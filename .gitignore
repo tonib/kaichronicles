@@ -1,0 +1,11 @@
+# The project AON data
+www/data/projectAon
+
+# Cordova stuff
+platforms
+plugins
+
+# Visual Studio Code stuff
+jsconfig.json
+.vscode
+typings

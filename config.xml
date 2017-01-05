@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="org.projectaon.kaichronicles" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Kai Chronicles</name>
+    <description>
+        Game player for books 1 and 2 of Lone Wolf gamebooks.
+    </description>
+    <author email="toni.bennasar.sf@gmail.com" href="https://www.projectaon.org">
+        Project AON
+    </author>
+    <content src="index.html" />
+    <plugin name="cordova-plugin-whitelist" spec="1" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <icon density="xxxhdpi" height="192" platform="android" src="res/android/xxxhdpi.png" width="192" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+        <icon src="res/android/xxhdpi.png" />
+        <icon density="ldpi" src="res/android/ldpi.png" />
+        <icon density="mdpi" src="res/android/mdpi.png" />
+        <icon density="hdpi" src="res/android/hdpi.png" />
+        <icon density="xhdpi" src="res/android/xhdpi.png" />
+        <icon density="xxhdpi" src="res/android/xxhdpi.png" />
+        <icon density="xxxhdpi" src="res/android/xxxhdpi.png" />
+    </platform>
+    <engine name="android" spec="~6.1.0" />
+</widget>

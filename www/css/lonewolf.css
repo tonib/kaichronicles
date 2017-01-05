@@ -1,0 +1,182 @@
+
+body {
+    padding-top: 50px;
+}
+
+#content {
+    padding: 40px 15px;
+    font-family: Souvenir, Georgia, "Times New Roman", Times, serif;
+    font-size: 16px;
+}
+
+p, ol, ul, dl, blockquote { text-align: justify }
+
+ul.unbulleted { list-style-type: none }
+
+h1 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+/* Subsection titles */
+h4 {
+    font-weight: bold;
+}
+
+/* Center illustrations */
+div.illustration {
+    text-align: center;
+    margin: 0 0 10px;
+}
+
+/* Do not render images outside the screen by default */
+div.illustration img {
+    max-width: 100%;
+}
+
+/* Render with its original size, when the user clicks on the image */
+div.illustration img.originalsize {
+    max-width: initial;
+}
+
+/* Illustration description */
+.illustration-label {
+    text-align: center;
+    font-size: small;
+    font-style: italic;
+}
+
+/* Choices */
+.choice {
+    margin-left: 15px;
+    text-align: left;
+}
+
+/* Disabled raw links */
+.disabled {
+    opacity: 0.65;
+    pointer-events: none;
+}
+
+/* Actions links */
+.action {
+    font-weight: bold;
+}
+
+/* Disabled action links */
+.action.disabled {
+    color: gray;
+}
+
+/* List tables */
+.list-table {
+    border: solid 1px #ddd;
+    margin-left: 0;
+    margin-bottom: 1.25em;
+    list-style-type: none;
+    padding-left: 0;
+}
+.list-table p {
+    margin-bottom: 0;
+}
+.list-table li {
+    padding: 0.9375em;
+    color: #333;
+    font-weight: normal;
+    border-bottom: dotted 1px #ddd;
+}
+.list-table > li:nth-of-type(2n+1) {
+    background-color: #f9f9f9;
+}
+
+/* Tables with bold texts on header */
+table.bold-head > thead > tr > td {
+    font-weight: bold;
+}
+
+/* Foot notes */
+.footnotes {
+    font-size: 0.8em;
+}
+
+/* Player attribute */
+.attribute {
+    font-size: 0.8em;
+}
+
+/* Table operations */
+.table-op {
+    float: right;
+}
+
+/* Image for objects table */
+.inventoryImgContainer {
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+}
+.inventoryImg {
+    max-width: 100px;
+    max-height: 30px;
+}
+
+/* Sing posts */
+div.signpost {
+    line-height: 1.5em;
+    padding-bottom: 1em;
+    padding-top: 1em;
+    text-align: center;
+}
+
+/* Position for toasts, below the title bar */
+.toast-position-lw {
+    top:60px;
+    right:12px
+}
+
+/* Remove toastr icons */
+#toast-container>.toast-success, #toast-container>.toast-info, 
+#toast-container>.toast-warning, #toast-container>.toast-error {
+    background-image: none!important;
+}
+#toast-container > div {
+    padding: 15px!important;
+}
+
+/* Action chart bonuses descriptions */
+.bonuses {
+    font-size: small;
+    font-style: italic;
+    padding-left: 12px;
+    padding-top: 3px; 
+}
+
+/* Combats */
+.combat td {
+    text-align: center;
+}
+
+/* Large buttons */
+.large-button {
+    /*display: block;*/
+    width: 100%;
+    text-align: left;
+    white-space: normal;
+    margin-bottom: 15px;
+}
+.large-button img { 
+    max-width: 25%;
+    margin: 5px 0;
+    margin-right: 10px;
+}
+
+/* The statistics on header is like a link */
+#template-statistics {
+    cursor: pointer;
+}
+
+/* Style to force to hide the toggle menu button */
+.hideImportant {
+    display: none!important;
+}

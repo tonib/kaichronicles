@@ -1,0 +1,47 @@
+<h1>Settings</h1>
+
+<form>
+    <div class="form-group">
+        <label for="settings-language">Book Language</label>
+        <select class="form-control" id="settings-language">
+            <option value="en">English</option>
+            <option value="es">Spanish</option>
+        </select>
+    </div>
+
+    <button class="btn btn-default large-button" type="button" id="settings-save">
+        <img src="data/projectAon/2/ill_en/small8.png" alt="Papers" />
+        <b>Save game</b>
+    </button>
+
+    <button class="btn btn-default large-button" type="button" id="settings-mainmenu">
+        <img src="data/projectAon/illExtra/door.png" alt="Door" />
+        <b>Go back to the main menu</b>
+    </button>
+
+    <button class="btn btn-default large-button" type="button" id="settings-restart">
+        <img src="data/projectAon/2/ill_en/small5.png" alt="Knight" />
+        <b>Restart book</b>
+    </button>
+
+    <button class="btn btn-default large-button" type="button" id="settings-about">
+        <img src="data/projectAon/illExtra/book.png" alt="Book" />
+        <b>About the book...</b>
+    </button>
+
+</form>
+
+<!-- Modal to load the new book language -->
+<div class="modal fade" id="settings-downloadDialog" tabindex="-1" role="dialog" 
+    data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Downloading</h4>
+      </div>
+      <div class="modal-body">
+        Downloading book, please wait...
+      </div>
+    </div>
+  </div>
+</div>

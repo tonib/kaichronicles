@@ -1,0 +1,167 @@
+<div id="mechanics-container">
+    <!-- DO NOT REMOVE THE ROOT DIV!!! -->
+    <!-- This is no really a view. Its the set of UI fragments to run game mechanics -->
+
+    <!-- Set skills -->
+    <div class="well" id="mechanics-setSkills">
+        <p id="mechanics-detWeapon">
+            Choose a number on the 
+            <a href="#" class="random action" id="mechanics-chooseWeapon">Random number table</a>
+            to determine your Combat Skill.
+        </p>
+        <p id="mechanics-detEndurance">
+            Choose a number on the <a href="#" class="random action" id="mechanics-chooseEndurance">Random 
+            number table</a> to determine your Endurance Points.
+        </p>
+    </div>
+
+    <!-- Select kai disciplines -->
+    <div class="well" id="mechanics-setDisciplines">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox"> 
+                Choose "<span class="mechanics-dName"></span>"
+                <span class="mechanics-wName"></span>
+            </label>
+        </div>
+    </div>
+    <div class="well" id="mechanics-setDisciplines-NDis">
+        <b>
+            Please, select <span id="mechanics-nDisciplines"></span> disciplines before continue.
+        </b>
+    </div>
+
+    <!-- Choose equipment -->
+    <div class="well" id="mechanics-chooseEquipment">
+        <b>
+            Click on both Random Table links before continue
+        </b> 
+    </div>
+
+    <!-- Display available objects on the section -->
+    <div id="mechanics-availableObjects">
+        <p><b>Available objects:</b></p>
+        <table class="table table-striped table-bordered" id="mechanics-availableObjectsList">
+            <tbody>
+                <!-- Objects go here -->
+            </tbody>
+        </table> 
+    </div>
+
+    <!-- Display shell object table -->
+    <div id="mechanics-shellObjects">
+        <p><b>Shell objects:</b></p>
+        <table class="table table-striped table-bordered" id="mechanics-shellObjectsList">
+            <tbody>
+                <!-- Objects go here -->
+            </tbody>
+        </table> 
+    </div>
+
+    <!-- Combat template -->
+    <div class="mechanics-combatUI" id="mechanics-combat">
+        <p><span class="attribute">COMBAT RATIO</span>: 
+        <span class="mechanics-combatRatio">CR</span></p>
+        <table class="table table-striped table-bordered bold-head" style="display:none">
+            <thead>
+                <tr>
+                    <td>#</td>
+                    <td>Random table</td>
+                    <td>E.P. lost (Lone Wolf)</td>
+                    <td>E.P. lost (<span class="mechanics-enemyName">Enemy</span>)</td>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <a href="#" class="btn btn-default mechanics-playTurn">Play turn</a>
+        <a href="#" class="btn btn-default mechanics-elude" style="display: none">Elude combat</a>
+    </div>
+
+    <!-- Player death -->
+    <div class="well" id="mechanics-death">
+        <p><b id="mechanics-deathmsg">Your mission and your live ends here</b></p>
+        <p><a href="#" class="action" id="mechanics-restart">Click here to restart the book</a></p>
+    </div>
+
+    <!-- Have a Meal -->
+    <div class="well" id="mechanics-meal">
+        <p><b>Meal</b></p>
+        <div class="radio" id="mechanics-eatHunt">
+            <label>
+                <input type="radio" name="mechanics-mealOption" value="hunting">
+                Use the Hunting discipline
+            </label>
+        </div>
+        <div class="radio" id="mechanics-eatMeal">
+            <label>
+                <input type="radio" name="mechanics-mealOption" value="meal">
+                Eat a backpack meal
+            </label>
+        </div>
+        <div class="radio mechanics-eatObject">
+            <label>
+                <input type="radio" name="mechanics-mealOption" value="objectId">
+                Eat the backpack object "<span class="mechanics-eatDescription">XXXX</span>"
+            </label>
+        </div>
+        <div class="radio" id="mechanics-buyMeal">
+            <label>
+                <input type="radio" name="mechanics-mealOption" value="buyMeal">
+                Buy meal (<span id="mechanics-mealPrice">0</span> Golden Crowns)
+            </label>
+        </div>
+        <div class="radio" id="mechanics-eatDoNotEat">
+            <label>
+                <input type="radio" name="mechanics-mealOption" value="doNotEat">
+                Do not eat (-3 ENDURANCE points)
+            </label>
+        </div>
+        <div id="mechanics-mealButtonDiv">
+            <button class="btn btn-default" type="button">Ok</button>
+        </div>
+    </div>
+
+    <!-- Player death -->
+    <div class="well" id="mechanics-message">
+        <p><b>Message goes here</b></p>
+    </div>
+
+    <!-- Cartwheel game -->
+    <div class="well" id="mechanics-book2Sect248">
+        <div class="form-group">
+            <b>
+                Belt pouch: <span id="mechanics-currentMoney">0</span> / 
+                Money won: <span id="mechanics-moneyWon">0</span>
+            </b>
+        </div>
+        <div class="form-group">
+            <label for="mechanics-numberToBet">Number for the bet</label>
+            <input type="number" min="0" max="9" class="form-control" 
+                placeholder="Number for the bet" id="mechanics-numberToBet" value="5">
+        </div>
+        <div class="form-group">
+            <label for="mechanics-moneyToBet">Crowns to bet:</label>
+            <input type="number" class="form-control" placeholder="Crowns to bet" 
+                id="mechanics-moneyToBet" min="1" max="50" value="1">
+        </div>
+        <div class="form-group">
+            <b id="mechanics-gameStatus"></b>
+        </div>
+        <button class="btn btn-default" type="button" id="mechanics-play">Play</button>
+    </div>
+
+    <!-- Portholes game -->
+    <div class="well" id="mechanics-book2Sect308">
+        <div class="form-group">
+            <b>
+                Belt pouch: <span id="mechanics-currentMoney">0</span>
+            </b>
+        </div>
+        <div class="form-group">
+            <b id="mechanics-gameStatus"></b>
+        </div>
+        <button class="btn btn-default" type="button" id="mechanics-play">Play</button>
+    </div>
+
+</div>

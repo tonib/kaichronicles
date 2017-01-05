@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<object-mechanics>
+
+    <weapons>
+        <!-- WEAPONS ON KAI SERIE BOOKS -->
+
+        <weapon id="axe">
+            <name lang="en">Axe</name>
+            <name lang="es">Hacha</name>
+            <image book="1" name="axe.png" />
+        </weapon>
+
+        <weapon id="dagger">
+            <name lang="en">Dagger</name>
+            <name lang="es">Daga</name>
+            <image book="1" name="dagger.png" />
+        </weapon>
+
+        <weapon id="sword">
+            <name lang="en">Sword</name>
+            <name lang="es">Espada</name>
+            <image book="1" name="sword.png" />
+        </weapon>
+
+        <weapon id="spear">
+            <name lang="en">Spear</name>
+            <name lang="es">Lanza</name>
+            <image book="1" name="spear.png" />
+        </weapon>
+
+        <weapon id="mace">
+            <name lang="en">Mace</name>
+            <name lang="es">Maza</name>
+            <image book="1" name="mace.png" />
+        </weapon>
+
+        <weapon id="shortsword">
+            <name lang="en">Short Sword</name>
+            <name lang="es">Espada corta</name>
+            <image book="1" name="ssword.png" />
+        </weapon>
+
+        <weapon id="quarterstaff">
+            <name lang="en">Quarterstaff</name>
+            <name lang="es">Estaca</name>
+            <image book="1" name="qstaff.png" />
+        </weapon>
+
+        <weapon id="warhammer">
+            <name lang="en">Warhammer</name>
+            <name lang="es">Martillo de guerra</name>
+            <image book="1" name="warhammr.png" />
+        </weapon>
+
+        <weapon id="broadsword">
+            <name lang="en">Broad Sword</name>
+            <name lang="es">Espadón</name>
+            <image book="1" name="bsword.png" />
+        </weapon>
+
+    </weapons>
+
+    <specials>
+        <!-- SPECIAL OBJECTS -->
+
+        <!-- BOOOK 1 -->
+
+        <special id="helmet">
+            <name lang="en">Helmet</name>
+            <description lang="en">This adds 2 ENDURANCE points to your total.</description>
+
+            <name lang="es">Casco</name>
+            <description lang="es">Suma 2 puntos de RESISTENCIA a tu total</description>
+
+            <image book="1" name="helmet.png" />
+            <effect class="endurance" increment="2" />
+        </special>
+
+        <special id="chainmail">
+            <name lang="en">Chainmail Waistcoat</name>
+            <description lang="en">This adds 4 ENDURANCE points to your total.</description>
+
+            <name lang="es">Cota de malla</name>
+            <description lang="es">Suma 4 puntos de RESISTENCIA a tu total.</description>
+
+            <image book="1" name="mail.png" />
+            <effect class="endurance" increment="4" />
+        </special>
+
+        <special id="map">
+            <name lang="en">Map</name>
+            <name lang="es">Mapa</name>
+        </special>
+
+        <special id="tombguardiangems">
+            <name lang="en">20 Tomb Guardian Gems</name>
+            <name lang="es">20 gemas de la tumba del guardián</name>
+        </special>
+
+        <special id="crystalstar">
+            <name lang="en">Crystal Star Pendant</name>
+            <description lang="en">
+                It is the symbol of the Brotherhood of the Crystal Star 
+                (the Magicians’ Guild of Toran)
+            </description>
+            
+            <name lang="es">Medallón de la Estrella de Cristal</name>
+            <description lang="es">
+                Es el símbolo de la Hermandad de la Estrella de Cristal
+                (el gremio de magos de Toran)
+            </description>
+        </special>
+
+        <!-- BOOOK 2 -->
+
+        <special id="shield">
+            <name lang="en">Shield</name>
+            <description lang="en">This adds 2 points to your COMBAT SKILL</description>
+
+            <name lang="es">Escudo</name>
+            <description lang="es">Añade 2 puntos a tu DESTREZA EN EL COMBATE</description>
+
+            <image book="2" name="shield.png" />
+            <effect class="combatSkill" increment="2" />
+        </special>
+
+        <special id="portbaxticket">
+            <name lang="en">Ticket to Port Bax</name>
+            <name lang="es">Billete a Port Bax</name>
+        </special>
+
+        <special id="sommerswerd" weaponType="sword|broadsword|shortsword" >
+            <name lang="en">Sommerswerd</name>
+            <description lang="en">
+                When used in combat, the Sommerswerd will add 8 points to your COMBAT SKILL 
+                (10 points if you possess the Kai Discipline of Weaponskill with swords). It has 
+                the ability to absorb any magic that is used against its bearer, and it doubles 
+                the total of all ENDURANCE points lost by undead enemies in combat
+            </description>
+            <name lang="es">Sommerswerd</name>
+            <description lang="es">
+                La Espada del Sol. Cuando luches con ella, la Sommerswerd sumarás 8 puntos a tu 
+                DESTREZA EN EL COMBATE (10 si posees la disciplina de Maestría en el Manejo de 
+                Armas con cualquier tipo de espada). Tiene la capacidad de absorber cualquier 
+                fuerza mágica que sea usada contra quien la esgrima y multiplica por dos los 
+                puntos de RESISTENCIA perdidos en combate por enemigos de ultratumba
+            </description>
+            <effect class="combatSkill" increment="8" />
+            <image book="2" name="ill5.png" />
+        </special>
+
+        <special id="magicspear" weaponType="spear">
+            <name lang="en">Magic Spear</name>
+            <name lang="es">Lanza Mágica</name>
+            <image book="1" name="spear.png" />
+        </special>
+
+        <special id="sealofhammerdal">
+            <name lang="en">Seal of Hammerdal</name>
+            <description lang="en">
+                A golden ring bearing the royal arms of Durenor
+            </description>
+
+            <name lang="es">Sello de Hammerdal</name>
+            <description lang="es">
+                Un  anillo de oro con el escudo real de Durenor
+            </description>
+        </special>
+        
+        <special id="portbaxpapers">
+            <name lang="en">Papers</name>
+            <description lang="en">
+                An envelope containing a sheaf of official-looking papers
+            </description>
+
+            <name lang="es">Documentos</name>
+            <description lang="es">
+                Un sobre que contiene un fajo de papeles de aspecto oficial
+            </description>
+        </special>
+
+    </specials>
+
+    <objects>
+        <!-- BACKPACK ITEMS -->
+
+        <!-- BOOOK 1 -->
+
+        <object id="healingpotion">
+            <name lang="en">Healing Potion</name>
+            <description lang="en">
+                This can restore 4 ENDURANCE points to your total, when swallowed after combat. 
+                You only have enough for one dose.
+            </description>
+
+            <name lang="es">Poción curativa</name>
+            <description lang="es">
+                Puede hacerte recuperar 4 puntos de RESISTENCIA de los que hayas perdido en combate. 
+                Sólo tienes cantidad suficiente para una dosis.
+            </description>
+
+            <image book="1" name="potion.png" />
+            <usage class="endurance" increment="4" />
+        </object>
+
+        <object id="vordakgem">
+            <name lang="en">Vordak Gem</name>
+            <name lang="es">Gema Vordak</name>
+
+            <image book="1" name="small5.png" />
+        </object>
+
+        <object id="goldenkey">
+            <name lang="en">Golden Key</name>
+            <name lang="es">Llave de oro</name>
+
+            <image book="1" name="small15.png" />
+        </object>
+
+        <object id="laumspurmeal" isMeal="true">
+            <name lang="en">Meal of Laumspur</name>
+            <description lang="en">
+                It can be used as a Meal, or to restore 3 ENDURANCE points
+            </description>
+
+            <name lang="es">Comida de Laumspur</name>
+            <description lang="es">
+                Puede ser usado como comida, o para recuperar 3 puntos de RESISTENCIA 
+            </description>
+
+            <usage class="endurance" increment="3" />
+        </object>
+        
+        <object id="silverkey">
+            <name lang="en">Silver Key</name>
+            <name lang="es">Llave de plata</name>
+
+            <image book="1" name="small15.png" />
+        </object>
+       
+        <object id="potionofstrength">
+            <name lang="en">Potion of Strength</name>
+            <description lang="en">
+                An Alether potion. It will increase your COMBAT SKILL by 2 points for the duration of a fight
+            </description>
+
+            <name lang="es">Pocion de aléter</name>
+            <description lang="es">
+                Aumentará en 2 puntos tu DESTREZA EN EL COMBATE mientras dure una lucha
+            </description>
+
+            <image book="1" name="potion.png" />
+            <usage class="combatSkill" increment="2" />
+        </object>
+       
+        <object id="torch">
+            <name lang="en">Torch</name>
+            <name lang="es">Antorcha</name>
+        </object>
+
+        <object id="tinderbox">
+            <name lang="en">Tinderbox</name>
+            <name lang="es">Yesca</name>
+        </object>
+
+        <object id="giakscroll">
+            <name lang="en">Giak’s Scroll</name>
+            <name lang="es">Pergamino Giak</name>
+        </object>
+
+        <object id="message">
+            <name lang="en">Message</name>
+            <description lang="en">
+                A message written on an animal skin
+            </description>
+
+            <name lang="es">Un mensaje</name>
+            <description lang="es">
+                Un mensaje escrito en una piel de animal
+            </description>
+
+            <image book="1" name="ill15.png" />
+        </object>
+
+        <object id="soap">
+            <name lang="en">Tablet of Perfumed Soap</name>
+            <name lang="es">Pastilla de jabón perfumado</name>
+        </object>
+
+        <!-- BOOOK 2 -->
+
+        <object id="healingpotion3">
+            <name lang="en">Healing Potion</name>
+            <description lang="en">
+                Restores 3 ENDURANCE points.
+            </description>
+
+            <name lang="es">Poción curativa</name>
+            <description lang="es">
+                Permite recuperar 3 puntos de RESISTENCIA.
+            </description>
+
+            <image book="1" name="potion.png" />
+            <usage class="endurance" increment="3" />
+        </object>
+
+        <object id="laumspurpotion">
+            <name lang="en">Laumspur Potion</name>
+            <description lang="en">
+                Restores 5 ENDURANCE points.
+            </description>
+
+            <name lang="es">Poción de Laumspur</name>
+            <description lang="es">
+                Permite recuperar 5 puntos de RESISTENCIA.
+            </description>
+
+            <image book="1" name="potion.png" />
+            <usage class="endurance" increment="5" />
+        </object>
+
+        <object id="whitepass">
+            <name lang="en">White Pass</name>
+            <name lang="es">Salvoconducto blanco</name>
+        </object>
+
+        <object id="redpass">
+            <name lang="en">Red Pass</name>
+            <name lang="es">Salvoconducto rojo</name>
+        </object>
+
+        <object id="blanket">
+            <name lang="en">Blanket</name>
+            <name lang="es">Manta</name>
+        </object>
+
+        <object id="rope">
+            <name lang="en">Rope</name>
+            <name lang="es">Cuerda</name>
+        </object>
+
+        <object id="orangepotion">
+            <name lang="en">Potion of Orange Liquid</name>
+            <name lang="es">Poción de líquido naranja</name>
+        </object>
+
+        <object id="goldring">
+            <name lang="en">Gold Ring</name>
+            <name lang="es">Anillo de oro</name>
+        </object>
+
+        <!-- OTHERS -->
+
+        <!-- This not really an object, but needed for mechanics -->
+        <object id="meal">
+            <name lang="en">Meal</name>
+            <name lang="es">Comida</name>
+            
+            <image book="1" name="food.png" />
+        </object>
+
+        <!-- This not really an object, but needed for mechanics -->
+        <object id="backpack">
+            <name lang="en">Backpack</name>
+            <name lang="es">Mochila</name>
+        </object>
+
+        <!-- This not really an object, but needed for mechanics -->
+        <object id="backpackcontent">
+            <name lang="en">Backpack Content</name>
+            <name lang="es">Contenido de la mochila</name>
+        </object>
+
+        <!-- This not really an object, but needed for mechanics -->
+        <object id="money">
+            <name lang="en">Money</name>
+            <name lang="es">Dinero</name>
+
+            <image book="1" name="pouch.png" />
+        </object>
+
+    </objects>
+
+</object-mechanics>

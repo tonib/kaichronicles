@@ -1,0 +1,71 @@
+
+<h1>Action chart</h1>
+
+<div class="row">
+  <div class="col-sm-6">
+    <label>Combat Skill</label>
+    <input type="text" class="form-control" placeholder="Combat Skill" id="achart-combatSkills"
+        readonly>
+    <p class="bonuses" id="achart-cs-bonuses"></p>
+  </div>
+  <div class="col-sm-6">
+    <label>Endurance Points</label><br/>
+    <input type="text" class="form-control" placeholder="Endurance Points" id="achart-endurance"
+        readonly>
+    <p class="bonuses" id="achart-endurance-bonuses"></p>
+  </div>
+</div>    
+
+<div class="row">
+  <div class="col-sm-6">
+    <label>Belt Pouch (Max. 50)</label><br/>
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="" id="achart-beltPouch" readonly>
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" id="achart-dropmoney" 
+          title="Drop 1 Golden Crown" >
+          <span class="glyphicon glyphicon-remove"></span>
+        </button>
+      </span>
+    </div>
+  </div>
+</div>
+
+<h3>Kai disciplines</h3>
+<table class="table table-striped table-bordered" id="achart-disciplines">
+    <tbody>
+    </tbody>
+</table> 
+
+<h3>Weapons</h3>
+<p><b>Current weapon:</b> <span id="achart-currentWeapon"><i>None</i></span> </p>
+<table class="table table-striped table-bordered" id="achart-weapons">
+    <tbody>
+    </tbody>
+</table> 
+
+<h3>Backpack Items <span id="achart-backpacktotal">0</span></h3>
+<div id="achart-backpack-content">
+  <label>Meals</label>
+  <div class="input-group">
+    <input type="text" class="form-control" placeholder="" id="achart-meals" readonly>
+    <span class="input-group-btn">
+      <button class="equipment-op btn btn-default" type="button" id="achart-dropmeal" data-op="drop" 
+        data-objectId="meal" >
+        <span class="glyphicon glyphicon-remove"></span>
+      </button>
+    </span>
+  </div>
+  <br/>
+
+  <table class="table table-striped table-bordered" id="achart-backpack">
+      <tbody>
+      </tbody>
+  </table> 
+</div>
+
+<h3>Special Items</h3>
+<table class="table table-striped table-bordered" id="achart-special">
+    <tbody>
+    </tbody>
+</table> 

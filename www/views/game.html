@@ -1,0 +1,48 @@
+
+<h1 id="game-section-title"></h1>
+
+<div id="game-section">
+    Loading...
+</div>
+
+<!-- Navigation buttons (previous / next) -->
+<div id="game-navSectionButtons" style="display: none; text-align: center">
+    <hr />
+    <a href="#" id="game-prevSection" class="btn btn-default" style="margin-right:10px; width:25%">
+        <span class="glyphicon glyphicon-arrow-left"></span>
+    </a>
+    <a href="#" id="game-nextSection" class="btn btn-default" style="margin-left:10px; width:25%">
+        <span class="glyphicon glyphicon-arrow-right"></span>
+    </a>
+</div>
+
+<!-- Debug options -->
+<div style="display:none" id="game-debugSection">
+    <h2>Debug</h2>
+
+    <form class="form-inline" id="game-debugJump" >
+        <div class="form-group">
+            <label for="game-debugNSection">Jump to section</label>
+            <input type="text" class="form-control" id="game-debugNSection" 
+                placeholder="section id">
+            <button type="submit" class="btn btn-default">Go</button>
+            <a id="game-goDisciplines" href="#">Go to disciplines</a>
+        </div>
+    </form>
+
+    <form class="form-inline" id="game-debugRandomTable" >
+        <div class="form-group">
+            <label for="game-debugRandomFix">Set next random number</label>
+            <input type="text" class="form-control" id="game-debugRandomFix" 
+                placeholder="Random number">
+            <button type="submit" class="btn btn-default">Set</button>
+        </div>
+    </form>
+
+    <p>
+        <a id="game-aonLink" href="#" target="_blank">Project AON section page</a>
+    </p>
+    <p>
+        <a id="game-resetSection" href="#">Reset section state</a>
+    </p>
+</div>

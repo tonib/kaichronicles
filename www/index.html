@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Lone Wolf">
+    <meta name="author" content="Project Aon">
+    <link rel="icon" href="images/favicon.ico">
+
+    <title>Lone Wolf</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="lib/toastr/toastr.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/lonewolf.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <!-- Navigation bar -->
+    <nav id="template-header" class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+
+        <div class="navbar-header">
+
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" 
+            data-target="#navbar" aria-expanded="false" aria-controls="navbar" 
+            id="template-menubutton">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+          <a class="navbar-brand" href="#mainMenu" id="template-img-logo">
+            <img src="images/logo-white-bg-40.png" 
+                 style="display: inline-block; margin-top:-10px;" alt="Logo" />
+          </a>
+          <a class="navbar-brand hidden-xs" href="#mainMenu" id="template-title">
+            Kai Chronicles
+          </a>
+          <p class="navbar-text" id="template-statistics">
+              C.S.: <span id="template-combatSkill">99</span>
+              E.: <span id="template-endurance">99</span>
+          </p>
+          
+        </div>
+
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav" id="navbar-content">
+            <li><a href="#actionChart" id="template-actionChart">Action chart</a></li>
+            <li><a href="#map" id="template-map">Map</a></li>
+            <li><a href="#settings">Settings</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </nav>
+
+    <div class="container" id="template-container">
+
+      <!--Main content-->
+      <div id="content">
+          <div id="body">
+              <img src="images/ajax-loader.gif" alt="Loading image" />
+              Loading...
+          </div>
+      </div>
+
+    </div><!-- /.container -->
+
+
+    <!-- Third party -->
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="lib/toastr/toastr.min.js"></script>
+    <script src="lib/filesaver.js"></script>
+    <!-- This is the Apache Cordova API (it does not exists phisically) -->
+    <script src="cordova.js"></script>
+
+    <!-- Base -->
+    <script src="common.js"></script>
+    <script src="views.js"></script>
+    <script src="state.js"></script>
+    <script src="routing.js"></script>
+
+    <!-- Base (cordova stuff) -->
+    <script src="cordova-stuff/cordovaApp.js"></script>
+    <script src="cordova-stuff/cordovaFS.js"></script>
+
+    <!-- Model -->
+    <script src="model/book.js"></script>
+    <script src="model/section.js"></script>
+    <script src="model/sectionRenderer.js"></script>
+    <script src="model/actionChart.js"></script>
+    <script src="model/mechanics.js"></script>
+    <script src="model/randomTable.js"></script>
+    <script src="model/combatTable.js"></script>
+    <script src="model/combat.js"></script>
+    <script src="model/combatTurn.js"></script>
+
+    <script src="model/sectionState.js"></script>
+    <script src="model/bookSectionStates.js"></script>
+    <script src="model/item.js"></script>
+
+    <!-- Controllers -->
+    <script src="controller/setupController.js"></script>
+    <script src="controller/gameController.js"></script>
+    <script src="controller/actionChartController.js"></script>
+    <script src="controller/mapController.js"></script>
+    <script src="controller/settingsController.js"></script>
+    <script src="controller/testsController.js"></script>
+    <script src="controller/mainMenuController.js"></script>
+    <script src="controller/newGameController.js"></script>
+    <script src="controller/aboutController.js"></script>
+    <script src="controller/loadGameController.js"></script>
+    <script src="controller/mechanics/mechanicsEngine.js"></script>
+    <script src="controller/mechanics/mealMechanics.js"></script>
+    <script src="controller/mechanics/combatMechanics.js"></script>
+    <script src="controller/mechanics/randomMechanics.js"></script>
+    <script src="controller/mechanics/setupMechanics.js"></script>
+    <script src="controller/mechanics/specialSectionsMechanics.js"></script>
+    
+    <!-- Views -->
+    <script src="views/actionChartView.js"></script>
+    <script src="views/gameView.js"></script>
+    <script src="views/setupView.js"></script>
+    <script src="views/mapView.js"></script>
+    <script src="views/settingsView.js"></script>
+    <script src="views/mainMenu.js"></script>
+    <script src="views/newGame.js"></script>
+    <script src="views/loadGameView.js"></script>
+    
+    <script lang="javascript">
+
+        /**
+         * The HTML template API
+         */
+        var template = {
+
+          /**
+           *  Set the navbar title and target URL
+           */
+          setNavTitle: function(title, url) { 
+            $('#template-title').text(title);
+            $('#template-title').attr('href', url);
+            $('#template-img-logo').attr('href', url);
+          },
+
+          /**
+           * Setup navigation bar
+           */
+          setup: function() {
+            // Hide the bootstrap menu when some menu option is clicked, or when
+            // the content is clicked
+            $('#template-header a, #template-container').click(function(){
+                template.collapseMenu();
+            });
+            $('#template-statistics').click(function() {
+                routing.redirect('actionChart');
+            });
+            template.updateStatistics(true);
+          },
+
+          /**
+            * Hide statistics on navigation bar
+            */
+          showStatistics: function(show) {
+            if( show ) {
+              $('#navbar-content').show();
+              $('#template-menubutton').removeClass( 'hideImportant' );
+              template.updateStatistics();
+            }
+            else {
+              $('#navbar-content').hide();
+              $('#template-statistics').hide();
+              $('#template-menubutton').addClass( 'hideImportant' );
+            }
+          },
+
+          /**
+           * Update player statistics
+           */
+          updateStatistics: function(doNotAnimate) {
+
+            // Update statistics
+            if( !state.actionChart || 
+                ( state.actionChart.combatSkill == 0 && state.actionChart.endurance == 0 ) ) {
+              $('#template-statistics').hide();
+              $('#template-map').hide();
+            }
+            else {
+              $('#template-statistics').show();
+              $('#template-combatSkill').text( state.actionChart.getCurrentCombatSkill() );
+              gameView.animateValueChange( $('#template-endurance') , 
+                state.actionChart.currentEndurance , doNotAnimate , 
+                state.actionChart.currentEndurance > 0 ? null : 'red' );
+
+              // Update map link
+              if( state.actionChart.hasObject('map') )
+                $('#template-map').show();
+              else
+                $('#template-map').hide(); 
+            }
+          },
+
+          /**
+           * Return true if the template menu is expanded
+           */
+          isMenuExpanded: function() { 
+            return $('#template-menubutton').attr('aria-expanded') == 'true'; 
+          },
+
+          /**
+           * Collapse the template menu
+           */
+          collapseMenu: function() { $('#navbar').collapse('hide'); }
+
+        };
+
+        
+        // *************** SETUP ***************
+        $(function() {
+            state.setupDefaultLanguage();
+            cordovaApp.setup();
+            template.setup();
+            routing.setup();
+        });
+
+    </script>
+
+  </body>
+</html>
