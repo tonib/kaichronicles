@@ -15,8 +15,10 @@ Project Aon web site. **REMEMBER** that game books data is under the
 ## Setup
 
 Download the Project Aon game data:
+```bash
     cd www/data/
     ruby downloadProjectAonData.rb
+```
 
 ### Setup web site
 
@@ -31,9 +33,11 @@ http://stackoverflow.com/questions/10752055/cross-origin-requests-are-only-suppo
 
 Install Cordova (https://cordova.apache.org/) and the Android requeriments
 (https://cordova.apache.org/docs/en/latest/guide/platforms/android/index.html). Then:
+```bash
     cordova platform add android
     cordova plugin add cordova-plugin-file
     cordova build android
+```
 
 This will generate a file platforms/android/build/outputs/apk/android-debug.apk with the
 Android app.
