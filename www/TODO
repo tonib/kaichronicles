@@ -10,6 +10,7 @@
   * Remove network permission
   * Check if plugins can be declared on config.xml
   * Performance
+  * Set minimum API to 4.4 ??? (try it on lower versions)
 - Death: Allow to restart book from section 1
 - Write readme.md
 - Legal:
@@ -17,7 +18,6 @@
   * Document software used on lib (licenses): Bootstrap, etc
   * Document code taken from Lone Wolf Adventures
   * Icon sources (project aon)
-- Upload code to github
 - Navigation bar: Set the "active" style of the current page on the navigation bar
 
 Reminders:
@@ -29,5 +29,7 @@ Reminders:
   ./common/scripts/build-xhtml.sh
 * Bug with cordova android icons:
   http://stackoverflow.com/questions/40351434/cordova-android-6-4-0-creates-res-folder-top-level-not-inside-platforms-android
-
+* Upload code to github:
+  git remote add origin https://github.com/tonib/kaichronicles.git
+  git push -u origin master
 Work done on this commit:
