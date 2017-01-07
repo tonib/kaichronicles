@@ -12,12 +12,6 @@
   * Performance
   * Set minimum API to 4.4 ??? (try it on lower versions)
 - Death: Allow to restart book from section 1
-- Write readme.md
-- Legal:
-  * Write license
-  * Document software used on lib (licenses): Bootstrap, etc
-  * Document code taken from Lone Wolf Adventures
-  * Icon sources (project aon)
 - Navigation bar: Set the "active" style of the current page on the navigation bar
 
 Reminders:
@@ -33,3 +27,4 @@ Reminders:
   git remote add origin https://github.com/tonib/kaichronicles.git
   git push -u origin master
 Work done on this commit:
+

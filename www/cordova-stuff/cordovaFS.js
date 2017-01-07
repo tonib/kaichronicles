@@ -5,7 +5,6 @@
 var cordovaFS = {
 
     saveFile: function(originalFileName, fileContent, callback) {
-        // TODO: Add proper error callbacks
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
             function (fs) {
                 console.log('file system open: ' + fs.name);
@@ -75,7 +74,6 @@ var cordovaFS = {
     },
 
     getDirectoryFiles: function( callback ) {
-        // TODO: Add proper error callbacks
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
             function (fs) {
                 cordovaFS.enumerateFiles(fs, callback);
@@ -98,7 +96,6 @@ var cordovaFS = {
     },
 
     loadFile: function( fileName, callback ) {
-        // TODO: Add proper error callbacks
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
             function (fs) {
                 console.log('file system open: ' + fs.name);
@@ -122,7 +119,6 @@ var cordovaFS = {
     },
 
     readFile: function(fileEntry, callback) {
-        // TODO: Add proper error callbacks
         fileEntry.file(
             function (file) {
                 var reader = new FileReader();
@@ -140,7 +136,6 @@ var cordovaFS = {
     },
 
     deleteFile: function(fileName, callback) {
-        // TODO: Add proper error callbacks
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
             function (fs) {
                 console.log('file system open: ' + fs.name);

@@ -42,6 +42,15 @@ Install Cordova (https://cordova.apache.org/) and the Android requeriments
 This will generate a file platforms/android/build/outputs/apk/android-debug.apk with the
 Android app.
 
+### Developing 
+
+If you add "?debug=true" to the game URL, they will appear some debug tools
+
+Game rules for each book are located at www/data. "mechanics-X" are the game rules
+for the book X. "objects.xml" are the game objects
+
+The game rules implementation are at www/controller/mechanics/mechanicsEngine.js
+
 ### License
 
 MIT. This application uses the following third-party code:
@@ -52,5 +61,5 @@ MIT. This application uses the following third-party code:
 * [jQuery](https://jquery.com/) (jQuery license)
 * The file www/images/logo-white-bg-40.png is an awful adaptation of the logo image of the 
   spanish Project Aon
-* The file www/model/sectionRenderer.js contains code taken from Lone Wolf Adventures, 
-  from Liquid State Limited
+* The HTML rendering and books XML processing contains code taken from 
+  Lone Wolf Adventures, by Liquid State Limited

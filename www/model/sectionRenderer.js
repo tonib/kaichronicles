@@ -1,7 +1,10 @@
+/*
+ * This file contains code taken from Lone Wolf Adventures, 
+ * by Liquid State Limited.
+ */
 
 /**
  * Tool to transform the book XML to HTML
- * TODO: Credits to lone wolf adventures
  * @param {Section}section The Section to render 
  */
 function SectionRenderer(section) {

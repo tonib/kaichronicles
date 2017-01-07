@@ -1,8 +1,3 @@
-/* 
- * Copyright del texto © 1984 Joe Dever.
- * Copyright de las ilustraciones © 1984 Gary Chalk.
- * Publicado por Proyecto Aon Español.
- */
 
 /**
  * Combat result for death

@@ -13,17 +13,18 @@ var views = {
      */
     loadView: function(viewPath) {
 
-        // TODO: Show a busy image when loading a view from internet
+        // TODO: Show a busy image when loading a view from Internet
         
         if( views.viewCache[viewPath] ) {
             // View was already loaded:
-            views.viewLoaded( views.viewCache[viewPath] );
+            template.setViewContent( views.viewCache[viewPath] );
             // Return a resolved promise:
             var dfd = jQuery.Deferred();
             dfd.resolve();
             return dfd.promise();
         }
 
+        // Load the view from Internet
         return $.ajax({
             url: 'views/' + viewPath,
             dataType: "html"
@@ -31,18 +32,15 @@ var views = {
         .done( function(data) {
             // Save view on cache:
             views.viewCache[viewPath] = data;
-            views.viewLoaded(data);
+            // Display the view
+            template.setViewContent(data);
         })
         .fail(function( jqXHR, textStatus, errorThrown ) {
-            alert( 'Error loading view ' + viewPath + ', error: ' + 
-                textStatus + ' / ' + errorThrown );
+            var msg = 'Error loading view ' + viewPath + ', error: ' + 
+                textStatus + ' / ' + errorThrown;
+            template.setViewContent('<p>' + msg + '</p>');
+            alert( msg );
         });
-    },
-    
-    viewLoaded: function(viewContent) {
-        $('#body').html(viewContent);
-        // Scroll to top
-        window.scrollTo(0, 0);
     }
     
 };

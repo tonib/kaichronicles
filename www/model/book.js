@@ -27,11 +27,12 @@ Book.getBaseUrl = function() {
 
 /** Do replacements on original XML to have a valid standalone XML.
  * It removes inclusions and replaces 
- * TODO: Credits to Lone Wolf Adventures
  * @param xmlText The original XML
  * @return The fixed XML
  */
 Book.fixXml = function(xmlText) {
+
+    // Code taken from Lone Wolf Adventures, by Liquid State Limited.
 
     // remove general directives
     // TODO: Handle all inclusions with a regex?
