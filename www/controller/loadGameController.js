@@ -26,14 +26,22 @@ var loadGameController = {
         });
     },
 
+    /**
+     * Fill the Cordova app saved games list
+     */
     listGameFiles: function() {
         loadGameView.clearFilesList();
         cordovaFS.getDirectoryFiles( function(entries) {
-            // Sort entries by its date creations:
-            $.each( entries, function(index, file) {
-                loadGameView.addFileToList( file.name );
-            });
-            loadGameView.bindListEvents();
+            
+            if( entries.length == 0 )
+                loadGameView.addFileToList( null );
+            else {
+                $.each( entries, function(index, file) {
+                    loadGameView.addFileToList( file.name );
+                });
+                loadGameView.bindListEvents();
+            }
+            
         });
     },
 

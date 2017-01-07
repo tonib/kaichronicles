@@ -25,5 +25,6 @@ Reminders:
 * Upload code to github:
   git remote add origin https://github.com/tonib/kaichronicles.git
   git push -u origin master
+
 Work done on this commit:
 

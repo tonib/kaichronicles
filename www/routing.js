@@ -6,16 +6,6 @@
 var routing = {
 
     /**
-     * The current route
-     */
-    currentRoute: null,
-
-    /**
-     * Is the hash change event enabled?
-     */
-    hashChangeEventEnabled: true,
-
-    /**
      * Redirect to some controler / action route
      * @param {string} route The route to redirect. It has a format "controller".
      * @param {object} parameters Hash with parameters for the route. It can be null
@@ -23,7 +13,6 @@ var routing = {
      */
     redirect: function(route, parameters) {
         try {
-            routing.hashChangeEventEnabled = false;
 
             // Remove hash
             route = routing.normalizeHash(route);
@@ -35,34 +24,17 @@ var routing = {
                     route += '?' + txtParms;
             }
 
-            if( route == routing.currentRoute )
-                // On hash change duplicate event:
-                return;
-
             template.collapseMenu();
             
-            routing.currentRoute = route; 
+            // This will fire the onHashChange callback:
             location.hash = route;
-            
-            //console.log('route: ' + route);
-            var controller = routing.getCurrentController();
-            if( !controller ) {
-                console.log("Undefined controller: " + routing.getControllerName() );
-                return false;
-            }
-            else {
-                controller['index']();
-                return true;
-            }
 
         }
         catch(e) {
             console.log(e);
             return false;
         }
-        finally {
-            routing.hashChangeEventEnabled = true;
-        }
+
     },
 
     /** Setup the routing events and redirect to the initial action */
@@ -76,6 +48,9 @@ var routing = {
         if( initialHash == '' )
             initialHash = 'mainMenu';
         routing.redirect(initialHash);
+
+        // Force the initial load
+        routing.onHashChange();
     },
 
     /**
@@ -118,13 +93,21 @@ var routing = {
      * Hash change event handler
      */
     onHashChange: function() {
-        if( !routing.hashChangeEventEnabled )
-            return;
-        routing.redirect( location.hash );
+        console.log('onHashChange');
+        try {
+            var controller = routing.getCurrentController();
+            if( !controller )
+                console.log("Undefined controller: " + routing.getControllerName() );
+            else
+                controller['index']();
+        }
+        catch(e) {
+            console.log(e);
+        }
     },
 
     /**
-     * Convert an objecto to URL parameters
+     * Convert an object to URL parameters
      * @param {object} o Object to convert
      * @returns {string} URL equivalent params 
      */
@@ -174,8 +157,7 @@ var routing = {
             window.history.back();
             return;
         }
-        if( !routing.redirect( controller.getBackController() ) )
-            window.history.back();
+        routing.redirect( backController );
 
     }
 

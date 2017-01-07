@@ -1,6 +1,7 @@
 
 /** 
- * The application setup controller
+ * The book loader controller
+ * TODO: Change the name of this controller. It's a "book setup" controller
  */
 var setupController = {
 

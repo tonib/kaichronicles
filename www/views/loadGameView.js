@@ -12,20 +12,25 @@ var loadGameView = {
 
     /**
      * Add a file to the file games list (Cordova app)
-     * @param {String} fileName File name to load
+     * @param {String} fileName File name to load. null for the empty list
+     * item.
      */
     addFileToList: function(fileName) {
-        $('#loadGame-fileslist tbody').append(
-            '<tr><td>' + 
-                '<button class="btn btn-default table-op" title="Delete" data-filename="' + 
+        var row = '<tr><td>';
+        if( !fileName ) 
+            row += '<i>No saved games found</i>';
+        else {
+            row += '<button class="btn btn-default table-op" title="Delete" data-filename="' + 
                 fileName + '">' + 
                     '<span class="glyphicon glyphicon-remove"></span>' + 
                 '</button>' +
                 '<a class="savegame" href="' + fileName + '">' + 
                     fileName + 
-                '</a>' +
-            '</td></tr>'
-        );
+                '</a>';
+        }
+        row += '</td></tr>';
+
+        $('#loadGame-fileslist tbody').append(row);
     },
 
     bindListEvents: function() {
@@ -36,6 +41,9 @@ var loadGameView = {
         });
         // Delete file events
         $('#loadGame-fileslist tbody button').click(function(e) {
+            // IMPORTANT: Do not remove this preventDefault(), otherwise
+            // Cordova beleaves we have changed the current page
+            e.preventDefault();
             var fileName = $(this).attr('data-filename');
             if( !confirm('Are you sure you want to delete the save game ' + fileName + '?') )
                 return;
