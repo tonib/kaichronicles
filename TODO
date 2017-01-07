@@ -10,21 +10,29 @@
   * Remove network permission
   * Check if plugins can be declared on config.xml
   * Performance
-  * Set minimum API to 4.4 ??? (try it on lower versions)
 - Death: Allow to restart book from section 1
 
 Reminders:
+
 * JsDoc docs: http://usejsdoc.org/
+
 * Build project AON xhtml:
   cd [trunk or tag directory]
   export AONDIR=`pwd`
   export LANGS=[laguage ("en" or "es")]
   ./common/scripts/build-xhtml.sh
+
 * Bug with cordova android icons:
   http://stackoverflow.com/questions/40351434/cordova-android-6-4-0-creates-res-folder-top-level-not-inside-platforms-android
+
 * Upload code to github:
   git remote add origin https://github.com/tonib/kaichronicles.git
   git push -u origin master
 
+* Android AVD
+  cd [android-sdk]
+  tools/android avd
+
 Work done on this commit:
 
+  

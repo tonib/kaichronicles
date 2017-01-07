@@ -42,6 +42,14 @@ Install Cordova (https://cordova.apache.org/) and the Android requeriments
 This will generate a file platforms/android/build/outputs/apk/android-debug.apk with the
 Android app.
 
+You can test it with the emulator:
+
+```bash
+    cordova emulate android
+```
+
+The Android older version supported is the 4.4.2 (API 19)
+
 ### Developing 
 
 If you add "?debug=true" to the game URL, they will appear some debug tools

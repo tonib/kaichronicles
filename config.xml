@@ -17,7 +17,13 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <icon density="xxxhdpi" height="192" platform="android" src="res/android/xxxhdpi.png" width="192" />
+
     <platform name="android">
+
+        <!-- Min version is 4.4.2 (API 19), the first one that uses 
+             Chromium (Chrome v32), the previous fails to render Bootstrap -->
+        <preference name="android-minSdkVersion" value="19" />
+
         <allow-intent href="market:*" />
         <icon src="res/android/xxhdpi.png" />
         <icon density="ldpi" src="res/android/ldpi.png" />

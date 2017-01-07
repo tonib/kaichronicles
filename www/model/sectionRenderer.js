@@ -257,7 +257,7 @@ SectionRenderer.prototype.a = function($a, level) {
             break;
         case 'license':
             // Project Aon license link
-            open = '<a target="_blank" href="https://www.projectaon.org/en/Main/License">';
+            open = '<a href="#projectAonLicense">';
             break; 
         case 'crtable':
             // Combats result table (do not link)
