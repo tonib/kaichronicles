@@ -48,7 +48,6 @@
               C.S.: <span id="template-combatSkill">99</span>
               E.: <span id="template-endurance">99</span>
           </p>
-          
         </div>
 
         <div id="navbar" class="collapse navbar-collapse">
@@ -147,12 +146,32 @@
         var template = {
 
           /**
-           *  Set the navbar title and target URL
+           * Set the navbar title and target URL
+           * @param {String} title The title to put on the navigation bar
+           * @param {String} url The target URL for the title on the nav. bar
            */
           setNavTitle: function(title, url) { 
+
+            // Update the title
             $('#template-title').text(title);
             $('#template-title').attr('href', url);
             $('#template-img-logo').attr('href', url);
+          },
+
+          /**
+            * Hightlight the active navigation bar link
+            */
+          highlightActiveLink: function() {
+            $('#template-header a, #template-header li').removeClass('active');
+            var $actives = $('#template-header a[href="#' + 
+              routing.normalizeHash(location.hash) + '"]');
+            $actives.each(function(index, link) {
+              var $link = $(link);
+              // Bootstrap puts the class 'active' on the parent of the link
+              // But I want to remark the "brand" link too, so put it on both
+              $link.parent().filter('li').addClass('active');
+              $link.addClass('active');
+            });
           },
 
           /**
@@ -242,6 +261,7 @@
             $('#body').html(viewContent);
             // Scroll to top
             window.scrollTo(0, 0);
+            template.highlightActiveLink();
           }
 
         };

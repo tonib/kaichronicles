@@ -87,8 +87,13 @@ var cordovaFS = {
 
         var dirReader = fs.root.createReader();
         dirReader.readEntries(
-            callback,
+            function( entries ) {
+                console.log('Got list of files. Running callback');
+                callback( entries );
+                console.log('Callback finished');
+            },
             function() { 
+                console.log('Error listing files');
                 alert('Error listing files');
                 callback( [] );
             }
@@ -141,18 +146,23 @@ var cordovaFS = {
                 console.log('file system open: ' + fs.name);
 
                 // Get the file to save
+                console.log('Get file to delete: ' + fileName);
                 fs.root.getFile(fileName, 
                     { 
                         create: false, 
                         exclusive: false
                     }, 
                     function (fileEntry) {
+                        console.log('Got the file to delete: ' + fileName);
                         fileEntry.remove(
                             function() { 
                                 console.log('File deleted. Now callback()');
                                 callback(); 
                             },
-                            function() { alert('Error deleting file'); }
+                            function() { 
+                                console.log('Error deleting file');
+                                alert('Error deleting file'); 
+                            }
                         );
                     }, 
                     function() { alert('Error getting file'); }

@@ -180,3 +180,8 @@ div.signpost {
 .hideImportant {
     display: none!important;
 }
+
+/* Highlight the page title */
+.navbar-brand.active {
+    color: #fff;
+}

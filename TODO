@@ -12,7 +12,6 @@
   * Performance
   * Set minimum API to 4.4 ??? (try it on lower versions)
 - Death: Allow to restart book from section 1
-- Navigation bar: Set the "active" style of the current page on the navigation bar
 
 Reminders:
 * JsDoc docs: http://usejsdoc.org/
