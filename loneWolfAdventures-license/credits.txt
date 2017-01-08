@@ -1,0 +1,1 @@
+https://github.com/skozlovf/openshift-diy-nginx-uwsgi
