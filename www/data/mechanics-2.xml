@@ -1159,6 +1159,11 @@
             </afterCombats>
         </section>
 
+        <section id="sect242">
+            <pick objectId="sommerswerd" />
+            <currentWeapon objectId="sommerswerd" />
+        </section>
+
         <section id="sect244">
             <test not="true" hasDiscipline="tracking">
                 <choiceState section="sect147" set="disabled" />

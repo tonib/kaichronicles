@@ -19,6 +19,7 @@ Download the Project Aon game data:
     cd www/data/
     ruby downloadProjectAonData.rb
 ```
+This will require ruby (any recent version), and the SVN client
 
 ### Setup web site
 
