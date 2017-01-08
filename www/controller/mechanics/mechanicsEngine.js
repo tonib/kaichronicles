@@ -338,6 +338,11 @@ var mechanicsEngine = {
                 conditionStatisfied = true;
         }
 
+        // Test book language
+        var bookLanguage = $(rule).attr('bookLanguage');
+        if( bookLanguage && state.book.language == bookLanguage )
+            conditionStatisfied = true;
+
         // Check if the test should be inversed
         if( $(rule).attr('not') == 'true' )
             conditionStatisfied = !conditionStatisfied;

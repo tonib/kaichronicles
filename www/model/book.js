@@ -117,10 +117,16 @@ Book.prototype.getBookXmlURL = function() {
  * Returns the book XHTML root directory, where are stored the book images for HTML format
  */
 Book.prototype.getBookImagesDirectoryURL = function() {
-    /*return Book.getBaseUrl() + this.language + '/xhtml/' +
-        ( this.language == 'en' ? 'lw' : 'ls' ) +  '/' + 
-        this.getProjectAonBookCode() + '/';*/
     return Book.getBaseUrl() + this.bookNumber + '/ill_' + this.language + '/';
+};
+
+/**
+ * Returns the book HTML directory on the Project Aon web site
+ */
+Book.prototype.getBookProjectAonHtmlDir = function() {
+    return 'https://projectaon.org/' + this.language + '/xhtml/' +
+        ( this.language == 'en' ? 'lw' : 'ls' ) +  '/' + 
+        this.getProjectAonBookCode() + '/';
 };
 
 /**

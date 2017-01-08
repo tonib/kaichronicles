@@ -6,6 +6,7 @@ var state = {
 
     /**
      * The current book
+     * {Book}
      */
     book: null,
 

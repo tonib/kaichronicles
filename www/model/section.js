@@ -127,6 +127,6 @@ Section.prototype.getFootNotesXml = function() {
  * Returns the URL of this section on the project aon web site
  */
 Section.prototype.getSectionAonPage = function() {
-    return this.book.getBookImagesDirectoryURL() + this.sectionId + ".htm";
+    return this.book.getBookProjectAonHtmlDir() + this.sectionId + ".htm";
 };
 

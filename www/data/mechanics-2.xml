@@ -1395,9 +1395,22 @@
             <test not="true" hasObject="magicspear" >
                 <choiceState section="sect102" set="disabled" />
             </test>
-            <choiceSelected section="sect102">
-                <drop objectId="magicspear" />
-            </choiceSelected>
+
+            <!-- Oks... Spanish and English translations have different 
+                 senses here for the choices: -->
+            <test bookLanguage="en">
+                <!-- English version -->
+                <choiceSelected section="sect118">
+                    <drop objectId="magicspear" />
+                </choiceSelected>
+            </test>
+
+            <test not="true" bookLanguage="en">
+                <!-- Spanish version -->
+                <choiceSelected section="sect102">
+                    <drop objectId="magicspear" />
+                </choiceSelected>
+            </test>
         </section>
 
         <section id="sect300">
