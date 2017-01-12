@@ -1,3 +1,5 @@
+- Add a link on the main menu to download the Android apk, if we are not already on the
+  app and the browser id contains "android"
 - Combat table overflow on small screens
 - If the book load fails, it doest not try to reload the next time
 - Test all books / all sections rendering. It should be valid HTML5
@@ -21,6 +23,7 @@
   * The spanish version should contain only the translated images
   * On the mechanics-XXX.xml, declare the translated images for each language
   * When the section is rendered, render the url image of the current language
+- Book 1 / sect173: If you have the silver key, disable the other choice
 
 Reminders:
 
