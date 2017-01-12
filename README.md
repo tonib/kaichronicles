@@ -12,6 +12,10 @@ Project Aon web site. **REMEMBER** that game books data is under the
   web site
 * You cannot redistribute the game books data in any way
 
+The Android older version supported is the 4.4.2 (API 19). The web is tested with the 
+latest version of Chrome and Firefox. So, other browsers or/and older versions maybe don't 
+work
+
 ## Setup
 
 Download the Project Aon game data:
@@ -49,7 +53,10 @@ You can test it with the emulator:
     cordova emulate android
 ```
 
-The Android older version supported is the 4.4.2 (API 19)
+There is a bug with Android on Cordova 6.4 with the app icons. If the app icon don't appear,
+read this:
+http://stackoverflow.com/questions/40351434/cordova-android-6-4-0-creates-res-folder-top-level-not-inside-platforms-android
+
 
 ### Developing 
 

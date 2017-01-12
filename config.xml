@@ -4,7 +4,7 @@
     <description>
         Game player for books 1 and 2 of Lone Wolf gamebooks.
     </description>
-    <author email="toni.bennasar.sf@gmail.com" href="https://www.projectaon.org">
+    <author email="toni.bennasar@projectaon.org" href="https://www.projectaon.org">
         Project AON
     </author>
     <content src="index.html" />
