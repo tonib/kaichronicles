@@ -8,7 +8,6 @@
 - Test controller: Test rules
 - Find "TODO" and do it
 - Android application:
-  * Try to add a splash screen
   * App lifeciclye
   * Remove network permission
   * Check if plugins can be declared on config.xml
