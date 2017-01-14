@@ -166,6 +166,8 @@
             <description lang="es">
                 Un  anillo de oro con el escudo real de Durenor
             </description>
+
+            <image book="2" name="seal.png" />
         </special>
         
         <special id="portbaxpapers">

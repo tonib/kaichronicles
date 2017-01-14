@@ -100,3 +100,16 @@ Mechanics.getRuleSelector = function(rule) {
         .get()
         .join( ' > ' );
 };
+
+/**
+ * Check if a image is translated
+ * @param {string} fileName The image file name
+ * @return true if the image is translated
+ */
+Mechanics.prototype.imageIsTranslated = function(fileName) {
+
+    return $(this.mechanicsXml)
+        .find('translated-images > image:contains("' + fileName + '")')
+        .length > 0;
+};
+

@@ -12,7 +12,7 @@ var mapController = {
         if( !setupController.checkBook() )
             return;
         
-        var mapSection = new Section(state.book, 'map');
+        var mapSection = new Section(state.book, 'map', state.mechanics);
         if( !mapSection.exists() ) {
             console.log("Map section does not exists" );
             return;

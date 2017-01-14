@@ -743,7 +743,8 @@ var mechanicsEngine = {
      */
     testDeath: function() {
         // Dont show death on non numbered sections (maybe we have not choose the endurance yet)
-        var section = new Section(state.book, state.sectionStates.currentSection);
+        var section = new Section(state.book, state.sectionStates.currentSection, 
+            state.mechanics);
         if( ! section.getSectionNumber() )
             return;
 

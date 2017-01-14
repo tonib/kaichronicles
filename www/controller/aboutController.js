@@ -26,7 +26,7 @@ var aboutController = {
     },
 
     appendSection: function(sectionId, containerId) {
-        var section = new Section( state.book , sectionId );
+        var section = new Section( state.book , sectionId , state.mechanics );
         var renderer = new SectionRenderer( section );
         $(containerId).append( renderer.renderSection() );
     },

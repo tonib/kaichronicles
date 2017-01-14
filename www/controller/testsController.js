@@ -12,7 +12,7 @@ var testsController = {
         // Test rendering:
         for(var i=1; i<350; i++) {
             try {
-                var section = new Section(state.book, 'sect' + i );
+                var section = new Section(state.book, 'sect' + i, state.mechanics );
                 var renderer = new SectionRenderer(section);
                 renderer.renderSection();
             }

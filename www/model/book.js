@@ -107,17 +107,24 @@ Book.prototype.getProjectAonBookCode = function() {
  * Returns the book XML source URL 
  */
 Book.prototype.getBookXmlURL = function() {
-    /*return Book.getBaseUrl() + this.language + '/xml/' + this.getProjectAonBookCode() +
-        '.xml';*/
     return Book.getBaseUrl() + this.bookNumber + '/' + this.getProjectAonBookCode() +
         '.xml';
 };
 
 /**
- * Returns the book XHTML root directory, where are stored the book images for HTML format
+ * Returns an illustration URL
+ * @param {string} fileName The illustration file name
+ * @param {Mechanics} mechanics The book mechanics. It can be null. In this case,
+ * no translated images will be searched
  */
-Book.prototype.getBookImagesDirectoryURL = function() {
-    return Book.getBaseUrl() + this.bookNumber + '/ill_' + this.language + '/';
+Book.prototype.getIllustrationURL = function(fileName, mechanics) {
+    var illDirectory;
+    if( mechanics && mechanics.imageIsTranslated(fileName) )
+        illDirectory = 'ill_' + this.language;
+    else
+        illDirectory = 'ill_en';
+    return Book.getBaseUrl() + this.bookNumber + '/' + illDirectory + '/' + 
+        fileName;
 };
 
 /**
@@ -177,7 +184,7 @@ Book.prototype.hasSection = function(sectionId) {
  * Get the book copyright HTML
  */
 Book.prototype.getCopyrightHtml = function() {
-    var fakeSection = new Section(this, 'fakeSection');
+    var fakeSection = new Section(this, 'fakeSection', null);
     var renderer = new SectionRenderer(fakeSection);
     //var selector = 'rights[class="copyrights"]';
     var selector = 'rights[class="license-notification"]';

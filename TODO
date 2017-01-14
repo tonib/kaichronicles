@@ -8,6 +8,7 @@
 - Test controller: Test rules
 - Find "TODO" and do it
 - Android application:
+  * Size (remove unused files from lib/bootstrap). Current size: 15.7 MB
   * App lifeciclye
   * Remove network permission
   * Check if plugins can be declared on config.xml
@@ -24,6 +25,11 @@
   * On the mechanics-XXX.xml, declare the translated images for each language
   * When the section is rendered, render the url image of the current language
 - Book 1 / sect173: If you have the silver key, disable the other choice
+- Money handling: 
+  * Allow to drop an arbitrary amount of money, not just a single coin
+  * Support for money as object on section
+  * Allow to pick droped money
+- The "Loading" does not appear when a view is loading
 
 Reminders:
 

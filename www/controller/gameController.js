@@ -37,7 +37,7 @@ var gameController = {
     loadSection: function(sectionId) {
 
         // Load and display the section
-        var newSection = new Section(state.book, sectionId);
+        var newSection = new Section(state.book, sectionId, state.mechanics);
         if( !newSection.exists() ) {
             console.log("Section " + sectionId + " does not exists" );
             return;

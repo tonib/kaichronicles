@@ -2,6 +2,21 @@
 
 <mechanics book="2">
 
+    <!-- LIST OF TRANSLATED IMAGES -->
+    <translated-images>
+        <image>acdscplz.png</image>
+        <image>map.png</image>
+        <image>seal.png</image>
+        <image>small4.png</image>
+        <image>small10.png</image>
+        <image>small16.png</image>
+        <image>small20.png</image>
+        <image>small22.png</image>
+        <image>small28.png</image>
+        <image>small29.png</image>
+        <image>weapons.png</image>
+    </translated-images>
+
     <!-- GAME RULES -->
     <sections>
 

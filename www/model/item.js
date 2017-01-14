@@ -29,7 +29,8 @@ function Item(book, $o, objectId) {
     if( $image.length > 0 ) {
         var bookNumber = parseInt( $image.attr('book') );
         var imageBook = new Book( bookNumber , state.book.language );
-        this.imageUrl = imageBook.getBookImagesDirectoryURL() + $image.attr('name'); 
+        // Get the object image URL, untranslated
+        this.imageUrl = imageBook.getIllustrationURL( $image.attr('name') );
     }
 
     // Usage (only one use, and then the object is dropped)
@@ -52,7 +53,7 @@ function Item(book, $o, objectId) {
 
     // If it's the map, add description from the book:
     if( objectId == 'map' ) {
-        var mapSection = new Section( book , 'map');
+        var mapSection = new Section( book , 'map', null);
         if( mapSection.exists() )
             this.description = mapSection.getTitleText();
     }

@@ -3,12 +3,15 @@
  * Section constructor from the Book XML
  * @param {Book} book The owner Book
  * @param {string} sectionId The section ID to load 
+ * @param {Mechanics} mechanics The book mechanics. It can be null. In this
+ * case, the images will not be translated
  */
-function Section(book, sectionId) {
+function Section(book, sectionId, mechanics) {
     
     /** The section id */
     this.sectionId = sectionId;
     this.book = book;
+    this.mechanics = mechanics;
     this.$xmlSection = book.getSectionXml( sectionId);
     // There can be nested sections, get the first one (the root)
     this.data =  this.$xmlSection.find('data').first();

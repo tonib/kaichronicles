@@ -2,6 +2,14 @@
 
 <mechanics book="1">
 
+    <!-- LIST OF TRANSLATED IMAGES -->
+    <translated-images>
+        <image>map.png</image>
+        <image>small21.png</image>
+        <image>small31.png</image>
+        <image>weapons.png</image>
+    </translated-images>
+
     <!-- GAME RULES -->
     <sections>
 

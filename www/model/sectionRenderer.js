@@ -5,7 +5,7 @@
 
 /**
  * Tool to transform the book XML to HTML
- * @param {Section}section The Section to render 
+ * @param {Section} section The Section to render 
  */
 function SectionRenderer(section) {
     /** {Section} The section to render */
@@ -324,7 +324,6 @@ SectionRenderer.prototype.choice = function($choice, level) {
 SectionRenderer.prototype.illustration = function($illustration, level) {
     
     var illustrationContent = '';
-    var illustrationsPath = this.sectionToRender.book.getBookImagesDirectoryURL();
     var creator = $illustration.find('> meta > creator').text();
     var description = $illustration.find('> meta > description').text();
     // Fix single quote markup
@@ -338,11 +337,15 @@ SectionRenderer.prototype.illustration = function($illustration, level) {
         // This app is only for the first 5 books and gives credit to only this 
         // illustrator in the footer, so only use his work (other illustrators images
         // are not stored on the SVN repository)
-        var source = $illustration.find('> instance.html').attr('src');
-        var isLargeIllustration = (source.indexOf('ill') == 0);
+        var fileName = $illustration.find('> instance.html').attr('src');
+        // Get the translated image URL:
+        var source = this.sectionToRender.book.getIllustrationURL(fileName, 
+            this.sectionToRender.mechanics);
+
+        var isLargeIllustration = (fileName.indexOf('ill') == 0);
         illustrationContent += '<div class="illustration' + 
             (isLargeIllustration ? ' ill' : '') + 
-            '"><img src="' + illustrationsPath + source + '" alt="' + description + 
+            '"><img src="' + source + '" alt="' + description + 
             '" title="' + description + '"></div><p class="illustration-label">' + 
             description + '</p>';
     }
