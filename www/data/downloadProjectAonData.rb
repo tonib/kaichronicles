@@ -48,18 +48,15 @@ class BookData
         "#{SVN_ROOT}/#{language}/png/#{books_set}/#{book_code(language)}/ill/#{author}"
     end
 
+    # Download illustrations
+    # language: The language illustrations (en/es)
+    # The illustrations author folder
     def download_illustrations(language, author)
 
         source_svn_dir = svn_illustrations_dir(language, author)
         target_dir = "#{book_dir}/ill_#{language}"
 
-        if language == 'en'
-            FileUtils.mkdir_p( target_dir )
-        else
-            # Non english images overwrite some english images. Take english as base:
-            english_ill_dir = "#{book_dir}/ill_en"
-            FileUtils.cp_r( english_ill_dir , target_dir )
-        end
+        FileUtils.mkdir_p( target_dir )
         cmd_line = "svn --force export #{source_svn_dir} #{target_dir}"
         p cmd_line
         `#{cmd_line}`

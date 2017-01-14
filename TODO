@@ -8,7 +8,8 @@
 - Test controller: Test rules
 - Find "TODO" and do it
 - Android application:
-  * Size (remove unused files from lib/bootstrap). Current size: 15.7 MB
+  * Size (remove unused files from lib/bootstrap). Original size: 15.7 MB
+    NOW: 11.8
   * App lifeciclye
   * Remove network permission
   * Check if plugins can be declared on config.xml
