@@ -75,7 +75,7 @@ MIT. This application uses the following third-party code:
 * [Toastr](https://github.com/CodeSeven/toastr) (MIT)
 * [FileSaver.js](https://github.com/eligrey/FileSaver.js/) (MIT)
 * [jQuery](https://jquery.com/) (jQuery license)
-* The file www/images/logo-white-bg-40.png is an awful adaptation of the logo image of the 
-  spanish Project Aon
+* Logos, icons and splashes are taken directly, or adapted, from the Spanish Project Aon 
+  (https://projectaon.org/es)
 * The HTML rendering and books XML processing contains code taken from 
   Lone Wolf Adventures, by Liquid State Limited

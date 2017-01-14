@@ -25,13 +25,28 @@
         <preference name="android-minSdkVersion" value="19" />
 
         <allow-intent href="market:*" />
+
+        <!-- Icons -->
         <icon src="res/android/xxhdpi.png" />
-        <icon density="ldpi" src="res/android/ldpi.png" />
-        <icon density="mdpi" src="res/android/mdpi.png" />
-        <icon density="hdpi" src="res/android/hdpi.png" />
-        <icon density="xhdpi" src="res/android/xhdpi.png" />
-        <icon density="xxhdpi" src="res/android/xxhdpi.png" />
-        <icon density="xxxhdpi" src="res/android/xxxhdpi.png" />
+        <icon density="ldpi" src="res/android/icons/ldpi.png" />
+        <icon density="mdpi" src="res/android/icons/mdpi.png" />
+        <icon density="hdpi" src="res/android/icons/hdpi.png" />
+        <icon density="xhdpi" src="res/android/icons/xhdpi.png" />
+        <icon density="xxhdpi" src="res/android/icons/xxhdpi.png" />
+        <icon density="xxxhdpi" src="res/android/icons/xxxhdpi.png" />
+
+        <!-- Splashes -->
+        <splash src="res/android/splashes/drawable-land-hdpi.png" density="land-hdpi"/>
+        <splash src="res/android/splashes/drawable-land-ldpi.png" density="land-ldpi"/>
+        <splash src="res/android/splashes/drawable-land-mdpi.png" density="land-mdpi"/>
+        <splash src="res/android/splashes/drawable-land-xhdpi.png" density="land-xhdpi"/>
+        <splash src="res/android/splashes/drawable-port-hdpi.png" density="port-hdpi"/>
+        <splash src="res/android/splashes/drawable-port-ldpi.png" density="port-ldpi"/>
+        <splash src="res/android/splashes/drawable-port-mdpi.png" density="port-mdpi"/>
+        <splash src="res/android/splashes/drawable-port-xhdpi.png" density="port-xhdpi"/>
+        
     </platform>
+
     <engine name="android" spec="~6.1.0" />
+
 </widget>
