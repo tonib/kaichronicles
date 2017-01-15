@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mechanics book="3">
+
+    <!-- LIST OF TRANSLATED IMAGES -->
+    <translated-images>
+        <image>map.png</image>
+        <image>weapons.png</image>
+    </translated-images>
+
+    <!-- GAME RULES -->
+    <sections>
+
+        <section id="gamerulz">
+            <!-- Select the player skills (weapons skill and endurance) UI -->
+            <setSkills />
+        </section>
+
+        <section id="discplnz">
+            <!-- Select the Kai disciplines UI -->
+            <setDisciplines />
+        </section>
+
+        <section id="equipmnt">
+            <!-- Do not pick 2 maps! -->
+            <test not="true" hasObject="map" >
+                <pick objectId="map" />
+            </test>
+
+            <randomTable>
+                <pick class="money" count="[RANDOM] + 10" />
+            </randomTable>
+
+            <object objectId="sword" />
+            <object objectId="shortsword" />
+            <object objectId="leatherwaistcoat" />
+            <object objectId="spear" />
+            <object objectId="mace" />
+            <object objectId="warhammer" />
+            <object objectId="axe" />
+            <object objectId="laumspurpotion4" />
+            <object objectId="quarterstaff" />
+            <object objectId="meal" />
+            <object objectId="broadsword" />
+
+            <message en-text="Pick the money and choose two objects before continue" />
+        </section>
+
+        <!-- UP TO SECTION 3 -->
+    </sections>
+
+</mechanics>

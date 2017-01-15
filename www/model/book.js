@@ -94,13 +94,20 @@ Book.prototype.downloadBookXml = function() {
 
 /**
  * Get the code name given to the book by the Project Aon
- * @returns The book code name. null if it was not found 
+ * @param {string} language The language for the book. If null, the current book language
+ * will be used
+ * @returns {string} The book code name. null if it was not found 
  */
-Book.prototype.getProjectAonBookCode = function() {
+Book.prototype.getProjectAonBookCode = function(language) {
+    if( !language )
+        language = this.language;
+
     if( this.bookNumber == 1 )
-        return this.language == 'en' ? '01fftd' : '01hdlo';
+        return language == 'en' ? '01fftd' : '01hdlo';
+    else if( this.bookNumber == 2 )
+        return language == 'en' ? '02fotw' : '02fsea';
     else
-        return this.language == 'en' ? '02fotw' : '02fsea';
+        return language == 'en' ? '03tcok' : '03lcdk';
 };
 
 /**
@@ -129,11 +136,15 @@ Book.prototype.getIllustrationURL = function(fileName, mechanics) {
 
 /**
  * Returns the book HTML directory on the Project Aon web site
+ * @param {string} language The book language to get. null to get the current book 
+ * language
  */
-Book.prototype.getBookProjectAonHtmlDir = function() {
-    return 'https://projectaon.org/' + this.language + '/xhtml/' +
-        ( this.language == 'en' ? 'lw' : 'ls' ) +  '/' + 
-        this.getProjectAonBookCode() + '/';
+Book.prototype.getBookProjectAonHtmlDir = function(language) {
+    if(!language)
+        language = this.language;
+    return 'https://projectaon.org/' + language + '/xhtml/' +
+        ( language == 'en' ? 'lw' : 'ls' ) +  '/' + 
+        this.getProjectAonBookCode(language) + '/';
 };
 
 /**

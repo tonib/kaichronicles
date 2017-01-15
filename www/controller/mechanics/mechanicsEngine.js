@@ -7,7 +7,7 @@ var mechanicsEngine = {
     /**
      * The last supported book number
      */
-    LAST_SUPPORTED_BOOK: 2,
+    LAST_SUPPORTED_BOOK: 3,
 
     /**
      * jquery DOM object with the mechanics HTML

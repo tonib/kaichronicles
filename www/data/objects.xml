@@ -182,6 +182,23 @@
             </description>
         </special>
 
+        <!-- BOOK 3 -->
+        <special id="leatherwaistcoat">
+            <name lang="en">Padded Leather Waistcoat</name>
+            <description lang="en">
+                This adds 2 ENDURANCE points to your total
+            </description>
+
+            <name lang="es">Cota de cuero</name>
+            <description lang="es">
+                Te permite sumar dos puntos de RESISTENCIA al total que ya posees
+            </description>
+
+            <image book="3" name="plw.png" />
+            <effect class="endurance" increment="2" />
+        </special>
+        
+
     </specials>
 
     <objects>
@@ -350,6 +367,25 @@
         <object id="goldring">
             <name lang="en">Gold Ring</name>
             <name lang="es">Anillo de oro</name>
+        </object>
+
+        <!-- BOOOK 3 -->
+
+        <object id="laumspurpotion4">
+            <name lang="en">Potion of Laumspur</name>
+            <description lang="en">
+                This restores 4 ENDURANCE points to your total when swallowed after combat. 
+                There is only enough for one dose
+            </description>
+
+            <name lang="es">Poción de Laumspur</name>
+            <description lang="es">
+                Te hace recuperar 4 puntos de RESISTENCIA al beberla tras un combate. 
+                Sólo hay cantidad suficiente para una dosis
+            </description>
+
+            <image book="3" name="potion.png" />
+            <usage class="endurance" increment="4" />
         </object>
 
         <!-- OTHERS -->

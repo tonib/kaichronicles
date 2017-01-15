@@ -128,8 +128,10 @@ Section.prototype.getFootNotesXml = function() {
 
 /**
  * Returns the URL of this section on the project aon web site
+ * @param {string} language The book language to get. null to get the current book 
+ * language
  */
-Section.prototype.getSectionAonPage = function() {
-    return this.book.getBookProjectAonHtmlDir() + this.sectionId + ".htm";
+Section.prototype.getSectionAonPage = function(language) {
+    return this.book.getBookProjectAonHtmlDir(language) + this.sectionId + ".htm";
 };
 

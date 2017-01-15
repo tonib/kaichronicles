@@ -89,6 +89,7 @@ FileUtils.mkdir_p( 'projectAon' )
 # Download data
 BookData.new( 1 , '01fftd' , '01hdlo' , [ 'chalk' ] ).download_book_data
 BookData.new( 2 , '02fotw' , '02fsea'  , [ 'chalk' ] ).download_book_data
+BookData.new( 3 , '03tcok' , '03lcdk'  , [ 'chalk' ] ).download_book_data
 
 # Additional images:
 BookData.download_extra_images({
