@@ -13,7 +13,11 @@ var mainMenuController = {
         views.loadView('mainMenu.html').then(function() {
             mainMenuView.setup();
 
-            // Check if there is current game
+            // Hide info only for the web site on the app:
+            if( cordovaApp.isRunningApp() )
+                mainMenuView.hideWebInfo();
+
+            // Check if there is a current game
             if( !state.existsPersistedState() )
                 mainMenuView.hideContinueGame();
                 

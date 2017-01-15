@@ -17,12 +17,6 @@
 - Death: 
   * Allow to restart book from section 1
   * Add a link to go to the load page
-- Add a version number for published versions
-- Application size: Do not duplicate images directory for each language.
-  * The english version should contain all images
-  * The spanish version should contain only the translated images
-  * On the mechanics-XXX.xml, declare the translated images for each language
-  * When the section is rendered, render the url image of the current language
 - Book 1 / sect173: If you have the silver key, disable the other choice
 - Money handling: 
   * Allow to drop an arbitrary amount of money, not just a single coin

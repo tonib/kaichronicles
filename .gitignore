@@ -9,3 +9,6 @@ plugins
 jsconfig.json
 .vscode
 typings
+
+# Apk build for distribution to Project AON
+www/kai.apk

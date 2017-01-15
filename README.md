@@ -61,12 +61,18 @@ http://stackoverflow.com/questions/40351434/cordova-android-6-4-0-creates-res-fo
 
 ### Developing 
 
-If you add "?debug=true" to the game URL, they will appear some debug tools
-
 Game rules for each book are located at www/data. "mechanics-X" are the game rules
 for the book X. "objects.xml" are the game objects
 
 The game rules implementation are at www/controller/mechanics/mechanicsEngine.js
+
+If you add "?debug=true" to the game URL, they will appear some debug tools.
+You also can use the browser Developer Tools to prepare the Action Chart to test sections.
+So, in the console you can execute things like:
+```javascript
+actionChartController.pick('axe')
+actionChartController.increaseMoney(-10)
+```
 
 ### License
 

@@ -18,6 +18,16 @@ var mainMenuView = {
         });
     },
 
+    /**
+     * Hide web text info
+     */
+    hideWebInfo: function() {
+        $('#menu-webinfo').hide();
+    },
+
+    /**
+     * Hide the continue game button
+     */
     hideContinueGame: function() { 
         $('#menu-continue').hide();
     }

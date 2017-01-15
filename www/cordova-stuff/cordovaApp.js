@@ -37,6 +37,6 @@ var cordovaApp = {
      * Are we running inside an app?
      */
     isRunningApp: function() { 
-        return navigator.app; 
+        return window.cordova; 
     }
 };
