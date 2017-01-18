@@ -14,6 +14,8 @@
         <section id="tssf">
             <!-- Drop the previous books map -->
             <drop objectId="map" />
+            <!-- Hunt is not available on Kalte (see section "equipmnt") -->
+            <huntStatus enabled="false" />
         </section>
 
         <section id="gamerulz">
@@ -87,10 +89,43 @@
             <!--pick objectId="meal" index="2" /-->
             <pick objectId="sleepingfurs" />
             <pick objectId="rope" />
-
         </section>
 
-        <!-- UP TO SECTION 13 -->
+        <section id="sect14">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect15">
+            <test not="true" hasDiscipline="mindomtr">
+                <choiceState section="sect185" set="disabled" />
+            </test>
+            <test not="true" hasObject="bonesword|bonedagger">
+                <choiceState section="sect86" set="disabled" />
+            </test>
+            <test hasDiscipline="mindomtr" hasObject="bonesword|bonedagger">
+                <choiceState section="sect323" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect16">
+            <message id="msg-drop-object" en-text="Drop two backpack items before continue" />
+            <choiceState section="all" set="disabled" />
+            <onInventoryEvent>
+                <test expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] == 0 || [BACKPACK-ITEMS-CNT-ON-SECTION] >= 2">
+                    <message id="msg-drop-object" op="hide" />
+                    <choiceState section="all" set="enabled" />
+                </test>
+                <test not="true" expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] == 0 || [BACKPACK-ITEMS-CNT-ON-SECTION] >= 2">
+                    <message id="msg-drop-object" op="show" />
+                    <choiceState section="all" set="disabled" />
+                </test>
+            </onInventoryEvent>
+        </section>
+
+        <!-- UP TO SECTION 17 -->
     </sections>
 
 </mechanics>

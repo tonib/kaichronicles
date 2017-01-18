@@ -8,6 +8,8 @@
         <section id="tssf">
             <!-- No more Barnak oil on your skin! -->
             <drop objectId="baknaroil" />
+            <!-- Hunting was not enabled on book 3 -->
+            <huntStatus enabled="true" />
         </section>
 
     </sections>
