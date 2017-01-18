@@ -11,6 +11,11 @@
     <!-- GAME RULES -->
     <sections>
 
+        <section id="tssf">
+            <!-- Drop the previous books map -->
+            <drop objectId="map" />
+        </section>
+
         <section id="gamerulz">
             <!-- Select the player skills (weapons skill and endurance) UI -->
             <setSkills />
@@ -46,7 +51,36 @@
             <message en-text="Pick the money and choose two objects before continue" />
         </section>
 
-        <!-- UP TO SECTION 3 -->
+        <section id="sect4">
+            <object objectId="bonesword" />
+            <object objectId="bluestonedisc" />
+        </section>
+
+        <section id="sect8">
+            <pick objectId="baknaroil" />
+        </section>
+
+        <section id="sect9">
+            <death />
+        </section>
+
+        <section id="sect10">
+            <test sectionVisited="sect90">
+                <choiceState section="sect90" set="disabled" />
+            </test>
+            <test sectionVisited="sect171">
+                <choiceState section="sect171" set="disabled" />
+            </test>
+            <test sectionVisited="sect289">
+                <choiceState section="sect289" set="disabled" />
+            </test>
+            <test sectionVisited="sect225">
+                <choiceState section="sect225" set="disabled" />
+            </test>
+            <object objectId="backpack" />
+        </section>
+
+        <!-- UP TO SECTION 11 -->
     </sections>
 
 </mechanics>

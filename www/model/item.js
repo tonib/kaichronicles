@@ -17,6 +17,8 @@ function Item(book, $o, objectId) {
     this.description = $o.find('description[lang=' + book.language + ']').text();
     /** True if the object is a meal */
     this.isMeal = $o.attr('isMeal') == 'true';
+    /** True if the object can be dropped */
+    this.droppable = $o.attr('droppable') != 'false';
     /** 
      * The weapon type. Only for special and object types. It is the kind of weapon.
      * If it can be handled as more than one weapon type, separate the with a '|'.

@@ -219,7 +219,9 @@ var actionChartView = {
                             '<span class="glyphicon glyphicon-hand-left">' + 
                         '</span></a> ';
                     }
-                    html += link + 'data-op="drop" title="Drop object"><span class="glyphicon glyphicon-remove"></span></a> ';
+                    if( o.droppable )
+                        // Object can be dropped:
+                        html += link + 'data-op="drop" title="Drop object"><span class="glyphicon glyphicon-remove"></span></a> ';
                 }
                 html += '</div>';
             }

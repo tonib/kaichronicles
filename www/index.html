@@ -269,6 +269,13 @@
         
         // *************** SETUP ***************
         $(function() {
+
+            if( window.getUrlParameter('debug') ) {
+              // On debug mode, disable the cache (to reload always the books xml)
+              console.log('Debug mode: cache disabled');
+              $.ajaxSetup({ cache: false });
+            }
+
             state.setupDefaultLanguage();
             cordovaApp.setup();
             template.setup();

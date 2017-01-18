@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mechanics book="3">
+
+    <!-- GAME RULES -->
+    <sections>
+
+        <section id="tssf">
+            <!-- No more Barnak oil on your skin! -->
+            <drop objectId="baknaroil" />
+        </section>
+
+    </sections>
+
+</mechanics>

@@ -59,6 +59,18 @@
             <image book="1" name="bsword.png" />
         </weapon>
 
+        <!-- BOOOK 3 -->
+
+        <weapon id="bonesword" weaponType="sword">
+            <name lang="en">Bone Sword</name>
+            <name lang="es">Espada de hueso</name>
+        </weapon>
+
+        <weapon id="bonedagger" weaponType="dagger">
+            <name lang="en">Bone Dagger</name>
+            <name lang="es">Puñal de hueso</name>
+        </weapon>
+
     </weapons>
 
     <specials>
@@ -183,6 +195,7 @@
         </special>
 
         <!-- BOOK 3 -->
+        
         <special id="leatherwaistcoat">
             <name lang="en">Padded Leather Waistcoat</name>
             <description lang="en">
@@ -198,6 +211,17 @@
             <effect class="endurance" increment="2" />
         </special>
         
+        <special id="baknaroil" droppable="false">
+            <name lang="en">Baknar Oil on your skin</name>
+            <description lang="en">
+                Baknar oil gives excellent insulation from the bitter cold of Kalte
+            </description>
+
+            <name lang="es">Aceite de Baknar en tu piel</name>
+            <description lang="es">
+                El aceite de Baknar es un aislante excelente que protege de las temperaturas glaciares de Kalte
+            </description>
+        </special>
 
     </specials>
 
@@ -387,6 +411,12 @@
             <image book="3" name="potion.png" />
             <usage class="endurance" increment="4" />
         </object>
+
+        <object id="bluestonedisc">
+            <name lang="en">Blue Stone Disc</name>
+            <name lang="es">Disco Azul de Piedra</name>
+        </object>
+        
 
         <!-- OTHERS -->
 
