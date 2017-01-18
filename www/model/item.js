@@ -13,12 +13,25 @@ function Item(book, $o, objectId) {
     this.id = objectId;
     /** The translated object name */
     this.name = $o.find('name[lang=' + book.language + ']').text();
-    /** The translated object description */
-    this.description = $o.find('description[lang=' + book.language + ']').text();
     /** True if the object is a meal */
     this.isMeal = $o.attr('isMeal') == 'true';
     /** True if the object can be dropped */
     this.droppable = $o.attr('droppable') != 'false';
+
+    /** Number of items the object it occupies on the backpack */
+    this.itemCount = $o.attr('itemCount');
+    this.itemCount = this.itemCount ? parseInt( this.itemCount ) : 1;
+
+    /** The translated object description */
+    this.description = $o.find('description[lang=' + book.language + ']').text();
+    if( this.itemCount > 1 ) {
+        // Add description of the size used 
+        if( this.description )
+            this.description += ' ';
+        this.description += '(Counts as ' + this.itemCount + ' items)';
+    }
+        
+
     /** 
      * The weapon type. Only for special and object types. It is the kind of weapon.
      * If it can be handled as more than one weapon type, separate the with a '|'.

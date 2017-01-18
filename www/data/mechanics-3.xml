@@ -80,7 +80,17 @@
             <object objectId="backpack" />
         </section>
 
-        <!-- UP TO SECTION 11 -->
+        <section id="sect12">
+            <pick objectId="meal" index="0" />
+            <pick objectId="meal" index="1" />
+            <!-- You pick 3 and eat one, so no third -->
+            <!--pick objectId="meal" index="2" /-->
+            <pick objectId="sleepingfurs" />
+            <pick objectId="rope" />
+
+        </section>
+
+        <!-- UP TO SECTION 13 -->
     </sections>
 
 </mechanics>

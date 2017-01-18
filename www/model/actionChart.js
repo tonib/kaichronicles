@@ -75,7 +75,7 @@ ActionChart.prototype.pick = function(o) {
 
             if( !this.hasBackpack )
                 throw 'You don\'t have  a backpack';
-            if( this.getNBackpackItems() >= 8 )
+            if( ( this.getNBackpackItems() + o.itemCount ) > 8 )
                 throw 'You can have only 8 backpack objects';
             if( o.id == 'meal')
                 // Special case
@@ -97,7 +97,13 @@ ActionChart.prototype.pick = function(o) {
  * Returns the total number of backpack items 
  */
 ActionChart.prototype.getNBackpackItems = function() {
-    return this.meals + this.backpackItems.length;
+    var count = this.meals;
+    for( var i=0; i<this.backpackItems.length; i++) {
+        var o = state.mechanics.getObject(this.backpackItems[i]);
+        if( o )
+            count += o.itemCount;
+    }
+    return count;
 };
 
 /**

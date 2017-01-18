@@ -417,6 +417,10 @@
             <name lang="es">Disco Azul de Piedra</name>
         </object>
         
+        <object id="sleepingfurs" itemCount="2">
+            <name lang="en">Sleeping Furs</name>
+            <name lang="es">Mantas de Piel</name>
+        </object>
 
         <!-- OTHERS -->
 
