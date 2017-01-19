@@ -18,6 +18,33 @@ var actionChartView = {
         actionChartView.updateMoney();
 
         // Disciplines.
+        actionChartView.fillDisciplines(actionChart);
+
+        // Fill the chart objects lists
+        actionChartView.updateObjectsLists();
+
+        // Bind event for drop meals
+        actionChartView.bindEquipmentEvents( $('#achart-dropmeal') );
+
+        // Bind drop money event
+        $('#achart-dropmoney' ).click(function() {
+            if( state.actionChart.beltPouch <= 0 )
+                return;
+            if( !confirm('Are you sure you want to drop 1 Golden Crown?') )
+                return;
+            actionChartController.increaseMoney(-1);
+        });
+    },
+
+    /**
+     * Render the disciplines table
+     * @param {ActionChart} actionChart The action chart
+     */
+    fillDisciplines: function(actionChart) {
+        // Kai title:
+        $('#achart-kaititle')
+            .text( state.book.getKaiTitle( actionChart.disciplines.length ) );
+
         // TODO: Display the discipline "quote" tag instead the name
         var $displines = $('#achart-disciplines > tbody');
         if( actionChart.disciplines.length == 0 ) {
@@ -49,21 +76,6 @@ var actionChartView = {
                 $(this).parent().find('i').toggle();
             });
         }
-
-        // Fill the chart objects lists
-        actionChartView.updateObjectsLists();
-
-        // Bind event for drop meals
-        actionChartView.bindEquipmentEvents( $('#achart-dropmeal') );
-
-        // Bind drop money event
-        $('#achart-dropmoney' ).click(function() {
-            if( state.actionChart.beltPouch <= 0 )
-                return;
-            if( !confirm('Are you sure you want to drop 1 Golden Crown?') )
-                return;
-            actionChartController.increaseMoney(-1);
-        });
     },
 
     updateMoney: function() {

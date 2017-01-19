@@ -156,7 +156,7 @@ var mechanicsEngine = {
 
     /**
      * Fire events after some combat turn
-     * @param combat The combat that has played turn. null to fire all combats on this
+     * @param {Combat} combat The combat that has played turn. null to fire all combats on this
      * section
      */
     fireAfterCombatTurn: function(combat) {
@@ -176,9 +176,12 @@ var mechanicsEngine = {
 
         // Fire the given combat
         $.each( mechanicsEngine.onAfterCombatTurns, function(index, rule) {
-            var ruleTurn = parseInt( $(rule).attr('turn') );
+            // Turn when to execute the rule:
+            var txtRuleTurn = $(rule).attr('turn');
+            var ruleTurn = parseInt( txtRuleTurn );
+
             // We reapply all rules accumulatively
-            if( combat.turns.length >= ruleTurn )
+            if( txtRuleTurn == 'any' || combat.turns.length >= ruleTurn )
                 mechanicsEngine.runChildRules( $(rule) );
         });
     },
@@ -726,7 +729,8 @@ var mechanicsEngine = {
             .replaceAll( '[ENDURANCE]' , state.actionChart.currentEndurance )
             .replaceAll( '[MAXENDURANCE]' , state.actionChart.getMaxEndurance() )
             .replaceAll( '[COMBATSENDURANCELOST]', sectionState.combatsEnduranceLost() )
-            .replaceAll( '[MEALS]', state.actionChart.meals );
+            .replaceAll( '[MEALS]', state.actionChart.meals )
+            .replaceAll( '[KAILEVEL]', state.actionChart.disciplines.count );
 
         try {
             // Be sure to return always an integer (expression can contain divisions...)

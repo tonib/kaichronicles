@@ -201,7 +201,33 @@
             </test>
         </section>
 
-        <!-- UP TO SECTION 31 -->
+        <section id="sect32">
+            <!-- TODO: Pending to implement foot note about 3th enemy -->
+            <choiceState section="all" set="disabled" />
+            <afterCombatTurn turn="any">
+                <test expression="[COMBATSENDURANCELOST] > 0">
+                    <disableCombats />
+                    <choiceState section="sect66" set="enabled" />
+                </test>
+            </afterCombatTurn>
+            <afterCombats>
+                <choiceState section="sect25" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect33">
+            <endurance count="-1" />
+
+            <test not="true" hasDiscipline="tracking|sixthsns">
+                <choiceState section="sect348" set="disabled" />
+            </test>
+            <test hasDiscipline="tracking|sixthsns">
+                <choiceState section="sect27" set="disabled" />
+                <choiceState section="sect314" set="disabled" />
+            </test>
+        </section>
+
+        <!-- UP TO SECTION 35 -->
 
     </sections>
 

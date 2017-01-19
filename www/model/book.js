@@ -203,3 +203,32 @@ Book.prototype.getCopyrightHtml = function() {
     return renderer.renderNodeChildren( 
         $(this.bookXml).find(selector) , 0 );
 };
+
+/**
+ * Get the Kai title for a given number of disciplines
+ * @param {number} nDisciplines Number of disciplines
+ * @return {string} The kai title
+ */
+Book.prototype.getKaiTitle = function(nDisciplines) {
+
+    // Normalize
+    if( nDisciplines < 1 )
+        nDisciplines = 1;
+    else if( nDisciplines > 10 )
+        nDisciplines = 10;
+    
+    // Get the title
+    var title = $(this.bookXml)
+        .find('section[id=levels] > data > ol > li:eq(' + nDisciplines + ')')
+        .text();
+    if( !title )
+        title = 'Unknown';
+
+    // For the level 5, there is an extra explanation to remove:
+    // &mdash;You begin the Lone Wolf adventures with this level of Kai training
+    var idx = title.indexOf( '&mdash;');
+    if( idx >= 0 )
+        title = title.substr(0, idx);
+
+    return title;
+}
