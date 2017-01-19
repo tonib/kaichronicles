@@ -125,7 +125,84 @@
             </onInventoryEvent>
         </section>
 
-        <!-- UP TO SECTION 17 -->
+        <section id="sect18">
+            <endurance count="-3" />
+            <drop objectId="currentweapon" />
+        </section>
+
+        <section id="sect21">
+            <endurance count="-2" />
+            <endurance count="-1" />
+        </section>
+
+        <section id="sect24">
+            <drop objectId="diamond" />
+        </section>
+
+        <section id="sect25">
+            <object objectId="trianglebluestone" />
+        </section>
+        
+        <section id="sect25">
+            <object objectId="trianglebluestone" />
+        </section>
+
+        <section id="sect26">
+            <object objectId="bonesword" index="0" />
+            <object objectId="bonesword" index="1" />
+            <object objectId="bonedagger" />
+            <object objectId="mace" />
+
+            <test hasDiscipline="sixthsns">
+                <choiceState section="sect187" set="disabled" />
+                <choiceState section="sect63" set="disabled" />
+            </test>
+            <test not="true" hasDiscipline="sixthsns">
+                <choiceState section="sect231" set="disabled" />
+            </test>
+            <choiceSelected section="sect187">
+                <pick objectId="bracelet" />
+            </choiceSelected>
+        </section>
+
+        <section id="sect27">
+            <test not="true" hasObject="baknaroil">
+                <endurance count="-2" />
+            </test>
+        </section>
+
+        <section id="sect29">
+            <test not="true" hasObject="sommerswerd">
+                <choiceState section="sect43" set="disabled" />
+            </test>
+            <test not="true" hasDiscipline="mindomtr">
+                <choiceState section="sect121" set="disabled" />
+            </test>
+
+            <test hasObject="sommerswerd" hasDiscipline="mindomtr">
+                <choiceState section="sect226" set="disabled" />
+                <choiceState section="sect266" set="disabled" />
+                <choiceState section="sect312" set="disabled" />
+            </test>
+
+            <test not="true" hasObject="sommerswerd" hasDiscipline="mindomtr">
+                <choiceState section="all" set="disabled" />
+                <randomTable>
+                    <case from="1" to="4">
+                        <choiceState section="sect226" set="enabled" />
+                    </case>
+                    <case from="5" to="9">
+                        <choiceState section="sect266" set="enabled" />
+                    </case>
+                    <case value="0">
+                        <choiceState section="sect312" set="enabled" />
+                    </case>
+                </randomTable>
+            </test>
+        </section>
+
+        <!-- UP TO SECTION 31 -->
+
     </sections>
 
 </mechanics>

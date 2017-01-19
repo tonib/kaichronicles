@@ -22,6 +22,7 @@
 - The "Loading" does not appear when a view is loading
 - Post info about mechanics files on forum ("Common Navigation File")
 - If you have a backpack and you try to pick a backmap, no message is show
+- After pick a random value, show it as black bold, not as disabled
 
 Reminders:
 

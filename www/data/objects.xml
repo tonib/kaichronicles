@@ -64,11 +64,13 @@
         <weapon id="bonesword" weaponType="sword">
             <name lang="en">Bone Sword</name>
             <name lang="es">Espada de hueso</name>
+            <image book="3" name="sword.png" />
         </weapon>
 
         <weapon id="bonedagger" weaponType="dagger">
             <name lang="en">Bone Dagger</name>
             <name lang="es">Puñal de hueso</name>
+            <image book="3" name="dagger.png" />
         </weapon>
 
     </weapons>
@@ -220,6 +222,28 @@
             <name lang="es">Aceite de Baknar en tu piel</name>
             <description lang="es">
                 El aceite de Baknar es un aislante excelente que protege de las temperaturas glaciares de Kalte
+            </description>
+        </special>
+
+        <special id="diamond">
+            <name lang="en">Diamond</name>
+            <name lang="es">Diamante</name>
+        </special>
+        
+        <special id="trianglebluestone">
+            <name lang="en">Triangle of Blue Stone</name>
+            <name lang="es">Triángulo azul de piedra</name>
+        </special>
+        
+        <special id="bracelet" droppable="false">
+            <name lang="en">Bracelet</name>
+            <description lang="en">
+                A plain bracelet, without mark or inscription, and appear to be made of solid gold
+            </description>
+
+            <name lang="es">Brazalete</name>
+            <description lang="es">
+                Un brazalete completamente liso, sin ninguna marca o inscripción, que parece de oro macizo
             </description>
         </special>
 

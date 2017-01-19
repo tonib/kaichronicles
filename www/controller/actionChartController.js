@@ -52,13 +52,18 @@ var actionChartController = {
     /**
      * Drop an object
      * @param objectId The object to drop, or "allweapons" to drop all weapons, 
-     * or "backpackcontent" to drop all backpack content
+     * or "backpackcontent" to drop all backpack content, or "currentweapon" to drop the current weapon
      * @param availableOnSection True if the object should be available on the current section
      */
     drop: function(objectId, availableOnSection) {
 
         if( objectId == 'allweapons' ) {
             actionChartController.dropAllWeapons();
+            return;
+        }
+
+        if( objectId == 'currentweapon' && state.actionChart.selectedWeapon ) {
+            this.drop( state.actionChart.selectedWeapon );
             return;
         }
 
