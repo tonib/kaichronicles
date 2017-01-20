@@ -446,6 +446,11 @@
             <name lang="es">Mantas de Piel</name>
         </object>
 
+        <object id="largerope" itemCount="2">
+            <name lang="en">Rope</name>
+            <name lang="es">Cuerda</name>
+        </object>
+
         <!-- OTHERS -->
 
         <!-- This not really an object, but needed for mechanics -->

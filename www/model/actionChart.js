@@ -67,14 +67,14 @@ ActionChart.prototype.pick = function(o) {
             if( o.id == 'backpack' ) {
                 // Special case
                 if( this.hasBackpack )
-                    return false;
+                    throw 'You already have a backpack';
 
                 this.hasBackpack = true;
                 return true;
             }
 
             if( !this.hasBackpack )
-                throw 'You don\'t have  a backpack';
+                throw 'You don\'t have a backpack';
             if( ( this.getNBackpackItems() + o.itemCount ) > 8 )
                 throw 'You can have only 8 backpack objects';
             if( o.id == 'meal')
@@ -143,8 +143,13 @@ ActionChart.prototype.increaseMoney = function(count) {
 
 /**
  * Returns true if the player has the object
+ * @param {string} objectId The object id to test. "backpack" to check if the player
+ * has a backpack
  */
 ActionChart.prototype.hasObject = function(objectId) {
+    if( objectId == 'backpack' )
+        return this.hasBackpack;
+        
     return this.backpackItems.contains( objectId ) ||
         this.specialItems.contains( objectId ) ||
         this.weapons.contains( objectId );

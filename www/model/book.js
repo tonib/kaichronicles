@@ -219,7 +219,7 @@ Book.prototype.getKaiTitle = function(nDisciplines) {
     
     // Get the title
     var title = $(this.bookXml)
-        .find('section[id=levels] > data > ol > li:eq(' + nDisciplines + ')')
+        .find('section[id=levels] > data > ol > li:eq(' + (nDisciplines-1) + ')')
         .text();
     if( !title )
         title = 'Unknown';

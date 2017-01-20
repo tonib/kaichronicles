@@ -730,7 +730,7 @@ var mechanicsEngine = {
             .replaceAll( '[MAXENDURANCE]' , state.actionChart.getMaxEndurance() )
             .replaceAll( '[COMBATSENDURANCELOST]', sectionState.combatsEnduranceLost() )
             .replaceAll( '[MEALS]', state.actionChart.meals )
-            .replaceAll( '[KAILEVEL]', state.actionChart.disciplines.count );
+            .replaceAll( '[KAILEVEL]', state.actionChart.disciplines.length );
 
         try {
             // Be sure to return always an integer (expression can contain divisions...)

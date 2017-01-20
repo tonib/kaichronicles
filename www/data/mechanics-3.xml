@@ -88,7 +88,7 @@
             <!-- You pick 3 and eat one, so no third -->
             <!--pick objectId="meal" index="2" /-->
             <pick objectId="sleepingfurs" />
-            <pick objectId="rope" />
+            <pick objectId="largerope" />
         </section>
 
         <section id="sect14">
@@ -227,7 +227,32 @@
             </test>
         </section>
 
-        <!-- UP TO SECTION 35 -->
+        <section id="sect36">
+            <test not="true" hasDiscipline="sixthsns">
+                <choiceState section="sect341" set="disabled" />
+                <choiceState section="sect124" set="disabled" />
+            </test>
+            <test hasDiscipline="sixthsns">
+                <choiceState section="sect264" set="disabled" />
+                <test expression="[KAILEVEL] >= 7">
+                    <choiceState section="sect124" set="disabled" />
+                </test>
+                <test not="true" expression="[KAILEVEL] >= 7">
+                    <choiceState section="sect341" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect37">
+            <death />
+        </section>
+
+        <section id="sect38">
+            <object objectId="backpack" />
+            <object objectId="largerope" />
+        </section>
+        
+        <!-- UP TO SECTION 39 -->
 
     </sections>
 

@@ -121,9 +121,9 @@ var setupMechanics = {
         .find('input[type=checkbox]')
         .click(function(e) {
 
-            // Limit the number of disciplines
+            // Limit the number of disciplines. Unlimited on debug mode
             var selected = $(this).prop( 'checked' );
-            if( selected && allSelected() ) {
+            if( selected && allSelected() && !window.getUrlParameter('debug') ) {
                 e.preventDefault();
                 alert( 'You can choose only ' + expectedNDisciplines + ' disciplines');
                 return;

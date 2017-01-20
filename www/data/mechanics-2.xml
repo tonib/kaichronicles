@@ -129,7 +129,6 @@
 
         <section id="sect15">
             <pick class="money" count="12" />
-            <pick objectId="backpack" />
             <object objectId="broadsword" />
             <object objectId="mace" />
             <object objectId="quarterstaff" />
@@ -137,6 +136,7 @@
             <object objectId="meal" index="0" />
             <object objectId="meal" index="1" />
             <object objectId="meal" index="2" />
+            <object objectId="backpack" />
         </section>
 
         <section id="sect17">
@@ -215,7 +215,9 @@
 
         <section id="sect31">
             <endurance count="+6" />
-            <pick objectId="backpack" />
+            <test not="true" hasObject="backpack">
+                <pick objectId="backpack" />
+            </test>
             <choiceState section="all" set="disabled" />
             <randomTable>
                 <case from="0" to="4">
@@ -1465,7 +1467,7 @@
             <object objectId="meal" index="0" />
             <object objectId="meal" index="1" />
             <object objectId="meal" index="2" />
-            <pick objectId="backpack" />
+            <object objectId="backpack" />
             <pick class="money" count="12" />
         </section>
 

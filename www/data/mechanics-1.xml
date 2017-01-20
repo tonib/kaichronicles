@@ -156,7 +156,7 @@
         </section>
 
         <section id="sect20">
-            <pick objectId="backpack" />
+            <object objectId="backpack" />
             <object objectId="meal" idx="0" />
             <object objectId="meal" idx="1" />
             <object objectId="dagger" />
@@ -322,7 +322,8 @@
 
         <section id="sect62">
             <pick class="money" count="28" />
-            <pick objectId="backpack" />
+            <object objectId="backpack" idx="0" />
+            <object objectId="backpack" idx="1" />
             <object objectId="meal" idx="0" />
             <object objectId="meal" idx="1" />
             <object objectId="meal" idx="2" />
