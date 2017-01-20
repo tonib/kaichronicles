@@ -216,7 +216,8 @@ var mechanicsEngine = {
     },
 
     /** 
-     * Choose equipment UI
+     * Choose equipment UI (only for book 1)
+     * TODO: This is weird, only for book 1? Fix this
      */
     chooseEquipment: function(rule) {
         setupMechanics.chooseEquipment();
@@ -503,6 +504,20 @@ var mechanicsEngine = {
 
     },
 
+    /** Event for combat turn */
+    afterCombatTurn: function(rule) {
+        mechanicsEngine.onAfterCombatTurns.push(rule);
+    },
+
+    /**
+     * Disable all combats
+     */
+    disableCombats: function(rule) {
+        var sectionState = state.sectionStates.getSectionState();
+        sectionState.setCombatsDisabled();
+        combatMechanics.hideCombatButtons(null);
+    },
+
     /** 
      * Increase endurance rule
      */
@@ -579,20 +594,6 @@ var mechanicsEngine = {
             return;
         actionChartController.drop( $(rule).attr('objectId') , false );
         state.sectionStates.markRuleAsExecuted(rule);
-    },
-
-    /** Event for combat turn */
-    afterCombatTurn: function(rule) {
-        mechanicsEngine.onAfterCombatTurns.push(rule);
-    },
-
-    /**
-     * Disable all combats
-     */
-    disableCombats: function(rule) {
-        var sectionState = state.sectionStates.getSectionState();
-        sectionState.setCombatsDisabled();
-        combatMechanics.hideCombatButtons(null);
     },
 
     /**

@@ -252,7 +252,156 @@
             <object objectId="largerope" />
         </section>
         
-        <!-- UP TO SECTION 39 -->
+        <section id="sect40">
+            <test not="true" hasDiscipline="tracking">
+                <choiceState section="sect255" set="disabled" />
+            </test>
+            <test hasDiscipline="tracking">
+                <choiceState section="sect125" set="disabled" />
+                <choiceState section="sect184" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect43">
+            <endurance count="-1" />
+        </section>
+
+        <section id="sect44">
+            <test not="true" hasObject="potionblackgraveweed">
+                <choiceState section="sect79" set="disabled" />
+            </test>
+            <test not="true" hasObject="potiongreengallowbrush">
+                <choiceState section="sect157" set="disabled" />
+            </test>
+            <test hasObject="potionblackgraveweed|potiongreengallowbrush">
+                <choiceState section="sect270" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect45">
+            <test not="true" hasObject="silverkeybook3">
+                <choiceState section="sect303" set="disabled" />
+            </test>
+            <test hasObject="silverkeybook3">
+                <choiceState section="sect15" set="disabled" />
+            </test>
+        </section>
+       
+        <section id="sect49">
+            <drop objectId="backpack" />
+
+            <test not="true" hasDiscipline="tracking">
+                <choiceState section="sect342" set="disabled" />
+            </test>
+            <test hasDiscipline="tracking">
+                <choiceState section="sect284" set="disabled" />
+                <choiceState section="sect199" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect50">
+            <test not="true" hasObject="glowingcrystal">
+                <choiceState section="sect139" set="disabled" />
+            </test>
+            <test hasObject="glowingcrystal">
+                <choiceState section="sect189" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect53">
+            <death />
+        </section>
+
+        <section id="sect54">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect250" set="enabled" />
+                </case>
+                <case from="5" to="12">
+                    <choiceState section="sect268" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="mindomtr|mndblst">
+                <randomTableIncrement increment="+3" />
+            </test>
+        </section>
+
+        <section id="sect55">
+            <endurance count="-5" />
+            <combatSkill count="-2" />
+        </section>
+
+        <section id="sect57">
+            <test not="true" hasDiscipline="healing">
+                <choiceState section="sect17" set="disabled" />
+            </test>
+            <test hasDiscipline="healing">
+                <choiceState section="sect251" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect59">
+            <object objectId="trianglebluestone" />
+        </section>
+
+        <section id="sect61">
+            <death />
+        </section>
+
+        <section id="sect62">
+            <endurance count="-3" />
+        </section>
+
+        <section id="sect66">
+            <death />
+        </section>
+
+        <section id="sect67">
+            <test not="true" hasObject="rope|largerope">
+                <choiceState section="sect328" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect68">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect69">
+            <test not="true" hasDiscipline="camflage">
+                <choiceState section="sect222" set="disabled" />
+            </test>
+            <test hasDiscipline="camflage">
+                <choiceState section="sect108" set="disabled" />
+                <choiceState section="sect198" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect70">
+            <test not="true" hasObject="baknaroil">
+                <choiceState section="sect209" set="disabled" />
+            </test>
+            <test hasObject="baknaroil">
+                <choiceState section="sect339" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect73">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="7">
+                    <choiceState section="sect119" set="enabled" />
+                </case>
+                <case from="8" to="9">
+                    <choiceState section="sect136" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <!-- UP TO SECTION 73 -->
 
     </sections>
 

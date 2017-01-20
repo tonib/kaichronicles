@@ -232,7 +232,16 @@
         
         <special id="trianglebluestone">
             <name lang="en">Triangle of Blue Stone</name>
+            <description lang="en">
+                It is a small triangle of blue stone on a neck chain
+            </description>
+
             <name lang="es">Triángulo azul de piedra</name>
+            <description lang="es">
+                Es un Triángulo Azul de Piedra, colgado de una cadena
+            </description>
+
+            <image book="3" name="small25.png" />
         </special>
         
         <special id="bracelet" droppable="false">
@@ -245,6 +254,17 @@
             <description lang="es">
                 Un brazalete completamente liso, sin ninguna marca o inscripción, que parece de oro macizo
             </description>
+        </special>
+
+        <special id="silverkeybook3">
+            <name lang="en">Silver Key</name>
+            <name lang="es">Llave de plata</name>
+            <image book="1" name="small15.png" />
+        </special>
+
+        <special id="glowingcrystal">
+            <name lang="en">Glowing Crystal</name>
+            <name lang="es">Piedra centelleante</name>
         </special>
 
     </specials>
@@ -449,6 +469,16 @@
         <object id="largerope" itemCount="2">
             <name lang="en">Rope</name>
             <name lang="es">Cuerda</name>
+        </object>
+
+        <object id="potionblackgraveweed">
+            <name lang="en">Potion of Black Graveweed</name>
+            <name lang="es">Poción negra de moras de cementerio</name>
+        </object>
+
+        <object id="potiongreengallowbrush">
+            <name lang="en">Potion of Green Gallowbrush</name>
+            <name lang="es">Poción verde de hierba de horca</name>
         </object>
 
         <!-- OTHERS -->
