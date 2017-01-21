@@ -483,7 +483,22 @@
             </test>
         </section>
 
-        <!-- UP TO SECTION 85 -->
+        <section id="sect86">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="7">
+                    <choiceState section="sect47" set="enabled" />
+                </case>
+                <case from="8" to="12">
+                    <choiceState section="sect194" set="enabled" />
+                </case>
+            </randomTable>
+            <test weaponskillActive="true">
+                <randomTableIncrement increment="+3" />
+            </test>
+        </section>
+
+        <!-- UP TO SECTION 86 -->
 
     </sections>
 

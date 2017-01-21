@@ -135,14 +135,15 @@ it will run the inner rules to this tag.
 If there is more than one condition on the tag, if any of them is true, the inner rules
 will be executed.
 
-* **hasDiscipline**: Player as any of the disciplines?
-* **hasObject**: Player carry any of the objects?
-* **expression**: The expression is true?
-* **sectionVisited**: This section has been visited?
-* **currentWeapon**: This is the current weapon?
-* **combatsWon="true"**: All combats on this section has been won?
-* **bookLanguage**: This is the current book language?
-* **not="true"**: This will negate the current test. So if any of these conditions is true,
+* **hasDiscipline="disciplineId1|disciplineId2|...**: Do the player has any of the disciplines?
+* **hasObject="objectId1|objectId2|...**: Do the player carry any of the objects?
+* **expression="Java expression"**: Is the expression true?
+* **sectionVisited="sectionId"**: Has the section been visited?
+* **currentWeapon="weaponId"**: Is this the current weapon?
+* **combatsWon="true"**: Have been won all combats on this section ?
+* **bookLanguage="language code (en/es)"**: Is this the current book language?
+* **weaponskillActive="true"**: Has the player Weaponskill with the current weapon?
+* **not="true"**: This will negate the current test. So if all of these conditions are false,
   the inner rules will be executed
 
 ### choiceState

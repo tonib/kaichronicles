@@ -347,6 +347,14 @@ var mechanicsEngine = {
         if( bookLanguage && state.book.language == bookLanguage )
             conditionStatisfied = true;
 
+        // Test weaponskill with current weapon
+        var weaponskillActive = $(rule).attr('weaponskillActive');
+        if( weaponskillActive == 'true' ) {
+            var currentWeapon = state.actionChart.getselectedWeaponItem();
+            if( state.actionChart.isWeaponskillActive(currentWeapon) )
+                conditionStatisfied = true;
+        }
+        
         // Check if the test should be inversed
         if( $(rule).attr('not') == 'true' )
             conditionStatisfied = !conditionStatisfied;

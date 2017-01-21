@@ -258,6 +258,27 @@ ActionChart.prototype.getCurrentCombatSkill = function(noMindblast, noWeapon) {
 };
 
 /**
+ * Return true if the Weaponskill is active with the selected weapon
+ * @param {Item} currentWeapon The selected weapon. null if the is player has no weapon
+ * @return {boolean} True if Weaponskill is active
+ */
+ActionChart.prototype.isWeaponskillActive = function(currentWeapon) {
+    if( !currentWeapon )
+        return false;
+
+    return this.disciplines.contains( 'wepnskll' ) &&
+        currentWeapon.isWeaponType(this.weaponSkill);
+};
+
+/**
+ * Get the selected weapon info
+ * @return {Item} The current weapon info. null if the is player has no weapon
+ */
+ActionChart.prototype.getselectedWeaponItem = function() {
+    return this.selectedWeapon ? state.mechanics.getObject(this.selectedWeapon) : null;
+};
+
+/**
  * Get the current bonuses for combat skill
  * @param {boolean} noMindblast If true, the Mindblast discipline bonus is not added 
  * @param {boolean} noWeapon If true, the combat skill for combat without weapons.
@@ -267,9 +288,7 @@ ActionChart.prototype.getCurrentCombatSkill = function(noMindblast, noWeapon) {
 ActionChart.prototype.getCurrentCombatSkillBonuses = function(noMindblast, noWeapon) {
     var bonuses = [];
 
-    var currentWeapon = null;
-    if( this.selectedWeapon )
-        currentWeapon = state.mechanics.getObject(this.selectedWeapon);
+    var currentWeapon = this.getselectedWeaponItem();
 
     // Weapons
     if( noWeapon || !currentWeapon ) {
@@ -279,14 +298,12 @@ ActionChart.prototype.getCurrentCombatSkillBonuses = function(noMindblast, noWea
             increment: -4
         });
     }
-    else if( this.disciplines.contains( 'wepnskll' ) ) {       
-        // Check Weapon skill
-        if( currentWeapon && currentWeapon.isWeaponType(this.weaponSkill) ) {
-            bonuses.push( {
-                concept: 'Weaponskill',
-                increment: +2
-            });
-        }
+    else if( this.isWeaponskillActive(currentWeapon) ) {       
+        // Weapon skill bonus
+        bonuses.push( {
+            concept: 'Weaponskill',
+            increment: +2
+        });
     }
 
     // Check weapon bonuses
