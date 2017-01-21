@@ -170,12 +170,12 @@ Make an object available on the section. The player will can pick / buy it.
 * **price**: If it's set, the price to buy the object (not free)
 * **unlimited="true"**: There is an unlimited number of objects of this class on the section
 
-### shell
+### sell
 ```xml
-<shell objectId="sword" price="3" />
+<sell objectId="sword" price="3" />
 ```
-This will allow to the player to shell a class of objects by a given price
-* **objectId**: The object id you can shell
+This will allow to the player to sell a class of objects by a given price
+* **objectId**: The object id you can sell
 * **price**: The money got by selling the object
 
 ### combat

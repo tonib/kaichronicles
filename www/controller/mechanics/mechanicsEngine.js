@@ -87,8 +87,8 @@ var mechanicsEngine = {
         // Render available objects on this section
         mechanicsEngine.showAvailableObjects();
 
-        // Render shell prices on this section
-        mechanicsEngine.showShellObjects();
+        // Render sell prices on this section
+        mechanicsEngine.showSellObjects();
 
         // Fire combat turns events (for restored combats)
         mechanicsEngine.fireAfterCombatTurn(null);
@@ -405,14 +405,14 @@ var mechanicsEngine = {
     },
 
     /**
-     * Allow to shell an inventory object rule
+     * Allow to sell an inventory object rule
      */
-    shell: function(rule) {
+    sell: function(rule) {
         var sectionState = state.sectionStates.getSectionState();
         if( sectionState.ruleHasBeenExecuted(rule) )
             // Execute only once
             return;
-        sectionState.shellPrices.push({
+        sectionState.sellPrices.push({
             id: $(rule).attr('objectId'),
             price: parseInt( $(rule).attr('price') )
         });
@@ -667,24 +667,24 @@ var mechanicsEngine = {
     },
 
     /**
-     * Show or update the table with the shell objects table
+     * Show or update the table with the sell objects table
      */
-    showShellObjects: function() {
+    showSellObjects: function() {
         var sectionState = state.sectionStates.getSectionState();
-        if( sectionState.shellPrices.length == 0 )
+        if( sectionState.sellPrices.length == 0 )
             return;
 
         // Check if the table was already inserted on the UI:
-        var $table = $('#mechanics-shellObjectsList');
+        var $table = $('#mechanics-sellObjectsList');
         if( $table.length == 0 ) {
             // Add the template
             gameView.appendToSection( 
-                mechanicsEngine.$mechanicsUI.find('#mechanics-shellObjects').clone() );
-            $table = $('#mechanics-shellObjectsList');
+                mechanicsEngine.$mechanicsUI.find('#mechanics-sellObjects').clone() );
+            $table = $('#mechanics-sellObjectsList');
         }       
 
         // Fill the objects list:
-        actionChartView.objectsList(sectionState.shellPrices, $table , false , true);
+        actionChartView.objectsList(sectionState.sellPrices, $table , false , true);
     },
 
     /**

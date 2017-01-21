@@ -1260,15 +1260,15 @@
             <object objectId="axe" price="3" unlimited="true" />
             <object objectId="quarterstaff" price="3" unlimited="true" />
 
-            <shell objectId="sword" price="3" />
-            <shell objectId="dagger" price="1" />
-            <shell objectId="broadsword" price="6" />
-            <shell objectId="shortsword" price="2" />
-            <shell objectId="warhammer" price="5" />
-            <shell objectId="spear" price="4" />
-            <shell objectId="mace" price="3" />
-            <shell objectId="axe" price="2" />
-            <shell objectId="quarterstaff" price="2" />
+            <sell objectId="sword" price="3" />
+            <sell objectId="dagger" price="1" />
+            <sell objectId="broadsword" price="6" />
+            <sell objectId="shortsword" price="2" />
+            <sell objectId="warhammer" price="5" />
+            <sell objectId="spear" price="4" />
+            <sell objectId="mace" price="3" />
+            <sell objectId="axe" price="2" />
+            <sell objectId="quarterstaff" price="2" />
         </section>
 
         <section id="sect268">

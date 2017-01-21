@@ -164,9 +164,9 @@ var actionChartView = {
      * @param $tableBody The HTML table to fill
      * @param available {boolean} True if the objects are available to get. 
      * False if the object are owned by the player
-     * @param shell {boolean} True if they are objects to shell 
+     * @param sell {boolean} True if they are objects to sell 
      */
-    objectsList: function(objects, $tableBody, available, shell) {
+    objectsList: function(objects, $tableBody, available, sell) {
 
         $tableBody.empty();
         
@@ -214,13 +214,13 @@ var actionChartView = {
                     html += link + 'data-op="get" title="' + title + '">' + 
                         '<span class="glyphicon glyphicon-plus"></span></a>';
                 }
-                else if(shell) {
-                    // Shell inventory object
+                else if(sell) {
+                    // Sell inventory object
                     // If we dont have the object, do not show it
                     if( !state.actionChart.hasObject(objectId) )
                         return;
                     link += 'data-price="' + price + '" ';
-                    html += link + 'data-op="shell" title="Shell object"><span class="glyphicon glyphicon-share"></span></a> ';
+                    html += link + 'data-op="sell" title="Sell object"><span class="glyphicon glyphicon-share"></span></a> ';
                 }
                 else {
                     // Inventory object
@@ -315,7 +315,7 @@ var actionChartView = {
                         
                         // Refresh the table of available objects
                         mechanicsEngine.showAvailableObjects();
-                        mechanicsEngine.showShellObjects();
+                        mechanicsEngine.showSellObjects();
 
                         if( price ) {
                             // Pay the price
@@ -324,15 +324,15 @@ var actionChartView = {
                     }
                     break;
 
-                case 'shell':
+                case 'sell':
                     var price = parseInt( $(this).attr('data-price') );
-                    if( !confirm('Are you sure you want to shell the object by ' + price +  
+                    if( !confirm('Are you sure you want to sell the object by ' + price +  
                         ' Golden Crowns?') )
                         return;
 
                     actionChartController.drop( o.id , false );
                     actionChartController.increaseMoney( price );
-                    mechanicsEngine.showShellObjects();
+                    mechanicsEngine.showSellObjects();
                     break;
 
                 case 'use':

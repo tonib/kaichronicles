@@ -14,13 +14,13 @@ function SectionState() {
     this.objects = [];
 
     /**
-     * Shell prices on the section. Applies only on sections where you can
-     * shell inventory objects.
+     * Sell prices on the section. Applies only on sections where you can
+     * sell inventory objects.
      * The array items are objects, with the following properties:
      * - id: The object id
      * - price: The object price
      */
-    this.shellPrices = [];
+    this.sellPrices = [];
 
     /** Combats on the section */
     this.combats = [];
