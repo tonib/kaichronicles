@@ -413,7 +413,77 @@
             </randomTable>
         </section>
 
-        <!-- UP TO SECTION 74 -->
+        <section id="sect76">
+            <test not="true" hasDiscipline="hunting|anmlknsp">
+                <choiceState section="sect51" set="disabled" />
+            </test>
+            <test hasDiscipline="hunting|anmlknsp">
+                <choiceState section="sect137" set="disabled" />
+                <choiceState section="sect261" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect77">
+            <endurance count="-1" />
+        </section>
+
+        <section id="sect78">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect79">
+            <drop objectId="potionblackgraveweed" />
+            <endurance count="+6" />
+        </section>
+
+        <section id="sect80">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="1">
+                    <choiceState section="sect123" set="enabled" />
+                </case>
+                <case from="2" to="9">
+                    <choiceState section="sect59" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect82">
+            <test not="true" hasDiscipline="anmlknsp">
+                <choiceState section="sect329" set="disabled" />
+            </test>
+            <test hasDiscipline="anmlknsp">
+                <choiceState section="sect138" set="disabled" />
+                <choiceState section="sect107" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect83">
+            <combat noMindblast="true" mindforceEP="-2" />
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect84">
+            <pick objectId="trianglebluestone" />
+        </section>
+
+        <section id="sect85">
+            <test not="true" hasDiscipline="sixthsns">
+                <choiceState section="sect98" set="disabled" />
+            </test>
+            <test hasDiscipline="sixthsns">
+                <choiceState section="sect49" set="disabled" />
+                <choiceState section="sect212" set="disabled" />
+            </test>
+        </section>
+
+        <!-- UP TO SECTION 85 -->
 
     </sections>
 

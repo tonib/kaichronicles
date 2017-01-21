@@ -13,8 +13,6 @@
   * Performance:
     * Blinkings on page, when a combat turn is run
     * Blinkings on navbar
-
-- Book 1 / sect173: If you have the silver key, disable the other choice
 - Money handling: 
   * Allow to drop an arbitrary amount of money, not just a single coin
   * Support for money as object on section
@@ -23,6 +21,9 @@
 - Post info about mechanics files on forum ("Common Navigation File")
 - After pick a random value, show it as black bold, not as disabled
 - Document rules
+- chooseEquipment rule: Use on all books, not just the book 1
+- Recheck books 1 and 2: Be more restrictive with choices
+  * Book 1 / sect173: If you have the silver key, disable the other choice
 
 Reminders:
 
