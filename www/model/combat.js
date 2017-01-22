@@ -6,8 +6,12 @@
  * @param {number} endurance Enemy endurance points 
  */
 function Combat(enemy, combatSkill, endurance) {
+    
+    /** Enemy name */
     this.enemy = enemy;
+    /** Enemy combat skill */
     this.combatSkill = combatSkill;
+    /** Enemy endurance points  */
     this.endurance = endurance;
     /** Combat turns (type = CombatTurn) */
     this.turns = [];
@@ -80,7 +84,7 @@ Combat.prototype.getTurnResult = function(elude) {
 }
 
 /**
- * Apply the next combat turn
+ * Get the next combat turn
  * @param {boolean} elude True if the player is eluding the combat
  * @return {CombatTurn} The combat turn
  */
@@ -89,6 +93,15 @@ Combat.prototype.nextTurn = function( elude ) {
     // Calculate the turn
     var turn = this.getTurnResult(elude);
     this.turns.push( turn );
+
+    return turn;
+}
+
+/**
+ * Apply the combat turn effects
+ * @param {CombatTurn} turn The turn to apply
+ */
+Combat.prototype.applyTurn = function( turn ) {
 
     // Apply player damages:
     if( turn.loneWolf == combatTable_DEATH )
@@ -106,7 +119,7 @@ Combat.prototype.nextTurn = function( elude ) {
     }
 
     // Check if the combat has been finished
-    if( elude || this.endurance == 0 || state.actionChart.currentEndurance == 0 ) {
+    if( turn.elude || this.endurance == 0 || state.actionChart.currentEndurance == 0 ) {
         this.combatFinished = true;
         if( this.fakeCombat ) {
             // Restore player endurance to original :
@@ -114,8 +127,6 @@ Combat.prototype.nextTurn = function( elude ) {
                 - state.actionChart.currentEndurance );
         }
     }
-
-    return turn;
 }
 
 /**

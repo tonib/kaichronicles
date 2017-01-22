@@ -164,5 +164,33 @@ var specialSectionsMechanics = {
             $('#mechanics-gameStatus').html( status );
             updateUI(false);
         });
+    },
+
+    /**
+     * Javek venom test
+     */
+    book3sect88: function() {
+
+        // Replace the combat turns generation:
+        var sectionState = state.sectionStates.getSectionState();
+        for(var i=0; i<sectionState.combats.length; i++) {
+            var combat = sectionState.combats[i];
+
+            combat.nextTurn = function() {
+                var turn = Combat.prototype.nextTurn.call(this);
+                // Check the bite:
+                if( turn.loneWolf > 0 && turn.loneWolf != combatTable_DEATH ) {
+                    var biteRandomValue = randomTable.getRandomValue();
+                    turn.playerLossText = '(' + turn.playerLossText + ')';
+                    turn.playerLossText += ' Random: ' + biteRandomValue;
+                    if( biteRandomValue == 9 )
+                        turn.loneWolf = combatTable_DEATH;
+                    else
+                        turn.loneWolf = 0;
+                }
+                return turn;
+            };
+        }
     }
+
 };

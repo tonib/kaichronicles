@@ -498,6 +498,18 @@
             </test>
         </section>
 
+        <section id="sect88">
+            <combat noMindblast="true" />
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+            <!-- 
+                Special: Test Javek bite (mortal venom)
+             -->
+            <book3sect88 />
+        </section>
+
         <!-- UP TO SECTION 86 -->
 
     </sections>

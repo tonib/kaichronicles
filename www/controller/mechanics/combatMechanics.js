@@ -118,6 +118,9 @@ var combatMechanics = {
         var combat = sectionState.combats[ combatIndex ];
         var turn = combat.nextTurn( elude );
         
+        // Apply turn combat losses
+        combat.applyTurn(turn);
+
         // Combat has been eluded?
         sectionState.combatEluded = elude;
 

@@ -641,6 +641,10 @@ var mechanicsEngine = {
         specialSectionsMechanics.book2sect308();
     },
     
+    book3sect88: function(rule) {
+        specialSectionsMechanics.book3sect88();
+    },
+
     /************************************************************/
     /**************** RULES HELPERS *****************************/
     /************************************************************/

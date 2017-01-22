@@ -17,6 +17,9 @@ function CombatTurn(turnNumber, combatRatio, dammageMultiplier, enemyMultiplier,
         // You know, javascript crap
         return;
 
+    /** True if the player is eluding the combat */
+    this.elude = elude;
+
     /** Number of the turn (1 is the first) */
     this.turnNumber = turnNumber;
 
@@ -47,12 +50,20 @@ function CombatTurn(turnNumber, combatRatio, dammageMultiplier, enemyMultiplier,
         this.loneWolf -= mindforceEP;
         this.loneWolfExtra = mindforceEP;
     }
+
+    /** Text with the player loss */
+    this.playerLossText = this.calculatePlayerLossText();
 }
 
 /**
  * Return a text with the player loss
  */
-CombatTurn.prototype.getPlayerLossText = function() {
+CombatTurn.prototype.getPlayerLossText = function() { return this.playerLossText; };
+
+/**
+ * Calculate the text with the player loss
+ */
+CombatTurn.prototype.calculatePlayerLossText = function() {
     var loss = this.loneWolfBase.toString();
     if( this.enemyMultiplier != 1 )
         loss = loss + " x " + this.enemyMultiplier;
