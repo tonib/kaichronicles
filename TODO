@@ -1,4 +1,4 @@
-- ERROR: "shell" should be "sell"
+- ERROR: Do not allow to pick objects if you are death
 - Combat table overflow on small screens
 - If the book load fails, it doest not try to reload the next time
 - Test all books / all sections rendering. It should be valid HTML5
@@ -19,11 +19,12 @@
   * Allow to pick droped money
 - The "Loading" does not appear when a view is loading
 - Post info about mechanics files on forum ("Common Navigation File")
+  * Document rules
 - After pick a random value, show it as black bold, not as disabled
-- Document rules
 - chooseEquipment rule: Use on all books, not just the book 1
 - Recheck books 1 and 2: Be more restrictive with choices
   * Book 1 / sect173: If you have the silver key, disable the other choice
+- Allow to view a larger version of the objects images
 
 Reminders:
 

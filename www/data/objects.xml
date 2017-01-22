@@ -267,6 +267,25 @@
             <name lang="es">Piedra centelleante</name>
         </special>
 
+        <special id="stoneeffigy">
+            <name lang="en">Stone Effigy</name>
+            <description lang="en">
+                A small statuette of a strange tentacled creature
+            </description>
+
+            <name lang="es">Efigie de piedra</name>
+            <description lang="es">
+                Una pequeña estatua que representa a un extraño ser dotado de tentáculos
+            </description>
+
+            <image book="3" name="small10.png" />
+        </special>
+        
+        <special id="bluestonedisc">
+            <name lang="en">Blue Stone Disc</name>
+            <name lang="es">Disco Azul de Piedra</name>
+        </special>
+
     </specials>
 
     <objects>
@@ -455,11 +474,6 @@
             <image book="3" name="potion.png" />
             <usage class="endurance" increment="4" />
         </object>
-
-        <object id="bluestonedisc">
-            <name lang="en">Blue Stone Disc</name>
-            <name lang="es">Disco Azul de Piedra</name>
-        </object>
         
         <object id="sleepingfurs" itemCount="2">
             <name lang="en">Sleeping Furs</name>
@@ -481,6 +495,11 @@
             <name lang="es">Poción verde de hierba de horca</name>
         </object>
 
+        <object id="tent" itemCount="3">
+            <name lang="en">Tent</name>
+            <name lang="es">Tienda de campaña</name>
+        </object>
+        
         <!-- OTHERS -->
 
         <!-- This not really an object, but needed for mechanics -->

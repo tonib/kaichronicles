@@ -54,6 +54,7 @@
         </section>
 
         <section id="sect4">
+            <!-- TODO: This bone sword is a special object, not a weapon, see footnote -->
             <object objectId="bonesword" />
             <object objectId="bluestonedisc" />
         </section>
@@ -510,7 +511,180 @@
             <book3sect88 />
         </section>
 
-        <!-- UP TO SECTION 86 -->
+        <section id="sect89">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect90">
+            <test not="true" hasDiscipline="healing">
+                <choiceState section="sect233" set="disabled" />
+            </test>
+            <test hasDiscipline="healing">
+                <choiceState section="sect10" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect91">
+            <pick objectId="baknaroil" />
+        </section>
+
+        <section id="sect92">
+            <test not="true" hasObject="rope|largerope">
+                <choiceState section="sect133" set="disabled" />
+            </test>
+            <test hasObject="rope|largerope">
+                <choiceState section="sect297" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect93">
+            <death />
+        </section>
+
+        <section id="sect94">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="6">
+                    <endurance count="-3" />
+                    <choiceState section="sect176" set="enabled" />
+                </case>
+                <case from="7" to="9">
+                    <death />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect95">
+            <death />
+        </section>
+
+        <section id="sect96">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="8">
+                    <choiceState section="sect59" set="enabled" />
+                </case>
+                <case from="9" to="11">
+                    <choiceState section="sect214" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasObject="baknaroil">
+                <randomTableIncrement increment="+2" />
+            </test>
+        </section>
+
+        <section id="sect97">
+            <test not="true" hasObject="diamond">
+                <choiceState section="sect24" set="disabled" />
+            </test>
+            <test not="true" expression="[MONEY] > 0">
+                <choiceState section="sect152" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect99">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" mindforceEP="-2" />
+            <test currentWeapon="sommerswerd">
+                <combat dammageMultiplier="2" />
+            </test> 
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect102">
+            <object objectId="stoneeffigy" />
+        </section>
+        
+        <section id="sect103">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect104">
+            <test not="true" hasObject="bluestonedisc">
+                <choiceState section="sect135" set="disabled" />
+            </test>
+            <test hasObject="bluestonedisc">
+                <choiceState section="sect330" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect105">
+            <test not="true" hasDiscipline="sixthsns">
+                <choiceState section="sect64" set="disabled" />
+            </test>
+            <test hasDiscipline="sixthsns">
+                <choiceState section="sect321" set="disabled" />
+                <choiceState section="sect275" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect106">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" eludeTurn="0" />
+            <afterCombats>
+                <choiceState section="sect338" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect145" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect107">
+            <test not="true" hasObject="baknaroil">
+                <choiceState section="sect202" set="disabled" />
+            </test>
+            <test hasObject="baknaroil">
+                <choiceState section="sect284" set="disabled" />
+                <choiceState section="sect138" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect108">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="1" />
+            <afterCombats>
+                <choiceState section="sect282" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect330" set="enabled" />
+                <choiceState section="sect198" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect114">
+            <test not="true" hasDiscipline="hunting">
+                <choiceState section="sect279" set="disabled" />
+            </test>
+            <test hasDiscipline="hunting">
+                <choiceState section="sect23" set="disabled" />
+                <choiceState section="sect101" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect116">
+            <drop objectId="glowingcrystal" />
+        </section>
+
+        <section id="sect119">
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
+            <object objectId="meal" index="2" />
+            <object objectId="meal" index="3" />
+            <object objectId="meal" index="4" />
+            <object objectId="sleepingfurs" />
+            <object objectId="tent" />
+            <object objectId="largerope" />
+        </section>
+
+        <!-- UP TO SECTION 120 -->
 
     </sections>
 
