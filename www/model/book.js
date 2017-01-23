@@ -219,7 +219,7 @@ Book.prototype.getKaiTitle = function(nDisciplines) {
     
     // Get the title
     var title = $(this.bookXml)
-        .find('section[id=levels] > data > ol > li:eq(' + (nDisciplines-1) + ')')
+        .find('section[id="levels"] > data > ol > li:eq(' + (nDisciplines-1) + ')')
         .text();
     if( !title )
         title = 'Unknown';
@@ -231,4 +231,20 @@ Book.prototype.getKaiTitle = function(nDisciplines) {
         title = title.substr(0, idx);
 
     return title;
+}
+
+/**
+ * Get sections that have a choice to go to some section
+ * @param {string} sectionId The destination section
+ * @return {Array<string>} Section ids that can go to the given section
+ */
+Book.prototype.getOriginSections = function(sectionId) {
+    var sourceSectionIds = [];
+    var sourceSections = $(this.bookXml)
+        .find('section[class="numbered"]' )
+        .has( 'data > choice[idref="' + sectionId + '"]')
+        .each( function(index, section) {
+            sourceSectionIds.push( $(section).attr('id') )
+        }) ;
+    return sourceSectionIds;
 }

@@ -115,11 +115,38 @@ var gameView = {
         // by game rules 
         $('#game-section').off( 'click' , '.choice a.choice-link' );
         $('#game-section').on( 'click' , '.choice a.choice-link' , function(e) {
-            e.preventDefault();
-            var section = $(this).attr('data-section');
-            console.log('Jump to section ' + section);
-            if( section )
-                gameController.loadSection( section );
+            gameView.choiceLinkClicked(e, this);
+        });
+    },
+
+    choiceLinkClicked: function(e, link) {
+        e.preventDefault();
+        var section = $(link).attr('data-section');
+        console.log('Jump to section ' + section);
+        if( section )
+            gameController.loadSection( section );
+    },
+
+    /**
+     * Display origin section. Only for debug
+     */
+    showOriginSections: function() {
+
+        var sectionIds = state.book.getOriginSections(state.sectionStates.currentSection);
+        var linksHtml = '';
+        for(var i=0; i<sectionIds.length; i++) {
+            // Ignore index of numbered sections
+            if( sectionIds[i] == 'numbered' )
+                continue;
+
+            if( linksHtml )
+                linksHtml += ', ';
+            linksHtml += '<a href="#" class="action choice-link" data-section="' + 
+                sectionIds[i] + '">' + sectionIds[i] + '</a>';
+        }
+        $('#game-sourceSections').html( linksHtml );
+        $('#game-sourceSections a').click(function(e) {
+            gameView.choiceLinkClicked(e, this);
         });
     },
 

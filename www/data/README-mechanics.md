@@ -183,6 +183,15 @@ This will allow to the player to sell a class of objects by a given price
 
 TODO: Continue here
 
+### special section
+
+There are sections (or parts of them) that cannot be described by the game rules.
+In that case, they are specific implementations:
+
+* **book2Sect238**: Cartwheel game
+* **book2sect308**: Portholes game
+* **book3sect88**: Javek venom test
+
 ## How rules are executed
 
 If you are going to use the rules in you application, here come some tips about how to

@@ -71,6 +71,11 @@ var gameController = {
 
         // Persist state
         state.persistState();
+
+        if( window.getUrlParameter('debug') )
+            // Show section that can come to here
+            gameView.showOriginSections();
+        
     },
 
     /**

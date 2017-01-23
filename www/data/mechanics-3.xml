@@ -684,7 +684,40 @@
             <object objectId="largerope" />
         </section>
 
-        <!-- UP TO SECTION 120 -->
+        <section id="sect121">
+            <endurance count="-1" />
+        </section>
+
+        <section id="sect123">
+            <choiceState section="all" set="disabled" />
+            <afterCombatTurn turn="any">
+                <test expression="[COMBATSENDURANCELOST] > 0">
+                    <disableCombats />
+                    <choiceState section="sect66" set="enabled" />
+                </test>
+            </afterCombatTurn>
+            <afterCombats>
+                <choiceState section="sect174" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect125">
+            <test not="true" hasDiscipline="camflage">
+                <choiceState section="sect96" set="disabled" />
+            </test>
+            <test hasDiscipline="camflage">
+                <choiceState section="sect322" set="disabled" />
+                <choiceState section="sect207" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect129">
+            <test not="true" hasObject="baknaroil">
+                <endurance count="-3" />
+            </test>
+        </section>
+
+        <!-- UP TO SECTION 131 -->
 
     </sections>
 
