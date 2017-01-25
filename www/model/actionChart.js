@@ -244,13 +244,17 @@ ActionChart.prototype.increaseEndurance = function(count) {
  * @param {boolean} noMindblast If true, the Mindblast discipline bonus is not added 
  * @param {boolean} noWeapon If true, the combat skill for combat without weapons.
  * If false, the combat skill for the current selected weapon
+ * @param {boolean} partialMindblast If true, the enemy is only partially affected by
+ * mindblast (only +1 CS)
  * @return The current combat skill. It includes bonuses for weapons and mindblast
  * discipline
  */
-ActionChart.prototype.getCurrentCombatSkill = function(noMindblast, noWeapon) {
+ActionChart.prototype.getCurrentCombatSkill = function(noMindblast, noWeapon,
+    partialMindblast) {
     
     var cs = this.combatSkill;
-    var bonuses = this.getCurrentCombatSkillBonuses(noMindblast, noWeapon);
+    var bonuses = this.getCurrentCombatSkillBonuses(noMindblast, noWeapon, 
+        partialMindblast);
     for(var i=0; i<bonuses.length; i++)
         cs += bonuses[i].increment;
 
@@ -283,9 +287,12 @@ ActionChart.prototype.getselectedWeaponItem = function() {
  * @param {boolean} noMindblast If true, the Mindblast discipline bonus is not added 
  * @param {boolean} noWeapon If true, the combat skill for combat without weapons.
  * If false, the combat skill for the current selected weapon
+ * @param {boolean} partialMindblast If true, the enemy is only partially affected by
+ * mindblast (only +1 CS)
  * @return {Array} Array of objects with the bonuses concepts
  */
-ActionChart.prototype.getCurrentCombatSkillBonuses = function(noMindblast, noWeapon) {
+ActionChart.prototype.getCurrentCombatSkillBonuses = function(noMindblast, noWeapon, 
+    partialMindblast) {
     var bonuses = [];
 
     var currentWeapon = this.getselectedWeaponItem();
@@ -318,7 +325,7 @@ ActionChart.prototype.getCurrentCombatSkillBonuses = function(noMindblast, noWea
     if( !noMindblast && this.disciplines.contains( 'mndblst' ) ) {
         bonuses.push( {
             concept: 'Mindblast',
-            increment: +2
+            increment: partialMindblast ? +1 : +2
         });
     }
 

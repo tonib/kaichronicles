@@ -138,7 +138,7 @@ will be executed.
 * **hasDiscipline="disciplineId1|disciplineId2|...**: Do the player has any of the disciplines?
 * **hasObject="objectId1|objectId2|...**: Do the player carry any of the objects?
 * **expression="Java expression"**: Is the expression true?
-* **sectionVisited="sectionId"**: Has the section been visited?
+* **sectionVisited="sectionId1|sectionId1|..."**: Has some of the sections been visited?
 * **currentWeapon="weaponId"**: Is this the current weapon?
 * **combatsWon="true"**: Have been won all combats on this section ?
 * **bookLanguage="language code (en/es)"**: Is this the current book language?
@@ -180,6 +180,25 @@ This will allow to the player to sell a class of objects by a given price
 * **price**: The money got by selling the object
 
 ### combat
+```xml
+<combat noMindblast="true" mindforceEP="-2" eludeTurn="1" />
+```
+
+The combat tag add modifiers to some combat of the current section. It can have
+the following properties:
+* **index="number"**: Index (zero based) of the combat to which it refers
+* **combatSkillModifier="bonus"**: Bonus (positive or negative) for Lone Wolf combat skill
+* **mindforceCS="-number"**: Bonus (negative) to the Lone Wolf combat skill due to the enemy
+  Mindblast. It will not be applied if the player as Mindshield
+* **mindforceEP="-number"**: Endurance points lost by LW each turn, due to the enemy Mindblast.
+  It will not be applied if the player as Mindshield
+* **noMindblast="true"**: The enemy is immune to Mindblast
+* **partialMindblast="true"**: Enemy is partially immunte to Mindblast (only +1CS)
+* **noWeapon="true"**: Lone Wolf cannot use any weapon on this combat
+* **eludeTurn="number"**: Turn number after which LW can elude the combat
+* **dammageMultiplier="number"**: LW dammage multiplier
+* **enemyMultiplier="number"**: Enemy dammage multiplier
+* **fake="true"**: This is a fake combat. When it's finished, LW endurance points will be restored
 
 TODO: Continue here
 

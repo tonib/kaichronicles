@@ -323,9 +323,16 @@ var mechanicsEngine = {
             conditionStatisfied = true;
         
         // Check section visited:
-        var sectionId = $(rule).attr('sectionVisited');
-        if( sectionId && state.sectionStates.sectionIsVisited(sectionId) )
-            conditionStatisfied = true;
+        var sectionIds = $(rule).attr('sectionVisited');
+        if( sectionIds ) {
+            sectionIds = sectionIds.split('|');
+            for(var i=0; i < sectionIds.length; i++ ) {
+                if( state.sectionStates.sectionIsVisited(sectionIds[i]) ) {
+                    conditionStatisfied = true;
+                    break;
+                }
+            }
+        }
 
         // Test current weapon:
         var currentWeapon = $(rule).attr('currentWeapon');
@@ -460,6 +467,11 @@ var mechanicsEngine = {
         var txtNoMindblast = $(rule).attr('noMindblast');
         if( txtNoMindblast )
             combat.noMindblast = ( txtNoMindblast == 'true' );
+
+        // Check if the enemy is partially immune to Mindblast (only +1CS)
+        var txtPartialMindblast = $(rule).attr('partialMindblast');
+        if( txtPartialMindblast )
+            combat.partialMindblast = ( txtPartialMindblast == 'true' );
 
         // Check if the player cannot use weapons on this combat
         var txtNoWeapon = $(rule).attr('noWeapon');

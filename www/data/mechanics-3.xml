@@ -717,6 +717,46 @@
             </test>
         </section>
 
+        <section id="sect132">
+            <!-- On sections 295 and 309 you got a meal, so it's not needed now -->
+            <test not="true" sectionVisited="sect295|sect309">
+                <meal />
+            </test>
+                <test not="true" hasDiscipline="tracking|anmlknsp">
+                <choiceState section="sect229" set="disabled" />
+            </test>
+            <test hasDiscipline="tracking|anmlknsp">
+                <choiceState section="sect88" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect134">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="3">
+                    <choiceState section="sect57" set="enabled" />
+                </case>
+                <case from="4" to="6">
+                    <choiceState section="sect188" set="enabled" />
+                </case>
+                <case from="7" to="9">
+                    <choiceState section="sect331" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect136">
+            <death />
+        </section>
+
+        <section id="sect137">
+            <combat partialMindblast="true" />
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
         <!-- UP TO SECTION 131 -->
 
     </sections>

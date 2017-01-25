@@ -21,6 +21,8 @@ function Combat(enemy, combatSkill, endurance) {
     this.objectsUsageModifier = 0;
     /** The enemy is immune to Mindblast? */
     this.noMindblast = false;
+    /** The enemy is partially immune to Mindblast (only +1 CS)? */
+    this.partialMindblast = false;
     /** The player cannot use weapons on this combat */
     this.noWeapon = false;
     /** Turn beyond which the combat can be eluded. -1 = no elude */
@@ -53,8 +55,10 @@ function Combat(enemy, combatSkill, endurance) {
  * @return {number} The current combat skill
  */
 Combat.prototype.getCurrentCombatSkill = function() {
-    var cs = state.actionChart.getCurrentCombatSkill(this.noMindblast, this.noWeapon) + 
-        this.combatModifier + this.objectsUsageModifier;
+    var cs = state.actionChart.getCurrentCombatSkill(this.noMindblast, 
+        this.noWeapon, this.partialMindblast ) + 
+        this.combatModifier + 
+        this.objectsUsageModifier;
 
     // Check enemy mindforce attack
     if( this.mindforceCS < 0 && !state.actionChart.disciplines.contains( 'mindshld' ) )

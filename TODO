@@ -13,6 +13,8 @@
   * Performance:
     * Blinkings on page, when a combat turn is run
     * Blinkings on navbar
+  * Load games page: games list is unsorted
+  * Load games page: Show info about saved games
 - Money handling: 
   * Allow to drop an arbitrary amount of money, not just a single coin
   * Support for money as object on section
@@ -25,6 +27,7 @@
 - Recheck books 1 and 2: Be more restrictive with choices
   * Book 1 / sect173: If you have the silver key, disable the other choice
 - Allow to view a larger version of the objects images
+- Toasts: If you click on some toast, hide them all
 
 Reminders:
 
