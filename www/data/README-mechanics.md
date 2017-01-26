@@ -140,7 +140,8 @@ will be executed.
 * **expression="Java expression"**: Is the expression true?
 * **sectionVisited="sectionId1|sectionId1|..."**: Has some of the sections been visited?
 * **currentWeapon="weaponId"**: Is this the current weapon?
-* **combatsWon="true"**: Have been won all combats on this section ?
+* **combatsWon="true"**: Have been won all combats on this section?
+* **combatsActive="true"**: Do some combat still active?
 * **bookLanguage="language code (en/es)"**: Is this the current book language?
 * **weaponskillActive="true"**: Has the player Weaponskill with the current weapon?
 * **not="true"**: This will negate the current test. So if all of these conditions are false,

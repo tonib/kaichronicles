@@ -802,8 +802,10 @@
             <choiceState section="all" set="disabled" />
             <combat eludeTurn="2" />
             <afterCombatTurn turn="4">
-                <disableCombats />
-                <choiceState section="sect203" set="enabled" />
+                <test combatsActive="true">
+                    <disableCombats />
+                    <choiceState section="sect203" set="enabled" />
+                </test>
             </afterCombatTurn>
             <afterCombats>
                 <choiceState section="sect94" set="enabled" />
@@ -1154,8 +1156,10 @@
             <choiceState section="all" set="disabled" />
             <combat eludeTurn="0" />
             <afterCombatTurn turn="4">
-                <disableCombats />
-                <choiceState section="sect203" set="enabled" />
+                <test combatsActive="true">
+                    <disableCombats />
+                    <choiceState section="sect203" set="enabled" />
+                </test>
             </afterCombatTurn>
             <afterCombats>
                 <choiceState section="sect94" set="enabled" />

@@ -203,7 +203,6 @@
         </section>
 
         <section id="sect32">
-            <!-- TODO: Pending to implement foot note about 3th enemy -->
             <choiceState section="all" set="disabled" />
             <afterCombatTurn turn="any">
                 <test expression="[COMBATSENDURANCELOST] > 0">
@@ -212,7 +211,9 @@
                 </test>
             </afterCombatTurn>
             <afterCombats>
-                <choiceState section="sect25" set="enabled" />
+                <test expression="[COMBATSENDURANCELOST] == 0">
+                    <choiceState section="sect25" set="enabled" />
+                </test>
             </afterCombats>
         </section>
 
@@ -697,7 +698,9 @@
                 </test>
             </afterCombatTurn>
             <afterCombats>
-                <choiceState section="sect174" set="enabled" />
+                <test expression="[COMBATSENDURANCELOST] == 0">
+                    <choiceState section="sect174" set="enabled" />
+                </test>
             </afterCombats>
         </section>
 
@@ -757,7 +760,106 @@
             </afterCombats>
         </section>
 
-        <!-- UP TO SECTION 131 -->
+        <section id="sect138">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="0" index="0" />
+            <combat eludeTurn="0" index="1" />
+            <afterCombatTurn turn="any">
+                <test expression="[COMBATSENDURANCELOST] > 0">
+                    <disableCombats />
+                    <choiceState section="sect66" set="enabled" />
+                </test>
+            </afterCombatTurn>
+            <afterCombats>
+                <test expression="[COMBATSENDURANCELOST] == 0">
+                    <choiceState section="sect25" set="enabled" />
+                </test>
+            </afterCombats>
+            <afterElude>
+                <test expression="[COMBATSENDURANCELOST] == 0">
+                    <choiceState section="sect277" set="enabled" />
+                </test>
+            </afterElude>
+        </section>
+
+        <section id="sect139">
+            <test not="true" hasObject="redpotionlaumspur">
+                <choiceState section="sect116" set="disabled" />
+            </test>
+            <test hasObject="redpotionlaumspur">
+                <choiceState section="sect239" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect140">
+            <endurance count="-2" />
+        </section>
+
+        <section id="sect142">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="5">
+                    <choiceState section="sect284" set="enabled" />
+                </case>
+                <case from="6" to="9">
+                    <choiceState section="sect32" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect143">
+            <death />
+        </section>
+
+        <section id="sect144">
+            <death />
+        </section>
+
+        <section id="sect146">
+            <choiceState section="sect226" set="disabled" />
+            <choiceState section="sect266" set="disabled" />
+            <choiceState section="sect312" set="disabled" />
+            <test not="true" hasObject="sommerswerd">
+                <choiceState section="sect43" set="disabled" />
+            </test>
+            <test not="true" hasDiscipline="mindomtr">
+                <choiceState section="sect121" set="disabled" />
+            </test>
+            <test not="true" hasObject="sommerswerd" hasDiscipline="mindomtr">
+                <randomTable>
+                    <case from="1" to="4">
+                        <choiceState section="sect226" set="enabled" />
+                    </case>
+                    <case from="5" to="9">
+                        <choiceState section="sect266" set="enabled" />
+                    </case>
+                    <case value="0">
+                        <choiceState section="sect312" set="enabled" />
+                    </case>
+                </randomTable>
+            </test>
+        </section>
+
+        <section id="sect147">
+            <choiceState section="all" set="disabled" />
+            <afterCombatTurn turn="any">
+                <test expression="[COMBATSENDURANCELOST] > 0">
+                    <disableCombats />
+                    <choiceState section="sect66" set="enabled" />
+                </test>
+            </afterCombatTurn>
+            <afterCombats>
+                <test expression="[COMBATSENDURANCELOST] == 0">
+                    <choiceState section="sect84" set="enabled" />
+                </test>
+            </afterCombats>
+        </section>
+
+        <section id="sect148">
+            <death />
+        </section>
+
+        <!-- UP TO SECTION 148 -->
 
     </sections>
 

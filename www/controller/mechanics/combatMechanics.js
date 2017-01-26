@@ -136,11 +136,16 @@ var combatMechanics = {
         combatMechanics.updateEnemyEndurance( $combatUI , combat , false );
 
         if( sectionState.combatEluded || combat.isFinished() ) {
+            // Combat finished
+
             // Hide button to run more turns
             combatMechanics.hideCombatButtons( $combatUI );
 
             // Test player death
             mechanicsEngine.testDeath();
+
+            // Fire turn events:
+            mechanicsEngine.fireAfterCombatTurn(combat);
 
             // Post combat rules execution:
             var combatsResult = sectionState.areAllCombatsFinished(state.actionChart);
@@ -153,11 +158,15 @@ var combatMechanics = {
 
         }
         else {
+            // Combat continues
+            
             if( combat.canBeEluded() )
                 // The combat can be eluded after this turn
                 $combatUI.find('.mechanics-elude').show();
+
             // Fire turn events:
             mechanicsEngine.fireAfterCombatTurn(combat);
+
             // Update combat ratio (it can be changed by combat turn rules):
             combatMechanics.updateCombatRatio( $combatUI , combat );
         }

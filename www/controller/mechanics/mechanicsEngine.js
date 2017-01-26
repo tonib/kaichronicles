@@ -162,9 +162,6 @@ var mechanicsEngine = {
     fireAfterCombatTurn: function(combat) {
 
         var sectionState = state.sectionStates.getSectionState();
-        if( sectionState.combatEluded )
-            // Nothing to do
-            return;
 
         if( !combat) {
             // Fire all combats
@@ -348,6 +345,12 @@ var mechanicsEngine = {
             else if( combatsWon == 'false' && !allCombatsWon )
                 conditionStatisfied = true;
         }
+
+        // Test some combat active:
+        var combatsActive = $(rule).attr('combatsActive');
+        if( combatsActive == 'true' && 
+            state.sectionStates.getSectionState().someCombatActive() )
+            conditionStatisfied = true;
 
         // Test book language
         var bookLanguage = $(rule).attr('bookLanguage');

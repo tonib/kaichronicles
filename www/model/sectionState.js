@@ -116,6 +116,20 @@ SectionState.prototype.areAllCombatsWon = function() {
 };
 
 /**
+ * Returns true if there is some combat active
+ */
+SectionState.prototype.someCombatActive = function() {
+    if( this.combatEluded )
+        return false;
+
+    for(var i=0; i<this.combats.length; i++) {
+        if( !this.combats[i].isFinished() )
+            return true;
+    }
+    return false;
+};
+
+/**
  * Returns the number on endurance points lost by the player on section combats 
  */
 SectionState.prototype.combatsEnduranceLost = function() {

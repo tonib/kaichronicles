@@ -500,6 +500,23 @@
             <name lang="es">Tienda de campaña</name>
         </object>
         
+        <object id="redpotionlaumspur">
+            <name lang="en">Red Potion of Laumspur</name>
+            <description lang="en">
+                Distilled Laumspur, a herb of great healing properties. 
+                This concentrated Potion is powerful enough to restore 5 ENDURANCE points
+            </description>
+
+            <name lang="es">Poción roja de Laumspur</name>
+            <description lang="es">
+                Es un brebaje de laumspur, una hierba de grandes propiedades curativas. 
+                Esta Poción concentrada permite a quien la bebe recuperar 5 puntos de 
+                RESISTENCIA
+            </description>
+
+            <usage class="endurance" increment="5" />
+        </object>
+
         <!-- OTHERS -->
 
         <!-- This not really an object, but needed for mechanics -->
