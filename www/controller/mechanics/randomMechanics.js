@@ -76,8 +76,13 @@ var randomMechanics = {
 
         $element.click(function(e) {
             e.preventDefault();
+
             if( $(this).hasClass('disabled') )
                 // Already clicked
+                return;
+
+            // Validate money picker, if there is
+            if( !moneyPickerMechanics.isValid() )
                 return;
 
             // Get the random value

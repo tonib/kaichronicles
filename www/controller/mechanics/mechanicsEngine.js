@@ -644,6 +644,13 @@ var mechanicsEngine = {
         state.sectionStates.huntEnabled = ( $(rule).attr('enabled') != 'false' );
     },
 
+    /**
+     * Money picker UI
+     */
+    moneyPicker: function(rule) {
+        moneyPickerMechanics.moneyPicker(rule);
+    },
+
     /************************************************************/
     /**************** SPECIAL SECTIONS **************************/
     /************************************************************/
@@ -758,7 +765,9 @@ var mechanicsEngine = {
             .replaceAll( '[MAXENDURANCE]' , state.actionChart.getMaxEndurance() )
             .replaceAll( '[COMBATSENDURANCELOST]', sectionState.combatsEnduranceLost() )
             .replaceAll( '[MEALS]', state.actionChart.meals )
-            .replaceAll( '[KAILEVEL]', state.actionChart.disciplines.length );
+            .replaceAll( '[KAILEVEL]', state.actionChart.disciplines.length )
+            .replaceAll( '[MONEYPICKER]', moneyPickerMechanics.getMoneyPickerValue() )
+            ;
 
         try {
             // Be sure to return always an integer (expression can contain divisions...)

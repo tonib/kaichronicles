@@ -899,7 +899,29 @@
             </test>
         </section>
 
-        <!-- UP TO SECTION 151 -->
+        <section id="sect152">
+            <choiceState section="all" set="disabled" />
+            <moneyPicker 
+                en-text="Choose the number of Gold Crowns you are going to throw" 
+                min="1" />
+            <randomTable>
+                <moneyPicker enabled="false" />
+                <pick class="money" count="-[MONEYPICKER]" />
+                <test expression="( [RANDOM] == 0 &amp;&amp; [MONEYPICKER] >= 10 ) || ( [RANDOM] > 0 &amp;&amp; [RANDOM] &lt;= [MONEYPICKER] )">
+                    <choiceState section="sect319" set="enabled" />
+                </test>
+                <test not="true" expression="( [RANDOM] == 0 &amp;&amp; [MONEYPICKER] >= 10 ) || ( [RANDOM] > 0 &amp;&amp; [RANDOM] &lt;= [MONEYPICKER] )">
+                    <choiceState section="sect181" set="enabled" />
+                </test>
+            </randomTable>
+        </section>
+
+        <section id="sect153">
+            <death />
+        </section>
+
+
+        <!-- UP TO SECTION 154 -->
 
     </sections>
 

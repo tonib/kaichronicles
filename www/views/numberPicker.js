@@ -95,4 +95,14 @@
         return true;
     };
  
+    /**
+     * Enable / disable the number picker
+     * @param {boolean} enabled True to enable, false to disable
+     */
+    $.fn.setEnabled = function(enabled) {
+        this.prop('disabled', !enabled);
+        this.parent().find('button.add-number').prop('disabled', !enabled);
+        this.parent().find('button.sub-number').prop('disabled', !enabled);
+    }
+
 }( jQuery ));
