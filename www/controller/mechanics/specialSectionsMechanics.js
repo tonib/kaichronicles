@@ -12,6 +12,10 @@ var specialSectionsMechanics = {
         var $gameUI = mechanicsEngine.$mechanicsUI.find('#mechanics-book2Sect248').clone();
         gameView.appendToSection( $gameUI );
 
+        // Bind number pickers events
+        $('#mechanics-moneyToBet').bindNumberEvents();
+        $('#mechanics-numberToBet').bindNumberEvents();
+
         // Get the game state
         var sectionState = state.sectionStates.getSectionState();
         var gameState = sectionState.ruleHasBeenExecuted(rule);
@@ -50,21 +54,12 @@ var specialSectionsMechanics = {
         $('#mechanics-play').click(function() {
 
             // Checks
-            var money = parseInt( $('#mechanics-moneyToBet').val() );
-            if( isNaN(money) || money <= 0 ) {
-                alert( 'Wrong value for "Crowns to bet"' );
+            if( !$('#mechanics-moneyToBet').isValid() || 
+                !$('#mechanics-numberToBet').isValid() )
                 return;
-            }
-            var number = parseInt( $('#mechanics-numberToBet').val() );
-            if( isNaN( number) || number < 0 || number > 9 ) {
-                alert( 'Wrong value for "Number for the bet"' );
-                return;
-            }
             
-            if( state.actionChart.beltPouch < money ) {
-                alert( 'You don\'t have enougth money to bet' );
-                return;
-            }
+            var money = $('#mechanics-moneyToBet').getNumber();
+            var number = $('#mechanics-numberToBet').getNumber();
 
             // Play the game
             var random = randomTable.getRandomValue();
