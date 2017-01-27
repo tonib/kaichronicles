@@ -859,6 +859,46 @@
             <death />
         </section>
 
+        <section id="sect149">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect286" set="enabled" />
+                </case>
+                <case from="5" to="11">
+                    <choiceState section="sect333" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="tracking|hunting|sixthsns">
+                <randomTableIncrement increment="+2" />
+            </test>
+        </section>
+
+        <section id="sect150">
+            <test not="true" hasObject="baknaroil">
+                <endurance count="-2" />
+            </test>
+            <test not="true" hasObject="sommerswerd">
+                <choiceState section="sect120" set="disabled" />
+            </test>
+            <test not="true" hasObject="firesphere">
+                <choiceState section="sect310" set="disabled" />
+            </test>
+            <test hasObject="sommerswerd|firesphere">
+                <choiceState section="sect18" set="disabled" />
+                <choiceState section="sect211" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect151">
+            <test not="true" hasObject="baknaroil">
+                <choiceState section="sect209" set="disabled" />
+            </test>
+            <test hasObject="baknaroil">
+                <choiceState section="sect339" set="disabled" />
+            </test>
+        </section>
+
         <!-- UP TO SECTION 148 -->
 
     </sections>
