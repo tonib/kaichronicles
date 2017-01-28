@@ -25,7 +25,7 @@
 - Toasts: If you click on some toast, hide them all
 - Reset the endurance at the start of all books
 - Add a cover image for the book on the new game page
-- Main menu: Add a warn about supported browsers
+- Pick rule: If you cannot pick the object, dont show the error message
 
 Reminders:
 
