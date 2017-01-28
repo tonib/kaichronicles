@@ -55,11 +55,13 @@ BookSectionStates.prototype.removeObjectFromSection = function(objectId) {
 };
 
 /**
- * Clear the current section state
+ * Clear some section state
+ * @param {string} sectionId The section id to clear
  */
-BookSectionStates.prototype.resetCurrentSectionState = function() {
-    this.sectionStates[ this.currentSection ] = null;
+BookSectionStates.prototype.resetSectionState = function(sectionId) {
+    this.sectionStates[ sectionId ] = null;
 };
+
 
 /**
  * Add a combat skill bonus to the current section combats by an object usage.

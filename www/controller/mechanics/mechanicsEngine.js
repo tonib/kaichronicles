@@ -494,6 +494,11 @@ var mechanicsEngine = {
         if( txtEnemyMultiplier )
             combat.enemyMultiplier = parseInt( txtEnemyMultiplier );
 
+        // Enemy extra loss per turn
+        var txtEnemyTurnLoss = $(rule).attr('enemyTurnLoss'); 
+        if( txtEnemyTurnLoss )
+            combat.enemyTurnLoss = parseInt( txtEnemyTurnLoss );
+
         // It's a fake combat?
         var txtFake = $(rule).attr('fake');
         if( txtFake )
@@ -649,6 +654,13 @@ var mechanicsEngine = {
      */
     moneyPicker: function(rule) {
         moneyPickerMechanics.moneyPicker(rule);
+    },
+
+    /**
+     * Reset the state of a given section
+     */
+    resectSectionState: function(rule) {
+        state.sectionStates.resetSectionState( $(rule).attr('sectionId') );
     },
 
     /************************************************************/

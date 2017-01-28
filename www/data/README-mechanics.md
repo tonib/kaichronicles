@@ -183,6 +183,13 @@ This will allow to the player to sell a class of objects by a given price
 * **objectId**: The object id you can sell
 * **price**: The money got by selling the object
 
+### resectSectionState
+```xml
+<resectSectionState sectionId="sect152" />
+```
+This will clear the state of the given section. Usefull if the player can return to that
+section, and there are rules with state there that must to be reexecuted
+
 ### combat
 ```xml
 <combat noMindblast="true" mindforceEP="-2" eludeTurn="1" />
@@ -203,6 +210,7 @@ the following properties:
 * **dammageMultiplier="number"**: LW dammage multiplier
 * **enemyMultiplier="number"**: Enemy dammage multiplier
 * **fake="true"**: This is a fake combat. When it's finished, LW endurance points will be restored
+* **enemyTurnLoss="-number"** Extra E.P. lost by the enemy each turn
 
 TODO: Continue here
 

@@ -1024,6 +1024,29 @@
             </randomTable>
         </section>
 
+        <section id="sect180">
+            <choiceState section="all" set="disabled" />
+            <combat enemyTurnLoss="-3" />
+            <afterCombatTurn turn="any">
+                <test expression="[COMBATSENDURANCELOST] > 0">
+                    <disableCombats />
+                    <choiceState section="sect129" set="enabled" />
+                </test>
+            </afterCombatTurn>
+            <afterCombats>
+                <test expression="[COMBATSENDURANCELOST] == 0">
+                    <choiceState section="sect70" set="enabled" />
+                </test>
+            </afterCombats>
+        </section>
+
+        <section id="sect181">
+            <resectSectionState sectionId="sect152" />
+            <test not="true" expression="[MONEY] > 0">
+                <choiceState section="sect152" set="disabled" />
+            </test>
+        </section>
+
         <!-- UP TO SECTION 179 -->
 
     </sections>

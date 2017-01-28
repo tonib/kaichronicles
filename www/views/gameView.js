@@ -80,7 +80,7 @@ var gameView = {
 
             $('#game-resetSection').click(function(e) {
                 e.preventDefault();
-                state.sectionStates.resetCurrentSectionState();
+                state.sectionStates.resetSectionState( state.sectionStates.currentSection );
                 gameController.loadSection( state.sectionStates.currentSection );
             });
 

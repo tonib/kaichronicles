@@ -8,9 +8,10 @@
  * @param {number} mindforceEP Player extra endurance points lost each turn by 
  * enemy mindforce attack. It must to be negative.
  * @param {boolean} elude True if the player is eluding the combat
+ * @param {number} extraEnemyLoss Extra E.P. lost by the enemy. It must to be negative.
  */
 function CombatTurn(turnNumber, combatRatio, dammageMultiplier, enemyMultiplier, 
-    mindforceEP, elude ) {
+    mindforceEP, elude , extraEnemyLoss ) {
 
     if( !turnNumber )
         // Default constructor (called on BookSectionStates.prototype.fromStateObject)
@@ -37,6 +38,10 @@ function CombatTurn(turnNumber, combatRatio, dammageMultiplier, enemyMultiplier,
     this.enemyBase = ( elude ? 0 : tableResult[0] );
     /** The enemy loss */
     this.enemy = CombatTurn.applyMultiplier( this.enemyBase , this.dammageMultiplier );
+    /** Enemy extra loss (extraEnemyLoss is negative)*/
+    this.enemyExtra = extraEnemyLoss;
+    if( this.enemy != combatTable_DEATH)
+        this.enemy -= extraEnemyLoss;
 
     /** The player base loss */
     this.loneWolfBase = tableResult[1];
@@ -47,7 +52,8 @@ function CombatTurn(turnNumber, combatRatio, dammageMultiplier, enemyMultiplier,
     if( this.loneWolf != combatTable_DEATH && mindforceEP < 0 && 
         !state.actionChart.disciplines.contains( 'mindshld' ) ) {
         // Enemy mind force attack (this.mindforceEP is negative):
-        this.loneWolf -= mindforceEP;
+        if( this.loneWolf != combatTable_DEATH)
+            this.loneWolf -= mindforceEP;
         this.loneWolfExtra = mindforceEP;
     }
 
@@ -80,7 +86,11 @@ CombatTurn.prototype.calculatePlayerLossText = function() {
 CombatTurn.prototype.getEnemyLossText = function() {
     var loss = this.enemyBase.toString();
     if( this.dammageMultiplier != 1 )
-        loss = loss + " x " + this.dammageMultiplier + " = " + this.enemy;
+        loss = loss + " x " + this.dammageMultiplier;
+    if( this.enemyExtra != 0 )
+        loss += " + " + ( - this.enemyExtra );
+    if( this.dammageMultiplier != 1 || this.enemyExtra != 0 )
+        loss += " = " + this.enemy
     return loss;
 };
 
