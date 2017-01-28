@@ -1,4 +1,3 @@
-- Combat table overflow on small screens
 - If the book load fails, it doest not try to reload the next time
 - Test all books / all sections rendering. It should be valid HTML5
   (https://validator.w3.org/docs/api.html)
