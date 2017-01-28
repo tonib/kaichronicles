@@ -619,6 +619,9 @@
             <test not="true" hasObject="silverkey">
                 <choiceState section="sect158" set="disabled" />
             </test>
+            <test hasObject="silverkey">
+                <choiceState section="sect259" set="disabled" />
+            </test>
         </section>
 
         <section id="sect174">

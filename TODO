@@ -21,10 +21,11 @@
 - Post info about mechanics files on forum ("Common Navigation File")
   * Document rules
 - chooseEquipment rule: Use on all books, not just the book 1
-- Book 1 / sect173: If you have the silver key, disable the other choice
 - Allow to view a larger version of the objects images
 - Toasts: If you click on some toast, hide them all
 - Reset the endurance at the start of all books
+- Add a cover image for the book on the new game page
+- Main menu: Add a warn about supported browsers
 
 Reminders:
 
