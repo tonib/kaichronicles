@@ -63,6 +63,7 @@ There are some keywords that can be used on expressions. They have the following
 the current section
 * **[COMBATSENEMYLOST]**: The number of endurance points lost by the enemies on combats on 
 the current section
+* **[COMBATSDURATION]**: The sum of turns of all combats on the section (combat duration)
 * **[MEALS]**: Number of meals on the action chart
 * **[KAILEVEL]**: Current number of Kai disciplines of the player
 

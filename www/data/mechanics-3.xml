@@ -888,6 +888,9 @@
             <test expression="[ENDURANCE] &lt; 10">
                 <randomTableIncrement increment="-2" />
             </test>
+            <test expression="[ENDURANCE] > 20">
+                <randomTableIncrement increment="+1" />
+            </test>
         </section>
 
         <section id="sect156">
@@ -923,7 +926,105 @@
             </test>
         </section>
 
-        <!-- UP TO SECTION 154 -->
+        <section id="sect161">
+            <combat noMindblast="true" />
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect164">
+            <choiceState section="all" set="disabled" />
+            <test currentWeapon="sommerswerd">
+                <combat dammageMultiplier="2" />
+            </test> 
+            <afterCombats>
+                <test not="true" expression="[COMBATSDURATION] > 5">
+                    <choiceState section="sect272" set="enabled" />
+                </test>
+                <test expression="[COMBATSDURATION] > 5">
+                    <choiceState section="sect324" set="enabled" />
+                </test>
+            </afterCombats>
+        </section>
+
+        <section id="sect167">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="6">
+                    <choiceState section="sect85" set="enabled" />
+                </case>
+                <case from="7" to="9">
+                    <choiceState section="sect300" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect169">
+            <test not="true" hasObject="trianglebluestone">
+                <choiceState section="sect41" set="disabled" />
+            </test>
+            <test hasObject="trianglebluestone">
+                <choiceState section="sect265" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect170">
+            <endurance count="-6" />
+            <test not="true" hasObject="sommerswerd">
+                <choiceState section="sect304" set="disabled" />
+            </test>
+            <test hasObject="sommerswerd">
+                <choiceState section="sect175" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect171">
+            <test not="true" hasDiscipline="sixthsns|wepnskll">
+                <choiceState section="sect311" set="disabled" />
+            </test>
+            <test hasDiscipline="sixthsns|wepnskll">
+                <choiceState section="sect10" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect173">
+            <test not="true" hasObject="stoneeffigy">
+                <choiceState section="sect34" set="disabled" />
+            </test>
+            <test hasObject="stoneeffigy">
+                <choiceState section="sect164" set="disabled" />
+            </test>
+            <test not="true" hasObject="sommerswerd">
+                <choiceState section="sect164" set="disabled" />
+            </test>
+            <test hasObject="stoneeffigy|sommerswerd">
+                <choiceState section="sect200" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect175">
+            <death />
+        </section>
+
+        <section id="sect177">
+            <object objectId="potionblackgraveweed" />
+        </section>
+
+        <section id="sect179">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect39" set="enabled" />
+                </case>
+                <case from="5" to="12">
+                    <choiceState section="sect296" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <!-- UP TO SECTION 179 -->
 
     </sections>
 

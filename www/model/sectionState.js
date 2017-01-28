@@ -146,6 +146,17 @@ SectionState.prototype.combatsEnduranceLost = function(who) {
 };
 
 /**
+ * Returns the number of turns used on all combats on the section
+ */
+SectionState.prototype.combatsDuration = function(who) {
+    var duration = 0;
+    for( var i=0, len = this.combats.length; i< len; i++)
+        duration += this.combats[i].turns.length;
+    return duration;
+};
+
+
+/**
  * Set combats as disabled
  */
 SectionState.prototype.setCombatsDisabled = function() {

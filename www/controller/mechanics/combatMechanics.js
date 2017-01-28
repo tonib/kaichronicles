@@ -40,7 +40,7 @@ var combatMechanics = {
             });
 
             // Set enemy name on table
-            $combatUI.find('.mechanics-enemyName').text( combat.enemy );
+            $combatUI.find('.mechanics-enemyName').html( combat.enemy );
             // Set combat ratio:
             combatMechanics.updateCombatRatio( $combatUI, combat );
             

@@ -768,6 +768,7 @@ var mechanicsEngine = {
             .replaceAll( '[MEALS]', state.actionChart.meals )
             .replaceAll( '[KAILEVEL]', state.actionChart.disciplines.length )
             .replaceAll( '[MONEYPICKER]', moneyPickerMechanics.getMoneyPickerValue() )
+            .replaceAll( '[COMBATSDURATION]', sectionState.combatsDuration() )
             ;
 
         try {

@@ -487,7 +487,13 @@
 
         <object id="potionblackgraveweed">
             <name lang="en">Potion of Black Graveweed</name>
+            <description lang="en">
+                Is a very powerful poison
+            </description>
             <name lang="es">Poción negra de moras de cementerio</name>
+            <description lang="es">
+                Es un poderoso veneno
+            </description>
         </object>
 
         <object id="potiongreengallowbrush">
