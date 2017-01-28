@@ -820,6 +820,10 @@ var mechanicsEngine = {
 
             // Disable all choice links
             mechanicsEngine.setChoiceState('all' , true);
+            // Disable pick any object
+            $('a.equipment-op').addClass('disabled');
+            // Disable money picker
+            moneyPickerMechanics.disable();
 
             // Bind restart book link
             $('#mechanics-restart').click(function(e) {

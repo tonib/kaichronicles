@@ -11,7 +11,7 @@ var moneyPickerMechanics = {
 
         if( $(rule).attr('enabled') == 'false' ) {
             // Disable the money picker
-            $('#mechanics-mpAmount').setEnabled(false);
+            moneyPickerMechanics.disable();
             return;
         }
 
@@ -56,6 +56,13 @@ var moneyPickerMechanics = {
         catch(e) {
             return 0;
         }
+    },
+
+    /**
+     * Disable the money picker
+     */
+    disable: function() {
+        $('#mechanics-mpAmount').setEnabled(false);
     }
     
 };

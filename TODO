@@ -1,4 +1,3 @@
-- ERROR: Do not allow to pick objects if you are death
 - Combat table overflow on small screens
 - If the book load fails, it doest not try to reload the next time
 - Test all books / all sections rendering. It should be valid HTML5
