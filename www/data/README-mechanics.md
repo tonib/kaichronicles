@@ -59,8 +59,10 @@ There are some keywords that can be used on expressions. They have the following
 * **[WEAPON-ITEMS-CNT-ON-ACTIONCHART]**: The current count of weapons on the action chart
 * **[ENDURANCE]**: The current endurance points
 * **[MAXENDURANCE]**: The maximum endurance points
-* **[COMBATSENDURANCELOST]**: The number of endurance points lost on combats on the current
-  section
+* **[COMBATSENDURANCELOST]**: The number of endurance points lost by Lone Wolf on combats on 
+the current section
+* **[COMBATSENEMYLOST]**: The number of endurance points lost by the enemies on combats on 
+the current section
 * **[MEALS]**: Number of meals on the action chart
 * **[KAILEVEL]**: Current number of Kai disciplines of the player
 

@@ -86,6 +86,8 @@ var gameView = {
 
             $('#game-goDisciplines').click(function(e) {
                 e.preventDefault();
+                // Keep the current section, to ease the go-back
+                $('#game-debugNSection').val( state.sectionStates.currentSection );
                 gameController.loadSection( 'discplnz' );
             });
         }

@@ -130,12 +130,18 @@ SectionState.prototype.someCombatActive = function() {
 };
 
 /**
- * Returns the number on endurance points lost by the player on section combats 
+ * Returns the number on endurance points lost by somebody on section combats 
+ * @param {string} who If is 'enemy' we will calculate the enemy loss. Otherwise, we will
+ * calculate the enemy loss
  */
-SectionState.prototype.combatsEnduranceLost = function() {
+SectionState.prototype.combatsEnduranceLost = function(who) {
     var lost = 0;
-    for( var i=0, len = this.combats.length; i< len; i++)
-        lost += this.combats[i].playerEnduranceLost();
+    for( var i=0, len = this.combats.length; i< len; i++) {
+        if( who == 'enemy')
+            lost += this.combats[i].enemyEnduranceLost();
+        else
+            lost += this.combats[i].playerEnduranceLost();
+    }
     return lost;
 };
 

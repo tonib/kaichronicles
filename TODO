@@ -24,13 +24,15 @@
   * Document rules
 - After pick a random value, show it as black bold, not as disabled
 - chooseEquipment rule: Use on all books, not just the book 1
-- Recheck books 1 and 2: Be more restrictive with choices
-  * Book 1 / sect173: If you have the silver key, disable the other choice
+- Book 1 / sect173: If you have the silver key, disable the other choice
 - Allow to view a larger version of the objects images
 - Toasts: If you click on some toast, hide them all
 - Book XXX (beggers): use the money picker to select the amount of money to drop
+- Reset the endurance at the start of all books
 
 Reminders:
+
+* DON'T BE RESTRICTIVE WITH CHOICES !!!!
 
 * JsDoc docs: http://usejsdoc.org/
 

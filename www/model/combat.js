@@ -13,6 +13,8 @@ function Combat(enemy, combatSkill, endurance) {
     this.combatSkill = combatSkill;
     /** Enemy endurance points  */
     this.endurance = endurance;
+    /** Enemy original endurance points  */
+    this.originalEndurance = endurance;
     /** Combat turns (type = CombatTurn) */
     this.turns = [];
     /** Increment of combat skill of Lone Wolf in this combat  */
@@ -161,6 +163,21 @@ Combat.prototype.playerEnduranceLost = function() {
             lost += state.actionChart.getMaxEndurance();
         else
             lost += turn.loneWolf;
+    }
+    return lost;
+};
+
+/**
+ * Returns the number on endurance points lost by the enemy on this combat 
+ */
+Combat.prototype.enemyEnduranceLost = function() {
+    var lost = 0;
+    for( var i=0, len = this.turns.length; i< len; i++) {
+        var turn = this.turns[i];
+        if( turn.enemy == combatTable_DEATH )
+            lost += this.originalEndurance;
+        else
+            lost += turn.enemy;
     }
     return lost;
 };

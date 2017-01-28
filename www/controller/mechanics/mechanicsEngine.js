@@ -764,6 +764,7 @@ var mechanicsEngine = {
             .replaceAll( '[ENDURANCE]' , state.actionChart.currentEndurance )
             .replaceAll( '[MAXENDURANCE]' , state.actionChart.getMaxEndurance() )
             .replaceAll( '[COMBATSENDURANCELOST]', sectionState.combatsEnduranceLost() )
+            .replaceAll( '[COMBATSENEMYLOST]', sectionState.combatsEnduranceLost('enemy') )
             .replaceAll( '[MEALS]', state.actionChart.meals )
             .replaceAll( '[KAILEVEL]', state.actionChart.disciplines.length )
             .replaceAll( '[MONEYPICKER]', moneyPickerMechanics.getMoneyPickerValue() )

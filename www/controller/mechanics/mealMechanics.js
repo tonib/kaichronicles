@@ -85,6 +85,13 @@ var mealMechanics = {
         });
     },
 
+    /**
+     * Return true if there are pending meals on the section
+     */
+    arePendingMeals: function() {
+        return $('#mechanics-meal').length > 0;
+    },
+
     updateEatBackpack: function() {
         if( state.actionChart.meals <= 0 )
             $('#mechanics-eatMeal').hide();

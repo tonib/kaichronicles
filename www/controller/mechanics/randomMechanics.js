@@ -81,9 +81,15 @@ var randomMechanics = {
                 // Already clicked
                 return;
 
-            // Validate money picker, if there is
+            // Validate money picker, if there is. If its not valid, don't follow with this link
             if( !moneyPickerMechanics.isValid() )
                 return;
+
+            // If there are pending meals, don't follow with this link
+            if( mealMechanics.arePendingMeals() ) {
+                alert('Please, do the Meal first');
+                return;
+            }
 
             // Get the random value
             var value = randomTable.getRandomValue(ignoreZero);
@@ -128,8 +134,10 @@ var randomMechanics = {
 
     linkAddChooseValue: function( $link , valueChoose , increment ) {
         var html = valueChoose.toString();
-        if( increment )
+        if( increment > 0 )
             html += ' + ' + increment;
+        else if( increment < 0 )
+            html += ' - ' + (-increment);
         $link.append(' (' + html + ')');
         // Disable the link:
         $link.addClass('disabled');

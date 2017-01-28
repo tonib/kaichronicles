@@ -492,7 +492,14 @@
 
         <object id="potiongreengallowbrush">
             <name lang="en">Potion of Green Gallowbrush</name>
+            <description lang="en">
+                 Is a very powerful sleeping potion
+            </description>
+
             <name lang="es">Poción verde de hierba de horca</name>
+            <description lang="es">
+                 Es un potente somnífero
+            </description>
         </object>
 
         <object id="tent" itemCount="3">
