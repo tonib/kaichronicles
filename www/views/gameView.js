@@ -121,8 +121,16 @@ var gameView = {
         });
     },
 
+    /**
+     * Called when a choice link is clicked
+     */
     choiceLinkClicked: function(e, link) {
         e.preventDefault();
+
+        // Validate money picker, if there is. If its not valid, don't follow with this link
+        if( !moneyPickerMechanics.isValid() )
+            return;
+
         var section = $(link).attr('data-section');
         console.log('Jump to section ' + section);
         if( section )

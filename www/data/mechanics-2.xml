@@ -521,6 +521,15 @@
             <message en-text="Pick only two objects" />
         </section>
 
+        <section id="sect93">
+            <moneyPicker 
+                en-text="Choose how many Crowns you wish to give to the beggars" 
+                min="1" />
+            <choiceSelected section="sect137">
+                <pick class="money" count="-[MONEYPICKER]" />
+            </choiceSelected>
+        </section>
+
         <section id="sect95">
             <test not="true" hasObject="healingpotion|laumspurmeal|healingpotion3|laumspurpotion"
                 hasDiscipline="healing">
