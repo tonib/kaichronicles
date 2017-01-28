@@ -84,5 +84,5 @@ MIT. This application uses the following third-party code:
 * [jQuery](https://jquery.com/) (jQuery license)
 * Logos, icons and splashes are taken directly, or adapted, from the Spanish Project Aon 
   (https://projectaon.org/es)
-* The HTML rendering and books XML processing contains code taken from 
-  Lone Wolf Adventures, by Liquid State Limited
+* The HTML rendering, books XML processing and Project Aon license HTML contain code
+  taken from Lone Wolf Adventures, by Liquid State Limited
