@@ -120,6 +120,9 @@ var randomMechanics = {
      * @return {jquery} The link tag already processed
      */
     setupRandomTableLink: function($element, alreadyChoose, valueAlreadyChoose, increment)  {
+
+        // Initially, the random table links are plain text (spans). When they got setup by a random rule, they
+        // are converted to links:
         if( $element.prop('tagName').toLowerCase() == 'span' ) {
             var $link = $('<a class="random action" href="#">' + $element.html() + '</a>');
             $element.replaceWith( $link );
@@ -132,6 +135,9 @@ var randomMechanics = {
         return $element;
     },
 
+    /**
+     * Change a random table link to clicked
+     */
     linkAddChooseValue: function( $link , valueChoose , increment ) {
         var html = valueChoose.toString();
         if( increment > 0 )
@@ -140,7 +146,7 @@ var randomMechanics = {
             html += ' - ' + (-increment);
         $link.append(' (' + html + ')');
         // Disable the link:
-        $link.addClass('disabled');
+        $link.addClass('disabled').addClass('picked');
     },
 
     /**

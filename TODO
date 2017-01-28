@@ -20,7 +20,6 @@
 - The "Loading" does not appear when a view is loading
 - Post info about mechanics files on forum ("Common Navigation File")
   * Document rules
-- After pick a random value, show it as black bold, not as disabled
 - chooseEquipment rule: Use on all books, not just the book 1
 - Book 1 / sect173: If you have the silver key, disable the other choice
 - Allow to view a larger version of the objects images

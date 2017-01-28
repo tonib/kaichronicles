@@ -67,6 +67,12 @@ div.illustration img.originalsize {
 .action.disabled {
     color: gray;
 }
+/* Already picked random table links */
+.action.random.picked {
+    color: black;
+    font-weight: bold;
+    opacity: 1;
+}
 
 /* List tables */
 .list-table {
