@@ -858,13 +858,13 @@
             <moneyPicker 
                 en-text="Choose the number of Gold Crowns you are going to throw" 
                 min="1" />
-            <randomTable>
+            <randomTable zeroAsTen="true">
                 <moneyPicker enabled="false" />
                 <pick class="money" count="-[MONEYPICKER]" />
-                <test expression="( [RANDOM] == 0 &amp;&amp; [MONEYPICKER] >= 10 ) || ( [RANDOM] > 0 &amp;&amp; [RANDOM] &lt;= [MONEYPICKER] )">
+                <test expression="[RANDOM] &lt;= [MONEYPICKER]">
                     <choiceState section="sect319" set="enabled" />
                 </test>
-                <test not="true" expression="( [RANDOM] == 0 &amp;&amp; [MONEYPICKER] >= 10 ) || ( [RANDOM] > 0 &amp;&amp; [RANDOM] &lt;= [MONEYPICKER] )">
+                <test not="true" expression="[RANDOM] &lt;= [MONEYPICKER]">
                     <choiceState section="sect181" set="enabled" />
                 </test>
             </randomTable>
@@ -1322,7 +1322,217 @@
             <death />
         </section>
 
-        <!-- UP TO SECTION 257 -->
+        <section id="sect258">
+            <choiceState section="all" set="disabled" />
+            <randomTable zeroAsTen="true" >
+                <test expression="[RANDOM] > 0">
+                    <endurance count="-[RANDOM]" />
+                </test>
+                <drop objectId="bracelet" />
+                <choiceState section="all" set="enabled" />
+            </randomTable>
+            <test hasDiscipline="hunting|sixthsns">
+                <randomTableIncrement increment="-2" />
+            </test>
+        </section>
+
+        <section id="sect259">
+            <choiceState section="all" set="disabled" />
+            <afterCombatTurn turn="any">
+                <test expression="[COMBATSENDURANCELOST] > 0">
+                    <disableCombats />
+                    <choiceState section="sect129" set="enabled" />
+                </test>
+            </afterCombatTurn>
+            <afterCombats>
+                <test expression="[COMBATSENDURANCELOST] == 0">
+                    <choiceState section="sect151" set="enabled" />
+                </test>
+            </afterCombats>
+        </section>
+
+        <section id="sect260">
+            <choiceState section="all" set="disabled" />
+            <combat enemyMultiplier="0" noMindblast="true" />
+            <afterCombatTurn turn="2">
+                <combat enemyMultiplier="1" />
+            </afterCombatTurn>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect262">
+            <test not="true" hasDiscipline="sixthsns">
+                <choiceState section="all" set="disabled" />
+                <randomTable>
+                    <case from="0" to="6">
+                        <choiceState section="sect320" set="enabled" />
+                    </case>
+                    <case from="7" to="9">
+                        <choiceState section="sect140" set="enabled" />
+                    </case>
+                </randomTable>
+            </test>
+            <test hasDiscipline="sixthsns">
+                <choiceState section="sect320" set="disabled" />
+                <choiceState section="sect140" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect263">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="0" index="0" />
+            <combat eludeTurn="0" index="1" />
+            <combat eludeTurn="0" index="2" />
+            <afterCombatTurn turn="any">
+                <test expression="[COMBATSENDURANCELOST] > 0">
+                    <disableCombats />
+                    <choiceState section="sect66" set="enabled" />
+                </test>
+            </afterCombatTurn>
+            <afterElude>
+                <test expression="[COMBATSENDURANCELOST] == 0">
+                    <choiceState section="sect277" set="enabled" />
+                </test>
+            </afterElude>
+            <afterCombats>
+                <test expression="[COMBATSENDURANCELOST] == 0">
+                    <choiceState section="sect25" set="enabled" />
+                </test>
+            </afterCombats>
+        </section>
+
+        <section id="sect265">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect267">
+            <drop objectId="glowingcrystal" />
+        </section>
+
+        <section id="sect268">
+            <!-- TODO: The Graveyard of the Ancients is on book 1, sect102 and sect329.
+                 Save a "flag" on the action chart if you visit that sections and test it here -->
+        </section>
+
+        <section id="sect270">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect272">            
+            <test hasObject="sommerswerd" >
+                <choiceState section="sect143" set="disabled" />
+                <choiceState section="sect58" set="disabled" />
+            </test>
+
+            <test not="true" hasObject="sommerswerd">
+                <choiceState section="all" set="disabled" />
+                <randomTable>
+                    <case from="0" to="3">
+                        <choiceState section="sect143" set="enabled" />
+                    </case>
+                    <case from="4" to="9">
+                        <choiceState section="sect58" set="enabled" />
+                    </case>
+                </randomTable>
+            </test>
+        </section>
+
+        <section id="sect273">
+            <test not="true" hasDiscipline="sixthsns">
+                <choiceState section="sect35" set="disabled" />
+            </test>
+            <test hasDiscipline="sixthsns">
+                <choiceState section="sect112" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect274">
+            <test not="true" hasDiscipline="sixthsns">
+                <choiceState section="sect131" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect275">
+            <test not="true" hasDiscipline="hunting|tracking|anmlknsp">
+                <choiceState section="sect293" set="disabled" />
+            </test>
+            <test hasDiscipline="hunting|tracking|anmlknsp">
+                <choiceState section="sect197" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect276">
+            <test not="true" hasDiscipline="hunting|tracking">
+                <choiceState section="sect219" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect277">
+            <test not="true" expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] > 0">
+                <choiceState section="sect142" set="disabled" />
+            </test>
+            <!-- Let the player chooose -->
+            <!--test expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] > 0">
+                <choiceState section="sect32" set="disabled" />
+            </test-->
+        </section>
+
+        <section id="sect280">
+            <endurance count="-1" />
+            <object objectId="silverkeybook3" />
+        </section>
+
+        <section id="sect282">
+            <object objectId="spear" />
+            <object objectId="bluestonedisc" />
+        </section>
+
+        <section id="sect283">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect53" set="enabled" />
+                </case>
+                <case from="5" to="7">
+                    <choiceState section="sect16" set="enabled" />
+                </case>
+                <case from="8" to="12">
+                    <choiceState section="sect113" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hunting">
+                <randomTableIncrement increment="+3" />
+            </test>
+        </section>
+
+        <section id="sect284">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="-2" to="3">
+                    <choiceState section="sect94" set="enabled" />
+                </case>
+                <case from="4" to="11">
+                    <choiceState section="sect176" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hunting">
+                <randomTableIncrement increment="+2" />
+            </test>
+            <test expression="[ENDURANCE] &lt; 8">
+                <randomTableIncrement increment="-2" />
+            </test>
+        </section>
+
+        <!-- UP TO SECTION 288 -->
 
     </sections>
 

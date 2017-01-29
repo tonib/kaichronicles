@@ -97,7 +97,7 @@ will be available on the section.
 
 ### randomTable (has state) / case / randomTableIncrement
 ```xml
-<randomTable index="0">
+<randomTable index="0" zeroAsTen="true" >
     <pick class="money" count="[RANDOM]" />
 </randomTable>
 
@@ -124,6 +124,8 @@ the number got will be saved as state of the rule.
 
 The property "index" is needed only if there is more than one random table link on the
 section. It will select the index (zero based) of the random table link to which it refers.
+
+If the property "zeroAsTen" is "true", the zero value will be returned as ten.
 
 The "case" rules are executed conditionally for the random number got. Other rules than
 "case" are always executed. 

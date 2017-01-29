@@ -767,7 +767,7 @@ var mechanicsEngine = {
         // Do replacements:
         var sectionState = state.sectionStates.getSectionState();
         var expression = txtExpression
-            .replaceAll( '[RANDOM]' , randomTable.lastValue )
+            .replaceAll( '[RANDOM]' , randomMechanics.lastValue )
             .replaceAll( '[MONEY]' , state.actionChart.beltPouch )
             .replaceAll( '[BACKPACK-ITEMS-CNT-ON-SECTION]' , sectionState.getCntSectionObjects('object') )
             .replaceAll( '[WEAPON-ITEMS-CNT-ON-SECTION]' , sectionState.getCntSectionObjects('weapon') )

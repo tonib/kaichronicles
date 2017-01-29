@@ -11,16 +11,12 @@ var randomTable = {
     nextValueDebug: -1,
 
     /**
-     * The last random number returned
-     */
-    lastValue: null,
-
-    /**
      * Returns an integer number between 0 and 9
-     * @param ignoreZero true if the zero should not be returned
+     * @param {boolean} ignoreZero true if the zero should not be returned
+     * @param {boolean} zeroAsTen true if the zero must to be returned as ten
      * @return The random number
      */
-    getRandomValue: function(ignoreZero) {
+    getRandomValue: function(ignoreZero, zeroAsTen) {
         var value;
         while(true) {
 
@@ -30,12 +26,14 @@ var randomTable = {
                 randomTable.nextValueDebug = -1;
             }
             else
-                value = Math.floor((Math.random() * 10.0) );
+                value = Math.floor( Math.random() * 10.0 );
 
             if( ignoreZero && value === 0 )
                 continue;
             
-            randomTable.lastValue = value;
+            if( zeroAsTen && value === 0 )
+                return 10;
+
             return value;
         }
     },

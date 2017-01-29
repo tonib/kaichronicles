@@ -4,6 +4,11 @@
  */
 var randomMechanics = {
 
+    /**
+     * The last random number picked, with the increment added
+     */
+    lastValue: null,
+
     /** 
      * Assing an action to a random table link.  
      */
@@ -42,9 +47,11 @@ var randomMechanics = {
         }
         else {
             // Bind the tag click event
+            var zeroAsTen = $(rule).attr( 'zeroAsTen' ) == 'true';
             randomMechanics.bindTableRandomLink( $link , function(value, increment) {
                 randomMechanics.onRandomTableMechanicsClicked(rule, value, increment);
-            });
+            }, 
+            false, zeroAsTen);
         }
     },
 
@@ -57,9 +64,16 @@ var randomMechanics = {
 
     /** Increment for random table selection */
     randomTableIncrement: function(rule) {
-        // Right now only first random table is supported
         var $link = randomMechanics.getRandomTableRefByIndex(rule);
-        var increment = mechanicsEngine.evaluateExpression( $(rule).attr('increment') );
+        var newIncrement = mechanicsEngine.evaluateExpression( $(rule).attr('increment') );
+
+        // Check if already there is an increment:
+        var increment = 0;
+        var txtCurrentIncrement = $link.attr( 'data-increment' );
+        if( txtCurrentIncrement )
+            increment = parseInt( txtCurrentIncrement );
+
+        increment += newIncrement;
         $link.attr( 'data-increment' , increment );
     },
 
@@ -67,9 +81,10 @@ var randomMechanics = {
      * Bind a link event to a random table table
      * @param $element The jquery element with the random table tag
      * @param onLinkPressed Callback to call when the link is pressed
-     * @param ignoreZero True if the zero random value should be ignored
+     * @param {boolean} ignoreZero True if the zero random value should be ignored
+     * @param {boolean} zeroAsTen true if the zero must to be returned as ten
      */
-    bindTableRandomLink: function($element, onLinkPressed, ignoreZero) {
+    bindTableRandomLink: function($element, onLinkPressed, ignoreZero, zeroAsTen) {
 
         // If the element is an span, replace it by a link
         $element = randomMechanics.setupRandomTableLink($element);
@@ -92,7 +107,7 @@ var randomMechanics = {
             }
 
             // Get the random value
-            var value = randomTable.getRandomValue(ignoreZero);
+            var value = randomTable.getRandomValue(ignoreZero, zeroAsTen);
 
             // Get the increment
             var increment = $(this).attr('data-increment');
@@ -100,6 +115,9 @@ var randomMechanics = {
                 increment = parseInt( increment );
             else
                 increment = 0;
+
+            // Store the last value picked
+            randomMechanics.lastValue = value + increment;
 
             // Show the result on the link
             randomMechanics.linkAddChooseValue( $(this) , value , increment);

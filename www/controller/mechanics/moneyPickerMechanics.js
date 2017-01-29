@@ -36,6 +36,11 @@ var moneyPickerMechanics = {
      */
     isValid: function() {
         var $picker = $('#mechanics-mpAmount');
+
+        // If the money picker has been disabled, dont check it
+        if( !$picker.isEnabled() )
+            return true;
+            
         if( $picker.length > 0 )
             return $picker.isValid();
         else

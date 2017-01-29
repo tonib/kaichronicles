@@ -105,4 +105,11 @@
         this.parent().find('button.sub-number').prop('disabled', !enabled);
     }
 
+    /**
+     * Return true if the number picker is enabled
+     */
+    $.fn.isEnabled = function() {
+        return !this.prop('disabled');
+    }
+
 }( jQuery ));
