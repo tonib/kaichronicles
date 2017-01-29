@@ -265,6 +265,9 @@
         <special id="glowingcrystal">
             <name lang="en">Glowing Crystal</name>
             <name lang="es">Piedra centelleante</name>
+            <description lang="es">
+                También se le llama Cristal radiante
+            </description>
         </special>
 
         <special id="stoneeffigy">
@@ -494,6 +497,7 @@
             <description lang="es">
                 Es un poderoso veneno
             </description>
+            <image book="3" name="small21.png" />
         </object>
 
         <object id="potiongreengallowbrush">

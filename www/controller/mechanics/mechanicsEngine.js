@@ -773,6 +773,7 @@ var mechanicsEngine = {
             .replaceAll( '[WEAPON-ITEMS-CNT-ON-SECTION]' , sectionState.getCntSectionObjects('weapon') )
             .replaceAll( '[BACKPACK-ITEMS-CNT-ON-ACTIONCHART]' , state.actionChart.getNBackpackItems() )
             .replaceAll( '[WEAPON-ITEMS-CNT-ON-ACTIONCHART]' , state.actionChart.weapons.length )
+            .replaceAll( '[WEAPONLIKE-CNT-ON-ACTIONCHART]' , state.actionChart.getWeaponObjects().length )
             .replaceAll( '[ENDURANCE]' , state.actionChart.currentEndurance )
             .replaceAll( '[MAXENDURANCE]' , state.actionChart.getMaxEndurance() )
             .replaceAll( '[COMBATSENDURANCELOST]', sectionState.combatsEnduranceLost() )
