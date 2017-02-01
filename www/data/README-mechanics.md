@@ -81,7 +81,8 @@ Game setup: The player selects the initial Endurance and Combat Skill
 Game setup: The player selects the Kai disciplines
 
 ### chooseEquipment
-Game setup: Choose equipment
+Game setup: Choose equipment. Property "en-text" is the text to show on the UI ("Pick X objects
+before continue")
 
 ### pick (execute once only)
 ```xml

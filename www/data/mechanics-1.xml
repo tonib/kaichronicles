@@ -67,7 +67,7 @@
             </randomTable>
 
             <!-- Choose equipment UI -->
-            <chooseEquipment />
+            <chooseEquipment en-text="Click on both Random Table links before continue" />
 
         </section>
 

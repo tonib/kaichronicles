@@ -217,7 +217,7 @@ var mechanicsEngine = {
      * TODO: This is weird, only for book 1? Fix this
      */
     chooseEquipment: function(rule) {
-        setupMechanics.chooseEquipment();
+        setupMechanics.chooseEquipment(rule);
     },
 
     /**

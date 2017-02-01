@@ -161,13 +161,14 @@ var setupMechanics = {
      */
     chooseEquipment: function(rule) {
         
-        // Add warning:
+        // Add the UI:
         gameView.appendToSection( 
             mechanicsEngine.$mechanicsUI.find('#mechanics-chooseEquipment').clone() );
         gameView.enableNextLink(false);
+        $('#mechanics-chooseEquipment-msg').text( $(rule).attr('en-text') );
 
         // Function to test all links were clicked
-        var textAllClicked = function() {
+        var testAllClicked = function() {
             if( $('.action').not('.disabled').length == 0 ) {
                 $('#mechanics-chooseEquipment').hide();
                 gameView.enableNextLink(true);
@@ -175,9 +176,9 @@ var setupMechanics = {
         };
 
         // Initial test
-        textAllClicked();
+        testAllClicked();
         // Test when some link is clicked
-        $('.action').click(function() { textAllClicked(); });
+        $('.action').click(function() { testAllClicked(); });
     }
 
 };

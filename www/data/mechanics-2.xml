@@ -55,7 +55,9 @@
             <object objectId="spear" />
             <object objectId="shield" />
             <object objectId="broadsword" />
-            <message en-text="Pick the money and choose two objects before continue (both meals count as one object)" />
+            
+            <!-- Choose equipment UI -->
+            <chooseEquipment en-text="Pick the money and choose two objects before continue (both meals count as one object)" />
         </section>
 
         <section id="sect2">
