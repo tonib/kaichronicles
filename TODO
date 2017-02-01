@@ -7,7 +7,6 @@
 - Android application:
   * App lifeciclye
   * Remove network permission
-  * Check if plugins can be declared on config.xml
   * Performance:
     * Blinkings on page, when a combat turn is run
     * Blinkings on navbar
@@ -29,6 +28,8 @@
 - Pick rule: If you cannot pick the object, dont show the error message
 - Allow to consult the combat tables
 - Add page to consult the game rules
+- Page title: Add the book title before the section number
+- Page footer: Add the book name and the copyright text
 
 Reminders:
 

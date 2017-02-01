@@ -8,7 +8,12 @@
         Project AON
     </author>
     <content src="index.html" />
+
+    <!-- Plugins -->
     <plugin name="cordova-plugin-whitelist" spec="1" />
+    <plugin name="cordova-plugin-file" spec="~4.3.1" />
+    <plugin name="cordova-plugin-splashscreen" spec="~4.0.1" />
+
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -36,15 +41,14 @@
         <icon density="xxxhdpi" src="res/android/icons/xxxhdpi.png" />
 
         <!-- Splashes -->
-        <splash src="res/android/splashes/drawable-land-hdpi.png" density="land-hdpi"/>
-        <splash src="res/android/splashes/drawable-land-ldpi.png" density="land-ldpi"/>
-        <splash src="res/android/splashes/drawable-land-mdpi.png" density="land-mdpi"/>
-        <splash src="res/android/splashes/drawable-land-xhdpi.png" density="land-xhdpi"/>
-        <splash src="res/android/splashes/drawable-port-hdpi.png" density="port-hdpi"/>
-        <splash src="res/android/splashes/drawable-port-ldpi.png" density="port-ldpi"/>
-        <splash src="res/android/splashes/drawable-port-mdpi.png" density="port-mdpi"/>
-        <splash src="res/android/splashes/drawable-port-xhdpi.png" density="port-xhdpi"/>
-        
+        <splash density="land-hdpi" src="res/android/splashes/drawable-land-hdpi.png" />
+        <splash density="land-ldpi" src="res/android/splashes/drawable-land-ldpi.png" />
+        <splash density="land-mdpi" src="res/android/splashes/drawable-land-mdpi.png" />
+        <splash density="land-xhdpi" src="res/android/splashes/drawable-land-xhdpi.png" />
+        <splash density="port-hdpi" src="res/android/splashes/drawable-port-hdpi.png" />
+        <splash density="port-ldpi" src="res/android/splashes/drawable-port-ldpi.png" />
+        <splash density="port-mdpi" src="res/android/splashes/drawable-port-mdpi.png" />
+        <splash density="port-xhdpi" src="res/android/splashes/drawable-port-xhdpi.png" />
     </platform>
 
     <engine name="android" spec="~6.1.0" />

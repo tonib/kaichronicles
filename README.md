@@ -40,8 +40,6 @@ Install Cordova (https://cordova.apache.org/) and the Android requeriments
 (https://cordova.apache.org/docs/en/latest/guide/platforms/android/index.html). Then:
 ```bash
     cordova platform add android
-    cordova plugin add cordova-plugin-file
-    cordova plugin add cordova-plugin-splashscreen
     cordova build android
 ```
 
