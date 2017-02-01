@@ -36,9 +36,15 @@ var loadGameController = {
             if( entries.length == 0 )
                 loadGameView.addFileToList( null );
             else {
-                $.each( entries, function(index, file) {
-                    loadGameView.addFileToList( file.name );
-                });
+                // Get file names
+                var fileNames = [];
+                for(var i=0; i<entries.length; i++)
+                    fileNames.push(entries[i].name);
+                // The list may be unsorted:
+                fileNames.sort();
+                // Show files
+                for(var i=0; i<fileNames.length; i++)
+                    loadGameView.addFileToList( fileNames[i] );
                 loadGameView.bindListEvents();
             }
             

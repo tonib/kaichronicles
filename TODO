@@ -10,7 +10,6 @@
   * Performance:
     * Blinkings on page, when a combat turn is run
     * Blinkings on navbar
-  * Load games page: games list is unsorted
   * Load games page: Show info about saved games
   * Replace toastr by Android toasts ???
 - Money handling: 
