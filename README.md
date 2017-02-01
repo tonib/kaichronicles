@@ -1,7 +1,8 @@
 ##Kai Chronicles
 
 This is a game player for Lone Wolf game books. Only books 1 and 2 are playable right
-now. It runs as a website or Android app.
+now. It runs as a website or Android app. You can play it at 
+[https://www.projectaon.org/staff/toni](https://www.projectaon.org/staff/toni).
 
 This repository does not contain game books data. It must to be downloaded from the 
 Project Aon web site. **REMEMBER** that game books data is under the

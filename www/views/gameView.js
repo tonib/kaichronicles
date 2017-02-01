@@ -63,6 +63,9 @@ var gameView = {
             gameController.onNavigatePrevNext(+1);
         });
 
+        // Show book copyright
+        $('#game-copyrights').html( state.book.getBookTitle() + '<br/>' + state.book.getCopyrightHtml() );
+
         // Setup debug options
         if( window.getUrlParameter('debug') == 'true' ) {
             $('#game-debugSection').show();

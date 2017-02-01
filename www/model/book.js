@@ -198,7 +198,7 @@ Book.prototype.getCopyrightHtml = function() {
     var fakeSection = new Section(this, 'fakeSection', null);
     var renderer = new SectionRenderer(fakeSection);
     //var selector = 'rights[class="copyrights"]';
-    var selector = 'rights[class="license-notification"]';
+    var selector = 'rights[class="copyrights"]';
     // rights class="license-notification"
     return renderer.renderNodeChildren( 
         $(this.bookXml).find(selector) , 0 );
