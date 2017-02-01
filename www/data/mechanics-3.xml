@@ -1534,7 +1534,49 @@
             </test>
         </section>
 
-        <!-- UP TO SECTION 288 -->
+        <section id="sect289">
+            <test not="true" hasDiscipline="anmlknsp" expression="[KAILEVEL] >= 6">
+                <choiceState section="sect156" set="disabled" />
+            </test>
+            <test hasDiscipline="anmlknsp" expression="[KAILEVEL] >= 6">
+                <choiceState section="sect10" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect290">
+            <test not="true" hasDiscipline="sixthsns">
+                <choiceState section="sect341" set="disabled" />
+                <choiceState section="sect124" set="disabled" />
+            </test>
+            <test hasDiscipline="sixthsns">
+                <choiceState section="sect264" set="disabled" />
+                <test not="true" expression="[KAILEVEL] >= 7">
+                    <choiceState section="sect341" set="disabled" />
+                </test>
+                <test expression="[KAILEVEL] >= 7">
+                    <choiceState section="sect124" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect291">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect103" set="enabled" />
+                </case>
+                <case from="5" to="9">
+                    <choiceState section="sect220" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect294">
+            <meal index="0" />
+            <meal index="1" />
+        </section>
+
+        <!-- UP TO SECTION 293 -->
 
     </sections>
 
