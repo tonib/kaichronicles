@@ -38,7 +38,8 @@ var gameView = {
      * Set the current section content
      */
     setSectionContent: function( section ) {
-        document.title = section.getTitleText();
+        document.title = section.book.getBookTitle() + ' - ' + 
+            section.getTitleText();
         $('#game-section-title').html( section.getTitleHtml() );
         $('#game-section').html( section.getHtml() );
         $('#game-aonLink-english').attr('href', section.getSectionAonPage('en') );
