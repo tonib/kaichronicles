@@ -20,6 +20,11 @@
     <!-- GAME RULES -->
     <sections>
 
+        <section id="tssf">
+            <!-- Restore the endurace to the maximum -->
+            <endurance count="+[MAXENDURANCE]" />
+        </section>
+
         <section id="gamerulz">
             <!-- Select the player skills (weapons skill and endurance) UI -->
             <setSkills />

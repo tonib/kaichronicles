@@ -12,6 +12,8 @@
     <sections>
 
         <section id="tssf">
+            <!-- Restore the endurace to the maximum -->
+            <endurance count="+[MAXENDURANCE]" />
             <!-- Drop the previous books map -->
             <drop objectId="map" />
             <!-- Hunt is not available on Kalte (see section "equipmnt") -->
