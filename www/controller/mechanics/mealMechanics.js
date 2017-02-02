@@ -10,48 +10,73 @@ var mealMechanics = {
         if( state.sectionStates.ruleHasBeenExecuted(rule) )
             // Execute only once
             return;
-            
-        // Add HTML to do the choose
-        gameView.appendToSection( 
-            mechanicsEngine.$mechanicsUI.find('#mechanics-meal').clone() );
 
-        // Initialize state:
+        // Get the UI id for the meal
+        var id = 'mechanics-meal';
+        var txtIndex = $(rule).attr('index');
+        if( txtIndex )
+            id += '-' + txtIndex;
+
+        // The jquery current meal selector
+        var mealSelector = '#' + id;
+
+        // If the meal UI is already on the section, recreate the UI
+        if( $(mealSelector).length > 0 )
+            $(mealSelector).remove();
+
+        // Get a copy of the meal UI
+        var $meal = mechanicsEngine.$mechanicsUI.find('#mechanics-meal').clone();
+        $meal.attr('id' , id);
+
+        // Set the radio inputs id
+        var mealOptionId = 'mechanics-mealOption';
+        if( txtIndex ) {
+            mealOptionId += '-' + txtIndex;
+            $meal.find('input[name=mechanics-mealOption]').attr('name', mealOptionId);
+        }
+
+        // Add the UI to the section
+        gameView.appendToSection( $meal );
+
+        // Check if hunting discipline is available
         if( !state.actionChart.disciplines.contains('hunting') || 
             !state.sectionStates.huntEnabled )
-            $('#mechanics-eatHunt').hide();
+            $(mealSelector + ' .mechanics-eatHunt').hide();
+
+        // Check if there are meals on the backpack
         mealMechanics.updateEatBackpack();
 
         // Check if you can buy a meal
         var price = $(rule).attr('price'); 
         if( price ) {
             price = parseInt( price );
-            $('#mechanics-mealPrice').text(price);
+            $(mealSelector + ' .mechanics-mealPrice').text(price);
         }
         else
-            $('#mechanics-buyMeal').hide();
+            $(mealSelector + ' .mechanics-buyMeal').hide();
 
         // Get meal objects on backpack (ex. "laumspurmeal")
-        var $mealObjectTemplate = $('.mechanics-eatObject').clone();
-        $('.mechanics-eatObject').remove();
+        var $mealObjectTemplate = $(mealSelector + ' .mechanics-eatObject').clone();
+        $(mealSelector + ' .mechanics-eatObject').remove();
         $.each( state.actionChart.getMealObjects() , function(index, objectId) {
             var o = state.mechanics.getObject( objectId );
             var $mealObject = $mealObjectTemplate.clone();
             $mealObject.find( '.mechanics-eatDescription' ).text( o.name );
             $mealObject.find( 'input' ).val( o.id );
-            $('#mechanics-eatDoNotEat').before( $mealObject );
+            $(mealSelector + ' .mechanics-eatDoNotEat').before( $mealObject );
         });
 
         // Set the default value
-        $('#mechanics-meal input:visible').first().prop('checked', true);
+        $(mealSelector + ' input:visible').first().prop('checked', true);
 
-        // Disable chooses:
+        // Disable choices:
         mechanicsEngine.setChoiceState('all', true);
         
         // Button event handler
-        $('#mechanics-meal button').click(function(e) {
+        $(mealSelector + ' button').click(function(e) {
             e.preventDefault();
 
-            var option = $('input[name=mechanics-mealOption]:checked').val();
+            var option = $(mealSelector + ' input[name=' + mealOptionId + ']:checked').val();
             if( option == 'meal' )
                 actionChartController.drop('meal' , false);
             else if( option == 'doNotEat' )
@@ -80,7 +105,7 @@ var mealMechanics = {
             mechanicsEngine.runSectionRules();
             
             // Remove UI
-            $('#mechanics-meal').remove();
+            $(mealSelector).remove();
 
         });
     },
@@ -89,13 +114,16 @@ var mealMechanics = {
      * Return true if there are pending meals on the section
      */
     arePendingMeals: function() {
-        return $('#mechanics-meal').length > 0;
+        return $('.mechanics-meal-ui').length > 0;
     },
 
+    /**
+     * Update the meals option to eat a backpack meal
+     */
     updateEatBackpack: function() {
         if( state.actionChart.meals <= 0 )
-            $('#mechanics-eatMeal').hide();
+            $('.mechanics-eatMeal').hide();
         else
-            $('#mechanics-eatMeal').show();
+            $('.mechanics-eatMeal').show();
     }
 };
