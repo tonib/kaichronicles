@@ -1576,7 +1576,83 @@
             <meal index="1" />
         </section>
 
-        <!-- UP TO SECTION 293 -->
+        <section id="sect295">
+            <object objectId="firesphere"/>
+        </section>
+        
+        <section id="sect296">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+            <afterCombatTurn turn="3">
+                <disableCombats />
+                <choiceState section="all" set="enabled" />
+            </afterCombatTurn>
+        </section>
+
+        <section id="sect298">
+            <object objectId="trianglebluestone"/>
+        </section>
+
+        <section id="sect299">
+            <test not="true" hasDiscipline="mindomtr">
+                <endurance count="-2" />
+            </test>
+        </section>
+
+        <section id="sect301">
+            <test not="true" hasDiscipline="camflage">
+                <choiceState section="sect122" set="disabled" />
+            </test>
+            <test not="true" hasDiscipline="mindomtr">
+                <choiceState section="sect228" set="disabled" />
+            </test>
+            <test not="true" hasDiscipline="hunting">
+                <choiceState section="sect347" set="disabled" />
+            </test>
+            <test hasDiscipline="camflage|mindomtr|hunting">
+                <choiceState section="sect179" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect302">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="1">
+                    <choiceState section="sect37" set="enabled" />
+                </case>
+                <case from="2" to="7">
+                    <choiceState section="sect193" set="enabled" />
+                </case>
+                <case from="8" to="11">
+                    <choiceState section="sect243" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="sixthsns">
+                <randomTableIncrement increment="+2" />
+            </test>
+        </section>
+
+        <section id="sect303">
+            <drop objectId="silverkeybook3" />
+            <test not="true" hasDiscipline="sixthsns">
+                <choiceState section="sect127" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect304">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" mindforceEP="-2" />
+            <test currentWeapon="sommerswerd">
+                <combat dammageMultiplier="2" />
+            </test> 
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <!-- UP TO SECTION 307 -->
 
     </sections>
 

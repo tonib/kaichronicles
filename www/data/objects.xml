@@ -289,6 +289,12 @@
             <name lang="es">Disco azul de piedra</name>
         </special>
 
+        <special id="firesphere">
+            <name lang="en">Firesphere</name>
+            <name lang="es">Esfera de fuego</name>
+            <image book="3" name="small7.png" />
+        </special>
+
     </specials>
 
     <objects>
@@ -532,12 +538,6 @@
             </description>
 
             <usage class="endurance" increment="5" />
-        </object>
-
-        <object id="firesphere">
-            <name lang="en">Firesphere</name>
-            <name lang="es">Esfera de fuego</name>
-            <image book="3" name="small7.png" />
         </object>
 
         <!-- OTHERS -->
