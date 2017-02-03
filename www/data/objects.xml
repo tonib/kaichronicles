@@ -80,7 +80,7 @@
 
         <!-- BOOOK 1 -->
 
-        <special id="helmet">
+        <special id="helmet" imcompatibleWith="silverhelm">
             <name lang="en">Helmet</name>
             <description lang="en">This adds 2 ENDURANCE points to your total.</description>
 
@@ -294,6 +294,22 @@
             <name lang="es">Esfera de fuego</name>
             <image book="3" name="small7.png" />
         </special>
+
+        <special id="silverhelm" imcompatibleWith="helmet" >
+            <name lang="en">Silver Helm</name>
+            <description lang="en">
+                If worn during combat, it will increase your COMBAT SKILL by 2 points
+            </description>
+
+            <name lang="es">Yelmo Mágico de Plata</name>
+            <description lang="es">
+                Siempre que lo lleves puesto en un combate, te permitirá aumentar tu 
+                DESTREZA EN EL COMBATE 2 puntos
+            </description>
+
+            <image book="3" name="small26.png" />
+            <effect class="combatSkill" increment="2" />
+        </special>        
 
     </specials>
 
@@ -538,6 +554,20 @@
             </description>
 
             <usage class="endurance" increment="5" />
+        </object>
+
+        <object id="potionofstrength4">
+            <name lang="en">Potion of Strength</name>
+            <description lang="en">
+                An Alether potion. It will increase your COMBAT SKILL by 4 points for the duration of a fight
+            </description>
+
+            <name lang="es">Pocion de aléter</name>
+            <description lang="es">
+                Aumentará en 4 puntos tu DESTREZA EN EL COMBATE mientras dure una lucha
+            </description>
+
+            <usage class="combatSkill" increment="4" />
         </object>
 
         <!-- OTHERS -->

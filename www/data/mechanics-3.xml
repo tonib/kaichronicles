@@ -1652,7 +1652,30 @@
             </afterCombats>
         </section>
 
-        <!-- UP TO SECTION 307 -->
+        <section id="sect308">
+            <pick objectId="silverhelm" />
+        </section>
+
+        <section id="sect309">
+            <object objectId="trianglebluestone" />
+            <object objectId="firesphere" />
+        </section>
+
+        <section id="sect311">
+            <object objectId="potionofstrength4" />
+        </section>
+
+        <section id="sect312">
+            <death />
+        </section>
+
+        <section id="sect316">
+            <choiceSelected section="sect236">
+                <pick objectId="bracelet" />
+            </choiceSelected>
+        </section>
+
+        <!-- UP TO SECTION 318 -->
 
     </sections>
 

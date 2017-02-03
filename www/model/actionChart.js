@@ -38,13 +38,19 @@ function ActionChart() {
 
 /**
  * Pick an object
- * @param o Object to pick
+ * @param {Item} o Object to pick
  * @return {boolean} True if the object was really picked
  */
 ActionChart.prototype.pick = function(o) {
 
     if( !o )
         return;
+
+    // Check incompatibilities
+    if( o.imcompatibleWith && this.hasObject(o.imcompatibleWith) ) {
+        var incombatibleObject = state.mechanics.getObject(o.imcompatibleWith);
+        throw 'You already have a "' + incombatibleObject.name + '"';
+    }
 
     switch( o.type ) {
         case 'weapon':

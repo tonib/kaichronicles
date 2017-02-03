@@ -22,12 +22,16 @@ var moneyPickerMechanics = {
         // Set the title
         $('#mechanics-mpTitle').text( $(rule).attr('en-text') );
 
+        // Bind number picker events
         $('#mechanics-mpAmount').bindNumberEvents();
+
+        // Set the minimum value
         var min = $(rule).attr('min');
-        if( min ) {
+        if( min )
             $('#mechanics-mpAmount').attr( 'min' , min );
-            $('#mechanics-mpAmount').val( min );
-        }
+
+        // Initialize (or restore) the value
+        $('#mechanics-mpAmount').initializeValue();
 
     },
 

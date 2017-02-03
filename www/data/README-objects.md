@@ -76,7 +76,6 @@ Optional. It references to some book image for the object
 Optional. If it's false, the player will cannot drop the object
 
 ### "effect" tag
-
 ```xml
 <special id="helmet">
     <name lang="en">Helmet</name>
@@ -90,6 +89,15 @@ Optional. If it's set, the object as some effect when it's carried:
     * "endurance": The endurance will be increased
     * "combatSkill": The combat skill will be increased
 * **"increment" property**: Amount to increment
+
+### "imcompatibleWith" property
+```xml
+<special id="silverhelm" imcompatibleWith="helmet" >
+    ...
+</special>
+```
+Optional. If it's set, the player cannot pick the object if it already has the
+incompatible object
 
 ## Weapons
 

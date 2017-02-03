@@ -37,6 +37,12 @@ function SectionState() {
     /** Healing discipline has been executed on this section? */
     this.healingExecuted = false;
 
+    /** 
+     * Last value for number pickers. The key is the number picker id and the value is the
+     * last value
+     */
+    this.numberPickersState = {};
+
 }
 
 /**
