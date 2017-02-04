@@ -248,3 +248,10 @@ Book.prototype.getOriginSections = function(sectionId) {
         }) ;
     return sourceSectionIds;
 }
+
+/**
+ * Get the book cover image URL
+ */
+Book.prototype.getCoverURL = function() {
+    return Book.getBaseUrl() + this.bookNumber + '/cover.jpg';
+}

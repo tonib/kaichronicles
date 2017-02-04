@@ -33,6 +33,11 @@ var newGameController = {
         
     },
 
+    selectedBookChanged: function(newBookNumber) {
+        var book = new Book(newBookNumber, 'en');
+        newGameView.setCoverImage( book.getCoverURL() );
+    },
+
     /** Return page */
     getBackController: function() { return 'mainMenu'; }
 

@@ -62,8 +62,17 @@ class BookData
         `#{cmd_line}`
     end
 
+    # Download the book cover
+    def download_cover
+        cover_path = "#{SVN_ROOT}/en/jpeg/lw/#{book_code('en')}/skins/ebook/cover.jpg"
+        cmd_line = "svn export #{cover_path} #{book_dir}/cover.jpg"
+        p cmd_line
+        `#{cmd_line}`
+    end
+
     def download_book_data
         FileUtils.mkdir_p( "projectAon/#{@book_number.to_s}" )
+        download_cover
         download_xml('en')
         download_xml('es')
         @ill_authors.each do |author| 

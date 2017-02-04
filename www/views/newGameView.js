@@ -19,6 +19,14 @@ var newGameView = {
             newGameController.startNewGame( $('#newgame-book').val() , 
                 $('#newgame-language').val() );
         });
-    }
 
+        // Book change
+        $('#newgame-book').change(function() {
+            newGameController.selectedBookChanged( $('#newgame-book').val() );
+        });
+    },
+
+    setCoverImage: function(url) {
+        $('#newgame-cover').attr('src', url);
+    }
 };
