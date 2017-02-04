@@ -268,6 +268,7 @@
             <description lang="es">
                 También se le llama Cristal radiante
             </description>
+            <image book="3" name="ill19.png" />
         </special>
 
         <special id="stoneeffigy">

@@ -1688,10 +1688,6 @@
                 <choiceState section="sect125" set="enabled" />
             </afterElude>
         </section>
-
-        <section id="sect350">
-            <message en-text="This is the last book implemented. Thank you for playing!" />
-        </section>
         
     </sections>
 
