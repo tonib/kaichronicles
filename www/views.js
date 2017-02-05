@@ -24,7 +24,11 @@ var views = {
             return dfd.promise();
         }
 
-        // Load the view from Internet
+        // Download the view
+        if( !cordovaApp.isRunningApp() )
+            // Set a busy message
+            template.setViewContent('<img src="images/ajax-loader.gif" alt="Loading image" /> Loading view...');
+
         return $.ajax({
             url: 'views/' + viewPath,
             dataType: "html"
