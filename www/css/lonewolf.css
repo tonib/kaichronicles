@@ -5,6 +5,9 @@ body {
 
 #content {
     padding: 40px 15px;
+}
+
+#content , .modal-dialog {
     font-family: Souvenir, Georgia, "Times New Roman", Times, serif;
     font-size: 16px;
 }
@@ -190,4 +193,9 @@ div.signpost {
 /* Highlight the page title */
 .navbar-brand.active {
     color: #fff;
+}
+
+/* Allow to break large links */
+a.breakable {
+    word-wrap: break-word;
 }

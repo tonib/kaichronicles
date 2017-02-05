@@ -119,6 +119,25 @@ var template = {
         // Scroll to top
         window.scrollTo(0, 0);
         template.highlightActiveLink();
+    },
+
+    /**
+     * Show dialog with object details
+     * @param {Item} o The object to show
+     */
+    showObjectDetails: function(o) {
+        if( !o )
+            return;
+
+        $('#template-objectTitle').text( o.name );
+        if( !o.imageUrl )
+            $('#template-objectImage').hide();
+        else {
+            $('#template-objectImage').show();
+            $('#template-objectImage img').attr('src' , o.imageUrl);
+        }
+        $('#template-objectDescription').text(o.description);
+        $('#template-objectDetails').modal('show');
     }
 
 };

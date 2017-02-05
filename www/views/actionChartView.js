@@ -159,7 +159,8 @@ var actionChartView = {
     },
 
     /**
-     * Fill an table with object descriptions
+     * Fill an table with object descriptions.
+     * TODO: Move this function to a new namespace / class (too complex)
      * @param objects The objects ids array
      * @param $tableBody The HTML table to fill
      * @param available {boolean} True if the objects are available to get. 
@@ -251,7 +252,11 @@ var actionChartView = {
             if( objectId == 'map' )
                 // It's the map:
                 name = '<a href="#map">' + name + '</a>';
-            html += '<span><b>' + name + '</b>';
+            else if( o.imageUrl )
+                // Add a link to view a larger version of the image
+                name = '<a href="#" class="equipment-op" data-op="details" data-objectId="' + 
+                o.id + '">' + name + '</a>';
+            html += '<span><b>' + name + '</b></span>';
 
             // Description
             if( o.description )
@@ -348,6 +353,12 @@ var actionChartView = {
                 case 'currentWeapon':
                     // Set the active weapon
                     actionChartController.setSelectedWeapon( o.id );
+                    break;
+
+                case 'details':
+                    // Show details
+                    template.showObjectDetails(o);
+                    break;
             }
         });
     },

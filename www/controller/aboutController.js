@@ -22,6 +22,7 @@ var aboutController = {
 
              aboutController.appendSection( 'dedicate' , '#about-dedication' );
              aboutController.appendSection( 'acknwldg' , '#about-content' );
+             $('#about-cover').attr('src' , state.book.getCoverURL() );
         });
     },
 

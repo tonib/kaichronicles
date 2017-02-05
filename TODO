@@ -6,7 +6,6 @@
 - Find "TODO" and do it
 - Android application:
   * App lifeciclye
-  * Remove network permission
   * Performance:
     * Blinkings on page, when a combat turn is run
     * Blinkings on navbar
@@ -19,11 +18,11 @@
 - The "Loading" does not appear when a view is loading
 - Post info about mechanics files on forum ("Common Navigation File")
   * Document rules
-- Allow to view a larger version of the objects images
 - Toasts: If you click on some toast, hide them all
 - Pick rule: If you cannot pick the object, dont show the error message
 - Allow to consult the combat tables
 - Add page to consult the game rules
+- Allow to change the name of save game files
 
 Reminders:
 
