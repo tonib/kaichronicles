@@ -42,6 +42,12 @@ var settingsView = {
             if( settingsController.saveGame( $('#settings-saveName').val() ) )
                 $('#settings-saveDialog').modal('hide');
         });
+
+        // Remove the current file name
+        $('#settings-saveRemove').click( function(e) {
+            e.preventDefault();
+            $('#settings-saveName').val('').focus();
+        });
     },
 
     /**

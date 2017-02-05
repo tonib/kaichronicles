@@ -74,6 +74,12 @@ var settingsController = {
             if( !fileName.toLowerCase().endsWith('.json') )
                 fileName += '.json';
 
+            // Check for invalid character names
+            if( !fileName.isValidFileName() ) {
+                alert('The file name contains invalid characters');
+                return false;
+            }
+
             if( cordovaApp.isRunningApp() ) {
                 // We are on cordova app
                 cordovaFS.saveFile( fileName , blob, function() {

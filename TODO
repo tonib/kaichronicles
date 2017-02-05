@@ -5,6 +5,7 @@
 - Test controller: Test rules
 - Find "TODO" and do it
 - Android application:
+  * If there is some dialog open, the back button should close the dialog
   * App lifeciclye
   * Performance:
     * Blinkings on page, when a combat turn is run
@@ -22,7 +23,6 @@
 - Pick rule: If you cannot pick the object, dont show the error message
 - Allow to consult the combat tables
 - Add page to consult the game rules
-- Check save game file names for invalid characters
 
 Reminders:
 

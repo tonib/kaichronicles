@@ -75,6 +75,17 @@ if (typeof String.prototype.getUrlParameter !== 'function') {
 
 }
 
+if (typeof String.prototype.isValidFileName !== 'function') {
+
+  /**
+   * Return true if it's a valid file name
+   */
+  String.prototype.isValidFileName = function() {
+    return /^[a-z0-9_.\-() '"]+$/i.test(this);
+  };
+
+}
+
 /****************** ARRAY ******************/
 
 if (typeof Array.prototype.contains !== 'function') {
