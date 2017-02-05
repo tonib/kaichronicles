@@ -29,9 +29,18 @@ var settingsView = {
             routing.redirect('about');
         });
 
-        // Save the game
-        $('#settings-save').click( function() {
-            settingsController.saveGame();
+        // Game save button
+        $('#settings-save').click( function(e) {
+            e.preventDefault();
+            $('#settings-saveName').val( settingsController.defaultSaveGameName() );
+            $('#settings-saveDialog').modal('show');
+        });
+
+        // Save game dialog - save button
+        $('#settings-saveBtn').click( function(e) {
+            e.preventDefault();
+            if( settingsController.saveGame( $('#settings-saveName').val() ) )
+                $('#settings-saveDialog').modal('hide');
         });
     },
 

@@ -22,7 +22,7 @@
 - Pick rule: If you cannot pick the object, dont show the error message
 - Allow to consult the combat tables
 - Add page to consult the game rules
-- Allow to change the name of save game files
+- Check save game file names for invalid characters
 
 Reminders:
 

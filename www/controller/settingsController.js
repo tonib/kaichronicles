@@ -38,21 +38,42 @@ var settingsController = {
     },
 
     /**
-     * Save the current game
+     * Show the save game dialog
      */
-    saveGame: function() {
+    saveGameDialog: function() {
+        $('#settings-saveDialog').modal('show');
+    },
+
+    /**
+     * Return a default save game file name
+     */
+    defaultSaveGameName: function() {
+        var now = new Date();
+        return now.getFullYear() + '_' + 
+            ( now.getMonth() + 1 ).toString().padLeft( 2 , '0' ) + '_' + 
+            now.getDate().toString().padLeft( 2 , '0' ) + '_' +
+            now.getHours().toString().padLeft( 2 , '0' ) + '_' +
+            now.getMinutes().toString().padLeft( 2 , '0' ) + '_' + 
+            now.getSeconds().toString().padLeft( 2 , '0' ) + '-book-' +
+            state.book.bookNumber + '-savegame.json';
+    },
+
+    /**
+     * Save the current game
+     * @param {String} fileName File name to save
+     */
+    saveGame: function(fileName) {
         try {
             var stateJson = state.getSaveGameJson();
             var blob = new Blob( [ stateJson ], {type: "text/plain;charset=utf-8"});
-            var now = new Date();
-            var fileName = now.getFullYear() + '_' + 
-                ( now.getMonth() + 1 ).toString().padLeft( 2 , '0' ) + '_' + 
-                now.getDate().toString().padLeft( 2 , '0' ) + '_' +
-                now.getHours().toString().padLeft( 2 , '0' ) + '_' +
-                now.getMinutes().toString().padLeft( 2 , '0' ) + '_' + 
-                now.getSeconds().toString().padLeft( 2 , '0' ) + '-book-' +
-                state.book.bookNumber + '-savegame.json';
-            //var fileName = "book-" + state.book.bookNumber + "-savegame.json";
+
+            // Check file name
+            fileName = fileName.trim();
+            if( !fileName )
+                fileName = settingsController.defaultSaveGameName();
+            if( !fileName.toLowerCase().endsWith('.json') )
+                fileName += '.json';
+
             if( cordovaApp.isRunningApp() ) {
                 // We are on cordova app
                 cordovaFS.saveFile( fileName , blob, function() {
@@ -62,11 +83,13 @@ var settingsController = {
             else {
                 saveAs(blob, fileName);
             }
+            return true;
         }
         catch(e) {
             console.log(e);
             alert('Your browser version does not support save file with javascript. ' + 
                 'Try a newer browser version. Error: ' + e);
+            return false;
         }
     },
 

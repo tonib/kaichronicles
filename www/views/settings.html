@@ -45,3 +45,26 @@
     </div>
   </div>
 </div>
+
+<!-- Modal to chage the save game file name -->
+<div class="modal fade" id="settings-saveDialog" tabindex="-1" role="dialog" 
+    aria-labelledby="settings-saveTitle">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="settings-downloadTitle">Save game</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+            <label for="settings-saveName">File name</label>
+            <input type="text" class="form-control"
+                id="settings-saveName" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" id="settings-saveBtn" class="btn btn-primary">Save game</button>
+      </div>
+    </div>
+  </div>
+</div>
