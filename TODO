@@ -5,7 +5,6 @@
 - Test controller: Test rules
 - Find "TODO" and do it
 - Android application:
-  * If there is some dialog open, the back button should close the dialog
   * App lifeciclye
   * Performance:
     * Blinkings on page, when a combat turn is run

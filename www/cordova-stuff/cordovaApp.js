@@ -18,9 +18,14 @@ var cordovaApp = {
 
     onBackButton: function() {
         console.log('onBackButton');
-        if( template.isMenuExpanded() )
+        if( $('.modal.in').length > 0 )
+            // It there is any bootstrap modal open, close it
+            $('.modal').modal('hide');
+        else if( template.isMenuExpanded() )
+            // If the bootstrap menu is expanded, collapse it
             template.collapseMenu();
         else
+            // Go back to the parent controller
             routing.onBackButton();
     },
 
