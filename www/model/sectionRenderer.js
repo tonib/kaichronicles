@@ -51,41 +51,46 @@ SectionRenderer.prototype.renderNodeChildren = function($tag, level) {
     
     // The HTML to return
     var sectionContent = '';
-    var self = this;
 
     // Traverse all child elements, except separated sections
-    $tag.contents()
-    .not('section.frontmatter-separate')
-    .each(function() {
-
-        if( this.nodeType == 3 ) {
+    //var children = $tag.contents().not('section.frontmatter-separate');
+    var children = $tag.contents();
+    for( var i=0; i<children.length; i++ ) {
+        var node = children[i];
+        
+        if( node.nodeType == 3 ) {
             // Text node
-            sectionContent += this.textContent;
-            return;
+            sectionContent += node.textContent;
+            continue;
         }
 
-        if( this.nodeType != 1 )
+        if( node.nodeType != 1 )
             // Not a node, skip it
-            return;
+            continue;
 
         // Get the tag name
-        var tagName = this.tagName.toLowerCase();
+        var tagName = node.tagName.toLowerCase();
         // Replace '-' char by '_' (not valid char for javascript function names)
         tagName = tagName.replaceAll('-' , '_');
 
-        // Call the function renderer
-        if( !self[tagName] )
-            throw self.sectionToRender.sectionId + ': Unkown tag: ' + tagName;
+        var $node = $(node);
+
+        if( tagName == 'section' && $node.attr('class') == 'frontmatter-separate' )
+            // Ignore separated sections
+            continue;
+
+        // Call the function renderer (this class method with the tag name)
+        if( !this[tagName] )
+            throw this.sectionToRender.sectionId + ': Unkown tag: ' + tagName;
         else {
             try {
-                sectionContent += self[tagName]( $(this) , level );
+                sectionContent += this[tagName]( $node , level );
             }
             catch(e) {
                 console.log(e);
             }
         }
-            
-    });
+    }
 
     return sectionContent;
 };

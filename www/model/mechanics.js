@@ -7,6 +7,10 @@ function Mechanics(book) {
     this.book = book;
     this.mechanicsXml = null;
     this.objectsXml = null;
+    /**
+     * Cache of book objects. Key is the object id. Value is the object Item 
+     */
+    this.objectsCache = {};
 }
 
 /**
@@ -69,13 +73,22 @@ Mechanics.prototype.getSection = function(sectionId) {
  */
 Mechanics.prototype.getObject = function(objectId) {
 
+    // Try to get the object from the cache:
+    var o = this.objectsCache[objectId];
+    if( o )
+        return o;
+
     var $o = $(this.objectsXml).find('*[id=' + objectId + ']');
     if( $o.length == 0 ) {
         console.log("Object " + objectId + " not found");
         return null;
     }
 
-    return new Item(this.book, $o, objectId);
+    // Parse the object info, and store it on the cache
+    o = new Item(this.book, $o, objectId);
+    this.objectsCache[objectId] = o;
+
+    return o;
 };
 
 /**
