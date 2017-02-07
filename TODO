@@ -6,10 +6,6 @@
 - Find "TODO" and do it
 - Android application:
   * App lifeciclye
-  * Performance:
-    * Blinkings on page, when a combat turn is run
-    * Blinkings on navbar
-    * Check http://wilsonpage.co.uk/preventing-layout-thrashing/
   * Load games page: Show info about saved games
   * Replace toastr by Android toasts ???
 - Money handling: 
