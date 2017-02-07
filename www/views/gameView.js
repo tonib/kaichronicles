@@ -165,6 +165,11 @@ var gameView = {
     },
 
     animateValueChange: function( $element , newValue , doNotAnimate , newColor ) {
+
+        // Disable animations on Cordova app (bad performance)
+        if( cordovaApp.isRunningApp() )
+            doNotAnimate = true;
+
         var txtNewValue = newValue.toString();
         if( $element.text() == txtNewValue )
             return;

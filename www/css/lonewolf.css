@@ -199,3 +199,12 @@ div.signpost {
 a.breakable {
     word-wrap: break-word;
 }
+
+/* To disable bootstrap menu transition animations */
+.no-transition {
+  -webkit-transition: height 0.01s;
+  -moz-transition: height 0.01s;
+  -ms-transition: height 0.01s;
+  -o-transition: height 0.01s;
+  transition: height 0.01s;
+}

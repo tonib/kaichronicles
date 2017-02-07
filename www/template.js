@@ -35,6 +35,7 @@ var template = {
      * Setup navigation bar
      */
     setup: function() {
+
         // Hide the bootstrap menu when some menu option is clicked, or when
         // the content is clicked
         $('#template-header a, #template-container').click(function(){
@@ -44,6 +45,10 @@ var template = {
             routing.redirect('actionChart');
         });
         template.updateStatistics(true);
+
+        // If we are on the cordova app, disable the animation (performance)
+        if( cordovaApp.isRunningApp() )
+            $('#navbar').addClass('no-transition');
     },
 
     /**
