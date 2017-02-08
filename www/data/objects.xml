@@ -312,6 +312,14 @@
             <effect class="combatSkill" increment="2" />
         </special>        
 
+        <!-- BOOK 4 -->
+
+        <special id="onyxmedallion">
+            <name lang="en">Onyx Medallion</name>
+            <name lang="es">Medallón de Ónice </name>
+            <image book="4" name="small3.png" />
+        </special>
+
     </specials>
 
     <objects>
@@ -569,6 +577,14 @@
             </description>
 
             <usage class="combatSkill" increment="4" />
+        </object>
+
+        <!-- BOOK 4 -->
+
+        <object id="brasskey">
+            <name lang="en">Brass Key</name>
+            <name lang="es">Llave de bronce</name>
+            <image book="1" name="small15.png" />
         </object>
 
         <!-- OTHERS -->

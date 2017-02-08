@@ -2,6 +2,13 @@
 
 <mechanics book="4">
 
+    <!-- LIST OF TRANSLATED IMAGES -->
+    <translated-images>
+        <image>map.png</image>
+        <image>weapons.png</image>
+        <image>ill16.png</image>
+    </translated-images>
+
     <!-- GAME RULES -->
     <sections>
 
@@ -10,7 +17,174 @@
             <drop objectId="baknaroil" />
             <!-- Hunting was not enabled on book 3 -->
             <huntStatus enabled="true" />
+            <!-- Restore the endurace to the maximum -->
+            <endurance count="+[MAXENDURANCE]" />
+            <!-- Drop the previous books map -->
+            <drop objectId="map" />
         </section>
+
+        <section id="gamerulz">
+            <!-- Select the player skills (weapons skill and endurance) UI -->
+            <setSkills />
+        </section>
+
+        <section id="discplnz">
+            <!-- Select the Kai disciplines UI -->
+            <setDisciplines />
+        </section>
+
+        <section id="equipmnt">
+            <!-- Do not pick 2 maps! -->
+            <test not="true" hasObject="map" >
+                <pick objectId="map" />
+            </test>
+
+            <randomTable>
+                <pick class="money" count="[RANDOM] + 10" />
+            </randomTable>
+
+            <object objectId="warhammer" />
+            <object objectId="dagger" />
+            <object objectId="laumspurpotion4" index="0" />
+            <object objectId="laumspurpotion4" index="1" />
+            <object objectId="sword" />
+            <object objectId="spear" />
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
+            <object objectId="meal" index="2" />
+            <object objectId="meal" index="3" />
+            <object objectId="meal" index="4" />
+            <object objectId="mace" />
+            <object objectId="chainmail" />
+            <object objectId="shield" />
+
+            <chooseEquipment en-text="Pick the money and choose up to six objects before continue" />
+        </section>
+
+        <section id="sect2">
+            <object objectId="sword" />
+            <object objectId="mace" />
+            <object objectId="dagger" />
+            <object objectId="warhammer" />
+            <pick class="money" count="12" />
+            <object objectId="backpack" />
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
+        </section>
+
+        <section id="sect3">
+            <endurance count="-1" />
+        </section>
+
+        <section id="sect10">
+            <object objectId="onyxmedallion" />
+        </section>
+
+        <section id="sect11">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect97" set="enabled" />
+                </case>
+                <case from="5" to="9">
+                    <choiceState section="sect190" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect12">
+            <!-- English footnote about the backpack -->
+            <pick objectId="backpack" />
+
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
+            <object objectId="meal" index="2" />
+            <object objectId="rope" />
+            <object objectId="laumspurpotion4" />
+            <object objectId="sword" />
+            <object objectId="spear" />
+        </section>
+
+        <section id="sect13">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect171" set="enabled" />
+                </case>
+                <case from="5" to="9">
+                    <choiceState section="sect25" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect14">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="0" />
+            <afterCombats>
+                <choiceState section="sect146" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect31" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect15">
+            <test not="true" hasDiscipline="tracking">
+                <choiceState section="sect264" set="disabled" />
+            </test>
+            <test hasDiscipline="tracking">
+                <choiceState section="sect134" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect17">
+            <death />
+        </section>
+
+        <section id="sect19">
+            <meal />
+        </section>
+
+        <section id="sect21">
+            <test not="true" hasDiscipline="tracking">
+                <choiceState section="sect264" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect22">
+            <!-- I dont want to force any rule here... What if the player has no 
+                 other backpack / weapon? -->
+            <message en-text="Drop some object before continue" />
+        </section>
+
+        <section id="sect23">
+            <test not="true" hasObject="brasskey">
+                <choiceState section="sect282" set="disabled" />
+            </test>
+            <test hasObject="brasskey">
+                <choiceState section="sect105" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect24">
+            <test not="true" hasDiscipline="healing">
+                <choiceState section="sect238" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect25">
+            <huntStatus enabled="false" />
+        </section>
+
+        <section id="sect26">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <!-- UP TO SECT28 -->
 
     </sections>
 

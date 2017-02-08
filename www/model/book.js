@@ -106,8 +106,10 @@ Book.prototype.getProjectAonBookCode = function(language) {
         return language == 'en' ? '01fftd' : '01hdlo';
     else if( this.bookNumber == 2 )
         return language == 'en' ? '02fotw' : '02fsea';
+    else if( this.bookNumber == 3 )
+        return language == 'en' ? '02fotw' : '02fsea';
     else
-        return language == 'en' ? '03tcok' : '03lcdk';
+        return language == 'en' ? '04tcod' : '04eam';
 };
 
 /**

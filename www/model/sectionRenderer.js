@@ -419,3 +419,8 @@ SectionRenderer.prototype.signpost = function( $signpost , level ) {
     return '<div class="signpost">' +  this.renderNodeChildren( $signpost , level ) + 
         '</div>';
 }
+
+SectionRenderer.prototype.poetry = function( $poetry , level ) {
+    return '<blockquote class="poetry">' + this.renderNodeChildren( $poetry , level ) + 
+        '</blockquote>';
+}

@@ -1,3 +1,6 @@
+- ERROR: If you have healing, and you enter on a section where you loss E.P., the
+  statistics displayed are not right (they ignore the loss)
+- ERROR: Book 2 / sect136: Disable if you have ENOUGHT money
 - If the book load fails, it doest not try to reload the next time
 - Test all books / all sections rendering. It should be valid HTML5
   (https://validator.w3.org/docs/api.html)
@@ -18,6 +21,8 @@
 - Pick rule: If you cannot pick the object, dont show the error message
 - Allow to consult the combat tables
 - Add page to consult the game rules
+- Save games is not working on safari
+- Create a booksSumary.xml, with info about the available books. 
 
 Reminders:
 
