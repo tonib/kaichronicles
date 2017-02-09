@@ -1,6 +1,8 @@
 - ERROR: If you have healing, and you enter on a section where you loss E.P., the
   statistics displayed are not right (they ignore the loss)
 - ERROR: Book 2 / sect136: Disable if you have ENOUGHT money
+- ERROR: Book 1 / sect36: Reset this section state (you can return here with a loop)
+- ERROR: Book 3 / sect12: There is a meal here ???
 - If the book load fails, it doest not try to reload the next time
 - Test all books / all sections rendering. It should be valid HTML5
   (https://validator.w3.org/docs/api.html)
@@ -11,6 +13,7 @@
   * App lifeciclye
   * Load games page: Show info about saved games
   * Replace toastr by Android toasts ???
+  * Remove animations from object details dialog (only for Android, performance...)
 - Money handling: 
   * Allow to drop an arbitrary amount of money, not just a single coin
   * Support for money as object on section
