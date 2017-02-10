@@ -12,6 +12,10 @@ body {
     font-size: 16px;
 }
 
+blockquote.poetry {
+    font-style: italic;
+}
+
 p, ol, ul, dl, blockquote { text-align: justify }
 
 ul.unbulleted { list-style-type: none }

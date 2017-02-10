@@ -73,6 +73,14 @@
             <image book="3" name="dagger.png" />
         </weapon>
 
+        <!-- BOOOK 4 -->
+
+        <weapon id="captaindvalsword" weaponType="sword">
+            <name lang="en">Captain D’Val’s Sword</name>
+            <name lang="es">Espada del Capitán D'Val</name>
+            <image book="1" name="sword.png" />
+        </weapon>
+
     </weapons>
 
     <specials>
@@ -585,6 +593,11 @@
             <name lang="en">Brass Key</name>
             <name lang="es">Llave de bronce</name>
             <image book="1" name="small15.png" />
+        </object>
+
+        <object id="flaskofholywater">
+            <name lang="en">Flask of Holy Water</name>
+            <name lang="es">Frasco de agua santa</name>
         </object>
 
         <!-- OTHERS -->
