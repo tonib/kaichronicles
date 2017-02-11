@@ -324,8 +324,32 @@
 
         <special id="onyxmedallion">
             <name lang="en">Onyx Medallion</name>
-            <name lang="es">Medallón de Ónice </name>
+            <name lang="es">Medallón de Ónice</name>
             <image book="4" name="small3.png" />
+        </special>
+
+        <special id="scrollpoetry">
+            <name lang="en">Scroll</name>
+            <description lang="en">
+                Upon the scroll is written the following verse: /
+                When the full moon shines o’er the temple deep, /
+                A sacrifice will stir from sleep /
+                The legions of a long forgotten lord. /
+                When a fair royal maid on the altar dies, /
+                The dead of Maakengorge shall rise /
+                To claim their long-awaited reward.
+            </description>
+
+            <name lang="es">Pergamino</name>
+            <description lang="es">
+                En él ves escritos los siguientes versos: 
+                Cuando la luna llena brille sobre el templo, /
+                Un sacrificio pondrá fin al sueño /
+                De las legiones de un señor ya olvidado. /
+                Cuando sobre el altar muera una rubia doncella de estirpe real, /
+                Los muertos del precipicio de Maaken despertarán /
+                Para reclamar la recompensa que tanto han esperado.
+            </description>
         </special>
 
     </specials>

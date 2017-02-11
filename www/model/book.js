@@ -72,6 +72,10 @@ Book.fixXml = function(xmlText) {
     exp = /<ch\.(.+?)\/>/g;
     xmlText = xmlText.replace( exp , "&amp;$1;");
 
+    // On book 4, the discipline id "mndblst" has been changed to "mndblast"
+    // This will break the game mechanics, so keep it as "mndblst":
+    xmlText = xmlText.replaceAll('"mndblast"', '"mndblst"');
+
     return xmlText;
 };
 
@@ -107,7 +111,7 @@ Book.prototype.getProjectAonBookCode = function(language) {
     else if( this.bookNumber == 2 )
         return language == 'en' ? '02fotw' : '02fsea';
     else if( this.bookNumber == 3 )
-        return language == 'en' ? '02fotw' : '02fsea';
+        return language == 'en' ? '03tcok' : '03lcdk';
     else
         return language == 'en' ? '04tcod' : '04eam';
 };
