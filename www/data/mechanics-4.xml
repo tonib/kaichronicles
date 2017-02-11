@@ -785,7 +785,77 @@
             <meal />
         </section>
 
-        <!-- UP TO sect142 -->
+        <section id="sect143">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="0" index="1" />
+            <afterCombats>
+                <choiceState section="sect230" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect87" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect144">
+            <death />
+        </section>
+
+        <section id="sect147">
+            <choiceState section="all" set="disabled" />
+            <combat enemyMultiplier="0" />
+            <afterCombatTurn turn="1">
+                <combat enemyMultiplier="1" />
+            </afterCombatTurn>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect152">
+            <object objectId="sword" />
+            <pick class="money" count="6" />
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
+            <object objectId="brasskey" />
+        </section>
+
+        <section id="sect153">
+            <choiceState section="all" set="disabled" />
+            <combat noWeapon="true" />
+            <afterCombatTurn turn="2">
+                <combat noWeapon="false" />
+            </afterCombatTurn>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect154">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="2">
+                    <choiceState section="sect120" set="enabled" />
+                </case>
+                <case from="3" to="9">
+                    <choiceState section="sect51" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect157">
+            <endurance count="+1" />
+        </section>
+
+        <section id="sect158">
+            <endurance count="-3" />
+            <drop objectId="backpack" />
+        </section>
+
+        <section id="sect159">
+            <endurance count="-2" />
+        </section>
+
+        <!-- UP TO sect164 -->
 
     </sections>
 

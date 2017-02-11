@@ -319,8 +319,8 @@ ActionChart.prototype.getCurrentCombatSkillBonuses = function(noMindblast, noWea
         });
     }
 
-    // Check weapon bonuses
-    if( currentWeapon && currentWeapon.effect && currentWeapon.effect.cls == 'combatSkill' ) {
+    // Check cuurent weapon bonuses
+    if( !noWeapon && currentWeapon && currentWeapon.effect && currentWeapon.effect.cls == 'combatSkill' ) {
         bonuses.push( {
             concept: currentWeapon.name,
             increment: currentWeapon.effect.increment
