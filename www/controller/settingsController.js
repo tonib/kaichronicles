@@ -32,7 +32,10 @@ var settingsController = {
         .then(function() {
             // Load game mechanics XML
             state.updateBookTranslation(book);
+            // Set the new language title
             template.setNavTitle( book.getBookTitle() , '#game');
+            // Clear the objects cache (they contain translated object names)
+            state.mechanics.clearObjectsCache();
             settingsView.hideDownloadDialog();
         });
     },

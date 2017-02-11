@@ -365,6 +365,11 @@ var mechanicsEngine = {
                 conditionStatisfied = true;
         }
         
+        // Test section choice is enabled:
+        var sectionToCheck = $(rule).attr('isChoiceEnabled');
+        if( sectionToCheck && mechanicsEngine.isChoiceEnabled(sectionToCheck) )
+            conditionStatisfied = true;
+
         // Check if the test should be inversed
         if( $(rule).attr('not') == 'true' )
             conditionStatisfied = !conditionStatisfied;
@@ -756,6 +761,17 @@ var mechanicsEngine = {
             $choose.find('.choice-link').removeClass('disabled');
     },
 
+    /**
+     * Return true if the choice for a given section is enabled
+     * @param {String} sectionId The section id for the choice to check
+     */
+    isChoiceEnabled: function(sectionId) {
+        var $selector = $('#game-section a[data-section=' + sectionId + ']')
+        if( $selector.length == 0 )
+            return false;
+        return !$selector.hasClass('disabled');
+    },
+
     /** 
      * Evaluates an expression
      * @param txtExpression Expression to evaluate
@@ -825,6 +841,8 @@ var mechanicsEngine = {
             $('a.equipment-op').addClass('disabled');
             // Disable money picker
             moneyPickerMechanics.disable();
+            // Disable random table links
+            $('a.random').addClass('disabled');
 
             // Bind restart book link
             $('#mechanics-restart').click(function(e) {
@@ -874,4 +892,5 @@ var mechanicsEngine = {
             routing.redirect('setup');
         });
     }
+
 };

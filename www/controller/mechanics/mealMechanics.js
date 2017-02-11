@@ -39,8 +39,9 @@ var mealMechanics = {
         gameView.appendToSection( $meal );
 
         // Check if hunting discipline is available
+        var huntDisabled = $(rule).attr('huntDisabled') == 'true';
         if( !state.actionChart.disciplines.contains('hunting') || 
-            !state.sectionStates.huntEnabled )
+            !state.sectionStates.huntEnabled || huntDisabled)
             $(mealSelector + ' .mechanics-eatHunt').hide();
 
         // Check if there are meals on the backpack

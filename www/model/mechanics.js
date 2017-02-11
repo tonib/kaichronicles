@@ -92,6 +92,13 @@ Mechanics.prototype.getObject = function(objectId) {
 };
 
 /**
+ * Clear the objects cache (due to a book language change)
+ */
+Mechanics.prototype.clearObjectsCache = function() {
+    this.objectsCache = {};
+};
+
+/**
  * Get a jquery selector for a give rule, relative to the "section" parent
  * @return {string} The jquery selector for the rule inside the section  
  */

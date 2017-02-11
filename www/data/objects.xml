@@ -624,6 +624,17 @@
             <name lang="es">Frasco de agua santa</name>
         </object>
 
+        <object id="whip">
+            <name lang="en">Whip</name>
+            <name lang="es">Látigo</name>
+        </object>
+
+        <object id="ironkey">
+            <name lang="en">Iron Key</name>
+            <name lang="es">Llave de Hierro</name>
+            <image book="1" name="small15.png" />
+        </object>
+
         <!-- OTHERS -->
 
         <!-- This not really an object, but needed for mechanics -->

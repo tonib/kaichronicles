@@ -156,6 +156,7 @@ will be executed.
 * **weaponskillActive="true"**: Has the player Weaponskill with the current weapon?
 * **not="true"**: This will negate the current test. So if all of these conditions are false,
   the inner rules will be executed
+* **isChoiceEnabled="sectionId"**: Is the choice for the given section enabled?
 
 ### choiceState
 ```xml
@@ -196,6 +197,20 @@ This will allow to the player to sell a class of objects by a given price
 ```
 This will clear the state of the given section. Usefull if the player can return to that
 section, and there are rules with state there that must to be reexecuted
+
+### meal
+```xml
+<meal huntDisabled="true" />
+```
+The player must to have a meal on this section. If the attribute "huntDisabled" is "true"
+the player will not be allowed to use the hunting discipline on this meal
+
+### huntStatus
+```xml
+<huntStatus enabled="false" />
+```
+This will enable or disable the hunting on meals until new advice. This will be used
+on map zones where there is no food (deserts, etc)
 
 ### combat
 ```xml
