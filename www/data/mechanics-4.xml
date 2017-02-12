@@ -1000,6 +1000,21 @@
             </afterCombats>
         </section>
 
+        <section id="sect194">
+            <choiceState section="all" set="disabled" />
+            <disableCombats />
+            <combat turnLoss="0" />
+            <randomTable zeroAsTen="true">
+                <disableCombats disabled="false" />
+                <afterCombatTurn turn="[RANDOM]">
+                    <combat turnLoss="-2" />
+                </afterCombatTurn>
+            </randomTable>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
         <!-- UP TO sect164 -->
 
     </sections>

@@ -107,6 +107,32 @@ var combatMechanics = {
     },
 
     /**
+     * Show combat UI buttons
+     * @param {jquery} $combatUI The combat UI where enable buttons. If it's null, all
+     * combats buttons on the section will be hidden
+     */
+    showCombatButtons: function( $combatUI ) {
+
+        if( !$combatUI )
+            // Disable all combats
+            $combatUI = $('.mechanics-combatUI');
+
+        if( $combatUI.length == 0 )
+            return;
+            
+        // Get combat data
+        var sectionState = state.sectionStates.getSectionState();
+        var combatIndex = parseInt( $combatUI.attr( 'data-combatIdx' ) );
+        var combat = sectionState.combats[ combatIndex ];
+
+        if( !(sectionState.combatEluded || combat.isFinished() || combat.disabled) ) {
+            $combatUI.find('.mechanics-playTurn').show();
+            if( combat.canBeEluded() )
+                $combatUI.find('.mechanics-elude').show();
+        }
+    },
+
+    /**
      * Run a combat turn
      * @param {jquery} $combatUI The combat UI
      * @param {boolean} elude True if the player is eluding the combat

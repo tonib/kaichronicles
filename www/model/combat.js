@@ -49,6 +49,11 @@ function Combat(enemy, combatSkill, endurance) {
      */
     this.enemyTurnLoss = 0;
 
+    /**
+     * Extra E.P. lost by the player each turn. It must to be negative.
+     */
+    this.turnLoss = 0;
+
     /** Book 2 / sect276: True if the combat is not a combat to death */
     this.fakeCombat = false;
     /** The original endurance of the player before the combat (for fake combats) */
@@ -90,7 +95,7 @@ Combat.prototype.getTurnResult = function(elude) {
     
     var turnResult = new CombatTurn(this.turns.length + 1, 
         this.getCombatRatio(), this.dammageMultiplier, this.enemyMultiplier, 
-        this.mindforceEP , elude , this.enemyTurnLoss );
+        this.mindforceEP , elude , this.enemyTurnLoss , this.turnLoss );
     return turnResult;
 }
 

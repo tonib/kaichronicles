@@ -163,11 +163,12 @@ SectionState.prototype.combatsDuration = function(who) {
 
 
 /**
- * Set combats as disabled
+ * Set combats as enabled / disabled
+ * @param {bool} enabled True to enable combats. False to disable them
  */
-SectionState.prototype.setCombatsDisabled = function() {
+SectionState.prototype.setCombatsEnabled = function(enabled) {
     for( var i=0, len = this.combats.length; i< len; i++)
-        this.combats[i].disabled = true;
+        this.combats[i].disabled = !enabled;
 };
 
 /**

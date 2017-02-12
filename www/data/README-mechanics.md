@@ -233,10 +233,18 @@ the following properties:
 * **enemyMultiplier="number"**: Enemy dammage multiplier
 * **fake="true"**: This is a fake combat. When it's finished, LW endurance points will be restored
 * **enemyTurnLoss="-number"** Extra E.P. lost by the enemy each turn
+* **turnLoss="-number"** Extra E.P. lost by LW each turn
 
 TODO: Continue here
 
-### special section
+### disableCombats
+```xml
+<disableCombats disabled="false" />
+```
+By default disables all section combats. If the optional property "disabled" is set to "true", 
+all section combats will be re-enabled
+
+### special sections
 
 There are sections (or parts of them) that cannot be described by the game rules.
 In that case, they are specific implementations:

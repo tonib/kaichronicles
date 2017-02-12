@@ -1,5 +1,6 @@
+- ERROR: randomMechanics.lastValue is not set if you load a saved game! (book4 / sect194)
 - ERROR: If you have healing, and you enter on a section where you loss E.P., the
-  statistics displayed are not right (they ignore the loss)
+  statistics displayed are not right (they ignore the loss, animations overlap?)
 - ERROR: Book 2 / sect136: Disable if you have ENOUGHT money
 - ERROR: Book 1 / sect36: Reset this section state (you can return here with a loop)
 - ERROR: Book 3 / sect12: There is a meal here ???

@@ -175,7 +175,8 @@ var mechanicsEngine = {
         $.each( mechanicsEngine.onAfterCombatTurns, function(index, rule) {
             // Turn when to execute the rule:
             var txtRuleTurn = $(rule).attr('turn');
-            var ruleTurn = parseInt( txtRuleTurn );
+            //var ruleTurn = parseInt( txtRuleTurn );
+            var ruleTurn = mechanicsEngine.evaluateExpression(txtRuleTurn);
 
             // We reapply all rules accumulatively
             if( txtRuleTurn == 'any' || combat.turns.length >= ruleTurn )
@@ -504,6 +505,11 @@ var mechanicsEngine = {
         if( txtEnemyTurnLoss )
             combat.enemyTurnLoss = parseInt( txtEnemyTurnLoss );
 
+        // Player extra loss per turn
+        var txtPlayerTurnLoss = $(rule).attr('turnLoss'); 
+        if( txtPlayerTurnLoss )
+            combat.turnLoss = parseInt( txtPlayerTurnLoss );
+
         // It's a fake combat?
         var txtFake = $(rule).attr('fake');
         if( txtFake )
@@ -543,12 +549,18 @@ var mechanicsEngine = {
     },
 
     /**
-     * Disable all combats
+     * Disable / enable all combats
      */
     disableCombats: function(rule) {
         var sectionState = state.sectionStates.getSectionState();
-        sectionState.setCombatsDisabled();
-        combatMechanics.hideCombatButtons(null);
+        var enabled = $(rule).attr('disabled') == 'false';
+        sectionState.setCombatsEnabled(enabled);
+        if(enabled)
+            // Enable combats
+            combatMechanics.showCombatButtons(null);
+        else
+            // Disable combats
+            combatMechanics.hideCombatButtons(null);
     },
 
     /** 
@@ -802,6 +814,7 @@ var mechanicsEngine = {
 
         try {
             // Be sure to return always an integer (expression can contain divisions...)
+            // TODO: The expression can be boolean too!. floor only numbers...
             return Math.floor( eval( expression ) );
         }
         catch(e) {

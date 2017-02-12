@@ -9,9 +9,10 @@
  * enemy mindforce attack. It must to be negative.
  * @param {boolean} elude True if the player is eluding the combat
  * @param {number} extraEnemyLoss Extra E.P. lost by the enemy. It must to be negative.
+ * @param {number} extraLoss Extra E.P. lost by the player. It must to be negative.
  */
 function CombatTurn(turnNumber, combatRatio, dammageMultiplier, enemyMultiplier, 
-    mindforceEP, elude , extraEnemyLoss ) {
+    mindforceEP, elude , extraEnemyLoss , turnLoss ) {
 
     if( !turnNumber )
         // Default constructor (called on BookSectionStates.prototype.fromStateObject)
@@ -56,6 +57,10 @@ function CombatTurn(turnNumber, combatRatio, dammageMultiplier, enemyMultiplier,
             this.loneWolf -= mindforceEP;
         this.loneWolfExtra = mindforceEP;
     }
+    // Extra loss
+    if( this.loneWolf != combatTable_DEATH)
+        this.loneWolf -= turnLoss;
+    this.loneWolfExtra += turnLoss;
 
     /** Text with the player loss */
     this.playerLossText = this.calculatePlayerLossText();
