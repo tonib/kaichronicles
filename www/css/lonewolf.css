@@ -120,6 +120,7 @@ table.bold-head > thead > tr > td {
 /* Table operations */
 .table-op {
     float: right;
+    margin-left: 5px;
 }
 
 /* Image for objects table */

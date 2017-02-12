@@ -103,6 +103,16 @@ BookData.new( 4 , '04tcod' , '04eam'  , [ 'chalk' ] ).download_book_data
 
 # Additional images:
 BookData.download_extra_images({
+
+    # Menus images
     'en/png/lw/05sots/ill/chalk/small6.png' => 'book.png' ,
-    'en/png/lw/07cd/ill/chalk/small5.png' => 'door.png'
+    'en/png/lw/07cd/ill/chalk/small5.png' => 'door.png' ,
+
+    # Spanish combat table results
+    'es/png/ls/01hdlo/ill/blake/crtneg.png' => 'combattable_es_negative.png',
+    'es/png/ls/01hdlo/ill/blake/crtpos.png' => 'combattable_es_positive.png',
+
+    # English combat table results
+    'en/png/lw/01fftd/ill/blake/crtneg.png' => 'combattable_en_negative.png',
+    'en/png/lw/01fftd/ill/blake/crtpos.png' => 'combattable_en_positive.png',
 })

@@ -162,6 +162,17 @@ var gameView = {
         $('#game-sourceSections a').click(function(e) {
             gameView.choiceLinkClicked(e, this);
         });
+    },
+
+    /**
+     * Show the dialog with the combat tables
+     */
+    showCombatTables: function() {
+        // Set the translated images
+        var combatTablesUrls = state.book.getCombatTablesImagesUrls();
+        $('#game-ctimage0').attr('src', combatTablesUrls[0]);
+        $('#game-ctimage1').attr('src', combatTablesUrls[1]);
+        $('#game-combatTables').modal('show');
     }
 
 };

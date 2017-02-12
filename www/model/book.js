@@ -261,3 +261,14 @@ Book.prototype.getOriginSections = function(sectionId) {
 Book.prototype.getCoverURL = function() {
     return Book.getBaseUrl() + this.bookNumber + '/cover.jpg';
 }
+
+/**
+ * Return an array of 2 positions with the combat tables images
+ */
+Book.prototype.getCombatTablesImagesUrls = function() {
+    var images = [];
+    var base = Book.getBaseUrl();
+    images.push( base + 'illExtra/combattable_' + this.language + '_positive.png' );
+    images.push( base + 'illExtra/combattable_' + this.language + '_negative.png' );
+    return images;
+}

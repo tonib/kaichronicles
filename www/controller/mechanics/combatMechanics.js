@@ -32,6 +32,17 @@ var combatMechanics = {
                     false );
             });
 
+            // Move the show combat tables as the first child (needed because it's a float)
+            var $btnCombatTables = $combatUI.find('.mechanics-combatTables');
+            $btnCombatTables.remove();
+            $combatOriginal.prepend( $btnCombatTables );
+
+            // Bind the show combat tables button click
+            $btnCombatTables.click(function(e) {
+                e.preventDefault();
+                gameView.showCombatTables();
+            });
+
             $combatOriginal.find('.mechanics-elude').click(function(e) {
                 // Elude combat button click
                 e.preventDefault();
