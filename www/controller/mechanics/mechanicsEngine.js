@@ -235,7 +235,7 @@ var mechanicsEngine = {
         var objectId = $(rule).attr('objectId');
         if( objectId ) {
             // Pick the object
-            if( !actionChartController.pick( objectId ) ) {
+            if( !actionChartController.pick( objectId , true) ) {
                 // The object has not been picked (ex. full backpack)
                 // Add the object to the section
                 state.sectionStates.addObjectToSection( objectId );

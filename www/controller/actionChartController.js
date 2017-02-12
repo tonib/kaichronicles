@@ -20,10 +20,12 @@ var actionChartController = {
 
     /**
      * Pick an object
-     * @param objectId The object to pick, or "meal", to pick one meal
+     * @param {string} objectId The object to pick, or "meal", to pick one meal
+     * @param {boolean} doNotShowError True we should do not show a toast if the player
+     * cannot pick the object
      * @return True if the object has been get. False if the object cannot be get
      */
-    pick: function(objectId) {
+    pick: function(objectId, doNotShowError) {
         try {
             // Pick the object
             var o = state.mechanics.getObject(objectId);
@@ -43,7 +45,8 @@ var actionChartController = {
         }
         catch(e) {
             // Error picking
-            toastr["error"](e);
+            if( !doNotShowError )
+                toastr["error"](e);
             console.log(e);
             return false;
         }
