@@ -855,6 +855,151 @@
             <endurance count="-2" />
         </section>
 
+        <section id="sect165">
+            <choiceSelected section="sect13">                
+                <!-- TODO: Meal rules does not work here, and this is not complete. 
+                     You should drop any meal type object (laumpsur meal) -->
+                <test expression="[MEALS] == 0">
+                    <endurance count="-3" />
+                </test>
+                <test expression="[MEALS] > 0">
+                    <drop objectId="meal" />
+                </test>
+            </choiceSelected>
+        </section>
+
+        <section id="sect167">
+            <object objectId="backpack" />
+            <object objectId="meal" />
+            <object objectId="shovel" />
+        </section>
+
+        <section id="sect168">
+            <test not="true" hasObject="sommerswerd">
+                <choiceState section="sect34" set="disabled" />
+            </test>
+            <test hasObject="sommerswerd">
+                <choiceState section="sect85" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect169">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect171">
+            <huntStatus enabled="false" />
+        </section>
+
+        <section id="sect173">
+            <choiceState section="all" set="disabled" />
+            <test hasObject="sommerswerd">
+                <choiceState section="sect275" set="enabled" />
+            </test>
+            <test not="true" hasObject="sommerswerd">
+                <randomTable>
+                    <case from="0" to="6">
+                        <choiceState section="sect143" set="enabled" />
+                    </case>
+                    <case from="7" to="11">
+                        <choiceState section="sect179" set="enabled" />
+                    </case>
+                </randomTable>
+                <test hasObject="shovel|pick" >
+                    <randomTableIncrement increment="+2" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect176">
+            <endurance count="-3" />
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect177">
+            <death />
+        </section>
+
+        <section id="sect181">
+            <death />
+        </section>
+
+        <section id="sect182">
+            <test not="true" hasDiscipline="hunting|tracking">
+                <choiceState section="sect332" set="disabled" />
+            </test>
+            <test hasDiscipline="hunting|tracking">
+                <choiceState section="sect58" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect183">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="6">
+                    <choiceState section="sect198" set="enabled" />
+                </case>
+                <case from="7" to="13">
+                    <choiceState section="sect338" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="camflage" >
+                <randomTableIncrement increment="+4" />
+            </test>
+        </section>
+
+        <section id="sect185">
+            <meal huntDisabled="true" />
+        </section>
+
+        <section id="sect186">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="0" />
+            <afterCombats>
+                <choiceState section="sect243" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect66" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect188">
+            <meal />
+        </section>
+
+        <section id="sect189">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect234" set="enabled" />
+                </case>
+                <case from="5" to="9">
+                    <choiceState section="sect47" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect192">
+            <death />
+        </section>
+
+        <section id="sect193">
+            <choiceState section="all" set="disabled" />
+            <afterCombatTurn turn="2">
+                <disableCombats />
+                <choiceState section="all" set="enabled" />
+            </afterCombatTurn>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
         <!-- UP TO sect164 -->
 
     </sections>

@@ -631,8 +631,18 @@
 
         <object id="ironkey">
             <name lang="en">Iron Key</name>
-            <name lang="es">Llave de Hierro</name>
+            <name lang="es">Llave de hierro</name>
             <image book="1" name="small15.png" />
+        </object>
+
+        <object id="shovel" itemCount="2">
+            <name lang="en">Shovel</name>
+            <name lang="es">Pala</name>
+        </object>
+
+        <object id="pick">
+            <name lang="en">Pick</name>
+            <name lang="es">Pico</name>
         </object>
 
         <!-- OTHERS -->
