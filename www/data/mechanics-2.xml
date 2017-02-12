@@ -747,6 +747,9 @@
             <test not="true" expression="[MONEY] >= 20">
                 <choiceState section="sect10" set="disabled" />
             </test>
+            <test expression="[MONEY] >= 20">
+                <choiceState section="sect238" set="disabled" />
+            </test>
         </section>
 
         <section id="sect139">
