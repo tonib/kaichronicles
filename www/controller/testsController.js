@@ -9,6 +9,17 @@ var testsController = {
         if( !setupController.checkBook() )
             return;
 
+        // Test randomness
+        var count = [];
+        for( var i=0; i<10; i++)
+            count[i] = 0;
+        var total = 200000;
+        for( i=0; i<total; i++)
+            count[randomTable.getRandomValue()]++;
+        console.log('Randomness test (' + total + ' random table hits)');
+        for( i=0; i<10; i++)
+            console.log(i + ': ' + count[i] + ' hits (' + ( count[i] / total ) * 100.0 + ' %)' );
+
         // Test rendering:
         for(var i=1; i<350; i++) {
             try {
