@@ -88,10 +88,10 @@
         <section id="sect12">
             <pick objectId="meal" index="0" />
             <pick objectId="meal" index="1" />
-            <!-- You pick 3 and eat one, so no third -->
-            <!--pick objectId="meal" index="2" /-->
+            <pick objectId="meal" index="2" />
             <pick objectId="sleepingfurs" />
             <pick objectId="largerope" />
+            <drop objectId="meal" />
         </section>
 
         <section id="sect14">
