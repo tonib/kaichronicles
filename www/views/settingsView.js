@@ -19,11 +19,21 @@ var settingsView = {
                 setupController.restartBook();
         });
 
-        // Go back to the main menu
-        $('#settings-mainmenu').click(function() {
-            routing.redirect('mainMenu');
-        });
+        if( cordovaApp.isRunningApp() )
+            // Button not needed: You have the "back" hardware button
+            $('#settings-mainmenu').hide();
+        else {
+            // Go back to the main menu
+            $('#settings-mainmenu').click(function() {
+                routing.redirect('mainMenu');
+            });
+        }
 
+        // Game rules
+        $('#settings-gamerules').click(function() {
+            routing.redirect('gameRules');
+        });
+        
         // About the book
         $('#settings-about').click(function() {
             routing.redirect('about');
