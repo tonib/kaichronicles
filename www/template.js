@@ -81,7 +81,7 @@ var template = {
         else {
             $('#template-statistics').show();
             $('#template-combatSkill').text( state.actionChart.getCurrentCombatSkill() );
-            gameView.animateValueChange( $('#template-endurance') , 
+            template.animateValueChange( $('#template-endurance') , 
             state.actionChart.currentEndurance , doNotAnimate , 
             state.actionChart.currentEndurance > 0 ? null : 'red' );
 
@@ -143,6 +143,44 @@ var template = {
         }
         $('#template-objectDescription').text(o.description);
         $('#template-objectDetails').modal('show');
+    },
+
+    /**
+     * Change a number value by other, with an animation. On the Cordova app, the
+     * change will not be animated (performance...)
+     * @param {jQuery} $element Element selector to change
+     * @param {number} newValue The new value to set
+     * @param {bool} doNotAnimate True if we should do not perform the animation
+     * @param {string} newColor The final HTML color of the element. If it's null, the default
+     * color for the DOM element will be used
+     */
+    animateValueChange: function( $element , newValue , doNotAnimate , newColor ) {
+
+        // Disable animations on Cordova app (bad performance)
+        if( cordovaApp.isRunningApp() )
+            doNotAnimate = true;
+        else
+            // Clear previous animations
+            $element.stop(true, true);
+
+        // If the value is not going to change, do nothing
+        var txtNewValue = newValue.toString();
+        if( $element.text() == txtNewValue )
+            return;
+
+        if( doNotAnimate ) {
+            $element.text( txtNewValue );
+            $element.css('color', newColor ? newColor : '' );
+        }
+        else {
+            var miliseconds = 500;
+            var currentValue = parseInt( $element.text() );
+            $element.css('color', newValue < currentValue ? 'red' : 'green' );
+            $element.fadeOut(miliseconds, function() {
+                $(this).css('color', newColor ? newColor : '');
+                $(this).text( txtNewValue ).fadeIn(miliseconds);
+            });
+        }
     }
 
 };

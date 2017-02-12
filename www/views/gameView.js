@@ -162,31 +162,6 @@ var gameView = {
         $('#game-sourceSections a').click(function(e) {
             gameView.choiceLinkClicked(e, this);
         });
-    },
-
-    animateValueChange: function( $element , newValue , doNotAnimate , newColor ) {
-
-        // Disable animations on Cordova app (bad performance)
-        if( cordovaApp.isRunningApp() )
-            doNotAnimate = true;
-
-        var txtNewValue = newValue.toString();
-        if( $element.text() == txtNewValue )
-            return;
-
-        if( doNotAnimate ) {
-            $element.text( txtNewValue );
-            $element.css('color', newColor ? newColor : '' );
-        }
-        else {
-            var miliseconds = 500;
-            var currentValue = parseInt( $element.text() );
-            $element.css('color', newValue < currentValue ? 'red' : 'green' );
-            $element.fadeOut(miliseconds, function() {
-                $(this).css('color', newColor ? newColor : '');
-                $(this).text( txtNewValue ).fadeIn(miliseconds);
-            });
-        }
     }
 
 };

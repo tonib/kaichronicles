@@ -35,9 +35,9 @@ var specialSectionsMechanics = {
          * Function to update the UI
          */
         var updateUI = function(gameState, doNotAnimate ) {
-            gameView.animateValueChange( $('#mechanics-moneyWon') , gameState.moneyWon , 
+            template.animateValueChange( $('#mechanics-moneyWon') , gameState.moneyWon , 
                 doNotAnimate );
-            gameView.animateValueChange( $('#mechanics-currentMoney') ,
+            template.animateValueChange( $('#mechanics-currentMoney') ,
                 state.actionChart.beltPouch , doNotAnimate); 
 
             var noMoney = ( state.actionChart.beltPouch == 0 );
@@ -109,7 +109,7 @@ var specialSectionsMechanics = {
          * Function to update the UI
          */
         var updateUI = function(doNotAnimate) {
-            gameView.animateValueChange( $('#mechanics-currentMoney') ,
+            template.animateValueChange( $('#mechanics-currentMoney') ,
                 state.actionChart.beltPouch , doNotAnimate); 
         };
         updateUI(true);

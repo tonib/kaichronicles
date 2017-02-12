@@ -69,7 +69,7 @@ var combatMechanics = {
     },
 
     updateEnemyEndurance: function( $combatUI , combat , doNotAnimate ) {
-        gameView.animateValueChange( $combatUI.parent().find( '.enemy-current-endurance' ) , 
+        template.animateValueChange( $combatUI.parent().find( '.enemy-current-endurance' ) , 
             combat.endurance , doNotAnimate , combat.endurance > 0 ? null : 'red' );
     },
 
