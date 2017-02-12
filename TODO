@@ -1,4 +1,3 @@
-- ERROR: Book 1 / sect36: Reset this section state (you can return here with a loop)
 - ERROR: Book 3 / sect12: There is a meal here ???
 - If the book load fails, it doest not try to reload the next time
 - Test all books / all sections rendering. It should be valid HTML5

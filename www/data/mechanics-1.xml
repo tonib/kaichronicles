@@ -483,6 +483,11 @@
             </afterCombats>
         </section>
 
+        <section id="sect140">
+            <!-- Here is a loop -->
+            <resectSectionState sectionId="sect36" />
+        </section>
+
         <section id="sect144">
             <message id="msg-drop-object" en-text="Drop a backpack item or weapon before continue" />
             <choiceState section="all" set="disabled" />
