@@ -1015,7 +1015,48 @@
             </afterCombats>
         </section>
 
-        <!-- UP TO sect164 -->
+        <section id="sect196">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect198">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect200">
+            <!--
+                TODO: Gorn Cove / Cala Gorn is on book 2 / sect168.
+                Do the same here than in book 3 / sect268 (a TODO too)
+            -->
+        </section>
+        
+        <section id="sect202">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="0" index="0" />
+            <combat eludeTurn="0" index="1" />
+            <combat eludeTurn="0" index="2" />
+            <combat eludeTurn="0" index="3" />
+            <combat eludeTurn="0" index="4" />
+            <combat eludeTurn="0" index="5" />
+            <afterCombats>
+                <choiceState section="sect237" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect342" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect204">
+            <meal />
+        </section>
+
+        <!-- UP TO sect204 -->
 
     </sections>
 
