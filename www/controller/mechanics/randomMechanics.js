@@ -116,9 +116,6 @@ var randomMechanics = {
             else
                 increment = 0;
 
-            // Store the last value picked
-            randomMechanics.lastValue = value + increment;
-
             // Show the result on the link
             randomMechanics.linkAddChooseValue( $(this) , value , increment);
 
@@ -173,6 +170,10 @@ var randomMechanics = {
      * @param randomValue The random value result from the table
      */
     onRandomTableMechanicsClicked: function(rule, randomValue, increment) {
+
+        // Set the last choosed value
+        randomMechanics.lastValue = randomValue + increment;
+
         // Process rule childs. It can be a single action, and/or a set of "case" rules
         $(rule).children().each(function(index, childRule) {
             if(childRule.nodeName == 'case') {
