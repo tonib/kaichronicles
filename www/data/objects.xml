@@ -49,7 +49,7 @@
 
         <weapon id="warhammer">
             <name lang="en">Warhammer</name>
-            <name lang="es">Martillo de guerra</name>
+            <name lang="es">Martillo de Guerra</name>
             <image book="1" name="warhammr.png" />
         </weapon>
 
@@ -63,13 +63,13 @@
 
         <weapon id="bonesword" weaponType="sword">
             <name lang="en">Bone Sword</name>
-            <name lang="es">Espada de hueso</name>
+            <name lang="es">Espada de Hueso</name>
             <image book="3" name="sword.png" />
         </weapon>
 
         <weapon id="bonedagger" weaponType="dagger">
             <name lang="en">Bone Dagger</name>
-            <name lang="es">Puñal de hueso</name>
+            <name lang="es">Puñal de Hueso</name>
             <image book="3" name="dagger.png" />
         </weapon>
 
@@ -77,7 +77,14 @@
 
         <weapon id="captaindvalsword" weaponType="sword">
             <name lang="en">Captain D’Val’s Sword</name>
+            <description lang="en">
+                It has an inscription on the blade: ‘Captain Remir D’Val—King’s Guard Regiment’
+            </description>
+
             <name lang="es">Espada del Capitán D'Val</name>
+            <description lang="es">
+                Tiene una inscripción en la empuñadura: ‘Capitán Remir D'Val. Regimiento de la Guardia del Rey’
+            </description>
             <image book="1" name="sword.png" />
         </weapon>
 
@@ -103,7 +110,7 @@
             <name lang="en">Chainmail Waistcoat</name>
             <description lang="en">This adds 4 ENDURANCE points to your total.</description>
 
-            <name lang="es">Cota de malla</name>
+            <name lang="es">Cota de Malla</name>
             <description lang="es">Suma 4 puntos de RESISTENCIA a tu total.</description>
 
             <image book="1" name="mail.png" />
@@ -117,7 +124,7 @@
 
         <special id="tombguardiangems">
             <name lang="en">20 Tomb Guardian Gems</name>
-            <name lang="es">20 gemas de la tumba del guardián</name>
+            <name lang="es">20 Gemas de la Tumba del Guardián</name>
         </special>
 
         <special id="crystalstar">
@@ -212,7 +219,7 @@
                 This adds 2 ENDURANCE points to your total
             </description>
 
-            <name lang="es">Cota de cuero</name>
+            <name lang="es">Cota de Cuero</name>
             <description lang="es">
                 Te permite sumar dos puntos de RESISTENCIA al total que ya posees
             </description>
@@ -244,7 +251,7 @@
                 It is a small triangle of blue stone on a neck chain
             </description>
 
-            <name lang="es">Triángulo azul de piedra</name>
+            <name lang="es">Triángulo Azul de Piedra</name>
             <description lang="es">
                 Es un triángulo azul de piedra, colgado de una cadena
             </description>
@@ -266,15 +273,15 @@
 
         <special id="silverkeybook3">
             <name lang="en">Silver Key</name>
-            <name lang="es">Llave de plata</name>
+            <name lang="es">Llave de Plata</name>
             <image book="1" name="small15.png" />
         </special>
 
         <special id="glowingcrystal">
             <name lang="en">Glowing Crystal</name>
-            <name lang="es">Piedra centelleante</name>
+            <name lang="es">Piedra Centelleante</name>
             <description lang="es">
-                También se le llama Cristal radiante
+                También se le llama Cristal Radiante
             </description>
             <image book="3" name="ill19.png" />
         </special>
@@ -285,7 +292,7 @@
                 A small statuette of a strange tentacled creature
             </description>
 
-            <name lang="es">Efigie de piedra</name>
+            <name lang="es">Efigie de Piedra</name>
             <description lang="es">
                 Una pequeña estatua que representa a un extraño ser dotado de tentáculos
             </description>
@@ -295,12 +302,12 @@
         
         <special id="bluestonedisc">
             <name lang="en">Blue Stone Disc</name>
-            <name lang="es">Disco azul de piedra</name>
+            <name lang="es">Disco Azul de Piedra</name>
         </special>
 
         <special id="firesphere">
             <name lang="en">Firesphere</name>
-            <name lang="es">Esfera de fuego</name>
+            <name lang="es">Esfera de Fuego</name>
             <image book="3" name="small7.png" />
         </special>
 
@@ -366,7 +373,7 @@
                 You only have enough for one dose.
             </description>
 
-            <name lang="es">Poción curativa</name>
+            <name lang="es">Poción Curativa</name>
             <description lang="es">
                 Puede hacerte recuperar 4 puntos de RESISTENCIA de los que hayas perdido en combate. 
                 Sólo tienes cantidad suficiente para una dosis.
@@ -385,7 +392,7 @@
 
         <object id="goldenkey">
             <name lang="en">Golden Key</name>
-            <name lang="es">Llave de oro</name>
+            <name lang="es">Llave de Oro</name>
 
             <image book="1" name="small15.png" />
         </object>
@@ -406,7 +413,7 @@
         
         <object id="silverkey">
             <name lang="en">Silver Key</name>
-            <name lang="es">Llave de plata</name>
+            <name lang="es">Llave de Plata</name>
 
             <image book="1" name="small15.png" />
         </object>
@@ -417,7 +424,7 @@
                 An Alether potion. It will increase your COMBAT SKILL by 2 points for the duration of a fight
             </description>
 
-            <name lang="es">Pocion de aléter</name>
+            <name lang="es">Pocion de Aléter</name>
             <description lang="es">
                 Aumentará en 2 puntos tu DESTREZA EN EL COMBATE mientras dure una lucha
             </description>
@@ -447,7 +454,7 @@
                 A message written on an animal skin
             </description>
 
-            <name lang="es">Un mensaje</name>
+            <name lang="es">Mensaje</name>
             <description lang="es">
                 Un mensaje escrito en una piel de animal
             </description>
@@ -457,7 +464,7 @@
 
         <object id="soap">
             <name lang="en">Tablet of Perfumed Soap</name>
-            <name lang="es">Pastilla de jabón perfumado</name>
+            <name lang="es">Pastilla de Jabón Perfumado</name>
         </object>
 
         <!-- BOOOK 2 -->
@@ -468,7 +475,7 @@
                 Restores 3 ENDURANCE points.
             </description>
 
-            <name lang="es">Poción curativa</name>
+            <name lang="es">Poción Curativa</name>
             <description lang="es">
                 Permite recuperar 3 puntos de RESISTENCIA.
             </description>
@@ -494,12 +501,12 @@
 
         <object id="whitepass">
             <name lang="en">White Pass</name>
-            <name lang="es">Salvoconducto blanco</name>
+            <name lang="es">Salvoconducto Blanco</name>
         </object>
 
         <object id="redpass">
             <name lang="en">Red Pass</name>
-            <name lang="es">Salvoconducto rojo</name>
+            <name lang="es">Salvoconducto Rojo</name>
         </object>
 
         <object id="blanket">
@@ -514,12 +521,12 @@
 
         <object id="orangepotion">
             <name lang="en">Potion of Orange Liquid</name>
-            <name lang="es">Poción de líquido naranja</name>
+            <name lang="es">Poción de Líquido Naranja</name>
         </object>
 
         <object id="goldring">
             <name lang="en">Gold Ring</name>
-            <name lang="es">Anillo de oro</name>
+            <name lang="es">Anillo de Oro</name>
         </object>
 
         <!-- BOOOK 3 -->
@@ -556,7 +563,7 @@
             <description lang="en">
                 Is a very powerful poison
             </description>
-            <name lang="es">Poción negra de moras de cementerio</name>
+            <name lang="es">Poción Negra de Moras de Cementerio</name>
             <description lang="es">
                 Es un poderoso veneno
             </description>
@@ -569,7 +576,7 @@
                  Is a very powerful sleeping potion
             </description>
 
-            <name lang="es">Poción verde de hierba de horca</name>
+            <name lang="es">Poción Verde de Hierba de Horca</name>
             <description lang="es">
                  Es un potente somnífero
             </description>
@@ -577,7 +584,7 @@
 
         <object id="tent" itemCount="3">
             <name lang="en">Tent</name>
-            <name lang="es">Tienda de campaña</name>
+            <name lang="es">Tienda de Campaña</name>
         </object>
         
         <object id="redpotionlaumspur">
@@ -587,7 +594,7 @@
                 This concentrated Potion is powerful enough to restore 5 ENDURANCE points
             </description>
 
-            <name lang="es">Poción roja de Laumspur</name>
+            <name lang="es">Poción Roja de Laumspur</name>
             <description lang="es">
                 Es un brebaje de laumspur, una hierba de grandes propiedades curativas. 
                 Esta Poción concentrada permite a quien la bebe recuperar 5 puntos de 
@@ -603,7 +610,7 @@
                 An Alether potion. It will increase your COMBAT SKILL by 4 points for the duration of a fight
             </description>
 
-            <name lang="es">Pocion de aléter</name>
+            <name lang="es">Pocion de Aléter</name>
             <description lang="es">
                 Aumentará en 4 puntos tu DESTREZA EN EL COMBATE mientras dure una lucha
             </description>
@@ -615,13 +622,13 @@
 
         <object id="brasskey">
             <name lang="en">Brass Key</name>
-            <name lang="es">Llave de bronce</name>
+            <name lang="es">Llave de Bronce</name>
             <image book="1" name="small15.png" />
         </object>
 
         <object id="flaskofholywater">
             <name lang="en">Flask of Holy Water</name>
-            <name lang="es">Frasco de agua santa</name>
+            <name lang="es">Frasco de Agua Santa</name>
         </object>
 
         <object id="whip">
@@ -631,7 +638,7 @@
 
         <object id="ironkey">
             <name lang="en">Iron Key</name>
-            <name lang="es">Llave de hierro</name>
+            <name lang="es">Llave de Hierro</name>
             <image book="1" name="small15.png" />
         </object>
 
@@ -640,10 +647,16 @@
             <name lang="es">Pala</name>
         </object>
 
-        <object id="pick">
+        <object id="pick" itemCount="2">
             <name lang="en">Pick</name>
             <name lang="es">Pico</name>
         </object>
+
+        <object id="hourglass">
+            <name lang="en">Hourglass</name>
+            <name lang="es">Reloj de Arena</name>
+        </object>
+        
 
         <!-- OTHERS -->
 

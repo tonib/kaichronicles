@@ -1056,7 +1056,145 @@
             <meal />
         </section>
 
-        <!-- UP TO sect204 -->
+        <section id="sect207">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect336" set="enabled" />
+                </case>
+                <case from="5" to="11">
+                    <choiceState section="sect218" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="wepnskll" >
+                <randomTableIncrement increment="+2" />
+            </test>
+        </section>
+
+        <section id="sect208">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect209">
+            <test not="true" expression="[KAILEVEL] >= 6" >
+                <choiceState section="sect111" set="disabled" />
+            </test>
+            <test expression="[KAILEVEL] >= 6" >
+                <choiceState section="sect43" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect211">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect51" set="enabled" />
+                </case>
+                <case from="5" to="9">
+                    <choiceState section="sect120" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect212">
+            <test not="true" hasDiscipline="anmlknsp">
+                <choiceState section="sect41" set="disabled" />
+            </test>
+            <test hasDiscipline="anmlknsp">
+                <choiceState section="sect276" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect213">
+            <object objectId="pick" />
+            <object objectId="shovel" />
+            <object objectId="axe" />
+            <object objectId="torch" />
+            <object objectId="tinderbox" />
+            <object objectId="hourglass" />
+        </section>
+
+        <section id="sect222">
+            <object objectId="captaindvalsword" />
+        </section>
+        
+        <section id="sect224">
+            <test not="true" hasDiscipline="sixthsns|tracking">
+                <choiceState section="sect60" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect225">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="1" to="5">
+                    <choiceState section="sect20" set="enabled" />
+                </case>
+                <case from="6" to="9">
+                    <choiceState section="sect300" set="enabled" />
+                </case>
+                <case value="0">
+                    <choiceState section="sect181" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect230">
+            <object objectId="sword" />
+            <object objectId="dagger" />
+            <pick class="money" count="9" />
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
+        </section>
+
+        <section id="sect231">
+            <pick class="money" count="3" />
+            <object objectId="sword" />            
+            <object objectId="meal" />
+        </section>
+
+        <section id="sect233">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect234">
+            <choiceState section="all" set="disabled" />
+            <disableCombats />
+            <combat turnLoss="0" />
+            <randomTable zeroAsTen="true">
+                <disableCombats disabled="false" />
+                <afterCombatTurn turn="[RANDOM]">
+                    <combat turnLoss="-2" />
+                </afterCombatTurn>
+            </randomTable>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect236">
+            <endurance count="-4" />
+        </section>
+
+        <section id="sect240">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect94" set="enabled" />
+                </case>
+                <case from="5" to="9">
+                    <choiceState section="sect158" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <!-- UP TO sect241 -->
 
     </sections>
 

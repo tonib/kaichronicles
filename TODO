@@ -1,3 +1,5 @@
+- ERROR: App Android / settings page: After language change, the back button doesn't
+  work
 - If the book load fails, it doest not try to reload the next time
 - Test all books / all sections rendering. It should be valid HTML5
   (https://validator.w3.org/docs/api.html)
@@ -24,6 +26,8 @@
   should be re-executed
 - Common performance (Android and web):
   * Minify and join javascript files
+- Game rules / kai training levels: Render as a numbered section (important to see
+  the numbers)
 
 Reminders:
 
