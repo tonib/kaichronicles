@@ -1194,6 +1194,129 @@
             </randomTable>
         </section>
 
+        <section id="sect242">
+            <death />
+        </section>
+
+        <section id="sect244">
+            <test not="true" hasDiscipline="sixthsns|tracking" >
+                <choiceState section="sect250" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect246">
+            <endurance count="-8" />
+            <test not="true" hasObject="sommerswerd">
+                <choiceState section="sect34" set="disabled" />
+            </test>
+            <test hasObject="sommerswerd">
+                <choiceState section="sect85" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect247">
+            <meal />
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect171" set="enabled" />
+                </case>
+                <case from="5" to="9">
+                    <choiceState section="sect25" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect249">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="3">
+                    <choiceState section="sect153" set="enabled" />
+                </case>
+                <case from="4" to="7">
+                    <choiceState section="sect323" set="enabled" />
+                </case>
+                <case from="8" to="11">
+                    <choiceState section="sect39" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="wepnskll" >
+                <randomTableIncrement increment="+2" />
+            </test>
+        </section>
+
+        <section id="sect253">
+            <test not="true" expression="[KAILEVEL] >= 8">
+                <choiceState section="sect72" set="disabled" />
+            </test>
+            <test expression="[KAILEVEL] >= 8">
+                <choiceState section="sect135" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect254">
+            <test not="true" hasDiscipline="tracking" >
+                <choiceState section="sect326" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect258">
+            <test not="true" hasObject="onyxmedallion">
+                <choiceState section="sect305" set="disabled" />
+            </test>
+
+            <test not="true" hasDiscipline="camflage">
+                <choiceState section="sect49" set="disabled" />
+            </test>
+            <test not="true" expression="[KAILEVEL] >= 7">
+                <choiceState section="sect49" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect260">
+            <choiceState section="all" set="disabled" />
+            <afterCombatTurn turn="3">
+                <disableCombats />
+                <choiceState section="all" set="enabled" />
+            </afterCombatTurn>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect261">
+            <object objectId="meal" />
+            <pick class="money" count="8" />
+        </section>
+
+        <section id="sect262">
+            <death />
+        </section>
+
+        <section id="sect263">
+            <endurance count="-4" />
+        </section>
+
+        <section id="sect267">
+            <death />
+        </section>
+
+        <section id="sect268">
+            <pick class="money" count="4" />
+            <object objectId="spear" />
+            <object objectId="sword" />
+            <object objectId="ironkey" />
+            <object objectId="brasskey" />
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
+            <object objectId="laumspurpotion4" />
+        </section>
+
+        <section id="sect269">
+            <meal huntDisabled="true" />
+            <object objectId="shovel" />
+        </section>
+
         <!-- UP TO sect241 -->
 
     </sections>
