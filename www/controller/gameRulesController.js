@@ -17,11 +17,10 @@ var gameRulesController = {
         .then(function() {
             
             // Push game rules sections:
-            gameRulesController.appendSection( 'howcarry'  );
-            gameRulesController.appendSection( 'howuse' );
-            gameRulesController.appendSection( 'cmbtrulz' );
+            gameRulesController.appendSection( 'crsumary' );
             gameRulesController.appendSection( 'levels' );
-            
+            gameRulesController.appendSection( 'howcarry'  );
+            gameRulesController.appendSection( 'howuse' );            
         });
     },
 

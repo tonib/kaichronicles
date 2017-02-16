@@ -22,7 +22,7 @@
 - Translate all messages / UI to spanish
 - Create a booksSumary.xml, with info about the available books. 
 - Combats should be sequential: First finish the first one, then the second, etc
-- If you pick an object on the current section, the rules conditioned by "hasObject"
+- If you pick an object on the current section, the rules conditioned by "hasObject" (or "meal" rules)
   should be re-executed
 - Common performance (Android and web):
   * Minify and join javascript files

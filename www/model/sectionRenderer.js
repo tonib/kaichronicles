@@ -148,7 +148,9 @@ SectionRenderer.prototype.ul = function($ul, level) {
  * @param $ol List to render
  * @returns The HTML
  */
-SectionRenderer.prototype.ol = SectionRenderer.prototype.ul;
+SectionRenderer.prototype.ol = function($ol, level) {
+    return '<ol>' + this.renderNodeChildren( $ol , level ) + '</ol>';
+};
 
 ////////////////////////////////////////////////////////
 // FOOT NOTES
