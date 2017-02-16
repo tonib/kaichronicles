@@ -14,10 +14,13 @@ var translationsTable = {
         //////////////////////////////////////
         
         'actionChart' : 'Carta de Acción',
-
         'combatSkill' : 'Destreza en el Combate',
+        'endurancePoints' : 'Puntos de Resistencia'
 
-        'endurancePoints' : 'Puntos de Resitencia'
-        
+    },
+
+    translateView: function() {
+
     }
+
 };
