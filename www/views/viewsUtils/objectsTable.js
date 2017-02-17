@@ -117,7 +117,7 @@ var objectsTable = {
             $tableBody.append( '<tr><td><i>(None)</i></td></tr>' );
 
         // Bind events:
-        actionChartView.bindEquipmentEvents( $tableBody );
+        objectsTable.bindEquipmentEvents( $tableBody );
     },
 
     /**
@@ -208,5 +208,5 @@ var objectsTable = {
             }
         });
     },
-    
+
 }
