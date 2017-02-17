@@ -17,7 +17,7 @@ var views = {
         
         if( views.viewCache[viewPath] ) {
             // View was already loaded:
-            template.setViewContent( views.getTranslatedView(views.viewCache[viewPath]) );
+            template.setViewContent( translationsTable.translateView(views.viewCache[viewPath]) );
             // Return a resolved promise:
             var dfd = jQuery.Deferred();
             dfd.resolve();
@@ -37,7 +37,7 @@ var views = {
             // Save view on cache:
             views.viewCache[viewPath] = data;
             // Display the view
-            template.setViewContent( views.getTranslatedView(data) );
+            template.setViewContent( translationsTable.translateView(data) );
         })
         .fail(function( jqXHR, textStatus, errorThrown ) {
             var msg = 'Error loading view ' + viewPath + ', error: ' + 
@@ -46,33 +46,6 @@ var views = {
             alert( msg );
         });
     },
-    
-    /**
-     * Returns a DOM view translated to the current language
-     * @param {DOM} view The view to translate
-     */
-    getTranslatedView( view ) {
-
-        var table = translationsTable[state.language];
-        if( !translationsTable[state.language] )
-            // Translation not available
-            return view;
- 
-        var $clonedView = $(view).clone();
-
-        // Translate the view
-        var translatedTags = $clonedView
-            .find('[data-translation]')
-            .addBack('[data-translation]');
-        for(var i=0; i<translatedTags.length; i++ ) {
-            var translationId = $(translatedTags[i]).attr('data-translation');
-            var html = table[ translationId ];
-            if( html )
-                $(translatedTags[i]).html( html );
-        }
-
-        return $clonedView;
-    }
 
 };
 
