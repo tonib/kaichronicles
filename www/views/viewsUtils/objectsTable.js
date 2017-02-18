@@ -6,14 +6,12 @@ var objectsTable = {
 
     /**
      * Fill an table with object descriptions.
-     * TODO: Move this function to a new namespace / class (too complex)
-     * @param objects The objects ids array
-     * @param $tableBody The HTML table to fill
-     * @param available {boolean} True if the objects are available to get. 
-     * False if the object are owned by the player
-     * @param sell {boolean} True if they are objects to sell 
+     * @param {Array<string>} objects The objects ids array
+     * @param {jQuery} $tableBody The HTML table to fill
+     * @param {string} type Table type: 'available': Available objects on section,
+     * 'sell': Sell inventory objects, 'inventory': Inventory objects
      */
-    objectsList: function(objects, $tableBody, available, sell) {
+    objectsList: function(objects, $tableBody, type ) {
 
         $tableBody.empty();
         
@@ -51,7 +49,7 @@ var objectsTable = {
                 var link = '<a href="#" data-objectId="' + objectId + 
                     '" class="equipment-op btn btn-default" ';
 
-                if( available ) {
+                if( type == 'available' ) {
                     // Available object
                     var title = ( price ? 'Buy object' : 'Pick object' );
                     if( price )
@@ -61,7 +59,7 @@ var objectsTable = {
                     html += link + 'data-op="get" title="' + title + '">' + 
                         '<span class="glyphicon glyphicon-plus"></span></a>';
                 }
-                else if(sell) {
+                else if( type == 'sell' ) {
                     // Sell inventory object
                     // If we dont have the object, do not show it
                     if( !state.actionChart.hasObject(objectId) )

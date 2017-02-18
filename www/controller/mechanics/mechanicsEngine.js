@@ -723,7 +723,7 @@ var mechanicsEngine = {
         }       
 
         // Fill the objects list:
-        objectsTable.objectsList(sectionState.objects, $table , true );
+        objectsTable.objectsList(sectionState.objects, $table , 'available' );
         
         // Fire events
         mechanicsEngine.fireInventoryEvents();
@@ -747,7 +747,7 @@ var mechanicsEngine = {
         }       
 
         // Fill the objects list:
-        objectsTable.objectsList(sectionState.sellPrices, $table , false , true);
+        objectsTable.objectsList(sectionState.sellPrices, $table , 'sell');
     },
 
     /**

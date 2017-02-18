@@ -123,7 +123,7 @@ var actionChartView = {
 
         // Weapons list
         objectsTable.objectsList( state.actionChart.weapons , 
-            $('#achart-weapons > tbody') );
+            $('#achart-weapons > tbody') , 'inventory' );
 
         // Current weapon:
         var current = state.actionChart.selectedWeapon;
@@ -143,13 +143,13 @@ var actionChartView = {
         // Backpack items
         if( state.actionChart.hasBackpack )
             objectsTable.objectsList( state.actionChart.backpackItems , 
-                $('#achart-backpack > tbody') );
+                $('#achart-backpack > tbody') , 'inventory' );
         else
             $('#achart-backpack-content').html('<i>You have lost your backpack</i>');
             
         // Special items
         objectsTable.objectsList( state.actionChart.specialItems , 
-            $('#achart-special > tbody') );
+            $('#achart-special > tbody') , 'inventory' );
 
         // Meals
         actionChartView.updateMeals();
