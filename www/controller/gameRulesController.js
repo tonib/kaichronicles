@@ -12,7 +12,7 @@ var gameRulesController = {
         if( !setupController.checkBook() )
             return;
         
-        document.title = 'The game rules';
+        document.title = translations.text('gameRules');
         views.loadView('gameRules.html')
         .then(function() {
             

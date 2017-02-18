@@ -93,7 +93,7 @@ var routing = {
      * Hash change event handler
      */
     onHashChange: function() {
-        console.log('onHashChange');
+        //console.log('onHashChange');
         try {
             var controller = routing.getCurrentController();
             if( !controller )

@@ -123,12 +123,55 @@ var translations = {
         'playerNumber' : 'Jugador {0}',
 
         //////////////////////////////////////
+        // About page
+        //////////////////////////////////////
+
+        'about' : 'Acerca del libro',
+        'forSommerlund' : '¡Por Sommerlund y el Kai!',
+        'dedication' : 'Dedicatoria',
+        'gameMechanics' : 'Mecanicas del juego',
+        'aboutKaiChronicles' : 'Mecánicas del juego escritas por Toni Bennasar. El código está bajo licencia MIT. Contien partes de código de "Lone Wolf Adventures", de Liquid State Limited',
+
+        //////////////////////////////////////
+        // Main menu
+        //////////////////////////////////////
+
+        'appInfo' : 'Esto es una aplicación para jugar a los librojuegos de Lobo Solitario, del 1 al 4.',
+        'browsersWarning' : 'Sólo se soportan las últimas versiones de Chrome y Firefox. Otros navegadores o versiones no están soportados (pueden funcionar... o no).',
+        'historyWarning' : 'Ten en cuenta que si borras el historial de tu navegador, perderás la partida actual. Puedes guardar la partida actual a un archivo en <i>Ajustes &gt; Guardar juego</i>.',
+        'androidInfo' : 'Puedes jugar a esto en una aplicación Android (versión mínima 4.4.2). Descárgala <a href="kai.apk">aquí</a> (14 MB).',
+        'haveFun' : '¡Divierte!',
+        'continueGame' : 'Continuar el juego',
+        'newGame' : 'Nuevo juego',
+
+        //////////////////////////////////////
+        // New game
+        //////////////////////////////////////
+
+        'book' : 'Libro',
+        'book1Title' : '1. Huida de la oscuridad',
+        'book2Title' : '2. Fuego sobre agua',
+        'book3Title' : '3. Las Cavernas del Kalte',
+        'book4Title' : '4. El Abismo maldito',
+        'language' : 'Idioma',
+        'english' : 'Ingles',
+        'spanish' : 'Español',
+        'agreeLicense' : 'Estoy de acuerdo con los términos de la licencia del Proyecto Aon',
+        'licenseText' : 'Texto de la licencia',
+        'startGame' : 'Iniciar juego',
+
+        //////////////////////////////////////
         // Others
         //////////////////////////////////////
 
         'tableAvailableObjects' : 'Objetos disponibles:',
         'tableSellObjects' : 'Vender objetos:',
         'doMealFirst' : 'Haz primero la comida',
+        'kaiChronicles' : 'Crónicas del Kai',
+        'gameRules' : 'Reglas del juego',
+        'loadGame' : 'Cargar juego',
+        'confirmDeleteSave' : '¿Seguro que quiere borrar el juego guardado {0}?'
+
     },
 
     /**
@@ -208,10 +251,18 @@ var translations = {
         'playerNumber' : 'Player {0}',
 
         //////////////////////////////////////
+        // About page
+        //////////////////////////////////////
+
+        'about' : 'About the book',
+
+        //////////////////////////////////////
         // Others
         //////////////////////////////////////
 
-        'doMealFirst' : 'Please, do the Meal first'
+        'doMealFirst' : 'Please, do the Meal first',
+        'kaiChronicles' : 'Kai Chronicles',
+        'confirmDeleteSave' : 'Are you sure you want to delete the save game {0} ?'
 
     },
 

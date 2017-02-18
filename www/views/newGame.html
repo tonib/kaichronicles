@@ -1,4 +1,4 @@
-<h1>New game</h1>
+<h1 data-translation="newGame">New game</h1>
 
 <div class="row">
 
@@ -7,32 +7,44 @@
         <form id="newgame-form" style="margin-bottom: 20px">
 
             <div class="form-group">
-                <label for="newgame-book">Book</label>
+                <label for="newgame-book" data-translation="book">Book</label>
                 <select class="form-control" id="newgame-book">
-                    <option value="1">1. Flight from the Dark</option>
-                    <option value="2">2. Fire on the Water</option>
-                    <option value="3">3. The Caverns of Kalte</option>
-                    <option value="4">4. The Chasm of Doom</option>
+                    <option value="1" data-translation="book1Title">
+                        1. Flight from the Dark
+                    </option>
+                    <option value="2" data-translation="book2Title">
+                        2. Fire on the Water
+                    </option>
+                    <option value="3" data-translation="book3Title">
+                        3. The Caverns of Kalte
+                    </option>
+                    <option value="4" data-translation="book4Title">
+                        4. The Chasm of Doom
+                    </option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label for="newgame-language">Book Language</label>
+                <label for="newgame-language" data-translation="language">Language</label>
                 <select class="form-control" id="newgame-language">
-                    <option value="en">English</option>
-                    <option value="es">Spanish</option>
+                    <option value="en" data-translation="english">English</option>
+                    <option value="es" data-translation="spanish">Spanish</option>
                 </select>
             </div>
 
             <div class="checkbox">
                 <label>
                     <input type="checkbox" id="newgame-license" checked="checked"> 
-                    I agree to the Project Aon license terms
+                    <span data-translation="agreeLicense">
+                        I agree to the Project Aon license terms
+                    </span>
                 </label>
-                (<a href="#projectAonLicense">Project Aon license text</a>)
+                (<a href="#projectAonLicense" data-translation="licenseText">License text</a>)
             </div>
 
-            <button type="submit" class="btn btn-primary">Start game</button>
+            <button type="submit" class="btn btn-primary" data-translation="startGame">
+                Start game
+            </button>
 
         </form>
     </div>

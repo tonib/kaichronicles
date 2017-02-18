@@ -8,7 +8,7 @@ var loadGameController = {
      * The load game page 
      */
     index: function() {
-        template.setNavTitle('Kai Chronicles', '#mainMenu');
+        template.setNavTitle( translations.text('kaiChronicles'), '#mainMenu');
         template.showStatistics(false);
         views.loadView('loadGame.html').then(function() {
                 

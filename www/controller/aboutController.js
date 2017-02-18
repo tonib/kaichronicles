@@ -12,7 +12,7 @@ var aboutController = {
         if( !setupController.checkBook() )
             return;
         
-        document.title = 'About';
+        document.title = translations.text( 'about' );
         views.loadView('about.html')
         .then(function() {
             

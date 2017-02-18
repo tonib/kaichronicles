@@ -9,7 +9,7 @@ var newGameController = {
      */
     index: function() {
 
-        template.setNavTitle('Kai Chronicles', '#mainMenu');
+        template.setNavTitle( translations.text('kaiChronicles') , '#mainMenu');
         template.showStatistics(false);
 
         views.loadView('newGame.html')
