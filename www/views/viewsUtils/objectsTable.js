@@ -137,40 +137,7 @@ var objectsTable = {
             switch(op) {
                 case 'get':
                     // Pick the object
-
-                    // Check if it's a buy
-                    var price = $(this).attr('data-price');
-                    if( price ) {
-                        price = parseInt( price );
-
-                        if( state.actionChart.beltPouch < price ) {
-                            alert("You don't have enough money" );
-                            return;
-                        }
-
-                        if( !confirm('Are you sure you want to buy the object by ' + price +  
-                            ' Golden Crowns?') )
-                            return;
-                            
-                    }
-
-                    if( actionChartController.pick( o.id ) ) {
-
-                        var unlimited = $(this).attr('data-unlimited');
-                        if( !unlimited ) {
-                            // Remove it from the available objects on the section
-                            state.sectionStates.removeObjectFromSection( o.id );
-                        }
-                        
-                        // Refresh the table of available objects
-                        mechanicsEngine.showAvailableObjects();
-                        mechanicsEngine.showSellObjects();
-
-                        if( price ) {
-                            // Pay the price
-                            actionChartController.increaseMoney( - price );
-                        }
-                    }
+                    objectsTable.onGetObjectClicked( $(this) , o );
                     break;
 
                 case 'sell':
@@ -207,4 +174,46 @@ var objectsTable = {
         });
     },
 
+    /**
+     * Link to get an object clicked event handler
+     * @param {jQuery} $link The link clicked
+     * @param {Item} o The object to get
+     */
+    onGetObjectClicked: function( $link , o ) {
+
+        // Check if it's a buy
+        var price = $link.attr('data-price');
+        if( price ) {
+            price = parseInt( price );
+
+            if( state.actionChart.beltPouch < price ) {
+                alert("You don't have enough money" );
+                return;
+            }
+
+            if( !confirm('Are you sure you want to buy the object by ' + price +  
+                ' Golden Crowns?') )
+                return;
+                
+        }
+
+        if( actionChartController.pick( o.id ) ) {
+
+            var unlimited = $link.attr('data-unlimited');
+            if( !unlimited ) {
+                // Remove it from the available objects on the section
+                state.sectionStates.removeObjectFromSection( o.id );
+            }
+            
+            // Refresh the table of available objects
+            mechanicsEngine.showAvailableObjects();
+            mechanicsEngine.showSellObjects();
+
+            if( price ) {
+                // Pay the price
+                actionChartController.increaseMoney( - price );
+            }
+        }
+        
+    }
 }
