@@ -25,7 +25,7 @@ var mealMechanics = {
             $(mealSelector).remove();
 
         // Get a copy of the meal UI
-        var $meal = mechanicsEngine.$mechanicsUI.find('#mechanics-meal').clone();
+        var $meal = mechanicsEngine.getMechanicsUI('mechanics-meal');
         $meal.attr('id' , id);
 
         // Set the radio inputs id

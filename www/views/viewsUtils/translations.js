@@ -66,11 +66,20 @@ var translations = {
         'randomTable' : 'Tabla de la Suerte',
         'randomTableSmall' : 'T.S.',
         'loneWolf': 'Lobo Solitario',
-        combatSkillUpper : 'DESTREZA EN EL COMBATE',
-        enduranceUpper : 'RESISTENCIA',
-        playTurn : 'Jugar turno',
-        eludeCombat : 'Eludir combate'
+        'combatSkillUpper' : 'DESTREZA EN EL COMBATE',
+        'enduranceUpper' : 'RESISTENCIA',
+        'playTurn' : 'Jugar turno',
+        'eludeCombat' : 'Eludir combate',
         
+        //////////////////////////////////////
+        // Meals
+        //////////////////////////////////////
+
+        'useHunting' : 'Usar la disciplina de Caza',
+        'eatBackpackMeal' : 'Comer una comida de la mochila',
+        'eatBackpackObject' : 'Comer',
+        'buyMeal' : 'Comprar comida',
+        'doNotEat' : 'No comer (-3 RESISTENCIA)'
     },
 
     /**
@@ -121,8 +130,8 @@ var translations = {
         // Combats
         //////////////////////////////////////
 
-        combatSkillUpper : 'COMBAT SKILL',
-        enduranceUpper : 'ENDURANCE'
+        'combatSkillUpper' : 'COMBAT SKILL',
+        'enduranceUpper' : 'ENDURANCE'
     },
 
     /**
