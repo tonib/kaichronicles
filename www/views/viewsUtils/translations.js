@@ -16,7 +16,7 @@ var translations = {
         'actionChart' : 'Carta de Acción',
         'combatSkill' : 'Destreza en el Combate',
         'endurancePoints' : 'Puntos de Resistencia',
-        'beltPouch' : 'Bolsa (Máx. 50)',
+        'actionBeltPouch' : 'Bolsa (Máx. 50)',
         'kaiDisciplines' : 'Diciplinas del Kai',
         'weapons' : 'Armas',
         'currentWeapon' : 'Arma actual:',
@@ -111,6 +111,18 @@ var translations = {
         'maxDisciplines' : 'Sólo puede elegir {0} disciplinas',
 
         //////////////////////////////////////
+        // Special sections
+        //////////////////////////////////////
+
+        'beltPouch' : 'Bolsa',
+        'moneyWon' : 'Dinero ganado',
+        'numberToBet' : 'Numero a apostar',
+        'crownsToBet' : 'Coronas a apostar',
+        'play' : 'Jugar',
+        'playerDices' : 'Dados de {0}',
+        'playerNumber' : 'Jugador {0}',
+
+        //////////////////////////////////////
         // Others
         //////////////////////////////////////
 
@@ -170,6 +182,7 @@ var translations = {
         'randomTable' : 'Random Number Table',
         'combatSkillUpper' : 'COMBAT SKILL',
         'enduranceUpper' : 'ENDURANCE',
+        'loneWolf': 'Lone Wolf',
 
         //////////////////////////////////////
         // Number picker
@@ -186,6 +199,13 @@ var translations = {
         'combatSkillSet' : 'Your Combat Skill is {0}',
         'enduranceSet' : 'Your Endurance Points are {0}',
         'maxDisciplines' : 'You can choose only {0} disciplines',
+
+        //////////////////////////////////////
+        // Special sections
+        //////////////////////////////////////
+
+        'playerDices' : '{0} dices',
+        'playerNumber' : 'Player {0}',
 
         //////////////////////////////////////
         // Others

@@ -9,7 +9,7 @@ var specialSectionsMechanics = {
      */
     book2Sect238: function(rule) {
         // Cartwheel game UI:
-        var $gameUI = mechanicsEngine.$mechanicsUI.find('#mechanics-book2Sect248').clone();
+        var $gameUI = mechanicsEngine.getMechanicsUI('mechanics-book2Sect248');
         gameView.appendToSection( $gameUI );
 
         // Bind number pickers events
@@ -51,7 +51,8 @@ var specialSectionsMechanics = {
         
         updateUI( gameState , true );
 
-        $('#mechanics-play').click(function() {
+        $('#mechanics-play').click(function(e) {
+            e.preventDefault();
 
             // Checks
             if( !$('#mechanics-moneyToBet').isValid() || 
@@ -83,11 +84,11 @@ var specialSectionsMechanics = {
             gameState.moneyToBet = money;
             gameState.numberToBet = number;
             gameState.moneyWon += moneyInc;
-            var msg = 'Random Table: ' + random;
+            var msg = translations.text('randomTable') + ': ' + random + '. ';
             if( moneyInc >= 0 )
-                msg += '. You won ' + moneyInc + ' Crowns';
+                msg += translations.text('msgGetMoney' , [moneyInc] );
             else
-                msg += '. You lost ' + (-moneyInc) + ' Crowns';
+                msg += translations.text('msgDropMoney' , [-moneyInc] );
             $('#mechanics-gameStatus').text( msg );
 
             updateUI( gameState , false );
@@ -101,8 +102,7 @@ var specialSectionsMechanics = {
     book2sect308: function() {
 
         // Portholes game UI:
-        var $gameUI = mechanicsEngine.$mechanicsUI
-            .find('#mechanics-book2Sect308').clone();
+        var $gameUI = mechanicsEngine.getMechanicsUI('mechanics-book2Sect308');
         gameView.appendToSection( $gameUI );
 
         /**
@@ -122,8 +122,8 @@ var specialSectionsMechanics = {
                 dice1: randomTable.getRandomValue(),
                 dice2: randomTable.getRandomValue()
             };
-            result.status = playerName + ' dices: ' + result.dice1 + ' + ' + 
-                result.dice2 + ' = ';
+            result.status = translations.text( 'playerDices' , [playerName] )  + ': ' + 
+                result.dice1 + ' + ' + result.dice2 + ' = ';
             if( result.dice1 == 0 && result.dice2 == 0 ) {
                 result.total = 100;
                 result.status += ' Portholes!';
@@ -135,24 +135,25 @@ var specialSectionsMechanics = {
             return result;
         };
 
-        $('#mechanics-play').click(function() {
+        $('#mechanics-play').click(function(e) {
+            e.preventDefault();
 
             if( state.actionChart.beltPouch < 3 ) {
-                alert( 'You don\'t have enougth money to bet' );
+                alert( translations.text('noEnoughMoney') );
                 return;
             }
 
-            var player1 = playerResult('Player 1'), 
-                player2 = playerResult('Player 2'),
-                lw = playerResult('Lone Wolf');
+            var player1 = playerResult( translations.text('playerNumber' , [1]) ), 
+                player2 = playerResult( translations.text('playerNumber' , [2]) ),
+                lw = playerResult( translations.text('loneWolf') );
             var status = player1.status + '<br/>' + 
                 player2.status + '<br/>' + lw.status + '<br/>';
             if( lw.total > player1.total && lw.total > player2.total ) {
-                status += 'You won 6 Gold Crowns';
+                status += translations.text('msgGetMoney' , [6]);
                 actionChartController.increaseMoney(6);
             }
             else {
-                status += 'You lost 3 Gold Crowns';
+                status += translations.text('msgDropMoney' , [3]);
                 actionChartController.increaseMoney(-3);
             }
 
