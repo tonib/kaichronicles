@@ -57,7 +57,10 @@
             <object objectId="broadsword" />
             
             <!-- Choose equipment UI -->
-            <chooseEquipment en-text="Pick the money and choose two objects before continue (both meals count as one object)" />
+            <chooseEquipment 
+                en-text="Pick the money and choose two objects before continue (both meals count as one object)" 
+                es-text="Escoge el dinero y elige dos objetos antes de continuar (ambas comidas cuentan como un objeto)"
+            />
         </section>
 
         <section id="sect2">

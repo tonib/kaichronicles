@@ -58,7 +58,10 @@
             <object objectId="chainmail" />
             <object objectId="shield" />
 
-            <chooseEquipment en-text="Pick the money and choose up to six objects before continue" />
+            <chooseEquipment 
+                en-text="Pick the money and choose up to six objects before continue" 
+                es-text="Escoge el dinero y elige hasta seis objetos antes de continuar"
+            />
         </section>
 
         <section id="sect2">

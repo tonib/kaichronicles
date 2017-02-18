@@ -12,8 +12,7 @@ var setupMechanics = {
             return;
 
         // Add HTML to do the choose
-        gameView.appendToSection( 
-            mechanicsEngine.$mechanicsUI.find('#mechanics-setSkills').clone() );
+        gameView.appendToSection( mechanicsEngine.getMechanicsUI('mechanics-setSkills') );
 
         // Disable next link
         gameView.enableNextLink(false);
@@ -25,8 +24,7 @@ var setupMechanics = {
             var $w = $('#mechanics-chooseWeapon');
             randomMechanics.bindTableRandomLink( $w , function(value) {
                 state.actionChart.combatSkill = value + 10;
-                $w.parent().append("<b>Your Combat Skill is " + state.actionChart.combatSkill + 
-                    ".</b>" );
+                $w.parent().append( '<b>' + translations.text('combatSkillSet' , [state.actionChart.combatSkill] ) + '.</b>' );
                 template.updateStatistics();
                 if( state.actionChart.combatSkill != 0 && state.actionChart.endurance != 0 )
                     gameView.enableNextLink(true);
@@ -41,8 +39,7 @@ var setupMechanics = {
             randomMechanics.bindTableRandomLink( $e , function(value) {
                 state.actionChart.endurance = value + 20;
                 state.actionChart.currentEndurance = state.actionChart.endurance;
-                $e.parent().append("<b>Your Endurance Points are " + state.actionChart.endurance + 
-                    ".</b>" );
+                $e.parent().append('<b>' + translations.text('enduranceSet' , [state.actionChart.endurance]) + '.</b>' );
                 template.updateStatistics();
                 if( state.actionChart.combatSkill != 0 && state.actionChart.endurance != 0 )
                     gameView.enableNextLink(true);
@@ -80,14 +77,13 @@ var setupMechanics = {
             var value = randomTable.getRandomValue();
             state.actionChart.weaponSkill = wTable[ value ];
             setWeaponSkillName();
-            $('#wepnskll .well').append('<div><i><small>Random table value: ' + value + 
+            $('#wepnskll .well').append('<div><i><small>' + translations.text('randomTable') + ': ' + value + 
                 '</small></i></div>')
             return state.actionChart.weaponSkill;
         };
 
         // Add the warning about the number of disciplines:
-        gameView.appendToSection( 
-            mechanicsEngine.$mechanicsUI.find('#mechanics-setDisciplines-NDis').clone() );
+        gameView.appendToSection( mechanicsEngine.getMechanicsUI('mechanics-setDisciplines-NDis') );
         $('#mechanics-nDisciplines').text( expectedNDisciplines );
         if( allSelected() ) {
             $('#mechanics-setDisciplines-NDis').hide();
@@ -97,9 +93,7 @@ var setupMechanics = {
             gameView.enableNextLink(false);
 
         // Add checkbox for each discipline:
-        $('.subsection').append( 
-            mechanicsEngine.$mechanicsUI.find('#mechanics-setDisciplines').clone() 
-        )
+        $('.subsection').append( mechanicsEngine.getMechanicsUI('mechanics-setDisciplines') )
         .each(function(index, $disciplineSection) {
             // Set the discipline name on the checkbox
             var $title = $(this).find( '.subsectionTitle' );
@@ -125,7 +119,7 @@ var setupMechanics = {
             var selected = $(this).prop( 'checked' );
             if( selected && allSelected() && !window.getUrlParameter('debug') ) {
                 e.preventDefault();
-                alert( 'You can choose only ' + expectedNDisciplines + ' disciplines');
+                alert( translations.text( 'maxDisciplines' , [expectedNDisciplines] ) );
                 return;
             }
             // Add / remove the discipline
@@ -162,10 +156,9 @@ var setupMechanics = {
     chooseEquipment: function(rule) {
         
         // Add the UI:
-        gameView.appendToSection( 
-            mechanicsEngine.$mechanicsUI.find('#mechanics-chooseEquipment').clone() );
+        gameView.appendToSection( mechanicsEngine.getMechanicsUI('mechanics-chooseEquipment') );
         gameView.enableNextLink(false);
-        $('#mechanics-chooseEquipment-msg').text( $(rule).attr('en-text') );
+        $('#mechanics-chooseEquipment-msg').text( mechanicsEngine.getRuleText( rule ) );
 
         // Function to test all links were clicked
         var testAllClicked = function() {

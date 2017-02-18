@@ -98,11 +98,25 @@ var translations = {
         'npMaxValue' : 'El valor máximo para "{0}" es {1}',
 
         //////////////////////////////////////
+        // Game setup
+        //////////////////////////////////////
+
+        'chooseNumberOn' : 'Elige un numero en la',
+        'determineCS' : 'para determinar tu Destreza en el Combate',
+        'determineE' : 'para determinar tu Resistencia',
+        'combatSkillSet' : 'Tu Destreza en el Combate es {0}',
+        'enduranceSet' : 'Tus puntos de Resistencia son {0}',
+        'selectNDisciplines' : 'Por favor, selcciona <span id="mechanics-nDisciplines"></span> disciplinas antes de continuar.',
+        'choose' : 'Elige',
+        'maxDisciplines' : 'Sólo puede elegir {0} disciplinas',
+
+        //////////////////////////////////////
         // Others
         //////////////////////////////////////
 
         'tableAvailableObjects' : 'Objetos disponibles:',
-        'tableSellObjects' : 'Vender objetos:'
+        'tableSellObjects' : 'Vender objetos:',
+        'doMealFirst' : 'Haz primero la comida',
     },
 
     /**
@@ -153,6 +167,7 @@ var translations = {
         // Combats
         //////////////////////////////////////
 
+        'randomTable' : 'Random Number Table',
         'combatSkillUpper' : 'COMBAT SKILL',
         'enduranceUpper' : 'ENDURANCE',
 
@@ -163,6 +178,20 @@ var translations = {
         'npWrongValue' : 'Wrong value for "{0}"',
         'npMinValue' : 'Minimum value for "{0}" is {1}',
         'npMaxValue' : 'Maximum value for "{0}" is {1}',
+
+        //////////////////////////////////////
+        // Game setup
+        //////////////////////////////////////
+
+        'combatSkillSet' : 'Your Combat Skill is {0}',
+        'enduranceSet' : 'Your Endurance Points are {0}',
+        'maxDisciplines' : 'You can choose only {0} disciplines',
+
+        //////////////////////////////////////
+        // Others
+        //////////////////////////////////////
+
+        'doMealFirst' : 'Please, do the Meal first'
 
     },
 

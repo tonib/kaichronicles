@@ -67,7 +67,10 @@
             </randomTable>
 
             <!-- Choose equipment UI -->
-            <chooseEquipment en-text="Click on both Random Table links before continue" />
+            <chooseEquipment 
+                en-text="Click on both Random Table links before continue" 
+                es-text="Haz click en ambos links de la Tabla de la Suerte antes de continuar"
+            />
 
         </section>
 

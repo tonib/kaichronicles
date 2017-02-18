@@ -52,7 +52,10 @@
             <object objectId="meal" />
             <object objectId="broadsword" />
 
-            <chooseEquipment en-text="Pick the money and choose two objects before continue" />
+            <chooseEquipment 
+                en-text="Pick the money and choose two objects before continue" 
+                es-text="Escoge el dinero y elige dos objetos antes de continuar"
+            />
         </section>
 
         <section id="sect4">

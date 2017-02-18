@@ -102,7 +102,7 @@ var randomMechanics = {
 
             // If there are pending meals, don't follow with this link
             if( mealMechanics.arePendingMeals() ) {
-                alert('Please, do the Meal first');
+                alert( translations.text('doMealFirst') );
                 return;
             }
 
