@@ -14,76 +14,89 @@ var objectsTable = {
     objectsList: function(objects, $tableBody, type ) {
 
         $tableBody.empty();
-        
-        var someObjectAdded = false;
 
         // Populate the table
-        $.each( objects , function(index, objectInfo) {
+        var html = '';
+        for( var i=0; i<objects.length; i++ ) {
+            var objectHtml = objectsTable.renderObject( objects[i] , type );
+            if( objectHtml )
+                html += objectHtml;
+        }
 
-            // Get the object id and price:
-            var objectId, price, unlimited;
-            if( typeof(objectInfo) === 'string' ) {
-                // The object info is directly the object id
-                objectId = objectInfo;
-                price = null;
-                unlimited = false;
-            }
-            else {
-                // The object info is the info about objects available on the section
-                // See SectionState.objects documentation
-                objectId = objectInfo.id;
-                price = objectInfo.price;
-                unlimited = objectInfo.unlimited; 
-            }
+        if( !html )
+            html = '<tr><td><i>(None)</i></td></tr>';
 
-            // Get the object info
-            var o = state.mechanics.getObject(objectId);
-            if( !o )
-                return;
-
-            // If it's a sell table, and we don't have the object, do not show it
-            if( type == 'sell' && !state.actionChart.hasObject(o.id) )
-                return;
-
-            var html = '<tr><td>';
-
-            // Object operations
-            html += objectsTable.operationsHtml( o , type , price , unlimited );
-
-            // Image
-            if( o.imageUrl ) {
-                html += '<span class="inventoryImgContainer"><img class="inventoryImg" src=' + 
-                    o.imageUrl + ' /></span>';
-            }
-
-            // Name
-            var name = o.name;
-            if( price )
-                name += ' (' + price + ' Golden Crowns)';
-
-            if( objectId == 'map' )
-                // It's the map:
-                name = '<a href="#map">' + name + '</a>';
-            else if( o.imageUrl )
-                // Add a link to view a larger version of the image
-                name = '<a href="#" class="equipment-op" data-op="details" data-objectId="' + 
-                o.id + '">' + name + '</a>';
-            html += '<span><b>' + name + '</b></span>';
-
-            // Description
-            if( o.description )
-                html += '<br/><i><small>' + o.description +'</small></i>';
-
-            html += '</td></tr>';
-            $tableBody.append( html );
-            someObjectAdded = true;
-        });
-
-        if( !someObjectAdded )
-            $tableBody.append( '<tr><td><i>(None)</i></td></tr>' );
+        $tableBody.append( html );
 
         // Bind events:
         objectsTable.bindEquipmentEvents( $tableBody );
+    },
+
+    /**
+     * Render an object to HTML
+     * @param {string|object} objectInfo The object to render: The object id, 
+     * or an object with properties objectId, price and unlimited (see 
+     * SectionState.objects documentation)
+     * @returns {string} The object HTML. null if the object should not be rendered
+     */
+    renderObject: function( objectInfo , type ) {
+
+        // Get the object id and price:
+        var objectId, price, unlimited;
+        if( typeof(objectInfo) === 'string' ) {
+            // The object info is directly the object id
+            objectId = objectInfo;
+            price = null;
+            unlimited = false;
+        }
+        else {
+            // The object info is the info about objects available on the section
+            // See SectionState.objects documentation
+            objectId = objectInfo.id;
+            price = objectInfo.price;
+            unlimited = objectInfo.unlimited; 
+        }
+
+        // Get the object info
+        var o = state.mechanics.getObject(objectId);
+        if( !o )
+            return null;
+
+        // If it's a sell table, and we don't have the object, do not show it
+        if( type == 'sell' && !state.actionChart.hasObject(objectId) )
+            return null;
+
+        var html = '<tr><td>';
+
+        // Object operations
+        html += objectsTable.operationsHtml( o , type , price , unlimited );
+
+        // Image
+        if( o.imageUrl ) {
+            html += '<span class="inventoryImgContainer"><img class="inventoryImg" src=' + 
+                o.imageUrl + ' /></span>';
+        }
+
+        // Name
+        var name = o.name;
+        if( price )
+            name += ' (' + price + ' Golden Crowns)';
+
+        if( objectId == 'map' )
+            // It's the map:
+            name = '<a href="#map">' + name + '</a>';
+        else if( o.imageUrl )
+            // Add a link to view a larger version of the image
+            name = '<a href="#" class="equipment-op" data-op="details" data-objectId="' + 
+            o.id + '">' + name + '</a>';
+        html += '<span><b>' + name + '</b></span>';
+
+        // Description
+        if( o.description )
+            html += '<br/><i><small>' + o.description +'</small></i>';
+
+        html += '</td></tr>';
+        return html;
     },
 
     /**
@@ -94,7 +107,7 @@ var objectsTable = {
      * @param {number} price Object price. Only if type is 'available' or 'sell'
      * @param {boolean} unlimited True if there is an unlimited amount of this object on
      * the section. Only if type is 'available'
-     * @returns The operations HTML
+     * @returns {string} The operations HTML
      */
     operationsHtml: function(o, type, price, unlimited) {
 
