@@ -52,6 +52,16 @@ var mechanicsEngine = {
         });
     },
 
+    /**
+     * Get a mechanics tag from the mechanicsEngine.html file, translated
+     * @param {string} tagId The tag id to get
+     * @returns {jQuery} The translated tag
+     */
+    getMechanicsUI: function( tagId ) {
+        var $tag = mechanicsEngine.$mechanicsUI.find('#' + tagId ).clone();
+        return translations.translateView($tag, true);
+    },
+
     /************************************************************/
     /**************** RULES EXECUTION ENTRY *********************/
     /************************************************************/

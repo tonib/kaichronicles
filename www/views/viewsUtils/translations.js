@@ -56,7 +56,21 @@ var translations = {
         'msgNoMoreBackpackItems' : 'No puedes coger mas Objetos de Mochila',
         'noWeapon' : 'Sin arma',
         'weaponskill' : 'Dominio Manejo Armas',
-        'mindblast' : 'Ataque Psíquico'
+        'mindblast' : 'Ataque Psíquico',
+
+        //////////////////////////////////////
+        // Combats
+        //////////////////////////////////////
+
+        'combatRatio' : 'PUNTUACIÓN EN EL COMBATE',
+        'randomTable' : 'Tabla de la Suerte',
+        'randomTableSmall' : 'T.S.',
+        'loneWolf': 'Lobo Solitario',
+        combatSkillUpper : 'DESTREZA EN EL COMBATE',
+        enduranceUpper : 'RESISTENCIA',
+        playTurn : 'Jugar turno',
+        eludeCombat : 'Eludir combate'
+        
     },
 
     /**
@@ -101,21 +115,34 @@ var translations = {
         'msgNoMoreBackpackItems' : 'You cannot get more Backpack Items',
         'noWeapon' : 'No weapon',
         'weaponskill' : 'Weaponskill',
-        'mindblast' : 'Mindblast'
+        'mindblast' : 'Mindblast',
+
+        //////////////////////////////////////
+        // Combats
+        //////////////////////////////////////
+
+        combatSkillUpper : 'COMBAT SKILL',
+        enduranceUpper : 'ENDURANCE'
     },
 
     /**
      * Returns a DOM view translated to the current language
      * @param {DOM} view The view to translate
+     * @param {boolean} doNotClone True if the view should be modified. False, if a clone of the view
+     * should be returned
      */
-    translateView: function( view ) {
+    translateView: function( view , doNotClone ) {
 
         var table = translations[state.language];
         if( !translations[state.language] )
             // Translation not available
             return view;
  
-        var $clonedView = $(view).clone();
+        var $clonedView;
+        if( doNotClone )
+            $clonedView = $(view);
+        else
+            $clonedView = $(view).clone();
 
         // Translate the view
         var translatedTags = $clonedView

@@ -12,7 +12,8 @@ var combatMechanics = {
             return;
 
         // Combat UI template:
-        var $template = mechanicsEngine.$mechanicsUI.find('#mechanics-combat').clone();
+        var $template = mechanicsEngine.getMechanicsUI('mechanics-combat');
+
         $template.attr('id', null);
         
         // Populate combats
@@ -222,7 +223,7 @@ var combatMechanics = {
      */
     renderCombatTurn: function( $combatTableBody , turn ) {
         $combatTableBody.append(
-            '<tr><td>' + turn.turnNumber + '</td><td>' + turn.randomValue + 
+            '<tr><td class="hidden-xs">' + turn.turnNumber + '</td><td>' + turn.randomValue + 
             '</td><td>' + turn.getPlayerLossText() + '</td><td>' + 
             turn.getEnemyLossText() + '</td></tr>'
         );

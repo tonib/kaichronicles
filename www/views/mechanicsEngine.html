@@ -64,25 +64,26 @@
             title="Show combat tables">
             <span class="glyphicon glyphicon-th"></span>
         </button>
-        <p><span class="attribute">COMBAT RATIO</span>: 
+        <p><span class="attribute" data-translation="combatRatio">COMBAT RATIO</span>: 
         <span class="mechanics-combatRatio">CR</span></p>
         <table class="table table-striped table-bordered bold-head" style="display:none">
             <thead>
                 <tr>
-                    <td>#</td>
+                    <td class="hidden-xs">#</td>
                     <td>
-                        <span class="hidden-xs">Random table</span>
-                        <span class="visible-xs-inline">R.</span>
+                        <span class="hidden-xs" data-translation="randomTable">Random table</span>
+                        <span class="visible-xs-inline" data-translation="randomTableSmall">R.</span>
                     </td>
-                    <td>E.P. lost (Lone Wolf)</td>
-                    <td>E.P. lost (<span class="mechanics-enemyName">Enemy</span>)</td>
+                    <td data-translation="loneWolf">Lone Wolf</td>
+                    <td><span class="mechanics-enemyName">Enemy</span></td>
                 </tr>
             </thead>
             <tbody>
             </tbody>
         </table>
-        <a href="#" class="btn btn-default mechanics-playTurn">Play turn</a>
-        <a href="#" class="btn btn-default mechanics-elude" style="display: none">Elude combat</a>
+        <a href="#" class="btn btn-default mechanics-playTurn" data-translation="playTurn">Play turn</a>
+        <a href="#" class="btn btn-default mechanics-elude" 
+            style="display: none" data-translation="eludeCombat">Elude combat</a>
     </div>
 
     <!-- Player death -->

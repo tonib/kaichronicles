@@ -392,9 +392,9 @@ SectionRenderer.prototype.combat = function( $combat , level ) {
     var combatSkill = $combat.find('.combatskill').text();
     var endurance = $combat.find('.endurance').text();
     return '<div class="combat well"><b>' + enemy + '</b><br />' + 
-        '<span class="attribute">COMBAT SKILL</span>: ' + 
+        '<span class="attribute">' + translations.text('combatSkillUpper') + '</span>: ' + 
         combatSkill + 
-        ' &nbsp;&nbsp; <span class="attribute">ENDURANCE</span>: ' + 
+        ' &nbsp;&nbsp; <span class="attribute">' + translations.text('enduranceUpper') + '</span>: ' + 
         '<span class="enemy-current-endurance">' + endurance + 
         '</span> / ' + 
         endurance + '</div>';
