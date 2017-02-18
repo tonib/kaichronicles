@@ -93,26 +93,26 @@
         var number = this.getNumber();
 
         if( isNaN(number) ) {
-            alert('Wrong value for "' + this.getTitle() + '"');
+            alert( translations.text('npWrongValue' , [this.getTitle()] ) );
             return false;
         }
 
         var min = this.getMinValue();
         if( number < min ) {
-            alert('Minimun value for "' + this.getTitle() + '" is ' + min);
+            alert( translations.text( 'npMinValue' , [ this.getTitle() , min ] ) );
             return false;
         }
 
         var max = this.getMaxValue();
         if( number > max ) {
-            alert('Maximum value for "' + this.getTitle() + '" is ' + max);
+            alert( translations.text( 'npMaxValue' , [ this.getTitle() , max ] ) );
             return false;
         }
 
         if( this.attr('data-ismoneypicker') == 'true' ) {
             // Check if you have enougth money
             if( state.actionChart.beltPouch < number) {
-                alert('You have only ' + state.actionChart.beltPouch + ' Gold Crowns');
+                alert( translations.text( 'noEnoughMoney' ) );
                 return false;
             }
         }

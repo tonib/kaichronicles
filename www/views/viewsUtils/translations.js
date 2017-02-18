@@ -90,6 +90,14 @@ var translations = {
         'deathLoadGame' : 'Haz click aquí para cargar un juego salvado',
 
         //////////////////////////////////////
+        // Number picker
+        //////////////////////////////////////
+
+        'npWrongValue' : 'Valor erroneo para "{0}"',
+        'npMinValue' : 'El valor mínimo para "{0}" es {1}',
+        'npMaxValue' : 'El valor máximo para "{0}" es {1}',
+
+        //////////////////////////////////////
         // Others
         //////////////////////////////////////
 
@@ -146,7 +154,16 @@ var translations = {
         //////////////////////////////////////
 
         'combatSkillUpper' : 'COMBAT SKILL',
-        'enduranceUpper' : 'ENDURANCE'
+        'enduranceUpper' : 'ENDURANCE',
+
+        //////////////////////////////////////
+        // Number picker
+        //////////////////////////////////////
+
+        'npWrongValue' : 'Wrong value for "{0}"',
+        'npMinValue' : 'Minimum value for "{0}" is {1}',
+        'npMaxValue' : 'Maximum value for "{0}" is {1}',
+
     },
 
     /**

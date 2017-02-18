@@ -16,11 +16,10 @@ var moneyPickerMechanics = {
         }
 
         // Add HTML to do the choose
-        gameView.appendToSection( 
-            mechanicsEngine.$mechanicsUI.find('#mechanics-moneypicker').clone() );
+        gameView.appendToSection( mechanicsEngine.getMechanicsUI('mechanics-moneypicker') );
 
         // Set the title
-        $('#mechanics-mpTitle').text( $(rule).attr('en-text') );
+        $('#mechanics-mpTitle').text( mechanicsEngine.getRuleText(rule) );
 
         // Bind number picker events
         $('#mechanics-mpAmount').bindNumberEvents();

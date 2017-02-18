@@ -861,7 +861,8 @@
         <section id="sect152">
             <choiceState section="all" set="disabled" />
             <moneyPicker 
-                en-text="Choose the number of Gold Crowns you are going to throw" 
+                en-text="Choose the number of Gold Crowns you are going to throw"
+                es-text="Elige el número de Coronas de Oro que vas a lanzar"
                 min="1" />
             <randomTable zeroAsTen="true">
                 <moneyPicker enabled="false" />
