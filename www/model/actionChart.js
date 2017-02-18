@@ -49,14 +49,14 @@ ActionChart.prototype.pick = function(o) {
     // Check incompatibilities
     if( o.imcompatibleWith && this.hasObject(o.imcompatibleWith) ) {
         var incombatibleObject = state.mechanics.getObject(o.imcompatibleWith);
-        throw 'You already have a "' + incombatibleObject.name + '"';
+        throw translations.text( 'msgIncompatible' , [incombatibleObject.name] );
     }
 
     switch( o.type ) {
         case 'weapon':
             if( this.weapons.length >= 2 )
-                throw 'You cannot pick more weapons';
-            console.log('Picked weapon ' + o.id);
+                throw translations.text('msgNoMoreWeapons');
+            //console.log('Picked weapon ' + o.id);
             this.weapons.push(o.id);
             this.checkCurrentWeapon();
             return true;
@@ -65,7 +65,7 @@ ActionChart.prototype.pick = function(o) {
             this.specialItems.push(o.id);
             if(o.isWeapon())
                 this.checkCurrentWeapon();
-            console.log('Picked special ' + o.id);
+            //console.log('Picked special ' + o.id);
             return true;
 
         case 'object':
@@ -73,16 +73,16 @@ ActionChart.prototype.pick = function(o) {
             if( o.id == 'backpack' ) {
                 // Special case
                 if( this.hasBackpack )
-                    throw 'You already have a backpack';
+                    throw translations.text( 'msgAlreadyBackpack' );
 
                 this.hasBackpack = true;
                 return true;
             }
 
             if( !this.hasBackpack )
-                throw 'You don\'t have a backpack';
+                throw translations.text( 'backpackLost' );
             if( ( this.getNBackpackItems() + o.itemCount ) > 8 )
-                throw 'You can have only 8 backpack objects';
+                throw translations.text( 'msgNoMoreBackpackItems' );
             if( o.id == 'meal')
                 // Special case
                 this.increaseMeals(1);
@@ -121,7 +121,7 @@ ActionChart.prototype.increaseMeals = function(count) {
     if( count > 0 ) {
 
         if( !this.hasBackpack )
-            throw 'You don\'t have  a backpack';
+            throw translations.text( 'backpackLost' );
 
         var maxToPick = 8 - this.getNBackpackItems();
         if( maxToPick < 0 )
@@ -130,7 +130,7 @@ ActionChart.prototype.increaseMeals = function(count) {
             count = maxToPick; 
     }
     this.meals += count;
-    console.log('Picked ' + count + ' meals');
+    //console.log('Picked ' + count + ' meals');
     return count;
 };
 
@@ -144,7 +144,7 @@ ActionChart.prototype.increaseMoney = function(count) {
         this.beltPouch = 50;
     else if( this.beltPouch < 0 )
         this.beltPouch = 0;
-    console.log('Picked ' + count + ' crowns');
+    //console.log('Picked ' + count + ' crowns');
 };
 
 /**
@@ -307,14 +307,14 @@ ActionChart.prototype.getCurrentCombatSkillBonuses = function(noMindblast, noWea
     if( noWeapon || !currentWeapon ) {
         // No weapon:
         bonuses.push( {
-            concept: 'No weapon',
+            concept: translations.text('noWeapon'),
             increment: -4
         });
     }
     else if( this.isWeaponskillActive(currentWeapon) ) {       
         // Weapon skill bonus
         bonuses.push( {
-            concept: 'Weaponskill',
+            concept: translations.text( 'weaponskill' ),
             increment: +2
         });
     }
@@ -330,7 +330,7 @@ ActionChart.prototype.getCurrentCombatSkillBonuses = function(noMindblast, noWea
     // Mindblast
     if( !noMindblast && this.disciplines.contains( 'mndblst' ) ) {
         bonuses.push( {
-            concept: 'Mindblast',
+            concept: translations.text( 'mindblast' ),
             increment: partialMindblast ? +1 : +2
         });
     }

@@ -49,7 +49,14 @@ var translations = {
         'msgDropMoney' : 'Has perdido {0} Coronas de Oro',
         'msgEndurance' : '{0} Puntos de Resistencia',
         'msgCombatSkill' : '{0} Destreza en el Combate (permanente)',
-        'msgCurrentWeapon' : 'Tu arma actual es ahora "{0}"'
+        'msgCurrentWeapon' : 'Tu arma actual es ahora "{0}"',
+        'msgIncompatible' : 'Ya tienes un "{0}"',
+        'msgNoMoreWeapons' : 'No puedes coger mas armas',
+        'msgAlreadyBackpack' : 'Ya tienes una mochila',
+        'msgNoMoreBackpackItems' : 'No puedes coger mas Objetos de Mochila',
+        'noWeapon' : 'Sin arma',
+        'weaponskill' : 'Dominio Manejo Armas',
+        'mindblast' : 'Ataque Psíquico'
     },
 
     /**
@@ -87,7 +94,14 @@ var translations = {
         'msgDropMoney' : 'You lost {0} Gold Crowns',
         'msgEndurance' : '{0} Endurance Points',
         'msgCombatSkill' : '{0} Combat Skill (permanent)',
-        'msgCurrentWeapon' : 'Your current weapon is now "{0}"'
+        'msgCurrentWeapon' : 'Your current weapon is now "{0}"',
+        'msgIncompatible' : 'You already have a "{0}"',
+        'msgNoMoreWeapons' : 'You cannot get more weapons',
+        'msgAlreadyBackpack' : 'You already have a Backpack',
+        'msgNoMoreBackpackItems' : 'You cannot get more Backpack Items',
+        'noWeapon' : 'No weapon',
+        'weaponskill' : 'Weaponskill',
+        'mindblast' : 'Mindblast'
     },
 
     /**
