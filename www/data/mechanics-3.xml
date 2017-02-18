@@ -114,7 +114,10 @@
         </section>
 
         <section id="sect16">
-            <message id="msg-drop-object" en-text="Drop two backpack items before continue" />
+            <message id="msg-drop-object" 
+                en-text="Drop two backpack items before continue" 
+                es-text="Deja dos Objetos de Mochila antes de continuar" 
+            />
             <choiceState section="all" set="disabled" />
             <onInventoryEvent>
                 <test expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] == 0 || [BACKPACK-ITEMS-CNT-ON-SECTION] >= 2">
@@ -1835,7 +1838,10 @@
         </section>
 
         <section id="sect350">
-            <message en-text="This is the last book implemented. Thank you for playing!" />
+            <message 
+                en-text="This is the last book implemented. Thank you for playing!" 
+                es-text="Este es el último libro implementado. ¡Gracias por jugar!" 
+            />
         </section>
 
     </sections>

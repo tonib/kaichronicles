@@ -489,7 +489,11 @@
         </section>
 
         <section id="sect144">
-            <message id="msg-drop-object" en-text="Drop a backpack item or weapon before continue" />
+            <message id="msg-drop-object" 
+                en-text="Drop a Backpack item or weapon before continue"
+                es-text="Deja un Objeto de Mochila o una arma antes de continuar"
+            />
+
             <choiceState section="all" set="disabled" />
             <onInventoryEvent>
                 <!-- The expression is: The player has no backpack items / weapons, or it has not drop any -->
@@ -952,7 +956,10 @@
         </section>
 
         <section id="sect277">
-            <message id="msg-drop-weapon" en-text="Drop a weapon before continue" />
+            <message id="msg-drop-weapon" 
+                en-text="Drop a weapon before continue" 
+                es-text="Deja un arma antes de continuar"
+            />
             <choiceState section="all" set="disabled" />
             <onInventoryEvent>
                 <test expression="[WEAPON-ITEMS-CNT-ON-ACTIONCHART] == 0 || [WEAPON-ITEMS-CNT-ON-SECTION] > 0">
@@ -1064,7 +1071,10 @@
 
         <section id="sect307">
             <object objectId="warhammer" />
-            <message id="msg-drop-weapon" en-text="Drop a weapon before continue" />
+            <message id="msg-drop-weapon" 
+                en-text="Drop a weapon before continue" 
+                es-text="Deja un arma antes de continuar"
+            />
             <onInventoryEvent>
                 <test expression="[WEAPON-ITEMS-CNT-ON-SECTION] > 0">
                     <message id="msg-drop-weapon" op="hide" />

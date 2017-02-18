@@ -525,7 +525,10 @@
             <object objectId="backpack" />
             <object objectId="dagger" />
             <object objectId="rope" />
-            <message en-text="Pick only two objects" />
+            <message 
+                en-text="Pick only two objects" 
+                es-text="Coge sólo dos objetos" 
+            />
         </section>
 
         <section id="sect93">

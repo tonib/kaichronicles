@@ -40,7 +40,7 @@
 
     <!-- Display available objects on the section -->
     <div id="mechanics-availableObjects">
-        <p><b>Available objects:</b></p>
+        <p><b data-translation="tableAvailableObjects">Available objects:</b></p>
         <table class="table table-striped table-bordered" id="mechanics-availableObjectsList">
             <tbody>
                 <!-- Objects go here -->
@@ -50,7 +50,7 @@
 
     <!-- Display sell object table -->
     <div id="mechanics-sellObjects">
-        <p><b>Sell objects:</b></p>
+        <p><b data-translation="tableSellObjects">Sell objects:</b></p>
         <table class="table table-striped table-bordered" id="mechanics-sellObjectsList">
             <tbody>
                 <!-- Objects go here -->
@@ -88,9 +88,15 @@
 
     <!-- Player death -->
     <div class="well" id="mechanics-death">
-        <p><b id="mechanics-deathmsg">Your mission and your live ends here</b></p>
-        <p><a href="#" class="action" id="mechanics-restart">Click here to restart the book</a></p>
-        <p><a href="#loadGame" class="action" >Click here to load a saved game</a></p>
+        <p><b id="mechanics-deathmsg" data-translation="msgDeath">
+            Your mission and your live ends here
+        </b></p>
+        <p><a href="#" class="action" id="mechanics-restart" data-translation="deathRestartBook">
+            Click here to restart the book
+        </a></p>
+        <p><a href="#loadGame" class="action" data-translation="deathLoadGame">
+            Click here to load a saved game
+        </a></p>
     </div>
 
     <!-- Have a Meal -->

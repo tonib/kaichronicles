@@ -80,7 +80,7 @@ var objectsTable = {
         // Name
         var name = o.name;
         if( price )
-            name += ' (' + price + ' Gold Crowns)';
+            name += ' (' + price + ' ' + translations.text('goldCrowns') + ')';
 
         if( objectId == 'map' )
             // It's the map:

@@ -154,7 +154,10 @@
         <section id="sect22">
             <!-- I dont want to force any rule here... What if the player has no 
                  other backpack / weapon? -->
-            <message en-text="Drop some object before continue" />
+            <message 
+                en-text="Drop some object before continue" 
+                es-text="Deja algún objeto antes de continuar" 
+            />
         </section>
 
         <section id="sect23">

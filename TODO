@@ -34,6 +34,8 @@
 - Use project aon colors?
 - Toasts with images: align text when the text is multiline
 - Open the dialog with the combat tables on links to 'crtable'
+- Web: Add a link on the title bar  to return to the main menu (Web only)
+- Small devices: Do not hide the app title on the main menu
 
 Reminders:
 

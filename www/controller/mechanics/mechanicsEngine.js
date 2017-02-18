@@ -629,9 +629,9 @@ var mechanicsEngine = {
         }
 
         // Display a new message
-        var $messageUI = mechanicsEngine.$mechanicsUI.find('#mechanics-message').clone();
+        var $messageUI = mechanicsEngine.getMechanicsUI('mechanics-message');
         $messageUI.attr('id', msgId );
-        $messageUI.find('b').text( $(rule).attr('en-text'));
+        $messageUI.find('b').text( mechanicsEngine.getRuleText(rule) );
         gameView.appendToSection( $messageUI );
     },
 
@@ -724,7 +724,7 @@ var mechanicsEngine = {
             if( thereAreObjects ) {
                 // Add the template
                 gameView.appendToSection( 
-                    mechanicsEngine.$mechanicsUI.find('#mechanics-availableObjects').clone() );
+                    mechanicsEngine.getMechanicsUI('mechanics-availableObjects') );
                 $table = $('#mechanics-availableObjectsList');
             }
             else
@@ -752,7 +752,7 @@ var mechanicsEngine = {
         if( $table.length == 0 ) {
             // Add the template
             gameView.appendToSection( 
-                mechanicsEngine.$mechanicsUI.find('#mechanics-sellObjects').clone() );
+                mechanicsEngine.getMechanicsUI('mechanics-sellObjects') );
             $table = $('#mechanics-sellObjectsList');
         }       
 
@@ -834,7 +834,7 @@ var mechanicsEngine = {
     },
 
     /**
-     * Set the death UI
+     * Set the death UI if the player is death
      */
     testDeath: function() {
         // Dont show death on non numbered sections (maybe we have not choose the endurance yet)
@@ -846,8 +846,7 @@ var mechanicsEngine = {
         if( state.actionChart.currentEndurance <= 0 && $('#mechanics-death').length == 0 ) {
 
             // Add the death UI
-            gameView.appendToSection( 
-                mechanicsEngine.$mechanicsUI.find('#mechanics-death').clone() );
+            gameView.appendToSection( mechanicsEngine.getMechanicsUI('mechanics-death') );
 
             // Try to set the death message (only for death sections)
             var $choice = $('p.choice, .deadend');
@@ -914,6 +913,19 @@ var mechanicsEngine = {
             state.nextBook();
             routing.redirect('setup');
         });
-    }
+    },
 
+    /**
+     * Get the 'en-text' or 'es-text' from the given rule
+     */
+    getRuleText: function(rule) {
+        var $rule = $(rule);
+        var text = $rule.attr( state.language + '-text');
+        if( !text )
+            // Return the english text
+            text = $rule.attr( 'en-text' );
+        if( !text )
+            text = '';
+        return text;
+    }
 };

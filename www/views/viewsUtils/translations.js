@@ -79,7 +79,22 @@ var translations = {
         'eatBackpackMeal' : 'Comer una comida de la mochila',
         'eatBackpackObject' : 'Comer',
         'buyMeal' : 'Comprar comida',
-        'doNotEat' : 'No comer (-3 RESISTENCIA)'
+        'doNotEat' : 'No comer (-3 RESISTENCIA)',
+
+        //////////////////////////////////////
+        // Death
+        //////////////////////////////////////
+
+        'msgDeath' : 'Tu misión y tu vida terminan aquí',
+        'deathRestartBook' : 'Haz click aquí para reiniciar el libro',
+        'deathLoadGame' : 'Haz click aquí para cargar un juego salvado',
+
+        //////////////////////////////////////
+        // Others
+        //////////////////////////////////////
+
+        'tableAvailableObjects' : 'Objetos disponibles:',
+        'tableSellObjects' : 'Vender objetos:'
     },
 
     /**
