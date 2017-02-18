@@ -30,7 +30,7 @@ var actionChartView = {
         $('#achart-dropmoney' ).click(function() {
             if( state.actionChart.beltPouch <= 0 )
                 return;
-            if( !confirm('Are you sure you want to drop 1 Golden Crown?') )
+            if( !confirm( translations.text('msgDropCoin') ) )
                 return;
             actionChartController.increaseMoney(-1);
         });
@@ -48,7 +48,7 @@ var actionChartView = {
         // TODO: Display the discipline "quote" tag instead the name
         var $displines = $('#achart-disciplines > tbody');
         if( actionChart.disciplines.length == 0 ) {
-            $displines.append( '<tr><td>(None)</td></tr>' );
+            $displines.append( '<tr><td>(' + translations.text('noneFemenine') + ')</td></tr>' );
         }
         else {
             var bookDisciplines = state.book.getDisciplinesTable();
@@ -64,7 +64,9 @@ var actionChartView = {
                 // Unescape the HTML description:
                 var descriptionHtml = $('<div />').html(dInfo.description).text();
                 $displines.append( '<tr><td>' +
-                    '<button class="btn btn-default table-op" title="Discipline description">' + 
+                    '<button class="btn btn-default table-op" title="' + 
+                    translations.text('disciplineDescription') +
+                    '">' + 
                         '<span class="glyphicon glyphicon-question-sign"></span>' + 
                     '</button>' + 
                     '<b>' + name + '</b><br/><i style="display:none"><small>' + 
@@ -79,7 +81,7 @@ var actionChartView = {
     },
 
     updateMoney: function() {
-        $('#achart-beltPouch').val( state.actionChart.beltPouch + ' Gold Crowns');
+        $('#achart-beltPouch').val( state.actionChart.beltPouch + ' ' + translations.text('goldCrowns') );
         $('#achart-dropmoney').prop( 'disabled', state.actionChart.beltPouch <= 0 );
     },
 
@@ -96,16 +98,17 @@ var actionChartView = {
      */
     updateStatistics: function() {
 
+        var txtCurrent = translations.text('current') + ': ';
         // Combat skill
         $('#achart-combatSkills').val( 
-            "Current: " + 
+            txtCurrent +  
             state.actionChart.getCurrentCombatSkill() + 
             " / Original: " + state.actionChart.combatSkill );
         $('#achart-cs-bonuses').text( 
             actionChartController.getBonusesText( state.actionChart.getCurrentCombatSkillBonuses() ) );
 
         // Endurance
-        var txtEndurance = "Current: " + state.actionChart.currentEndurance;
+        var txtEndurance = txtCurrent + state.actionChart.currentEndurance;
         var max = state.actionChart.getMaxEndurance();
         if( max != state.actionChart.endurance )
             txtEndurance += ' / Max.: ' + max;
@@ -129,7 +132,7 @@ var actionChartView = {
         var current = state.actionChart.selectedWeapon;
         if( current )
             current = state.mechanics.getObject( current );
-        $('#achart-currentWeapon').html( current ? current.name : '<i>None</i>');
+        $('#achart-currentWeapon').html( current ? current.name : '<i>' + translations.text('noneFemenine') + '</i>');
     },
 
     /**
@@ -145,7 +148,7 @@ var actionChartView = {
             objectsTable.objectsList( state.actionChart.backpackItems , 
                 $('#achart-backpack > tbody') , 'inventory' );
         else
-            $('#achart-backpack-content').html('<i>You have lost your backpack</i>');
+            $('#achart-backpack-content').html('<i>' + translations.text('backpackLost') + '</i>');
             
         // Special items
         objectsTable.objectsList( state.actionChart.specialItems , 

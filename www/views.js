@@ -17,7 +17,7 @@ var views = {
         
         if( views.viewCache[viewPath] ) {
             // View was already loaded:
-            template.setViewContent( translationsTable.translateView(views.viewCache[viewPath]) );
+            template.setViewContent( translations.translateView(views.viewCache[viewPath]) );
             // Return a resolved promise:
             var dfd = jQuery.Deferred();
             dfd.resolve();
@@ -37,7 +37,7 @@ var views = {
             // Save view on cache:
             views.viewCache[viewPath] = data;
             // Display the view
-            template.setViewContent( translationsTable.translateView(data) );
+            template.setViewContent( translations.translateView(data) );
         })
         .fail(function( jqXHR, textStatus, errorThrown ) {
             var msg = 'Error loading view ' + viewPath + ', error: ' + 
