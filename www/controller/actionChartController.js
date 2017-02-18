@@ -35,7 +35,8 @@ var actionChartController = {
             if( !state.actionChart.pick( o ) )
                 return false;
                 
-            actionChartView.showInventoryMsg('pick', o , 'You get "' + o.name + '"' );
+            actionChartView.showInventoryMsg('pick', o , 
+                translations.text( 'msgGetObject' , [o.name] ) );
 
             // Update player statistics (for objects with effects)
             actionChartView.updateStatistics();
@@ -80,7 +81,8 @@ var actionChartController = {
             return;
         
         if( state.actionChart.drop(objectId) ) {
-            actionChartView.showInventoryMsg('drop', o , 'You drop "' + o.name + '"' );
+            actionChartView.showInventoryMsg('drop', o , 
+                translations.text('msgDropObject' , [o.name] ) );
 
             // Update the action chart view
             actionChartView.updateObjectsLists();
@@ -151,9 +153,11 @@ var actionChartController = {
             state.actionChart.increaseMeals(count);
             var o = state.mechanics.getObject('meal');
             if( count > 0 )
-                actionChartView.showInventoryMsg('pick' , o , 'You get ' + count + ' meals' );
+                actionChartView.showInventoryMsg('pick' , o , 
+                    translations.text( 'msgGetMeal' , [count] ) );
             else if( count < 0 )
-                actionChartView.showInventoryMsg('drop' , o , 'You drop ' + ( - count )+ ' meals' );
+                actionChartView.showInventoryMsg('drop' , o , 
+                    translations.text( 'msgDropMeal' , [-count] ) );
         }
         catch(e) {
             toastr["error"](e);
@@ -168,9 +172,11 @@ var actionChartController = {
         state.actionChart.increaseMoney(count);
         var o = state.mechanics.getObject('money');
         if( count > 0 )
-            actionChartView.showInventoryMsg('pick' , o , 'You get ' + count + ' crowns' );
+            actionChartView.showInventoryMsg('pick' , o , 
+                translations.text( 'msgGetMoney' , [count] ) );
         else if( count < 0 )
-            actionChartView.showInventoryMsg('drop' , o , 'You lost ' + ( - count ) + ' crowns' );
+            actionChartView.showInventoryMsg('drop' , o , 
+                translations.text( 'msgDropMoney' , [-count] ) );
         actionChartView.updateMoney();
     },
 
@@ -183,11 +189,11 @@ var actionChartController = {
         state.actionChart.increaseEndurance(count);
         if( count > 0 ) {
             if( !noToast )
-                toastr["success"]('+' + count + ' endurance points' );
+                toastr["success"]( translations.text('msgEndurance' , ['+' + count] ) );
         }
         else if( count < 0 ) {
             if( !noToast )
-                toastr["warning"]( count + ' endurance points' );
+                toastr["warning"]( translations.text('msgEndurance' , [count] ) );
             mechanicsEngine.testDeath();
         }
         template.updateStatistics();
@@ -200,9 +206,9 @@ var actionChartController = {
     increaseCombatSkill: function(count) {
         state.actionChart.combatSkill += count;
         if( count > 0 )
-            toastr["success"]('+' + count + ' combat skill (permanent)' );
+            toastr["success"]( translations.text('msgCombatSkill' , ['+' + count]) );
         else if( count < 0 )
-            toastr["warning"]( count + ' combat skill (permanent)' );
+            toastr["warning"]( translations.text('msgCombatSkill' , [count]) );
         template.updateStatistics();
     },
 
@@ -223,7 +229,7 @@ var actionChartController = {
         template.updateStatistics();
         if( showToast ) {
             var o = state.mechanics.getObject( weaponId )
-            toastr["info"]( 'Your current weapon is now "' + o.name + '"');
+            toastr["info"]( translations.text( 'msgCurrentWeapon' , [o.name] ) );
         }
     },
 

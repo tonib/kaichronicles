@@ -40,7 +40,16 @@ var translations = {
         'confirmUse' : '¿Estás seguro que quieres usar "{0}"?',
         'confirmDrop' : '¿Seguro que quieres dejar "{0}"?',
         'noEnoughMoney' : 'No tienes suficiente dinero',
-        'confirmBuy' : '¿Seguro que quieres comprar el objeto por {0} Coronas de Oro?'
+        'confirmBuy' : '¿Seguro que quieres comprar el objeto por {0} Coronas de Oro?',
+        'msgGetObject' : 'Has cogido "{0}"',
+        'msgDropObject' : 'Has dejado "{0}"',
+        'msgGetMeal' : 'Has cogido {0} comidas',
+        'msgDropMeal' : 'Has dejado {0} comidas',
+        'msgGetMoney' : 'Has cogido {0} Coronas de Oro',
+        'msgDropMoney' : 'Has perdido {0} Coronas de Oro',
+        'msgEndurance' : '{0} Puntos de Resistencia',
+        'msgCombatSkill' : '{0} Destreza en el Combate (permanente)',
+        'msgCurrentWeapon' : 'Tu arma actual es ahora "{0}"'
     },
 
     /**
@@ -69,7 +78,16 @@ var translations = {
         'confirmUse' : 'Are you sure you want to use "{0}"?',
         'confirmDrop' : 'Are you sure you want to drop "{0}"?',
         'noEnoughMoney' : 'You don\'t have enough money',
-        'confirmBuy' : 'Are you sure you want to buy the object for {0} Gold Crowns?'
+        'confirmBuy' : 'Are you sure you want to buy the object for {0} Gold Crowns?',
+        'msgGetObject' : 'You get "{0}"',
+        'msgDropObject' : 'You drop "{0}"',
+        'msgGetMeal' : 'You get {0} meals',
+        'msgDropMeal' : 'You drop {0} meals',
+        'msgGetMoney' : 'You get {0} Gold Crowns',
+        'msgDropMoney' : 'You lost {0} Gold Crowns',
+        'msgEndurance' : '{0} Endurance Points',
+        'msgCombatSkill' : '{0} Combat Skill (permanent)',
+        'msgCurrentWeapon' : 'Your current weapon is now "{0}"'
     },
 
     /**
