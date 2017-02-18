@@ -24,7 +24,7 @@ var objectsTable = {
         }
 
         if( !html )
-            html = '<tr><td><i>(None)</i></td></tr>';
+            html = '<tr><td><i>(' + translations.text('noneMasculine') + ')</i></td></tr>';
 
         $tableBody.append( html );
 
@@ -80,7 +80,7 @@ var objectsTable = {
         // Name
         var name = o.name;
         if( price )
-            name += ' (' + price + ' Golden Crowns)';
+            name += ' (' + price + ' Gold Crowns)';
 
         if( objectId == 'map' )
             // It's the map:
@@ -121,7 +121,7 @@ var objectsTable = {
 
         if( type == 'available' ) {
             // Available object
-            var title = ( price ? 'Buy object' : 'Pick object' );
+            var title = translations.text( price ? 'buyObject' : 'pickObject' );
             if( price )
                 link += 'data-price="' + price + '" ';
             if( unlimited )
@@ -132,20 +132,22 @@ var objectsTable = {
         else if( type == 'sell' ) {
             // Sell inventory object
             link += 'data-price="' + price + '" ';
-            html += link + 'data-op="sell" title="Sell object"><span class="glyphicon glyphicon-share"></span></a> ';
+            html += link + 'data-op="sell" title="' + translations.text('sellObject') + 
+                '"><span class="glyphicon glyphicon-share"></span></a> ';
         }
         else {
             // Inventory object
             if( o.usage )
-                html += link + 'data-op="use">Use</a> ';
+                html += link + 'data-op="use">' + translations.text('use') + '</a> ';
             if( o.isWeapon() && state.actionChart.selectedWeapon != o.id) {
-                html += link + 'data-op="currentWeapon" title="Set as current weapon">' + 
-                    '<span class="glyphicon glyphicon-hand-left">' + 
-                '</span></a> ';
+                html += link + 'data-op="currentWeapon" title="' + 
+                    translations.text('setCurrentWeapon') + '">' + 
+                    '<span class="glyphicon glyphicon-hand-left"></span></a> ';
             }
             if( o.droppable )
                 // Object can be dropped:
-                html += link + 'data-op="drop" title="Drop object"><span class="glyphicon glyphicon-remove"></span></a> ';
+                html += link + 'data-op="drop" title="' + translations.text('dropObject') + 
+                    '"><span class="glyphicon glyphicon-remove"></span></a> ';
         }
         html += '</div>';
         return html;
@@ -175,8 +177,7 @@ var objectsTable = {
 
                 case 'sell':
                     var price = parseInt( $(this).attr('data-price') );
-                    if( !confirm('Are you sure you want to sell the object by ' + price +  
-                        ' Golden Crowns?') )
+                    if( !confirm( translations.text( 'confirmSell' , [ price ] ) ) )
                         return;
 
                     actionChartController.drop( o.id , false );
@@ -185,12 +186,12 @@ var objectsTable = {
                     break;
 
                 case 'use':
-                    if( confirm('Are you sure you want to use "' + o.name + '"?') )
+                    if( confirm( translations.text( 'confirmUse' , [o.name] ) ) )
                         actionChartController.use( o.id );
                     break;
 
                 case 'drop':
-                    if( confirm('Are you sure you want to drop "' + o.name + '"?') )
+                    if( confirm( translations.text( 'confirmDrop' , [o.name] ) ) )
                         actionChartController.drop( o.id , true );
                     break;
 
@@ -220,12 +221,11 @@ var objectsTable = {
             price = parseInt( price );
 
             if( state.actionChart.beltPouch < price ) {
-                alert("You don't have enough money" );
+                alert( translations.text('noEnoughMoney') );
                 return;
             }
 
-            if( !confirm('Are you sure you want to buy the object by ' + price +  
-                ' Golden Crowns?') )
+            if( !confirm( translations.text('confirmBuy', [price] ) ) )
                 return;
                 
         }

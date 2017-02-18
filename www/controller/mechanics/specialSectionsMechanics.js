@@ -148,11 +148,11 @@ var specialSectionsMechanics = {
             var status = player1.status + '<br/>' + 
                 player2.status + '<br/>' + lw.status + '<br/>';
             if( lw.total > player1.total && lw.total > player2.total ) {
-                status += 'You won 6 Golden Crowns';
+                status += 'You won 6 Gold Crowns';
                 actionChartController.increaseMoney(6);
             }
             else {
-                status += 'You lost 3 Golden Crowns';
+                status += 'You lost 3 Gold Crowns';
                 actionChartController.increaseMoney(-3);
             }
 

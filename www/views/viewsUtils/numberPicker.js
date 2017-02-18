@@ -112,7 +112,7 @@
         if( this.attr('data-ismoneypicker') == 'true' ) {
             // Check if you have enougth money
             if( state.actionChart.beltPouch < number) {
-                alert('You have only ' + state.actionChart.beltPouch + ' Golden Crowns');
+                alert('You have only ' + state.actionChart.beltPouch + ' Gold Crowns');
                 return false;
             }
         }
