@@ -41,51 +41,19 @@ var objectsTable = {
             if( !o )
                 return;
 
+            // If it's a sell table, and we don't have the object, do not show it
+            if( type == 'sell' && !state.actionChart.hasObject(o.id) )
+                return;
+
             var html = '<tr><td>';
 
-            // Operations (only if player is not death)
-            if( state.actionChart.currentEndurance > 0 ) {
-                html += '<div class="table-op">';
-                var link = '<a href="#" data-objectId="' + objectId + 
-                    '" class="equipment-op btn btn-default" ';
+            // Object operations
+            html += objectsTable.operationsHtml( o , type , price , unlimited );
 
-                if( type == 'available' ) {
-                    // Available object
-                    var title = ( price ? 'Buy object' : 'Pick object' );
-                    if( price )
-                        link += 'data-price="' + price + '" ';
-                    if( unlimited )
-                        link += 'data-unlimited="true" ';
-                    html += link + 'data-op="get" title="' + title + '">' + 
-                        '<span class="glyphicon glyphicon-plus"></span></a>';
-                }
-                else if( type == 'sell' ) {
-                    // Sell inventory object
-                    // If we dont have the object, do not show it
-                    if( !state.actionChart.hasObject(objectId) )
-                        return;
-                    link += 'data-price="' + price + '" ';
-                    html += link + 'data-op="sell" title="Sell object"><span class="glyphicon glyphicon-share"></span></a> ';
-                }
-                else {
-                    // Inventory object
-                    if( o.usage )
-                        html += link + 'data-op="use">Use</a> ';
-                    if( o.isWeapon() && state.actionChart.selectedWeapon != objectId) {
-                        html += link + 'data-op="currentWeapon" title="Set as current weapon">' + 
-                            '<span class="glyphicon glyphicon-hand-left">' + 
-                        '</span></a> ';
-                    }
-                    if( o.droppable )
-                        // Object can be dropped:
-                        html += link + 'data-op="drop" title="Drop object"><span class="glyphicon glyphicon-remove"></span></a> ';
-                }
-                html += '</div>';
-            }
-            
             // Image
             if( o.imageUrl ) {
-                html += '<span class="inventoryImgContainer"><img class="inventoryImg" src=' + o.imageUrl + ' /></span>';
+                html += '<span class="inventoryImgContainer"><img class="inventoryImg" src=' + 
+                    o.imageUrl + ' /></span>';
             }
 
             // Name
@@ -116,6 +84,58 @@ var objectsTable = {
 
         // Bind events:
         objectsTable.bindEquipmentEvents( $tableBody );
+    },
+
+    /**
+     * Get the available operations HTML for a given object
+     * @param {Item} o The object
+     * @param {string} type Table type: 'available': Available objects on section,
+     * 'sell': Sell inventory objects, 'inventory': Inventory objects
+     * @param {number} price Object price. Only if type is 'available' or 'sell'
+     * @param {boolean} unlimited True if there is an unlimited amount of this object on
+     * the section. Only if type is 'available'
+     * @returns The operations HTML
+     */
+    operationsHtml: function(o, type, price, unlimited) {
+
+        if( state.actionChart.currentEndurance <= 0 ) 
+            // Player is death: No operations
+            return '';
+
+        var html = '<div class="table-op">';
+        var link = '<a href="#" data-objectId="' + o.id + 
+            '" class="equipment-op btn btn-default" ';
+
+        if( type == 'available' ) {
+            // Available object
+            var title = ( price ? 'Buy object' : 'Pick object' );
+            if( price )
+                link += 'data-price="' + price + '" ';
+            if( unlimited )
+                link += 'data-unlimited="true" ';
+            html += link + 'data-op="get" title="' + title + '">' + 
+                '<span class="glyphicon glyphicon-plus"></span></a>';
+        }
+        else if( type == 'sell' ) {
+            // Sell inventory object
+            link += 'data-price="' + price + '" ';
+            html += link + 'data-op="sell" title="Sell object"><span class="glyphicon glyphicon-share"></span></a> ';
+        }
+        else {
+            // Inventory object
+            if( o.usage )
+                html += link + 'data-op="use">Use</a> ';
+            if( o.isWeapon() && state.actionChart.selectedWeapon != o.id) {
+                html += link + 'data-op="currentWeapon" title="Set as current weapon">' + 
+                    '<span class="glyphicon glyphicon-hand-left">' + 
+                '</span></a> ';
+            }
+            if( o.droppable )
+                // Object can be dropped:
+                html += link + 'data-op="drop" title="Drop object"><span class="glyphicon glyphicon-remove"></span></a> ';
+        }
+        html += '</div>';
+        return html;
     },
 
     /**
