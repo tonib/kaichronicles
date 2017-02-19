@@ -10,14 +10,12 @@ var setupController = {
      */
     index: function() {
 
-        // Configure toast messages
-        toastr.options.positionClass = 'toast-position-lw';
-
         // If the book is already loaded, redirect to the game
         if( state.book && state.book.bookXml ) {
             console.log("Book already loaded");
             template.setNavTitle( state.book.getBookTitle() , '#game' );
             routing.redirect('game');
+            setupController.verifyLanguageChange();
             return;
         }
 
@@ -33,10 +31,22 @@ var setupController = {
             var keepActionChart = routing.getHashParameter('keepActionChart');
             state.setup(bookNumber, language, keepActionChart);
         }
+        template.translateMainMenu();
 
         views.loadView('setup.html')
         .then(function() { setupController.runDownloads(); });
           
+    },
+
+    verifyLanguageChange: function() {
+        // Re-translate the main menu (needed if the language has been changed on the 
+        // main menu). The book language rules:
+        if( !state.book )
+            return;
+        if( state.language != state.book.language) {
+            state.language = state.book.language;
+            template.translateMainMenu();
+        }
     },
 
     runDownloads: function() {

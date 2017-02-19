@@ -24,6 +24,11 @@ var mainMenuController = {
         });
     },
 
+    changeTranslation: function() {
+        state.language = state.language == 'es' ? 'en' : 'es';
+        mainMenuController.index();
+    },
+
     /** Return page */
     getBackController: function() { return 'exitApp'; }
     

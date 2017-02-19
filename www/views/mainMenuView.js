@@ -6,15 +6,27 @@ var mainMenuView = {
      * @param section The map Section
      */
     setup: function( section ) {
-        document.title = 'Kai Chronicles';
-        $('#menu-continue').click(function() {
+        document.title = translations.text('kaiChronicles');
+        if( state.language == 'es' )
+            $('#menu-translate').text('English version');
+        else
+            $('#menu-translate').text('Versión española');
+
+        $('#menu-continue').click(function(e) {
+            e.preventDefault();
             routing.redirect('setup');
         });
-        $('#menu-new').click(function() {
+        $('#menu-new').click(function(e) {
+            e.preventDefault();
             routing.redirect('newGame');
         });
-        $('#menu-load').click(function() {
+        $('#menu-load').click(function(e) {
+            e.preventDefault();
             routing.redirect('loadGame');
+        });
+        $('#menu-translate').click(function(e) {
+            e.preventDefault();
+            mainMenuController.changeTranslation();
         });
     },
 
