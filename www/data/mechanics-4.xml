@@ -1323,7 +1323,281 @@
             <object objectId="shovel" />
         </section>
 
-        <!-- UP TO sect241 -->
+        <section id="sect270">
+            <test not="true" hasObject="torch">
+                <choiceState section="sect29" set="disabled" />
+            </test>
+            <test not="true" hasObject="firesphere">
+                <choiceState section="sect168" set="disabled" />
+            </test>
+            <test hasObject="torch">
+                <choiceState section="sect246" set="disabled" />
+            </test>
+            <test hasObject="firesphere">
+                <choiceState section="sect246" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect271">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="6">
+                    <choiceState section="sect9" set="enabled" />
+                </case>
+                <case from="7" to="11">
+                    <choiceState section="sect104" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hunting">
+                <randomTableIncrement increment="+2" />
+            </test>
+        </section>
+
+        <section id="sect272">
+            <endurance count="-5" />
+            <message id="msg-drop-weapon" 
+                en-text="Drop a weapon before continue" 
+                es-text="Deja un arma antes de continuar"
+            />
+            <choiceState section="all" set="disabled" />
+            <onInventoryEvent>
+                <test expression="[WEAPON-ITEMS-CNT-ON-ACTIONCHART] == 0 || [WEAPON-ITEMS-CNT-ON-SECTION] > 0">
+                    <message id="msg-drop-weapon" op="hide" />
+                    <choiceState section="all" set="enabled" />
+                </test>
+                <test not="true" expression="[WEAPON-ITEMS-CNT-ON-ACTIONCHART] == 0 || [WEAPON-ITEMS-CNT-ON-SECTION] > 0">
+                    <message id="msg-drop-weapon" op="show" />
+                    <choiceState section="all" set="disabled" />
+                </test>
+            </onInventoryEvent>
+        </section>
+
+        <section id="sect274">
+            <test not="true" hasObject="flaskofholywater">
+                <choiceState section="sect283" set="disabled" />
+            </test>
+            <test hasObject="flaskofholywater">
+                <choiceState section="sect325" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect275">
+            <endurance count="-1" />
+        </section>
+
+        <section id="sect277">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect280">
+            <pick class="money" count="3" />
+            <object objectId="meal" />
+            <object objectId="sword" />
+        </section>
+
+        <section id="sect283">
+            <endurance count="-3" />
+        </section>
+
+        <section id="sect284">
+            <endurance count="-3" />
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="0" />
+            <afterCombats>
+                <choiceState section="sect7" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect89" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect285">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect287">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect289">
+            <test not="true" expression="[KAILEVEL] >= 8">
+                <choiceState section="sect255" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect291">
+            <test not="true" hasDiscipline="camflage">
+                <choiceState section="sect172" set="disabled" />
+            </test>
+            <test hasDiscipline="camflage">
+                <choiceState section="sect93" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect293">
+            <test not="true" hasDiscipline="tracking">
+                <choiceState section="sect18" set="disabled" />
+            </test>
+            <test hasDiscipline="tracking">
+                <choiceState section="sect150" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect296">
+            <test not="true" hasObject="sommerswerd">
+                <choiceState section="sect122" set="disabled" />
+            </test>
+            <test hasObject="sommerswerd">
+                <choiceState section="sect274" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect299">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect301">
+            <test not="true" hasDiscipline="anmlknsp">
+                <choiceState section="sect106" set="disabled" />
+            </test>
+            <test hasDiscipline="anmlknsp">
+                <choiceState section="sect236" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect302">
+            <object objectId="laumspurpotion4" index="0" />
+            <object objectId="laumspurpotion4" index="1" />
+            <object objectId="potionofstrength" />
+            <object objectId="flaskofholywater" />
+        </section>
+
+        <section id="sect303">
+            <endurance count="-2" />
+        </section>
+
+        <section id="sect304">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect47" set="enabled" />
+                </case>
+                <case from="5" to="9">
+                    <choiceState section="sect234" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect308">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect309">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="7">
+                    <choiceState section="sect138" set="enabled" />
+                </case>
+                <case from="8" to="13">
+                    <choiceState section="sect244" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="camflage">
+                <randomTableIncrement increment="+4" />
+            </test>
+        </section>
+
+        <section id="sect310">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect312">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="2">
+                    <choiceState section="sect120" set="enabled" />
+                </case>
+                <case from="3" to="9">
+                    <choiceState section="sect51" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect315">
+            <test not="true" hasDiscipline="tracking">
+                <choiceState section="sect48" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect316">
+            <choiceState section="all" set="disabled" />
+            <combat index="0" combatSkillModifier="-2" eludeTurn="0" />
+            <afterCombats>
+                <choiceState section="sect146" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect31" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect318">
+            <test not="true" hasObject="scrollpoetry">
+                <choiceState section="sect279" set="disabled" />
+            </test>
+            <test hasObject="scrollpoetry">
+                <choiceState section="sect57" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect319">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect25" set="enabled" />
+                </case>
+                <case from="5" to="9">
+                    <choiceState section="sect171" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect322">
+            <endurance count="+2" />
+            <object objectId="pick" />
+            <object objectId="shovel" />
+        </section>
+
+        <section id="sect324">
+            <meal />
+        </section>
+
+        <section id="sect325">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <!-- UP TO  -->
 
     </sections>
 

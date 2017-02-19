@@ -24,6 +24,9 @@ var mainMenuController = {
         });
     },
 
+    /**
+     * Change the current language
+     */
     changeTranslation: function() {
         state.language = state.language == 'es' ? 'en' : 'es';
         mainMenuController.index();

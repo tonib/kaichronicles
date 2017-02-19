@@ -19,8 +19,6 @@
   * Document rules
 - Toasts: If you click on some toast, hide them all
 - Save games is not working on safari
-- Translate all messages / UI to spanish:
-  * Translate tags properties ("title", etc)
 - Create a booksSumary.xml, with info about the available books. 
 - Combats should be sequential: First finish the first one, then the second, etc
 - If you pick an object on the current section, the rules conditioned by "hasObject" (or "meal" rules)
@@ -28,14 +26,15 @@
 - Common performance (Android and web):
   * Minify and join javascript files
   * Rendering performance on book 2 / sect equimpnt
-- Game rules / kai training levels: Render as a numbered section (important to see
-  the numbers)
 - Implement phisical random tables (pick on the screen) ???
 - Use project aon colors?
 - Toasts with images: align text when the text is multiline
 - Open the dialog with the combat tables on links to 'crtable'
-- Web: Add a link on the title bar  to return to the main menu (Web only)
+- Web: Add a link on the title bar to return to the main menu (Web only)
 - Small devices: Do not hide the app title on the main menu
+- About the book: 
+  * Add a link to the project aon license
+  * Add a link to the Project Aon URL
 
 Reminders:
 

@@ -45,7 +45,7 @@ var loadGameView = {
             // Cordova beleaves we have changed the current page
             e.preventDefault();
             var fileName = $(this).attr('data-filename');
-            if( !confirm( translations.text('confirmDeleteSave' , fileName ) ) )
+            if( !confirm( translations.text('confirmDeleteSave' , [ fileName ] ) ) )
                 return;
             loadGameController.deleteFile( fileName );
         });

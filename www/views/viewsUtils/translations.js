@@ -57,6 +57,7 @@ var translations = {
         'noWeapon' : 'Sin arma',
         'weaponskill' : 'Dominio Manejo Armas',
         'mindblast' : 'Ataque Psíquico',
+        'countAsObjects'  : '(Cuenta como {0} objetos)',
 
         //////////////////////////////////////
         // Combats
@@ -245,6 +246,7 @@ var translations = {
         'noWeapon' : 'No weapon',
         'weaponskill' : 'Weaponskill',
         'mindblast' : 'Mindblast',
+        'countAsObjects'  : '(Counts as {0} items)',
 
         //////////////////////////////////////
         // Combats

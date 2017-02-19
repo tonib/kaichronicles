@@ -11,6 +11,10 @@ var combatMechanics = {
         if( sectionState.combats.length == 0 )
             return;
 
+        // If the player is death, do nothing
+        if( state.actionChart.currentEndurance <= 0 )
+            return;
+            
         // Combat UI template:
         var $template = mechanicsEngine.getMechanicsUI('mechanics-combat');
 

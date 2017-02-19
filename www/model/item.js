@@ -28,7 +28,7 @@ function Item(book, $o, objectId) {
         // Add description of the size used 
         if( this.description )
             this.description += ' ';
-        this.description += '(Counts as ' + this.itemCount + ' items)';
+        this.description += translations.text( 'countAsObjects' , [this.itemCount] );
     }
         
 
