@@ -1,5 +1,3 @@
-- ERROR: App Android / settings page: After language change, the back button doesn't
-  work
 - Web: Add a link on the title bar to return to the main menu (Web only)
 - Small devices: Do not hide the app title on the main menu
 - If the book load fails, it doest not try to reload the next time
