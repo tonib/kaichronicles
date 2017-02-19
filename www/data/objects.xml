@@ -359,6 +359,19 @@
             </description>
         </special>
 
+        <special id="daggerofvashna" weaponType="dagger">
+            <name lang="en">Dagger of Vashna</name>
+            <description lang="en">
+                A twisted black dagger
+            </description>
+            
+            <name lang="es">Daga de Vashna</name>
+            <description lang="es">
+                Una daga negra en forma de serpiente ondulada
+            </description>
+            <image book="4" name="small20.png" />
+        </special>
+
     </specials>
 
     <objects>

@@ -1597,6 +1597,122 @@
             </afterCombats>
         </section>
 
+        <section id="sect327">
+            <drop objectId="captaindvalsword" />
+        </section>
+
+        <section id="sect329">
+            <death />
+        </section>
+
+        <section id="sect331">
+            <test not="true" hasDiscipline="anmlknsp">
+                <choiceState section="sect41" set="disabled" />
+            </test>
+            <test hasDiscipline="anmlknsp">
+                <choiceState section="sect276" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect333">
+            <choiceState section="all" set="disabled" />
+            <afterCombatTurn turn="1">
+                <disableCombats />
+                <test expression="[COMBATSENDURANCELOST] > [COMBATSENEMYLOST]">
+                    <choiceState section="sect209" set="enabled" />
+                </test>
+                <test expression="[COMBATSENEMYLOST] > [COMBATSENDURANCELOST]">
+                    <choiceState section="sect220" set="enabled" />
+                </test>
+                <test expression="[COMBATSENEMYLOST] == [COMBATSENDURANCELOST]">
+                    <choiceState section="sect344" set="enabled" />
+                </test>
+            </afterCombatTurn>
+        </section>
+
+        <section id="sect334">
+            <death />
+        </section>
+
+        <section id="sect335">
+            <test not="true" hasDiscipline="camflage">
+                <choiceState section="sect35" set="disabled" />
+            </test>
+            <test not="true" hasDiscipline="mindomtr">
+                <choiceState section="sect317" set="disabled" />
+            </test>
+            <test hasDiscipline="camflage|mindomtr">
+                <choiceState section="sect147" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect339">
+            <meal />
+        </section>
+
+        <section id="sect340">
+            <endurance count="-2" />
+        </section>
+
+        <section id="sect341">
+            <endurance count="-4" />
+        </section>
+
+        <section id="sect342">
+            <drop objectId="backpack" />
+        </section>
+
+        <section id="sect343">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="-2" to="6">
+                    <choiceState section="sect194" set="enabled" />
+                </case>
+                <case from="7" to="12">
+                    <choiceState section="sect61" set="enabled" />
+                </case>
+            </randomTable>
+            <test expression="[ENDURANCE] &lt;= 12">
+                <randomTableIncrement increment="-2" />
+            </test>
+            <test expression="[ENDURANCE] >= 20">
+                <randomTableIncrement increment="+3" />
+            </test>
+        </section>
+
+        <section id="sect344">
+            <test not="true" expression="[KAILEVEL] >= 6">
+                <choiceState section="sect111" set="disabled" />
+            </test>
+            <test expression="[KAILEVEL] >= 6">
+                <choiceState section="sect43" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect345">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="6">
+                    <choiceState section="sect51" set="enabled" />
+                </case>
+                <case from="7" to="9">
+                    <choiceState section="sect120" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect347">
+            <death />
+        </section>
+
+        <section id="sect350">
+            <pick objectId="daggerofvashna" />
+            <message 
+                en-text="This is the last book implemented. Thank you for playing!" 
+                es-text="Este es el último libro implementado. ¡Gracias por jugar!" 
+            />
+        </section>
+
         <!-- UP TO  -->
 
     </sections>
