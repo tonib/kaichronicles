@@ -140,7 +140,7 @@ var translations = {
         'appInfo' : 'Esto es una aplicación para jugar a los librojuegos de Lobo Solitario, del 1 al 4.',
         'browsersWarning' : 'Sólo se soportan las últimas versiones de Chrome y Firefox. Otros navegadores o versiones no están soportados (pueden funcionar... o no).',
         'historyWarning' : 'Ten en cuenta que si borras el historial de tu navegador, perderás la partida actual. Puedes guardar la partida actual a un archivo en <i>Ajustes &gt; Guardar juego</i>.',
-        'androidInfo' : 'Puedes jugar a esto en una aplicación Android (versión mínima 4.4.2). Descárgala <a href="kai.apk">aquí</a> (14 MB).',
+        'androidInfo' : 'Puedes jugar a esto en una aplicación Android (versión mínima 4.4.2). Descárgala <a href="kai.apk">aquí</a> (18 MB).',
         'haveFun' : '¡Divierte!',
         'continueGame' : 'Continuar el juego',
         'newGame' : 'Nuevo juego',
