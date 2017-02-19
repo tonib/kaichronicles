@@ -13,7 +13,7 @@ var newGameView = {
         $('#newgame-form').submit(function(e) {
             e.preventDefault();
             if( !$('#newgame-license').prop('checked') ) {
-                alert('You must agree the licence to play this game');
+                alert( translations.text('youMustAgree') );
                 return;
             }
             newGameController.startNewGame( $('#newgame-book').val() , 

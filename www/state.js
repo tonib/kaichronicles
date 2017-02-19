@@ -34,7 +34,7 @@ var state = {
      * Setup the default browser language
      */
     setupDefaultLanguage: function() {
-        //console.log('Current language: ' + navigator.language);
+        console.log('Current language: ' + navigator.language);
         if( !navigator.language || navigator.language.length < 2 )
             return;
         if( navigator.language.toLowerCase().substr(0,2) == 'es' )

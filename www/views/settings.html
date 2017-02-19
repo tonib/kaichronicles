@@ -1,50 +1,53 @@
-<h1>Settings</h1>
+<h1 data-translation="settings">Settings</h1>
 
 <form>
     <div class="form-group">
-        <label for="settings-language">Book Language</label>
+        <label for="settings-language" data-translation="language">Language</label>
         <select class="form-control" id="settings-language">
-            <option value="en">English</option>
-            <option value="es">Spanish</option>
+            <option value="en" data-translation="english">English</option>
+            <option value="es" data-translation="spanish">Spanish</option>
         </select>
     </div>
 
     <button class="btn btn-default large-button" type="button" id="settings-mainmenu">
         <img src="data/projectAon/illExtra/door.png" alt="Door" />
-        <b>Go back to the main menu</b>
+        <b data-translation="goBackMain">Go back to the main menu</b>
     </button>
 
     <button class="btn btn-default large-button" type="button" id="settings-gamerules">
         <img src="data/projectAon/illExtra/book.png" alt="Book" />
-        <b>The game rules</b>
+        <b data-translation="gameRules">Game rules</b>
     </button>
 
     <button class="btn btn-default large-button" type="button" id="settings-save">
         <img src="data/projectAon/2/ill_en/small8.png" alt="Papers" />
-        <b>Save game</b>
+        <b data-translation="saveGame">Save game</b>
     </button>
 
     <button class="btn btn-default large-button" type="button" id="settings-restart">
         <img src="data/projectAon/2/ill_en/small5.png" alt="Knight" />
-        <b>Restart book</b>
+        <b data-translation="restartBook">Restart book</b>
     </button>
 
     <button class="btn btn-default large-button" type="button" id="settings-about">
         <img src="data/projectAon/illExtra/book.png" alt="Book" />
-        <b>About the book...</b>
+        <b data-translation="about">About the book</b>
     </button>
 
 </form>
 
-<!-- Modal to load the new book language -->
-<div class="modal fade" id="settings-downloadDialog" tabindex="-1" role="dialog" 
+<!-- Modal to load the new book language. IMPORTANT: MUST NOT TO HAVE fade CLASS!
+-->
+<div class="modal" id="settings-downloadDialog" tabindex="-1" role="dialog" 
     data-backdrop="static" data-keyboard="false" aria-labelledby="settings-downloadTitle">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="settings-downloadTitle">Downloading</h4>
+        <h4 class="modal-title" id="settings-downloadTitle" data-translation="downloading">
+          Downloading
+        </h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" data-translation="downloadingWait">
         Downloading book, please wait...
       </div>
     </div>
@@ -57,11 +60,13 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="settings-downloadTitle">Save game</h4>
+        <h4 class="modal-title" id="settings-downloadTitle" data-translation="saveGame">
+          Save game
+        </h4>
       </div>
       <div class="modal-body">
         <div class="form-group">
-            <label for="settings-saveName">File name</label>
+            <label for="settings-saveName" data-translation="fileName">File name</label>
             <div class="input-group">
                 <input type="text" class="form-control"
                   id="settings-saveName" />
@@ -75,8 +80,14 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" id="settings-saveBtn" class="btn btn-primary">Save game</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" 
+          data-translation="close">
+            Close
+        </button>
+        <button type="button" id="settings-saveBtn" class="btn btn-primary"
+          data-translation="saveGame">
+            Save game
+        </button>
       </div>
     </div>
   </div>

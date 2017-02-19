@@ -45,6 +45,7 @@ var template = {
             routing.redirect('actionChart');
         });
         template.updateStatistics(true);
+        template.translateMainMenu();
 
         // If we are on the cordova app, disable the animation (performance)
         if( cordovaApp.isRunningApp() )
@@ -181,6 +182,10 @@ var template = {
                 $(this).text( txtNewValue ).fadeIn(miliseconds);
             });
         }
+    },
+
+    translateMainMenu: function() {
+        translations.translateTags( $('#template-header') );
     }
 
 };

@@ -15,7 +15,7 @@ var settingsView = {
         // Restart book
         $('#settings-restart').click(function(e) {
             e.preventDefault();
-            if( confirm('Are you sure you want to restart the book?') )
+            if( confirm( translations.text('confirmRestart') ) )
                 setupController.restartBook();
         });
 
@@ -61,13 +61,21 @@ var settingsView = {
     },
 
     /**
-     * Show the download book dialog
+     * Show the download book dialog, only for web
      */
-    showDownloadDialog: function() { $('#settings-downloadDialog').modal('show') },
+    showDownloadDialog: function() { 
+        if( cordovaApp.isRunningApp() )
+            return;
+        $('#settings-downloadDialog').modal('show');
+    },
 
     /**
-     * Hide the download book dialog
+     * Hide the download book dialog, only for web
      */
-    hideDownloadDialog: function() { $('#settings-downloadDialog').modal('hide') }
+    hideDownloadDialog: function() { 
+        if( cordovaApp.isRunningApp() )
+            return;
+        $('#settings-downloadDialog').modal('hide');
+    }
 
 };

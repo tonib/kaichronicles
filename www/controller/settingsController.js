@@ -9,7 +9,7 @@ var settingsController = {
         if( !setupController.checkBook() )
             return;
 
-        document.title = 'Settings';
+        document.title = translations.text('settings');
 
         views.loadView('settings.html')
         .then(function() {
@@ -30,13 +30,17 @@ var settingsController = {
         var book = new Book( state.book.bookNumber , newLanguage );
         book.downloadBookXml()
         .then(function() {
+            settingsView.hideDownloadDialog();
             // Load game mechanics XML
             state.updateBookTranslation(book);
             // Set the new language title
             template.setNavTitle( book.getBookTitle() , '#game');
             // Clear the objects cache (they contain translated object names)
             state.mechanics.clearObjectsCache();
-            settingsView.hideDownloadDialog();
+            // Translate the main menu
+            template.translateMainMenu();
+            // Force to reload the settings view, translated to the new language
+            settingsController.index();
         });
     },
 

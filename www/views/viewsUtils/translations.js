@@ -157,8 +157,33 @@ var translations = {
         'english' : 'Ingles',
         'spanish' : 'Español',
         'agreeLicense' : 'Estoy de acuerdo con los términos de la licencia del Proyecto Aon',
+        'youMustAgree' : 'Has de estar de acuerdo con la licencia para poder jugar',
         'licenseText' : 'Texto de la licencia',
         'startGame' : 'Iniciar juego',
+
+        //////////////////////////////////////
+        // Settings
+        //////////////////////////////////////
+
+        'settings' : 'Ajustes',
+        'goBackMain' : 'Volver al menú principal',
+        'saveGame' : 'Guardar partida',
+        'restartBook' : 'Reiniciar libro',
+        'downloading' : 'Descargando',
+        'downloadingWait' : 'Descargando el libro, por favor, espere...',
+        'fileName' : 'Nombre archivo',
+        'close' : 'Cerrar',
+        'wrongFileName' : 'El nombre de archivo contiene carácteres no válidos',
+        'gameSaved' : 'Partida guardada',
+        'confirmRestart' : '¿Seguro que quieres reiniciar el libro?',
+
+        //////////////////////////////////////
+        // Template (Main page)
+        //////////////////////////////////////
+
+        'CS' : 'D.C.',
+        'E' : 'R.',
+        'map' : 'Mapa',
 
         //////////////////////////////////////
         // Others
@@ -170,7 +195,9 @@ var translations = {
         'kaiChronicles' : 'Crónicas del Kai',
         'gameRules' : 'Reglas del juego',
         'loadGame' : 'Cargar juego',
-        'confirmDeleteSave' : '¿Seguro que quiere borrar el juego guardado {0}?'
+        'confirmDeleteSave' : '¿Seguro que quiere borrar el juego guardado {0}?',
+        'projectAonLicense' : 'Licencia del Proyecto Aon',
+        'combatTables' : 'Tablas de Combate'
 
     },
 
@@ -183,6 +210,7 @@ var translations = {
         // Action chart / object tables
         //////////////////////////////////////
 
+        'actionChart' : 'Action Chart',
         'msgDropCoin' : 'Are you sure you want to drop 1 Gold Crown?',
         'noneFemenine' : 'None',
         'noneMasculine' : 'None',
@@ -257,12 +285,36 @@ var translations = {
         'about' : 'About the book',
 
         //////////////////////////////////////
+        // New game
+        //////////////////////////////////////
+
+        'youMustAgree' : 'You must agree the licence to play this game',
+
+        //////////////////////////////////////
+        // Settings
+        //////////////////////////////////////
+
+        'settings' : 'Settings',
+        'wrongFileName' : 'The file name contains invalid characters',
+        'gameSaved' : 'Game saved',
+        'confirmRestart' : 'Are you sure you want to restart the book?',
+
+        //////////////////////////////////////
+        // Template (Main page)
+        //////////////////////////////////////
+
+        'CS' : 'C.S.',
+        'E' : 'E.',
+        'map' : 'Map',
+
+        //////////////////////////////////////
         // Others
         //////////////////////////////////////
 
         'doMealFirst' : 'Please, do the Meal first',
         'kaiChronicles' : 'Kai Chronicles',
-        'confirmDeleteSave' : 'Are you sure you want to delete the save game {0} ?'
+        'confirmDeleteSave' : 'Are you sure you want to delete the save game {0} ?',
+        'projectAonLicense' : 'Project Aon license'
 
     },
 
@@ -275,7 +327,7 @@ var translations = {
     translateView: function( view , doNotClone ) {
 
         var table = translations[state.language];
-        if( !translations[state.language] )
+        if( !table )
             // Translation not available
             return view;
  
@@ -286,7 +338,7 @@ var translations = {
             $clonedView = $(view).clone();
 
         // Translate the view
-        var translatedTags = $clonedView
+        /*var translatedTags = $clonedView
             .find('[data-translation]')
             .addBack('[data-translation]');
         for(var i=0; i<translatedTags.length; i++ ) {
@@ -294,9 +346,30 @@ var translations = {
             var html = table[ translationId ];
             if( html )
                 $(translatedTags[i]).html( html );
+        }*/
+        translations.translateTags( $clonedView , table );
+        return $clonedView;
+    },
+
+    translateTags: function( $tags , table ) {
+
+        if( !table ) {
+            table = translations[state.language];
+            if( !table )
+                // Translation not available
+                return;
         }
 
-        return $clonedView;
+        var $translatedTags = $tags
+            .find('[data-translation]')
+            .addBack('[data-translation]');
+        for(var i=0; i<$translatedTags.length; i++ ) {
+            var $t = $($translatedTags[i])
+            var translationId = $t.attr('data-translation');
+            var html = table[ translationId ];
+            if( html )
+                $t.html( html );
+        }
     },
 
     /**
