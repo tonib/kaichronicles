@@ -76,6 +76,7 @@ var translations = {
         // Meals
         //////////////////////////////////////
 
+        'meal' : 'Comida',
         'useHunting' : 'Usar la disciplina de Caza',
         'eatBackpackMeal' : 'Comer una comida de la mochila',
         'eatBackpackObject' : 'Comer',

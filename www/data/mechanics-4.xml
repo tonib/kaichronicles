@@ -1392,6 +1392,15 @@
             </afterCombats>
         </section>
 
+        <section id="sect279">
+            <test not="true" hasObject="captaindvalsword">
+                <choiceState section="sect327" set="disabled" />
+            </test>
+            <test hasObject="captaindvalsword">
+                <choiceState section="sect289" set="disabled" />
+            </test>
+        </section>
+
         <section id="sect280">
             <pick class="money" count="3" />
             <object objectId="meal" />

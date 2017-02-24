@@ -1,3 +1,4 @@
+- ERROR: Hunting STILL activated on book 3...
 - Web: Add a link on the title bar to return to the main menu (Web only)
 - Small devices: Do not hide the app title on the main menu
 - If the book load fails, it doest not try to reload the next time
@@ -34,6 +35,8 @@
   * Add a link to the project aon license
   * Add a link to the Project Aon URL
   * Add the title section info (authors info, and more)
+- Save the scroll position on the current section when you change of page
+- If the hunting is disabled on the current section, show it on some place (Action Chart?)
 
 Reminders:
 
