@@ -36,15 +36,17 @@ Book.fixXml = function(xmlText) {
 
     // remove general directives
     // TODO: Handle all inclusions with a regex?
-    xmlText = xmlText.replaceAll('%general.links;', '')
-    xmlText = xmlText.replaceAll('%xhtml.links;', '')
-    xmlText = xmlText.replaceAll('%general.inclusions;', '')
-    xmlText = xmlText.replaceAll('&inclusion.joe.dever.bio.lw;', '')
-    xmlText = xmlText.replaceAll('&inclusion.gary.chalk.bio.lw;', '')
-    xmlText = xmlText.replaceAll('&inclusion.project.aon.license;', '')
-    xmlText = xmlText.replaceAll('&inclusion.joe.dever.endowment;', '')
-    xmlText = xmlText.replaceAll('&inclusion.action.chart;', '')
-    xmlText = xmlText.replaceAll('&inclusion.combat.results.table;', '')
+    xmlText = xmlText.replaceAll('%general.links;', '');
+    xmlText = xmlText.replaceAll('%xhtml.links;', '');
+    xmlText = xmlText.replaceAll('%general.inclusions;', '');
+    xmlText = xmlText.replaceAll('%xhtml.characters;', '');
+    
+    xmlText = xmlText.replaceAll('&inclusion.joe.dever.bio.lw;', '');
+    xmlText = xmlText.replaceAll('&inclusion.gary.chalk.bio.lw;', '');
+    xmlText = xmlText.replaceAll('&inclusion.project.aon.license;', '');
+    xmlText = xmlText.replaceAll('&inclusion.joe.dever.endowment;', '');
+    xmlText = xmlText.replaceAll('&inclusion.action.chart;', '');
+    xmlText = xmlText.replaceAll('&inclusion.combat.results.table;', '');
 
     /*xmlText = xmlText.replaceAll('&link.project.website;', '')    
     xmlText = xmlText.replaceAll('&link.staff.contact;', '')
@@ -54,7 +56,10 @@ Book.fixXml = function(xmlText) {
     //xmlText = xmlText.replace( new RegExp( /\&link\..+?\;/ , 'g' ) , '' );
     var exp = /\&link\..+?\;/g;
     xmlText = xmlText.replace( exp , '' );
-    
+
+    xmlText = xmlText.replaceAll('&copy;', '&amp;copy;' );
+    xmlText = xmlText.replaceAll('&endash;', '-' );
+
     // replace non-valid special characters with html special characters
     xmlText = xmlText.replaceAll('<ch.ellips/>', '&amp;hellip;');
     xmlText = xmlText.replaceAll('<ch.lellips/>', '&amp;hellip;');
@@ -112,8 +117,10 @@ Book.prototype.getProjectAonBookCode = function(language) {
         return language == 'en' ? '02fotw' : '02fsea';
     else if( this.bookNumber == 3 )
         return language == 'en' ? '03tcok' : '03lcdk';
-    else
+    else if( this.bookNumber == 4 )
         return language == 'en' ? '04tcod' : '04eam';
+    else
+        return language == 'en' ? '05sots' : '05eddls'; 
 };
 
 /**

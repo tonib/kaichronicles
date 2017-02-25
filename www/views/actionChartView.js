@@ -9,7 +9,7 @@ var actionChartView = {
      */
     fill: function(actionChart) {
 
-        document.title = 'Action chart';
+        document.title = translations.text( 'actionChart' );
 
         // Show endurance / combat skills.
         actionChartView.updateStatistics();

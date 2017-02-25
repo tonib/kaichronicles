@@ -138,7 +138,7 @@ var translations = {
         // Main menu
         //////////////////////////////////////
 
-        'appInfo' : 'Esto es una aplicación para jugar a los librojuegos de Lobo Solitario, del 1 al 4.',
+        'appInfo' : 'Esto es una aplicación para jugar a los librojuegos de Lobo Solitario, del 1 al 5.',
         'browsersWarning' : 'Sólo se soportan las últimas versiones de Chrome y Firefox. Otros navegadores o versiones no están soportados (pueden funcionar... o no).',
         'historyWarning' : 'Ten en cuenta que si borras el historial de tu navegador, perderás la partida actual. Puedes guardar la partida actual a un archivo en <i>Ajustes &gt; Guardar juego</i>.',
         'androidInfo' : 'Puedes jugar a esto en una aplicación Android (versión mínima 4.4.2). Descárgala <a href="kai.apk">aquí</a> (18 MB).',
@@ -155,6 +155,7 @@ var translations = {
         'book2Title' : '2. Fuego sobre agua',
         'book3Title' : '3. Las Cavernas del Kalte',
         'book4Title' : '4. El Abismo maldito',
+        'book5Title' : '5. El Desierto de las Sombras',
         'language' : 'Idioma',
         'english' : 'Ingles',
         'spanish' : 'Español',

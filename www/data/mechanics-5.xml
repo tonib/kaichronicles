@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mechanics book="5">
+
+    <!-- LIST OF TRANSLATED IMAGES -->
+    <translated-images>
+        <image>map.png</image>
+        <image>weapons.png</image>
+    </translated-images>
+
+    <!-- GAME RULES -->
+    <sections>
+
+        <section id="tssf">
+            <!-- Restore the endurace to the maximum -->
+            <endurance count="+[MAXENDURANCE]" />
+            <!-- Drop the previous books map -->
+            <drop objectId="map" />
+        </section>
+
+        <section id="gamerulz">
+            <!-- Select the player skills (weapons skill and endurance) UI -->
+            <setSkills />
+        </section>
+
+        <section id="discplnz">
+            <!-- Select the Kai disciplines UI -->
+            <setDisciplines />
+        </section>
+
+        <section id="equipmnt">
+            <!-- Do not pick 2 maps! -->
+            <test not="true" hasObject="map" >
+                <pick objectId="map" />
+            </test>
+        </section>
+
+    </sections>
+
+</mechanics>
