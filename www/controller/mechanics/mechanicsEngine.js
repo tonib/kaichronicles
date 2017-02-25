@@ -906,6 +906,11 @@ var mechanicsEngine = {
             return;
         
         var $nextBook = $('.bookref');
+        if( $nextBook.length == 0 ) {
+            // XML bug with spanish book 4. It has no bookref...
+            $nextBook = $('cite');
+        }
+
         $nextBook.replaceWith( '<a href="#" id="game-nextBook" class="action">' + 
             $nextBook.html() + '</a>' );
         $('#game-nextBook').click(function(e) {

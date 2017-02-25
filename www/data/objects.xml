@@ -95,7 +95,7 @@
 
         <!-- BOOOK 1 -->
 
-        <special id="helmet" imcompatibleWith="silverhelm">
+        <special id="helmet" incompatibleWith="silverhelm">
             <name lang="en">Helmet</name>
             <description lang="en">This adds 2 ENDURANCE points to your total.</description>
 
@@ -143,7 +143,7 @@
 
         <!-- BOOOK 2 -->
 
-        <special id="shield">
+        <special id="shield" incompatibleWith="shield">
             <name lang="en">Shield</name>
             <description lang="en">This adds 2 points to your COMBAT SKILL</description>
 
@@ -311,7 +311,7 @@
             <image book="3" name="small7.png" />
         </special>
 
-        <special id="silverhelm" imcompatibleWith="helmet" >
+        <special id="silverhelm" incompatibleWith="helmet" >
             <name lang="en">Silver Helm</name>
             <description lang="en">
                 If worn during combat, it will increase your COMBAT SKILL by 2 points
@@ -670,6 +670,35 @@
             <name lang="es">Reloj de Arena</name>
         </object>
         
+        <!-- BOOK 5 -->
+
+        <object id="oedeherb">
+            <name lang="en">Oede Herb</name>
+            <description lang="en">
+                It is a powerful substance that can be used against many deadly diseases 
+                or alternatively can be used to restore 10 ENDURANCE points if swallowed 
+                after combat
+            </description>
+
+            <name lang="es">Hierba Oede</name>
+            <description lang="es">
+                La hierba contiene una sustancia eficaz contra numerosas enfermedades 
+                mortales. También puede ser utilizada para restablecer 10 puntos de 
+                RESISTENCIA tragándola después de un combate
+            </description>
+
+            <usage class="endurance" increment="10" />
+        </object>
+        
+        <object id="blowpipe">
+            <name lang="en">Blowpipe</name>
+            <name lang="es">Cerbatana</name>
+        </object>
+        
+        <object id="sleepdart">
+            <name lang="en">Sleep Dart</name>
+            <name lang="es">Dardo Somnífero</name>
+        </object>
 
         <!-- OTHERS -->
 

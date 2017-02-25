@@ -10,7 +10,7 @@ var testsController = {
             return;
 
         // Test randomness
-        var count = [];
+        /*var count = [];
         for( var i=0; i<10; i++)
             count[i] = 0;
         var total = 200000;
@@ -18,9 +18,10 @@ var testsController = {
             count[randomTable.getRandomValue()]++;
         console.log('Randomness test (' + total + ' random table hits)');
         for( i=0; i<10; i++)
-            console.log(i + ': ' + count[i] + ' hits (' + ( count[i] / total ) * 100.0 + ' %)' );
+            console.log(i + ': ' + count[i] + ' hits (' + ( count[i] / total ) * 100.0 + ' %)' );*/
 
         // Test rendering:
+        console.log('Testing sections render');
         for(var i=1; i<350; i++) {
             try {
                 var section = new Section(state.book, 'sect' + i, state.mechanics );

@@ -55,24 +55,42 @@ var actionChartController = {
     
     /**
      * Drop an object
-     * @param objectId The object to drop, or "allweapons" to drop all weapons, 
-     * or "backpackcontent" to drop all backpack content, or "currentweapon" to drop the current weapon
+     * @param objectId The object to drop, 
+     * or "allweapons" to drop all weapons, 
+     * or "backpackcontent" to drop all backpack content, 
+     * or "currentweapon" to drop the current weapon,
+     * or "allspecial" to drop all the special items
+     * or "all" to drop all (weapons, backpack, special items, and money)
      * @param availableOnSection True if the object should be available on the current section
      */
     drop: function(objectId, availableOnSection) {
 
         if( objectId == 'allweapons' ) {
-            actionChartController.dropAllWeapons();
+            actionChartController.dropItemsList( state.actionChart.weapons );
             return;
         }
 
-        if( objectId == 'currentweapon' && state.actionChart.selectedWeapon ) {
-            this.drop( state.actionChart.selectedWeapon );
+        if( objectId == 'currentweapon' ) {
+            if( state.actionChart.selectedWeapon )
+                this.drop( state.actionChart.selectedWeapon );
             return;
         }
 
         if( objectId == 'backpackcontent' ) {
             actionChartController.dropBackpackContent();
+            return;
+        }
+
+        if( objectId == 'allspecial') {
+            actionChartController.dropItemsList( state.actionChart.specialItems );
+            return;
+        }
+
+        if( objectId == 'all' ) {
+            actionChartController.drop('backpack');
+            actionChartController.drop('allweapons');
+            actionChartController.drop('allspecial');
+            actionChartController.increaseMoney( - state.actionChart.beltPouch );
             return;
         }
 
@@ -107,8 +125,17 @@ var actionChartController = {
      */
     dropBackpackContent: function() {
         actionChartController.increaseMeals( -state.actionChart.meals );
-        while( state.actionChart.backpackItems.length > 0 )
-            actionChartController.drop(state.actionChart.backpackItems[0], false);
+        actionChartController.dropItemsList( state.actionChart.backpackItems );
+    },
+
+    /**
+     * Drop an array of objects
+     * @param {Array<string>} arrayOfItems Array of the objects to drop. It must to be
+     * an array owned by the action chart
+     */
+    dropItemsList: function(arrayOfItems) {
+        while( arrayOfItems.length > 0 )
+            actionChartController.drop(arrayOfItems[0], false);
     },
 
     /**

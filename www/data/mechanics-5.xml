@@ -33,7 +33,105 @@
             <test not="true" hasObject="map" >
                 <pick objectId="map" />
             </test>
+
+            <randomTable>
+                <pick class="money" count="[RANDOM] + 10" />
+            </randomTable>
+
+            <object objectId="dagger" />
+            <object objectId="laumspurpotion4" />
+            <object objectId="sword" />
+            <object objectId="spear" />
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
+            <object objectId="mace" />
+            <object objectId="shield" />
+
+            <chooseEquipment 
+                en-text="Pick the money and choose up to four objects before continue" 
+                es-text="Escoge el dinero y elige hasta cuatro objetos antes de continuar"
+            />
         </section>
+
+        <section id="sect1" en-text="Part I" es-text="Parte I" >
+        </section>
+
+        <section id="sect2">
+            <!-- TODO: Restore temporal CS loss -->
+            <object objectId="oedeherb" />
+        </section>
+
+        <section id="sect3">
+            <pick class="money" count="4" />
+            <object objectId="dagger" />
+            <object objectId="sword" />
+            <object objectId="potionofstrength" />
+            <object objectId="blowpipe" />
+            <object objectId="sleepdart" />
+        </section>
+
+        <section id="sect4">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <test not="true" expression="[COMBATSDURATION] >= 5">
+                    <choiceState section="sect165" set="enabled" />
+                </test>
+                <test expression="[COMBATSDURATION] >= 5">
+                    <choiceState section="sect180" set="enabled" />
+                </test>
+            </afterCombats>
+        </section>
+
+        <section id="sect5">
+            <death />
+        </section>
+
+        <section id="sect8">
+            <endurance count="-2" />
+        </section>
+
+        <section id="sect10">
+            <!-- TODO: Save the current inventory state -->
+            <drop objectId="all" />
+        </section>
+
+        <section id="sect11">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="-2" to="2">
+                    <choiceState section="sect167" set="enabled" />
+                </case>
+                <case from="3" to="9">
+                    <choiceState section="sect190" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="camflage|hunting">
+                <randomTableIncrement increment="-2" />
+            </test>
+        </section>
+
+        <section id="sect12">
+            <choiceState section="all" set="disabled" />
+            <combat index="0" combatSkillModifier="-2" noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect13">
+            <test not="true" hasDiscipline="anmlknsp">
+                <choiceState section="sect187" set="disabled" />
+            </test>
+            <test hasDiscipline="anmlknsp">
+                <choiceState section="sect110" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect14">
+            <!-- TODO: Restore inventory lost at sect10 -->
+        </section>
+
+        <!-- Up to sect14 -->
 
     </sections>
 

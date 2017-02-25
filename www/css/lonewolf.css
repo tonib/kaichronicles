@@ -213,3 +213,9 @@ a.breakable {
   -o-transition: height 0.01s;
   transition: height 0.01s;
 }
+
+/* Main title for book parts (see book4, sect 1: "Part I") */
+.book-section-title {
+    text-align: center;
+    margin-bottom: 5px;
+}

@@ -67,7 +67,7 @@ function Item(book, $o, objectId) {
     }
 
     // Incompatibilities
-    this.imcompatibleWith = $o.attr('imcompatibleWith');
+    this.incompatibleWith = $o.attr('incompatibleWith');
 
     // If it's the map, add description from the book:
     if( objectId == 'map' ) {

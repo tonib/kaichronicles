@@ -47,8 +47,8 @@ ActionChart.prototype.pick = function(o) {
         return;
 
     // Check incompatibilities
-    if( o.imcompatibleWith && this.hasObject(o.imcompatibleWith) ) {
-        var incombatibleObject = state.mechanics.getObject(o.imcompatibleWith);
+    if( o.incompatibleWith && this.hasObject(o.incompatibleWith) ) {
+        var incombatibleObject = state.mechanics.getObject(o.incompatibleWith);
         throw translations.text( 'msgIncompatible' , [incombatibleObject.name] );
     }
 

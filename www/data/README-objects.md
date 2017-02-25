@@ -90,9 +90,9 @@ Optional. If it's set, the object as some effect when it's carried:
     * "combatSkill": The combat skill will be increased
 * **"increment" property**: Amount to increment
 
-### "imcompatibleWith" property
+### "incompatibleWith" property
 ```xml
-<special id="silverhelm" imcompatibleWith="helmet" >
+<special id="silverhelm" incompatibleWith="helmet" >
     ...
 </special>
 ```

@@ -109,7 +109,17 @@ Section.prototype.getTitleText = function() {
  * Get the title HTML
  */
 Section.prototype.getTitleHtml = function() {
-    return this.$xmlSection.find('title').first().text();
+    var title = this.$xmlSection.find('title').first().text();
+    // Check if the section has a "main title" on the mechanics file (see sect1 on book 4)
+    if( this.mechanics ) {
+        var section = this.mechanics.getSection(this.sectionId);
+        if( section ) {
+            var mainTitle = mechanicsEngine.getRuleText( section );
+            if( mainTitle )
+                title = '<div class="book-section-title">' + mainTitle + '</div>' + title;
+        }
+    }
+    return title;
 };
 
 /**
