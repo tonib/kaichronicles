@@ -141,7 +141,7 @@
                     <choiceState section="sect175" set="enabled" />
                 </case>
             </randomTable>
-            <test hasDiscipline="hunting" expression="[KAILEVEL] >= 7">
+            <test expression="[KAILEVEL] >= 7">
                 <randomTableIncrement increment="-1" />
             </test>
         </section>
@@ -203,7 +203,207 @@
             </afterElude>
         </section>
 
-        <!-- Up to sect14 -->
+        <section id="sect22">
+            <endurance count="-8" />
+            <test not="true" hasDiscipline="healing">
+                <choiceState section="sect107" set="disabled" />
+            </test>
+            <test hasDiscipline="healing">
+                <choiceState section="sect63" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect23">
+            <choiceState section="all" set="disabled" />
+            <!-- TODO: If you have lost an arm use??? -->
+            <randomTable>
+                <case from="-3" to="-1">
+                    <choiceState section="sect77" set="enabled" />
+                </case>
+                <case from="0" to="6">
+                    <choiceState section="sect192" set="enabled" />
+                </case>
+                <case from="7" to="11">
+                    <choiceState section="sect114" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hunting">
+                <randomTableIncrement increment="+2" />
+            </test>
+        </section>
+
+        <section id="sect24">
+            <test not="true" hasDiscipline="sixthsns" >
+                <choiceState section="sect147" set="disabled" />
+            </test>
+            <test hasDiscipline="sixthsns" >
+                <choiceState section="sect196" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect26">
+            <test not="true" hasDiscipline="mindomtr" >
+                <choiceState section="sect48" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect27">
+            <object objectId="larnumaoil" price="3" unlimited="true" />
+            <object objectId="laumspurpotion4" price="5" unlimited="true" />
+            <object objectId="rendalimelixir" price="7" unlimited="true" />
+        </section>
+
+        <section id="sect29">
+            <drop objectId="rope" />
+        </section>
+
+        <section id="sect30">
+            <test not="true" expression="[KAILEVEL] >= 7">
+                <choiceState section="sect62" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect31">
+            <test hasObject="firesphere|tinderbox">
+                <choiceState section="sect183" set="disabled" />
+            </test>
+            <test not="true" hasObject="firesphere|tinderbox">
+                <choiceState section="sect143" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect34">
+            <endurance count="-1" />
+        </section>
+
+        <section id="sect35">
+            <object objectId="jewelledmace" />
+            <object objectId="copperkey" />
+        </section>
+
+        <section id="sect38">
+            <endurance count="-1" />
+        </section>
+
+        <section id="sect40">
+            <pick class="money" count="-[MONEY]" />
+            <endurance count="-2" />
+            <message id="msg-drop-object" 
+                en-text="Drop one Backpack Item before continue" 
+                es-text="Deja un Objeto de Mochila antes de continuar" 
+            />
+            <choiceState section="all" set="disabled" />
+            <onInventoryEvent>
+                <test expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] == 0 || [BACKPACK-ITEMS-CNT-ON-SECTION] >= 1">
+                    <message id="msg-drop-object" op="hide" />
+                    <choiceState section="all" set="enabled" />
+                </test>
+                <test not="true" expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] == 0 || [BACKPACK-ITEMS-CNT-ON-SECTION] >= 1">
+                    <message id="msg-drop-object" op="show" />
+                    <choiceState section="all" set="disabled" />
+                </test>
+            </onInventoryEvent>
+        </section>
+
+        <section id="sect46">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect48">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect34" set="enabled" />
+                </case>
+                <case from="5" to="99">
+                    <choiceState section="sect80" set="enabled" />
+                </case>
+            </randomTable>
+            <test expression="[KAILEVEL] >= 7">
+                <randomTableIncrement increment="+3" />
+            </test>
+        </section>
+
+        <section id="sect49">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="5">
+                    <choiceState section="sect106" set="enabled" />
+                </case>
+                <case from="6" to="13">
+                    <choiceState section="sect189" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hunting">
+                <randomTableIncrement increment="+1" />
+            </test>
+            <test expression="[KAILEVEL] >= 9">
+                <randomTableIncrement increment="+3" />
+            </test>
+        </section>
+
+        <section id="sect50">
+            <endurance count="-2" />
+        </section>
+
+        <section id="sect51">
+            <endurance count="-1" />
+            <test not="true" hasDiscipline="tracking" >
+                <choiceState section="sect173" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect52">
+            <pick class="money" count="4" />
+            <object objectId="gaolerkeys" />
+            <object objectId="dagger" />
+            <object objectId="sword" />
+        </section>
+
+        <section id="sect54">
+            <!-- TODO: If you need the Oede herb ??? -->
+        </section>
+
+        <section id="sect56">
+            <object objectId="jakan" />
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="3">
+                    <choiceState section="sect7" set="enabled" />
+                </case>
+                <case from="4" to="11">
+                    <choiceState section="sect28" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="wepnskll">
+                <randomTableIncrement increment="+2" />
+            </test>
+        </section>
+
+        <section id="sect57">
+            <!-- TODO: If you have ever fought an Elix before, add 2 to your COMBAT SKILL 
+                for the duration of this fight -->
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect58">
+            <!-- TODO: If you know the correct number that will open the bronze door, 
+                 turn to that section number -->
+        </section>
+
+        <section id="sect59">
+            <choiceSelected section="sect4">                
+                <pick objectId="sword" />
+            </choiceSelected>
+        </section>
+
+        <!-- Up to sect62 -->
 
     </sections>
 

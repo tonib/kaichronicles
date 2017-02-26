@@ -88,6 +88,24 @@
             <image book="1" name="sword.png" />
         </weapon>
 
+        <!-- BOOOK 5 -->
+
+        <!-- Yes: a "bow", and yes, it's not a standard weapon, but it's a WEAPON. 
+             So if it's a Weapon, you can use it as a Weapon (Overwhelming Logic). 
+             It has no sense for me: How do you do a fight sword against bow?
+        -->
+        <weapon id="jakan" weaponType="bow">
+            <name lang="en">Jakan</name>
+            <description lang="en">
+                A hunting bow used by the coastal fishermen of Vassagonia
+            </description>
+
+            <name lang="es">Jakan</name>
+            <description lang="es">
+                Un arco de caza de los que utilizan los pescadores de la costa de Vassagonia
+            </description>
+        </weapon>
+
     </weapons>
 
     <specials>
@@ -370,6 +388,39 @@
                 Una daga negra en forma de serpiente ondulada
             </description>
             <image book="4" name="small20.png" />
+        </special>
+
+        <!-- BOOK 5 -->
+
+        <special id="jewelledmace" weaponType="mace">
+            <name lang="en">Jewelled Mace</name>
+            <description lang="en">
+                Beautifully carved and encrusted with rubies, emeralds, and pearls. 
+                In the Northlands this weapon would fetch thousands of Crowns
+            </description>
+            
+            <name lang="es">Maza Enjoyada</name>
+            <description lang="es">
+                Bellamente tallada, con empuñadura de plata e incrustaciones de rubíes, 
+                perlas y esmeraldas. En los países del norte esta arma costaría miles de 
+                Coronas
+            </description>
+
+            <image book="1" name="mace.png" />
+        </special>
+
+        <special id="copperkey">
+            <name lang="en">Copper Key</name>
+            <name lang="es">Llave de Cobre</name>
+
+            <image book="1" name="small15.png" />
+        </special>
+
+        <special id="gaolerkeys">
+            <name lang="en">Gaoler’s Keys</name>
+            <name lang="es">Llaves del Carcelero</name>
+
+            <image book="1" name="small15.png" />
         </special>
 
     </specials>
@@ -698,6 +749,34 @@
         <object id="sleepdart">
             <name lang="en">Sleep Dart</name>
             <name lang="es">Dardo Somnífero</name>
+        </object>
+
+        <object id="larnumaoil">
+            <name lang="en">Larnuma Oil</name>
+            <description lang="en">
+                Restores 2 ENDURANCE points per dose
+            </description>
+
+            <name lang="es">Aceite de Larnuma</name>
+            <description lang="es">
+                Cada dosis restablece 2 puntos de RESISTENCIA
+            </description>
+
+            <usage class="endurance" increment="2" />
+        </object>
+
+        <object id="rendalimelixir">
+            <name lang="en">Rendalim’s Elixir</name>
+            <description lang="en">
+                Restores 6 ENDURANCE points per dose
+            </description>
+
+            <name lang="es">Elixir de Rendalim</name>
+            <description lang="es">
+                Cada dosis restablece 6 puntos de RESISTENCIA
+            </description>
+
+            <usage class="endurance" increment="6" />
         </object>
 
         <!-- OTHERS -->

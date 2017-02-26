@@ -118,7 +118,7 @@
 
         <section id="sect16">
             <message id="msg-drop-object" 
-                en-text="Drop two backpack items before continue" 
+                en-text="Drop two Backpack Items before continue" 
                 es-text="Deja dos Objetos de Mochila antes de continuar" 
             />
             <choiceState section="all" set="disabled" />
