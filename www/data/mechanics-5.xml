@@ -91,7 +91,7 @@
         </section>
 
         <section id="sect10">
-            <!-- TODO: Save the current inventory state -->
+            <saveInventoryState restorePoint="book4sect10Inventory" />
             <drop objectId="all" />
         </section>
 
@@ -128,7 +128,7 @@
         </section>
 
         <section id="sect14">
-            <!-- TODO: Restore inventory lost at sect10 -->
+            <restoreInventoryState restorePoint="book4sect10Inventory" />
         </section>
 
         <!-- Up to sect14 -->

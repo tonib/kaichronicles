@@ -432,3 +432,17 @@ ActionChart.prototype.getWeaponObjects = function() {
     });
     return result;
 };
+
+/**
+ * Return an object with the current inventory state
+ */
+ActionChart.prototype.getInventoryState = function() {
+    return {
+        weapons: this.weapons.clone(),
+        hasBackpack: this.hasBackpack,
+        backpackItems: this.backpackItems.clone(),
+        specialItems: this.specialItems.clone(),
+        beltPouch: this.beltPouch,
+        meals: this.meals
+    };
+};

@@ -116,6 +116,12 @@ if (!Array.prototype.some) {
   };
 }
 
+if (!Array.prototype.clone) {
+    Array.prototype.clone = function() {
+	      return this.slice(0);
+    };
+}
+
 /****************** WINDOW ******************/
 
 if (typeof Window.prototype.getUrlParameter !== 'function') {

@@ -690,6 +690,41 @@ var mechanicsEngine = {
         state.sectionStates.resetSectionState( $(rule).attr('sectionId') );
     },
 
+    /**
+     * Save the current inventory state
+     */
+    saveInventoryState: function(rule) {
+        if( state.sectionStates.ruleHasBeenExecuted(rule) )
+            // Execute only once
+            return;
+
+        // Save the inventory state:
+        state.sectionStates.otherStates[ $(rule).attr('restorePoint') ] =
+            state.actionChart.getInventoryState();
+        state.sectionStates.markRuleAsExecuted(rule);
+    },
+
+    /**
+     * Restore the inventory state
+     */
+    restoreInventoryState: function(rule) {
+        if( state.sectionStates.ruleHasBeenExecuted(rule) )
+            // Execute only once
+            return;
+
+        var restorePoint = $(rule).attr('restorePoint');
+        var inventoryState = state.sectionStates.otherStates[ restorePoint ];
+        if( !inventoryState ) {
+            console.log('restorePoint ' + restorePoint + ' not found!');
+            return;
+        }
+        actionChartController.restoreInventoryState( inventoryState );
+        // Clean the restore point, to avoid space overhead
+        state.sectionStates.otherStates[ restorePoint ] = null;
+
+        state.sectionStates.markRuleAsExecuted(rule);
+    },
+
     /************************************************************/
     /**************** SPECIAL SECTIONS **************************/
     /************************************************************/

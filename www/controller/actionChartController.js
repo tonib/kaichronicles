@@ -277,7 +277,35 @@ var actionChartController = {
         return txt.join(", ");
     },
 
+    pickItemsList: function(arrayOfItems) {
+        var renderAvailableObjects = false;
+        for(var i=0; i<arrayOfItems.length; i++) {
+            if( !actionChartController.pick( arrayOfItems[i] ) ) {
+                // Add the object as available on the current section
+                state.sectionStates.addObjectToSection( arrayOfItems[i] );
+                renderAvailableObjects = true;
+            }
+        }
+        if( renderAvailableObjects )
+            // Render available objects on this section (game view)
+            mechanicsEngine.showAvailableObjects();
+    },
+
+    /**
+     * Restore the inventory from an object generated with ActionChart.getInventoryState.
+     * This does not replace the current inventory, just append objects to the current
+     */
+    restoreInventoryState: function(inventoryState) {
+        if( !state.actionChart.hasBackpack && inventoryState.hasBackpack )
+            actionChartController.pick('backpack');
+        actionChartController.pickItemsList( inventoryState.weapons );
+        actionChartController.pickItemsList( inventoryState.backpackItems );
+        actionChartController.pickItemsList( inventoryState.specialItems );
+        actionChartController.increaseMoney( inventoryState.beltPouch );
+        actionChartController.increaseMeals( inventoryState.meals );
+    },
+
     /** Return page */
-    getBackController: function() { return 'game'; }
-    
+    getBackController: function() { return 'game'; },
+
 };

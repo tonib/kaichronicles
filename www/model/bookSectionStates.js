@@ -19,6 +19,12 @@ function BookSectionStates() {
      * Hunting discipline enabled?
      */
     this.huntEnabled = true;
+
+    /**
+     * Other states
+     */
+    this.otherStates = {};
+
 }
 
 /**
@@ -134,6 +140,12 @@ BookSectionStates.prototype.fromStateObject = function(stateObject) {
         });
         sectionState.combats = combats;
     });
+
+    // Other states initialization. Be sure it's not null
+    this.otherStates = stateObject.otherStates;
+    if( !this.otherStates )
+        this.otherStates = {};
+        
 };
 
 BookSectionStates.prototype.sectionIsVisited = function(sectionId) {
