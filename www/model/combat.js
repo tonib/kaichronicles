@@ -56,6 +56,9 @@ function Combat(enemy, combatSkill, endurance) {
 
     /** Book 2 / sect276: True if the combat is not a combat to death */
     this.fakeCombat = false;
+    /** If fakeCombat is true, percentage of the E.P. lost to restore  */
+    this.fakeRestoreFactor = 1.0;
+
     /** The original endurance of the player before the combat (for fake combats) */
     this.originalPlayerEndurance = state.actionChart.currentEndurance;
     /** Combat has been finished? */
@@ -139,8 +142,13 @@ Combat.prototype.applyTurn = function( turn ) {
         this.combatFinished = true;
         if( this.fakeCombat ) {
             // Restore player endurance to original :
-            state.actionChart.increaseEndurance( this.originalPlayerEndurance
-                - state.actionChart.currentEndurance );
+            var epToRestore = this.originalPlayerEndurance
+                - state.actionChart.currentEndurance;
+            // Apply the factor
+            epToRestore = Math.floor( this.fakeRestoreFactor * epToRestore );
+            // If you call this, the endurance on the UI is not updated
+            //state.actionChart.increaseEndurance( epToRestore );
+            actionChartController.increaseEndurance( epToRestore );
         }
     }
 }

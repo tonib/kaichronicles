@@ -131,6 +131,78 @@
             <restoreInventoryState restorePoint="book4sect10Inventory" />
         </section>
 
+        <section id="sect15">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="-1" to="7">
+                    <choiceState section="sect151" set="enabled" />
+                </case>
+                <case from="8" to="9">
+                    <choiceState section="sect175" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hunting" expression="[KAILEVEL] >= 7">
+                <randomTableIncrement increment="-1" />
+            </test>
+        </section>
+
+        <section id="sect16">
+            <object objectId="rope" />
+            <object objectId="tinderbox" />
+        </section>
+
+        <section id="sect17">
+            <test not="true" hasDiscipline="sixthsns" >
+                <choiceState section="sect47" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect18">
+            <death />
+        </section>
+
+        <section id="sect19">
+            <!-- TODO: Meals right now are considered as backpack items. Wrong -->
+            <message id="msg-drop-objects" 
+                en-text="Drop the Backpack Items you want to give to the guards" 
+                es-text="Deja los Objetos de Mochila que quieres dar a los guardias"
+            />
+            <onInventoryEvent>
+                <test expression="[BACKPACK-ITEMS-CNT-ON-SECTION] >= 2">
+                    <message id="msg-drop-objects" op="hide" />
+                    <choiceState section="sect137" set="enabled" />
+                    <choiceState section="sect49" set="disabled" />
+                </test>
+                <test not="true" expression="[BACKPACK-ITEMS-CNT-ON-SECTION] >= 2">
+                    <message id="msg-drop-objects" op="show" />
+                    <choiceState section="sect137" set="disabled" />
+                    <choiceState section="sect49" set="enabled" />
+                </test>
+            </onInventoryEvent>
+        </section>
+
+        <section id="sect20">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="0" fake="true" restoreFactor="0.5" />
+            <afterCombats>
+                <test combatsWon="true">
+                    <test not="true" expression="[COMBATSDURATION] >= 4">
+                    <choiceState section="sect125" set="enabled" />
+                    </test>
+                    <test expression="[COMBATSDURATION] >= 4">
+                        <choiceState section="sect82" set="enabled" />
+                    </test>
+                </test>
+                <test combatsWon="false">
+                    <choiceState section="sect161" set="enabled" />
+                </test>
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect142" set="enabled" />
+                <choiceState section="sect176" set="enabled" />
+            </afterElude>
+        </section>
+
         <!-- Up to sect14 -->
 
     </sections>

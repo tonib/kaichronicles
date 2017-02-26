@@ -231,7 +231,9 @@ the following properties:
 * **eludeTurn="number"**: Turn number after which LW can elude the combat
 * **dammageMultiplier="number"**: LW dammage multiplier
 * **enemyMultiplier="number"**: Enemy dammage multiplier
-* **fake="true"**: This is a fake combat. When it's finished, LW endurance points will be restored
+* **fake="true"**: This is a fake combat. When it's finished, LW endurance points lost will be restored
+* **restoreFactor="floatNumber"**: Only applies if fake="true". Factor of the EP lost to restore after the combat.
+  Default is 1.0 (100% of the EP lost)
 * **enemyTurnLoss="-number"** Extra E.P. lost by the enemy each turn
 * **turnLoss="-number"** Extra E.P. lost by LW each turn
 
@@ -243,6 +245,17 @@ TODO: Continue here
 ```
 By default disables all section combats. If the optional property "disabled" is set to "true", 
 all section combats will be re-enabled
+
+### saveInventoryState / restoreInventoryState
+```xml
+<saveInventoryState restorePoint="book4sect10Inventory" />
+<restoreInventoryState restorePoint="book4sect10Inventory" />
+```
+It can be used when player loses all his objects, and they can be found after. "saveInventoryState"
+stores the player current inventory state. When the "restoreInventoryState" rule is executed
+all the objects stored will be re-added to the player inventory. "restorePoint" property
+is used to identify the place on the book where it was lost the inventory (they can be more
+than one).
 
 ### special sections
 

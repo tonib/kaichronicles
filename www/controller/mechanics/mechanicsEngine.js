@@ -522,8 +522,13 @@ var mechanicsEngine = {
 
         // It's a fake combat?
         var txtFake = $(rule).attr('fake');
-        if( txtFake )
+        if( txtFake ) {
             combat.fakeCombat = ( txtFake == 'true' );
+            // % of the E.P. lost to restore after the combat on fake combats.
+            var txtFactor = $(rule).attr('restoreFactor');
+            if( txtFactor )
+                combat.fakeRestoreFactor = parseFloat(txtFactor);
+        }
 
     },
 
@@ -843,8 +848,8 @@ var mechanicsEngine = {
             .replaceAll( '[RANDOM]' , randomMechanics.lastValue )
             .replaceAll( '[MONEY]' , state.actionChart.beltPouch )
             .replaceAll( '[BACKPACK-ITEMS-CNT-ON-SECTION]' , sectionState.getCntSectionObjects('object') )
-            .replaceAll( '[WEAPON-ITEMS-CNT-ON-SECTION]' , sectionState.getCntSectionObjects('weapon') )
             .replaceAll( '[BACKPACK-ITEMS-CNT-ON-ACTIONCHART]' , state.actionChart.getNBackpackItems() )
+            .replaceAll( '[WEAPON-ITEMS-CNT-ON-SECTION]' , sectionState.getCntSectionObjects('weapon') )
             .replaceAll( '[WEAPON-ITEMS-CNT-ON-ACTIONCHART]' , state.actionChart.weapons.length )
             .replaceAll( '[WEAPONLIKE-CNT-ON-ACTIONCHART]' , state.actionChart.getWeaponObjects().length )
             .replaceAll( '[ENDURANCE]' , state.actionChart.currentEndurance )
