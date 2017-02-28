@@ -1,1 +1,1 @@
-Here comes resources (images)
+Here goes resources (images)

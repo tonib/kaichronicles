@@ -1,6 +1,6 @@
 # Mechanics
 
-Here comes a brief of the books mechanics rules. They are stored at mechanics-XXX.xml
+This is a brief of the books mechanics rules. They are stored at mechanics-XXX.xml
 file, where XXX is the book number
 
 General struture:
@@ -10,17 +10,17 @@ General struture:
 <mechanics book="1">
     
     <translated-images>
-        <!-- Here come the list of translated images (usually images that 
+        <!-- Here goes the list of translated images (usually images that 
              contain texts) -->
         <image>map.png</image>
         ...
     </translated-images>
 
     <sections>
-        <!-- Here come the list of sections that must to be mechanized -->
+        <!-- Here goes the list of sections that must to be mechanized -->
 
         <section id="sectXXX">
-            <!-- Here come the rules for the section with id "sectXXX" -->
+            <!-- Here goes the rules for the section with id "sectXXX" -->
         </section>
 
         <section id="sectYYY">
@@ -72,7 +72,7 @@ the current section
 * **[KAILEVEL]**: Current number of Kai disciplines of the player
 
 ## Rules description
-Here come the rules usage:
+Description of the rules usage:
 
 ### setSkills
 Game setup: The player selects the initial Endurance and Combat Skill
@@ -256,6 +256,33 @@ stores the player current inventory state. When the "restoreInventoryState" rule
 all the objects stored will be re-added to the player inventory. "restorePoint" property
 is used to identify the place on the book where it was lost the inventory (they can be more
 than one).
+
+### choiceSelected
+```xml
+<choiceSelected section="sect187">
+    <pick objectId="bracelet" />
+</choiceSelected>
+```
+Contains the rules to execute when a choice is selected. "section" property can be the
+choice section destination or "all" for any choice on the section
+
+### registerGlobalRule / unregisterGlobalRule
+```xml
+<section id="sect63">
+    <!-- Player will lose 2 E.P. each section until a Laumspur Potion is used -->
+    <registerGlobalRule id="book5sect63">
+        <onObjectUse objectId="laumspurmeal|laumspurpotion|laumspurpotion4|redpotionlaumspur">
+            <unregisterGlobalRule id="book5sect63" />
+        </onObjectUse>
+        <choiceSelected section="all">           
+            <endurance count="-2" />
+        </choiceSelected>
+    </registerGlobalRule>
+</section>
+```
+"registerGlobalRule" registers a set of rules that will be executed each section.
+These rules has an "id", and they will be executed each section until the rule 
+"unregisterGlobalRule" is executed with the same "id" property
 
 ### special sections
 

@@ -1,24 +1,24 @@
 # Objects
 
-Here comes a brief of the objects descriptions. They are stored at objects.xml file. 
+This a brief of the objects descriptions. They are stored at objects.xml file. 
 General struture:
 
 ```xml
 <object-mechanics>
     <weapons>
-        <!-- Here come weapons descriptions -->
+        <!-- Here goes weapons descriptions -->
         <weapon>...</weapon>
         <weapon>...</weapon>
     </weapons>
 
     <specials>
-        <!-- Here come special items descriptions -->
+        <!-- Here goes special items descriptions -->
         <special>...</special>
         <special>...</special>
     </specials>
 
     <objects>
-        <!-- Here come objects descriptions -->
+        <!-- Here goes objects descriptions -->
         <object>...</object>
         <object>...</object>
     </objects>
