@@ -169,6 +169,9 @@ var actionChartController = {
         
         // Drop the object, and do not keep it on the section
         actionChartController.drop(objectId, false);
+
+        // Fire mechanics rules
+        mechanicsEngine.fireObjectUsed( objectId );
     },
 
     /**

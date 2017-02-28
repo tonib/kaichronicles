@@ -34,6 +34,9 @@ var mechanicsEngine = {
     /** Rules for events on some choice is selected */
     onChoiceSelected: [],
 
+    /** The rule to run after some object used */
+    onObjectUsedRule: null,
+
     /************************************************************/
     /**************** MAIN FUNCTIONS ****************************/
     /************************************************************/
@@ -80,6 +83,7 @@ var mechanicsEngine = {
         mechanicsEngine.onInventoryEventRule = null;
         mechanicsEngine.onAfterCombatTurns = [];
         mechanicsEngine.onChoiceSelected = [];
+        mealMechanics.onObjectUsedRule = null;
 
         // Disable previous link if we are on "The story so far" section
         gameView.enablePreviousLink(section.sectionId != 'tssf');
@@ -211,6 +215,20 @@ var mechanicsEngine = {
             if( ruleSectionId == 'all' || ruleSectionId == sectionId )
                 mechanicsEngine.runChildRules( $(rule) );
         });
+    },
+
+    /**
+     * Fire events when some object is used
+     * @param {string} objectId The id of the object used
+     */
+    fireObjectUsed: function(objectId) {
+        if( !mechanicsEngine.onObjectUsedRule )
+            return;
+
+        var $eventRule = $(mechanicsEngine.onObjectUsedRule);
+        var objectIds = $eventRule.attr('objectId').split('|');
+        if( objectIds.contains(objectId) ) 
+            mechanicsEngine.runChildRules( $eventRule );
     },
 
     /************************************************************/
@@ -748,10 +766,28 @@ var mechanicsEngine = {
             return;
 
         var ruleId = $(rule).attr('id');
-        if( !state.sectionStates.globalRulesIds.contains( ruleId ) )
+        if( !state.sectionStates.globalRulesIds.contains( ruleId ) ) {
+            console.log('Registered global rule ' + ruleId);
             state.sectionStates.globalRulesIds.push( ruleId );
+        }
 
         state.sectionStates.markRuleAsExecuted(rule);
+    },
+
+    /**
+     * Unregister a set of global rules
+     */
+    unregisterGlobalRule: function(rule) {
+        var ruleId = $(rule).attr('id');
+        console.log('Unregistering global rule ' + ruleId );
+        state.sectionStates.globalRulesIds.removeValue(ruleId);
+    },
+
+    /**
+     * Add an event handler for when an object is used on this section
+     */
+    objectUsed: function(rule) {
+        mechanicsEngine.onObjectUsedRule = rule;
     },
 
     /************************************************************/

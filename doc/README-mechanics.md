@@ -284,6 +284,15 @@ choice section destination or "all" for any choice on the section
 These rules has an "id", and they will be executed each section until the rule 
 "unregisterGlobalRule" is executed with the same "id" property
 
+### objectUsed
+```xml
+<objectUsed objectId="laumspurpotion|laumspurpotion4|redpotionlaumspur">
+    <unregisterGlobalRule id="book5sect63" />
+</objectUsed>
+```
+Event handler for an object use. If some of the objects on the "objectId" property is used
+on this section, the chilren rules will be executed
+
 ### special sections
 
 There are sections (or parts of them) that cannot be described by the game rules.

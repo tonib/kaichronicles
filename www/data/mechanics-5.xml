@@ -406,9 +406,9 @@
         <section id="sect63">
             <!-- Player will lose 2 E.P. each section until a Laumspur Potion is used -->
             <registerGlobalRule id="book5sect63">
-                <!--onObjectUse objectId="laumspurmeal|laumspurpotion|laumspurpotion4|redpotionlaumspur">
+                <objectUsed objectId="laumspurpotion|laumspurpotion4|redpotionlaumspur">
                     <unregisterGlobalRule id="book5sect63" />
-                </onObjectUse-->
+                </objectUsed>
                 <choiceSelected section="all">                
                     <endurance count="-2" />
                 </choiceSelected>
