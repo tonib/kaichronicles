@@ -138,7 +138,7 @@ var gameView = {
         var section = $(link).attr('data-section');
         console.log('Jump to section ' + section);
         if( section )
-            gameController.loadSection( section );
+            gameController.loadSection( section , true );
     },
 
     /**

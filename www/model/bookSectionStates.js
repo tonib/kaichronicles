@@ -25,6 +25,11 @@ function BookSectionStates() {
      */
     this.otherStates = {};
 
+    /**
+     * Global rules to run on each section
+     */
+    this.globalRulesIds = [];
+
 }
 
 /**
@@ -141,10 +146,15 @@ BookSectionStates.prototype.fromStateObject = function(stateObject) {
         sectionState.combats = combats;
     });
 
-    // Other states initialization. Be sure it's not null
+    // Other states initialization. Be sure it's not null (created on v1.3)
     this.otherStates = stateObject.otherStates;
     if( !this.otherStates )
         this.otherStates = {};
+        
+    // Global rules. Be sure it's not null (created on v1.4)
+    this.globalRulesIds = stateObject.globalRulesIds;
+    if( !this.globalRulesIds )
+        this.globalRulesIds = [];
         
 };
 

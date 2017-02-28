@@ -133,3 +133,11 @@ Mechanics.prototype.imageIsTranslated = function(fileName) {
         .length > 0;
 };
 
+/**
+ * Search a "registerGlobalRule" tag by its id
+ * @param {string} id The global rule container id to return
+ * @return {object} The XML tag found
+ */
+Mechanics.prototype.getGlobalRule = function(id) {
+    return $(this.mechanicsXml).find('registerGlobalRule[id=' + id + ']').first();
+};

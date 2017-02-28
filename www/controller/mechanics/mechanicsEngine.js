@@ -122,10 +122,17 @@ var mechanicsEngine = {
      * Run current section rules
      */
     runSectionRules: function() {
+        // Run section rules
         var $sectionMechanics = 
             state.mechanics.getSection( state.sectionStates.currentSection );
         if( $sectionMechanics != null )
             mechanicsEngine.runChildRules( $sectionMechanics );
+        
+        // Run global rules
+        for( var i=0; i<state.sectionStates.globalRulesIds.length; i++) {
+            var id = state.sectionStates.globalRulesIds[i];
+            mechanicsEngine.runChildRules( state.mechanics.getGlobalRule(id) );
+        }
     },
 
     /**
@@ -200,7 +207,8 @@ var mechanicsEngine = {
      */
     fireChoiceSelected: function(sectionId) {
         $.each( mechanicsEngine.onChoiceSelected , function(index, rule) {
-            if( $(rule).attr('section') == sectionId )
+            var ruleSectionId = $(rule).attr('section');
+            if( ruleSectionId == 'all' || ruleSectionId == sectionId )
                 mechanicsEngine.runChildRules( $(rule) );
         });
     },
@@ -726,6 +734,22 @@ var mechanicsEngine = {
         actionChartController.restoreInventoryState( inventoryState );
         // Clean the restore point, to avoid space overhead
         state.sectionStates.otherStates[ restorePoint ] = null;
+
+        state.sectionStates.markRuleAsExecuted(rule);
+    },
+
+    /**
+     * Register a set of global rules: Rules to execute at any section until they are
+     * unregistered
+     */
+    registerGlobalRule: function(rule) {
+        if( state.sectionStates.ruleHasBeenExecuted(rule) )
+            // Execute only once
+            return;
+
+        var ruleId = $(rule).attr('id');
+        if( !state.sectionStates.globalRulesIds.contains( ruleId ) )
+            state.sectionStates.globalRulesIds.push( ruleId );
 
         state.sectionStates.markRuleAsExecuted(rule);
     },

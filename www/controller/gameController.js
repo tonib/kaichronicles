@@ -32,9 +32,10 @@ var gameController = {
 
     /**
      * Load and display a section
-     * @param sectionId The section id to display
+     * @param {string} sectionId The section id to display
+     * @param {bool} choiceLinkClicked True if the section is load due to a choice link click
      */
-    loadSection: function(sectionId) {
+    loadSection: function(sectionId, choiceLinkClicked ) {
 
         // Load and display the section
         var newSection = new Section(state.book, sectionId, state.mechanics);
@@ -48,7 +49,8 @@ var gameController = {
         toastr.clear();
         
         // Fire choice events:
-        mechanicsEngine.fireChoiceSelected(sectionId);
+        if( choiceLinkClicked )
+            mechanicsEngine.fireChoiceSelected(sectionId);
         
         // Store the current section id (must to be done BEFORE execute mechanicsEngine.run,
         // there are references to this there)
