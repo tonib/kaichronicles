@@ -37,6 +37,9 @@ var mechanicsEngine = {
     /** The rule to run after some object used */
     onObjectUsedRule: null,
 
+    /** The rule to execute when the action button of a number picker is clicked */
+    onNumberPickerChoosed: null,
+
     /************************************************************/
     /**************** MAIN FUNCTIONS ****************************/
     /************************************************************/
@@ -83,7 +86,8 @@ var mechanicsEngine = {
         mechanicsEngine.onInventoryEventRule = null;
         mechanicsEngine.onAfterCombatTurns = [];
         mechanicsEngine.onChoiceSelected = [];
-        mealMechanics.onObjectUsedRule = null;
+        mechanicsEngine.onObjectUsedRule = null;
+        mechanicsEngine.onNumberPickerChoosed = null;
 
         // Disable previous link if we are on "The story so far" section
         gameView.enablePreviousLink(section.sectionId != 'tssf');
@@ -229,6 +233,14 @@ var mechanicsEngine = {
         var objectIds = $eventRule.attr('objectId').split('|');
         if( objectIds.contains(objectId) ) 
             mechanicsEngine.runChildRules( $eventRule );
+    },
+
+    /**
+     * The action button of a picker number was clicked
+     */
+    fireNumberPickerChoosed: function() {
+        if( mechanicsEngine.onNumberPickerChoosed )
+            mechanicsEngine.runChildRules( $(mechanicsEngine.onNumberPickerChoosed) );
     },
 
     /************************************************************/
@@ -717,6 +729,13 @@ var mechanicsEngine = {
     },
 
     /**
+     * Number picker action button clicked event handler
+     */
+    numberPickerChoosed: function(rule) {
+        mechanicsEngine.onNumberPickerChoosed = rule;
+    },
+
+    /**
      * Reset the state of a given section
      */
     resectSectionState: function(rule) {
@@ -790,6 +809,23 @@ var mechanicsEngine = {
      */
     objectUsed: function(rule) {
         mechanicsEngine.onObjectUsedRule = rule;
+    },
+
+    /**
+     * Move to other book section
+     */
+    goToSection: function(rule) {
+        gameController.loadSection( $(rule).attr('section') , true );
+        // To avoid continuing executing rules, throw an exception
+        throw 'Jumped to a new section, rules execution interrupted ' + 
+            '(This exception is not really an error)';
+    },
+
+    /**
+     * Show a "dialog" message
+     */
+    toast: function(rule) {
+        toastr['info']( mechanicsEngine.getRuleText(rule) );
     },
 
     /************************************************************/

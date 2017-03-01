@@ -24,10 +24,15 @@ var numberPickerMechanics = {
 
         // Check if it has an action button
         var actionButtonTitle = mechanicsEngine.getRuleText(rule, 'actionButton');
-        if( actionButtonTitle )
+        if( actionButtonTitle ) {
             $ui.find('#mechanics-picknumber')
             .show()
+            .click(function(e) {
+                e.preventDefault();
+                mechanicsEngine.fireNumberPickerChoosed();
+            })
             .text( actionButtonTitle );
+        }
 
         // Add HTML to do the choose
         gameView.appendToSection( $ui );
@@ -42,6 +47,11 @@ var numberPickerMechanics = {
         var min = $(rule).attr('min');
         if( min )
             $('#mechanics-mpAmount').attr( 'min' , min );
+
+        // Set the maximum value
+        var max = $(rule).attr('max');
+        if( max )
+            $('#mechanics-mpAmount').attr( 'max' , max );
 
         // Initialize (or restore) the value
         $('#mechanics-mpAmount').initializeValue();
@@ -85,6 +95,7 @@ var numberPickerMechanics = {
      */
     disable: function() {
         $('#mechanics-mpAmount').setEnabled(false);
+        $('#mechanics-picknumber').prop('disabled', true);
     }
     
 };

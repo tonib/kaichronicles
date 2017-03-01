@@ -393,8 +393,6 @@
         </section>
 
         <section id="sect58">
-            <!-- TODO: If you know the correct number that will open the bronze door, 
-                 turn to that section number. Right nuber is 67 -->
             <test bookLanguage="en">
                 <choiceState section="sect98" set="disabled" />
             </test>
@@ -405,17 +403,22 @@
                 en-actionButton="Choose"
                 es-actionButton="Elige"
                 />
-            <!--onNumberPickerChoosed>
+            <numberPickerChoosed>
                 <test expression="[NUMBERPICKER] == 67">
                     <goToSection section="sect67" />
                 </test>
                 <test expression="[NUMBERPICKER] != 67">
                     <toast 
-                        es-text="Wrong number!"
-                        en-text="¡Número incorrecto!" />
-                    <goToSection section="sect156" />
+                        en-text="Wrong number!"
+                        es-text="¡Número incorrecto!" />
+                    <test bookLanguage="es">
+                        <goToSection section="sect156" />
+                    </test>
+                    <test bookLanguage="en">
+                        <goToSection section="sect98" />
+                    </test>
                 </test>
-            </onNumberPickerChoosed-->
+            </numberPickerChoosed>
         </section>
 
         <section id="sect59">
