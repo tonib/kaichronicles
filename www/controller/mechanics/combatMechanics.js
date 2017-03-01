@@ -45,7 +45,7 @@ var combatMechanics = {
             // Bind the show combat tables button click
             $btnCombatTables.click(function(e) {
                 e.preventDefault();
-                gameView.showCombatTables();
+                template.showCombatTables();
             });
 
             $combatOriginal.find('.mechanics-elude').click(function(e) {

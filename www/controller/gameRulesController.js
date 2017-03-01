@@ -20,7 +20,10 @@ var gameRulesController = {
             gameRulesController.appendSection( 'crsumary' );
             gameRulesController.appendSection( 'levels' );
             gameRulesController.appendSection( 'howcarry'  );
-            gameRulesController.appendSection( 'howuse' );            
+            gameRulesController.appendSection( 'howuse' );
+
+            // Bind combat table links
+            gameView.bindCombatTablesLinks();
         });
     },
 

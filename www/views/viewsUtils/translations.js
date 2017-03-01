@@ -302,6 +302,7 @@ var translations = {
         'wrongFileName' : 'The file name contains invalid characters',
         'gameSaved' : 'Game saved',
         'confirmRestart' : 'Are you sure you want to restart the book?',
+        'close' : 'Close',
 
         //////////////////////////////////////
         // Template (Main page)
@@ -318,7 +319,8 @@ var translations = {
         'doMealFirst' : 'Please, do the Meal first',
         'kaiChronicles' : 'Kai Chronicles',
         'confirmDeleteSave' : 'Are you sure you want to delete the save game {0} ?',
-        'projectAonLicense' : 'Project Aon license'
+        'projectAonLicense' : 'Project Aon license',
+        'combatTables' : 'Combat Tables'
 
     },
 
@@ -342,15 +344,6 @@ var translations = {
             $clonedView = $(view).clone();
 
         // Translate the view
-        /*var translatedTags = $clonedView
-            .find('[data-translation]')
-            .addBack('[data-translation]');
-        for(var i=0; i<translatedTags.length; i++ ) {
-            var translationId = $(translatedTags[i]).attr('data-translation');
-            var html = table[ translationId ];
-            if( html )
-                $(translatedTags[i]).html( html );
-        }*/
         translations.translateTags( $clonedView , table );
         return $clonedView;
     },

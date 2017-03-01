@@ -260,7 +260,7 @@ SectionRenderer.prototype.a = function($a, level) {
     var idRef = $a.attr('idref');
     if( !idRef )
         // Removed link by Book.fixXml. Render as plain text
-        idRef = 'crtable';
+        idRef = 'plaintext';
         
     switch( idRef ) {
         case 'action':
@@ -279,9 +279,14 @@ SectionRenderer.prototype.a = function($a, level) {
         case 'license':
             // Project Aon license link
             open = '<a href="#projectAonLicense">';
-            break; 
+            break;
         case 'crtable':
             // Combats result table (do not link)
+            open = '<a href="#" class="crtable">';
+            close = '</a>';
+            break;
+        case 'plaintext':
+            // Plain text
             open = '<span>';
             close = '</span>';
             break;

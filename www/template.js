@@ -186,6 +186,20 @@ var template = {
 
     translateMainMenu: function() {
         translations.translateTags( $('#template-header') );
+    },
+
+    /**
+     * Show the dialog with the combat tables
+     */
+    showCombatTables: function() {
+        // Translate the dialog
+        translations.translateTags( $('#template-combatTables') );
+        
+        // Set the translated images
+        var combatTablesUrls = state.book.getCombatTablesImagesUrls();
+        $('#template-ctimage0').attr('src', combatTablesUrls[0]);
+        $('#template-ctimage1').attr('src', combatTablesUrls[1]);
+        $('#template-combatTables').modal('show');
     }
 
 };
