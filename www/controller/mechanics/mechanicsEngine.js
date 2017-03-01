@@ -513,10 +513,10 @@ var mechanicsEngine = {
         if( txtNoMindblast )
             combat.noMindblast = ( txtNoMindblast == 'true' );
 
-        // Check if the enemy is partially immune to Mindblast (only +1CS)
-        var txtPartialMindblast = $(rule).attr('partialMindblast');
-        if( txtPartialMindblast )
-            combat.partialMindblast = ( txtPartialMindblast == 'true' );
+        // Special mindblast bonus?
+        var txtMindblastBonus = $(rule).attr('mindblastBonus');
+        if( txtMindblastBonus )
+            combat.mindblastBonus = parseInt( txtMindblastBonus );
 
         // Check if the player cannot use weapons on this combat
         var txtNoWeapon = $(rule).attr('noWeapon');

@@ -415,7 +415,15 @@
             </registerGlobalRule>
         </section>
 
-        <!-- Up to sect62 -->
+        <section id="sect64">
+            <choiceState section="all" set="disabled" />
+            <combat mindblastBonus="+4" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <!-- Up to sect63 -->
 
     </sections>
 

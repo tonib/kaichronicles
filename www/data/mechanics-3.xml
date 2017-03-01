@@ -719,7 +719,7 @@
         </section>
 
         <section id="sect137">
-            <combat partialMindblast="true" />
+            <combat mindblastBonus="+1" />
             <choiceState section="all" set="disabled" />
             <afterCombats>
                 <choiceState section="all" set="enabled" />

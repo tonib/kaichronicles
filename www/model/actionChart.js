@@ -250,17 +250,17 @@ ActionChart.prototype.increaseEndurance = function(count) {
  * @param {boolean} noMindblast If true, the Mindblast discipline bonus is not added 
  * @param {boolean} noWeapon If true, the combat skill for combat without weapons.
  * If false, the combat skill for the current selected weapon
- * @param {boolean} partialMindblast If true, the enemy is only partially affected by
- * mindblast (only +1 CS)
+ * @param {number} mindblastBonus If > 0, the mindblast CS bonus to apply. If 0 or null,
+ * the default bonus will be used (+2CS)
  * @return The current combat skill. It includes bonuses for weapons and mindblast
  * discipline
  */
 ActionChart.prototype.getCurrentCombatSkill = function(noMindblast, noWeapon,
-    partialMindblast) {
+    mindblastBonus) {
     
     var cs = this.combatSkill;
     var bonuses = this.getCurrentCombatSkillBonuses(noMindblast, noWeapon, 
-        partialMindblast);
+        mindblastBonus);
     for(var i=0; i<bonuses.length; i++)
         cs += bonuses[i].increment;
 
@@ -293,12 +293,12 @@ ActionChart.prototype.getselectedWeaponItem = function() {
  * @param {boolean} noMindblast If true, the Mindblast discipline bonus is not added 
  * @param {boolean} noWeapon If true, the combat skill for combat without weapons.
  * If false, the combat skill for the current selected weapon
- * @param {boolean} partialMindblast If true, the enemy is only partially affected by
- * mindblast (only +1 CS)
+ * @param {number} mindblastBonus If > 0, the mindblast CS bonus to apply. If 0 or null,
+ * the default bonus will be used (+2CS)
  * @return {Array} Array of objects with the bonuses concepts
  */
 ActionChart.prototype.getCurrentCombatSkillBonuses = function(noMindblast, noWeapon, 
-    partialMindblast) {
+    mindblastBonus ) {
     var bonuses = [];
 
     var currentWeapon = this.getselectedWeaponItem();
@@ -331,7 +331,7 @@ ActionChart.prototype.getCurrentCombatSkillBonuses = function(noMindblast, noWea
     if( !noMindblast && this.disciplines.contains( 'mndblst' ) ) {
         bonuses.push( {
             concept: translations.text( 'mindblast' ),
-            increment: partialMindblast ? +1 : +2
+            increment: mindblastBonus ? mindblastBonus : +2
         });
     }
 

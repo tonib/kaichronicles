@@ -226,7 +226,7 @@ the following properties:
 * **mindforceEP="-number"**: Endurance points lost by LW each turn, due to the enemy Mindblast.
   It will not be applied if the player as Mindshield
 * **noMindblast="true"**: The enemy is immune to Mindblast
-* **partialMindblast="true"**: Enemy is partially immunte to Mindblast (only +1CS)
+* **mindblastBonus="number"**: Special CS bonus to apply for Mindblast discipline on this combat
 * **noWeapon="true"**: Lone Wolf cannot use any weapon on this combat
 * **eludeTurn="number"**: Turn number after which LW can elude the combat
 * **dammageMultiplier="number"**: LW dammage multiplier
