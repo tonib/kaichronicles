@@ -135,6 +135,9 @@ var template = {
         if( !o )
             return;
 
+        // Translate the dialog
+        translations.translateTags( $('#template-objectDetails') );
+
         $('#template-objectTitle').text( o.name );
         if( !o.imageUrl )
             $('#template-objectImage').hide();
