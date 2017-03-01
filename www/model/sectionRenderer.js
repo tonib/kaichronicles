@@ -200,6 +200,20 @@ SectionRenderer.prototype.getHtmlFootRef = function(id) {
 };
 
 ////////////////////////////////////////////////////////
+// PUZZLES
+////////////////////////////////////////////////////////
+
+SectionRenderer.prototype.puzzle = function( $puzzle , level ) {
+    return '<p>' + this.renderNodeChildren( $puzzle , level ) + '</p>';
+}
+
+SectionRenderer.prototype.choose = function( $choose , level ) {
+    // TODO: To be complete, we should evaluate the expression. Not needed on book 5,
+    // TODO: just render the otherwise tag
+    return this.renderNodeChildren( $choose.children('otherwise') , level ) ;
+}
+
+////////////////////////////////////////////////////////
 // OTHER
 ////////////////////////////////////////////////////////
 

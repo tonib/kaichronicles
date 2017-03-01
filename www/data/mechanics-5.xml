@@ -394,7 +394,7 @@
 
         <section id="sect58">
             <!-- TODO: If you know the correct number that will open the bronze door, 
-                 turn to that section number -->
+                 turn to that section number. Right nuber is 67 -->
         </section>
 
         <section id="sect59">
@@ -423,7 +423,11 @@
             </afterCombats>
         </section>
 
-        <!-- Up to sect63 -->
+        <section id="sect67">
+            <object objectId="quarterstaff" />
+        </section>
+
+        <!-- Up to sect67 -->
 
     </sections>
 
