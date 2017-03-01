@@ -97,7 +97,7 @@ var randomMechanics = {
                 return;
 
             // Validate money picker, if there is. If its not valid, don't follow with this link
-            if( !moneyPickerMechanics.isValid() )
+            if( !numberPickerMechanics.isValid() )
                 return;
 
             // If there are pending meals, don't follow with this link

@@ -863,17 +863,19 @@
 
         <section id="sect152">
             <choiceState section="all" set="disabled" />
-            <moneyPicker 
+            <numberPicker 
                 en-text="Choose the number of Gold Crowns you are going to throw"
                 es-text="Elige el número de Coronas de Oro que vas a lanzar"
-                min="1" />
+                min="1" 
+                money="true"
+                />
             <randomTable zeroAsTen="true">
-                <moneyPicker enabled="false" />
-                <pick class="money" count="-[MONEYPICKER]" />
-                <test expression="[RANDOM] &lt;= [MONEYPICKER]">
+                <numberPicker enabled="false" />
+                <pick class="money" count="-[NUMBERPICKER]" />
+                <test expression="[RANDOM] &lt;= [NUMBERPICKER]">
                     <choiceState section="sect319" set="enabled" />
                 </test>
-                <test not="true" expression="[RANDOM] &lt;= [MONEYPICKER]">
+                <test not="true" expression="[RANDOM] &lt;= [NUMBERPICKER]">
                     <choiceState section="sect181" set="enabled" />
                 </test>
             </randomTable>

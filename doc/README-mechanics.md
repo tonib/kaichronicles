@@ -293,6 +293,19 @@ These rules has an "id", and they will be executed each section until the rule
 Event handler for an object use. If some of the objects on the "objectId" property is used
 on this section, the chilren rules will be executed
 
+### numberPicker
+```xml
+<numberPicker 
+    en-text="Choose the number of Gold Crowns you are going to throw"
+    es-text="Elige el número de Coronas de Oro que vas a lanzar"
+    min="1" 
+    money="true"
+    />
+<numberPicker enabled="false" />
+```
+Add a control on the UI to select a number
+
+
 ### special sections
 
 There are sections (or parts of them) that cannot be described by the game rules.

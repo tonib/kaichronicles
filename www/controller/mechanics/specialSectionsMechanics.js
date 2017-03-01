@@ -9,7 +9,7 @@ var specialSectionsMechanics = {
      */
     book2Sect238: function(rule) {
         // Cartwheel game UI:
-        var $gameUI = mechanicsEngine.getMechanicsUI('mechanics-book2Sect248');
+        var $gameUI = mechanicsEngine.getMechanicsUI('mechanics-book2Sect238');
         gameView.appendToSection( $gameUI );
 
         // Bind number pickers events

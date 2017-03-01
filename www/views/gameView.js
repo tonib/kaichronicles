@@ -132,7 +132,7 @@ var gameView = {
         e.preventDefault();
 
         // Validate money picker, if there is. If its not valid, don't follow with this link
-        if( !moneyPickerMechanics.isValid() )
+        if( !numberPickerMechanics.isValid() )
             return;
 
         var section = $(link).attr('data-section');

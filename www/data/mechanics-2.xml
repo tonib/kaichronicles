@@ -535,12 +535,14 @@
         </section>
 
         <section id="sect93">
-            <moneyPicker 
+            <numberPicker 
                 en-text="Choose how many Crowns you wish to give to the beggars"
                 es-text="Elige las Coronas que desees dar a los mendigos"
-                min="1" />
+                min="1" 
+                money="true"
+                />
             <choiceSelected section="sect137">
-                <pick class="money" count="-[MONEYPICKER]" />
+                <pick class="money" count="-[NUMBERPICKER]" />
             </choiceSelected>
         </section>
 

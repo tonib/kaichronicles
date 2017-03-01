@@ -708,10 +708,10 @@ var mechanicsEngine = {
     },
 
     /**
-     * Money picker UI
+     * Number picker UI
      */
-    moneyPicker: function(rule) {
-        moneyPickerMechanics.moneyPicker(rule);
+    numberPicker: function(rule) {
+        numberPickerMechanics.numberPicker(rule);
     },
 
     /**
@@ -918,7 +918,7 @@ var mechanicsEngine = {
             .replaceAll( '[COMBATSENEMYLOST]', sectionState.combatsEnduranceLost('enemy') )
             .replaceAll( '[MEALS]', state.actionChart.meals )
             .replaceAll( '[KAILEVEL]', state.actionChart.disciplines.length )
-            .replaceAll( '[MONEYPICKER]', moneyPickerMechanics.getMoneyPickerValue() )
+            .replaceAll( '[NUMBERPICKER]', numberPickerMechanics.getNumberPickerValue() )
             .replaceAll( '[COMBATSDURATION]', sectionState.combatsDuration() )
             ;
 
@@ -962,7 +962,7 @@ var mechanicsEngine = {
             // Disable pick any object
             $('a.equipment-op').addClass('disabled');
             // Disable money picker
-            moneyPickerMechanics.disable();
+            numberPickerMechanics.disable();
             // Disable random table links
             $('a.random').addClass('disabled');
 
