@@ -427,9 +427,11 @@ var mechanicsEngine = {
 
         // Test section:
         if( section != 'all' && 
-            $('a.choice-link[data-section=' + section + ']').length == 0 )
-            throw 'Wrong choiceState (section=' + section + ')';
-
+            $('a.choice-link[data-section=' + section + ']').length == 0 ) {
+            console.log( 'choiceState: Wrong choiceState (section=' + section + ')' );
+            return;
+        }
+        
         // Get if we must enable or disable:
         var disabled = ( $(rule).attr('set') == 'disabled' );
 
@@ -1021,14 +1023,22 @@ var mechanicsEngine = {
     },
 
     /**
-     * Get the 'en-text' or 'es-text' from the given rule
+     * Get a translated property of a rule. The properties checked are 'en-<property>' and 
+     * 'es-<property>'
+     * @param {xmlNode} rule The rule to check
+     * @param {string} propertyName The property to check. If it's null, the 'text' property
+     * will be search
+     * @return {string} The translated text
      */
-    getRuleText: function(rule) {
+    getRuleText: function(rule, propertyName) {
+        if( !propertyName )
+            propertyName = 'text';
+
         var $rule = $(rule);
-        var text = $rule.attr( state.language + '-text');
+        var text = $rule.attr( state.language + '-' + propertyName);
         if( !text )
             // Return the english text
-            text = $rule.attr( 'en-text' );
+            text = $rule.attr( 'en-' + propertyName);
         if( !text )
             text = '';
         return text;

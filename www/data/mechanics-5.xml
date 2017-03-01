@@ -395,6 +395,27 @@
         <section id="sect58">
             <!-- TODO: If you know the correct number that will open the bronze door, 
                  turn to that section number. Right nuber is 67 -->
+            <test bookLanguage="en">
+                <choiceState section="sect98" set="disabled" />
+            </test>
+            <numberPicker 
+                en-text="Choose the number for the Cloeasian combination lock"
+                es-text="Elige el número para la cerradura"
+                min="1" max="200" 
+                en-actionButton="Choose"
+                es-actionButton="Elige"
+                />
+            <!--onNumberPickerChoosed>
+                <test expression="[NUMBERPICKER] == 67">
+                    <goToSection section="sect67" />
+                </test>
+                <test expression="[NUMBERPICKER] != 67">
+                    <toast 
+                        es-text="Wrong number!"
+                        en-text="¡Número incorrecto!" />
+                    <goToSection section="sect156" />
+                </test>
+            </onNumberPickerChoosed-->
         </section>
 
         <section id="sect59">

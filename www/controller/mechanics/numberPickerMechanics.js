@@ -22,6 +22,13 @@ var numberPickerMechanics = {
         if( $(rule).attr('money') == 'true' )
             $ui.find('#mechanics-mpAmount').attr('data-ismoneypicker', 'true');
 
+        // Check if it has an action button
+        var actionButtonTitle = mechanicsEngine.getRuleText(rule, 'actionButton');
+        if( actionButtonTitle )
+            $ui.find('#mechanics-picknumber')
+            .show()
+            .text( actionButtonTitle );
+
         // Add HTML to do the choose
         gameView.appendToSection( $ui );
 

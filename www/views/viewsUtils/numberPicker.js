@@ -7,7 +7,12 @@
     /**
      * Returns the number value, or NaN
      */
-    $.fn.getNumber = function() { return parseInt( this.val() ); };
+    $.fn.getNumber = function() { 
+        var txtVal = this.val();
+        if( !txtVal )
+            return 0;
+        return parseInt( txtVal ); 
+    };
 
     /**
      * Set the number value
