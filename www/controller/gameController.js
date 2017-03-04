@@ -20,6 +20,7 @@ var gameController = {
         views.loadView('game.html')
         .then(function() {
             template.showStatistics(true);
+            template.setNavTitle( state.book.getBookTitle() , '#game' , false);
             gameView.setup();
             // Go to the current section (or the initial)
             var sec = state.sectionStates.currentSection;

@@ -8,7 +8,7 @@ var mainMenuController = {
      * The game menu 
      */
     index: function() {
-        template.setNavTitle( translations.text('kaiChronicles') , '#mainMenu');
+        template.setNavTitle( translations.text('kaiChronicles') , '#mainMenu', true);
         template.showStatistics(false);
         views.loadView('mainMenu.html').then(function() {
             mainMenuView.setup();

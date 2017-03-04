@@ -34,7 +34,7 @@ var settingsController = {
             // Load game mechanics XML
             state.updateBookTranslation(book);
             // Set the new language title
-            template.setNavTitle( book.getBookTitle() , '#game');
+            template.setNavTitle( book.getBookTitle() , '#game', false);
             // Clear the objects cache (they contain translated object names)
             state.mechanics.clearObjectsCache();
             // Translate the main menu

@@ -7,12 +7,21 @@ var template = {
      * Set the navbar title and target URL
      * @param {String} title The title to put on the navigation bar
      * @param {String} url The target URL for the title on the nav. bar
+     * @param {bool} showTitleOnSmallDevs True if the main title should be shown on
+     * small devices.
      */
-    setNavTitle: function(title, url) { 
+    setNavTitle: function(title, url, showTitleOnSmallDevs ) { 
         // Update the title
         $('#template-title').text(title);
         $('#template-title').attr('href', url);
         $('#template-img-logo').attr('href', url);
+
+        var $title = $('#template-title');
+        if( showTitleOnSmallDevs )
+            $title.removeClass('hidden-xs hidden-sm');
+        else
+            $title.addClass('hidden-xs hidden-sm');
+            
     },
 
     /**

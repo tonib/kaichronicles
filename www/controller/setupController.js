@@ -13,7 +13,7 @@ var setupController = {
         // If the book is already loaded, redirect to the game
         if( state.book && state.book.bookXml ) {
             console.log("Book already loaded");
-            template.setNavTitle( state.book.getBookTitle() , '#game' );
+            template.setNavTitle( state.book.getBookTitle() , '#game' , false);
             routing.redirect('game');
             setupController.verifyLanguageChange();
             return;
@@ -102,7 +102,7 @@ var setupController = {
             setupView.log('Done!');
             setupView.done();
 
-            template.setNavTitle( state.book.getBookTitle() , '#game');
+            template.setNavTitle( state.book.getBookTitle() , '#game', false);
             template.updateStatistics(true);
             routing.redirect('game');
         })
