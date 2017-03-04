@@ -1,5 +1,4 @@
 - ERROR: Hunting STILL activated on book 3...
-- Book 5: English map section has text!!!
 - Small devices: Do not hide the app title on the main menu
 - If the book load fails, it doest not try to reload the next time
 - Test all books / all sections rendering. It should be valid HTML5

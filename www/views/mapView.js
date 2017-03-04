@@ -3,12 +3,14 @@ var mapView = {
 
     /**
      * Show the map section
-     * @param section The map Section
+     * @param {Section} section The map Section
      */
     setSectionContent: function( section ) {
         document.title = section.getTitleText();
         $('#map-title').text( section.getTitleText() );
-        $('#map-section').html( section.getHtml() );
+        // Render the map, with the illustrations text. On book 5, it's the 
+        // map description
+        $('#map-section').html( section.getHtml(true) );
     },
 
     /**

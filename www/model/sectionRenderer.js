@@ -12,6 +12,8 @@ function SectionRenderer(section) {
     this.sectionToRender = section;
     /** {Array<{{ {string} id : {string} html }}>} The footnotes HTML */
     this.footNotes = [];
+    /** Render text illustration instances for this section?  */
+    this.renderIllustrationsText = false;
 }
 
 /**
@@ -374,6 +376,13 @@ SectionRenderer.prototype.illustration = function($illustration, level) {
             '"><img src="' + source + '" alt="' + description + 
             '" title="' + description + '"></div><p class="illustration-label">' + 
             description + '</p>';
+    }
+    
+    if( this.renderIllustrationsText ) {
+        // Render the text instance too
+        var $textInstance = $illustration.find('> instance.text');
+        if( $textInstance )
+            illustrationContent += this.renderNodeChildren( $textInstance , level );
     }
 
     return illustrationContent;

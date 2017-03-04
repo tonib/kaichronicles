@@ -202,7 +202,7 @@ var translations = {
         'confirmDeleteSave' : '¿Seguro que quiere borrar el juego guardado {0}?',
         'projectAonLicense' : 'Licencia del Proyecto Aon',
         'combatTables' : 'Tablas de Combate',
-        'mainMenu' : 'Menú',    // "Menú Principal" does not fit on 768px screens
+        'mainMenu' : 'Menú principal'
     },
 
     /**
