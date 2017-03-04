@@ -5,7 +5,8 @@ now. It runs as a website or Android app. You can play it at
 [https://www.projectaon.org/staff/toni](https://www.projectaon.org/staff/toni).
 
 This repository does not contain game books data. It must to be downloaded from the 
-Project Aon web site. **REMEMBER** that game books data is under the
+[Project Aon web site](https://www.projectaon.org). 
+**REMEMBER** that game books data is under the
 [Project Aon license](https://www.projectaon.org/en/Main/License), so:
 
 * You cannot put this application on a public web server (only on your local machine, for
@@ -84,4 +85,5 @@ MIT. This application uses the following third-party code:
 * Logos, icons and splashes are taken directly, or adapted, from the Spanish Project Aon 
   (https://projectaon.org/es)
 * The HTML rendering, books XML processing and Project Aon license HTML contain code
-  taken from Lone Wolf Adventures, by Liquid State Limited
+  taken from [Lone Wolf Adventures](https://lonewolfadventures.projectaon.org/), 
+  by Liquid State Limited

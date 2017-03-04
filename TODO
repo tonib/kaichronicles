@@ -27,17 +27,14 @@
 - Common performance (Android and web):
   * Minify and join javascript files
   * Rendering performance on book 2 / sect equimpnt
-- Implement phisical random tables (pick on the screen) ???
-- Use project aon colors?
 - Toasts with images: align text when the text is multiline
 - About the book: 
-  * Add a link to the project aon license
-  * Add a link to the Project Aon URL
   * Add the title section info (authors info, and more)
-  * Add a link to the lone wolf adventures, and to the author's github page
 - Save the scroll position on the current section when you change of page
 - If the hunting is disabled on the current section, show it on some place (Action Chart?)
 - Report sect163 book 5 error
+- Implement phisical random tables (pick on the screen) ???
+- Use project aon colors ???
 
 Reminders:
 
