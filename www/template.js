@@ -47,9 +47,13 @@ var template = {
         template.updateStatistics(true);
         template.translateMainMenu();
 
-        // If we are on the cordova app, disable the animation (performance)
-        if( cordovaApp.isRunningApp() )
+        if( cordovaApp.isRunningApp() ) {
+            // If we are on the cordova app, disable the animation (performance)
             $('#navbar').addClass('no-transition');
+
+            // Link not needed: You have the "back" hardware button
+            $('#template-mainMenu').hide();
+        }
     },
 
     /**

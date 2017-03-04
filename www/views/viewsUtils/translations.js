@@ -169,7 +169,6 @@ var translations = {
         //////////////////////////////////////
 
         'settings' : 'Ajustes',
-        'goBackMain' : 'Volver al menú principal',
         'saveGame' : 'Guardar partida',
         'restartBook' : 'Reiniciar libro',
         'downloading' : 'Descargando',
@@ -200,8 +199,8 @@ var translations = {
         'loadGame' : 'Cargar juego',
         'confirmDeleteSave' : '¿Seguro que quiere borrar el juego guardado {0}?',
         'projectAonLicense' : 'Licencia del Proyecto Aon',
-        'combatTables' : 'Tablas de Combate'
-
+        'combatTables' : 'Tablas de Combate',
+        'mainMenu' : 'Menú',    // "Menú Principal" does not fit on 768px screens
     },
 
     /**
@@ -320,7 +319,8 @@ var translations = {
         'kaiChronicles' : 'Kai Chronicles',
         'confirmDeleteSave' : 'Are you sure you want to delete the save game {0} ?',
         'projectAonLicense' : 'Project Aon license',
-        'combatTables' : 'Combat Tables'
+        'combatTables' : 'Combat Tables',
+        'mainMenu' : 'Main Menu'
 
     },
 

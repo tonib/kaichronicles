@@ -90,7 +90,7 @@ var settingsController = {
             if( cordovaApp.isRunningApp() ) {
                 // We are on cordova app
                 cordovaFS.saveFile( fileName , blob, function() {
-                    toastr['success']('Game saved');
+                    toastr['success']( translations.text( 'gameSaved' ) );
                 });
             }
             else {

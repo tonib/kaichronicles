@@ -19,16 +19,6 @@ var settingsView = {
                 setupController.restartBook();
         });
 
-        if( cordovaApp.isRunningApp() )
-            // Button not needed: You have the "back" hardware button
-            $('#settings-mainmenu').hide();
-        else {
-            // Go back to the main menu
-            $('#settings-mainmenu').click(function() {
-                routing.redirect('mainMenu');
-            });
-        }
-
         // Game rules
         $('#settings-gamerules').click(function() {
             routing.redirect('gameRules');
