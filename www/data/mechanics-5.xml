@@ -481,7 +481,51 @@
             <!-- TODO: Limbdeath -->
         </section>
 
-        <!-- Up to sect83 -->
+        <section id="sect86">
+            <endurance count="-1" />
+        </section>
+
+        <section id="sect87">
+            <test not="true" hasDiscipline="sixthsns" >
+                <choiceState section="sect105" set="disabled" />
+            </test>
+            <test hasDiscipline="sixthsns" >
+                <choiceState section="sect158" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect90">
+            <test not="true" hasDiscipline="healing">
+                <choiceState section="sect6" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect91">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <test not="true" expression="[COMBATSDURATION] >= 5">
+                    <choiceState section="sect65" set="enabled" />
+                </test>
+                <test expression="[COMBATSDURATION] >= 5">
+                    <choiceState section="sect180" set="enabled" />
+                </test>
+            </afterCombats>
+        </section>
+
+        <section id="sect93">
+            <endurance count="+1" />
+        </section>
+
+        <section id="sect95">
+            <test not="true" hasDiscipline="mindomtr" >
+                <choiceState section="sect184" set="disabled" />
+            </test>
+            <test hasDiscipline="mindomtr" >
+                <choiceState section="sect56" set="disabled" />
+            </test>
+        </section>
+
+        <!-- Up to sect99 -->
 
     </sections>
 

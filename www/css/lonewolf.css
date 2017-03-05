@@ -7,12 +7,12 @@ body {
     padding: 40px 15px;
 }
 
-#content , .modal-dialog , blockquote.poetry {
+#content , .modal-dialog , blockquote {
     font-family: Souvenir, Georgia, "Times New Roman", Times, serif;
     font-size: 16px;
 }
 
-blockquote.poetry {
+blockquote {
     font-style: italic;
 }
 
