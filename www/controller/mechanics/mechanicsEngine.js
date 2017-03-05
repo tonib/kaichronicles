@@ -751,8 +751,16 @@ var mechanicsEngine = {
             return;
 
         // Save the inventory state:
-        state.sectionStates.otherStates[ $(rule).attr('restorePoint') ] =
-            state.actionChart.getInventoryState();
+        var restorePoint = $(rule).attr('restorePoint');
+        var currentRestorePoint = state.sectionStates.otherStates[ restorePoint ];
+        var newRestorePoint = state.actionChart.getInventoryState();
+        if( currentRestorePoint ) {
+            // Join both
+            newRestorePoint = ActionChart.joinInventoryStates(currentRestorePoint, 
+                newRestorePoint);
+        }
+        state.sectionStates.otherStates[ restorePoint ] = newRestorePoint;
+
         state.sectionStates.markRuleAsExecuted(rule);
     },
 

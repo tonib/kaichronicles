@@ -91,7 +91,7 @@
         </section>
 
         <section id="sect10">
-            <saveInventoryState restorePoint="book4sect10Inventory" />
+            <saveInventoryState restorePoint="book5InventoryLost" />
             <drop objectId="all" />
         </section>
 
@@ -128,7 +128,7 @@
         </section>
 
         <section id="sect14">
-            <restoreInventoryState restorePoint="book4sect10Inventory" />
+            <restoreInventoryState restorePoint="book5InventoryLost" />
         </section>
 
         <section id="sect15">
@@ -449,6 +449,11 @@
 
         <section id="sect67">
             <object objectId="quarterstaff" />
+        </section>
+
+        <section id="sect69">
+            <saveInventoryState restorePoint="book5InventoryLost" />
+            <drop objectId="all" />
         </section>
 
         <!-- Up to sect67 -->

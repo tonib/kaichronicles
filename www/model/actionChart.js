@@ -1,6 +1,8 @@
 
 /**
  * The action chart / player state 
+ * TODO: This will be hard, but the inventory should be on a different class, for 
+ * TODO: getInventoryState() and joinInventoryStates() elegance
  */
 function ActionChart() {
 
@@ -444,5 +446,19 @@ ActionChart.prototype.getInventoryState = function() {
         specialItems: this.specialItems.clone(),
         beltPouch: this.beltPouch,
         meals: this.meals
+    };
+};
+
+/**
+ * Joins two inventory states
+ */
+ActionChart.joinInventoryStates = function(s1, s2) {
+    return {
+        weapons: s1.weapons.concat( s2.weapons ),
+        hasBackpack: s1.hasBackpack || s2.hasBackpack ,
+        backpackItems: s1.backpackItems.concat( s2.backpackItems ),
+        specialItems: s1.specialItems.concat ( s2.specialItems ),
+        beltPouch: s1.beltPouch + s2.beltPouch,
+        meals: s1.meals + s2.meals
     };
 };
