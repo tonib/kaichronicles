@@ -29,6 +29,9 @@ function ActionChart() {
     /** The weapon code for the "wepnskll" discipline */
     this.weaponSkill = '';
 
+    /** Player annotations */
+    this.annotations = '';
+
     // Debug fast setup:
     if( window.getUrlParameter('debug') ) {
         this.endurance = this.currentEndurance = 25;

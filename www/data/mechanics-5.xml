@@ -468,7 +468,20 @@
             <death />
         </section>
 
-        <!-- Up to sect77 -->
+        <section id="sect79">
+            <test not="true" hasDiscipline="camflage">
+                <choiceState section="sect170" set="disabled" />
+            </test>
+            <test not="true" hasDiscipline="hunting">
+                <choiceState section="sect170" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect81">
+            <!-- TODO: Limbdeath -->
+        </section>
+
+        <!-- Up to sect83 -->
 
     </sections>
 

@@ -58,7 +58,8 @@ var translations = {
         'weaponskill' : 'Dominio Manejo Armas',
         'mindblast' : 'Ataque Psíquico',
         'countAsObjects'  : '(Cuenta como {0} objetos)',
-
+        'annotations' : 'Anotaciones',
+        
         //////////////////////////////////////
         // Combats
         //////////////////////////////////////

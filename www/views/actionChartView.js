@@ -34,6 +34,13 @@ var actionChartView = {
                 return;
             actionChartController.increaseMoney(-1);
         });
+
+        // Annotations
+        $('#achart-annotations').val( actionChart.annotations );
+        $('#achart-annotations').off();
+        $('#achart-annotations').on('input', function() {
+            state.actionChart.annotations = $(this).val();
+        });
     },
 
     /**
