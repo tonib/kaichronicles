@@ -396,8 +396,9 @@ SectionRenderer.prototype.illustration = function($illustration, level) {
  * @returns The HTML
  */
 SectionRenderer.prototype.deadend = function( $deadend, level ) {
-    return '<ul class="list-table deadend"><li class="title">' +
-        this.renderNodeChildren( $deadend , level ) + '</li></ul>'
+    /*return '<ul class="list-table deadend"><li class="title">' +
+        this.renderNodeChildren( $deadend , level ) + '</li></ul>'*/
+    return '<p>' + this.renderNodeChildren( $deadend , level ) + '</p>';
 };
 
 /** Onomatopoeia renderer */

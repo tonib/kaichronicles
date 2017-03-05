@@ -994,20 +994,11 @@ var mechanicsEngine = {
             // Add the death UI
             gameView.appendToSection( mechanicsEngine.getMechanicsUI('mechanics-death') );
 
-            // Try to set the death message (only for death sections)
-            var $choice = $('p.choice, .deadend');
-            if( $choice.length > 0 ) {
-                if( $choice.find('.choice-link').length == 0 ) {
-                    $('#mechanics-deathmsg').text( $choice.text() );
-                    $choice.remove();
-                }
-            }
-
             // Disable all choice links
             mechanicsEngine.setChoiceState('all' , true);
             // Disable pick any object
             $('a.equipment-op').addClass('disabled');
-            // Disable money picker
+            // Disable number picker
             numberPickerMechanics.disable();
             // Disable random table links
             $('a.random').addClass('disabled');

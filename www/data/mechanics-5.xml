@@ -456,7 +456,19 @@
             <drop objectId="all" />
         </section>
 
-        <!-- Up to sect67 -->
+        <section id="sect71">
+            <object objectId="towel" />
+        </section>
+        
+        <section id="sect72">
+            <endurance count="-1" />
+        </section>
+
+        <section id="sect77">
+            <death />
+        </section>
+
+        <!-- Up to sect77 -->
 
     </sections>
 

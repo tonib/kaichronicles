@@ -70,7 +70,7 @@
         <weapon id="bonedagger" weaponType="dagger">
             <name lang="en">Bone Dagger</name>
             <name lang="es">Puñal de Hueso</name>
-            <image book="3" name="dagger.png" />
+            <image book="3" name="small17.png" />
         </weapon>
 
         <!-- BOOOK 4 -->
@@ -778,6 +778,12 @@
 
             <usage class="endurance" increment="6" />
         </object>
+
+        <object id="towel" itemCount="2">
+            <name lang="en">Towel</name>
+            <name lang="es">Toalla</name>
+        </object>
+        
 
         <!-- OTHERS -->
 

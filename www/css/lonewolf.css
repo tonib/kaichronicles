@@ -219,3 +219,8 @@ a.breakable {
     text-align: center;
     margin-bottom: 5px;
 }
+
+/* Death UI */
+#mechanics-death p , #mechanics-death div {
+    text-align: center;
+}
