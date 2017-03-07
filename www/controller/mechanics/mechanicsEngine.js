@@ -960,6 +960,7 @@ var mechanicsEngine = {
             .replaceAll( '[WEAPONLIKE-CNT-ON-ACTIONCHART]' , state.actionChart.getWeaponObjects().length )
             .replaceAll( '[ENDURANCE]' , state.actionChart.currentEndurance )
             .replaceAll( '[MAXENDURANCE]' , state.actionChart.getMaxEndurance() )
+            .replaceAll( '[ORIGINALCOMBATSKILL]' , state.actionChart.combatSkill )
             .replaceAll( '[COMBATSENDURANCELOST]', sectionState.combatsEnduranceLost() )
             .replaceAll( '[COMBATSENEMYLOST]', sectionState.combatsEnduranceLost('enemy') )
             .replaceAll( '[MEALS]', state.actionChart.meals )

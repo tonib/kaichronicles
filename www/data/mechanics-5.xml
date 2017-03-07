@@ -187,7 +187,7 @@
             <afterCombats>
                 <test combatsWon="true">
                     <test not="true" expression="[COMBATSDURATION] >= 4">
-                    <choiceState section="sect125" set="enabled" />
+                        <choiceState section="sect125" set="enabled" />
                     </test>
                     <test expression="[COMBATSDURATION] >= 4">
                         <choiceState section="sect82" set="enabled" />
@@ -594,7 +594,126 @@
             </test>
         </section>
 
-        <!-- Up to sect117 -->
+        <section id="sect118">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="3">
+                    <choiceState section="sect89" set="enabled" />
+                </case>
+                <case from="4" to="12">
+                    <choiceState section="sect21" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hunting">
+                <randomTableIncrement increment="+2" />
+            </test>
+            <test expression="[KAILEVEL] >= 8">
+                <randomTableIncrement increment="+1" />
+            </test>
+        </section>
+
+        <section id="sect119">
+            <choiceState section="all" set="disabled" />
+            <combat enemyMultiplier="0" />
+            <afterCombatTurn turn="3">
+                <combat enemyMultiplier="1" />
+            </afterCombatTurn>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect122">
+            <test not="true" hasObject="gaolerkeys">
+                <choiceState section="sect136" set="disabled" />
+            </test>
+            <test hasObject="gaolerkeys">
+                <choiceState section="sect26" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect123">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="0" />
+            <afterCombats>
+                <choiceState section="sect198" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect51" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect125">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="3">
+                    <choiceState section="sect50" set="enabled" />
+                </case>
+                <case from="4" to="99">
+                    <choiceState section="sect191" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hunting">
+                <randomTableIncrement increment="+2" />
+            </test>
+        </section>
+
+        <section id="sect126">
+            <test not="true" hasDiscipline="camflage">
+                <choiceState section="sect170" set="disabled" />
+            </test>
+            <test not="true" hasDiscipline="hunting">
+                <choiceState section="sect170" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect127">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <test not="true" expression="( [RANDOM] + 10 ) > [ORIGINALCOMBATSKILL]">
+                    <choiceState section="sect159" set="enabled" />
+                </test>
+                <test expression="( [RANDOM] + 10 ) > [ORIGINALCOMBATSKILL]">
+                    <endurance count="-1" />
+                    <choiceState section="sect93" set="enabled" />
+                </test>
+            </randomTable>
+        </section>
+
+        <section id="sect128">
+            <test not="true" hasObject="rope|largerope">
+                <choiceState section="sect29" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect128">
+            <test not="true" hasObject="rope|largerope">
+                <choiceState section="sect29" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect130">
+            <pick objectId="herbpad" />
+            <endurance count="+1" />
+            <test not="true" hasDiscipline="camflage">
+                <choiceState section="sect151" set="disabled" />
+            </test>
+            <test hasDiscipline="camflage">
+                <choiceState section="sect15" set="disabled" />
+            </test>
+        </section>
+        
+        <section id="sect131">
+            <object objectId="silvercomb" />
+            <object objectId="hourglass" />
+            <object objectId="laumspurpotion4" />
+            <object objectId="prism" />
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
+            <object objectId="meal" index="2" />
+        </section>
+
+        <!-- Up to sect134 -->
 
     </sections>
 

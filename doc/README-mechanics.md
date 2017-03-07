@@ -70,6 +70,7 @@ the current section
 * **[COMBATSDURATION]**: The sum of turns of all combats on the section (combat duration)
 * **[MEALS]**: Number of meals on the action chart
 * **[KAILEVEL]**: Current number of Kai disciplines of the player
+* **[ORIGINALCOMBATSKILL]**: The original combat skill (without modifiers)
 
 ## Rules description
 Description of the rules usage:

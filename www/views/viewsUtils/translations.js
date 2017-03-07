@@ -109,7 +109,7 @@ var translations = {
         'determineE' : 'para determinar tu Resistencia',
         'combatSkillSet' : 'Tu Destreza en el Combate es {0}',
         'enduranceSet' : 'Tus puntos de Resistencia son {0}',
-        'selectNDisciplines' : 'Por favor, selcciona <span id="mechanics-nDisciplines"></span> disciplinas antes de continuar.',
+        'selectNDisciplines' : 'Por favor, selecciona <span id="mechanics-nDisciplines"></span> disciplinas antes de continuar.',
         'choose' : 'Elige',
         'maxDisciplines' : 'Sólo puede elegir {0} disciplinas',
 

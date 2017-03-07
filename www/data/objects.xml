@@ -423,6 +423,12 @@
             <image book="1" name="small15.png" />
         </special>
 
+        <special id="herbpad">
+            <name lang="en">Herb Pad</name>
+            <name lang="es">Mascarilla de Hierbas</name>
+        </special>
+        
+
     </specials>
 
     <objects>
@@ -787,6 +793,11 @@
         <object id="prism">
             <name lang="en">Prism</name>
             <name lang="es">Prisma</name>
+        </object>
+
+        <object id="silvercomb">
+            <name lang="en">Silver Comb</name>
+            <name lang="es">Peine de Plata</name>
         </object>
 
         <!-- OTHERS -->
