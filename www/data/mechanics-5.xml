@@ -525,7 +525,76 @@
             </test>
         </section>
 
-        <!-- Up to sect99 -->
+        <section id="sect100">
+            <object objectId="prism" />
+            <object objectId="copperkey" />
+        </section>
+
+        <section id="sect101">
+            <pick class="money" count="4" />
+            <object objectId="dagger" />
+            <object objectId="sword" />
+            <object objectId="potionofstrength" />
+            <object objectId="blowpipe" />
+            <object objectId="sleepdart" />
+        </section>
+
+        <section id="sect102">
+            <object objectId="sword" />
+            <object objectId="dagger" />
+            <object objectId="warhammer" />
+            <pick class="money" count="6" />
+            <object objectId="gaolerkeys" />
+        </section>
+
+        <section id="sect103">
+            <endurance count="+2" />
+        </section>
+
+        <section id="sect106">
+            <choiceState section="all" set="disabled" />
+            <combat combatSkillModifier="-2" />
+            <afterCombatTurn turn="3">
+                <combat combatSkillModifier="0" />
+            </afterCombatTurn>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect108">
+            <endurance count="-2" />
+        </section>
+
+        <section id="sect110">
+            <choiceState section="all" set="disabled" />
+            <combat mindblastBonus="+4" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect111">
+            <pick class="money" count="3" />
+            <object objectId="copperkey" />
+            <test not="true" hasDiscipline="tracking" >
+                <choiceState section="sect74" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect112">
+            <test not="true" hasDiscipline="anmlknsp" >
+                <choiceState section="sect133" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect113">
+            <test not="true" hasDiscipline="healing" >
+                <choiceState section="sect53" set="disabled" />
+            </test>
+        </section>
+
+        <!-- Up to sect117 -->
 
     </sections>
 

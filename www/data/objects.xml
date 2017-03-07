@@ -784,6 +784,10 @@
             <name lang="es">Toalla</name>
         </object>
         
+        <object id="prism">
+            <name lang="en">Prism</name>
+            <name lang="es">Prisma</name>
+        </object>
 
         <!-- OTHERS -->
 
