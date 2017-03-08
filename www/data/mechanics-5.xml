@@ -72,6 +72,10 @@
 
         <section id="sect4">
             <choiceState section="all" set="disabled" />
+            <combat dammageMultiplier="0" />
+            <afterCombatTurn turn="1">
+                <combat dammageMultiplier="1" />
+            </afterCombatTurn>
             <afterCombats>
                 <test not="true" expression="[COMBATSDURATION] >= 5">
                     <choiceState section="sect165" set="enabled" />
@@ -422,7 +426,7 @@
         </section>
 
         <section id="sect59">
-            <choiceSelected section="sect4">                
+            <choiceSelected section="sect4">
                 <pick objectId="sword" />
             </choiceSelected>
         </section>
@@ -433,7 +437,7 @@
                 <objectUsed objectId="laumspurpotion|laumspurpotion4|redpotionlaumspur">
                     <unregisterGlobalRule id="book5sect63" />
                 </objectUsed>
-                <choiceSelected section="all">                
+                <choiceSelected section="all">
                     <endurance count="-2" />
                 </choiceSelected>
             </registerGlobalRule>
@@ -713,7 +717,87 @@
             <object objectId="meal" index="2" />
         </section>
 
-        <!-- Up to sect134 -->
+        <section id="sect135">
+            <choiceState section="all" set="disabled" />
+            <combat fake="true" restoreFactor="0.5" combatSkillModifier="-2" />
+            <afterCombats>
+                <test combatsWon="false">
+                    <choiceState section="sect161" set="enabled" />
+                </test>
+                <test combatsWon="true">
+                    <choiceState section="sect130" set="enabled" />
+                </test>
+            </afterCombats>
+        </section>
+
+        <section id="sect136">
+            <test not="true" hasDiscipline="camflage">
+                <choiceState section="sect186" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect137">
+            <meal />
+            <test not="true" hasDiscipline="tracking|sixthsns">
+                <choiceState section="sect37" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect138">
+            <choiceSelected section="sect4">
+                <pick objectId="sword" />
+            </choiceSelected>
+        </section>
+
+        <section id="sect142">
+            <test not="true" hasDiscipline="anmlknsp">
+                <choiceState section="sect134" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect146">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="-2" to="2">
+                    <choiceState section="sect44" set="enabled" />
+                </case>
+                <case from="3" to="9">
+                    <choiceState section="sect190" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="camflage|hunting">
+                <randomTableIncrement increment="-2" />
+            </test>
+        </section>
+
+        <section id="sect152">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="2">
+                    <choiceState section="sect5" set="enabled" />
+                </case>
+                <case from="3" to="8">
+                    <choiceState section="sect38" set="enabled" />
+                </case>
+                <case from="9" to="13">
+                    <choiceState section="sect87" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hunting">
+                <randomTableIncrement increment="+2" />
+            </test>
+            <test expression="[KAILEVEL] >= 9">
+                <randomTableIncrement increment="+2" />
+            </test>
+        </section>
+
+        <section id="sect153">
+            <test not="true" hasDiscipline="tracking">
+                <choiceState section="sect42" set="disabled" />
+            </test>
+        </section>
+
+        <!-- Up to sect153 -->
 
     </sections>
 
