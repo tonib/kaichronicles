@@ -800,6 +800,44 @@
             <name lang="es">Peine de Plata</name>
         </object>
 
+        <object id="potiongallowbrush">
+            <name lang="en">Potion of Gallowbrush</name>
+            <description lang="en">
+                Induces sleep for 1–2 hours per dose
+            </description>
+            
+            <name lang="es">Poción de Arbusto de Gallow</name>
+            <description lang="es">
+                Hace dormir de 1 a 2 horas
+            </description>
+        </object>
+        
+        <object id="tincturegraveweed">
+            <name lang="en">Tincture of Graveweed</name>
+            <description lang="en">
+                Causes sickness and loss of 2 ENDURANCE points per dose
+            </description>
+            
+            <name lang="es">Tintura de Hierbas de las Tumbas</name>
+            <description lang="es">
+                Causa malestar y perdida de 2 puntos de RESISTENCIA
+            </description>
+        </object>
+
+        <object id="tincturecalacena">
+            <name lang="en">Tincture of Calacena</name>
+            <description lang="en">
+                Causes terrifying hallucinations for 1–2 hours per dose
+            </description>
+            
+            <name lang="es">Tintura de Calacena</name>
+            <description lang="es">
+                Causa horribles alucinaciones durante 1 o 2 horas
+            </description>
+        </object>
+
+        Tintura de Calacena
+
         <!-- OTHERS -->
 
         <!-- This not really an object, but needed for mechanics -->

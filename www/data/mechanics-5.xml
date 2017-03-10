@@ -797,7 +797,68 @@
             </test>
         </section>
 
-        <!-- Up to sect153 -->
+        <section id="sect154">
+            <object objectId="potionofstrength" price="4" unlimited="true" />
+            <!-- Errata: -->
+            <test bookLanguage="en">
+                <object objectId="potiongallowbrush" price="2" unlimited="true" />
+            </test>
+            <test bookLanguage="es">
+                <object objectId="potiongallowbrush" price="3" unlimited="true" />
+            </test>
+            <object objectId="laumspurpotion4" price="5" unlimited="true" />
+            <object objectId="larnumaoil" price="3" unlimited="true" />
+            <object objectId="tincturegraveweed" price="1" unlimited="true" />
+            <object objectId="tincturecalacena" price="2" unlimited="true" />
+        </section>
+
+        <section id="sect156">
+            <test not="true" hasDiscipline="mindomtr" >
+                <choiceState section="sect8" set="disabled" />
+            </test>
+            <test not="true" hasDiscipline="sixthsns" >
+                <choiceState section="sect8" set="disabled" />
+            </test>
+            <test hasDiscipline="mindomtr" >
+                <test hasDiscipline="sixthsns" >
+                    <choiceState section="sect98" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect159">
+            <endurance count="-2" />
+            <choiceState section="all" set="disabled" />
+            <combat combatSkillModifier="-2" />
+            <afterCombatTurn turn="3">
+                <combat combatSkillModifier="0" />
+            </afterCombatTurn>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect162">
+            <!-- TODO: "If you have lost the use of one arm, you cannot fight..." -->
+            <endurance count="-1" />
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect163">
+            <test not="true" hasDiscipline="sixthsns" >
+                <choiceState section="sect144" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect164">
+            <endurance count="-1" />
+        </section>
+
+        <!-- Up to sect165 -->
 
     </sections>
 
