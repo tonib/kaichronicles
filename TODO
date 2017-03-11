@@ -9,14 +9,14 @@
 - Android application:
   * App lifeciclye
   * Load games page: Show info about saved games
+  * Load games page: Remove ".json" extension
   * Replace toastr by Android toasts ???
   * Remove animations from modal dialogs (only for Android, performance...)
 - Money handling: 
   * Allow to drop an arbitrary amount of money, not just a single coin
   * Support for money as object on section
   * Allow to pick droped money
-- Post info about mechanics files on forum ("Common Navigation File")
-  * Document rules
+- Document all rules
 - Toasts: If you click on some toast, hide them all
 - Save games is not working on safari
 - Create a booksSumary.xml, with info about the available books. 
@@ -33,6 +33,7 @@
 - If the hunting is disabled on the current section, show it on some place (Action Chart?)
 - Implement phisical random tables (pick on the screen) ???
 - Use project aon colors ???
+- Book 2 sect290, there are spanish / english inconsistencies
 
 Reminders:
 

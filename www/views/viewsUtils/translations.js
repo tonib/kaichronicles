@@ -88,7 +88,7 @@ var translations = {
         // Death
         //////////////////////////////////////
 
-        'msgDeath' : 'Tu misión y tu vida terminan aquí',
+        'msgDeath' : 'Tu vida y tu misión terminan aquí',
         'deathRestartBook' : 'Haz click aquí para reiniciar el libro',
         'deathLoadGame' : 'Haz click aquí para cargar un juego salvado',
 
