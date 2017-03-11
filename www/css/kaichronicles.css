@@ -3,6 +3,12 @@ body {
     padding-top: 50px;
 }
 
+html {
+    /* Always show the scroll bar, to avoid "re-layout" when you move from a section
+      without scroll to other with scroll */
+    overflow-y: scroll;
+}
+
 #content {
     padding: 40px 15px;
 }

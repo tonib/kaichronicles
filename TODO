@@ -1,5 +1,4 @@
 - ERROR: Hunting STILL activated on book 3...
-- UI web: When you move from one page with scroll to other without, the title moves
 - RE-TEST the random table
 - If the book load fails, it doest not try to reload the next time
 - Test all books / all sections rendering. It should be valid HTML5
@@ -32,7 +31,6 @@
   * Add the title section info (authors info, and more)
 - Save the scroll position on the current section when you change of page
 - If the hunting is disabled on the current section, show it on some place (Action Chart?)
-- Report sect163 book 5 error
 - Implement phisical random tables (pick on the screen) ???
 - Use project aon colors ???
 
