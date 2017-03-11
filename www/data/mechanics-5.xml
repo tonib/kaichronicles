@@ -948,6 +948,62 @@
             <endurance count="-2" />
         </section>
 
+        <section id="sect188">
+            <test hasObject="blacksash">
+                <choiceState section="sect72" set="disabled" />
+            </test>
+            <test not="true" hasObject="blacksash">
+                <choiceState section="sect172" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect190">
+            <choiceState section="all" set="disabled" />
+            <combat combatSkillModifier="-2" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect192">
+            <endurance count="-2" />
+        </section>
+
+        <section id="sect194">
+            <choiceState section="all" set="disabled" />
+            <combat mindforceCS="-3" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect198">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="6">
+                    <choiceState section="sect25" set="enabled" />
+                </case>
+                <case from="7" to="12">
+                    <choiceState section="sect141" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hunting">
+                <randomTableIncrement increment="+3" />
+            </test>
+        </section>
+
+        <section id="sect199">
+            <test not="true" hasDiscipline="sixthsns" >
+                <choiceState section="sect39" set="disabled" />
+            </test>
+            <test hasDiscipline="sixthsns" >
+                <choiceState section="sect9" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect201" en-text="Part II" es-text="Parte II" >
+        </section>
+
         <!-- Up to sect187 -->
 
     </sections>
