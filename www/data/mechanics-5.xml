@@ -57,7 +57,10 @@
         </section>
 
         <section id="sect2">
-            <!-- TODO: Restore temporal CS loss -->
+            <!-- Restore temporal CS loss (Limbdeath) -->
+            <test sectionVisited="sect166">
+                <combatSkill count="+3" />
+            </test>
             <object objectId="oedeherb" />
         </section>
 
@@ -219,7 +222,6 @@
 
         <section id="sect23">
             <choiceState section="all" set="disabled" />
-            <!-- TODO: If you have lost an arm use??? -->
             <randomTable>
                 <case from="-3" to="-1">
                     <choiceState section="sect77" set="enabled" />
@@ -233,6 +235,10 @@
             </randomTable>
             <test hasDiscipline="hunting">
                 <randomTableIncrement increment="+2" />
+            </test>
+            <test sectionVisited="sect166">
+                <!-- If you have lost an arm use (Limbdeath)... -->
+                <randomTableIncrement increment="-3" />
             </test>
         </section>
 
@@ -368,7 +374,13 @@
         </section>
 
         <section id="sect54">
-            <!-- TODO: If you need the Oede herb ??? -->
+            <test sectionVisited="sect166">
+                <!-- If you need the Oede herb... (Limbdeath) -->
+                <choiceState section="sect154" set="disabled" />
+            </test>
+            <test not="true" sectionVisited="sect166">
+                <choiceState section="sect68" set="disabled" />
+            </test>
         </section>
 
         <section id="sect56">
@@ -436,6 +448,7 @@
             <registerGlobalRule id="book5sect63">
                 <objectUsed objectId="laumspurpotion|laumspurpotion4|redpotionlaumspur">
                     <unregisterGlobalRule id="book5sect63" />
+                    <!-- TODO: Add a toast here -->
                 </objectUsed>
                 <choiceSelected section="all">
                     <endurance count="-2" />
@@ -479,10 +492,6 @@
             <test not="true" hasDiscipline="hunting">
                 <choiceState section="sect170" set="disabled" />
             </test>
-        </section>
-
-        <section id="sect81">
-            <!-- TODO: Limbdeath -->
         </section>
 
         <section id="sect86">
@@ -839,13 +848,22 @@
         </section>
 
         <section id="sect162">
-            <!-- TODO: "If you have lost the use of one arm, you cannot fight..." -->
             <endurance count="-1" />
             <choiceState section="all" set="disabled" />
-            <combat noMindblast="true" />
-            <afterCombats>
-                <choiceState section="all" set="enabled" />
-            </afterCombats>
+            <test sectionVisited="sect166">
+                <!-- If you have lost the use of one arm, you cannot fight... (Limbdeath) -->
+                <disableCombats />
+                <randomTable zeroAsTen="true">
+                    <endurance count="-[RANDOM]" />
+                    <choiceState section="all" set="enabled" />
+                </randomTable>
+            </test>
+            <test not="true" sectionVisited="sect166">
+                <combat noMindblast="true" />
+                <afterCombats>
+                    <choiceState section="all" set="enabled" />
+                </afterCombats>
+            </test>
         </section>
 
         <section id="sect163">
@@ -856,6 +874,11 @@
 
         <section id="sect164">
             <endurance count="-1" />
+        </section>
+        
+        <section id="sect166">
+            <!-- ARM Limbdeath HERE!!! -->
+            <combatSkill count="-3" />
         </section>
 
         <!-- Up to sect165 -->
