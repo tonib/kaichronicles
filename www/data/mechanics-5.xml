@@ -881,7 +881,74 @@
             <combatSkill count="-3" />
         </section>
 
-        <!-- Up to sect165 -->
+        <section id="sect167">
+            <test not="true" hasDiscipline="sixthsns" >
+                <choiceState section="sect105" set="disabled" />
+            </test>
+            <test hasDiscipline="sixthsns" >
+                <choiceState section="sect158" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect168">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <test not="true" expression="[COMBATSDURATION] >= 4">
+                    <choiceState section="sect101" set="enabled" />
+                </test>
+                <test expression="[COMBATSDURATION] >= 4">
+                    <choiceState section="sect46" set="enabled" />
+                </test>
+            </afterCombats>
+        </section>
+
+        <section id="sect169">
+            <object objectId="blacksash" price="2" unlimited="true" />
+        </section>
+
+        <section id="sect176">
+            <saveInventoryState restorePoint="book5InventoryLost" />
+            <drop objectId="all" />
+        </section>
+
+        <section id="sect178">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect180">
+            <choiceState section="all" set="disabled" />
+            <test not="true" hasDiscipline="mndblst">
+                <randomTable>
+                    <case from="0" to="5">
+                        <choiceState section="sect120" set="enabled" />
+                    </case>
+                    <case from="6" to="12">
+                        <choiceState section="sect193" set="enabled" />
+                    </case>
+                </randomTable>
+                <test hasDiscipline="sixthsns|hunting">
+                    <randomTableIncrement increment="+3" />
+                </test>
+            </test>
+            <test hasDiscipline="mndblst">
+                <choiceState section="sect45" set="enabled" />
+            </test>
+        </section>
+
+        <section id="sect182">
+            <object objectId="spear" />
+            <object objectId="broadsword" />
+        </section>
+
+        <section id="sect183">
+            <endurance count="-2" />
+        </section>
+
+        <!-- Up to sect187 -->
 
     </sections>
 

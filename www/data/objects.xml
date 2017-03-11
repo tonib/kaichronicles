@@ -428,6 +428,10 @@
             <name lang="es">Mascarilla de Hierbas</name>
         </special>
         
+        <special id="blacksash">
+            <name lang="en">Black Sash</name>
+            <name lang="es">Banda Negra</name>
+        </special>
 
     </specials>
 
