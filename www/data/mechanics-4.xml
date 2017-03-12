@@ -155,6 +155,7 @@
         </section>
 
         <section id="sect22">
+            <!-- TODO: Unsupported -->
             <!-- I dont want to force any rule here... What if the player has no 
                  other backpack / weapon? -->
             <message 

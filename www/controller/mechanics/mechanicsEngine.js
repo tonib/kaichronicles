@@ -1039,7 +1039,7 @@ var mechanicsEngine = {
      */
     checkLastSection: function(section) {
 
-        if( section.sectionId != 'sect350' || 
+        if( section.sectionId != state.mechanics.getLastSectionId() || 
             state.book.bookNumber >= mechanicsEngine.LAST_SUPPORTED_BOOK )
             return;
         

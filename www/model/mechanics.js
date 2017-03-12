@@ -141,3 +141,22 @@ Mechanics.prototype.imageIsTranslated = function(fileName) {
 Mechanics.prototype.getGlobalRule = function(id) {
     return $(this.mechanicsXml).find('registerGlobalRule[id=' + id + ']').first();
 };
+
+/**
+ * Return the number of numbered secions on the book
+ */
+Mechanics.prototype.getSectionsCount = function() {
+    var $sections = $(this.mechanicsXml).find('mechanics > sections');
+    var count = $sections.attr('count');
+    if(!count)
+        // Default is 350
+        count = '350';
+    return parseInt(count);
+};
+
+/**
+ * Return the id of the book last section
+ */
+Mechanics.prototype.getLastSectionId = function() {
+    return 'sect' + this.getSectionsCount();
+};

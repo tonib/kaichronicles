@@ -16,9 +16,12 @@ General struture:
         ...
     </translated-images>
 
-    <sections>
-        <!-- Here goes the list of sections that must to be mechanized -->
-
+    <!-- Here goes the list of sections that must to be mechanized 
+        The "count" attribute is optional. It's the number of sections on the book, 
+        and the default value is "350"
+    -->
+    <sections count="400">
+        
         <section id="sectXXX">
             <!-- Here goes the rules for the section with id "sectXXX" -->
         </section>

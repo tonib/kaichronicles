@@ -21,8 +21,9 @@ var testsController = {
             console.log(i + ': ' + count[i] + ' hits (' + ( count[i] / total ) * 100.0 + ' %)' );*/
 
         // Test rendering:
-        console.log('Testing sections render');
-        for(var i=1; i<350; i++) {
+        var count = state.mechanics.getSectionsCount();
+        console.log('Testing sections render (' + count + ')');
+        for(var i=1; i<count; i++) {
             try {
                 var section = new Section(state.book, 'sect' + i, state.mechanics );
                 var renderer = new SectionRenderer(section);

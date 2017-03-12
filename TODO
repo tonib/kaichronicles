@@ -24,8 +24,9 @@
 - Save games is not working on safari
 - Create a booksSumary.xml, with info about the available books. 
 - Combats should be sequential: First finish the first one, then the second, etc
-- If you pick an object on the current section, the rules conditioned by "hasObject" (or "meal" rules)
-  should be re-executed
+- If you pick an object on the current section: 
+  * The rules conditioned by "hasObject" (or "meal" rules) should be re-executed
+  * Update combats combat ratio UI
 - Toasts with images: align text when the text is multiline
 - About the book: 
   * Add the title section info (authors info, and more)

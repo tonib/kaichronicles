@@ -1,3 +1,6 @@
+/**
+ * Class to handle the Project Aon books XML
+ */
 
 /**
  * Constructor
