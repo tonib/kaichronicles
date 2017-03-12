@@ -433,6 +433,11 @@
             <name lang="es">Banda Negra</name>
         </special>
 
+        <special id="brasswhistle">
+            <name lang="en">Brass Whistle</name>
+            <name lang="es">Silbato de Latón</name>
+        </special>
+
     </specials>
 
     <objects>
@@ -840,7 +845,22 @@
             </description>
         </object>
 
-        Tintura de Calacena
+        <object id="bottlekourshah">
+            <name lang="en">Bottle of Kourshah</name>
+            <description lang="en">
+                A lime-green wine, it tastes delicious. There is enough Kourshah in the 
+                bottle to restore 4 ENDURANCE points
+            </description>
+            
+            <name lang="es">Botella de Kourshah</name>
+            <description lang="es">
+                Un licor verde lima, tiene un sabor delicioso. En la botella hay bastante 
+                Kourshah para restablecer 4 puntos de RESISTENCIA
+            </description>
+
+            <usage class="endurance" increment="4" />
+        </object>
+        
 
         <!-- OTHERS -->
 
