@@ -866,6 +866,10 @@
             <usage class="endurance" increment="4" />
         </object>
         
+        <object id="canteenwater">
+            <name lang="en">Canteen of Water</name>
+            <name lang="es">Cantimplora</name>
+        </object>
 
         <!-- OTHERS -->
 

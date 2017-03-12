@@ -1446,6 +1446,9 @@
                 <test hasDiscipline="hunting|camflage">
                     <randomTableIncrement increment="+2" />
                 </test>
+                <test expression="[KAILEVEL] >= 8">
+                    <randomTableIncrement increment="+3" />
+                </test>
             </test>
         </section>
 
@@ -1514,6 +1517,70 @@
             </test>
             <test not="true" hasObject="blackcrystalcube">
                 <choiceState section="sect229" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect301">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="-99" to="4">
+                    <choiceState section="sect363" set="enabled" />
+                </case>
+                <case from="5" to="9">
+                    <choiceState section="sect259" set="enabled" />
+                </case>
+            </randomTable>
+            <test expression="[KAILEVEL] >= 7">
+                <randomTableIncrement increment="-2" />
+            </test>
+            <test hasDiscipline="hunting">
+                <randomTableIncrement increment="-1" />
+            </test>
+        </section>
+
+        <section id="sect302">
+            <endurance count="+3" />
+        </section>
+
+        <section id="sect304">
+            <death />
+        </section>
+
+        <section id="sect305">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="2">
+                    <choiceState section="sect293" set="enabled" />
+                </case>
+                <case from="3" to="9">
+                    <choiceState section="sect234" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect310">
+            <pick objectId="copperkey" />
+            <object objectId="canteenwater" />
+            <object objectId="broadsword" />
+        </section>
+
+        <section id="sect312">
+            <choiceState section="all" set="disabled" />
+            <test hasDiscipline="hunting|sixthsns">
+                <choiceState section="sect210" set="true" />
+            </test>
+            <test not="true" hasDiscipline="hunting|sixthsns">
+                <randomTable>
+                    <case from="0" to="4">
+                        <choiceState section="sect354" set="enabled" />
+                    </case>
+                    <case from="5" to="8">
+                        <choiceState section="sect371" set="enabled" />
+                    </case>
+                    <case value="9">
+                        <choiceState section="sect232" set="enabled" />
+                    </case>
+                </randomTable>
             </test>
         </section>
 
