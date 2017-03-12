@@ -438,6 +438,11 @@
             <name lang="es">Silbato de Latón</name>
         </special>
 
+        <special id="blackcrystalcube">
+            <name lang="en">Black Crystal Cube</name>
+            <name lang="es">Cubo de Cristal Negro</name>
+        </special>
+
     </specials>
 
     <objects>

@@ -1144,6 +1144,126 @@
             </choiceSelected>
         </section>
 
+        <section id="sect229">
+            <choiceState section="all" set="disabled" />
+            <drop objectId="blackcrystalcube" />
+            <randomTable>
+                <case from="0" to="6">
+                    <choiceState section="sect385" set="enabled" />
+                </case>
+                <case from="7" to="12">
+                    <choiceState section="sect251" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="sixthsns">
+                <randomTableIncrement increment="+3" />
+            </test>
+        </section>
+
+        <section id="sect230">
+            <death />
+        </section>
+
+        <section id="sect231">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect232">
+            <death />
+        </section>
+
+        <section id="sect234">
+            <test not="true" hasDiscipline="tracking" >
+                <choiceState section="sect220" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect235">
+            <test not="true" hasDiscipline="healing" >
+                <choiceState section="sect344" set="disabled" />
+            </test>
+            <test hasDiscipline="healing" >
+                <choiceState section="sect208" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect237">
+            <endurance count="+1" />
+        </section>
+
+        <section id="sect238">
+            <endurance count="-1" />
+        </section>
+
+        <section id="sect239">
+            <choiceState section="all" set="disabled" />
+            <test hasObject="tincturegraveweed">
+                <!-- TODO: Drop "tincturegraveweed" at sect260 -->
+                <choiceState section="sect260" set="true" />
+            </test>
+            <test not="true" hasObject="tincturegraveweed">
+                <randomTable>
+                    <case from="0" to="4">
+                        <choiceState section="sect324" set="enabled" />
+                    </case>
+                    <case from="5" to="99">
+                        <choiceState section="sect303" set="enabled" />
+                    </case>
+                </randomTable>
+                <test hasDiscipline="hunting|tracking|camflage">
+                    <randomTableIncrement increment="+2" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect240">
+            <choiceState section="all" set="disabled" />
+            <combat dammageMultiplier="2" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect241">
+            <test not="true" hasDiscipline="sixthsns" >
+                <choiceState section="sect365" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect242">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="6">
+                    <choiceState section="sect262" set="enabled" />
+                </case>
+                <case from="7" to="99">
+                    <choiceState section="sect378" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="camflage">
+                <randomTableIncrement increment="+2" />
+            </test>
+        </section>
+
+        <section id="sect244">
+            <choiceState section="all" set="disabled" />
+            <afterCombatTurn turn="1">
+                <disableCombats />
+                <test expression="[COMBATSENDURANCELOST] > [COMBATSENEMYLOST]">
+                    <choiceState section="sect347" set="enabled" />
+                </test>
+                <test expression="[COMBATSENEMYLOST] > [COMBATSENDURANCELOST]">
+                    <choiceState section="sect327" set="enabled" />
+                </test>
+                <test expression="[COMBATSENEMYLOST] == [COMBATSENDURANCELOST]">
+                    <choiceState section="sect271" set="enabled" />
+                </test>
+            </afterCombatTurn>
+        </section>
+
         <!-- Up to sect187 -->
 
     </sections>
