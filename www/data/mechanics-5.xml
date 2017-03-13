@@ -1023,7 +1023,6 @@
 
         <section id="sect208">
             <test not="true" hasObject="oedeherb">
-                <!-- TODO: Drop "oedeherb" at sect321 -->
                 <choiceState section="sect321" set="disabled" />
             </test>
         </section>
@@ -1547,6 +1546,9 @@
         </section>
 
         <section id="sect305">
+            <!-- TODO: You should drop the rope OR the largerope, not both -->
+            <drop objectId="rope" />
+            <drop objectId="largerope" />
             <choiceState section="all" set="disabled" />
             <randomTable>
                 <case from="0" to="2">
@@ -1582,6 +1584,105 @@
                     </case>
                 </randomTable>
             </test>
+        </section>
+
+        <section id="sect313">
+            <test not="true" hasObject="blowpipe">
+                <choiceState section="sect325" set="disabled" />
+            </test>
+            <test not="true" hasObject="sleepdart">
+                <choiceState section="sect325" set="disabled" />
+            </test>
+            <test hasObject="blowpipe">
+                <test hasObject="sleepdart">
+                    <choiceState section="sect282" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect314">
+            <test not="true" hasDiscipline="sixthsns" >
+                <choiceState section="sect358" set="disabled" />
+            </test>
+            <test hasDiscipline="sixthsns" >
+                <choiceState section="sect263" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect316">
+            <choiceState section="all" set="disabled" />
+            <combat combatSkillModifier="-2" />
+            <afterCombatTurn turn="3">
+                <combat combatSkillModifier="0" />
+            </afterCombatTurn>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect320">
+            <meal huntDisabled="true" />
+        </section>
+
+        <section id="sect321">
+            <drop objectId="oedeherb" />
+        </section>
+
+        <section id="sect323">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="2">
+                    <choiceState section="sect250" set="enabled" />
+                </case>
+                <case from="3" to="9">
+                    <choiceState section="sect312" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect324">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect325">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="3">
+                    <choiceState section="sect384" set="enabled" />
+                    <drop objectId="sleepdart" />
+                </case>
+                <case from="4" to="99">
+                    <choiceState section="sect398" set="enabled" />
+                    <drop objectId="sleepdart" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="wepnskll">
+                <randomTableIncrement increment="+2" />
+            </test>
+        </section>
+
+        <section id="sect329">
+            <test hasObject="rope|largerope">
+                <choiceState section="sect387" set="disabled" />
+            </test>
+            <test not="true" hasObject="rope|largerope">
+                <choiceState section="sect305" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect330">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <test not="true" expression="[COMBATSDURATION] >= 3">
+                    <choiceState section="sect243" set="enabled" />
+                </test>
+                <test expression="[COMBATSDURATION] >= 3">
+                    <choiceState section="sect394" set="enabled" />
+                </test>
+            </afterCombats>
         </section>
 
         <!-- Up to sect187 -->
