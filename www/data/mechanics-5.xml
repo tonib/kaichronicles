@@ -1685,7 +1685,129 @@
             </afterCombats>
         </section>
 
-        <!-- Up to sect187 -->
+        <section id="sect331">
+            <numberPicker 
+                en-text="Choose the number for location of the Tomb of the Majhan"
+                es-text="Elige el número de la localización de la Tumba de los Majhanes"
+                min="1" max="400" 
+                en-actionButton="Choose"
+                es-actionButton="Elige"
+                />
+            <numberPickerChoosed>
+                <test expression="[NUMBERPICKER] == 373">
+                    <goToSection section="sect373" />
+                </test>
+                <test expression="[NUMBERPICKER] != 373">
+                    <toast 
+                        en-text="Wrong number!"
+                        es-text="¡Número incorrecto!" />
+                </test>
+            </numberPickerChoosed>
+        </section>
+
+        <section id="sect333">
+            <test hasObject="sommerswerd">
+                <choiceState section="sect348" set="disabled" />
+            </test>
+            <test not="true" hasObject="sommerswerd">
+                <choiceState section="sect258" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect334">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="0" />
+            <afterCombats>
+                <choiceState section="sect310" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect209" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect335">
+            <test not="true" hasDiscipline="sixthsns" >
+                <choiceState section="sect204" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect336">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect374" set="enabled" />
+                </case>
+                <case from="5" to="8">
+                    <choiceState section="sect254" set="enabled" />
+                </case>
+                <case value="9">
+                    <choiceState section="sect261" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect337">
+            <test not="true" hasDiscipline="sixthsns" >
+                <choiceState section="sect365" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect341">
+            <pick objectId="copperkey" />
+            <object objectId="canteenwater" />
+            <object objectId="broadsword" />
+        </section>
+
+        <section id="sect344">
+            <test not="true" hasObject="oedeherb">
+                <choiceState section="sect321" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect350">
+            <!-- TODO: Restore the sommerswerd at sect400 -->
+            <endurance count="-3" />
+            <drop objectId="sommerswerd" />
+            <test not="true" hasDiscipline="mindshld" >
+                <choiceState section="sect253" set="disabled" />
+            </test>
+            <test hasDiscipline="mindshld" >
+                <choiceState section="sect369" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect353">
+            <choiceState section="all" set="disabled" />
+            <combat mindforceCS="-2" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect354">
+            <endurance count="-2" />
+            <test not="true" hasDiscipline="healing">
+                <choiceState section="sect377" set="disabled" />
+            </test>
+            <test hasDiscipline="healing">
+                <choiceState section="sect339" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect355">
+            <choiceState section="all" set="disabled" />
+            <combat mindforceCS="-2" />
+            <afterCombats>
+                <test not="true" expression="[COMBATSDURATION] >= 5">
+                    <choiceState section="sect249" set="enabled" />
+                </test>
+                <test expression="[COMBATSDURATION] >= 5">
+                    <choiceState section="sect304" set="enabled" />
+                </test>
+            </afterCombats>
+        </section>
+
+        <!-- Up to sect356 -->
 
     </sections>
 

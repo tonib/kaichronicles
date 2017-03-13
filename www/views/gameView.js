@@ -108,9 +108,14 @@ var gameView = {
         var $firstChoice = $('p.choice').first();
         if( $firstChoice.length > 0 )
             $firstChoice.before(html);
-        else
-            // Add to the end
-            $('#game-section').append(html);
+        else {
+            // Add to the end, but before foot notes
+            if( $('div.footnotes').length > 0 ) {
+                $('hr').first().before(html);
+            }
+            else
+                $('#game-section').append(html);
+        }
     },
 
     /**
