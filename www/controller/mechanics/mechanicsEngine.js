@@ -196,17 +196,19 @@ var mechanicsEngine = {
             return;
         }
 
-        // Fire the given combat
-        $.each( mechanicsEngine.onAfterCombatTurns, function(index, rule) {
+        // Fire the given combat turn events
+        for(var i=0; i< mechanicsEngine.onAfterCombatTurns.length; i++) {
+            var rule = mechanicsEngine.onAfterCombatTurns[i];
+
             // Turn when to execute the rule:
             var txtRuleTurn = $(rule).attr('turn');
-            //var ruleTurn = parseInt( txtRuleTurn );
-            var ruleTurn = mechanicsEngine.evaluateExpression(txtRuleTurn);
+            var ruleTurn = txtRuleTurn == 'any' ? 'any' : 
+                mechanicsEngine.evaluateExpression(txtRuleTurn);
 
             // We reapply all rules accumulatively
             if( txtRuleTurn == 'any' || combat.turns.length >= ruleTurn )
                 mechanicsEngine.runChildRules( $(rule) );
-        });
+        }
     },
 
     /**
@@ -952,6 +954,7 @@ var mechanicsEngine = {
         var sectionState = state.sectionStates.getSectionState();
         var expression = txtExpression
             .replaceAll( '[RANDOM]' , randomMechanics.lastValue )
+            .replaceAll( '[COMBATRANDOM]' , sectionState.getLastRandomCombatTurn() )
             .replaceAll( '[MONEY]' , state.actionChart.beltPouch )
             .replaceAll( '[BACKPACK-ITEMS-CNT-ON-SECTION]' , sectionState.getCntSectionObjects('object') )
             .replaceAll( '[BACKPACK-ITEMS-CNT-ON-ACTIONCHART]' , state.actionChart.getNBackpackItems() )

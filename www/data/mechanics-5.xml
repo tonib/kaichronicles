@@ -1807,6 +1807,23 @@
             </afterCombats>
         </section>
 
+        <section id="sect357">
+            <choiceState section="all" set="disabled" />
+            <combat combatSkillModifier="-2" />
+            <afterCombatTurn turn="any">
+                <test expression="[COMBATRANDOM] == 1">
+                    <disableCombats />
+                    <choiceState section="sect293" set="enabled" />
+                </test>
+            </afterCombatTurn>
+            <afterCombats>
+                <test expression="[COMBATRANDOM] != 1">
+                    <choiceState section="sect207" set="enabled" />
+                    <choiceState section="sect224" set="enabled" />
+                </test>
+            </afterCombats>
+        </section>
+
         <!-- Up to sect356 -->
 
     </sections>
