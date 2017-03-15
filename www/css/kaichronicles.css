@@ -8,6 +8,10 @@ html {
       without scroll to other with scroll */
     overflow-y: scroll;
 }
+body.modal-open {
+    /* And this is needed to avoid the margin on modals */
+    padding-right: 0!important;
+}
 
 #content {
     padding: 40px 15px;
