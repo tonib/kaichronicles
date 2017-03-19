@@ -1,4 +1,4 @@
-##Kai Chronicles
+## Kai Chronicles
 
 This is a game player for Lone Wolf game books. Only books 1 - 4 are playable right
 now. It runs as a website or Android app. You can play it at 
