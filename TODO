@@ -1,6 +1,9 @@
 - Common performance (Android and web):
   * Minify and join javascript files
   * Rendering performance on book 2 / sect equimpnt
+- If you pick an object on the current section: 
+  * The rules conditioned by "hasObject" (or "meal" rules) should be re-executed
+  * Update combats combat ratio UI
 - ERROR: Hunting STILL activated on book 3...
 - RE-TEST the random table
 - If the book load fails, it doest not try to reload the next time
@@ -23,9 +26,6 @@
 - Save games is not working on safari
 - Create a booksSumary.xml, with info about the available books. 
 - Combats should be sequential: First finish the first one, then the second, etc
-- If you pick an object on the current section: 
-  * The rules conditioned by "hasObject" (or "meal" rules) should be re-executed
-  * Update combats combat ratio UI
 - Toasts with images: align text when the text is multiline
 - About the book: 
   * Add the title section info (authors info, and more)
@@ -34,7 +34,6 @@
 - Implement phisical random tables (pick on the screen) ???
 - Use project aon colors ???
 - Book 2 sect290, there are spanish / english inconsistencies
-- Book 3 sect350, there are spanish / english inconsistencies
 - Death UI should be located after the choices, not before (spanish deadends)
 - Add robots file, description tags, etc for Web Search
 
