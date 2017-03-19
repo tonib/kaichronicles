@@ -1,9 +1,9 @@
 # The project AON data
-www/data/projectAon
+src/www/data/projectAon
 
 # Cordova stuff
-platforms
-plugins
+src/platforms
+src/plugins
 
 # Visual Studio Code stuff
 jsconfig.json
@@ -11,4 +11,4 @@ jsconfig.json
 typings
 
 # Apk build for distribution to Project AON
-www/kai.apk
+src/www/kai.apk
