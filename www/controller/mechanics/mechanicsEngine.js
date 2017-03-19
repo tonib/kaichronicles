@@ -972,6 +972,15 @@ var mechanicsEngine = {
             .replaceAll( '[COMBATSDURATION]', sectionState.combatsDuration() )
             ;
 
+        // Extra randoms:
+        for(var i=0; i<3; i++) {
+            var text = '[RANDOM' + i + ']';
+            if( text.indexOf( text ) >= 0 ) {
+                expression = expression.replaceAll( text , 
+                    randomMechanics.getRandomValueChoosed(i) );
+            }
+        }
+
         try {
             // Be sure to return always an integer (expression can contain divisions...)
             // TODO: The expression can be boolean too!. floor only numbers...

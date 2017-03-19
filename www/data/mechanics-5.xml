@@ -1824,7 +1824,31 @@
             </afterCombats>
         </section>
 
-        <!-- Up to sect356 -->
+        <section id="sect359">
+            <endurance count="+2" />
+        </section>
+
+        <section id="sect360">
+            <choiceState section="all" set="disabled" />
+            <randomTable index="0">
+                <randomTable index="1">
+                    <test expression="[RANDOM1] &lt; [RANDOM0]">
+                        <choiceState section="sect226" set="enabled" />
+                    </test>
+                    <test expression="[RANDOM1] > [RANDOM0]">
+                        <choiceState section="sect297" set="enabled" />
+                    </test>
+                    <test expression="[RANDOM1] == [RANDOM0]">
+                        <choiceState section="sect334" set="enabled" />
+                    </test>
+                </randomTable>
+            </randomTable>
+            <test hasDiscipline="hunting">
+                <randomTableIncrement index="0" increment="+1" />
+            </test>
+        </section>
+
+        <!-- Up to sect360 -->
 
     </sections>
 

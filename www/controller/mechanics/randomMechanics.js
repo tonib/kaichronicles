@@ -32,7 +32,7 @@ var randomMechanics = {
         }
         else {
             // Get the index of the random table tag to handle
-            $link = randomMechanics.getRandomTableRefByIndex(rule);
+            $link = randomMechanics.getRandomTableRefByRule(rule);
         }
 
         // Check if the rule was already executed (= link clicked):
@@ -55,16 +55,19 @@ var randomMechanics = {
         }
     },
 
-    getRandomTableRefByIndex: function(rule) {
-        var index = $(rule).attr('index');
+    getRandomTableRefByIndex: function(index) {
         if( !index )
             index = 0;
         return $('.random:eq( ' + index + ')');
     },
 
+    getRandomTableRefByRule: function(rule) {
+        return randomMechanics.getRandomTableRefByIndex( $(rule).attr('index') );
+    },
+
     /** Increment for random table selection */
     randomTableIncrement: function(rule) {
-        var $link = randomMechanics.getRandomTableRefByIndex(rule);
+        var $link = randomMechanics.getRandomTableRefByRule(rule);
         var newIncrement = mechanicsEngine.evaluateExpression( $(rule).attr('increment') );
 
         // Check if already there is an increment:
@@ -162,6 +165,8 @@ var randomMechanics = {
         $link.append(' (' + html + ')');
         // Disable the link:
         $link.addClass('disabled').addClass('picked');
+        // Store the value on the UI too
+        $link.attr( 'data-picked' , valueChoose + increment );
     },
 
     /**
@@ -214,5 +219,23 @@ var randomMechanics = {
         }
 
         return false;
+    },
+
+    /**
+     * Get the choosen value of a given random table on the section
+     * @param {number} index The index of the random table on the section
+     * @returns {number} The choosen value, with increments. -1 if it was not picked
+     */
+    getRandomValueChoosed: function(index) {
+        var $link = randomMechanics.getRandomTableRefByIndex(index);
+        if( $link.length == 0 )
+            return -1;
+
+        var txtPicked = $link.attr('data-picked');
+        if( txtPicked == null )
+            return -1;
+        
+        return parseInt( txtPicked );
     }
+
 };

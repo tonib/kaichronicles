@@ -53,6 +53,8 @@ syntax. Example:
 There are some keywords that can be used on expressions. They have the following meanings:
 
 * **[RANDOM]**: The value of the last random table value picked (not for combat random values)
+* **[RANDOMxxx]**: Ex. "[RANDOM2], The value of the xxx-th random table value picked 
+  (not for combat random values), where xxx is the random table index (0=first, 1=second,...)
 * **[COMBATRANDOM]**: The value of the last random table value picked on combats in this section
 * **[MONEY]**: The current amount of money
 * **[BACKPACK-ITEMS-CNT-ON-SECTION]**: The current count of available backpack items 
