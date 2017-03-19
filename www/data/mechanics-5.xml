@@ -1129,12 +1129,11 @@
 
         <section id="sect226">
             <choiceSelected section="sect334">
-                <!-- TODO: TEST THIS!!! -->
                 <registerGlobalRule id="book5sect226">
                     <!--Ignore any wounds you may sustain in the first 2 rounds of combat-->
                     <combat enemyMultiplier="0" />
                     <afterCombatTurn turn="2">
-                        <combat enemyMultiplier="0" />
+                        <combat enemyMultiplier="1" />
                     </afterCombatTurn>
 
                     <!-- Only for the next combat (sect334) -->
