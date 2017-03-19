@@ -448,7 +448,9 @@
             <registerGlobalRule id="book5sect63">
                 <objectUsed objectId="laumspurpotion|laumspurpotion4|redpotionlaumspur">
                     <unregisterGlobalRule id="book5sect63" />
-                    <!-- TODO: Add a toast here -->
+                    <toast 
+                        en-text="Your wound has been healed!"
+                        es-text="¡Tu herida ha sido curada!" />
                 </objectUsed>
                 <choiceSelected section="all">
                     <endurance count="-2" />
