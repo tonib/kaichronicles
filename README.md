@@ -22,18 +22,18 @@ work
 
 Download the Project Aon game data:
 ```bash
-    cd www/data/
+    cd src/www/data/
     ruby downloadProjectAonData.rb
 ```
 This will require ruby (any recent version), and the SVN client
 
 ### Setup web site
 
-* Put the folder www on your private web server
-* Open http://localhost/[dir-for-www]/index.html
+* Put the folder src/www on your private web server
+* Open http://localhost/[dir-for-src-www]/index.html
 
 Done. If you have Firefox, you dont need a web server. You can open directly the 
-file www/index.html. This will not work with Chrome (see 
+file src/www/index.html. This will not work with Chrome (see 
 http://stackoverflow.com/questions/10752055/cross-origin-requests-are-only-supported-for-http-error-when-loading-a-local)
 
 ### Setup Android app
@@ -41,16 +41,18 @@ http://stackoverflow.com/questions/10752055/cross-origin-requests-are-only-suppo
 Install Cordova (https://cordova.apache.org/) and the Android requeriments
 (https://cordova.apache.org/docs/en/latest/guide/platforms/android/index.html). Then:
 ```bash
+    cd src
     cordova platform add android
     cordova build android
 ```
 
-This will generate a file platforms/android/build/outputs/apk/android-debug.apk with the
+This will generate a file src/platforms/android/build/outputs/apk/android-debug.apk with the
 Android app.
 
 You can test it with the emulator:
 
 ```bash
+    cd src
     cordova emulate android
 ```
 
@@ -84,6 +86,6 @@ MIT. This application uses the following third-party code:
 * [jQuery](https://jquery.com/) (jQuery license)
 * Logos, icons and splashes are taken directly, or adapted, from the Spanish Project Aon 
   (https://projectaon.org/es)
-* The HTML rendering, books XML processing and Project Aon license HTML contain code
+* The HTML rendering, books XML processing and Project Aon license HTML contains code
   taken from [Lone Wolf Adventures](https://lonewolfadventures.projectaon.org/), 
   by Liquid State Limited

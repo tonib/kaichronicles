@@ -3,6 +3,8 @@ require 'fileutils'
 
 # TODO: Right now, the target directory ("projectAon") is relative to the current
 # TODO: directory. It should be relative to this script location
+# TODO: Do this with a node.js script instead of ruby
+# TODO: Move this script outside the www directory
 
 # Tool to download book data from the Project Aon SVN
 class BookData
