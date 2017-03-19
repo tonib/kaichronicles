@@ -238,6 +238,10 @@
 
             // Configure toast messages
             toastr.options.positionClass = 'toast-position-lw';
+            toastr.options.onclick = function() { 
+                // Remove all toasts on click one
+                toastr.clear();
+            };
 
             state.setupDefaultLanguage();
             cordovaApp.setup();

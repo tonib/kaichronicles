@@ -20,7 +20,6 @@
   * Support for money as object on section
   * Allow to pick droped money
 - Document all rules
-- Toasts: If you click on some toast, hide them all
 - Save games is not working on safari
 - Create a booksSumary.xml, with info about the available books. 
 - Combats should be sequential: First finish the first one, then the second, etc
