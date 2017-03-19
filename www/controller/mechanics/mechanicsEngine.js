@@ -506,6 +506,11 @@ var mechanicsEngine = {
             combatIndex = 0;
 
         var sectionState = state.sectionStates.getSectionState();
+        if( combatIndex >= sectionState.combats.length ) {
+            console.log('Rule "combat": Combat with index ' + combatIndex + 
+                ' not found');
+            return;
+        }
         var combat = sectionState.combats[ combatIndex ];
 
         // Check LW combat skill modifiers:

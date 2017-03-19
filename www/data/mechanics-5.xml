@@ -1201,7 +1201,6 @@
         <section id="sect239">
             <choiceState section="all" set="disabled" />
             <test hasObject="tincturegraveweed">
-                <!-- TODO: Drop "tincturegraveweed" at sect260 -->
                 <choiceState section="sect260" set="true" />
             </test>
             <test not="true" hasObject="tincturegraveweed">
@@ -1330,6 +1329,10 @@
 
         <section id="sect259">
             <death />
+        </section>
+
+        <section id="sect260">
+            <drop objectId="tincturegraveweed" />
         </section>
 
         <section id="sect261">
