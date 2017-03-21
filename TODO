@@ -22,6 +22,7 @@
   * Allow to drop an arbitrary amount of money, not just a single coin
   * Support for money as object on section
   * Allow to pick droped money
+  * Until that, remove the option to drop a single coin...
 - Document all rules
 - Save games is not working on safari
 - Create a booksSumary.xml, with info about the available books. 
@@ -36,6 +37,7 @@
 - Book 2 sect290, there are spanish / english inconsistencies
 - Death UI should be located after the choices, not before (spanish deadends)
 - Add robots file, description tags, etc for Web Search
+- Letter for death on combats: "M" for Spanish / "K" for English
 
 Reminders:
 
@@ -61,3 +63,8 @@ Reminders:
   tools/android avd
 
 Work done on this commit:
+
+* node.js
+  Install dependencies: npm install
+  Run script: npm run lint
+  

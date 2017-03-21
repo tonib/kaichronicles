@@ -15,3 +15,7 @@ src/www/kai.apk
 
 # Distribution directory
 dist
+
+# NPM / node.js stuff
+npm-debug.log
+node_modules
