@@ -1,6 +1,7 @@
 - Common performance (Android and web):
-  * Minify and join javascript files
   * Rendering performance on book 2 / sect equimpnt
+  * Join all views on a single html file (only for production)
+
 - If you pick an object on the current section: 
   * The rules conditioned by "hasObject" (or "meal" rules) should be re-executed
   * Update combats combat ratio UI

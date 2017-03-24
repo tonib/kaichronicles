@@ -1,0 +1,25 @@
+{
+    "name": "kaichronicles",
+    "version": "1.4.0",
+    "repository" :
+    { 
+        "type" : "git",
+        "url" : "https://github.com/tonib/kaichronicles.git"
+    },
+    "license" : "MIT",
+
+    "devDependencies": {
+        "jshint": "latest",
+        "node-fs-extra": "latest",
+        "uglify-js": "latest",
+        "klaw-sync": "latest",
+        "preprocess": "latest"
+    },
+
+    "scripts": {
+        "lint": "jshint src/www/js",
+        "prepareBuild": "node scripts/build.js",
+        "clean": "rm -rf dist"
+    }
+}
+
