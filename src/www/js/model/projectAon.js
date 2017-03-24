@@ -65,10 +65,21 @@ var projectAon = {
         }
     ],
 
+    /**
+     * Returns an array with the book titles on a given language code
+     */
     getBookTitles: function(language) {
         var titles = [];
         for( var i=0; i<projectAon.supportedBooks.length; i++)
             titles.push( projectAon.supportedBooks[i][ 'title_' + language ] );
         return titles;
+    },
+
+    /**
+     * Returns the number of the last supported book (1-based index)
+     */
+    getLastSupportedBook: function() {
+        return projectAon.supportedBooks.length;
     }
+
 };

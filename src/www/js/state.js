@@ -82,7 +82,7 @@ var state = {
 
         if( deleteBooksHistory ) {
             // Remove action charts from previous books
-            for(var i=1; i <= mechanicsEngine.LAST_SUPPORTED_BOOK; i++)
+            for(var i=1; i <= projectAon.getLastSupportedBook(); i++)
                 localStorage.removeItem( 'state-book-' + i.toString() );
         }
     },

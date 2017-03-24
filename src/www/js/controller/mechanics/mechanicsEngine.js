@@ -5,11 +5,6 @@
 var mechanicsEngine = {
 
     /**
-     * The last supported book number
-     */
-    LAST_SUPPORTED_BOOK: 5,
-
-    /**
      * jquery DOM object with the mechanics HTML
      */
     $mechanicsUI: null,
@@ -1057,7 +1052,7 @@ var mechanicsEngine = {
     checkLastSection: function(section) {
 
         if( section.sectionId != state.mechanics.getLastSectionId() || 
-            state.book.bookNumber >= mechanicsEngine.LAST_SUPPORTED_BOOK )
+            state.book.bookNumber >= projectAon.getLastSupportedBook() )
             return;
         
         var $nextBook = $('.bookref');
