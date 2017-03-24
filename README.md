@@ -22,10 +22,10 @@ work
 
 Download the Project Aon game data:
 ```bash
-    cd src/www/data/
-    ruby downloadProjectAonData.rb
+    npm install
+    npm run downloaddata
 ```
-This will require ruby (any recent version), and the SVN client
+This will require Node.js (any recent version), and the SVN client on your path
 
 ### Setup web site
 

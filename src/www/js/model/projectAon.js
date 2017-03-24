@@ -83,3 +83,11 @@ var projectAon = {
     }
 
 };
+
+try {
+    if (typeof exports !== 'undefined')
+        exports.projectAon = projectAon;
+}
+catch(e) {
+    console.log(e);
+}
