@@ -63,5 +63,12 @@ var projectAon = {
 
             illustrators: [ 'chalk' ]
         }
-    ]
+    ],
+
+    getBookTitles: function(language) {
+        var titles = [];
+        for( var i=0; i<projectAon.supportedBooks.length; i++)
+            titles.push( projectAon.supportedBooks[i][ 'title_' + language ] );
+        return titles;
+    }
 };

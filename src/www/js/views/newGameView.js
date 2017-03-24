@@ -9,6 +9,16 @@ var newGameView = {
         // Set current language
         $('#newgame-language').val( state.language );
 
+        // Add supported books
+        var html = '';
+        var titles = projectAon.getBookTitles( state.language );
+        for( var i=0; i<titles.length; i++) {
+            var bookIndex = i + 1;
+            html += '<option value="' + bookIndex + '" >' + bookIndex + '. ' + 
+                titles[i] + '</option>';
+        }
+        $('#newgame-book').html( html );
+
         // Form submit
         $('#newgame-form').submit(function(e) {
             e.preventDefault();

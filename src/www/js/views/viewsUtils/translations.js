@@ -154,11 +154,6 @@ var translations = {
         //////////////////////////////////////
 
         'book' : 'Libro',
-        'book1Title' : '1. Huida de la oscuridad',
-        'book2Title' : '2. Fuego sobre agua',
-        'book3Title' : '3. Las Cavernas del Kalte',
-        'book4Title' : '4. El Abismo maldito',
-        'book5Title' : '5. El Desierto de las Sombras',
         'language' : 'Idioma',
         'english' : 'Ingles',
         'spanish' : 'Español',
