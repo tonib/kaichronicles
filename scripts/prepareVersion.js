@@ -66,7 +66,7 @@ function minifyJavascript() {
 }
 
 /** 
- * Build the app version
+ * Builds a production version of the application
  */
 function buildAndroidApp() {
 

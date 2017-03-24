@@ -18,8 +18,9 @@
 
     "scripts": {
         "lint": "jshint src/www/js",
-        "prepareBuild": "node scripts/build.js",
-        "clean": "rm -rf dist"
+        "prepareversion": "node scripts/prepareVersion.js",
+        "clean": "rm -rf dist",
+        "downloaddata": "node scripts/downloadProjectAonData.js"
     }
 }
 

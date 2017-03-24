@@ -9,7 +9,7 @@
  */
 function Book(number, language) {
 
-    /** Book index number */
+    /** Book index number (1 = first book) */
     this.bookNumber = number;
 
     /** The book language */
@@ -24,7 +24,6 @@ function Book(number, language) {
  * @return The base URL 
  */
 Book.getBaseUrl = function() {
-    //return '/data/tags/20151013/';
     return 'data/projectAon/';
 };
 
@@ -114,16 +113,16 @@ Book.prototype.getProjectAonBookCode = function(language) {
     if( !language )
         language = this.language;
 
-    if( this.bookNumber == 1 )
-        return language == 'en' ? '01fftd' : '01hdlo';
-    else if( this.bookNumber == 2 )
-        return language == 'en' ? '02fotw' : '02fsea';
-    else if( this.bookNumber == 3 )
-        return language == 'en' ? '03tcok' : '03lcdk';
-    else if( this.bookNumber == 4 )
-        return language == 'en' ? '04tcod' : '04eam';
-    else
-        return language == 'en' ? '05sots' : '05eddls'; 
+    var bookMetadata = projectAon.supportedBooks[ this.bookNumber - 1 ];
+    if( !bookMetadata )
+        return null;
+
+    var languageCode = 'code_' + language;
+    var bookCode = bookMetadata[ languageCode ];
+    
+    if( !bookCode )
+        return null;
+    return bookCode;
 };
 
 /**
