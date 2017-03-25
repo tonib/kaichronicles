@@ -159,18 +159,25 @@
     <script src="lib/filesaver.js"></script>
 
     <!-- This is the Apache Cordova API (only for App) -->
-    <!-- @ifdef CORDOVA -->
+    <!-- @ifdef CORDOVA !>
       <script src="cordova.js"></script>
     <!-- @endif -->
 
     <!-- Production scripts -->
     <!-- @ifdef PRODUCTION !>
+      <script>
+          var ENVIRONMENT = 'PRODUCTION';
+      </script>
       <script src="kai.min.js"></script>
     <!-- @endif -->
 
     <!-- Development scripts -->
     <!-- @ifndef PRODUCTION -->
       
+      <script>
+          var ENVIRONMENT = 'DEVELOPMENT';
+      </script>
+
       <!-- Base -->
       <script src="js/common.js"></script>
       <script src="js/views.js"></script>
@@ -257,10 +264,14 @@
                 toastr.clear();
             };
 
-            state.setupDefaultLanguage();
-            cordovaApp.setup();
-            template.setup();
-            routing.setup();
+            // First, load the views, then do the real application setup
+            views.setup().then( function() {
+                state.setupDefaultLanguage();
+                cordovaApp.setup();
+                template.setup();
+                routing.setup();
+            });
+
         });
 
     </script>

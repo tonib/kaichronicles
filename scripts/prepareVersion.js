@@ -7,6 +7,7 @@ const uglifyJS = require( 'uglify-js' );
 const preprocess = require( 'preprocess' );
 const child_process = require('child_process');
 const process = require('process');
+const path = require('path');
 
 /**
  * Recreate the dist directory
@@ -56,7 +57,7 @@ function minifyJavascript() {
     // Minify files:
     var result = uglifyJS.minify( jsPaths );
 
-    // Write finified file
+    // Write minified file
     fs.writeFileSync( 'dist/src/www/kai.min.js' , result.code );
 
     // Remove the unninified js files:
@@ -87,7 +88,7 @@ function buildAndroidApp() {
         // TODO: Sign the apk to upload to the google play
         console.log('Copy the generated apk to the web root');
         fs.copySync( 'platforms/android/build/outputs/apk/android-debug.apk' , 
-            'kai.apk' );
+            'www/kai.apk' );
     }
     catch(e) {
         console.log(e);
@@ -111,8 +112,33 @@ function prepareDistDirectory() {
     fs.removeSync( 'dist/src' );
 }
 
+/**
+ * Join views on a single file
+ */
+function joinViews() {
+    console.log("Join HTML views on a single file");
+
+    // Get all .html files on views dir
+    var viewFiles = klawSync( 'dist/src/www/views' , {nodir: true} );
+    var joinedFileContent = '';
+    viewFiles.forEach((f) => {
+        console.log( f.path );
+        var fileText = fs.readFileSync( f.path , 'utf8' );
+        joinedFileContent += '\n<div class="htmlpage" id="' + 
+            path.basename( f.path ) + '">\n' + fileText + "\n</div>\n";
+    });
+    joinedFileContent = "<div>\n" + joinedFileContent + "\n</div>\n";
+
+    // Write joined file
+    fs.writeFileSync( 'dist/src/www/views.html' , joinedFileContent );
+
+    // Delete views directory
+    fs.removeSync( 'dist/src/www/views' );
+}
+
 recreateDist();
 minifyJavascript();
+joinViews();
 buildAndroidApp();
 prepareDistDirectory();
 

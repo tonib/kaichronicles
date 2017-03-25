@@ -44,6 +44,20 @@ var mechanicsEngine = {
      * @return The deferred object for the download
      */
     downloadMechanicsUI: function() {
+        // TODO: This is ugly. The mechanicsEngine.html load should be 
+        // TODO: handled always by views object
+
+        // There is a trick here: If we are on production, the UI was already
+        // loaded with the views:
+        var cachedView = views.getCachedView( 'mechanicsEngine.html' );
+        if( cachedView ) {
+            mechanicsEngine.$mechanicsUI = $(cachedView).find('#mechanics-container');
+            // Return a resolved promise
+            var dfd = jQuery.Deferred();
+            dfd.resolve();
+            return dfd.promise();
+        }
+
         return $.ajax({
             url: mechanicsEngine.mechanicsUIURL,
             dataType: "html"

@@ -1,7 +1,8 @@
-- Common performance (Android and web):
-  * Rendering performance on book 2 / sect equimpnt
-  * Join all views on a single html file (only for production)
-
+- Money handling: 
+  * Allow to drop an arbitrary amount of money, not just a single coin
+  * Support for money as object on section
+  * Allow to pick droped money
+  * Until that, remove the option to drop a single coin...
 - If you pick an object on the current section: 
   * The rules conditioned by "hasObject" (or "meal" rules) should be re-executed
   * Update combats combat ratio UI
@@ -19,14 +20,8 @@
   * Load games page: Remove ".json" extension
   * Replace toastr by Android toasts ???
   * Remove animations from modal dialogs (only for Android, performance...)
-- Money handling: 
-  * Allow to drop an arbitrary amount of money, not just a single coin
-  * Support for money as object on section
-  * Allow to pick droped money
-  * Until that, remove the option to drop a single coin...
 - Document all rules
 - Save games is not working on safari
-- Create a booksSumary.xml, with info about the available books. 
 - Combats should be sequential: First finish the first one, then the second, etc
 - Toasts with images: align text when the text is multiline
 - About the book: 
@@ -39,6 +34,8 @@
 - Death UI should be located after the choices, not before (spanish deadends)
 - Add robots file, description tags, etc for Web Search
 - Letter for death on combats: "M" for Spanish / "K" for English
+- Common performance (Android and web):
+  * Rendering performance on book 2 / sect equimpnt
 
 Reminders:
 
