@@ -1,8 +1,10 @@
+- Performance: Do not load automatically book 1 cover on startup (see network on f12)
 - Money handling: 
   * Allow to drop an arbitrary amount of money, not just a single coin
   * Support for money as object on section
   * Allow to pick droped money
   * Until that, remove the option to drop a single coin...
+- Death UI should be located after the choices, not before (spanish deadends)
 - If you pick an object on the current section: 
   * The rules conditioned by "hasObject" (or "meal" rules) should be re-executed
   * Update combats combat ratio UI
@@ -31,12 +33,16 @@
 - Implement phisical random tables (pick on the screen) ???
 - Use project aon colors ???
 - Book 2 sect290, there are spanish / english inconsistencies
-- Death UI should be located after the choices, not before (spanish deadends)
 - Add robots file, description tags, etc for Web Search
 - Letter for death on combats: "M" for Spanish / "K" for English
 - Common performance (Android and web):
   * Rendering performance on book 2 / sect equimpnt
-
+- Add google analitics
+- Upload to google play:
+  * Download and handle books
+- Book 5 / sect400: Report differences: On part I you can loss all your inventory and
+  do not recover it. On sect400 (english)  you always can recover sommerswerd. On
+  spanish version not
 Reminders:
 
 * DON'T BE RESTRICTIVE WITH CHOICES !!!!
