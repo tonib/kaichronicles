@@ -43,6 +43,7 @@
   do not recover it. On sect400 (english)  you always can recover sommerswerd. On
   spanish version not
 - Performance: Do not load automatically book 1 cover on startup (see network on f12)
+- UI: All buttons should be width 100%
 
 Reminders:
 

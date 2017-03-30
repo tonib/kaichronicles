@@ -234,3 +234,8 @@ a.breakable {
 #mechanics-death p , #mechanics-death div {
     text-align: center;
 }
+
+/* Centered column table */
+td.center {
+    text-align: center;
+}

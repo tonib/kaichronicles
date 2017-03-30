@@ -187,6 +187,13 @@ var translations = {
         'map' : 'Mapa',
 
         //////////////////////////////////////
+        // Download books
+        //////////////////////////////////////
+
+        'download': 'Descargar',
+        'downloadRemoveBooks' : 'Descargar / borrar libros',
+
+        //////////////////////////////////////
         // Others
         //////////////////////////////////////
 

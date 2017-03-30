@@ -23,15 +23,22 @@ var workWithBooksController = {
             books.push( new BookDownloadState(i) );
         
         // Setup UI
-        workWithBooksView.fillBooksTable(books);
+        workWithBooksView.setup(books);
 
         // Check books state
         BookDownloadState.getBooksDirectory(function(booksDir) {
             books.forEach( function(book) {
                 book.checkDownloadState(booksDir, function() {
                     console.log( 'Book ' + book.bookNumber + ' downloaded?: ' + book.downloaded );
+                    if( book.downloaded )
+                        workWithBooksView.setBookChecked( book.bookNumber );
                 });
             });
         });
-    }
+    },
+
+    updateBooks: function(bookNumbers) {
+        alert( bookNumbers.length );
+    },
+
 };
