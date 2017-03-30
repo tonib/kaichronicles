@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="org.projectaon.kaichronicles" version="1.4.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="org.projectaon.kaichronicles" version="1.5.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Kai Chronicles</name>
     <description>
         Game player for Lone Wolf gamebooks 1 - 5
@@ -13,6 +13,7 @@
     <plugin name="cordova-plugin-whitelist" spec="1" />
     <plugin name="cordova-plugin-file" spec="~4.3.1" />
     <plugin name="cordova-plugin-splashscreen" spec="~4.0.1" />
+    <plugin name="cordova-plugin-file-transfer" spec="~1.6.2" />
 
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -52,5 +53,5 @@
     </platform>
 
     <engine name="android" spec="~6.1.0" />
-
+    
 </widget>

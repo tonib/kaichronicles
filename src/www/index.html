@@ -158,8 +158,10 @@
     <script src="lib/toastr/toastr.min.js"></script>
     <script src="lib/filesaver.js"></script>
 
-    <!-- This is the Apache Cordova API (only for App) -->
-    <!-- @ifdef CORDOVA !>
+    <!-- This is the Apache Cordova API (only for App) 
+         Keep it in development (to run cordova from command line on src dir)
+      -->
+    <!-- @ifdef CORDOVA -->
       <script src="cordova.js"></script>
     <!-- @endif -->
 
@@ -216,7 +218,8 @@
       <script src="js/model/bookSectionStates.js"></script>
       <script src="js/model/item.js"></script>
       <script src="js/model/projectAon.js"></script>
-
+      <script src="js/model/bookDownloadState.js"></script>
+      
       <!-- Controllers -->
       <script src="js/controller/setupController.js"></script>
       <script src="js/controller/gameController.js"></script>
@@ -230,7 +233,8 @@
       <script src="js/controller/loadGameController.js"></script>
       <script src="js/controller/projectAonLicenseController.js"></script>
       <script src="js/controller/gameRulesController.js"></script>
-      
+      <script src="js/controller/workWithBooks.js"></script>
+
       <!-- Mechanics -->
       <script src="js/controller/mechanics/mechanicsEngine.js"></script>
       <script src="js/controller/mechanics/mealMechanics.js"></script>
@@ -254,6 +258,7 @@
       <script src="js/views/mainMenuView.js"></script>
       <script src="js/views/newGameView.js"></script>
       <script src="js/views/loadGameView.js"></script>
+      <script src="js/views/workWithBooksView.js"></script>
       
       <!-- This HTML page template handler -->
       <script src="js/template.js"></script>

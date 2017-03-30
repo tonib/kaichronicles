@@ -32,14 +32,18 @@ var loadGameController = {
     listGameFiles: function() {
         loadGameView.clearFilesList();
         cordovaFS.getDirectoryFiles( function(entries) {
-            
-            if( entries.length == 0 )
-                loadGameView.addFileToList( null );
-            else {
-                // Get file names
-                var fileNames = [];
-                for(var i=0; i<entries.length; i++)
+
+            // Get file names
+            var fileNames = [];
+            for(var i=0; i<entries.length; i++) {
+                // There can be directories here (ex. downloaded books)
+                if( entries[i].isFile )
                     fileNames.push(entries[i].name);
+            }
+
+            if( entries.length == 0 )
+                fileNames.addFileToList( null );
+            else {
                 // The list may be unsorted:
                 fileNames.sort();
                 // Show files

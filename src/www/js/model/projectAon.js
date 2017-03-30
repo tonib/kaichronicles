@@ -70,9 +70,16 @@ var projectAon = {
      */
     getBookTitles: function(language) {
         var titles = [];
-        for( var i=0; i<projectAon.supportedBooks.length; i++)
-            titles.push( projectAon.supportedBooks[i][ 'title_' + language ] );
+        for( var i=1; i<=projectAon.supportedBooks.length; i++)
+            titles.push( projectAon.getBookTitle(i, language) );
         return titles;
+    },
+
+    /**
+     * Returns the title of a book on a given language
+     */
+    getBookTitle: function(bookNumber, language) {
+        return projectAon.supportedBooks[bookNumber-1][ 'title_' + language ];
     },
 
     /**

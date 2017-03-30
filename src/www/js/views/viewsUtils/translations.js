@@ -148,6 +148,7 @@ var translations = {
         'haveFun' : '¡Divierte!',
         'continueGame' : 'Continuar el juego',
         'newGame' : 'Nuevo juego',
+        'downloadBooks' : 'Descargar libros',
 
         //////////////////////////////////////
         // New game

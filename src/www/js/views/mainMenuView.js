@@ -28,6 +28,17 @@ var mainMenuView = {
             e.preventDefault();
             mainMenuController.changeTranslation();
         });
+
+        // Download books (only for app)
+        var $downloadBooksBtn = $('#menu-downloadbooks');
+        if( cordovaApp.isRunningApp() ) {
+            $('#menu-downloadbooks').click(function(e) {
+                e.preventDefault();
+                routing.redirect('workWithBooks');
+            });
+        }
+        else
+            $downloadBooksBtn.hide();
     },
 
     /**
