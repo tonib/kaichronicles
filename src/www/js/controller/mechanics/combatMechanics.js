@@ -8,7 +8,7 @@ var combatMechanics = {
 
         // Get combats to render
         var sectionState = state.sectionStates.getSectionState();
-        if( sectionState.combats.length == 0 )
+        if( sectionState.combats.length === 0 )
             return;
 
         // If the player is death, do nothing
@@ -100,7 +100,7 @@ var combatMechanics = {
     updateCombats: function() {
         // Get combats to render
         var sectionState = state.sectionStates.getSectionState();
-        if( sectionState.combats.length == 0 )
+        if( sectionState.combats.length === 0 )
             return;
         $.each(sectionState.combats, function(index, combat) {
             var $combatUI = $('.mechanics-combatUI:eq(' + index + ')');
@@ -133,7 +133,7 @@ var combatMechanics = {
             // Disable all combats
             $combatUI = $('.mechanics-combatUI');
 
-        if( $combatUI.length == 0 )
+        if( $combatUI.length === 0 )
             return;
             
         // Get combat data

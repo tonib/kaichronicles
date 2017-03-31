@@ -142,7 +142,7 @@ var mechanicsEngine = {
         // Run section rules
         var $sectionMechanics = 
             state.mechanics.getSection( state.sectionStates.currentSection );
-        if( $sectionMechanics != null )
+        if( $sectionMechanics !== null )
             mechanicsEngine.runChildRules( $sectionMechanics );
         
         // Run global rules
@@ -350,10 +350,11 @@ var mechanicsEngine = {
         // Check discipline
         var disciplineToTest = $(rule).attr('hasDiscipline');
         // TODO: Test "disciplineToTest" is valid 
+        var i;
         if( disciplineToTest ) {
             // Check if the player has some of the disciplines
             var disciplines = disciplineToTest.split('|');
-            for(var i=0; i < disciplines.length; i++ ) {
+            for(i=0; i < disciplines.length; i++ ) {
                 if( state.actionChart.disciplines.contains( disciplines[i] ) ) {
                     conditionStatisfied = true;
                     break;
@@ -366,7 +367,7 @@ var mechanicsEngine = {
         if( objectIdsToTest ) {
             // Check if the player has some of the objects
             var objects = objectIdsToTest.split('|');
-            for(var i=0; i < objects.length; i++ ) {
+            for(i=0; i < objects.length; i++ ) {
                 if( state.actionChart.hasObject( objects[i] ) ) {
                     conditionStatisfied = true;
                     break;
@@ -383,7 +384,7 @@ var mechanicsEngine = {
         var sectionIds = $(rule).attr('sectionVisited');
         if( sectionIds ) {
             sectionIds = sectionIds.split('|');
-            for(var i=0; i < sectionIds.length; i++ ) {
+            for(i=0; i < sectionIds.length; i++ ) {
                 if( state.sectionStates.sectionIsVisited(sectionIds[i]) ) {
                     conditionStatisfied = true;
                     break;
@@ -396,6 +397,14 @@ var mechanicsEngine = {
         if( currentWeapon && state.actionChart.selectedWeapon == currentWeapon )
             conditionStatisfied = true;
             
+        // Test weaponskill with current weapon
+        var weaponskillActive = $(rule).attr('weaponskillActive');
+        if( weaponskillActive == 'true' ) {
+            currentWeapon = state.actionChart.getselectedWeaponItem();
+            if( state.actionChart.isWeaponskillActive(currentWeapon) )
+                conditionStatisfied = true;
+        }
+
         // Test combats won:
         var combatsWon = $(rule).attr('combatsWon');
         if( combatsWon ) {
@@ -416,14 +425,6 @@ var mechanicsEngine = {
         var bookLanguage = $(rule).attr('bookLanguage');
         if( bookLanguage && state.book.language == bookLanguage )
             conditionStatisfied = true;
-
-        // Test weaponskill with current weapon
-        var weaponskillActive = $(rule).attr('weaponskillActive');
-        if( weaponskillActive == 'true' ) {
-            var currentWeapon = state.actionChart.getselectedWeaponItem();
-            if( state.actionChart.isWeaponskillActive(currentWeapon) )
-                conditionStatisfied = true;
-        }
         
         // Test section choice is enabled:
         var sectionToCheck = $(rule).attr('isChoiceEnabled');
@@ -450,7 +451,7 @@ var mechanicsEngine = {
 
         // Test section:
         if( section != 'all' && 
-            $('a.choice-link[data-section=' + section + ']').length == 0 ) {
+            $('a.choice-link[data-section=' + section + ']').length === 0 ) {
             console.log( 'choiceState: Wrong choiceState (section=' + section + ')' );
             return;
         }
@@ -849,7 +850,7 @@ var mechanicsEngine = {
      * Show a "dialog" message
      */
     toast: function(rule) {
-        toastr['info']( mechanicsEngine.getRuleText(rule) );
+        toastr.info( mechanicsEngine.getRuleText(rule) );
     },
 
     /************************************************************/
@@ -882,7 +883,7 @@ var mechanicsEngine = {
 
         // Check if the table was already inserted on the UI:
         var $table = $('#mechanics-availableObjectsList');
-        if( $table.length == 0 ) {
+        if( $table.length === 0 ) {
             if( thereAreObjects ) {
                 // Add the template
                 gameView.appendToSection( 
@@ -906,12 +907,12 @@ var mechanicsEngine = {
      */
     showSellObjects: function() {
         var sectionState = state.sectionStates.getSectionState();
-        if( sectionState.sellPrices.length == 0 )
+        if( sectionState.sellPrices.length === 0 )
             return;
 
         // Check if the table was already inserted on the UI:
         var $table = $('#mechanics-sellObjectsList');
-        if( $table.length == 0 ) {
+        if( $table.length === 0 ) {
             // Add the template
             gameView.appendToSection( 
                 mechanicsEngine.getMechanicsUI('mechanics-sellObjects') );
@@ -950,8 +951,8 @@ var mechanicsEngine = {
      * @param {String} sectionId The section id for the choice to check
      */
     isChoiceEnabled: function(sectionId) {
-        var $selector = $('#game-section a[data-section=' + sectionId + ']')
-        if( $selector.length == 0 )
+        var $selector = $('#game-section a[data-section=' + sectionId + ']');
+        if( $selector.length === 0 )
             return false;
         return !$selector.hasClass('disabled');
     },
@@ -997,8 +998,11 @@ var mechanicsEngine = {
 
         try {
             // Be sure to return always an integer (expression can contain divisions...)
+            // We REALLY need eval, so disable warnings about the evilness of eval
+            /* jshint ignore:start */
             // TODO: The expression can be boolean too!. floor only numbers...
             return Math.floor( eval( expression ) );
+            /* jshint ignore:end */
         }
         catch(e) {
             console.log("Error evaluating expression " + txtExpression + ": " + e);
@@ -1016,7 +1020,7 @@ var mechanicsEngine = {
         if( ! section.getSectionNumber() )
             return;
 
-        if( state.actionChart.currentEndurance <= 0 && $('#mechanics-death').length == 0 ) {
+        if( state.actionChart.currentEndurance <= 0 && $('#mechanics-death').length === 0 ) {
 
             // Add the death UI
             gameView.appendToSection( mechanicsEngine.getMechanicsUI('mechanics-death') );
@@ -1070,7 +1074,7 @@ var mechanicsEngine = {
             return;
         
         var $nextBook = $('.bookref');
-        if( $nextBook.length == 0 ) {
+        if( $nextBook.length === 0 ) {
             // XML bug with spanish book 4. It has no bookref...
             $nextBook = $('cite');
         }
