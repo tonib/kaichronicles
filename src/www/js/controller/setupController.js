@@ -80,19 +80,21 @@ var setupController = {
         // Stuff to handle each download
         var promises = [];
         var someError = false;
+        var failFunction = function(jqXHR, textStatus, errorThrown) {
+            if( !errorThrown )
+                errorThrown = 'Unknown error (Cross domain error?)';
+            setupView.log( this.url + ' failed: ' + errorThrown.toString(), 'error' );
+            someError = true;
+        };
+        var doneFunction = function() {
+            setupView.log( this.url + ' OK!' , 'ok' );
+        };
         for(var i=0; i<downloads.length; i++) {
             setupView.log(downloads[i].url + ' download started...');
             downloads[i].promise.url = downloads[i].url; 
             downloads[i].promise
-            .fail( function(jqXHR, textStatus, errorThrown) {
-                if( !errorThrown )
-                    errorThrown = 'Unknown error (Cross domain error?)';
-                setupView.log( this.url + ' failed: ' + errorThrown.toString(), 'error' );
-                someError = true;
-            })
-            .done(function() {
-                setupView.log( this.url + ' OK!' , 'ok' );
-            });
+            .fail( failFunction )
+            .done( doneFunction );
             promises.push( downloads[i].promise );
         }
 
