@@ -148,7 +148,7 @@ var randomMechanics = {
         }
 
         if( alreadyChoose )
-            randomMechanics.linkAddChooseValue( $link , valueAlreadyChoose , increment);
+            randomMechanics.linkAddChooseValue( $element , valueAlreadyChoose , increment);
 
         return $element;
     },
@@ -228,11 +228,11 @@ var randomMechanics = {
      */
     getRandomValueChoosed: function(index) {
         var $link = randomMechanics.getRandomTableRefByIndex(index);
-        if( $link.length == 0 )
+        if( $link.length === 0 )
             return -1;
 
         var txtPicked = $link.attr('data-picked');
-        if( txtPicked == null )
+        if( txtPicked === null )
             return -1;
         
         return parseInt( txtPicked );

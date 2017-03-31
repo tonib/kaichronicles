@@ -8,7 +8,7 @@ var setupMechanics = {
      */
     setSkills: function() {
         // If the skills are already set, do nothing
-        if( state.actionChart.combatSkill != 0 && state.actionChart.endurance != 0 )
+        if( state.actionChart.combatSkill !== 0 && state.actionChart.endurance !== 0 )
             return;
 
         // Add HTML to do the choose
@@ -18,7 +18,7 @@ var setupMechanics = {
         gameView.enableNextLink(false);
 
         // Combat skill
-        if( state.actionChart.combatSkill != 0 )
+        if( state.actionChart.combatSkill !== 0 )
             $('#mechanics-detWeapon').hide();
         else {
             var $w = $('#mechanics-chooseWeapon');
@@ -26,13 +26,13 @@ var setupMechanics = {
                 state.actionChart.combatSkill = value + 10;
                 $w.parent().append( '<b>' + translations.text('combatSkillSet' , [state.actionChart.combatSkill] ) + '.</b>' );
                 template.updateStatistics();
-                if( state.actionChart.combatSkill != 0 && state.actionChart.endurance != 0 )
+                if( state.actionChart.combatSkill !== 0 && state.actionChart.endurance !== 0 )
                     gameView.enableNextLink(true);
             }, true);
         }
         
         // Endurance points
-        if( state.actionChart.endurance != 0 )
+        if( state.actionChart.endurance !== 0 )
             $('#mechanics-detEndurance').hide();
         else {
             var $e = $('#mechanics-chooseEndurance');
@@ -41,7 +41,7 @@ var setupMechanics = {
                 state.actionChart.currentEndurance = state.actionChart.endurance;
                 $e.parent().append('<b>' + translations.text('enduranceSet' , [state.actionChart.endurance]) + '.</b>' );
                 template.updateStatistics();
-                if( state.actionChart.combatSkill != 0 && state.actionChart.endurance != 0 )
+                if( state.actionChart.combatSkill !== 0 && state.actionChart.endurance !== 0 )
                     gameView.enableNextLink(true);
             }, true);
         }
@@ -78,7 +78,7 @@ var setupMechanics = {
             state.actionChart.weaponSkill = wTable[ value ];
             setWeaponSkillName();
             $('#wepnskll .well').append('<div><i><small>' + translations.text('randomTable') + ': ' + value + 
-                '</small></i></div>')
+                '</small></i></div>');
             return state.actionChart.weaponSkill;
         };
 
@@ -162,7 +162,7 @@ var setupMechanics = {
 
         // Function to test all links were clicked
         var testAllClicked = function() {
-            if( $('.action').not('.disabled').length == 0 ) {
+            if( $('.action').not('.disabled').length === 0 ) {
                 $('#mechanics-chooseEquipment').hide();
                 gameView.enableNextLink(true);
             }
