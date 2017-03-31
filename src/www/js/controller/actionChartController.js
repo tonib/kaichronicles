@@ -29,7 +29,7 @@ var actionChartController = {
         try {
             // Pick the object
             var o = state.mechanics.getObject(objectId);
-            if( o == null )
+            if( o === null )
                 return false;
             
             if( !state.actionChart.pick( o ) )
@@ -47,7 +47,7 @@ var actionChartController = {
         catch(e) {
             // Error picking
             if( !doNotShowError )
-                toastr["error"](e);
+                toastr.error(e);
             console.log(e);
             return false;
         }
@@ -158,7 +158,7 @@ var actionChartController = {
 
         // Do the usage action:
         if( o.usage.cls == 'endurance' )
-            actionChartController.increaseEndurance( o.usage.increment )
+            actionChartController.increaseEndurance( o.usage.increment );
         else if( o.usage.cls == 'combatSkill' )
             // Combat skill modifiers only apply to the current section combats
             state.sectionStates.combatSkillUsageModifier( o.usage.increment );
@@ -190,7 +190,7 @@ var actionChartController = {
                     translations.text( 'msgDropMeal' , [-count] ) );
         }
         catch(e) {
-            toastr["error"](e);
+            toastr.error(e);
         }
     },
 
@@ -219,11 +219,11 @@ var actionChartController = {
         state.actionChart.increaseEndurance(count);
         if( count > 0 ) {
             if( !noToast )
-                toastr["success"]( translations.text('msgEndurance' , ['+' + count] ) );
+                toastr.success( translations.text('msgEndurance' , ['+' + count] ) );
         }
         else if( count < 0 ) {
             if( !noToast )
-                toastr["warning"]( translations.text('msgEndurance' , [count] ) );
+                toastr.warning( translations.text('msgEndurance' , [count] ) );
             mechanicsEngine.testDeath();
         }
         template.updateStatistics();
@@ -236,9 +236,9 @@ var actionChartController = {
     increaseCombatSkill: function(count) {
         state.actionChart.combatSkill += count;
         if( count > 0 )
-            toastr["success"]( translations.text('msgCombatSkill' , ['+' + count]) );
+            toastr.success( translations.text('msgCombatSkill' , ['+' + count]) );
         else if( count < 0 )
-            toastr["warning"]( translations.text('msgCombatSkill' , [count]) );
+            toastr.warning( translations.text('msgCombatSkill' , [count]) );
         template.updateStatistics();
     },
 
@@ -258,8 +258,8 @@ var actionChartController = {
         actionChartView.updateStatistics();
         template.updateStatistics();
         if( showToast ) {
-            var o = state.mechanics.getObject( weaponId )
-            toastr["info"]( translations.text( 'msgCurrentWeapon' , [o.name] ) );
+            var o = state.mechanics.getObject( weaponId );
+            toastr.info( translations.text( 'msgCurrentWeapon' , [o.name] ) );
         }
     },
 

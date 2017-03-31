@@ -35,19 +35,20 @@ var loadGameController = {
 
             // Get file names
             var fileNames = [];
-            for(var i=0; i<entries.length; i++) {
+            var i;
+            for(i=0; i<entries.length; i++) {
                 // There can be directories here (ex. downloaded books)
                 if( entries[i].isFile )
                     fileNames.push(entries[i].name);
             }
 
-            if( entries.length == 0 )
+            if( entries.length === 0 )
                 fileNames.addFileToList( null );
             else {
                 // The list may be unsorted:
                 fileNames.sort();
                 // Show files
-                for(var i=0; i<fileNames.length; i++)
+                for(i=0; i<fileNames.length; i++)
                     loadGameView.addFileToList( fileNames[i] );
                 loadGameView.bindListEvents();
             }
