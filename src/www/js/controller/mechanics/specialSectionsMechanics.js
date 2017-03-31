@@ -40,7 +40,7 @@ var specialSectionsMechanics = {
             template.animateValueChange( $('#mechanics-currentMoney') ,
                 state.actionChart.beltPouch , doNotAnimate); 
 
-            var noMoney = ( state.actionChart.beltPouch == 0 );
+            var noMoney = ( state.actionChart.beltPouch === 0 );
             if( gameState.moneyWon >= 40 || noMoney )
                 // Maximum money won
                 $('#mechanics-play').hide();
@@ -124,7 +124,7 @@ var specialSectionsMechanics = {
             };
             result.status = translations.text( 'playerDices' , [playerName] )  + ': ' + 
                 result.dice1 + ' + ' + result.dice2 + ' = ';
-            if( result.dice1 == 0 && result.dice2 == 0 ) {
+            if( result.dice1 === 0 && result.dice2 === 0 ) {
                 result.total = 100;
                 result.status += ' Portholes!';
             }
@@ -169,23 +169,25 @@ var specialSectionsMechanics = {
 
         // Replace the combat turns generation:
         var sectionState = state.sectionStates.getSectionState();
+
+        var nextTurnFunction = function() {
+            var turn = Combat.prototype.nextTurn.call(this);
+            // Check the bite:
+            if( turn.loneWolf > 0 && turn.loneWolf != combatTable_DEATH ) {
+                var biteRandomValue = randomTable.getRandomValue();
+                turn.playerLossText = '(' + turn.playerLossText + ')';
+                turn.playerLossText += ' Random: ' + biteRandomValue;
+                if( biteRandomValue == 9 )
+                    turn.loneWolf = combatTable_DEATH;
+                else
+                    turn.loneWolf = 0;
+            }
+            return turn;
+        };
+        
         for(var i=0; i<sectionState.combats.length; i++) {
             var combat = sectionState.combats[i];
-
-            combat.nextTurn = function() {
-                var turn = Combat.prototype.nextTurn.call(this);
-                // Check the bite:
-                if( turn.loneWolf > 0 && turn.loneWolf != combatTable_DEATH ) {
-                    var biteRandomValue = randomTable.getRandomValue();
-                    turn.playerLossText = '(' + turn.playerLossText + ')';
-                    turn.playerLossText += ' Random: ' + biteRandomValue;
-                    if( biteRandomValue == 9 )
-                        turn.loneWolf = combatTable_DEATH;
-                    else
-                        turn.loneWolf = 0;
-                }
-                return turn;
-            };
+            combat.nextTurn = nextTurnFunction;
         }
     }
 
