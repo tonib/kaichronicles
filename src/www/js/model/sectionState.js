@@ -97,7 +97,7 @@ SectionState.prototype.areAllCombatsFinished = function(actionChart) {
         // LW death
         return false;
 
-    if( this.combats.length == 0 )
+    if( this.combats.length === 0 )
         return 'finished';
 
     if( this.combatEluded )
@@ -203,10 +203,10 @@ SectionState.prototype.removeObjectFromSection = function(objectId) {
  * Returns -1 if there are no combats or not turns yet
  */
 SectionState.prototype.getLastRandomCombatTurn = function() {
-    if( this.combats.length == 0 )
+    if( this.combats.length === 0 )
         return -1;
     var combat = this.combats[0];
-    if( combat.turns.length == 0 )
+    if( combat.turns.length === 0 )
         return -1;
     return combat.turns[ combat.turns.length - 1].randomValue;
 };

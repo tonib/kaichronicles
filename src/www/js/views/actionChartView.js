@@ -54,7 +54,7 @@ var actionChartView = {
 
         // TODO: Display the discipline "quote" tag instead the name
         var $displines = $('#achart-disciplines > tbody');
-        if( actionChart.disciplines.length == 0 ) {
+        if( actionChart.disciplines.length === 0 ) {
             $displines.append( '<tr><td>(' + translations.text('noneFemenine') + ')</td></tr>' );
         }
         else {

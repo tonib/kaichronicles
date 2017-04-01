@@ -217,7 +217,7 @@ ActionChart.prototype.checkCurrentWeapon = function() {
 
     // Try to set the current weapon
     var weaponObjects = this.getWeaponObjects();
-    if( weaponObjects.length == 0 ) {
+    if( weaponObjects.length === 0 ) {
         // No weapons
         this.selectedWeapon = '';
         return;
@@ -351,7 +351,7 @@ ActionChart.prototype.getCurrentCombatSkillBonuses = function(noMindblast, noWea
     });
 
     return bonuses;
-}
+};
 
 /**
  * Function to enumerate backpack objects and special items

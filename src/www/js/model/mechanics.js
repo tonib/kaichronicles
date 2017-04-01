@@ -65,7 +65,7 @@ Mechanics.prototype.getObjectsXmlURL = function() {
 Mechanics.prototype.getSection = function(sectionId) {
     var $section = $(this.mechanicsXml)
         .find('mechanics > sections > section[id=' + sectionId + ']');
-    return $section.length == 0 ? null : $section;
+    return $section.length === 0 ? null : $section;
 };
 
 /**
@@ -79,7 +79,7 @@ Mechanics.prototype.getObject = function(objectId) {
         return o;
 
     var $o = $(this.objectsXml).find('*[id=' + objectId + ']');
-    if( $o.length == 0 ) {
+    if( $o.length === 0 ) {
         console.log("Object " + objectId + " not found");
         return null;
     }

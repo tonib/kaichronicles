@@ -80,14 +80,14 @@ Combat.prototype.getCurrentCombatSkill = function() {
         cs += this.mindforceCS;
 
     return cs;
-}
+};
 
 /**
  * Returns the combat ratio for this combat
  */
 Combat.prototype.getCombatRatio = function() {
     return this.getCurrentCombatSkill() - this.combatSkill;
-}
+};
 
 /**
  * Get a turn result from the combat table
@@ -100,7 +100,7 @@ Combat.prototype.getTurnResult = function(elude) {
         this.getCombatRatio(), this.dammageMultiplier, this.enemyMultiplier, 
         this.mindforceEP , elude , this.enemyTurnLoss , this.turnLoss );
     return turnResult;
-}
+};
 
 /**
  * Get the next combat turn
@@ -114,7 +114,7 @@ Combat.prototype.nextTurn = function( elude ) {
     this.turns.push( turn );
 
     return turn;
-}
+};
 
 /**
  * Apply the combat turn effects
@@ -138,12 +138,11 @@ Combat.prototype.applyTurn = function( turn ) {
     }
 
     // Check if the combat has been finished
-    if( turn.elude || this.endurance == 0 || state.actionChart.currentEndurance == 0 ) {
+    if( turn.elude || this.endurance === 0 || state.actionChart.currentEndurance === 0 ) {
         this.combatFinished = true;
         if( this.fakeCombat ) {
             // Restore player endurance to original :
-            var epToRestore = this.originalPlayerEndurance
-                - state.actionChart.currentEndurance;
+            var epToRestore = this.originalPlayerEndurance - state.actionChart.currentEndurance;
             // Apply the factor
             epToRestore = Math.floor( this.fakeRestoreFactor * epToRestore );
             // If you call this, the endurance on the UI is not updated
@@ -151,7 +150,7 @@ Combat.prototype.applyTurn = function( turn ) {
             actionChartController.increaseEndurance( epToRestore );
         }
     }
-}
+};
 
 /**
  * Returns true if the combat is finished?
@@ -159,7 +158,7 @@ Combat.prototype.applyTurn = function( turn ) {
 Combat.prototype.isFinished = function() {
     //return this.endurance == 0 || state.actionChart.currentEndurance == 0;
     return this.combatFinished;
-}
+};
 
 /**
  * Returns true if the combat can be eluded right now
@@ -168,7 +167,7 @@ Combat.prototype.canBeEluded = function() {
     if( this.eludeTurn < 0 || this.isFinished() )
         return false;
     return this.turns.length >= this.eludeTurn;
-}
+};
 
 /**
  * Returns the number on endurance points lost by the player on this combat 

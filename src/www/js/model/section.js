@@ -22,14 +22,14 @@ function Section(book, sectionId, mechanics) {
  */
 Section.prototype.exists = function() {
     return this.$xmlSection.length > 0;
-} 
+};
 
 /**
  * Return true if the section has navigation links 
  */
 Section.prototype.hasNavigation = function() {
     return this.$xmlSection.find('link[class=next]').length > 0;
-} 
+};
 
 /**
  * Return the section number. null if it has no number 
@@ -39,7 +39,7 @@ Section.prototype.getSectionNumber = function() {
         return null;
     // Id is "sectXXX"
     return parseInt( this.sectionId.substring(4) );
-}
+};
 
 /**
  * Returns the previous section id
@@ -54,7 +54,7 @@ Section.prototype.getNextSectionId = function() {
         return 'sect' + ( sNumber + 1 );
 
     return null; 
-}
+};
 
 /**
  * Returns the next section id
@@ -67,13 +67,13 @@ Section.prototype.getPreviousSectionId = function() {
     var sNumber = this.getSectionNumber();
     if( sNumber ) {
         if( sNumber == 1 )
-            return 'kaiwisdm'
+            return 'kaiwisdm';
         else
             return 'sect' + ( sNumber - 1 );
     }
 
     return null; 
-}
+};
 
 /**
  * Returns the section HTML

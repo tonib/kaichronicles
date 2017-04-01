@@ -112,7 +112,7 @@ BookSectionStates.prototype.markRuleAsExecuted = function( rule, executionState 
  */
 BookSectionStates.prototype.setupCombats = function( section ) {
     var sectionState = this.getSectionState();
-    if( sectionState.combats.length == 0 ) {
+    if( sectionState.combats.length === 0 ) {
         var combats = section.getCombats();
         if( combats.length > 0 )
             sectionState.combats = combats;

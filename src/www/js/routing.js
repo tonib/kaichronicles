@@ -45,7 +45,7 @@ var routing = {
 
         // Call the initial controller
         var initialHash = routing.normalizeHash(location.hash);
-        if( initialHash == '' )
+        if( initialHash === '' )
             initialHash = 'mainMenu';
         routing.redirect(initialHash);
 
@@ -69,7 +69,9 @@ var routing = {
     getCurrentController: function() {
         //console.log('route: ' + route);
         try {
+            /* jshint ignore:start */
             return eval( routing.getControllerName() );
+            /* jshint ignore:end */
         }
         catch(e) {
             console.log(e);
@@ -99,7 +101,7 @@ var routing = {
             if( !controller )
                 console.log("Undefined controller: " + routing.getControllerName() );
             else
-                controller['index']();
+                controller.index();
         }
         catch(e) {
             console.log(e);
@@ -114,7 +116,7 @@ var routing = {
     objectToUrlParms: function(o) {
         var str = '';
         for (var key in o) {
-            if (str != '')
+            if (str !== '')
                 str += "&";
             str += key + "=" + encodeURIComponent(o[key]);
         }

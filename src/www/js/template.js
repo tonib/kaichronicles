@@ -88,7 +88,7 @@ var template = {
 
         // Update statistics
         if( !state.actionChart || 
-            ( state.actionChart.combatSkill == 0 && state.actionChart.endurance == 0 ) ) {
+            ( state.actionChart.combatSkill === 0 && state.actionChart.endurance === 0 ) ) {
             $('#template-statistics').hide();
             $('#template-map').hide();
         }

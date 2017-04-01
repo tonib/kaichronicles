@@ -27,7 +27,7 @@
      */
     $.fn.getTitle = function() {
         return $("label[for='" + this.attr('id') + "']").text();
-    }
+    };
 
     /**
      * Bind number events
@@ -55,7 +55,7 @@
         this.change(function() {
             self.fireValueChanged();
         });
-    },
+    };
 
     /**
      * Event called when the number picker has changed
@@ -69,7 +69,7 @@
         catch(e) {
             console.log(e);
         }
-    },
+    };
 
     /**
      * Returns the minimum value for this field
@@ -79,7 +79,7 @@
         if( isNaN(min) )
             return -99999999;
         return min;
-    }
+    };
 
     /**
      * Returns the maximum value for this field
@@ -89,7 +89,7 @@
         if( isNaN(max) )
             return 99999999;
         return max;
-    }
+    };
 
     /**
      * Return true if the number is valid
@@ -133,14 +133,14 @@
         this.prop('disabled', !enabled);
         this.parent().find('button.add-number').prop('disabled', !enabled);
         this.parent().find('button.sub-number').prop('disabled', !enabled);
-    }
+    };
 
     /**
      * Return true if the number picker is enabled
      */
     $.fn.isEnabled = function() {
         return !this.prop('disabled');
-    }
+    };
 
     /**
      * Set the initial value of the picker
@@ -157,7 +157,7 @@
             if( min )
                 this.val( min );
         }
-    }
+    };
 
 
 }( jQuery ));

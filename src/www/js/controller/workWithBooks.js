@@ -53,7 +53,7 @@ var workWithBooksController = {
         }
 
         // TODO: Translate
-        if( toRemove.length == 0 && toDownload.length == 0 ) {
+        if( toRemove.length === 0 && toDownload.length === 0 ) {
             alert( 'No changes selected' );
         }
         else {

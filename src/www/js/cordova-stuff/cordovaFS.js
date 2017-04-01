@@ -36,10 +36,11 @@ var cordovaFS = {
         cordovaFS.enumerateFiles(fs, function(entries) {
             console.log('Searching unused name for ' + fileName);
             idx = 0;
+            var hasSameName = function(f) { return f.name == fileName; };
             while(true) {
                 fileName = name + ( idx > 0 ? '-' + idx : '' ) + '.' + extension;
                 console.log('Checking ' + fileName);
-                if( entries.some( function(f) { return f.name == fileName; } ) ) {
+                if( entries.some( hasSameName ) ) {
                     idx++;
                     continue;
                 }
@@ -97,7 +98,7 @@ var cordovaFS = {
                 alert('Error listing files');
                 callback( [] );
             }
-        )
+        );
     },
 
     loadFile: function( fileName, callback ) {

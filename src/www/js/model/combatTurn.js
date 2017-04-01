@@ -78,9 +78,9 @@ CombatTurn.prototype.calculatePlayerLossText = function() {
     var loss = this.loneWolfBase.toString();
     if( this.enemyMultiplier != 1 )
         loss = loss + " x " + this.enemyMultiplier;
-    if( this.loneWolfExtra != 0 )
+    if( this.loneWolfExtra !== 0 )
         loss += " + " + ( - this.loneWolfExtra );
-    if( this.enemyMultiplier != 1 || this.loneWolfExtra != 0 )
+    if( this.enemyMultiplier != 1 || this.loneWolfExtra !== 0 )
         loss += " = " + this.loneWolf;
     return loss;
 };
@@ -92,10 +92,10 @@ CombatTurn.prototype.getEnemyLossText = function() {
     var loss = this.enemyBase.toString();
     if( this.dammageMultiplier != 1 )
         loss = loss + " x " + this.dammageMultiplier;
-    if( this.enemyExtra != 0 )
+    if( this.enemyExtra !== 0 )
         loss += " + " + ( - this.enemyExtra );
-    if( this.dammageMultiplier != 1 || this.enemyExtra != 0 )
-        loss += " = " + this.enemy
+    if( this.dammageMultiplier != 1 || this.enemyExtra !== 0 )
+        loss += " = " + this.enemy;
     return loss;
 };
 
@@ -106,7 +106,7 @@ CombatTurn.prototype.getEnemyLossText = function() {
  * @return {number|string} The final endurance loss
  */
 CombatTurn.applyMultiplier = function( enduranceLoss, multiplier ) {
-    if( multiplier == 0 )
+    if( multiplier === 0 )
         // Ensure no death
         return 0;
     if( enduranceLoss != combatTable_DEATH )

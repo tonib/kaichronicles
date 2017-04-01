@@ -246,7 +246,7 @@ Book.prototype.getKaiTitle = function(nDisciplines) {
         title = title.substr(0, idx);
 
     return title;
-}
+};
 
 /**
  * Get sections that have a choice to go to some section
@@ -259,17 +259,17 @@ Book.prototype.getOriginSections = function(sectionId) {
         .find('section[class="numbered"]' )
         .has( 'data > choice[idref="' + sectionId + '"]')
         .each( function(index, section) {
-            sourceSectionIds.push( $(section).attr('id') )
+            sourceSectionIds.push( $(section).attr('id') );
         }) ;
     return sourceSectionIds;
-}
+};
 
 /**
  * Get the book cover image URL
  */
 Book.prototype.getCoverURL = function() {
     return Book.getBaseUrl() + this.bookNumber + '/cover.jpg';
-}
+};
 
 /**
  * Return an array of 2 positions with the combat tables images
@@ -280,4 +280,4 @@ Book.prototype.getCombatTablesImagesUrls = function() {
     images.push( base + 'illExtra/combattable_' + this.language + '_positive.png' );
     images.push( base + 'illExtra/combattable_' + this.language + '_negative.png' );
     return images;
-}
+};

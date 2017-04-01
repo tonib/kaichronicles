@@ -29,7 +29,7 @@ BookDownloadState.prototype.checkDownloadState = function(booksDir, callback) {
         function() { self.downloaded = true; callback(); },
         function() { self.downloaded = false; callback(); }
     );
-}
+};
 
 BookDownloadState.prototype.delete = function( booksDir , callbackOk , callbackError ) {
     
@@ -44,7 +44,7 @@ BookDownloadState.prototype.delete = function( booksDir , callbackOk , callbackE
         },
         function(fileError) { callbackError(fileError); }
     );
-}
+};
 
 BookDownloadState.prototype.download = function( booksDir, callbackOk , callbackError ) {
 
@@ -60,7 +60,7 @@ BookDownloadState.prototype.download = function( booksDir, callbackOk , callback
         true
     );
 
-}
+};
 
 /**
  * Get the directory where books are stored on the device
@@ -72,4 +72,4 @@ BookDownloadState.getBooksDirectory = function(callback) {
             callback( booksDir );
         });
     });
-}
+};

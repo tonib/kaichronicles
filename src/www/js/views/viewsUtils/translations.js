@@ -367,7 +367,7 @@ var translations = {
             .find('[data-translation]')
             .addBack('[data-translation]');
         for(var i=0; i<$translatedTags.length; i++ ) {
-            var $t = $($translatedTags[i])
+            var $t = $($translatedTags[i]);
             var translationId = $t.attr('data-translation');
             var html = table[ translationId ];
             if( html )
@@ -386,7 +386,7 @@ var translations = {
             var table = translations[state.language];
             if( !table )
                 // Use english as default
-                table = translations['en'];
+                table = translations.en;
                 
             var text = table[textId];
             if( !text ) {

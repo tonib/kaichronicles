@@ -229,4 +229,4 @@ var state = {
 
         state.persistState();
     }
-}
+};

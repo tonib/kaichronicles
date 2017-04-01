@@ -36,7 +36,7 @@ SectionRenderer.prototype.renderSection = function() {
         for (var i = 0, len = this.footNotes.length; i < len; i++) {
             html += this.footNotes[i].html;
         }
-        html += "</div>"
+        html += "</div>";
     }
 
     return html;
@@ -129,7 +129,7 @@ SectionRenderer.prototype.strong = SectionRenderer.prototype.renderHtmlNode;
 
 /** Render node as plain text*/
 SectionRenderer.prototype.renderPlainText = function($node, level) {
-    return this.renderNodeChildren( $node , level )
+    return this.renderNodeChildren( $node , level );
 };
 
 ////////////////////////////////////////////////////////
@@ -186,7 +186,7 @@ SectionRenderer.prototype.footref = function($footRef, level) {
     var id = $footRef.attr('idref');
     // Render the reference
     return this.renderNodeChildren( $footRef , level ) + this.getHtmlFootRef(id);
-}
+};
 
 /**
  * Get the HTML of a footer note id
@@ -207,13 +207,13 @@ SectionRenderer.prototype.getHtmlFootRef = function(id) {
 
 SectionRenderer.prototype.puzzle = function( $puzzle , level ) {
     return '<p>' + this.renderNodeChildren( $puzzle , level ) + '</p>';
-}
+};
 
 SectionRenderer.prototype.choose = function( $choose , level ) {
     // TODO: To be complete, we should evaluate the expression. Not needed on book 5,
     // TODO: just render the otherwise tag
     return this.renderNodeChildren( $choose.children('otherwise') , level ) ;
-}
+};
 
 ////////////////////////////////////////////////////////
 // OTHER
@@ -303,7 +303,7 @@ SectionRenderer.prototype.a = function($a, level) {
                 throw 'a tag: Unknown idref type: ' + $a.attr('idref');
     }
     return open + this.renderNodeChildren( $a , level ) + close;
-}
+};
 
 /**
  * Definition list renderer
@@ -341,7 +341,7 @@ SectionRenderer.prototype.link_text = function($linkText, level) {
 SectionRenderer.prototype.choice = function($choice, level) {
 
     return '<p class="choice"><span class="glyphicon glyphicon-chevron-right"></span> ' + 
-        this.renderNodeChildren( $choice , level ) + '</p>'
+        this.renderNodeChildren( $choice , level ) + '</p>';
 };
 
 /**
@@ -370,7 +370,7 @@ SectionRenderer.prototype.illustration = function($illustration, level) {
         var source = this.sectionToRender.book.getIllustrationURL(fileName, 
             this.sectionToRender.mechanics);
 
-        var isLargeIllustration = (fileName.indexOf('ill') == 0);
+        var isLargeIllustration = (fileName.indexOf('ill') === 0);
         illustrationContent += '<div class="illustration' + 
             (isLargeIllustration ? ' ill' : '') + 
             '"><img src="' + source + '" alt="' + description + 
@@ -449,9 +449,9 @@ SectionRenderer.prototype.section = function( $section , level ) {
 SectionRenderer.prototype.signpost = function( $signpost , level ) {
     return '<div class="signpost">' +  this.renderNodeChildren( $signpost , level ) + 
         '</div>';
-}
+};
 
 SectionRenderer.prototype.poetry = function( $poetry , level ) {
     return '<blockquote class="poetry">' + this.renderNodeChildren( $poetry , level ) + 
         '</blockquote>';
-}
+};

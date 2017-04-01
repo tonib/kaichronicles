@@ -166,7 +166,7 @@ var objectsTable = {
 
             var op = $(this).attr('data-op');
             var o = state.mechanics.getObject( $(this).attr('data-objectId') );
-            if( o == null )
+            if( o === null )
                 return;
 
             switch(op) {
@@ -249,4 +249,4 @@ var objectsTable = {
         }
         
     }
-}
+};
