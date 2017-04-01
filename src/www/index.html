@@ -283,13 +283,21 @@
                 toastr.clear();
             };
 
-            // First, load the views, then do the real application setup
-            views.setup().then( function() {
-                state.setupDefaultLanguage();
-                cordovaApp.setup();
-                template.setup();
-                routing.setup();
-            });
+            // First, load the views
+            // TODO: Handle errors
+            views.setup()
+              .then(function() {
+                  // If we are on the app, resolve where is the books directory
+                  return BookDownloadState.resolveBooksDirectory();
+              })
+              .then( function() {
+                  console.log('Real setup started');
+                  // Then do the real application setup
+                  state.setupDefaultLanguage();
+                  cordovaApp.setup();
+                  template.setup();
+                  routing.setup();
+              });
 
         });
 

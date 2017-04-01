@@ -55,19 +55,22 @@ BookDownloadState.prototype.download = function( booksDir, callbackOk , callback
     console.log('Downloading ' + url + ' to ' + dstPath);
 
     var fileTransfer = new FileTransfer();
+    var self = this;
     fileTransfer.download(url, dstPath, 
         function(zipFileEntry) { 
             // Download ok. Uncompress the book
             console.log('Unzipping ' + dstPath + ' to ' + dstDir);
             zip.unzip( dstPath , dstDir , function(resultCode) {
-                
+
                 // Delete the unzipped file
                 console.log('Deleting unzipped file');
                 zipFileEntry.remove();
 
                 // Check the unzip operation
-                if(resultCode === 0)
+                if(resultCode === 0) {
+                    self.downloaded = true;
                     callbackOk(); 
+                }
                 else
                     callbackError();
             });
@@ -92,3 +95,31 @@ BookDownloadState.getBooksDirectory = function(callback) {
         });
     });
 };
+
+/**
+ * Resolve the directory where the books are stored. The directory URL will be stored on 
+ * BookDownloadState.BOOKS_PATH
+ * @return {Promise} The resolution promise
+ */
+BookDownloadState.resolveBooksDirectory = function() {
+
+    if( !cordovaApp.isRunningApp() ) {
+        // This is just for the app
+        dfd = jQuery.Deferred();
+        dfd.resolve();
+        return dfd.promise();
+    }
+
+    console.log('Resolving books directory');
+    return cordovaFS.requestFileSystemAsync()
+        .then(function(fs) {
+            console.log('1');
+            return cordovaFS.getDirectoryAsync(fs.root, BookDownloadState.BOOKS_DIR, { create: true });
+        })
+        .then(function(booksDirEntry) {
+            console.log('2');
+            BookDownloadState.BOOKS_PATH = booksDirEntry.toURL();
+            console.log('Books are at ' + BookDownloadState.BOOKS_PATH );
+        });
+};
+

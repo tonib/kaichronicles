@@ -1,6 +1,7 @@
 
 /**
  * Stuff to access the file system via cordova
+ * TODO: This is almost crap. Replace by deferreds (oh javascript)
  */
 var cordovaFS = {
 
@@ -142,6 +143,7 @@ var cordovaFS = {
     },
 
     deleteFile: function(fileName, callback) {
+
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
             function (fs) {
                 console.log('file system open: ' + fs.name);
@@ -172,6 +174,45 @@ var cordovaFS = {
             }, 
             function() { alert('Error requesting file system'); }
         );
+    },
+
+    /**
+     * Requests a filesystem in which to store application data.
+     * TODO: Use this anywhere
+     */
+    requestFileSystemAsync: function(type) {
+        var dfd = jQuery.Deferred();
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
+            function( fileSystem ) {
+                dfd.resolve( fileSystem );
+            },
+            function( fileError ) {
+                // TODO: Test this (codes?)
+                dfd.reject( 'Error requesting file system ' + type.toString() + 
+                    ' (code ' + fileError.code + ')' );
+            }
+        );
+        return dfd.promise();
+    },
+
+    /**
+     * Creates or looks up a directory
+     * TODO: Use this anywhere
+     */
+    getDirectoryAsync: function(dir, path, options) {
+        var dfd = jQuery.Deferred();
+        dir.getDirectory( path , options, 
+            function( subdir ) {
+                console.log( 'getDirectoryAsync success: ' + subdir.toURL() );
+                dfd.resolve( subdir );
+            },
+            function( fileError ) {
+                // TODO: Test this (codes?)
+                dfd.reject( 'Error getting / creating directory ' + dir.toURL() + '/' + path + 
+                    ': (code ' + fileError.code + ')' );
+            }
+        );
+        return dfd.promise();
     }
 
 };

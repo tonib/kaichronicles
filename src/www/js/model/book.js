@@ -17,6 +17,7 @@ function Book(number, language) {
 
     /** The book XML document */
     this.bookXml = null;
+
 }
 
 /**
