@@ -50,13 +50,32 @@ BookDownloadState.prototype.download = function( booksDir, callbackOk , callback
 
     var fileName = this.bookNumber + '.zip';
     var url = 'http://192.168.1.11/ls/data/projectAon/' + fileName;
-    var dstPath = booksDir.toURL() + '/' + fileName;
+    var dstDir = booksDir.toURL();
+    var dstPath = dstDir + '/' + fileName;
     console.log('Downloading ' + url + ' to ' + dstPath);
 
     var fileTransfer = new FileTransfer();
     fileTransfer.download(url, dstPath, 
-        function(fileEntry) { callbackOk(fileEntry); },
-        function(fileTransferError) { callbackError(fileTransferError); },
+        function(zipFileEntry) { 
+            // Download ok. Uncompress the book
+            console.log('Unzipping ' + dstPath + ' to ' + dstDir);
+            zip.unzip( dstPath , dstDir , function(resultCode) {
+                
+                // Delete the unzipped file
+                console.log('Deleting unzipped file');
+                zipFileEntry.remove();
+
+                // Check the unzip operation
+                if(resultCode === 0)
+                    callbackOk(); 
+                else
+                    callbackError();
+            });
+        },
+        function(fileTransferError) { 
+            // Download failed
+            callbackError(fileTransferError); 
+        },
         true
     );
 

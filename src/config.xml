@@ -9,11 +9,17 @@
     </author>
     <content src="index.html" />
 
+    <!-- Use cordova version 6.1 to avoid bug with icons on 6.4 
+         http://stackoverflow.com/questions/40351434/cordova-android-6-4-0-creates-res-folder-top-level-not-inside-platforms-android) 
+    -->
+    <engine name="android" spec="~6.1.0" />
+
     <!-- Plugins -->
     <plugin name="cordova-plugin-whitelist" spec="1" />
     <plugin name="cordova-plugin-file" spec="~4.3.1" />
     <plugin name="cordova-plugin-splashscreen" spec="~4.0.1" />
     <plugin name="cordova-plugin-file-transfer" spec="~1.6.2" />
+    <plugin name="cordova-plugin-zip" spec="~3.1.0" />
 
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -51,7 +57,5 @@
         <splash density="port-mdpi" src="res/android/splashes/drawable-port-mdpi.png" />
         <splash density="port-xhdpi" src="res/android/splashes/drawable-port-xhdpi.png" />
     </platform>
-
-    <engine name="android" spec="~6.1.0" />
     
 </widget>
