@@ -290,12 +290,23 @@
                   return BookDownloadState.resolveBooksDirectory();
               })
               .then( function() {
-                  console.log('Real setup started');
-                  // Then do the real application setup
-                  state.setupDefaultLanguage();
-                  cordovaApp.setup();
-                  template.setup();
-                  routing.setup();
+                  try {
+                    console.log('Real setup started');
+                    // Then do the real application setup
+                    state.setupDefaultLanguage();
+                    cordovaApp.setup();
+                    template.setup();
+                    routing.setup();
+                  }
+                  catch(e) {
+                    console.log(e);
+                    return jQuery.Deferred().reject(e).promise();
+                  }
+              })
+              .fail(function(reason) {
+                  if( !reason )
+                    reason = 'Unknown error';
+                  template.setErrorMessage(reason.toString());
               });
 
         });

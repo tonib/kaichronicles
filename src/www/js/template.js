@@ -131,6 +131,13 @@ var template = {
     },
 
     /**
+     * Display an error
+     */
+    setErrorMessage: function(msg) {
+        template.setViewContent('<p style="color: red">' + msg + '</p>');
+    },
+    
+    /**
      * Show dialog with object details
      * @param {Item} o The object to show
      */

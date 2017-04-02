@@ -12,9 +12,7 @@ var views = {
     setup: function() {
         if( ENVIRONMENT == 'DEVELOPMENT' ) {
             // Nothing to do. Return a resolved promise
-            var dfd = jQuery.Deferred();
-            dfd.resolve();
-            return dfd.promise();
+            return jQuery.Deferred().resolve().promise();
         }
 
         // Production. Preload all views, for better UX:
@@ -29,11 +27,11 @@ var views = {
                 views.viewCache[viewName] = div;
             });
         })
-        .fail(function( jqXHR, textStatus, errorThrown ) {
+        .then(null, function( jqXHR, textStatus, errorThrown ) {
+            // Format a error message as a reason
             var msg = 'Error loading views.html, error: ' + 
                 ajaxErrorMsg(this, jqXHR, textStatus, errorThrown);
-            template.setViewContent('<p>' + msg + '</p>');
-            alert( msg );
+            return jQuery.Deferred().reject(msg);
         });
     },
 
@@ -73,7 +71,7 @@ var views = {
         .fail(function( jqXHR, textStatus, errorThrown ) {
             var msg = 'Error loading view ' + viewPath + ', error: ' + 
                 ajaxErrorMsg(this, jqXHR, textStatus, errorThrown);
-            template.setViewContent('<p>' + msg + '</p>');
+            template.setErrorMessage( msg );
             alert( msg );
         });
     },
