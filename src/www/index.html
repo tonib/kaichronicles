@@ -287,7 +287,7 @@
             views.setup()
               .then(function() {
                   // If we are on the app, resolve where is the books directory
-                  return BookDownloadState.resolveBooksDirectory();
+                  return BookDownloadState.resolveBooksDirectoryAsync();
               })
               .then( function() {
                   try {

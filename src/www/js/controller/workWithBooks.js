@@ -66,10 +66,9 @@ var workWithBooksController = {
 
                 // Remove books
                 toRemove.forEach(function(book) {
-                    book.delete(booksDir, 
-                        function() { console.log('Book deleted'); },
-                        function() { console.log('Error deleting book'); }
-                    );
+                    book.deleteAsync(booksDir)
+                        .done(function() { console.log('Book deleted'); })
+                        .fail(function(reason) { console.log('Error deleting book: ' + reason); });
                 });
 
                 // Download books

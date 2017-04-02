@@ -186,8 +186,7 @@ var cordovaFS = {
             },
             function( fileError ) {
                 // TODO: Test this (codes?)
-                dfd.reject( 'Error requesting file system ' + type.toString() + 
-                    ' (code ' + fileError.code + ')' );
+                dfd.reject( 'Error requesting file system (code ' + fileError.code + ')' );
             }
         );
         return dfd.promise();
@@ -246,6 +245,20 @@ var cordovaFS = {
             else
                 dfd.reject('Unknown error unzipping ' + dstPath + ' to ' + dstDir );
         });
+        return dfd.promise();
+    },
+
+    removeRecursivelyAsync: function(directoryEntry) {
+
+        var dfd = jQuery.Deferred();
+        console.log('Deleting directory ' + directoryEntry.toURL() );
+        directoryEntry.removeRecursively(
+            function() { dfd.resolve(); },
+            function(fileError) { 
+                dfd.reject( 'Error deleting directory ' + directoryEntry.toURL() + 
+                    ' (code ' + fileError.code + ')' );
+            }
+        );
         return dfd.promise();
     }
 };

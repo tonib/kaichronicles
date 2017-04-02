@@ -31,19 +31,13 @@ BookDownloadState.prototype.checkDownloadState = function(booksDir, callback) {
     );
 };
 
-BookDownloadState.prototype.delete = function( booksDir , callbackOk , callbackError ) {
+BookDownloadState.prototype.deleteAsync = function( booksDir ) {
     
     console.log( 'Deleting book ' + this.bookNumber );
-    booksDir.getDirectory( this.bookNumber.toString() , {} , 
-        function(bookDir) { 
-            // Succeed callback
-            bookDir.removeRecursively(
-                function() { callbackOk(); },
-                function(fileError) { callbackError(fileError); }
-            );
-        },
-        function(fileError) { callbackError(fileError); }
-    );
+    var self = this;
+    return cordovaFS.getDirectoryAsync( booksDir , this.bookNumber.toString() )
+        .then(function(bookDir) { return cordovaFS.removeRecursivelyAsync( bookDir ); })
+        .done(function() { self.downloaded = false; });
 };
 
 BookDownloadState.prototype.downloadAsync = function( booksDir ) {
@@ -84,14 +78,11 @@ BookDownloadState.getBooksDirectoryAsync = function(callback) {
  * BookDownloadState.BOOKS_PATH
  * @return {Promise} The resolution promise
  */
-BookDownloadState.resolveBooksDirectory = function() {
+BookDownloadState.resolveBooksDirectoryAsync = function() {
 
-    if( !cordovaApp.isRunningApp() ) {
+    if( !cordovaApp.isRunningApp() )
         // This is just for the app
-        dfd = jQuery.Deferred();
-        dfd.resolve();
-        return dfd.promise();
-    }
+        return jQuery.Deferred().resolve().promise();
 
     console.log('Resolving books directory');
     return BookDownloadState.getBooksDirectoryAsync()
