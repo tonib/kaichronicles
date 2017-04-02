@@ -171,7 +171,7 @@ function ajaxErrorMsg(context, jqXHR, textStatus, errorThrown) {
   if( !textStatus )
     textStatus = '';
   var msg = context.url + ' failed: ' + errorThrown.toString() + '. Code: ' + jqXHR.status + 
-    '. Status: ' + textStatus + '.Response text: ' + jqXHR.responseText;
+    '. Status: ' + textStatus /*+ '. Response text: ' + jqXHR.responseText*/;
   return msg;
 }
 

@@ -81,9 +81,7 @@ var setupController = {
         var promises = [];
         var someError = false;
         var failFunction = function(jqXHR, textStatus, errorThrown) {
-            if( !errorThrown )
-                errorThrown = 'Unknown error (Cross domain error?)';
-            setupView.log( this.url + ' failed: ' + errorThrown.toString(), 'error' );
+            setupView.log( ajaxErrorMsg(this, jqXHR, textStatus, errorThrown), 'error' );
             someError = true;
         };
         var doneFunction = function() {

@@ -31,7 +31,7 @@ var views = {
         })
         .fail(function( jqXHR, textStatus, errorThrown ) {
             var msg = 'Error loading views.html, error: ' + 
-                textStatus + ' / ' + errorThrown;
+                ajaxErrorMsg(this, jqXHR, textStatus, errorThrown);
             template.setViewContent('<p>' + msg + '</p>');
             alert( msg );
         });
@@ -72,7 +72,7 @@ var views = {
         })
         .fail(function( jqXHR, textStatus, errorThrown ) {
             var msg = 'Error loading view ' + viewPath + ', error: ' + 
-                textStatus + ' / ' + errorThrown;
+                ajaxErrorMsg(this, jqXHR, textStatus, errorThrown);
             template.setViewContent('<p>' + msg + '</p>');
             alert( msg );
         });
