@@ -113,11 +113,9 @@ BookDownloadState.resolveBooksDirectory = function() {
     console.log('Resolving books directory');
     return cordovaFS.requestFileSystemAsync()
         .then(function(fs) {
-            console.log('1');
             return cordovaFS.getDirectoryAsync(fs.root, BookDownloadState.BOOKS_DIR, { create: true });
         })
         .then(function(booksDirEntry) {
-            console.log('2');
             BookDownloadState.BOOKS_PATH = booksDirEntry.toURL();
             console.log('Books are at ' + BookDownloadState.BOOKS_PATH );
         });

@@ -6,28 +6,26 @@
 var cordovaFS = {
 
     saveFile: function(originalFileName, fileContent, callback) {
-        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
-            function (fs) {
-                console.log('file system open: ' + fs.name);
+        cordovaFS.requestFileSystemAsync( LocalFileSystem.PERSISTENT )
+        .then( function(fs) {
+            console.log('file system open: ' + fs.name);
 
-                cordovaFS.getUnusedName(originalFileName, fs, function(fileName) {
-                    // Get the file to save
-                    fs.root.getFile(fileName, 
-                        { 
-                            create: true, 
-                            exclusive: false 
-                        }, 
-                        function (fileEntry) {
-                            console.log("fileEntry is file?" + fileEntry.isFile.toString());
-                            cordovaFS.writeFile(fileEntry, fileContent, callback);
-                        }, 
-                        function() { alert('Error getting file'); }
-                    );
-                });
-                
-            }, 
-            function() { alert('Error requesting file system'); }
-        );
+            cordovaFS.getUnusedName(originalFileName, fs, function(fileName) {
+                // Get the file to save
+                fs.root.getFile(fileName, 
+                    { 
+                        create: true, 
+                        exclusive: false 
+                    }, 
+                    function (fileEntry) {
+                        console.log("fileEntry is file?" + fileEntry.isFile.toString());
+                        cordovaFS.writeFile(fileEntry, fileContent, callback);
+                    }, 
+                    function() { alert('Error getting file'); }
+                );
+            });
+        }, 
+        function() { alert('Error requesting file system'); } );
     },
 
     getUnusedName: function(fileName, fs, callback) {

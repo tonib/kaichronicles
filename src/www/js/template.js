@@ -120,16 +120,6 @@ var template = {
     collapseMenu: function() { $('#navbar').collapse('hide'); },
 
     /**
-     * Display a message "Loading..."
-     */
-    displayLoadingMsg: function() {
-        $('#body').html(
-            '<img src="images/ajax-loader.gif" alt="Loading image" /> ' + 
-            'Loading...'
-        );
-    },
-
-    /**
      * Show an HTML view
      * @param {DOM} viewContent The view to show
      */

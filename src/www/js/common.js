@@ -154,3 +154,39 @@ if (typeof Window.prototype.getUrlParameter !== 'function') {
   };
 
 }
+
+/**
+ * Get a human readable error for an AJAX error
+ * @param {Object} context The "this" value for the error callback (oh javascript...)
+ * @param {jqXHR} jqXHR The AJAX call itself
+ * @param {String} textStatus Possible values for the second argument (besides null) are 
+ * "timeout", "error", "abort", and "parsererror"
+ * @param {String} errorThrown The textual portion of the HTTP status, such as "Not Found" 
+ * or "Internal Server Error."
+ * @returns {String} The error message for an AJAX error
+ */
+function ajaxErrorMsg(context, jqXHR, textStatus, errorThrown) {
+  if( !errorThrown )
+      errorThrown = 'Unknown error (Cross domain error?)';
+  if( !textStatus )
+    textStatus = '';
+  var msg = context.url + ' failed: ' + errorThrown.toString() + '. Code: ' + jqXHR.status + 
+    '. Status: ' + textStatus + '.Response text: ' + jqXHR.responseText;
+  return msg;
+}
+
+/**
+ * Get a rejected promise for an AJAX error
+ * @param {Object} context The "this" value for the error callback (oh javascript...)
+ * @param {jqXHR} jqXHR The AJAX call itself
+ * @param {String} textStatus Possible values for the second argument (besides null) are 
+ * "timeout", "error", "abort", and "parsererror"
+ * @param {String} errorThrown The textual portion of the HTTP status, such as "Not Found" 
+ * or "Internal Server Error."
+ * @returns {Promise} The rejected promise
+ */
+function ajaxErrorPromise(context, jqXHR, textStatus, errorThrown) {
+  var dfd = jQuery.Deferred();
+  dfd.reject( ajaxErrorMsg(context, jqXHR, textStatus, errorThrown) );
+  return dfd.promise();
+}
