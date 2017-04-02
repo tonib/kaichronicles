@@ -48,18 +48,23 @@ BookDownloadState.prototype.downloadAsync = function( booksDir ) {
     var dstPath = dstDir + '/' + fileName;
     var self = this;
 
-    var zEntry;
+    var zEntry = null;
     return cordovaFS.downloadAsync(url , dstPath)
         .then(function(zipFileEntry) {
             // Download ok. Uncompress the book
             zEntry = zipFileEntry;
             return cordovaFS.unzipAsync( dstPath , dstDir );
         })
-        .done(function() { self.downloaded = true; })
+        .done(function() { 
+            console.log( 'Book ' + self.bookNumber + ' downloaded and unzipped');
+            self.downloaded = true; 
+        })
         .always(function() {
-            // Delete the downloaded zip file, always
-            console.log('Deleting zip file');
-            zEntry.remove();
+            // Delete the downloaded zip file
+            if( zEntry ) {
+                console.log('Deleting zip file');
+                zEntry.remove();
+            }
         });
 };
 

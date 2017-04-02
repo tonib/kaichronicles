@@ -36,5 +36,17 @@ var workWithBooksView = {
 
     setBookChecked: function(bookNumber) {
         $('tr[data-book-number=' + bookNumber + '] input').prop('checked' , 'checked');
+    },
+
+    displayModal: function(show) {
+        if( show )
+            // Clear the log
+            $('#wwbooks-log').empty();
+
+        $('#wwbooks-modal').modal( show ? 'show' : 'hide' );
+    },
+
+    logEvent: function(msg) {
+        $('#wwbooks-log').append('<p>' + msg + '</p>');
     }
 };

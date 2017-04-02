@@ -64,21 +64,49 @@ var workWithBooksController = {
             BookDownloadState.getBooksDirectoryAsync()
             .then( function(booksDir) {
 
-                // Remove books
+                workWithBooksView.displayModal(true);
+
+                // Initial empty resolved promise
+                var changesPromise = jQuery.Deferred().resolve().promise();
+
+                // Remove books, chaining promises
                 toRemove.forEach(function(book) {
-                    book.deleteAsync(booksDir)
-                        .done(function() { console.log('Book deleted'); })
-                        .fail(function(reason) { console.log('Error deleting book: ' + reason); });
+                    // Chain always the next promise, it was failed the previous or not
+                    changesPromise = changesPromise.then(
+                        function() { return book.deleteAsync(booksDir); } , 
+                        function() { return book.deleteAsync(booksDir); }
+                    )
+                    .done(function() { 
+                        workWithBooksView.logEvent('Book ' + book.bookNumber + ' removed');
+                    })
+                    .fail(function(reason) { 
+                        workWithBooksView.logEvent('Book ' + book.bookNumber + ' deletion failed: ' + 
+                            reason );
+                    });
                 });
 
-                // Download books
+                // Download books, chaining promises
                 toDownload.forEach(function(book) {
-                    book.downloadAsync(booksDir)
+                    /*book.downloadAsync(booksDir)
                         .done(function() { console.log('Book downloaded'); })
-                        .fail(function(reason) { console.log('Error downloading book: ' + reason); });
+                        .fail(function(reason) { console.log('Error downloading book: ' + reason); });*/
+                    // Chain always the next promise, it was failed the previous or not
+                    changesPromise = changesPromise.then(
+                        function() { return book.downloadAsync(booksDir); } , 
+                        function() { return book.downloadAsync(booksDir); }
+                    )
+                    .done(function() { 
+                        workWithBooksView.logEvent('Book ' + book.bookNumber + ' downloaded');
+                    })
+                    .fail(function(reason) { 
+                        workWithBooksView.logEvent('Book ' + book.bookNumber + ' download failed: ' + 
+                            reason );
+                    });
                 });
 
-            });
+                //workWithBooksView.displayModal(false);
+            })
+            .fail(function(reason){ alert(reason); });
         }
     },
 
