@@ -29,7 +29,8 @@ var workWithBooksController = {
         workWithBooksView.setup(workWithBooksController.books);
 
         // Check books state
-        BookDownloadState.getBooksDirectory(function(booksDir) {
+        BookDownloadState.getBooksDirectoryAsync()
+        .then( function(booksDir) {
             workWithBooksController.books.forEach( function(book) {
                 book.checkDownloadState(booksDir, function() {
                     console.log( 'Book ' + book.bookNumber + ' downloaded?: ' + book.downloaded );
@@ -60,7 +61,8 @@ var workWithBooksController = {
             if( !confirm( 'Are you sure you want to do the selected changes?' ) )
                 return;
 
-            BookDownloadState.getBooksDirectory(function(booksDir) {
+            BookDownloadState.getBooksDirectoryAsync()
+            .then( function(booksDir) {
 
                 // Remove books
                 toRemove.forEach(function(book) {
@@ -72,10 +74,9 @@ var workWithBooksController = {
 
                 // Download books
                 toDownload.forEach(function(book) {
-                    book.download(booksDir,
-                        function() { console.log('Book downloaded'); },
-                        function() { console.log('Error downloading book'); }
-                    );
+                    book.downloadAsync(booksDir)
+                        .done(function() { console.log('Book downloaded'); })
+                        .fail(function(reason) { console.log('Error downloading book: ' + reason); });
                 });
 
             });

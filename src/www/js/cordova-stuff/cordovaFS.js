@@ -6,7 +6,7 @@
 var cordovaFS = {
 
     saveFile: function(originalFileName, fileContent, callback) {
-        cordovaFS.requestFileSystemAsync( LocalFileSystem.PERSISTENT )
+        cordovaFS.requestFileSystemAsync()
         .then( function(fs) {
             console.log('file system open: ' + fs.name);
 
@@ -178,7 +178,7 @@ var cordovaFS = {
      * Requests a filesystem in which to store application data.
      * TODO: Use this anywhere
      */
-    requestFileSystemAsync: function(type) {
+    requestFileSystemAsync: function() {
         var dfd = jQuery.Deferred();
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
             function( fileSystem ) {
@@ -201,7 +201,6 @@ var cordovaFS = {
         var dfd = jQuery.Deferred();
         dir.getDirectory( path , options, 
             function( subdir ) {
-                console.log( 'getDirectoryAsync success: ' + subdir.toURL() );
                 dfd.resolve( subdir );
             },
             function( fileError ) {
@@ -211,6 +210,42 @@ var cordovaFS = {
             }
         );
         return dfd.promise();
-    }
+    },
 
+    downloadAsync: function(url, dstPath) {
+        
+        var dfd = jQuery.Deferred();
+        console.log('Downloading ' + url + ' to ' + dstPath);
+        var fileTransfer = new FileTransfer();
+        fileTransfer.download(url, dstPath, 
+            function(zipFileEntry) { 
+                // Download ok
+                dfd.resolve( zipFileEntry );
+            },
+            function(fileTransferError) { 
+                // Download failed
+                var msg = 'Download of ' + url + ' to ' + dstPath + ' failed. Code: ' + 
+                    fileTransferError.code;
+                if(fileTransfer.exception)
+                    msg += '. Exception: ' + fileTransfer.exception.toString();
+                dfd.reject( msg );
+            },
+            true
+        );
+        return dfd.promise();
+    },
+
+    unzipAsync: function(dstPath , dstDir) {
+
+        var dfd = jQuery.Deferred();
+        console.log('Unzipping ' + dstPath + ' to ' + dstDir);
+        zip.unzip( dstPath , dstDir , function(resultCode) {
+            // Check the unzip operation
+            if(resultCode === 0)
+                dfd.resolve();
+            else
+                dfd.reject('Unknown error unzipping ' + dstPath + ' to ' + dstDir );
+        });
+        return dfd.promise();
+    }
 };
