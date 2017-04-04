@@ -159,7 +159,7 @@ var translations = {
         'english' : 'Ingles',
         'spanish' : 'Español',
         'agreeLicense' : 'Estoy de acuerdo con los términos de la licencia del Proyecto Aon',
-        'youMustAgree' : 'Has de estar de acuerdo con la licencia para poder jugar',
+        'youMustAgree' : 'Has de estar de acuerdo con la licencia para poder continuar',
         'licenseText' : 'Texto de la licencia',
         'startGame' : 'Iniciar juego',
 
@@ -297,7 +297,7 @@ var translations = {
         // New game
         //////////////////////////////////////
 
-        'youMustAgree' : 'You must agree the licence to play this game',
+        'youMustAgree' : 'You must agree the licence to continue',
 
         //////////////////////////////////////
         // Settings
