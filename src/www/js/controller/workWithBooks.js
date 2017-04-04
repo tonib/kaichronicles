@@ -64,6 +64,8 @@ var workWithBooksController = {
             BookDownloadState.getBooksDirectoryAsync()
             .then( function(booksDir) {
 
+                var allOk = true;
+
                 workWithBooksView.displayModal(true);
 
                 // Initial empty resolved promise
@@ -86,6 +88,7 @@ var workWithBooksController = {
                     .fail(function(reason) { 
                         workWithBooksView.logEvent('Book ' + book.bookNumber + ' deletion failed: ' + 
                             reason );
+                        allOk = false;
                     });
                 });
 
@@ -108,13 +111,24 @@ var workWithBooksController = {
                     .fail(function(reason) { 
                         workWithBooksView.logEvent('Book ' + book.bookNumber + ' download failed: ' + 
                             reason );
+                        allOk = false;
                     });
                 });
 
-                //workWithBooksView.displayModal(false);
+                changesPromise.then(function(){
+                    // When the actions chain ends, refresh the books list
+                    workWithBooksController.setupList();
+                    // If all was ok, close the modal
+                    if( allOk )
+                        workWithBooksView.displayModal(false);
+                });
+
             })
             .fail(function(reason){ alert(reason); });
         }
     },
 
+    /** Return page */
+    getBackController: function() { return 'mainMenu'; }
+    
 };

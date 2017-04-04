@@ -239,3 +239,12 @@ a.breakable {
 td.center {
     text-align: center;
 }
+
+/* Disable animations on bootstrap progress bar (performance) */
+.progress-bar {
+    -webkit-transition: none;
+    -moz-transition: none;
+    -ms-transition: none;
+    -o-transition: none;
+    transition: none;
+}​

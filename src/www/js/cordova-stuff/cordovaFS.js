@@ -218,12 +218,19 @@ var cordovaFS = {
 
         var fileTransfer = new FileTransfer();
         if( progressCallback) {
+            console.log('Registering progress callback');
             fileTransfer.onprogress = function(progressEvent) {
-                if(!progressEvent.lengthComputable || progressEvent.total === 0)
+                if(!progressEvent.lengthComputable || progressEvent.total === 0) {
+                    console.log('No computable length');
                     return;
-                progressCallback(progressEvent.loaded / progressEvent.total);
+                }
+                var percent = (progressEvent.loaded / progressEvent.total) * 100.0;
+                console.log('Calling progress callback (' + percent + '%)');
+                progressCallback(percent);
             };
         }
+        else
+            console.log('No callback progress');
 
         fileTransfer.download(url, dstPath, 
             function(zipFileEntry) { 

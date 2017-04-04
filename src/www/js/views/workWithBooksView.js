@@ -58,4 +58,5 @@ var workWithBooksView = {
     updateProgress: function( percent ) {
         $('#wwbooks-progress').css('width', percent + '%');
     }
+
 };
