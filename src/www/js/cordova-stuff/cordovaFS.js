@@ -211,11 +211,20 @@ var cordovaFS = {
         return dfd.promise();
     },
 
-    downloadAsync: function(url, dstPath) {
+    downloadAsync: function(url, dstPath, progressCallback) {
         
         var dfd = jQuery.Deferred();
         console.log('Downloading ' + url + ' to ' + dstPath);
+
         var fileTransfer = new FileTransfer();
+        if( progressCallback) {
+            fileTransfer.onprogress = function(progressEvent) {
+                if(!progressEvent.lengthComputable || progressEvent.total === 0)
+                    return;
+                progressCallback(progressEvent.loaded / progressEvent.total);
+            };
+        }
+
         fileTransfer.download(url, dstPath, 
             function(zipFileEntry) { 
                 // Download ok

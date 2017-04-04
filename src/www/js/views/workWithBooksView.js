@@ -48,5 +48,14 @@ var workWithBooksView = {
 
     logEvent: function(msg) {
         $('#wwbooks-log').append('<p>' + msg + '</p>');
+    },
+
+    setCurrentWork: function(msg) {
+        $('#wwbooks-current').text(msg);
+        workWithBooksView.updateProgress(0);
+    },
+
+    updateProgress: function( percent ) {
+        $('#wwbooks-progress').css('width', percent + '%');
     }
 };

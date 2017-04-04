@@ -72,9 +72,13 @@ var workWithBooksController = {
                 // Remove books, chaining promises
                 toRemove.forEach(function(book) {
                     // Chain always the next promise, it was failed the previous or not
+                    var work = function() {
+                        workWithBooksView.setCurrentWork('Removing book ' + book.bookNumber);
+                        return book.deleteAsync(booksDir);
+                    };
                     changesPromise = changesPromise.then(
-                        function() { return book.deleteAsync(booksDir); } , 
-                        function() { return book.deleteAsync(booksDir); }
+                        function() { return work(); } , 
+                        function() { return work(); }
                     )
                     .done(function() { 
                         workWithBooksView.logEvent('Book ' + book.bookNumber + ' removed');
@@ -87,13 +91,16 @@ var workWithBooksController = {
 
                 // Download books, chaining promises
                 toDownload.forEach(function(book) {
-                    /*book.downloadAsync(booksDir)
-                        .done(function() { console.log('Book downloaded'); })
-                        .fail(function(reason) { console.log('Error downloading book: ' + reason); });*/
                     // Chain always the next promise, it was failed the previous or not
+                    var work = function() {
+                        workWithBooksView.setCurrentWork('Downloading book ' + book.bookNumber);
+                        return book.downloadAsync(booksDir, function(percent) {
+                            workWithBooksView.updateProgress(percent);
+                        });
+                    };
                     changesPromise = changesPromise.then(
-                        function() { return book.downloadAsync(booksDir); } , 
-                        function() { return book.downloadAsync(booksDir); }
+                        function() { return work(); } , 
+                        function() { return work(); }
                     )
                     .done(function() { 
                         workWithBooksView.logEvent('Book ' + book.bookNumber + ' downloaded');

@@ -25,7 +25,11 @@ function Book(number, language) {
  * @return The base URL 
  */
 Book.getBaseUrl = function() {
-    return 'data/projectAon/';
+    if( cordovaApp.isRunningApp() )
+        // Return the local downloaded books directory
+        return BookDownloadState.BOOKS_PATH + '/';
+    else
+        return 'data/projectAon/';
 };
 
 /** Do replacements on original XML to have a valid standalone XML.
@@ -94,8 +98,11 @@ Book.fixXml = function(xmlText) {
 Book.prototype.downloadBookXml = function() {
 
     var self = this;
+    var bookXmlUrl = this.getBookXmlURL();
+    console.log( 'Downloading book XML URL: ' + bookXmlUrl);
+
     return $.ajax({
-        url: this.getBookXmlURL(),
+        url: bookXmlUrl,
         dataType: "text"
     })
     .done(function(xml) {
@@ -146,8 +153,10 @@ Book.prototype.getIllustrationURL = function(fileName, mechanics) {
         illDirectory = 'ill_' + this.language;
     else
         illDirectory = 'ill_en';
-    return Book.getBaseUrl() + this.bookNumber + '/' + illDirectory + '/' + 
+    var illUrl = Book.getBaseUrl() + this.bookNumber + '/' + illDirectory + '/' + 
         fileName;
+    console.log('Image URL: ' + illUrl);
+    return illUrl;
 };
 
 /**
