@@ -61,11 +61,18 @@ var workWithBooksView = {
     },
 
     displayModal: function(show) {
-        if( show )
+        if( show ) {
             // Clear the log
             $('#wwbooks-log').empty();
+            // Disable close
+            $('#wwbooks-closemodal').prop( 'disabled' , true );
+        }
 
         $('#wwbooks-modal').modal( show ? 'show' : 'hide' );
+    },
+
+    enableCloseModal: function() {
+        $('#wwbooks-closemodal').prop( 'disabled' , false );
     },
 
     logEvent: function(msg) {

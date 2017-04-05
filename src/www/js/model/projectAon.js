@@ -11,12 +11,17 @@ var projectAon = {
 
         // Book 1:
         {
+            // English title
             title_en: 'Flight from the Dark',
+            // English book code
             code_en: '01fftd',
 
+            // Spanish title
             title_es: 'Huida de la oscuridad',
+            // Spanish code
             code_es: '01hdlo',
 
+            // Illustrators folders to download
             illustrators: [ 'chalk' ]
         },
 

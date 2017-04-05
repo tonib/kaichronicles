@@ -33,10 +33,9 @@
 
 <!-- 
     Modal to delete / download books. IMPORTANT: DO NOT FADE THIS MODAL (async issues... oh javascript)
-    TODO: Translate
   -->
-<div class="modal" id="wwbooks-modal" tabindex="-1" role="dialog" 
-    aria-labelledby="wwbooks-title">
+<div class="modal nobackbutton" id="wwbooks-modal" tabindex="-1" role="dialog" 
+    aria-labelledby="wwbooks-title" data-backdrop="static" >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
 
@@ -58,7 +57,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" 
+                <button type="button button-default" class="btn btn-primary" data-dismiss="modal" 
                     data-translation="close" id="wwbooks-closemodal" >
                     Close
                 </button>

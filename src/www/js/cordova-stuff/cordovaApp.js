@@ -18,7 +18,8 @@ var cordovaApp = {
 
     onBackButton: function() {
         console.log('onBackButton');
-        if( $('.modal.in').length > 0 )
+        // If a modal has class "nobackbutton", do not allow to close it with the back button
+        if( $('.modal.in').length > 0 && !$('.modal').hasClass('nobackbutton') )
             // It there is any bootstrap modal open, close it
             $('.modal').modal('hide');
         else if( template.isMenuExpanded() )

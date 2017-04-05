@@ -155,6 +155,11 @@ var routing = {
             cordovaApp.closeApp();
             return;
         }
+        
+        if( backController == 'DONOTHING' )
+            // ok:
+            return;
+
         if( !backController ){
             window.history.back();
             return;

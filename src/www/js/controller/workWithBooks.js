@@ -7,6 +7,9 @@ var workWithBooksController = {
     /** The book states */
     books: [],
 
+    /** Are we currently downloading / deleting books? */
+    changingBooks: false,
+
     /**
      * Render the work with books
      */
@@ -38,7 +41,7 @@ var workWithBooksController = {
         .then( function(booksDir) {
             workWithBooksController.books.forEach( function(book) {
                 book.checkDownloadState(booksDir, function() {
-                    console.log( 'Book ' + book.bookNumber + ' downloaded?: ' + book.downloaded );
+                    //console.log( 'Book ' + book.bookNumber + ' downloaded?: ' + book.downloaded );
                     if( book.downloaded )
                         workWithBooksView.markBookAsDownloaded( book.bookNumber );
                 });
@@ -70,6 +73,7 @@ var workWithBooksController = {
             .then( function(booksDir) {
 
                 var allOk = true;
+                workWithBooksController.changingBooks = true;
 
                 workWithBooksView.displayModal(true);
 
@@ -128,9 +132,15 @@ var workWithBooksController = {
                 var updateUI = function() {
                     // Refresh the books list
                     workWithBooksController.updateBooksList();
-                    // If all was ok, close the modal
+                    
                     if( allOk )
+                        // If all was ok, close the modal
                         workWithBooksView.displayModal(false);
+                    else
+                        // Enable the close button
+                        workWithBooksView.enableCloseModal();
+
+                    workWithBooksController.changingBooks = false;
                 };
                 changesPromise.then(
                     function(){ updateUI(); },
@@ -143,6 +153,12 @@ var workWithBooksController = {
     },
 
     /** Return page */
-    getBackController: function() { return 'mainMenu'; }
+    getBackController: function() { 
+        if( workWithBooksController.changingBooks )
+            // Do not allow to cancel downloads (unsupported)
+            return 'DONOTHING';
+        else
+            return 'mainMenu'; 
+    }
     
 };
