@@ -15,18 +15,23 @@ var workWithBooksController = {
         template.showStatistics(false);
 
         views.loadView('workWithBooks.html')
-        .then(function() { workWithBooksController.setupList(); });
+        .then(function() { 
+            // Setup UI
+            workWithBooksView.setup();
+            // Update the books list
+            workWithBooksController.updateBooksList(); 
+        });
     },
 
-    setupList: function() {
+    updateBooksList: function() {
 
         // Initialize books
         workWithBooksController.books = [];
         for( var i=1; i<=projectAon.supportedBooks.length; i++)
             workWithBooksController.books.push( new BookDownloadState(i) );
-        
-        // Setup UI
-        workWithBooksView.setup(workWithBooksController.books);
+
+        // Recreate the books list
+        workWithBooksView.updateBooksList( workWithBooksController.books );
 
         // Check books state
         BookDownloadState.getBooksDirectoryAsync()
@@ -35,13 +40,14 @@ var workWithBooksController = {
                 book.checkDownloadState(booksDir, function() {
                     console.log( 'Book ' + book.bookNumber + ' downloaded?: ' + book.downloaded );
                     if( book.downloaded )
-                        workWithBooksView.setBookChecked( book.bookNumber );
+                        workWithBooksView.markBookAsDownloaded( book.bookNumber );
                 });
             });
         });
     },
 
-    updateBooks: function(selectedBookNumbers) {
+    downloadBooks: function(selectedBookNumbers) {
+
         // Check differences:
         var toRemove = [], toDownload = [];
         for( var i=0; i<workWithBooksController.books.length; i++) {
@@ -53,12 +59,11 @@ var workWithBooksController = {
                 toDownload.push( book );
         }
 
-        // TODO: Translate
         if( toRemove.length === 0 && toDownload.length === 0 ) {
-            alert( 'No changes selected' );
+            alert( translations.text( 'noChangesSelected' ) );
         }
         else {
-            if( !confirm( 'Are you sure you want to do the selected changes?' ) )
+            if( !confirm( translations.text('confirmChanges') ) )
                 return;
 
             BookDownloadState.getBooksDirectoryAsync()
@@ -75,7 +80,8 @@ var workWithBooksController = {
                 toRemove.forEach(function(book) {
                     // Chain always the next promise, it was failed the previous or not
                     var work = function() {
-                        workWithBooksView.setCurrentWork('Removing book ' + book.bookNumber);
+                        workWithBooksView.setCurrentWork( 
+                            translations.text( 'deletingBook' , [book.bookNumber] ) ) ;
                         return book.deleteAsync(booksDir);
                     };
                     changesPromise = changesPromise.then(
@@ -83,11 +89,12 @@ var workWithBooksController = {
                         function() { return work(); }
                     )
                     .done(function() { 
-                        workWithBooksView.logEvent('Book ' + book.bookNumber + ' removed');
+                        workWithBooksView.logEvent( 
+                            translations.text( 'bookDeleted' , [book.bookNumber] ) );
                     })
                     .fail(function(reason) { 
-                        workWithBooksView.logEvent('Book ' + book.bookNumber + ' deletion failed: ' + 
-                            reason );
+                        workWithBooksView.logEvent(
+                            translations.text( 'deletionFailed' , [ book.bookNumber , reason ] ) );
                         allOk = false;
                     });
                 });
@@ -96,7 +103,8 @@ var workWithBooksController = {
                 toDownload.forEach(function(book) {
                     // Chain always the next promise, it was failed the previous or not
                     var work = function() {
-                        workWithBooksView.setCurrentWork('Downloading book ' + book.bookNumber);
+                        workWithBooksView.setCurrentWork(
+                            translations.text( 'downloadingBook' , [book.bookNumber] ) );
                         return book.downloadAsync(booksDir, function(percent) {
                             workWithBooksView.updateProgress(percent);
                         });
@@ -106,22 +114,28 @@ var workWithBooksController = {
                         function() { return work(); }
                     )
                     .done(function() { 
-                        workWithBooksView.logEvent('Book ' + book.bookNumber + ' downloaded');
+                        workWithBooksView.logEvent( 
+                            translations.text( 'bookDownloaded' , [book.bookNumber] ) );
                     })
                     .fail(function(reason) { 
-                        workWithBooksView.logEvent('Book ' + book.bookNumber + ' download failed: ' + 
-                            reason );
+                        workWithBooksView.logEvent( 
+                            translations.text( 'downloadFailed' , [ book.bookNumber , reason ] ) );
                         allOk = false;
                     });
                 });
 
-                changesPromise.then(function(){
-                    // When the actions chain ends, refresh the books list
-                    workWithBooksController.setupList();
+                // When the actions chain ends, update the UI
+                var updateUI = function() {
+                    // Refresh the books list
+                    workWithBooksController.updateBooksList();
                     // If all was ok, close the modal
                     if( allOk )
                         workWithBooksView.displayModal(false);
-                });
+                };
+                changesPromise.then(
+                    function(){ updateUI(); },
+                    function(){ updateUI(); }
+                );
 
             })
             .fail(function(reason){ alert(reason); });

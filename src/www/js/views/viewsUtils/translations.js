@@ -190,8 +190,16 @@ var translations = {
         // Download books
         //////////////////////////////////////
 
-        'download': 'Descargar',
-        'downloadRemoveBooks' : 'Descargar / borrar libros',
+        'applyChanges' : 'Aplicar cambios',
+        'selectBooks' : 'Selecciona los libros que quieres descargar del <a href="https://www.projectaon.org">Proyecto Aon</a>.',
+        'noChangesSelected' : 'No se han seleccionado cambios',
+        'confirmChanges' : '¿Seguro que quieres hacer los cambios seleccionados?',
+        'deletingBook' : 'Borrando libro {0}',
+        'bookDeleted' : 'Libro {0} borrado',
+        'deletionFailed' : 'Borrado del libro {0} fallido: {1}',
+        'downloadingBook' : 'Descargando libro {0}',
+        'bookDownloaded' : 'Libro {0} descargado',
+        'downloadFailed' : 'Descarga del libro {0} fallida: {1}',
 
         //////////////////////////////////////
         // Others
@@ -316,6 +324,19 @@ var translations = {
         'CS' : 'C.S.',
         'E' : 'E.',
         'map' : 'Map',
+
+        //////////////////////////////////////
+        // Download books
+        //////////////////////////////////////
+
+        'noChangesSelected' : 'No changes selected',
+        'confirmChanges' : 'Are you sure you want to do the selected changes?',
+        'deletingBook' : 'Deleting book {0}',
+        'bookDeleted' : 'Book {0} deleted',
+        'deletionFailed' : 'Book {0} deletion failed: {1}',
+        'downloadingBook' : 'Downloading book {0}',
+        'bookDownloaded' : 'Book {0} downloaded',
+        'downloadFailed' : 'Book {0} download failed: {1}',
 
         //////////////////////////////////////
         // Others

@@ -210,8 +210,8 @@ div.signpost {
     color: #fff;
 }
 
-/* Allow to break large links */
-a.breakable {
+/* Allow to break words (and URLs!) */
+.breakable {
     word-wrap: break-word;
 }
 

@@ -1,9 +1,21 @@
 
 <h2 data-translation="downloadBooks">Download books</h2>
 
-<p>
+<p data-translation="selectBooks">
     Select the books you want to download from <a href="https://www.projectaon.org">Project Aon</a>.
 </p>
+
+<table class="table table-striped" id="wwbooks-list">
+    <thead>
+        <tr>
+            <th data-translation="book" style="width:100%">Book</th>
+            <th class="center"><input type="checkbox" id="wwbooks-all"></th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
 <div class="checkbox">
     <label>
         <input type="checkbox" id="wwbooks-license" checked="checked"> 
@@ -13,28 +25,17 @@
     </label>
     <a href="#projectAonLicense" data-translation="licenseText">License text</a>
 </div>
-<table class="table table-striped" id="wwbooks-list">
-    <thead>
-        <tr>
-            <th data-translation="book">Book</th>
-            <th data-translation="download" class="hidden-xs">Download</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr><td>Book 1</td></tr>
-        <tr><td>Book 2</td></tr>
-    </tbody>
-</table>
 
-<button type="submit" class="btn btn-primary" data-translation="downloadRemoveBooks" id="wwbooks-update">
-    Download / remove books
+<button type="submit" class="btn btn-primary" data-translation="applyChanges" 
+    id="wwbooks-update">
+    Apply changes
 </button>
 
 <!-- 
-    Modal to delete / download books 
+    Modal to delete / download books. IMPORTANT: DO NOT FADE THIS MODAL (async issues... oh javascript)
     TODO: Translate
   -->
-<div class="modal fade" id="wwbooks-modal" tabindex="-1" role="dialog" 
+<div class="modal" id="wwbooks-modal" tabindex="-1" role="dialog" 
     aria-labelledby="wwbooks-title">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -50,16 +51,15 @@
                         <div class="progress-bar" role="progressbar" aria-valuenow="60" 
                             aria-valuemin="0" aria-valuemax="100" style="width: 0%;"
                             id="wwbooks-progress">
-                            <span class="sr-only">60% Complete</span>
                         </div>
                     </div>
                 </div>
-                <p id="wwbooks-log"></p>
+                <p id="wwbooks-log" class="breakable"></p>
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" 
-                    data-translation="close">
+                    data-translation="close" id="wwbooks-closemodal" >
                     Close
                 </button>
             </div>
