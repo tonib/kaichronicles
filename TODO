@@ -1,10 +1,14 @@
 - ERROR: Equipment section on each book. Allow to pick only the maximum number of objects
 - ERROR: Saved games page: No message displayed if there is not any saved game...
 - Upload to google play:
-  * Download and handle books
-  * Images now referenced from books should be external
-  * Progress (show current work)
-  * Allow to abort
+  * Add info about icons license
+  * Combat table images should be included on PA books data
+  * Continue game: Check for deleted books
+  * Main menu: If there is no any downloaded book, redirect to the downloads page
+  * New game: Show only downloaded books
+  * Downloads page: Check if there is internet connection
+  * Downloads page: Show books sizes
+  * Allow to abort downloads
 - Money handling: 
   * Allow to drop an arbitrary amount of money, not just a single coin
   * Support for money as object on section
@@ -51,8 +55,11 @@
 
 Reminders:
 
-Unzip:
-https://github.com/MobileChromeApps/cordova-plugin-zip
+* Game icons
+  web: http://game-icons.net/
+  license: https://creativecommons.org/licenses/by/3.0/
+  Authors: Delapouite (http://delapouite.com/), Lorc (http://lorcblog.blogspot.com/),
+    Willdabeast (http://wjbstories.blogspot.com/)
 
 * DON'T BE RESTRICTIVE WITH CHOICES !!!!
 
