@@ -80,7 +80,7 @@ var workWithBooksView = {
     },
 
     logEvent: function(msg) {
-        $('#wwbooks-log').append(msg + '\n');
+        $('#wwbooks-log').append(msg + '\n\n');
     },
 
     setCurrentWork: function(msg) {

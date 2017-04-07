@@ -163,3 +163,21 @@ BookDownloadState.getDownloadedBooksAsync = function(booksToCheck) {
     }
 
 };
+
+BookDownloadState.isBookDownloadedAsync = function(bookNumber) {
+    if( cordovaApp.isRunningApp() ) {
+        // Cordova app: Check if the book was downloaded
+        return BookDownloadState.getBooksDirectoryAsync()
+        .then( function(booksDir) {
+            var book = new BookDownloadState(bookNumber);
+            return book.checkDownloadStateAsync(booksDir);
+        })
+        .then(function(book) {
+            return jQuery.Deferred().resolve( book.downloaded ).promise();
+        });
+    }
+    else {
+        // Web: Yes, it's downloaded (no apply)
+        return jQuery.Deferred().resolve( true ).promise();
+    }
+};

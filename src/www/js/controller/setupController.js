@@ -33,7 +33,17 @@ var setupController = {
         }
         template.translateMainMenu();
 
-        views.loadView('setup.html')
+        // Check if the book to setup is downloaded
+        BookDownloadState.isBookDownloadedAsync(state.book.bookNumber)
+        .then(function(bookIsDownloaded) {
+            if(!bookIsDownloaded) {
+                alert('Book ' + state.book.bookNumber + ' is not downloaded!' );
+                routing.redirect('mainMenu');
+                return jQuery.Deferred().reject().promise();
+            }
+            else
+                return views.loadView('setup.html'); 
+        })
         .then(function() { setupController.runDownloads(); });
           
     },

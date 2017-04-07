@@ -2,7 +2,7 @@
 - ERROR: Saved games page: No message displayed if there is not any saved game...
 - Check all "==="
 - Upload to google play:
-  * Continue game: Check for deleted books
+  * Continue game: Check for deleted books (CLEAR STATE CACHE WHEN BOOKS ARE REMOVED!!!)
   * Downloads page: Check if there is internet connection
   * Downloads page: Show books sizes
   * Allow to abort downloads
