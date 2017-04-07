@@ -80,12 +80,16 @@ actionChartController.increaseMoney(-10)
 
 MIT. This application uses the following third-party code:
 
+* The HTML rendering, books XML processing and Project Aon license HTML contains code
+  taken from [Lone Wolf Adventures](https://lonewolfadventures.projectaon.org/), 
+  by Liquid State Limited
+* The Lone Wolf logo and splashes are taken directly, or adapted, from the 
+  [Spanish Project Aon](https://projectaon.org/es)
+* Button icons are create by [Delapouite](http://delapouite.com/), 
+  [Lorc](http://lorcblog.blogspot.com/) and [Willdabeast](http://wjbstories.blogspot.com/),
+  and distributed from [http://game-icons.net/](http://game-icons.net/) 
+  ([CC License](https://creativecommons.org/licenses/by/3.0/))
 * [Bootstrap](http://getbootstrap.com/) (MIT)
 * [Toastr](https://github.com/CodeSeven/toastr) (MIT)
 * [FileSaver.js](https://github.com/eligrey/FileSaver.js/) (MIT)
 * [jQuery](https://jquery.com/) (jQuery license)
-* Logos, icons and splashes are taken directly, or adapted, from the Spanish Project Aon 
-  (https://projectaon.org/es)
-* The HTML rendering, books XML processing and Project Aon license HTML contains code
-  taken from [Lone Wolf Adventures](https://lonewolfadventures.projectaon.org/), 
-  by Liquid State Limited
