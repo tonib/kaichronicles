@@ -29,24 +29,18 @@ var workWithBooksController = {
     updateBooksList: function() {
 
         // Initialize books
-        workWithBooksController.books = [];
-        for( var i=1; i<=projectAon.supportedBooks.length; i++)
-            workWithBooksController.books.push( new BookDownloadState(i) );
+        workWithBooksController.books = BookDownloadState.getAllBooks(false);
 
         // Recreate the books list
         workWithBooksView.updateBooksList( workWithBooksController.books );
 
         // Check books state
-        BookDownloadState.getBooksDirectoryAsync()
-        .then( function(booksDir) {
-            workWithBooksController.books.forEach( function(book) {
-                book.checkDownloadState(booksDir, function() {
-                    //console.log( 'Book ' + book.bookNumber + ' downloaded?: ' + book.downloaded );
-                    if( book.downloaded )
-                        workWithBooksView.markBookAsDownloaded( book.bookNumber );
-                });
-            });
-        });
+        BookDownloadState.getDownloadedBooksAsync( workWithBooksController.books )
+        .then( function(downloadedBooks) {
+            for(var i=0; i<downloadedBooks.length; i++)
+                workWithBooksView.markBookAsDownloaded( downloadedBooks[i].bookNumber );
+        })
+        .fail(function(reason) { alert(reason); });
     },
 
     downloadBooks: function(selectedBookNumbers) {

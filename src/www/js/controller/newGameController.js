@@ -9,12 +9,25 @@ var newGameController = {
      */
     index: function() {
 
-        template.setNavTitle( translations.text('kaiChronicles') , '#mainMenu', true);
-        template.showStatistics(false);
+        // Get available books
+        var books = [];
+        BookDownloadState.getDownloadedBooksAsync()
+        .then(function(downloadedBooks) {
 
-        views.loadView('newGame.html')
-        .then(function() {
-            newGameView.setup();
+            if( downloadedBooks.length === 0 ) {
+                // No books downloaded:
+                alert( translations.text('noDownloadedBooks') );
+                routing.redirect('mainMenu');
+                return;
+            }
+
+            template.setNavTitle( translations.text('kaiChronicles') , '#mainMenu', true);
+            template.showStatistics(false);
+
+            views.loadView('newGame.html')
+            .then(function() {
+                newGameView.setup(downloadedBooks);
+            });
         });
     },
 

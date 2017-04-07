@@ -162,6 +162,7 @@ var translations = {
         'youMustAgree' : 'Has de estar de acuerdo con la licencia para poder continuar',
         'licenseText' : 'Texto de la licencia',
         'startGame' : 'Iniciar juego',
+        'noDownloadedBooks' : 'No se ha descargado ningún libro. Ve a "Descargar libros" en el menú principal',
 
         //////////////////////////////////////
         // Settings
@@ -306,6 +307,7 @@ var translations = {
         //////////////////////////////////////
 
         'youMustAgree' : 'You must agree the licence to continue',
+        'noDownloadedBooks' : 'There are no downloaded books. Go to "Download books" on the main menu',
 
         //////////////////////////////////////
         // Settings

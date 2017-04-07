@@ -71,16 +71,6 @@ var projectAon = {
     ],
 
     /**
-     * Returns an array with the book titles on a given language code
-     */
-    getBookTitles: function(language) {
-        var titles = [];
-        for( var i=1; i<=projectAon.supportedBooks.length; i++)
-            titles.push( projectAon.getBookTitle(i, language) );
-        return titles;
-    },
-
-    /**
      * Returns the title of a book on a given language
      */
     getBookTitle: function(bookNumber, language) {

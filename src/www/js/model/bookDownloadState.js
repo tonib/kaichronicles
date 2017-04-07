@@ -21,14 +21,22 @@ BookDownloadState.BOOKS_DIR = 'books';
 /**
  * Check if the book is already downloaded
  * @param {DirectoryEntry} booksDir The books directory root
- * @param {function} callback Function to run when the check is finished
  */
-BookDownloadState.prototype.checkDownloadState = function(booksDir, callback) {
+BookDownloadState.prototype.checkDownloadStateAsync = function(booksDir) {
+    var dfd = jQuery.Deferred();
     var self = this;
-    booksDir.getDirectory( this.bookNumber.toString() , {} , 
-        function() { self.downloaded = true; callback(); },
-        function() { self.downloaded = false; callback(); }
-    );
+    cordovaFS.getDirectoryAsync( booksDir , this.bookNumber.toString() , {} )
+    .done(function() { 
+        // Book directory found
+        self.downloaded = true; 
+        dfd.resolve(self);
+    })
+    .fail(function() {
+        // Book directory not found
+        self.downloaded = false; 
+        dfd.resolve(self);
+    });
+    return dfd.promise();
 };
 
 BookDownloadState.prototype.deleteAsync = function( booksDir ) {
@@ -98,3 +106,60 @@ BookDownloadState.resolveBooksDirectoryAsync = function() {
         });
 };
 
+/**
+ * Get all available books
+ * @param {bool} markAsDownloaded True if the books should be marked as downloaded
+ * @return {Array<BookDownloadState>} All books state
+ */
+BookDownloadState.getAllBooks = function(markAsDownloaded) {
+    var books = [];
+    for( var i=1; i<=projectAon.supportedBooks.length; i++) {
+        var book = new BookDownloadState(i);
+        if( markAsDownloaded )
+            book.downloaded = true;
+        books.push( book );
+    }
+    return books;
+};
+
+/**
+ * Get the downloaded books
+ * @return {Promise} Promise with an array of BookDownloadState with the downloaded books
+ */
+BookDownloadState.getDownloadedBooksAsync = function(booksToCheck) {
+
+    if( !booksToCheck )
+        booksToCheck = BookDownloadState.getAllBooks();
+
+    if( cordovaApp.isRunningApp() ) {
+        // Cordova app: Check downloaded books
+        return BookDownloadState.getBooksDirectoryAsync()
+        .then( function(booksDir) {
+            var promises = [];
+            // Start each book check
+            booksToCheck.forEach( function(book) {
+                promises.push( book.checkDownloadStateAsync(booksDir) );
+            });
+
+            // Wait for all checks
+            return $.when.apply($, promises);
+        })
+        .then(function() {
+            // Return downloaded books
+            var downloadedBooks = [];
+            for(var i=0; i<booksToCheck.length; i++) {
+                if( booksToCheck[i].downloaded )
+                    downloadedBooks.push( booksToCheck[i] );
+            }
+
+            return jQuery.Deferred().resolve( downloadedBooks ).promise();
+        });
+    }
+    else {
+        // Web: Return all books as downloaded
+        return jQuery.Deferred()
+            .resolve( BookDownloadState.getAllBooks(true) )
+            .promise();
+    }
+
+};

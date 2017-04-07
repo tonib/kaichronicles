@@ -4,18 +4,17 @@
  */
 var newGameView = {
 
-    setup: function() {
+    setup: function(downloadedBooks) {
 
         // Set current language
         $('#newgame-language').val( state.language );
 
         // Add supported books
         var html = '';
-        var titles = projectAon.getBookTitles( state.language );
-        for( var i=0; i<titles.length; i++) {
-            var bookIndex = i + 1;
-            html += '<option value="' + bookIndex + '" >' + bookIndex + '. ' + 
-                titles[i] + '</option>';
+        for( var i=0; i<downloadedBooks.length; i++) {
+            html += '<option value="' + downloadedBooks[i].bookNumber + '" >' + 
+                downloadedBooks[i].bookNumber + '. ' + 
+                downloadedBooks[i].title + '</option>';
         }
         $('#newgame-book').html( html );
 
@@ -34,6 +33,10 @@ var newGameView = {
         $('#newgame-book').change(function() {
             newGameController.selectedBookChanged( $('#newgame-book').val() );
         });
+
+        // Set the first book as selected:
+        if( downloadedBooks.length > 0 )
+            newGameController.selectedBookChanged( downloadedBooks[0].bookNumber );
     },
 
     setCoverImage: function(url) {
