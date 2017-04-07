@@ -39,6 +39,10 @@ var workWithBooksView = {
 
     },
 
+    setSelectAllUnchecked: function() {
+        $('#wwbooks-all').removeAttr('checked');
+    },
+
     updateBooksList: function(booksState) {
         var $tableBody = $('#wwbooks-list > tbody');
         $tableBody.empty();
@@ -76,7 +80,7 @@ var workWithBooksView = {
     },
 
     logEvent: function(msg) {
-        $('#wwbooks-log').append('<p>' + msg + '</p>');
+        $('#wwbooks-log').append(msg + '\n');
     },
 
     setCurrentWork: function(msg) {

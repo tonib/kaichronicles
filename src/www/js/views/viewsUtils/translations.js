@@ -201,6 +201,7 @@ var translations = {
         'downloadingBook' : 'Descargando libro {0}',
         'bookDownloaded' : 'Libro {0} descargado',
         'downloadFailed' : 'Descarga del libro {0} fallida: {1}',
+        'processFinishedErrors' : '¡Proceso finalizado con errores!',
 
         //////////////////////////////////////
         // Others
@@ -339,6 +340,7 @@ var translations = {
         'downloadingBook' : 'Downloading book {0}',
         'bookDownloaded' : 'Book {0} downloaded',
         'downloadFailed' : 'Book {0} download failed: {1}',
+        'processFinishedErrors' : 'Process finished with errors!',
 
         //////////////////////////////////////
         // Others

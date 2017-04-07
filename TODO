@@ -3,8 +3,6 @@
 - Check all "==="
 - Upload to google play:
   * Continue game: Check for deleted books
-  * Main menu: If there is no any downloaded book, redirect to the downloads page
-  * New game: Show only downloaded books
   * Downloads page: Check if there is internet connection
   * Downloads page: Show books sizes
   * Allow to abort downloads

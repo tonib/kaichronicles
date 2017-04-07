@@ -28,6 +28,9 @@ var workWithBooksController = {
 
     updateBooksList: function() {
 
+        // Uncheck the "select all" check
+        workWithBooksView.setSelectAllUnchecked();
+
         // Initialize books
         workWithBooksController.books = BookDownloadState.getAllBooks(false);
 
@@ -130,9 +133,14 @@ var workWithBooksController = {
                     if( allOk )
                         // If all was ok, close the modal
                         workWithBooksView.displayModal(false);
-                    else
+                    else {
                         // Enable the close button
                         workWithBooksView.enableCloseModal();
+                        // Show info:
+                        workWithBooksView.setCurrentWork( 
+                            translations.text( 'processFinishedErrors' ) );
+                        workWithBooksView.updateProgress(100);
+                    }
 
                     workWithBooksController.changingBooks = false;
                 };
