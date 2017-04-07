@@ -99,16 +99,17 @@ BookData.prototype.downloadBookData = function() {
         this.downloadIllustrations('en' , author);
         this.downloadIllustrations('es' , author);
     });
+    this.downloadCombatTablesImages('en');
+    this.downloadCombatTablesImages('es');
 }
 
-BookData.downloadExtraImages = function( imagesUrlsTable ) {
-    fs.mkdirSync( BookData.TARGET_ROOT + '/illExtra' );
-    for (var url in imagesUrlsTable) {
-        var source = BookData.SVN_ROOT + '/' + url;
-        var target = BookData.TARGET_ROOT + '/illExtra/' + imagesUrlsTable[url];
-        var svnParams = [ '--force' , 'export' , source , target];
-        BookData.runSvnCommand( svnParams );
-    }
+BookData.prototype.downloadCombatTablesImages = function(language) {
+    var sourceSvnDir = this.getSvnIllustrationsDir(language, 'blake');
+    var targetDir = this.getBookDir() + '/ill_' + language;
+    BookData.runSvnCommand( [ 'export' , sourceSvnDir + '/crtneg.png' , 
+        targetDir + '/crtneg.png' ] );
+    BookData.runSvnCommand( [ 'export' , sourceSvnDir + '/crtpos.png' , 
+        targetDir + '/crtpos.png' ] );
 }
 
 BookData.runSvnCommand = function( params ) {
@@ -124,21 +125,4 @@ fs.mkdirSync( BookData.TARGET_ROOT );
 for( var i=1; i <= projectAon.supportedBooks.length; i++ )
     new BookData(i).downloadBookData();
 
-// Additional images:
-// TODO: en/png/lw/05sots/ill/chalk/small6.png is already on a supported book
-// TODO: Do not duplicate the image
-BookData.downloadExtraImages({
-
-    // Menus images
-    'en/png/lw/05sots/ill/chalk/small6.png' : 'book.png' ,
-    'en/png/lw/07cd/ill/chalk/small5.png' : 'door.png' ,
-
-    // Spanish combat table results
-    'es/png/ls/01hdlo/ill/blake/crtneg.png' : 'combattable_es_negative.png',
-    'es/png/ls/01hdlo/ill/blake/crtpos.png' : 'combattable_es_positive.png',
-
-    // English combat table results
-    'en/png/lw/01fftd/ill/blake/crtneg.png' : 'combattable_en_negative.png',
-    'en/png/lw/01fftd/ill/blake/crtpos.png' : 'combattable_en_positive.png',
-});
 

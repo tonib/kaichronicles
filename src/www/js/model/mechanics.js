@@ -128,6 +128,10 @@ Mechanics.getRuleSelector = function(rule) {
  */
 Mechanics.prototype.imageIsTranslated = function(fileName) {
 
+    if( fileName == 'crtneg.png' || fileName == 'crtpos.png' )
+        // Combat tables
+        return true;
+
     return $(this.mechanicsXml)
         .find('translated-images > image:contains("' + fileName + '")')
         .length > 0;

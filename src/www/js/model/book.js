@@ -155,7 +155,7 @@ Book.prototype.getIllustrationURL = function(fileName, mechanics) {
         illDirectory = 'ill_en';
     var illUrl = Book.getBaseUrl() + this.bookNumber + '/' + illDirectory + '/' + 
         fileName;
-    console.log('Image URL: ' + illUrl);
+    //console.log('Image URL: ' + illUrl);
     return illUrl;
 };
 
@@ -284,10 +284,9 @@ Book.prototype.getCoverURL = function() {
 /**
  * Return an array of 2 positions with the combat tables images
  */
-Book.prototype.getCombatTablesImagesUrls = function() {
+Book.prototype.getCombatTablesImagesUrls = function(mechanics) {
     var images = [];
-    var base = Book.getBaseUrl();
-    images.push( base + 'illExtra/combattable_' + this.language + '_positive.png' );
-    images.push( base + 'illExtra/combattable_' + this.language + '_negative.png' );
+    images.push( this.getIllustrationURL( 'crtpos.png', mechanics) );
+    images.push( this.getIllustrationURL( 'crtneg.png', mechanics ) );
     return images;
 };
