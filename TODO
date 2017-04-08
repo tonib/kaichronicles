@@ -2,7 +2,6 @@
 - ERROR: Saved games page: No message displayed if there is not any saved game...
 - Check all "==="
 - Upload to google play:
-  * Downloads page: Check if there is internet connection
   * Prepare version without PA data
   * Allow to abort downloads
 - Money handling: 

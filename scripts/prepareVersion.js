@@ -75,6 +75,10 @@ function buildAndroidApp() {
     console.log('Updating index.html for Cordova app');
     preprocessIndexPage(true);
 
+    // Delete the project aon data
+    console.log('Deleting Project Aon data');
+    fs.removeSync('dist/src/www/data/projectAon');
+
     // Go to root dir
     process.chdir('dist/src');
 
@@ -85,7 +89,7 @@ function buildAndroidApp() {
         child_process.execFileSync('cordova', ['build', 'android'] , {stdio:[0,1,2]} );
 
         // Copy the apk to the web root
-        // TODO: Sign the apk to upload to the google play
+        // TODO: Sign the apk to upload to the Google Play
         console.log('Copy the generated apk to the web root');
         fs.copySync( 'platforms/android/build/outputs/apk/android-debug.apk' , 
             'www/kai.apk' );
@@ -106,6 +110,10 @@ function prepareDistDirectory() {
     // Update HTML to use the minified js WITHOUT cordova.js
     console.log('Updating index.html for www');
     preprocessIndexPage(false);
+
+    // Copy Project Aon data
+    console.log('Copying Project Aon data');
+    fs.copySync('src/www/data/projectAon', 'dist/src/www/data/projectAon' );
 
     console.log('Prepare www dir');
     fs.renameSync( 'dist/src/www', 'dist/www' );

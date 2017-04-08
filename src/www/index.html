@@ -268,47 +268,56 @@
     <script lang="javascript">
 
         // *************** SETUP ***************
+
+        function kaiChroniclesSetup() {
+          if( window.getUrlParameter('debug') ) {
+              // On debug mode, disable the cache (to always reload the books xml)
+              console.log('Debug mode: cache disabled');
+              $.ajaxSetup({ cache: false });
+          }
+
+          // Configure toast messages
+          toastr.options.positionClass = 'toast-position-lw';
+          toastr.options.onclick = function() { 
+              // Remove all toasts on click one
+              toastr.clear();
+          };
+
+          // First, load the views
+          views.setup()
+            .then(function() {
+                // If we are on the app, resolve where is the books directory
+                return BookDownloadState.resolveBooksDirectoryAsync();
+            })
+            .then( function() {
+                try {
+                  console.log('Real setup started');
+                  // Then do the real application setup
+                  state.setupDefaultLanguage();
+                  cordovaApp.setup();
+                  template.setup();
+                  routing.setup();
+                }
+                catch(e) {
+                  console.log(e);
+                  return jQuery.Deferred().reject(e).promise();
+                }
+            })
+            .fail(function(reason) {
+                if( !reason )
+                  reason = 'Unknown error';
+                template.setErrorMessage(reason.toString());
+            });
+        }
+
         $(function() {
-          
-            if( window.getUrlParameter('debug') ) {
-                // On debug mode, disable the cache (to always reload the books xml)
-                console.log('Debug mode: cache disabled');
-                $.ajaxSetup({ cache: false });
-            }
-
-            // Configure toast messages
-            toastr.options.positionClass = 'toast-position-lw';
-            toastr.options.onclick = function() { 
-                // Remove all toasts on click one
-                toastr.clear();
-            };
-
-            // First, load the views
-            views.setup()
-              .then(function() {
-                  // If we are on the app, resolve where is the books directory
-                  return BookDownloadState.resolveBooksDirectoryAsync();
-              })
-              .then( function() {
-                  try {
-                    console.log('Real setup started');
-                    // Then do the real application setup
-                    state.setupDefaultLanguage();
-                    cordovaApp.setup();
-                    template.setup();
-                    routing.setup();
-                  }
-                  catch(e) {
-                    console.log(e);
-                    return jQuery.Deferred().reject(e).promise();
-                  }
-              })
-              .fail(function(reason) {
-                  if( !reason )
-                    reason = 'Unknown error';
-                  template.setErrorMessage(reason.toString());
-              });
-
+          if( cordovaApp.isRunningApp() ){
+            // Cordova App: Wait for device API libraries to load
+            document.addEventListener("deviceready", kaiChroniclesSetup, false);
+          }
+          else
+            // Web: Start right now
+            kaiChroniclesSetup();
         });
 
     </script>
