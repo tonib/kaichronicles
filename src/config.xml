@@ -7,7 +7,7 @@
     <author email="toni.bennasar@projectaon.org" href="https://www.projectaon.org">
         Project AON
     </author>
-    <content src="index.html" />
+    <content src="index.html?debug=true" />
 
     <!-- Use cordova version 6.1 to avoid bug with icons on 6.4 
          http://stackoverflow.com/questions/40351434/cordova-android-6-4-0-creates-res-folder-top-level-not-inside-platforms-android) 

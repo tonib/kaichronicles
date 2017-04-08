@@ -216,7 +216,8 @@ var translations = {
         'confirmDeleteSave' : '¿Seguro que quiere borrar el juego guardado {0}?',
         'projectAonLicense' : 'Licencia del Proyecto Aon',
         'combatTables' : 'Tablas de Combate',
-        'mainMenu' : 'Menú principal'
+        'mainMenu' : 'Menú principal',
+        'bookNotDownloaded' : 'El libro {0} no está descargado'
     },
 
     /**
@@ -351,7 +352,8 @@ var translations = {
         'confirmDeleteSave' : 'Are you sure you want to delete the save game {0} ?',
         'projectAonLicense' : 'Project Aon license',
         'combatTables' : 'Combat Tables',
-        'mainMenu' : 'Main Menu'
+        'mainMenu' : 'Main Menu',
+        'bookNotDownloaded' : 'Book {0} is not downloaded'
 
     },
 

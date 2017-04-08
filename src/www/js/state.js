@@ -67,15 +67,19 @@ var state = {
         state.sectionStates = new BookSectionStates();
     },
 
+    removeCachedState: function() {
+        state.book = null;
+        state.mechanics = null;
+        state.sectionStates = null;
+        state.actionChart = null;
+    },
+
     /**
      * Reset the current state
      */
     reset: function(deleteBooksHistory) {
 
-        state.book = null;
-        state.mechanics = null;
-        state.sectionStates = null;
-        state.actionChart = null;
+        state.removeCachedState();
 
         // Remove current game state
         localStorage.removeItem( 'state' );

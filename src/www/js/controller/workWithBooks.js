@@ -77,6 +77,10 @@ var workWithBooksController = {
                 // Initial empty resolved promise
                 var changesPromise = jQuery.Deferred().resolve().promise();
 
+                // If we will remove books, clean the cached book: Needed, because
+                // the cached book may be deleted now
+                state.removeCachedState();
+                
                 // Remove books, chaining promises
                 toRemove.forEach(function(book) {
                     // Chain always the next promise, it was failed the previous or not

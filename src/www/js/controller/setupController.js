@@ -37,7 +37,7 @@ var setupController = {
         BookDownloadState.isBookDownloadedAsync(state.book.bookNumber)
         .then(function(bookIsDownloaded) {
             if(!bookIsDownloaded) {
-                alert('Book ' + state.book.bookNumber + ' is not downloaded!' );
+                alert( translations.text('bookNotDownloaded' , [state.book.bookNumber] ) );
                 routing.redirect('mainMenu');
                 return jQuery.Deferred().reject().promise();
             }
