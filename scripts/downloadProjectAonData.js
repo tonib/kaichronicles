@@ -90,6 +90,17 @@ BookData.prototype.downloadCover = function() {
     BookData.runSvnCommand( svnParams );
 }
 
+BookData.prototype.zipBook = function() {
+    // Zip the book
+    // Go to books dir
+    process.chdir(BookData.TARGET_ROOT);
+    var txtBookNumber = this.bookNumber.toString();
+    child_process.execFileSync( 'zip' , ['-r' , txtBookNumber + '.zip' , txtBookNumber] , 
+        {stdio:[0,1,2]} );
+    // Go back
+    process.chdir('../../../..');
+}
+
 BookData.prototype.downloadBookData = function() {
     fs.mkdirSync( BookData.TARGET_ROOT + '/' + this.bookNumber );
     this.downloadCover();
@@ -101,6 +112,8 @@ BookData.prototype.downloadBookData = function() {
     });
     this.downloadCombatTablesImages('en');
     this.downloadCombatTablesImages('es');
+
+    this.zipBook();
 }
 
 BookData.prototype.downloadCombatTablesImages = function(language) {

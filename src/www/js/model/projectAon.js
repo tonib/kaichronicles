@@ -22,7 +22,10 @@ var projectAon = {
             code_es: '01hdlo',
 
             // Illustrators folders to download
-            illustrators: [ 'chalk' ]
+            illustrators: [ 'chalk' ],
+
+            // Zip size, in bytes
+            zipSize: 4887076
         },
 
         // Book 2:
@@ -33,7 +36,9 @@ var projectAon = {
             title_es: 'Fuego sobre agua',
             code_es: '02fsea',
 
-            illustrators: [ 'chalk' ]
+            illustrators: [ 'chalk' ],
+
+            zipSize: 5117979
         }, 
 
         // Book 3:
@@ -44,7 +49,9 @@ var projectAon = {
             title_es: 'Las Cavernas del Kalte',
             code_es: '03lcdk',
 
-            illustrators: [ 'chalk' ]
+            illustrators: [ 'chalk' ],
+
+            zipSize: 4178493
         }, 
 
         // Book 4:
@@ -55,7 +62,9 @@ var projectAon = {
             title_es: 'El Abismo maldito',
             code_es: '04eam',
 
-            illustrators: [ 'chalk' ]
+            illustrators: [ 'chalk' ],
+
+            zipSize: 4408246
         }, 
 
         // Book 5:
@@ -66,7 +75,9 @@ var projectAon = {
             title_es: 'El Desierto de las Sombras',
             code_es: '05eddls',
 
-            illustrators: [ 'chalk' ]
+            illustrators: [ 'chalk' ],
+
+            zipSize: 4183069
         }
     ],
 
