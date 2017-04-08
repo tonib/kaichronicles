@@ -4,7 +4,6 @@
 - Upload to google play:
   * Downloads PA data: Create books zip files
   * Downloads page: Check if there is internet connection
-  * Downloads page: Show books sizes
   * Allow to abort downloads
 - Money handling: 
   * Allow to drop an arbitrary amount of money, not just a single coin

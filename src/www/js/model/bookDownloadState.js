@@ -11,6 +11,11 @@ function BookDownloadState(bookNumber) {
     this.bookNumber = bookNumber;
     this.downloaded = false;
     this.title = projectAon.getBookTitle( bookNumber, state.language );
+    /**
+     * The book size, in MB
+     */
+    this.size = ( projectAon.supportedBooks[bookNumber-1].zipSize / 1024.0 ) / 1024.0;
+    this.size = this.size.toFixed(1);
 }
 
 /**

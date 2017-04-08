@@ -202,6 +202,7 @@ var translations = {
         'bookDownloaded' : 'Libro {0} descargado',
         'downloadFailed' : 'Descarga del libro {0} fallida: {1}',
         'processFinishedErrors' : '¡Proceso finalizado con errores!',
+        'size' : 'Tam.',
 
         //////////////////////////////////////
         // Others
