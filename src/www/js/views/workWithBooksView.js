@@ -37,6 +37,21 @@ var workWithBooksView = {
                 $allChecks.removeAttr('checked');
         });
 
+        // Close / cancel button
+        $('#wwbooks-closemodal').click(function(e) {
+            e.preventDefault();
+            workWithBooksView.closeCancelClicked();
+        });
+    },
+
+    closeCancelClicked: function() {
+        if( workWithBooksController.changingBooks ) {
+            // Cancel process
+            if( !confirm( 'Are you sure you want to cancel?') )
+                return;
+        }
+
+        workWithBooksController.closeCancelClicked();
     },
 
     setSelectAllUnchecked: function() {
@@ -69,15 +84,29 @@ var workWithBooksView = {
         if( show ) {
             // Clear the log
             $('#wwbooks-log').empty();
-            // Disable close
-            $('#wwbooks-closemodal').prop( 'disabled' , true );
+
+            // Set cancel button
+            $('#wwbooks-closemodal')
+                .removeClass('btn-primary')
+                .addClass('btn-danger')
+                .text( translations.text('cancel') );
+            
+            // Do no close the dialog with the hardware back button
+            $('#wwbooks-modal').addClass('nobackbutton');
         }
 
         $('#wwbooks-modal').modal( show ? 'show' : 'hide' );
     },
 
     enableCloseModal: function() {
-        $('#wwbooks-closemodal').prop( 'disabled' , false );
+        // Set close button
+        $('#wwbooks-closemodal')
+            .removeClass('btn-danger')
+            .addClass('btn-primary')
+            .text( translations.text('close') );
+
+        // Enable to close the dialog with the hardware back button
+        $('#wwbooks-modal').removeClass('nobackbutton');
     },
 
     logEvent: function(msg) {

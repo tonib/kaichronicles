@@ -5,6 +5,11 @@
  */
 var cordovaFS = {
 
+    /**
+     * The current download (see downloadAsync and cancelCurrentDownload)
+     */
+    currentDownload: null,
+
     saveFile: function(originalFileName, fileContent, callback) {
         cordovaFS.requestFileSystemAsync()
         .then( function(fs) {
@@ -217,6 +222,7 @@ var cordovaFS = {
         console.log('Downloading ' + url + ' to ' + dstPath);
 
         var fileTransfer = new FileTransfer();
+        cordovaFS.currentDownload = fileTransfer;
         if( progressCallback) {
             console.log('Registering progress callback');
             fileTransfer.onprogress = function(progressEvent) {
@@ -235,10 +241,12 @@ var cordovaFS = {
         fileTransfer.download(url, dstPath, 
             function(zipFileEntry) { 
                 // Download ok
+                cordovaFS.currentDownload = null;
                 dfd.resolve( zipFileEntry );
             },
             function(fileTransferError) { 
                 // Download failed
+                cordovaFS.currentDownload = null;
                 var msg = 'Download of ' + url + ' to ' + dstPath + ' failed. Code: ' + 
                     fileTransferError.code;
                 if(fileTransfer.exception)
@@ -248,6 +256,17 @@ var cordovaFS = {
             true
         );
         return dfd.promise();
+    },
+
+    cancelCurrentDownload: function() {
+        try {
+            if( !cordovaFS.currentDownload ) 
+                return;
+            cordovaFS.currentDownload.abort();
+        }
+        catch(e) {
+            console.log(e);
+        }
     },
 
     unzipAsync: function(dstPath , dstDir) {

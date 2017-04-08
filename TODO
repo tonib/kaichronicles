@@ -1,7 +1,8 @@
 - ERROR: Equipment section on each book. Allow to pick only the maximum number of objects
 - ERROR: Saved games page: No message displayed if there is not any saved game...
 - Upload to google play:
-  * Allow to abort downloads
+  * Sign apk
+  * Icons and images
 - Money handling: 
   * Allow to drop an arbitrary amount of money, not just a single coin
   * Support for money as object on section

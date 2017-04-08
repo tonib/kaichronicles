@@ -204,6 +204,8 @@ var translations = {
         'processFinishedErrors' : '¡Proceso finalizado con errores!',
         'size' : 'Tam.',
         'noInternet' : 'No hay conexión a Internet',
+        'cancel' : 'Cancelar',
+        'processCancelled' : 'Proceso cancelado',
 
         //////////////////////////////////////
         // Others
@@ -345,6 +347,8 @@ var translations = {
         'downloadFailed' : 'Book {0} download failed: {1}',
         'processFinishedErrors' : 'Process finished with errors!',
         'noInternet' : 'There is no Internet connection',
+        'cancel' : 'Cancel',
+        'processCancelled' : 'Process cancelled',
 
         //////////////////////////////////////
         // Others
