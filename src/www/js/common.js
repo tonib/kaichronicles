@@ -132,24 +132,6 @@ if (typeof Window.prototype.getUrlParameter !== 'function') {
    * @return The parameter value (string). null if it was not found
    */
   Window.prototype.getUrlParameter = function (sParam) {
-    /*
-    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-      sURLVariables = sPageURL.split('&'),
-      sParameterName,
-      i;
-
-    for (i = 0; i < sURLVariables.length; i++) {
-      sParameterName = sURLVariables[i].split('=');
-
-      if (sParameterName[0] === sParam) {
-        var value = sParameterName[1];
-        if( value === undefined )
-          return null;
-        else
-          return decodeURIComponent(sParameterName[1]).replace(/\+/g, ' ');
-      }
-    }
-    */
     return window.location.search.substring(1).getUrlParameter(sParam);
   };
 

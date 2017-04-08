@@ -232,7 +232,7 @@ var randomMechanics = {
             return -1;
 
         var txtPicked = $link.attr('data-picked');
-        if( txtPicked === null )
+        if( txtPicked === null || txtPicked === undefined )
             return -1;
         
         return parseInt( txtPicked );

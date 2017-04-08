@@ -1,8 +1,6 @@
 - ERROR: Equipment section on each book. Allow to pick only the maximum number of objects
 - ERROR: Saved games page: No message displayed if there is not any saved game...
-- Check all "==="
 - Upload to google play:
-  * Prepare version without PA data
   * Allow to abort downloads
 - Money handling: 
   * Allow to drop an arbitrary amount of money, not just a single coin
