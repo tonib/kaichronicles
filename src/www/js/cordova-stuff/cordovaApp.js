@@ -44,5 +44,19 @@ var cordovaApp = {
      */
     isRunningApp: function() { 
         return window.cordova; 
+    },
+
+    /**
+     * Returns true if there is some kind of connection to Internet
+     */
+    thereIsInternetConnection: function() {
+        try {
+            return navigator.connection.type != Connection.NONE;
+        }
+        catch(e) {
+            console.log(e);
+            return true;
+        }
     }
+
 };

@@ -48,6 +48,7 @@ var workWithBooksController = {
 
     downloadBooks: function(selectedBookNumbers) {
 
+
         // Check differences:
         var toRemove = [], toDownload = [];
         for( var i=0; i<workWithBooksController.books.length; i++) {
@@ -61,101 +62,107 @@ var workWithBooksController = {
 
         if( toRemove.length === 0 && toDownload.length === 0 ) {
             alert( translations.text( 'noChangesSelected' ) );
+            return;
         }
-        else {
-            if( !confirm( translations.text('confirmChanges') ) )
-                return;
 
-            BookDownloadState.getBooksDirectoryAsync()
-            .then( function(booksDir) {
+        if( toDownload.length > 0 && !cordovaApp.thereIsInternetConnection() ) {
+            alert( translations.text( 'noInternet' ) );
+            return;
+        }
 
-                var allOk = true;
-                workWithBooksController.changingBooks = true;
+        if( !confirm( translations.text('confirmChanges') ) )
+            return;
 
-                workWithBooksView.displayModal(true);
+        BookDownloadState.getBooksDirectoryAsync()
+        .then( function(booksDir) {
 
-                // Initial empty resolved promise
-                var changesPromise = jQuery.Deferred().resolve().promise();
+            var allOk = true;
+            workWithBooksController.changingBooks = true;
 
-                // If we will remove books, clean the cached book: Needed, because
-                // the cached book may be deleted now
-                state.removeCachedState();
-                
-                // Remove books, chaining promises
-                toRemove.forEach(function(book) {
-                    // Chain always the next promise, it was failed the previous or not
-                    var work = function() {
-                        workWithBooksView.setCurrentWork( 
-                            translations.text( 'deletingBook' , [book.bookNumber] ) ) ;
-                        return book.deleteAsync(booksDir);
-                    };
-                    changesPromise = changesPromise.then(
-                        function() { return work(); } , 
-                        function() { return work(); }
-                    )
-                    .done(function() { 
-                        workWithBooksView.logEvent( 
-                            translations.text( 'bookDeleted' , [book.bookNumber] ) );
-                    })
-                    .fail(function(reason) { 
-                        workWithBooksView.logEvent(
-                            translations.text( 'deletionFailed' , [ book.bookNumber , reason ] ) );
-                        allOk = false;
-                    });
-                });
+            workWithBooksView.displayModal(true);
 
-                // Download books, chaining promises
-                toDownload.forEach(function(book) {
-                    // Chain always the next promise, it was failed the previous or not
-                    var work = function() {
-                        workWithBooksView.setCurrentWork(
-                            translations.text( 'downloadingBook' , [book.bookNumber] ) );
-                        return book.downloadAsync(booksDir, function(percent) {
-                            workWithBooksView.updateProgress(percent);
-                        });
-                    };
-                    changesPromise = changesPromise.then(
-                        function() { return work(); } , 
-                        function() { return work(); }
-                    )
-                    .done(function() { 
-                        workWithBooksView.logEvent( 
-                            translations.text( 'bookDownloaded' , [book.bookNumber] ) );
-                    })
-                    .fail(function(reason) { 
-                        workWithBooksView.logEvent( 
-                            translations.text( 'downloadFailed' , [ book.bookNumber , reason ] ) );
-                        allOk = false;
-                    });
-                });
+            // Initial empty resolved promise
+            var changesPromise = jQuery.Deferred().resolve().promise();
 
-                // When the actions chain ends, update the UI
-                var updateUI = function() {
-                    // Refresh the books list
-                    workWithBooksController.updateBooksList();
-                    
-                    if( allOk )
-                        // If all was ok, close the modal
-                        workWithBooksView.displayModal(false);
-                    else {
-                        // Enable the close button
-                        workWithBooksView.enableCloseModal();
-                        // Show info:
-                        workWithBooksView.setCurrentWork( 
-                            translations.text( 'processFinishedErrors' ) );
-                        workWithBooksView.updateProgress(100);
-                    }
-
-                    workWithBooksController.changingBooks = false;
+            // If we will remove books, clean the cached book: Needed, because
+            // the cached book may be deleted now
+            state.removeCachedState();
+            
+            // Remove books, chaining promises
+            toRemove.forEach(function(book) {
+                // Chain always the next promise, it was failed the previous or not
+                var work = function() {
+                    workWithBooksView.setCurrentWork( 
+                        translations.text( 'deletingBook' , [book.bookNumber] ) ) ;
+                    return book.deleteAsync(booksDir);
                 };
-                changesPromise.then(
-                    function(){ updateUI(); },
-                    function(){ updateUI(); }
-                );
+                changesPromise = changesPromise.then(
+                    function() { return work(); } , 
+                    function() { return work(); }
+                )
+                .done(function() { 
+                    workWithBooksView.logEvent( 
+                        translations.text( 'bookDeleted' , [book.bookNumber] ) );
+                })
+                .fail(function(reason) { 
+                    workWithBooksView.logEvent(
+                        translations.text( 'deletionFailed' , [ book.bookNumber , reason ] ) );
+                    allOk = false;
+                });
+            });
 
-            })
-            .fail(function(reason){ alert(reason); });
-        }
+            // Download books, chaining promises
+            toDownload.forEach(function(book) {
+                // Chain always the next promise, it was failed the previous or not
+                var work = function() {
+                    workWithBooksView.setCurrentWork(
+                        translations.text( 'downloadingBook' , [book.bookNumber] ) );
+                    return book.downloadAsync(booksDir, function(percent) {
+                        workWithBooksView.updateProgress(percent);
+                    });
+                };
+                changesPromise = changesPromise.then(
+                    function() { return work(); } , 
+                    function() { return work(); }
+                )
+                .done(function() { 
+                    workWithBooksView.logEvent( 
+                        translations.text( 'bookDownloaded' , [book.bookNumber] ) );
+                })
+                .fail(function(reason) { 
+                    workWithBooksView.logEvent( 
+                        translations.text( 'downloadFailed' , [ book.bookNumber , reason ] ) );
+                    allOk = false;
+                });
+            });
+
+            // When the actions chain ends, update the UI
+            var updateUI = function() {
+                // Refresh the books list
+                workWithBooksController.updateBooksList();
+                
+                if( allOk )
+                    // If all was ok, close the modal
+                    workWithBooksView.displayModal(false);
+                else {
+                    // Enable the close button
+                    workWithBooksView.enableCloseModal();
+                    // Show info:
+                    workWithBooksView.setCurrentWork( 
+                        translations.text( 'processFinishedErrors' ) );
+                    workWithBooksView.updateProgress(100);
+                }
+
+                workWithBooksController.changingBooks = false;
+            };
+            changesPromise.then(
+                function(){ updateUI(); },
+                function(){ updateUI(); }
+            );
+
+        })
+        .fail(function(reason){ alert(reason); });
+
     },
 
     /** Return page */
