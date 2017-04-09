@@ -1,7 +1,7 @@
 
 /**
  * Stuff to access the file system via cordova
- * TODO: This is almost crap. Replace by deferreds (oh javascript)
+ * TODO: This is almost crap. Replace by promises (oh javascript...)
  */
 var cordovaFS = {
 

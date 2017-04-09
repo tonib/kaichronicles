@@ -5,17 +5,29 @@
 var cordovaApp = {
 
     /**
-     * Application Constructor
+     * Setup Cordova app, if needed
+     * @returns {Promise} The process promise
      */
     setup: function() {
-        document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+        var dfd = jQuery.Deferred();
+
+        if( !cordovaApp.isRunningApp() )
+            // Running on web
+            return dfd.resolve().promise();
+
+        document.addEventListener( 'deviceready', function() {
+            // Register event listeners
+            document.addEventListener('backbutton', cordovaApp.onBackButton.bind(this), false);
+            dfd.resolve();
+        }, 
+        false );
+
+        return dfd.promise();
     },
 
-    onDeviceReady: function() {
-        // Register event listeners
-        document.addEventListener('backbutton', this.onBackButton.bind(this), false);
-    },
-
+    /**
+     * Hardware back button clicked
+     */
     onBackButton: function() {
         console.log('onBackButton');
         // If a modal has class "nobackbutton", do not allow to close it with the back button
