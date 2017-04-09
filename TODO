@@ -36,7 +36,8 @@
 - Implement phisical random tables (pick on the screen) ???
 - Use project aon colors ???
 - Book 2 sect290, there are spanish / english inconsistencies
-- Add robots file, description tags, etc for Web Search
+- Add robots file, description tags, etc for Web Search. Search Console?. 
+  * Register visits to setup controller (new games / continue game)
 - Letter for death on combats: "M" for Spanish / "K" for English
 - Common performance (Android and web):
   * Rendering performance on book 2 / sect equimpnt

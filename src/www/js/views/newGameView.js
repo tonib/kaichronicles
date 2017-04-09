@@ -39,7 +39,15 @@ var newGameView = {
             newGameController.selectedBookChanged( downloadedBooks[0].bookNumber );
     },
 
+    /**
+     * Change the current book cover
+     * @param {string} url The cover URL
+     */
     setCoverImage: function(url) {
+        if( !cordovaApp.isRunningApp() ) {
+            // Web: Clear the previous cover (PA server has a slow connection)
+            $('#newgame-cover').attr('src', '');
+        }
         $('#newgame-cover').attr('src', url);
     }
 };
