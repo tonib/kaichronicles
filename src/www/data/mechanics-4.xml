@@ -33,7 +33,7 @@
             <setDisciplines />
         </section>
 
-        <section id="equipmnt">
+        <section id="equipmnt" pickMaximum="6">
             <!-- Do not pick 2 maps! -->
             <test not="true" hasObject="map" >
                 <pick objectId="map" />

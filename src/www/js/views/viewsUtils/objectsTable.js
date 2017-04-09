@@ -230,7 +230,7 @@ var objectsTable = {
                 
         }
 
-        if( actionChartController.pick( o.id ) ) {
+        if( actionChartController.pick( o.id , true, true) ) {
 
             var unlimited = $link.attr('data-unlimited');
             if( !unlimited ) {

@@ -35,12 +35,14 @@
             <setDisciplines />
         </section>
 
-        <section id="equipmnt">
+        <section id="equipmnt" pickMaximum="2" pickMaximumMealsFactor="2" >
+        
             <!-- Do not pick 2 maps! -->
             <test not="true" hasObject="map" >
                 <pick objectId="map" />
             </test>
             <pick objectId="sealofhammerdal" />
+            
             <randomTable>
                 <pick class="money" count="[RANDOM] + 10" />
             </randomTable>

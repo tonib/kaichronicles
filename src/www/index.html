@@ -301,6 +301,7 @@
                 routing.setup();
               }
               catch(e) {
+                // d'oh!
                 console.log(e);
                 return jQuery.Deferred().reject(e).promise();
               }

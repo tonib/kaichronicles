@@ -21,20 +21,28 @@ var actionChartController = {
     /**
      * Pick an object
      * @param {string} objectId The object to pick, or "meal", to pick one meal
-     * @param {boolean} doNotShowError True we should do not show a toast if the player
+     * @param {boolean} showError True we should show a toast if the player
      * cannot pick the object
+     * @param {boolean} fromUITable True if we are picking the object from the UI
      * @return True if the object has been get. False if the object cannot be get
      */
-    pick: function(objectId, doNotShowError) {
+    pick: function(objectId, showError, fromUITable ) {
         try {
-            // Pick the object
+            // Get object info
             var o = state.mechanics.getObject(objectId);
             if( o === null )
                 return false;
-            
+
+            // Check if the section has restrictions about picking objects
+            // This will throw an exception if no more objects can be picked
+            if( fromUITable )
+                mechanicsEngine.checkMoreObjectsCanBePicked( objectId );
+
+            // Try to pick the object
             if( !state.actionChart.pick( o ) )
                 return false;
-                
+
+            // Show toast
             actionChartView.showInventoryMsg('pick', o , 
                 translations.text( 'msgGetObject' , [o.name] ) );
 
@@ -46,7 +54,7 @@ var actionChartController = {
         }
         catch(e) {
             // Error picking
-            if( !doNotShowError )
+            if( showError )
                 toastr.error(e);
             console.log(e);
             return false;
@@ -283,8 +291,8 @@ var actionChartController = {
     pickItemsList: function(arrayOfItems) {
         var renderAvailableObjects = false;
         for(var i=0; i<arrayOfItems.length; i++) {
-            if( !actionChartController.pick( arrayOfItems[i] ) ) {
-                // Add the object as available on the current section
+            if( !actionChartController.pick( arrayOfItems[i] , true , false ) ) {
+                // Object cannot be picked. Add the object as available on the current section
                 state.sectionStates.addObjectToSection( arrayOfItems[i] );
                 renderAvailableObjects = true;
             }
@@ -300,7 +308,7 @@ var actionChartController = {
      */
     restoreInventoryState: function(inventoryState) {
         if( !state.actionChart.hasBackpack && inventoryState.hasBackpack )
-            actionChartController.pick('backpack');
+            actionChartController.pick('backpack', false, false);
         actionChartController.pickItemsList( inventoryState.weapons );
         actionChartController.pickItemsList( inventoryState.backpackItems );
         actionChartController.pickItemsList( inventoryState.specialItems );

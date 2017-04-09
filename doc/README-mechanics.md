@@ -81,6 +81,18 @@ the current section
 ## Rules description
 Description of the rules usage:
 
+### section
+```xml
+<section id="equipmnt" pickMaximum="2" pickMaximumMealsFactor="2" >
+...
+</section>
+```
+"section" is the root for rules to be executed on a given section. "id" is the section id.
+
+Property "pickMaximum" is optional. It's the maximum number of object you can pick on the section.
+On book 2, two meals count as one object. Property "pickMaximumMealsFactor" is a trick for that
+(optional).
+
 ### setSkills
 Game setup: The player selects the initial Endurance and Combat Skill
 

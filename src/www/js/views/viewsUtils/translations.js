@@ -222,7 +222,9 @@ var translations = {
         'combatTables' : 'Tablas de Combate',
         'mainMenu' : 'Menú principal',
         'bookNotDownloaded' : 'El libro {0} no está descargado',
-        'noSavedGames' : 'No se encontraron juegos guardados'
+        'noSavedGames' : 'No se encontraron juegos guardados',
+        'maximumPick' : 'Sólo puedes coger {0} objetos'
+
     },
 
     /**
@@ -362,7 +364,8 @@ var translations = {
         'combatTables' : 'Combat Tables',
         'mainMenu' : 'Main Menu',
         'bookNotDownloaded' : 'Book {0} is not downloaded',
-        'noSavedGames' : 'No saved games found'
+        'noSavedGames' : 'No saved games found',
+        'maximumPick' : 'You can pick only {0} objects'
 
     },
 

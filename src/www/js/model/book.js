@@ -99,7 +99,7 @@ Book.prototype.downloadBookXml = function() {
 
     var self = this;
     var bookXmlUrl = this.getBookXmlURL();
-    console.log( 'Downloading book XML URL: ' + bookXmlUrl);
+    //console.log( 'Downloading book XML URL: ' + bookXmlUrl);
 
     return $.ajax({
         url: bookXmlUrl,
