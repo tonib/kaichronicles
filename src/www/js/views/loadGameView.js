@@ -18,7 +18,7 @@ var loadGameView = {
     addFileToList: function(fileName) {
         var row = '<tr><td>';
         if( !fileName ) 
-            row += '<i>No saved games found</i>';
+            row += '<i>' + translations.text( 'noSavedGames' ) + '</i>';
         else {
             row += '<button class="btn btn-default table-op" title="Delete" data-filename="' + 
                 fileName + '">' + 

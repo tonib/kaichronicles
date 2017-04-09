@@ -1,5 +1,4 @@
 - ERROR: Equipment section on each book. Allow to pick only the maximum number of objects
-- ERROR: Saved games page: No message displayed if there is not any saved game...
 - Upload to google play:
   * Sign apk
   * Icons and images
@@ -74,9 +73,9 @@ Reminders:
   cd [android-sdk]
   tools/android avd
 
-Work done on this commit:
-
 * node.js
   Install dependencies: npm install
   Run script: npm run lint
   
+
+Work done on this commit:

@@ -221,7 +221,8 @@ var translations = {
         'projectAonLicense' : 'Licencia del Proyecto Aon',
         'combatTables' : 'Tablas de Combate',
         'mainMenu' : 'Menú principal',
-        'bookNotDownloaded' : 'El libro {0} no está descargado'
+        'bookNotDownloaded' : 'El libro {0} no está descargado',
+        'noSavedGames' : 'No se encontraron juegos guardados'
     },
 
     /**
@@ -360,7 +361,8 @@ var translations = {
         'projectAonLicense' : 'Project Aon license',
         'combatTables' : 'Combat Tables',
         'mainMenu' : 'Main Menu',
-        'bookNotDownloaded' : 'Book {0} is not downloaded'
+        'bookNotDownloaded' : 'Book {0} is not downloaded',
+        'noSavedGames' : 'No saved games found'
 
     },
 

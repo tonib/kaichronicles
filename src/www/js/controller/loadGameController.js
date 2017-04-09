@@ -42,8 +42,8 @@ var loadGameController = {
                     fileNames.push(entries[i].name);
             }
 
-            if( entries.length === 0 )
-                fileNames.addFileToList( null );
+            if( fileNames.length === 0 )
+                loadGameView.addFileToList( null );
             else {
                 // The list may be unsorted:
                 fileNames.sort();
