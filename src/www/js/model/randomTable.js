@@ -25,8 +25,12 @@ var randomTable = {
                 value = randomTable.nextValueDebug;
                 randomTable.nextValueDebug = -1;
             }
-            else
-                value = Math.floor( Math.random() * 10.0 );
+            else {
+                // Get an index for the picked number
+                var index = Math.floor( Math.random() * 100.0 );
+                // Get the number for that index on the book random table
+                value = state.book.bookRandomTable[index];
+            }
 
             if( ignoreZero && value === 0 )
                 continue;

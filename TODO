@@ -1,7 +1,6 @@
 - Upload to google play:
   * Sign apk
   * Icons and images
-- Save games is not working on safari
 - RE-TEST the random table
 - Death UI should be located after the choices, not before (spanish deadends)
 - If you pick an object on the current section: 
@@ -43,7 +42,8 @@
   * Allow to drop an arbitrary amount of money, not just a single coin
   * Support for money as object on section
   * Allow to pick droped money
-  
+- Save games is not working on safari
+
 Reminders:
 
 * DON'T BE RESTRICTIVE WITH CHOICES !!!!

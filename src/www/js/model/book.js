@@ -18,6 +18,10 @@ function Book(number, language) {
     /** The book XML document */
     this.bookXml = null;
 
+    /**
+     * Array of 100 positions with the random table number as they appear on the book
+     */
+    this.bookRandomTable = [];
 }
 
 /**
@@ -108,6 +112,7 @@ Book.prototype.downloadBookXml = function() {
     .done(function(xml) {
         xml = Book.fixXml(xml);
         self.bookXml = $.parseXML(xml);
+        self.bookRandomTable = self.getRandomTable();
     });
 };
 
@@ -289,4 +294,19 @@ Book.prototype.getCombatTablesImagesUrls = function(mechanics) {
     images.push( this.getIllustrationURL( 'crtpos.png', mechanics) );
     images.push( this.getIllustrationURL( 'crtneg.png', mechanics ) );
     return images;
+};
+
+/**
+ * Get the book random table number
+ * @return {Arrray<number>} Array with the 100 numbers of the random table
+ */
+Book.prototype.getRandomTable = function(mechanics) {
+    var $randomCells = $(this.bookXml)
+        .find('section[id=random] > data > illustration > instance[class=text]')
+        .find('td');
+    var numbers = [];
+    for(var i=0; i<$randomCells.length; i++) {
+        numbers.push( parseInt( $($randomCells[i]).text() ) );
+    }
+    return numbers;
 };
