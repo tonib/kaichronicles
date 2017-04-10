@@ -216,7 +216,10 @@ var template = {
     },
 
     showRandomTable: function(show) {
-        $('#template-randomtable').modal( show ? 'show' : 'hide' );
+        var $randomModal = $('#template-randomtable');
+        if( show )
+            translations.translateTags( $randomModal );
+        $randomModal.modal( show ? 'show' : 'hide' );
     },
 
     fillRandomTableModal: function(numbers) {

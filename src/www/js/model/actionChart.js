@@ -32,6 +32,11 @@ function ActionChart() {
     /** Player annotations */
     this.annotations = '';
 
+    /**
+     * Use manual random table?
+     */
+    this.manualRandomTable = false;
+
     // Debug fast setup:
     if( window.getUrlParameter('debug') ) {
         this.endurance = this.currentEndurance = 25;

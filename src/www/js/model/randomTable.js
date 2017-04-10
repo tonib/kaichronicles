@@ -47,6 +47,10 @@ var randomTable = {
 
     getRandomValueAsync: function(ignoreZero, zeroAsTen) {
 
+        if( !state.actionChart.manualRandomTable )
+            // Use computer generated random numbers:
+            return jQuery.Deferred().resolve( randomTable.getRandomValue() ).promise();
+
         // Store info about the current selection
         randomTable.currentAsync = {
             ignoreZero: ignoreZero,
@@ -63,7 +67,7 @@ var randomTable = {
             return;
 
         if( randomTable.currentAsync.ignoreZero && value === 0 ) {
-            toastr.info('Zero ignored');
+            toastr.info( translations.text('zeroIgnored') );
             return;
         }
         

@@ -177,6 +177,9 @@ var translations = {
         'wrongFileName' : 'El nombre de archivo contiene carácteres no válidos',
         'gameSaved' : 'Partida guardada',
         'confirmRestart' : '¿Seguro que quieres reiniciar el libro?',
+        'randomTableValues' : 'Valores de la Tabla de la Suerte',
+        'computerGenerated' : 'Generados por ordenador',
+        'manual' : 'Manuales',
 
         //////////////////////////////////////
         // Template (Main page)
@@ -222,7 +225,8 @@ var translations = {
         'mainMenu' : 'Menú principal',
         'bookNotDownloaded' : 'El libro {0} no está descargado',
         'noSavedGames' : 'No se encontraron juegos guardados',
-        'maximumPick' : 'Sólo puedes coger {0} objetos'
+        'maximumPick' : 'Sólo puedes coger {0} objetos',
+        'zeroIgnored' : 'Cero ignorado'
 
     },
 
@@ -363,7 +367,8 @@ var translations = {
         'mainMenu' : 'Main Menu',
         'bookNotDownloaded' : 'Book {0} is not downloaded',
         'noSavedGames' : 'No saved games found',
-        'maximumPick' : 'You can pick only {0} objects'
+        'maximumPick' : 'You can pick only {0} objects',
+        'zeroIgnored' : 'Zero ignored'
 
     },
 

@@ -12,6 +12,12 @@ var settingsView = {
             settingsController.changeLanguage( $(this).val() );
         });
 
+        // Random table type
+        $('#settings-randomtable').val( state.actionChart.manualRandomTable ? 'manual' : 'computer' );
+        $('#settings-randomtable').change(function() {
+            state.actionChart.manualRandomTable = ( $(this).val() == 'manual' );
+        });
+
         // Restart book
         $('#settings-restart').click(function(e) {
             e.preventDefault();
