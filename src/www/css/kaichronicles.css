@@ -248,3 +248,22 @@ td.center {
     -o-transition: none;
     transition: none;
 }​
+
+/* Random table size */
+#template-containertable {
+    border-style: solid!important;
+    border-width: 1px!important;
+    border-color: #ccc!important;
+}
+#template-containertable td {
+    padding: 2px!important;
+    text-align: center;
+    font-weight: bold;
+}
+/* Random table coloring */
+#template-containertable tbody tr:nth-child(odd) td:nth-child(odd) {
+   background-color: #ccc;
+}
+#template-containertable tbody tr:nth-child(even) td:nth-child(even) {
+   background-color: #ccc;
+}

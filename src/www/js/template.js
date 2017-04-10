@@ -213,6 +213,30 @@ var template = {
         $('#template-ctimage0').attr('src', combatTablesUrls[0]);
         $('#template-ctimage1').attr('src', combatTablesUrls[1]);
         $('#template-combatTables').modal('show');
-    }
+    },
 
+    showRandomTable: function(show) {
+        $('#template-randomtable').modal( show ? 'show' : 'hide' );
+    },
+
+    fillRandomTableModal: function(numbers) {
+
+        // Fill table
+        var html = '';
+        for(var row=0; row<10; row++) {
+            html += '<tr>';
+            for(var column=0; column<10; column++) {
+                var number = numbers[ row * 10 + column ];
+                html += '<td data-number="' + number + '">' + number + '</td>';
+            }
+            html += '</tr>';
+        }
+        $('#template-randomcontent').html( html );
+
+        // Add click event handlers:
+        $('#template-randomcontent td').mousedown(function(e) {
+            e.preventDefault();
+            randomTable.randomTableUIClicked( parseInt( $(this).attr('data-number') ) );
+        });
+    }
 };

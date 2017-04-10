@@ -46,7 +46,7 @@ var testsController = {
 
         // Test randomness of the book random table:
         count = [];
-        for( var i=0; i<10; i++)
+        for( i=0; i<10; i++)
             count[i] = 0;
         var bookRandomTable = state.book.getRandomTable();
         for( i=0; i<bookRandomTable.length; i++)

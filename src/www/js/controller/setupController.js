@@ -112,6 +112,8 @@ var setupController = {
             setupView.log('Done!');
             setupView.done();
 
+            // Fill the random table UI
+            template.fillRandomTableModal( state.book.bookRandomTable );
             template.setNavTitle( state.book.getBookTitle() , '#game', false);
             template.updateStatistics(true);
             routing.redirect('game');

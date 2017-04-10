@@ -90,19 +90,6 @@ Combat.prototype.getCombatRatio = function() {
 };
 
 /**
- * Get a turn result from the combat table
- * @param {boolean} elude True if the player is eluding the combat
- * @return The combat turn info
- */
-Combat.prototype.getTurnResult = function(elude) {
-    
-    var turnResult = new CombatTurn(this.turns.length + 1, 
-        this.getCombatRatio(), this.dammageMultiplier, this.enemyMultiplier, 
-        this.mindforceEP , elude , this.enemyTurnLoss , this.turnLoss );
-    return turnResult;
-};
-
-/**
  * Get the next combat turn
  * @param {boolean} elude True if the player is eluding the combat
  * @return {CombatTurn} The combat turn
@@ -110,7 +97,10 @@ Combat.prototype.getTurnResult = function(elude) {
 Combat.prototype.nextTurn = function( elude ) {
 
     // Calculate the turn
-    var turn = this.getTurnResult(elude);
+    var turn = new CombatTurn(this.turns.length + 1, 
+        this.getCombatRatio(), this.dammageMultiplier, this.enemyMultiplier, 
+        this.mindforceEP , elude , this.enemyTurnLoss , this.turnLoss );
+
     this.turns.push( turn );
 
     return turn;
