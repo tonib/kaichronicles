@@ -110,21 +110,6 @@ var randomMechanics = {
             }
 
             // Get the random value
-            /*var value = randomTable.getRandomValue(ignoreZero, zeroAsTen);
-
-            // Get the increment
-            var increment = $(this).attr('data-increment');
-            if( increment )
-                increment = parseInt( increment );
-            else
-                increment = 0;
-
-            // Show the result on the link
-            randomMechanics.linkAddChooseValue( $(this) , value , increment);
-
-            // Fire the event:
-            onLinkPressed( value , increment );*/
-
             var self = this;
             randomTable.getRandomValueAsync(ignoreZero, zeroAsTen)
             .then(function(value) {

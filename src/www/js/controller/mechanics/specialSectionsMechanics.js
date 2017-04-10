@@ -63,36 +63,38 @@ var specialSectionsMechanics = {
             var number = $('#mechanics-numberToBet').getNumber();
 
             // Play the game
-            var random = randomTable.getRandomValue();
-            var moneyInc;
-            if( random == number )
-                moneyInc = money * 8;
-            else if ( randomTable.module10( random + 1 ) == number || 
-                      randomTable.module10( random - 1 ) == number ) {
-                moneyInc = money * 5;
-            }
-            else 
-                moneyInc = -money;
+            randomTable.getRandomValueAsync()
+            .then(function(random) {
+                var moneyInc;
+                if( random == number )
+                    moneyInc = money * 8;
+                else if ( randomTable.module10( random + 1 ) == number || 
+                        randomTable.module10( random - 1 ) == number ) {
+                    moneyInc = money * 5;
+                }
+                else
+                    moneyInc = -money;
 
-            // Limit money won to 40
-            if( gameState.moneyWon + moneyInc > 40 )
-                moneyInc = 40 - gameState.moneyWon;
-                 
-            actionChartController.increaseMoney(moneyInc);
+                // Limit money won to 40
+                if( gameState.moneyWon + moneyInc > 40 )
+                    moneyInc = 40 - gameState.moneyWon;
+                    
+                actionChartController.increaseMoney(moneyInc);
 
-            // Update game state:
-            gameState.moneyToBet = money;
-            gameState.numberToBet = number;
-            gameState.moneyWon += moneyInc;
-            var msg = translations.text('randomTable') + ': ' + random + '. ';
-            if( moneyInc >= 0 )
-                msg += translations.text('msgGetMoney' , [moneyInc] );
-            else
-                msg += translations.text('msgDropMoney' , [-moneyInc] );
-            $('#mechanics-gameStatus').text( msg );
+                // Update game state:
+                gameState.moneyToBet = money;
+                gameState.numberToBet = number;
+                gameState.moneyWon += moneyInc;
+                var msg = translations.text('randomTable') + ': ' + random + '. ';
+                if( moneyInc >= 0 )
+                    msg += translations.text('msgGetMoney' , [moneyInc] );
+                else
+                    msg += translations.text('msgDropMoney' , [-moneyInc] );
+                $('#mechanics-gameStatus').text( msg );
 
-            updateUI( gameState , false );
-
+                updateUI( gameState , false );
+            });
+            
         });
     },
 

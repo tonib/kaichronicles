@@ -259,6 +259,7 @@ td.center {
     padding: 2px!important;
     text-align: center;
     font-weight: bold;
+    cursor: pointer;
 }
 /* Random table coloring */
 #template-containertable tbody tr:nth-child(odd) td:nth-child(odd) {

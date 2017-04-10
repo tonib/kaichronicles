@@ -50,6 +50,8 @@ var setupMechanics = {
 
     /**
      * Choose the kai disciplines UI
+     * TODO: Too complex, move to another namespace and split it on different functions
+     * TODO: Use getRandomValueAsync on weaponSkill discipline
      */
     setDisciplines: function() {
 
