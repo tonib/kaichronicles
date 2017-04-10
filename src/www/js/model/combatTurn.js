@@ -2,6 +2,7 @@
 /**
  * Create a combat turn
  * @param {number} turnNumber Number of the turn (1 is the first)
+ * @param {number} randomValue The random table value for this turn
  * @param {number} combatRatio Current combat ratio
  * @param {number} dammageMultiplier Lone wolf dammage multiplier
  * @param {number} enemyMultiplier Enemy dammage multiplier
@@ -11,8 +12,8 @@
  * @param {number} extraEnemyLoss Extra E.P. lost by the enemy. It must to be negative.
  * @param {number} extraLoss Extra E.P. lost by the player. It must to be negative.
  */
-function CombatTurn(turnNumber, combatRatio, dammageMultiplier, enemyMultiplier, 
-    mindforceEP, elude , extraEnemyLoss , turnLoss ) {
+function CombatTurn(turnNumber, randomValue , combatRatio, dammageMultiplier, 
+    enemyMultiplier, mindforceEP, elude , extraEnemyLoss , turnLoss ) {
 
     if( !turnNumber )
         // Default constructor (called on BookSectionStates.prototype.fromStateObject)
@@ -26,7 +27,7 @@ function CombatTurn(turnNumber, combatRatio, dammageMultiplier, enemyMultiplier,
     this.turnNumber = turnNumber;
 
     /** The random table result  */
-    this.randomValue = randomTable.getRandomValue();
+    this.randomValue = randomValue;
     /** Lone wolf dammage multiplier */
     this.dammageMultiplier = dammageMultiplier;
     /** Enemy dammage multiplier */

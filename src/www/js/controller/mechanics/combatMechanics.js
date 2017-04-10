@@ -158,65 +158,69 @@ var combatMechanics = {
         var combatIndex = parseInt( $combatUI.attr( 'data-combatIdx' ) );
         var sectionState = state.sectionStates.getSectionState();
         var combat = sectionState.combats[ combatIndex ];
-        var turn = combat.nextTurn( elude );
-        
-        // Apply turn combat losses
-        combat.applyTurn(turn);
 
-        // Combat has been eluded?
-        sectionState.combatEluded = elude;
+        combat.nextTurnAsync( elude )
+        .then(function(turn) {
 
-        // Update player statistics:
-        template.updateStatistics();
-        
-        // Render new turn
-        var $turnsTable = $combatUI.find( 'table' ).first(); 
-        $turnsTable.show();
-        combatMechanics.renderCombatTurn( $turnsTable.find( '> tbody' ), turn );
-        
-        // Update enemy current endurance
-        combatMechanics.updateEnemyEndurance( $combatUI , combat , false );
+            // Apply turn combat losses
+            combat.applyTurn(turn);
 
-        if( sectionState.combatEluded || combat.isFinished() ) {
-            // Combat finished
+            // Combat has been eluded?
+            sectionState.combatEluded = elude;
 
-            // Hide button to run more turns
-            combatMechanics.hideCombatButtons( $combatUI );
-
-            // Test player death
-            mechanicsEngine.testDeath();
-
-            // Fire turn events:
-            mechanicsEngine.fireAfterCombatTurn(combat);
-
-            // Post combat rules execution:
-            var combatsResult = sectionState.areAllCombatsFinished(state.actionChart);
-            if( combatsResult == 'finished' && mechanicsEngine.onAfterCombatsRule )
-                // Fire "afterCombats" rule
-                mechanicsEngine.runChildRules( $(mechanicsEngine.onAfterCombatsRule) );
-            if( combatsResult == 'eluded' && mechanicsEngine.onEludeCombatsRule )
-                // Fire "afterElude" rule
-                mechanicsEngine.runChildRules( $(mechanicsEngine.onEludeCombatsRule) );
-
-        }
-        else {
-            // Combat continues
+            // Update player statistics:
+            template.updateStatistics();
             
-            if( combat.canBeEluded() )
-                // The combat can be eluded after this turn
-                $combatUI.find('.mechanics-elude').show();
+            // Render new turn
+            var $turnsTable = $combatUI.find( 'table' ).first(); 
+            $turnsTable.show();
+            combatMechanics.renderCombatTurn( $turnsTable.find( '> tbody' ), turn );
+            
+            // Update enemy current endurance
+            combatMechanics.updateEnemyEndurance( $combatUI , combat , false );
 
-            // Fire turn events:
-            mechanicsEngine.fireAfterCombatTurn(combat);
+            if( sectionState.combatEluded || combat.isFinished() ) {
+                // Combat finished
 
-            // Update combat ratio (it can be changed by combat turn rules):
-            combatMechanics.updateCombatRatio( $combatUI , combat );
-        }
+                // Hide button to run more turns
+                combatMechanics.hideCombatButtons( $combatUI );
 
-        // Combat has been eluded?
-        if( elude )
-            // Disable other combats
-            combatMechanics.hideCombatButtons( null );
+                // Test player death
+                mechanicsEngine.testDeath();
+
+                // Fire turn events:
+                mechanicsEngine.fireAfterCombatTurn(combat);
+
+                // Post combat rules execution:
+                var combatsResult = sectionState.areAllCombatsFinished(state.actionChart);
+                if( combatsResult == 'finished' && mechanicsEngine.onAfterCombatsRule )
+                    // Fire "afterCombats" rule
+                    mechanicsEngine.runChildRules( $(mechanicsEngine.onAfterCombatsRule) );
+                if( combatsResult == 'eluded' && mechanicsEngine.onEludeCombatsRule )
+                    // Fire "afterElude" rule
+                    mechanicsEngine.runChildRules( $(mechanicsEngine.onEludeCombatsRule) );
+
+            }
+            else {
+                // Combat continues
+                
+                if( combat.canBeEluded() )
+                    // The combat can be eluded after this turn
+                    $combatUI.find('.mechanics-elude').show();
+
+                // Fire turn events:
+                mechanicsEngine.fireAfterCombatTurn(combat);
+
+                // Update combat ratio (it can be changed by combat turn rules):
+                combatMechanics.updateCombatRatio( $combatUI , combat );
+            }
+
+            // Combat has been eluded?
+            if( elude )
+                // Disable other combats
+                combatMechanics.hideCombatButtons( null );
+                
+        });
 
     },
 

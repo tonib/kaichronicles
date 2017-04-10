@@ -170,24 +170,27 @@ var specialSectionsMechanics = {
         // Replace the combat turns generation:
         var sectionState = state.sectionStates.getSectionState();
 
-        var nextTurnFunction = function() {
-            var turn = Combat.prototype.nextTurn.call(this);
-            // Check the bite:
-            if( turn.loneWolf > 0 && turn.loneWolf != combatTable_DEATH ) {
-                var biteRandomValue = randomTable.getRandomValue();
-                turn.playerLossText = '(' + turn.playerLossText + ')';
-                turn.playerLossText += ' Random: ' + biteRandomValue;
-                if( biteRandomValue == 9 )
-                    turn.loneWolf = combatTable_DEATH;
-                else
-                    turn.loneWolf = 0;
-            }
-            return turn;
+        var nextTurnAsyncFunction = function() {
+            return Combat.prototype.nextTurnAsync.call(this)
+            .then(function(turn) {
+                // Check the bite:
+                if( turn.loneWolf > 0 && turn.loneWolf != combatTable_DEATH ) {
+                    var biteRandomValue = randomTable.getRandomValue();
+                    turn.playerLossText = '(' + turn.playerLossText + ')';
+                    turn.playerLossText += ' Random: ' + biteRandomValue;
+                    if( biteRandomValue == 9 )
+                        turn.loneWolf = combatTable_DEATH;
+                    else
+                        turn.loneWolf = 0;
+                }
+
+                return jQuery.Deferred().resolve(turn).promise();
+            });
         };
         
         for(var i=0; i<sectionState.combats.length; i++) {
             var combat = sectionState.combats[i];
-            combat.nextTurn = nextTurnFunction;
+            combat.nextTurnAsync = nextTurnAsyncFunction;
         }
     }
 

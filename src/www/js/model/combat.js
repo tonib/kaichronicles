@@ -92,18 +92,25 @@ Combat.prototype.getCombatRatio = function() {
 /**
  * Get the next combat turn
  * @param {boolean} elude True if the player is eluding the combat
- * @return {CombatTurn} The combat turn
+ * @return {Promise} Promise with the next CombatTurn
  */
-Combat.prototype.nextTurn = function( elude ) {
+Combat.prototype.nextTurnAsync = function( elude ) {
+
+    var dfd = jQuery.Deferred();
 
     // Calculate the turn
-    var turn = new CombatTurn(this.turns.length + 1, 
-        this.getCombatRatio(), this.dammageMultiplier, this.enemyMultiplier, 
-        this.mindforceEP , elude , this.enemyTurnLoss , this.turnLoss );
+    var self = this;
+    randomTable.getRandomValueAsync()
+    .then(function(randomValue) {
+        var turn = new CombatTurn(self.turns.length + 1, randomValue,
+            self.getCombatRatio(), self.dammageMultiplier, self.enemyMultiplier, 
+            self.mindforceEP , elude , self.enemyTurnLoss , self.turnLoss );
 
-    this.turns.push( turn );
+        self.turns.push( turn );
+        dfd.resolve(turn);
+    });
 
-    return turn;
+    return dfd.promise();
 };
 
 /**
