@@ -26,15 +26,6 @@ var actionChartView = {
         // Bind event for drop meals
         objectsTable.bindEquipmentEvents( $('#achart-dropmeal') );
 
-        // Bind drop money event
-        $('#achart-dropmoney' ).click(function() {
-            if( state.actionChart.beltPouch <= 0 )
-                return;
-            if( !confirm( translations.text('msgDropCoin') ) )
-                return;
-            actionChartController.increaseMoney(-1);
-        });
-
         // Annotations
         $('#achart-annotations').val( actionChart.annotations );
         $('#achart-annotations').off();
@@ -89,7 +80,6 @@ var actionChartView = {
 
     updateMoney: function() {
         $('#achart-beltPouch').val( state.actionChart.beltPouch + ' ' + translations.text('goldCrowns') );
-        $('#achart-dropmoney').prop( 'disabled', state.actionChart.beltPouch <= 0 );
     },
 
     /**

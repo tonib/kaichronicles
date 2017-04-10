@@ -23,7 +23,6 @@ var translations = {
         'backpackItems' : 'Objetos de Mochila',
         'meals' : 'Comidas',
         'specialItems' : 'Objetos Especiales',
-        'msgDropCoin' : '¿Seguro que quieres dejar 1 Corona de Oro?',
         'noneFemenine' : 'Ninguna',
         'noneMasculine' : 'Ninguno',
         'disciplineDescription' : 'Descripción de la disciplina',
@@ -237,7 +236,6 @@ var translations = {
         //////////////////////////////////////
 
         'actionChart' : 'Action Chart',
-        'msgDropCoin' : 'Are you sure you want to drop 1 Gold Crown?',
         'noneFemenine' : 'None',
         'noneMasculine' : 'None',
         'disciplineDescription' : 'Discipline description',

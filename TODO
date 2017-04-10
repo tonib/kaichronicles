@@ -1,11 +1,6 @@
 - Upload to google play:
   * Sign apk
   * Icons and images
-- Money handling: 
-  * Allow to drop an arbitrary amount of money, not just a single coin
-  * Support for money as object on section
-  * Allow to pick droped money
-  * Until that, remove the option to drop a single coin...
 - Save games is not working on safari
 - RE-TEST the random table
 - Death UI should be located after the choices, not before (spanish deadends)
@@ -43,9 +38,12 @@
 - Book 5 / sect400: Report differences: On part I you can loss all your inventory and
   do not recover it. On sect400 (english)  you always can recover sommerswerd. On
   spanish version not
-- Performance: Do not load automatically book 1 cover on startup (see network on f12)
 - UI: All buttons should be width 100%
-
+- Money handling: 
+  * Allow to drop an arbitrary amount of money, not just a single coin
+  * Support for money as object on section
+  * Allow to pick droped money
+  
 Reminders:
 
 * DON'T BE RESTRICTIVE WITH CHOICES !!!!
