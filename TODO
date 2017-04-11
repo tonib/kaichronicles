@@ -1,8 +1,6 @@
 - Upload to google play:
   * Sign apk
   * Icons and images
-- RE-TEST the random table
-- Death UI should be located after the choices, not before (spanish deadends)
 - If you pick an object on the current section: 
   * The rules conditioned by "hasObject" (or "meal" rules) should be re-executed
   * Update combats combat ratio UI

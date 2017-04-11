@@ -100,22 +100,29 @@ var gameView = {
 
     /**
      * Appends HTML to the current section
-     * @param html The HTML to append
+     * @param {string|jQuery} html The HTML to append
+     * @param {bool} beforeChoices True if it should be append before choices. False, after
+     * section body and before choices
      */
-    appendToSection: function(html) {
+    appendToSection: function(html, beforeChoices) {
 
         // Try to add the html before the first choice:
-        var $firstChoice = $('p.choice').first();
-        if( $firstChoice.length > 0 )
-            $firstChoice.before(html);
-        else {
-            // Add to the end, but before foot notes
-            if( $('div.footnotes').length > 0 ) {
-                $('hr').first().before(html);
+        if( !beforeChoices ) {
+            var $firstChoice = $('p.choice').first();
+            if( $firstChoice.length > 0 ) {
+                $firstChoice.before(html);
+                return;
             }
-            else
-                $('#game-section').append(html);
         }
+        
+        if( $('div.footnotes').length > 0 ) {
+            // Add to the end, but before foot notes
+            $('hr').first().before(html);
+        }
+        else
+            // Add at the end
+            $('#game-section').append(html);
+        
     },
 
     /**

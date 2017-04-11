@@ -1059,7 +1059,7 @@ var mechanicsEngine = {
         if( state.actionChart.currentEndurance <= 0 && $('#mechanics-death').length === 0 ) {
 
             // Add the death UI
-            gameView.appendToSection( mechanicsEngine.getMechanicsUI('mechanics-death') );
+            gameView.appendToSection( mechanicsEngine.getMechanicsUI('mechanics-death') , true );
 
             // Disable all choice links
             mechanicsEngine.setChoiceState('all' , true);
