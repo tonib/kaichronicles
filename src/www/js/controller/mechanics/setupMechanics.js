@@ -162,18 +162,18 @@ var setupMechanics = {
         gameView.enableNextLink(false);
         $('#mechanics-chooseEquipment-msg').text( mechanicsEngine.getRuleText( rule ) );
 
-        // Function to test all links were clicked
-        var testAllClicked = function() {
-            if( $('.action').not('.disabled').length === 0 ) {
-                $('#mechanics-chooseEquipment').hide();
-                gameView.enableNextLink(true);
-            }
-        };
+        // Initial test. Other tests are in randomMechanics.onRandomTableMechanicsClicked()
+        setupMechanics.chooseEquipmentTestAllClicked();
+    },
 
-        // Initial test
-        testAllClicked();
-        // Test when some link is clicked
-        $('.action').click(function() { testAllClicked(); });
+    /**
+     * Checks if all links on the Equipment section have been clicked
+     */
+    chooseEquipmentTestAllClicked: function() {
+        if( $('.action').not('.disabled').length === 0 ) {
+            $('#mechanics-chooseEquipment').hide();
+            gameView.enableNextLink(true);
+        }
     }
 
 };

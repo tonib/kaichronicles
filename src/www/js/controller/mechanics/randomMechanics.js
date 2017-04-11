@@ -193,6 +193,10 @@ var randomMechanics = {
                 mechanicsEngine.runRule(childRule);
         });
 
+        // Ugly hack: If we are on the 'equipment' section, check if all link has been clicked
+        if( state.sectionStates.currentSection == 'equipmnt' )
+            setupMechanics.chooseEquipmentTestAllClicked();
+
         // Mark the rule as executed
         var r = randomValue, i = increment;
         state.sectionStates.markRuleAsExecuted( rule, { randomValue: r , increment: i } );

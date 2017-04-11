@@ -24,7 +24,6 @@
   * Add the title section info (authors info, and more)
 - Save the scroll position on the current section when you change of page
 - If the hunting is disabled on the current section, show it on some place (Action Chart?)
-- Implement phisical random tables (pick on the screen) ???
 - Use project aon colors ???
 - Book 2 sect290, there are spanish / english inconsistencies
 - Add robots file, description tags, etc for Web Search. Search Console?. 
@@ -41,6 +40,8 @@
   * Support for money as object on section
   * Allow to pick droped money
 - Save games is not working on safari
+- Phisical random table when you choose weaponskill discipline is not displayed
+- Toasts appear over the random table
 
 Reminders:
 
