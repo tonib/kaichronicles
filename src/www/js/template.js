@@ -208,6 +208,9 @@ var template = {
         // Translate the dialog
         translations.translateTags( $('#template-combatTables') );
         
+        // Hide toasts
+        toastr.clear();
+
         // Set the translated images
         var combatTablesUrls = state.book.getCombatTablesImagesUrls(state.mechanics);
         $('#template-ctimage0').attr('src', combatTablesUrls[0]);
@@ -215,13 +218,23 @@ var template = {
         $('#template-combatTables').modal('show');
     },
 
+    /**
+     * Show the random table dialog
+     */
     showRandomTable: function(show) {
         var $randomModal = $('#template-randomtable');
-        if( show )
+        if( show ) {
+            // Hide toasts
+            toastr.clear();
+            // Translate the dialog
             translations.translateTags( $randomModal );
+        }
         $randomModal.modal( show ? 'show' : 'hide' );
     },
 
+    /**
+     * Populate the random table values with the current book random table
+     */
     fillRandomTableModal: function(numbers) {
 
         // Fill table
