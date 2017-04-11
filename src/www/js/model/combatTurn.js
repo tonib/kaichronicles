@@ -76,29 +76,40 @@ CombatTurn.prototype.getPlayerLossText = function() { return this.playerLossText
  * Calculate the text with the player loss
  */
 CombatTurn.prototype.calculatePlayerLossText = function() {
-    var loss = this.loneWolfBase.toString();
-    if( this.enemyMultiplier != 1 )
-        loss = loss + " x " + this.enemyMultiplier;
-    if( this.loneWolfExtra !== 0 )
-        loss += " + " + ( - this.loneWolfExtra );
-    if( this.enemyMultiplier != 1 || this.loneWolfExtra !== 0 )
-        loss += " = " + this.loneWolf;
-    return loss;
+    return CombatTurn.lossText( this.loneWolfBase , this.enemyMultiplier , this.loneWolfExtra ,
+        this.loneWolf );
 };
 
 /**
  * Return a text with the enemy loss
  */
 CombatTurn.prototype.getEnemyLossText = function() {
-    var loss = this.enemyBase.toString();
-    if( this.dammageMultiplier != 1 )
-        loss = loss + " x " + this.dammageMultiplier;
-    if( this.enemyExtra !== 0 )
-        loss += " + " + ( - this.enemyExtra );
-    if( this.dammageMultiplier != 1 || this.enemyExtra !== 0 )
-        loss += " = " + this.enemy;
+    return CombatTurn.lossText( this.enemyBase , this.dammageMultiplier , this.enemyExtra , 
+        this.enemy );
+};
+
+/**
+ * Translate the loss
+ * @param {string|number} loss It can be a number with the loss, or combatTable_DEATH
+ */
+CombatTurn.translateLoss = function(loss) {
+    return loss == combatTable_DEATH ? translations.text( 'deathLetter' ) : loss.toString();
+};
+
+/**
+ * Get a text for a turn result
+ */
+CombatTurn.lossText = function( base , multiplier , extra , finalLoss ) {
+    var loss = CombatTurn.translateLoss( base );
+    if( multiplier != 1 )
+        loss = loss + " x " + multiplier;
+    if( extra !== 0 )
+        loss += " + " + ( - extra );
+    if( multiplier != 1 || extra !== 0 )
+        loss += " = " + CombatTurn.translateLoss( finalLoss );
     return loss;
 };
+
 
 /**
  * Apply a multiplier to a combat endurance loss

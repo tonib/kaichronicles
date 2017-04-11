@@ -71,6 +71,7 @@ var translations = {
         'enduranceUpper' : 'RESISTENCIA',
         'playTurn' : 'Jugar turno',
         'eludeCombat' : 'Eludir combate',
+        'deathLetter' : 'M',
         
         //////////////////////////////////////
         // Meals
@@ -283,6 +284,7 @@ var translations = {
         'combatSkillUpper' : 'COMBAT SKILL',
         'enduranceUpper' : 'ENDURANCE',
         'loneWolf': 'Lone Wolf',
+        'deathLetter' : 'K',
 
         //////////////////////////////////////
         // Number picker
