@@ -114,10 +114,12 @@ var routing = {
      */
     onHashChange: function() {
 
+        var controller;
+
         // Notify the previous controler that we leave
         try {
             if( routing.lastControllerName ) {
-                var controller = routing.getController(routing.lastControllerName);
+                controller = routing.getController(routing.lastControllerName);
                 if( controller && controller.onLeave ) {
                     console.log('Leaving ' + routing.lastControllerName);
                     controller.onLeave();
@@ -130,7 +132,7 @@ var routing = {
 
         // Move to the new controller
         try {
-            var controller = routing.getCurrentController();
+            controller = routing.getCurrentController();
             if( !controller )
                 console.log("Undefined controller: " + routing.getControllerName() );
             else {
