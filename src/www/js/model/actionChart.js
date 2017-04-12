@@ -26,6 +26,7 @@ function ActionChart() {
     this.hasBackpack = true;
 
     this.disciplines = [];
+    
     /** The weapon code for the "wepnskll" discipline */
     this.weaponSkill = '';
 
@@ -36,6 +37,11 @@ function ActionChart() {
      * Use manual random table?
      */
     this.manualRandomTable = false;
+
+    /**
+     * The latests scroll position on the game section
+     */
+    this.yScrollPosition = 0;
 
     // Debug fast setup:
     if( window.getUrlParameter('debug') ) {

@@ -1,15 +1,7 @@
 - Upload to google play:
   * Sign apk
   * Icons and images
-- If you pick an object on the current section: 
-  * The rules conditioned by "hasObject" (or "meal" rules) should be re-executed
-  * Update combats combat ratio UI
 - ERROR: Hunting STILL activated on book 3...
-- If the book load fails, it doest not try to reload the next time
-- Test all books / all sections rendering. It should be valid HTML5
-  (https://validator.w3.org/docs/api.html)
-- Test tags <ch.* /> replacements
-- Test controller: Test rules
 - Find "TODO" and do it
 - Android application:
   * App lifeciclye
@@ -17,19 +9,9 @@
   * Load games page: Remove ".json" extension
   * Replace toastr by Android toasts ???
   * Remove animations from modal dialogs (only for Android, performance...)
-- Document all rules
-- Combats should be sequential: First finish the first one, then the second, etc
-- Toasts with images: align text when the text is multiline
-- About the book: 
-  * Add the title section info (authors info, and more)
-- Save the scroll position on the current section when you change of page
-- If the hunting is disabled on the current section, show it on some place (Action Chart?)
-- Use project aon colors ???
 - Book 2 sect290, there are spanish / english inconsistencies
 - Add robots file, description tags, etc for Web Search. Search Console?. 
   * Register visits to setup controller (new games / continue game)
-- Common performance (Android and web):
-  * Rendering performance on book 2 / sect equimpnt
 - Book 5 / sect400: Report differences: On part I you can loss all your inventory and
   do not recover it. On sect400 (english)  you always can recover sommerswerd. On
   spanish version not
@@ -40,6 +22,19 @@
   * Allow to pick droped money
 - Save games is not working on safari
 - Phisical random table when you choose weaponskill discipline is not displayed
+- Toasts with images: align text when the text is multiline
+- Combats should be sequential: First finish the first one, then the second, etc
+- About the book: 
+  * Add the title section info (authors info, and more)
+- If the hunting is disabled on the current section, show it on some place (Action Chart?)
+- Use project aon colors ???
+- Document all rules
+- Common performance (Android and web):
+  * Rendering performance on book 2 / sect equimpnt
+- Test all books / all sections rendering. It should be valid HTML5
+  (https://validator.w3.org/docs/api.html)
+- Test tags <ch.* /> replacements
+- Test controller: Test rules
 
 Reminders:
 

@@ -26,7 +26,7 @@ var gameController = {
             var sec = state.sectionStates.currentSection;
             if( !sec )
                 sec = 'tssf';
-            gameController.loadSection(sec);
+            gameController.loadSection(sec, false, state.actionChart.yScrollPosition);
         });
 
     },
@@ -95,6 +95,23 @@ var gameController = {
     },
 
     /** Return page */
-    getBackController: function() { return 'mainMenu'; }
+    getBackController: function() { 
+        return 'mainMenu'; 
+    },
+
+    /**
+     * On leave controller
+     */
+    onLeave: function() {
+        
+        if( !state || !state.actionChart )
+            return;
+
+        // Store the scroll position
+        console.log('current scroll: ' + window.pageYOffset);
+        state.actionChart.yScrollPosition = window.pageYOffset;
+
+        state.persistState();
+    }
 
 };

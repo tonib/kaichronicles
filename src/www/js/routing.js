@@ -6,6 +6,11 @@
 var routing = {
 
     /**
+     * The current controller name
+     */
+    lastControllerName: null,
+
+    /**
      * Redirect to some controler / action route
      * @param {string} route The route to redirect. It has a format "controller".
      * @param {object} parameters Hash with parameters for the route. It can be null
@@ -57,26 +62,39 @@ var routing = {
      * Get the controller name from the current URL hash
      */
     getControllerName: function() {
-        var route = routing.normalizeHash( location.hash );
-        var idxParms = route.indexOf('?');
-        if( idxParms >= 0 )
-            route = route.substring( 0 , idxParms );
+        try {
+            var route = routing.normalizeHash( location.hash );
+            var idxParms = route.indexOf('?');
+            if( idxParms >= 0 )
+                route = route.substring( 0 , idxParms );
 
-        return route + 'Controller';
+            return route + 'Controller';
+        }
+        catch(e) {
+            console.log(e);
+            return null;
+        }
     },
 
-    /** Get the current controller object */
-    getCurrentController: function() {
-        //console.log('route: ' + route);
+    /** Get the the controller object by its name */
+    getController: function(controllerName) {
         try {
+            if( !controllerName )
+                return null;
+
             /* jshint ignore:start */
-            return eval( routing.getControllerName() );
+            return eval( controllerName );
             /* jshint ignore:end */
         }
         catch(e) {
             console.log(e);
             return null;
         }
+    },
+
+    /** Get the current controller object */
+    getCurrentController: function() {
+        return routing.getController( routing.getControllerName() );
     },
 
     /**
@@ -95,13 +113,31 @@ var routing = {
      * Hash change event handler
      */
     onHashChange: function() {
-        //console.log('onHashChange');
+
+        // Notify the previous controler that we leave
+        try {
+            if( routing.lastControllerName ) {
+                var controller = routing.getController(routing.lastControllerName);
+                if( controller && controller.onLeave ) {
+                    console.log('Leaving ' + routing.lastControllerName);
+                    controller.onLeave();
+                }
+            }
+        }
+        catch(e) {
+            console.log(e);
+        }
+
+        // Move to the new controller
         try {
             var controller = routing.getCurrentController();
             if( !controller )
                 console.log("Undefined controller: " + routing.getControllerName() );
-            else
+            else {
+                // Store the new hash
+                routing.lastControllerName = routing.getControllerName();
                 controller.index();
+            }
         }
         catch(e) {
             console.log(e);
