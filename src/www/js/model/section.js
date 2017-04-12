@@ -77,7 +77,7 @@ Section.prototype.getPreviousSectionId = function() {
 
 /**
  * Returns the section HTML
- * @param {bool} renderIllustrationsText True if the illustrations text should be 
+ * @param {boolean} renderIllustrationsText True if the illustrations text should be 
  * rendered
  */
 Section.prototype.getHtml = function(renderIllustrationsText) {

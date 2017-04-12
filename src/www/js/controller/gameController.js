@@ -34,9 +34,10 @@ var gameController = {
     /**
      * Load and display a section
      * @param {string} sectionId The section id to display
-     * @param {bool} choiceLinkClicked True if the section is load due to a choice link click
+     * @param {boolean} choiceLinkClicked True if the section is load due to a choice link click
+     * @param {number} yScroll y coord. where to scroll initially
      */
-    loadSection: function(sectionId, choiceLinkClicked ) {
+    loadSection: function(sectionId, choiceLinkClicked , yScroll ) {
 
         // Load and display the section
         var newSection = new Section(state.book, sectionId, state.mechanics);
@@ -69,8 +70,10 @@ var gameController = {
         // Bind choice links
         gameView.bindChoiceLinks();
 
-        // Scroll to top
-        window.scrollTo(0, 0);
+        // Scroll to top (or to the indicated place)
+        if( !yScroll )
+            yScroll = 0;
+        window.scrollTo(0, yScroll);
 
         // Persist state
         state.persistState();

@@ -49,7 +49,7 @@ BookSectionStates.prototype.getSectionState = function() {
  * Add an object to the current section
  * @param {string} objectId Object id to add
  * @param {number} price The object price
- * @param {bool} unlimited True if there are an infinite number of this kind of object on the section
+ * @param {boolean} unlimited True if there are an infinite number of this kind of object on the section
  */
 BookSectionStates.prototype.addObjectToSection = function(objectId, price, unlimited) {
     var sectionState = this.getSectionState();

@@ -113,7 +113,7 @@ BookDownloadState.resolveBooksDirectoryAsync = function() {
 
 /**
  * Get all available books
- * @param {bool} markAsDownloaded True if the books should be marked as downloaded
+ * @param {boolean} markAsDownloaded True if the books should be marked as downloaded
  * @return {Array<BookDownloadState>} All books state
  */
 BookDownloadState.getAllBooks = function(markAsDownloaded) {

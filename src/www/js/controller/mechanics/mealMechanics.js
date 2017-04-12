@@ -45,7 +45,10 @@ var mealMechanics = {
             $(mealSelector + ' .mechanics-eatHunt').hide();
 
         // Check if there are meals on the backpack
-        mealMechanics.updateEatBackpack();
+        if( state.actionChart.meals <= 0 )
+            $('.mechanics-eatMeal').hide();
+        else
+            $('.mechanics-eatMeal').show();
 
         // Check if you can buy a meal
         var price = $(rule).attr('price'); 
@@ -116,15 +119,6 @@ var mealMechanics = {
      */
     arePendingMeals: function() {
         return $('.mechanics-meal-ui').length > 0;
-    },
-
-    /**
-     * Update the meals option to eat a backpack meal
-     */
-    updateEatBackpack: function() {
-        if( state.actionChart.meals <= 0 )
-            $('.mechanics-eatMeal').hide();
-        else
-            $('.mechanics-eatMeal').show();
     }
+
 };

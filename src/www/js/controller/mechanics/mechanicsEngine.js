@@ -174,9 +174,9 @@ var mechanicsEngine = {
     /**
      * Fire events associated to inventory changes (pick, drop, etc)
      * @param {boolean} fromUI True if the event was fired from the UI
-     * @param {string} objectId Only applies if fromUI is true. The object picked / droped
+     * @param {Item} o Only applies if fromUI is true. The object picked / droped
      */
-    fireInventoryEvents: function(fromUI, objectId) {
+    fireInventoryEvents: function(fromUI, o ) {
 
         // Render object tables
         mechanicsEngine.showAvailableObjects();
@@ -185,16 +185,17 @@ var mechanicsEngine = {
         if( mechanicsEngine.onInventoryEventRule )
             mechanicsEngine.runChildRules( $(mechanicsEngine.onInventoryEventRule) );
 
-        // Update meals UI (have we picked a meal?)
-        mealMechanics.updateEatBackpack();
         // Update combat ratio on combats  (have we picked a weapon?)
         combatMechanics.updateCombats();
 
-        if( fromUI ) {
+        if( fromUI && routing.getControllerName() == 'gameController' ) {
             // Check if we must to re-render the section. This may be needed if the 
             // picked / dropped object affects to the rules
-            if( mechanicsEngine.checkReRenderAfterInventoryEvent(objectId) ) {
-                console.log('RE-RENDER!');
+            if( mechanicsEngine.checkReRenderAfterInventoryEvent(o) ) {
+                // Re-render the section
+                console.log('Re-rendering the section due to rules re-execution');
+                gameController.loadSection( state.sectionStates.currentSection , false , 
+                    window.pageYOffset);
             }
         }
 
@@ -203,8 +204,9 @@ var mechanicsEngine = {
     /**
      * Check if we must to re-render the section. This may be needed if the 
      * picked / dropped object affects to the rules
+     * @param {Item} o The object picked / droped
      */
-    checkReRenderAfterInventoryEvent: function(objectId) {
+    checkReRenderAfterInventoryEvent: function(o) {
         
         // Get section rules
         var $sectionRules = state.mechanics.getSection( state.sectionStates.currentSection );
@@ -217,14 +219,23 @@ var mechanicsEngine = {
                 // onInventoryEvent rule don't affect, has been executed
                 return 'ignoreDescendants';
             else if( rule.nodeName == 'test' ) {
+                // test rule
                 var objects = $(rule).attr('hasObject');
                 if( objects ) {
                     objects = objects.split('|');
-                    if( objects.contains(objectId) ) {
+                    if( objects.contains(o.id) ) {
                         // Section should be re-rendered
                         reRender = true;
                         return 'finish';
                     }
+                }
+            }
+            else if( rule.nodeName == 'meal' ) {
+                // meal rule
+                if( o.id == 'meal' || o.isMeal ) {
+                    // Section should be re-rendered
+                    reRender = true;
+                    return 'finish';
                 }
             }
         });

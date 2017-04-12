@@ -7,7 +7,7 @@ var template = {
      * Set the navbar title and target URL
      * @param {String} title The title to put on the navigation bar
      * @param {String} url The target URL for the title on the nav. bar
-     * @param {bool} showTitleOnSmallDevs True if the main title should be shown on
+     * @param {boolean} showTitleOnSmallDevs True if the main title should be shown on
      * small devices.
      */
     setNavTitle: function(title, url, showTitleOnSmallDevs ) { 
@@ -164,7 +164,7 @@ var template = {
      * change will not be animated (performance...)
      * @param {jQuery} $element Element selector to change
      * @param {number} newValue The new value to set
-     * @param {bool} doNotAnimate True if we should do not perform the animation
+     * @param {boolean} doNotAnimate True if we should do not perform the animation
      * @param {string} newColor The final HTML color of the element. If it's null, the default
      * color for the DOM element will be used
      */

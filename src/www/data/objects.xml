@@ -247,6 +247,8 @@
         </special>
         
         <special id="baknaroil" droppable="false">
+            <!-- On books this is not really an object, just an "annotation" on 
+                the action chart... -->
             <name lang="en">Baknar Oil on your skin</name>
             <description lang="en">
                 Baknar oil gives excellent insulation from the bitter cold of Kalte

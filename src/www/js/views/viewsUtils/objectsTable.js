@@ -182,7 +182,7 @@ var objectsTable = {
 
                     actionChartController.drop( o.id , false , true );
                     actionChartController.increaseMoney( price );
-                    mechanicsEngine.fireInventoryEvents(true, o.id);
+                    mechanicsEngine.fireInventoryEvents(true, o);
                     break;
 
                 case 'use':
@@ -244,7 +244,7 @@ var objectsTable = {
             }
 
             // Refresh the table of available objects
-            mechanicsEngine.fireInventoryEvents(true, o.id);
+            mechanicsEngine.fireInventoryEvents(true, o);
 
         }
         

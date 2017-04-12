@@ -164,7 +164,7 @@ SectionState.prototype.combatsDuration = function(who) {
 
 /**
  * Set combats as enabled / disabled
- * @param {bool} enabled True to enable combats. False to disable them
+ * @param {boolean} enabled True to enable combats. False to disable them
  */
 SectionState.prototype.setCombatsEnabled = function(enabled) {
     for( var i=0, len = this.combats.length; i< len; i++)
@@ -175,7 +175,7 @@ SectionState.prototype.setCombatsEnabled = function(enabled) {
  * Add an object to the section
  * @param {string} objectId Object id to add
  * @param {number} price The object price
- * @param {bool} unlimited True if there are an infinite number of this kind of object on the section
+ * @param {boolean} unlimited True if there are an infinite number of this kind of object on the section
  */
 SectionState.prototype.addObjectToSection = function(objectId, price, unlimited) {
     this.objects.push({

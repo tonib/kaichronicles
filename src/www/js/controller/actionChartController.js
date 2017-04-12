@@ -124,7 +124,7 @@ var actionChartController = {
                 state.sectionStates.addObjectToSection( objectId );
 
                 // Render available objects on this section (game view)
-                mechanicsEngine.fireInventoryEvents( fromUI , objectId);
+                mechanicsEngine.fireInventoryEvents( fromUI , o );
             }
 
         }

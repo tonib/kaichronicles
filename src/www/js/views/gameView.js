@@ -101,7 +101,7 @@ var gameView = {
     /**
      * Appends HTML to the current section
      * @param {string|jQuery} html The HTML to append
-     * @param {bool} beforeChoices True if it should be append before choices. False, after
+     * @param {boolean} beforeChoices True if it should be append before choices. False, after
      * section body and before choices
      */
     appendToSection: function(html, beforeChoices) {
