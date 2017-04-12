@@ -63,15 +63,17 @@ var actionChartController = {
     
     /**
      * Drop an object
-     * @param objectId The object to drop, 
+     * @param {string} objectId The object to drop, 
      * or "allweapons" to drop all weapons, 
      * or "backpackcontent" to drop all backpack content, 
      * or "currentweapon" to drop the current weapon,
      * or "allspecial" to drop all the special items
      * or "all" to drop all (weapons, backpack, special items, and money)
-     * @param availableOnSection True if the object should be available on the current section
+     * @param {boolean} availableOnSection True if the object should be available on 
+     * the current section
+     * @param {boolean} fromUI True if the action is fired from the UI
      */
-    drop: function(objectId, availableOnSection) {
+    drop: function(objectId, availableOnSection, fromUI) {
 
         if( objectId == 'allweapons' ) {
             actionChartController.dropItemsList( state.actionChart.weapons );
@@ -122,7 +124,7 @@ var actionChartController = {
                 state.sectionStates.addObjectToSection( objectId );
 
                 // Render available objects on this section (game view)
-                mechanicsEngine.showAvailableObjects();
+                mechanicsEngine.fireInventoryEvents( fromUI , objectId);
             }
 
         }
@@ -299,7 +301,7 @@ var actionChartController = {
         }
         if( renderAvailableObjects )
             // Render available objects on this section (game view)
-            mechanicsEngine.showAvailableObjects();
+            mechanicsEngine.fireInventoryEvents();
     },
 
     /**

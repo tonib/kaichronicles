@@ -111,11 +111,8 @@ var mechanicsEngine = {
         // Get and run section rules
         mechanicsEngine.runSectionRules();
 
-        // Render available objects on this section
-        mechanicsEngine.showAvailableObjects();
-
-        // Render sell prices on this section
-        mechanicsEngine.showSellObjects();
+        // Render available / to sell objects on this section
+        mechanicsEngine.fireInventoryEvents();
 
         // Fire combat turns events (for restored combats)
         mechanicsEngine.fireAfterCombatTurn(null);
@@ -176,14 +173,62 @@ var mechanicsEngine = {
 
     /**
      * Fire events associated to inventory changes (pick, drop, etc)
+     * @param {boolean} fromUI True if the event was fired from the UI
+     * @param {string} objectId Only applies if fromUI is true. The object picked / droped
      */
-    fireInventoryEvents: function() {
+    fireInventoryEvents: function(fromUI, objectId) {
+
+        // Render object tables
+        mechanicsEngine.showAvailableObjects();
+        mechanicsEngine.showSellObjects();
+
         if( mechanicsEngine.onInventoryEventRule )
             mechanicsEngine.runChildRules( $(mechanicsEngine.onInventoryEventRule) );
+
         // Update meals UI (have we picked a meal?)
         mealMechanics.updateEatBackpack();
         // Update combat ratio on combats  (have we picked a weapon?)
         combatMechanics.updateCombats();
+
+        if( fromUI ) {
+            // Check if we must to re-render the section. This may be needed if the 
+            // picked / dropped object affects to the rules
+            if( mechanicsEngine.checkReRenderAfterInventoryEvent(objectId) ) {
+                console.log('RE-RENDER!');
+            }
+        }
+
+    },
+
+    /**
+     * Check if we must to re-render the section. This may be needed if the 
+     * picked / dropped object affects to the rules
+     */
+    checkReRenderAfterInventoryEvent: function(objectId) {
+        
+        // Get section rules
+        var $sectionRules = state.mechanics.getSection( state.sectionStates.currentSection );
+        if( $sectionRules === null )
+            return false;
+
+        var reRender = false;
+        mechanicsEngine.enumerateSectionRules( $sectionRules[0] , function(rule) {
+            if( rule.nodeName == 'onInventoryEvent' )
+                // onInventoryEvent rule don't affect, has been executed
+                return 'ignoreDescendants';
+            else if( rule.nodeName == 'test' ) {
+                var objects = $(rule).attr('hasObject');
+                if( objects ) {
+                    objects = objects.split('|');
+                    if( objects.contains(objectId) ) {
+                        // Section should be re-rendered
+                        reRender = true;
+                        return 'finish';
+                    }
+                }
+            }
+        });
+        return reRender;
     },
 
     /**
@@ -934,8 +979,6 @@ var mechanicsEngine = {
         // Fill the objects list:
         objectsTable.objectsList(sectionState.objects, $table , 'available' );
         
-        // Fire events
-        mechanicsEngine.fireInventoryEvents();
     },
 
     /**
@@ -1219,6 +1262,28 @@ var mechanicsEngine = {
         }
 
         return nCurrentlyPickedObjects;
+    },
+
+    /**
+     * Execute a function for each rule on a section
+     * @param {XmlNode} rule The root rule
+     * @param {function(XmlNode)} callback The function to execute
+     */
+    enumerateSectionRules: function( rule , callback ) {
+
+        var result = callback( rule );
+        if( result == 'finish' )
+            return 'finish';
+        else if( result == 'ignoreDescendants' )
+            return;
+
+        var childrenRules = $(rule).children();
+        for(var i=0; i<childrenRules.length; i++) {
+            result = mechanicsEngine.enumerateSectionRules( childrenRules[i] , callback );
+            if( result == 'finish' )
+                return 'finish';
+        }
+
     }
 
 };

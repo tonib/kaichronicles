@@ -180,9 +180,9 @@ var objectsTable = {
                     if( !confirm( translations.text( 'confirmSell' , [ price ] ) ) )
                         return;
 
-                    actionChartController.drop( o.id , false );
+                    actionChartController.drop( o.id , false , true );
                     actionChartController.increaseMoney( price );
-                    mechanicsEngine.showSellObjects();
+                    mechanicsEngine.fireInventoryEvents(true, o.id);
                     break;
 
                 case 'use':
@@ -192,7 +192,7 @@ var objectsTable = {
 
                 case 'drop':
                     if( confirm( translations.text( 'confirmDrop' , [o.name] ) ) )
-                        actionChartController.drop( o.id , true );
+                        actionChartController.drop( o.id , true , true );
                     break;
 
                 case 'currentWeapon':
@@ -237,15 +237,15 @@ var objectsTable = {
                 // Remove it from the available objects on the section
                 state.sectionStates.removeObjectFromSection( o.id );
             }
-            
-            // Refresh the table of available objects
-            mechanicsEngine.showAvailableObjects();
-            mechanicsEngine.showSellObjects();
 
             if( price ) {
                 // Pay the price
                 actionChartController.increaseMoney( - price );
             }
+
+            // Refresh the table of available objects
+            mechanicsEngine.fireInventoryEvents(true, o.id);
+
         }
         
     }
