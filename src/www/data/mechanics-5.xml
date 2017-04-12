@@ -1769,7 +1769,7 @@
         </section>
 
         <section id="sect350">
-            <!-- Sommerswerd willbe restored at sect400 -->
+            <!-- Sommerswerd will be restored at sect400 -->
             <endurance count="-3" />
             <drop objectId="sommerswerd" />
             <test not="true" hasDiscipline="mindshld" >

@@ -1,21 +1,17 @@
 - Upload to google play:
   * Sign apk
   * Icons and images
+- Add robots file, description tags, etc for Web Search. Search Console?. 
+  * Register visits to setup controller (new games / continue game)
+
+FOR FUTURE (1.7+ / 2018):
 - ERROR: Hunting STILL activated on book 3...
-- Find "TODO" and do it
 - Android application:
   * App lifeciclye
   * Load games page: Show info about saved games
   * Load games page: Remove ".json" extension
   * Replace toastr by Android toasts ???
   * Remove animations from modal dialogs (only for Android, performance...)
-- Book 2 sect290, there are spanish / english inconsistencies
-- Add robots file, description tags, etc for Web Search. Search Console?. 
-  * Register visits to setup controller (new games / continue game)
-- Book 5 / sect400: Report differences: On part I you can loss all your inventory and
-  do not recover it. On sect400 (english)  you always can recover sommerswerd. On
-  spanish version not
-- UI: All buttons should be width 100%
 - Money handling: 
   * Allow to drop an arbitrary amount of money, not just a single coin
   * Support for money as object on section
@@ -35,6 +31,7 @@
   (https://validator.w3.org/docs/api.html)
 - Test tags <ch.* /> replacements
 - Test controller: Test rules
+- Find "TODO" and do it
 
 Reminders:
 
