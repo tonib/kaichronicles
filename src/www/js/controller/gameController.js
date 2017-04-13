@@ -108,7 +108,7 @@ var gameController = {
             return;
 
         // Store the scroll position
-        console.log('current scroll: ' + window.pageYOffset);
+        //console.log('current scroll: ' + window.pageYOffset);
         state.actionChart.yScrollPosition = window.pageYOffset;
 
         state.persistState();
