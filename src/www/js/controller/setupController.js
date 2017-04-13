@@ -23,13 +23,15 @@ var setupController = {
         if( state.existsPersistedState() ) {
             template.updateStatistics(true);
             state.restoreState();
+            setupController.recordPageVisit('continue');
         }
         else {
-            // New book. Get hash URL parameters
+            // New game. Get hash URL parameters
             var bookNumber = parseInt( routing.getHashParameter('bookNumber') );
             var language = routing.getHashParameter('language');
             var keepActionChart = routing.getHashParameter('keepActionChart');
             state.setup(bookNumber, language, keepActionChart);
+            setupController.recordPageVisit('newgame');
         }
         template.translateMainMenu();
 
@@ -147,6 +149,23 @@ var setupController = {
             return false;
         }
         return true;
+    },
+
+    /**
+     * Record page on Google Analytics
+     * @param {string} pageName The page name to record
+     */
+    recordPageVisit: function(pageName) {
+        try {
+            if( ENVIRONMENT == 'PRODUCTION' && !cordovaApp.isRunningApp() ) {
+                var url = '/' + pageName + '-' + state.book.bookNumber + '.html';
+                ga('set', 'page', url);
+                ga('send', 'pageview');
+            }
+        }
+        catch(e) {
+            console.log(e);
+        }
     },
 
     /** Return page */
