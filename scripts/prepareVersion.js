@@ -8,6 +8,7 @@ const preprocess = require( 'preprocess' );
 const child_process = require('child_process');
 const process = require('process');
 const path = require('path');
+const readline = require('readline');
 
 /**
  * Recreate the dist directory
@@ -85,14 +86,40 @@ function buildAndroidApp() {
     try {
         // Run cordova command line
         console.log('Building Android app');
-        child_process.execFileSync('cordova', ['clean', 'android'] , {stdio:[0,1,2]} );
-        child_process.execFileSync('cordova', ['build', 'android'] , {stdio:[0,1,2]} );
 
-        // Copy the apk to the web root
-        // TODO: Sign the apk to upload to the Google Play
-        console.log('Copy the generated apk to the web root');
-        fs.copySync( 'platforms/android/build/outputs/apk/android-debug.apk' , 
-            'www/kai.apk' );
+        // Clean
+        child_process.execFileSync('cordova', ['clean', 'android'] , {stdio:[0,1,2]} );
+
+        // Request the keystore password
+        const rl = readline.createInterface({
+            input: process.stdin,
+            output: process.stdout
+        });
+        var params = ['build', 'android' , '--release' ];
+        rl.question('keystore password (empty for do not sign apk): ', function(pwd) {
+
+            process.chdir('dist/src');
+
+            if( pwd ) {
+                // cordova build android --release -- --keystore=../../keystore/projectaon.keystore --storePassword=[PASSWORD] --alias=projectaon --password=[PASSWORD]
+                console.log('Building SIGNED');
+                params.push( '--' );
+                params.push( '--keystore=../../keystore/projectaon.keystore' );
+                params.push( '--storePassword=' + pwd );
+                params.push( '--password=' + pwd );
+                params.push( '--alias=projectaon' );
+            }
+            else
+                console.log('Building UNSIGNED');
+            
+            child_process.execFileSync('cordova', params , {stdio:[0,1,2]} );
+
+            // Copy the apk to the web root
+            // TODO: Sign the apk to upload to the Google Play
+            console.log('Copy the generated apk to the web root');
+            fs.copySync( 'platforms/android/build/outputs/apk/android-release-unsigned.apk' , 
+                'www/kai.apk' );
+        });
     }
     catch(e) {
         console.log(e);
@@ -148,5 +175,5 @@ recreateDist();
 minifyJavascript();
 joinViews();
 buildAndroidApp();
-prepareDistDirectory();
+//prepareDistDirectory();
 
