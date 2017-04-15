@@ -1173,6 +1173,9 @@ var mechanicsEngine = {
             $nextBook.html() + '</a>' );
         $('#game-nextBook').click(function(e) {
             e.preventDefault();
+            // Move the scroll to the top: The scroll state will be stored when we leave
+            // the controller, and we want to start the next book with a scroll y=0
+            window.scrollTo(0, 0);
             state.nextBook();
             routing.redirect('setup');
         });
