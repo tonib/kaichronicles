@@ -148,14 +148,18 @@ function buildAndroidApp() {
         
         child_process.execFileSync('cordova', params , {stdio:[0,1,2]} );
 
-        var src;
-        if( pwd )
+        var src, dst;
+        if( pwd ) {
             src = 'platforms/android/build/outputs/apk/android-release.apk';
-        else
+            dst = 'kai-signed.apk'
+        }
+        else {
             src = 'platforms/android/build/outputs/apk/android-release-unsigned.apk';
+            dst = 'kai-UNSIGNED.apk'
+        }
 
-        console.log( 'Copying ' + src + ' to www/kai.apk' );
-        fs.copySync( src , 'www/kai.apk' );
+        console.log( 'Copying ' + src + ' to dist/' + dst );
+        fs.copySync( src , '../' + dst );
     }
     catch(e) {
         console.log(e);
