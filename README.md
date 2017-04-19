@@ -2,7 +2,8 @@
 
 This is a game player for Lone Wolf game books. Only books 1 - 5 are playable right
 now. It runs as a website or Android app. You can play it at 
-[https://www.projectaon.org/staff/toni](https://www.projectaon.org/staff/toni).
+[https://www.projectaon.org/staff/toni](https://www.projectaon.org/staff/toni) or download
+from the [Google Play](https://play.google.com/store/apps/details?id=org.projectaon.kaichronicles).
 
 This repository does not contain game books data. It must to be downloaded from the 
 [Project Aon web site](https://www.projectaon.org). 
@@ -15,8 +16,8 @@ This repository does not contain game books data. It must to be downloaded from 
 * You cannot redistribute the game books data in any way
 
 The Android older version supported is the 4.4.2 (API 19). The web is tested with the 
-latest version of Chrome and Firefox. So, other browsers or/and older versions maybe don't 
-work
+latest version of Chrome and Firefox. So, other browsers or/and older versions may don't 
+work.
 
 ## Setup
 
@@ -63,10 +64,13 @@ http://stackoverflow.com/questions/40351434/cordova-android-6-4-0-creates-res-fo
 
 ### Developing 
 
-Game rules for each book are located at www/data. "mechanics-X" are the game rules
+Game rules for each book are located at [src/www/data](src/www/data). "mechanics-X" are the game rules
 for the book X. "objects.xml" are the game objects
 
-The game rules implementation are at www/controller/mechanics/mechanicsEngine.js
+There is (unfished) documentation for [rules](doc/README-mechanics.md) and 
+[object formats](doc/README-objects.md).
+
+The game rules implementation are at src/www/controller/mechanics/.
 
 If you add "?debug=true" to the game URL, they will appear some debug tools.
 You also can use the browser Developer Tools to prepare the Action Chart to test sections.
@@ -75,6 +79,21 @@ So, in the console you can execute things like:
 actionChartController.pick('axe')
 actionChartController.increaseMoney(-10)
 ```
+
+There are some scripts for development:
+
+```bash
+    npm run downloaddata  # Download books data from the Project Aon
+    npm run lint          # Runs jshint over the javascript code
+    npm run prepareversion [-- KEYSTOREPASSWORD] # Prepare a version to upload on "dist" dir.
+    npm run clean         # Delete the "dist" dir
+```
+
+"npm run prepareversion" will generate a version to upload to the Google Play and the Project Aon 
+website on the "dist" directory. If you are me (probably not), you have the keystore to sign the 
+apk to upload to the Google Play. Then "KEYSTOREPASSWORD" is the password for the keystore. If 
+it's not specified, an unsigned .apk will be generated. I suspect it's not a good idea to publish 
+keystores on github.
 
 ### License
 

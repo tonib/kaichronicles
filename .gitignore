@@ -10,9 +10,6 @@ jsconfig.json
 .vscode
 typings
 
-# Apk build for distribution to Project AON (TODO: no longer used?)
-src/www/kai.apk
-
 # Distribution directory
 dist
 
