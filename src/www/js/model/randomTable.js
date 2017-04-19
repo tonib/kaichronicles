@@ -32,7 +32,6 @@ var randomTable = {
                 var index = Math.floor( Math.random() * 100.0 );
                 // Get the number for that index on the book random table
                 value = state.book.bookRandomTable[index];
-                template.showRandomTable();
             }
 
             if( ignoreZero && value === 0 )
