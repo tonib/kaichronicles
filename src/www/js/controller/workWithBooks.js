@@ -36,7 +36,7 @@ var workWithBooksController = {
     updateBooksList: function() {
 
         // Uncheck the "select all" check
-        workWithBooksView.setSelectAllUnchecked();
+        workWithBooksView.setSelectAllState(false);
 
         // Recreate the books list
         workWithBooksView.updateBooksList( state.localBooksLibrary.booksLibrary );
@@ -47,7 +47,10 @@ var workWithBooksController = {
             var downloadedBooks = state.localBooksLibrary.getDownloadedBooks();
             for(var i=0; i<downloadedBooks.length; i++)
                 workWithBooksView.markBookAsDownloaded( downloadedBooks[i].bookNumber );
-            // TODO: If all books are downloaded, check the "select all"
+
+            // If all books are downloaded, check the "select all"
+            if( downloadedBooks.length == state.localBooksLibrary.booksLibrary.length )
+                workWithBooksView.setSelectAllState(true);
         });
         
     },

@@ -54,8 +54,15 @@ var workWithBooksView = {
         workWithBooksController.closeCancelClicked();
     },
 
-    setSelectAllUnchecked: function() {
-        $('#wwbooks-all').removeAttr('checked');
+    /**
+     * Set the "select all" checked / unchecked
+     * @param {bool} checked True to check. False to uncheck
+     */
+    setSelectAllState: function(checked) {
+        if( checked )
+            $('#wwbooks-all').prop( 'checked' , 'checked' );
+        else
+            $('#wwbooks-all').removeAttr( 'checked' );
     },
 
     updateBooksList: function(booksState) {
