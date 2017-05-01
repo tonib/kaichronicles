@@ -10,13 +10,21 @@
 function BookDownloadState(bookNumber) {
     this.bookNumber = bookNumber;
     this.downloaded = false;
-    this.title = projectAon.getBookTitle( bookNumber, state.language );
+
     /**
      * The book size, in MB
      */
     this.size = ( projectAon.supportedBooks[bookNumber-1].zipSize / 1024.0 ) / 1024.0;
     this.size = this.size.toFixed(1);
 }
+
+/**
+ * Get the translated book title
+ * @return {string} The translated book title
+ */
+BookDownloadState.prototype.getTitle = function() {
+    return projectAon.getBookTitle( this.bookNumber, state.language );
+};
 
 /**
  * Check if the book is already downloaded

@@ -73,7 +73,7 @@ var workWithBooksView = {
         for(var i=0; i<booksState.length; i++) 
             html += '<tr data-book-number="' + booksState[i].bookNumber + 
                 '" style="width:100%"><td>' + 
-                booksState[i].bookNumber + '. ' + booksState[i].title + 
+                booksState[i].bookNumber + '. ' + booksState[i].getTitle() + 
                 '</td><td style="white-space: nowrap">' + booksState[i].size.toString() + ' MB</td>' + 
                 '<td class="center"><input type="checkbox"></td>' +
                 '</tr>';

@@ -14,7 +14,7 @@ var newGameView = {
         for( var i=0; i<downloadedBooks.length; i++) {
             html += '<option value="' + downloadedBooks[i].bookNumber + '" >' + 
                 downloadedBooks[i].bookNumber + '. ' + 
-                downloadedBooks[i].title + '</option>';
+                downloadedBooks[i].getTitle() + '</option>';
         }
         $('#newgame-book').html( html );
 
