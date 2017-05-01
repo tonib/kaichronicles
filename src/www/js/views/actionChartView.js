@@ -161,8 +161,14 @@ var actionChartView = {
     showInventoryMsg: function(action, object, msg) {
         var toastType = ( action == 'pick' ? 'success' : 'warning' );
         var html = '';
-        if( object && object.imageUrl)
-            html += '<img class="inventoryImg" src="' + object.imageUrl + '" /> ';
+
+        // Check if the object has an image
+        if( object) {
+            var imageUrl = object.getImageUrl();
+            if( imageUrl )
+                html += '<img class="inventoryImg" src="' + imageUrl + '" /> ';
+        }
+
         html += msg;
         html = '<div>' + html + '</div>';
         

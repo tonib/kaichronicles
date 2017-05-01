@@ -149,12 +149,16 @@ var template = {
         translations.translateTags( $('#template-objectDetails') );
 
         $('#template-objectTitle').text( o.name );
-        if( !o.imageUrl )
+
+        // Show / hide object image
+        var imageUrl = o.getImageUrl();
+        if( !imageUrl )
             $('#template-objectImage').hide();
         else {
             $('#template-objectImage').show();
-            $('#template-objectImage img').attr('src' , o.imageUrl);
+            $('#template-objectImage img').attr('src' , imageUrl);
         }
+
         $('#template-objectDescription').text(o.description);
         $('#template-objectDetails').modal('show');
     },

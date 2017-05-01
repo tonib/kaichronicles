@@ -1,5 +1,3 @@
-- Add cordova license info
-- Fix bug with object images
 
 FOR FUTURE (1.7+):
 - Try (and use?) Typescript (oh javascript...)
@@ -30,6 +28,7 @@ FOR FUTURE (1.7+):
 - Test tags <ch.* /> replacements
 - Test controller: Test rules
 - Find "TODO" and do it
+- Death UI: If you click restart book, prompt for confirmation
 
 Reminders:
 

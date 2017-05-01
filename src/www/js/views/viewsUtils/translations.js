@@ -135,7 +135,7 @@ var translations = {
         'gameMechanics' : 'Mecanicas del juego',
         'aboutKaiChronicles' : 'Mecánicas del juego escritas por Toni Bennasar. El código está bajo licencia MIT. Contien partes de código de <a href="https://lonewolfadventures.projectaon.org">Lone Wolf Adventures</a>, creado por Liquid State Limited',
         'distribution' : 'Distribución',
-        'distributionInfo' : 'Libro distribuido por el <a href="https://www.projectaon.org">Proyecto Aon</a>, bajo la <a href="#projectAonLicense">licencia del Project Aon</a>.',
+        'distributionInfo' : 'Libro distribuido por el <a href="https://www.projectaon.org">Proyecto Aon</a>, bajo la <a href="#projectAonLicense">licencia del Proyecto Aon</a>.',
 
         //////////////////////////////////////
         // Main menu

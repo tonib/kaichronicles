@@ -112,3 +112,4 @@ MIT. This application uses the following third-party code:
 * [Toastr](https://github.com/CodeSeven/toastr) (MIT)
 * [FileSaver.js](https://github.com/eligrey/FileSaver.js/) (MIT)
 * [jQuery](https://jquery.com/) (jQuery license)
+* [Apache Cordova](https://cordova.apache.org/) (Apache license)

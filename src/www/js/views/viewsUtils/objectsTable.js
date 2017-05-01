@@ -71,10 +71,11 @@ var objectsTable = {
         // Object operations
         html += objectsTable.operationsHtml( o , type , price , unlimited );
 
-        // Image
-        if( o.imageUrl ) {
+        // Objet Image
+        var imageUrl = o.getImageUrl();
+        if( imageUrl ) {
             html += '<span class="inventoryImgContainer"><img class="inventoryImg" src=' + 
-                o.imageUrl + ' /></span>';
+                imageUrl + ' /></span>';
         }
 
         // Name
@@ -85,7 +86,7 @@ var objectsTable = {
         if( objectId == 'map' )
             // It's the map:
             name = '<a href="#map">' + name + '</a>';
-        else if( o.imageUrl )
+        else if( imageUrl )
             // Add a link to view a larger version of the image
             name = '<a href="#" class="equipment-op" data-op="details" data-objectId="' + 
             o.id + '">' + name + '</a>';

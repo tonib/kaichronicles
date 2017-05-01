@@ -99,3 +99,20 @@ Item.prototype.isWeaponType = function(weaponType) {
         return this.weaponType.split('|').contains( weaponType ); 
     return false;
 };
+
+/**
+ * Get the object image URL.
+ * @return {string} The object image URL. null if the object has no image or we are
+ * running the Cordova app and the book for the image is not downloaded
+ */
+Item.prototype.getImageUrl = function() {
+
+    if( !this.imageUrl )
+        return null;
+
+    // Cordova app: Check if the book where is the image is downloaded
+    if( !state.localBooksLibrary.isBookDownloaded( this.imageBookNumber ) )
+        return null;
+    
+    return this.imageUrl;
+};
