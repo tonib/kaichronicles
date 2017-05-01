@@ -31,6 +31,12 @@ var state = {
     language: 'en',
 
     /**
+     * The local books download state for the Cordova app.
+     * This member is not persisted
+     */
+    localBooksLibrary: null,
+
+    /**
      * Setup the default browser language
      */
     setupDefaultLanguage: function() {

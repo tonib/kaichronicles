@@ -259,6 +259,7 @@
       <script src="js/model/item.js"></script>
       <script src="js/model/projectAon.js"></script>
       <script src="js/model/bookDownloadState.js"></script>
+      <script src="js/model/localBooksLibrary.js"></script>
       
       <!-- Controllers -->
       <script src="js/controller/setupController.js"></script>
@@ -329,8 +330,9 @@
               return cordovaApp.setup();
           })
           .then(function() {
-              // If we are on the app, resolve where is the books directory
-              return BookDownloadState.resolveBooksDirectoryAsync();
+              // If we are on the app, setup the downloaded books state
+              state.localBooksLibrary = new LocalBooksLibrary();
+              return state.localBooksLibrary.setupAsync();
           })
           .then( function() {
               try {

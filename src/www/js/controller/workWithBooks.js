@@ -4,9 +4,6 @@
  */
 var workWithBooksController = {
 
-    /** The book states */
-    books: [],
-
     /** Are we currently downloading / deleting books? */
     changingBooks: false,
 
@@ -41,19 +38,18 @@ var workWithBooksController = {
         // Uncheck the "select all" check
         workWithBooksView.setSelectAllUnchecked();
 
-        // Initialize books
-        workWithBooksController.books = BookDownloadState.getAllBooks(false);
-
         // Recreate the books list
-        workWithBooksView.updateBooksList( workWithBooksController.books );
+        workWithBooksView.updateBooksList( state.localBooksLibrary.booksLibrary );
 
         // Check books state
-        BookDownloadState.getDownloadedBooksAsync( workWithBooksController.books )
-        .then( function(downloadedBooks) {
+        state.localBooksLibrary.updateBooksDownloadStateAsync()
+        .then(function() {
+            var downloadedBooks = state.localBooksLibrary.getDownloadedBooks();
             for(var i=0; i<downloadedBooks.length; i++)
                 workWithBooksView.markBookAsDownloaded( downloadedBooks[i].bookNumber );
-        })
-        .fail(function(reason) { alert(reason); });
+            // TODO: If all books are downloaded, check the "select all"
+        });
+        
     },
 
     downloadBooks: function(selectedBookNumbers) {
@@ -61,8 +57,8 @@ var workWithBooksController = {
 
         // Check differences:
         var toRemove = [], toDownload = [];
-        for( var i=0; i<workWithBooksController.books.length; i++) {
-            var book = workWithBooksController.books[i];
+        for( var i=0; i<state.localBooksLibrary.booksLibrary.length; i++) {
+            var book = state.localBooksLibrary.booksLibrary[i];
             var bookSelected = selectedBookNumbers.contains( book.bookNumber );
             if( book.downloaded && !bookSelected )
                 toRemove.push( book );
@@ -83,7 +79,7 @@ var workWithBooksController = {
         if( !confirm( translations.text('confirmChanges') ) )
             return;
 
-        BookDownloadState.getBooksDirectoryAsync()
+        LocalBooksLibrary.getBooksDirectoryAsync()
         .then( function(booksDir) {
 
             workWithBooksController.changingBooks = true;

@@ -36,18 +36,16 @@ var setupController = {
         template.translateMainMenu();
 
         // Check if the book to setup is downloaded
-        BookDownloadState.isBookDownloadedAsync(state.book.bookNumber)
-        .then(function(bookIsDownloaded) {
-            if(!bookIsDownloaded) {
-                alert( translations.text('bookNotDownloaded' , [state.book.bookNumber] ) );
-                routing.redirect('mainMenu');
-                return jQuery.Deferred().reject().promise();
-            }
-            else
-                return views.loadView('setup.html'); 
-        })
-        .then(function() { setupController.runDownloads(); });
-          
+        if( !state.localBooksLibrary.isBookDownloaded(state.book.bookNumber) ) {
+            alert( translations.text('bookNotDownloaded' , [state.book.bookNumber] ) );
+            routing.redirect('mainMenu');
+            return jQuery.Deferred().reject().promise();
+        }
+        else {
+            return views.loadView('setup.html')
+            .then(function() { setupController.runDownloads(); }); 
+        }
+        
     },
 
     verifyLanguageChange: function() {

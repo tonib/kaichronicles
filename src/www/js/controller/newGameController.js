@@ -10,25 +10,23 @@ var newGameController = {
     index: function() {
 
         // Get available books
-        var books = [];
-        BookDownloadState.getDownloadedBooksAsync()
-        .then(function(downloadedBooks) {
+        var downloadedBooks = state.localBooksLibrary.getDownloadedBooks();
 
-            if( downloadedBooks.length === 0 ) {
-                // No books downloaded:
-                alert( translations.text('noDownloadedBooks') );
-                routing.redirect('mainMenu');
-                return;
-            }
+        if( downloadedBooks.length === 0 ) {
+            // No books downloaded:
+            alert( translations.text('noDownloadedBooks') );
+            routing.redirect('mainMenu');
+            return;
+        }
 
-            template.setNavTitle( translations.text('kaiChronicles') , '#mainMenu', true);
-            template.showStatistics(false);
+        template.setNavTitle( translations.text('kaiChronicles') , '#mainMenu', true);
+        template.showStatistics(false);
 
-            views.loadView('newGame.html')
-            .then(function() {
-                newGameView.setup(downloadedBooks);
-            });
+        views.loadView('newGame.html')
+        .then(function() {
+            newGameView.setup(downloadedBooks);
         });
+
     },
 
     /**

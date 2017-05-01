@@ -1,7 +1,6 @@
-- Main icon 512 x 512
-- Captures 2 up to 8
-- Imagen destacada: 1024 x 500
-
+- Add cordova license info
+- Set select all download books if all books are downloaded
+- Fix bug with object images
 
 FOR FUTURE (1.7+):
 - Try (and use?) Typescript (oh javascript...)

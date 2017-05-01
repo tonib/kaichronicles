@@ -46,6 +46,10 @@ function Item(book, $o, objectId) {
         var imageBook = new Book( bookNumber , state.book.language );
         // Get the object image URL, untranslated
         this.imageUrl = imageBook.getIllustrationURL( $image.attr('name') );
+        /** 
+         * The referenced book. Needed to check if the book has been downloaded on the Cordova app
+         */
+        this.imageBookNumber = bookNumber;
     }
 
     // Usage (only one use, and then the object is dropped)

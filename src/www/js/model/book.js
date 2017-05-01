@@ -31,7 +31,7 @@ function Book(number, language) {
 Book.getBaseUrl = function() {
     if( cordovaApp.isRunningApp() )
         // Return the local downloaded books directory
-        return BookDownloadState.BOOKS_PATH + '/';
+        return state.localBooksLibrary.BOOKS_PATH + '/';
     else
         return 'data/projectAon/';
 };
