@@ -229,6 +229,16 @@
             </description>
         </special>
 
+        <special id="whitepass">
+            <name lang="en">White Pass</name>
+            <name lang="es">Salvoconducto Blanco</name>
+        </special>
+
+        <special id="redpass">
+            <name lang="en">Red Pass</name>
+            <name lang="es">Salvoconducto Rojo</name>
+        </special>
+        
         <!-- BOOK 3 -->
         
         <special id="leatherwaistcoat">
@@ -583,16 +593,6 @@
 
             <image book="1" name="potion.png" />
             <usage class="endurance" increment="5" />
-        </object>
-
-        <object id="whitepass">
-            <name lang="en">White Pass</name>
-            <name lang="es">Salvoconducto Blanco</name>
-        </object>
-
-        <object id="redpass">
-            <name lang="en">Red Pass</name>
-            <name lang="es">Salvoconducto Rojo</name>
         </object>
 
         <object id="blanket">
