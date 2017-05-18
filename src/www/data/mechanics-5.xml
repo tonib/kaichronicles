@@ -221,6 +221,8 @@
         </section>
 
         <section id="sect23">
+            <endurance count="-1" />
+            
             <choiceState section="all" set="disabled" />
             <randomTable>
                 <case from="-3" to="-1">

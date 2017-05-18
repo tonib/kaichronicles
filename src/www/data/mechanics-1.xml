@@ -280,6 +280,9 @@
             <test not="true" hasDiscipline="sixthsns">
                 <choiceState section="sect296" set="disabled" />
             </test>
+            <test not="true" expression="[MONEY] >= 2" >
+                <choiceState section="sect246" set="disabled" />
+            </test>
         </section>
 
         <section id="sect49">
@@ -873,6 +876,7 @@
         </section>
 
         <section id="sect246">
+            <pick class="money" count="-2" />
             <choiceState section="all" set="disabled" />
             <afterCombats>
                 <choiceState section="all" set="enabled" />
