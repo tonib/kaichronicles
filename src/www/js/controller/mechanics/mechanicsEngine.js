@@ -945,6 +945,20 @@ var mechanicsEngine = {
         toastr.info( mechanicsEngine.getRuleText(rule) );
     },
 
+    /**
+     * Drop all disciplines.
+     * Used when changing of book series (kai -> magnakai)
+     */
+    dropDisciplines: function(rule) {
+        if( state.sectionStates.ruleHasBeenExecuted(rule) )
+            // Execute only once
+            return;
+        state.actionChart.disciplines = [];
+        // Redraw current CS / EP on the bar title
+        template.updateStatistics();
+        state.sectionStates.markRuleAsExecuted(rule);
+    },
+
     /************************************************************/
     /**************** SPECIAL SECTIONS **************************/
     /************************************************************/

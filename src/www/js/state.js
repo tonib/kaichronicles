@@ -64,13 +64,14 @@ var state = {
                 // Convert the Object to ActionChart
                 state.actionChart = $.extend(new ActionChart(), state.actionChart);
         }
-        if( !state.actionChart )
-            state.actionChart = new ActionChart();
 
         state.language = language;
         state.book = new Book(bookNumber, state.language);
         state.mechanics = new Mechanics(state.book);
         state.sectionStates = new BookSectionStates();
+
+        if( !state.actionChart )
+            state.actionChart = new ActionChart();
     },
 
     removeCachedState: function() {
