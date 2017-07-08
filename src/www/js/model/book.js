@@ -70,6 +70,7 @@ Book.fixXml = function(xmlText) {
 
     xmlText = xmlText.replaceAll('&copy;', '&amp;copy;' );
     xmlText = xmlText.replaceAll('&endash;', '-' );
+    xmlText = xmlText.replaceAll('&lellips;', '&amp;hellip;' );
 
     // replace non-valid special characters with html special characters
     xmlText = xmlText.replaceAll('<ch.ellips/>', '&amp;hellip;');
@@ -110,9 +111,14 @@ Book.prototype.downloadBookXml = function() {
         dataType: "text"
     })
     .done(function(xml) {
-        xml = Book.fixXml(xml);
-        self.bookXml = $.parseXML(xml);
-        self.bookRandomTable = self.getRandomTable();
+        try {
+            xml = Book.fixXml(xml);
+            self.bookXml = $.parseXML(xml);
+            self.bookRandomTable = self.getRandomTable();
+        }
+        catch(e) {
+            throw e;
+        }
     });
 };
 

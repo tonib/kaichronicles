@@ -78,6 +78,19 @@ var projectAon = {
             illustrators: [ 'chalk' ],
 
             zipSize: 4183069
+        },
+
+        // Book 6:
+        {
+            title_en: 'The Kingdoms of Terror',
+            code_en: '06tkot',
+
+            title_es: 'La Piedra de la Ciencia',
+            code_es: '06lpdlc',
+
+            illustrators: [ 'chalk' ],
+
+            zipSize: 0
         }
     ],
 
