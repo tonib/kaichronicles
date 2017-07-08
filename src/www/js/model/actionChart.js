@@ -45,8 +45,8 @@ function ActionChart() {
 
     // Debug fast setup:
     if( window.getUrlParameter('debug') ) {
-        this.endurance = this.currentEndurance = 25;
-        this.combatSkill = 15;
+        //this.endurance = this.currentEndurance = 25;
+        //this.combatSkill = 15;
         this.disciplines = [ 'camflage' , 'hunting' , 'sixthsns' , 'healing' , 'wepnskll' ];
         this.weaponSkill = 'axe';
     }

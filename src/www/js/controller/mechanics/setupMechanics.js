@@ -17,6 +17,9 @@ var setupMechanics = {
         // Disable next link
         gameView.enableNextLink(false);
 
+        // Book language inconsistencies: Spanish books say "ignore zero", english does not
+        var ignoreZero = ( state.book.language == "es" );
+
         // Combat skill
         if( state.actionChart.combatSkill !== 0 )
             $('#mechanics-detWeapon').hide();
@@ -28,7 +31,7 @@ var setupMechanics = {
                 template.updateStatistics();
                 if( state.actionChart.combatSkill !== 0 && state.actionChart.endurance !== 0 )
                     gameView.enableNextLink(true);
-            }, true);
+            }, ignoreZero);
         }
         
         // Endurance points
@@ -43,7 +46,7 @@ var setupMechanics = {
                 template.updateStatistics();
                 if( state.actionChart.combatSkill !== 0 && state.actionChart.endurance !== 0 )
                     gameView.enableNextLink(true);
-            }, true);
+            }, ignoreZero);
         }
 
     },

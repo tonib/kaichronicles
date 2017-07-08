@@ -15,6 +15,13 @@
             <endurance count="+[MAXENDURANCE]" />
             <!-- Drop the previous books map -->
             <drop objectId="map" />
+
+            <!-- TODO: DROP KAI DISCIPLINES HERE, NOW REPLACED BY MAGNAKAI DISCIPLINES -->
+        </section>
+
+        <section id="gamerulz">
+            <!-- Select the player skills (weapons skill and endurance) UI -->
+            <setSkills />
         </section>
 
     </sections>
