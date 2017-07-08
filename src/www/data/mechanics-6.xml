@@ -24,6 +24,11 @@
             <setSkills />
         </section>
 
+        <section id="discplnz">
+            <!-- Select the Kai disciplines UI -->
+            <setDisciplines />
+        </section>
+        
     </sections>
 
 </mechanics>
