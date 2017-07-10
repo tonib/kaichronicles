@@ -1,13 +1,14 @@
+/// <reference path="../../external.ts" />
 
 /**
  * Translations table
  */
-var translations = {
+class Translations {
 
     /**
      * Spanish translations
      */
-    es: {
+    private readonly es = {
 
         //////////////////////////////////////
         // Action chart / object tables
@@ -229,12 +230,12 @@ var translations = {
         'maximumPick' : 'Sólo puedes coger {0} objetos',
         'zeroIgnored' : 'Cero ignorado'
 
-    },
+    };
 
     /**
      * English translations
      */
-    en: {
+    private readonly en = {
 
         //////////////////////////////////////
         // Action chart / object tables
@@ -372,7 +373,7 @@ var translations = {
         'maximumPick' : 'You can pick only {0} objects',
         'zeroIgnored' : 'Zero ignored'
 
-    },
+    };
 
     /**
      * Returns a DOM view translated to the current language
@@ -380,9 +381,9 @@ var translations = {
      * @param {boolean} doNotClone True if the view should be modified. False, if a clone of the view
      * should be returned
      */
-    translateView: function( view , doNotClone ) {
+    public translateView( view , doNotClone ) {
 
-        var table = translations[state.language];
+        var table = this[state.language];
         if( !table )
             // Translation not available
             return view;
@@ -394,14 +395,14 @@ var translations = {
             $clonedView = $(view).clone();
 
         // Translate the view
-        translations.translateTags( $clonedView , table );
+        this.translateTags( $clonedView , table );
         return $clonedView;
-    },
+    }
 
-    translateTags: function( $tags , table ) {
+    public translateTags( $tags , table ) {
 
         if( !table ) {
-            table = translations[state.language];
+            table = this[state.language];
             if( !table )
                 // Translation not available
                 return;
@@ -417,7 +418,7 @@ var translations = {
             if( html )
                 $t.html( html );
         }
-    },
+    }
 
     /**
      * Get a translated message
@@ -425,12 +426,12 @@ var translations = {
      * @param {Array<object>} replacements Replacements to do on the message. It can be null
      * @returns {string} The text
      */
-    text: function( textId , replacements ) {
+    public text( textId : string , replacements : Array<any> = null ) : string {
         try {
-            var table = translations[state.language];
+            var table = this[state.language];
             if( !table )
                 // Use english as default
-                table = translations.en;
+                table = this.en;
                 
             var text = table[textId];
             if( !text ) {
@@ -450,4 +451,9 @@ var translations = {
         }
     }
 
-};
+}
+
+/**
+ * The translations singleton
+ */
+const translations = new Translations();

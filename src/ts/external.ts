@@ -1,6 +1,5 @@
 // External declarations
 declare var state:any;
-declare var translations:any;
 declare var gameView:any;
 declare var mechanicsEngine:any;
 declare var template:any;
