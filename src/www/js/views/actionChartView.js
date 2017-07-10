@@ -56,7 +56,7 @@ var actionChartView = {
                 var name = dInfo.name;
                 var isWeaponSkill = ( disciplineId == 'wepnskll' );
                 if( isWeaponSkill ) {
-                    var o = state.mechanics.getObject( actionChart.weaponSkill );
+                    var o = state.mechanics.getObject( actionChart.weaponSkill[0] );
                     name += ' (' + o.name + ')';
                 }
                 // Unescape the HTML description:

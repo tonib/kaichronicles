@@ -41,8 +41,11 @@ class ActionChart {
     /** Disciplines ids */
     public disciplines : Array<string> = [];
     
-    /** The weapon code for the "wepnskll" discipline */
-    public weaponSkill = '';
+    /** 
+     * The weapon codes for the "wepnskll" / "wpnmstry" disciplines.
+     * On kai series, it's a single weapon. On magnakai, they are 3
+     */
+    public weaponSkill : Array<string> = [];
 
     /** Player annotations */
     public annotations = '';
@@ -61,7 +64,7 @@ class ActionChart {
                 //this.endurance = this.currentEndurance = 25;
                 //this.combatSkill = 15;
                 //this.disciplines = [ 'camflage' , 'hunting' , 'sixthsns' , 'healing' , 'wepnskll' ];
-                //this.weaponSkill = 'axe';
+                //this.weaponSkill = [ 'axe' ];
             }
         }
     }
@@ -297,14 +300,19 @@ class ActionChart {
 
     /**
      * Return true if the Weaponskill is active with the selected weapon
-     * @param {Item} currentWeapon The selected weapon. null if the is player has no weapon
-     * @return {boolean} True if Weaponskill is active
+     * @return True if Weaponskill is active
      */
-    public isWeaponskillActive(currentWeapon) : boolean {
-        if( !currentWeapon )
+    public isWeaponskillActive() : boolean {
+
+        if( !this.disciplines.contains( 'wepnskll' ) )
+            // Player has no Weaponskill
             return false;
 
-        return this.disciplines.contains( 'wepnskll' ) && currentWeapon.isWeaponType(this.weaponSkill);
+        const currentWeapon = this.getselectedWeaponItem();
+        for(let i=0; i< this.weaponSkill.length; i++ ) {
+            if( currentWeapon.isWeaponType( this.weaponSkill[i] ) )
+                return true;
+        }
     }
 
     /**
@@ -337,7 +345,7 @@ class ActionChart {
                 increment: -4
             });
         }
-        else if( this.isWeaponskillActive(currentWeapon) ) {       
+        else if( this.isWeaponskillActive() ) {       
             // Weapon skill bonus
             bonuses.push( {
                 concept: translations.text( 'weaponskill' ),

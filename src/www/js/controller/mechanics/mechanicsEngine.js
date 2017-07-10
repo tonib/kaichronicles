@@ -493,8 +493,7 @@ var mechanicsEngine = {
         // Test weaponskill with current weapon
         var weaponskillActive = $(rule).attr('weaponskillActive');
         if( weaponskillActive == 'true' ) {
-            currentWeapon = state.actionChart.getselectedWeaponItem();
-            if( state.actionChart.isWeaponskillActive(currentWeapon) )
+            if( state.actionChart.isWeaponskillActive() )
                 conditionStatisfied = true;
         }
 

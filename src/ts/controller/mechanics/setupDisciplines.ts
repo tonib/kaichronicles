@@ -144,7 +144,7 @@ class SetupDisciplines {
      */
     private chooseWeaponskillWeapon(e : Event) {
 
-        if( state.actionChart.weaponSkill ) {
+        if( state.actionChart.weaponSkill.length > 0 ) {
             // Weapon already choosed
             state.actionChart.disciplines.push( 'wepnskll' );
             return;
@@ -161,7 +161,7 @@ class SetupDisciplines {
 
             // Store the discipline
             state.actionChart.disciplines.push( 'wepnskll' );
-            state.actionChart.weaponSkill = self.kaiWeapons[ value ];
+            state.actionChart.weaponSkill.push( self.kaiWeapons[ value ] );
 
             // Show on UI the selected weapon
             self.setWeaponSkillWeaponNameOnUI();
@@ -180,9 +180,9 @@ class SetupDisciplines {
      * Only applies to Kai serie
      */
     private setWeaponSkillWeaponNameOnUI() {
-        if( !state.actionChart.weaponSkill )
+        if( state.actionChart.weaponSkill.length === 0 )
             return;
-        const o = state.mechanics.getObject( state.actionChart.weaponSkill );
+        const o = state.mechanics.getObject( state.actionChart.weaponSkill[0] );
         $('#wepnskll .mechanics-wName').text('(' + o.name + ')');
     }
 
