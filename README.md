@@ -21,9 +21,14 @@ work.
 
 ## Setup
 
-Download the Project Aon game data:
+Compile Typescript
 ```bash
     npm install
+    npm run ts
+```
+
+Download the Project Aon game data:
+```bash
     npm run downloaddata
 ```
 This will require Node.js (any recent version), zip command and the SVN client on your path
