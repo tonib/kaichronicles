@@ -13,14 +13,16 @@
         "node-fs-extra": "latest",
         "uglify-js": "latest",
         "klaw-sync": "latest",
-        "preprocess": "latest"
+        "preprocess": "latest",
+        "typescript": "latest"
     },
 
     "scripts": {
         "lint": "jshint src/www/js",
         "prepareversion": "node scripts/prepareVersion.js",
         "clean": "rm -rf dist",
-        "downloaddata": "node scripts/downloadProjectAonData.js"
+        "downloaddata": "node scripts/downloadProjectAonData.js",
+        "ts": "tsc -p tsconfig.json"
     }
 }
 

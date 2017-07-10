@@ -1,6 +1,9 @@
 # The project AON data
 src/www/data/projectAon
 
+# Typescript generated code
+src/www/js/ts-generated
+
 # Cordova stuff
 src/platforms
 src/plugins

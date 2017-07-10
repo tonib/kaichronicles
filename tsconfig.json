@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "outDir" : "src/www/js/ts-generated",
+        "rootDir" : "src/ts"
+    },
+
+    "include": [
+        "src/ts/**/*"
+    ]
+}

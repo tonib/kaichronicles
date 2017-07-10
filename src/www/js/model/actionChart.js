@@ -47,8 +47,8 @@ function ActionChart() {
     if( window.getUrlParameter('debug') ) {
         if( state.book.bookNumber <= 5 ) {
             // debug data for kai series
-            this.endurance = this.currentEndurance = 25;
-            this.combatSkill = 15;
+            //this.endurance = this.currentEndurance = 25;
+            //this.combatSkill = 15;
             this.disciplines = [ 'camflage' , 'hunting' , 'sixthsns' , 'healing' , 'wepnskll' ];
             this.weaponSkill = 'axe';
         }

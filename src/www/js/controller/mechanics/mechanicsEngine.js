@@ -361,7 +361,8 @@ var mechanicsEngine = {
      * Choose the kai disciplines UI
      */
     setDisciplines: function() {
-        setupMechanics.setDisciplines();
+        var setup = new SetupDisciplines();
+        setup.setupDisciplinesChoose();
     },
 
     /** 

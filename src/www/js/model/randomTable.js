@@ -48,7 +48,7 @@ var randomTable = {
 
         if( !state.actionChart.manualRandomTable )
             // Use computer generated random numbers:
-            return jQuery.Deferred().resolve( randomTable.getRandomValue() ).promise();
+            return jQuery.Deferred().resolve( randomTable.getRandomValue(ignoreZero, zeroAsTen) ).promise();
 
         // Store info about the current selection
         randomTable.currentAsync = {

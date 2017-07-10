@@ -2,3 +2,4 @@
 - Fixed bug on book 1 / sect246: Drop 2 Crowns
 - Fixed bug on book 5 / sect23: Lose 1 E.P.
 - Fixed bug choosing CS / EP: Book language inconsistencies: Spanish books say "ignore zero", English does not
+- Fixed bug with random table: If it was "computer generated", the ten as zero, and ignore zeros were ignored
