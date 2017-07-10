@@ -1,13 +1,5 @@
 
-// External declarations. TODO: Check how to declare these properly
-declare var state:any;
-declare var randomTable:any;
-declare var $:any;
-declare var translations:any;
-declare var gameView:any;
-declare var mechanicsEngine:any;
-declare var template:any;
-interface Window { getUrlParameter( parmName : string) : string }
+/// <reference path="../../external.ts" />
 
 /**
  * Setup player disciplines

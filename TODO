@@ -1,5 +1,4 @@
 - Publish 1.6.3
-
 - Report erratas:
   * Book 1,2,3,4,5,6: inconsitencies between laguages: "Si el lápiz señala 0, no cuenta." / "If you pick 0 it counts as zero."
 
@@ -7,7 +6,6 @@ FOR FUTURE (1.7+):
 - Describe where:
   * Play on the web
   * Report bugs
-- Try (and use?) Typescript (oh javascript...)
 - ERROR: Hunting STILL activated on book 3...
 - Android application:
   * App lifeciclye
@@ -37,6 +35,9 @@ FOR FUTURE (1.7+):
 - Find "TODO" and do it
 - Death UI: If you click restart book, prompt for confirmation
 - Add a text on the map view: "Click on the map to enlarge it"
+- Shared images on multiples books:
+  * Allow to declare images on multiple books
+  * Choose the latest available image
 
 Reminders:
 
