@@ -98,15 +98,34 @@ class SetupDisciplines {
 
         // Add / remove the discipline
         const disciplineId : string = $checkBox.closest('.subsection').attr('id');
-        if( selected ) {
-            state.actionChart.disciplines.push( disciplineId );
-            if( disciplineId == 'wepnskll' )
-                // Choose the weapon
-                this.chooseWeaponskillWeapon();
-        }
+        if( selected )
+            this.onDisciplineSelected(e, disciplineId);
         else
             state.actionChart.disciplines.removeValue( disciplineId );
 
+        this.afterDisciplineSelection();
+    }
+
+    /**
+     * Discipline selected event handler
+     * @param e The discipline check box click event
+     * @param disciplineId The selected discipline
+     */
+    private onDisciplineSelected(e : Event, disciplineId : string) {
+
+        if( disciplineId == 'wepnskll' ) {
+            // Special case for kai series: Choose on the random table the weapon
+            this.chooseWeaponskillWeapon(e);
+            return;
+        }
+
+        state.actionChart.disciplines.push( disciplineId );
+    }
+
+    /**
+     * Code to call after a discipline is selected / deselected
+     */
+    private afterDisciplineSelection() {
         // Update the UI
         if( this.getAllDisciplinesSelected() ) {
             $('#mechanics-setDisciplines-NDis').hide();
@@ -117,6 +136,54 @@ class SetupDisciplines {
             gameView.enableNextLink(false);
         }
         template.updateStatistics();
+    }
+
+    /**
+     * Do the random choice for Weaponskill weapon.
+     * Only applies to Kai serie
+     */
+    private chooseWeaponskillWeapon(e : Event) {
+
+        if( state.actionChart.weaponSkill ) {
+            // Weapon already choosed
+            state.actionChart.disciplines.push( 'wepnskll' );
+            return;
+        }
+
+        // Do not mark the check yet. The "if" is REQUIRED, otherwise the check is not marked with computer generated random table
+        if( state.actionChart.manualRandomTable )
+            e.preventDefault();
+
+        // Pick a  random number
+        const self = this;
+        randomTable.getRandomValueAsync()
+        .then(function(value : number) {
+
+            // Store the discipline
+            state.actionChart.disciplines.push( 'wepnskll' );
+            state.actionChart.weaponSkill = self.kaiWeapons[ value ];
+
+            // Show on UI the selected weapon
+            self.setWeaponSkillWeaponNameOnUI();
+            const $well = $('#wepnskll .well');
+            $well.append('<div><i><small>' + translations.text('randomTable') + ': ' + value + '</small></i></div>');
+
+            // Mark the checkbox
+            $well.find( 'input[type=checkbox]' ).prop( 'checked' , true ); 
+
+            self.afterDisciplineSelection();
+        });
+    }
+
+    /**
+     * Set the weapon name on UI.
+     * Only applies to Kai serie
+     */
+    private setWeaponSkillWeaponNameOnUI() {
+        if( !state.actionChart.weaponSkill )
+            return;
+        const o = state.mechanics.getObject( state.actionChart.weaponSkill );
+        $('#wepnskll .mechanics-wName').text('(' + o.name + ')');
     }
 
     /**
@@ -143,37 +210,6 @@ class SetupDisciplines {
      */
     private getAllDisciplinesSelected() : boolean {
         return state.actionChart.disciplines.length >= this.expectedNDisciplines;
-    }
-
-    /**
-     * Do the random choice for Weaponskill weapon.
-     * Only applies to Kai serie
-     * TODO: This should use the manual random table too
-     * @returns The selected weapon object id for Weaponskill
-     */
-    private chooseWeaponskillWeapon() : string {
-
-        if( state.actionChart.weaponSkill )
-            // Already choosed
-            return state.actionChart.weaponSkill;
- 
-        const value : number = randomTable.getRandomValue();
-        state.actionChart.weaponSkill = this.kaiWeapons[ value ];
-        this.setWeaponSkillWeaponNameOnUI();
-        $('#wepnskll .well').append('<div><i><small>' + translations.text('randomTable') + ': ' + value + 
-            '</small></i></div>');
-        return state.actionChart.weaponSkill;
-    }
-
-    /**
-     * Set the weapon name on UI.
-     * Only applies to Kai serie
-     */
-    private setWeaponSkillWeaponNameOnUI() {
-        if( !state.actionChart.weaponSkill )
-            return;
-        const o = state.mechanics.getObject( state.actionChart.weaponSkill );
-        $('#wepnskll .mechanics-wName').text('(' + o.name + ')');
     }
 
 }

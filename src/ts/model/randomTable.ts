@@ -62,7 +62,7 @@ class RandomTable {
         }
     }
 
-    public getRandomValueAsync(ignoreZero : boolean, zeroAsTen : boolean) : Promise<number> {
+    public getRandomValueAsync(ignoreZero : boolean = false, zeroAsTen : boolean = false) : Promise<number> {
 
         if( !state.actionChart.manualRandomTable )
             // Use computer generated random numbers:

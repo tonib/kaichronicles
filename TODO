@@ -18,7 +18,6 @@ FOR FUTURE (1.7+):
   * Support for money as object on section
   * Allow to pick droped money
 - Save games is not working on safari
-- Phisical random table when you choose weaponskill discipline is not displayed
 - Toasts with images: align text when the text is multiline
 - Combats should be sequential: First finish the first one, then the second, etc
 - About the book: 
@@ -38,6 +37,9 @@ FOR FUTURE (1.7+):
 - Shared images on multiples books:
   * Allow to declare images on multiple books
   * Choose the latest available image
+- New game page: 
+  * Do not show the license text on Android (the book was already downloaded)
+  * Ask for the random table type
 
 Reminders:
 
