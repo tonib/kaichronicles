@@ -107,6 +107,31 @@ class SetupDisciplines {
         .click( function( e : Event) {
             self.onWeaponmasteryWeaponClick( e, $(this) );
         });
+
+        // Set the initial state
+        this.enableMagnakaiWeapons();
+    }
+
+    /**
+     * Enable or disable weapons selection for Weaponmastery
+     */
+    private enableMagnakaiWeapons() {
+
+        // Only for magnakai books
+        if( state.book.bookNumber <= 5 )
+            return;
+
+        var disable : boolean = false;
+
+        // If Weaponmastery is not selected, disable
+        if( !state.actionChart.disciplines.contains( 'wpnmstry' ) )
+            disable = true;
+        
+        // If Weaponmastery was selected on a previous book, disable (do not allow to change the selected weapons)
+        if( this.previousActionChart && this.previousActionChart.disciplines.contains( 'wpnmstry' ) )
+            disable = true;
+
+        $( 'input.weaponmastery-chk' ).prop( 'disabled' , disable );
     }
 
     /**
@@ -208,6 +233,7 @@ class SetupDisciplines {
             $('#mechanics-setDisciplines-NDis').show();
             gameView.enableNextLink(false);
         }
+        this.enableMagnakaiWeapons();
         template.updateStatistics();
     }
 
