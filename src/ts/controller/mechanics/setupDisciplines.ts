@@ -13,6 +13,11 @@ class SetupDisciplines {
                                     'axe' , 'sword' , 'quarterstaff' , 'broadsword' ];
 
     /**
+     * Weapons table for Weaponmastery discipline on Magnakai books
+     */                       
+    private readonly magnakaiWeapons = [ 'dagger' , 'spear' , 'mace' , 'shortsword' , 'warhammer', 'bow',
+                                         'axe' , 'sword' , 'quarterstaff' , 'broadsword' ];
+    /**
      * Expected number of disciplines to choose
      */
     private readonly expectedNDisciplines : number;
@@ -55,8 +60,39 @@ class SetupDisciplines {
             self.onDiscliplineCheckBoxClick(e, $(this) );
         });
 
+        // If we are on a magnakai book, add the weapons checkboxes
+        this.populateMagnakaiWeapons();
+
         // Set the already choosen weapon for the skill
         this.setWeaponSkillWeaponNameOnUI();
+    }
+
+    /**
+     * Add checkboxes to select weapons for Weaponmastery.
+     * Only for magnakai books
+     */
+    private populateMagnakaiWeapons() {
+        // Only for magnakai books
+        if( state.book.bookNumber < 5 )
+            return;
+
+        const $checkboxTemplate = mechanicsEngine.getMechanicsUI('mechanics-magnakaiWeapon');
+        let html = '';
+        for( let i=0; i < this.magnakaiWeapons.length; i++ ) {
+            if( i % 2 == 0 )
+                html += '<div class="row">';
+
+            const weaponItem = state.mechanics.getObject( this.magnakaiWeapons[i] );
+            const $checkbox = $checkboxTemplate.clone();
+            $checkbox.find( '.mechanics-wName' ).text( weaponItem.name );
+            html += $checkbox[0].outerHTML;
+
+            if( i % 2 == 1 )
+                html += '</div>';
+        }
+
+        const $well = $('#wpnmstry .well');
+        $well.append (html );
     }
 
     /**

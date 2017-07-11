@@ -3,7 +3,7 @@
 <object-mechanics>
 
     <weapons>
-        <!-- WEAPONS ON KAI SERIE BOOKS -->
+        <!-- WEAPONS ON KAI / MAGNAKAI SERIE BOOKS -->
 
         <weapon id="axe">
             <name lang="en">Axe</name>
@@ -104,6 +104,14 @@
             <description lang="es">
                 Un arco de caza de los que utilizan los pescadores de la costa de Vassagonia
             </description>
+        </weapon>
+
+        <!-- BOOOK 6 -->
+
+        <weapon id="bow">
+            <name lang="en">Bow</name>
+            <name lang="es">Arco</name>
+            <image book="6" name="bow.png" />
         </weapon>
 
     </weapons>
