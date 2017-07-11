@@ -113,6 +113,7 @@ class Translations {
         'selectNDisciplines' : 'Por favor, selecciona <span id="mechanics-nDisciplines"></span> disciplinas antes de continuar.',
         'choose' : 'Elige',
         'maxDisciplines' : 'Sólo puede elegir {0} disciplinas',
+        'only3Weapons' : 'Sólo puedes elegir 3 armas',
 
         //////////////////////////////////////
         // Special sections
@@ -302,6 +303,7 @@ class Translations {
         'combatSkillSet' : 'Your Combat Skill is {0}',
         'enduranceSet' : 'Your Endurance Points are {0}',
         'maxDisciplines' : 'You can choose only {0} disciplines',
+        'only3Weapons' : 'You can select only 3 weapons',
 
         //////////////////////////////////////
         // Special sections

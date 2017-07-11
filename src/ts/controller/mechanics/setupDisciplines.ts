@@ -73,26 +73,63 @@ class SetupDisciplines {
      */
     private populateMagnakaiWeapons() {
         // Only for magnakai books
-        if( state.book.bookNumber < 5 )
+        if( state.book.bookNumber <= 5 )
             return;
 
+        // Add checkboxes
         const $checkboxTemplate = mechanicsEngine.getMechanicsUI('mechanics-magnakaiWeapon');
         let html = '';
         for( let i=0; i < this.magnakaiWeapons.length; i++ ) {
             if( i % 2 == 0 )
                 html += '<div class="row">';
 
+            // Prepare the weapon UI
             const weaponItem = state.mechanics.getObject( this.magnakaiWeapons[i] );
             const $checkbox = $checkboxTemplate.clone();
+            $checkbox.attr( 'id' , weaponItem.id );
             $checkbox.find( '.mechanics-wName' ).text( weaponItem.name );
+
+            // The weapon has been already selected?
+            const selected : boolean = state.actionChart.weaponSkill.contains( this.magnakaiWeapons[i] );
+            $checkbox.find( 'input' ).attr( 'checked' , selected );
+
             html += $checkbox[0].outerHTML;
 
             if( i % 2 == 1 )
                 html += '</div>';
         }
-
         const $well = $('#wpnmstry .well');
-        $well.append (html );
+        $well.append ( html );
+
+        // Add event handlers
+        const self = this;
+        $well.find( 'input.weaponmastery-chk' )
+        .click( function( e : Event) {
+            self.onWeaponmasteryWeaponClick( e, $(this) );
+        });
+    }
+
+    /**
+     * Click on a Weaponmastery weapon event handler
+     * @param e The click event
+     * @param  $checkBox The checkbox (jQuery)
+     */
+    private onWeaponmasteryWeaponClick(e: Event, $checkBox : any) {
+
+        const selected : boolean = $checkBox.prop( 'checked' );
+        const weaponId : string = $checkBox.closest('.weaponmastery-weapon').attr('id');
+
+        if( selected ) {
+            // Check the maximum weapons number
+            if( state.actionChart.weaponSkill.length >= 3 ) {
+                e.preventDefault();
+                alert( translations.text( 'only3Weapons' ) );
+                return;
+            }
+            state.actionChart.weaponSkill.push( weaponId );
+        }
+        else 
+            state.actionChart.weaponSkill.removeValue( weaponId );
     }
 
     /**
@@ -216,8 +253,14 @@ class SetupDisciplines {
      * Only applies to Kai serie
      */
     private setWeaponSkillWeaponNameOnUI() {
+
         if( state.actionChart.weaponSkill.length === 0 )
+            // No weapon selected yet
             return;
+        if( state.book.bookNumber > 5 )
+            // Only for kai books
+            return;
+
         const o = state.mechanics.getObject( state.actionChart.weaponSkill[0] );
         $('#wepnskll .mechanics-wName').text('(' + o.name + ')');
     }
