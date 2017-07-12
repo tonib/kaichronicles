@@ -80,7 +80,7 @@ class SetupDisciplines {
         const $checkboxTemplate = mechanicsEngine.getMechanicsUI('mechanics-magnakaiWeapon');
         let html = '';
         for( let i=0; i < this.magnakaiWeapons.length; i++ ) {
-            if( i % 2 == 0 )
+            if( i % 2 === 0 )
                 html += '<div class="row">';
 
             // Prepare the weapon UI

@@ -545,6 +545,7 @@
         <object id="tinderbox">
             <name lang="en">Tinderbox</name>
             <name lang="es">Yesca</name>
+            <image book="6" name="tindrbox.png" />
         </object>
 
         <object id="giakscroll">
@@ -611,6 +612,7 @@
         <object id="rope">
             <name lang="en">Rope</name>
             <name lang="es">Cuerda</name>
+            <image book="6" name="rope.png" />
         </object>
 
         <object id="orangepotion">
@@ -650,6 +652,7 @@
         <object id="largerope" itemCount="2">
             <name lang="en">Rope</name>
             <name lang="es">Cuerda</name>
+            <image book="6" name="rope.png" />
         </object>
 
         <object id="potionblackgraveweed">
