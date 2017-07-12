@@ -111,6 +111,7 @@ class Translations {
         'combatSkillSet' : 'Tu Destreza en el Combate es {0}',
         'enduranceSet' : 'Tus puntos de Resistencia son {0}',
         'selectNDisciplines' : 'Por favor, selecciona <span id="mechanics-nDisciplines"></span> disciplinas antes de continuar.',
+        'selectNWeapons' : 'Por favor, selecciona 3 armas para Maestría en el Manejo de Armas',
         'choose' : 'Elige',
         'maxDisciplines' : 'Sólo puede elegir {0} disciplinas',
         'only3Weapons' : 'Sólo puedes elegir 3 armas',

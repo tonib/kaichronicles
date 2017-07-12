@@ -38,16 +38,11 @@ class SetupDisciplines {
      */
     public setupDisciplinesChoose() {
 
-         // Add the warning about the number of disciplines:
+         // Add the warning about the number of disciplines and weapons:
         gameView.appendToSection( mechanicsEngine.getMechanicsUI('mechanics-setDisciplines-NDis') );
         $('#mechanics-nDisciplines').text( this.expectedNDisciplines );
-        if( this.getAllDisciplinesSelected() ) {
-            $('#mechanics-setDisciplines-NDis').hide();
-            gameView.enableNextLink(true);
-        }
-        else
-            gameView.enableNextLink(false);
-
+        gameView.appendToSection( mechanicsEngine.getMechanicsUI('mechanics-setDisciplines-NWeapons') );
+        
         // Add checkbox for each discipline:
         const self = this;
         $('.subsection').append( mechanicsEngine.getMechanicsUI('mechanics-setDisciplines') )
@@ -63,8 +58,11 @@ class SetupDisciplines {
         // If we are on a magnakai book, add the weapons checkboxes
         this.populateMagnakaiWeapons();
 
-        // Set the already choosen weapon for the skill
+        // Set the already choosen weapon for the Weaponskill
         this.setWeaponSkillWeaponNameOnUI();
+
+        // Initialize UI state
+        this.afterDisciplineSelection();
     }
 
     /**
@@ -155,6 +153,9 @@ class SetupDisciplines {
         }
         else 
             state.actionChart.weaponSkill.removeValue( weaponId );
+
+        // Update UI
+        this.afterDisciplineSelection();
     }
 
     /**
@@ -224,15 +225,29 @@ class SetupDisciplines {
      * Code to call after a discipline is selected / deselected
      */
     private afterDisciplineSelection() {
-        // Update the UI
-        if( this.getAllDisciplinesSelected() ) {
+
+        let enableNextPage = true;
+
+        // Check all disiciplines selected
+        if( this.getAllDisciplinesSelected() )
             $('#mechanics-setDisciplines-NDis').hide();
-            gameView.enableNextLink(true);
-        }
         else {
             $('#mechanics-setDisciplines-NDis').show();
-            gameView.enableNextLink(false);
+            enableNextPage = false;
         }
+
+        // Check weapons selected for magnakai books
+        let showWeaponsWarning = false;
+        if( state.book.bookNumber > 5 && state.actionChart.disciplines.contains( 'wpnmstry' ) && 
+            state.actionChart.weaponSkill.length < 3 ) {
+            enableNextPage = false;
+            $('#mechanics-setDisciplines-NWeapons').show();
+        }
+        else
+            $('#mechanics-setDisciplines-NWeapons').hide();
+
+        gameView.enableNextLink( enableNextPage );
+
         this.enableMagnakaiWeapons();
         template.updateStatistics();
     }
