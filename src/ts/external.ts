@@ -1,8 +1,11 @@
 // External declarations
+
 declare var state:any;
 declare var gameView:any;
 declare var mechanicsEngine:any;
 declare var template:any;
+declare var objectsTable;
+declare var actionChartController;
 
 declare var $:any;
 declare var jQuery:any;

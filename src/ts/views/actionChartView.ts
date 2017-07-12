@@ -1,13 +1,15 @@
+/// <reference path="../external.ts" />
+
 /**
  * The action chart view API
  */
-var actionChartView = {
+const actionChartView = {
 
     /**
      * Fill the action chart with the player state
      * @param actionChart The ActionChart
      */
-    fill: function(actionChart) {
+    fill: function(actionChart : ActionChart) {
 
         document.title = translations.text( 'actionChart' );
 
@@ -38,7 +40,7 @@ var actionChartView = {
      * Render the disciplines table
      * @param {ActionChart} actionChart The action chart
      */
-    fillDisciplines: function(actionChart) {
+    fillDisciplines: function(actionChart : ActionChart) {
         // Kai title:
         $('#achart-kaititle')
             .text( state.book.getKaiTitle( actionChart.disciplines.length ) );
@@ -51,14 +53,19 @@ var actionChartView = {
         else {
             var bookDisciplines = state.book.getDisciplinesTable();
             // Enumerate disciplines
-            $.each( actionChart.disciplines , function(index, disciplineId) {
+            $.each( actionChart.disciplines , function(index, disciplineId : string) {
                 var dInfo = bookDisciplines[disciplineId];
                 var name = dInfo.name;
-                var isWeaponSkill = ( disciplineId == 'wepnskll' );
-                if( isWeaponSkill ) {
-                    var o = state.mechanics.getObject( actionChart.weaponSkill[0] );
-                    name += ' (' + o.name + ')';
+
+                if( disciplineId == 'wepnskll' || disciplineId == 'wpnmstry' ) {
+                    // Show selected weapons description
+                    let weapons : Array<string> = [];
+                    for(let i=0; i<actionChart.weaponSkill.length; i++)
+                        weapons.push( state.mechanics.getObject( actionChart.weaponSkill[i] ).name );
+                    if( weapons.length > 0 )
+                        name += ' (' + weapons.join(', ') + ')';
                 }
+
                 // Unescape the HTML description:
                 var descriptionHtml = $('<div />').html(dInfo.description).text();
                 $displines.append( '<tr><td>' +

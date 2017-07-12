@@ -264,8 +264,12 @@ Book.prototype.getKaiTitle = function(nDisciplines) {
     // &mdash;You begin the Lone Wolf adventures with this level of Kai training
     var idx = title.indexOf( '&mdash;');
     if( idx >= 0 )
-        title = title.substr(0, idx);
-
+        title = title.substr(0, idx).trim();
+    // On book 6 (spanish), there is a parenthesis: Maestro Superior del Kai (con este...
+    idx = title.indexOf( '(');
+    if( idx >= 0 )
+        title = title.substr(0, idx).trim();
+    
     return title;
 };
 
