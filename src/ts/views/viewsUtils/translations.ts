@@ -56,6 +56,7 @@ class Translations {
         'msgNoMoreBackpackItems' : 'No puedes coger mas Objetos de Mochila',
         'noWeapon' : 'Sin arma',
         'weaponskill' : 'Dominio Manejo Armas',
+        'weaponmastery' : 'Maestría Manejo Armas',
         'mindblast' : 'Ataque Psíquico',
         'countAsObjects'  : '(Cuenta como {0} objetos)',
         'annotations' : 'Anotaciones',
@@ -276,6 +277,7 @@ class Translations {
         'msgNoMoreBackpackItems' : 'You cannot get more Backpack Items',
         'noWeapon' : 'No weapon',
         'weaponskill' : 'Weaponskill',
+        'weaponmastery' : 'Weaponmastery',
         'mindblast' : 'Mindblast',
         'countAsObjects'  : '(Counts as {0} items)',
 

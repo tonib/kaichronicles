@@ -304,7 +304,7 @@ class ActionChart {
      */
     public isWeaponskillActive() : boolean {
 
-        if( !this.disciplines.contains( 'wepnskll' ) )
+        if( !this.disciplines.contains( 'wepnskll' ) && !this.disciplines.contains( 'wpnmstry' ) )
             // Player has no Weaponskill
             return false;
 
@@ -345,15 +345,23 @@ class ActionChart {
                 increment: -4
             });
         }
-        else if( this.isWeaponskillActive() ) {       
+        else if( this.isWeaponskillActive() ) {
             // Weapon skill bonus
-            bonuses.push( {
-                concept: translations.text( 'weaponskill' ),
-                increment: +2
-            });
+            if( state.book.bookNumber <= 5 )
+                // Kai book:
+                bonuses.push( {
+                    concept: translations.text( 'weaponskill' ),
+                    increment: +2
+                });
+            else
+                // Magnakai book
+                bonuses.push( {
+                    concept: translations.text( 'weaponmastery' ),
+                    increment: +3
+                });
         }
 
-        // Check cuurent weapon bonuses
+        // Check current weapon bonuses
         if( !noWeapon && currentWeapon && currentWeapon.effect && currentWeapon.effect.cls == 'combatSkill' ) {
             bonuses.push( {
                 concept: currentWeapon.name,
@@ -362,7 +370,7 @@ class ActionChart {
         }
 
         // Mindblast
-        if( !noMindblast && this.disciplines.contains( 'mndblst' ) ) {
+        if( !noMindblast && ( this.disciplines.contains( 'mndblst' ) || this.disciplines.contains( 'psisurge' ) ) ) {
             bonuses.push( {
                 concept: translations.text( 'mindblast' ),
                 increment: mindblastBonus ? mindblastBonus : +2
