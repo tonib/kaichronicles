@@ -90,10 +90,6 @@
 
         <!-- BOOOK 5 -->
 
-        <!-- Yes: a "bow", and yes, it's not a standard weapon, but it's a WEAPON. 
-             So if it's a Weapon, you can use it as a Weapon (Overwhelming Logic). 
-             It has no sense for me: How do you do a fight sword against bow?
-        -->
         <weapon id="jakan" weaponType="bow">
             <name lang="en">Jakan</name>
             <description lang="en">
@@ -104,6 +100,7 @@
             <description lang="es">
                 Un arco de caza de los que utilizan los pescadores de la costa de Vassagonia
             </description>
+            <image book="6" name="bow.png" />
         </weapon>
 
         <!-- BOOOK 6 -->
@@ -461,6 +458,14 @@
         <special id="blackcrystalcube">
             <name lang="en">Black Crystal Cube</name>
             <name lang="es">Cubo de Cristal Negro</name>
+        </special>
+
+        <!-- BOOK 6 -->
+
+        <special id="quiver">
+            <name lang="en">Quiver</name>
+            <name lang="es">Carcaj</name>
+            <image book="6" name="quiver.png" />
         </special>
 
     </specials>

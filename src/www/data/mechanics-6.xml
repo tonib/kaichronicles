@@ -29,6 +29,38 @@
             <setDisciplines />
         </section>
         
+        <section id="equipmnt" pickMaximum="5" pickMaximumMealsFactor="4">
+            <!-- Do not pick 2 maps! -->
+            <test not="true" hasObject="map" >
+                <pick objectId="map" />
+            </test>
+
+            <randomTable>
+                <pick class="money" count="[RANDOM] + 10" />
+            </randomTable>
+
+            <object objectId="sword" />
+            <object objectId="laumspurpotion4" />
+            <object objectId="warhammer" />
+            <object objectId="bow" />
+            <object objectId="quiver" arrows="6" />
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
+            <object objectId="meal" index="2" />
+            <object objectId="meal" index="3" />
+            <object objectId="quarterstaff" />
+            <object objectId="leatherwaistcoat" />
+            <object objectId="rope" />
+            <object objectId="dagger" />
+            <object objectId="tinderbox" />
+            <object objectId="axe" />
+
+            <chooseEquipment 
+                en-text="Pick the money and choose up to five objects before continue" 
+                es-text="Escoge el dinero y elige hasta cinco objetos antes de continuar"
+            />
+        </section>
+
     </sections>
 
 </mechanics>
