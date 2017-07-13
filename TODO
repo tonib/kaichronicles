@@ -12,7 +12,8 @@ FOR FUTURE (1.7+):
 - Describe where:
   * Play on the web
   * Report bugs
-- ERROR: Hunting STILL activated on book 3...
+- ERROR: Hunting STILL activated on book 3... 
+  (maybe fixed: BookSectionStates.fromStateObject, added line "this.huntEnabled = stateObject.huntEnabled;" on v 1.6.3)
 - Android application:
   * App lifeciclye
   * Load games page: Show info about saved games

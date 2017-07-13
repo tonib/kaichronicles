@@ -18,7 +18,7 @@ const state = {
     /**
      * The current book section states
      */
-    sectionStates: null,
+    sectionStates: <BookSectionStates> null,
 
     /**
      * The current action chart
