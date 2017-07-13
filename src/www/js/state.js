@@ -162,6 +162,10 @@ var state = {
                 stateKeys.actionChart.weaponSkill = [];
         }
 
+        // On version 1.6.3 / 1.7, we store the number of arrows (magnakai)
+        if( !stateKeys.actionChart.arrows )
+            stateKeys.actionChart.arrows = 0;
+            
         state.language = stateKeys.language;
         state.book = new Book(stateKeys.bookNumber, state.language);
         state.mechanics = new Mechanics(state.book);

@@ -56,8 +56,8 @@
             <object objectId="axe" />
 
             <chooseEquipment 
-                en-text="Pick the money and choose up to five objects before continue" 
-                es-text="Escoge el dinero y elige hasta cinco objetos antes de continuar"
+                en-text="Pick the money and choose up to five objects before continue (all meals count as one object)" 
+                es-text="Escoge el dinero y elige hasta cinco objetos antes de continuar (todas las comidas cuentan como un objeto)"
             />
         </section>
 

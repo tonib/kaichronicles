@@ -10,6 +10,7 @@ declare var cordovaApp:any;
 declare var projectAon:any;
 declare var Section:any;
 declare var SectionRenderer:any;
+declare var Mechanics:any;
 
 declare var $:any;
 declare var jQuery:any;

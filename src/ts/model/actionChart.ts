@@ -56,6 +56,10 @@ class ActionChart {
     /** The latests scroll position on the game section */
     public yScrollPosition = 0;
 
+    /** 
+     * Number of arrows on the quiver. This MUST to be zero if the player has no quiver. */
+    public arrows = 0;
+
     constructor() {
         // Debug fast setup:
         if( window.getUrlParameter('debug') ) {
@@ -223,6 +227,8 @@ class ActionChart {
         if( this.backpackItems.removeValue(objectId) || this.specialItems.removeValue(objectId)) {
             this.checkMaxEndurance();
             this.checkCurrentWeapon();
+            if( objectId == 'quiver' )
+                this.arrows = 0;
             return true;
         }
         
@@ -502,5 +508,11 @@ class ActionChart {
         };
     }
 
+    public increaseArrows(increment : number) {
+        this.arrows += increment;
+        if( this.arrows < 0 )
+            this.arrows = 0;
+    }
+    
 }
 
