@@ -42,12 +42,13 @@ var objectsTable = {
     renderObject: function( objectInfo , type ) {
 
         // Get the object id and price:
-        var objectId, price, unlimited;
+        var objectId, price, unlimited, arrows;
         if( typeof(objectInfo) === 'string' ) {
             // The object info is directly the object id
             objectId = objectInfo;
             price = null;
             unlimited = false;
+            arrows = 0;
         }
         else {
             // The object info is the info about objects available on the section
@@ -55,6 +56,7 @@ var objectsTable = {
             objectId = objectInfo.id;
             price = objectInfo.price;
             unlimited = objectInfo.unlimited; 
+            arrows = objectInfo.arrows;
         }
 
         // Get the object info
@@ -82,6 +84,8 @@ var objectsTable = {
         var name = o.name;
         if( price )
             name += ' (' + price + ' ' + translations.text('goldCrowns') + ')';
+        if( objectId == 'quiver' && arrows )
+            name += ' (' + arrows + ' ' + translations.text('arrows') + ')';
 
         if( objectId == 'map' )
             // It's the map:
@@ -232,6 +236,13 @@ var objectsTable = {
         }
 
         if( actionChartController.pick( o.id , true, true) ) {
+
+            if( o.id == 'quiver' ) {
+                // Get the number of arrows on the quiver
+                var arrows = $link.attr('data-arrows');
+                arrows = ( arrows ? parseInt( arrows ) : 0 );
+                state.actionChart.increaseArrows( arrows );
+            }
 
             var unlimited = $link.attr('data-unlimited');
             if( !unlimited ) {

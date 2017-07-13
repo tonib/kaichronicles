@@ -379,8 +379,10 @@ var mechanicsEngine = {
      */
     pick: function(rule) {
 
+        var sectionState = state.sectionStates.getSectionState();
+
         // Do not execute the rule twice:
-        if( state.sectionStates.ruleHasBeenExecuted(rule) )
+        if( sectionState.ruleHasBeenExecuted(rule) )
             return;
 
         // Check if we are picking an object
@@ -390,11 +392,11 @@ var mechanicsEngine = {
             if( !actionChartController.pick( objectId , false, false) ) {
                 // The object has not been picked (ex. full backpack)
                 // Add the object to the section
-                state.sectionStates.addObjectToSection( objectId );
+                sectionState.addObjectToSection( objectId );
             }
 
             // Mark the rule as exececuted
-            state.sectionStates.markRuleAsExecuted(rule);
+            sectionState.markRuleAsExecuted(rule);
             return;
         }
 
@@ -413,7 +415,7 @@ var mechanicsEngine = {
             console.log('Pick rule with no objectId / class');
 
         // Mark the rule as exececuted
-        state.sectionStates.markRuleAsExecuted(rule);
+        sectionState.markRuleAsExecuted(rule);
 
     },
 
@@ -560,8 +562,10 @@ var mechanicsEngine = {
      */
     object: function(rule) {
 
+        var sectionState = state.sectionStates.getSectionState();
+
         // Do not execute the rule twice:
-        if( state.sectionStates.ruleHasBeenExecuted(rule) )
+        if( sectionState.ruleHasBeenExecuted(rule) )
             return;
 
         var objectId = $(rule).attr('objectId');
@@ -576,10 +580,14 @@ var mechanicsEngine = {
         // Unlimited number of this kind of object?
         var unlimited = ( $(rule).attr('unlimited') == 'true' );
 
+        // Number of arrows (only for quiver)
+        var arrows = $(rule).attr('arrows');
+        arrows = ( arrows ? parseInt( arrows ) : 0 );
+            
         // Add the object to the available objects on the section
-        state.sectionStates.addObjectToSection( objectId , price , unlimited);
+        sectionState.addObjectToSection( objectId , price , unlimited , arrows );
 
-        state.sectionStates.markRuleAsExecuted(rule);
+        sectionState.markRuleAsExecuted(rule);
     },
 
     /**

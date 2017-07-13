@@ -108,6 +108,9 @@ var actionChartController = {
         if( !o )
             return;
         
+        // Number of arrows on the quiver (to keep it on the dropped object)
+        var arrows = state.actionChart.arrows;
+
         if( state.actionChart.drop(objectId) ) {
             actionChartView.showInventoryMsg('drop', o , 
                 translations.text('msgDropObject' , [o.name] ) );
@@ -121,7 +124,8 @@ var actionChartController = {
 
             if( availableOnSection ) {
                 // Add the droped object as available on the current section
-                state.sectionStates.addObjectToSection( objectId );
+                var sectionState = state.sectionStates.getSectionState();
+                sectionState.addObjectToSection( objectId , 0 , false , arrows );
 
                 // Render available objects on this section (game view)
                 mechanicsEngine.fireInventoryEvents( fromUI , o );
@@ -292,10 +296,11 @@ var actionChartController = {
 
     pickItemsList: function(arrayOfItems) {
         var renderAvailableObjects = false;
+        var sectionState = state.sectionStates.getSectionState();
         for(var i=0; i<arrayOfItems.length; i++) {
             if( !actionChartController.pick( arrayOfItems[i] , true , false ) ) {
                 // Object cannot be picked. Add the object as available on the current section
-                state.sectionStates.addObjectToSection( arrayOfItems[i] );
+                sectionState.addObjectToSection( arrayOfItems[i] );
                 renderAvailableObjects = true;
             }
         }

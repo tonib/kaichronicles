@@ -51,10 +51,10 @@ BookSectionStates.prototype.getSectionState = function() {
  * @param {number} price The object price
  * @param {boolean} unlimited True if there are an infinite number of this kind of object on the section
  */
-BookSectionStates.prototype.addObjectToSection = function(objectId, price, unlimited) {
+/*BookSectionStates.prototype.addObjectToSection = function(objectId, price, unlimited) {
     var sectionState = this.getSectionState();
     sectionState.addObjectToSection( objectId, price, unlimited );
-};
+};*/
 
 /**
  * Remove an object from the current section
