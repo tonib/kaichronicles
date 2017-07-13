@@ -133,10 +133,11 @@ const actionChartView = {
             $('#achart-weapons > tbody') , 'inventory' );
 
         // Current weapon:
-        var current = state.actionChart.selectedWeapon;
-        if( current )
-            current = state.mechanics.getObject( current );
-        $('#achart-currentWeapon').html( current ? current.name : '<i>' + translations.text('noneFemenine') + '</i>');
+        var current = null;
+        if( state.actionChart.selectedWeapon )
+            current = state.mechanics.getObject( state.actionChart.selectedWeapon );
+        
+        $('#achart-currentWeapon').html( current ? current.name : '<i>' + translations.text('noneFemenine') + '</i>' );
     },
 
     /**

@@ -294,7 +294,7 @@ class ActionChart {
      * @return The current combat skill. It includes bonuses for weapons and mindblast
      * discipline
      */
-    public getCurrentCombatSkill(noMindblast : boolean, noWeapon : boolean, mindblastBonus : number) : number {
+    public getCurrentCombatSkill(noMindblast : boolean = false, noWeapon : boolean = false, mindblastBonus : number = 0) : number {
         
         var cs = this.combatSkill;
         var bonuses = this.getCurrentCombatSkillBonuses(noMindblast, noWeapon, mindblastBonus);
@@ -338,7 +338,7 @@ class ActionChart {
      * the default bonus will be used (+2CS)
      * @return {Array} Array of objects with the bonuses concepts
      */
-    public getCurrentCombatSkillBonuses(noMindblast, noWeapon, mindblastBonus ) {
+    public getCurrentCombatSkillBonuses(noMindblast : boolean = false, noWeapon : boolean = false, mindblastBonus : number = 0 ) {
         var bonuses = [];
 
         var currentWeapon = this.getselectedWeaponItem();

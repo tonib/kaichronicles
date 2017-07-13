@@ -1,14 +1,14 @@
+/// <reference path="external.ts" />
 
 /** 
  * The application state
  */
-var state = {
+const state = {
 
     /**
      * The current book
-     * {Book}
      */
-    book: null,
+    book : <Book> null,
 
     /**
      * The current book mechanics
@@ -23,7 +23,7 @@ var state = {
     /**
      * The current action chart
      */
-    actionChart: null,
+    actionChart: <ActionChart> null,
 
     /**
      * The current language ('en' = english / 'es' = spanish)
@@ -50,7 +50,7 @@ var state = {
     /**
      * Setup the state for a book number and language
      */
-    setup: function(bookNumber, language, keepActionChart) {
+    setup: function(bookNumber : number, language : string, keepActionChart : boolean) {
 
         if( !bookNumber )
             bookNumber = 1;
@@ -84,7 +84,7 @@ var state = {
     /**
      * Reset the current state
      */
-    reset: function(deleteBooksHistory) {
+    reset: function(deleteBooksHistory : boolean) {
 
         state.removeCachedState();
 
@@ -145,7 +145,7 @@ var state = {
         }
         catch(e) {
             console.log(e);
-            state.setup();
+            state.setup(1, 'en', false);
         }
     },
 
