@@ -230,5 +230,5 @@ class SectionState {
         if( combat.turns.length === 0 )
             return -1;
         return combat.turns[ combat.turns.length - 1].randomValue;
-    };
+    }
 }
