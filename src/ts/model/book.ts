@@ -202,16 +202,24 @@ class Book {
      * Returns a dictionary with the disciplines info
      * TODO: Check what return type put here
      */
-    public getDisciplinesTable() : any {
-        var result = {};
+    public getDisciplinesTable() : {} {
+        let result = {};
         // Parse the disciplines section
         $(this.bookXml).find('section[id=discplnz] > data > section')
         .each( function(disciplineSection) {
-            var disciplineId = $(this).attr('id'); 
+            var disciplineId = $(this).attr('id');
+
+            let description : string; 
+            if( disciplineId == 'psisurge' )
+                // Special case, with useful info on second paragraph
+                description = $(this).find('p:not(:last)').text();
+            else
+                description = $(this).find('p').first().text();
+
             result[disciplineId] = {
                 id: disciplineId,
                 name: $(this).find('> meta > title').text(),
-                description: $(this).find('p').first().text()
+                description: description
             };
         });
 
