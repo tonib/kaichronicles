@@ -23,7 +23,7 @@ class Mechanics {
     /** Cache of book objects. 
      * Key is the object id. Value is the object Item  
      */
-    public objectsCache = {};
+    public objectsCache : { [objectId : string] : Item } = {};
 
     /**
      * The game mechanics
@@ -91,10 +91,10 @@ class Mechanics {
     /**
      * Returns a JS object with the object properties. null if it was not found
      */
-    public getObject(objectId : string) : any {
+    public getObject(objectId : string) : Item {
 
         // Try to get the object from the cache:
-        var o = this.objectsCache[objectId];
+        let o = this.objectsCache[objectId];
         if( o )
             return o;
 

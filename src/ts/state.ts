@@ -13,7 +13,7 @@ const state = {
     /**
      * The current book mechanics
      */
-    mechanics: null,
+    mechanics: <Mechanics> null,
 
     /**
      * The current book section states

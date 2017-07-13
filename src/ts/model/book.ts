@@ -166,7 +166,7 @@ class Book {
      * @param {Mechanics} mechanics The book mechanics. It can be null. In this case,
      * no translated images will be searched
      */
-    public getIllustrationURL(fileName : string, mechanics : any) : string {
+    public getIllustrationURL(fileName : string, mechanics : any = null) : string {
         var illDirectory;
         if( mechanics && mechanics.imageIsTranslated(fileName) )
             illDirectory = 'ill_' + this.language;
