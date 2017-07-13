@@ -3,7 +3,6 @@
 declare var gameView:any;
 declare var mechanicsEngine:any;
 declare var template:any;
-declare var objectsTable:any;
 declare var actionChartController:any;
 declare var cordovaApp:any;
 declare var projectAon:any;

@@ -1,17 +1,18 @@
+/// <reference path="../../external.ts" />
 
 /**
  * Objects table handling
  */
-var objectsTable = {
+const objectsTable = {
 
     /**
-     * Fill an table with object descriptions.
-     * @param {Array<string>} objects The objects ids array
+     * Fill table with object descriptions.
+     * @param {Array<string>} objects Array with objects ids OR objects info (see renderObject)
      * @param {jQuery} $tableBody The HTML table to fill
      * @param {string} type Table type: 'available': Available objects on section,
      * 'sell': Sell inventory objects, 'inventory': Inventory objects
      */
-    objectsList: function(objects, $tableBody, type ) {
+    objectsList: function(objects : Array<any> , $tableBody : any, type : string ) {
 
         $tableBody.empty();
 
@@ -37,9 +38,9 @@ var objectsTable = {
      * @param {string|object} objectInfo The object to render: The object id, 
      * or an object with properties objectId, price and unlimited (see 
      * SectionState.objects documentation)
-     * @returns {string} The object HTML. null if the object should not be rendered
+     * @returns The object HTML. null if the object should not be rendered
      */
-    renderObject: function( objectInfo , type ) {
+    renderObject: function( objectInfo : any , type : string) : string {
 
         // Get the object id and price:
         var objectId, price, unlimited, arrows;
@@ -114,7 +115,7 @@ var objectsTable = {
      * the section. Only if type is 'available'
      * @returns {string} The operations HTML
      */
-    operationsHtml: function(o, type, price, unlimited) {
+    operationsHtml: function(o, type : string, price : number, unlimited : boolean ) : string {
 
         if( state.actionChart.currentEndurance <= 0 ) 
             // Player is death: No operations
