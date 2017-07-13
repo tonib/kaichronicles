@@ -2,7 +2,7 @@
 /**
  * The action chart controller
  */
-var actionChartController = {
+const actionChartController = {
 
     /**
      * Render the action chart
@@ -20,13 +20,13 @@ var actionChartController = {
 
     /**
      * Pick an object
-     * @param {string} objectId The object to pick, or "meal", to pick one meal
-     * @param {boolean} showError True we should show a toast if the player
+     * @param objectId The object to pick, or "meal", to pick one meal
+     * @param showError True we should show a toast if the player
      * cannot pick the object
-     * @param {boolean} fromUITable True if we are picking the object from the UI
+     * @param fromUITable True if we are picking the object from the UI
      * @return True if the object has been get. False if the object cannot be get
      */
-    pick: function(objectId, showError, fromUITable ) {
+    pick: function(objectId : string, showError : boolean, fromUITable : boolean ) : boolean {
         try {
             // Get object info
             var o = state.mechanics.getObject(objectId);
@@ -63,17 +63,17 @@ var actionChartController = {
     
     /**
      * Drop an object
-     * @param {string} objectId The object to drop, 
+     * @param objectId The object to drop, 
      * or "allweapons" to drop all weapons, 
      * or "backpackcontent" to drop all backpack content, 
      * or "currentweapon" to drop the current weapon,
      * or "allspecial" to drop all the special items
      * or "all" to drop all (weapons, backpack, special items, and money)
-     * @param {boolean} availableOnSection True if the object should be available on 
+     * @param availableOnSection True if the object should be available on 
      * the current section
-     * @param {boolean} fromUI True if the action is fired from the UI
+     * @param fromUI True if the action is fired from the UI
      */
-    drop: function(objectId, availableOnSection, fromUI) {
+    drop: function( objectId : string, availableOnSection : boolean = false, fromUI : boolean = false ) {
 
         if( objectId == 'allweapons' ) {
             actionChartController.dropItemsList( state.actionChart.weapons );
@@ -149,7 +149,7 @@ var actionChartController = {
      */
     dropItemsList: function(arrayOfItems) {
         while( arrayOfItems.length > 0 )
-            actionChartController.drop(arrayOfItems[0], false);
+            actionChartController.drop(arrayOfItems[0], false, false);
     },
 
     /**
@@ -157,7 +157,7 @@ var actionChartController = {
      */
     dropAllWeapons: function() {
         while( state.actionChart.weapons.length > 0 )
-            actionChartController.drop(state.actionChart.weapons[0], false);
+            actionChartController.drop(state.actionChart.weapons[0], false, false);
     },
 
     /**
@@ -226,10 +226,10 @@ var actionChartController = {
 
     /**
      * Increase / decrease the current endurance
-     * @param {number} count Number to increase. Negative to decrease
+     * @param count Number to increase. Negative to decrease
      * @param {boolean} noToast True if no message should be show
      */
-    increaseEndurance: function(count, noToast) {
+    increaseEndurance: function( count : number, noToast : boolean = false) {
         state.actionChart.increaseEndurance(count);
         if( count > 0 ) {
             if( !noToast )
@@ -258,10 +258,10 @@ var actionChartController = {
 
     /**
      * Set the current weapon
-     * @param {string} weaponId The weapon id to set selected
-     * @param {boolean} showToast True if we should show a message to the user   
+     * @param weaponId The weapon id to set selected
+     * @param showToast True if we should show a message to the user   
      */
-    setSelectedWeapon: function( weaponId , showToast ) {
+    setSelectedWeapon: function( weaponId : string , showToast : boolean = false ) {
         if( state.actionChart.selectedWeapon == weaponId )
             return;
 
