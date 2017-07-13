@@ -71,7 +71,7 @@ class SectionState {
      * @param executionState The state to associate with the execution. If it's null,
      * if will be set to true
      */
-    public markRuleAsExecuted( rule, executionState : any ) {
+    public markRuleAsExecuted( rule, executionState : any = true ) {
         if( !executionState )
             executionState = true;
 

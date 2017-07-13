@@ -497,7 +497,7 @@ class ActionChart {
     /**
      * Joins two inventory states
      */
-    public joinInventoryStates = function(s1, s2) {
+    public static joinInventoryStates = function(s1, s2) {
         return {
             weapons: s1.weapons.concat( s2.weapons ),
             hasBackpack: s1.hasBackpack || s2.hasBackpack ,

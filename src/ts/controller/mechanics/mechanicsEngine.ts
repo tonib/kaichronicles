@@ -2,7 +2,7 @@
 /**
  * Engine to render and run gamebook mechanics rules 
  */
-var mechanicsEngine = {
+const mechanicsEngine = {
 
     /**
      * jquery DOM object with the mechanics HTML
@@ -173,10 +173,10 @@ var mechanicsEngine = {
 
     /**
      * Fire events associated to inventory changes (pick, drop, etc)
-     * @param {boolean} fromUI True if the event was fired from the UI
-     * @param {Item} o Only applies if fromUI is true. The object picked / droped
+     * @param fromUI True if the event was fired from the UI
+     * @param o Only applies if fromUI is true. The object picked / droped
      */
-    fireInventoryEvents: function(fromUI, o ) {
+    fireInventoryEvents: function( fromUI : boolean = false , o : Item = null ) {
 
         // Render object tables
         mechanicsEngine.showAvailableObjects();
@@ -1091,7 +1091,7 @@ var mechanicsEngine = {
             .replaceAll( '[ENDURANCE]' , state.actionChart.currentEndurance )
             .replaceAll( '[MAXENDURANCE]' , state.actionChart.getMaxEndurance() )
             .replaceAll( '[ORIGINALCOMBATSKILL]' , state.actionChart.combatSkill )
-            .replaceAll( '[COMBATSENDURANCELOST]', sectionState.combatsEnduranceLost() )
+            .replaceAll( '[COMBATSENDURANCELOST]', sectionState.combatsEnduranceLost('player') )
             .replaceAll( '[COMBATSENEMYLOST]', sectionState.combatsEnduranceLost('enemy') )
             .replaceAll( '[MEALS]', state.actionChart.meals )
             .replaceAll( '[KAILEVEL]', state.actionChart.disciplines.length )
@@ -1207,11 +1207,11 @@ var mechanicsEngine = {
      * Get a translated property of a rule. The properties checked are 'en-<property>' and 
      * 'es-<property>'
      * @param {xmlNode} rule The rule to check
-     * @param {string} propertyName The property to check. If it's null, the 'text' property
+     * @param propertyName The property to check. If it's null, the 'text' property
      * will be search
-     * @return {string} The translated text
+     * @return The translated text
      */
-    getRuleText: function(rule, propertyName) {
+    getRuleText: function(rule, propertyName : string = null ) : string {
         if( !propertyName )
             propertyName = 'text';
 
@@ -1265,7 +1265,7 @@ var mechanicsEngine = {
         var sectionStateObjects = state.sectionStates.getSectionState().objects;
         var currentObjects = {};
         var objectId;
-        for(i=0; i<sectionStateObjects.length; i++) {
+        for(let i=0; i<sectionStateObjects.length; i++) {
             objectId = sectionStateObjects[i].id;
             if( !currentObjects[objectId] )
                 currentObjects[objectId] = 1;
