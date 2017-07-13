@@ -1153,7 +1153,7 @@ var mechanicsEngine = {
      * Apply the healing discipline on the current section
      */
     healingDiscipline: function() {
-        if( !state.actionChart.disciplines.contains('healing') )
+        if( !state.actionChart.disciplines.contains('healing') && !state.actionChart.disciplines.contains('curing') )
             return;
         var sectionState = state.sectionStates.getSectionState();
         if( sectionState.combats.length > 0 )
