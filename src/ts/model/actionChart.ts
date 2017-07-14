@@ -2,6 +2,16 @@
 /// <reference path="../external.ts" />
 
 /**
+ * Bonus for CS/EP definition
+ */
+interface Bonus {
+    /** The bonus description */
+    concept : string;
+    /** The increment / decrement of the CS/EP */
+    increment : number;
+}
+
+/**
  * The action chart / player state 
  * TODO: This will be hard, but the inventory should be on a different class, for 
  * TODO: getInventoryState() and joinInventoryStates() elegance
@@ -336,9 +346,11 @@ class ActionChart {
      * If false, the combat skill for the current selected weapon
      * @param {number} mindblastBonus If > 0, the mindblast CS bonus to apply. If 0 or null,
      * the default bonus will be used (+2CS)
-     * @return {Array} Array of objects with the bonuses concepts
+     * @return Array of objects with the bonuses concepts
      */
-    public getCurrentCombatSkillBonuses(noMindblast : boolean = false, noWeapon : boolean = false, mindblastBonus : number = 0 ) {
+    public getCurrentCombatSkillBonuses(noMindblast : boolean = false, noWeapon : boolean = false, 
+        mindblastBonus : number = 0 ) : Array<Bonus> {
+
         var bonuses = [];
 
         var currentWeapon = this.getselectedWeaponItem();
@@ -393,6 +405,10 @@ class ActionChart {
             }
         });
 
+        const circlesBonuses = LoreCircle.getCirclesBonuses( this.disciplines , 'CS' );
+        for( let c of circlesBonuses )
+            bonuses.push(c);
+
         return bonuses;
     }
 
@@ -427,9 +443,9 @@ class ActionChart {
 
     /**
      * Get the current bonuses for endurance
-     * @return {Array} Array of objects with the bonuses concepts
+     * @return Array of objects with the bonuses concepts
      */
-    public getEnduranceBonuses() {
+    public getEnduranceBonuses() : Array<Bonus> {
 
         var bonuses = [];
         this.enumerateObjects( function(o) {
@@ -440,6 +456,11 @@ class ActionChart {
                 });
             }
         });
+
+        const circlesBonuses = LoreCircle.getCirclesBonuses( this.disciplines , 'EP' );
+        for( let c of circlesBonuses )
+            bonuses.push(c);
+
         return bonuses;
     }
 
@@ -508,11 +529,22 @@ class ActionChart {
         };
     }
 
+    /**
+     * Increase the number of arrows of the player
+     * @param increment N. of arrows to increment. Negative to decrement
+     */
     public increaseArrows(increment : number) {
         this.arrows += increment;
         if( this.arrows < 0 )
             this.arrows = 0;
     }
-    
+
+    /**
+     * Get the magnakai lore circles owned by the player
+     */
+    public getLoreCircles() : Array<LoreCircle> {
+        return LoreCircle.getCircles(this.disciplines);
+    }
+
 }
 

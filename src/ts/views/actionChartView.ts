@@ -41,9 +41,26 @@ const actionChartView = {
      * @param {ActionChart} actionChart The action chart
      */
     fillDisciplines: function(actionChart : ActionChart) {
+
         // Kai title:
         $('#achart-kaititle')
             .text( state.book.getKaiTitle( actionChart.disciplines.length ) );
+
+        // Lore circles:
+        if( state.book.bookNumber <= 5 )
+            // Only for magnakai books
+            $('#achart-circles').hide();
+        else {
+            const circles = actionChart.getLoreCircles();
+            if( circles.length == 0 )
+                $('#achart-currentCircles').html( '<i>' + translations.text('noneMasculine') + '</i>' );
+            else {
+                let circlesNames : Array<string> = [];
+                for( let c of actionChart.getLoreCircles() )
+                    circlesNames.push( c.getDescription() );
+                $('#achart-currentCircles').html( circlesNames.join( ', ') );
+            }
+        }
 
         // TODO: Display the discipline "quote" tag instead the name
         var $displines = $('#achart-disciplines > tbody');

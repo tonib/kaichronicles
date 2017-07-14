@@ -61,7 +61,12 @@ class Translations {
         'mindblast' : 'Ataque Psíquico',
         'countAsObjects'  : '(Cuenta como {0} objetos)',
         'annotations' : 'Anotaciones',
-        
+        'circleFire' : 'Círculo de Fuego',
+        'circleLight' : 'Círculo de Luz',
+        'circleSolaris' : 'Círculo de Solaris',
+        'circleSpirit' : 'Círculo del Espíritu',
+        'circles' : 'Círculos de la Ciencia:',
+
         //////////////////////////////////////
         // Combats
         //////////////////////////////////////
@@ -282,7 +287,11 @@ class Translations {
         'weaponmastery' : 'Weaponmastery',
         'mindblast' : 'Mindblast',
         'countAsObjects'  : '(Counts as {0} items)',
-
+        'circleFire' : 'Circle of Fire',
+        'circleLight' : 'Circle of Light',
+        'circleSolaris' : 'Circle of Solaris',
+        'circleSpirit' : 'Circle of the Spirit',
+        
         //////////////////////////////////////
         // Combats
         //////////////////////////////////////
