@@ -7,7 +7,7 @@ const objectsTable = {
 
     /**
      * Fill table with object descriptions.
-     * @param {Array<string>} objects Array with objects ids OR objects info (see renderObject)
+     * @param {Array<string>} objects Array with objects ids OR SectionItem
      * @param {jQuery} $tableBody The HTML table to fill
      * @param {string} type Table type: 'available': Available objects on section,
      * 'sell': Sell inventory objects, 'inventory': Inventory objects
@@ -19,7 +19,8 @@ const objectsTable = {
         // Populate the table
         var html = '';
         for( var i=0; i<objects.length; i++ ) {
-            var objectHtml = objectsTable.renderObject( objects[i] , type );
+            
+            var objectHtml = objectsTable.renderObject( objectsTable.toSectionItem( objects[i] , type ) , type );
             if( objectHtml )
                 html += objectHtml;
         }
@@ -34,45 +35,46 @@ const objectsTable = {
     },
 
     /**
+     * Convert, if needed, the object id to a SectionItem
+     */
+    toSectionItem: function( objectInfo : any , type : string ) : SectionItem {
+        if( typeof(objectInfo) === 'string' )
+            return { 
+                // The object info is directly the object id
+                id : objectInfo,
+                price : 0,
+                unlimited : false,
+                arrows : ( type == 'inventory' ? state.actionChart.arrows : 0 )
+            }
+        else {
+            // The object info is the info about objects available on the section
+            // See SectionState.objects documentation
+            return objectInfo;
+        }
+    },
+
+    /**
      * Render an object to HTML
-     * @param {string|object} objectInfo The object to render: The object id, 
+     * @param objectInfo The object to render: The object id, 
      * or an object with properties objectId, price and unlimited (see 
      * SectionState.objects documentation)
      * @returns The object HTML. null if the object should not be rendered
      */
-    renderObject: function( objectInfo : any , type : string) : string {
-
-        // Get the object id and price:
-        var objectId, price, unlimited, arrows;
-        if( typeof(objectInfo) === 'string' ) {
-            // The object info is directly the object id
-            objectId = objectInfo;
-            price = null;
-            unlimited = false;
-            arrows = 0;
-        }
-        else {
-            // The object info is the info about objects available on the section
-            // See SectionState.objects documentation
-            objectId = objectInfo.id;
-            price = objectInfo.price;
-            unlimited = objectInfo.unlimited; 
-            arrows = objectInfo.arrows;
-        }
+    renderObject: function( objectInfo : SectionItem , type : string) : string {
 
         // Get the object info
-        var o = state.mechanics.getObject(objectId);
+        const o = state.mechanics.getObject( objectInfo.id );
         if( !o )
             return null;
 
         // If it's a sell table, and we don't have the object, do not show it
-        if( type == 'sell' && !state.actionChart.hasObject(objectId) )
+        if( type == 'sell' && !state.actionChart.hasObject( objectInfo.id ) )
             return null;
 
         var html = '<tr><td>';
 
         // Object operations
-        html += objectsTable.operationsHtml( o , type , price , unlimited );
+        html += objectsTable.operationsHtml( o , type , objectInfo );
 
         // Objet Image
         var imageUrl = o.getImageUrl();
@@ -83,12 +85,12 @@ const objectsTable = {
 
         // Name
         var name = o.name;
-        if( price )
-            name += ' (' + price + ' ' + translations.text('goldCrowns') + ')';
-        if( objectId == 'quiver' && arrows )
-            name += ' (' + arrows + ' ' + translations.text('arrows') + ')';
+        if( objectInfo.price )
+            name += ' (' + objectInfo.price + ' ' + translations.text('goldCrowns') + ')';
+        if( objectInfo.id == 'quiver' && objectInfo.arrows )
+            name += ' (' + objectInfo.arrows + ' ' + translations.text('arrows') + ')';
 
-        if( objectId == 'map' )
+        if( objectInfo.id == 'map' )
             // It's the map:
             name = '<a href="#map">' + name + '</a>';
         else if( imageUrl )
@@ -107,15 +109,13 @@ const objectsTable = {
 
     /**
      * Get the available operations HTML for a given object
-     * @param {Item} o The object
-     * @param {string} type Table type: 'available': Available objects on section,
+     * @param o The object
+     * @param type Table type: 'available': Available objects on section,
      * 'sell': Sell inventory objects, 'inventory': Inventory objects
-     * @param {number} price Object price. Only if type is 'available' or 'sell'
-     * @param {boolean} unlimited True if there is an unlimited amount of this object on
-     * the section. Only if type is 'available'
+     * @param objectInfo The object info in the section
      * @returns {string} The operations HTML
      */
-    operationsHtml: function(o, type : string, price : number, unlimited : boolean ) : string {
+    operationsHtml: function(o : Item, type : string, objectInfo : SectionItem ) : string {
 
         if( state.actionChart.currentEndurance <= 0 ) 
             // Player is death: No operations
@@ -125,19 +125,23 @@ const objectsTable = {
         var link = '<a href="#" data-objectId="' + o.id + 
             '" class="equipment-op btn btn-default" ';
 
+        if( o.id == 'quiver' )
+            // Store the number of arrows on the quiver
+            link += 'data-arrows="' + objectInfo.arrows + '" ';
+
         if( type == 'available' ) {
             // Available object
-            var title = translations.text( price ? 'buyObject' : 'pickObject' );
-            if( price )
-                link += 'data-price="' + price + '" ';
-            if( unlimited )
+            var title = translations.text( objectInfo.price ? 'buyObject' : 'pickObject' );
+            if( objectInfo.price )
+                link += 'data-price="' + objectInfo.price + '" ';
+            if( objectInfo.unlimited )
                 link += 'data-unlimited="true" ';
             html += link + 'data-op="get" title="' + title + '">' + 
                 '<span class="glyphicon glyphicon-plus"></span></a>';
         }
         else if( type == 'sell' ) {
             // Sell inventory object
-            link += 'data-price="' + price + '" ';
+            link += 'data-price="' + objectInfo.price + '" ';
             html += link + 'data-op="sell" title="' + translations.text('sellObject') + 
                 '"><span class="glyphicon glyphicon-share"></span></a> ';
         }
