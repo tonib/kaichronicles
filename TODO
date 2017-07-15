@@ -41,6 +41,7 @@ FOR FUTURE (1.7+):
 - Find "TODO" and do it
 - Death UI: If you click restart book, prompt for confirmation
 - Add a text on the map view: "Click on the map to enlarge it"
+  * Android: Allow to zoom with swipe
 - Shared images on multiples books:
   * Allow to declare images on multiple books
   * Choose the latest available image

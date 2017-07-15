@@ -4,7 +4,6 @@ declare var gameView:any;
 declare var template:any;
 declare var cordovaApp:any;
 declare var projectAon:any;
-declare var Section:any;
 declare var SectionRenderer:any;
 declare var Combat:any;
 declare var CombatTurn:any;

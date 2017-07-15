@@ -1,11 +1,12 @@
+/// <reference path="../external.ts" />
 
-var mapView = {
+const mapView = {
 
     /**
      * Show the map section
-     * @param {Section} section The map Section
+     * @param section The map Section
      */
-    setSectionContent: function( section ) {
+    setSectionContent: function( section : Section ) {
         document.title = section.getTitleText();
         $('#map-title').text( section.getTitleText() );
         // Render the map, with the illustrations text. On book 5, it's the 

@@ -1,8 +1,9 @@
+/// <reference path="../external.ts" />
 
 /**
  * The map controller
  */
-var mapController = {
+const mapController = {
 
     /**
      * Render the map
