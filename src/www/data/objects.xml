@@ -468,6 +468,11 @@
             <image book="6" name="quiver.png" />
         </special>
 
+        <special id="mapvaretta">
+            <name lang="en">Map of Varetta</name>
+            <name lang="es">Mapa de Varetta</name>
+        </special>
+
     </specials>
 
     <objects>
@@ -887,6 +892,25 @@
         <object id="canteenwater">
             <name lang="en">Canteen of Water</name>
             <name lang="es">Cantimplora</name>
+        </object>
+
+        <!-- BOOK 6 -->
+
+        <object id="laumspurpotion3">
+            <name lang="en">Potion of Laumspur</name>
+            <description lang="en">
+                This restores 3 ENDURANCE points to your total when swallowed after combat. 
+                There is only enough for one dose
+            </description>
+
+            <name lang="es">Poción de Laumspur</name>
+            <description lang="es">
+                Te hace recuperar 3 puntos de RESISTENCIA al beberla tras un combate. 
+                Sólo hay cantidad suficiente para una dosis
+            </description>
+
+            <image book="3" name="potion.png" />
+            <usage class="endurance" increment="3" />
         </object>
 
         <!-- OTHERS -->

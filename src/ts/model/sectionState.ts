@@ -91,19 +91,41 @@ class SectionState {
     }
 
     /**
+     * Return the count of items on the current section of a given type
+     * @param type The object type to count ('weapon', 'object' or 'special').
+     * null to return all
+     * @return The objects on this section
+     */
+    public getSectionObjects(type : string = null) : Array<Item> {
+        let items : Array<Item> = [];
+        for( let sectionItem of this.objects) {
+            let i = state.mechanics.getObject( sectionItem.id );
+            if( !type || i.type == type )
+                items.push(i);
+        }
+        return items;
+    }
+
+    /**
      * Return the count of objects on the current section of a given type
      * @param type The object type to count ('weapon', 'object' or 'special').
      * null to return all
      * @return The count of objects on this section
      */
     public getCntSectionObjects(type : string) : number {
-        var cnt = 0;
-        for( var i=0, len = this.objects.length; i< len; i++) {
-            var o = state.mechanics.getObject( this.objects[i].id );
-            if( !type || o.type == type )
-                cnt++;
+        return this.getSectionObjects(type).length;
+    }
+
+    /**
+     * Return the weapons and weapon special object on the section
+     */
+    public getWeaponObjects() : Array<Item> {
+        let weapons : Array<Item> = [];
+        for( let i of this.getSectionObjects() ) {
+            if( i.isWeapon() )
+                weapons.push( i );
         }
-        return cnt;
+        return weapons;
     }
 
     /**

@@ -1085,8 +1085,13 @@ const mechanicsEngine = {
             .replaceAll( '[MONEY]' , state.actionChart.beltPouch )
             .replaceAll( '[BACKPACK-ITEMS-CNT-ON-SECTION]' , sectionState.getCntSectionObjects('object') )
             .replaceAll( '[BACKPACK-ITEMS-CNT-ON-ACTIONCHART]' , state.actionChart.getNBackpackItems() )
+            // This does NOT include special items:
             .replaceAll( '[WEAPON-ITEMS-CNT-ON-SECTION]' , sectionState.getCntSectionObjects('weapon') )
+            // This does NOT include special items:
             .replaceAll( '[WEAPON-ITEMS-CNT-ON-ACTIONCHART]' , state.actionChart.weapons.length )
+            // This includes special items
+            .replaceAll( '[WEAPONLIKE-CNT-ON-SECTION]' , sectionState.getWeaponObjects().length )
+            // This includes special items
             .replaceAll( '[WEAPONLIKE-CNT-ON-ACTIONCHART]' , state.actionChart.getWeaponObjects().length )
             .replaceAll( '[ENDURANCE]' , state.actionChart.currentEndurance )
             .replaceAll( '[MAXENDURANCE]' , state.actionChart.getMaxEndurance() )

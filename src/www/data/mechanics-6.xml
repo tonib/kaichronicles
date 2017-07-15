@@ -61,6 +61,68 @@
             />
         </section>
 
+        <section id="sect1">
+            <test not="true" hasDiscipline="pthmnshp">
+                <choiceState section="sect308" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect2">
+            <object objectId="laumspurpotion4" price="5" />
+            <object objectId="potiongallowbrush" price="2" />
+            <object objectId="rendalimelixir" price="7" />
+            <object objectId="potionofstrength" price="4" />
+            <object objectId="potionblackgraveweed" price="4" />
+        </section>
+
+        <section id="sect3">
+            <object objectId="torch" />
+        </section>
+
+        <section id="sect4">
+            <message id="msg-drop-weapon" 
+                en-text="Drop a weapon before continue" 
+                es-text="Deja un arma antes de continuar"
+            />
+            <choiceState section="all" set="disabled" />
+            <onInventoryEvent>
+                <test expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] == 0 || [WEAPONLIKE-CNT-ON-SECTION] > 0">
+                    <message id="msg-drop-weapon" op="hide" />
+                    <choiceState section="all" set="enabled" />
+                </test>
+                <test not="true" expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] == 0 || [WEAPONLIKE-CNT-ON-SECTION] > 0">
+                    <message id="msg-drop-weapon" op="show" />
+                    <choiceState section="all" set="disabled" />
+                </test>
+            </onInventoryEvent>
+        </section>
+
+        <section id="sect5">
+            <test not="true" expression="[MONEY] >= 2">
+                <choiceState section="sect141" set="disabled" />
+            </test>
+            <choiceSelected section="sect141">
+                <pick class="money" count="-2" />
+            </choiceSelected>
+        </section>
+
+        <section id="sect8">
+            <pick class="money" count="10" />
+            <object objectId="laumspurpotion3" />
+            <object objectId="mapvaretta" />
+        </section>
+
+        <section id="sect9">
+            <test not="true" expression="[MONEY] >= 10">
+                <choiceState section="sect332" set="disabled" />
+            </test>
+            <choiceSelected section="sect332">
+                <pick class="money" count="-10" />
+            </choiceSelected>
+        </section>
+
+        <!-- UP TO sect9 -->
+        
     </sections>
 
 </mechanics>

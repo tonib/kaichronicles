@@ -481,20 +481,20 @@ class ActionChart {
     /**
      * Returns all weapons and backpack / special item objects that can be
      * used as weapons
-     * @return {Array<Item>} All weapon objects
+     * @return All weapon objects
      */
-    public getWeaponObjects() {
+    public getWeaponObjects() : Array<Item> {
 
         // Weapons
-        var result = [];
-        for( var i=0; i<this.weapons.length; i++) {
-            var o = state.mechanics.getObject(this.weapons[i]);
+        let result : Array<Item> = [];
+        for( let i=0; i<this.weapons.length; i++) {
+            let o = state.mechanics.getObject(this.weapons[i]);
             if( o )
                 result.push(o);
         }
 
         // Weapon-like objects
-        this.enumerateObjects( function(o) {
+        this.enumerateObjects( function(o : Item) {
             if( o.isWeapon() )
                 result.push(o);
         });
