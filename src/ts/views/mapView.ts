@@ -44,13 +44,11 @@ const mapView = {
         let $image = $('#map-section img');
         let image = $image[0];
 
-        console.log( image.width );
-        console.log( image.height );
-
         let factor = ( increase ? 1.1 : 0.9 );
         image.width *= factor;
         image.height *= factor;
 
+        // If originalsize class is not set, the width is fixed to 100%, and the image appears distorted
         $image.addClass('originalsize');
     }
 

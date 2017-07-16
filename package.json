@@ -9,12 +9,12 @@
     "license" : "MIT",
 
     "devDependencies": {
-        "jshint": "latest",
-        "node-fs-extra": "latest",
-        "uglify-js": "latest",
-        "klaw-sync": "latest",
-        "preprocess": "latest",
-        "typescript": "latest"
+        "jshint": "2.9.5",
+        "node-fs-extra": "0.8.2",
+        "uglify-js": "3.0.25",
+        "klaw-sync": "2.1.0",
+        "preprocess": "3.1.0",
+        "typescript": "2.4.1"
     },
 
     "scripts": {

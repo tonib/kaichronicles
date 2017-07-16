@@ -129,7 +129,7 @@
             <effect class="endurance" increment="2" />
         </special>
 
-        <special id="chainmail">
+        <special id="chainmail" incompatibleWith="chainmail">
             <name lang="en">Chainmail Waistcoat</name>
             <description lang="en">This adds 4 ENDURANCE points to your total.</description>
 
@@ -246,7 +246,7 @@
         
         <!-- BOOK 3 -->
         
-        <special id="leatherwaistcoat">
+        <special id="leatherwaistcoat" incompatibleWith="leatherwaistcoat" >
             <name lang="en">Padded Leather Waistcoat</name>
             <description lang="en">
                 This adds 2 ENDURANCE points to your total
