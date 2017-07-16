@@ -201,6 +201,13 @@ class Translations {
         'map' : 'Mapa',
 
         //////////////////////////////////////
+        // Map
+        //////////////////////////////////////
+
+        'map-clickinfo' : 'Haz click en el mapa para ajustar al tamaño de la pantalla / restaurar a su tamaño original.',
+        'map-changezoom' : 'Cambiar zoom:',
+
+        //////////////////////////////////////
         // Download books
         //////////////////////////////////////
 

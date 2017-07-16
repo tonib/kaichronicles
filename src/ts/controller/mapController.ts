@@ -22,7 +22,7 @@ const mapController = {
         views.loadView('map.html')
         .then(function() {
             mapView.setSectionContent( mapSection );
-            mapView.bindImageClicks();
+            mapView.bindEvents();
         });
         
     },

@@ -3,6 +3,8 @@
 - BUG: book 4 / sect194: "If you have the Kai Discipline of Mind Over Matter, you can add 2 to the number you have picked." not applied
 - Report erratas:
   * Book 1,2,3,4,5,6: inconsitencies between laguages: "Si el lápiz señala 0, no cuenta." / "If you pick 0 it counts as zero."
+  * Book 5: On English map, there is a description of the country, with clues about the grave location puzzle, on spanish, there
+    is not.
 - "Psi-surge" discipline on combats
 - Bow cannot be used on hand-by-hand combats. It cannot be set as current weapon
 - package.json: Change "latest" to the current version number
