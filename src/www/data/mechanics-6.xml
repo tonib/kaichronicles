@@ -121,7 +121,35 @@
             </choiceSelected>
         </section>
 
-        <!-- UP TO sect9 -->
+        <section id="sect10">
+            <object objectId="luyenticket" price="10" />
+            <object objectId="rhemticket" price="15" />
+            <object objectId="eulaticket" price="20" />
+            <onInventoryEvent>
+                <test hasObject="luyenticket|rhemticket|eulaticket">
+                    <choiceState section="all" set="enabled" />
+                </test>
+                <test not="true" hasObject="luyenticket|rhemticket|eulaticket">
+                    <choiceState section="all" set="disabled" />
+                </test>
+            </onInventoryEvent>
+        </section>
+
+        <section id="sect12">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="0" enemyMultiplier="0" />
+            <afterCombatTurn turn="2">
+                <combat enemyMultiplier="1" />
+            </afterCombatTurn>
+            <afterCombats>
+                <choiceState section="sect112" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect305" set="enabled" />
+            </afterElude>
+        </section>
+
+        <!-- UP TO sect12 -->
         
     </sections>
 

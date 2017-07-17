@@ -473,6 +473,21 @@
             <name lang="es">Mapa de Varetta</name>
         </special>
 
+        <special id="luyenticket">
+            <name lang="en">Ticket to Luyen</name>
+            <name lang="es">Billete a Luyen</name>
+        </special>
+
+        <special id="rhemticket">
+            <name lang="en">Ticket to Rhem</name>
+            <name lang="es">Billete a Rhem</name>
+        </special>
+
+        <special id="eulaticket">
+            <name lang="en">Ticket to Eula</name>
+            <name lang="es">Billete a Eula</name>
+        </special>
+
     </specials>
 
     <objects>
