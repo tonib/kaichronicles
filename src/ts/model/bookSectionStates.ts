@@ -119,13 +119,13 @@ class BookSectionStates {
             // Restore combats
             var combats = [];
             $.each( sectionState.combats , function( index , combat ) {
-                var rightCombat = $.extend( new Combat(), combat );
+                var rightCombat = $.extend( new Combat( '' , 0 , 0 ) , combat );
                 combats.push( rightCombat );
                 
                 // Restore combat turns
                 var turns = [];
                 $.each( rightCombat.turns , function( index , turn ) {
-                    turns.push( $.extend( new CombatTurn(), turn ) );
+                    turns.push( $.extend( new CombatTurn(0,0,0,0,0,0,false,0,0) , turn ) );
                 });
                 rightCombat.turns = turns;
             });
