@@ -239,6 +239,8 @@ const actionChartController = {
             if( !noToast )
                 toastr.warning( translations.text('msgEndurance' , [count] ) );
             mechanicsEngine.testDeath();
+            // Check if the Psi-surge should be disabled
+            combatMechanics.checkPsiSurgeEnabled();
         }
         template.updateStatistics();
     },

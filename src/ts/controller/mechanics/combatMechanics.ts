@@ -90,6 +90,9 @@ const combatMechanics = {
                 // Initialice Psi surge:
                 if( combat.psiSurge )
                     $psiSurgeCheck.attr( 'checked' , true );
+                // Check if the Psi-surge cannot be used (EP <= 6)
+                if( state.actionChart.currentEndurance <= 6 )
+                    combatMechanics.disablePsiSurge( $combatUI , combat );
                 // Psi surge selection
                 $psiSurgeCheck.click(function(e : Event) {
                     combatMechanics.onPsiSurgeClick(e , $(this) );
@@ -234,7 +237,9 @@ const combatMechanics = {
             if( elude )
                 // Disable other combats
                 combatMechanics.hideCombatButtons( null );
-                
+            
+            // Check if the Psi-surge should be disabled after this turn
+            combatMechanics.checkPsiSurgeEnabled();
         });
 
     },
@@ -265,6 +270,37 @@ const combatMechanics = {
         const selected : boolean = $psiSurgeCheck.prop( 'checked' ) ? true : false;
         combat.psiSurge = selected;
         combatMechanics.updateCombatRatio( $combatUI , combat);
+    },
+
+    /**
+     * Check if the Psi-surge can be enabled. 
+     * It cannot be used if the EP <= 6
+     */
+    checkPsiSurgeEnabled : function() {
+
+        if( !state.actionChart.disciplines.contains('psisurge') )
+            return;
+        if( state.actionChart.currentEndurance > 6 )
+            return;
+        var sectionState = state.sectionStates.getSectionState();
+        if( sectionState.combats.length === 0 )
+            return;
+        for( let i=0; i<sectionState.combats.length; i++ ) {
+            var $combatUI = $('.mechanics-combatUI:eq(' + i + ')');
+            combatMechanics.disablePsiSurge( $combatUI , sectionState.combats[i]);
+        }
+        
+    },
+
+    /**
+     * Disable Psi-surge on a combat
+     */
+    disablePsiSurge : function( $combatUI : any , combat : Combat ) {
+        combat.psiSurge = false;
+        const $psiSurgeCheck = $combatUI.find('.psisurgecheck input');
+        $psiSurgeCheck.prop('checked', false);
+        $psiSurgeCheck.prop('disabled', true);
+        combatMechanics.updateCombatRatio( $combatUI , combat );
     }
 
 };
