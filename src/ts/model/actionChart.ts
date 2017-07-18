@@ -301,13 +301,15 @@ class ActionChart {
      * If false, the combat skill for the current selected weapon
      * @param mindblastBonus If > 0, the mindblast CS bonus to apply. If 0 or null,
      * the default bonus will be used (+2CS)
+     * @param psiSurge Is Psi-surge activated?
      * @return The current combat skill. It includes bonuses for weapons and mindblast
      * discipline
      */
-    public getCurrentCombatSkill(noMindblast : boolean = false, noWeapon : boolean = false, mindblastBonus : number = 0) : number {
+    public getCurrentCombatSkill(noMindblast : boolean = false, noWeapon : boolean = false, mindblastBonus : number = 0,
+        psiSurge : boolean = false) : number {
         
         var cs = this.combatSkill;
-        var bonuses = this.getCurrentCombatSkillBonuses(noMindblast, noWeapon, mindblastBonus);
+        var bonuses = this.getCurrentCombatSkillBonuses(noMindblast, noWeapon, mindblastBonus, psiSurge);
         for(var i=0; i<bonuses.length; i++)
             cs += bonuses[i].increment;
 
@@ -346,10 +348,11 @@ class ActionChart {
      * If false, the combat skill for the current selected weapon
      * @param {number} mindblastBonus If > 0, the mindblast CS bonus to apply. If 0 or null,
      * the default bonus will be used (+2CS)
+     * @param psiSurge Is Psi-surge activated?
      * @return Array of objects with the bonuses concepts
      */
     public getCurrentCombatSkillBonuses(noMindblast : boolean = false, noWeapon : boolean = false, 
-        mindblastBonus : number = 0 ) : Array<Bonus> {
+        mindblastBonus : number = 0 , psiSurge : boolean = false) : Array<Bonus> {
 
         var bonuses = [];
 
@@ -387,8 +390,14 @@ class ActionChart {
             });
         }
 
-        // Mindblast
-        if( !noMindblast && ( this.disciplines.contains( 'mndblst' ) || this.disciplines.contains( 'psisurge' ) ) ) {
+        // Mindblast / Psi-surge
+        if( psiSurge ) {
+            bonuses.push( {
+                concept: translations.text( 'psisurge' ),
+                increment: +4
+            });
+        }
+        else if( !noMindblast && ( this.disciplines.contains( 'mndblst' ) || this.disciplines.contains( 'psisurge' ) ) ) {
             bonuses.push( {
                 concept: translations.text( 'mindblast' ),
                 increment: mindblastBonus ? mindblastBonus : +2

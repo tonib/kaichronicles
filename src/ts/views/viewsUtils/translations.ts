@@ -59,6 +59,7 @@ class Translations {
         'weaponskill' : 'Dominio Manejo Armas',
         'weaponmastery' : 'Maestría Manejo Armas',
         'mindblast' : 'Ataque Psíquico',
+        'psisurge' : 'Acometida Psíquica',
         'countAsObjects'  : '(Cuenta como {0} objetos)',
         'annotations' : 'Anotaciones',
         'circleFire' : 'Círculo de Fuego',
@@ -80,7 +81,8 @@ class Translations {
         'playTurn' : 'Jugar turno',
         'eludeCombat' : 'Eludir combate',
         'deathLetter' : 'M',
-        
+        'mechanics-combat-psisurge' : 'Acometida Psíquica: +4 DC, -2 R por asalto',
+
         //////////////////////////////////////
         // Meals
         //////////////////////////////////////
@@ -293,6 +295,7 @@ class Translations {
         'weaponskill' : 'Weaponskill',
         'weaponmastery' : 'Weaponmastery',
         'mindblast' : 'Mindblast',
+        'psisurge' : 'Psi-surge',
         'countAsObjects'  : '(Counts as {0} items)',
         'circleFire' : 'Circle of Fire',
         'circleLight' : 'Circle of Light',

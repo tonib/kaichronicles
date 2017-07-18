@@ -50,49 +50,39 @@ class CombatTurn {
     /**
      * Create a combat turn
      * TODO: Do not pass all those parameters. Pass only Combat, and read the properties
-     * @param turnNumber Number of the turn (1 is the first)
+     * @param combat The combat owner of this turn
      * @param randomValue The random table value for this turn
-     * @param combatRatio Current combat ratio
-     * @param dammageMultiplier Lone wolf dammage multiplier
-     * @param enemyMultiplier Enemy dammage multiplier
-     * @param mindforceEP Player extra endurance points lost each turn by 
-     * enemy mindforce attack. It must to be negative.
      * @param elude True if the player is eluding the combat
-     * @param extraEnemyLoss Extra E.P. lost by the enemy. It must to be negative.
-     * @param extraLoss Extra E.P. lost by the player. It must to be negative.
      */
-    public constructor(turnNumber : number, randomValue : number, combatRatio : number, dammageMultiplier : number, 
-        enemyMultiplier : number, mindforceEP : number, elude : boolean, extraEnemyLoss : number , turnLoss : number ) {
+    public constructor( combat : Combat , randomValue : number , elude : boolean ) {
 
-        if( !turnNumber )
+        if( !combat )
             // Default constructor (called on BookSectionStates.prototype.fromStateObject)
-            // You know, javascript crap
             return;
-
+        
         /** True if the player is eluding the combat */
         this.elude = elude;
 
         /** Number of the turn (1 is the first) */
-        this.turnNumber = turnNumber;
+        this.turnNumber = combat.turns.length + 1;
 
         /** The random table result  */
         this.randomValue = randomValue;
         /** Lone wolf dammage multiplier */
-        this.dammageMultiplier = dammageMultiplier;
+        this.dammageMultiplier = combat.dammageMultiplier;
         /** Enemy dammage multiplier */
-        this.enemyMultiplier = enemyMultiplier;
+        this.enemyMultiplier = combat.enemyMultiplier;
 
-        var tableResult = combatTable.getCombatTableResult(combatRatio, 
-            this.randomValue);
+        var tableResult = combatTable.getCombatTableResult(combat.getCombatRatio(), this.randomValue);
 
         /** Enemy base loss  */
         this.enemyBase = ( elude ? 0 : tableResult[0] );
         /** The enemy loss */
         this.enemy = CombatTurn.applyMultiplier( this.enemyBase , this.dammageMultiplier );
-        /** Enemy extra loss (extraEnemyLoss is negative)*/
-        this.enemyExtra = extraEnemyLoss;
+        /** Enemy extra loss (combat.enemyTurnLoss is negative)*/
+        this.enemyExtra = combat.enemyTurnLoss;
         if( this.enemy != combatTable_DEATH)
-            this.enemy -= extraEnemyLoss;
+            this.enemy -= combat.enemyTurnLoss;
 
         /** The player base loss */
         this.loneWolfBase = tableResult[1];
@@ -100,17 +90,25 @@ class CombatTurn {
         this.loneWolf = CombatTurn.applyMultiplier( this.loneWolfBase , this.enemyMultiplier );
         /** Player extra loss. TODO: Add magnakai discipline */
         this.loneWolfExtra = 0;
-        if( this.loneWolf != combatTable_DEATH && mindforceEP < 0 && 
+        if( this.loneWolf != combatTable_DEATH && combat.mindforceEP < 0 && 
             !state.actionChart.disciplines.contains( 'mindshld' ) ) {
-            // Enemy mind force attack (this.mindforceEP is negative):
+            // Enemy mind force attack (combat.mindforceEP is negative):
             if( this.loneWolf != combatTable_DEATH)
-                this.loneWolf -= mindforceEP;
-            this.loneWolfExtra = mindforceEP;
+                this.loneWolf -= combat.mindforceEP;
+            this.loneWolfExtra = combat.mindforceEP;
         }
+
         // Extra loss
         if( this.loneWolf != combatTable_DEATH)
-            this.loneWolf -= turnLoss;
-        this.loneWolfExtra += turnLoss;
+            this.loneWolf -= combat.turnLoss;
+        this.loneWolfExtra += combat.turnLoss;
+
+        // Psi-surge loss
+        if( combat.psiSurge ) {
+            if( this.loneWolf != combatTable_DEATH )
+                this.loneWolf += 2;
+            this.loneWolfExtra -= 2;
+        }
 
         /** Text with the player loss */
         this.playerLossText = this.calculatePlayerLossText();

@@ -45,7 +45,7 @@ class SectionState {
     public sellPrices : Array<ShellPrice> = [];
 
     /** Combats on the section */
-    public combats = [];
+    public combats : Array<Combat> = [];
 
     /** The combat has been eluded? */
     public combatEluded = false;

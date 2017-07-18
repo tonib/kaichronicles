@@ -75,6 +75,9 @@ class Combat {
     /** Combat has been finished? */
     public combatFinished = false;
 
+    /** Psi-surge is activated on this combat? */
+    public psiSurge = false;
+
     /**
      * Create a combat
      * @param enemy Enemy name
@@ -98,11 +101,11 @@ class Combat {
 
     /**
      * Get the player combat skill for this combat
-     * @return {number} The current combat skill
+     * @return The current combat skill
      */
     public getCurrentCombatSkill() : number {
         var cs = state.actionChart.getCurrentCombatSkill(this.noMindblast, 
-            this.noWeapon, this.mindblastBonus ) + 
+            this.noWeapon, this.mindblastBonus , this.psiSurge ) + 
             this.combatModifier + 
             this.objectsUsageModifier;
 
@@ -134,10 +137,7 @@ class Combat {
         var self = this;
         randomTable.getRandomValueAsync()
         .then(function(randomValue) {
-            var turn = new CombatTurn(self.turns.length + 1, randomValue,
-                self.getCombatRatio(), self.dammageMultiplier, self.enemyMultiplier, 
-                self.mindforceEP , elude , self.enemyTurnLoss , self.turnLoss );
-
+            var turn = new CombatTurn( self, randomValue, elude );
             self.turns.push( turn );
             dfd.resolve(turn);
         });

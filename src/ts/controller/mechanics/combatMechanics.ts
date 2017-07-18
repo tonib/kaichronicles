@@ -22,7 +22,7 @@ const combatMechanics = {
         $template.attr('id', null);
         
         // Populate combats
-        $.each(sectionState.combats, function(index, combat) {
+        $.each(sectionState.combats, function(index : number, combat : Combat) {
             var $combatUI = $template.clone();
             // Set the combat index
             $combatUI.attr('data-combatIdx', index);
@@ -81,6 +81,20 @@ const combatMechanics = {
                 // The combat can be eluded
                 $combatUI.find('.mechanics-elude').show();
 
+            if( !state.actionChart.disciplines.contains('psisurge' ) ) {
+                // Hide Psi-surge check
+                $combatUI.find('.psisurgecheck').hide();
+            }
+            else {
+                const $psiSurgeCheck = $combatUI.find('.psisurgecheck input');
+                // Initialice Psi surge:
+                if( combat.psiSurge )
+                    $psiSurgeCheck.attr( 'checked' , true );
+                // Psi surge selection
+                $psiSurgeCheck.click(function(e : Event) {
+                    combatMechanics.onPsiSurgeClick(e , $(this) );
+                });
+            }
         });
 
     },
@@ -236,6 +250,21 @@ const combatMechanics = {
             '</td><td>' + turn.getPlayerLossText() + '</td><td>' + 
             turn.getEnemyLossText() + '</td></tr>'
         );
+    },
+
+    /**
+     * Psi-surge event handler
+     */
+    onPsiSurgeClick : function(e : Event, $psiSurgeCheck : any) {
+
+        const $combatUI = $psiSurgeCheck.parents('.mechanics-combatUI').first();
+        const combatIndex = parseInt( $combatUI.attr( 'data-combatIdx' ) );
+        const sectionState = state.sectionStates.getSectionState();
+        const combat = sectionState.combats[ combatIndex ];
+
+        const selected : boolean = $psiSurgeCheck.prop( 'checked' ) ? true : false;
+        combat.psiSurge = selected;
+        combatMechanics.updateCombatRatio( $combatUI , combat);
     }
 
 };

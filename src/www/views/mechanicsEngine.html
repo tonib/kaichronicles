@@ -78,12 +78,24 @@
 
     <!-- Combat template -->
     <div class="mechanics-combatUI" id="mechanics-combat">
+        <!-- Combat tables -->
         <button class="btn btn-default table-op mechanics-combatTables" 
             title="Show combat tables">
             <span class="glyphicon glyphicon-th"></span>
         </button>
+        <!-- Combat ratio -->
         <p><span class="attribute" data-translation="combatRatio">COMBAT RATIO</span>: 
         <span class="mechanics-combatRatio">CR</span></p>
+        <!-- Psi-surge -->
+        <div class="checkbox psisurgecheck">
+            <label>
+                <input type="checkbox"> 
+                <span data-translation="mechanics-combat-psisurge">
+                    Psi-surge: +4 CS, −2 EP per round
+                </span>
+            </label>
+        </div>
+        <!-- Combat turns -->
         <table class="table table-striped table-bordered bold-head" style="display:none">
             <thead>
                 <tr>
@@ -99,6 +111,7 @@
             <tbody>
             </tbody>
         </table>
+        <!-- Combat buttons -->
         <a href="#" class="btn btn-primary btn-block mechanics-playTurn" data-translation="playTurn">
             Play turn
         </a>
