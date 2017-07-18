@@ -204,9 +204,9 @@ const mechanicsEngine = {
     /**
      * Check if we must to re-render the section. This may be needed if the 
      * picked / dropped object affects to the rules
-     * @param {Item} o The object picked / droped
+     * @param o The object picked / droped
      */
-    checkReRenderAfterInventoryEvent: function(o) {
+    checkReRenderAfterInventoryEvent: function(o : Item) {
         
         // Get section rules
         var $sectionRules = state.mechanics.getSection( state.sectionStates.currentSection );
@@ -228,6 +228,11 @@ const mechanicsEngine = {
                         reRender = true;
                         return 'finish';
                     }
+                }
+                if( $(rule).attr('canUseBow') && ( o.id == 'quiver' || o.isWeaponType( 'bow' ) ) ) {
+                    // Section should be re-rendered
+                    reRender = true;
+                    return 'finish';
                 }
             }
             else if( rule.nodeName == 'meal' ) {
@@ -411,6 +416,8 @@ const mechanicsEngine = {
             actionChartController.increaseMeals(count);
         else if( cls == 'money' )
             actionChartController.increaseMoney(count);
+        else if( cls == 'arrow' )
+            actionChartController.increaseArrows(count);
         else
             console.log('Pick rule with no objectId / class');
 
@@ -523,6 +530,11 @@ const mechanicsEngine = {
         // Test section choice is enabled:
         var sectionToCheck = $(rule).attr('isChoiceEnabled');
         if( sectionToCheck && mechanicsEngine.isChoiceEnabled(sectionToCheck) )
+            conditionStatisfied = true;
+
+        // Test if the player can use the bow
+        let canUseBow = $(rule).attr('canUseBow');
+        if( canUseBow && state.actionChart.canUseBow() )
             conditionStatisfied = true;
 
         // Check if the test should be inversed

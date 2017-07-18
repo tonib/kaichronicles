@@ -560,5 +560,19 @@ class ActionChart {
     public hasMindShield() : boolean {
         return this.disciplines.contains( 'mindshld' ) || this.disciplines.contains( 'psiscrn' );
     }
+
+    /** The player has a bow and some arrow? */
+    public canUseBow() : boolean {
+        let hasBow = false;
+        for( let weapon of this.getWeaponObjects() ) {
+            if( weapon.isWeaponType( 'bow' ) ) {
+                hasBow = true;
+                break;
+            }
+        }
+        if( !hasBow )
+            return false;
+        return this.arrows > 0;
+    }
 }
 

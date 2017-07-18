@@ -958,6 +958,14 @@
             <image book="1" name="pouch.png" />
         </object>
 
+        <!-- This not really an object, but needed for mechanics -->
+        <object id="arrow">
+            <name lang="en">Arrows</name>
+            <name lang="es">Flechas</name>
+
+            <image book="6" name="quiver.png" />
+        </object>
+
     </objects>
 
 </object-mechanics>

@@ -183,7 +183,7 @@ const actionChartView = {
         $('#achart-backpacktotal').text('(' + state.actionChart.getNBackpackItems() + ')');
     },
 
-    showInventoryMsg: function(action, object, msg) {
+    showInventoryMsg: function(action : string, object : Item, msg : string) {
         var toastType = ( action == 'pick' ? 'success' : 'warning' );
         var html = '';
 

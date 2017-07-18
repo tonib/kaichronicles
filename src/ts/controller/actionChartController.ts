@@ -325,6 +325,21 @@ const actionChartController = {
         actionChartController.increaseMeals( inventoryState.meals );
     },
 
+    /**
+     * Increase the number of arrows of the player
+     * @param increment N. of arrows to increment. Negative to decrement
+     */
+    increaseArrows : function(increment : number) {
+        state.actionChart.increaseArrows(increment);
+        var o = state.mechanics.getObject('arrow');
+        if( increment > 0 )
+            actionChartView.showInventoryMsg('pick' , o , 
+                translations.text( 'msgGetArrows' , [increment] ) );
+        else if( increment < 0 )
+            actionChartView.showInventoryMsg('drop' , o , 
+                translations.text( 'msgDropArrows' , [-increment] ) );
+    },
+
     /** Return page */
     getBackController: function() { return 'game'; },
 

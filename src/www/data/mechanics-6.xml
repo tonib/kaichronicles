@@ -149,7 +149,84 @@
             </afterElude>
         </section>
 
-        <!-- UP TO sect12 -->
+        <section id="sect13">
+            <test not="true" canUseBow="true">
+                <choiceState section="sect56" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect16">
+            <test not="true" hasObject="mapvaretta">
+                <pick objectId="mapvaretta" />
+            </test>
+        </section>
+
+        <section id="sect17">
+            <test not="true" expression="[MONEY] >= 3">
+                <choiceState section="sect202" set="disabled" />
+            </test>
+            <test not="true" expression="[MONEY] >= 5">
+                <choiceState section="sect251" set="disabled" />
+            </test>
+
+            <test not="true" expression="[MONEY] >= 2">
+                <choiceState section="sect144" set="disabled" />
+                <message id="msg-drop-object" 
+                    en-text="Drop one Backpack Item or Weapon in lieu of payment for a night in the dormitory" 
+                    es-text="Deja un Arma u Objeto de Mochila en pago por una noche en el dormitorio"
+                />
+                <onInventoryEvent>
+                    <test expression="( [WEAPON-ITEMS-CNT-ON-ACTIONCHART] + [BACKPACK-ITEMS-CNT-ON-ACTIONCHART] ) == 0 || ( [WEAPON-ITEMS-CNT-ON-SECTION] + [BACKPACK-ITEMS-CNT-ON-SECTION] ) > 0">
+                        <message id="msg-drop-object" op="hide" />
+                        <choiceState section="sect144" set="enabled" />
+                    </test>
+                    <test not="true" expression="( [WEAPON-ITEMS-CNT-ON-ACTIONCHART] + [BACKPACK-ITEMS-CNT-ON-ACTIONCHART] ) == 0 || ( [WEAPON-ITEMS-CNT-ON-SECTION] + [BACKPACK-ITEMS-CNT-ON-SECTION] ) > 0">
+                        <message id="msg-drop-object" op="show" />
+                        <choiceState section="sect144" set="disabled" />
+                    </test>
+                </onInventoryEvent>
+            </test>
+
+            <choiceSelected section="sect144">
+                <test expression="[MONEY] >= 2">
+                    <pick class="money" count="-2" />
+                </test>
+            </choiceSelected>
+            <choiceSelected section="sect202">
+                <pick class="money" count="-3" />
+            </choiceSelected>
+            <choiceSelected section="sect251">
+                <pick class="money" count="-5" />
+            </choiceSelected>
+
+        </section>
+
+        <section id="sect18">
+            <test not="true" hasDiscipline="hntmstry">
+                <choiceState section="sect205" set="disabled" />
+            </test>
+        </section>
+        
+        <section id="sect20">
+            <pick class="arrow" count="-1" />
+        </section>
+
+        <section id="sect22">
+            <test not="true" hasDiscipline="dvnation">
+                <choiceState section="sect41" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect24">
+            <test not="true" hasDiscipline="nexus">
+                <choiceState section="sect276" set="disabled" />
+            </test>
+            <test not="true" hasObject="rope|largerope">
+                <choiceState section="sect101" set="disabled" />
+            </test>
+        </section>
+
+        <!-- UP TO sect25 -->
         
     </sections>
 
