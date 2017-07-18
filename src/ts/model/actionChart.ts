@@ -259,8 +259,8 @@ class ActionChart {
             // All is ok
             return;
 
-        // Try to set the current weapon
-        var weaponObjects = this.getWeaponObjects();
+        // Try to set the current weapon, only hand-to-hand weapons
+        var weaponObjects = this.getWeaponObjects(true);
         if( weaponObjects.length === 0 ) {
             // No weapons
             this.selectedWeapon = '';
@@ -481,21 +481,22 @@ class ActionChart {
     /**
      * Returns all weapons and backpack / special item objects that can be
      * used as weapons
+     * @param onlyHandToHand If it's true, only hand to hand weapons will be returned
      * @return All weapon objects
      */
-    public getWeaponObjects() : Array<Item> {
+    public getWeaponObjects(onlyHandToHand : boolean = false) : Array<Item> {
 
         // Weapons
         let result : Array<Item> = [];
         for( let i=0; i<this.weapons.length; i++) {
             let o = state.mechanics.getObject(this.weapons[i]);
-            if( o )
+            if( o && ( !onlyHandToHand || o.isHandToHandWeapon() ) )
                 result.push(o);
         }
 
         // Weapon-like objects
         this.enumerateObjects( function(o : Item) {
-            if( o.isWeapon() )
+            if( o.isWeapon() && ( !onlyHandToHand || o.isHandToHandWeapon() ) )
                 result.push(o);
         });
         return result;

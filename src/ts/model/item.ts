@@ -168,6 +168,15 @@ class Item {
         return false;
     }
 
+    /** Returns true if this is a hand-to-hand weapon (not a bow) */
+    public isHandToHandWeapon() : boolean {
+        if( !this.isWeapon() )
+            return false;
+        if( this.id == 'bow' || this.weaponType == 'bow' )
+            return false;
+        return true;
+    }
+
     /**
      * Get the object image URL.
      * @return The object image URL. null if the object has no image or we are

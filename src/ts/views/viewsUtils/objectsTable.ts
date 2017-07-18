@@ -149,7 +149,8 @@ const objectsTable = {
             // Inventory object
             if( o.usage )
                 html += link + 'data-op="use">' + translations.text('use') + '</a> ';
-            if( o.isWeapon() && state.actionChart.selectedWeapon != o.id) {
+            if( o.isHandToHandWeapon() && state.actionChart.selectedWeapon != o.id ) {
+                // Op to set the weapon as current
                 html += link + 'data-op="currentWeapon" title="' + 
                     translations.text('setCurrentWeapon') + '">' + 
                     '<span class="glyphicon glyphicon-hand-left"></span></a> ';
