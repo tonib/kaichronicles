@@ -110,8 +110,7 @@ class Combat {
             this.objectsUsageModifier;
 
         // Check enemy mindforce attack
-        // TODO: Add magnakai disicipline here
-        if( this.mindforceCS < 0 && !state.actionChart.disciplines.contains( 'mindshld' ) )
+        if( this.mindforceCS < 0 && !state.actionChart.hasMindShield() )
             cs += this.mindforceCS;
 
         return cs;

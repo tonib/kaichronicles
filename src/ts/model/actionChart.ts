@@ -556,5 +556,9 @@ class ActionChart {
         return LoreCircle.getCircles(this.disciplines);
     }
 
+    /** The player has Mindshield / Psi-screen? */
+    public hasMindShield() : boolean {
+        return this.disciplines.contains( 'mindshld' ) || this.disciplines.contains( 'psiscrn' );
+    }
 }
 

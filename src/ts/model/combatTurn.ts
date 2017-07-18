@@ -90,8 +90,7 @@ class CombatTurn {
         this.loneWolf = CombatTurn.applyMultiplier( this.loneWolfBase , this.enemyMultiplier );
         /** Player extra loss. TODO: Add magnakai discipline */
         this.loneWolfExtra = 0;
-        if( this.loneWolf != combatTable_DEATH && combat.mindforceEP < 0 && 
-            !state.actionChart.disciplines.contains( 'mindshld' ) ) {
+        if( this.loneWolf != combatTable_DEATH && combat.mindforceEP < 0 && !state.actionChart.hasMindShield() ) {
             // Enemy mind force attack (combat.mindforceEP is negative):
             if( this.loneWolf != combatTable_DEATH)
                 this.loneWolf -= combat.mindforceEP;
