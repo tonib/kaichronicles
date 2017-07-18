@@ -2,12 +2,12 @@
 /**
  * Combat result for death
  */
-var combatTable_DEATH= "D";
+const combatTable_DEATH= "D";
 
 /**
  * The combat table
  */
-var combatTable = {
+const combatTable = {
 
     /**
      * Combat table results when the combat ratio is <= 0
@@ -233,12 +233,12 @@ var combatTable = {
 
     /**
      * Get a combat table result
-     * @param {number} combatRatio The combat ratio
-     * @param {number} randomTableValue The random table value
-     * @returns {Array<number>} Array with endurance points loses. Index 0 is the 
+     * @param combatRatio The combat ratio
+     * @param randomTableValue The random table value
+     * @returns Array with endurance points loses, or combatTable_DEATH. Index 0 is the 
      * EP enemy loss. Index 1 is the Lone Wolf loss
      */
-    getCombatTableResult: function(combatRatio, randomTableValue) {
+    getCombatTableResult: function(combatRatio : number, randomTableValue : number) : Array<any> {
         var ponderatedIndex = combatRatio / 2.0;
         var table;
         if( combatRatio <= 0 ) {
