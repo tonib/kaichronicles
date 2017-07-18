@@ -1,5 +1,6 @@
+/// <reference path="../../external.ts" />
 
-var combatMechanics = {
+const combatMechanics = {
 
     /**
      * Render section combats
@@ -84,12 +85,12 @@ var combatMechanics = {
 
     },
 
-    updateEnemyEndurance: function( $combatUI , combat , doNotAnimate ) {
+    updateEnemyEndurance: function( $combatUI : any , combat : Combat , doNotAnimate : boolean ) {
         template.animateValueChange( $combatUI.parent().find( '.enemy-current-endurance' ) , 
             combat.endurance , doNotAnimate , combat.endurance > 0 ? null : 'red' );
     },
 
-    updateCombatRatio: function( $combatUI , combat ) {
+    updateCombatRatio: function( $combatUI : any , combat : Combat ) {
         // Set combat ratio:
         $combatUI.find('.mechanics-combatRatio').text( combat.getCombatRatio() );
     },
@@ -113,7 +114,7 @@ var combatMechanics = {
      * @param {jquery} $combatUI The combat UI where disable buttons. If it's null, all
      * combats buttons on the section will be hidden
      */
-    hideCombatButtons: function( $combatUI ) {
+    hideCombatButtons: function( $combatUI : any ) {
         if( !$combatUI )
             // Disable all combats
             $combatUI = $('.mechanics-combatUI');
@@ -127,7 +128,7 @@ var combatMechanics = {
      * @param {jquery} $combatUI The combat UI where enable buttons. If it's null, all
      * combats buttons on the section will be hidden
      */
-    showCombatButtons: function( $combatUI ) {
+    showCombatButtons: function( $combatUI : any ) {
 
         if( !$combatUI )
             // Disable all combats
@@ -151,9 +152,9 @@ var combatMechanics = {
     /**
      * Run a combat turn
      * @param {jquery} $combatUI The combat UI
-     * @param {boolean} elude True if the player is eluding the combat
+     * @param elude True if the player is eluding the combat
      */
-    runCombatTurn: function( $combatUI , elude ) {
+    runCombatTurn: function( $combatUI : any, elude : boolean ) {
         // Get the combat info:
         var combatIndex = parseInt( $combatUI.attr( 'data-combatIdx' ) );
         var sectionState = state.sectionStates.getSectionState();
@@ -229,7 +230,7 @@ var combatMechanics = {
      * @param {jquery} $combatTable Table where to append the turn
      * @param turn The turn to render
      */
-    renderCombatTurn: function( $combatTableBody , turn ) {
+    renderCombatTurn: function( $combatTableBody : any , turn : CombatTurn ) {
         $combatTableBody.append(
             '<tr><td class="hidden-xs">' + turn.turnNumber + '</td><td>' + turn.randomValue + 
             '</td><td>' + turn.getPlayerLossText() + '</td><td>' + 
