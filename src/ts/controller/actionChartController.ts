@@ -68,6 +68,7 @@ const actionChartController = {
      * or "backpackcontent" to drop all backpack content, 
      * or "currentweapon" to drop the current weapon,
      * or "allspecial" to drop all the special items
+     * or "allmeals" to drop all meals
      * or "all" to drop all (weapons, backpack, special items, and money)
      * @param availableOnSection True if the object should be available on 
      * the current section
@@ -96,6 +97,11 @@ const actionChartController = {
             return;
         }
 
+        if( objectId == 'allmeals' ) {
+            actionChartController.increaseMeals( -state.actionChart.meals );
+            return;
+        }
+        
         if( objectId == 'all' ) {
             actionChartController.drop('backpack');
             actionChartController.drop('allweapons');

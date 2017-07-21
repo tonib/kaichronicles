@@ -488,6 +488,19 @@
             <name lang="es">Billete a Eula</name>
         </special>
 
+        <special id="cess">
+            <name lang="en">Cess</name>
+            <description lang="en">
+                A blue card. It is stamped with today’s date and will allow you access to the town of Amory on this day only
+            </description>
+
+            <name lang="es">Cess</name>
+            <description lang="es">
+                Una tarjeta azul. La tarjeta lleva un sello con fecha de hoy y te permitirá entrar en la ciudad de Amory sólo 
+                en este día
+            </description>
+        </special>
+        
     </specials>
 
     <objects>
@@ -926,6 +939,21 @@
 
             <image book="3" name="potion.png" />
             <usage class="endurance" increment="3" />
+        </object>
+
+        <object id="bottlewine">
+            <name lang="en">Bottle of Wine</name>
+            <name lang="es">Botella de Vino</name>
+        </object>
+
+        <object id="mirror">
+            <name lang="en">Mirror</name>
+            <name lang="es">Espejo</name>
+        </object>
+
+        <object id="maptekaro">
+            <name lang="en">Map of Tekaro</name>
+            <name lang="es">Mapa de Tekaro</name>
         </object>
 
         <!-- OTHERS -->

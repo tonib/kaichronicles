@@ -253,7 +253,137 @@
             </afterCombats>
         </section>
 
-        <!-- UP TO sect26 -->
+        <section id="sect27">
+            <test not="true" expression="[MONEY] >= 3">
+                <choiceState section="sect304" set="disabled" />
+            </test>
+            <choiceSelected section="sect304">
+                <pick class="money" count="-3" />
+                <pick objectId="cess" />
+            </choiceSelected>
+        </section>
+
+        <section id="sect29">
+            <death />
+        </section>
+
+        <section id="sect30">
+            <test not="true" expression="[MONEY] >= 8">
+                <choiceState section="sect230" set="disabled" />
+            </test>
+            <choiceSelected section="sect230">
+                <pick class="money" count="-8" />
+            </choiceSelected>
+        </section>
+
+        <section id="sect34">
+            <randomTable>
+                <pick class="money" count="[RANDOM] + 5" />
+            </randomTable>
+        </section>
+
+        <section id="sect35">
+            <drop objectId="allmeals" />
+        </section>
+        
+        <section id="sect36">
+            <death />
+        </section>
+
+        <section id="sect37">
+            <endurance count="-12" />
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="0" />
+            <afterCombats>
+                <choiceState section="sect8" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect279" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect39">
+            <test not="true" hasDiscipline="pthmnshp">
+                <choiceState section="sect117" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect40">
+            <pick class="money" count="27" />
+            <object objectId="bottlewine" />
+            <object objectId="mirror" />
+        </section>
+
+        <section id="sect42">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="0" />
+            <afterCombats>
+                <choiceState section="sect86" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect70" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect44">
+            <endurance count="-2" />
+        </section>
+
+        <section id="sect47">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect48">
+            <pick class="money" count="5" />
+            <object objectId="maptekaro" />
+        </section>
+
+        <section id="sect50">
+            <!-- TODO: Descuenta las Coronas de oro que ha apostado -->
+        </section>
+
+        <section id="sect51">
+            <endurance count="-2" />
+        </section>
+
+        <section id="sect52">
+            <death />
+        </section>
+
+        <section id="sect54">
+            <endurance count="-2" />
+        </section>
+
+        <section id="sect56">
+            <pick class="arrow" count="-1" />
+            <choiceState section="all" set="disabled" />
+            <randomTable zeroAsTen="true">
+                <endurance count="-[RANDOM]" />
+                <choiceState section="all" set="enabled" />
+            </randomTable>
+        </section>
+
+        <section id="sect57">
+            <death />
+        </section>
+
+        <section id="sect62">
+            <!-- TODO: El prestidigitador te paga la cantidad de coronas de oro que has apostado -->
+        </section>
+
+        <section id="sect63">
+            <test not="true" hasDiscipline="hntmstry">
+                <choiceState section="sect162" set="disabled" />
+            </test>
+            <test hasDiscipline="hntmstry">
+                <choiceState section="sect278" set="disabled" />
+            </test>
+        </section>
+
+        <!-- UP TO sect64 -->
         
     </sections>
 
