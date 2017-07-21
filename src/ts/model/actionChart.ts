@@ -306,10 +306,10 @@ class ActionChart {
      * discipline
      */
     public getCurrentCombatSkill(noMindblast : boolean = false, noWeapon : boolean = false, mindblastBonus : number = 0,
-        psiSurge : boolean = false) : number {
+        psiSurge : boolean = false , bow : boolean = false ) : number {
         
         var cs = this.combatSkill;
-        var bonuses = this.getCurrentCombatSkillBonuses(noMindblast, noWeapon, mindblastBonus, psiSurge);
+        var bonuses = this.getCurrentCombatSkillBonuses(noMindblast, noWeapon, mindblastBonus, psiSurge, bow);
         for(var i=0; i<bonuses.length; i++)
             cs += bonuses[i].increment;
 
@@ -320,13 +320,13 @@ class ActionChart {
      * Return true if the Weaponskill is active with the selected weapon
      * @return True if Weaponskill is active
      */
-    public isWeaponskillActive() : boolean {
+    public isWeaponskillActive( bow : boolean = false ) : boolean {
 
         if( !this.disciplines.contains( 'wepnskll' ) && !this.disciplines.contains( 'wpnmstry' ) )
             // Player has no Weaponskill
             return false;
 
-        const currentWeapon = this.getselectedWeaponItem();
+        const currentWeapon = this.getselectedWeaponItem( bow );
         for(let i=0; i< this.weaponSkill.length; i++ ) {
             if( currentWeapon.isWeaponType( this.weaponSkill[i] ) )
                 return true;
@@ -337,7 +337,11 @@ class ActionChart {
      * Get the selected weapon info
      * @return {Item} The current weapon info. null if the is player has no weapon
      */
-    public getselectedWeaponItem() {
+    public getselectedWeaponItem( bow : boolean = false ) : Item {
+
+        if( bow )
+            return this.getSelectedBow();
+        
         return this.selectedWeapon ? state.mechanics.getObject(this.selectedWeapon) : null;
     }
 
@@ -349,14 +353,15 @@ class ActionChart {
      * @param {number} mindblastBonus If > 0, the mindblast CS bonus to apply. If 0 or null,
      * the default bonus will be used (+2CS)
      * @param psiSurge Is Psi-surge activated?
+     * @param bow Is a bow combat?
      * @return Array of objects with the bonuses concepts
      */
     public getCurrentCombatSkillBonuses(noMindblast : boolean = false, noWeapon : boolean = false, 
-        mindblastBonus : number = 0 , psiSurge : boolean = false) : Array<Bonus> {
+        mindblastBonus : number = 0 , psiSurge : boolean = false, bow : boolean = false) : Array<Bonus> {
 
         var bonuses = [];
 
-        var currentWeapon = this.getselectedWeaponItem();
+        var currentWeapon = this.getselectedWeaponItem( bow );
 
         // Weapons
         if( noWeapon || !currentWeapon ) {
@@ -366,7 +371,7 @@ class ActionChart {
                 increment: -4
             });
         }
-        else if( this.isWeaponskillActive() ) {
+        else if( this.isWeaponskillActive( bow ) ) {
             // Weapon skill bonus
             if( state.book.bookNumber <= 5 )
                 // Kai book:
@@ -405,15 +410,18 @@ class ActionChart {
         }
 
         // Objects (not weapons. Ex. shield)
-        this.enumerateObjects( function(o) {
-            if( !o.isWeapon() && o.effect && o.effect.cls == 'combatSkill' ) {
-                bonuses.push( {
-                    concept: o.name,
-                    increment: o.effect.increment 
-                });
-            }
-        });
-
+        if( !bow ) {
+            this.enumerateObjects( function(o) {
+                if( !o.isWeapon() && o.effect && o.effect.cls == 'combatSkill' ) {
+                    bonuses.push( {
+                        concept: o.name,
+                        increment: o.effect.increment 
+                    });
+                }
+            });
+        }
+        
+        // Lore-circles bonuses
         const circlesBonuses = LoreCircle.getCirclesBonuses( this.disciplines , 'CS' );
         for( let c of circlesBonuses )
             bonuses.push(c);
@@ -563,16 +571,21 @@ class ActionChart {
 
     /** The player has a bow and some arrow? */
     public canUseBow() : boolean {
-        let hasBow = false;
-        for( let weapon of this.getWeaponObjects() ) {
-            if( weapon.isWeaponType( 'bow' ) ) {
-                hasBow = true;
-                break;
-            }
-        }
-        if( !hasBow )
+        if( this.getSelectedBow() == null )
             return false;
         return this.arrows > 0;
+    }
+
+    /**
+     * Get the selected bow weapon
+     * TODO: This returns the first bow. Allow to selected the current bow
+     */
+    public getSelectedBow() : Item {
+        for( let weapon of this.getWeaponObjects() ) {
+            if( weapon.isWeaponType( 'bow' ) )
+                return weapon;
+        }
+        return null;
     }
 }
 

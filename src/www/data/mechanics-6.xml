@@ -227,11 +227,33 @@
         </section>
 
         <section id="sect26">
-            <combat fake="true" bow="true" />
+            <textToChoice 
+                text-en="turn immediately to 335"
+                text-es="pasa inmediatamente al 335"
+                section="sect335"
+            />
+            <choiceState section="all" set="disabled" />
+            <combat bow="true" />
             <book6sect26 />
+            <test hasObject="jakan">
+                <afterCombatTurn turn="any">
+                    <test expression="[COMBATRANDOM] == 0">
+                        <disableCombats />
+                        <choiceState section="sect335" set="enabled" />
+                    </test>
+                </afterCombatTurn>
+            </test>
+            <afterCombats>
+                <test combatsWon="true">
+                    <choiceState section="sect252" set="enabled" />
+                </test>
+                <test combatsWon="false">
+                    <choiceState section="sect183" set="enabled" />
+                </test>
+            </afterCombats>
         </section>
 
-        <!-- UP TO sect25 -->
+        <!-- UP TO sect26 -->
         
     </sections>
 

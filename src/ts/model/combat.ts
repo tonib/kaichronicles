@@ -78,6 +78,9 @@ class Combat {
     /** Psi-surge is activated on this combat? */
     public psiSurge = false;
 
+    /** It's a bow combat? If false, it's a hand-to-hand combat */
+    public bowCombat = false;
+
     /**
      * Create a combat
      * @param enemy Enemy name
@@ -105,7 +108,7 @@ class Combat {
      */
     public getCurrentCombatSkill() : number {
         var cs = state.actionChart.getCurrentCombatSkill(this.noMindblast, 
-            this.noWeapon, this.mindblastBonus , this.psiSurge ) + 
+            this.noWeapon, this.mindblastBonus , this.psiSurge , this.bowCombat ) + 
             this.combatModifier + 
             this.objectsUsageModifier;
 

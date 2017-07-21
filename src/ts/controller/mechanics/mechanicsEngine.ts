@@ -699,6 +699,10 @@ const mechanicsEngine = {
                 combat.fakeRestoreFactor = parseFloat(txtFactor);
         }
 
+        // It's a bow combat?
+        if( $(rule).attr('bow') )
+            combat.bowCombat = true;
+        
     },
 
     /**
@@ -979,6 +983,29 @@ const mechanicsEngine = {
         state.sectionStates.markRuleAsExecuted(rule);
     },
 
+    /**
+     * Change a section text by a section choice
+     */
+    textToChoice: function( rule ) {
+
+        var linkText : string = $(rule).attr('text-' + state.language);
+        if( !linkText ) {
+            console.log( 'textToChoice: text-' + state.language +' attribute not found');
+            return;
+        }
+
+        var $textContainer = $(':contains("' + linkText + '")').last();
+        if( $textContainer.length == 0 ) {
+            console.log( 'textToChoice: text "' + linkText + '" not found');
+            return;
+        }
+
+        let sectionId = $(rule).attr('section');
+        var newHtml = $textContainer.html().replace( linkText , 
+            '<p class="choice" style="display: inline; margin: 0"><a href="#" class="action choice-link" data-section="' + sectionId + '">' + linkText + '</a></p>' );
+        $textContainer.html( newHtml );           
+    },
+
     /************************************************************/
     /**************** SPECIAL SECTIONS **************************/
     /************************************************************/
@@ -1053,10 +1080,10 @@ const mechanicsEngine = {
 
     /**
      * Enable or disable choice links
-     * @param {string} section The section to enable / disable. 'all' for all choices
-     * @param {boolean} disabled True to disable the choices. False to enable 
+     * @param section The section to enable / disable. 'all' for all choices
+     * @param disabled True to disable the choices. False to enable 
      */
-    setChoiceState: function(section, disabled) {
+    setChoiceState: function(section : string, disabled : boolean) {
 
         // Do not enable anything if the player is death:
         if( state.actionChart.currentEndurance <= 0 && !disabled )
