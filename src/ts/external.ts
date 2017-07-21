@@ -12,7 +12,6 @@ declare var setupMechanics:any;
 declare var randomMechanics:any;
 declare var mealMechanics:any;
 declare var numberPickerMechanics:any;
-declare var specialSectionsMechanics:any;
 declare var setupController:any;
 
 declare var $:any;

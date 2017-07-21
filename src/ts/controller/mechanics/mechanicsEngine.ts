@@ -995,6 +995,10 @@ const mechanicsEngine = {
         specialSectionsMechanics.book3sect88();
     },
 
+    book6sect26: function(rule) {
+        specialSectionsMechanics.book6sect26();
+    },
+
     /************************************************************/
     /**************** RULES HELPERS *****************************/
     /************************************************************/

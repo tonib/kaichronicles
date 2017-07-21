@@ -226,6 +226,10 @@
             </test>
         </section>
 
+        <section id="sect26">
+            <book6sect26 />
+        </section>
+
         <!-- UP TO sect25 -->
         
     </sections>

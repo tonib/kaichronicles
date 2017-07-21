@@ -2,7 +2,7 @@
 /**
  * Special book sections with complex mechanics
  */
-var specialSectionsMechanics = {
+const specialSectionsMechanics = {
 
     /**
      * Cartwheel game
@@ -122,7 +122,9 @@ var specialSectionsMechanics = {
         var playerResult = function(playerName) {
             var result = {
                 dice1: randomTable.getRandomValue(),
-                dice2: randomTable.getRandomValue()
+                dice2: randomTable.getRandomValue(),
+                status: null,
+                total: null
             };
             result.status = translations.text( 'playerDices' , [playerName] )  + ': ' + 
                 result.dice1 + ' + ' + result.dice2 + ' = ';
@@ -194,6 +196,10 @@ var specialSectionsMechanics = {
             var combat = sectionState.combats[i];
             combat.nextTurnAsync = nextTurnAsyncFunction;
         }
+    },
+
+    book6sect26: function() {
+        
     }
 
 };
