@@ -227,6 +227,7 @@
         </section>
 
         <section id="sect26">
+            <combat fake="true" bow="true" />
             <book6sect26 />
         </section>
 

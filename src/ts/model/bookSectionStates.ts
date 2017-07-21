@@ -93,9 +93,9 @@ class BookSectionStates {
 
     /**
      * Setup combat states on the current section
-     * @param {Section} section The current section info 
+     * @param section The current section info 
      */
-    public setupCombats( section ) {
+    public setupCombats( section : Section ) {
         var sectionState = this.getSectionState();
         if( sectionState.combats.length === 0 ) {
             var combats = section.getCombats();

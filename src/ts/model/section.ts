@@ -111,15 +111,22 @@ class Section {
 
     /**
      * Returns an array of Combat objects with the combats on this section
-     * @return {Array<Combat>} Combats on this section
+     * @return Combats on this section
      */
-    public getCombats() {
+    public getCombats() : Array<Combat> {
         var result = [];
         this.$xmlSection.find('combat').each(function(index, combat) {
+
+            let $enduranceAttr = $(combat).find('enemy-attribute[class=endurance]');
+            if( $enduranceAttr.length == 0 )
+                // Book 6 / sect26: The endurance attribute is "target"
+                $enduranceAttr = $(combat).find('enemy-attribute[class=target]');
+
+            const $combat = $(combat);
             result.push( new Combat(  
-                $(combat).find('enemy').text(), 
-                parseInt( $(combat).find('enemy-attribute[class=combatskill]').text() ),
-                parseInt( $(combat).find('enemy-attribute[class=endurance]').text() )
+                $combat.find('enemy').text(), 
+                parseInt( $combat.find('enemy-attribute[class=combatskill]').text() ),
+                parseInt( SectionRenderer.getEnemyEndurance( $combat ).text() )
             ));
         });
         return result;

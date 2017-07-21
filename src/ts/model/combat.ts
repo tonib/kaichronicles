@@ -144,6 +144,17 @@ class Combat {
         return dfd.promise();
     }
 
+    public static applyLoss( currentEndurance : number , loss : any ) : number {
+        if( loss == combatTable_DEATH )
+            return 0;
+        else {
+            currentEndurance -= loss;
+            if( currentEndurance < 0 )
+                currentEndurance = 0;
+            return currentEndurance;
+        }
+    } 
+
     /**
      * Apply the combat turn effects
      * @param turn The turn to apply
@@ -157,13 +168,14 @@ class Combat {
             state.actionChart.increaseEndurance( -turn.loneWolf );
         
         // Apply enemy damages:
-        if( turn.enemy == combatTable_DEATH )
+        /*if( turn.enemy == combatTable_DEATH )
             this.endurance = 0;
         else {
             this.endurance -= turn.enemy;
             if( this.endurance < 0 )
                 this.endurance = 0;
-        }
+        }*/
+        this.endurance = Combat.applyLoss( this.endurance , turn.enemy );
 
         // Check if the combat has been finished
         if( turn.elude || this.endurance === 0 || state.actionChart.currentEndurance === 0 ) {

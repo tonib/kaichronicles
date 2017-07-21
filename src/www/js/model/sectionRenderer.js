@@ -411,6 +411,14 @@ SectionRenderer.prototype.foreign = function( $foreign , level ) {
     return '<i>' + this.renderNodeChildren( $foreign , level ) + '</i>';    
 };
 
+SectionRenderer.getEnemyEndurance = function( $combat ) {
+    var $enduranceAttr = $combat.find('enemy-attribute[class=endurance]');
+    if( $enduranceAttr.length == 0 )
+        // Book 6 / sect26: The endurance attribute is "target"
+        $enduranceAttr = $combat.find('enemy-attribute[class=target]');
+    return $enduranceAttr;
+}
+
 /**
  * Combat renderer
  * @param $combat Combat to render
@@ -419,7 +427,7 @@ SectionRenderer.prototype.foreign = function( $foreign , level ) {
 SectionRenderer.prototype.combat = function( $combat , level ) {
     var enemy = $combat.find('enemy').text();
     var combatSkill = $combat.find('.combatskill').text();
-    var endurance = $combat.find('.endurance').text();
+    var endurance = SectionRenderer.getEnemyEndurance( $combat ).text();
     return '<div class="combat well"><b>' + enemy + '</b><br />' + 
         '<span class="attribute">' + translations.text('combatSkillUpper') + '</span>: ' + 
         combatSkill + 

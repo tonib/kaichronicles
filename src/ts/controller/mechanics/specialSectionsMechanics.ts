@@ -174,9 +174,9 @@ const specialSectionsMechanics = {
         // Replace the combat turns generation:
         var sectionState = state.sectionStates.getSectionState();
 
-        var nextTurnAsyncFunction = function() {
+        var nextTurnAsyncFunction = function() : Promise<CombatTurn> {
             return Combat.prototype.nextTurnAsync.call(this)
-            .then(function(turn) {
+            .then(function(turn : CombatTurn) {
                 // Check the bite:
                 if( turn.loneWolf > 0 && turn.loneWolf != combatTable_DEATH ) {
                     var biteRandomValue = randomTable.getRandomValue();
@@ -203,3 +203,70 @@ const specialSectionsMechanics = {
     }
 
 };
+
+/** Bow tournament final */
+class Book6sect26 {
+
+    public constructor() {
+
+        // Replace the combat turns generation:
+        const sectionState = state.sectionStates.getSectionState();
+        for(let combat of sectionState.combats) {
+            combat.nextTurnAsync = Book6sect26.nextTurnAsync;
+            combat.applyTurn = Book6sect26.applyTurn;
+        }
+
+        // Add UI
+        var $UI = mechanicsEngine.getMechanicsUI('mechanics-book6sect26');
+        $('.combat').append( $UI );
+        Book6sect26.updatePlayerTargetPointsUI(true);
+    }
+
+    /** Replacement for combat turns generation */
+    private static nextTurnAsync() : Promise<CombatTurn> {
+        return Combat.prototype.nextTurnAsync.call(this)
+        .then(function(turn : CombatTurn) {
+            // Do not remove EP to the player. Do a backup of the real loss at turn.loneWolfExtra
+            turn.loneWolfExtra = turn.loneWolf;
+            turn.loneWolf = turn.loneWolfBase = 0;
+            return jQuery.Deferred().resolve(turn).promise();
+        });
+    }
+
+    /** Replacement for turns application */
+    private static applyTurn( turn : CombatTurn ) {
+        // Apply normal combat
+        Combat.prototype.applyTurn.call(this, turn);
+
+        // Remove player target points (stored at turn.loneWolfExtra)
+        let targetPoints = Book6sect26.getPlayerTargetPoints();
+        targetPoints = Combat.applyLoss( targetPoints , turn.loneWolfExtra );
+        Book6sect26.setPlayerTargetPoints( targetPoints );
+
+        // Combat is finished?
+        var self : any = this;
+        if( targetPoints <= 0 )
+            self.combatFinished = true;
+
+        // Update player target points
+        Book6sect26.updatePlayerTargetPointsUI(false);
+    }
+
+    private static getPlayerTargetPoints() : any {
+        let targetPoints = state.sectionStates.otherStates['book6sect26TargetPoints'];
+        if( targetPoints === undefined || targetPoints === null )
+            return 50;
+        return targetPoints;
+    }
+
+    private static setPlayerTargetPoints( targetPoints : any ) {
+        state.sectionStates.otherStates['book6sect26TargetPoints'] = targetPoints;
+    }
+
+    private static updatePlayerTargetPointsUI( doNotAnimate : boolean ) {
+        const targetPoints = Book6sect26.getPlayerTargetPoints();
+        const color = ( targetPoints <= 0 ? 'red' : null );
+        template.animateValueChange( $('#mechanics-targetpoins') , targetPoints , doNotAnimate , color );
+    }
+
+}
