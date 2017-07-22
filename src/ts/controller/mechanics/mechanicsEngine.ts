@@ -1141,6 +1141,7 @@ const mechanicsEngine = {
             .replaceAll( '[ORIGINALCOMBATSKILL]' , state.actionChart.combatSkill )
             .replaceAll( '[COMBATSENDURANCELOST]', sectionState.combatsEnduranceLost('player') )
             .replaceAll( '[COMBATSENEMYLOST]', sectionState.combatsEnduranceLost('enemy') )
+            .replaceAll( '[ENEMYENDURANCE]', sectionState.getEnemyEndurance() )
             .replaceAll( '[MEALS]', state.actionChart.meals )
             .replaceAll( '[KAILEVEL]', state.actionChart.disciplines.length )
             .replaceAll( '[NUMBERPICKER]', numberPickerMechanics.getNumberPickerValue() )

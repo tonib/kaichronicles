@@ -8,7 +8,7 @@ class Combat {
     /** Enemy combat skill */
     public combatSkill : number;
 
-    /** Enemy endurance points  */
+    /** Enemy current endurance points  */
     public endurance : number;
 
     /** Enemy original endurance points  */

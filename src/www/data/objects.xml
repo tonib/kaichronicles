@@ -501,6 +501,16 @@
             </description>
         </special>
         
+        <special id="rubyring">
+            <name lang="en">Ruby Ring</name>
+            <name lang="es">Anillo de Rubíes</name>
+        </special>
+        
+        <special id="silverbrooch">
+            <name lang="en">Silver Brooch</name>
+            <name lang="es">Broche de Plata</name>
+        </special>
+
     </specials>
 
     <objects>
@@ -954,6 +964,21 @@
         <object id="maptekaro">
             <name lang="en">Map of Tekaro</name>
             <name lang="es">Mapa de Tekaro</name>
+        </object>
+
+        <object id="taunorwater">
+            <name lang="en">Taunor Water</name>
+            <description lang="en">
+                There is enough spa water to restore 6 ENDURANCE points
+            </description>
+
+            <name lang="es">Agua de Taunor</name>
+            <description lang="es">
+                Tienes bastante para restablecer 6 puntos de RESISTENCIA
+            </description>
+
+            <image book="1" name="potion.png" />
+            <usage class="endurance" increment="6" />
         </object>
 
         <!-- OTHERS -->

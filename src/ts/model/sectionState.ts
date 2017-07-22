@@ -253,4 +253,15 @@ class SectionState {
             return -1;
         return combat.turns[ combat.turns.length - 1].randomValue;
     }
+
+    /**
+     * Returns the enemy current endurance of the first combat on the section.
+     * It returns zero if there are no combats on the section
+     */
+    public getEnemyEndurance() : number {
+        if( this.combats.length === 0 )
+            return 0;
+        return this.combats[0].endurance;
+    }
+    
 }
