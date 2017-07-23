@@ -234,14 +234,25 @@ class SectionState {
     /**
      * Remove an object from the section
      * @param objectId Object id to remove
+     * @param price Price of the object to remove
      */
-    public removeObjectFromSection(objectId : string) {
+    public removeObjectFromSection(objectId : string, price: number) {
+        // Be sure price is not null
+        if( !price )
+            price = 0;
+        
         for( var i=0, len = this.objects.length; i< len; i++) {
-            if( this.objects[i].id == objectId ) {
+            // Be sure price is not null
+            let currentPrice = this.objects[i].price;
+            if( !currentPrice )
+                currentPrice = 0;
+
+            if( this.objects[i].id == objectId && currentPrice == price ) {
                 this.objects.splice(i, 1);
                 return;
             }
         }
+        console.log( 'Object to remove from section not found :' + objectId + ' ' + price );
     }
 
     /**

@@ -44,15 +44,6 @@ class BookSectionStates {
     }
 
     /**
-     * Remove an object from the current section
-     * @param {string} objectId Object id to remove
-     */
-    public removeObjectFromSection(objectId : string) {
-        var sectionState = this.getSectionState();
-        sectionState.removeObjectFromSection( objectId );
-    }
-
-    /**
      * Clear some section state
      * @param {string} sectionId The section id to clear
      */

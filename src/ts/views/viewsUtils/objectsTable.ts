@@ -238,10 +238,9 @@ const objectsTable = {
     onGetObjectClicked: function( $link , o ) {
 
         // Check if it's a buy
-        var price = $link.attr('data-price');
+        const txtPrice : string = $link.attr('data-price');
+        const price : number = ( txtPrice ? parseInt( txtPrice ) : 0 );
         if( price ) {
-            price = parseInt( price );
-
             if( state.actionChart.beltPouch < price ) {
                 alert( translations.text('noEnoughMoney') );
                 return;
@@ -271,7 +270,8 @@ const objectsTable = {
             var unlimited = $link.attr('data-unlimited');
             if( !unlimited ) {
                 // Remove it from the available objects on the section
-                state.sectionStates.removeObjectFromSection( o.id );
+                const sectionState = state.sectionStates.getSectionState();
+                sectionState.removeObjectFromSection( o.id , price );
             }
 
             if( price ) {

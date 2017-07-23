@@ -1,6 +1,6 @@
 - Publish 1.6.3
-- BUG: book 2 / sect266: If you drop an object that can be buy, if you re-pick it, the sell object disappears...
-- BUG: book 4 / sect194: "If you have the Kai Discipline of Mind Over Matter, you can add 2 to the number you have picked." not applied
+- BUG: book 4 / sect194: "If you have the Kai Discipline of Mind Over Matter, you can add 2 to the number you have picked." 
+  not applied
 - Report erratas:
   * Book 1,2,3,4,5,6: inconsitencies between laguages: "Si el lápiz señala 0, no cuenta." / "If you pick 0 it counts as zero."
   * Book 5: On English map, there is a description of the country, with clues about the grave location puzzle, on spanish, there
