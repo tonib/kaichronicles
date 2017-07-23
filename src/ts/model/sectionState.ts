@@ -26,6 +26,9 @@ interface ShellPrice {
 
     /** The object price */
     price : number;
+
+    /** Only applies if id = 'quiver'. Number of arrows on the quiver */
+    arrows : number;
 }
 
 /**

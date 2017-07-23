@@ -112,7 +112,6 @@ class ActionChart {
                 this.specialItems.push(o.id);
                 if(o.isWeapon())
                     this.checkCurrentWeapon();
-                //console.log('Picked special ' + o.id);
                 return true;
 
             case 'object':
@@ -345,22 +344,9 @@ class ActionChart {
         return this.selectedWeapon ? state.mechanics.getObject(this.selectedWeapon) : null;
     }
 
-    /**
-     * Get the current bonuses for combat skill
-     * @param {boolean} noMindblast If true, the Mindblast discipline bonus is not added 
-     * @param {boolean} noWeapon If true, the combat skill for combat without weapons.
-     * If false, the combat skill for the current selected weapon
-     * @param {number} mindblastBonus If > 0, the mindblast CS bonus to apply. If 0 or null,
-     * the default bonus will be used (+2CS)
-     * @param psiSurge Is Psi-surge activated?
-     * @param bow Is a bow combat?
-     * @return Array of objects with the bonuses concepts
-     */
-    public getCurrentCombatSkillBonuses(noMindblast : boolean = false, noWeapon : boolean = false, 
-        mindblastBonus : number = 0 , psiSurge : boolean = false, bow : boolean = false) : Array<Bonus> {
+    private getWeaponCombatSkillBonuses( noWeapon : boolean = false , bow : boolean ) : Array<Bonus> {
 
         var bonuses = [];
-
         var currentWeapon = this.getselectedWeaponItem( bow );
 
         // Weapons
@@ -394,6 +380,38 @@ class ActionChart {
                 increment: currentWeapon.effect.increment
             });
         }
+
+        return bonuses;
+    }
+
+    public getBowBonus() : number {
+        let bonus = 0
+        for( let b of this.getWeaponCombatSkillBonuses(false, true) )
+            bonus += b.increment;
+        return bonus;
+    }
+
+    /**
+     * Get the current bonuses for combat skill
+     * @param {boolean} noMindblast If true, the Mindblast discipline bonus is not added 
+     * @param {boolean} noWeapon If true, the combat skill for combat without weapons.
+     * If false, the combat skill for the current selected weapon
+     * @param {number} mindblastBonus If > 0, the mindblast CS bonus to apply. If 0 or null,
+     * the default bonus will be used (+2CS)
+     * @param psiSurge Is Psi-surge activated?
+     * @param bow Is a bow combat?
+     * @return Array of objects with the bonuses concepts
+     */
+    public getCurrentCombatSkillBonuses(noMindblast : boolean = false, noWeapon : boolean = false, 
+        mindblastBonus : number = 0 , psiSurge : boolean = false, bow : boolean = false) : Array<Bonus> {
+
+        var bonuses = [];
+
+        var currentWeapon = this.getselectedWeaponItem( bow );
+
+        // Weapon
+        for( let b of this.getWeaponCombatSkillBonuses(noWeapon, bow) )
+            bonuses.push( b );
 
         // Mindblast / Psi-surge
         if( psiSurge ) {

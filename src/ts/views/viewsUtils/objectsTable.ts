@@ -68,8 +68,13 @@ const objectsTable = {
             return null;
 
         // If it's a sell table, and we don't have the object, do not show it
-        if( type == 'sell' && !state.actionChart.hasObject( objectInfo.id ) )
-            return null;
+        if( type == 'sell' ) {
+            if( !state.actionChart.hasObject( objectInfo.id ) )
+                return null;
+            // We don't have enougth arrows to sell, do not show
+            if( objectInfo.id == 'quiver' && state.actionChart.arrows < objectInfo.arrows )
+                return null;
+        }
 
         var html = '<tr><td>';
 
@@ -85,10 +90,10 @@ const objectsTable = {
 
         // Name
         var name = o.name;
-        if( objectInfo.price )
-            name += ' (' + objectInfo.price + ' ' + translations.text('goldCrowns') + ')';
         if( objectInfo.id == 'quiver' && objectInfo.arrows )
             name += ' (' + objectInfo.arrows + ' ' + translations.text('arrows') + ')';
+        if( objectInfo.price )
+            name += ' (' + objectInfo.price + ' ' + translations.text('goldCrowns') + ')';
 
         if( objectInfo.id == 'map' )
             // It's the map:
@@ -191,7 +196,13 @@ const objectsTable = {
                     if( !confirm( translations.text( 'confirmSell' , [ price ] ) ) )
                         return;
 
-                    actionChartController.drop( o.id , false , true );
+                    let txtArrows = $(this).attr('data-arrows');
+                    let arrows = ( txtArrows ? parseInt( txtArrows ) : 0 );
+                    if( o.id == 'quiver' && arrows > 0 )
+                        // Drop arrows
+                        actionChartController.increaseArrows( -arrows );
+                    else
+                        actionChartController.drop( o.id , false , true );
                     actionChartController.increaseMoney( price );
                     mechanicsEngine.fireInventoryEvents(true, o);
                     break;
@@ -241,13 +252,20 @@ const objectsTable = {
                 
         }
 
-        if( actionChartController.pick( o.id , true, true) ) {
+        let objectPicked : boolean;
+        // Do not pick two quivers
+        if( o.id == 'quiver' && state.actionChart.hasObject(o.id) )
+            objectPicked = true;
+        else
+            objectPicked = actionChartController.pick( o.id , true, true);
+
+        if( objectPicked ) {
 
             if( o.id == 'quiver' ) {
                 // Get the number of arrows on the quiver
                 var arrows = $link.attr('data-arrows');
                 arrows = ( arrows ? parseInt( arrows ) : 0 );
-                state.actionChart.increaseArrows( arrows );
+                actionChartController.increaseArrows( arrows );
             }
 
             var unlimited = $link.attr('data-unlimited');

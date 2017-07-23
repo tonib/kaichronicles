@@ -566,6 +566,74 @@
             </test>
         </section>
 
+        <section id="sect95">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="3">
+                    <choiceState section="sect155" set="enabled" />
+                </case>
+                <case from="4" to="99">
+                    <choiceState section="sect12" set="enabled" />
+                </case>
+            </randomTable>
+            <randomTableIncrement increment="[BOWBONUS]" />
+        </section>
+
+        <section id="sect96">
+            <test not="true" hasObject="cess">
+                <choiceState section="sect49" set="disabled" />
+            </test>
+            <test hasObject="cess">
+                <choiceState section="sect221" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect97">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="3">
+                    <choiceState section="sect174" set="enabled" />
+                </case>
+                <case from="4" to="6">
+                    <choiceState section="sect313" set="enabled" />
+                </case>
+                <case from="7" to="9">
+                    <choiceState section="sect57" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect98">
+            <object objectId="broadsword" price="7" unlimited="true" />
+            <object objectId="dagger" price="2" unlimited="true" />
+            <object objectId="shortsword" price="3" unlimited="true" />
+            <object objectId="warhammer" price="6" unlimited="true" />
+            <object objectId="spear" price="5" unlimited="true" />
+            <object objectId="mace" price="4" unlimited="true" />
+            <object objectId="axe" price="3" unlimited="true" />
+            <object objectId="bow" price="7" unlimited="true" />
+            <object objectId="quarterstaff" price="3" unlimited="true" />
+            <object objectId="sword" price="4" unlimited="true" />
+            <object objectId="quiver" arrows="2" price="1" unlimited="true" />
+
+            <sell objectId="broadsword" price="6" />
+            <sell objectId="dagger" price="1" />
+            <sell objectId="shortsword" price="2" />
+            <sell objectId="warhammer" price="5" />
+            <sell objectId="spear" price="4" />
+            <sell objectId="mace" price="3" />
+            <sell objectId="axe" price="2" />
+            <sell objectId="bow" price="6" />
+            <sell objectId="quarterstaff" price="2" />
+            <sell objectId="sword" price="3" />
+            <sell objectId="quiver" arrows="4" price="1" />
+
+        </section>
+
+        <section id="sect99">
+            <death />
+        </section>
+
         <!-- UP TO sect94 -->
         
     </sections>

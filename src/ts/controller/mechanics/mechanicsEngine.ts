@@ -612,7 +612,8 @@ const mechanicsEngine = {
             return;
         sectionState.sellPrices.push({
             id: $(rule).attr('objectId'),
-            price: parseInt( $(rule).attr('price') )
+            price: parseInt( $(rule).attr('price') ),
+            arrows: parseInt( $(rule).attr('arrows') )
         });
         state.sectionStates.markRuleAsExecuted(rule);
     },
@@ -1146,6 +1147,7 @@ const mechanicsEngine = {
             .replaceAll( '[KAILEVEL]', state.actionChart.disciplines.length )
             .replaceAll( '[NUMBERPICKER]', numberPickerMechanics.getNumberPickerValue() )
             .replaceAll( '[COMBATSDURATION]', sectionState.combatsDuration() )
+            .replaceAll( '[BOWBONUS]', state.actionChart.getBowBonus() )
             ;
 
         // Extra randoms:
