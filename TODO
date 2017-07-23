@@ -1,10 +1,9 @@
 - Publish 1.6.3
-- BUG: book 4 / sect194: "If you have the Kai Discipline of Mind Over Matter, you can add 2 to the number you have picked." 
-  not applied
 - Report erratas:
   * Book 1,2,3,4,5,6: inconsitencies between laguages: "Si el lápiz señala 0, no cuenta." / "If you pick 0 it counts as zero."
   * Book 5: On English map, there is a description of the country, with clues about the grave location puzzle, on spanish, there
     is not.
+  * Book 5 / 234, spanish typo "Tabla de la Suertey anótalo" should be "Tabla de la Suerte y anótalo"
   * Book 6 / 13, spanish: "Si no tienes un arco y deseas escapar, pasa al 182." should be "Si deseas escapar, pasa al 182".
   * Book 6 / 17, spanish leaks foot note: "[2] If you cannot afford to pay for a room, the tavern-keeper will accept one 
     Backpack Item or Weapon in lieu of payment for a night in the dormitory."

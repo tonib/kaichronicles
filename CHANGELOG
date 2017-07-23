@@ -1,7 +1,9 @@
 1.6.3 / 1.7
 - Improvements on map zoom (not the best, but It Works)
-- Fixed bug on book 1 / sect246: Drop 2 Crowns
-- Fixed bug on book 5 / sect23: Lose 1 E.P.
+- Fixed bug on book 1 / sect246: Drop 2 Crowns was not applied
+- Fixed bug on book 4 / sect194 and sect234: "If you have the Kai Discipline of Mind Over Matter, you can add 2 to the number you 
+  have picked." was not applied
+- Fixed bug on book 5 / sect23: Lose 1 E.P. was not applied
 - Fixed bug choosing CS / EP: Book language inconsistencies: Spanish books say "ignore zero", English does not
 - Fixed bug with random table: If it was "computer generated", the "ten as zero", and "ignore zeros" rules were ignored
 - Fixed bug: On section where you can buy things: If you drop an object that can be buy, if you re-pick it, 

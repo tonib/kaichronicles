@@ -1017,6 +1017,9 @@
                     <combat turnLoss="-2" />
                 </afterCombatTurn>
             </randomTable>
+            <test hasDiscipline="mindomtr" >
+                <randomTableIncrement increment="+2" />
+            </test>
             <afterCombats>
                 <choiceState section="all" set="enabled" />
             </afterCombats>
@@ -1180,6 +1183,9 @@
                     <combat turnLoss="-2" />
                 </afterCombatTurn>
             </randomTable>
+            <test hasDiscipline="mindomtr" >
+                <randomTableIncrement increment="+2" />
+            </test>
             <afterCombats>
                 <choiceState section="all" set="enabled" />
             </afterCombats>
