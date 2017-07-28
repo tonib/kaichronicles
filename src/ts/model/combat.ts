@@ -35,6 +35,9 @@ class Combat {
     /** Turn beyond which the combat can be eluded. -1 = no elude */
     public eludeTurn = -1;
 
+    /** Maximum turn which the combat can be eluded. -1 == no max turn */
+    public maxEludeTurn = -1;
+
     /** Combat has been disabled? */
     public disabled = false;
 
@@ -209,7 +212,11 @@ class Combat {
     public canBeEluded() : boolean {
         if( this.eludeTurn < 0 || this.isFinished() )
             return false;
-        return this.turns.length >= this.eludeTurn;
+        if( this.turns.length < this.eludeTurn )
+            return false;
+        if( this.maxEludeTurn >= 0 && this.turns.length > this.maxEludeTurn )
+            return false;
+        return true;
     }
 
     /**

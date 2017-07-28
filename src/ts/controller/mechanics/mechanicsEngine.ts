@@ -667,10 +667,15 @@ const mechanicsEngine = {
         if( txtNoWeapon )
             combat.noWeapon = ( txtNoWeapon == 'true' );
 
-        // Check if the combat can be eluded
+        // Initial turn to allow to elude the combat
         if( $(rule).attr('eludeTurn') )
             combat.eludeTurn = parseInt( $(rule).attr('eludeTurn') );
         
+        // Max. turn to elude combat
+        const txtmaxEludeTurn : string = $(rule).attr('maxEludeTurn');
+        if( txtmaxEludeTurn )
+            combat.maxEludeTurn = parseInt( txtmaxEludeTurn );
+
         // Dammage multiplier (player)
         if( $(rule).attr('dammageMultiplier') )
             combat.dammageMultiplier = parseInt( $(rule).attr('dammageMultiplier') );

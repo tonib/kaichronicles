@@ -49,8 +49,8 @@ const combatMechanics = {
                 template.showCombatTables();
             });
 
+            // Elude combat button click
             $combatOriginal.find('.mechanics-elude').click(function(e) {
-                // Elude combat button click
                 e.preventDefault();
                 combatMechanics.runCombatTurn( $(this).parents('.mechanics-combatUI').first() , 
                     true );
@@ -77,9 +77,9 @@ const combatMechanics = {
             if( sectionState.combatEluded || combat.isFinished() || combat.disabled )
                 // Hide button to run more turns
                 combatMechanics.hideCombatButtons( $combatUI );
-            else if( combat.canBeEluded() )
-                // The combat can be eluded
-                $combatUI.find('.mechanics-elude').show();
+            else 
+                // Check if the combat can be eluded
+                combatMechanics.showHideEludeButton( combat , $combatUI );
 
             if( !state.actionChart.disciplines.contains('psisurge' ) ) {
                 // Hide Psi-surge check
@@ -157,12 +157,11 @@ const combatMechanics = {
         // Get combat data
         var sectionState = state.sectionStates.getSectionState();
         var combatIndex = parseInt( $combatUI.attr( 'data-combatIdx' ) );
-        var combat = sectionState.combats[ combatIndex ];
+        const combat = sectionState.combats[ combatIndex ];
 
         if( !(sectionState.combatEluded || combat.isFinished() || combat.disabled) ) {
             $combatUI.find('.mechanics-playTurn').show();
-            if( combat.canBeEluded() )
-                $combatUI.find('.mechanics-elude').show();
+            combatMechanics.showHideEludeButton( combat , $combatUI );
         }
     },
 
@@ -222,9 +221,8 @@ const combatMechanics = {
             else {
                 // Combat continues
                 
-                if( combat.canBeEluded() )
-                    // The combat can be eluded after this turn
-                    $combatUI.find('.mechanics-elude').show();
+                // Check if the combat can be eluded
+                combatMechanics.showHideEludeButton( combat , $combatUI );
 
                 // Fire turn events:
                 mechanicsEngine.fireAfterCombatTurn(combat);
@@ -242,6 +240,19 @@ const combatMechanics = {
             combatMechanics.checkPsiSurgeEnabled();
         });
 
+    },
+
+    /**
+     * Update visibility of the elude combat button
+     * @param combat The combat to update
+     * @param {jQuery} $combatUI The combat UI
+     */
+    showHideEludeButton: function( combat: Combat , $combatUI : any ) {
+        if( combat.canBeEluded() )
+            // The combat can be eluded after this turn
+            $combatUI.find('.mechanics-elude').show();
+        else
+            $combatUI.find('.mechanics-elude').hide();
     },
 
     /**

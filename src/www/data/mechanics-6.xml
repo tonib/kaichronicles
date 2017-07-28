@@ -634,7 +634,77 @@
             <death />
         </section>
 
-        <!-- UP TO sect94 -->
+        <section id="sect101">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect348" set="enabled" />
+                </case>
+                <case from="5" to="99">
+                    <choiceState section="sect207" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="+3" />
+            </test>
+        </section>
+
+        <section id="sect102">
+            <test not="true" expression="[MONEY] >= 10">
+                <choiceState section="sect10" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect103">
+            <!-- TODO: Drop borrowed bow -->
+        </section>
+
+        <section id="sect106">
+            <!-- TODO: Allow to use this without pick it -->
+            <object objectId="taunorwater" />
+        </section>
+
+        <section id="sect109">
+            <object objectId="maptekaro" />
+        </section>
+
+        <section id="sect111">
+            <!-- TODO: Allow to use this without pick it -->
+            <object objectId="laumspurpotion4" />
+        </section>
+        
+        <section id="sect112">
+            <!-- TODO: Allow to use this without pick it -->
+            <object objectId="taunorwater" />
+        </section>
+
+        <section id="sect113">
+            <!-- TODO: Drop staked money -->
+        </section>
+
+        <section id="sect114">
+            <choiceState section="all" set="disabled" />
+            <combat combatSkillModifier="+2" />
+            <afterCombatTurn turn="1">
+                <combat combatSkillModifier="0" />
+            </afterCombatTurn>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect116">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="0" maxEludeTurn="0" />
+            <afterCombats>
+                <choiceState section="sect193" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect105" set="enabled" />
+            </afterElude>
+        </section>
+
+        <!-- UP TO sect122 -->
         
     </sections>
 
