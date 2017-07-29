@@ -1028,6 +1028,7 @@
         </object>
 
         <!-- This not really an object, but needed for mechanics -->
+        <!-- TODO: Check this object, I think it can be removed (replaced by quiver) -->
         <object id="arrow">
             <name lang="en">Arrows</name>
             <name lang="es">Flechas</name>

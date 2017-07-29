@@ -205,6 +205,7 @@
             <test not="true" hasDiscipline="hntmstry">
                 <choiceState section="sect205" set="disabled" />
             </test>
+            <!-- TODO: Check called sections pick the right bow -->
         </section>
         
         <section id="sect20">
@@ -375,6 +376,10 @@
 
         <section id="sect57">
             <death />
+        </section>
+
+        <section id="sect60">
+            <!-- TODO: Pick bow -->
         </section>
 
         <section id="sect62">
@@ -772,7 +777,29 @@
             </onInventoryEvent>
         </section>
 
-        <!-- UP TO sect132 -->
+        <section id="sect137">
+            <test not="true" expression="[MONEY] >= 3">
+                <choiceState section="sect332" set="disabled" />
+            </test>
+            <choiceSelected section="sect332">
+                <pick class="money" count="-3" />
+            </choiceSelected>
+        </section>
+
+        <section id="sect138">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect139">
+            <pick class="money" count="11" />
+            <pick objectId="silverbrooch" />
+            <object objectId="dagger" />
+        </section>
+
+        <!-- UP TO sect140 -->
         
     </sections>
 
