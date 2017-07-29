@@ -217,16 +217,22 @@ const actionChartController = {
     /**
      * Increase / decrease the money number
      * @param count Number to increase. Negative to decrease 
+     * @param availableOnSection The dropped money should be available on the current section? Only applies if count < 0
      */
-    increaseMoney: function(count) {
+    increaseMoney: function(count : number, availableOnSection: boolean = false) {
         state.actionChart.increaseMoney(count);
-        var o = state.mechanics.getObject('money');
+        const o = state.mechanics.getObject('money');
         if( count > 0 )
             actionChartView.showInventoryMsg('pick' , o , 
                 translations.text( 'msgGetMoney' , [count] ) );
-        else if( count < 0 )
-            actionChartView.showInventoryMsg('drop' , o , 
-                translations.text( 'msgDropMoney' , [-count] ) );
+        else if( count < 0 ) {
+            actionChartView.showInventoryMsg('drop' , o , translations.text( 'msgDropMoney' , [-count] ) );
+            if( availableOnSection && count < 0 ) {
+                // Add the droped money as available on the current section
+                const sectionState = state.sectionStates.getSectionState();
+                sectionState.addObjectToSection( 'money' , 0 , false , -count );
+            }
+        }
         actionChartView.updateMoney();
     },
 

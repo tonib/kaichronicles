@@ -62,7 +62,7 @@ const actionChartView = {
             e.preventDefault();
             const $moneyAmount = $('#achart-dropmoneyamount');
             if( $moneyAmount.isValid() ) {
-                actionChartController.increaseMoney( - $moneyAmount.getNumber() );
+                actionChartController.increaseMoney( - $moneyAmount.getNumber() , true );
                 $('#achart-dropmoneydialog').modal('hide');
             }
         });

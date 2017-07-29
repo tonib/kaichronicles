@@ -100,8 +100,16 @@ const objectsTable = {
 
         // Name
         var name = o.name;
+
+        // Number of arrows on the quiver
         if( objectInfo.id == 'quiver' && objectInfo.count )
             name += ' (' + objectInfo.count + ' ' + translations.text('arrows') + ')';
+
+        // Money amount
+        if( objectInfo.id == 'money' && objectInfo.count )
+            name += ' (' + objectInfo.count + ' ' + translations.text('goldCrowns') + ')';
+
+        // Buy / sell price
         if( objectInfo.price )
             name += ' (' + objectInfo.price + ' ' + translations.text('goldCrowns') + ')';
 
@@ -140,8 +148,8 @@ const objectsTable = {
         var link = '<a href="#" data-objectId="' + o.id + 
             '" class="equipment-op btn btn-default" ';
 
-        if( o.id == 'quiver' )
-            // Store the number of arrows on the quiver
+        if( o.id == 'quiver' || o.id == 'money' )
+            // Store the number of arrows on the quiver / gold crowns
             link += 'data-count="' + objectInfo.count + '" ';
 
         if( type == 'available' ) {
@@ -262,20 +270,27 @@ const objectsTable = {
         }
 
         let objectPicked : boolean;
-        // Do not pick two quivers
         if( o.id == 'quiver' && state.actionChart.hasObject(o.id) )
+            // Do not pick two quivers
+            objectPicked = true;
+        else if( o.id == 'money' )
+            // Not really an object
             objectPicked = true;
         else
             objectPicked = actionChartController.pick( o.id , true, true);
 
         if( objectPicked ) {
 
-            if( o.id == 'quiver' ) {
-                // Get the number of arrows on the quiver
-                let txtCount : string = $link.attr('data-count');
-                let arrows = ( txtCount ? parseInt( txtCount ) : 0 );
-                actionChartController.increaseArrows( arrows );
-            }
+            let txtCount : string = $link.attr('data-count');
+            let count = ( txtCount ? parseInt( txtCount ) : 0 );
+
+            if( o.id == 'quiver' )
+                // Increase the number of arrows on the quiver
+                actionChartController.increaseArrows( count );
+
+            if( o.id == 'money' )
+                // Pick the money
+                actionChartController.increaseMoney( count );
 
             var unlimited = $link.attr('data-unlimited');
             if( !unlimited ) {

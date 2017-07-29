@@ -226,6 +226,18 @@ class SectionState {
      * @param count Only applies if id = 'quiver' (number of arrows on the quiver) or money (number of Gold Crowns)
      */
     public addObjectToSection(objectId : string , price : number = 0, unlimited : boolean = false, count : number = 0 ) {
+
+        // Special cases:
+        if( objectId == 'money' || objectId == 'quiver' ) {
+            // Try to increase the current money amount / arrows on the section:
+            for( let o of this.objects ) {
+                if( o.id == objectId ) {
+                    o.count += count;
+                    return;
+                }
+            }
+        }
+
         this.objects.push({
             id: objectId,
             price: price,
