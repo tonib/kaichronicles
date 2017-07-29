@@ -13,8 +13,11 @@ interface SectionItem {
     /** True if there are an infinite number of this kind of object on the section */
     unlimited : boolean;
 
-    /** Only applies if id = 'quiver'. Number of arrows on the quiver */
-    arrows : number;
+    /** 
+     * Only applies if id = 'quiver' (number of arrows on the quiver) 
+     * or id = 'money' (number of Gold Crowns) 
+     */
+    count : number;
 }
 
 /**
@@ -28,7 +31,7 @@ interface ShellPrice {
     price : number;
 
     /** Only applies if id = 'quiver'. Number of arrows on the quiver */
-    arrows : number;
+    count : number;
 }
 
 /**
@@ -220,14 +223,14 @@ class SectionState {
      * @param objectId Object id to add
      * @param price The object price
      * @param unlimited True if there are an infinite number of this kind of object on the section
-     * @param arrows Only applies if id = 'quiver'. Number of arrows on the quiver
+     * @param count Only applies if id = 'quiver' (number of arrows on the quiver) or money (number of Gold Crowns)
      */
-    public addObjectToSection(objectId : string , price : number = 0, unlimited : boolean = false, arrows : number = 0 ) {
+    public addObjectToSection(objectId : string , price : number = 0, unlimited : boolean = false, count : number = 0 ) {
         this.objects.push({
             id: objectId,
             price: price,
             unlimited: unlimited,
-            arrows: (objectId == 'quiver' ? arrows : 0 )
+            count: (objectId == 'quiver' || objectId == 'money' ? count : 0 )
         });
     }
 

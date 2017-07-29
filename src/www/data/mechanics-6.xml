@@ -43,7 +43,7 @@
             <object objectId="laumspurpotion4" />
             <object objectId="warhammer" />
             <object objectId="bow" />
-            <object objectId="quiver" arrows="6" />
+            <object objectId="quiver" count="6" />
             <object objectId="meal" index="0" />
             <object objectId="meal" index="1" />
             <object objectId="meal" index="2" />
@@ -621,7 +621,7 @@
             <object objectId="bow" price="7" unlimited="true" />
             <object objectId="quarterstaff" price="3" unlimited="true" />
             <object objectId="sword" price="4" unlimited="true" />
-            <object objectId="quiver" arrows="2" price="1" unlimited="true" />
+            <object objectId="quiver" count="2" price="1" unlimited="true" />
 
             <sell objectId="broadsword" price="6" />
             <sell objectId="dagger" price="1" />
@@ -633,7 +633,7 @@
             <sell objectId="bow" price="6" />
             <sell objectId="quarterstaff" price="2" />
             <sell objectId="sword" price="3" />
-            <sell objectId="quiver" arrows="4" price="1" />
+            <sell objectId="quiver" count="4" price="1" />
 
         </section>
 

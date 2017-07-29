@@ -36,16 +36,26 @@ const objectsTable = {
 
     /**
      * Convert, if needed, the object id to a SectionItem
+     * @param objectInfo A string with the object id, or a SectionItem with the object info
+     * @param type The currently rendering table type: 'available': Available objects on section,
+     * 'sell': Sell inventory objects, 'inventory': Inventory objects
+     * @return A SectionItem with the object info
      */
     toSectionItem: function( objectInfo : any , type : string ) : SectionItem {
-        if( typeof(objectInfo) === 'string' )
+        if( typeof(objectInfo) === 'string' ) {
+            let count = 0;
+            if( type == 'inventory' && objectInfo == 'quiver' )
+                // The number of arrows on the quiver:
+                count = state.actionChart.arrows;
+
             return { 
                 // The object info is directly the object id
                 id : objectInfo,
                 price : 0,
                 unlimited : false,
-                arrows : ( type == 'inventory' ? state.actionChart.arrows : 0 )
+                count : count
             }
+        }
         else {
             // The object info is the info about objects available on the section
             // See SectionState.objects documentation
@@ -72,7 +82,7 @@ const objectsTable = {
             if( !state.actionChart.hasObject( objectInfo.id ) )
                 return null;
             // We don't have enougth arrows to sell, do not show
-            if( objectInfo.id == 'quiver' && state.actionChart.arrows < objectInfo.arrows )
+            if( objectInfo.id == 'quiver' && state.actionChart.arrows < objectInfo.count )
                 return null;
         }
 
@@ -90,8 +100,8 @@ const objectsTable = {
 
         // Name
         var name = o.name;
-        if( objectInfo.id == 'quiver' && objectInfo.arrows )
-            name += ' (' + objectInfo.arrows + ' ' + translations.text('arrows') + ')';
+        if( objectInfo.id == 'quiver' && objectInfo.count )
+            name += ' (' + objectInfo.count + ' ' + translations.text('arrows') + ')';
         if( objectInfo.price )
             name += ' (' + objectInfo.price + ' ' + translations.text('goldCrowns') + ')';
 
@@ -132,7 +142,7 @@ const objectsTable = {
 
         if( o.id == 'quiver' )
             // Store the number of arrows on the quiver
-            link += 'data-arrows="' + objectInfo.arrows + '" ';
+            link += 'data-count="' + objectInfo.count + '" ';
 
         if( type == 'available' ) {
             // Available object
@@ -196,11 +206,11 @@ const objectsTable = {
                     if( !confirm( translations.text( 'confirmSell' , [ price ] ) ) )
                         return;
 
-                    let txtArrows = $(this).attr('data-arrows');
-                    let arrows = ( txtArrows ? parseInt( txtArrows ) : 0 );
-                    if( o.id == 'quiver' && arrows > 0 )
+                    let txtCount : string = $(this).attr('data-count');
+                    let count = ( txtCount ? parseInt( txtCount ) : 0 );
+                    if( o.id == 'quiver' && count > 0 )
                         // Drop arrows
-                        actionChartController.increaseArrows( -arrows );
+                        actionChartController.increaseArrows( -count );
                     else
                         actionChartController.drop( o.id , false , true );
                     actionChartController.increaseMoney( price );
@@ -262,8 +272,8 @@ const objectsTable = {
 
             if( o.id == 'quiver' ) {
                 // Get the number of arrows on the quiver
-                var arrows = $link.attr('data-arrows');
-                arrows = ( arrows ? parseInt( arrows ) : 0 );
+                let txtCount : string = $link.attr('data-count');
+                let arrows = ( txtCount ? parseInt( txtCount ) : 0 );
                 actionChartController.increaseArrows( arrows );
             }
 

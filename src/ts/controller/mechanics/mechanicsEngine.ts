@@ -592,12 +592,12 @@ const mechanicsEngine = {
         // Unlimited number of this kind of object?
         var unlimited = ( $(rule).attr('unlimited') == 'true' );
 
-        // Number of arrows (only for quiver)
-        var arrows = $(rule).attr('arrows');
-        arrows = ( arrows ? parseInt( arrows ) : 0 );
-            
+        // Number of items (only for quiver (n. arrows) and money (n.gold crowns))
+        const txtCount : string = $(rule).attr('count');
+        const count = ( txtCount ? parseInt( txtCount ) : 0 );
+        
         // Add the object to the available objects on the section
-        sectionState.addObjectToSection( objectId , price , unlimited , arrows );
+        sectionState.addObjectToSection( objectId , price , unlimited , count );
 
         sectionState.markRuleAsExecuted(rule);
     },
@@ -613,7 +613,7 @@ const mechanicsEngine = {
         sectionState.sellPrices.push({
             id: $(rule).attr('objectId'),
             price: parseInt( $(rule).attr('price') ),
-            arrows: parseInt( $(rule).attr('arrows') )
+            count: parseInt( $(rule).attr('count') )
         });
         state.sectionStates.markRuleAsExecuted(rule);
     },

@@ -115,7 +115,7 @@ const actionChartController = {
             return;
         
         // Number of arrows on the quiver (to keep it on the dropped object)
-        var arrows = state.actionChart.arrows;
+        const arrows = ( objectId == 'quiver' ? state.actionChart.arrows : 0 );
 
         if( state.actionChart.drop(objectId) ) {
             actionChartView.showInventoryMsg('drop', o , 
