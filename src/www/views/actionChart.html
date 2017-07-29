@@ -18,8 +18,15 @@
 
 <div class="row">
   <div class="col-sm-6">
-    <label data-translation="actionBeltPouch">Belt Pouch (Max. 50)</label><br/>
-    <input type="text" class="form-control" placeholder="" id="achart-beltPouch" readonly>
+    <label data-translation="actionBeltPouch">Belt Pouch (Max. 50)</label>
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="" id="achart-beltPouch" readonly>
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" id="achart-dropmoneybutton">
+          <span class="glyphicon glyphicon-remove"></span>
+        </button>
+      </span>
+    </div>
   </div>
 </div>
 
@@ -68,3 +75,45 @@
 
 <h3 data-translation="annotations">Annotations</h3>
 <textarea class="form-control" rows="10" id="achart-annotations"></textarea>
+
+<!-- Modal to drop money -->
+<div class="modal fade" id="achart-dropmoneydialog" tabindex="-1" role="dialog" aria-labelledby="achart-dropmoneytitle">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title" id="achart-dropmoneytitle" data-translation="dropMoney">
+          Drop money
+        </h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group">
+            <label for="achart-dropmoneyamount" data-translation="amount">Amount</label>
+            <div class="input-group">
+              <input type="number" class="form-control" id="achart-dropmoneyamount" min="1" data-ismoneypicker="true" value="1">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default add-number">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button> 
+                    <button type="button" class="btn btn-default sub-number">
+                        <span class="glyphicon glyphicon-minus"></span>
+                    </button> 
+                </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" 
+          data-translation="close">
+            Close
+        </button>
+        <button class="btn btn-primary" type="button" id="achart-dropmoneyapply" data-translation="dropMoney">
+            Drop money
+        </button>
+      </div>
+      
+    </div>
+  </div>
+</div>

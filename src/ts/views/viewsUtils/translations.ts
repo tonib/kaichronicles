@@ -69,7 +69,9 @@ class Translations {
         'circleSolaris' : 'Círculo de Solaris',
         'circleSpirit' : 'Círculo del Espíritu',
         'circles' : 'Círculos de la Ciencia:',
-
+        'dropMoney' : 'Dejar dinero',
+        'amount' : 'Cantidad',
+        
         //////////////////////////////////////
         // Combats
         //////////////////////////////////////

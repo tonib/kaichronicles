@@ -19,6 +19,9 @@ const actionChartView = {
         // Show money
         actionChartView.updateMoney();
 
+        // Bind drop money events
+        actionChartView.bindDropMoneyEvents();
+
         // Disciplines.
         actionChartView.fillDisciplines(actionChart);
 
@@ -34,6 +37,36 @@ const actionChartView = {
         $('#achart-annotations').on('input', function() {
             state.actionChart.annotations = $(this).val();
         });
+    },
+
+    /**
+     * Bind events for drop money UI
+     */
+    bindDropMoneyEvents: function() {
+
+        // Bind drop money button event
+        $('#achart-dropmoneybutton').click( function(e: Event) {
+            e.preventDefault();
+            // Update the maximum amount to drop
+            $('#achart-dropmoneyamount')
+                .attr('max', state.actionChart.beltPouch )
+                .val('1');
+            $('#achart-dropmoneydialog').modal('show');
+        });
+
+        // Bind money picker events
+        $('#achart-dropmoneyamount').bindNumberEvents();
+
+        // Bind drop money confirmation button
+        $('#achart-dropmoneyapply').click( function(e : Event) {
+            e.preventDefault();
+            const $moneyAmount = $('#achart-dropmoneyamount');
+            if( $moneyAmount.isValid() ) {
+                actionChartController.increaseMoney( - $moneyAmount.getNumber() );
+                $('#achart-dropmoneydialog').modal('hide');
+            }
+        });
+
     },
 
     /**
@@ -104,6 +137,7 @@ const actionChartView = {
 
     updateMoney: function() {
         $('#achart-beltPouch').val( state.actionChart.beltPouch + ' ' + translations.text('goldCrowns') );
+        $('#achart-dropmoneybutton').prop( 'disabled', state.actionChart.beltPouch <= 0 );
     },
 
     /**
