@@ -981,6 +981,22 @@
             <usage class="endurance" increment="6" />
         </object>
 
+        <object id="aletherberries">
+            <name lang="en">Alether Berries</name>
+            <description lang="en">
+                They will increase your COMBAT SKILL by 2 points for the duration of a fight. 
+                You cannot swallow more than one handful during any one combat
+            </description>
+
+            <name lang="es">Frutos de Aléter</name>
+            <description lang="es">
+                Aumentará en 2 puntos tu DESTREZA EN EL COMBATE mientras dure una lucha. 
+                Sólo puedes tomar un puñado antes de un combate
+            </description>
+
+            <usage class="combatSkill" increment="2" />
+        </object>
+
         <!-- OTHERS -->
 
         <!-- This not really an object, but needed for mechanics -->

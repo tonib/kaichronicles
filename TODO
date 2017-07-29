@@ -25,7 +25,7 @@ FOR FUTURE (1.7+):
   * Allow to drop an arbitrary amount of money, not just a single coin
   * Support for money as object on section
   * Allow to pick droped money
-- Save games is not working on safari
+- Save games is not working on Safari
 - Toasts with images: align text when the text is multiline
 - Combats should be sequential: First finish the first one, then the second, etc
 - About the book: 

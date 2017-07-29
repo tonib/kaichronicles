@@ -329,6 +329,13 @@
             <endurance count="-2" />
         </section>
 
+        <section id="sect45">
+            <choiceSelected section="sect212">
+                <!-- TODO: Drop won bow -->
+                <!--drop objectId=""-->
+            </choiceSelected>
+        </section>
+
         <section id="sect47">
             <choiceState section="all" set="disabled" />
             <afterCombats>
@@ -704,7 +711,59 @@
             </afterElude>
         </section>
 
-        <!-- UP TO sect122 -->
+        <section id="sect123">
+            <object objectId="aletherberries" price="3" index="0" />
+            <object objectId="aletherberries" price="3" index="1" />
+            <object objectId="aletherberries" price="3" index="2" />
+        </section>
+
+        <section id="sect124">
+            <test hasObject="luyenticket|rhemticket|eulaticket">
+                <choiceState section="sect290" set="disabled" />
+            </test>
+            <test not="true" hasObject="luyenticket|rhemticket|eulaticket">
+                <choiceState section="sect59" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect126">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="3">
+                    <choiceState section="sect244" set="enabled" />
+                </case>
+                <case from="4" to="6">
+                    <choiceState section="sect29" set="enabled" />
+                </case>
+                <case from="7" to="9">
+                    <choiceState section="sect150" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect127">
+            <!--
+                TODO: Have you been at book 4, at the hut where you get the Scroll?
+                Do the same here than in book 3 / sect268 (a TODO too)
+            -->
+        </section>
+
+        <section id="sect128">
+            <death />
+        </section>
+
+        <section id="sect129">
+            <death />
+        </section>
+
+        <section id="sect132">
+            <message id="msg-drop-proposal" 
+                en-text="If you agree to his proposal, drop 2 Special Items or 20 Gold Crowns" 
+                es-text="Si estás de acuerdo con esa propuesta, deja dos Objetos Especiales o 20 Coronas de Oro"
+            />
+        </section>
+
+        <!-- UP TO sect131 -->
         
     </sections>
 
