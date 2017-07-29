@@ -761,9 +761,18 @@
                 en-text="If you agree to his proposal, drop 2 Special Items or 20 Gold Crowns" 
                 es-text="Si estás de acuerdo con esa propuesta, deja dos Objetos Especiales o 20 Coronas de Oro"
             />
+            <onInventoryEvent>
+                <choiceState section="all" set="disabled" />
+                <test expression="[SPECIAL-ITEMS-ON-SECTION] >= 2 || [MONEY-ON-SECTION] >= 20">
+                    <choiceState section="sect212" set="enabled" />
+                </test>
+                <test not="true" expression="[SPECIAL-ITEMS-ON-SECTION] >= 2 || [MONEY-ON-SECTION] >= 20">
+                    <choiceState section="sect176" set="enabled" />
+                </test>
+            </onInventoryEvent>
         </section>
 
-        <!-- UP TO sect131 -->
+        <!-- UP TO sect132 -->
         
     </sections>
 

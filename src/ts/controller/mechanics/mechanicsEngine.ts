@@ -1131,7 +1131,10 @@ const mechanicsEngine = {
         var expression = txtExpression
             .replaceAll( '[RANDOM]' , randomMechanics.lastValue )
             .replaceAll( '[COMBATRANDOM]' , sectionState.getLastRandomCombatTurn() )
+            // Money on the belt pouch
             .replaceAll( '[MONEY]' , state.actionChart.beltPouch )
+            // Money available on the section
+            .replaceAll( '[MONEY-ON-SECTION]' , sectionState.getAvailableMoney() )
             .replaceAll( '[BACKPACK-ITEMS-CNT-ON-SECTION]' , sectionState.getCntSectionObjects('object') )
             .replaceAll( '[BACKPACK-ITEMS-CNT-ON-ACTIONCHART]' , state.actionChart.getNBackpackItems() )
             // This does NOT include special items:
@@ -1142,6 +1145,8 @@ const mechanicsEngine = {
             .replaceAll( '[WEAPONLIKE-CNT-ON-SECTION]' , sectionState.getWeaponObjects().length )
             // This includes special items
             .replaceAll( '[WEAPONLIKE-CNT-ON-ACTIONCHART]' , state.actionChart.getWeaponObjects().length )
+            // Count of special items on section
+            .replaceAll( '[SPECIAL-ITEMS-ON-SECTION]' , sectionState.getCntSectionObjects('special') )
             .replaceAll( '[ENDURANCE]' , state.actionChart.currentEndurance )
             .replaceAll( '[MAXENDURANCE]' , state.actionChart.getMaxEndurance() )
             .replaceAll( '[ORIGINALCOMBATSKILL]' , state.actionChart.combatSkill )

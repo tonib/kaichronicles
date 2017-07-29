@@ -35,7 +35,7 @@ interface ShellPrice {
 }
 
 /**
- * Stores a section state (combat, objects, etc) 
+ * Stores a section state (combats, objects, etc) 
  */
 class SectionState {
 
@@ -292,5 +292,17 @@ class SectionState {
             return 0;
         return this.combats[0].endurance;
     }
-    
+
+    /**
+     * Get the available amount of money on the section
+     */
+    public getAvailableMoney() : number {
+        let moneyCount = 0;
+        for( let o of this.objects ) {
+            if( o.id == 'money')
+                moneyCount += o.count;
+        }
+        return moneyCount;
+    }
+
 }

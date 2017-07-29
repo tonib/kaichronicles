@@ -11,9 +11,10 @@
 - Equipment sections. When there are exceptions (all meals == one object), show a message always visible with that info
 
 FOR FUTURE (1.7+):
-- Describe where:
-  * Play on the web
-  * Report bugs
+- Describe:
+  * Where play on the web
+  * Where Report bugs
+  * FAQ
 - ERROR: Hunting STILL activated on book 3... 
   (maybe fixed: BookSectionStates.fromStateObject, added line "this.huntEnabled = stateObject.huntEnabled;" on v 1.6.3)
 - Android application:
@@ -22,10 +23,6 @@ FOR FUTURE (1.7+):
   * Load games page: Remove ".json" extension
   * Replace toastr by Android toasts ???
   * Remove animations from modal dialogs (only for Android, performance...)
-- Money handling: 
-  * Allow to drop an arbitrary amount of money, not just a single coin
-  * Support for money as object on section
-  * Allow to pick droped money
 - Save games is not working on Safari
 - Toasts with images: align text when the text is multiline
 - Combats should be sequential: First finish the first one, then the second, etc
