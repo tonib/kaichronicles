@@ -10,7 +10,6 @@ declare var routing:any;
 declare var gameController:any;
 declare var setupMechanics:any;
 declare var randomMechanics:any;
-declare var mealMechanics:any;
 declare var numberPickerMechanics:any;
 declare var setupController:any;
 
