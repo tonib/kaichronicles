@@ -799,7 +799,61 @@
             <object objectId="dagger" />
         </section>
 
-        <!-- UP TO sect140 -->
+        <section id="sect141">
+            <test not="true" hasWeaponType="bow">
+                <choiceState section="sect340" set="disabled" />
+            </test>
+            <test hasWeaponType="bow">
+                <choiceState section="sect18" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect142">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="-99" to="4">
+                    <choiceState section="sect184" set="enabled" />
+                </case>
+                <case from="5" to="99">
+                    <choiceState section="sect51" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="nexus|dvnation">
+                <randomTableIncrement increment="-2" />
+            </test>
+            <test hasObject="shield">
+                <randomTableIncrement increment="-3" />
+            </test>
+        </section>
+
+        <section id="sect144">
+            <choiceState section="sect144" set="disabled" />
+            <message id="msg-drop-object" 
+                en-text="Drop one Backpack Item" 
+                es-text="Deja un Objeto de Mochila"
+            />
+            <onInventoryEvent>
+                <test expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] == 0 || [BACKPACK-ITEMS-CNT-ON-SECTION] > 0">
+                    <message id="msg-drop-object" op="hide" />
+                    <choiceState section="all" set="enabled" />
+                </test>
+                <test not="true" expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] == 0 || [BACKPACK-ITEMS-CNT-ON-SECTION] > 0">
+                    <message id="msg-drop-object" op="show" />
+                    <choiceState section="all" set="disabled" />
+                </test>
+            </onInventoryEvent>
+        </section>
+
+        <section id="sect145">
+            <pick class="money" count="12" />
+            <object objectId="rubyring" />
+        </section>
+
+        <section id="sect146">
+            <meal />
+        </section>
+
+        <!-- UP TO sect146 -->
         
     </sections>
 

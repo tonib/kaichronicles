@@ -599,8 +599,13 @@ class ActionChart {
      * TODO: This returns the first bow. Allow to selected the current bow
      */
     public getSelectedBow() : Item {
+        return this.getWeaponType( 'bow' );
+    }
+
+    /** Return the first weapon of a given type. null if the player has not kind of weapon */
+    public getWeaponType( weaponType : string ) : Item {
         for( let weapon of this.getWeaponObjects() ) {
-            if( weapon.isWeaponType( 'bow' ) )
+            if( weapon.isWeaponType( weaponType ) )
                 return weapon;
         }
         return null;

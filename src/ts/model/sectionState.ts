@@ -105,6 +105,11 @@ class SectionState {
     public getSectionObjects(type : string = null) : Array<Item> {
         let items : Array<Item> = [];
         for( let sectionItem of this.objects) {
+
+            if( sectionItem.id == 'money' ) 
+                // Money if not really an object. It's stored like one for mechanics needs
+                continue;
+
             let i = state.mechanics.getObject( sectionItem.id );
             if( !type || i.type == type )
                 items.push(i);

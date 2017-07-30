@@ -234,6 +234,11 @@ const mechanicsEngine = {
                     reRender = true;
                     return 'finish';
                 }
+                if( $(rule).attr('hasWeaponType') && o.isWeapon() ) {
+                    // Section should be re-rendered
+                    reRender = true;
+                    return 'finish';
+                }
             }
             else if( rule.nodeName == 'meal' ) {
                 // meal rule
@@ -535,6 +540,11 @@ const mechanicsEngine = {
         // Test if the player can use the bow
         let canUseBow = $(rule).attr('canUseBow');
         if( canUseBow && state.actionChart.canUseBow() )
+            conditionStatisfied = true;
+
+        // Test if the player has a kind of weapon
+        let hasWeaponType : string = $(rule).attr( 'hasWeaponType' );
+        if( hasWeaponType && state.actionChart.getWeaponType( hasWeaponType ) )
             conditionStatisfied = true;
 
         // Check if the test should be inversed
@@ -1135,7 +1145,9 @@ const mechanicsEngine = {
             .replaceAll( '[MONEY]' , state.actionChart.beltPouch )
             // Money available on the section
             .replaceAll( '[MONEY-ON-SECTION]' , sectionState.getAvailableMoney() )
+            // Backpack items on section (includes meals)
             .replaceAll( '[BACKPACK-ITEMS-CNT-ON-SECTION]' , sectionState.getCntSectionObjects('object') )
+            // Backpack items on action chart (includes meals)
             .replaceAll( '[BACKPACK-ITEMS-CNT-ON-ACTIONCHART]' , state.actionChart.getNBackpackItems() )
             // This does NOT include special items:
             .replaceAll( '[WEAPON-ITEMS-CNT-ON-SECTION]' , sectionState.getCntSectionObjects('weapon') )

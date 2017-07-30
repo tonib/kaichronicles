@@ -40,7 +40,9 @@ var mealMechanics = {
 
         // Check if hunting discipline is available
         var huntDisabled = $(rule).attr('huntDisabled') == 'true';
-        if( !state.actionChart.disciplines.contains('hunting') || 
+        var hasHuntingDiscipline = state.actionChart.disciplines.contains('hunting') || 
+            state.actionChart.disciplines.contains('hntmstry');
+        if( !hasHuntingDiscipline || 
             !state.sectionStates.huntEnabled || huntDisabled)
             $(mealSelector + ' .mechanics-eatHunt').hide();
 

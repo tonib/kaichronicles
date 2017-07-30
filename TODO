@@ -11,7 +11,9 @@
 - Equipment sections. When there are exceptions (all meals == one object), show a message always visible with that info
 - Report erratas:
   - book 6 / sect134 / spanish: "agrupadas e semicírculo" should be "agrupadas en semicírculo"
-  
+- Re-render section if the money object is picked, and there is some expression with "[MONEY]" or "[MONEY-ON-SECTION]"
+hunting > hntmstry 
+
 FOR FUTURE (1.7+):
 - Describe:
   * Where play on the web
