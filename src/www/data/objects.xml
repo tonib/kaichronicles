@@ -511,6 +511,12 @@
             <name lang="es">Broche de Plata</name>
         </special>
 
+        <special id="smallsilverkey">
+            <name lang="en">Small Silver Key</name>
+            <name lang="es">Llave de Plata (Libro 6)</name>
+            <image book="1" name="small15.png" />
+        </special>
+
     </specials>
 
     <objects>

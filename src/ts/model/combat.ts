@@ -26,6 +26,9 @@ class Combat {
     /** The enemy is immune to Mindblast? */
     public noMindblast = false;
 
+    /** The enemy is immune to Psi-Surge? */
+    public noPsiSurge = false;
+
     /** The CS bonus to apply if the player has Mindblast discipline */
     public mindblastBonus = 2;
 

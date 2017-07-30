@@ -50,7 +50,7 @@ class LoreCircle {
      * Return true if the player disciplines match this circle
      * @param disciplines Player disciplines ids
      */
-    private matchCircle( disciplines : Array<string> ) : boolean {
+    public matchCircle( disciplines : Array<string> ) : boolean {
         for( let d of this.disciplines ) {
             if( !disciplines.contains(d) )
                 return false;
@@ -108,4 +108,16 @@ class LoreCircle {
         return bonuses;
     }
 
+    /**
+     * Return a given lore circle
+     * @param circleId The circle id
+     * @return The LoreCircle. null if it was not found
+     */
+    public static getCircle( circleId : string ) : LoreCircle {
+        for( let c of LoreCircle.circles ) {
+            if( c.id == circleId )
+                return c;
+        }
+        return null;
+    }
 }

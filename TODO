@@ -11,6 +11,7 @@
 - Equipment sections. When there are exceptions (all meals == one object), show a message always visible with that info
 - Report erratas:
   - book 6 / sect134 / spanish: "agrupadas e semicírculo" should be "agrupadas en semicírculo"
+  - book 6 / sect158 / spanish: "Llave de plata" debería ser "Pequeña llave de plata"
 - Re-render section if the money object is picked, and there is some expression with "[MONEY]" or "[MONEY-ON-SECTION]"
 hunting > hntmstry 
 
@@ -19,6 +20,7 @@ FOR FUTURE (1.7+):
   * Where play on the web
   * Where Report bugs
   * FAQ
+  * Aknowledgements: LSI for the Google Play account
 - ERROR: Hunting STILL activated on book 3... 
   (maybe fixed: BookSectionStates.fromStateObject, added line "this.huntEnabled = stateObject.huntEnabled;" on v 1.6.3)
 - Android application:

@@ -547,6 +547,11 @@ const mechanicsEngine = {
         if( hasWeaponType && state.actionChart.getWeaponType( hasWeaponType ) )
             conditionStatisfied = true;
 
+        // Test if the player has a lore-circle
+        let circleId : string = $(rule).attr('hasCircle');
+        if( circleId && LoreCircle.getCircle( circleId ).matchCircle( state.actionChart.disciplines ) )
+            conditionStatisfied = true;
+
         // Check if the test should be inversed
         if( $(rule).attr('not') == 'true' )
             conditionStatisfied = !conditionStatisfied;
@@ -666,6 +671,11 @@ const mechanicsEngine = {
         var txtNoMindblast = $(rule).attr('noMindblast');
         if( txtNoMindblast )
             combat.noMindblast = ( txtNoMindblast == 'true' );
+
+        // Check if the enemy is immune to Psi-Surge
+        const txtNoPsiSurge : string = $(rule).attr('noPsiSurge');
+        if( txtNoPsiSurge )
+            combat.noPsiSurge = ( txtNoPsiSurge == 'true' );
 
         // Special mindblast bonus?
         var txtMindblastBonus = $(rule).attr('mindblastBonus');

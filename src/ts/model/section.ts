@@ -116,12 +116,6 @@ class Section {
     public getCombats() : Array<Combat> {
         var result = [];
         this.$xmlSection.find('combat').each(function(index, combat) {
-
-            let $enduranceAttr = $(combat).find('enemy-attribute[class=endurance]');
-            if( $enduranceAttr.length == 0 )
-                // Book 6 / sect26: The endurance attribute is "target"
-                $enduranceAttr = $(combat).find('enemy-attribute[class=target]');
-
             const $combat = $(combat);
             result.push( new Combat(  
                 $combat.find('enemy').text(), 

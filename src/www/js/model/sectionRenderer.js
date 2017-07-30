@@ -416,6 +416,9 @@ SectionRenderer.getEnemyEndurance = function( $combat ) {
     if( $enduranceAttr.length == 0 )
         // Book 6 / sect26: The endurance attribute is "target"
         $enduranceAttr = $combat.find('enemy-attribute[class=target]');
+    if( $enduranceAttr.length == 0 )
+        // Book 6 / sect156: The endurance attribute is "resistance"
+        $enduranceAttr = $combat.find('enemy-attribute[class=resistance]');
     return $enduranceAttr;
 }
 

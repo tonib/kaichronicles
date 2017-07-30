@@ -579,7 +579,6 @@
         </section>
 
         <section id="sect95">
-            <!-- TODO: Check arrow loss -->
             <choiceState section="all" set="disabled" />
             <randomTable>
                 <case from="0" to="3">
@@ -588,6 +587,7 @@
                 <case from="4" to="99">
                     <choiceState section="sect12" set="enabled" />
                 </case>
+                <pick class="arrow" count="-1" />
             </randomTable>
             <randomTableIncrement increment="[BOWBONUS]" />
         </section>
@@ -886,8 +886,163 @@
             </test>
         </section>
 
-        <!-- UP TO sect154 -->
-        
+        <section id="sect155">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="4" noWeapon="true" />
+            <afterCombatTurn turn="1">
+                <combat noWeapon="false" />
+            </afterCombatTurn>
+            <afterCombats>
+                <choiceState section="sect112" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect305" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect156">
+            <choiceState section="sect200" set="disabled" />
+            <combat noMindblast="true" noPsiSurge="true" />
+            <afterCombats>
+                <choiceState section="sect200" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect157">
+            <endurance count="+1" />
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
+        </section>
+
+        <section id="sect158">
+            <pick objectId="smallsilverkey" />
+            <object objectId="quarterstaff" />
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
+            <object objectId="meal" index="2" />
+            <object objectId="mace" />
+            <object objectId="brasswhistle" />
+            <object objectId="rope" />
+            <object objectId="shortsword" />
+        </section>
+
+        <section id="sect159">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect160">
+            <pick objectId="cess" />
+        </section>
+
+        <section id="sect161">
+            <death />
+        </section>
+
+        <section id="sect162">
+            <test not="true" canUseBow="true">
+                <choiceState section="sect198" set="disabled" />
+            </test>
+            <test canUseBow="true">
+                <choiceState section="sect343" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect163">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="-99" to="3">
+                    <choiceState section="sect197" set="enabled" />
+                </case>
+                <case from="4" to="99">
+                    <choiceState section="sect229" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="invsblty">
+                <randomTableIncrement increment="+4" />
+            </test>
+        </section>
+
+        <section id="sect164">
+            <endurance count="-2" />
+            <choiceState section="all" set="disabled" />
+            <test hasDiscipline="anmlctrl">
+                <combat combatSkillModifier="+1" />
+            </test>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect165">
+            <test not="true" expression="[MONEY] >= 5">
+                <choiceState section="sect16" set="disabled" />
+            </test>
+            <choiceSelected section="sect16">
+                <pick class="money" count="-5" />
+                <pick objectId="mapvaretta" />
+            </choiceSelected>
+        </section>
+
+        <section id="sect166">
+            <choiceState section="sect144" set="disabled" />
+            <message id="msg-drop-object" 
+                en-text="Drop two Backpack Items" 
+                es-text="Deja dos Objetos de Mochila"
+            />
+            <onInventoryEvent>
+                <test expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] == 0 || [BACKPACK-ITEMS-CNT-ON-SECTION] >= 2">
+                    <message id="msg-drop-object" op="hide" />
+                    <choiceState section="all" set="enabled" />
+                </test>
+                <test not="true" expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] == 0 || [BACKPACK-ITEMS-CNT-ON-SECTION] >= 2">
+                    <message id="msg-drop-object" op="show" />
+                    <choiceState section="all" set="disabled" />
+                </test>
+            </onInventoryEvent>
+        </section>
+
+        <section id="sect169">
+            <test not="true" hasCircle="circleFire">
+                <choiceState section="sect65" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect170">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="-99" to="5">
+                    <choiceState section="sect23" set="enabled" />
+                </case>
+                <case from="6" to="99">
+                    <choiceState section="sect265" set="enabled" />
+                </case>
+                <pick class="arrow" count="-1" />
+            </randomTable>
+            <randomTableIncrement increment="[BOWBONUS]" />
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="+1" />
+            </test>
+        </section>
+
+        <section id="sect171">
+            <test not="true" hasDiscipline="nexus">
+                <endurance count="-1" />
+            </test>
+        </section>
+
+        <section id="sect172">
+            <pick class="money" count="-5" />
+        </section>
+
+        <section id="sect174">
+            <endurance count="-5" />
+        </section>
+
+        <!-- UP TO sect175 -->
+
     </sections>
 
 </mechanics>

@@ -81,7 +81,7 @@ const combatMechanics = {
                 // Check if the combat can be eluded
                 combatMechanics.showHideEludeButton( combat , $combatUI );
 
-            if( !state.actionChart.disciplines.contains('psisurge' ) ) {
+            if( !state.actionChart.disciplines.contains('psisurge' ) || combat.noPsiSurge ) {
                 // Hide Psi-surge check
                 $combatUI.find('.psisurgecheck').hide();
             }
