@@ -579,6 +579,7 @@
         </section>
 
         <section id="sect95">
+            <!-- TODO: Check arrow loss -->
             <choiceState section="all" set="disabled" />
             <randomTable>
                 <case from="0" to="3">
@@ -853,7 +854,39 @@
             <meal />
         </section>
 
-        <!-- UP TO sect146 -->
+        <section id="sect148">
+            <message id="msg-drop-proposal" 
+                en-text="If you agree to his proposal, drop 2 Special Items or 20 Gold Crowns" 
+                es-text="Si estás de acuerdo con esa propuesta, deja dos Objetos Especiales o 20 Coronas de Oro"
+            />
+            <onInventoryEvent>
+                <choiceState section="all" set="disabled" />
+                <test expression="[SPECIAL-ITEMS-ON-SECTION] >= 2 || [MONEY-ON-SECTION] >= 20">
+                    <choiceState section="sect212" set="enabled" />
+                </test>
+                <test not="true" expression="[SPECIAL-ITEMS-ON-SECTION] >= 2 || [MONEY-ON-SECTION] >= 20">
+                    <choiceState section="sect176" set="enabled" />
+                </test>
+            </onInventoryEvent>
+        </section>
+
+        <section id="sect151">
+            <!--
+                TODO: Have you been at book 4?
+                Do the same here than in book 3 / sect268 (a TODO too)
+            -->
+        </section>
+
+        <section id="sect153">
+            <test not="true" canUseBow="true">
+                <choiceState section="sect178" set="disabled" />
+            </test>
+            <test canUseBow="true">
+                <choiceState section="sect39" set="disabled" />
+            </test>
+        </section>
+
+        <!-- UP TO sect154 -->
         
     </sections>
 
