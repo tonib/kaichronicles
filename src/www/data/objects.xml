@@ -517,6 +517,51 @@
             <image book="1" name="small15.png" />
         </special>
 
+        <!-- BOOK 7 -->
+
+        <special id="fireseed">
+            <name lang="en">Fireseed</name>
+            <description lang="en">
+                When thrown against a hard surface, these Fireseeds explode and burn fiercely
+            </description>
+			
+            <name lang="es">Petardo</name>
+            <description lang="es">
+                Arrojados contra una superficie dura, explotan y producen tremendas quemaduras
+            </description>
+			
+        </special>
+		
+        <special id="kazanoudamulet">
+            <name lang="en">Kazan-Oud Platinum Amulet</name>
+            <name lang="es">Amuleto de platino</name>
+        </special>
+		
+        <special id="skeletonkey">
+            <name lang="en">Skeleton Key</name>
+            <name lang="es">Llave de hueso</name>
+        </special>
+		
+        <special id="parchment">
+            <name lang="en">Parchment</name>
+            <name lang="es">Pergamino</name>
+        </special>
+
+        <special id="silverwhistle">
+            <name lang="en">Silver Whistle</name>
+            <name lang="es">Silbato de Plata</name>
+        </special>
+
+        <special id="powerkey">
+            <name lang="en">Power-key</name>
+            <name lang="es">Llave de energía</name>
+        </special>
+
+        <special id="goldkey">
+            <name lang="en">Gold key</name>
+            <name lang="es">Llave de Oro</name>
+        </special>
+
     </specials>
 
     <objects>
@@ -1001,6 +1046,29 @@
             </description>
 
             <usage class="combatSkill" increment="2" />
+        </object>
+
+        <!-- BOOK 7 -->
+
+        <object id="lantern">
+            <name lang="en">Lantern</name>
+            <name lang="es">Linterna</name>
+        </object>
+
+        <object id="laumspurpotion8">
+            <name lang="en">Potion of concentrated Laumspur</name>
+            <description lang="en">
+                This restores 8 ENDURANCE points to your total when swallowed after combat. 
+                There is only enough for one dose
+            </description>
+
+            <name lang="es">Poción de Laumspur concentrado</name>
+            <description lang="es">
+                Te hace recuperar 8 puntos de RESISTENCIA al beberla tras un combate. 
+                Sólo hay cantidad suficiente para una dosis
+            </description>
+
+            <usage class="endurance" increment="8" />
         </object>
 
         <!-- OTHERS -->
