@@ -1070,6 +1070,22 @@
 
             <usage class="endurance" increment="8" />
         </object>
+		
+        <object id="vialbluepills">
+            <name lang="en">Vial of Blue Pills</name>
+            <name lang="es">Frasco de píldoras azules</name>
+        </object>
+		
+        <object id="bottlewater">
+            <name lang="en">Bottle of Water</name>
+            <name lang="es">Botella de agua</name>
+        </object>
+		
+        <object id="pouchadgana">
+			<!-- TODO: see sect129 -->
+            <name lang="en">Pouch of Adgana</name>
+            <name lang="es">Bolsa con adgana</name>
+        </object>
 
         <!-- OTHERS -->
 

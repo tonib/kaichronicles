@@ -177,7 +177,7 @@
         </section>
         
         <section id="sect32">
-            <!-- TODO: Drop equipped weapon -->
+            <drop objectId="currentweapon" />
         </section>
 
         <section id="sect34">
@@ -871,8 +871,7 @@
         </section>
         
         <section id="sect158">
-            <!-- TODO: drop all meals -->
-            <drop objectId="meal" count="-[MEALS]" />
+            <drop objectId="allmeals" />
             <message id="msg-drop-two-backpack" 
                 en-text="Drop two Backpack items before continue" 
                 es-text="Deja 2 objetos de la mochila antes de continuar"
@@ -927,10 +926,12 @@
                     <choiceState section="sect301" set="disabled" />
                 </test>
             </test>
-            <test canUseBow="true">
-                <choiceState section="sect7" set="enabled" />
-                <choiceState section="sect301" set="disabled" />
-            </test>
+            <test not="true" hasDiscipline="anmlctrl" expression="[KAILEVEL] >= 2">
+				<test canUseBow="true">
+					<choiceState section="sect7" set="enabled" />
+					<choiceState section="sect301" set="disabled" />
+				</test>
+			</test>
         </section>
         
         <section id="sect165">
