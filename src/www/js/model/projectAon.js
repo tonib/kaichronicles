@@ -91,6 +91,19 @@ var projectAon = {
             illustrators: [ 'chalk' ],
 
             zipSize: 0
+        },
+
+        // Book 7:
+        {
+            title_en: 'Castle Death',
+            code_en: '07cd',
+
+            title_es: 'Muerte en el Castillo',
+            code_es: '07meec',
+
+            illustrators: [ 'chalk' ],
+
+            zipSize: 0
         }
     ],
 
