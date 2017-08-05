@@ -1,3 +1,4 @@
+/// <reference path="../external.ts" />
 
 /**
  * The game view interface functions
@@ -8,7 +9,7 @@ var gameView = {
      * Enable / disable previous and next section links
      * @param section The current Section
      */
-    updateNavigation: function(section) {
+    updateNavigation: function(section : Section) {
         var $navButtons = $('#game-navSectionButtons');
         if( window.getUrlParameter('debug') || section.hasNavigation() )
             $navButtons.show();
@@ -16,7 +17,7 @@ var gameView = {
             $navButtons.hide();
     },
 
-    enableLink: function( linkId , enabled) {
+    enableLink: function( linkId : string, enabled : boolean ) {
         var $nextLink = $(linkId);
         if( enabled )
             $nextLink.removeClass('disabled');
@@ -25,19 +26,19 @@ var gameView = {
     },
 
     /** Enable or disable the "next page" link */
-    enableNextLink: function(enabled) {
+    enableNextLink: function(enabled : boolean) {
         gameView.enableLink('#game-nextSection', enabled);
     },
 
     /** Enable or disable the "previous page" link */
-    enablePreviousLink: function(enabled) {
+    enablePreviousLink: function(enabled : boolean) {
         gameView.enableLink('#game-prevSection', enabled);
     },
 
     /**
      * Set the current section content
      */
-    setSectionContent: function( section ) {
+    setSectionContent: function( section : Section ) {
         document.title = section.book.getBookTitle() + ' - ' + 
             section.getTitleText();
         $('#game-section-title').html( section.getTitleHtml() );
@@ -101,13 +102,13 @@ var gameView = {
     /**
      * Appends HTML to the current section
      * @param {string|jQuery} html The HTML to append
-     * @param {boolean} beforeChoices True if it should be append before choices. False, after
+     * @param afterChoices True if it should be append after choices. False, after
      * section body and before choices
      */
-    appendToSection: function(html, beforeChoices) {
+    appendToSection: function(html : any, afterChoices : boolean = false) {
 
         // Try to add the html before the first choice:
-        if( !beforeChoices ) {
+        if( !afterChoices ) {
             var $firstChoice = $('p.choice').first();
             if( $firstChoice.length > 0 ) {
                 $firstChoice.before(html);
@@ -149,7 +150,7 @@ var gameView = {
     /**
      * Called when a choice link is clicked
      */
-    choiceLinkClicked: function(e, link) {
+    choiceLinkClicked: function(e : Event, link : string) {
         e.preventDefault();
 
         // Validate money picker, if there is. If its not valid, don't follow with this link

@@ -1,6 +1,5 @@
 // External declarations
 
-declare var gameView:any;
 declare var template:any;
 declare var cordovaApp:any;
 declare var projectAon:any;
@@ -10,13 +9,14 @@ declare var setupMechanics:any;
 declare var randomMechanics:any;
 declare var numberPickerMechanics:any;
 declare var setupController:any;
-declare var cordovaFS;
-declare var saveAs;
+declare var cordovaFS:any;
 
 declare var $:any;
 declare var jQuery:any;
 
 declare var toastr:any;
+
+declare var saveAs:any;
 
 // commons.js: 
 interface Window { 

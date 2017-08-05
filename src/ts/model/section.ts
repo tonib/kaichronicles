@@ -103,7 +103,7 @@ class Section {
      * @param renderIllustrationsText True if the illustrations text should be 
      * rendered
      */
-    public getHtml(renderIllustrationsText : boolean ) : string {
+    public getHtml(renderIllustrationsText : boolean = false) : string {
         var sectionRenderer = new SectionRenderer( this );
         sectionRenderer.renderIllustrationsText = renderIllustrationsText;
         return sectionRenderer.renderSection(); 
