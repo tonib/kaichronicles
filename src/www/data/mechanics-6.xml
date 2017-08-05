@@ -239,6 +239,7 @@
             <choiceState section="all" set="disabled" />
             <combat bow="true" />
             <book6sect26 />
+            <!-- TODO: This is not "hasObject", instead it's the current selected bow (implementation pending) -->
             <test hasObject="jakan">
                 <afterCombatTurn turn="any">
                     <test expression="[COMBATRANDOM] == 0">
@@ -1044,7 +1045,101 @@
             <endurance count="-5" />
         </section>
 
-        <!-- UP TO sect175 -->
+        <section id="sect178">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="7">
+                    <choiceState section="sect296" set="enabled" />
+                </case>
+                <case from="8" to="99">
+                    <choiceState section="sect303" set="enabled" />
+                </case>
+                <pick class="arrow" count="-1" />
+            </randomTable>
+            <randomTableIncrement increment="[BOWBONUS]" />
+        </section>
+
+        <section id="sect183">
+            <!-- TODO: Drop borrowed bow -->
+        </section>
+
+        <section id="sect187">
+            <endurance count="-3" />
+        </section>
+
+        <section id="sect188">
+            <test not="true" hasObject="silverbrooch">
+                <choiceState section="sect31" set="disabled" />
+            </test>
+            <test hasObject="silverbrooch">
+                <choiceState section="sect14" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect190">
+            <!-- TODO: Allow to use this without pick it -->
+            <object objectId="taunorwater" />
+        </section>
+
+        <section id="sect191">
+            <meal />
+        </section>
+
+        <section id="sect192">
+            <death />
+        </section>
+
+        <section id="sect193">
+            <pick objectId="mapvaretta" />
+        </section>
+
+        <section id="sect194">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="0" />
+            <test hasDiscipline="anmlctrl">
+                <combat combatSkillModifier="+2" />
+            </test>
+            <afterCombats>
+                <choiceState section="sect145" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect289" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect196">
+            <test not="true" canUseBow="true">
+                <choiceState section="sect20" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect197">
+            <endurance count="-2" />
+        </section>
+
+        <section id="sect199">
+            <test not="true" expression="[MONEY] > 0">
+                <choiceState section="sect245" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect201">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <test not="true" expression="[COMBATSDURATION] > 3">
+                    <choiceState section="sect15" set="enabled" />
+                </test>
+                <test expression="[COMBATSDURATION] > 3">
+                    <choiceState section="sect87" set="enabled" />
+                </test>
+            </afterCombats>
+        </section>
+
+        <section id="sect202">
+            <endurance count="+1" />
+        </section>
+
+        <!-- UP TO sect204 -->
 
     </sections>
 
