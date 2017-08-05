@@ -18,6 +18,11 @@ interface SectionItem {
      * or id = 'money' (number of Gold Crowns) 
      */
     count : number;
+
+    /**
+     * Object is allowed to be used from the section (not picked object)?
+     */
+    useOnSection: boolean;
 }
 
 /**
@@ -229,8 +234,10 @@ class SectionState {
      * @param price The object price
      * @param unlimited True if there are an infinite number of this kind of object on the section
      * @param count Only applies if id = 'quiver' (number of arrows on the quiver) or money (number of Gold Crowns)
+     * @param useOnSection The object is allowed to be used on the section (not picked object)?
      */
-    public addObjectToSection(objectId : string , price : number = 0, unlimited : boolean = false, count : number = 0 ) {
+    public addObjectToSection(objectId : string , price : number = 0, unlimited : boolean = false, count : number = 0 ,
+        useOnSection : boolean = false ) {
 
         // Special cases:
         if( objectId == 'money' || objectId == 'quiver' ) {
@@ -247,7 +254,8 @@ class SectionState {
             id: objectId,
             price: price,
             unlimited: unlimited,
-            count: (objectId == 'quiver' || objectId == 'money' ? count : 0 )
+            count: (objectId == 'quiver' || objectId == 'money' ? count : 0 ),
+            useOnSection: useOnSection
         });
     }
 

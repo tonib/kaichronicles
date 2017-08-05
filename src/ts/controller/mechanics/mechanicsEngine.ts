@@ -606,7 +606,7 @@ const mechanicsEngine = {
         if( sectionState.ruleHasBeenExecuted(rule) )
             return;
 
-        var objectId = $(rule).attr('objectId');
+        const objectId : string = $(rule).attr('objectId');
         if( !objectId )
             throw 'Rule object without objectId';
 
@@ -616,14 +616,17 @@ const mechanicsEngine = {
             price = mechanicsEngine.evaluateExpression( price );
 
         // Unlimited number of this kind of object?
-        var unlimited = ( $(rule).attr('unlimited') == 'true' );
+        const unlimited = ( $(rule).attr('unlimited') == 'true' );
 
         // Number of items (only for quiver (n. arrows) and money (n.gold crowns))
         const txtCount : string = $(rule).attr('count');
         const count = ( txtCount ? parseInt( txtCount ) : 0 );
         
+        // Object can be used directly from the section, without picking it?
+        const useOnSection = ( $(rule).attr('useOnSection') == 'true' );
+        
         // Add the object to the available objects on the section
-        sectionState.addObjectToSection( objectId , price , unlimited , count );
+        sectionState.addObjectToSection( objectId , price , unlimited , count , useOnSection );
 
         sectionState.markRuleAsExecuted(rule);
     },

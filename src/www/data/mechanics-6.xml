@@ -401,7 +401,7 @@
 
         <section id="sect65">
             <!-- TODO: Allow to use this without pick it -->
-            <object objectId="taunorwater" />
+            <object objectId="taunorwater" useOnSection="true" />
         </section>
 
         <section id="sect67">
