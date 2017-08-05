@@ -11,7 +11,7 @@ const settingsView = {
         // Language
         $('#settings-language').val( state.language );
         $('#settings-language').change(function() {
-            settingsController.changeLanguage( $(this).val() );
+            settingsController.changeLanguage( $(this).val() , true );
         });
 
         // Random table type

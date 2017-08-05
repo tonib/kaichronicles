@@ -84,9 +84,9 @@ const mechanicsEngine = {
     /**
      * Run the game mechanics of a section. 
      * It updates the gameView, binds events, etc. 
-     * @param {Section} section The current game Section
+     * @param section The current game Section
      */
-    run: function(section) {
+    run: function(section : Section) {
 
         // Defaults:
         gameView.enableNextLink(true);

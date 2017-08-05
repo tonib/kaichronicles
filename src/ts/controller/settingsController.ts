@@ -23,17 +23,21 @@ const settingsController = {
     /**
      * Change the current language
      * @param newLanguage The new language code
+     * @param updateUI Should we show progress on UI. Set true ONLY on the settings page
+     * @return The promise to download the book with the new language
      */
-    changeLanguage: function(newLanguage : string) {
+    changeLanguage: function(newLanguage : string, updateUI : boolean) : Promise<void> {
 
         // TODO: Check download errors
         
         // Load the book with the new language:
-        settingsView.showDownloadDialog();
+        if( updateUI )
+            settingsView.showDownloadDialog();
         var book = new Book( state.book.bookNumber , newLanguage );
-        book.downloadBookXml()
+        return book.downloadBookXml()
         .then(function() {
-            settingsView.hideDownloadDialog();
+            if( updateUI )
+                settingsView.hideDownloadDialog();
             // Load game mechanics XML
             state.updateBookTranslation(book);
             // Set the new language title
@@ -43,7 +47,8 @@ const settingsController = {
             // Translate the main menu
             template.translateMainMenu();
             // Force to reload the settings view, translated to the new language
-            settingsController.index();
+            if( updateUI )
+                settingsController.index();
         });
     },
 

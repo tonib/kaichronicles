@@ -1,13 +1,14 @@
+/// <reference path="../external.ts" />
 
 /**
  * The game controller
  */
-var gameController = {
+const gameController = {
 
     /**
-     * {Section} The current book section
+     * The current book section
      */
-    currentSection: null,
+    currentSection: <Section> null,
 
     /**
      * Setup the game view
@@ -33,11 +34,11 @@ var gameController = {
 
     /**
      * Load and display a section
-     * @param {string} sectionId The section id to display
-     * @param {boolean} choiceLinkClicked True if the section is load due to a choice link click
-     * @param {number} yScroll y coord. where to scroll initially
+     * @param sectionId The section id to display
+     * @param choiceLinkClicked True if the section is load due to a choice link click
+     * @param yScroll y coord. where to scroll initially
      */
-    loadSection: function(sectionId, choiceLinkClicked , yScroll ) {
+    loadSection: function(sectionId : string, choiceLinkClicked : boolean = false, yScroll : number = 0) {
 
         // Load and display the section
         var newSection = new Section(state.book, sectionId, state.mechanics);
@@ -88,7 +89,7 @@ var gameController = {
      * Navigate to the previous or next section
      * @param increment -1 to go the previous. +1 to the next
      */
-    onNavigatePrevNext: function(increment) {
+    onNavigatePrevNext: function(increment : number) {
         var s = gameController.currentSection;
         var newId = ( increment < 0 ? s.getPreviousSectionId() : s.getNextSectionId() );
         gameController.loadSection( newId );
