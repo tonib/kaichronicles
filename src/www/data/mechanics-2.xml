@@ -41,6 +41,10 @@
             <test not="true" hasObject="map" >
                 <pick objectId="map" />
             </test>
+            <test not="true" hasObject="backpack" >
+                <pick objectId="backpack" />
+            </test>
+            
             <pick objectId="sealofhammerdal" />
             
             <randomTable>

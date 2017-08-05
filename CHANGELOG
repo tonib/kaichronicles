@@ -8,3 +8,4 @@
 - Fixed bug with random table: If it was "computer generated", the "ten as zero", and "ignore zeros" rules were ignored
 - Fixed bug: On section where you can buy things: If you drop an object that can be buy, if you re-pick it, 
   the object sell disappears
+- Fixed bug: At the start of each book, if the player had not a backpack, pick one.

@@ -34,7 +34,10 @@
             <test not="true" hasObject="map" >
                 <pick objectId="map" />
             </test>
-
+            <test not="true" hasObject="backpack" >
+                <pick objectId="backpack" />
+            </test>
+            
             <randomTable>
                 <pick class="money" count="[RANDOM] + 10" />
             </randomTable>
