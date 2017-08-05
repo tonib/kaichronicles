@@ -11,6 +11,9 @@ declare var setupMechanics:any;
 declare var randomMechanics:any;
 declare var numberPickerMechanics:any;
 declare var setupController:any;
+declare var settingsView;
+declare var cordovaFS;
+declare var saveAs;
 
 declare var $:any;
 declare var jQuery:any;
@@ -27,5 +30,8 @@ interface Array<T> {
     clone() : Array<T>;
 }
 interface String {
-    replaceAll(find : string, replace : string) : string
+    replaceAll(find : string, replace : string) : string;
+    padLeft(padLength : number, padChar : string) : string;
+    endsWith(suffix : string);
+    isValidFileName() : boolean;
 }

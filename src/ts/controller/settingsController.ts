@@ -1,8 +1,10 @@
+/// <reference path="../external.ts" />
+
 
 /**
  * Game settings controller
  */
-var settingsController = {
+const settingsController = {
 
     index: function() {
 
@@ -20,8 +22,9 @@ var settingsController = {
 
     /**
      * Change the current language
+     * @param newLanguage The new language code
      */
-    changeLanguage: function(newLanguage) {
+    changeLanguage: function(newLanguage : string) {
 
         // TODO: Check download errors
         
@@ -67,9 +70,9 @@ var settingsController = {
 
     /**
      * Save the current game
-     * @param {String} fileName File name to save
+     * @param fileName File name to save
      */
-    saveGame: function(fileName) {
+    saveGame: function(fileName : string) {
         try {
             var stateJson = state.getSaveGameJson();
             var blob = new Blob( [ stateJson ], {type: "text/plain;charset=utf-8"});
