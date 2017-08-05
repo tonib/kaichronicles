@@ -1,8 +1,10 @@
+/// <reference path="../external.ts" />
+
 
 /**
  * Settings view
  */
-var settingsView = {
+const settingsView = {
 
     setup: function() {
 

@@ -11,7 +11,6 @@ declare var setupMechanics:any;
 declare var randomMechanics:any;
 declare var numberPickerMechanics:any;
 declare var setupController:any;
-declare var settingsView;
 declare var cordovaFS;
 declare var saveAs;
 
