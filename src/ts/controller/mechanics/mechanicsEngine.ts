@@ -229,15 +229,26 @@ const mechanicsEngine = {
                         return 'finish';
                     }
                 }
+
                 if( $(rule).attr('canUseBow') && ( o.id == 'quiver' || o.isWeaponType( 'bow' ) ) ) {
                     // Section should be re-rendered
                     reRender = true;
                     return 'finish';
                 }
+                
                 if( $(rule).attr('hasWeaponType') && o.isWeapon() ) {
                     // Section should be re-rendered
                     reRender = true;
                     return 'finish';
+                }
+
+                const expression : string = $(rule).attr( 'expression' );
+                if( expression ) {
+                    if( o.id == 'money' && ( expression.indexOf('[MONEY]') >= 0 ||  expression.indexOf('[MONEY-ON-SECTION]') >= 0 ) ) {
+                        // Section should be re-rendered
+                        reRender = true;
+                        return 'finish';
+                    }
                 }
             }
             else if( rule.nodeName == 'meal' ) {

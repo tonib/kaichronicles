@@ -253,14 +253,20 @@ class Book6sect26 {
     }
 
     private static getPlayerTargetPoints() : any {
+        /* jshint ignore:start */
+        // On TS i cannot write ".book6sect26TargetPoints"
         let targetPoints = state.sectionStates.otherStates['book6sect26TargetPoints'];
+        /* jshint ignore:end */
         if( targetPoints === undefined || targetPoints === null )
             return 50;
         return targetPoints;
     }
 
     private static setPlayerTargetPoints( targetPoints : any ) {
+        /* jshint ignore:start */
+        // On TS i cannot write ".book6sect26TargetPoints"
         state.sectionStates.otherStates['book6sect26TargetPoints'] = targetPoints;
+        /* jshint ignore:end */
     }
 
     private static updatePlayerTargetPointsUI( doNotAnimate : boolean ) {

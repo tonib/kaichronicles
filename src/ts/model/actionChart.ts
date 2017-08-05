@@ -73,12 +73,17 @@ class ActionChart {
     constructor() {
         // Debug fast setup:
         if( window.getUrlParameter('debug') ) {
+            this.endurance = this.currentEndurance = 25;
+            this.combatSkill = 15;
             if( state.book.bookNumber <= 5 ) {
                 // debug data for kai series
-                this.endurance = this.currentEndurance = 25;
-                this.combatSkill = 15;
                 this.disciplines = [ 'camflage' , 'hunting' , 'sixthsns' , 'healing' , 'wepnskll' ];
                 this.weaponSkill = [ 'axe' ];
+            }
+            else {
+                // debug data for magnakai
+                this.disciplines = [ 'wpnmstry' , 'curing' , 'hntmstry' ];
+                this.weaponSkill = [ 'axe' , 'sword' , 'bow' ];
             }
         }
     }
