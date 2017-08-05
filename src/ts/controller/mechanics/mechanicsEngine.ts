@@ -235,7 +235,7 @@ const mechanicsEngine = {
                     reRender = true;
                     return 'finish';
                 }
-                
+
                 if( $(rule).attr('hasWeaponType') && o.isWeapon() ) {
                     // Section should be re-rendered
                     reRender = true;
@@ -1243,7 +1243,8 @@ const mechanicsEngine = {
             // Bind restart book link
             $('#mechanics-restart').click(function(e) {
                 e.preventDefault();
-                setupController.restartBook();
+                if( confirm( translations.text( 'confirmRestart' ) ) )
+                    setupController.restartBook();
             });
 
             // If there are pending combats, disable them

@@ -11,6 +11,7 @@
   - book 6 / sect134 / spanish: "agrupadas e semicírculo" should be "agrupadas en semicírculo"
   - book 6 / sect158 / spanish: "Llave de plata" debería ser "Pequeña llave de plata"
 - Allow to export / import saved games to the SD card
+- Add a debug link to switch the current book language
 
 FOR FUTURE (1.7+):
 - Describe:
@@ -40,7 +41,6 @@ FOR FUTURE (1.7+):
 - Test tags <ch.* /> replacements
 - Test controller: Test rules
 - Find "TODO" and do it
-- Death UI: If you click restart book, prompt for confirmation
 - Shared images on multiples books:
   * Allow to declare images on multiple books
   * Choose the latest available image
