@@ -13,7 +13,7 @@
   - book 6 / sect134 / spanish: "agrupadas e semicírculo" should be "agrupadas en semicírculo"
   - book 6 / sect158 / spanish: "Llave de plata" debería ser "Pequeña llave de plata"
 - Re-render section if the money object is picked, and there is some expression with "[MONEY]" or "[MONEY-ON-SECTION]"
-hunting > hntmstry 
+- Allow to export / import saved games to the SD card
 
 FOR FUTURE (1.7+):
 - Describe:
@@ -71,6 +71,9 @@ Reminders:
   git remote add origin https://github.com/tonib/kaichronicles.git
   git push -u origin master
 
+* Update code from github:
+  git pull origin master
+  
 * Create new tag:
   git tag <tagname>
   git push origin --tags
