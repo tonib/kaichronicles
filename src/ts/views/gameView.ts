@@ -95,6 +95,14 @@ var gameView = {
                 $('#game-debugNSection').val( state.sectionStates.currentSection );
                 gameController.loadSection( 'discplnz' );
             });
+
+            $('#game-switchlanguage').click(function(e : Event) {
+                e.preventDefault();
+                settingsController.changeLanguage( state.book.language == 'en' ? 'es' : 'en' , false )
+                .then(function() { 
+                    gameController.loadSection( state.sectionStates.currentSection );
+                });
+            });
         }
 
     },
