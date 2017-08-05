@@ -20,7 +20,6 @@ FOR FUTURE (1.7+):
   * Where play on the web
   * Where Report bugs
   * FAQ
-  * Aknowledgements: LSI for the Google Play account
 - ERROR: Hunting STILL activated on book 3... 
   (maybe fixed: BookSectionStates.fromStateObject, added line "this.huntEnabled = stateObject.huntEnabled;" on v 1.6.3)
 - Android application:
