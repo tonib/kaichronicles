@@ -111,6 +111,22 @@
             <image book="6" name="bow.png" />
         </weapon>
 
+        <weapon id="broninwarhammer" weaponType="warhammer">
+            <name lang="en">Bronin Warhammer</name>
+            <description lang="en">
+                Wrought of a metal called bronin. When you use it in combat it will add 1 point to your COMBAT SKILL
+            </description>
+
+            <name lang="es">Martillo de Guerra de Bronin</name>
+            <description lang="es">
+                Un arma muy fina, forjada con un metal llamado bronin. Cuando lo uses en la lucha añadirá 
+                1 punto a tu DESTREZA EN EL COMBATE
+            </description>
+
+            <effect class="combatSkill" increment="1" />
+            <image book="1" name="warhammr.png" />
+        </weapon>
+
     </weapons>
 
     <specials>

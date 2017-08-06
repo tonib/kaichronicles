@@ -1134,7 +1134,142 @@
             <endurance count="+1" />
         </section>
 
-        <!-- UP TO sect204 -->
+        <section id="sect207">
+            <object objectId="broninwarhammer" />
+        </section>
+
+        <section id="sect208">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="0" />
+            <afterCombats>
+                <choiceState section="sect8" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect279" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect209">
+            <pick class="arrow" count="-1" />
+        </section>
+
+        <section id="sect211">
+            <test not="true" hasObject="mapvaretta">
+                <choiceState section="sect17" set="disabled" />
+            </test>
+            <test hasObject="mapvaretta">
+                <choiceState section="sect104" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect214">
+            <!-- TODO: Pick bone bow, -4 CS on tournment -->
+        </section>
+
+        <section id="sect215">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="2" />
+            <afterCombats>
+                <choiceState section="sect111" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect286" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect218">
+            <death />
+        </section>
+
+        <section id="sect219">
+            <test not="true" canUseBow="true">
+                <choiceState section="sect301" set="disabled" />
+            </test>
+            <test canUseBow="false">
+                <choiceState section="sect78" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect220">
+            <numberPicker 
+                en-text="Choose the number of Gold Crowns you want to donate"
+                es-text="Elige el número de Coronas de Oro que quieres donar"
+                min="0" 
+                money="true"
+                />
+            <choiceSelected section="all">
+                <pick class="money" count="-[NUMBERPICKER]" />
+            </choiceSelected>
+        </section>
+
+        <section id="sect222">
+            <endurance count="-12" />
+        </section>
+
+        <section id="sect223">
+            <!-- TODO: Descuenta las Coronas de oro que ha apostado -->
+        </section>
+
+        <section id="sect224">
+            <test not="true" canUseBow="true">
+                <choiceState section="sect170" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect227">
+            <test not="true" canUseBow="true">
+                <choiceState section="sect20" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect228">
+            <test not="true" hasDiscipline="curing">
+                <choiceState section="sect136" set="disabled" />
+            </test>
+            <test hasDiscipline="curing">
+                <choiceState section="sect84" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect232">
+            <pick class="money" count="-3" />
+            <test not="true" expression="[MEALS] >= 1">
+                <choiceState section="sect219" set="disabled" />
+            </test>
+            <choiceSelected section="sect219">
+                <drop objectId="meal" />
+            </choiceSelected>
+        </section>
+
+        <section id="sect234">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect242">
+            <death />
+        </section>
+
+        <section id="sect243">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="3">
+                    <choiceState section="sect155" set="enabled" />
+                </case>
+                <case from="4" to="8">
+                    <choiceState section="sect292" set="enabled" />
+                </case>
+                <case from="9" to="99">
+                    <choiceState section="sect264" set="enabled" />
+                </case>
+                <pick class="arrow" count="-1" />
+            </randomTable>
+            <randomTableIncrement increment="[BOWBONUS]" />
+        </section>
+
+        <!-- UP TO sect244 -->
 
     </sections>
 

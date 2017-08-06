@@ -1188,6 +1188,7 @@ const mechanicsEngine = {
             .replaceAll( '[COMBATSENDURANCELOST]', sectionState.combatsEnduranceLost('player') )
             .replaceAll( '[COMBATSENEMYLOST]', sectionState.combatsEnduranceLost('enemy') )
             .replaceAll( '[ENEMYENDURANCE]', sectionState.getEnemyEndurance() )
+            // Number of meals on the backpack
             .replaceAll( '[MEALS]', state.actionChart.meals )
             .replaceAll( '[KAILEVEL]', state.actionChart.disciplines.length )
             .replaceAll( '[NUMBERPICKER]', numberPickerMechanics.getNumberPickerValue() )
