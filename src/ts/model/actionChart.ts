@@ -601,19 +601,30 @@ class ActionChart {
 
     /**
      * Get the selected bow weapon
-     * TODO: This returns the first bow. Allow to selected the current bow
+     * TODO: This returns the bow with the maximum CS bonus. Allow to selected the current bow
      */
     public getSelectedBow() : Item {
         return this.getWeaponType( 'bow' );
     }
 
-    /** Return the first weapon of a given type. null if the player has not kind of weapon */
+    /** 
+     * Return the weapon of a given type, with the bigger bonus for combat skill. 
+     * null if the player has not that kind of weapon 
+     */
     public getWeaponType( weaponType : string ) : Item {
+        let maxBonus = 0;
+        let selectedWeapon : Item = null;
         for( let weapon of this.getWeaponObjects() ) {
-            if( weapon.isWeaponType( weaponType ) )
-                return weapon;
+            if( weapon.isWeaponType( weaponType ) ) {
+                let weaponBonus : number = weapon.getCombatSkillEffect();
+                if( weaponBonus >= maxBonus ) {
+                    maxBonus = weaponBonus;
+                    selectedWeapon = weapon;
+                }
+            }
         }
-        return null;
+        return selectedWeapon;
     }
+    
 }
 

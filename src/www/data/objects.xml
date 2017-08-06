@@ -533,6 +533,25 @@
             <image book="1" name="small15.png" />
         </special>
 
+        <special id="silverbowduadon" weaponType="bow">
+            <name lang="en">Silver Bow of Duadon</name>
+            <description lang="en">
+                A magnificent Bow made from the wood of a silver oak tree. 
+                This weapon will add 3 points to your total whenever you are using a Bow and are instructed to pick a 
+                number from the Random Number Table
+            </description>
+
+            <name lang="es">Arco de Plata de Duadon</name>
+            <description lang="es">
+                Un magnifico arco hecho de madera de roble y plata. 
+                Cuando uses este arco y se te ordene elegir al azar un número de la Tabla de la Suerte. 
+                podrás sumar 3 puntos al total que obtengas
+            </description>
+
+            <effect class="combatSkill" increment="3" />
+            <image book="6" name="bow.png" />
+        </special>
+
         <!-- BOOK 7 -->
 
         <special id="fireseed">

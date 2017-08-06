@@ -353,10 +353,6 @@
             <object objectId="maptekaro" />
         </section>
 
-        <section id="sect50">
-            <!-- TODO: Descuenta las Coronas de oro que ha apostado -->
-        </section>
-
         <section id="sect51">
             <endurance count="-2" />
         </section>
@@ -384,10 +380,6 @@
 
         <section id="sect60">
             <!-- TODO: Pick bow -->
-        </section>
-
-        <section id="sect62">
-            <!-- TODO: El prestidigitador te paga la cantidad de coronas de oro que has apostado -->
         </section>
 
         <section id="sect63">
@@ -689,10 +681,6 @@
         
         <section id="sect112">
             <object objectId="taunorwater" useOnSection="true" />
-        </section>
-
-        <section id="sect113">
-            <!-- TODO: Drop staked money -->
         </section>
 
         <section id="sect114">
@@ -1206,10 +1194,6 @@
             <endurance count="-12" />
         </section>
 
-        <section id="sect223">
-            <!-- TODO: Descuenta las Coronas de oro que ha apostado -->
-        </section>
-
         <section id="sect224">
             <test not="true" canUseBow="true">
                 <choiceState section="sect170" set="disabled" />
@@ -1269,7 +1253,64 @@
             <randomTableIncrement increment="[BOWBONUS]" />
         </section>
 
-        <!-- UP TO sect244 -->
+        <section id="sect245">
+            <numberPicker 
+                en-text="Choose the number of Gold Crowns you want to bet"
+                es-text="Elige el número de Coronas de Oro que quieres apostar"
+                min="1" 
+                money="true"
+                />
+            <choiceSelected section="sect50">
+                <pick class="money" count="-[NUMBERPICKER]" />
+            </choiceSelected>
+            <choiceSelected section="sect113">
+                <pick class="money" count="-[NUMBERPICKER]" />
+            </choiceSelected>
+            <choiceSelected section="sect223">
+                <pick class="money" count="-[NUMBERPICKER]" />
+            </choiceSelected>
+            <choiceSelected section="sect62">
+                <pick class="money" count="+[NUMBERPICKER]" />
+            </choiceSelected>
+        </section>
+
+        <section id="sect246">
+            <object objectId="taunorwater" useOnSection="true" />
+        </section>
+
+        <section id="sect247">
+            <test not="true" hasDiscipline="dvnation">
+                <choiceState section="sect206" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect248">
+            <test not="true" hasDiscipline="invsblty">
+                <choiceState section="sect322" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect249">
+            <test not="true" hasObject="maptekaro">
+                <choiceState section="sect235" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect250">
+            <test not="true" expression="[MONEY] > 0">
+                <choiceState section="sect123" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect251">
+            <endurance count="+3" />
+        </section>
+
+        <section id="sect252">
+            <pick objectId="silverbowduadon" />
+        </section>
+
+        <!-- UP TO sect252 -->
 
     </sections>
 

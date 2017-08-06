@@ -4,7 +4,11 @@
  * Item effect / usage description
  */
 interface ItemEffect {
+
+    /** 'combatSkill' for combat skill increment. 'endurance' for endurance points increment. */
     cls : string;
+
+    /** Attribute increment */
     increment : number;
 }
 
@@ -194,5 +198,15 @@ class Item {
         return this.imageUrl;
     }
 
+    /**
+     * Returns the combat skill effect bonus for this object. Zero if it has no effect
+     */
+    public getCombatSkillEffect() : number {
+        if( !this.effect )
+            return 0;
+        if( this.effect.cls != 'combatSkill' )
+            return 0;
+        return this.effect.increment;
+    }
 }
 
