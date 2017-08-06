@@ -336,8 +336,7 @@
 
         <section id="sect45">
             <choiceSelected section="sect212">
-                <!-- TODO: Drop won bow -->
-                <!--drop objectId=""-->
+                <drop objectId="silverbowduadon" />
             </choiceSelected>
         </section>
 
@@ -1310,7 +1309,103 @@
             <pick objectId="silverbowduadon" />
         </section>
 
-        <!-- UP TO sect252 -->
+        <section id="sect253">
+            <meal price="1" />
+            <test not="true" expression="[MONEY] >= 3">
+                <choiceState section="sect35" set="disabled" />
+            </test>
+            <test expression="[MONEY] >= 3">
+                <choiceState section="sect54" set="disabled" />
+            </test>
+            <choiceSelected section="sect35">
+                <pick class="money" count="-3" />
+            </choiceSelected>
+        </section>
+
+        <section id="sect254">
+            <choiceState section="all" set="disabled" />
+            <test not="true" hasDiscipline="hntmstry">
+                <combat combatSkillModifier="-2" />
+            </test>
+            <afterCombatTurn turn="1">
+                <combat combatSkillModifier="0" />
+            </afterCombatTurn>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect257">
+            <death />
+        </section>
+
+        <section id="sect258">
+            <test not="true" hasDiscipline="dvnation">
+                <choiceState section="sect283" set="disabled" />
+            </test>
+            <test not="true" hasDiscipline="hntmstry">
+                <choiceState section="sect164" set="disabled" />
+            </test>
+            <test hasDiscipline="dvnation|hntmstry">
+                <choiceState section="sect97" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect259">
+            <test not="true" hasDiscipline="dvnation|psisurge">
+                <choiceState section="sect186" set="disabled" />
+            </test>
+            <test hasDiscipline="dvnation|psisurge">
+                <choiceState section="sect156" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect261">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="2">
+                    <choiceState section="sect99" set="enabled" />
+                </case>
+                <case from="3" to="6">
+                    <choiceState section="sect187" set="enabled" />
+                </case>
+                <case from="7" to="99">
+                    <choiceState section="sect22" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="anmlctrl">
+                <randomTableIncrement increment="+3" />
+            </test>
+        </section>
+
+        <section id="sect262">
+            <test not="true" hasDiscipline="dvnation">
+                <choiceState section="sect58" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect266">
+            <endurance count="+1" />
+        </section>
+
+        <section id="sect268">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="5">
+                    <choiceState section="sect155" set="enabled" />
+                </case>
+                <case from="6" to="8">
+                    <choiceState section="sect236" set="enabled" />
+                </case>
+                <case from="9" to="99">
+                    <choiceState section="sect75" set="enabled" />
+                </case>
+                <pick class="arrow" count="-1" />
+            </randomTable>
+            <randomTableIncrement increment="[BOWBONUS]" />
+        </section>
+
+        <!-- UP TO sect269 -->
 
     </sections>
 
