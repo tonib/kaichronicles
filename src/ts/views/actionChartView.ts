@@ -29,7 +29,7 @@ const actionChartView = {
         actionChartView.updateObjectsLists();
 
         // Bind event for drop meals
-        objectsTable.bindEquipmentEvents( $('#achart-dropmeal') );
+        ObjectsTable.bindTableEquipmentEvents( $('#achart-dropmeal') , ObjectsTableType.INVENTORY );
 
         // Annotations
         $('#achart-annotations').val( actionChart.annotations );
@@ -180,8 +180,8 @@ const actionChartView = {
     updateWeapons: function() {
 
         // Weapons list
-        objectsTable.objectsList( state.actionChart.weapons , 
-            $('#achart-weapons > tbody') , 'inventory' );
+        new ObjectsTable( state.actionChart.weapons , $('#achart-weapons > tbody') , ObjectsTableType.INVENTORY )
+            .renderTable();
 
         // Current weapon:
         var current = null;
@@ -201,14 +201,14 @@ const actionChartView = {
 
         // Backpack items
         if( state.actionChart.hasBackpack )
-            objectsTable.objectsList( state.actionChart.backpackItems , 
-                $('#achart-backpack > tbody') , 'inventory' );
+            new ObjectsTable( state.actionChart.backpackItems , $('#achart-backpack > tbody') , ObjectsTableType.INVENTORY )
+                .renderTable();
         else
             $('#achart-backpack-content').html('<i>' + translations.text('backpackLost') + '</i>');
             
         // Special items
-        objectsTable.objectsList( state.actionChart.specialItems , 
-            $('#achart-special > tbody') , 'inventory' );
+        new ObjectsTable( state.actionChart.specialItems , $('#achart-special > tbody') , ObjectsTableType.INVENTORY )
+            .renderTable();
 
         // Meals
         actionChartView.updateMeals();

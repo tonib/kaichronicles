@@ -1093,8 +1093,7 @@ const mechanicsEngine = {
         }       
 
         // Fill the objects list:
-        objectsTable.objectsList(sectionState.objects, $table , 'available' );
-        
+        new ObjectsTable(sectionState.objects, $table, ObjectsTableType.AVAILABLE).renderTable();
     },
 
     /**
@@ -1115,7 +1114,7 @@ const mechanicsEngine = {
         }       
 
         // Fill the objects list:
-        objectsTable.objectsList(sectionState.sellPrices, $table , 'sell');
+        new ObjectsTable(sectionState.sellPrices, $table, ObjectsTableType.SELL).renderTable();
     },
 
     /**
