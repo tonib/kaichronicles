@@ -145,6 +145,12 @@ class ObjectsTableItem {
         return link;
     }
 
+    /** Get HTML for 'use' operation */
+    private getUseOperation() : string {
+        const title = translations.text('use');
+        return this.getOperationTag( 'use' , title , title );
+    }
+
     /**
      * Render available objects operations
      * @return The HTML. Empty string if there are no avaliable operations
@@ -164,7 +170,13 @@ class ObjectsTableItem {
         let html = '';
 
         if( this.type == ObjectsTableType.AVAILABLE ) {
-            // Avaiable object (free) / buy object: Get it / Buy it
+            // Avaiable object (free) / buy object: 
+
+            if( this.objectInfo.price == 0 && this.objectInfo.useOnSection )
+                // Allow to use the object from the section, without picking it
+                html += this.getUseOperation();
+
+            // Get it / Buy it
             const title = translations.text( this.objectInfo.price ? 'buyObject' : 'pickObject' );
             html += this.getOperationTag( 'get' , title , '<span class="glyphicon glyphicon-plus"></span>' );
         }
@@ -175,11 +187,9 @@ class ObjectsTableItem {
         }
         else if( this.type == ObjectsTableType.INVENTORY ) {
 
-            if( this.item.usage ) {
+            if( this.item.usage )
                 // Use object operation
-                const title = translations.text('use');
-                html += this.getOperationTag( 'use' , title , title );
-            }
+                html += this.getUseOperation();
 
             if( this.item.isHandToHandWeapon() && state.actionChart.selectedWeapon != this.item.id ) {
                 // Op to set the weapon as current
@@ -343,9 +353,23 @@ class ObjectsTableItem {
         mechanicsEngine.fireInventoryEvents(true, this.item);
     }
 
+    /** Use object operation */
     private use() {
-        if( confirm( translations.text( 'confirmUse' , [this.item.name] ) ) )
-            actionChartController.use( this.item.id );
+
+        if( !confirm( translations.text( 'confirmUse' , [this.item.name] ) ) )
+            return;
+
+        // Use the object
+        const dropObject = ( this.type == ObjectsTableType.INVENTORY );
+        actionChartController.use( this.item.id , dropObject );
+
+        // If the object was used from the section, available objects remove it
+        if( this.type == ObjectsTableType.AVAILABLE && !this.objectInfo.unlimited ) {
+            const sectionState = state.sectionStates.getSectionState();
+            sectionState.removeObjectFromSection( this.item.id , this.objectInfo.price );
+            // Refresh the table of available objects
+            mechanicsEngine.fireInventoryEvents(true, this.item);
+        }
     }
 
     private drop() {

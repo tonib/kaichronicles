@@ -400,7 +400,6 @@
         </section>
 
         <section id="sect65">
-            <!-- TODO: Allow to use this without pick it -->
             <object objectId="taunorwater" useOnSection="true" />
         </section>
 
@@ -677,8 +676,7 @@
         </section>
 
         <section id="sect106">
-            <!-- TODO: Allow to use this without pick it -->
-            <object objectId="taunorwater" />
+            <object objectId="taunorwater" useOnSection="true" />
         </section>
 
         <section id="sect109">
@@ -686,13 +684,11 @@
         </section>
 
         <section id="sect111">
-            <!-- TODO: Allow to use this without pick it -->
-            <object objectId="laumspurpotion4" />
+            <object objectId="laumspurpotion4" useOnSection="true" />
         </section>
         
         <section id="sect112">
-            <!-- TODO: Allow to use this without pick it -->
-            <object objectId="taunorwater" />
+            <object objectId="taunorwater" useOnSection="true" />
         </section>
 
         <section id="sect113">
@@ -1077,8 +1073,7 @@
         </section>
 
         <section id="sect190">
-            <!-- TODO: Allow to use this without pick it -->
-            <object objectId="taunorwater" />
+            <object objectId="taunorwater" useOnSection="true" />
         </section>
 
         <section id="sect191">

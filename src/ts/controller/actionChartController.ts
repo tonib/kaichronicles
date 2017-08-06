@@ -169,8 +169,9 @@ const actionChartController = {
     /**
      * Use an object
      * @param objectId The object to use
+     * @param dropObject True if the object should be droped from the action chart
      */
-    use: function(objectId) {
+    use: function(objectId : string, dropObject : boolean = true) {
         // Get the object
         var o = state.mechanics.getObject(objectId);
         if( !o || !o.usage )
@@ -188,7 +189,8 @@ const actionChartController = {
         template.updateStatistics();
         
         // Drop the object, and do not keep it on the section
-        actionChartController.drop(objectId, false);
+        if( dropObject )
+            actionChartController.drop(objectId, false);
 
         // Fire mechanics rules
         mechanicsEngine.fireObjectUsed( objectId );
