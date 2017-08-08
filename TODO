@@ -11,6 +11,7 @@
   - book 6 / sect134 / spanish: "agrupadas e semicírculo" should be "agrupadas en semicírculo"
   - book 6 / sect158 / spanish: "Llave de plata" debería ser "Pequeña llave de plata"
   - book 6 / sect208 / spanish: "repente se pon en pie" debería ser  "repente se pone en pie"
+  - book 6 / sect278 / spanish: "lamido" debería ser  "bramido" ?
 - Allow to export / import saved games to the SD card
 
 FOR FUTURE (1.7+):

@@ -1083,6 +1083,16 @@
             <usage class="combatSkill" increment="2" />
         </object>
 
+        <object id="mapsommerlund">
+            <name lang="en">Map of Sommerlund</name>
+            <name lang="es">Mapa de Sommerlund</name>
+        </object>
+
+        <object id="mapluyen">
+            <name lang="en">Map of Luyen</name>
+            <name lang="es">Mapa de Luyen</name>
+        </object>
+
         <!-- BOOK 7 -->
 
         <object id="lantern">

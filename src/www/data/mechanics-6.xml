@@ -1405,7 +1405,113 @@
             <randomTableIncrement increment="[BOWBONUS]" />
         </section>
 
-        <!-- UP TO sect269 -->
+        <section id="sect270">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" noPsiSurge="true" />
+
+            <test not="true" hasDiscipline="hntmstry">
+                <combat combatSkillModifier="-2" />
+            </test>
+            <afterCombatTurn turn="2">
+                <combat combatSkillModifier="0" />
+            </afterCombatTurn>
+
+            <test not="true" hasDiscipline="nexus">
+                <combat turnLoss="-2" />
+            </test>
+
+            <combat dammageMultiplier="1" />
+            <test currentWeapon="sommerswerd">
+                <combat dammageMultiplier="2" />
+            </test> 
+
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect271">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="5">
+                    <choiceState section="sect99" set="enabled" />
+                </case>
+                <case from="6" to="99">
+                    <choiceState section="sect81" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="anmlctrl|hntmstry">
+                <randomTableIncrement increment="+3" />
+            </test>
+        </section>
+
+        <section id="sect272">
+            <test not="true" hasDiscipline="curing">
+                <choiceState section="sect250" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect273">
+            <test not="true" expression="[MONEY] >= 3">
+                <choiceState section="sect304" set="disabled" />
+            </test>
+            <choiceSelected section="sect304">
+                <pick class="money" count="-3" />
+                <pick objectId="cess" />
+            </choiceSelected>
+        </section>
+
+        <section id="sect275">
+            <object objectId="mapsommerlund" price="5" />
+            <object objectId="maptekaro" price="4" />
+            <object objectId="mapluyen" price="3" />
+        </section>
+
+        <section id="sect276">
+            <object objectId="broninwarhammer" />
+        </section>
+
+        <section id="sect278">
+            <endurance count="-3" />
+            <test not="true" canUseBow="true">
+                <choiceState section="sect198" set="disabled" />
+            </test>
+            <test canUseBow="true">
+                <choiceState section="sect343" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect279">
+            <test not="true" expression="[MONEY] >= 1">
+                <choiceState section="sect284" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect280">
+            <test not="true" hasDiscipline="curing">
+                <choiceState section="sect42" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect282">
+            <endurance count="-1" />
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect283">
+            <choiceState section="all" set="disabled" />
+            <test hasDiscipline="anmlctrl">
+                <combat combatSkillModifier="+1" />
+            </test>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <!-- UP TO sect283 -->
 
     </sections>
 
