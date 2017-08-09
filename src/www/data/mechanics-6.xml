@@ -1523,7 +1523,25 @@
             <book6sect284 />
         </section>
 
-        <!-- UP TO sect284 -->
+        <section id="sect286">
+            <test not="true" hasDiscipline="hntmstry">
+                <choiceState section="sect314" set="disabled" />
+            </test>
+            <test hasDiscipline="hntmstry">
+                <choiceState section="sect142" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect288">
+            <test not="true" hasDiscipline="curing">
+                <choiceState section="sect61" set="disabled" />
+            </test>
+            <test hasDiscipline="curing">
+                <choiceState section="sect84" set="disabled" />
+            </test>
+        </section>
+
+        <!-- UP TO sect290 -->
 
     </sections>
 
