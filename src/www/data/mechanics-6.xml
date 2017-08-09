@@ -1511,7 +1511,19 @@
             </afterCombats>
         </section>
 
-        <!-- UP TO sect283 -->
+        <section id="sect284">
+            <numberPicker 
+                en-text="Choose the number of Gold Crowns you want to bet"
+                es-text="Elige el número de Coronas de Oro que quieres apostar"
+                min="1" max="10" 
+                money="true"
+                en-actionButton="Bet"
+                es-actionButton="Apuesta"
+            />
+            <book6sect284 />
+        </section>
+
+        <!-- UP TO sect284 -->
 
     </sections>
 

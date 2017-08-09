@@ -276,3 +276,97 @@ class Book6sect26 {
     }
 
 }
+
+/** Bet */
+class Book6sect284 {
+
+    public constructor( $rule : any ) {
+
+        // Pick number event handler
+        const self = this;
+        numberPickerMechanics.bindButtonActionEvent( null , function() {
+            self.onPickNumber();
+        })
+
+        // Add the game results section:
+        $('#mechanics-numberpicker').append('<p style="margin-top: 10px" id="mechanics-book6sect284"></p>');
+
+        this.updateUIState();
+        
+    }
+
+    private getBetsState() : Array<Array<number>> {
+        let betsState = state.sectionStates.otherStates['book6sect284'];
+        if( ! betsState )
+            betsState = [];
+        return betsState;
+    }
+
+    private setBetsState( betsState : Array<Array<number>> ) {
+        state.sectionStates.otherStates['book6sect284'] = betsState;
+    }
+
+    private onPickNumber() {
+
+        if( !numberPickerMechanics.isValid() )
+            return;
+        
+        let betsState  = this.getBetsState();
+
+        let newBet : Array<number> = [];
+        // Money amount
+        newBet.push( numberPickerMechanics.getNumberPickerValue() )
+        // First number
+        newBet.push( randomTable.getRandomValue() );
+        // Second number
+        newBet.push( randomTable.getRandomValue() );
+
+        let moneyWon = 0;
+        if( newBet[1] > ( newBet[2] + 3 ) )
+            // Bet won
+            moneyWon = newBet[0] * 2;
+        else
+            moneyWon = -newBet[0];
+        actionChartController.increaseMoney( moneyWon );
+
+        betsState.push( newBet );
+        this.setBetsState( betsState );
+
+        this.updateUIState();
+    }
+
+    private renderBets() {
+        let $betsPlaceholder = $('#mechanics-book6sect284');
+        $betsPlaceholder.empty();
+        let html = '';
+        for( let bet of this.getBetsState() ) {
+            html += translations.text( 'number' , [1] ) + ': ' + bet[1] + 
+            ', ' + translations.text( 'number' , [2] ) + ': ' + bet[2] + ' + 3 = ' + ( bet[2] + 3 ) + '<br/>';
+        }
+        $betsPlaceholder.html( html );
+    }
+
+    private updateUIState() {
+
+        this.renderBets();
+
+        let betsState = this.getBetsState();
+
+        let allMoneyLost = ( state.actionChart.beltPouch == 0 );
+
+        // Can you quit?
+        let quitEnabled = ( betsState.length < 3 && !allMoneyLost );
+        mechanicsEngine.setChoiceState('sect336' , !quitEnabled );
+        if( !quitEnabled ) 
+            numberPickerMechanics.hideButtonActionEvent();
+
+        // 3 bets played and still money?
+        let sect347Enabled = ( betsState.length >= 3 && state.actionChart.beltPouch > 0 );
+        mechanicsEngine.setChoiceState('sect347' , !sect347Enabled );
+
+        // All money lost?
+        mechanicsEngine.setChoiceState('sect76' , !allMoneyLost );
+
+    }
+
+}

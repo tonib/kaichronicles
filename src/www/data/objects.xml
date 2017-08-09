@@ -323,8 +323,8 @@
         </special>
 
         <special id="silverkeybook3">
-            <name lang="en">Silver Key</name>
-            <name lang="es">Llave de Plata</name>
+            <name lang="en">Silver Key (Book 3)</name>
+            <name lang="es">Llave de Plata (Libro 3)</name>
             <image book="1" name="small15.png" />
         </special>
 

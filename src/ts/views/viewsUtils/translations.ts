@@ -141,7 +141,8 @@ class Translations {
         'playerDices' : 'Dados de {0}',
         'playerNumber' : 'Jugador {0}',
         'targetPoints' : 'BLANCOS LOBO SOLITARIO:',
-        
+        'number' : 'Número {0}',
+
         //////////////////////////////////////
         // About page
         //////////////////////////////////////
@@ -342,6 +343,7 @@ class Translations {
 
         'playerDices' : '{0} dices',
         'playerNumber' : 'Player {0}',
+        'number' : 'Number {0}',
 
         //////////////////////////////////////
         // About page

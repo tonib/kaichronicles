@@ -25,13 +25,11 @@ var numberPickerMechanics = {
         // Check if it has an action button
         var actionButtonTitle = mechanicsEngine.getRuleText(rule, 'actionButton');
         if( actionButtonTitle ) {
-            $ui.find('#mechanics-picknumber')
-            .show()
-            .click(function(e) {
-                e.preventDefault();
+            var $pickNumberButton = $ui.find('#mechanics-picknumber');
+            $pickNumberButton.show().text( actionButtonTitle );
+            numberPickerMechanics.bindButtonActionEvent( $pickNumberButton , function() {
                 mechanicsEngine.fireNumberPickerChoosed();
-            })
-            .text( actionButtonTitle );
+            });
         }
 
         // Add HTML to do the choose
@@ -58,6 +56,22 @@ var numberPickerMechanics = {
 
     },
 
+    bindButtonActionEvent : function( $pickNumberButton , callback ) {
+
+        if( !$pickNumberButton )
+            $pickNumberButton = $('#mechanics-picknumber');
+
+        $pickNumberButton.click(function(e) {
+            e.preventDefault();
+            callback();
+        });
+
+    },
+
+    hideButtonActionEvent : function() {
+        $('#mechanics-picknumber').hide();
+    },
+
     /**
      * Return true if the money picker value is valid
      */
@@ -75,7 +89,7 @@ var numberPickerMechanics = {
     },
 
     /**
-     * Get the money picker value
+     * Get the number picker value
      */
     getNumberPickerValue: function() {
         try {
