@@ -1,3 +1,4 @@
+/// <reference path="../../external.ts" />
 
 /**
  * Engine to render and run gamebook mechanics rules 

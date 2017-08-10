@@ -1,13 +1,14 @@
+/// <reference path="../../external.ts" />
 
 /**
  * Tool to select a number (or an amount of money)
  */
-var numberPickerMechanics = {
+const numberPickerMechanics = {
 
     /**
      * numberPicker rule execution
      */
-    numberPicker: function(rule) {
+    numberPicker: function(rule : any) {
 
         if( $(rule).attr('enabled') == 'false' ) {
             // Disable the money picker
@@ -56,7 +57,7 @@ var numberPickerMechanics = {
 
     },
 
-    bindButtonActionEvent : function( $pickNumberButton , callback ) {
+    bindButtonActionEvent : function( $pickNumberButton : any , callback : () => void) {
 
         if( !$pickNumberButton )
             $pickNumberButton = $('#mechanics-picknumber');
@@ -75,7 +76,7 @@ var numberPickerMechanics = {
     /**
      * Return true if the money picker value is valid
      */
-    isValid: function() {
+    isValid: function() : boolean {
         var $picker = $('#mechanics-mpAmount');
 
         // If the money picker has been disabled, dont check it
@@ -91,7 +92,7 @@ var numberPickerMechanics = {
     /**
      * Get the number picker value
      */
-    getNumberPickerValue: function() {
+    getNumberPickerValue: function() : number {
         try {
             var $picker = $('#mechanics-mpAmount');
             if( $picker.length > 0 )
