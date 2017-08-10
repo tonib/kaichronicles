@@ -7,7 +7,8 @@
 - in book 1 sect 180 I should be able to elude the combat without fighting; or if the combat has multiple enemy, I think I 
   should elude ALL the enemy and then change section.
 - Equipment sections. When there are exceptions (all meals == one object), show a message always visible with that info
-- Report erratas: <none>
+- Report erratas:
+  * Book 6 / sect315: "poderosa tuerza mental que le hace" should be "poderosa fuerza mental que te hace"
 - Allow to export / import saved games to the SD card
 
 FOR FUTURE (1.7+):

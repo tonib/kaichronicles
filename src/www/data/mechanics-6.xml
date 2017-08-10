@@ -239,6 +239,7 @@
             <choiceState section="all" set="disabled" />
             <combat bow="true" />
             <book6sect26 />
+            <!-- TODO: If you use Jakan, then -2CS  -->
             <!-- TODO: This is not "hasObject", instead it's the current selected bow (implementation pending) -->
             <test hasObject="jakan">
                 <afterCombatTurn turn="any">
@@ -865,6 +866,7 @@
         </section>
 
         <section id="sect153">
+            <endurance count="-5" />
             <test not="true" canUseBow="true">
                 <choiceState section="sect178" set="disabled" />
             </test>
@@ -1541,7 +1543,120 @@
             </test>
         </section>
 
-        <!-- UP TO sect290 -->
+        <section id="sect291">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect177" set="enabled" />
+                </case>
+                <case from="5" to="9">
+                    <choiceState section="sect309" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect293">
+            <drop objectId="smallsilverkey" />
+        </section>
+
+        <section id="sect295">
+            <test not="true" hasObject="sommerswerd">
+                <choiceState section="sect321" set="disabled" />
+            </test>
+            <test hasObject="sommerswerd">
+                <choiceState section="sect257" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect298">
+            <!-- TODO: pick jakan. -2 CS on tourment -->
+            <test bookLanguage="es">
+                <choiceState section="sect335" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect299">
+            <test not="true" hasDiscipline="hntmstry">
+                <choiceState section="sect114" set="disabled" />
+            </test>
+            <test not="true" expression="[MONEY] >= 1">
+                <choiceState section="sect161" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect301">
+            <pick class="arrow" count="-1" />
+        </section>
+
+        <section id="sect305">
+            <test not="true" hasDiscipline="dvnation">
+                <choiceState section="sect122" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect306">
+            <test not="true" hasDiscipline="nexus">
+                <endurance count="-1" />
+            </test>
+        </section>
+
+        <section id="sect307">
+            <meal price="2" />
+        </section>
+
+        <section id="sect310">
+            <endurance count="-2" />
+        </section>
+
+        <section id="sect311">
+            <death />
+        </section>
+
+        <section id="sect313">
+            <endurance count="-8" />
+        </section>
+
+        <section id="sect315">
+            <endurance count="-4" />
+        </section>
+
+        <section id="sect316">
+            <test not="true" hasDiscipline="hntmstry">
+                <choiceState section="sect114" set="disabled" />
+            </test>
+            <test not="true" expression="[MONEY] >= 1">
+                <choiceState section="sect161" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect317">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="-99" to="6">
+                    <choiceState section="sect85" set="enabled" />
+                </case>
+                <case from="7" to="99">
+                    <choiceState section="sect153" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="dvnation|hntmstry">
+                <randomTableIncrement increment="-5" />
+            </test>
+        </section>
+
+        <section id="sect318">
+            <test not="true" hasDiscipline="anmlctrl">
+                <choiceState section="sect32" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect320">
+            <test not="true" hasDiscipline="pthmnshp|dvnation">
+                <choiceState section="sect195" set="disabled" />
+            </test>
+        </section>
+
+        <!-- UP TO sect320 -->
 
     </sections>
 
