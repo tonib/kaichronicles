@@ -1,13 +1,14 @@
+/// <reference path="../../external.ts" />
 
 /**
  * Random table links mechanics
  */
-var randomMechanics = {
+const randomMechanics = {
 
     /**
      * The last random number picked, with the increment added
      */
-    lastValue: null,
+    lastValue: <number> null,
 
     /** 
      * Assing an action to a random table link.  
@@ -55,18 +56,18 @@ var randomMechanics = {
         }
     },
 
-    getRandomTableRefByIndex: function(index) {
+    getRandomTableRefByIndex: function(index : number) : any {
         if( !index )
             index = 0;
         return $('.random:eq( ' + index + ')');
     },
 
-    getRandomTableRefByRule: function(rule) {
+    getRandomTableRefByRule: function(rule : any) {
         return randomMechanics.getRandomTableRefByIndex( $(rule).attr('index') );
     },
 
     /** Increment for random table selection */
-    randomTableIncrement: function(rule) {
+    randomTableIncrement: function(rule : any) {
         var $link = randomMechanics.getRandomTableRefByRule(rule);
         var newIncrement = mechanicsEngine.evaluateExpression( $(rule).attr('increment') );
 
@@ -87,7 +88,8 @@ var randomMechanics = {
      * @param {boolean} ignoreZero True if the zero random value should be ignored
      * @param {boolean} zeroAsTen true if the zero must to be returned as ten
      */
-    bindTableRandomLink: function($element, onLinkPressed, ignoreZero, zeroAsTen) {
+    bindTableRandomLink: function($element : any, onLinkPressed : (value : number, increment: number) => void, 
+        ignoreZero : boolean , zeroAsTen : boolean) {
 
         // If the element is an span, replace it by a link
         $element = randomMechanics.setupRandomTableLink($element);
@@ -132,14 +134,14 @@ var randomMechanics = {
     /**
      * Setup a tag to link to the random table
      * @param {jquery} $element The DOM element to setup
-     * @param {boolean} alreadyChoose If it's true, the link will be set disabled
-     * @param {number} valueAlreadyChoose Only needed if alreadyChoose is true. It's the 
-     * previously
-     * random value got
-     * @param {number} increment The increment to the choose value, due to game rules
+     * @param alreadyChoose If it's true, the link will be set disabled
+     * @param valueAlreadyChoose Only needed if alreadyChoose is true. It's the 
+     * previously random value got
+     * @param increment The increment to the choose value, due to game rules
      * @return {jquery} The link tag already processed
      */
-    setupRandomTableLink: function($element, alreadyChoose, valueAlreadyChoose, increment)  {
+    setupRandomTableLink: function($element : any, alreadyChoose : boolean = false, valueAlreadyChoose : number = 0, 
+        increment : number = 0) : any {
 
         // Initially, the random table links are plain text (spans). When they got setup by a random rule, they
         // are converted to links:
@@ -158,7 +160,7 @@ var randomMechanics = {
     /**
      * Change a random table link to clicked
      */
-    linkAddChooseValue: function( $link , valueChoose , increment ) {
+    linkAddChooseValue: function( $link : any , valueChoose : number, increment : number) {
         var html = valueChoose.toString();
         if( increment > 0 )
             html += ' + ' + increment;
@@ -176,7 +178,7 @@ var randomMechanics = {
      * @param rule The "randomTable" rule
      * @param randomValue The random value result from the table
      */
-    onRandomTableMechanicsClicked: function(rule, randomValue, increment) {
+    onRandomTableMechanicsClicked: function(rule : any, randomValue : number, increment : number) {
 
         // Set the last choosed value
         randomMechanics.lastValue = randomValue + increment;
@@ -207,17 +209,17 @@ var randomMechanics = {
      * @param rule The rule to evaluate
      * @return True if the case conditions are satisfied 
      */
-    evaluateCaseRule: function(rule, randomValue) {
+    evaluateCaseRule: function(rule : any, randomValue : number) : boolean {
 
         // Test single value
-        var txtValue = $(rule).attr('value');
+        var txtValue : string = $(rule).attr('value');
         if( txtValue ) {
             var value = parseInt(txtValue);
             return randomValue == value;
         }
 
         // Test from / to value
-        var txtFromValue = $(rule).attr('from');
+        var txtFromValue  : string = $(rule).attr('from');
         if( txtFromValue ) {
             var fromValue = parseInt( txtFromValue );
             var toValue = parseInt( $(rule).attr('to') );
@@ -232,7 +234,7 @@ var randomMechanics = {
      * @param {number} index The index of the random table on the section
      * @returns {number} The choosen value, with increments. -1 if it was not picked
      */
-    getRandomValueChoosed: function(index) {
+    getRandomValueChoosed: function(index : number) : number {
         var $link = randomMechanics.getRandomTableRefByIndex(index);
         if( $link.length === 0 )
             return -1;

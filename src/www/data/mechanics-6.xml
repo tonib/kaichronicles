@@ -575,7 +575,7 @@
         <section id="sect95">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="3">
+                <case from="-99" to="3">
                     <choiceState section="sect155" set="enabled" />
                 </case>
                 <case from="4" to="99">
@@ -1031,7 +1031,7 @@
         <section id="sect178">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="7">
+                <case from="-99" to="7">
                     <choiceState section="sect296" set="enabled" />
                 </case>
                 <case from="8" to="99">
@@ -1238,7 +1238,7 @@
         <section id="sect243">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="3">
+                <case from="-99" to="3">
                     <choiceState section="sect155" set="enabled" />
                 </case>
                 <case from="4" to="8">
@@ -1391,7 +1391,7 @@
         <section id="sect268">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="5">
+                <case from="-99" to="5">
                     <choiceState section="sect155" set="enabled" />
                 </case>
                 <case from="6" to="8">

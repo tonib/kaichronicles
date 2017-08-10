@@ -6,7 +6,6 @@ declare var projectAon:any;
 declare var views:any;
 declare var routing:any;
 declare var setupMechanics:any;
-declare var randomMechanics:any;
 declare var numberPickerMechanics:any;
 declare var setupController:any;
 declare var cordovaFS:any;
