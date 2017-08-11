@@ -766,6 +766,12 @@
             </onInventoryEvent>
         </section>
 
+        <section id="sect135">
+            <test not="true" expression="[MONEY] >= 1">
+                <choiceState section="sect333" set="disabled" />
+            </test>
+        </section>
+
         <section id="sect137">
             <test not="true" expression="[MONEY] >= 3">
                 <choiceState section="sect332" set="disabled" />
@@ -1656,7 +1662,109 @@
             </test>
         </section>
 
-        <!-- UP TO sect320 -->
+        <section id="sect322">
+            <test not="true" expression="[MONEY] >= 10">
+                <choiceState section="sect332" set="disabled" />
+            </test>
+            <choiceSelected section="sect332">
+                <pick class="money" count="-10" />
+            </choiceSelected>
+        </section>
+
+        <section id="sect323">
+            <death />
+        </section>
+
+        <section id="sect324">
+            <test not="true" hasDiscipline="dvnation|hntmstry">
+                <choiceState section="sect208" set="disabled" />
+            </test>
+            <test hasDiscipline="dvnation|hntmstry">
+                <choiceState section="sect37" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect325">
+            <test not="true" sectionVisited="sect252" >
+                <choiceState section="sect45" set="disabled" />
+            </test>
+            <test sectionVisited="sect252" >
+                <choiceState section="sect132" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect326">
+            <test not="true" hasDiscipline="curing">
+                <choiceState section="sect216" set="disabled" />
+            </test>
+            <test hasDiscipline="curing">
+                <choiceState section="sect46" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect328">
+            <pick class="money" count="-2" />
+        </section>
+
+        <section id="sect329">
+            <death />
+        </section>
+
+        <section id="sect330">
+            <test not="true" canUseBow="true">
+                <choiceState section="sect20" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect332">
+            <test expression="[MONEY] >= 1">
+                <choiceState section="sect91" set="disabled" />
+            </test>
+            <test not="true" hasDiscipline="pthmnshp|dvnation">
+                <choiceState section="sect346" set="disabled" />
+            </test>
+            <test not="true" expression="[MONEY] >= 1">
+                <choiceState section="sect172" set="disabled" />
+                <choiceState section="sect232" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect334">
+            <test not="true" canUseBow="true">
+                <choiceState section="sect209" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect335">
+            <!-- TODO: Drop jakan?, check sections where the borrowed bow is dropped -->
+        </section>
+
+        <section id="sect337">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="0" maxEludeTurn="0" />
+            <afterCombats>
+                <choiceState section="sect40" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect191" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect339">
+            <choiceState section="sect80" set="disabled" />
+            <test hasObject="firesphere">
+                <choiceState section="sect80" set="enabled" />
+                <choiceState section="sect90" set="disabled" />
+            </test>
+            <test hasObject="tinderbox">
+                <test hasObject="torch">
+                    <choiceState section="sect80" set="enabled" />
+                    <choiceState section="sect90" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <!-- UP TO sect339 -->
 
     </sections>
 
