@@ -91,8 +91,7 @@ var projectAon = {
             illustrators: [ 'chalk' ],
 
             zipSize: 3088890
-        }
-        /*,
+        },
 
         // Book 7:
         {
@@ -105,7 +104,7 @@ var projectAon = {
             illustrators: [ 'chalk' ],
 
             zipSize: 3129146
-        }*/
+        }
     ],
 
     /**

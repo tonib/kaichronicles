@@ -415,7 +415,7 @@ class Book6sect340 {
     }
 
     private updateUI() {
-        
+
         let sum = mechanicsEngine.evaluateExpression('[BOWBONUS]');
         const tournmentState = this.getState();
         for( let i=0; i<3; i++) {
