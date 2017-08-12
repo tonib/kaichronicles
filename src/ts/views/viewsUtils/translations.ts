@@ -142,7 +142,8 @@ class Translations {
         'playerNumber' : 'Jugador {0}',
         'targetPoints' : 'BLANCOS LOBO SOLITARIO:',
         'number' : 'Número {0}',
-
+        'shoot' : 'Disparo',
+        
         //////////////////////////////////////
         // About page
         //////////////////////////////////////

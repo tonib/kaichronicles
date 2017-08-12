@@ -370,3 +370,66 @@ class Book6sect284 {
     }
 
 }
+
+/** Bow tournament */
+class Book6sect340 {
+
+    public constructor() {
+        var $gameUI = mechanicsEngine.getMechanicsUI('mechanics-book6sect340');
+        gameView.appendToSection( $gameUI );
+
+        mechanicsEngine.setChoiceState('all' , true );
+
+        // Bow bonus:
+        $('#mechanics-book6sect340-bonus').text( mechanicsEngine.evaluateExpression('[BOWBONUS]') );
+
+        for( let i=0; i<3; i++)
+            this.bindRandomLink(i);
+
+        this.updateUI();
+    }
+    
+    private getState() : Array<number> {
+        let tournmentState = state.sectionStates.otherStates['book6sect340'];
+        if( !tournmentState ) {
+            tournmentState = [ -1 , -1 , -1 ];
+            state.sectionStates.otherStates['book6sect340'] = tournmentState;
+        }
+        return tournmentState;
+    }
+
+    private bindRandomLink( i : number ) {
+        const tournmentState = this.getState();
+        // Add one because there is a random table on the section text to ignore
+        const $link = randomMechanics.getRandomTableRefByIndex( i + 1 );
+        const self = this;
+        if( tournmentState[i] >= 0 )
+            randomMechanics.linkAddChooseValue( $link , tournmentState[i] , 0);
+        else
+            randomMechanics.bindTableRandomLink( $link , 
+                function(value: number, increment: number) {
+                    tournmentState[i] = value;
+                    self.updateUI();
+                },
+                false , false );
+    }
+
+    private updateUI() {
+        
+        let sum = mechanicsEngine.evaluateExpression('[BOWBONUS]');
+        const tournmentState = this.getState();
+        for( let i=0; i<3; i++) {
+            if( tournmentState[i] < 0 )
+                // Random not choosed
+                return;
+            sum += tournmentState[i];
+        }
+
+        // All random choosed
+        console.log('Total: ' + sum);
+        if( sum <= 7 )
+            mechanicsEngine.setChoiceState('sect103' , false );
+        else
+            mechanicsEngine.setChoiceState('sect26' , false );
+    }
+}

@@ -1764,6 +1764,10 @@
             </test>
         </section>
 
+        <section id="sect340">
+            <book6sect340 />
+        </section>
+        
         <!-- UP TO sect339 -->
 
     </sections>
