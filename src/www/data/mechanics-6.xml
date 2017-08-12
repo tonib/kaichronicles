@@ -1765,10 +1765,69 @@
         </section>
 
         <section id="sect340">
+            <!-- NOT jakan malus here -->
+            <!-- TODO: Also, if at any time you should pick a 0 from the Random Number Table when using the bow, 
+                 the Jakan will break. If this happens during the tournament at any stage, turn immediately to 335. 
+                 Make a note of this adventive number in the margin of your Action Chart for future reference. -->
             <book6sect340 />
         </section>
-        
-        <!-- UP TO sect339 -->
+
+        <section id="sect341">
+            <test not="true" hasCircle="circleSolaris">
+                <choiceState section="sect131" set="disabled" />
+            </test>
+            <test hasCircle="circleSolaris">
+                <choiceState section="sect44" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect342">
+            <test not="true" expression="[MONEY] > 0">
+                <choiceState section="sect123" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect343">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="3" />
+            <afterCombats>
+                <choiceState section="sect112" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect305" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect344">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" noPsiSurge="true" />
+            <afterCombatTurn turn="any">
+                <test not="true" expression="[ENEMYENDURANCE] > 25">
+                    <disableCombats />
+                    <choiceState section="all" set="enabled" />
+                </test>
+            </afterCombatTurn>
+        </section>
+
+        <section id="sect347">
+            <test not="true" hasDiscipline="hntmstry">
+                <choiceState section="sect114" set="disabled" />
+            </test>
+            <test not="true" expression="[MONEY] >= 1">
+                <choiceState section="sect161" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect349">
+            <death />
+        </section>
+
+        <section id="sect350">
+            <message 
+                en-text="This is the last implemented book. Thank you for playing!" 
+                es-text="Este es el último libro implementado. ¡Gracias por jugar!" 
+            />
+        </section>
 
     </sections>
 

@@ -2094,10 +2094,6 @@
                 <!-- Restore sommerswerd -->
                 <pick objectId="sommerswerd" />
             </test>
-            <message 
-                en-text="This is the last implemented book. Thank you for playing!" 
-                es-text="Este es el último libro implementado. ¡Gracias por jugar!" 
-            />
         </section>
 
         <!-- Up to sect360 -->
