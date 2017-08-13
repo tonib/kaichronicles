@@ -113,8 +113,7 @@ class Combat {
      * @return The current combat skill
      */
     public getCurrentCombatSkill() : number {
-        var cs = state.actionChart.getCurrentCombatSkill(this.noMindblast, 
-            this.noWeapon, this.mindblastBonus , this.psiSurge , this.bowCombat ) + 
+        var cs = state.actionChart.getCurrentCombatSkill(this) + 
             this.combatModifier + 
             this.objectsUsageModifier;
 
@@ -177,13 +176,6 @@ class Combat {
             state.actionChart.increaseEndurance( -turn.loneWolf );
         
         // Apply enemy damages:
-        /*if( turn.enemy == combatTable_DEATH )
-            this.endurance = 0;
-        else {
-            this.endurance -= turn.enemy;
-            if( this.endurance < 0 )
-                this.endurance = 0;
-        }*/
         this.endurance = Combat.applyLoss( this.endurance , turn.enemy );
 
         // Check if the combat has been finished

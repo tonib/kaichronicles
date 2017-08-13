@@ -552,6 +552,17 @@
             <image book="6" name="bow.png" />
         </special>
 
+        <special id="tournamentbow" weaponType="bow">
+            <!-- Not really an book object, but it's needed by mechanics on the bow tournment -->
+            <name lang="en">Bow</name>
+            <description lang="en">Borrowed bow for the tournament</description>
+
+            <name lang="es">Arco</name>
+            <description lang="es">Arco prestado para el torneo</description>
+
+            <image book="6" name="bow.png" />
+        </special>
+
         <!-- BOOK 7 -->
 
         <special id="fireseed">

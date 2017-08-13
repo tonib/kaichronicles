@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="org.projectaon.kaichronicles" version="1.6.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="org.projectaon.kaichronicles" version="1.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Kai Chronicles</name>
     <description>
-        Game player for Lone Wolf gamebooks 1 - 5
+        Game player for Lone Wolf gamebooks 1 - 6
     </description>
     <author email="toni.bennasar@projectaon.org" href="https://www.projectaon.org">
         Project AON

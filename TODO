@@ -1,17 +1,18 @@
-- Publish 1.6.3
+- Publish 1.7
 - Check reported bugs on Google play:
   * Saved games removed when adding new games
   * Objects types
   * Others?
-- Allow to select the current bow
 - in book 1 sect 180 I should be able to elude the combat without fighting; or if the combat has multiple enemy, I think I 
   should elude ALL the enemy and then change section.
 - Equipment sections. When there are exceptions (all meals == one object), show a message always visible with that info
 - Report erratas:
   * Book 6 / sect315: "poderosa tuerza mental que le hace" should be "poderosa fuerza mental que te hace"
-- Allow to export / import saved games to the SD card
+  * Book 6 / sect146: "He piedra" should be "La piedra"
 
-FOR FUTURE (1.7+):
+FOR FUTURE (1.8+):
+- Allow to select the current bow
+- Allow to export / import saved games to the SD card
 - Describe:
   * Where play on the web
   * Where Report bugs
@@ -45,6 +46,8 @@ FOR FUTURE (1.7+):
 - New game page: 
   * Do not show the license text on Android (the book was already downloaded)
   * Ask for the random table type
+- Use latest version on PAON data on SVN (a fixed commit number)
+- Allow to read the "Lore-circles of the Magnakai" section from the "Magnakai Disciplines" section (with a dialog?)
 
 Reminders:
 

@@ -357,6 +357,10 @@
             <object objectId="maptekaro" />
         </section>
 
+        <section id="sect49">
+            <drop objectId="cess" />
+        </section>
+
         <section id="sect51">
             <endurance count="-2" />
         </section>
@@ -383,7 +387,7 @@
         </section>
 
         <section id="sect60">
-            <!-- TODO: Pick bow -->
+            <pick objectId="tournamentbow" />
         </section>
 
         <section id="sect63">
@@ -668,7 +672,7 @@
         </section>
 
         <section id="sect103">
-            <!-- TODO: Drop borrowed bow -->
+            <drop objectId="tournamentbow" />
         </section>
 
         <section id="sect106">
@@ -1055,7 +1059,7 @@
         </section>
 
         <section id="sect183">
-            <!-- TODO: Drop borrowed bow -->
+            <drop objectId="tournamentbow" />
         </section>
 
         <section id="sect187">
@@ -1162,7 +1166,7 @@
         </section>
 
         <section id="sect214">
-            <!-- TODO: Pick bone bow, -4 CS on tournment -->
+            <pick objectId="tournamentbow" />
         </section>
 
         <section id="sect215">
@@ -1318,6 +1322,7 @@
         </section>
 
         <section id="sect252">
+            <drop objectId="tournamentbow" />
             <pick objectId="silverbowduadon" />
         </section>
 
@@ -1579,8 +1584,7 @@
         </section>
 
         <section id="sect298">
-            <!-- Do not pick the bow as an object. You may be forced to drop some
-                 other weapon, and that has no sense -->
+            <pick objectId="tournamentbow" />
             <choiceState section="sect335" set="disabled" />
         </section>
 
@@ -1739,7 +1743,7 @@
         </section>
 
         <section id="sect335">
-            <!-- TODO: Drop jakan?, check sections where the borrowed bow is dropped -->
+            <drop objectId="tournamentbow" />
         </section>
 
         <section id="sect337">
@@ -1768,10 +1772,6 @@
         </section>
 
         <section id="sect340">
-            <!-- NOT jakan malus here -->
-            <!-- TODO: Also, if at any time you should pick a 0 from the Random Number Table when using the bow, 
-                 the Jakan will break. If this happens during the tournament at any stage, turn immediately to 335. 
-                 Make a note of this adventive number in the margin of your Action Chart for future reference. -->
             <book6sect340 />
         </section>
 
