@@ -56,14 +56,18 @@ function minifyJavascript() {
     // Get all .js files on js directory
     var jsFiles = klawSync( 'dist/src/www/js' , {nodir: true} );
     console.log("Minfiying js files:");
-    var jsPaths = [];
+    var jsPaths = {};
     jsFiles.forEach((f) => {
         console.log(f.path);
-        jsPaths.push(f.path);
+        jsPaths[f.path] = fs.readFileSync( f.path , 'utf8' );
     });
 
     // Minify files:
     var result = uglifyJS.minify( jsPaths );
+    if( result.error )
+        throw JSON.stringify( result.error );
+    if( result.warnings )
+        console.log( 'WARNINGS!!!! : ' + result.warnings );
 
     // Write minified file
     fs.writeFileSync( 'dist/src/www/kai.min.js' , result.code );

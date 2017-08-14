@@ -59,7 +59,7 @@ BookDownloadState.prototype.deleteAsync = function( booksDir ) {
 BookDownloadState.prototype.downloadAsync = function( booksDir , progressCallback) {
 
     var fileName = this.bookNumber + '.zip';
-    //var url = 'http://192.168.1.11/ls/data/projectAon/' + fileName;
+    //var url = 'http://192.168.1.10/ls/data/projectAon/' + fileName;
     var url = 'https://www.projectaon.org/staff/toni/data/projectAon/' + fileName;
     var dstDir = booksDir.toURL();
     var dstPath = dstDir + '/' + fileName;
