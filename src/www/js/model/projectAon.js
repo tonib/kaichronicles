@@ -93,7 +93,7 @@ var projectAon = {
             zipSize: 3088890
         },
 
-        // Book 7:
+        // Book 7 (REVIEWING):
         {
             title_en: 'Castle Death',
             code_en: '07cd',
@@ -106,7 +106,7 @@ var projectAon = {
             zipSize: 3129146
         },
 
-        // Book 8:
+        // Book 8 (NOT IMPLEMENTED):
         {
             title_en: 'The Jungle of Horrors',
             code_en: '08tjoh',
@@ -116,10 +116,10 @@ var projectAon = {
 
             illustrators: [ 'chalk' ],
 
-            zipSize: 0
+            zipSize: 3537081
         },
 
-        // Book 9:
+        // Book 9 (NOT IMPLEMENTED):
         {
             title_en: 'The Cauldron of Fear',
             code_en: '09tcof',
@@ -129,7 +129,7 @@ var projectAon = {
 
             illustrators: [ 'williams' ],
 
-            zipSize: 0
+            zipSize: 2839095
         }
 
     ],
