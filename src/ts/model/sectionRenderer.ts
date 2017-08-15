@@ -487,4 +487,7 @@ class SectionRenderer {
             '</blockquote>';
     }
 
+    private thought( $thought : any , level : number ) : string {
+        return '<i>' + this.renderNodeChildren( $thought , level ) + '</i>';
+    }
 }

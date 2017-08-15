@@ -66,7 +66,9 @@ class Book {
         xmlText = xmlText.replaceAll('&inclusion.joe.dever.endowment;', '');
         xmlText = xmlText.replaceAll('&inclusion.action.chart;', '');
         xmlText = xmlText.replaceAll('&inclusion.combat.results.table;', '');
-
+        xmlText = xmlText.replaceAll('&inclusion.action.chart.magnakai;', '');
+        xmlText = xmlText.replaceAll('&inclusion.brian.williams.bio.lw;', '');
+        
         /*xmlText = xmlText.replaceAll('&link.project.website;', '')    
         xmlText = xmlText.replaceAll('&link.staff.contact;', '')
         xmlText = xmlText.replaceAll('&link.01hdlo;', '');*/
