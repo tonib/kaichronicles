@@ -91,8 +91,7 @@ var projectAon = {
             illustrators: [ 'chalk' ],
 
             zipSize: 3088890
-        }
-        /*,
+        },
 
         // Book 7:
         {
@@ -105,7 +104,34 @@ var projectAon = {
             illustrators: [ 'chalk' ],
 
             zipSize: 3129146
-        }*/
+        },
+
+        // Book 8:
+        {
+            title_en: 'The Jungle of Horrors',
+            code_en: '08tjoh',
+
+            title_es: 'La Jungla de los Horrores',
+            code_es: '08ljdlh',
+
+            illustrators: [ 'chalk' ],
+
+            zipSize: 0
+        },
+
+        // Book 9:
+        {
+            title_en: 'The Cauldron of Fear',
+            code_en: '09tcof',
+
+            title_es: 'El Caldero del Miedo',
+            code_es: '09ecdm',
+
+            illustrators: [ 'williams' ],
+
+            zipSize: 0
+        }
+
     ],
 
     /**

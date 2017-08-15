@@ -75,7 +75,7 @@ for the book X. "objects.xml" are the game objects
 There is (unfished) documentation for [rules](doc/README-mechanics.md) and 
 [object formats](doc/README-objects.md).
 
-The game rules implementation are at src/www/controller/mechanics/.
+The game rules implementation are at src/ts/controller/mechanics and src/www/controller/mechanics/.
 
 If you add "?debug=true" to the game URL, they will appear some debug tools.
 You also can use the browser Developer Tools to prepare the Action Chart to test sections.
@@ -88,7 +88,7 @@ actionChartController.increaseMoney(-10)
 There are some scripts for development:
 
 ```bash
-    npm run downloaddata  # Download books data from the Project Aon
+    npm run downloaddata [booknumber] # Download books data from the Project Aon. Specify "booknumber" to download a single book
     npm run lint          # Runs jshint over the javascript code
     npm run prepareversion [-- KEYSTOREPASSWORD] # Prepare a version to upload on "dist" dir.
     npm run clean         # Delete the "dist" dir
@@ -118,3 +118,5 @@ MIT. This application uses the following third-party code:
 * [FileSaver.js](https://github.com/eligrey/FileSaver.js/) (MIT)
 * [jQuery](https://jquery.com/) (jQuery license)
 * [Apache Cordova](https://cordova.apache.org/) (Apache license)
+
+Thanks to [LSI](http://www.lsisoluciones.com) to let us use its Google Play account.

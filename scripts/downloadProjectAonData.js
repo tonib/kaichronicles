@@ -130,12 +130,24 @@ BookData.runSvnCommand = function( params ) {
     child_process.execFileSync( 'svn' , params , {stdio:[0,1,2]} );
 }
 
+// Check if we should download only a single book
+var bookNumber = 0;
+if( process.argv.length >= 3 )
+    bookNumber = parseInt( process.argv[2] );
+
 // Recreate the directory
-fs.removeSync( BookData.TARGET_ROOT );
-fs.mkdirSync( BookData.TARGET_ROOT );
+if( !bookNumber )
+    fs.removeSync( BookData.TARGET_ROOT );
+if( !fs.existsSync(BookData.TARGET_ROOT) )
+    fs.mkdirSync( BookData.TARGET_ROOT );
 
 // Download books data
-for( var i=1; i <= projectAon.supportedBooks.length; i++ )
+var from, to;
+if( bookNumber )
+    from = to = bookNumber;
+else {
+    from = 1;
+    to = projectAon.supportedBooks.length;
+}
+for( var i=from; i <= to; i++ )
     new BookData(i).downloadBookData();
-
-
