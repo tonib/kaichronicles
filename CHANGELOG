@@ -10,3 +10,7 @@
 - Fixed bug: On section where you can buy things: If you drop an object that can be buy, if you re-pick it, 
   the object sell disappears
 - Fixed bug: At the start of each book, if the player had not a backpack, pick one.
+
+1.7.1
+- Fixed bug with number of disciplines to choose if you have played previous books
+

@@ -91,7 +91,10 @@ var projectAon = {
             illustrators: [ 'chalk' ],
 
             zipSize: 3088890
-        },
+        }
+        
+        ///////////////////////////////////////
+        /*,
 
         // Book 7 (REVIEWING):
         {
@@ -130,7 +133,7 @@ var projectAon = {
             illustrators: [ 'williams' ],
 
             zipSize: 2839095
-        }
+        }*/
 
     ],
 

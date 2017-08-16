@@ -29,8 +29,8 @@ class SetupDisciplines {
     private readonly previousActionChart : any;
 
     constructor() {
-        this.expectedNDisciplines = this.getNExpectedDisciplines();
         this.previousActionChart = state.getPreviousBookActionChart( state.book.bookNumber - 1);
+        this.expectedNDisciplines = this.getNExpectedDisciplines();
     }
 
      /**
