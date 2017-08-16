@@ -19,6 +19,12 @@ class SectionRenderer {
      * */
     private footNotes : Array< { [id : string] : string } > = [];
 
+    /**
+     * List of renderend foot note references ids.
+     * Needed to avoid render not referenced foot notes
+     */
+    private renderedFootNotesRefs : Array <string> = [];
+
     /** Render text illustration instances for this section?  */
     public renderIllustrationsText = false;
 
@@ -48,7 +54,11 @@ class SectionRenderer {
         if( footNotes.length > 0 ) {
             html += '<hr/><div class="footnotes">';
             for (var i = 0, len = this.footNotes.length; i < len; i++) {
-                html += this.footNotes[i].html;
+                if( this.renderedFootNotesRefs.contains( this.footNotes[i].id ) )
+                    html += this.footNotes[i].html;
+                else
+                    console.log( this.sectionToRender.sectionId + ': Footnote ' + this.footNotes[i].id + 
+                        ' not rendered because its not referenced' );
             }
             html += "</div>";
         }
@@ -204,7 +214,8 @@ class SectionRenderer {
     private footref($footRef : any, level : number) : string {
 
         // Get the foot note id:
-        var id = $footRef.attr('idref');
+        const id : string = $footRef.attr('idref');
+
         // Render the reference
         return this.renderNodeChildren( $footRef , level ) + this.getHtmlFootRef(id);
     }
@@ -215,6 +226,7 @@ class SectionRenderer {
      * @return The HTML reference, or an empty string
      */
     private getHtmlFootRef(id : string ) : string {
+        this.renderedFootNotesRefs.push( id );
         for (var i = 0, len = this.footNotes.length; i < len; i++) {
             if( this.footNotes[i].id == id )
                 return '<sup>' + (i + 1) + '</sup>';

@@ -5,6 +5,7 @@
 - Equipment sections. When there are exceptions (all meals == one object), show a message always visible with that info
 
 FOR FUTURE (1.8+):
+- Implement the Kai Monastery "safekeeping" mentioned on the "Equipment" sections
 - Allow to select the current bow
 - Allow to export / import saved games to the SD card
 - Describe:
