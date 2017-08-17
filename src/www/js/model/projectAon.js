@@ -94,10 +94,10 @@ var projectAon = {
         }
         
         ///////////////////////////////////////
-        ,
-
+        
+        
         // Book 7 (REVIEWING):
-        {
+        /*,{
             title_en: 'Castle Death',
             code_en: '07cd',
 
@@ -133,8 +133,8 @@ var projectAon = {
             illustrators: [ 'williams' ],
 
             zipSize: 2839095
-        }
-
+        }*/
+        
     ],
 
     /**

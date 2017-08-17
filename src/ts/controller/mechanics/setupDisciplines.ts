@@ -38,10 +38,13 @@ class SetupDisciplines {
      */
     public setupDisciplinesChoose() {
 
-         // Add the warning about the number of disciplines and weapons:
+         // Add the warning about the number of disciplines
         gameView.appendToSection( mechanicsEngine.getMechanicsUI('mechanics-setDisciplines-NDis') );
         $('#mechanics-nDisciplines').text( this.expectedNDisciplines );
+
+        // Add the warning about the number of weapons for weaponmastery
         gameView.appendToSection( mechanicsEngine.getMechanicsUI('mechanics-setDisciplines-NWeapons') );
+        $('#mechanics-setDisciplines-weaponsmax').text( this.getExpectedNWeaponsWeaponmastery() );
         
         // Add checkbox for each discipline:
         const self = this;
@@ -139,6 +142,18 @@ class SetupDisciplines {
         }
     }
 
+    /** 
+     * Returns the number of weapons to select for the Weaponmastery discipline.
+     * Only for magnakai books
+     */
+    private getExpectedNWeaponsWeaponmastery() : number {
+        let nWeapons = 3;
+        if( this.previousActionChart && this.previousActionChart.disciplines.contains( 'wpnmstry' ) )
+            // One more for this book
+            nWeapons = this.previousActionChart.weaponSkill.length + 1;
+        return nWeapons;
+    }
+
     /**
      * Click on a Weaponmastery weapon event handler
      * @param e The click event
@@ -151,9 +166,10 @@ class SetupDisciplines {
 
         if( selected ) {
             // Check the maximum weapons number
-            if( state.actionChart.weaponSkill.length >= 3 ) {
+            const nExpectedWeapons = this.getExpectedNWeaponsWeaponmastery();
+            if( !window.getUrlParameter('debug') && state.actionChart.weaponSkill.length >= nExpectedWeapons ) {
                 e.preventDefault();
-                alert( translations.text( 'only3Weapons' ) );
+                alert( translations.text( 'onlyNWeapons' , [nExpectedWeapons] ) );
                 return;
             }
             state.actionChart.weaponSkill.push( weaponId );
@@ -246,7 +262,7 @@ class SetupDisciplines {
         // Check weapons selected for magnakai books
         let showWeaponsWarning = false;
         if( state.book.bookNumber > 5 && state.actionChart.disciplines.contains( 'wpnmstry' ) && 
-            state.actionChart.weaponSkill.length < 3 ) {
+            state.actionChart.weaponSkill.length < this.getExpectedNWeaponsWeaponmastery() ) {
             enableNextPage = false;
             $('#mechanics-setDisciplines-NWeapons').show();
         }

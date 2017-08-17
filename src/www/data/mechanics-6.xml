@@ -1451,7 +1451,7 @@
             <choiceState section="all" set="disabled" />
             <randomTable>
                 <case from="0" to="5">
-                    <choiceState section="sect99" set="enabled" />
+                    <choiceState section="sect52" set="enabled" />
                 </case>
                 <case from="6" to="99">
                     <choiceState section="sect81" set="enabled" />

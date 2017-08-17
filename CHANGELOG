@@ -14,3 +14,6 @@
 1.7.1
 - Fixed bug with number of disciplines to choose if you have played previous books
 
+1.7.2
+- Fixed bug on book 6 / sect271: If the random number was 5 or less, no choice was activated
+
