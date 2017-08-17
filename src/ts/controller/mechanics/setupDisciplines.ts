@@ -121,15 +121,22 @@ class SetupDisciplines {
 
         var disable : boolean = false;
 
-        // If Weaponmastery is not selected, disable
-        if( !state.actionChart.disciplines.contains( 'wpnmstry' ) )
-            disable = true;
+        // If Weaponmastery is not selected, disable all weapons
+        if( !state.actionChart.disciplines.contains( 'wpnmstry' ) ) {
+            $( 'input.weaponmastery-chk' ).prop( 'disabled' , true );
+            return;
+        }
         
-        // If Weaponmastery was selected on a previous book, disable (do not allow to change the selected weapons)
-        if( this.previousActionChart && this.previousActionChart.disciplines.contains( 'wpnmstry' ) )
-            disable = true;
+        // By default, enable all weapons
+        $( 'input.weaponmastery-chk' ).prop( 'disabled' , false );
 
-        $( 'input.weaponmastery-chk' ).prop( 'disabled' , disable );
+        // If Weaponmastery was selected on a previous book, disable disable the weapons already
+        // selected on the previous book
+        if( !window.getUrlParameter('debug') && this.previousActionChart && 
+            this.previousActionChart.disciplines.contains( 'wpnmstry' ) ) {
+            for( let weaponId of this.previousActionChart.weaponSkill )
+                $('#' + weaponId + ' input[type=checkbox]').prop( 'disabled' , true );
+        }
     }
 
     /**

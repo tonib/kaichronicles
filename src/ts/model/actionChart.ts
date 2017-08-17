@@ -53,7 +53,7 @@ class ActionChart {
     
     /** 
      * The weapon codes for the "wepnskll" / "wpnmstry" disciplines.
-     * On kai series, it's a single weapon. On magnakai, they are 3
+     * On kai series, it's a single weapon. On magnakai, they are 3 or more
      */
     public weaponSkill : Array<string> = [];
 
