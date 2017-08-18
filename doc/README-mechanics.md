@@ -78,6 +78,21 @@ the current section
 * **[KAILEVEL]**: Current number of Kai disciplines of the player
 * **[ORIGINALCOMBATSKILL]**: The original combat skill (without modifiers)
 
+## Codes for Magnakai disciplines
+
+These are the codes for each Magnakai discipline, used by the mechanics, as the appear on the XMLs:
+
+* **Weaponmastery**: wpnmstry
+* **Animal Control**: anmlctrl
+* **Curing**: curing
+* **Invisibility**: invsblty
+* **Huntmastery**: hntmstry
+* **Pathsmanship**: pthmnshp
+* **Psi-surge**: psisurge
+* **Psi-screen**: psiscrn
+* **Nexus**: nexus
+* **Divination**: dvnation
+
 ## Rules description
 Description of the rules usage:
 

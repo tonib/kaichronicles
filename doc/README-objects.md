@@ -64,7 +64,8 @@ Optional. A extended description for the object, translated to some language
     ...
 </weapon>
 ```
-Optional. It references to some book image for the object
+Optional. It references to some book image for the object. The image should be at 
+/src/www/data/projectAon/[BOOKNUMBER]/ill_en/[IMAGENAME]
 
 ### "droppable" property
 ```xml

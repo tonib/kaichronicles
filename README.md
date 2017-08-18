@@ -100,6 +100,8 @@ apk to upload to the Google Play. Then "KEYSTOREPASSWORD" is the password for th
 it's not specified, an unsigned .apk will be generated. I suspect it's not a good idea to publish 
 keystores on github.
 
+A "guide" to develop new books can be found at [doc/README-developing.md](doc/README-developing.md)
+
 ### License
 
 MIT. This application uses the following third-party code:

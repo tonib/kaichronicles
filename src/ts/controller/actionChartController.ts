@@ -26,7 +26,7 @@ const actionChartController = {
      * @param fromUITable True if we are picking the object from the UI
      * @return True if the object has been get. False if the object cannot be get
      */
-    pick: function(objectId : string, showError : boolean, fromUITable : boolean ) : boolean {
+    pick: function(objectId : string, showError : boolean = false, fromUITable : boolean = false) : boolean {
         try {
             // Get object info
             var o = state.mechanics.getObject(objectId);
@@ -200,7 +200,7 @@ const actionChartController = {
      * Increase / decrease the meals number
      * @param count Number to increase. Negative to decrease 
      */
-    increaseMeals: function(count) {
+    increaseMeals: function(count : number) {
         try {
             state.actionChart.increaseMeals(count);
             var o = state.mechanics.getObject('meal');
