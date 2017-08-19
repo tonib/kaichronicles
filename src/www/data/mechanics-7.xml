@@ -27,7 +27,7 @@
             <setDisciplines />
         </section>
         
-        <section id="equipmnt" pickMaximum="5" pickMaximumMealsFactor="3">
+        <section id="equipmnt" pickMaximum="5">
             <!-- Do not pick 2 maps! -->
             <test not="true" hasObject="map" >
                 <pick objectId="map" />
@@ -42,7 +42,7 @@
 
             <object objectId="sword" />
             <object objectId="bow" />
-            <object objectId="quiver" arrows="6" />
+            <object objectId="quiver" count="6" />
             <object objectId="rope" />
             <object objectId="laumspurpotion4" />
             <object objectId="lantern" />
@@ -311,7 +311,7 @@
             <object objectId="axe" index="1" />
             <object objectId="bow" />
             <object objectId="spear" />
-            <object objectId="quiver" arrows="4" />
+            <object objectId="quiver" count="4" />
             <object objectId="meal" index="0" />
             <object objectId="meal" index="1" />
             <object objectId="meal" index="2" />

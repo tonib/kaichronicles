@@ -20,12 +20,6 @@ class EquipmentSectionMechanics {
             return;
         const nPickableObjects = parseInt( txtNPickableObjects );
 
-        // On book 2, two meals count as 1 object:
-        let mealsFactor = 1;
-        var txtMealsFactor : string = $sectionMechanics.attr( 'pickMaximumMealsFactor' );
-        if( txtMealsFactor )
-            mealsFactor = parseInt( txtMealsFactor );
-
         // Get the original objects on the section:
         var originalObjects = EquipmentSectionMechanics.getOriginalObjects( $sectionMechanics );
 
@@ -34,10 +28,10 @@ class EquipmentSectionMechanics {
             return;
 
         // Get the the number of picked objects
-        var nPickedObjects = EquipmentSectionMechanics.getNumberPickedObjects( $sectionMechanics , 
-            originalObjects , mealsFactor );
+        let pickedObjects = EquipmentSectionMechanics.getPickedObjects( $sectionMechanics , 
+            originalObjects );
 
-        if( nPickedObjects >= nPickableObjects )
+        if( pickedObjects.length >= nPickableObjects && !pickedObjects.contains(pickedObjectId) )
             // D'oh!
             throw translations.text( 'maximumPick' , [nPickableObjects] );
     }
@@ -90,19 +84,15 @@ class EquipmentSectionMechanics {
     }
 
     /**
-     * Get the current number of picked objects on the section
+     * Get the currently  picked objects on the section
      * @param {jQuery} $sectionMechanics XML tag with the current section mechanics
      * @param originalObjects Original objects on the section. Key is the object id and 
      * the value is the number of objects
-     * @returns Number of picked objects
+     * @returns The different picked objects ids
      */
-    private static getNumberPickedObjects( $sectionMechanics : any , originalObjects : { [objectId : string ] : number } , 
-        mealsFactor : number ) : number {
+    private static getPickedObjects( $sectionMechanics : any , originalObjects : { [objectId : string ] : number } ) 
+    : Array<string> {
         
-        // On book 2, two meals count as 1 object:
-        if( !mealsFactor )
-            mealsFactor = 1.0;
-
         // Get the current number of objects on the section:
         var sectionStateObjects = state.sectionStates.getSectionState().objects;
         var currentObjects : { [objectId : string ] : number } = {};
@@ -116,7 +106,7 @@ class EquipmentSectionMechanics {
         }
 
         // Check the currently number of picked objects
-        var nCurrentlyPickedObjects = 0;
+        let pickedObjects : Array<string> = [];
         for( objectId in originalObjects) {
 
             if ( !originalObjects.hasOwnProperty(objectId) )
@@ -127,19 +117,13 @@ class EquipmentSectionMechanics {
             var nCurrent = currentObjects[objectId];
             if( !nCurrent )
                 nCurrent = 0;
-
-            if( objectId == 'meal' ) {
-                // On book 2, two meals count as 1 object:
-                nOriginal = nOriginal / mealsFactor;
-                nCurrent = nCurrent / mealsFactor;
-            }
             
             var increase = nOriginal - nCurrent;
             if( increase > 0 )
-                nCurrentlyPickedObjects += increase;
+                pickedObjects.push( objectId );
         }
 
-        return nCurrentlyPickedObjects;
+        return pickedObjects;
     }
     
 }

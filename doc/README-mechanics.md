@@ -98,15 +98,15 @@ Description of the rules usage:
 
 ### section
 ```xml
-<section id="equipmnt" pickMaximum="2" pickMaximumMealsFactor="2" >
+<section id="equipmnt" pickMaximum="2" >
 ...
 </section>
 ```
 "section" is the root for rules to be executed on a given section. "id" is the section id.
 
 Property "pickMaximum" is optional. It's the maximum number of object you can pick on the section.
-On book 2, two meals count as one object. Property "pickMaximumMealsFactor" is a trick for that
-(optional).
+Objects are grouped by it's id. So if there are 2 meals, if you pick them both, it counts as a one object 
+picked. This is for "Equipment" sections, where meals and fireseeds are grouped.
 
 ### setSkills
 Game setup: The player selects the initial Endurance and Combat Skill
