@@ -66,20 +66,28 @@
             />
         </section>
 
+        <section id="sect1">
+            <pick objectId="powerkey" />
+        </section>
+
         <section id="sect5">
             <meal />
         </section>
 
         <section id="sect7">
-            <pick class="arrow" count="-100" />
+            <pick class="arrow" count="-[ARROWS]" />
         </section>
-
+        
         <section id="sect8">
+            <choiceState section="all" set="disabled" />
             <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
         </section>
 
         <section id="sect10">
-            <pick class="fireseed" count="-1" />
+            <drop objectId="fireseed" />
         </section>
 
         <section id="sect11">
@@ -93,7 +101,7 @@
                 <choiceState section="sect329" set="disabled" />
             </test>
         </section>
-
+        
         <section id="sect13">
             <test not="true" hasDiscipline="anmlctrl|psisurge">
                 <choiceState section="sect180" set="disabled" />
@@ -104,6 +112,7 @@
         </section>
 
         <section id="sect15">
+            <!-- TODO: Restore only weapons -->
             <restoreInventoryState restorePoint="book57nventoryLost" />
             <object objectId="kazanoudamulet" />
             <object objectId="laumspurpotion8" />
@@ -128,24 +137,30 @@
             <endurance count="-2" />
         </section>
 
-        <section id="sect19    ">
+        <section id="sect19">
+            <choiceState section="all" set="disabled" />
             <combat eludeTurn="3" />
             <!-- Unless you have the Magnakai Discipline of Huntmastery, deduct 3 points from your COMBAT SKILL for the first two rounds of combat -->
             <test not="true" hasDiscipline="hntmstry">
                 <combat combatSkillModifier="-3" />
                 <afterCombatTurn turn="2">
-                    <combat combatSkillModifier="+3" />
+                    <combat combatSkillModifier="0" />
                 </afterCombatTurn>
             </test>
+            <afterCombats>
+                <choiceState section="sect141" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect241" set="enabled" />
+            </afterElude>
         </section>
-
+        
         <section id="sect26">
-            <!-- TODO: If you have the Magnakai Discipline of Weaponmastery WITH SWORD -->
             <randomTable>
-                <test hasDiscipline="wpnmstry">
+                <test hasWeaponskillWith="sword">
                     <endurance count="-[RANDOM] - 1" />
                 </test>
-                <test not="true" hasDiscipline="wpnmstry">
+                <test not="true" hasWeaponskillWith="sword">
                     <endurance count="-[RANDOM] - 3" />
                 </test>
             </randomTable>
@@ -155,37 +170,41 @@
             <!-- CHECK: Psi-screen OR combact -->
             <test hasDiscipline="psiscrn">
                 <choiceState section="sect5" set="disabled" />
+                <disableCombats />
             </test>
             <test not="true" hasDiscipline="psiscrn">
-                <choiceState section="sect38" set="disabled" />
+                <choiceState section="all" set="disabled" />
                 <!-- Unless you have the Magnakai Discipline of Huntmastery, deduct 3 points from your COMBAT SKILL for the first three rounds of combat -->
-                <combat eludeTurn="3" />
                 <test not="true" hasDiscipline="hntmstry">
                     <combat combatSkillModifier="-3" />
-                    <afterCombatTurn turn="2">
-                        <combat combatSkillModifier="+3" />
+                    <afterCombatTurn turn="3">
+                        <combat combatSkillModifier="0" />
                     </afterCombatTurn>
                 </test>
+                <afterCombats>
+                    <choiceState section="sect5" set="enabled" />
+                </afterCombats>
             </test>
         </section>
-        
+
         <section id="sect28">
             <death />
         </section>
 
         <section id="sect31">
-            <object objectId="skeletonkey" />
-            <object objectId="parchment" />
+            <pick objectId="skeletonkey" />
+            <pick objectId="parchment" />
             <test not="true" canUseBow="true">
                 <choiceState section="sect266" set="disabled" />
             </test>
         </section>
-        
+
         <section id="sect32">
             <drop objectId="currentweapon" />
         </section>
 
         <section id="sect34">
+            <!-- Lets try the inverse (primate is KAILEVEL >= 4)
             <test not="true" hasDiscipline="invsblty">
                 <choiceState section="sect86" set="disabled" />
             </test>
@@ -196,7 +215,7 @@
             </test>
             <test not="true" expression="[KAILEVEL] >= 2">
                 <test not="true" hasDiscipline="anmlctrl">
-                    <!-- CHECK: If you have the Magnakai Discipline of Animal Control and have reached the Kai rank of Primate, turn to 130. -->
+                    <CHECK: If you have the Magnakai Discipline of Animal Control and have reached the Kai rank of Primate, turn to 130.>
                     <choiceState section="sect130" set="disabled" />
                 </test>
             </test>
@@ -207,6 +226,25 @@
                 </test>
             </test>
             <test not="true" hasObject="silverwhistle">
+                <choiceState section="sect233" set="disabled" />
+            </test>
+            -->
+            
+            <choiceState section="all" set="disabled" />
+            <choiceState section="sect233" set="enabled" />
+            <test hasDiscipline="invsblty">
+                <choiceState section="sect86" set="enabled" />
+                <choiceState section="sect233" set="disabled" />
+            </test>
+            <test expression="[KAILEVEL] >= 4">
+                <test hasDiscipline="anmlctrl">
+                    <!--CHECK: If you have the Magnakai Discipline of Animal Control and have reached the Kai rank of Primate, turn to 130.-->
+                    <choiceState section="sect130" set="enabled" />
+                    <choiceState section="sect233" set="disabled" />
+                </test>
+            </test>
+            <test hasObject="silverwhistle">
+                <choiceState section="sect347" set="enabled" />
                 <choiceState section="sect233" set="disabled" />
             </test>
         </section>
@@ -221,10 +259,12 @@
                     <choiceState section="sect246" set="enabled" />
                 </case>
             </randomTable>
-            <test expression="[KAILEVEL] >= 2">
-                <randomTableIncrement increment="1]" />
+            <test expression="[KAILEVEL] >= 4">
+                <randomTableIncrement increment="1" />
             </test>
         </section>
+        
+        <!-- REVISION: START HERE -->
         
         <section id="sect39">
             <choiceState section="all" set="disabled" />

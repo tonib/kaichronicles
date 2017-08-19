@@ -45,6 +45,9 @@ the "actionChartController" object:
 
 ## Develop sections
 
+I have a rule: Dont be restrictive with choices. If a choice is not selectable, disable it. If there are 2 choices selectable,
+let the player choose.
+
 So, for each book section, sequentially , do this:
 
 * Read the section

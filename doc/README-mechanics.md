@@ -77,6 +77,7 @@ the current section
 * **[MEALS]**: Number of meals on the action chart
 * **[KAILEVEL]**: Current number of Kai disciplines of the player
 * **[ORIGINALCOMBATSKILL]**: The original combat skill (without modifiers)
+* **[ARROWS]**: Current number of arrows on the quiver
 
 ## Codes for Magnakai disciplines
 
@@ -191,6 +192,9 @@ will be executed.
 * **not="true"**: This will negate the current test. So if all of these conditions are false,
   the inner rules will be executed
 * **isChoiceEnabled="sectionId"**: Is the choice for the given section enabled?
+* **hasWeaponType="weaponType"**: The player has some weapon of the given type?
+* **hasCircle="loreCircleId"**: The player has this Lore Circle (see loreCircle.ts for codes)
+* **hasWeaponskillWith="weaponType"** : The player has weaponskill / weaponmastery with the given weapon?
 
 ### choiceState
 ```xml

@@ -336,6 +336,23 @@ class ActionChart {
     }
 
     /**
+     * Check if the player has weaponskill with a given type of weapon
+     * @param weaponType Weapon type to check
+     * @return True if the player has weaponskill with that weapon
+     */
+    public hasWeaponskillWith( weaponType : string ) : boolean {
+        if( !this.disciplines.contains( 'wepnskll' ) && !this.disciplines.contains( 'wpnmstry' ) )
+            // Player has no Weaponskill
+            return false;
+
+        for( let w of this.weaponSkill )
+            if( w == weaponType )
+                return true;
+
+        return false;
+    }
+
+    /**
      * Get the selected weapon info
      * @return {Item} The current weapon info. null if the is player has no weapon
      */

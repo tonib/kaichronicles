@@ -579,12 +579,20 @@
 		
         <special id="kazanoudamulet">
             <name lang="en">Kazan-Oud Platinum Amulet</name>
-            <name lang="es">Amuleto de platino</name>
+            <description lang="en">
+                It will protect you from injury due to exposure to high temperatures
+            </description>
+
+            <name lang="es">Amuleto de Platino</name>
+            <description lang="es">
+                Te protegerá de los daños que puedan causarte las altas temperaturas
+            </description>
         </special>
 		
         <special id="skeletonkey">
             <name lang="en">Skeleton Key</name>
             <name lang="es">Llave de hueso</name>
+            <image book="1" name="small15.png" />
         </special>
 		
         <special id="parchment">
@@ -599,7 +607,16 @@
 
         <special id="powerkey">
             <name lang="en">Power-key</name>
-            <name lang="es">Llave de energía</name>
+            <description lang="en">
+                A gem the size of a small apple. It is a dull translucent red, but within its core a 
+                swirling mist of glittering sparks flickers with gold and silver fire
+            </description>
+
+            <name lang="es">Llave de Energía</name>
+            <description lang="es">
+                Una gema del tamaño de una manzana pequeña.Es de un color rojo translúcido y en su 
+                interior reverbera una mezcla resplandeciente de chispas doradas y plateadas
+            </description>
         </special>
 
         <special id="goldkey">
@@ -1124,6 +1141,7 @@
             </description>
 
             <usage class="endurance" increment="8" />
+            <image book="3" name="potion.png" />
         </object>
 		
         <object id="vialbluepills">

@@ -526,6 +526,11 @@ const mechanicsEngine = {
         if( circleId && LoreCircle.getCircle( circleId ).matchCircle( state.actionChart.disciplines ) )
             conditionStatisfied = true;
 
+        // Check if the player has weaponskill / weaponmastery with a given weapon
+        const hasWeaponskillWith : string = $(rule).attr('hasWeaponskillWith');
+        if( hasWeaponskillWith && state.actionChart.hasWeaponskillWith( hasWeaponskillWith ) )
+            conditionStatisfied = true;
+        
         // Check if the test should be inversed
         if( $(rule).attr('not') == 'true' )
             conditionStatisfied = !conditionStatisfied;
@@ -1165,6 +1170,8 @@ const mechanicsEngine = {
             .replaceAll( '[NUMBERPICKER]', numberPickerMechanics.getNumberPickerValue() )
             .replaceAll( '[COMBATSDURATION]', sectionState.combatsDuration() )
             .replaceAll( '[BOWBONUS]', state.actionChart.getBowBonus() )
+            // Current number of arrows
+            .replaceAll( '[ARROWS]', state.actionChart.arrows )
             ;
 
         // Extra randoms:
