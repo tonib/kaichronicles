@@ -56,8 +56,13 @@
             <object objectId="broadsword" />
 
             <chooseEquipment 
-                en-text="Pick the money and choose two objects before continue" 
-                es-text="Escoge el dinero y elige dos objetos antes de continuar"
+                en-text="Click on the Random Table link to get money before continue" 
+                es-text="Haz click en el link de la Tabla de la Suerte para obtener dinero antes de continuar"
+            />
+
+            <message 
+                en-text="You may take any two of the following:" 
+                es-text="Puedes coger hasta dos objetos:" 
             />
         </section>
 

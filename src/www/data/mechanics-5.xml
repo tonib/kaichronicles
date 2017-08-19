@@ -51,8 +51,13 @@
             <object objectId="shield" />
 
             <chooseEquipment 
-                en-text="Pick the money and choose up to four objects before continue" 
-                es-text="Escoge el dinero y elige hasta cuatro objetos antes de continuar"
+                en-text="Click on the Random Table link to get money before continue" 
+                es-text="Haz click en el link de la Tabla de la Suerte para obtener dinero antes de continuar"
+            />
+
+            <message 
+                en-text="You may take up to four of the following (both meals count as one object):" 
+                es-text="Puedes elegir hasta cuatro de los objetos (ambas comidas cuentan como un objeto):" 
             />
         </section>
 

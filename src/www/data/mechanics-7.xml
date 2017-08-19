@@ -56,8 +56,13 @@
             <object objectId="fireseed" index="2" />
 
             <chooseEquipment 
-                en-text="Pick the money and choose up to five objects before continue (all meals count as one object)" 
-                es-text="Escoge el dinero y elige hasta cinco objetos antes de continuar (todas las comidas cuentan como un objeto)"
+                en-text="Click on the Random Table link to get money before continue" 
+                es-text="Haz click en el link de la Tabla de la Suerte para obtener dinero antes de continuar"
+            />
+
+            <message 
+                en-text="You may take up to five of the following (all meals and fireseeds count as one object):" 
+                es-text="Puedes elegir hasta cinco de los objetos (todas las comidas y petardos cuentan como un objeto):" 
             />
         </section>
 

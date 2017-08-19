@@ -62,8 +62,13 @@
             <object objectId="shield" />
 
             <chooseEquipment 
-                en-text="Pick the money and choose up to six objects before continue" 
-                es-text="Escoge el dinero y elige hasta seis objetos antes de continuar"
+                en-text="Click on the Random Table link to get money before continue" 
+                es-text="Haz click en el link de la Tabla de la Suerte para obtener dinero antes de continuar"
+            />
+
+            <message 
+                en-text="You may take up to six of the following (all meals count as one object):" 
+                es-text="Puedes elegir hasta seis de los objetos (todas las comidas cuentan como un objeto):" 
             />
         </section>
 

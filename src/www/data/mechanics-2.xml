@@ -50,6 +50,7 @@
             <randomTable>
                 <pick class="money" count="[RANDOM] + 10" />
             </randomTable>
+
             <object objectId="sword" />
             <object objectId="shortsword" />
             <object objectId="meal" idx="0" />
@@ -64,8 +65,13 @@
             
             <!-- Choose equipment UI -->
             <chooseEquipment 
-                en-text="Pick the money and choose two objects before continue (both meals count as one object)" 
-                es-text="Escoge el dinero y elige dos objetos antes de continuar (ambas comidas cuentan como un objeto)"
+                en-text="Click on the Random Table link to get money before continue" 
+                es-text="Haz click en el link de la Tabla de la Suerte para obtener dinero antes de continuar"
+            />
+
+            <message 
+                en-text="You may take any two of the following (both meals count as one object):" 
+                es-text="Puedes coger hasta dos objetos (ambas comidas cuentan como un objeto):" 
             />
         </section>
 
