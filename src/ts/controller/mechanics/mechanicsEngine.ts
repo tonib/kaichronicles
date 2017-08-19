@@ -338,7 +338,7 @@ const mechanicsEngine = {
      * Choose player skills UI
      */
     setSkills: function() {
-        setupMechanics.setSkills();
+        SkillsSetup.setSkills();
     },
 
     /**

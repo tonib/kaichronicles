@@ -1,12 +1,14 @@
+/// <reference path="../../external.ts" />
+
 /** 
- * Game setup mechanics
+ * Player characteristics setup
  */
-var setupMechanics = {
+class SkillsSetup {
 
     /**
      * Choose player skills UI
      */
-    setSkills: function() {
+    public static setSkills() {
         // If the skills are already set, do nothing
         if( state.actionChart.combatSkill !== 0 && state.actionChart.endurance !== 0 )
             return;
@@ -18,7 +20,7 @@ var setupMechanics = {
         gameView.enableNextLink(false);
 
         // Book language inconsistencies: Spanish books say "ignore zero", english does not
-        var ignoreZero = ( state.book.language == "es" );
+        var ignoreZero = ( state.book.language == 'es' );
 
         // Combat skill
         if( state.actionChart.combatSkill !== 0 )
@@ -31,7 +33,7 @@ var setupMechanics = {
                 template.updateStatistics();
                 if( state.actionChart.combatSkill !== 0 && state.actionChart.endurance !== 0 )
                     gameView.enableNextLink(true);
-            }, ignoreZero);
+            }, ignoreZero, false);
         }
         
         // Endurance points
@@ -46,9 +48,8 @@ var setupMechanics = {
                 template.updateStatistics();
                 if( state.actionChart.combatSkill !== 0 && state.actionChart.endurance !== 0 )
                     gameView.enableNextLink(true);
-            }, ignoreZero);
+            }, ignoreZero, false);
         }
 
     }
-
-};
+}
