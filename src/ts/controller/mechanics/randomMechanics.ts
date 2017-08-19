@@ -197,7 +197,7 @@ const randomMechanics = {
 
         // Ugly hack: If we are on the 'equipment' section, check if all link has been clicked
         if( state.sectionStates.currentSection == 'equipmnt' )
-            setupMechanics.chooseEquipmentTestAllClicked();
+            EquipmentSectionMechanics.chooseEquipmentTestAllClicked();
 
         // Mark the rule as executed
         var r = randomValue, i = increment;

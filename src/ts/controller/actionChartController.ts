@@ -36,7 +36,7 @@ const actionChartController = {
             // Check if the section has restrictions about picking objects
             // This will throw an exception if no more objects can be picked
             if( fromUITable )
-                mechanicsEngine.checkMoreObjectsCanBePicked( objectId );
+                EquipmentSectionMechanics.checkMoreObjectsCanBePicked( objectId );
 
             // Try to pick the object
             if( !state.actionChart.pick( o ) )

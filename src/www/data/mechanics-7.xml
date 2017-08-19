@@ -27,7 +27,7 @@
             <setDisciplines />
         </section>
         
-        <section id="equipmnt" pickMaximum="5" pickMaximumMealsFactor="4">
+        <section id="equipmnt" pickMaximum="5" pickMaximumMealsFactor="3">
             <!-- Do not pick 2 maps! -->
             <test not="true" hasObject="map" >
                 <pick objectId="map" />

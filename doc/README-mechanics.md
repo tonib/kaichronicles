@@ -80,7 +80,7 @@ the current section
 
 ## Codes for Magnakai disciplines
 
-These are the codes for each Magnakai discipline, used by the mechanics, as the appear on the XMLs:
+These are the codes for each Magnakai discipline, used by the mechanics, as they appear on the XMLs:
 
 * **Weaponmastery**: wpnmstry
 * **Animal Control**: anmlctrl

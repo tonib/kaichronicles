@@ -4,6 +4,9 @@
   * Objects types
   * Others?
 - Equipment sections. When there are exceptions (all meals == one object), show a message always visible with that info
+- Report Spanish erratas:
+  * Book 7 / equipmnt: "El número máximo de Objetos Especiales que un Maestro del Kai puede llevar durante una aventura es 12".
+    The 12 max. on English starts at book 8
 
 FOR FUTURE (1.8+):
 - Implement the Kai Monastery "safekeeping" mentioned on the "Equipment" sections
@@ -80,3 +83,5 @@ Reminders:
   
 
 Work done on this commit:
+
+Nº averia: 61190585

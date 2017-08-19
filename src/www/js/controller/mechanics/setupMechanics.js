@@ -49,30 +49,6 @@ var setupMechanics = {
             }, ignoreZero);
         }
 
-    },
-
-    /** 
-     * Choose equipment UI 
-     */
-    chooseEquipment: function(rule) {
-        
-        // Add the UI:
-        gameView.appendToSection( mechanicsEngine.getMechanicsUI('mechanics-chooseEquipment') );
-        gameView.enableNextLink(false);
-        $('#mechanics-chooseEquipment-msg').text( mechanicsEngine.getRuleText( rule ) );
-
-        // Initial test. Other tests are in randomMechanics.onRandomTableMechanicsClicked()
-        setupMechanics.chooseEquipmentTestAllClicked();
-    },
-
-    /**
-     * Checks if all links on the Equipment section have been clicked
-     */
-    chooseEquipmentTestAllClicked: function() {
-        if( $('.action').not('.disabled').length === 0 ) {
-            $('#mechanics-chooseEquipment').hide();
-            gameView.enableNextLink(true);
-        }
     }
 
 };

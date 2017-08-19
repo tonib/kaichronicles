@@ -330,44 +330,6 @@ const mechanicsEngine = {
             mechanicsEngine.runChildRules( $(mechanicsEngine.onNumberPickerChoosed) );
     },
 
-    /**
-     * Check if some more object can be picked on the current section
-     * This will throw an exception if you cannot pick more objects
-     * @param {string} pickedObjectId The picked object id
-     */
-    checkMoreObjectsCanBePicked: function( pickedObjectId ) {
-
-        // Check if the section has restrictions about the number of pickable objects:
-        var $sectionMechanics = state.mechanics.getSection( state.sectionStates.currentSection );
-        if( !$sectionMechanics )
-            return;
-        var nPickableObjects = $sectionMechanics.attr('pickMaximum');
-        if( !nPickableObjects )
-            return;
-        nPickableObjects = parseInt(nPickableObjects);
-
-        // On book 2, two meals count as 1 object:
-        var mealsFactor = 1;
-        var txtMealsFactor = $sectionMechanics.attr( 'pickMaximumMealsFactor' );
-        if( txtMealsFactor )
-            mealsFactor = parseInt( txtMealsFactor );
-
-        // Get the original objects on the section:
-        var originalObjects = mechanicsEngine.getOriginalObjects( $sectionMechanics );
-
-        // If the object was not originally on the section, ignore it
-        if( !originalObjects[ pickedObjectId ] ) 
-            return;
-
-        // Get the the number of picked objects
-        var nPickedObjects = mechanicsEngine.getNumberPickedObjects( $sectionMechanics , 
-            originalObjects , mealsFactor );
-
-        if( nPickedObjects >= nPickableObjects )
-            // D'oh!
-            throw translations.text( 'maximumPick' , [nPickableObjects] );
-    },
-
     /************************************************************/
     /**************** RULES *************************************/
     /************************************************************/
@@ -392,7 +354,7 @@ const mechanicsEngine = {
      * TODO: This is weird, only for book 1? Fix this
      */
     chooseEquipment: function(rule) {
-        setupMechanics.chooseEquipment(rule);
+        EquipmentSectionMechanics.chooseEquipment(rule);
     },
 
     /**
@@ -1330,81 +1292,6 @@ const mechanicsEngine = {
         if( !text )
             text = '';
         return text;
-    },
-
-    /**
-     * Get the original objects on the section
-     * @returns {Object} Key is the object id and the value is the number of objects
-     */
-    getOriginalObjects: function( $sectionMechanics ) {
-
-        // Get the original objects on the section:
-        var childrenRules = $sectionMechanics.children();
-        var originalObjects = {};
-        for(var i=0; i<childrenRules.length; i++) {
-            var rule = childrenRules[i];
-            if( rule.nodeName == 'object' ) {
-                var objectid = $(rule).attr('objectId');
-                if( !originalObjects[objectid] )
-                    originalObjects[objectid] = 1;
-                else
-                    originalObjects[objectid] += 1;
-            }
-        }
-
-        return originalObjects;
-    },
-
-    /**
-     * Get the current number of picked objects on the section
-     * @param {jQuery} $sectionMechanics XML tag with the current section mechanics
-     * @param {Object} originalObjects Original objects on the section. Key is the object id and 
-     * the value is the number of objects
-     * @returns {number} Number of picked objects
-     */
-    getNumberPickedObjects: function( $sectionMechanics , originalObjects , mealsFactor ) {
-
-        // On book 2, two meals count as 1 object:
-        if( !mealsFactor )
-            mealsFactor = 1.0;
-
-        // Get the current number of objects on the section:
-        var sectionStateObjects = state.sectionStates.getSectionState().objects;
-        var currentObjects = {};
-        var objectId;
-        for(let i=0; i<sectionStateObjects.length; i++) {
-            objectId = sectionStateObjects[i].id;
-            if( !currentObjects[objectId] )
-                currentObjects[objectId] = 1;
-            else
-                currentObjects[objectId] += 1;
-        }
-
-        // Check the currently number of picked objects
-        var nCurrentlyPickedObjects = 0;
-        for( objectId in originalObjects) {
-
-            if ( !originalObjects.hasOwnProperty(objectId) )
-                continue;
-            
-            var nOriginal = originalObjects[objectId];
-
-            var nCurrent = currentObjects[objectId];
-            if( !nCurrent )
-                nCurrent = 0;
-
-            if( objectId == 'meal' ) {
-                // On book 2, two meals count as 1 object:
-                nOriginal = nOriginal / mealsFactor;
-                nCurrent = nCurrent / mealsFactor;
-            }
-            
-            var increase = nOriginal - nCurrent;
-            if( increase > 0 )
-                nCurrentlyPickedObjects += increase;
-        }
-
-        return nCurrentlyPickedObjects;
     },
 
     /**
