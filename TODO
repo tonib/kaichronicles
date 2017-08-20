@@ -1,5 +1,6 @@
 - Test controller: Test rules
 - Check reported bugs on Google play:
+  * Should be the healing kai discipline be enabled on magnakai books?
   * Saved games removed when adding new games
   * Objects types
   * Others?
@@ -7,6 +8,7 @@
 - Report Spanish erratas:
   * Book 7 / equipmnt: "El número máximo de Objetos Especiales que un Maestro del Kai puede llevar durante una aventura es 12".
     The 12 max. on English starts at book 8
+  * Book 7 / sect43: "Record them as Sabito on your Action Chart." is only on the English version
 - "resectSectionState" rule should be "resetSectionState"
 
 FOR FUTURE (1.8+):

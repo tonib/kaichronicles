@@ -264,8 +264,6 @@
             </test>
         </section>
         
-        <!-- REVISION: START HERE -->
-        
         <section id="sect39">
             <choiceState section="all" set="disabled" />
             <randomTable>
@@ -277,7 +275,19 @@
                 </case>
             </randomTable>
         </section>
-        
+
+        <section id="sect40">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <test not="true" expression="[COMBATSDURATION] >= 4">
+                    <choiceState section="sect248" set="enabled" />
+                </test>
+                <test expression="[COMBATSDURATION] >= 4">
+                    <choiceState section="sect160" set="enabled" />
+                </test>
+            </afterCombats>
+        </section>
+
         <section id="sect42">
             <endurance count="-3" />
             <test not="true" hasObject="sommerswerd">
@@ -287,7 +297,11 @@
                 <choiceState section="sect202" set="disabled" />
             </test>
         </section>
-        
+
+        <section id="sect43">
+            <!-- TODO: Should be the vial of blue pills replaced by a new object called "Sabito" ??? -->
+        </section>
+
         <section id="sect44">
             <endurance count="-3" />
         </section>
@@ -295,6 +309,9 @@
         <section id="sect45">
             <choiceState section="all" set="disabled" />
             <combat eludeTurn="3" />
+            <test hasCircle="circleLight">
+                <combat combatSkillModifier="+2" />
+            </test>
             <afterCombats>
                 <choiceState section="sect283" set="enabled" />
             </afterCombats>
@@ -304,10 +321,11 @@
         </section>
         
         <section id="sect46">
-            <test hasDiscipline="invsblty|pthmnshp|dvnation">
+            <!-- Dont be restrictive with the choices -->
+            <!--test hasDiscipline="invsblty|pthmnshp|dvnation">
                 <choiceState section="sect349" set="disabled" />
                 <choiceState section="sect163" set="disabled" />
-            </test>
+            </test-->
             <test not="true" hasDiscipline="invsblty|pthmnshp|dvnation">
                 <choiceState section="sect2" set="disabled" />
             </test>
@@ -328,7 +346,7 @@
         <section id="sect51">
             <death />
         </section>
-        
+
         <section id="sect53">
             <endurance count="-5" />
             <test not="true" hasObject="fireseed">
@@ -355,14 +373,14 @@
             <object objectId="axe" index="0" />
             <object objectId="axe" index="1" />
             <object objectId="bow" />
-            <object objectId="spear" />
+            <object objectId="spear" index="0" />
+            <object objectId="spear" index="1" />
             <object objectId="quiver" count="4" />
             <object objectId="meal" index="0" />
             <object objectId="meal" index="1" />
             <object objectId="meal" index="2" />
             <object objectId="meal" index="3" />
-            <object objectId="pouchadgana" />
-            <object objectId="flaskwine" />
+            <object objectId="bottlewine" />
             <test not="true" hasDiscipline="curing">
                 <choiceState section="sect129" set="disabled" />
             </test>
@@ -386,6 +404,13 @@
             </test>
         </section>
         
+        <section id="sect62">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
         <section id="sect63">
             <test not="true" hasDiscipline="invsblty">
                 <choiceState section="sect281" set="disabled" />
@@ -403,14 +428,24 @@
         </section>
         
         <section id="sect66">
-            <test not="true" canUseBow="true">
+            <test not="true" hasWeaponType="sword">
                 <choiceState section="sect252" set="disabled" />
+            </test>
+            <test hasWeaponType="sword">
+                <choiceState section="sect263" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect67">
+            <test not="true" canUseBow="true">
+                <choiceState section="sect175" set="disabled" />
             </test>
         </section>
 
         <section id="sect68">
             <!-- CHECK: complex -->
-            <choiceState section="all" set="disabled" />
+            <!-- Dont be restrictive with choices -->
+            <!--choiceState section="all" set="disabled" />
             <test hasDiscipline="nexus">
                 <choiceState section="sect124" set="enabled" />
             </test>
@@ -420,6 +455,12 @@
                 </test>
                 <choiceState section="sect298" set="enabled" />
                 <choiceState section="sect322" set="enabled" />
+            </test-->
+            <test not="true" hasDiscipline="nexus">
+                <choiceState section="sect124" set="disabled" />
+            </test>
+            <test not="true" hasObject="rope|largerope">
+                <choiceState section="sect182" set="disabled" />
             </test>
         </section>
         
@@ -436,15 +477,22 @@
         
         <section id="sect75">
             <choiceState section="all" set="disabled" />
-            <!-- TODO: you cannot make use of a shield or any two-handed weapon (i.e. Broadsword, Spear, Quarterstaff) during the combat -->
-            <combact enemyMultiplier="3" /> <!-- TODO: needed? -->
             <afterCombats>
-                <test not="true" expression="[COMBATSDURATION] >= 3">
-                    <choiceState section="sect248" set="disabled" />
+                <test not="true" expression="[COMBATSDURATION] > 3" >
+                    <choiceState section="sect248" set="enabled" />
                 </test>
-                <test expression="[COMBATSDURATION] >= 3">
-                    <choiceState section="sect160" set="disabled" />
+                <test expression="[COMBATSDURATION] > 3" >
+                    <choiceState section="sect160" set="enabled" />
                 </test>
+            </afterCombats>
+        </section>
+
+        <section id="sect76">
+            <choiceState section="all" set="disabled" />
+            <!-- TODO: you cannot make use of a shield or any two-handed weapon (i.e. Broadsword, Spear, Quarterstaff) during the combat -->
+            <combact enemyMultiplier="3" /> <!-- needed? YES (treble loses) -->
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
             </afterCombats>
         </section>
         
@@ -461,6 +509,7 @@
         </section>
         
         <section id="sect79">
+            <pick class="arrow" count="-1" />
             <test not="true" canUseBow="true">
                 <choiceState section="sect328" set="disabled" />
             </test>
@@ -474,12 +523,11 @@
             <object objectId="dagger" index="0" />
             <object objectId="dagger" index="1" />
             <object objectId="mace" />
-            <pick class="money" count="5" />
+            <pick class="money" count="6" />
         </section>
         
-        <section id="sect78">
+        <section id="sect81">
             <choiceState section="all" set="disabled" />
-            <combat/>
             <afterCombats>
                 <choiceState section="all" set="enabled" />
             </afterCombats>
@@ -489,25 +537,31 @@
             <test not="true" hasDiscipline="pthmnshp">
                 <choiceState section="sect65" set="disabled" />
             </test>
-            <test hasDiscipline="pthmnshp">
+            <!-- Dont be restrictive with the choices -->
+            <!--test hasDiscipline="pthmnshp">
                 <choiceState section="sect277" set="disabled" />
                 <choiceState section="sect30" set="disabled" />
-            </test>
+            </test-->
         </section>
         
         <section id="sect84">
             <death />
         </section>
         
+        <!-- REVISION: START HERE -->
+        
         <section id="sect85">
-            <!-- CHECK: complicata -->
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <choiceState section="all" set="enabled" />
+                <endurance count="-[RANDOM]" />
+            </randomTable>
+
+            <randomTableIncrement increment="+2" />
             <test hasDiscipline="hntmstry">
-                <test expression="[KAILEVEL] >= 2">
-                    <endurance count="-[RANDOM]" />
+                <test expression="[KAILEVEL] >= 4">
+                    <randomTableIncrement increment="-2" />
                 </test>
-            </test>
-            <test not="true" hasDiscipline="hntmstry" expression="[KAILEVEL] >= 2">
-                <endurance count="-[RANDOM] -2" />
             </test>
         </section>
         
@@ -754,6 +808,11 @@
             </test>
         </section>
 
+        <section id="sect129">
+            <!-- TODO: Implement adgana usage -->
+            <object objectId="pouchadgana" />
+        </section>
+
         <section id="sect131">
             <message id="msg-drop-weapon" 
                 en-text="Drop a weapon and the second item on your list of Backpack Items before continue" 
@@ -915,6 +974,10 @@
             <endurance count="-2" />
         </section>
         
+        <section id="sect157">
+            <drop objectId="fireseed" />
+        </section>
+
         <section id="sect158">
             <drop objectId="allmeals" />
             <message id="msg-drop-two-backpack" 
@@ -1568,10 +1631,10 @@
         </section>
         
         <section id="sect261">
-            <test not="true" hasObject="flaskwine|bottlewater">
+            <test not="true" hasObject="bottlewine|bottlewater">
                 <choiceState section="sect18" set="disabled" />
             </test>
-            <test hasObject="flaskwine|bottlewater">
+            <test hasObject="bottlewine|bottlewater">
                 <choiceState section="sect304" set="disabled" />
             </test>
         </section>
@@ -1742,7 +1805,7 @@
         
         <section id="sect297">
             <endurance count="-2" />
-            <test not="true" hasDiscipline="fireseed">
+            <test not="true" hasObject="fireseed">
                 <choiceState section="sect157" set="disabled" />
             </test>
         </section>
@@ -1903,6 +1966,7 @@
                 <case from="5" to="99">
                     <choiceState section="sect67" set="enabled" />
                 </case>
+                <pick class="arrow" count="-1" />
             </randomTable>
             <!-- TODO: If you have the Magnakai Discipline of Weaponmastery WITH bow -->
             <test hasDiscipline="wpnmstry">

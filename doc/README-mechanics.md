@@ -73,7 +73,7 @@ There are some keywords that can be used on expressions. They have the following
 the current section
 * **[COMBATSENEMYLOST]**: The number of endurance points lost by the enemies on combats on 
 the current section
-* **[COMBATSDURATION]**: The sum of turns of all combats on the section (combat duration)
+* **[COMBATSDURATION]**: The sum of number of turns of all combats on the section (combat duration)
 * **[MEALS]**: Number of meals on the action chart
 * **[KAILEVEL]**: Current number of Kai disciplines of the player
 * **[ORIGINALCOMBATSKILL]**: The original combat skill (without modifiers)
@@ -166,7 +166,8 @@ If the property "zeroAsTen" is "true", the zero value will be returned as ten.
 The "case" rules are executed conditionally for the random number got. Other rules than
 "case" are always executed. 
 
-The "randomTableIncrement" will add a bonus to the random value picked
+The "randomTableIncrement" will add a bonus to the random value picked. They are cumulative: If they are
+more than one randomTableIncrement executed, all the increments will be added.
 
 ### test
 ```xml
