@@ -388,12 +388,6 @@ class SectionRenderer {
         var illustrationContent = '';
         var creator = $illustration.find('> meta > creator').text();
         var description = $illustration.find('> meta > description').text();
-        // Fix single quote markup
-        description = description.replace('&rsquot;', '&rsquo;');
-        description = description.replace('&lsquot;', '&lsquo;');
-        // Fix double quote markup
-        description = description.replace('&rdquot;', '&rdquo;');
-        description = description.replace('&ldquot;', '&ldquo;');
 
         if (creator == 'Gary Chalk') { 
             // This app is only for the first 5 books and gives credit to only this 

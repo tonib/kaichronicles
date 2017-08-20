@@ -548,8 +548,6 @@
             <death />
         </section>
         
-        <!-- REVISION: START HERE -->
-        
         <section id="sect85">
             <choiceState section="all" set="disabled" />
             <randomTable>
@@ -582,11 +580,12 @@
             <test not="true" hasDiscipline="nexus">
                 <choiceState section="sect72" set="disabled" />
             </test>
-            <test hasDiscipline="nexus">
+            <!-- Dont be restrictive with the choices -->
+            <!--test hasDiscipline="nexus">
                 <choiceState section="sect126" set="disabled" />
                 <choiceState section="sect204" set="disabled" />
                 <choiceState section="sect320" set="disabled" />
-            </test>
+            </test-->
         </section>
         
         <section id="sect90">
@@ -606,8 +605,7 @@
         
         <section id="sect93">
             <choiceState section="all" set="disabled" />
-            <!-- TODO: The enemy is immune to Psi-surge -->
-            <combat noMindblast="true" combatSkillModifier="-4" />
+            <combat noMindblast="true" noPsiSurge="true" combatSkillModifier="-4" />
             <afterCombats>
                 <choiceState section="all" set="enabled" />
             </afterCombats>
@@ -636,6 +634,8 @@
                 <choiceState section="sect202" set="disabled" />
             </test>
         </section>
+        
+        <!-- REVISION: START HERE -->
         
         <section id="sect100">
             <numberPicker 

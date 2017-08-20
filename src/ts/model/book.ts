@@ -99,6 +99,13 @@ class Book {
         exp = /<ch\.(.+?)\/>/g;
         xmlText = xmlText.replace( exp , "&amp;$1;");
 
+        // Fix single quote markup
+        xmlText = xmlText.replace('&amp;rsquot;', '&amp;rsquo;');
+        xmlText = xmlText.replace('&amp;lsquot;', '&amp;lsquo;');
+        // Fix double quote markup
+        xmlText = xmlText.replace('&amp;rdquot;', '&amp;rdquo;');
+        xmlText = xmlText.replace('&amp;ldquot;', '&amp;ldquo;');
+
         // On book 4, the discipline id "mndblst" has been changed to "mndblast"
         // This will break the game mechanics, so keep it as "mndblst":
         xmlText = xmlText.replaceAll('"mndblast"', '"mndblst"');
