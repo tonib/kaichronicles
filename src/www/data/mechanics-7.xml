@@ -634,9 +634,7 @@
                 <choiceState section="sect202" set="disabled" />
             </test>
         </section>
-        
-        <!-- REVISION: START HERE -->
-        
+
         <section id="sect100">
             <numberPicker 
                 en-text="Choose the number"
@@ -646,10 +644,10 @@
                 es-actionButton="Elige"
                 />
             <numberPickerChoosed>
-                <test expression="[NUMBERPICKER] == 270">
-                    <goToSection section="sect270" />
+                <test expression="[NUMBERPICKER] == 34">
+                    <goToSection section="sect34" />
                 </test>
-                <test expression="[NUMBERPICKER] != 270">
+                <test expression="[NUMBERPICKER] != 34">
                     <toast 
                         en-text="Wrong number!"
                         es-text="¡Número incorrecto!" />
@@ -667,7 +665,9 @@
         </section>
         
         <section id="sect104">
-            <endurance count="-3" />
+            <test not="true" hasDiscipline="nexus">
+                <endurance count="-3" />
+            </test>
             <test not="true" canUseBow="true">
                 <choiceState section="sect225" set="disabled" />
             </test>
@@ -679,14 +679,21 @@
         
         <section id="sect107">
             <endurance count="-6" />
-            <test not="true" hasObject="sword">
+            <test not="true" hasWeaponType="sword">
                 <choiceState section="sect26" set="disabled" />
             </test>
-            <test not="true" hasObject="torch">
-                <test not="true" hasObject="tinderbox">
-                    <choiceState section="sect51" set="disabled" />
+
+            <!-- Lantern, OR torch and tinderbox -->
+            <choiceState section="sect51" set="disabled" />
+            <test hasObject="torch">
+                <test hasObject="tinderbox">
+                    <choiceState section="sect51" set="enabled" />
                 </test>
             </test>
+            <test hasObject="lantern">
+                <choiceState section="sect51" set="enabled" />
+            </test>
+
             <test not="true" hasObject="firesphere">
                 <choiceState section="sect145" set="disabled" />
             </test>
@@ -697,7 +704,7 @@
         </section>
         
         <section id="sect111">
-            <test not="true" hasDiscipline="psiscrn">
+            <test not="true" hasDiscipline="dvnation|psiscrn">
                 <choiceState section="sect68" set="disabled" />
             </test>
         </section>
@@ -739,7 +746,7 @@
             </test>
         </section>
         
-        <section id="sect118">-->
+        <section id="sect118">
             <endurance count="+[MAXENDURANCE]" />
             <choiceState section="all" set="disabled" />
             <combat noMindblast="true" />
@@ -756,10 +763,11 @@
             <test not="true" hasDiscipline="nexus">
                 <choiceState section="sect72" set="disabled" />
             </test>
-            <test hasDiscipline="nexus">
+            <!-- Dont be restrictive with the choices -->
+            <!--test hasDiscipline="nexus">
                 <choiceState section="sect126" set="disabled" />
                 <choiceState section="sect204" set="disabled" />
-            </test>
+            </test-->
         </section>
         
         <section id="sect121">
@@ -768,7 +776,8 @@
         
         <section id="sect122">
             <drop objectId="backpack" />
-            <drop objectId="allweapons" />
+            <!-- Only backpack, no weapons -->
+            <!--drop objectId="allweapons" /-->
         </section>
         
         <section id="sect124">
@@ -779,11 +788,10 @@
         
         <section id="sect126">
             <choiceState section="all" set="disabled" />
-            <test hasDiscipline="nexus">
-                <combat noMindblast="true" />
-            </test>
+            <!-- Different properties are cumulative: -->
+            <combat noMindblast="true" />
             <test not="true" hasDiscipline="nexus">
-                <combat noMindblast="true" dammageMultiplier="2" />
+                <combat enemyMultiplier="2" />
             </test>
             <afterCombats>
                 <choiceState section="sect147" set="enabled" />
@@ -813,12 +821,16 @@
             <object objectId="pouchadgana" />
         </section>
 
+        <!-- REVISION: START HERE -->
+
         <section id="sect131">
             <message id="msg-drop-weapon" 
                 en-text="Drop a weapon and the second item on your list of Backpack Items before continue" 
                 es-text="Deja un arma y el segundo objeto de la lista de artículos de la mochila antes de continuar"
             />
             <choiceState section="all" set="disabled" />
+            <!-- What if the player has a single Backpack item? Should drop the first? Ok, yes -->
+            <!-- But no WEAPONLIKE, they include Special items -->
             <onInventoryEvent>
                 <test expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] == 0 || [WEAPONLIKE-CNT-ON-SECTION] > 0">
                     <test expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] == 0 || [BACKPACK-ITEMS-CNT-ON-SECTION] > 0">

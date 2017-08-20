@@ -8,6 +8,8 @@
   * Book 7 / equipmnt: "El número máximo de Objetos Especiales que un Maestro del Kai puede llevar durante una aventura es 12".
     The 12 max. on English starts at book 8
   * Book 7 / sect43: "Record them as Sabito on your Action Chart." is only on the English version
+  * Book 7 / sect264, Spanish: "Now" should be "Ahora"
+  * Book 7 / sect120, Spanish: "desga-rrándote" should be "desgarrándote"
 - "resectSectionState" rule should be "resetSectionState"
 - Check book 9 illustrations (non Gary Chalk creator), because on SectionRenderer.illustration there is a condition about it
 

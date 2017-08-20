@@ -99,6 +99,7 @@ class Book {
         exp = /<ch\.(.+?)\/>/g;
         xmlText = xmlText.replace( exp , "&amp;$1;");
 
+        // This code was previously at SectionRenderer.illustration:
         // Fix single quote markup
         xmlText = xmlText.replace('&amp;rsquot;', '&amp;rsquo;');
         xmlText = xmlText.replace('&amp;lsquot;', '&amp;lsquo;');

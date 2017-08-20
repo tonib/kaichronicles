@@ -197,6 +197,20 @@ will be executed.
 * **hasCircle="loreCircleId"**: The player has this Lore Circle (see loreCircle.ts for codes)
 * **hasWeaponskillWith="weaponType"** : The player has weaponskill / weaponmastery with the given weapon?
 
+To make AND conditions, embed test tags. Example: Enable a choice if the player has the lantern, or torch AND tinderbox:
+```xml
+<!-- Lantern, OR torch and tinderbox -->
+<choiceState section="sect51" set="disabled" />
+<test hasObject="torch">
+    <test hasObject="tinderbox">
+        <choiceState section="sect51" set="enabled" />
+    </test>
+</test>
+<test hasObject="lantern">
+    <choiceState section="sect51" set="enabled" />
+</test>
+```
+
 ### choiceState
 ```xml
 <section id="sect23">
@@ -345,6 +359,28 @@ on this section, the chilren rules will be executed
 ```
 Add a control on the UI to select a number
 
+### goToSection
+```xml
+<numberPicker 
+    en-text="Choose the number"
+    es-text="Elige el número"
+    min="1" max="350" 
+    en-actionButton="Choose"
+    es-actionButton="Elige"
+    />
+<numberPickerChoosed>
+    <test expression="[NUMBERPICKER] == 34">
+        <goToSection section="sect34" />
+    </test>
+    <test expression="[NUMBERPICKER] != 34">
+        <toast 
+            en-text="Wrong number!"
+            es-text="¡Número incorrecto!" />
+    </test>
+</numberPickerChoosed>
+```
+
+Forces a jump to another section. "section" property specifies the section where to jump.
 
 ### special sections
 
