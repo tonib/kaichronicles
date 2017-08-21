@@ -821,28 +821,26 @@
             <object objectId="pouchadgana" />
         </section>
 
-        <!-- REVISION: START HERE -->
-
         <section id="sect131">
             <message id="msg-drop-weapon" 
                 en-text="Drop a weapon and the second item on your list of Backpack Items before continue" 
                 es-text="Deja un arma y el segundo objeto de la lista de artículos de la mochila antes de continuar"
             />
             <choiceState section="all" set="disabled" />
-            <!-- What if the player has a single Backpack item? Should drop the first? Ok, yes -->
-            <!-- But no WEAPONLIKE, they include Special items -->
+            <!-- What if the player has a single Backpack Item? Should drop the first? Nope, drop only the second -->
+            <!-- Use WEAPON, But no WEAPONLIKE (they include Special Items) -->
             <onInventoryEvent>
-                <test expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] == 0 || [WEAPONLIKE-CNT-ON-SECTION] > 0">
-                    <test expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] == 0 || [BACKPACK-ITEMS-CNT-ON-SECTION] > 0">
+                <test expression="[WEAPON-ITEMS-CNT-ON-ACTIONCHART] == 0 || [WEAPON-ITEMS-CNT-ON-SECTION] > 0">
+                    <test expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] &lt;= 1 || [BACKPACK-ITEMS-CNT-ON-SECTION] > 0">
                         <message id="msg-drop-weapon" op="hide" />
                         <choiceState section="all" set="enabled" />
                     </test>
                 </test>
-                <test not="true" expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] == 0 || [WEAPONLIKE-CNT-ON-SECTION] > 0">
+                <test not="true" expression="[WEAPON-ITEMS-CNT-ON-ACTIONCHART] == 0 || [WEAPON-ITEMS-CNT-ON-SECTION] > 0">
                     <message id="msg-drop-weapon" op="show" />
                     <choiceState section="all" set="disabled" />
                 </test>
-                <test not="true" expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] == 0 || [BACKPACK-ITEMS-CNT-ON-SECTION] > 0">
+                <test not="true" expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] &lt;= 1 || [BACKPACK-ITEMS-CNT-ON-SECTION] > 0">
                     <message id="msg-drop-weapon" op="show" />
                     <choiceState section="all" set="disabled" />
                 </test>
@@ -857,22 +855,27 @@
             <test not="true" hasDiscipline="dvnation">
                 <choiceState section="sect57" set="disabled" />
             </test>
-            <test hasDiscipline="dvnation">
+            <!-- Dont be restrictive with the choices -->
+            <!--test hasDiscipline="dvnation">
                 <choiceState section="sect203" set="disabled" />
                 <choiceState section="sect325" set="disabled" />
-            </test>
+            </test-->
         </section>
         
         <section id="sect137">
-            <pick class="arrow" count="-100" />
+            <pick class="arrow" count="-[ARROWS]" />
         </section>
         
         <section id="sect141">
-            <!-- TODO: Lore-circle of the Spirit, disabled -->
-                <choiceState section="sect25" set="enabled" />
+            <test not="true" hasCircle="circleSpirit">
+                <choiceState section="sect25" set="disabled" />
+            </test>
             <!-- else: disable -->
+            <!-- Dont be restrictive with the choices -->
+            <!--
                 <choiceState section="sect223" set="enabled" />
                 <choiceState section="sect308" set="enabled" />
+            -->
         </section>
         
         <section id="sect142">
@@ -883,10 +886,12 @@
                     <choiceState section="sect238" set="enabled" />
                 </test>
                 <test expression="[COMBATSDURATION] > 3" >
-                    <choiceState section="sect394" set="enabled" />
+                    <choiceState section="sect212" set="enabled" />
                 </test>
             </afterCombats>
         </section>
+        
+        <!-- REVISION: START HERE -->
         
         <section id="sect143">
             <test not="true" hasObject="fireseed">

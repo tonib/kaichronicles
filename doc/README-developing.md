@@ -45,9 +45,6 @@ the "actionChartController" object:
 
 ## Develop sections
 
-I have a rule: Dont be restrictive with choices. If a choice is not selectable, disable it. If there are 2 choices selectable,
-let the player choose.
-
 So, for each book section, sequentially , do this:
 
 * Read the section
@@ -58,6 +55,23 @@ So, for each book section, sequentially , do this:
 
 The implemented rules covers usually the 90% of the book, but there exceptions (a lot). If don't know how to implement a
 rule or it's directly not implemented, put a "TODO:" comment on the XML and it' will be implemented later by me.
+
+I have a rule: Don't be restrictive with choices. If a choice text explains a condition, and this condition is not satisfied, disable the choice. Otherwise, don't do interpretations, and don't disable the choice, let the player choose. Ex.:
+
+* If you have completed the Lore-circle of the Spirit, turn to 25.
+* If you wish to pick up the Silver Sceptre, turn to 223.
+* If you wish to leave it where it is and continue, turn to 308.
+
+If you have the "Lore-circle of the Spirit", don't disable choices to 223 and 308. I know this is subjective, and probably wrong,
+but let some freedom to the player. 
+
+Other example:
+
+* If you have any Fireseeds, turn to 10.
+* If you possess the Sommerswerd, turn to 317.
+* If you have neither of these Special Items, turn to 331.
+
+If you don't have Fireseeds, disable 10. If you don't have Sommerswerd, disable 317. If you have Fireseeds OR Sommerswerd, disable 331, because the choice text say it explicitly.
 
 ## Documentation
 
