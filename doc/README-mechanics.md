@@ -78,6 +78,8 @@ the current section
 * **[KAILEVEL]**: Current number of Kai disciplines of the player
 * **[ORIGINALCOMBATSKILL]**: The original combat skill (without modifiers)
 * **[ARROWS]**: Current number of arrows on the quiver
+* **[BOWBONUS]** : Bonus for bow usage: It's Weaponmastery bonus + bow object bonus (see 
+"silverbowduadon" object). It will be -4 if the player has no bow
 
 ## Codes for Magnakai disciplines
 
@@ -127,8 +129,8 @@ before continue")
 Pick an object. If the object cannot be picked (ex, the backpack is full), the object
 will be available on the section. 
 * **objectId**: The identifier of the object to pick.
-* **class**: If you are going to pick meals (="meal") or money (="money")
-* **count**: Only if class is "meal" or "money". Expression with the number of coins / meals
+* **class**: This for counters. If you are going to pick meals (="meal") money (="money") or "arrow"
+* **count**: Only if class is "meal", "money" or "arrow". Expression with the number of coins / meals
   to pick
 
 ### randomTable (has state) / case / randomTableIncrement
@@ -297,7 +299,7 @@ TODO: Continue here
 ```xml
 <disableCombats disabled="false" />
 ```
-By default disables all section combats. If the optional property "disabled" is set to "true", 
+By default disables all section combats. If the optional property "disabled" is set to "false", 
 all section combats will be re-enabled
 
 ### saveInventoryState / restoreInventoryState

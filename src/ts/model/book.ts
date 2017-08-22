@@ -101,11 +101,11 @@ class Book {
 
         // This code was previously at SectionRenderer.illustration:
         // Fix single quote markup
-        xmlText = xmlText.replace('&amp;rsquot;', '&amp;rsquo;');
-        xmlText = xmlText.replace('&amp;lsquot;', '&amp;lsquo;');
+        xmlText = xmlText.replaceAll('&amp;rsquot;', '&amp;rsquo;');
+        xmlText = xmlText.replaceAll('&amp;lsquot;', '&amp;lsquo;');
         // Fix double quote markup
-        xmlText = xmlText.replace('&amp;rdquot;', '&amp;rdquo;');
-        xmlText = xmlText.replace('&amp;ldquot;', '&amp;ldquo;');
+        xmlText = xmlText.replaceAll('&amp;rdquot;', '&amp;rdquo;');
+        xmlText = xmlText.replaceAll('&amp;ldquot;', '&amp;ldquo;');
 
         // On book 4, the discipline id "mndblst" has been changed to "mndblast"
         // This will break the game mechanics, so keep it as "mndblst":

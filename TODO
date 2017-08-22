@@ -12,6 +12,7 @@
   * Book 7 / sect120, Spanish: "desga-rrándote" should be "desgarrándote"
 - "resectSectionState" rule should be "resetSectionState"
 - Check book 9 illustrations (non Gary Chalk creator), because on SectionRenderer.illustration there is a condition about it
+- mechanics-5.xml / sect331: Add a message explaining the maps bug
 
 FOR FUTURE (1.8+):
 - Implement the Kai Monastery "safekeeping" mentioned on the "Equipment" sections
