@@ -1717,6 +1717,12 @@
                         es-text="¡Número incorrecto!" />
                 </test>
             </numberPickerChoosed>
+
+            <!-- cough cough... -->
+            <message 
+                en-text="WARNING: There is an error on the map. The city of Chula should have a flag." 
+                es-text="ATENCIÓN: Hay un error en el mapa. La ciudad de Chula debería tener una bandera." 
+            />
         </section>
 
         <section id="sect333">
