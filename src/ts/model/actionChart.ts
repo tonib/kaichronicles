@@ -75,6 +75,7 @@ class ActionChart {
         if( window.getUrlParameter('debug') ) {
             this.endurance = this.currentEndurance = 25;
             this.combatSkill = 15;
+            this.manualRandomTable = true;
             if( state.book.bookNumber <= 5 ) {
                 // debug data for kai series
                 this.disciplines = [ 'camflage' , 'hunting' , 'sixthsns' , 'healing' , 'wepnskll' ];

@@ -10,10 +10,14 @@
   * Book 7 / sect43: "Record them as Sabito on your Action Chart." is only on the English version
   * Book 7 / sect264, Spanish: "Now" should be "Ahora"
   * Book 7 / sect120, Spanish: "desga-rrándote" should be "desgarrándote"
+  * Book 7 / sect182, Spanish: " enlazar la em-puñadura de la Espada"
+  * Book 7 / sect186, Spanish: "lanza" should be "Lanza"
+  
 - "resectSectionState" rule should be "resetSectionState"
 - Check book 9 illustrations (non Gary Chalk creator), because on SectionRenderer.illustration there is a condition about it
 
 FOR FUTURE (1.8+):
+- Add button to explain combat ratio
 - Implement the Kai Monastery "safekeeping" mentioned on the "Equipment" sections
 - Allow to select the current bow
 - Allow to export / import saved games to the SD card
@@ -88,5 +92,3 @@ Reminders:
   
 
 Work done on this commit:
-
-Nº averia: 61190585

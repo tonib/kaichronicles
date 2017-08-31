@@ -1225,8 +1225,6 @@
                 <choiceState section="sect225" set="disabled" />
             </test>
         </section>
-
-        <!-- REVISION: START HERE -->
         
         <section id="sect178">
             <choiceState section="all" set="disabled" />
@@ -1247,11 +1245,11 @@
         </section>
         
         <section id="sect179">
-            <choiceState section="sect297" set="disable" />
-            <test not="true" hasDiscipline="psisurge" >
-                <test expression="[KAILEVEL] >= 2">
-                    <choiceState section="sect134" set="disabled" />
-                    <choiceState section="sect297" set="enabled" />
+            <choiceState section="sect134" set="disabled" />
+            <test hasDiscipline="psisurge" >
+                <test expression="[KAILEVEL] >= 4">
+                    <choiceState section="sect297" set="disabled" />
+                    <choiceState section="sect134" set="enabled" />
                 </test>
             </test>
         </section>
@@ -1260,22 +1258,28 @@
             <test not="true" canUseBow="true">
                 <choiceState section="sect206" set="disabled" />
             </test>
-            <test not="true" hasDiscipline="XXX" hasObject="XXX">
+            <!--test not="true" hasDiscipline="XXX" hasObject="XXX">
                 <choiceState section="sect332" set="disabled" />
             </test>
             <test not="true" hasDiscipline="XXX" hasObject="XXX">
                 <choiceState section="sect69" set="disabled" />
-            </test>
+            </test-->
         </section>
-        
+
+        <section id="sect182">
+            <object objectId="sword" />
+        </section>
+
         <section id="sect184">
+            <!-- TODO: Sabito? -->
             <test not="true" hasObject="vialbluepills">
                 <choiceState section="sect230" set="disabled" />
             </test>
-            <test hasObject="vialbluepills">
+            <!-- Dont be restrictive with the choices -->
+            <!--test hasObject="vialbluepills">
                 <choiceState section="sect313" set="disabled" />
                 <choiceState section="sect153" set="disabled" />
-            </test>
+            </test-->
         </section>
         
         <section id="sect185">
@@ -1291,6 +1295,7 @@
         </section>
         
         <section id="sect186">
+            <object objectId="spear" />
             <object objectId="silverwhistle" />
         </section>
         
@@ -1298,10 +1303,11 @@
             <test not="true" hasDiscipline="dvnation">
                 <choiceState section="sect205" set="disabled" />
             </test>
-            <test hasDiscipline="dvnation">
+            <!-- Dont be restrictive with the choices -->
+            <!--test hasDiscipline="dvnation">
                 <choiceState section="sect79" set="disabled" />
                 <choiceState section="sect95" set="disabled" />
-            </test>
+            </test-->
             <test not="true" canUseBow="true">
                 <choiceState section="sect79" set="disabled" />
             </test>
@@ -1315,6 +1321,10 @@
             <endurance count="-2" />
         </section>
         
+        <section id="sect191">
+            <drop objectId="fireseed" />
+        </section>
+
         <section id="sect197">
             <test not="true" canUseBow="true">
                 <choiceState section="sect266" set="disabled" />
@@ -1338,7 +1348,7 @@
         
         <section id="sect202">
             <choiceState section="all" set="disabled" />
-            <combat />
+            <combat noMindblast="true" />
             <afterCombats>
                 <choiceState section="all" set="enabled" />
             </afterCombats>
@@ -1351,6 +1361,7 @@
         </section>
         
         <section id="sect206">
+            <pick class="arrow" count="-1" />
             <choiceState section="all" set="disabled" />
             <combat />
             <afterCombats>
@@ -1364,10 +1375,10 @@
         </section>
         
         <section id="sect208">
-            <test not="true" hasObject="rope">
+            <test not="true" hasObject="rope|largerope">
                 <choiceState section="sect310" set="disabled" />
             </test>
-            <test hasObject="rope">
+            <test hasObject="rope|largerope">
                 <choiceState section="sect211" set="disabled" />
             </test>
         </section>
@@ -1384,7 +1395,8 @@
         <section id="sect214">
             <choiceState section="all" set="disabled" />
             <choiceState section="sect277" set="enabled" />
-            <test hasDiscipline="psisurge">
+            <!-- Why Psi-Surge ? -->
+            <!--test hasDiscipline="psisurge">
                 <choiceState section="sect114" set="enabled" />
             </test>
             <test not="true" hasDiscipline="psisurge">
@@ -1397,8 +1409,18 @@
                 <afterCombats>
                     <choiceState section="sect277" set="enabled" />
                 </afterCombats>
+            </test-->
+            <!-- TODO: No object bonus should be added on this combat -->
+            <combat noMindblast="true" noPsiSurge="true" />
+            <test not="true" hasDiscipline="nexus">
+                <combat noWeapon="true" />
             </test>
+            <afterCombats>
+                <choiceState section="sect114" set="enabled" />
+            </afterCombats>
         </section>
+        
+        <!-- REVISION: START HERE -->
         
         <section id="sect216">
             <!-- TODO: Lore-circle of the Spirit, disabled -->

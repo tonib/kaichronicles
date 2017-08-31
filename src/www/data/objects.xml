@@ -1160,6 +1160,11 @@
             <name lang="es">Bolsa con adgana</name>
         </object>
 
+        <object id="redrobe">
+            <name lang="en">Red Robe</name>
+            <name lang="es">Túnica con capucha</name>
+        </object>
+
         <!-- OTHERS -->
 
         <!-- This not really an object, but needed for mechanics -->
