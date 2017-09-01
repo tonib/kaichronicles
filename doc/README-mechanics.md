@@ -293,6 +293,18 @@ the following properties:
 * **enemyTurnLoss="-number"** Extra E.P. lost by the enemy each turn
 * **turnLoss="-number"** Extra E.P. lost by LW each turn
 
+Different combat tags with different attributes are cumulative. Different combat tags with the same attribute will
+replace that value. Ex:
+
+```xml
+<!-- Cumulative effects -->
+<combat noMindblast="true" />
+<combat mindforceEP="-2" />
+<!-- Replacement -->
+<combat noMindblast="true" />
+<combat noMindblast="false" />
+```
+
 TODO: Continue here
 
 ### disableCombats

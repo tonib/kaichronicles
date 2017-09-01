@@ -611,6 +611,10 @@
             </afterCombats>
         </section>
 
+        <section id="sect96">
+            <pick objectId="sword" />
+        </section>
+
         <section id="sect97">
             <test not="true" hasObject="fireseed">
                 <choiceState section="sect10" set="disabled" />
@@ -704,6 +708,7 @@
         </section>
         
         <section id="sect111">
+            <!-- TODO: Check all paths where you get the sword have a object tag with the sword -->
             <test not="true" hasDiscipline="dvnation|psiscrn">
                 <choiceState section="sect68" set="disabled" />
             </test>
@@ -1420,31 +1425,29 @@
             </afterCombats>
         </section>
         
-        <!-- REVISION: START HERE -->
-        
         <section id="sect216">
             <!-- TODO: Lore-circle of the Spirit, disabled -->
-                <choiceState section="sect244" set="enabled" />
+            <test not="true" hasCircle="circleSolaris">
+                <choiceState section="sect244" set="disabled" />
+            </test>
+            <!-- Dont be restrictive with choices -->
             <!-- else: disable -->
-                <choiceState section="sect295" set="enabled" />
-                <choiceState section="sect343" set="enabled" />
+                <!--choiceState section="sect295" set="enabled" />
+                <choiceState section="sect343" set="enabled" /-->
         </section>
         
         <section id="sect219">
             <endurance count="-6" />
-            <test hasDiscipline="curing">
-                <combat noWeapon="true" />
-            </test>
+
+            <choiceState section="all" set="disabled" />
             <test not="true" hasDiscipline="curing">
-                <combat noWeapon="true" enemyMultiplier="2" />
+                <combat enemyMultiplier="2" />
             </test>
-            <afterCombatTurn turn="3">
-                <test hasDiscipline="curing">
-                    <combat />
-                </test>
-                <test not="true" hasDiscipline="curing">
-                    <combat enemyMultiplier="2" />
-                </test>
+            <!-- Combat tag modifiers with different attributtes are cummulative -->
+            <combat noWeapon="true" />
+            <afterCombatTurn turn="2">
+                <!-- Combat tag modifiers with the same attributte are replaced -->
+                <combat noWeapon="false" />
             </afterCombatTurn>
             <afterCombats>
                 <choiceState section="all" set="enabled" />
@@ -1474,30 +1477,19 @@
             <endurance count="-2" />
             <endurance count="-1" />
         </section>
-        
-        <section id="sect236">
-            <test not="true" hasDiscipline="pthmnshp">
-                <choiceState section="sect139" set="disabled" />
-            </test>
-            <test hasDiscipline="pthmnshp">
-                <choiceState section="sect187" set="disabled" />
-                <choiceState section="sect101" set="disabled" />
-            </test>
-        </section>
+
         <section id="sect225">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="6">
+                <case from="-99" to="6">
                     <choiceState section="sect196" set="enabled" />
                 </case>
                 <case from="7" to="99">
                     <choiceState section="sect112" set="enabled" />
                 </case>
+                <pick class="arrow" count="-1" />
             </randomTable>
-            <!-- TODO: If you have the Magnakai Discipline of Weaponmastery WITH bow -->
-            <test hasDiscipline="wpnmstry">
-                <randomTableIncrement increment="+3" />
-            </test>
+            <randomTableIncrement increment="[BOWBONUS]" />
         </section>
         
         <section id="sect226">
@@ -1523,18 +1515,28 @@
             <test not="true" hasDiscipline="pthmnshp">
                 <choiceState section="sect330" set="disabled" />
             </test>
-            <test hasDiscipline="pthmnshp">
+            <!-- Dont be restrictive with the choices -->
+            <!--test hasDiscipline="pthmnshp">
                 <choiceState section="sect20" set="disabled" />
                 <choiceState section="sect92" set="disabled" />
-            </test>
+            </test-->
         </section>
         
+        <section id="sect230">
+            <drop objectId="vialbluepills" />
+        </section>
+
         <section id="sect232">
             <test not="true" canUseBow="true">
                 <choiceState section="sect152" set="disabled" />
             </test>
+            <choiceSelected section="sect152">
+                <pick class="arrow" count="-1" />
+            </choiceSelected>
         </section>
         
+        <!-- REVISION: START HERE -->
+
         <section id="sect233">
             <!-- TODO: If you choose to use Mindblast or Psi-surge during combat, double all ENDURANCE point losses sustained by the enemy. --> 
             <choiceState section="all" set="disabled" />
@@ -1562,6 +1564,16 @@
             </test>
         </section>
         
+        <section id="sect236">
+            <test not="true" hasDiscipline="pthmnshp">
+                <choiceState section="sect139" set="disabled" />
+            </test>
+            <test hasDiscipline="pthmnshp">
+                <choiceState section="sect187" set="disabled" />
+                <choiceState section="sect101" set="disabled" />
+            </test>
+        </section>
+
         <section id="sect237">
             <death />
         </section>
