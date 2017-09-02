@@ -313,7 +313,10 @@
 
         // *************** SETUP ***************
 
-        if( window.getUrlParameter('debug') ) {
+        // Are we on debug mode?
+        var debugMode = ( window.getUrlParameter('debug') == 'true' );
+
+        if( debugMode ) {
             // On debug mode, disable the cache (to always reload the books xml)
             console.log('Debug mode: cache disabled');
             $.ajaxSetup({ cache: false });
@@ -340,10 +343,17 @@
           .then( function() {
               try {
                 console.log('Real setup started');
+
                 // Then do the real application setup
                 state.setupDefaultLanguage();
                 template.setup();
                 routing.setup();
+
+                if( debugMode && state.existsPersistedState() ) {
+                    // If we are developing a book, avoid to press the "Continue game"
+                    routing.redirect( 'setup' );
+                }
+
               }
               catch(e) {
                 // d'oh!
