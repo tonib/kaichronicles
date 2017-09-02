@@ -1847,8 +1847,6 @@
         <section id="sect275">
             <death/>
         </section>
-        
-        <!-- REVISION: START HERE -->
 
         <section id="sect276">
             <pick class="arrow" count="-1" />
@@ -1856,7 +1854,11 @@
                 <choiceState section="sect50" set="disabled" />
             </test>
         </section>
-        
+
+        <section id="sect279">
+            <object objectId="sword" />
+        </section>
+
         <section id="sect280">
             <choiceState section="all" set="disabled" />
             <combat />
@@ -1874,16 +1876,19 @@
             <test not="true" hasDiscipline="nexus">
                 <endurance count="-8" />
             </test>
-            <test asDiscipline="nexus">
+            <test hasDiscipline="nexus">
                 <endurance count="-6" />
             </test>
         </section>
         
+        <!-- REVISION: START HERE -->
+        
         <section id="sect285">
             <choiceState section="all" set="disabled" />
-            <test hasDiscipline="curing">
+            <!-- This is not needed -->
+            <!--test hasDiscipline="curing">
                 <combat />
-            </test>
+            </test-->
             <test not="true" hasDiscipline="curing">
                 <combat enemyMultiplier="2" />
             </test>

@@ -155,7 +155,7 @@ class Translations {
         'aboutKaiChronicles' : 'Mecánicas del juego escritas por Toni Bennasar y Timendum. El código está bajo licencia MIT. Contien partes de código de <a href="https://lonewolfadventures.projectaon.org">Lone Wolf Adventures</a>, creado por Liquid State Limited.',
         'distribution' : 'Distribución',
         'distributionInfo' : 'Libro distribuido por el <a href="https://www.projectaon.org">Proyecto Aon</a>, bajo la <a href="#projectAonLicense">licencia del Proyecto Aon</a>.',
-        'about-authors' : 'Sobre los autores',
+        'about-authors' : 'Sobre los autores del libro',
         
         //////////////////////////////////////
         // Main menu
