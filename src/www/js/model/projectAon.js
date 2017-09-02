@@ -24,6 +24,9 @@ var projectAon = {
             // Illustrators folders to download
             illustrators: [ 'chalk' ],
 
+            // Authors biographies (.inc files in [LANGUAGECODE]/xml )
+            biographies: [ 'jdbiolw' , 'gcbiolw' ],
+
             // Zip size, in bytes
             zipSize: 4887076
         },
@@ -38,6 +41,8 @@ var projectAon = {
 
             illustrators: [ 'chalk' ],
 
+            biographies: [ 'jdbiolw' , 'gcbiolw' ],
+
             zipSize: 5117979
         }, 
 
@@ -50,6 +55,8 @@ var projectAon = {
             code_es: '03lcdk',
 
             illustrators: [ 'chalk' ],
+
+            biographies: [ 'jdbiolw' , 'gcbiolw' ],
 
             zipSize: 4178493
         }, 
@@ -64,6 +71,8 @@ var projectAon = {
 
             illustrators: [ 'chalk' ],
 
+            biographies: [ 'jdbiolw' , 'gcbiolw' ],
+
             zipSize: 4408246
         }, 
 
@@ -77,6 +86,8 @@ var projectAon = {
 
             illustrators: [ 'chalk' ],
 
+            biographies: [ 'jdbiolw' , 'gcbiolw' ],
+
             zipSize: 4183069
         },
 
@@ -89,6 +100,8 @@ var projectAon = {
             code_es: '06lpdlc',
 
             illustrators: [ 'chalk' ],
+
+            biographies: [ 'jdbiolw' , 'gcbiolw' ],
 
             zipSize: 3088890
         }
@@ -106,6 +119,8 @@ var projectAon = {
 
             illustrators: [ 'chalk' ],
 
+            biographies: [ 'jdbiolw' , 'gcbiolw' ],
+
             zipSize: 3129146
         },
 
@@ -118,6 +133,8 @@ var projectAon = {
             code_es: '08ljdlh',
 
             illustrators: [ 'chalk' ],
+
+            biographies: [ 'jdbiolw' , 'gcbiolw' ],
 
             zipSize: 3537081
         },
@@ -132,6 +149,8 @@ var projectAon = {
 
             illustrators: [ 'williams' ],
 
+            biographies: [ 'jdbiolw' , 'bwbiolw' ],
+            
             zipSize: 2839095
         }
         

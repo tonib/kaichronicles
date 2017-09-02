@@ -11,13 +11,14 @@ function BookData( bookNumber ) {
 
     this.bookNumber = bookNumber;
 
-    var bookMetadata = projectAon.supportedBooks[ i - 1 ];
+    /** Metadata about the book */
+    this.bookMetadata = projectAon.supportedBooks[ i - 1 ];
     /** The english book code */
-    this.enCode = bookMetadata.code_en;
+    this.enCode = this.bookMetadata.code_en;
     /** The spanish book code */
-    this.esCode = bookMetadata.code_es;
+    this.esCode = this.bookMetadata.code_es;
     /** Array with illustrations authors directories names */
-    this.illAuthors = bookMetadata.illustrators;
+    this.illAuthors = this.bookMetadata.illustrators;
 }
 
 /**
@@ -53,6 +54,16 @@ BookData.prototype.downloadXml = function(language) {
     var sourcePath = BookData.SVN_ROOT + '/' + language + '/xml/' + 
         xmlFileName;
     var targetPath = this.getBookDir() + '/' + xmlFileName;
+    var svnParams = [ 'export' , sourcePath , targetPath ];
+    BookData.runSvnCommand( svnParams );
+}
+
+/**
+ * Download an author biography file
+ */
+BookData.prototype.downloadAuthorBio = function(language, bioFileName) {
+    var sourcePath = BookData.SVN_ROOT + '/' + language + '/xml/' + bioFileName + '.inc';
+    var targetPath = this.getBookDir() + '/' + bioFileName + '-' + language + '.inc';
     var svnParams = [ 'export' , sourcePath , targetPath ];
     BookData.runSvnCommand( svnParams );
 }
@@ -102,14 +113,25 @@ BookData.prototype.zipBook = function() {
 }
 
 BookData.prototype.downloadBookData = function() {
+
     fs.mkdirSync( BookData.TARGET_ROOT + '/' + this.bookNumber );
+
+    // Download authors biographies
+    this.bookMetadata.biographies.forEach( (authorBio) => {
+        this.downloadAuthorBio('en', authorBio);
+        this.downloadAuthorBio('es', authorBio);
+    });
+
     this.downloadCover();
+
     this.downloadXml('en');
     this.downloadXml('es');
+
     this.illAuthors.forEach( (author) => {
         this.downloadIllustrations('en' , author);
         this.downloadIllustrations('es' , author);
     });
+
     this.downloadCombatTablesImages('en');
     this.downloadCombatTablesImages('es');
 

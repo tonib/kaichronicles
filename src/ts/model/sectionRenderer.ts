@@ -394,9 +394,11 @@ class SectionRenderer {
     private illustration($illustration : any, level : number) : string {
         
         const creator : string = $illustration.find('> meta > creator').text();
-        if( !SectionRenderer.toRenderIllAuthors.contains( creator ) )
+        if( !SectionRenderer.toRenderIllAuthors.contains( creator ) ) {
             // Author images not distributed
+            console.log( 'Illustration of ' + creator + ' author not rendered');
             return '';
+        }
 
         var illustrationContent = '';
         var description = $illustration.find('> meta > description').text();
