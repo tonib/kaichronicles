@@ -49,7 +49,7 @@ class Book {
      * @param xmlText The original XML
      * @return The fixed XML
      */
-    private static fixXml(xmlText : string) : string {
+    public static fixXml(xmlText : string) : string {
 
         // Code taken from Lone Wolf Adventures, by Liquid State Limited.
 
@@ -137,6 +137,40 @@ class Book {
             catch(e) {
                 throw e;
             }
+        });
+    }
+
+    /**
+     * Start promises to download authors info
+     * Added on v 1.8
+     * @returns The download promises. The promises text is the author XML bio, fixed
+     */
+    public downloadAuthorsBio() : Array<Promise<string>> {
+
+        try {
+            let promises : Array<Promise<string>> = [];
+            for( let authorId of projectAon.supportedBooks[this.bookNumber - 1].biographies ) {
+                promises.push( this.downloadAuthorInfo( authorId ) );
+            }
+
+            return promises;
+        }
+        catch(ex) {
+            console.log(ex);
+            return null;
+        }
+    }
+
+    /**
+     * Start a promise to download an author info
+     * @param authorId The author id (ex. "jdbiolw")
+     * @returns The download promise. The promise text is the author XML bio, fixed
+     */
+    private downloadAuthorInfo( authorId : string ) : Promise<string> {
+        const authorFileUrl = Book.getBaseUrl() + this.bookNumber + '/' + authorId + '-' + this.language + '.inc';
+        return $.ajax({
+            url: authorFileUrl,
+            dataType: "text"
         });
     }
 

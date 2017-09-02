@@ -17,3 +17,6 @@
 1.7.2
 - Fixed bug on book 6 / sect271: If the random number was 5 or less, no choice was activated
 
+1.8
+- Book 7 available
+- Show authors biography

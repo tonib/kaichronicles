@@ -13,6 +13,7 @@
   * Book 7 / sect186, Spanish: "lanza" should be "Lanza"
   * Book 7 / sect245, Spanish: "pecho, derri-bándote con su peso"
   * Book 7 / sect264, Spanish: "Now" should be "Ahora"  
+- projectAon to TS
 
 FOR FUTURE (1.8+):
 - Add button to explain combat ratio
@@ -34,8 +35,6 @@ FOR FUTURE (1.8+):
 - Save games is not working on Safari
 - Toasts with images: align text when the text is multiline
 - Combats should be sequential: First finish the first one, then the second, etc
-- About the book: 
-  * Add the title section info (authors info, and more)
 - If the hunting is disabled on the current section, show it on some place (Action Chart?)
 - Use project aon colors ???
 - Document all rules
