@@ -248,9 +248,9 @@ This will allow to the player to sell a class of objects by a given price
 * **objectId**: The object id you can sell
 * **price**: The money got by selling the object
 
-### resectSectionState
+### resetSectionState
 ```xml
-<resectSectionState sectionId="sect152" />
+<resetSectionState sectionId="sect152" />
 ```
 This will clear the state of the given section. Usefull if the player can return to that
 section, and there are rules with state there that must to be reexecuted

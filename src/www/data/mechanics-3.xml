@@ -1060,7 +1060,7 @@
         </section>
 
         <section id="sect181">
-            <resectSectionState sectionId="sect152" />
+            <resetSectionState sectionId="sect152" />
             <test not="true" expression="[MONEY] > 0">
                 <choiceState section="sect152" set="disabled" />
             </test>

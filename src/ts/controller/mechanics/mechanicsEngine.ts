@@ -879,7 +879,7 @@ const mechanicsEngine = {
     /**
      * Reset the state of a given section
      */
-    resectSectionState: function(rule) {
+    resetSectionState: function(rule) {
         state.sectionStates.resetSectionState( $(rule).attr('sectionId') );
     },
 

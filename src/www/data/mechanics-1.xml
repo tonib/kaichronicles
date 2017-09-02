@@ -491,7 +491,7 @@
 
         <section id="sect140">
             <!-- Here is a loop -->
-            <resectSectionState sectionId="sect36" />
+            <resetSectionState sectionId="sect36" />
         </section>
 
         <section id="sect144">
