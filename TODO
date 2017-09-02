@@ -14,7 +14,7 @@
   * Book 7 / sect245, Spanish: "pecho, derri-bándote con su peso"
   * Book 7 / sect264, Spanish: "Now" should be "Ahora"  
 
-- Check book 9 illustrations (non Gary Chalk creator), because on SectionRenderer.illustration there is a condition about it
+- On debug mode, when Ctrl+F5 is pressed, try to go to the game automatically
 
 FOR FUTURE (1.8+):
 - Add button to explain combat ratio

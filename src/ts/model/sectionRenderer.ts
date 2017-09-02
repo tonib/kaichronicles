@@ -386,25 +386,19 @@ class SectionRenderer {
     private illustration($illustration : any, level : number) : string {
         
         var illustrationContent = '';
-        var creator = $illustration.find('> meta > creator').text();
         var description = $illustration.find('> meta > description').text();
 
-        if (creator == 'Gary Chalk') { 
-            // This app is only for the first 5 books and gives credit to only this 
-            // illustrator in the footer, so only use his work (other illustrators images
-            // are not stored on the SVN repository)
-            var fileName = $illustration.find('> instance.html').attr('src');
-            // Get the translated image URL:
-            var source = this.sectionToRender.book.getIllustrationURL(fileName, 
-                this.sectionToRender.mechanics);
+        const fileName : string = $illustration.find('> instance.html').attr('src');
+        // Get the translated image URL:
+        var source = this.sectionToRender.book.getIllustrationURL(fileName, 
+            this.sectionToRender.mechanics);
 
-            var isLargeIllustration = (fileName.indexOf('ill') === 0);
-            illustrationContent += '<div class="illustration' + 
-                (isLargeIllustration ? ' ill' : '') + 
-                '"><img src="' + source + '" alt="' + description + 
-                '" title="' + description + '"></div><p class="illustration-label">' + 
-                description + '</p>';
-        }
+        var isLargeIllustration = (fileName.indexOf('ill') === 0);
+        illustrationContent += '<div class="illustration' + 
+            (isLargeIllustration ? ' ill' : '') + 
+            '"><img src="' + source + '" alt="' + description + 
+            '" title="' + description + '"></div><p class="illustration-label">' + 
+            description + '</p>';
         
         if( this.renderIllustrationsText ) {
             // Render the text instance too
