@@ -284,8 +284,10 @@ class SectionRenderer {
         // Check if it's a anchor target id
         if( $a.attr('id') ) {
             // Check if its a foot note target
-            if( $a.attr('class') == 'footnote' )
-                return this.getHtmlFootRef( $a.attr('idref') );
+            if( $a.attr('class') == 'footnote' ) {
+                // It is. Render its content and the reference to the foot note
+                return this.renderNodeChildren( $a , level ) + this.getHtmlFootRef( $a.attr('idref') );
+            }
 
             // Ignore
             return this.renderNodeChildren( $a , level );
@@ -448,10 +450,10 @@ class SectionRenderer {
      * @returns The HTML
      */
     private combat( $combat : any , level : number ) : string {
-        var enemy = $combat.find('enemy').text();
+        let enemyHtml = this.renderNodeChildren( $combat.find('enemy') , level );
         var combatSkill = $combat.find('.combatskill').text();
         var endurance = SectionRenderer.getEnemyEndurance( $combat ).text();
-        return '<div class="combat well"><b>' + enemy + '</b><br />' + 
+        return '<div class="combat well"><b>' + enemyHtml + '</b><br />' + 
             '<span class="attribute">' + translations.text('combatSkillUpper') + '</span>: ' + 
             combatSkill + 
             ' &nbsp;&nbsp; <span class="attribute">' + translations.text('enduranceUpper') + '</span>: ' + 
