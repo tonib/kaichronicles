@@ -1146,23 +1146,23 @@
 		
         <object id="vialbluepills">
             <name lang="en">Vial of Blue Pills</name>
-            <name lang="es">Frasco de píldoras azules</name>
+            <name lang="es">Frasco de Píldoras Azules</name>
         </object>
 		
         <object id="bottlewater">
             <name lang="en">Bottle of Water</name>
-            <name lang="es">Botella de agua</name>
+            <name lang="es">Botella de Agua</name>
         </object>
 		
         <object id="pouchadgana">
 			<!-- TODO: see sect129 -->
             <name lang="en">Pouch of Adgana</name>
-            <name lang="es">Bolsa con adgana</name>
+            <name lang="es">Bolsa con Adgana</name>
         </object>
 
         <object id="redrobe">
             <name lang="en">Red Robe</name>
-            <name lang="es">Túnica con capucha</name>
+            <name lang="es">Túnica con Capucha</name>
         </object>
 
         <!-- OTHERS -->

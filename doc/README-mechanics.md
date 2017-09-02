@@ -150,6 +150,7 @@ will be available on the section.
         <choiceState section="sect316" set="enabled" />
     </case>
 </randomTable>
+<randomTableIncrement increment="+[BOWBONUS]" />
 
 <test hasDiscipline="sixthsns">
     <randomTableIncrement increment="+2" />
@@ -169,7 +170,8 @@ The "case" rules are executed conditionally for the random number got. Other rul
 "case" are always executed. 
 
 The "randomTableIncrement" will add a bonus to the random value picked. They are cumulative: If they are
-more than one randomTableIncrement executed, all the increments will be added.
+more than one randomTableIncrement executed, all the increments will be added. For bow, use the [BOWBONUS].
+This will add the combat skill bonus, plus bow object bonus
 
 ### test
 ```xml

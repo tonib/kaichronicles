@@ -332,6 +332,7 @@
         </section>
         
         <section id="sect50">
+            <pick class="arrow" count="-1" />
             <choiceState section="all" set="disabled" />
             <afterCombats>
                 <test not="true" expression="[COMBATSDURATION] > 3">
@@ -1534,11 +1535,13 @@
                 <pick class="arrow" count="-1" />
             </choiceSelected>
         </section>
-        
-        <!-- REVISION: START HERE -->
 
         <section id="sect233">
-            <!-- TODO: If you choose to use Mindblast or Psi-surge during combat, double all ENDURANCE point losses sustained by the enemy. --> 
+            <!-- If you choose to use Mindblast or Psi-surge during combat, double all ENDURANCE point losses sustained by the enemy. --> 
+            <!-- Mindblast is always activated -->
+            <test hasDiscipline="psisurge">
+                <combat dammageMultiplier="2" />
+            </test>
             <choiceState section="all" set="disabled" />
             <combat />
             <afterCombats>
@@ -1553,25 +1556,18 @@
                 <choiceState section="all" set="enabled" />
             </afterCombats>
         </section>
-        
-        <section id="sect161">
-            <test not="true" hasDiscipline="pthmnshp">
-                <choiceState section="sect139" set="disabled" />
-            </test>
-            <test hasDiscipline="pthmnshp">
-                <choiceState section="sect187" set="disabled" />
-                <choiceState section="sect101" set="disabled" />
-            </test>
-        </section>
-        
+                
         <section id="sect236">
+            <object objectId="spear" />
+            <object objectId="broadsword" />
             <test not="true" hasDiscipline="pthmnshp">
                 <choiceState section="sect139" set="disabled" />
             </test>
-            <test hasDiscipline="pthmnshp">
+            <!-- Dont be restrictive with the choices -->
+            <!--test hasDiscipline="pthmnshp">
                 <choiceState section="sect187" set="disabled" />
                 <choiceState section="sect101" set="disabled" />
-            </test>
+            </test-->
         </section>
 
         <section id="sect237">
@@ -1589,13 +1585,16 @@
             <test not="true" hasDiscipline="pthmnshp">
                 <choiceState section="sect251" set="disabled" />
             </test>
-            <test hasDiscipline="pthmnshp">
+            <!-- Dont be restrictive with the choices -->
+            <!--test hasDiscipline="pthmnshp">
                 <choiceState section="sect82" set="disabled" />
                 <choiceState section="sect30" set="disabled" />
-            </test>
-            
+            </test-->
         </section>
+
         <section id="sect241">
+            <choiceState section="all" set="disabled" />
+            <!-- This -1 could be a randomTableIncrement tag. Sure 0 == 10 ? -->
             <randomTable zeroAsTen="true">
                 <test hasDiscipline="curing">
                     <endurance count="-[RANDOM] + 1" />
@@ -1603,6 +1602,7 @@
                 <test not="true" hasDiscipline="curing">
                     <endurance count="-[RANDOM]" />
                 </test>
+                <choiceState section="all" set="enabled" />
             </randomTable>
         </section>
         
@@ -1622,14 +1622,16 @@
                 <choiceState section="all" set="enabled" />
             </afterCombats>
         </section>
+
         <section id="sect248">
-            <test not="true" hasDiscipline="dvnation|pthmnshp" hasObject="XXX">
+            <test not="true" hasDiscipline="dvnation|pthmnshp">
                 <choiceState section="sect171" set="disabled" />
             </test>
-            <test hasDiscipline="dvnation|pthmnshp" >
+            <!-- Dont be restrictive with the choices -->
+            <!--test hasDiscipline="dvnation|pthmnshp" >
                 <choiceState section="sect29" set="disabled" />
                 <choiceState section="sect272" set="disabled" />
-            </test>
+            </test-->
         </section>
         
         <section id="sect249">
@@ -1648,10 +1650,11 @@
             <test not="true" hasDiscipline="dvnation|pthmnshp">
                 <choiceState section="sect338" set="disabled" />
             </test>
-            <test hasDiscipline="dvnation|pthmnshp">
+            <!-- Dont be restrictive with the choices -->
+            <!--test hasDiscipline="dvnation|pthmnshp">
                 <choiceState section="sect300" set="disabled" />
                 <choiceState section="sect315" set="disabled" />
-            </test>
+            </test-->
         </section>
         
         <section id="sect253">
@@ -1690,20 +1693,22 @@
         <section id="sect257">
             <endurance count="-2" />
             <choiceState section="all" set="disabled" />
+            <!-- combat tags are cumulative (for different attributes) -->
+            <combat eludeTurn="3" />
             <test hasDiscipline="hntmstry">
                 <test hasObject="blanket|redrobe">
-                    <combat combatSkillModifier="1" eludeTurn="3" />
+                    <combat combatSkillModifier="1" />
                 </test>
                 <test not="true" hasObject="blanket|redrobe">
-                    <combat combatSkillModifier="0" eludeTurn="3" />
+                    <combat combatSkillModifier="0" />
                 </test>
             </test>
             <test not="true" hasDiscipline="hntmstry">
                 <test hasObject="blanket|redrobe">
-                    <combat combatSkillModifier="-1" eludeTurn="3" />
+                    <combat combatSkillModifier="-1" />
                 </test>
                 <test not="true" hasObject="blanket|redrobe">
-                    <combat combatSkillModifier="-2" eludeTurn="3" />
+                    <combat combatSkillModifier="-2" />
                 </test>
             </test>
             <afterCombats>
@@ -1715,7 +1720,9 @@
         </section>
         
         <section id="sect258">
-            <test not="true" hasObject="firesphere|lantern">
+            <!-- This will enable 289 if you have only a torch, or only a tinderbox (you must to have both) -->
+            <!-- (and dont be restrictive with choices, 30, always enabled) -->
+            <!--test not="true" hasObject="firesphere|lantern">
                 <test not="true" hasObject="torch">
                     <test not="true" hasObject="tinderbox">
                         <choiceState section="sect289" set="disabled" />
@@ -1731,7 +1738,21 @@
                     <choiceState section="sect277" set="disabled" />
                     <choiceState section="sect30" set="disabled" />
                 </test>
+            </test-->
+
+            <!-- by default, assume you dont have any required object -->
+            <choiceState section="sect289" set="disabled" />
+            <test hasObject="firesphere|lantern">
+                <choiceState section="sect289" set="enabled" />
+                <choiceState section="sect277" set="disabled" />
             </test>
+            <test hasObject="torch">
+                <test hasObject="tinderbox">
+                    <choiceState section="sect289" set="enabled" />
+                <choiceState section="sect277" set="disabled" />
+                </test>
+            </test>
+
         </section>
         
         <section id="sect261">
@@ -1782,17 +1803,15 @@
         <section id="sect266">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="6">
+                <case from="-99" to="6">
                     <choiceState section="sect75" set="enabled" />
                 </case>
                 <case from="7" to="99">
                     <choiceState section="sect162" set="enabled" />
                 </case>
+                <pick class="arrow" count="-1" />
             </randomTable>
-            <!-- TODO: If you have the Magnakai Discipline of Weaponmastery WITH bow -->
-            <test hasDiscipline="wpnmstry">
-                <randomTableIncrement increment="3" />
-            </test>
+            <randomTableIncrement increment="[BOWBONUS]" />
         </section>
         
         <section id="sect267">
@@ -1829,7 +1848,10 @@
             <death/>
         </section>
         
+        <!-- REVISION: START HERE -->
+
         <section id="sect276">
+            <pick class="arrow" count="-1" />
             <test not="true" canUseBow="true">
                 <choiceState section="sect50" set="disabled" />
             </test>
