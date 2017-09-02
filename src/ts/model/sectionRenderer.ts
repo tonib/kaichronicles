@@ -10,6 +10,12 @@
  */
 class SectionRenderer {
 
+    /**
+     * Only illustrations of following authors are rendered (Others are not included on PAON).
+     * This covers up to book 9. There are illustrations of authors that are not distributed (ex. JC Alvarez)
+     */
+    private static toRenderIllAuthors = [ 'Gary Chalk' , 'Brian Williams' ];
+
     /** The section to render */
     public sectionToRender : Section;
 
@@ -387,6 +393,11 @@ class SectionRenderer {
      */
     private illustration($illustration : any, level : number) : string {
         
+        const creator : string = $illustration.find('> meta > creator').text();
+        if( !SectionRenderer.toRenderIllAuthors.contains( creator ) )
+            // Author images not distributed
+            return '';
+
         var illustrationContent = '';
         var description = $illustration.find('> meta > description').text();
 
