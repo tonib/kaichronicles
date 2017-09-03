@@ -12,9 +12,19 @@ interface Bonus {
 }
 
 /**
+ * Inventory state on a given moment
+ */
+interface InventoryState {
+    weapons: Array<string>;
+    hasBackpack: boolean;
+    backpackItems: Array<string>;
+    specialItems: Array<string>;
+    beltPouch: number;
+    meals: number;
+}
+
+/**
  * The action chart / player state 
- * TODO: This will be hard, but the inventory should be on a different class, for 
- * TODO: getInventoryState() and joinInventoryStates() elegance
  */
 class ActionChart {
 
@@ -561,22 +571,47 @@ class ActionChart {
 
     /**
      * Return an object with the current inventory state
+     * @param objectTypes Kind of objects to get: 'all' = all, 'weaponlike' = weapons and weapon Special Objects
      */
-    public getInventoryState() {
-        return {
-            weapons: this.weapons.clone(),
-            hasBackpack: this.hasBackpack,
-            backpackItems: this.backpackItems.clone(),
-            specialItems: this.specialItems.clone(),
-            beltPouch: this.beltPouch,
-            meals: this.meals
-        };
+    public getInventoryState( objectTypes ) : InventoryState {
+
+        if( objectTypes == 'all')
+            return {
+                weapons: this.weapons.clone(),
+                hasBackpack: this.hasBackpack,
+                backpackItems: this.backpackItems.clone(),
+                specialItems: this.specialItems.clone(),
+                beltPouch: this.beltPouch,
+                meals: this.meals
+            };
+        else if( objectTypes == 'weaponlike' ) {
+            let objects : InventoryState = {
+                weapons: [],
+                hasBackpack: false,
+                backpackItems: [],
+                specialItems: [],
+                beltPouch: 0,
+                meals: 0
+            };
+
+            for( let w of this.getWeaponObjects(false) ) {
+                if( w.type == Item.WEAPON )
+                    objects.weapons.push(w.id);
+                else if( w.type == Item.SPECIAL)
+                    objects.specialItems.push(w.id);
+                else if( w.type == Item.OBJECT)
+                    objects.backpackItems.push(w.id);
+            }
+            return objects;
+        }
+        else
+            throw 'Wrong objectTypes: ' + objectTypes;
     }
 
     /**
      * Joins two inventory states
      */
-    public static joinInventoryStates = function(s1, s2) {
+    public static joinInventoryStates = function(s1 : InventoryState, s2 : InventoryState) {
         return {
             weapons: s1.weapons.concat( s2.weapons ),
             hasBackpack: s1.hasBackpack || s2.hasBackpack ,

@@ -64,8 +64,9 @@ const actionChartController = {
     /**
      * Drop an object
      * @param objectId The object to drop, 
-     * or "allweapons" to drop all weapons, 
-     * or "backpackcontent" to drop all backpack content, 
+     * or "allweapons" to drop all weapons (it does not drop special items weapons),  
+     * or "allweaponlike" to drop all weapons and special items weapons
+     * or "backpackcontent" to drop all backpack content, but not the backpack 
      * or "currentweapon" to drop the current weapon,
      * or "allspecial" to drop all the special items
      * or "allmeals" to drop all meals
@@ -84,6 +85,14 @@ const actionChartController = {
         if( objectId == 'currentweapon' ) {
             if( state.actionChart.selectedWeapon )
                 this.drop( state.actionChart.selectedWeapon );
+            return;
+        }
+
+        if( objectId == 'allweaponlike' ) {
+            let weaponsIds = [];
+            for( let w of state.actionChart.getWeaponObjects(false) )
+                weaponsIds.push(w.id);
+            actionChartController.dropItemsList( weaponsIds );
             return;
         }
 
@@ -150,12 +159,14 @@ const actionChartController = {
 
     /**
      * Drop an array of objects
-     * @param {Array<string>} arrayOfItems Array of the objects to drop. It must to be
-     * an array owned by the action chart
+     * @param arrayOfItems Array of the objects ids to drop.
      */
-    dropItemsList: function(arrayOfItems) {
-        while( arrayOfItems.length > 0 )
-            actionChartController.drop(arrayOfItems[0], false, false);
+    dropItemsList: function(arrayOfItems : Array<string>) {
+        // arrayOfItems can be a reference to a state.actionChart member, so don't
+        // traverse it as is, or we will lose elements
+        const elementsToDrop = arrayOfItems.clone();
+        for( let objectId of elementsToDrop )
+            actionChartController.drop(objectId, false, false);
     },
 
     /**
@@ -329,7 +340,7 @@ const actionChartController = {
      * Restore the inventory from an object generated with ActionChart.getInventoryState.
      * This does not replace the current inventory, just append objects to the current
      */
-    restoreInventoryState: function(inventoryState) {
+    restoreInventoryState: function(inventoryState : InventoryState) {
         if( !state.actionChart.hasBackpack && inventoryState.hasBackpack )
             actionChartController.pick('backpack', false, false);
         actionChartController.pickItemsList( inventoryState.weapons );

@@ -890,16 +890,18 @@ const mechanicsEngine = {
         if( state.sectionStates.ruleHasBeenExecuted(rule) )
             // Execute only once
             return;
+        
+        const restorePoint : string = $(rule).attr('restorePoint');
+        let objectsType : string = $(rule).attr('objectsType');
+        if( !objectsType )
+            objectsType = 'all';
 
         // Save the inventory state:
-        var restorePoint = $(rule).attr('restorePoint');
-        var currentRestorePoint = state.sectionStates.otherStates[ restorePoint ];
-        var newRestorePoint = state.actionChart.getInventoryState();
-        if( currentRestorePoint ) {
+        const currentRestorePoint : InventoryState = state.sectionStates.otherStates[ restorePoint ];
+        var newRestorePoint = state.actionChart.getInventoryState( objectsType );
+        if( currentRestorePoint )
             // Join both
-            newRestorePoint = ActionChart.joinInventoryStates(currentRestorePoint, 
-                newRestorePoint);
-        }
+            newRestorePoint = ActionChart.joinInventoryStates(currentRestorePoint, newRestorePoint);
         state.sectionStates.otherStates[ restorePoint ] = newRestorePoint;
 
         state.sectionStates.markRuleAsExecuted(rule);

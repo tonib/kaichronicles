@@ -125,6 +125,7 @@ before continue")
 ```xml
 <pick objectId="magicspear" />
 <pick class="money" count="[RANDOM] + 5" />
+<pick class="arrow" count="-1" />
 ```
 Pick an object. If the object cannot be picked (ex, the backpack is full), the object
 will be available on the section. 
@@ -132,6 +133,21 @@ will be available on the section.
 * **class**: This for counters. If you are going to pick meals (="meal") money (="money") or "arrow"
 * **count**: Only if class is "meal", "money" or "arrow". Expression with the number of coins / meals
   to pick
+
+### drop (execute once only)
+```xml
+<drop objectId="fireseed" />
+<drop objectId="allmeals" />
+```
+Drop an object, or a set of objects. This rules is not used for counters (money, meals and arrows). If you want to
+decrease a counter, use the pick rule. The "objectId" can be a an object id, or one of the following:
+* **allweapons**: Drop all weapons (it does not drop special items weapons)
+* **allweaponlike**: Drop all weapons and special items weapons
+* **backpackcontent**: Drop all backpack content, but not the backpack
+* **currentweapon**: Drop the current hand-to-hand weapon
+* **allspecial**: Drop all the special items
+* **allmeals**: Drop all meals
+* **all**: Drop all (weapons, backpack, special items, and money)
 
 ### randomTable (has state) / case / randomTableIncrement
 ```xml
@@ -321,11 +337,14 @@ all section combats will be re-enabled
 <saveInventoryState restorePoint="book4sect10Inventory" />
 <restoreInventoryState restorePoint="book4sect10Inventory" />
 ```
-It can be used when player loses all his objects, and they can be found after. "saveInventoryState"
+It can be used when player loses part of the inventory, and they can be found after. "saveInventoryState"
 stores the player current inventory state. When the "restoreInventoryState" rule is executed
-all the objects stored will be re-added to the player inventory. "restorePoint" property
+the objects stored will be re-added to the player inventory. "restorePoint" property
 is used to identify the place on the book where it was lost the inventory (they can be more
 than one).
+
+The optional property "objectsType" identifies the objects to lose / restore. "all" means all objects, meals and money
+will be lost. "weaponlike" means only weapons and weapon special items will be lost. The default value is "all"
 
 ### choiceSelected
 ```xml

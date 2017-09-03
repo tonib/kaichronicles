@@ -112,8 +112,7 @@
         </section>
 
         <section id="sect15">
-            <!-- TODO: Restore only weapons -->
-            <restoreInventoryState restorePoint="book57nventoryLost" />
+            <restoreInventoryState restorePoint="book7nventoryLost" />
             <object objectId="kazanoudamulet" />
             <object objectId="laumspurpotion8" />
         </section>
@@ -1774,23 +1773,9 @@
         </section>
         
         <section id="sect264">
-            <!-- TODO: save only weapons -->
-            <saveInventoryState restorePoint="book57nventoryLost" />
-            <choiceState section="all" set="disabled" />
-            <message id="msg-drop-weapons" 
-                en-text="Drop all weapons and weapon-like Special Items before continue" 
-                es-text="Deja todas las armas y los objetos especiales que puedan servir de armas antes de continuar"
-            />
-            <onInventoryEvent>
-                <test expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] == 0">
-                        <message id="msg-drop-weapons" op="hide" />
-                        <choiceState section="all" set="enabled" />
-                </test>
-                <test not="true" expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] == 0">
-                    <message id="msg-drop-weapons" op="show" />
-                    <choiceState section="all" set="disabled" />
-                </test>
-            </onInventoryEvent>
+            <!-- Save only weapons -->
+            <saveInventoryState restorePoint="book7nventoryLost" objectsType="weaponlike" />
+            <drop objectId="allweaponlike" />
         </section>
         
         <section id="sect265">
@@ -2129,23 +2114,9 @@
         
         <section id="sect335">
             <endurance count="-1" />
-            <!-- TODO: save only weapons -->
-            <saveInventoryState restorePoint="book57nventoryLost" />
-            <choiceState section="all" set="disabled" />
-            <message id="msg-drop-weapons" 
-                en-text="Drop all weapons and weapon-like Special Items before continue" 
-                es-text="Deja todas las armas y los objetos especiales que puedan servir de armas antes de continuar"
-            />
-            <onInventoryEvent>
-                <test expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] == 0">
-                        <message id="msg-drop-weapons" op="hide" />
-                        <choiceState section="all" set="enabled" />
-                </test>
-                <test not="true" expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] == 0">
-                    <message id="msg-drop-weapons" op="show" />
-                    <choiceState section="all" set="disabled" />
-                </test>
-            </onInventoryEvent>
+            <!-- Save only weapons -->
+            <saveInventoryState restorePoint="book7nventoryLost" objectsType="weaponlike" />
+            <drop objectId="allweaponlike" />
         </section>
     
         <section id="sect337">
