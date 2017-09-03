@@ -49,7 +49,7 @@ So, for each book section, sequentially , do this:
 
 * Read the section
 * If the section needs some mechanics, write them on the XML, and:
-    * On the browser press Ctrl + F5 to reload the web / mechanics XMLs, and press "Continue game"
+    * On the browser press Ctrl + F5 to reload the web / mechanics XMLs
     * Test the section mechanics. Use the "Reset section state" to re-test, if you don't have changed the XMLs (it's faster)
 * Move to the next section
 

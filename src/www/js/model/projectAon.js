@@ -104,13 +104,10 @@ var projectAon = {
             biographies: [ 'jdbiolw' , 'gcbiolw' ],
 
             zipSize: 3088890
-        }
-        
-        ///////////////////////////////////////
-        
-        
-        // Book 7 (REVIEWING):
-        ,{
+        },
+
+        // Book 7:
+        {
             title_en: 'Castle Death',
             code_en: '07cd',
 
@@ -122,10 +119,13 @@ var projectAon = {
             biographies: [ 'jdbiolw' , 'gcbiolw' ],
 
             zipSize: 3129146
-        },
+        }
 
+        ///////////////////////////////////////
+        
+        /*
         // Book 8 (NOT IMPLEMENTED):
-        {
+        ,{
             title_en: 'The Jungle of Horrors',
             code_en: '08tjoh',
 
@@ -153,6 +153,7 @@ var projectAon = {
             
             zipSize: 2839095
         }
+        */
         
     ],
 
