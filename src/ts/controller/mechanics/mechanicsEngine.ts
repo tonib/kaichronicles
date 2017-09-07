@@ -620,8 +620,11 @@ const mechanicsEngine = {
      */
     combat: function(rule) {
 
+        // TODO: Reuse this selector, performance:
+        const $rule = $(rule);
+
         // Combat index
-        var combatIndex = parseInt( $(rule).attr('index') );
+        var combatIndex = parseInt( $rule.attr('index') );
         if( !combatIndex )
             combatIndex = 0;
 
@@ -708,8 +711,13 @@ const mechanicsEngine = {
         }
 
         // It's a bow combat?
-        if( $(rule).attr('bow') )
+        if( $rule.attr('bow') == 'true' )
             combat.bowCombat = true;
+        
+        // Objects to disable on this combat:
+        const txtDisabledObjects : string = $rule.attr('disabledObjects');
+        if( txtDisabledObjects )
+            combat.disabledObjects = txtDisabledObjects.split('|');
         
     },
 

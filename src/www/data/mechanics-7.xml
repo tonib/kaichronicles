@@ -297,10 +297,6 @@
             </test>
         </section>
 
-        <section id="sect43">
-            <!-- TODO: Should be the vial of blue pills replaced by a new object called "Sabito" ??? -->
-        </section>
-
         <section id="sect44">
             <endurance count="-3" />
         </section>
@@ -489,8 +485,9 @@
 
         <section id="sect76">
             <choiceState section="all" set="disabled" />
-            <!-- TODO: you cannot make use of a shield or any two-handed weapon (i.e. Broadsword, Spear, Quarterstaff) during the combat -->
-            <combact enemyMultiplier="3" /> <!-- needed? YES (treble loses) -->
+            <!-- you cannot make use of a shield or any two-handed weapon (i.e. Broadsword, Spear, Quarterstaff) 
+                 during the combat -->
+            <combat enemyMultiplier="3" disabledObjects="shield|broadsword|spear|quarterstaff"/>
             <afterCombats>
                 <choiceState section="all" set="enabled" />
             </afterCombats>
@@ -1276,7 +1273,6 @@
         </section>
 
         <section id="sect184">
-            <!-- TODO: Sabito? -->
             <test not="true" hasObject="vialbluepills">
                 <choiceState section="sect230" set="disabled" />
             </test>
@@ -1426,7 +1422,6 @@
         </section>
         
         <section id="sect216">
-            <!-- TODO: Lore-circle of the Spirit, disabled -->
             <test not="true" hasCircle="circleSolaris">
                 <choiceState section="sect244" set="disabled" />
             </test>

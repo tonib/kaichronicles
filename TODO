@@ -4,15 +4,6 @@
   * Saved games removed when adding new games
   * Objects types
   * Others?
-- Report Spanish erratas:
-  * Book 7 / equipmnt: "El número máximo de Objetos Especiales que un Maestro del Kai puede llevar durante una aventura es 12".
-    The 12 max. on English starts at book 8
-  * Book 7 / sect43: "Record them as Sabito on your Action Chart." is only on the English version
-  * Book 7 / sect120, Spanish: "desga-rrándote" should be "desgarrándote"
-  * Book 7 / sect182, Spanish: " enlazar la em-puñadura de la Espada"
-  * Book 7 / sect186, Spanish: "lanza" should be "Lanza"
-  * Book 7 / sect245, Spanish: "pecho, derri-bándote con su peso"
-  * Book 7 / sect264, Spanish: "Now" should be "Ahora"  
 - projectAon to TS
 - Add the section "Lore-circles of the Magnakai" to the game rules view
 
@@ -37,7 +28,6 @@ FOR FUTURE (1.8+):
 - Toasts with images: align text when the text is multiline
 - Combats should be sequential: First finish the first one, then the second, etc
 - If the hunting is disabled on the current section, show it on some place (Action Chart?)
-- Use project aon colors ???
 - Document all rules
 - Common performance (Android and web):
   * Rendering performance on book 2 / sect equimpnt

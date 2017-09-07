@@ -87,6 +87,9 @@ class Combat {
     /** It's a bow combat? If false, it's a hand-to-hand combat */
     public bowCombat = false;
 
+    /** Object ids that cannot be used on this combat. */
+    public disabledObjects : Array<string> = [];
+
     /**
      * Create a combat
      * @param enemy Enemy name

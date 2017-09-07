@@ -375,10 +375,28 @@ class ActionChart {
         return this.selectedWeapon ? state.mechanics.getObject(this.selectedWeapon) : null;
     }
 
-    private getWeaponCombatSkillBonuses( noWeapon : boolean = false , bow : boolean ) : Array<Bonus> {
+    /**
+     * Get bonuses for the selected weapon
+     * @param noWeapon True if the combat is with no weapons
+     * @param bowCombat True if it's a combat with bow
+     * @param disabledObjectsIds Objects ids that cannot be used on this combat
+     */
+    private getWeaponCombatSkillBonuses( noWeapon : boolean , bowCombat : boolean , disabledObjectsIds : Array<string> ) 
+    : Array<Bonus> {
 
         var bonuses = [];
-        var currentWeapon = this.getselectedWeaponItem( bow );
+        var currentWeapon = this.getselectedWeaponItem( bowCombat );
+
+        // Check if the current weapon is disabled
+        if( disabledObjectsIds.length > 0 && currentWeapon ) {
+            if( disabledObjectsIds.contains( currentWeapon.id ) )
+                // Disabled
+                currentWeapon = null;
+            else if( currentWeapon.weaponType && disabledObjectsIds.contains( currentWeapon.weaponType ) ) {
+                // Base weapon disabled
+                currentWeapon = null;
+            }
+        }
 
         // Weapons
         if( noWeapon || !currentWeapon ) {
@@ -388,7 +406,7 @@ class ActionChart {
                 increment: -4
             });
         }
-        else if( this.isWeaponskillActive( bow ) ) {
+        else if( this.isWeaponskillActive( bowCombat ) ) {
             // Weapon skill bonus
             if( state.book.bookNumber <= 5 )
                 // Kai book:
@@ -417,7 +435,7 @@ class ActionChart {
 
     public getBowBonus() : number {
         let bonus = 0
-        for( let b of this.getWeaponCombatSkillBonuses(false, true) )
+        for( let b of this.getWeaponCombatSkillBonuses(false, true, []) )
             bonus += b.increment;
         return bonus;
     }
@@ -429,40 +447,36 @@ class ActionChart {
      */
     public getCurrentCombatSkillBonuses(combat : Combat = null) : Array<Bonus> {
 
-        // TODO: Create a Combat.getDefaultCombatValues() that return a combat with default values
-        // TODO: Use it here instead of these variables
-        const noMindblast = ( combat ? combat.noMindblast : false );
-        const noWeapon = ( combat ? combat.noWeapon : false );
-        const mindblastBonus = ( combat ? combat.mindblastBonus : +2 );
-        const psiSurge = ( combat ? combat.psiSurge : false );
-        const bow = ( combat ? combat.bowCombat : false );
+        if( !combat )
+            // Create a fake combat with the default values
+            combat = new Combat('Fake enemy' , 0 , 0 );
 
         var bonuses = [];
 
-        var currentWeapon = this.getselectedWeaponItem( bow );
+        var currentWeapon = this.getselectedWeaponItem( combat.bowCombat );
 
-        // Weapon
-        for( let b of this.getWeaponCombatSkillBonuses(noWeapon, bow) )
+        // Current weapon bonuses
+        for( let b of this.getWeaponCombatSkillBonuses( combat.noWeapon , combat.bowCombat , combat.disabledObjects ) )
             bonuses.push( b );
 
         // Mindblast / Psi-surge
-        if( psiSurge ) {
+        if( combat.psiSurge ) {
             bonuses.push( {
                 concept: translations.text( 'psisurge' ),
                 increment: +4
             });
         }
-        else if( !noMindblast && ( this.disciplines.contains( 'mndblst' ) || this.disciplines.contains( 'psisurge' ) ) ) {
+        else if( !combat.noMindblast && ( this.disciplines.contains( 'mndblst' ) || this.disciplines.contains( 'psisurge' ) ) ) {
             bonuses.push( {
                 concept: translations.text( 'mindblast' ),
-                increment: mindblastBonus ? mindblastBonus : +2
+                increment: combat.mindblastBonus ? combat.mindblastBonus : +2
             });
         }
 
-        // Objects (not weapons. Ex. shield)
-        if( !bow ) {
+        // Other objects (not weapons). Ex. shield. They are not applied for bow combats
+        if( !combat.bowCombat ) {
             this.enumerateObjects( function(o) {
-                if( !o.isWeapon() && o.effect && o.effect.cls == 'combatSkill' ) {
+                if( !o.isWeapon() && o.effect && o.effect.cls == 'combatSkill' && !combat.disabledObjects.contains(o.id) ) {
                     bonuses.push( {
                         concept: o.name,
                         increment: o.effect.increment 
