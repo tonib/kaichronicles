@@ -297,6 +297,10 @@
             </test>
         </section>
 
+        <section id="sect43">
+            <object objectId="vialbluepills" />
+        </section>
+        
         <section id="sect44">
             <endurance count="-3" />
         </section>
@@ -1497,7 +1501,8 @@
             <object objectId="rope" />
             <object objectId="blanket" />
             <object objectId="dagger" />
-            <object objectId="vialbluepills" />
+            <!-- Moved to sect43 -->
+            <!--object objectId="vialbluepills" /-->
             <object objectId="bottlewater" />
             <object objectId="powerkey" />
             <test not="true" hasDiscipline="curing">
