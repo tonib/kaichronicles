@@ -363,7 +363,7 @@ class ObjectsTableItem {
         const dropObject = ( this.type == ObjectsTableType.INVENTORY );
         actionChartController.use( this.item.id , dropObject );
 
-        // If the object was used from the section, available objects remove it
+        // If the object was used from the section, remove it
         if( this.type == ObjectsTableType.AVAILABLE && !this.objectInfo.unlimited ) {
             const sectionState = state.sectionStates.getSectionState();
             sectionState.removeObjectFromSection( this.item.id , this.objectInfo.price );

@@ -433,3 +433,51 @@ class Book6sect340 {
             mechanicsEngine.setChoiceState('sect26' , false );
     }
 }
+
+
+/**
+ * Special objects use
+ */
+class SpecialObjectsUse {
+
+    /** Use special object */
+    public static use( item : Item ) {
+        if( item.id == 'pouchadgana' )
+            SpecialObjectsUse.useAdgana();
+        else
+            console.log('SpecialObjectsUse - Unknown object: ' + item.id );
+    }
+
+    /** Use Adgana ( object id "pouchadgana") */
+    private static useAdgana() {
+
+        // There are pending combats on the current section?
+        const sectionState = state.sectionStates.getSectionState();
+
+        // Set flag for ccombats
+        for( let c of sectionState.combats )
+            c.adganaUsed = true;
+
+        // Apply adgana effects:
+        let effectCS = state.actionChart.adganaUsed ? +3 : +6;
+        sectionState.combatSkillUsageModifier( effectCS );
+
+        const combatsState = sectionState.areAllCombatsFinished(state.actionChart);
+        if( combatsState == 'finished' || combatsState == 'eluded'  ) {
+            // No pending combats. Fire the adgana post-combat effects right now
+            SpecialObjectsUse.postAdganaUse();
+        }
+
+        // Rembember adgana use
+        state.actionChart.adganaUsed = true;
+    }
+
+    /** Effects of Adgana after combats ( object id "pouchadgana") */
+    public static postAdganaUse() {
+        const r = randomTable.getRandomValue(); 
+        toastr.info( translations.text('adganaUse' , [r] ));
+        if( r == 0 || r == 1 )
+            actionChartController.increaseEndurance( -4 , false , true );
+    }
+
+}

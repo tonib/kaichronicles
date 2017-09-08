@@ -149,7 +149,7 @@ class SectionState {
      * Returns 'eluded' if all combats are eluded, and Lone Wolf is not death.
      * Returns false if there are pending combats, or Lone Wolf is death
      */
-    public areAllCombatsFinished(actionChart : ActionChart) : any {
+    public areAllCombatsFinished(actionChart : ActionChart) : string|boolean {
 
         if( actionChart.currentEndurance <= 0 )
             // LW death
@@ -316,6 +316,16 @@ class SectionState {
                 moneyCount += o.count;
         }
         return moneyCount;
+    }
+
+    /**
+     * Add a combat skill bonus to the current section combats by an object usage.
+     * @param combatSkillModifier The combat skill increase
+     */
+    public combatSkillUsageModifier( combatSkillModifier : number ) {
+        // Apply the modifier to current combats:
+        for( let combat of this.combats )
+            combat.objectsUsageModifier += combatSkillModifier;
     }
 
 }

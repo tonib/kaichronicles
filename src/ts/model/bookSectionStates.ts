@@ -52,18 +52,6 @@ class BookSectionStates {
     }
 
     /**
-     * Add a combat skill bonus to the current section combats by an object usage.
-     * @param combatSkillModifier The combat skill increase
-     */
-    public combatSkillUsageModifier( combatSkillModifier : number ) {
-        const sectionState = this.getSectionState();
-        // Apply the modifier to current combats:
-        $.each(sectionState.combats, function(index, combat) {
-            combat.objectsUsageModifier += combatSkillModifier;
-        });
-    }
-
-    /**
      * Check if a rule has been executed on the current section
      * @param rule Rule to check
      * @return The object associated with the execution. true if there was no result stored

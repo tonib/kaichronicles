@@ -191,10 +191,15 @@ const actionChartController = {
         // Do the usage action:
         if( o.usage.cls == 'endurance' )
             actionChartController.increaseEndurance( o.usage.increment );
-        else if( o.usage.cls == 'combatSkill' )
+        else if( o.usage.cls == 'combatSkill' ) {
             // Combat skill modifiers only apply to the current section combats
-            state.sectionStates.combatSkillUsageModifier( o.usage.increment );
-            
+            const sectionState = state.sectionStates.getSectionState();
+            sectionState.combatSkillUsageModifier( o.usage.increment );
+        }
+        else if( o.usage.cls == 'special' )
+            // Special usage
+            SpecialObjectsUse.use( o );
+
         // Update player statistics
         actionChartView.updateStatistics();
         template.updateStatistics();
@@ -252,10 +257,11 @@ const actionChartController = {
     /**
      * Increase / decrease the current endurance
      * @param count Number to increase. Negative to decrease
-     * @param {boolean} noToast True if no message should be show
+     * @param noToast True if no message should be show
+     * @param permanent True if the increase is permanent (it changes the original endurance)
      */
-    increaseEndurance: function( count : number, noToast : boolean = false) {
-        state.actionChart.increaseEndurance(count);
+    increaseEndurance: function( count : number, noToast : boolean = false, permanent : boolean = false ) {
+        state.actionChart.increaseEndurance(count, permanent);
         if( count > 0 ) {
             if( !noToast )
                 toastr.success( translations.text('msgEndurance' , ['+' + count] ) );

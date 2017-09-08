@@ -209,7 +209,7 @@ const combatMechanics = {
                 mechanicsEngine.fireAfterCombatTurn(combat);
 
                 // Post combat rules execution:
-                var combatsResult = sectionState.areAllCombatsFinished(state.actionChart);
+                const combatsResult = sectionState.areAllCombatsFinished(state.actionChart);
                 if( combatsResult == 'finished' && mechanicsEngine.onAfterCombatsRule )
                     // Fire "afterCombats" rule
                     mechanicsEngine.runChildRules( $(mechanicsEngine.onAfterCombatsRule) );
@@ -217,6 +217,9 @@ const combatMechanics = {
                     // Fire "afterElude" rule
                     mechanicsEngine.runChildRules( $(mechanicsEngine.onEludeCombatsRule) );
 
+                if( ( combatsResult == 'finished' || combatsResult == 'eluded' ) && combat.adganaUsed )
+                    // Fire post-combat adgana effects
+                    SpecialObjectsUse.postAdganaUse();
             }
             else {
                 // Combat continues

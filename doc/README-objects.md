@@ -89,6 +89,7 @@ Optional. If it's set, the object as some effect when it's carried:
 * **"class" property**: It says what is the effect of the object:
     * "endurance": The endurance will be increased
     * "combatSkill": The combat skill will be increased
+    * "special": Objects with complex behavior. They are implemented on SpecialObjectsUse class, at specialSectionsMechanics.ts
 * **"increment" property**: Amount to increment
 
 ### "incompatibleWith" property

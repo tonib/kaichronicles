@@ -45,7 +45,9 @@ FOR FUTURE (1.8+):
   * Ask for the random table type
 - Use latest version on PAON data on SVN (a fixed commit number)
 - Allow to read the "Lore-circles of the Magnakai" section from the "Magnakai Disciplines" section (with a dialog?)
-
+- If a object description is too long, do not show the entire description: Show the first characters, and add a link
+  to display the entire description (see pouchadgana object, and sommerswerd?)
+  
 Reminders:
 
 * DON'T BE RESTRICTIVE WITH CHOICES !!!!

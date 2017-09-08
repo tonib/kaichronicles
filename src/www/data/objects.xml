@@ -1168,7 +1168,27 @@
         <object id="pouchadgana">
 			<!-- TODO: see sect129 -->
             <name lang="en">Pouch of Adgana</name>
+            <description lang="en">
+                Crushed Adgana leaves. One dose is enough to increase your COMBAT SKILL by 6 points for the duration of a fight.
+                It is highly addictive. If you decide to take this potion prior to combat, as soon as the combat is resolved, 
+                you must pick a number from the Random Number Table. If the number you pick is 0 or 1, you have become 
+                addicted and your ENDURANCE score must be reduced permanently by 4 points.
+                Should the opportunity to use a further dose of Adgana ever arise, its effect on that occasion will be 
+                only half that of the original dose (i.e. it will increase your COMBAT SKILL by 3 points instead of 6).
+            </description>
+
             <name lang="es">Bolsa con Adgana</name>
+            <description lang="es">
+                Hojas trituradas de adgana. Una dosis de estas hierbas es suficiente para aumentar en 6 puntos tu 
+                DESTREZA EN EL COMBATE durante una pelea. Produce adicción. Si decides tomar esta poción antes de un combate, 
+                existe una pequeña probabilidad de que te hagas adicto. Al terminar el combate, debes elegir al azar un 
+                número de la Tabla de la Suerte. Si el número que obtienes es 0 ó 1, te has vuelto adicto y 
+                tu RESISTENCIA disminuye permanentemente en 4 puntos.
+                Si se presenta una segunda oportunidad de tomar otra dosis de adgana, su efecto en esta ocasión será sólo 
+                la mitad que el de la primera dosis (es decir, incrementará tu DESTREZA EN EL COMBATE en 3 puntos en vez de 6).
+            </description>
+
+            <usage class="special" />
         </object>
 
         <object id="redrobe">

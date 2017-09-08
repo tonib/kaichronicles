@@ -90,6 +90,9 @@ class Combat {
     /** Object ids that cannot be used on this combat. */
     public disabledObjects : Array<string> = [];
 
+    /** Adgana has been used on this combat? (see "pouchadgana" object) */
+    public adganaUsed = false;
+
     /**
      * Create a combat
      * @param enemy Enemy name

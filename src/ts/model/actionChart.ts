@@ -76,9 +76,11 @@ class ActionChart {
     /** The latests scroll position on the game section */
     public yScrollPosition = 0;
 
-    /** 
-     * Number of arrows on the quiver. This MUST to be zero if the player has no quiver. */
+    /** Number of arrows on the quiver. This MUST to be zero if the player has no quiver. */
     public arrows = 0;
+
+    /** The player has used adgana previously? (see "pouchadgana" object) */
+    public adganaUsed = false;
 
     constructor() {
         // Debug fast setup:
@@ -301,8 +303,11 @@ class ActionChart {
     /**
      * Increase / decrease the current endurance
      * @param count Number to increase. Negative to decrease 
+     * @param permanent True if the increase is permanent (it changes the original endurance)
      */
-    public increaseEndurance = function(count : number) {
+    public increaseEndurance = function(count : number, permanent : boolean = false) {
+        if( permanent )
+            this.endurance += count;
         this.currentEndurance += count;
         this.checkMaxEndurance();
         if( this.currentEndurance < 0 )
