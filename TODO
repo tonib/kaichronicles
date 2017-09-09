@@ -7,6 +7,8 @@
 - projectAon to TS
 - Erratas:
   * b7 sect224: "por lodo el pasadizo" "todo"
+  * b7 sect148: "CHALECO DE MALLA" should be "Cota de cuero"?
+  * b7 sect122: "malecón Del mismo ", miss point
 - Add the section "Lore-circles of the Magnakai" to the game rules view
 
 FOR FUTURE (1.8+):
@@ -47,7 +49,9 @@ FOR FUTURE (1.8+):
 - Allow to read the "Lore-circles of the Magnakai" section from the "Magnakai Disciplines" section (with a dialog?)
 - If a object description is too long, do not show the entire description: Show the first characters, and add a link
   to display the entire description (see pouchadgana object, and sommerswerd?)
-  
+- Objects table: If the quiver has no arrows, show "(0 arrows)"
+- Dont let drop money if the player is death
+
 Reminders:
 
 * DON'T BE RESTRICTIVE WITH CHOICES !!!!

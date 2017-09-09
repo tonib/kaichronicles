@@ -155,6 +155,7 @@
         </section>
         
         <section id="sect26">
+            <choiceState section="all" set="disabled" />
             <randomTable>
                 <test hasWeaponskillWith="sword">
                     <endurance count="-[RANDOM] - 1" />
@@ -162,6 +163,7 @@
                 <test not="true" hasWeaponskillWith="sword">
                     <endurance count="-[RANDOM] - 3" />
                 </test>
+                <choiceState section="all" set="enabled" />
             </randomTable>
         </section>
 
@@ -699,23 +701,30 @@
         
         <section id="sect107">
             <endurance count="-6" />
-            <test not="true" hasWeaponType="sword">
-                <choiceState section="sect26" set="disabled" />
+
+            <choiceState section="all" set="disabled" />
+            <choiceState section="sect292" set="enabled" />
+
+            <test hasWeaponType="sword">
+                <choiceState section="sect26" set="enabled" />
+                <choiceState section="sect292" set="disabled" />
             </test>
 
             <!-- Lantern, OR torch and tinderbox -->
-            <choiceState section="sect51" set="disabled" />
             <test hasObject="torch">
                 <test hasObject="tinderbox">
                     <choiceState section="sect51" set="enabled" />
+                    <choiceState section="sect292" set="disabled" />
                 </test>
             </test>
             <test hasObject="lantern">
                 <choiceState section="sect51" set="enabled" />
+                <choiceState section="sect292" set="disabled" />
             </test>
 
-            <test not="true" hasObject="firesphere">
-                <choiceState section="sect145" set="disabled" />
+            <test hasObject="firesphere">
+                <choiceState section="sect145" set="enabled" />
+                <choiceState section="sect292" set="disabled" />
             </test>
         </section>
         
@@ -1937,6 +1946,12 @@
             </test>
         </section>
         
+        <section id="sect298">
+            <test not="true" hasWeaponType="sword">
+                <choiceState section="sect151" set="disabled" />
+            </test>
+        </section>
+
         <section id="sect299">
             <choiceState section="all" set="disabled" />
             <combat />
