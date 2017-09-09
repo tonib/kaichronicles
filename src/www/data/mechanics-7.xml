@@ -166,7 +166,7 @@
         </section>
 
         <section id="sect27">
-            <!-- CHECK: Psi-screen OR combact -->
+            <!-- CHECK: Psi-screen OR combat -->
             <test hasDiscipline="psiscrn">
                 <choiceState section="sect5" set="disabled" />
                 <disableCombats />
@@ -1248,7 +1248,7 @@
             <test hasObject="fireseed">
                 <choiceState section="sect191" set="enabled" />
             </test>
-            <!-- TODO: Why disable mindblast? -->
+            <!-- Why disable mindblast? -->
             <!--test hasDiscipline="curing">
                 <combat noMindblast="true" />
             </test-->
@@ -1409,8 +1409,7 @@
         </section>
         
         <section id="sect214">
-            <choiceState section="all" set="disabled" />
-            <choiceState section="sect277" set="enabled" />
+            <choiceState section="sect114" set="disabled" />
             <!-- Why Psi-Surge ? -->
             <!--test hasDiscipline="psisurge">
                 <choiceState section="sect114" set="enabled" />
@@ -1426,6 +1425,8 @@
                     <choiceState section="sect277" set="enabled" />
                 </afterCombats>
             </test-->
+            <!-- It is unclear, but you may be able to use the Magnakai Discipline of Psi-surge to aid you in this fight 
+                (cf. The Kingdoms of Terror Section 259): On this game, Psi-surge was disabled on that section, so here too -->
             <!-- TODO: No object bonus should be added on this combat -->
             <combat noMindblast="true" noPsiSurge="true" />
             <test not="true" hasDiscipline="nexus">
