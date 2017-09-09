@@ -199,7 +199,22 @@
         </section>
 
         <section id="sect32">
-            <drop objectId="currentweapon" />
+            <!-- TODO: We should control the kind of weapon droped -->
+            <message id="msg-drop-weapon" 
+                en-text="Drop a sword or spear before continue" 
+                es-text="Deja una espada o lanza antes de continuar"
+            />
+            <choiceState section="all" set="disabled" />
+            <onInventoryEvent>
+                <test expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] == 0 || [WEAPONLIKE-CNT-ON-SECTION] > 0">
+                    <message id="msg-drop-weapon" op="hide" />
+                    <choiceState section="all" set="enabled" />
+                </test>
+                <test not="true" expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] == 0 || [WEAPONLIKE-CNT-ON-SECTION] > 0">
+                    <message id="msg-drop-weapon" op="show" />
+                    <choiceState section="all" set="disabled" />
+                </test>
+            </onInventoryEvent>
         </section>
 
         <section id="sect34">
@@ -822,7 +837,6 @@
         </section>
 
         <section id="sect129">
-            <!-- TODO: Implement adgana usage -->
             <object objectId="pouchadgana" />
         </section>
 
@@ -1103,12 +1117,10 @@
         </section>
 
         <section id="sect168">
-            <!-- TODO: hasObject or hasWeaponType? Current weapon type?
-                On sect32 should we loss the current weapon or the sword|spear? -->
-            <test not="true" hasObject="sword|spear">
+            <test not="true" hasWeaponType="sword|spear">
                 <choiceState section="sect32" set="disabled" />
             </test>
-            <test hasObject="sword|spear">
+            <test hasWeaponType="sword|spear">
                 <choiceState section="sect263" set="disabled" />
             </test>
         </section>

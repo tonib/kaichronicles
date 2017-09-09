@@ -518,8 +518,14 @@ const mechanicsEngine = {
 
         // Test if the player has a kind of weapon
         let hasWeaponType : string = $(rule).attr( 'hasWeaponType' );
-        if( hasWeaponType && state.actionChart.getWeaponType( hasWeaponType ) )
-            conditionStatisfied = true;
+        if( hasWeaponType ) {
+            for( let weaponType of hasWeaponType.split('|') ) {
+                if( state.actionChart.getWeaponType( weaponType ) ) {
+                    conditionStatisfied = true;
+                    break;
+                }
+            }
+        }
 
         // Test if the player has a lore-circle
         let circleId : string = $(rule).attr('hasCircle');

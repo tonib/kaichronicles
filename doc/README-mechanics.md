@@ -61,6 +61,8 @@ There are some keywords that can be used on expressions. They have the following
   on the section
 * **[WEAPON-ITEMS-CNT-ON-SECTION]**: The current count of available weapons on the section.
   Special items that are weapons too are ignored
+* **[WEAPONLIKE-CNT-ON-SECTION]**: The current count of weapons on the action chart.
+  Special items that are weapons too are included
 * **[BACKPACK-ITEMS-CNT-ON-ACTIONCHART]**: The current count of backpack items on the
   action chart
 * **[WEAPON-ITEMS-CNT-ON-ACTIONCHART]**: The current count of weapons on the action chart.
@@ -213,7 +215,7 @@ will be executed.
 * **not="true"**: This will negate the current test. So if all of these conditions are false,
   the inner rules will be executed
 * **isChoiceEnabled="sectionId"**: Is the choice for the given section enabled?
-* **hasWeaponType="weaponType"**: The player has some weapon of the given type?
+* **hasWeaponType="weaponType1|weaponType2|..."**: The player has some weapon of some of the given types?
 * **hasCircle="loreCircleId"**: The player has this Lore Circle (see loreCircle.ts for codes)
 * **hasWeaponskillWith="weaponType"** : The player has weaponskill / weaponmastery with the given weapon?
 
