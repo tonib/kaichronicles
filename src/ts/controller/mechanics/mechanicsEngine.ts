@@ -326,6 +326,10 @@ const mechanicsEngine = {
      * The action button of a picker number was clicked
      */
     fireNumberPickerChoosed: function() {
+        // Be sure the picker number value is valid
+        if( !numberPickerMechanics.isValid() )
+            return;
+
         if( mechanicsEngine.onNumberPickerChoosed )
             mechanicsEngine.runChildRules( $(mechanicsEngine.onNumberPickerChoosed) );
     },

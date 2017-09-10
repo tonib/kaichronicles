@@ -5,13 +5,9 @@
   * Objects types
   * Others?
 - projectAon to TS
-- Erratas:
-  * b7 sect224: "por lodo el pasadizo" "todo"
-  * b7 sect148: "CHALECO DE MALLA" should be "Cota de cuero"?
-  * b7 sect122: "malecón Del mismo ", miss point
 - Add the section "Lore-circles of the Magnakai" to the game rules view
 
-FOR FUTURE (1.8+):
+FOR FUTURE (1.9+):
 - Add button to explain combat ratio
 - Implement the Kai Monastery "safekeeping" mentioned on the "Equipment" sections
 - Allow to select the current bow
@@ -51,6 +47,8 @@ FOR FUTURE (1.8+):
   to display the entire description (see pouchadgana object, and sommerswerd?)
 - Objects table: If the quiver has no arrows, show "(0 arrows)"
 - Dont let drop money if the player is death
+- Death: Option to restart from the section 1
+- Saved games deletion: Do not refresh the entire table (ugly)
 
 Reminders:
 
