@@ -119,13 +119,12 @@ var projectAon = {
             biographies: [ 'jdbiolw' , 'gcbiolw' ],
 
             zipSize: 3129146
-        }
+        },
 
         ///////////////////////////////////////
-        
-        /*
-        // Book 8 (NOT IMPLEMENTED):
-        ,{
+
+        // Book 8:
+        {
             title_en: 'The Jungle of Horrors',
             code_en: '08tjoh',
 
@@ -137,8 +136,9 @@ var projectAon = {
             biographies: [ 'jdbiolw' , 'gcbiolw' ],
 
             zipSize: 3537081
-        },
+        }
 
+        /*
         // Book 9 (NOT IMPLEMENTED):
         {
             title_en: 'The Cauldron of Fear',
