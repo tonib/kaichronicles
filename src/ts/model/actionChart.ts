@@ -406,9 +406,12 @@ class ActionChart {
         // Weapons
         if( noWeapon || !currentWeapon ) {
             // No weapon:
+            let modifier = -4;
+            if( this.disciplines.contains( 'wpnmstry' ) && this.disciplines.length >= 5 )
+                modifier = -2; // Tutelaries with Weaponmastery are better at unarmed combat
             bonuses.push( {
                 concept: translations.text('noWeapon'),
-                increment: -4
+                increment: modifier
             });
         }
         else if( this.isWeaponskillActive( bowCombat ) ) {

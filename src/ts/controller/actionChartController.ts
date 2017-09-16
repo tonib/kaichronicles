@@ -298,6 +298,9 @@ const actionChartController = {
         if( state.actionChart.selectedWeapon == weaponId )
             return;
 
+        if( !state.actionChart.hasObject(weaponId) )
+            return;
+
         state.actionChart.selectedWeapon = weaponId;
         actionChartView.updateWeapons();
         // There can be weapons on backpack / special items:
