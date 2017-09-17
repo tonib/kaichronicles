@@ -464,25 +464,27 @@ class ActionChart {
         var currentWeapon = this.getselectedWeaponItem( combat.bowCombat );
 
         // Current weapon bonuses
-        for( let b of this.getWeaponCombatSkillBonuses( combat.noWeapon , combat.bowCombat , combat.disabledObjects ) )
-            bonuses.push( b );
+        if ( !combat.mentalOnly ) {
+            for( let b of this.getWeaponCombatSkillBonuses( combat.noWeapon , combat.bowCombat , combat.disabledObjects ) )
+                bonuses.push( b );
+        }
 
         // Mindblast / Psi-surge
         if( combat.psiSurge ) {
             bonuses.push( {
                 concept: translations.text( 'psisurge' ),
-                increment: +4
+                increment: +4 * combat.mindblastMultiplier
             });
         }
         else if( !combat.noMindblast && ( this.disciplines.contains( 'mndblst' ) || this.disciplines.contains( 'psisurge' ) ) ) {
             bonuses.push( {
                 concept: translations.text( 'mindblast' ),
-                increment: combat.mindblastBonus ? combat.mindblastBonus : +2
+                increment: (combat.mindblastBonus ? combat.mindblastBonus : +2) * combat.mindblastMultiplier
             });
         }
 
         // Other objects (not weapons). Ex. shield. They are not applied for bow combats
-        if( !combat.bowCombat ) {
+        if( !combat.mentalOnly && !combat.bowCombat ) {
             this.enumerateObjects( function(o) {
                 if( !o.isWeapon() && o.effect && o.effect.cls == 'combatSkill' && !combat.disabledObjects.contains(o.id) ) {
                     bonuses.push( {
@@ -494,9 +496,14 @@ class ActionChart {
         }
         
         // Lore-circles bonuses
-        const circlesBonuses = LoreCircle.getCirclesBonuses( this.disciplines , 'CS' );
-        for( let c of circlesBonuses )
-            bonuses.push(c);
+        // We disable these in a mental combat, but flavor-wise, we should
+        // arguably still allow the Spirit circle. Although the game rules are
+        // not that detailed.
+        if ( !combat.mentalOnly ) {
+            const circlesBonuses = LoreCircle.getCirclesBonuses( this.disciplines , 'CS' );
+            for( let c of circlesBonuses )
+                bonuses.push(c);
+        }
 
         return bonuses;
     }
