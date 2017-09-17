@@ -280,12 +280,14 @@ const actionChartController = {
      * Increase / decrease the combat skill permanently
      * @param count Number to increase. Negative to decrease 
      */
-    increaseCombatSkill: function(count) {
+    increaseCombatSkill: function(count , showToast : boolean = true ) {
         state.actionChart.combatSkill += count;
-        if( count > 0 )
-            toastr.success( translations.text('msgCombatSkill' , ['+' + count]) );
-        else if( count < 0 )
-            toastr.warning( translations.text('msgCombatSkill' , [count]) );
+        if( showToast ) {
+            if( count > 0 )
+                toastr.success( translations.text('msgCombatSkill' , ['+' + count]) );
+            else if( count < 0 )
+                toastr.warning( translations.text('msgCombatSkill' , [count]) );
+        }
         template.updateStatistics();
     },
 

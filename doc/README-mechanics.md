@@ -303,7 +303,9 @@ the following properties:
 * **noMindblast="true"**: The enemy is immune to Mindblast
 * **noPsiSurge="true"**: The enemy is immune to Psi-Surge
 * **mindblastBonus="number"**: Special CS bonus to apply for Mindblast discipline on this combat
+* **mindblastMultiplier="number"**: CS multiplier to apply to Mindblast/Psi-Surge attacks this combat
 * **noWeapon="true"**: Lone Wolf cannot use any weapon on this combat
+* **mentalOnly="true"**: Lone Wolf cannot use any physical bonuses on this combat
 * **eludeTurn="number"**: Turn number after which LW can elude the combat
 * **dammageMultiplier="number"**: LW dammage multiplier
 * **enemyMultiplier="number"**: Enemy dammage multiplier

@@ -703,10 +703,20 @@ const mechanicsEngine = {
         if( txtMindblastBonus )
             combat.mindblastBonus = parseInt( txtMindblastBonus );
 
+        // Mindblast multiplier (to all mental attacks too, like psi-surge)
+        var txtMindblastMultiplier = $(rule).attr('mindblastMultiplier');
+        if( txtMindblastMultiplier )
+            combat.mindblastMultiplier = parseInt( txtMindblastMultiplier );
+
         // Check if the player cannot use weapons on this combat
         var txtNoWeapon = $(rule).attr('noWeapon');
         if( txtNoWeapon )
             combat.noWeapon = ( txtNoWeapon == 'true' );
+
+        // Check if the combat is non-physical (disables most bonuses)
+        var txtMentalOnly = $(rule).attr('mentalOnly');
+        if( txtMentalOnly )
+            combat.mentalOnly = ( txtMentalOnly == 'true' );
 
         // Initial turn to allow to elude the combat
         if( $(rule).attr('eludeTurn') )
@@ -827,7 +837,8 @@ const mechanicsEngine = {
             return;
 
         var increase = mechanicsEngine.evaluateExpression( $(rule).attr('count') );
-        actionChartController.increaseCombatSkill( increase );
+        const showToast = ( $(rule).attr('toast') != 'false' );
+        actionChartController.increaseCombatSkill( increase , showToast );
         state.sectionStates.markRuleAsExecuted(rule);
     },
 

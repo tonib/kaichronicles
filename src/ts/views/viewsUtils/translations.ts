@@ -85,7 +85,7 @@ class Translations {
         'playTurn' : 'Jugar turno',
         'eludeCombat' : 'Eludir combate',
         'deathLetter' : 'M',
-        'mechanics-combat-psisurge' : 'Acometida Psíquica: +4 DC, -2 R por asalto',
+        'mechanics-combat-psisurge' : 'Acometida Psíquica: +<span id="mechanics-combatTables-psisurgeCS">4</span> DC, -2 R por asalto',
 
         //////////////////////////////////////
         // Meals

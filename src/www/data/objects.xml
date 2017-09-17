@@ -1230,6 +1230,11 @@
             <usage class="endurance" increment="2" />
         </object>
 
+        <object id="sackofsilver">
+            <name lang="en">Sack of Silver</name>
+            <name lang="es">Saco de Plata</name>
+        </object>
+
         <!-- OTHERS -->
 
         <!-- This not really an object, but needed for mechanics -->

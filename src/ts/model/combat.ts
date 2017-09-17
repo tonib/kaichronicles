@@ -32,8 +32,14 @@ class Combat {
     /** The CS bonus to apply if the player has Mindblast discipline */
     public mindblastBonus = 2;
 
+    /** The CS multiplier to apply to Mindblast/Psi-Surge attacks */
+    public mindblastMultiplier = 1;
+
     /** The player cannot use weapons on this combat */
     public noWeapon = false;
+
+    /** Check if the combat is non-physical (disables most bonuses) */
+    public mentalOnly = false;
 
     /** Turn beyond which the combat can be eluded. -1 = no elude */
     public eludeTurn = -1;
@@ -121,7 +127,7 @@ class Combat {
     public getCurrentCombatSkill() : number {
         var cs = state.actionChart.getCurrentCombatSkill(this) + 
             this.combatModifier + 
-            this.objectsUsageModifier;
+            ( this.mentalOnly ? 0 : this.objectsUsageModifier );
 
         // Check enemy mindforce attack
         if( this.mindforceCS < 0 && !state.actionChart.hasMindShield() )

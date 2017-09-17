@@ -97,6 +97,7 @@ const combatMechanics = {
                 $psiSurgeCheck.click(function(e : Event) {
                     combatMechanics.onPsiSurgeClick(e , $(this) );
                 });
+                $('#mechanics-combatTables-psisurgeCS').text( 4 * combat.mindblastMultiplier );
             }
         });
 
