@@ -643,11 +643,46 @@ const mechanicsEngine = {
         if( sectionState.ruleHasBeenExecuted(rule) )
             // Execute only once
             return;
-        sectionState.sellPrices.push({
-            id: $(rule).attr('objectId'),
-            price: parseInt( $(rule).attr('price') ),
-            count: parseInt( $(rule).attr('count') )
-        });
+
+        var price = parseInt( $(rule).attr('price') );
+
+        var objectId = $(rule).attr('objectId');
+        if( objectId ) {
+            sectionState.sellPrices.push({
+                id: objectId,
+                price: price,
+                count: parseInt( $(rule).attr('count') )
+            });
+        }
+
+        // Other things (money or meals)
+        var cls = $(rule).attr('class');
+        if( cls ) {
+            var objectIds = [];
+            var except = [];
+
+            const txtExcept = $(rule).attr('except');
+            if( txtExcept )
+                except = txtExcept.split('|');
+
+            if( cls == 'special') {
+                objectIds = state.actionChart.specialItems;
+                except.push( 'map' ); // don't sell this, come on!
+            }
+            else
+                mechanicsEngine.debugWarning('Sell rule with invalid class');
+
+            for( let id of objectIds ) {
+                if( !except.contains( id ) ) {
+                    sectionState.sellPrices.push({
+                        id: id,
+                        price: price,
+                        count: 0,
+                    });
+                }
+            }
+        }
+
         state.sectionStates.markRuleAsExecuted(rule);
     },
 

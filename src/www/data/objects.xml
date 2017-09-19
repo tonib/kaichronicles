@@ -638,6 +638,11 @@
             <image book="1" name="sword.png" />
         </special>
 
+        <special id="greycrystalring">
+            <name lang="en">Grey Crystal Ring</name>
+            <name lang="es">Anillo de Cristal Gris</name>
+        </special>
+
     </specials>
 
     <objects>

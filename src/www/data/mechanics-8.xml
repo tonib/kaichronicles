@@ -234,6 +234,9 @@
                     <choiceState section="sect125" set="enabled" />
                 </case>
             </randomTable>
+            <choiceSelected section="all">
+                <pick class="arrow" count="-1" />
+            </choiceSelected>
         </section>
 
         <section id="sect30">
@@ -273,7 +276,6 @@
 
         <section id="sect38">
             <choiceState section="all" set="disabled" />
-            <pick class="arrow" count="-1" />
             <combat eludeTurn="3" />
             <afterCombats>
                 <choiceState section="sect9" set="enabled" />
@@ -284,7 +286,6 @@
         </section>
 
         <section id="sect39">
-            <pick class="arrow" count="-1" />
             <endurance count="-8" />
             <test not="true" hasDiscipline="dvnation">
                 <choiceState section="sect131" set="disabled" />
@@ -639,6 +640,244 @@
             <choiceState section="all" set="disabled" />
             <test hasDiscipline="anmlctrl">
                 <combat combatSkillModifier="2" />
+            </test>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect110">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" eludeTurn="3" />
+            <afterCombats>
+                <choiceState section="sect293" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect191" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect112">
+            <numberPicker
+                en-text="Answer the riddle"
+                es-text="Responde al acertijo"
+                min="1" max="350"
+                en-actionButton="Choose"
+                es-actionButton="Elige"
+                />
+            <numberPickerChoosed>
+                <test expression="[NUMBERPICKER] == 3">
+                    <goToSection section="sect3" />
+                </test>
+                <test expression="[NUMBERPICKER] != 3">
+                    <toast
+                        en-text="Wrong number!"
+                        es-text="¡Número incorrecto!" />
+                </test>
+            </numberPickerChoosed>
+        </section>
+
+        <section id="sect113">
+            <test not="true" hasObject="sommerswerd">
+                <choiceState section="sect30" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect115">
+            <endurance count="-8" />
+        </section>
+
+        <section id="sect117">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect154" set="enabled" />
+                </case>
+                <case from="5" to="8">
+                    <choiceState section="sect40" set="enabled" />
+                </case>
+                <case from="9" to="99">
+                    <choiceState section="sect251" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="+3" />
+            </test>
+            <test hasDiscipline="dvnation">
+                <test expression="[KAILEVEL] >= 4">
+                    <randomTableIncrement increment="+1" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect121">
+            <death />
+        </section>
+
+        <section id="sect122">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="5">
+                    <choiceState section="sect115" set="enabled" />
+                </case>
+                <case from="6" to="99">
+                    <choiceState section="sect334" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="+2" />
+            </test>
+        </section>
+
+        <section id="sect123">
+            <test not="true" hasObject="fireseed">
+                <choiceState section="sect81" set="disabled" />
+            </test>
+            <choiceSelected section="sect81">
+                <drop objectId="fireseed" />
+            </choiceSelected>
+        </section>
+
+        <section id="sect125">
+            <test not="true" canUseBow="true">
+                <choiceState section="sect90" set="disabled" />
+            </test>
+            <choiceSelected section="sect90">
+                <pick class="arrow" count="-1" />
+            </choiceSelected>
+        </section>
+
+        <section id="sect126">
+            <numberPicker
+                en-text="Answer the riddle"
+                es-text="Responde al acertijo"
+                min="1" max="350"
+                en-actionButton="Choose"
+                es-actionButton="Elige"
+                />
+            <numberPickerChoosed>
+                <test expression="[NUMBERPICKER] == 16">
+                    <goToSection section="sect16" />
+                </test>
+                <test expression="[NUMBERPICKER] != 16">
+                    <toast
+                        en-text="Wrong number!"
+                        es-text="¡Número incorrecto!" />
+                </test>
+            </numberPickerChoosed>
+        </section>
+
+        <section id="sect127">
+            <test not="true" canUseBow="true">
+                <choiceState section="sect209" set="disabled" />
+            </test>
+            <choiceSelected section="sect209">
+                <pick class="arrow" count="-1" />
+            </choiceSelected>
+        </section>
+
+        <section id="sect129">
+            <meal />
+        </section>
+
+        <section id="sect130">
+            <test not="true" sectionVisited="sect262">
+                <choiceState section="sect329" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect132">
+            <test not="true" hasObject="fireseed">
+                <choiceState section="sect15" set="disabled" />
+            </test>
+            <choiceSelected section="sect15">
+                <drop objectId="fireseed" />
+            </choiceSelected>
+        </section>
+
+        <section id="sect134">
+            <death />
+        </section>
+
+        <section id="sect135">
+            <test not="true" hasObject="pass">
+                <choiceState section="sect68" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect136">
+            <test not="true" hasDiscipline="pthmnshp">
+                <choiceState section="sect256" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect138">
+            <test not="true" hasDiscipline="pthmnshp">
+                <choiceState section="sect203" set="disabled" />
+            </test>
+            <test not="true" expression="[KAILEVEL] >= 5">
+                <choiceState section="sect203" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect139">
+            <pick objectId="greycrystalring" />
+            <sell class="special" except="greycrystalring" price="8" />
+        </section>
+
+        <section id="sect141">
+            <numberPicker
+                en-text="Answer the riddle"
+                es-text="Responde al acertijo"
+                min="1" max="350"
+                en-actionButton="Choose"
+                es-actionButton="Elige"
+                />
+            <numberPickerChoosed>
+                <test expression="[NUMBERPICKER] == 59">
+                    <goToSection section="sect3" />
+                </test>
+                <test expression="[NUMBERPICKER] != 59">
+                    <toast
+                        en-text="Wrong number!"
+                        es-text="¡Número incorrecto!" />
+                </test>
+            </numberPickerChoosed>
+        </section>
+
+        <section id="sect143">
+            <test not="true" hasObject="pass">
+                <choiceState section="sect18" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect145">
+            <pick class="money" count="-4" />
+        </section>
+
+        <section id="sect146">
+            <endurance count="-5" />
+        </section>
+
+        <section id="sect150">
+            <meal />
+        </section>
+
+        <section id="sect152">
+            <meal />
+        </section>
+
+        <section id="sect154">
+            <death />
+        </section>
+
+        <section id="sect155">
+            <choiceState section="all" set="disabled" />
+            <test not="true" hasDiscipline="curing">
+                <combat enemyMultiplier="2" />
+            </test>
+            <test not="true" expression="[KAILEVEL] >= 4">
+                <combat enemyMultiplier="2" />
             </test>
             <afterCombats>
                 <choiceState section="all" set="enabled" />
