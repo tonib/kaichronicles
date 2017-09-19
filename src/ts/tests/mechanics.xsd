@@ -1,17 +1,7 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-    <!-- "section" tag definition -->
-    <xs:complexType name="section_type">
-        <!--xs:sequence>
-            <xs:element name="title" type="stringtype"/>
-            <xs:element name="note" type="stringtype" minOccurs="0"/>
-            <xs:element name="quantity" type="inttype"/>
-            <xs:element name="price" type="dectype"/>
-        </xs:sequence-->
-    </xs:complexType>
-
-    <!-- Root element -->
+    <!-- ROOT ELEMENT -->
     <xs:element name="mechanics">
         <xs:complexType>
 
@@ -19,7 +9,7 @@
             <xs:sequence>
 
                 <!-- Book translated images -->
-                <xs:element name="translated-images">
+                <xs:element name="translated-images" minOccurs="0" maxOccurs="1">
                     <xs:complexType>
                         <xs:sequence>
                             <!-- Each translated image file name -->
@@ -45,5 +35,21 @@
 
         </xs:complexType>
     </xs:element>
+
+    <!-- "section" tag definition -->
+    <xs:complexType name="section_type">
+
+        <!-- "section" children -->
+        <xs:sequence>
+            <xs:element name="setSkills" />
+        </xs:sequence>
+
+        <!-- Section id -->
+        <xs:attribute name="id" type="xs:string" use="required" />
+
+    </xs:complexType>
+
+    <!-- "setSkills" rule -->
+
 
 </xs:schema>

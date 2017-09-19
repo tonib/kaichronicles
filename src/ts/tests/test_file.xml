@@ -18,6 +18,12 @@
 
     <!-- GAME RULES -->
     <sections>
+
+        <section id="gamerulz">
+            <!-- Select the player skills (weapons skill and endurance) UI -->
+            <setSkills />
+        </section>
+
     </sections>
-    
+
 </mechanics>
