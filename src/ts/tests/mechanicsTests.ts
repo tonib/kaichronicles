@@ -7,21 +7,27 @@ import libxml = require( 'libxmljs' );
 import fs = require('node-fs-extra');
 declare var process;
 
-console.log("Mechanics tests...");
-declare var __dirname;
-console.log( process.cwd() );
+console.log("* Mechanics tests");
 
-
+console.log("Loading XSD...");
 const xsd : string = fs.readFileSync( 'src/ts/tests/mechanics.xsd' , 'utf8' );
 const xsdDoc = libxml.parseXml(xsd);
 
+console.log("Loading XML...");
 const xmlText : string = fs.readFileSync( 'src/ts/tests/test_file.xml' , 'utf8' );
 const xmlDoc = libxml.parseXml(xmlText);
-if( xmlDoc.validate(xsdDoc) )
-    console.log('XML OK!');
-else {
-    console.log('Do\'h!');
-    console.log( xmlDoc.validationErrors );
+
+console.log("Validating...");
+try {
+    if( xmlDoc.validate(xsdDoc) )
+        console.log('XML OK!');
+    else {
+        console.log('Do\'h!');
+        console.log( xmlDoc.validationErrors );
+    }
+}
+catch(e) {
+    console.log(e);
 }
 
 /*

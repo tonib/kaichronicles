@@ -1,26 +1,49 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-<!--xs:element name="note">
-  <xs:complexType>
-    <xs:sequence>
-      <xs:element name="to" type="xs:string"/>
-      <xs:element name="from" type="xs:string"/>
-      <xs:element name="heading" type="xs:string"/>
-      <xs:element name="body" type="xs:string"/>
-    </xs:sequence>
-  </xs:complexType>
-</xs:element-->
+    <!-- "section" tag definition -->
+    <xs:complexType name="section_type">
+        <!--xs:sequence>
+            <xs:element name="title" type="stringtype"/>
+            <xs:element name="note" type="stringtype" minOccurs="0"/>
+            <xs:element name="quantity" type="inttype"/>
+            <xs:element name="price" type="dectype"/>
+        </xs:sequence-->
+    </xs:complexType>
 
-<xs:element name="mechanics">
-  <xs:complexType>
-    <!--xs:sequence>
-      <xs:element name="to" type="xs:string"/>
-      <xs:element name="from" type="xs:string"/>
-      <xs:element name="heading" type="xs:string"/>
-      <xs:element name="body" type="xs:string"/>
-    </xs:sequence-->
-  </xs:complexType>
-</xs:element>
+    <!-- Root element -->
+    <xs:element name="mechanics">
+        <xs:complexType>
+
+            <!-- "mechanics" children -->
+            <xs:sequence>
+
+                <!-- Book translated images -->
+                <xs:element name="translated-images">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <!-- Each translated image file name -->
+                            <xs:element name="image" type="xs:string" maxOccurs="unbounded" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                
+                <!-- Book sections -->
+                <xs:element name="sections">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <!-- Each section rules -->
+                            <xs:element name="section" type="section_type" minOccurs="0" maxOccurs="unbounded" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+            </xs:sequence>
+
+            <!-- Book number -->
+            <xs:attribute name="book" type="xs:integer" use="required" />
+
+        </xs:complexType>
+    </xs:element>
 
 </xs:schema>
