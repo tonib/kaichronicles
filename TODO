@@ -1,4 +1,5 @@
 - Test controller: Test rules
+  XSD validation with node.js: https://stackoverflow.com/questions/11050759/validate-xml-syntax-structure-with-node-js
 - Check reported bugs on Google play:
   * Should be the healing kai discipline be enabled on magnakai books?
   * Saved games removed when adding new games
