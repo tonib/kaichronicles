@@ -167,7 +167,7 @@ const mechanicsEngine = {
     runRule: function(rule) {
         //console.log( Mechanics.getRuleSelector(rule) );
         if( !mechanicsEngine[rule.nodeName] )
-            console.log("Unknown rule: " + rule.nodeName);
+            mechanicsEngine.debugWarning("Unknown rule: " + rule.nodeName);
         else
             mechanicsEngine[rule.nodeName](rule);
     },
@@ -200,6 +200,20 @@ const mechanicsEngine = {
             }
         }
 
+    },
+
+    /**
+     * Print debug warning to console, and even more prominently if we're in
+     * debug mode.
+     */
+    debugWarning: function(msg : string) {
+        console.log(msg);
+        if( window.getUrlParameter( 'debug' ) ) {
+            var $messageUI = mechanicsEngine.getMechanicsUI('mechanics-message');
+            $messageUI.attr('id', '' );
+            $messageUI.find('b').text( msg );
+            gameView.appendToSection( $messageUI );
+        }
     },
 
     /**
@@ -376,6 +390,9 @@ const mechanicsEngine = {
         // Check if we are picking an object
         var objectId = $(rule).attr('objectId');
         if( objectId ) {
+            if( !state.mechanics.getObject( objectId ) )
+                mechanicsEngine.debugWarning( 'Unknown object: ' + objectId );
+
             // Pick the object
             if( !actionChartController.pick( objectId , false, false) ) {
                 // The object has not been picked (ex. full backpack)
@@ -402,7 +419,7 @@ const mechanicsEngine = {
         else if( cls == 'arrow' )
             actionChartController.increaseArrows(count);
         else
-            console.log('Pick rule with no objectId / class');
+            mechanicsEngine.debugWarning('Pick rule with no objectId / class');
 
         // Mark the rule as exececuted
         sectionState.markRuleAsExecuted(rule);
@@ -434,12 +451,14 @@ const mechanicsEngine = {
 
         // Check discipline
         var disciplineToTest = $(rule).attr('hasDiscipline');
-        // TODO: Test "disciplineToTest" is valid 
         var i;
         if( disciplineToTest ) {
             // Check if the player has some of the disciplines
+            var allDisciplines = Object.keys( state.book.getDisciplinesTable() );
             var disciplines = disciplineToTest.split('|');
             for(i=0; i < disciplines.length; i++ ) {
+                if( !allDisciplines.contains( disciplines[i] ) )
+                    mechanicsEngine.debugWarning('Unknown discipline: ' + disciplines[i]);
                 if( state.actionChart.disciplines.contains( disciplines[i] ) ) {
                     conditionStatisfied = true;
                     break;
@@ -453,6 +472,8 @@ const mechanicsEngine = {
             // Check if the player has some of the objects
             var objects = objectIdsToTest.split('|');
             for(i=0; i < objects.length; i++ ) {
+                if( !state.mechanics.getObject( objects[i] ) )
+                    mechanicsEngine.debugWarning( 'Unknown object: ' + objects[i] );
                 if( state.actionChart.hasObject( objects[i] ) ) {
                     conditionStatisfied = true;
                     break;
@@ -562,7 +583,7 @@ const mechanicsEngine = {
         // Test section:
         if( section != 'all' && 
             $('a.choice-link[data-section=' + section + ']').length === 0 ) {
-            console.log( 'choiceState: Wrong choiceState (section=' + section + ')' );
+            mechanicsEngine.debugWarning( 'choiceState: Wrong choiceState (section=' + section + ')' );
             return;
         }
         
@@ -585,8 +606,13 @@ const mechanicsEngine = {
             return;
 
         const objectId : string = $(rule).attr('objectId');
-        if( !objectId )
-            throw 'Rule object without objectId';
+        if( !objectId ) {
+            mechanicsEngine.debugWarning( 'Rule object without objectId' );
+            return;
+        }
+
+        if( !state.mechanics.getObject( objectId ) )
+            mechanicsEngine.debugWarning( 'Unknown object: ' + objectId );
 
         // Object price (optional)
         var price = $(rule).attr('price');
@@ -640,8 +666,8 @@ const mechanicsEngine = {
 
         var sectionState = state.sectionStates.getSectionState();
         if( combatIndex >= sectionState.combats.length ) {
-            console.log('Rule "combat": Combat with index ' + combatIndex + 
-                ' not found');
+            mechanicsEngine.debugWarning('Rule "combat": Combat with index ' +
+                combatIndex + ' not found');
             return;
         }
         var combat = sectionState.combats[ combatIndex ];
@@ -936,7 +962,7 @@ const mechanicsEngine = {
         var restorePoint = $(rule).attr('restorePoint');
         var inventoryState = state.sectionStates.otherStates[ restorePoint ];
         if( !inventoryState ) {
-            console.log('restorePoint ' + restorePoint + ' not found!');
+            mechanicsEngine.debugWarning('restorePoint ' + restorePoint + ' not found!');
             return;
         }
         actionChartController.restoreInventoryState( inventoryState );
@@ -1018,13 +1044,13 @@ const mechanicsEngine = {
 
         var linkText : string = $(rule).attr('text-' + state.language);
         if( !linkText ) {
-            console.log( 'textToChoice: text-' + state.language +' attribute not found');
+            mechanicsEngine.debugWarning( 'textToChoice: text-' + state.language +' attribute not found');
             return;
         }
 
         var $textContainer = $(':contains("' + linkText + '")').last();
         if( $textContainer.length == 0 ) {
-            console.log( 'textToChoice: text "' + linkText + '" not found');
+            mechanicsEngine.debugWarning( 'textToChoice: text "' + linkText + '" not found');
             return;
         }
 
@@ -1212,7 +1238,7 @@ const mechanicsEngine = {
             /* jshint ignore:end */
         }
         catch(e) {
-            console.log("Error evaluating expression " + txtExpression + ": " + e);
+            mechanicsEngine.debugWarning("Error evaluating expression " + txtExpression + ": " + e);
             return null;
         }
     },
