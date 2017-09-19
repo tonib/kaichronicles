@@ -24,6 +24,18 @@
             <setSkills />
         </section>
 
+        <section id="discplnz">
+            <!-- Select the Kai disciplines UI -->
+            <setDisciplines />
+        </section>
+
+        <section id="equipmnt">
+            <!-- Choose equipment -->
+            <pick objectId="axe" />
+            <pick class="meal" count="1" />
+            <pick objectId="map" />
+        </section>
+        
     </sections>
 
 </mechanics>

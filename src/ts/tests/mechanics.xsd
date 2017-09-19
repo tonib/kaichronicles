@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-    <!-- ROOT ELEMENT -->
+    <!--
+        *** ROOT ELEMENT ***
+    -->
     <xs:element name="mechanics">
         <xs:complexType>
 
@@ -36,12 +38,18 @@
         </xs:complexType>
     </xs:element>
 
+    <!--
+        *** SECTION ***
+    -->
+
     <!-- "section" tag definition -->
     <xs:complexType name="section_type">
 
         <!-- "section" children -->
         <xs:sequence>
-            <xs:element name="setSkills" />
+            <xs:element name="setSkills" type="setSkills" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="setDisciplines" type="setDisciplines" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="pick" type="pick" minOccurs="0" maxOccurs="unbounded" />
         </xs:sequence>
 
         <!-- Section id -->
@@ -49,7 +57,38 @@
 
     </xs:complexType>
 
-    <!-- "setSkills" rule -->
+    <!--
+        *** RULES ***
+    -->
 
+    <!-- "setSkills" rule -->
+    <xs:complexType name="setSkills" />
+
+    <!-- "setDisciplines" rule -->
+    <xs:complexType name="setDisciplines" />
+    
+    <!-- "pick" rule -->
+    <xs:complexType name="pick">
+
+        <!-- Object picked id -->
+        <xs:attribute name="objectId" type="xs:string" />
+
+        <!-- Object class (for counters: "meals", "arrow", "money") -->
+        <xs:attribute name="class" type="xs:string" />
+        
+        <!-- Items count (for counters: "meals", "arrow", "money"). Value can be a number or an expresion -->
+        <xs:attribute name="count" type="xs:string" />
+        
+        <!-- TODO: objectId OR class should be mandatory -->
+
+    </xs:complexType>
+
+    <!-- "randomTable" rule -->
+    <xs:complexType name="randomTable">
+
+        <!-- Random table index, default is zero -->
+        <xs:attribute name="index" type="xs:integer" />
+
+    </xs:complexType>
 
 </xs:schema>
