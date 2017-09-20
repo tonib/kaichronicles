@@ -98,10 +98,55 @@
         <xs:attribute name="index" type="xs:integer" />
         <!-- Section text selection (English) -->
         <xs:attribute name="text-en" type="xs:string" />
+        <!-- Section text selection (Spanish) -->
+        <xs:attribute name="text-es" type="xs:string" />
         <!-- 0 == 10? -->
         <xs:attribute name="zeroAsTen" type="xs:boolean" />
     </xs:complexType>
 
+    
+    <!-- "chooseEquipment" rule -->
+    <xs:complexType name="chooseEquipment">
+        <!-- English description -->
+        <xs:attribute name="en-text" type="xs:string" />
+        <!-- Spanish description -->
+        <xs:attribute name="es-text" type="xs:string" />
+    </xs:complexType>
+
+    <xs:complexType name="test">
+        <!-- Children -->
+        <xs:group ref="any_rule" minOccurs="0" maxOccurs="unbounded" />
+
+        <xs:attribute name="hasDiscipline" type="xs:string" />
+        <xs:attribute name="hasObject" type="xs:string" />
+        <xs:attribute name="expression" type="xs:string" />
+        <xs:attribute name="currentWeapon" type="xs:string" />
+        <xs:attribute name="weaponskillActive" type="xs:boolean" />
+        <xs:attribute name="combatsWon" type="xs:boolean" />
+        <xs:attribute name="combatsActive" type="xs:boolean" />
+        <xs:attribute name="bookLanguage" type="xs:string" />
+        <xs:attribute name="isChoiceEnabled" type="xs:string" />
+        <xs:attribute name="canUseBow" type="xs:boolean" />
+        <xs:attribute name="hasWeaponType" type="xs:string" />
+        <xs:attribute name="hasCircle" type="xs:string" />
+        <xs:attribute name="hasWeaponskillWith" type="xs:string" />
+        <xs:attribute name="not" type="xs:boolean" />
+    </xs:complexType>
+
+    <xs:complexType name="choiceState">
+        <xs:attribute name="section" type="xs:string" />
+        <xs:attribute name="set" type="xs:string" />
+    </xs:complexType>
+
+    <xs:complexType name="object">
+        <xs:attribute name="objectId" type="xs:string" />
+        <xs:attribute name="price" type="xs:integer" />
+        <xs:attribute name="count" type="xs:integer" />
+        <xs:attribute name="useOnSection" type="xs:boolean" />
+        <xs:attribute name="unlimited" type="xs:boolean" />
+        <xs:attribute name="idx" type="xs:integer" />
+    </xs:complexType>
+    
     <!--
         *** ANY RULE DEFINITION ***
     -->
@@ -112,6 +157,10 @@
             <xs:element name="setDisciplines" type="setDisciplines" />
             <xs:element name="pick" type="pick" />
             <xs:element name="randomTable" type="randomTable" />
+            <xs:element name="chooseEquipment" type="chooseEquipment" />
+            <xs:element name="test" type="test" />
+            <xs:element name="choiceState" type="choiceState" />
+            <xs:element name="object" type="object" />
         </xs:choice>
     </xs:group>
 
