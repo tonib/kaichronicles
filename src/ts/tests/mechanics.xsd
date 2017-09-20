@@ -65,26 +65,41 @@
     
     <!-- "pick" rule -->
     <xs:complexType name="pick">
-
         <!-- Object picked id -->
         <xs:attribute name="objectId" type="xs:string" />
-
         <!-- Object class (for counters: "meals", "arrow", "money") -->
         <xs:attribute name="class" type="xs:string" />
-        
         <!-- Items count (for counters: "meals", "arrow", "money"). Value can be a number or an expresion -->
         <xs:attribute name="count" type="xs:string" />
-        
         <!-- TODO: objectId OR class should be mandatory -->
-
     </xs:complexType>
 
     <!-- "randomTable" rule -->
     <xs:complexType name="randomTable">
+        <!-- Children. It can be any rule, or "case" -->
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <!-- case definition -->
+            <xs:element name="case">
+                <xs:complexType>
+                    <!-- case children -->
+                    <xs:group ref="any_rule" minOccurs="0" maxOccurs="unbounded" />
+
+                    <xs:attribute name="value" type="xs:integer" />
+                    <xs:attribute name="from" type="xs:integer" />
+                    <xs:attribute name="to" type="xs:integer" />
+                </xs:complexType>
+            </xs:element>
+
+            <!-- Any other rule -->
+            <xs:group ref="any_rule" />
+        </xs:choice>
 
         <!-- Random table index, default is zero -->
         <xs:attribute name="index" type="xs:integer" />
-
+        <!-- Section text selection (English) -->
+        <xs:attribute name="text-en" type="xs:string" />
+        <!-- 0 == 10? -->
+        <xs:attribute name="zeroAsTen" type="xs:boolean" />
     </xs:complexType>
 
     <!--
@@ -92,10 +107,11 @@
     -->
 
     <xs:group name="any_rule">
-        <xs:choice >
+        <xs:choice>
             <xs:element name="setSkills" type="setSkills" />
             <xs:element name="setDisciplines" type="setDisciplines" />
             <xs:element name="pick" type="pick" />
+            <xs:element name="randomTable" type="randomTable" />
         </xs:choice>
     </xs:group>
 

@@ -34,6 +34,50 @@
             <pick objectId="axe" />
             <pick class="meal" count="1" />
             <pick objectId="map" />
+
+            <randomTable index="0">
+                <pick class="money" count="[RANDOM]" />
+            </randomTable>
+
+            <randomTable index="1">
+                <case value="1">
+                    <pick objectId="sword" />
+                </case>
+                <case value="2">
+                    <pick objectId="helmet" />
+                </case>
+                <case value="3">
+                    <pick class="meal" count="2" />
+                </case>
+                <case value="4">
+                    <pick objectId="chainmail" />
+                </case>
+                <case value="5">
+                    <pick objectId="mace" />
+                </case>
+                <case value="6">
+                    <pick objectId="healingpotion" />
+                </case>
+                <case value="7">
+                    <pick objectId="quarterstaff" />
+                </case>
+                <case value="8">
+                    <pick objectId="spear" />
+                </case>
+                <case value="9">
+                    <pick class="money" count="12" />
+                </case>
+                <case value="0">
+                    <pick objectId="broadsword" />
+                </case>
+            </randomTable>
+
+            <!-- Choose equipment UI -->
+            <chooseEquipment 
+                en-text="Click on both Random Table links before continue" 
+                es-text="Haz click en ambos links de la Tabla de la Suerte antes de continuar"
+            />
+            
         </section>
         
     </sections>
