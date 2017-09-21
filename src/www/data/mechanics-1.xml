@@ -1209,7 +1209,7 @@
 
         <section id="sect342">
             <choiceState section="all" set="disabled" />
-            <combat hasMindforce="true" mindforceCS="-2" />
+            <combat mindforceCS="-2" noMindblast="true" />
             <afterCombats>
                 <choiceState section="all" set="enabled" />
             </afterCombats>

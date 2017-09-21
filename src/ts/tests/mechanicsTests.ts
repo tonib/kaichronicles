@@ -14,7 +14,7 @@ const xsd : string = fs.readFileSync( 'src/ts/tests/mechanics.xsd' , 'utf8' );
 const xsdDoc = libxml.parseXml(xsd);
 
 console.log("Loading XML...");
-const xmlText : string = fs.readFileSync( 'src/www/data/mechanics-1.xml' , 'utf8' );
+const xmlText : string = fs.readFileSync( 'src/www/data/mechanics-2.xml' , 'utf8' );
 const xmlDoc = libxml.parseXml(xmlText);
 
 console.log("Validating...");

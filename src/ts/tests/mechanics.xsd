@@ -134,8 +134,8 @@
     </xs:complexType>
 
     <xs:complexType name="choiceState">
-        <xs:attribute name="section" type="xs:string" />
-        <xs:attribute name="set" type="xs:string" />
+        <xs:attribute name="section" type="xs:string" use="required" />
+        <xs:attribute name="set" type="xs:string" use="required" />
     </xs:complexType>
 
     <xs:complexType name="object">
@@ -147,6 +147,84 @@
         <xs:attribute name="idx" type="xs:integer" />
     </xs:complexType>
     
+    <xs:complexType name="combat">
+        <xs:attribute name="index" type="xs:integer" />
+        <xs:attribute name="combatSkillModifier" type="xs:string" />
+        <xs:attribute name="mindforceCS" type="xs:integer" />
+        <xs:attribute name="mindforceEP" type="xs:integer" />
+        <xs:attribute name="noMindblast" type="xs:boolean" />
+        <xs:attribute name="noPsiSurge" type="xs:boolean" />
+        <xs:attribute name="mindblastBonus" type="xs:integer" />
+        <xs:attribute name="noWeapon" type="xs:boolean" />
+        <xs:attribute name="eludeTurn" type="xs:integer" />
+        <xs:attribute name="maxEludeTurn" type="xs:integer" />
+        <xs:attribute name="dammageMultiplier" type="xs:integer" />
+        <xs:attribute name="enemyMultiplier" type="xs:integer" />
+        <xs:attribute name="enemyTurnLoss" type="xs:integer" />
+        <xs:attribute name="turnLoss" type="xs:integer" />
+        <xs:attribute name="fake" type="xs:boolean" />
+        <xs:attribute name="bow" type="xs:boolean" />
+        <xs:attribute name="disabledObjects" type="xs:string" />
+    </xs:complexType>
+
+    <xs:complexType name="afterCombats">
+        <!-- Children -->
+        <xs:group ref="any_rule" minOccurs="0" maxOccurs="unbounded" />
+    </xs:complexType>
+
+    <xs:complexType name="afterElude">
+        <!-- Children -->
+        <xs:group ref="any_rule" minOccurs="0" maxOccurs="unbounded" />
+    </xs:complexType>
+
+    <xs:complexType name="onInventoryEvent">
+        <!-- Children -->
+        <xs:group ref="any_rule" minOccurs="0" maxOccurs="unbounded" />
+    </xs:complexType>
+
+    <xs:complexType name="afterCombatTurn">
+        <!-- Children -->
+        <xs:group ref="any_rule" minOccurs="0" maxOccurs="unbounded" />
+
+        <xs:attribute name="turn" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="death">
+    </xs:complexType>
+    
+    <xs:complexType name="endurance">
+        <xs:attribute name="count" type="xs:string" />
+    </xs:complexType>
+    
+    <xs:complexType name="meal">
+        <xs:attribute name="index" type="xs:integer" />
+        <xs:attribute name="huntDisabled" type="xs:boolean" />
+        <xs:attribute name="price" type="xs:integer" />
+    </xs:complexType>
+    
+    <xs:complexType name="resetSectionState">
+        <xs:attribute name="sectionId" type="xs:string" use="required" />
+    </xs:complexType>
+    
+    <xs:complexType name="message">
+        <xs:attribute name="en-text" type="xs:string" />
+        <xs:attribute name="es-text" type="xs:string" />
+        <xs:attribute name="id" type="xs:string" />
+        <xs:attribute name="op" type="xs:string" />
+    </xs:complexType>
+    
+    <xs:complexType name="drop">
+        <xs:attribute name="objectId" type="xs:string" use="required" />
+    </xs:complexType>
+    
+    <xs:complexType name="disableCombats">
+        <xs:attribute name="disabled" type="xs:boolean" />
+    </xs:complexType>
+
+    <xs:complexType name="combatSkill">
+        <xs:attribute name="count" type="xs:integer" use="required" />
+    </xs:complexType>
+
     <!--
         *** ANY RULE DEFINITION ***
     -->
@@ -161,6 +239,19 @@
             <xs:element name="test" type="test" />
             <xs:element name="choiceState" type="choiceState" />
             <xs:element name="object" type="object" />
+            <xs:element name="combat" type="combat" />
+            <xs:element name="afterCombats" type="afterCombats" />
+            <xs:element name="afterElude" type="afterElude" />
+            <xs:element name="afterCombatTurn" type="afterCombatTurn" />
+            <xs:element name="onInventoryEvent" type="onInventoryEvent" />
+            <xs:element name="death" type="death" />
+            <xs:element name="endurance" type="endurance" />
+            <xs:element name="meal" type="meal" />
+            <xs:element name="resetSectionState" type="resetSectionState" />
+            <xs:element name="message" type="message" />
+            <xs:element name="drop" type="drop" />
+            <xs:element name="disableCombats" type="disableCombats" />
+            <xs:element name="combatSkill" type="combatSkill" />
         </xs:choice>
     </xs:group>
 
