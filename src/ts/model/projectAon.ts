@@ -1,9 +1,10 @@
+/// <reference path="../external.ts" />
 
 /**
  * Metadata about books and Project Aon web structure
  */
-var projectAon = {
-
+const projectAon = {
+    
     /**
      * Books metadata
      */
@@ -172,6 +173,10 @@ var projectAon = {
     }
 
 };
+
+// TODO: Does not work, I dont know why and right now, I don't have time
+//export { projectAon as projectAon };
+//export { projectAon };
 
 try {
     if (typeof exports !== 'undefined')

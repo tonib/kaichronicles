@@ -2,7 +2,6 @@
 
 declare var template:any;
 declare var cordovaApp:any;
-declare var projectAon:any;
 declare var views:any;
 declare var routing:any;
 declare var setupController:any;
@@ -14,6 +13,8 @@ declare var jQuery:any;
 declare var toastr:any;
 
 declare var saveAs:any;
+
+declare var exports;
 
 // commons.js: 
 interface Window { 

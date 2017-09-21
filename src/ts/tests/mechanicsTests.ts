@@ -5,6 +5,7 @@
 
 import libxml = require( 'libxmljs' );
 import fs = require('node-fs-extra');
+
 declare var process;
 
 function validateBookXml( path : string ) {

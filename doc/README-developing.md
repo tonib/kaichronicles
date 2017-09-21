@@ -4,7 +4,7 @@ This is a "guide" to develop mechanics for new books.
 
 ## Previous steps
 * Download the code (or clone the git repository)
-* Be sure the book you want to develop is listed at the file /src/www/js/model/projectAon.js. If it's not
+* Be sure the book you want to develop is listed at the file /src/ts/model/projectAon.ts. If it's not
   here, the book will not be downloaded from the PAON
 * Setup the web part (compile Typescript, download books, etc), as it's described at ../README.md, 
   at sections "Setup" and "Setup web site". The Android part will not be needed
