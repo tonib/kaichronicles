@@ -27,6 +27,9 @@
                             <!-- Each section rules -->
                             <xs:element name="section" type="section" minOccurs="0" maxOccurs="unbounded" />
                         </xs:sequence>
+
+                        <!-- Number of sections on book. Default is 350 -->
+                        <xs:attribute name="count" type="xs:integer" />
                     </xs:complexType>
                 </xs:element>
 
@@ -51,7 +54,8 @@
         <!-- Section id -->
         <xs:attribute name="id" type="xs:string" use="required" />
         <xs:attribute name="pickMaximum" type="xs:integer" />
-        
+        <xs:attribute name="en-text" type="xs:string" />
+        <xs:attribute name="es-text" type="xs:string" />
     </xs:complexType>
 
     <!--
@@ -72,6 +76,7 @@
         <xs:attribute name="class" type="xs:string" />
         <!-- Items count (for counters: "meals", "arrow", "money"). Value can be a number or an expresion -->
         <xs:attribute name="count" type="xs:string" />
+        <xs:attribute name="index" type="xs:integer" />
         <!-- TODO: objectId OR class should be mandatory -->
     </xs:complexType>
 
@@ -165,6 +170,7 @@
         <xs:attribute name="enemyTurnLoss" type="xs:integer" />
         <xs:attribute name="turnLoss" type="xs:integer" />
         <xs:attribute name="fake" type="xs:boolean" />
+        <xs:attribute name="restoreFactor" type="xs:decimal" />
         <xs:attribute name="bow" type="xs:boolean" />
         <xs:attribute name="disabledObjects" type="xs:string" />
     </xs:complexType>
@@ -196,6 +202,11 @@
         <xs:group ref="any_rule" minOccurs="0" maxOccurs="unbounded" />
 
         <xs:attribute name="section" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="numberPickerChoosed">
+        <!-- Children -->
+        <xs:group ref="any_rule" minOccurs="0" maxOccurs="unbounded" />
     </xs:complexType>
 
     <xs:complexType name="death">
@@ -236,6 +247,7 @@
 
     <xs:complexType name="randomTableIncrement">
         <xs:attribute name="increment" type="xs:string" use="required" />
+        <xs:attribute name="index" type="xs:integer" />
     </xs:complexType>
     
     <xs:complexType name="currentWeapon">
@@ -245,7 +257,8 @@
     <xs:complexType name="numberPicker">
         <xs:attribute name="enabled" type="xs:boolean" />
         <xs:attribute name="money" type="xs:boolean" />
-        <xs:attribute name="actionButton" type="xs:string" />
+        <xs:attribute name="en-actionButton" type="xs:string" />
+        <xs:attribute name="es-actionButton" type="xs:string" />
         <xs:attribute name="en-text" type="xs:string" />
         <xs:attribute name="es-text" type="xs:string" />
         <xs:attribute name="min" type="xs:integer" />
@@ -262,13 +275,56 @@
         <xs:attribute name="count" type="xs:integer" />
     </xs:complexType>
 
+    <xs:complexType name="saveInventoryState">
+        <xs:attribute name="restorePoint" type="xs:string" use="required" />
+        <xs:attribute name="objectsType" type="xs:string" />
+    </xs:complexType>
+
+    <xs:complexType name="restoreInventoryState">
+        <xs:attribute name="restorePoint" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="goToSection">
+        <xs:attribute name="section" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="toast">
+        <xs:attribute name="en-text" type="xs:string" use="required" />
+        <xs:attribute name="es-text" type="xs:string" />
+    </xs:complexType>
+    
+    <xs:complexType name="registerGlobalRule">
+        <!-- Children -->
+        <xs:group ref="any_rule" minOccurs="0" maxOccurs="unbounded" />
+
+        <xs:attribute name="id" type="xs:string" use="required" />
+    </xs:complexType>
+    
+    <xs:complexType name="unregisterGlobalRule">
+        <xs:attribute name="id" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="objectUsed">
+        <!-- Children -->
+        <xs:group ref="any_rule" minOccurs="0" maxOccurs="unbounded" />
+
+        <xs:attribute name="objectId" type="xs:string" use="required" />
+    </xs:complexType>
+    
+    <xs:complexType name="dropDisciplines" />
+
+    <xs:complexType name="textToChoice">
+        <xs:attribute name="text-en" type="xs:string" use="required" />
+        <xs:attribute name="text-es" type="xs:string" use="required" />
+        <xs:attribute name="section" type="xs:string" use="required" />
+    </xs:complexType>
+
     <!--
         *** SPECIAL SECTIONS ***
     -->
 
-    <xs:complexType name="book2Sect238" />
-    <xs:complexType name="book2sect308" />
-
+    <xs:complexType name="specialsection_type" />
+    
     <!--
         *** ANY RULE DEFINITION ***
     -->
@@ -302,10 +358,24 @@
             <xs:element name="numberPicker" type="numberPicker" />
             <xs:element name="huntStatus" type="huntStatus" />
             <xs:element name="sell" type="sell" />
+            <xs:element name="saveInventoryState" type="saveInventoryState" />
+            <xs:element name="restoreInventoryState" type="restoreInventoryState" />
+            <xs:element name="numberPickerChoosed" type="numberPickerChoosed" />
+            <xs:element name="goToSection" type="goToSection" />
+            <xs:element name="toast" type="toast" />
+            <xs:element name="registerGlobalRule" type="registerGlobalRule" />
+            <xs:element name="objectUsed" type="objectUsed" />
+            <xs:element name="unregisterGlobalRule" type="unregisterGlobalRule" />
+            <xs:element name="dropDisciplines" type="dropDisciplines" />
+            <xs:element name="textToChoice" type="textToChoice" />
 
             <!-- Special sections -->
-            <xs:element name="book2Sect238" type="book2Sect238" />
-            <xs:element name="book2sect308" type="book2sect308" />
+            <xs:element name="book2Sect238" type="specialsection_type" />
+            <xs:element name="book2sect308" type="specialsection_type" />
+            <xs:element name="book3sect88" type="specialsection_type" />
+            <xs:element name="book6sect26" type="specialsection_type" />
+            <xs:element name="book6sect284" type="specialsection_type" />
+            <xs:element name="book6sect340" type="specialsection_type" />
             
         </xs:choice>
     </xs:group>

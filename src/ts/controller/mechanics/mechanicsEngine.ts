@@ -1017,7 +1017,7 @@ const mechanicsEngine = {
     },
 
     /**
-     * Show a "dialog" message
+     * Show a "toast" message
      */
     toast: function(rule) {
         toastr.info( mechanicsEngine.getRuleText(rule) );

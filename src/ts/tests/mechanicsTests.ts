@@ -33,5 +33,5 @@ console.log("Loading XSD...");
 const xsd : string = fs.readFileSync( 'src/ts/tests/mechanics.xsd' , 'utf8' );
 const xsdDoc = libxml.parseXml(xsd);
 
-validateBookXml( 'src/www/data/mechanics-1.xml' );
-validateBookXml( 'src/www/data/mechanics-2.xml' );
+for(let i=1; i<= 8; i++)
+    validateBookXml( 'src/www/data/mechanics-' + i + '.xml' );
