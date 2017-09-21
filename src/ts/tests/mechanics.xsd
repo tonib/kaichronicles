@@ -50,7 +50,8 @@
 
         <!-- Section id -->
         <xs:attribute name="id" type="xs:string" use="required" />
-
+        <xs:attribute name="pickMaximum" type="xs:integer" />
+        
     </xs:complexType>
 
     <!--
@@ -120,6 +121,7 @@
         <xs:attribute name="hasDiscipline" type="xs:string" />
         <xs:attribute name="hasObject" type="xs:string" />
         <xs:attribute name="expression" type="xs:string" />
+        <xs:attribute name="sectionVisited" type="xs:string" />
         <xs:attribute name="currentWeapon" type="xs:string" />
         <xs:attribute name="weaponskillActive" type="xs:boolean" />
         <xs:attribute name="combatsWon" type="xs:boolean" />
@@ -139,12 +141,12 @@
     </xs:complexType>
 
     <xs:complexType name="object">
-        <xs:attribute name="objectId" type="xs:string" />
-        <xs:attribute name="price" type="xs:integer" />
+        <xs:attribute name="objectId" type="xs:string" use="required" />
+        <xs:attribute name="price" type="xs:string" />
         <xs:attribute name="count" type="xs:integer" />
         <xs:attribute name="useOnSection" type="xs:boolean" />
         <xs:attribute name="unlimited" type="xs:boolean" />
-        <xs:attribute name="idx" type="xs:integer" />
+        <xs:attribute name="index" type="xs:integer" />
     </xs:complexType>
     
     <xs:complexType name="combat">
@@ -189,6 +191,13 @@
         <xs:attribute name="turn" type="xs:string" use="required" />
     </xs:complexType>
 
+    <xs:complexType name="choiceSelected">
+        <!-- Children -->
+        <xs:group ref="any_rule" minOccurs="0" maxOccurs="unbounded" />
+
+        <xs:attribute name="section" type="xs:string" use="required" />
+    </xs:complexType>
+
     <xs:complexType name="death">
     </xs:complexType>
     
@@ -225,6 +234,41 @@
         <xs:attribute name="count" type="xs:integer" use="required" />
     </xs:complexType>
 
+    <xs:complexType name="randomTableIncrement">
+        <xs:attribute name="increment" type="xs:string" use="required" />
+    </xs:complexType>
+    
+    <xs:complexType name="currentWeapon">
+        <xs:attribute name="objectId" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="numberPicker">
+        <xs:attribute name="enabled" type="xs:boolean" />
+        <xs:attribute name="money" type="xs:boolean" />
+        <xs:attribute name="actionButton" type="xs:string" />
+        <xs:attribute name="en-text" type="xs:string" />
+        <xs:attribute name="es-text" type="xs:string" />
+        <xs:attribute name="min" type="xs:integer" />
+        <xs:attribute name="max" type="xs:integer" />
+    </xs:complexType>
+
+    <xs:complexType name="huntStatus">
+        <xs:attribute name="enabled" type="xs:boolean" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="sell">
+        <xs:attribute name="objectId" type="xs:string" use="required" />
+        <xs:attribute name="price" type="xs:integer" use="required" />
+        <xs:attribute name="count" type="xs:integer" />
+    </xs:complexType>
+
+    <!--
+        *** SPECIAL SECTIONS ***
+    -->
+
+    <xs:complexType name="book2Sect238" />
+    <xs:complexType name="book2sect308" />
+
     <!--
         *** ANY RULE DEFINITION ***
     -->
@@ -252,6 +296,17 @@
             <xs:element name="drop" type="drop" />
             <xs:element name="disableCombats" type="disableCombats" />
             <xs:element name="combatSkill" type="combatSkill" />
+            <xs:element name="randomTableIncrement" type="randomTableIncrement" />
+            <xs:element name="choiceSelected" type="choiceSelected" />
+            <xs:element name="currentWeapon" type="currentWeapon" />
+            <xs:element name="numberPicker" type="numberPicker" />
+            <xs:element name="huntStatus" type="huntStatus" />
+            <xs:element name="sell" type="sell" />
+
+            <!-- Special sections -->
+            <xs:element name="book2Sect238" type="book2Sect238" />
+            <xs:element name="book2sect308" type="book2sect308" />
+            
         </xs:choice>
     </xs:group>
 

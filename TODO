@@ -11,6 +11,7 @@
   * Others?
 - projectAon to TS
 - Add the section "Lore-circles of the Magnakai" to the game rules view
+- jshint should be runned over non TS generated code
 
 FOR FUTURE (1.9+):
 - Add button to explain combat ratio

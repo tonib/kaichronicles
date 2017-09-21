@@ -53,8 +53,8 @@
 
             <object objectId="sword" />
             <object objectId="shortsword" />
-            <object objectId="meal" idx="0" />
-            <object objectId="meal" idx="1" />
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
             <object objectId="chainmail" />
             <object objectId="mace" />
             <object objectId="healingpotion" />
@@ -535,8 +535,8 @@
         <section id="sect91">
             <object objectId="quarterstaff" />
             <object objectId="blanket" />
-            <object objectId="meal" idx="0" />
-            <object objectId="meal" idx="1" />
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
             <object objectId="backpack" />
             <object objectId="dagger" />
             <object objectId="rope" />

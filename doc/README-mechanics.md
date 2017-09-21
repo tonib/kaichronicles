@@ -252,11 +252,14 @@ Enable or disable section choices
 ```xml
 <object objectId="laumspurpotion" />
 <object objectId="sword" price="4" unlimited="true" />
+<object objectId="meal" index="0" />
+<object objectId="meal" index="1" />
 ```
 Make an object available on the section. The player will can pick / buy it.
 * **objectId**: The available object id 
 * **price**: If it's set, the price to buy the object (not free)
 * **unlimited="true"**: There is an unlimited number of objects of this class on the section
+* **index="number"** Required, for ugly reasons, when there are two o more objects with the same id on a section
 
 ### sell
 ```xml
@@ -420,6 +423,13 @@ Add a control on the UI to select a number
 ```
 
 Forces a jump to another section. "section" property specifies the section where to jump.
+
+### currentWeapon
+```xml
+<currentWeapon objectId="sommerswerd" />
+```
+
+Changes the player current weapon to the set on "objectId" property
 
 ### special sections
 
