@@ -174,10 +174,7 @@ const projectAon = {
 
 };
 
-// TODO: Does not work, I dont know why and right now, I don't have time
-//export { projectAon as projectAon };
-//export { projectAon };
-
+// Do not use Typescript modules here, plain node.js modules for browser JS compatiblity (oh javascript...)
 try {
     if (typeof exports !== 'undefined')
         exports.projectAon = projectAon;
