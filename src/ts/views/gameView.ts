@@ -3,7 +3,7 @@
 /**
  * The game view interface functions
  */
-var gameView = {
+const gameView = {
 
     /**
      * Enable / disable previous and next section links

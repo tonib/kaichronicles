@@ -79,9 +79,16 @@ const gameController = {
         // Persist state
         state.persistState();
 
-        if( window.getUrlParameter('debug') )
+        if( window.getUrlParameter('debug') ) {
             // Show section that can come to here
             gameView.showOriginSections();
+
+            // Validate this section
+            const validator = new BookValidator( state.mechanics , state.book );
+            validator.validateSection( gameController.currentSection.sectionId );
+            for( let error of validator.errors )
+                mechanicsEngine.debugWarning(error);
+        }
         
     },
 

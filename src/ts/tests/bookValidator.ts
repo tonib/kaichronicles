@@ -22,21 +22,38 @@ class BookValidator {
         this.book = book;
     }
 
-    public validate() {
+    /**
+     * Validate the entire book. Errors will be stored at this.errors
+     */
+    public validateBook() {
         
+        this.errors = [];
+
         // Traverse book sections
         const lastSectionId = this.mechanics.getLastSectionId();
         let currentSectionId = Book.INITIAL_SECTION;
         while( currentSectionId != lastSectionId ) {
-
             // The book section
-            this.currentSection = new Section( this.book , currentSectionId , this.mechanics );
-            // The section mechanics
-            const $sectionMechanics = this.mechanics.getSection( currentSectionId );
-            this.validateChildrenRules( $sectionMechanics );
-
+            this.validateSectionInternal(currentSectionId);
             currentSectionId = this.currentSection.getNextSectionId();
         }
+    }
+
+    /**
+     * Validate a single section. Errors will be stored at this.errors
+     * @param sectionId Section to validate
+     */
+    public validateSection( sectionId : string ) {
+        this.errors = [];
+        this.validateSectionInternal(sectionId);
+    }
+
+    private validateSectionInternal( sectionId : string ) {
+        // The book section
+        this.currentSection = new Section( this.book , sectionId , this.mechanics );
+        // The section mechanics
+        const $sectionMechanics = this.mechanics.getSection( sectionId );
+        this.validateChildrenRules( $sectionMechanics );
     }
 
     private validateChildrenRules( $parent ) {
@@ -48,7 +65,7 @@ class BookValidator {
 
     private validateRule( rule ) {
         if( this[rule.nodeName] )
-            mechanicsEngine[rule.nodeName]( $(rule) );
+            this[rule.nodeName]( $(rule) );
 
         this.validateChildrenRules( $(rule) );
     }
