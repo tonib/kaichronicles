@@ -204,6 +204,26 @@ const randomMechanics = {
         state.sectionStates.markRuleAsExecuted( rule, { randomValue: r , increment: i } );
     },
 
+    getCaseRuleBounds: function( $rule : any) : Array<number> {
+
+        // Test single value
+        const txtValue : string = $rule.attr('value');
+        if( txtValue ) {
+            var value = parseInt(txtValue);
+            return [value, value];
+        }
+
+        // Test from / to value
+        var txtFromValue  : string = $rule.attr('from');
+        if( txtFromValue ) {
+            var fromValue = parseInt( txtFromValue );
+            var toValue = parseInt( $rule.attr('to') );
+            return [fromValue, toValue];
+        }
+
+        return null;
+    },
+
     /**
      * Evaluates a "case" rule.
      * @param rule The rule to evaluate
@@ -211,22 +231,11 @@ const randomMechanics = {
      */
     evaluateCaseRule: function(rule : any, randomValue : number) : boolean {
 
-        // Test single value
-        var txtValue : string = $(rule).attr('value');
-        if( txtValue ) {
-            var value = parseInt(txtValue);
-            return randomValue == value;
-        }
+        const bounds = randomMechanics.getCaseRuleBounds( $(rule) );
+        if( !bounds )
+            return false;
+        return randomValue >= bounds[0] && randomValue <= bounds[1];
 
-        // Test from / to value
-        var txtFromValue  : string = $(rule).attr('from');
-        if( txtFromValue ) {
-            var fromValue = parseInt( txtFromValue );
-            var toValue = parseInt( $(rule).attr('to') );
-            return randomValue >= fromValue && randomValue <=toValue;
-        }
-
-        return false;
     },
 
     /**

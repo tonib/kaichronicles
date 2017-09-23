@@ -108,7 +108,7 @@
         </xs:choice>
 
         <!-- Random table index, default is zero -->
-        <xs:attribute name="index" type="xs:integer" />
+        <xs:attribute name="index" type="xs:nonNegativeInteger" />
         <!-- Section text selection (English) -->
         <xs:attribute name="text-en" type="xs:string" />
         <!-- Section text selection (Spanish) -->

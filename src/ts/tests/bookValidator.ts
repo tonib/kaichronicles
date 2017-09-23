@@ -111,5 +111,60 @@ class BookValidator {
         this.validateNumericExpression( $rule , 'count' );
     }
 
+    private randomTable( $rule ) {
 
+        if( !$rule.attr('text-en') ) {
+            // Check index:
+            let txtIndex : string = $rule.attr('index');
+            if( !txtIndex )
+                txtIndex = '0';
+            const $random = this.currentSection.$xmlSection.find( 'a[href=random]:eq( ' + txtIndex + ')' );
+            if( !$random )
+                this.addError( $rule , 'Link to random table not found' );
+        }
+
+        // Check numbers coverage
+        let coverage : Array<number> = [];
+        let overlapped = false;
+        for( let child of $rule.children() ) {
+            if( child.nodeName == 'case' ) {
+                const bounds = randomMechanics.getCaseRuleBounds( $(child) );
+                if( bounds && bounds[0] <= bounds[1] ) {
+                    for( let i=bounds[0]; i<= bounds[1]; i++) {
+                        if( coverage.contains(i) )
+                            overlapped = true;
+                        else
+                            coverage.push(i);
+                    }
+                }
+            }
+        }
+        // TODO: Check randomTableIncrement, and [BOWBONUS]: If it exists, the bounds should be -99, +99
+        let numberToTest;
+        if( $rule.attr( 'zeroAsTen' ) == 'true' )
+            numberToTest = [1, 10];
+        else
+            numberToTest = [0, 9];
+        let missedNumbers = false;
+        for( let i=numberToTest[0]; i<= numberToTest[1]; i++) {
+            if( !coverage.contains(i) )
+                missedNumbers = true;
+        }
+
+        if( missedNumbers )
+            this.addError( $rule, 'Missed numbers');
+        if( overlapped )
+            this.addError( $rule, 'Overlapped numbers');
+
+    }
+
+    private case( $rule ) {
+        const bounds = randomMechanics.getCaseRuleBounds( $rule );
+        if( !bounds ) {
+            this.addError( $rule, 'Needs "value" or "from" / "to" attributes' );
+            return;
+        }
+        if( bounds[0] > bounds[1] )
+            this.addError( $rule, 'Wrong range' );
+    }
 }

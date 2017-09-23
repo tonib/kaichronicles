@@ -1,9 +1,11 @@
 - Test controller: Test rules
-  XSD validation with node.js: 
+  * XSD validation with node.js: 
     https://stackoverflow.com/questions/11050759/validate-xml-syntax-structure-with-node-js
     https://www.w3schools.com/xml/schema_complex_empty.asp
     https://stackoverflow.com/questions/16512617/what-is-the-proper-way-in-xsd-to-define-a-set-of-elements-that-may-be-child-elem
     https://www.freeformatter.com/xml-validator-xsd.html
+  * Function to validate entire current book
+  * Script to validate all books
 - Check reported bugs on Google play:
   * Should be the healing kai discipline be enabled on magnakai books?
   * Saved games removed when adding new games
