@@ -1,7 +1,4 @@
 
-/**
- * Tools to validate book mechanics
- */
 
 import libxml = require( 'libxmljs' );
 import fs = require('node-fs-extra');

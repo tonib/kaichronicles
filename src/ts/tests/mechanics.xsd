@@ -72,12 +72,19 @@
     <xs:complexType name="pick">
         <!-- Object picked id -->
         <xs:attribute name="objectId" type="xs:string" />
-        <!-- Object class (for counters: "meals", "arrow", "money") -->
-        <xs:attribute name="class" type="xs:string" />
+        <!-- Object class (for counters: "meal", "arrow", "money") -->
+        <xs:attribute name="class">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="meal"/>
+                    <xs:enumeration value="arrow"/>
+                    <xs:enumeration value="money"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
         <!-- Items count (for counters: "meals", "arrow", "money"). Value can be a number or an expresion -->
         <xs:attribute name="count" type="xs:string" />
-        <xs:attribute name="index" type="xs:integer" />
-        <!-- TODO: objectId OR class should be mandatory -->
+        <xs:attribute name="index" type="xs:nonNegativeInteger" />
     </xs:complexType>
 
     <!-- "randomTable" rule -->

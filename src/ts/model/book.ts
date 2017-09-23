@@ -6,6 +6,8 @@
  */
 class Book {
 
+    public static INITIAL_SECTION = 'tssf';
+
     /** Book index number (1 = first book) */
     public bookNumber : number;
 

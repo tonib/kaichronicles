@@ -26,7 +26,7 @@ const gameController = {
             // Go to the current section (or the initial)
             var sec = state.sectionStates.currentSection;
             if( !sec )
-                sec = 'tssf';
+                sec = Book.INITIAL_SECTION;
             gameController.loadSection(sec, false, state.actionChart.yScrollPosition);
         });
 
