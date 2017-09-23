@@ -1,10 +1,11 @@
+/// <reference path="../external.ts" />
 
 /** 
  * The book loader controller
  * TODO: Change the name of this controller. It's a "book setup" controller
  */
-var setupController = {
-
+const setupController = {
+    
     /** Set up the application 
      * This will load the XML book and then redirect to the game 
      */
@@ -170,4 +171,5 @@ var setupController = {
     getBackController: function() { return 'mainMenu'; }
     
 };
-
+    
+    
