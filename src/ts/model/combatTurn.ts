@@ -168,7 +168,7 @@ class CombatTurn {
             return 0;
         if( enduranceLoss != combatTable_DEATH )
             // Apply the dammage multiplier
-            enduranceLoss *= multiplier;
+            enduranceLoss = Math.floor( enduranceLoss * multiplier );
         return enduranceLoss; 
     }
 

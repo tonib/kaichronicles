@@ -769,7 +769,7 @@ const mechanicsEngine = {
         // Dammage multiplier (enemy)
         var txtEnemyMultiplier = $(rule).attr('enemyMultiplier'); 
         if( txtEnemyMultiplier )
-            combat.enemyMultiplier = parseInt( txtEnemyMultiplier );
+            combat.enemyMultiplier = parseFloat( txtEnemyMultiplier );
 
         // Enemy extra loss per turn
         var txtEnemyTurnLoss = $(rule).attr('enemyTurnLoss'); 

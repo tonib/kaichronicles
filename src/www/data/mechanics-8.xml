@@ -897,6 +897,77 @@
             </registerGlobalRule>
         </section>
 
+        <section id="sect157">
+            <test not="true" hasDiscipline="invsblty">
+                <choiceState section="sect67" set="disabled" />
+            </test>
+            <test not="true" expression="[KAILEVEL] >= 5">
+                <choiceState section="sect67" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect158">
+            <death />
+        </section>
+
+        <section id="sect159">
+            <choiceState section="all" set="disabled" />
+            <endurance count="-5" />
+            <combat noMindblast="true" noPsiSurge="true" enemyMultiplier="0.5" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect161">
+            <test not="true" canUseBow="true">
+                <choiceState section="sect208" set="disabled" />
+            </test>
+            <choiceSelected section="sect208">
+                <pick class="arrow" count="-1" />
+            </choiceSelected>
+        </section>
+
+        <section id="sect162">
+            <choiceState section="all" set="disabled" />
+            <test hasDiscipline="anmlctrl">
+                <combat combatSkillModifier="+2" />
+            </test>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect163">
+            <test not="true" hasDiscipline="dvnation">
+                <choiceState section="sect341" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect164">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect165">
+            <death />
+        </section>
+
+        <section id="sect168">
+            <object objectId="quiver" count="2" price="1" unlimited="true" />
+            <object objectId="bow" price="8" unlimited="true" />
+            <object objectId="quiver" price="3" unlimited="true" />
+            <object objectId="wristguards" price="2" unlimited="true" />
+            <object objectId="woodbowcase" price="5" unlimited="true" />
+            <object objectId="leatherbowcase" price="3" unlimited="true" />
+            <object objectId="bowstring" price="1" unlimited="true" />
+            <test not="true" hasObject="silverbowduadon">
+                <choiceState section="sect304" set="disabled" />
+            </test>
+        </section>
+
         <section id="sect350">
             <message
                 en-text="This is the last implemented book. Thank you for playing!" 

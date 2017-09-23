@@ -1240,6 +1240,26 @@
             <name lang="es">Saco de Plata</name>
         </object>
 
+        <object id="wristguards">
+            <name lang="en">Wrist and Finger Guards</name>
+            <name lang="es">Muñequeras y Dediles</name>
+        </object>
+
+        <object id="woodbowcase">
+            <name lang="en">Bow Case (wood)</name>
+            <name lang="es">Estuche de Arco (de madera)</name>
+        </object>
+
+        <object id="leatherbowcase">
+            <name lang="en">Bow Case (leather)</name>
+            <name lang="es">Estuche de Arco (de cuero)</name>
+        </object>
+
+        <object id="bowstring">
+            <name lang="en">Bowstring</name>
+            <name lang="es">Cuerda de Arco</name>
+        </object>
+
         <!-- OTHERS -->
 
         <!-- This not really an object, but needed for mechanics -->
