@@ -8,7 +8,10 @@
     http://syssgx.github.io/xml.js/
   * Function to validate entire current book
   * Script to validate all books
-  * If the script to test is removed, remove the reference to libxmljs
+  * If the script to test is removed, remove the reference to libxmljs from the package.json
+  * DO NOT INCLUDE THE xmllint.js IN THE PRODUCTION RELEASES (2.2 MB!!!)
+  * Add acknowledgment to the xmllint.js
+
 - Check reported bugs on Google play:
   * Should be the healing kai discipline be enabled on magnakai books?
   * Saved games removed when adding new games

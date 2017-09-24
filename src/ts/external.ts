@@ -26,6 +26,9 @@ declare var exports;
 // Google analytics
 declare var ga;
 
+// xmllint.js
+declare var validateXML;
+
 // commons.js: 
 interface Window { 
     getUrlParameter( parmName : string ) : string 

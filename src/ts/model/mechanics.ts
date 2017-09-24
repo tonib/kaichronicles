@@ -11,7 +11,7 @@ class Mechanics {
     public book : Book = null;
 
     /**
-     * The book mechanics XML document
+     * The book mechanics XML document (XmlDocument)
      */
     public mechanicsXml : any = null;
 

@@ -42,7 +42,7 @@ function validateBookXml( bookNumber : number ) {
 console.log("* Mechanics tests");
 
 console.log("Loading XSD...");
-const xsd : string = fs.readFileSync( 'src/ts/tests/mechanics.xsd' , 'utf8' );
+const xsd : string = fs.readFileSync( 'src/www/data/mechanics.xsd' , 'utf8' );
 const xsdDoc = libxml.parseXml(xsd);
 
 for(let i=1; i<= projectAon.supportedBooks.length; i++)

@@ -12,8 +12,14 @@ class BookValidator {
     /** Errors found */
     public errors : Array<string> = [];
 
+    /** Current testing section */
     private currentSection : Section;
     
+    /** 
+     * XSD text for mechanics validation. null until is not loaded
+     */
+    private static xsdText : string;
+
     /**
      * Constructor
      */
@@ -32,7 +38,7 @@ class BookValidator {
         promises.push( mechanics.downloadXml() );
         promises.push( mechanics.downloadObjectsXml() );
 
-        var dfd = jQuery.Deferred();
+        const dfd = jQuery.Deferred();
 
         $.when.apply($, promises)
         .done( function() {
@@ -120,6 +126,54 @@ class BookValidator {
     }
 
     //////////////////////////////////////////////////////////
+    // VALIDATE XML
+    //////////////////////////////////////////////////////////
+
+    /**
+     * Download the XSD to validate the XML, if this has not been done yet
+     */
+    private static downloadXsd() : Promise<void> {
+
+        const dfd = jQuery.Deferred();
+        if( BookValidator.xsdText )
+            return dfd.resolve().promise();
+
+        return $.ajax({
+            url: 'data/mechanics.xsd',
+            dataType: "text"
+        })
+        .done(function(xmlText : string) {
+            BookValidator.xsdText = xmlText;
+        });
+    }
+
+    /**
+     * Validate the mechanics XML. Errors will be stored at this.errors
+     */
+    public validateXml() : Promise<void>{
+        const self = this;
+        return BookValidator.downloadXsd()
+        .then( function() {
+
+            // The book mechanics
+            let xmlText = new XMLSerializer().serializeToString( self.mechanics.mechanicsXml.documentElement );
+            // There is some kind of error with the UTF8 encoding. acute characters throw errors of invalid character...
+            xmlText = xmlText.replace( /[áéíóú¡¿\’]/gi , '' );
+
+            var module = {
+                xml: xmlText,
+                schema: BookValidator.xsdText,
+                arguments: ["--noout", "--schema", 'mechanics.xsd', 'mechanics-' + self.book.bookNumber + '.xml' ]
+            };
+            //and call function
+            var xmllint = validateXML(module);
+            console.log( xmllint );
+            return jQuery.Deferred().resolve().promise();
+        });
+    }
+
+
+    //////////////////////////////////////////////////////////
     // RULES VALIDATION
     //////////////////////////////////////////////////////////
 
@@ -168,7 +222,7 @@ class BookValidator {
         // There can be randomTable's without cases: In that case, do no check coverage:
         if( nCasesFound == 0 )
             return;
-        
+
         // TODO: Check randomTableIncrement, and [BOWBONUS]: If it exists, the bounds should be -99, +99
         let numberToTest;
         if( $rule.attr( 'zeroAsTen' ) == 'true' )

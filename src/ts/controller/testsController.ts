@@ -115,6 +115,8 @@ class testsController {
         for( let error of validator.errors )
             testsController.addError(error);
 
+        validator.validateXml();
+        
         // Separator
         testsController.addLog('');
     }
