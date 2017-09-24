@@ -2,8 +2,8 @@
 /**
  * Application tests
  */
-var testsController = {
-
+const testsController = {
+    
     index: function() {
 
         if( !setupController.checkBook() )

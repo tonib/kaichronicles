@@ -375,7 +375,7 @@ class Book {
      * Get the book random table number
      * @return Array with the 100 numbers of the random table
      */
-    private getRandomTable() : Array<number> {
+    public getRandomTable() : Array<number> {
         var $randomCells = $(this.bookXml)
             .find('section[id=random] > data > illustration > instance[class=text]')
             .find('td');
