@@ -1,6 +1,8 @@
 
 /**
  * Application tests
+ * TODO: Run XSD
+ * TODO: Test all books / languages
  */
 class testsController {
     
@@ -26,6 +28,11 @@ class testsController {
             e.preventDefault();
             testsController.testCurrentBookMechanics();
         } );
+        $('#tests-allbooks').click( function(e : Event) {
+            e.preventDefault();
+            testsController.testAllBooks();
+        } );
+        
     }
 
     /**
@@ -94,10 +101,51 @@ class testsController {
     private static testCurrentBookMechanics() {
         testsController.clearLog();
         const validator = new BookValidator( state.mechanics , state.book );
+        testsController.testBook( validator );
+        testsController.addLog('Finished');
+    }
+
+    private static testBook( validator : BookValidator ) {
         validator.validateBook();
+        let title = 'Book ' + validator.book.bookNumber + ' (' + validator.book.language + ') ';
+        if( validator.errors.length == 0 )
+            testsController.addLog( title + 'OK!');
+        else
+            testsController.addLog(title + 'with errors:');
         for( let error of validator.errors )
             testsController.addError(error);
-        testsController.addLog('Finished');
+
+        // Separator
+        testsController.addLog('');
+    }
+
+    private static downloadAndTestBook( bookNumber : number , language : string ) {
+        BookValidator.downloadBookAndGetValidator( bookNumber , language )
+        .then(function(validator : BookValidator) {
+
+            testsController.testBook(validator);
+
+            // Move to the next book:
+            let nextBookNumber = validator.book.bookNumber;
+            let nextLanguage = validator.book.language;
+            if( nextLanguage == 'en')
+                nextLanguage = 'es';
+            else {
+                nextBookNumber++;
+                nextLanguage = 'en';
+            }
+            if( nextBookNumber > projectAon.supportedBooks.length ) {
+                testsController.addLog("Finished");
+                return;
+            }
+
+            testsController.downloadAndTestBook( nextBookNumber , nextLanguage );
+        });
+    }
+
+    private static testAllBooks() {
+        testsController.clearLog();
+        testsController.downloadAndTestBook( 1, 'en' );
     }
 
     private static clearLog() {

@@ -7,7 +7,7 @@ class BookValidator {
     private mechanics : Mechanics;
 
     /** Book XML */
-    private book : Book;
+    public book : Book;
 
     /** Errors found */
     public errors : Array<string> = [];
@@ -20,6 +20,29 @@ class BookValidator {
     public constructor( mechanics : Mechanics , book : Book ) {
         this.mechanics = mechanics;
         this.book = book;
+    }
+
+    public static downloadBookAndGetValidator( bookNumber : number , language : string ) : Promise<BookValidator> {
+
+        const book = new Book(bookNumber, language );
+        const mechanics = new Mechanics( book );
+        
+        let promises = [];
+        promises.push( book.downloadBookXml() );
+        promises.push( mechanics.downloadXml() );
+        promises.push( mechanics.downloadObjectsXml() );
+
+        var dfd = jQuery.Deferred();
+
+        $.when.apply($, promises)
+        .done( function() {
+            dfd.resolve( new BookValidator(mechanics, book) );
+        } )
+        .fail( function() {
+            dfd.reject('Error downloading book files');
+        });
+
+        return dfd.promise();
     }
 
     /**
@@ -126,8 +149,10 @@ class BookValidator {
         // Check numbers coverage
         let coverage : Array<number> = [];
         let overlapped = false;
+        let nCasesFound = 0;
         for( let child of $rule.children() ) {
             if( child.nodeName == 'case' ) {
+                nCasesFound++;
                 const bounds = randomMechanics.getCaseRuleBounds( $(child) );
                 if( bounds && bounds[0] <= bounds[1] ) {
                     for( let i=bounds[0]; i<= bounds[1]; i++) {
@@ -139,6 +164,11 @@ class BookValidator {
                 }
             }
         }
+
+        // There can be randomTable's without cases: In that case, do no check coverage:
+        if( nCasesFound == 0 )
+            return;
+        
         // TODO: Check randomTableIncrement, and [BOWBONUS]: If it exists, the bounds should be -99, +99
         let numberToTest;
         if( $rule.attr( 'zeroAsTen' ) == 'true' )
