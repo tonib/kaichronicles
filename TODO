@@ -4,8 +4,11 @@
     https://www.w3schools.com/xml/schema_complex_empty.asp
     https://stackoverflow.com/questions/16512617/what-is-the-proper-way-in-xsd-to-define-a-set-of-elements-that-may-be-child-elem
     https://www.freeformatter.com/xml-validator-xsd.html
+    https://stackoverflow.com/questions/35930737/validate-xml-against-xsd-with-javascript-on-client-side
+    http://syssgx.github.io/xml.js/
   * Function to validate entire current book
   * Script to validate all books
+  * If the script to test is removed, remove the reference to libxmljs
 - Check reported bugs on Google play:
   * Should be the healing kai discipline be enabled on magnakai books?
   * Saved games removed when adding new games

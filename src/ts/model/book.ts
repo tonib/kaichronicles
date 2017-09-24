@@ -131,15 +131,19 @@ class Book {
             dataType: "text"
         })
         .done(function(xml) {
-            try {
-                xml = Book.fixXml(xml);
-                self.bookXml = $.parseXML(xml);
-                self.bookRandomTable = self.getRandomTable();
-            }
-            catch(e) {
-                throw e;
-            }
+            self.setXml(xml);
         });
+    }
+
+    public setXml(xml : string) {
+        try {
+            xml = Book.fixXml(xml);
+            this.bookXml = $.parseXML(xml);
+            this.bookRandomTable = this.getRandomTable();
+        }
+        catch(e) {
+            throw e;
+        }
     }
 
     /**
