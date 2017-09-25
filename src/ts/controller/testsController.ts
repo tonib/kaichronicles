@@ -9,7 +9,14 @@ class testsController {
     public static index() {
 
         return views.loadView('tests.html')
-        .then(function() { testsController.setup(); }); 
+        .then(function() {
+            // Load XSD for XML validation
+            return BookValidator.downloadXsd();
+        })
+        .then(function() { 
+            // View setup
+            testsController.setup(); 
+        }); 
     }
 
     /**
@@ -114,14 +121,13 @@ class testsController {
             testsController.addLog(title + 'with errors:');
         for( let error of validator.errors )
             testsController.addError(error);
-
-        validator.validateXml();
         
         // Separator
         testsController.addLog('');
     }
 
     private static downloadAndTestBook( bookNumber : number , language : string ) {
+
         BookValidator.downloadBookAndGetValidator( bookNumber , language )
         .then(function(validator : BookValidator) {
 

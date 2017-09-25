@@ -1,16 +1,16 @@
 - Test controller: Test rules
-  * XSD validation with node.js: 
-    https://stackoverflow.com/questions/11050759/validate-xml-syntax-structure-with-node-js
-    https://www.w3schools.com/xml/schema_complex_empty.asp
-    https://stackoverflow.com/questions/16512617/what-is-the-proper-way-in-xsd-to-define-a-set-of-elements-that-may-be-child-elem
-    https://www.freeformatter.com/xml-validator-xsd.html
-    https://stackoverflow.com/questions/35930737/validate-xml-against-xsd-with-javascript-on-client-side
-    http://syssgx.github.io/xml.js/
-  * Function to validate entire current book
-  * Script to validate all books
-  * If the script to test is removed, remove the reference to libxmljs from the package.json
   * DO NOT INCLUDE THE xmllint.js IN THE PRODUCTION RELEASES (2.2 MB!!!)
   * Add acknowledgment to the xmllint.js
+  * Document new tests functions
+
+- Book 8:
+mechanics-8.xml:370: element combat: Schemas validity error : Element 'combat', attribute 'mindblastMultiplier': The attribute 'mindblastMultiplier' is not allowed.
+mechanics-8.xml:455: element combat: Schemas validity error : Element 'combat', attribute 'mentalOnly': The attribute 'mentalOnly' is not allowed.
+mechanics-8.xml:825: element sell: Schemas validity error : Element 'sell', attribute 'class': The attribute 'class' is not allowed.
+mechanics-8.xml:825: element sell: Schemas validity error : Element 'sell', attribute 'except': The attribute 'except' is not allowed.
+mechanics-8.xml:825: element sell: Schemas validity error : Element 'sell': The attribute 'objectId' is required but missing.
+mechanics-8.xml:906: element combatSkill: Schemas validity error : Element 'combatSkill', attribute 'toast': The attribute 'toast' is not allowed.
+mechanics-8.xml fails to validate
 
 - Check reported bugs on Google play:
   * Should be the healing kai discipline be enabled on magnakai books?

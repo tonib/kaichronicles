@@ -16,6 +16,11 @@ class Mechanics {
     public mechanicsXml : any = null;
 
     /**
+     * The original XML text. It will be saved only if we are on debug mode. Otherwise it will be null
+     */
+    public mechanicsXmlText : string;
+
+    /**
      * The game objects XML document
      */
     public objectsXml : any = null;
@@ -42,10 +47,13 @@ class Mechanics {
         var self = this;
         return $.ajax({
             url: this.getXmlURL(),
-            dataType: "xml"
+            dataType: "text"
         })
-        .done(function(xml) {
-            self.mechanicsXml = xml;
+        .done(function(xml : string) {
+            self.mechanicsXml = $.parseXML(xml);
+            if( window.getUrlParameter('debug') )
+                // Debug mode: Store the original XML. This can be needed to do tests (BookValidator.ts)
+                self.mechanicsXmlText = xml;
         });
     }
 

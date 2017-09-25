@@ -27,7 +27,7 @@ declare var exports;
 declare var ga;
 
 // xmllint.js
-declare var validateXML;
+declare function validateXML(parms : any) : string;
 
 // commons.js: 
 interface Window { 

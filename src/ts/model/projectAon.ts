@@ -124,7 +124,6 @@ const projectAon = {
 
         ///////////////////////////////////////
         
-        /*
         // Book 8 (NOT IMPLEMENTED):
         ,{
             title_en: 'The Jungle of Horrors',
@@ -154,7 +153,6 @@ const projectAon = {
             
             zipSize: 2839095
         }
-        */
         
     ],
 

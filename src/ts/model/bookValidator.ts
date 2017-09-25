@@ -58,6 +58,9 @@ class BookValidator {
         
         this.errors = [];
 
+        // Validate the XML with XSD
+        this.validateXml();
+
         // Traverse book sections
         const lastSectionId = this.mechanics.getLastSectionId();
         let currentSectionId = Book.INITIAL_SECTION;
@@ -132,11 +135,11 @@ class BookValidator {
     /**
      * Download the XSD to validate the XML, if this has not been done yet
      */
-    private static downloadXsd() : Promise<void> {
+    public static downloadXsd() : Promise<void> {
 
-        const dfd = jQuery.Deferred();
         if( BookValidator.xsdText )
-            return dfd.resolve().promise();
+            // Already downloaded
+            return jQuery.Deferred().resolve().promise();
 
         return $.ajax({
             url: 'data/mechanics.xsd',
@@ -150,26 +153,38 @@ class BookValidator {
     /**
      * Validate the mechanics XML. Errors will be stored at this.errors
      */
-    public validateXml() : Promise<void>{
-        const self = this;
-        return BookValidator.downloadXsd()
-        .then( function() {
+    private validateXml() {
 
-            // The book mechanics
-            let xmlText = new XMLSerializer().serializeToString( self.mechanics.mechanicsXml.documentElement );
-            // There is some kind of error with the UTF8 encoding. acute characters throw errors of invalid character...
-            xmlText = xmlText.replace( /[áéíóú¡¿\’]/gi , '' );
+        if( !BookValidator.xsdText ) {
+            this.errors.push( 'The XSD for mechanics validation has not been downloaded' );
+            return;
+        }
 
-            var module = {
-                xml: xmlText,
-                schema: BookValidator.xsdText,
-                arguments: ["--noout", "--schema", 'mechanics.xsd', 'mechanics-' + self.book.bookNumber + '.xml' ]
-            };
-            //and call function
-            var xmllint = validateXML(module);
-            console.log( xmllint );
-            return jQuery.Deferred().resolve().promise();
-        });
+        // The book mechanics
+        let xmlText;
+        if( this.mechanics.mechanicsXmlText )
+            xmlText = this.mechanics.mechanicsXmlText;
+        else
+            // This will NOT be the same as the original, and line numbers reported by "validateXML" will be aproximated
+            xmlText = new XMLSerializer().serializeToString( this.mechanics.mechanicsXml.documentElement );
+
+        // There is some kind of error with the UTF8 encoding. acute characters throw errors of invalid character...
+        xmlText = xmlText.replace( /[áéíóú¡¿\’]/gi , '' );
+
+        // xmllint.js call parameters
+        const mechanicsFileName = 'mechanics-' + this.book.bookNumber + '.xml';
+        const module = {
+            xml: xmlText,
+            schema: BookValidator.xsdText,
+            arguments: ["--noout", "--schema", 'mechanics.xsd', mechanicsFileName ]
+        };
+
+        // Do the XSD validation
+        var xmllint = validateXML(module).trim();
+        if( xmllint != mechanicsFileName + ' validates')
+            // Error:
+            this.errors.push( xmllint );
+        console.log( xmllint );
     }
 
 

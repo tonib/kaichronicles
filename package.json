@@ -14,8 +14,7 @@
         "uglify-js": "3.0.25",
         "klaw-sync": "2.1.0",
         "preprocess": "3.1.0",
-        "typescript": "2.4.1",
-        "libxmljs": "0.18.7"
+        "typescript": "2.4.1"
     },
 
     "scripts": {
@@ -23,8 +22,7 @@
         "prepareversion": "node scripts/prepareVersion.js",
         "clean": "rm -rf dist",
         "downloaddata": "node scripts/downloadProjectAonData.js",
-        "ts": "tsc -p tsconfig.json",
-        "testmechanics": "node src/www/js/ts-generated/tests/mechanicsTests.js"
+        "ts": "tsc -p tsconfig.json"
     }
 }
 
