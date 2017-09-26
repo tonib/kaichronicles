@@ -235,6 +235,7 @@ const mechanicsEngine = {
                 return 'ignoreDescendants';
             else if( rule.nodeName == 'test' ) {
                 // test rule
+                // TODO: Use mechanicsEngine.getArrayProperty here
                 var objects = $(rule).attr('hasObject');
                 if( objects ) {
                     objects = objects.split('|');
@@ -331,6 +332,7 @@ const mechanicsEngine = {
             return;
 
         var $eventRule = $(mechanicsEngine.onObjectUsedRule);
+        // TODO: Use mechanicsEngine.getArrayProperty here
         var objectIds = $eventRule.attr('objectId').split('|');
         if( objectIds.contains(objectId) ) 
             mechanicsEngine.runChildRules( $eventRule );
@@ -450,6 +452,7 @@ const mechanicsEngine = {
         var conditionStatisfied = false;
 
         // Check discipline
+        // TODO: Use mechanicsEngine.getArrayProperty here
         var disciplineToTest = $(rule).attr('hasDiscipline');
         var i;
         if( disciplineToTest ) {
@@ -470,6 +473,7 @@ const mechanicsEngine = {
         var objectIdsToTest = $(rule).attr('hasObject');
         if( objectIdsToTest ) {
             // Check if the player has some of the objects
+            // TODO: Use mechanicsEngine.getArrayProperty here
             var objects = objectIdsToTest.split('|');
             for(i=0; i < objects.length; i++ ) {
                 if( !state.mechanics.getObject( objects[i] ) )
@@ -487,6 +491,7 @@ const mechanicsEngine = {
             conditionStatisfied = true;
         
         // Check section visited:
+        // TODO: Use mechanicsEngine.getArrayProperty here
         var sectionIds = $(rule).attr('sectionVisited');
         if( sectionIds ) {
             sectionIds = sectionIds.split('|');
@@ -542,6 +547,7 @@ const mechanicsEngine = {
             conditionStatisfied = true;
 
         // Test if the player has a kind of weapon
+        // TODO: Use mechanicsEngine.getArrayProperty here
         let hasWeaponType : string = $(rule).attr( 'hasWeaponType' );
         if( hasWeaponType ) {
             for( let weaponType of hasWeaponType.split('|') ) {
@@ -1091,6 +1097,19 @@ const mechanicsEngine = {
     /************************************************************/
     /**************** RULES HELPERS *****************************/
     /************************************************************/
+
+    /**
+     * Get an array of strings stored on a rule property
+     * @param $rule {jQuery} The rule
+     * @param property The property to get. Property values must be separated by '|' (ex. 'a|b|c' )
+     * @returns The values stored on the property. An empty array if the property does not exists
+     */
+    getArrayProperty : function( $rule : any , property : string ) : Array<string> {
+        const propertyText = $rule.attr( property );
+        if( !propertyText )
+            return [];
+        return propertyText.split('|');
+    },
 
     /**
      * Show or update the table with the available objects on the section

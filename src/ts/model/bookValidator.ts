@@ -102,16 +102,32 @@ class BookValidator {
         this.validateChildrenRules( $(rule) );
     }
 
-    private validateObjectId( $rule , property : string , allowMultiple : boolean ) : boolean {
-        const txtObjectIds : string = $rule.attr('objectId');
-        if( !txtObjectIds )
-            return false;
+    private addError( $rule , errorMsg : string ) {
+        this.errors.push( 'Section ' + this.currentSection.sectionId + ', rule ' + $rule[0].nodeName + ': ' + errorMsg );
+    }
 
-        let objectIds = [];
+    //////////////////////////////////////////////////////////
+    // COMMON ATTRIBUTRES VALIDATION
+    //////////////////////////////////////////////////////////
+
+    private getPropertyValueAsArray( $rule , property : string , allowMultiple : boolean ) : Array<string> {
+        
         if( allowMultiple )
-            objectIds = txtObjectIds.split('|');
+            return mechanicsEngine.getArrayProperty( $rule , property );
+
+        // Single value
+        const value : string = $rule.attr( property );
+        if( value )
+            return [ value ];
         else
-            objectIds.push( txtObjectIds );
+            return [];
+    }
+
+    private validateObjectIdsAttribute( $rule , property : string , allowMultiple : boolean ) : boolean {
+
+        let objectIds = this.getPropertyValueAsArray( $rule , property , allowMultiple );
+        if( objectIds.length == 0 )
+            return false;
 
         for( let objectId of objectIds ) {
             if( !this.mechanics.getObject(objectId) )
@@ -124,8 +140,40 @@ class BookValidator {
         // TODO: Pending
     }
 
-    private addError( $rule , errorMsg : string ) {
-        this.errors.push( 'Section ' + this.currentSection.sectionId + ', rule ' + $rule[0].nodeName + ': ' + errorMsg );
+    private validateBooleanExpression( $rule : any , property : string ) {
+        // TODO: Pending
+    }
+
+    private validateDisciplinesAttribute( $rule : any , property : string , allowMultiple : boolean ) {
+        
+        let disciplinesIds = this.getPropertyValueAsArray( $rule , property , allowMultiple );
+        if( disciplinesIds.length == 0 )
+            return;
+
+        const disciplinesTable = this.book.getDisciplinesTable();
+        for( let disciplineId of disciplinesIds ) {
+            if( !disciplinesTable[disciplineId] )
+                this.addError( $rule , 'Wrong discipline id: ' + disciplineId );
+        }
+    }
+
+    private validateSectionsAttribute( $rule : any , property : string , allowMultiple : boolean ) {
+        let sectionIds = this.getPropertyValueAsArray( $rule , property , allowMultiple );
+
+        for( let sectionId of sectionIds ) {
+            if( this.book.getSectionXml(sectionId).length == 0 )
+                this.addError( $rule , 'Section does not exists: ' + sectionId );
+        }
+    }
+
+    private validateSectionChoiceAttribute( $rule : any, property : string) {
+        const sectionId : string = $rule.attr( property );
+        if( !sectionId )
+            return;
+
+        const $choices = this.currentSection.$xmlSection.find( 'choice[idref=' + sectionId + ']' );
+        if( $choices.length == 0 )
+            this.addError( $rule , 'No choice found on this section with destination to ' + sectionId );
     }
 
     //////////////////////////////////////////////////////////
@@ -193,7 +241,7 @@ class BookValidator {
     //////////////////////////////////////////////////////////
 
     private pick( $rule ) {
-        const objectIdFound = this.validateObjectId( $rule , 'objectId' , false );
+        const objectIdFound = this.validateObjectIdsAttribute( $rule , 'objectId' , false );
         const classFound = $rule.attr('class');
         const onlyOne = ( ( objectIdFound && !classFound ) || ( !objectIdFound && classFound ) );
         if( !onlyOne )
@@ -265,5 +313,20 @@ class BookValidator {
         }
         if( bounds[0] > bounds[1] )
             this.addError( $rule, 'Wrong range' );
+    }
+
+    private test( $rule ) {
+        this.validateDisciplinesAttribute( $rule , 'hasDiscipline' , true );
+        this.validateObjectIdsAttribute( $rule , 'hasObject' , true );
+        this.validateBooleanExpression( $rule , 'expression' );
+        this.validateSectionsAttribute( $rule , 'sectionVisited' , true );
+        // TODO: Check the object id is a weapon for currentWeapon
+        this.validateObjectIdsAttribute( $rule , 'currentWeapon' , false );
+
+        const language : string = $rule.attr('bookLanguage');
+        if( language && ( language != 'en' && language != 'es' ) )
+            this.addError( $rule , 'Wrong language: ' + language );
+        
+        this.validateSectionChoiceAttribute( $rule , 'isChoiceEnabled' );
     }
 }

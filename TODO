@@ -20,6 +20,7 @@ mechanics-8.xml fails to validate
 - projectAon to TS
 - Add the section "Lore-circles of the Magnakai" to the game rules view
 - jshint should be runned over non TS generated code
+- add book 7 is playable on Google Play app description
 
 FOR FUTURE (1.9+):
 - Add button to explain combat ratio

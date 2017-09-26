@@ -121,9 +121,9 @@
     <!-- "chooseEquipment" rule -->
     <xs:complexType name="chooseEquipment">
         <!-- English description -->
-        <xs:attribute name="en-text" type="xs:string" />
+        <xs:attribute name="en-text" type="xs:string" use="required" />
         <!-- Spanish description -->
-        <xs:attribute name="es-text" type="xs:string" />
+        <xs:attribute name="es-text" type="xs:string" use="required" />
     </xs:complexType>
 
     <xs:complexType name="test">

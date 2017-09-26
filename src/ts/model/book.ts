@@ -250,9 +250,8 @@ class Book {
 
     /**
      * Returns a dictionary with the disciplines info
-     * TODO: Check what return type put here
      */
-    public getDisciplinesTable() : {} {
+    public getDisciplinesTable() : { [disciplineId : string] : { id : string , name : string , description : string } } {
         let result = {};
         // Parse the disciplines section
         $(this.bookXml).find('section[id=discplnz] > data > section')
