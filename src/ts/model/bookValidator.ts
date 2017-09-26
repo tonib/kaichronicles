@@ -99,6 +99,14 @@ class BookValidator {
         if( this[rule.nodeName] )
             this[rule.nodeName]( $(rule) );
 
+        // Special case: If this is a "test" rule with "bookLanguage" attr. set, check it:
+        // (there are semantic differences between languages...)
+        if( rule.nodeName == 'test' ) {
+            const language : string = $(rule).attr('bookLanguage');
+            if( language && language != this.book.language )
+                // Ignore children
+                return;
+        }
         this.validateChildrenRules( $(rule) );
     }
 
@@ -123,15 +131,18 @@ class BookValidator {
             return [];
     }
 
-    private validateObjectIdsAttribute( $rule , property : string , allowMultiple : boolean ) : boolean {
+    private validateObjectIdsAttribute( $rule , property : string , allowMultiple : boolean , onlyWeapons : boolean ) : boolean {
 
         let objectIds = this.getPropertyValueAsArray( $rule , property , allowMultiple );
         if( objectIds.length == 0 )
             return false;
 
         for( let objectId of objectIds ) {
-            if( !this.mechanics.getObject(objectId) )
+            let item = this.mechanics.getObject(objectId);
+            if( !item )
                 this.addError( $rule , 'Object id ' + objectId + ' not found');
+            else if( onlyWeapons && !item.isWeapon() )
+                this.addError( $rule , 'Object id ' + objectId + ' is not a weapon');
         }
         return true;
     }
@@ -166,14 +177,25 @@ class BookValidator {
         }
     }
 
-    private validateSectionChoiceAttribute( $rule : any, property : string) {
+    private validateSectionChoiceAttribute( $rule : any, property : string, allowAll : boolean ) {
         const sectionId : string = $rule.attr( property );
         if( !sectionId )
             return;
 
+        if( allowAll && sectionId == 'all' )
+            return;
+
+
         const $choices = this.currentSection.$xmlSection.find( 'choice[idref=' + sectionId + ']' );
-        if( $choices.length == 0 )
+        if( $choices.length == 0 ) {
+            
+            // If there is a "textToChoice" link with that destination, it's ok
+            const $sectionMechanics = this.mechanics.getSection( this.currentSection.sectionId );
+            if( $sectionMechanics && $sectionMechanics.find('textToChoice[section=' + sectionId + ']').length > 0 )
+                return;
+
             this.addError( $rule , 'No choice found on this section with destination to ' + sectionId );
+        }
     }
 
     //////////////////////////////////////////////////////////
@@ -241,7 +263,7 @@ class BookValidator {
     //////////////////////////////////////////////////////////
 
     private pick( $rule ) {
-        const objectIdFound = this.validateObjectIdsAttribute( $rule , 'objectId' , false );
+        const objectIdFound = this.validateObjectIdsAttribute( $rule , 'objectId' , false , false );
         const classFound = $rule.attr('class');
         const onlyOne = ( ( objectIdFound && !classFound ) || ( !objectIdFound && classFound ) );
         if( !onlyOne )
@@ -317,16 +339,26 @@ class BookValidator {
 
     private test( $rule ) {
         this.validateDisciplinesAttribute( $rule , 'hasDiscipline' , true );
-        this.validateObjectIdsAttribute( $rule , 'hasObject' , true );
+        this.validateObjectIdsAttribute( $rule , 'hasObject' , true , false );
         this.validateBooleanExpression( $rule , 'expression' );
         this.validateSectionsAttribute( $rule , 'sectionVisited' , true );
-        // TODO: Check the object id is a weapon for currentWeapon
-        this.validateObjectIdsAttribute( $rule , 'currentWeapon' , false );
+        this.validateObjectIdsAttribute( $rule , 'currentWeapon' , false , true );
 
         const language : string = $rule.attr('bookLanguage');
         if( language && ( language != 'en' && language != 'es' ) )
             this.addError( $rule , 'Wrong language: ' + language );
         
-        this.validateSectionChoiceAttribute( $rule , 'isChoiceEnabled' );
+        this.validateSectionChoiceAttribute( $rule , 'isChoiceEnabled' , false );
+        this.validateObjectIdsAttribute( $rule , 'hasWeaponType' , true , false );
+        
+        const circle : string = $rule.attr( 'hasCircle' );
+        if( circle && !LoreCircle.getCircle( circle ) )
+            this.addError( $rule , 'Wrong circle: ' + circle );
+
+        this.validateObjectIdsAttribute( $rule , 'hasWeaponskillWith' , false , true );
+    }
+
+    private choiceState( $rule ) {
+        this.validateSectionChoiceAttribute( $rule , 'section' , true );
     }
 }

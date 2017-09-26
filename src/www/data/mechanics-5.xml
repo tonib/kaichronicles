@@ -1211,7 +1211,7 @@
         <section id="sect239">
             <choiceState section="all" set="disabled" />
             <test hasObject="tincturegraveweed">
-                <choiceState section="sect260" set="true" />
+                <choiceState section="sect260" set="enabled" />
             </test>
             <test not="true" hasObject="tincturegraveweed">
                 <randomTable>
@@ -1442,7 +1442,7 @@
         <section id="sect282">
             <choiceState section="all" set="disabled" />
             <test hasDiscipline="mindomtr">
-                <choiceState section="sect295" set="true" />
+                <choiceState section="sect295" set="enabled" />
             </test>
             <test not="true" hasDiscipline="mindomtr">
                 <randomTable>
@@ -1583,7 +1583,7 @@
         <section id="sect312">
             <choiceState section="all" set="disabled" />
             <test hasDiscipline="hunting|sixthsns">
-                <choiceState section="sect210" set="true" />
+                <choiceState section="sect210" set="enabled" />
             </test>
             <test not="true" hasDiscipline="hunting|sixthsns">
                 <randomTable>
@@ -1934,7 +1934,7 @@
             <endurance count="-1" />
             <choiceState section="all" set="disabled" />
             <test hasDiscipline="mindomtr">
-                <choiceState section="sect269" set="true" />
+                <choiceState section="sect269" set="enabled" />
             </test>
             <test not="true" hasDiscipline="mindomtr">
                 <randomTable>

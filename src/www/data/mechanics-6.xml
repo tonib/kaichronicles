@@ -835,7 +835,7 @@
         </section>
 
         <section id="sect144">
-            <choiceState section="sect144" set="disabled" />
+            <choiceState section="all" set="disabled" />
             <message id="msg-drop-object" 
                 en-text="Drop one Backpack Item" 
                 es-text="Deja un Objeto de Mochila"
@@ -995,7 +995,7 @@
         </section>
 
         <section id="sect166">
-            <choiceState section="sect144" set="disabled" />
+            <choiceState section="all" set="disabled" />
             <message id="msg-drop-object" 
                 en-text="Drop two Backpack Items" 
                 es-text="Deja dos Objetos de Mochila"
@@ -1590,7 +1590,9 @@
 
         <section id="sect298">
             <pick objectId="tournamentbow" />
-            <choiceState section="sect335" set="disabled" />
+            <test bookLanguage="es">
+                <choiceState section="sect335" set="disabled" />
+            </test>
         </section>
 
         <section id="sect299">

@@ -149,9 +149,18 @@
 
     <xs:complexType name="choiceState">
         <xs:attribute name="section" type="xs:string" use="required" />
-        <xs:attribute name="set" type="xs:string" use="required" />
+        <xs:attribute name="set" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="enabled"/>
+                    <xs:enumeration value="disabled"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
     </xs:complexType>
 
+    <!-- START HERE -->
+    
     <xs:complexType name="object">
         <xs:attribute name="objectId" type="xs:string" use="required" />
         <xs:attribute name="price" type="xs:string" />

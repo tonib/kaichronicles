@@ -114,6 +114,9 @@ class LoreCircle {
      * @return The LoreCircle. null if it was not found
      */
     public static getCircle( circleId : string ) : LoreCircle {
+
+        LoreCircle.initializeCircles();
+        
         for( let c of LoreCircle.circles ) {
             if( c.id == circleId )
                 return c;
