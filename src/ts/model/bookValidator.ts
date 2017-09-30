@@ -100,18 +100,24 @@ class BookValidator {
     }
 
     private validateRule( rule ) {
-        if( this[rule.nodeName] )
-            this[rule.nodeName]( $(rule) );
+        try {
+            if( this[rule.nodeName] )
+                this[rule.nodeName]( $(rule) );
 
-        // Special case: If this is a "test" rule with "bookLanguage" attr. set, check it:
-        // (there are semantic differences between languages...)
-        if( rule.nodeName == 'test' ) {
-            const language : string = $(rule).attr('bookLanguage');
-            if( language && language != this.book.language )
-                // Ignore children
-                return;
+            // Special case: If this is a "test" rule with "bookLanguage" attr. set, check it:
+            // (there are semantic differences between languages...)
+            if( rule.nodeName == 'test' ) {
+                const language : string = $(rule).attr('bookLanguage');
+                if( language && language != this.book.language )
+                    // Ignore children
+                    return;
+            }
+            this.validateChildrenRules( $(rule) );
         }
-        this.validateChildrenRules( $(rule) );
+        catch(e) {
+            console.log(e);
+            this.addError( $(rule) , 'Exception validating rule: ' + e );
+        }
     }
 
     private addError( $rule , errorMsg : string ) {
@@ -149,14 +155,6 @@ class BookValidator {
                 this.addError( $rule , 'Object id ' + objectId + ' is not a weapon');
         }
         return true;
-    }
-
-    private validateNumericExpression( $rule , property : string ) {
-        // TODO: Pending
-    }
-
-    private validateBooleanExpression( $rule : any , property : string ) {
-        // TODO: Pending
     }
 
     private validateDisciplinesAttribute( $rule : any , property : string , allowMultiple : boolean ) {
@@ -215,6 +213,47 @@ class BookValidator {
         if( this.currentSection.getCombats().length == 0 ) {
             this.addError( $rule , 'There are no combats on this section');
         }
+    }
+
+    //////////////////////////////////////////////////////////
+    // EXPRESSIONS VALIDATION
+    //////////////////////////////////////////////////////////
+
+    private validateAndEvalExpression( $rule : any ,  expression : string ) : any {
+        try {
+            for( let keyword of ExpressionEvaluator.getKeywords( expression ) ) {
+                if( !ExpressionEvaluator.isValidKeyword( keyword ) )
+                    this.addError( $rule , 'Unkwown keyword ' + keyword );
+                expression = expression.replaceAll( keyword , '0' );
+            }
+            return eval( expression );
+        }
+        catch(e) {
+            console.log(e);
+            this.addError( $rule , 'Error evaluating expression: ' + e );
+            return null;
+        }
+    }
+
+    private validateExpression( $rule : any , property : string , expectedType : string ) {
+        let expression = $rule.attr( property );
+        if( !expression )
+            return;
+
+        let value = this.validateAndEvalExpression( $rule , expression );
+        if( value !== null ) {
+            let type = typeof value;
+            if( type !== expectedType )
+                this.addError( $rule , 'Wrong expression type. Expected: ' + expectedType + ', expression type: ' + type );
+        }
+    }
+
+    private validateNumericExpression( $rule : any , property : string ) {
+        this.validateExpression( $rule , property , 'number' );
+    }
+
+    private validateBooleanExpression( $rule : any , property : string ) {
+        this.validateExpression( $rule , property , 'boolean' );
     }
 
     //////////////////////////////////////////////////////////

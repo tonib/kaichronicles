@@ -1201,6 +1201,8 @@ const mechanicsEngine = {
         if( !txtExpression )
             return 0;
         // Do replacements:
+        // TODO: Inefficient. This will evaluate all functions when the text to replace is not present
+        // TODO: Search first the expressions to replace, and then do each replacement
         var sectionState = state.sectionStates.getSectionState();
         var expression = txtExpression
             .replaceAll( '[RANDOM]' , randomMechanics.lastValue )
