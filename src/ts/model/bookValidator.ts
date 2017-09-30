@@ -15,6 +15,10 @@ class BookValidator {
     /** Current testing section */
     private currentSection : Section;
     
+    /** Special values allowed on "drop" rule */
+    private specialDropValues = [ 'allweapons' , 'allweaponlike' , 'backpackcontent' , 
+        'currentweapon' , 'allspecial' , 'allmeals' , 'all' ];
+
     /** 
      * XSD text for mechanics validation. null until is not loaded
      */
@@ -185,6 +189,9 @@ class BookValidator {
         if( allowAll && sectionId == 'all' )
             return;
 
+        // If the rule is under a "registerGlobalRule", do no check this
+        if( $rule.closest( 'registerGlobalRule' ).length > 0 )
+            return;
 
         const $choices = this.currentSection.$xmlSection.find( 'choice[idref=' + sectionId + ']' );
         if( $choices.length == 0 ) {
@@ -195,6 +202,18 @@ class BookValidator {
                 return;
 
             this.addError( $rule , 'No choice found on this section with destination to ' + sectionId );
+        }
+    }
+
+    private checkThereAreCombats( $rule ) {
+
+        // If the rule is under a "registerGlobalRule", do no check this
+        if( $rule.closest( 'registerGlobalRule' ).length > 0 )
+            return;
+
+        // Check there are combats on this section
+        if( this.currentSection.getCombats().length == 0 ) {
+            this.addError( $rule , 'There are no combats on this section');
         }
     }
 
@@ -361,4 +380,86 @@ class BookValidator {
     private choiceState( $rule ) {
         this.validateSectionChoiceAttribute( $rule , 'section' , true );
     }
+
+    private object( $rule ) {
+        this.validateObjectIdsAttribute( $rule , 'objectId' , false , false );
+        this.validateNumericExpression( $rule , 'price' );
+    }
+
+    private combat( $rule ) {
+        this.validateNumericExpression( $rule , 'combatSkillModifier' );
+        this.validateObjectIdsAttribute( $rule , 'disabledObjects' , true , false );
+
+        this.checkThereAreCombats( $rule );
+
+        var combatIndex = parseInt( $rule.attr('index') );
+        if( combatIndex ) {
+            const nCombats = this.currentSection.getCombats().length;
+            if( nCombats <= combatIndex ) 
+                this.addError( $rule , 'There is no combat with index ' + combatIndex );
+        }
+    }
+
+    private afterCombats( $rule ) {
+        this.checkThereAreCombats( $rule );
+    }
+
+    private afterElude( $rule ) {
+        this.checkThereAreCombats( $rule );
+    }
+
+    private afterCombatTurn( $rule ) {
+        this.checkThereAreCombats( $rule );
+    }
+
+    private choiceSelected( $rule ) {
+        this.validateSectionChoiceAttribute( $rule , 'section' , true );
+    }
+
+    private numberPickerChoosed( $rule ) {
+        const $sectionMechanics = this.mechanics.getSection( this.currentSection.sectionId );
+        if( $sectionMechanics.find( 'numberPicker' ).length == 0 )
+            this.addError( $rule , 'No "numberPicker" rule found on this section' );
+    }
+
+    private endurance( $rule ) {
+        this.validateNumericExpression( $rule , 'count' );
+    }
+
+    private resetSectionState( $rule ) {
+        this.validateSectionsAttribute( $rule , 'sectionId' , false );
+    }
+    
+    private message( $rule ) {
+        if( $rule.attr( 'op' ) ) {
+            var msgId = $rule.attr('id');
+            if( !msgId )
+                this.addError( $rule , '"id" attribute required' );
+            else {
+                // Find the referenced message
+                const $sectionMechanics = this.mechanics.getSection( this.currentSection.sectionId );
+                if( $sectionMechanics.find( 'message[id=' + msgId + ']:not([op])' ).length == 0 )
+                    this.addError( $rule , 'No "message" found with English text and id ' + msgId );
+            }
+        }
+        else {
+            if( !$rule.attr( 'en-text' ) )
+                this.addError( $rule , '"en-text" or "op" attribute required' );
+        }
+    }
+
+    private drop( $rule ) {
+        // Special values:
+        const objectId = $rule.attr( 'objectId' );
+        if( objectId && this.specialDropValues.contains( objectId ) )
+            return;
+
+        this.validateObjectIdsAttribute( $rule , 'objectId' , false , false );
+    }
+
+    private disableCombats( $rule ) {
+        this.checkThereAreCombats( $rule );
+    }
+
+
 }

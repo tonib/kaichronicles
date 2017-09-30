@@ -1212,6 +1212,7 @@
         </object>
 
         <!-- This not really an object, but needed for mechanics -->
+        <!-- TODO: Check this object, I think it can be removed -->
         <object id="backpackcontent">
             <name lang="en">Backpack Content</name>
             <name lang="es">Contenido de la mochila</name>

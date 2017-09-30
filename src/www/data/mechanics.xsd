@@ -164,14 +164,14 @@
     <xs:complexType name="object">
         <xs:attribute name="objectId" type="xs:string" use="required" />
         <xs:attribute name="price" type="xs:string" />
-        <xs:attribute name="count" type="xs:integer" />
+        <xs:attribute name="count" type="xs:nonNegativeInteger" />
         <xs:attribute name="useOnSection" type="xs:boolean" />
         <xs:attribute name="unlimited" type="xs:boolean" />
-        <xs:attribute name="index" type="xs:integer" />
+        <xs:attribute name="index" type="xs:nonNegativeInteger" />
     </xs:complexType>
     
     <xs:complexType name="combat">
-        <xs:attribute name="index" type="xs:integer" />
+        <xs:attribute name="index" type="xs:nonNegativeInteger" />
         <xs:attribute name="combatSkillModifier" type="xs:string" />
         <xs:attribute name="mindforceCS" type="xs:integer" />
         <xs:attribute name="mindforceEP" type="xs:integer" />
@@ -233,9 +233,9 @@
     </xs:complexType>
     
     <xs:complexType name="meal">
-        <xs:attribute name="index" type="xs:integer" />
+        <xs:attribute name="index" type="xs:nonNegativeInteger" />
         <xs:attribute name="huntDisabled" type="xs:boolean" />
-        <xs:attribute name="price" type="xs:integer" />
+        <xs:attribute name="price" type="xs:nonNegativeInteger" />
     </xs:complexType>
     
     <xs:complexType name="resetSectionState">
@@ -243,10 +243,17 @@
     </xs:complexType>
     
     <xs:complexType name="message">
-        <xs:attribute name="en-text" type="xs:string" />
+        <xs:attribute name="en-text" type="xs:string"/>
         <xs:attribute name="es-text" type="xs:string" />
         <xs:attribute name="id" type="xs:string" />
-        <xs:attribute name="op" type="xs:string" />
+        <xs:attribute name="op">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="show"/>
+                    <xs:enumeration value="hide"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
     </xs:complexType>
     
     <xs:complexType name="drop">
