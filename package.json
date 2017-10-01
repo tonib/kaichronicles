@@ -20,9 +20,10 @@
     "scripts": {
         "lint": "jshint src/www/js",
         "prepareversion": "node scripts/prepareVersion.js",
-        "clean": "rm -rf dist",
+        "cleandist": "rm -rf dist",
         "downloaddata": "node scripts/downloadProjectAonData.js",
-        "ts": "tsc -p tsconfig.json"
+        "ts": "tsc -p tsconfig.json",
+        "cleants": "rm -rf src/www/js/ts-generated"
     }
 }
 

@@ -192,7 +192,10 @@
     <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script src="lib/toastr/toastr.min.js"></script>
     <script src="lib/filesaver.js"></script>
-    <script src="lib/xmllint.js"></script>
+    <!-- @ifndef PRODUCTION -->
+        <!-- xmllint.js is 2.2 MB and only used for tests, so don't include it on production -->
+        <script src="lib/xmllint.js"></script>
+    <!-- @endif -->
 
     <!-- This is the Apache Cordova API (only for App) 
          Keep it in development (to run cordova from command line on src dir)

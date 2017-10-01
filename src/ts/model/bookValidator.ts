@@ -293,6 +293,10 @@ class BookValidator {
      */
     private validateXml() {
 
+        if( typeof validateXML == 'undefined' )
+            // On production, the xmllint.js is not available (size = 2.2 MB minified...)
+            return;
+
         if( !BookValidator.xsdText ) {
             this.errors.push( 'The XSD for mechanics validation has not been downloaded' );
             return;
@@ -324,7 +328,6 @@ class BookValidator {
             this.errors.push( xmllint );
         console.log( xmllint );
     }
-
 
     //////////////////////////////////////////////////////////
     // RULES VALIDATION
@@ -532,5 +535,5 @@ class BookValidator {
         if( $(html).find(':contains("' + linkText + '")').length == 0 )
             this.addError( $rule , 'Text to replace "' + linkText + '" not found');
     }
-    
+
 }
