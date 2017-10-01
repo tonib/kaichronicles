@@ -1,3 +1,8 @@
+- Objects table: If the quiver has no arrows, show "(0 arrows)"
+- Saved games deletion: Do not refresh the entire table (ugly)
+- Dont let drop money if the player is death
+- Implement the Kai Monastery "safekeeping" mentioned on the "Equipment" sections
+- Books n >= 8: Max number of special objects is 12
 - Check reported bugs on Google play:
   * Should be the healing kai discipline be enabled on magnakai books?
   * Saved games removed when adding new games
@@ -9,7 +14,6 @@
 
 FOR FUTURE (1.9+):
 - Add button to explain combat ratio
-- Implement the Kai Monastery "safekeeping" mentioned on the "Equipment" sections
 - Allow to select the current bow
 - Allow to export / import saved games to the SD card
 - Describe:
@@ -45,10 +49,6 @@ FOR FUTURE (1.9+):
 - Allow to read the "Lore-circles of the Magnakai" section from the "Magnakai Disciplines" section (with a dialog?)
 - If a object description is too long, do not show the entire description: Show the first characters, and add a link
   to display the entire description (see pouchadgana object, and sommerswerd?)
-- Objects table: If the quiver has no arrows, show "(0 arrows)"
-- Dont let drop money if the player is death
-- Death: Option to restart from the section 1
-- Saved games deletion: Do not refresh the entire table (ugly)
 
 Reminders:
 
