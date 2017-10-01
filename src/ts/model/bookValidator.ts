@@ -256,6 +256,16 @@ class BookValidator {
         this.validateExpression( $rule , property , 'boolean' );
     }
 
+    private validateRandomTableIndex($rule: any) {
+        // Check index:
+        let txtIndex: string = $rule.attr('index');
+        if(!txtIndex)
+            txtIndex = '0';
+        const $random = this.currentSection.$xmlSection.find('a[href=random]:eq( ' + txtIndex + ')');
+        if(!$random)
+            this.addError($rule, 'Link to random table not found');
+    }
+
     //////////////////////////////////////////////////////////
     // VALIDATE XML
     //////////////////////////////////////////////////////////
@@ -333,15 +343,8 @@ class BookValidator {
 
     private randomTable( $rule ) {
 
-        if( !$rule.attr('text-en') ) {
-            // Check index:
-            let txtIndex : string = $rule.attr('index');
-            if( !txtIndex )
-                txtIndex = '0';
-            const $random = this.currentSection.$xmlSection.find( 'a[href=random]:eq( ' + txtIndex + ')' );
-            if( !$random )
-                this.addError( $rule , 'Link to random table not found' );
-        }
+        if( !$rule.attr('text-en') )
+            this.validateRandomTableIndex($rule);
 
         // Check numbers coverage
         let coverage : Array<number> = [];
@@ -383,6 +386,11 @@ class BookValidator {
         if( overlapped )
             this.addError( $rule, 'Overlapped numbers');
 
+    }
+
+    private randomTableIncrement( $rule ) {
+        this.validateNumericExpression( $rule , 'increment' );
+        this.validateRandomTableIndex( $rule );
     }
 
     private case( $rule ) {
@@ -500,5 +508,29 @@ class BookValidator {
         this.checkThereAreCombats( $rule );
     }
 
+    private currentWeapon( $rule ) {
+        this.validateObjectIdsAttribute( $rule , 'objectId' , false , true );
+    }
 
+    private sell( $rule ) {
+        this.validateObjectIdsAttribute( $rule , 'objectId' , false , false );
+    }
+
+    private goToSection( $rule ) {
+        this.validateSectionsAttribute( $rule , 'section' , false );
+    }
+
+    private objectUsed( $rule ) {
+        this.validateObjectIdsAttribute( $rule , 'objectId' , true , false );
+    }
+
+    private textToChoice( $rule ) {
+        this.validateSectionsAttribute( $rule , 'section' , false );
+
+        const html = this.currentSection.getHtml();
+        const linkText : string = $rule.attr('text-' + this.book.language);
+        if( $(html).find(':contains("' + linkText + '")').length == 0 )
+            this.addError( $rule , 'Text to replace "' + linkText + '" not found');
+    }
+    
 }

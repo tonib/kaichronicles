@@ -1047,7 +1047,7 @@ const mechanicsEngine = {
      */
     textToChoice: function( rule ) {
 
-        var linkText : string = $(rule).attr('text-' + state.language);
+        const linkText : string = $(rule).attr('text-' + state.language);
         if( !linkText ) {
             mechanicsEngine.debugWarning( 'textToChoice: text-' + state.language +' attribute not found');
             return;

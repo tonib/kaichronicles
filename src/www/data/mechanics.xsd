@@ -158,8 +158,6 @@
             </xs:simpleType>
         </xs:attribute>
     </xs:complexType>
-
-    <!-- START HERE -->
     
     <xs:complexType name="object">
         <xs:attribute name="objectId" type="xs:string" use="required" />
@@ -268,9 +266,11 @@
         <xs:attribute name="count" type="xs:integer" use="required" />
     </xs:complexType>
 
+    <!-- START HERE -->
+    
     <xs:complexType name="randomTableIncrement">
         <xs:attribute name="increment" type="xs:string" use="required" />
-        <xs:attribute name="index" type="xs:integer" />
+        <xs:attribute name="index" type="xs:nonNegativeInteger" />
     </xs:complexType>
     
     <xs:complexType name="currentWeapon">
@@ -294,13 +294,20 @@
 
     <xs:complexType name="sell">
         <xs:attribute name="objectId" type="xs:string" use="required" />
-        <xs:attribute name="price" type="xs:integer" use="required" />
-        <xs:attribute name="count" type="xs:integer" />
+        <xs:attribute name="price" type="xs:nonNegativeInteger" use="required" />
+        <xs:attribute name="count" type="xs:nonNegativeInteger" />
     </xs:complexType>
 
     <xs:complexType name="saveInventoryState">
         <xs:attribute name="restorePoint" type="xs:string" use="required" />
-        <xs:attribute name="objectsType" type="xs:string" />
+        <xs:attribute name="objectsType">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="all"/>
+                    <xs:enumeration value="weaponlike"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="restoreInventoryState">
