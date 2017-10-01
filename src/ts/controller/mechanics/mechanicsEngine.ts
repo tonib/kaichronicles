@@ -301,9 +301,8 @@ const mechanicsEngine = {
             var rule = mechanicsEngine.onAfterCombatTurns[i];
 
             // Turn when to execute the rule:
-            var txtRuleTurn = $(rule).attr('turn');
-            var ruleTurn = txtRuleTurn == 'any' ? 'any' : 
-                mechanicsEngine.evaluateExpression(txtRuleTurn);
+            const txtRuleTurn : string = $(rule).attr('turn');
+            const ruleTurn = ( txtRuleTurn == 'any' ? 'any' : ExpressionEvaluator.evalInteger( txtRuleTurn ) );
 
             // We reapply all rules accumulatively
             if( txtRuleTurn == 'any' || combat.turns.length >= ruleTurn )
@@ -411,7 +410,7 @@ const mechanicsEngine = {
         var cls = $(rule).attr('class');
 
         // Check the amount
-        var count = mechanicsEngine.evaluateExpression( $(rule).attr('count') );
+        const count = ExpressionEvaluator.evalInteger( $(rule).attr('count') );
 
         // Add to the action chart 
         if( cls == 'meal')
@@ -487,7 +486,7 @@ const mechanicsEngine = {
 
         // Check expression
         var expression = $(rule).attr('expression');
-        if( expression && mechanicsEngine.evaluateExpression( expression ) )
+        if( expression && ExpressionEvaluator.evalBoolean( expression ) )
             conditionStatisfied = true;
         
         // Check section visited:
@@ -623,7 +622,7 @@ const mechanicsEngine = {
         // Object price (optional)
         var price = $(rule).attr('price');
         if( price )
-            price = mechanicsEngine.evaluateExpression( price );
+            price = ExpressionEvaluator.evalInteger( price );
 
         // Unlimited number of this kind of object?
         const unlimited = ( $(rule).attr('unlimited') == 'true' );
@@ -682,7 +681,7 @@ const mechanicsEngine = {
         var txtCombatSkillModifier = $(rule).attr('combatSkillModifier');
         if( txtCombatSkillModifier ) {
             var combatSkillModifier = 
-                mechanicsEngine.evaluateExpression( txtCombatSkillModifier );
+                ExpressionEvaluator.evalInteger( txtCombatSkillModifier );
             combat.combatModifier = combatSkillModifier;
         }
 
@@ -818,7 +817,7 @@ const mechanicsEngine = {
             // Execute only once
             return;
 
-        var increase = mechanicsEngine.evaluateExpression( $(rule).attr('count') );
+        const increase = ExpressionEvaluator.evalInteger( $(rule).attr('count') );
         actionChartController.increaseEndurance( increase );
 
         state.sectionStates.markRuleAsExecuted(rule);
@@ -832,7 +831,7 @@ const mechanicsEngine = {
             // Execute only once
             return;
 
-        var increase = mechanicsEngine.evaluateExpression( $(rule).attr('count') );
+        const increase = ExpressionEvaluator.evalInteger( $(rule).attr('count') );
         actionChartController.increaseCombatSkill( increase );
         state.sectionStates.markRuleAsExecuted(rule);
     },
@@ -1190,78 +1189,6 @@ const mechanicsEngine = {
         if( $selector.length === 0 )
             return false;
         return !$selector.hasClass('disabled');
-    },
-
-    /** 
-     * Evaluates an expression
-     * @param txtExpression Expression to evaluate
-     * @return The expression current value
-     */
-    evaluateExpression: function(txtExpression) {
-        if( !txtExpression )
-            return 0;
-        // Do replacements:
-        // TODO: Inefficient. This will evaluate all functions when the text to replace is not present
-        // TODO: Search first the expressions to replace, and then do each replacement
-        var sectionState = state.sectionStates.getSectionState();
-        var expression = txtExpression
-            .replaceAll( '[RANDOM]' , randomMechanics.lastValue )
-            .replaceAll( '[COMBATRANDOM]' , sectionState.getLastRandomCombatTurn() )
-            // Money on the belt pouch
-            .replaceAll( '[MONEY]' , state.actionChart.beltPouch )
-            // Money available on the section
-            .replaceAll( '[MONEY-ON-SECTION]' , sectionState.getAvailableMoney() )
-            // Backpack items on section (includes meals)
-            .replaceAll( '[BACKPACK-ITEMS-CNT-ON-SECTION]' , sectionState.getCntSectionObjects('object') )
-            // Backpack items on action chart (includes meals)
-            .replaceAll( '[BACKPACK-ITEMS-CNT-ON-ACTIONCHART]' , state.actionChart.getNBackpackItems() )
-            // This does NOT include special items:
-            .replaceAll( '[WEAPON-ITEMS-CNT-ON-SECTION]' , sectionState.getCntSectionObjects('weapon') )
-            // This does NOT include special items:
-            .replaceAll( '[WEAPON-ITEMS-CNT-ON-ACTIONCHART]' , state.actionChart.weapons.length )
-            // This includes special items
-            .replaceAll( '[WEAPONLIKE-CNT-ON-SECTION]' , sectionState.getWeaponObjects().length )
-            // This includes special items
-            .replaceAll( '[WEAPONLIKE-CNT-ON-ACTIONCHART]' , state.actionChart.getWeaponObjects().length )
-            // Count of special items on section
-            .replaceAll( '[SPECIAL-ITEMS-ON-SECTION]' , sectionState.getCntSectionObjects('special') )
-            .replaceAll( '[ENDURANCE]' , state.actionChart.currentEndurance )
-            .replaceAll( '[MAXENDURANCE]' , state.actionChart.getMaxEndurance() )
-            .replaceAll( '[ORIGINALCOMBATSKILL]' , state.actionChart.combatSkill )
-            .replaceAll( '[COMBATSENDURANCELOST]', sectionState.combatsEnduranceLost('player') )
-            .replaceAll( '[COMBATSENEMYLOST]', sectionState.combatsEnduranceLost('enemy') )
-            .replaceAll( '[ENEMYENDURANCE]', sectionState.getEnemyEndurance() )
-            // Number of meals on the backpack
-            .replaceAll( '[MEALS]', state.actionChart.meals )
-            .replaceAll( '[KAILEVEL]', state.actionChart.disciplines.length )
-            .replaceAll( '[NUMBERPICKER]', numberPickerMechanics.getNumberPickerValue() )
-            .replaceAll( '[COMBATSDURATION]', sectionState.combatsDuration() )
-            .replaceAll( '[BOWBONUS]', state.actionChart.getBowBonus() )
-            // Current number of arrows
-            .replaceAll( '[ARROWS]', state.actionChart.arrows )
-            ;
-
-        // Extra randoms:
-        for(var i=0; i<3; i++) {
-            var text = '[RANDOM' + i + ']';
-            if( text.indexOf( text ) >= 0 ) {
-                expression = expression.replaceAll( text , 
-                    randomMechanics.getRandomValueChoosed(i) );
-            }
-        }
-
-        try {
-            // Be sure to return always an integer (expression can contain divisions...)
-            // We REALLY need eval, so disable warnings about the evilness of eval
-            /* jshint ignore:start */
-            // TODO: The expression can be boolean too!. floor only numbers...
-            return Math.floor( eval( expression ) );
-            /* jshint ignore:end */
-        }
-        catch(e) {
-            mechanicsEngine.debugWarning("Error evaluating expression " + txtExpression + ": " + e);
-            return null;
-        }
     },
 
     /**

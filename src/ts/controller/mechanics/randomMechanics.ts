@@ -69,7 +69,7 @@ const randomMechanics = {
     /** Increment for random table selection */
     randomTableIncrement: function(rule : any) {
         var $link = randomMechanics.getRandomTableRefByRule(rule);
-        var newIncrement = mechanicsEngine.evaluateExpression( $(rule).attr('increment') );
+        const newIncrement = ExpressionEvaluator.evalInteger( $(rule).attr('increment') );
 
         // Check if already there is an increment:
         var increment = 0;

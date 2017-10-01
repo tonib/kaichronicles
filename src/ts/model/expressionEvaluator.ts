@@ -140,6 +140,11 @@ class ExpressionEvaluator {
 
     };
 
+    /**
+     * Get keywords contained on an expression
+     * @param expression Expression where to find keywords
+     * @returns Keywords found
+     */
     public static getKeywords( expression : string ) : Array<string> {
 
         const repeatedKeywords = expression.match( ExpressionEvaluator.replacementsRegex );
@@ -154,6 +159,11 @@ class ExpressionEvaluator {
         return keywords;
     }
 
+    /**
+     * Replace keywords by its values
+     * @param expression Expression where to replace keywords
+     * @returns The expression with the replaced values
+     */
     private static doReplacements( expression : string ) : string {
         for( let keyword of ExpressionEvaluator.getKeywords(expression) ) {
             let replacement;
@@ -169,9 +179,15 @@ class ExpressionEvaluator {
         return expression;
     }
 
+    /**
+     * Replaces keywords and evaluates an expression
+     * @param expression Expression to evaluate
+     * @returns The expression value
+     */
     private static eval( expression : string ) : any {
         try {
-            return eval( ExpressionEvaluator.eval( expression ) );
+            expression = ExpressionEvaluator.doReplacements( expression );
+            return eval( expression );
         }
         catch(e) {
             mechanicsEngine.debugWarning("Error evaluating expression " + expression + ": " + e);
@@ -179,6 +195,11 @@ class ExpressionEvaluator {
         }
     }
 
+    /**
+     * Check if a keyword is valid
+     * @param keyword Keyword to check
+     * @returns True if it's valid
+     */
     public static isValidKeyword( keyword : string ) : boolean {
         if( ExpressionEvaluator.replacementFunctions[ keyword ] )
             return true;
@@ -186,10 +207,20 @@ class ExpressionEvaluator {
             return false;
     }
 
+    /**
+     * Evaluates a boolean expression
+     * @param expression Expression to evaluate
+     * @returns The expression value
+     */
     public static evalBoolean( expression : string ) : boolean {
         return ExpressionEvaluator.eval( expression );
     }
 
+    /**
+     * Evaluates an integer expression
+     * @param expression Expression to evaluate
+     * @returns The expression value
+     */
     public static evalInteger( expression : string ) : number {
         return Math.floor( ExpressionEvaluator.eval( expression ) );
     }
