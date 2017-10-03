@@ -1065,6 +1065,14 @@ const mechanicsEngine = {
         $textContainer.html( newHtml );           
     },
 
+    /**
+     * Add a button to access to the Kai monastery stored objects
+     */
+    kaiMonasteryStorage: function( rule : any ) {
+        const $tag = mechanicsEngine.getMechanicsUI( 'mechanics-kaimonasterystorage' );
+        gameView.appendToSection( $tag , true );
+    },
+
     /************************************************************/
     /**************** SPECIAL SECTIONS **************************/
     /************************************************************/

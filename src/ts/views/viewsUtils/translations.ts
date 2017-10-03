@@ -255,8 +255,8 @@ class Translations {
         'bookNotDownloaded' : 'El libro {0} no está descargado',
         'noSavedGames' : 'No se encontraron juegos guardados',
         'maximumPick' : 'Sólo puedes coger {0} objetos',
-        'zeroIgnored' : 'Cero ignorado'
-
+        'zeroIgnored' : 'Cero ignorado',
+        'kaiMonasteryStorage' : 'Objetos en el monasterio del Kai'
     };
 
     /**
