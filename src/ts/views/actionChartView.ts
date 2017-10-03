@@ -137,7 +137,8 @@ const actionChartView = {
 
     updateMoney: function() {
         $('#achart-beltPouch').val( state.actionChart.beltPouch + ' ' + translations.text('goldCrowns') );
-        $('#achart-dropmoneybutton').prop( 'disabled', state.actionChart.beltPouch <= 0 );
+        // Disable if the player has no money or it's death
+        $('#achart-dropmoneybutton').prop( 'disabled', state.actionChart.beltPouch <= 0 || state.actionChart.currentEndurance <= 0 );
     },
 
     /**
@@ -145,7 +146,8 @@ const actionChartView = {
      */
     updateMeals: function() {
         $('#achart-meals').val( state.actionChart.meals );
-        $('#achart-dropmeal').prop( 'disabled', state.actionChart.meals <= 0 );
+        // Disable if the player has no meals or it's death
+        $('#achart-dropmeal').prop( 'disabled', state.actionChart.meals <= 0 || state.actionChart.currentEndurance <= 0 );
     },
 
     /**
