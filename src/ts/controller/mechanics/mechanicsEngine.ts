@@ -1071,6 +1071,10 @@ const mechanicsEngine = {
     kaiMonasteryStorage: function( rule : any ) {
         const $tag = mechanicsEngine.getMechanicsUI( 'mechanics-kaimonasterystorage' );
         gameView.appendToSection( $tag , true );
+        $tag.find( 'button' ).click( function( e : Event ) {
+            e.preventDefault();
+            routing.redirect( 'kaimonastery' );
+        });
     },
 
     /************************************************************/
