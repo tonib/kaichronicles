@@ -239,6 +239,16 @@ class Translations {
         'processCancelled' : 'Proceso cancelado',
 
         //////////////////////////////////////
+        // Kai monastery safekeeping
+        //////////////////////////////////////
+
+        'kaiMonasteryStorage' : 'Objetos en el monasterio del Kai',
+        'kaiMonastery' : 'Monasterio del Kai',
+        'kaiMonasteryInfo' : 'Aquí puedes guardar objetos en custodia en el monasterio del Kai. Los objetos ' + 
+            'dejados aquí estarán disponibles cuando continues al próximo libro, en la sección "Equipo".',
+        'backToEquipment' : 'Volver a la sección de Equipo',
+
+        //////////////////////////////////////
         // Others
         //////////////////////////////////////
 
@@ -255,8 +265,7 @@ class Translations {
         'bookNotDownloaded' : 'El libro {0} no está descargado',
         'noSavedGames' : 'No se encontraron juegos guardados',
         'maximumPick' : 'Sólo puedes coger {0} objetos',
-        'zeroIgnored' : 'Cero ignorado',
-        'kaiMonasteryStorage' : 'Objetos en el monasterio del Kai'
+        'zeroIgnored' : 'Cero ignorado'
     };
 
     /**

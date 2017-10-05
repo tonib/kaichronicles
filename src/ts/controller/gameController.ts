@@ -18,10 +18,16 @@ const gameController = {
         if( !setupController.checkBook() )
             return;
 
+        if( state.sectionStates.currentSection == Book.KAIMONASTERY_SECTION ) {
+            gameController.gameTemplateSetup();
+            // Special case: Move to the inexistent section for the Kai monastery
+            routing.redirect( 'kaimonastery' );
+            return;
+        }
+
         views.loadView('game.html')
         .then(function() {
-            template.showStatistics(true);
-            template.setNavTitle( state.book.getBookTitle() , '#game' , false);
+            gameController.gameTemplateSetup();
             gameView.setup();
             // Go to the current section (or the initial)
             var sec = state.sectionStates.currentSection;
@@ -30,6 +36,12 @@ const gameController = {
             gameController.loadSection(sec, false, state.actionChart.yScrollPosition);
         });
 
+    },
+
+    /** Setup the HTML main page template for the game view */
+    gameTemplateSetup : function() {
+        template.showStatistics(true);
+        template.setNavTitle( state.book.getBookTitle() , '#game' , false);
     },
 
     /**
@@ -115,9 +127,10 @@ const gameController = {
         if( !state || !state.actionChart )
             return;
 
-        // Store the scroll position
-        //console.log('current scroll: ' + window.pageYOffset);
-        state.actionChart.yScrollPosition = window.pageYOffset;
+        // Store the scroll position.
+        // Special case: Do not store if we are going redirected from 'game' controller, at the index function to 'kaimonastery'
+        if( !( routing.getControllerName() == 'kaimonasteryController' && window.pageYOffset == 0 ) )
+            state.actionChart.yScrollPosition = window.pageYOffset;
 
         state.persistState();
     }

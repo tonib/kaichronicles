@@ -465,6 +465,12 @@ Remove all disciplines from the Action Chart. Only used when changing of book se
 ```
 Replaces a section text by a choice link. This could be needed when there is no link on the original Project AON XML
 
+### kaiMonasteryStorage
+```xml
+<kaiMonasteryStorage />
+```
+Add a button to access to the Kai monastery stored objects. It can be added inside "equipmnt" sections only.
+
 ### special sections
 
 There are sections (or parts of them) that cannot be described by the game rules.

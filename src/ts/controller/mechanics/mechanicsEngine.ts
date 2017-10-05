@@ -1073,6 +1073,8 @@ const mechanicsEngine = {
         gameView.appendToSection( $tag , true );
         $tag.find( 'button' ).click( function( e : Event ) {
             e.preventDefault();
+            // Move to the fake section for Kai monastery
+            state.sectionStates.currentSection = Book.KAIMONASTERY_SECTION;
             routing.redirect( 'kaimonastery' );
         });
     },
@@ -1124,8 +1126,10 @@ const mechanicsEngine = {
 
     /**
      * Show or update the table with the available objects on the section
+     * @param renderEmptyTable If it's true and there are no objects on the current section section, 
+     * a empty objects table will be rendered. If it's empty, no table will be rendered
      */
-    showAvailableObjects: function() {
+    showAvailableObjects: function( renderEmptyTable = false ) {
 
         var sectionState = state.sectionStates.getSectionState();
         var thereAreObjects = ( sectionState.objects.length >= 1 );
@@ -1133,16 +1137,15 @@ const mechanicsEngine = {
         // Check if the table was already inserted on the UI:
         var $table = $('#mechanics-availableObjectsList');
         if( $table.length === 0 ) {
-            if( thereAreObjects ) {
-                // Add the template
-                gameView.appendToSection( 
-                    mechanicsEngine.getMechanicsUI('mechanics-availableObjects') );
+            if( thereAreObjects || renderEmptyTable ) {
+                // Add the objects table template
+                gameView.appendToSection( mechanicsEngine.getMechanicsUI('mechanics-availableObjects') );
                 $table = $('#mechanics-availableObjectsList');
             }
             else
                 // Nothing to do
                 return;
-        }       
+        }
 
         // Fill the objects list:
         new ObjectsTable(sectionState.objects, $table, ObjectsTableType.AVAILABLE).renderTable();

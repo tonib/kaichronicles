@@ -536,4 +536,9 @@ class BookValidator {
             this.addError( $rule , 'Text to replace "' + linkText + '" not found');
     }
 
+    private kaiMonasteryStorage( $rule ) {
+        // Only available on "equipment" sections
+        if( $rule.closest( 'section[id=equipmnt]' ).length == 0 )
+            this.addError( $rule , 'Rule "kaiMonasteryStorage" should be included only on section with id=equipmnt' );
+    }
 }

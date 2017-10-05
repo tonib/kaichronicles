@@ -15,7 +15,16 @@ const kaimonasteryController = {
     
             views.loadView('kaimonastery.html')
             .then(function() {
-                
+
+                // Go back to the equipment section
+                $('#monastery-goback').click( function(e : Event) {
+                    e.preventDefault();
+                    state.sectionStates.currentSection = Book.EQUIPMENT_SECTION;
+                    routing.redirect( 'game' );
+                });
+
+                // Render available objects on the Kai monastery
+                mechanicsEngine.showAvailableObjects( true );
             });
             
         },

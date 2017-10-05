@@ -6,7 +6,14 @@
  */
 class Book {
 
+    /** Initial books section */
     public static INITIAL_SECTION = 'tssf';
+
+    /** Special unexistent section where to store objects on the Kai monastery */
+    public static KAIMONASTERY_SECTION = 'kaimonastery';
+
+    /** Books equipment section */
+    public static EQUIPMENT_SECTION = 'equipmnt';
 
     /** Book index number (1 = first book) */
     public bookNumber : number;
