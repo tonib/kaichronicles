@@ -35,6 +35,10 @@
             <test not="true" hasObject="backpack" >
                 <pick objectId="backpack" />
             </test>
+
+            <!-- Kai monastery safekeeping -->
+            <kaiMonasteryStorage />
+            
         </section>
 
     </sections>

@@ -1,9 +1,7 @@
 - Kai monastery storage: 
   * When you pick money, ask the amount to pick
-  * Save objects on section 'kaimonastery' to the actionChart object
 - Objects table: If the quiver has no arrows, show "(0 arrows)"
 - Saved games deletion: Do not refresh the entire table (ugly)
-- Implement the Kai Monastery "safekeeping" mentioned on the "Equipment" sections
 - Books n >= 8: Max number of special objects is 12
 - Check reported bugs on Google play:
   * Should be the healing kai discipline be enabled on magnakai books?
@@ -13,6 +11,9 @@
 - Add the section "Lore-circles of the Magnakai" to the game rules view
 - jshint should be runned over non TS generated code
 - add book 7 is playable on Google Play app description
+- Erratas:
+  * Book 5+ equimpnt: English ref to "safekeeping", Spanish hasn't
+- Allow to export / import saved games to the SD card
 
 FOR FUTURE (1.9+):
 - Add button to explain combat ratio
@@ -20,7 +21,6 @@ FOR FUTURE (1.9+):
   * https://github.com/tonib/kaichronicles/issues/5
   * https://www.projectaon.org/es/foro3/viewtopic.php?p=27752#p27752
 - Allow to select the current bow
-- Allow to export / import saved games to the SD card
 - Describe:
   * Where play on the web
   * Where Report bugs

@@ -82,6 +82,11 @@ class ActionChart {
     /** The player has used adgana previously? (see "pouchadgana" object) */
     public adganaUsed = false;
 
+    /**
+     * Objects in safekeeping at Kai monastery
+     */
+    public kaiMonasterySafekeeping : Array<SectionItem>  = [];
+
     constructor() {
         // Debug fast setup:
         if( window.getUrlParameter('debug') ) {

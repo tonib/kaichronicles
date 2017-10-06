@@ -42,6 +42,9 @@
                 <pick class="money" count="[RANDOM] + 10" />
             </randomTable>
 
+            <!-- Kai monastery safekeeping -->
+            <kaiMonasteryStorage />
+            
             <object objectId="sword" />
             <object objectId="laumspurpotion4" />
             <object objectId="warhammer" />

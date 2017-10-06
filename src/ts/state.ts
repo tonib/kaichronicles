@@ -196,6 +196,11 @@ const state = {
         state.book = new Book(state.book.bookNumber + 1, state.language);
         state.mechanics = new Mechanics(state.book);
         state.sectionStates = new BookSectionStates();
+
+        // Save on the next book Kai monastery safekeeping section the objects stored on the last book
+        const kaiMonasterySection = state.sectionStates.getSectionState( Book.KAIMONASTERY_SECTION );
+        kaiMonasterySection.objects = state.actionChart.kaiMonasterySafekeeping;
+
         state.persistState();
     },
 

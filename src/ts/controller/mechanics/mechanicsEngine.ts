@@ -1075,6 +1075,7 @@ const mechanicsEngine = {
             e.preventDefault();
             // Move to the fake section for Kai monastery
             state.sectionStates.currentSection = Book.KAIMONASTERY_SECTION;
+            state.persistState();
             routing.redirect( 'kaimonastery' );
         });
     },

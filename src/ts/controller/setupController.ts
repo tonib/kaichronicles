@@ -137,7 +137,7 @@ const setupController = {
 
     /**
      * Check if the book is already loaded.
-     * If is not, it redirects to the book setup 
+     * If is not, it redirects to the main menu
      * @return false if the book is not loaded
      */
     checkBook: function() {
