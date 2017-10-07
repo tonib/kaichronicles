@@ -206,14 +206,16 @@ class ActionChart {
     /**
      * Increase / decrease the money number
      * @param count Number to increase. Negative to decrease 
+     * @returns Amount really picked.
      */
-    public increaseMoney(count : number) {
+    public increaseMoney(count : number) : number {
+        const oldBeltPouch = this.beltPouch;
         this.beltPouch += count;
         if( this.beltPouch > 50 )
             this.beltPouch = 50;
         else if( this.beltPouch < 0 )
             this.beltPouch = 0;
-        //console.log('Picked ' + count + ' crowns');
+        return this.beltPouch - oldBeltPouch;
     }
 
     /**

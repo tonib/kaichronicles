@@ -263,8 +263,9 @@ class SectionState {
      * Remove an object from the section
      * @param objectId Object id to remove
      * @param price Price of the object to remove
+     * @param count Count to decrease. Only applies if the object is 'money'
      */
-    public removeObjectFromSection(objectId : string, price: number) {
+    public removeObjectFromSection(objectId : string, price: number, count: number = -1) {
         // Be sure price is not null
         if( !price )
             price = 0;
@@ -276,7 +277,15 @@ class SectionState {
                 currentPrice = 0;
 
             if( this.objects[i].id == objectId && currentPrice == price ) {
-                this.objects.splice(i, 1);
+                let removeObject = true;
+                if( objectId == 'money' && count >= 0 && this.objects[i].count > count ) {
+                    // Still money available:
+                    this.objects[i].count -= count;
+                    removeObject = false;
+                }
+
+                if( removeObject )
+                    this.objects.splice(i, 1);
                 return;
             }
         }

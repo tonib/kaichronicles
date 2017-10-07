@@ -28,9 +28,9 @@ class ObjectsTableItem {
 
     /**
      * Constructor
-     * @param type Table type
      * @param itemInfo Object info. It can be a string with the object id, or a SectionItem with the object info
      * on the section
+     * @param type Table type
      */
     constructor( itemInfo : any , type : ObjectsTableType ) {
         this.type = type;
@@ -316,18 +316,20 @@ class ObjectsTableItem {
 
         if( objectPicked ) {
 
+            let countPicked = this.objectInfo.count;
+
             if( this.item.id == 'quiver' )
                 // Increase the number of arrows on the quiver
                 actionChartController.increaseArrows( this.objectInfo.count );
 
             if( this.item.id == 'money' )
                 // Pick the money
-                actionChartController.increaseMoney( this.objectInfo.count );
+                countPicked = actionChartController.increaseMoney( this.objectInfo.count );
 
             if( !this.objectInfo.unlimited ) {
                 // Remove it from the available objects on the section
                 const sectionState = state.sectionStates.getSectionState();
-                sectionState.removeObjectFromSection( this.item.id , this.objectInfo.price );
+                sectionState.removeObjectFromSection( this.item.id , this.objectInfo.price , countPicked );
             }
 
             if( this.objectInfo.price ) {
