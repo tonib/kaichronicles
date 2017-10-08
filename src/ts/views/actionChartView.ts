@@ -43,30 +43,11 @@ const actionChartView = {
      * Bind events for drop money UI
      */
     bindDropMoneyEvents: function() {
-
         // Bind drop money button event
         $('#achart-dropmoneybutton').click( function(e: Event) {
             e.preventDefault();
-            // Update the maximum amount to drop
-            $('#achart-dropmoneyamount')
-                .attr('max', state.actionChart.beltPouch )
-                .val('1');
-            $('#achart-dropmoneydialog').modal('show');
+            MoneyDialog.show( true );
         });
-
-        // Bind money picker events
-        $('#achart-dropmoneyamount').bindNumberEvents();
-
-        // Bind drop money confirmation button
-        $('#achart-dropmoneyapply').click( function(e : Event) {
-            e.preventDefault();
-            const $moneyAmount = $('#achart-dropmoneyamount');
-            if( $moneyAmount.isValid() ) {
-                actionChartController.increaseMoney( - $moneyAmount.getNumber() , true );
-                $('#achart-dropmoneydialog').modal('hide');
-            }
-        });
-
     },
 
     /**
