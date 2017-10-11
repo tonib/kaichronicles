@@ -1,7 +1,6 @@
 
 /**
  * Modal dialog to pick / drop money.
- * The use of this dialog to pick AND drop money on the same page is currently not supported (not needed right now)
  */
 class MoneyDialog {
 
@@ -14,12 +13,28 @@ class MoneyDialog {
             $('#mechanics-moneyamount')
             .attr('max', state.actionChart.beltPouch )
             .val('1');
+            $('#mechanics-moneyamount').attr('data-ismoneypicker', 'true');
         }
         else {
-            // TODO
+            const sectionMoney = state.sectionStates.getSectionState().getAvailableMoney();
+            $('#mechanics-moneyamount')
+            .attr('max', sectionMoney )
+            .val( sectionMoney );
+            $('#mechanics-moneyamount').attr('data-ismoneypicker', 'false');
         }
 
-        $('#mechanics-moneydialog').modal('show');
+        const $dlg = $('#mechanics-moneydialog');
+
+        // Update translations
+        const title = ( drop ? 'dropMoney' : 'pickMoney' );
+        $('#mechanics-moneytitle').attr( 'data-translation' , title );
+        $('#mechanics-moneyapply').attr( 'data-translation' , title );
+        translations.translateTags( $dlg );
+
+        // Show
+        $dlg
+            .prop('data-isdrop' , drop )
+            .modal('show');
     }
 
     private static setupDialog(drop : boolean) {
@@ -31,19 +46,36 @@ class MoneyDialog {
         const $moneyDlg = mechanicsEngine.getMechanicsUI( 'mechanics-moneydialog' );
         $('body').append( $moneyDlg );
 
-
         // Bind money picker events
         $('#mechanics-moneyamount').bindNumberEvents();
 
         // Bind drop money confirmation button
         $('#mechanics-moneyapply').click( function(e : Event) {
             e.preventDefault();
-            const $moneyAmount = $('#mechanics-moneyamount');
-            if( $moneyAmount.isValid() ) {
-                actionChartController.increaseMoney( - $moneyAmount.getNumber() , true );
-                $('#mechanics-moneydialog').modal('hide');
-            }
+            MoneyDialog.onDialogConfirmed();
         });
 
+    }
+
+    private static onDialogConfirmed() {
+
+        const $moneyAmount = $('#mechanics-moneyamount');
+        if( !$moneyAmount.isValid() )
+            return;
+
+        const moneyAmount = $moneyAmount.getNumber();
+        if( $('#mechanics-moneydialog').prop( 'data-isdrop' ) ) {
+            // Drop
+            actionChartController.increaseMoney( - moneyAmount , true );
+        }
+        else {
+            // Pick
+            const countPicked = actionChartController.increaseMoney( moneyAmount );
+            const sectionState = state.sectionStates.getSectionState();
+            sectionState.removeObjectFromSection( Item.MONEY , 0 , countPicked );
+            // Re-render section
+            mechanicsEngine.showAvailableObjects();
+        }
+        $('#mechanics-moneydialog').modal('hide');
     }
 }

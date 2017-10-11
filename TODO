@@ -1,5 +1,3 @@
-- Kai monastery storage: 
-  * When you pick money, ask the amount to pick
 - Objects table: If the quiver has no arrows, show "(0 arrows)"
 - Saved games deletion: Do not refresh the entire table (ugly)
 - Books n >= 8: Max number of special objects is 12
@@ -10,7 +8,6 @@
   * Others?
 - Add the section "Lore-circles of the Magnakai" to the game rules view
 - jshint should be runned over non TS generated code
-- add book 7 is playable on Google Play app description
 - Erratas:
   * Book 5+ equimpnt: English ref to "safekeeping", Spanish hasn't
 - Allow to export / import saved games to the SD card

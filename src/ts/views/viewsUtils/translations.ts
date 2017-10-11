@@ -70,6 +70,7 @@ class Translations {
         'circleSpirit' : 'Círculo del Espíritu',
         'circles' : 'Círculos de la Ciencia:',
         'dropMoney' : 'Dejar dinero',
+        'pickMoney' : 'Coger dinero',
         'amount' : 'Cantidad',
         
         //////////////////////////////////////
@@ -321,7 +322,10 @@ class Translations {
         'circleLight' : 'Circle of Light',
         'circleSolaris' : 'Circle of Solaris',
         'circleSpirit' : 'Circle of the Spirit',
-        
+        'dropMoney' : 'Drop money',
+        'pickMoney' : 'Pick money',
+        'amount' : 'Amount',
+
         //////////////////////////////////////
         // Combats
         //////////////////////////////////////
@@ -447,7 +451,12 @@ class Translations {
         return $clonedView;
     }
 
-    public translateTags( $tags , table ) {
+    /**
+     * Translate an HTML fragment
+     * @param  $tags jQuery selector of tags to translate
+     * @param table Translations table to use. If null, the current language will be used
+     */
+    public translateTags( $tags : any , table : { [key : string] : string } = null ) {
 
         if( !table ) {
             table = this[state.language];

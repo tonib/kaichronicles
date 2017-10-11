@@ -4,7 +4,10 @@
  * The Kai monastery storage controller
  */
 class kaimonasteryController {
-    
+
+    /** Controller name */
+    public static readonly NAME = 'kaimonasteryController';
+
     /**
      * Render page
      */

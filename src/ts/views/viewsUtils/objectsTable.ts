@@ -293,6 +293,12 @@ class ObjectsTableItem {
 
     private get() {
 
+        // Special case. On kai monastery, ask the money amount to pick
+        if( this.objectInfo.id == Item.MONEY && routing.getControllerName() == kaimonasteryController.NAME ) {
+            MoneyDialog.show(false);
+            return;
+        }
+
         // Check if it's a buy
         if( this.objectInfo.price ) {
             if( state.actionChart.beltPouch < this.objectInfo.price ) {
