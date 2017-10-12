@@ -1,8 +1,6 @@
-- Objects table: If the quiver has no arrows, show "(0 arrows)"
 - Saved games deletion: Do not refresh the entire table (ugly)
 - Books n >= 8: Max number of special objects is 12
 - Check reported bugs on Google play:
-  * Should be the healing kai discipline be enabled on magnakai books?
   * Saved games removed when adding new games
   * Objects types
   * Others?

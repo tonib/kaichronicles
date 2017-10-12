@@ -74,8 +74,11 @@ class ObjectsTableItem {
         var name = this.item.name;
 
         // Number of arrows on the quiver
-        if( this.objectInfo.id == 'quiver' && this.objectInfo.count )
-            name += ' (' + this.objectInfo.count + ' ' + translations.text('arrows') + ')';
+        if( this.objectInfo.id == 'quiver' ) {
+            // Be sure count is not null
+            const count = ( this.objectInfo.count ? this.objectInfo.count : 0 );
+            name += ' (' + count + ' ' + translations.text('arrows') + ')';
+        }
 
         // Money amount
         if( this.objectInfo.id == 'money' && this.objectInfo.count )
