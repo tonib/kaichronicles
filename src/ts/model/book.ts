@@ -392,4 +392,10 @@ class Book {
         return numbers;
     }
 
+    /** Is it a book of Kai series (1-5)? */
+    public isKaiBook() : boolean { return this.bookNumber <= 5; }
+
+    /** Is it a book of Magnakai series (6-?)? */
+    public isMagnakaiBook() : boolean { return this.bookNumber > 5; }
+
 }

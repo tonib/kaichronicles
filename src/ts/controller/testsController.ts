@@ -173,4 +173,4 @@ class testsController {
     /** Return page */
     public static getBackController() : string { return 'game'; }
 
-};
+}

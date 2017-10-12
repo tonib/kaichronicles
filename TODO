@@ -3,8 +3,6 @@
   * Saved games removed when adding new games
   * Objects types
   * Others?
-- Add the section "Lore-circles of the Magnakai" to the game rules view
-- jshint should be runned over non TS generated code
 - Erratas:
   * Book 5+ equimpnt: English ref to "safekeeping", Spanish hasn't
 - Allow to export / import saved games to the SD card

@@ -52,5 +52,5 @@ class kaimonasteryController {
     /** Return page */
     public static getBackController() { return 'mainMenu'; }
 
-};
+}
     
