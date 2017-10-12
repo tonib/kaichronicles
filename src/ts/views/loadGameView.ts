@@ -22,38 +22,43 @@ const loadGameView = {
 
     /**
      * Add a file to the file games list (Cordova app)
-     * @param fileName File name to load. null for the empty list
-     * item.
+     * @param fileNames File names to load
      */
-    addFileToList: function(fileName : string) {
-        var row = '<tr><td>';
-        if( !fileName ) 
-            row += '<i>' + translations.text( 'noSavedGames' ) + '</i>';
+    addFilesToList: function(fileNames : Array<string>) {
+        
+        let html = '';
+        if( fileNames.length == 0 ) 
+            html += '<tr><td><i>' + translations.text( 'noSavedGames' ) + '</i></td></tr>';
         else {
-            row += '<button class="btn btn-default table-op" title="Delete" data-filename="' + 
-                fileName + '">' + 
-                    '<span class="glyphicon glyphicon-remove"></span>' + 
-                '</button>' +
-                '<a class="savegame" href="' + fileName + '">' + 
-                    fileName + 
-                '</a>';
+            for( let fileName of fileNames ) {
+                html += '<tr id="' + fileName + '"><td>';
+                html += '<button class="btn btn-default table-op" title="Delete" data-filename="' + 
+                    fileName + '">' + 
+                        '<span class="glyphicon glyphicon-remove"></span>' + 
+                    '</button>' +
+                    '<a class="savegame" href="' + fileName + '">' + 
+                        fileName + 
+                    '</a>';
+                html += '</td></tr>';
+            }
         }
-        row += '</td></tr>';
 
-        $('#loadGame-fileslist tbody').append(row);
+        $('#loadGame-fileslist tbody').append( html );
     },
 
     /**
      * Bind Android files list events
      */
     bindListEvents: function() {
+
         // Load game events
-        $('.savegame').click(function(e) {
+        $('.savegame').click(function(e : Event) {
             e.preventDefault();
             loadGameController.fileListClicked( $(this).attr( 'href' ) );
         });
+
         // Delete file events
-        $('#loadGame-fileslist tbody button').click(function(e) {
+        $('#loadGame-fileslist tbody button').click(function(e : Event) {
             // IMPORTANT: Do not remove this preventDefault(), otherwise
             // Cordova beleaves we have changed the current page
             e.preventDefault();
@@ -62,6 +67,19 @@ const loadGameView = {
                 return;
             loadGameController.deleteFile( fileName );
         });
+    },
+
+    /**
+     * Remove a file name from the files list (Android)
+     */
+    removeFilenameFromList: function( fileName : string ) {
+        // It does not work, because fileName can contain points...
+        //$('#' + fileName).remove();
+        $('tr[id="' + fileName + '"]').remove();
+        
+        if( $('#loadGame-fileslist tr').length == 0 )
+            // Show the "No games found" message
+            loadGameView.addFilesToList([]);
     },
 
     /**

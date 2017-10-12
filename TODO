@@ -1,4 +1,3 @@
-- Saved games deletion: Do not refresh the entire table (ugly)
 - Books n >= 8: Max number of special objects is 12
 - Check reported bugs on Google play:
   * Saved games removed when adding new games
@@ -26,6 +25,7 @@ FOR FUTURE (1.9+):
   * App lifeciclye
   * Load games page: Show info about saved games
   * Load games page: Remove ".json" extension
+  * Save game: Do not be so restrictive with file names characters
   * Replace toastr by Android toasts ???
   * Remove animations from modal dialogs (only for Android, performance...)
 - Save games is not working on Safari
@@ -84,5 +84,7 @@ Reminders:
   Install dependencies: npm install
   Run script: npm run lint
   
+* Debug Cordova app on Chrome:
+  URL: chrome://inspect/#devices
 
 Work done on this commit:

@@ -35,25 +35,17 @@ const loadGameController = {
         cordovaFS.getDirectoryFiles( function(entries) {
 
             // Get file names
-            var fileNames = [];
-            var i;
-            for(i=0; i<entries.length; i++) {
+            let fileNames : Array<string> = [];
+            for(let entry of entries) {
                 // There can be directories here (ex. downloaded books)
-                if( entries[i].isFile )
-                    fileNames.push(entries[i].name);
+                if( entry.isFile )
+                    fileNames.push( entry.name );
             }
 
-            if( fileNames.length === 0 )
-                loadGameView.addFileToList( null );
-            else {
-                // The list may be unsorted:
-                fileNames.sort();
-                // Show files
-                for(i=0; i<fileNames.length; i++)
-                    loadGameView.addFileToList( fileNames[i] );
-                loadGameView.bindListEvents();
-            }
-            
+            // The list may be unsorted:
+            fileNames.sort();
+            loadGameView.addFilesToList( fileNames );
+            loadGameView.bindListEvents();
         });
     },
 
@@ -108,7 +100,8 @@ const loadGameController = {
      */
     deleteFile: function(fileName : string) {
         cordovaFS.deleteFile(fileName, function() {
-            loadGameController.listGameFiles();
+            //loadGameController.listGameFiles();
+            loadGameView.removeFilenameFromList( fileName );
         });
     },
 
