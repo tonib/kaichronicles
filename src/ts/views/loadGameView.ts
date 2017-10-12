@@ -1,21 +1,31 @@
+/// <reference path="../external.ts" />
 
 /**
  * The load game view interface functions
  */
-var loadGameView = {
-
+const loadGameView = {
+    
+    /**
+     * Hide the Android files list
+     */
     hideFilesList: function() { $('#loadGame-fileslist').hide(); },
 
+    /**
+     * Hide the web file uploader
+     */
     hideFileUpload: function() { $('#loadGame-file').hide(); },
 
+    /**
+     * Remove all rows on the files list (Android)
+     */
     clearFilesList: function() { $('#loadGame-fileslist tbody').empty(); },
 
     /**
      * Add a file to the file games list (Cordova app)
-     * @param {String} fileName File name to load. null for the empty list
+     * @param fileName File name to load. null for the empty list
      * item.
      */
-    addFileToList: function(fileName) {
+    addFileToList: function(fileName : string) {
         var row = '<tr><td>';
         if( !fileName ) 
             row += '<i>' + translations.text( 'noSavedGames' ) + '</i>';
@@ -33,6 +43,9 @@ var loadGameView = {
         $('#loadGame-fileslist tbody').append(row);
     },
 
+    /**
+     * Bind Android files list events
+     */
     bindListEvents: function() {
         // Load game events
         $('.savegame').click(function(e) {
@@ -51,6 +64,9 @@ var loadGameView = {
         });
     },
 
+    /**
+     * Bind web file uploader events
+     */
     bindFileUploaderEvents: function() {
         $('#loadGame-file').change(function() {
             if( !this.files || !this.files[0] )

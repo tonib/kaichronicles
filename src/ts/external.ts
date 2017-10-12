@@ -6,7 +6,6 @@ declare var views:any;
 declare var routing:any;
 declare var setupView:any;
 declare var cordovaFS:any;
-declare var loadGameView:any;
 
 // index.html:
 declare const ENVIRONMENT : string;
