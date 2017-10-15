@@ -28,6 +28,9 @@ interface InventoryState {
  */
 class ActionChart {
 
+    /** First book number with a limit on Special Items count */
+    public static BOOK_WITH_MAX_SPECIALS = 8;
+
     /** The original combat skill */ 
     public combatSkill = 0;
 
@@ -132,6 +135,9 @@ class ActionChart {
                 return true;
 
             case 'special':
+                const nMax = ActionChart.getMaxSpecials();
+                if( nMax && this.specialItems.length >= nMax )
+                    throw translations.text( 'msgNoMoreSpecialItems' );
                 this.specialItems.push(o.id);
                 if(o.isWeapon())
                     this.checkCurrentWeapon();
@@ -653,6 +659,8 @@ class ActionChart {
      * @param increment N. of arrows to increment. Negative to decrement
      */
     public increaseArrows(increment : number) {
+        if( !this.hasObject( Item.QUIVER ) )
+            return;
         this.arrows += increment;
         if( this.arrows < 0 )
             this.arrows = 0;
@@ -703,6 +711,14 @@ class ActionChart {
         }
         return selectedWeapon;
     }
-    
+
+    /**
+     * Return the maximum number of special items that can be picked on the curernt book.
+     * @returns The max number. Zero if there is no limit on the current book
+     */
+    public static getMaxSpecials() : number {
+        return state.book.bookNumber >= ActionChart.BOOK_WITH_MAX_SPECIALS ? 12 : 0;
+    }
+
 }
 

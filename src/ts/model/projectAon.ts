@@ -4,7 +4,7 @@
  * Metadata about books and Project Aon web structure
  */
 const projectAon = {
-    
+
     /**
      * Books metadata
      */

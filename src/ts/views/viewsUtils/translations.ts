@@ -57,6 +57,7 @@ class Translations {
         'msgNoMoreWeapons' : 'No puedes coger mas armas',
         'msgAlreadyBackpack' : 'Ya tienes una mochila',
         'msgNoMoreBackpackItems' : 'No puedes coger mas Objetos de Mochila',
+        'msgNoMoreSpecialItems' : 'No puedes coger mas Objetos Especiales',
         'noWeapon' : 'Sin arma',
         'weaponskill' : 'Dominio Manejo Armas',
         'weaponmastery' : 'Maestría Manejo Armas',
@@ -72,7 +73,10 @@ class Translations {
         'dropMoney' : 'Dejar dinero',
         'pickMoney' : 'Coger dinero',
         'amount' : 'Cantidad',
-        
+        'maxSpecialItems' : 'A partir de este libro, el número máximo de Objetos Especiales que puedes ' + 
+            'llevar es de 12. Podrás dejar el resto en un lugar seguro del monasterio del Kai, o dejarlo aquí. ' +
+            'Si se deja aquí, el objeto se perderá. Por favor, deja los Objetos Especiales antes de continuar.',
+
         //////////////////////////////////////
         // Combats
         //////////////////////////////////////
@@ -312,6 +316,7 @@ class Translations {
         'msgNoMoreWeapons' : 'You cannot get more weapons',
         'msgAlreadyBackpack' : 'You already have a Backpack',
         'msgNoMoreBackpackItems' : 'You cannot get more Backpack Items',
+        'msgNoMoreSpecialItems' : 'You cannot get more Special Items',
         'noWeapon' : 'No weapon',
         'weaponskill' : 'Weaponskill',
         'weaponmastery' : 'Weaponmastery',
