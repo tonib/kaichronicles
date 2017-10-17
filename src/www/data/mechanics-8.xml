@@ -36,18 +36,8 @@
                 <pick objectId="backpack" />
             </test>
 
-            <randomTable>
-                <pick class="money" count="[RANDOM] + 10" />
-            </randomTable>
-
             <!-- Kai monastery safekeeping -->
-            <kaiMonasteryStorage />
-            
-            <chooseEquipment 
-                en-text="Click on the Random Table link to get money before continue" 
-                es-text="Haz click en el link de la Tabla de la Suerte para obtener dinero antes de continuar"
-            />
-            
+            <kaiMonasteryStorage />            
         </section>
 
     </sections>

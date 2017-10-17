@@ -124,7 +124,7 @@ const projectAon = {
 
         ///////////////////////////////////////
         
-        // Book 8 (NOT IMPLEMENTED):
+        // Book 8 (NOT IMPLEMENTED / Work in progress (Michael) ):
         ,{
             title_en: 'The Jungle of Horrors',
             code_en: '08tjoh',
@@ -139,7 +139,7 @@ const projectAon = {
             zipSize: 3537081
         },
 
-        // Book 9 (NOT IMPLEMENTED):
+        // Book 9 (NOT IMPLEMENTED / Work in progress (Colin) ):
         {
             title_en: 'The Cauldron of Fear',
             code_en: '09tcof',
@@ -152,6 +152,21 @@ const projectAon = {
             biographies: [ 'jdbiolw' , 'bwbiolw' ],
             
             zipSize: 2839095
+        },
+
+        // Book 10 (NOT IMPLEMENTED / Nobody working on it):
+        {
+            title_en: 'The Dungeons of Torgar',
+            code_en: '10tdot',
+
+            title_es: 'Las Mazmorras de Torgar',
+            code_es: '10lmdt',
+
+            illustrators: [ 'williams' ],
+
+            biographies: [ 'jdbiolw' , 'bwbiolw' ],
+            
+            zipSize: 3079362
         }
         
     ],

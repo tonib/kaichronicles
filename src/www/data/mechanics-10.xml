@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<mechanics book="9">
+<mechanics book="10">
 
     <!-- LIST OF TRANSLATED IMAGES -->
     <translated-images>
@@ -37,7 +37,7 @@
             </test>
 
             <!-- Kai monastery safekeeping -->
-            <kaiMonasteryStorage />
+            <kaiMonasteryStorage />            
         </section>
 
     </sections>
