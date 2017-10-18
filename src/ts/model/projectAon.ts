@@ -154,7 +154,7 @@ const projectAon = {
             zipSize: 2839095
         },
 
-        // Book 10 (NOT IMPLEMENTED / Nobody working on it):
+        // Book 10 (NOT IMPLEMENTED / Work in progress (Toni) ):
         {
             title_en: 'The Dungeons of Torgar',
             code_en: '10tdot',
@@ -167,8 +167,23 @@ const projectAon = {
             biographies: [ 'jdbiolw' , 'bwbiolw' ],
             
             zipSize: 3079362
-        }
+        },
         
+        // Book 11 (NOT IMPLEMENTED / Nobody working on it):
+        {
+            title_en: 'The Prisoners of Time',
+            code_en: '11tpot',
+
+            title_es: 'Prisioneros del Tiempo',
+            code_es: '11pdt',
+
+            illustrators: [ 'williams' ],
+
+            biographies: [ 'jdbiolw' , 'bwbiolw' ],
+            
+            zipSize: 3007751
+        }
+
     ],
 
     /**

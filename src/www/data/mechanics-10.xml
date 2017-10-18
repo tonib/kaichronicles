@@ -27,7 +27,7 @@
             <setDisciplines />
         </section>
         
-        <section id="equipmnt">
+        <section id="equipmnt" pickMaximum="5">
             <!-- Do not pick 2 maps! -->
             <test not="true" hasObject="map" >
                 <pick objectId="map" />
@@ -36,8 +36,80 @@
                 <pick objectId="backpack" />
             </test>
 
+            <randomTable>
+                <pick class="money" count="[RANDOM] + 10" />
+            </randomTable>
+
             <!-- Kai monastery safekeeping -->
-            <kaiMonasteryStorage />            
+            <kaiMonasteryStorage />
+
+            <object objectId="sword" />
+            <object objectId="bow" />
+            <object objectId="quiver" count="6" />
+            <object objectId="rope" />
+            <object objectId="laumspurpotion4" />
+            <object objectId="lantern" />
+            <object objectId="mace" />
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
+            <object objectId="meal" index="2" />
+            <object objectId="dagger" />
+
+            <chooseEquipment 
+                en-text="Click on the Random Table link to get money before continue" 
+                es-text="Haz click en el link de la Tabla de la Suerte para obtener dinero antes de continuar"
+            />
+
+            <message 
+                en-text="You may take up to five of the following (all meals count as one object):" 
+                es-text="Puedes elegir hasta cinco de los objetos (todas las comidas cuentan como un objeto):" 
+            />
+
+        </section>
+
+        <section id="sect2">
+            <choiceState section="all" set="disabled" />
+            <combat />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect4">
+            <choiceState section="sect324" set="disabled" />
+            <choiceState section="sect241" set="disabled" />
+
+            <test hasDiscipline="hntmstry">
+                <test expression="[KAILEVEL] >= 6">
+                    <choiceState section="sect324" set="enabled" />
+                    <choiceState section="sect108" set="disabled" />
+                </test>
+            </test>
+
+            <test hasDiscipline="pthmnshp">
+                <test expression="[KAILEVEL] >= 5">
+                    <choiceState section="sect241" set="enabled" />
+                    <choiceState section="sect108" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect6">
+            <!--
+                TODO: If you have ever visited the land of Talestria...
+                Do the same here than in book 3 / sect268 (a TODO too)
+            -->
+        </section>
+
+        <section id="sect7">
+            <test hasCircle="circleSpirit">
+                <choiceState section="sect111" set="disabled" />
+                <choiceState section="sect287" set="disabled" />
+                <choiceState section="sect152" set="disabled" />
+            </test>
+            <test not="true" hasCircle="circleSpirit">
+                <choiceState section="sect46" set="disabled" />
+            </test>
         </section>
 
     </sections>

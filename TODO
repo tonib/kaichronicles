@@ -1,11 +1,19 @@
+- Allow to export / import saved games to the SD card
 - Check reported bugs on Google play:
   * Saved games removed when adding new games
   * Objects types
   * Others?
 - Erratas:
   * Book 5+ equimpnt: English ref to "safekeeping", Spanish hasn't
-- Allow to export / import saved games to the SD card
+  * Book 10 / sect1 / Spanish: "estudias el mapaque" should be "estudias el mapa que"
+  * Book 10 / sect3,4,5,6 / Spanish: Two points on choices
 - Add button to explain combat ratio
+- Kai level "Tutelary" with "Weaponmastery": Tutelaries are able to use defensive combat skills to great effect 
+  when fighting unarmed. When entering combat without a weapon, Tutelaries lose only 2 points from their COMBAT SKILL, instead of the usual 4 points.
+- Kai level "Mentora" with "Weaponmastery": Mentoras skilled in Weaponmastery are more accurate when using all missile 
+  weapons, whether fired (e.g. a bow) or thrown (e.g. a dagger). When using a bow or thrown weapon and instructed to pick a 
+  number from the Random Number Table, add 2 to the number picked if you are a Mentora with the Magnakai Discipline 
+  of Weaponmastery.
 
 FOR FUTURE (1.9+):
 - Support for kai disciplines on magnakai books:

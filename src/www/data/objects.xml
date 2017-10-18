@@ -1124,7 +1124,18 @@
 
         <object id="lantern">
             <name lang="en">Lantern</name>
+            <description lang="en">
+                The Lantern is designed to be self-lighting. You will not need a Tinderbox or any other means of 
+                creating a flame to light it.
+            </description>
+
             <name lang="es">Linterna</name>
+            <description lang="es">
+                La Linterna ha sido creada para funcionar por sí sola. No necesitarás Yesca ni ninguna otra cosa para 
+                crear una llama con la que encenderla.
+            </description>
+
+            <image book="9" name="lantern.png" />
         </object>
 
         <object id="laumspurpotion8">
