@@ -209,8 +209,8 @@ will be executed.
 * **expression="Java expression"**: Is the expression true?
 * **sectionVisited="sectionId1|sectionId1|..."**: Has some of the sections been visited?
 * **currentWeapon="weaponId"**: Is this the current weapon?
-* **combatsWon="true"**: Have been won all combats on this section?
-* **combatsActive="true"**: Do some combat still active?
+* **combatsWon="boolean"**: Have been won all combats on this section (or not)?
+* **combatsActive="true"**: Do some combat still active (unfinished)?
 * **bookLanguage="language code (en/es)"**: Is this the current book language?
 * **weaponskillActive="true"**: Has the player Weaponskill with the current weapon?
 * **not="true"**: This will negate the current test. So if all of these conditions are false,
@@ -219,6 +219,7 @@ will be executed.
 * **hasWeaponType="weaponType1|weaponType2|..."**: The player has some weapon of some of the given types?
 * **hasCircle="loreCircleId"**: The player has this Lore Circle (see loreCircle.ts for codes)
 * **hasWeaponskillWith="weaponType"** : The player has weaponskill / weaponmastery with the given weapon?
+* **canUseBow="boolean"** : The player has a bow and one arrow (or not)?
 
 To make AND conditions, embed test tags. Example: Enable a choice if the player has the lantern, or torch AND tinderbox:
 ```xml

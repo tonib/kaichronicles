@@ -7,6 +7,7 @@
   * Book 5+ equimpnt: English ref to "safekeeping", Spanish hasn't
   * Book 10 / sect1 / Spanish: "estudias el mapaque" should be "estudias el mapa que"
   * Book 10 / sect3,4,5,6 / Spanish: Two points on choices
+  * Book 10 / sect11 / Spanish: No foot page
 - Add button to explain combat ratio
 - Kai level "Tutelary" with "Weaponmastery": Tutelaries are able to use defensive combat skills to great effect 
   when fighting unarmed. When entering combat without a weapon, Tutelaries lose only 2 points from their COMBAT SKILL, instead of the usual 4 points.
@@ -14,6 +15,7 @@
   weapons, whether fired (e.g. a bow) or thrown (e.g. a dagger). When using a bow or thrown weapon and instructed to pick a 
   number from the Random Number Table, add 2 to the number picked if you are a Mentora with the Magnakai Discipline 
   of Weaponmastery.
+- Remove the "Alert" text from the message dialog
 
 FOR FUTURE (1.9+):
 - Support for kai disciplines on magnakai books:

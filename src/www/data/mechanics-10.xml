@@ -112,6 +112,118 @@
             </test>
         </section>
 
+        <section id="sect8">
+            <test canUseBow="false">
+                <!-- TODO: sect131, drop arrow -->
+                <choiceState section="sect131" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect9">
+            <test not="true" hasObject="sommerswerd">
+                <choiceState section="sect113" set="disabled" />
+            </test>
+            <test hasObject="sommerswerd">
+                <choiceState section="sect126" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect10">
+            <death />
+        </section>
+
+        <section id="sect11">
+            <!-- TODO: Drop weapon. Foot page is not clear, and there are differences between language.
+                 Let the player choose -->
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="3">
+                    <choiceState section="sect310" set="enabled" />
+                </case>
+                <case from="4" to="99">
+                    <choiceState section="sect229" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="+2" />
+            </test>
+        </section>
+
+        <section id="sect15">
+            <endurance count="-1" />
+        </section>
+
+        <section id="sect16">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="2">
+                    <choiceState section="sect264" set="enabled" />
+                </case>
+                <case from="3" to="5">
+                    <choiceState section="sect121" set="enabled" />
+                </case>
+                <case from="6" to="99">
+                    <choiceState section="sect319" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="+3" />
+            </test>
+        </section>
+
+        <section id="sect17">
+            <death />
+        </section>
+
+        <section id="sect18">
+            <choiceState section="sect83" set="disabled" />
+            <choiceState section="sect255" set="disabled" />
+
+            <test hasDiscipline="nexus">
+                <test expression="[KAILEVEL] >= 4">
+                    <choiceState section="sect83" set="enabled" />
+                    <choiceState section="sect167" set="disabled" />
+                </test>
+            </test>
+
+            <test hasDiscipline="curing">
+                <choiceState section="sect255" set="enabled" />
+                <choiceState section="sect167" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect19">
+            <choiceState section="sect93" set="disabled" />
+
+            <test hasDiscipline="psiscrn">
+                <test expression="[KAILEVEL] >= 7">
+                    <choiceState section="sect93" set="enabled" />
+                    <choiceState section="sect228" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect22">
+            <test canUseBow="false">
+                <!-- TODO: sect293, drop arrow -->
+                <choiceState section="sect293" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect23">
+            <choiceState section="all" set="disabled" />
+            <combat />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect24">
+            <death />
+        </section>
+
+        <!-- Up to sect25 -->
+        
     </sections>
 
 </mechanics>

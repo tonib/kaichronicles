@@ -450,6 +450,9 @@ const mechanicsEngine = {
         // Initially the condition is false
         var conditionStatisfied = false;
 
+        // TODO: Remove references to $(rule), use and re-use this
+        const $rule = $(rule);
+
         // Check discipline
         // TODO: Use mechanicsEngine.getArrayProperty here
         var disciplineToTest = $(rule).attr('hasDiscipline');
@@ -508,6 +511,7 @@ const mechanicsEngine = {
             conditionStatisfied = true;
             
         // Test weaponskill with current weapon
+        // TODO: Use mechanicsEngine.getBooleanProperty here
         var weaponskillActive = $(rule).attr('weaponskillActive');
         if( weaponskillActive == 'true' ) {
             if( state.actionChart.isWeaponskillActive() )
@@ -515,6 +519,7 @@ const mechanicsEngine = {
         }
 
         // Test combats won:
+        // TODO: Use mechanicsEngine.getBooleanProperty here
         var combatsWon = $(rule).attr('combatsWon');
         if( combatsWon ) {
             var allCombatsWon = state.sectionStates.getSectionState().areAllCombatsWon();
@@ -525,6 +530,7 @@ const mechanicsEngine = {
         }
 
         // Test some combat active:
+        // TODO: Use mechanicsEngine.getBooleanProperty here
         var combatsActive = $(rule).attr('combatsActive');
         if( combatsActive == 'true' && 
             state.sectionStates.getSectionState().someCombatActive() )
@@ -541,8 +547,8 @@ const mechanicsEngine = {
             conditionStatisfied = true;
 
         // Test if the player can use the bow
-        let canUseBow = $(rule).attr('canUseBow');
-        if( canUseBow && state.actionChart.canUseBow() )
+        const canUseBow = mechanicsEngine.getBooleanProperty( $rule , 'canUseBow' );
+        if( canUseBow != null && canUseBow == state.actionChart.canUseBow() )
             conditionStatisfied = true;
 
         // Test if the player has a kind of weapon
@@ -1123,6 +1129,19 @@ const mechanicsEngine = {
         if( !propertyText )
             return [];
         return propertyText.split('|');
+    },
+
+    /**
+     * Get a boolean rule property
+     * @param $rule {jQuery} The rule
+     * @param property The property to get
+     * @returns The property value. null if the property was not present
+     */
+    getBooleanProperty : function( $rule : any , property : string ) : boolean | null {
+        const txtValue : string = $rule.attr( property );
+        if( !txtValue )
+            return null;
+        return txtValue == 'true';
     },
 
     /**
