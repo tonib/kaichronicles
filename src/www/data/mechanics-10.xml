@@ -69,7 +69,6 @@
 
         <section id="sect2">
             <choiceState section="all" set="disabled" />
-            <combat />
             <afterCombats>
                 <choiceState section="all" set="enabled" />
             </afterCombats>
@@ -212,7 +211,6 @@
 
         <section id="sect23">
             <choiceState section="all" set="disabled" />
-            <combat />
             <afterCombats>
                 <choiceState section="all" set="enabled" />
             </afterCombats>
@@ -222,7 +220,160 @@
             <death />
         </section>
 
-        <!-- Up to sect25 -->
+        <section id="sect26">
+            <endurance count="-1" />
+            <test canUseBow="false">
+                <!-- TODO: drop arrow -->
+                <choiceState section="sect147" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect27">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="3">
+                    <choiceState section="sect54" set="enabled" />
+                </case>
+                <case from="4" to="99">
+                    <choiceState section="sect15" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="+3" />
+            </test>
+        </section>
+
+        <section id="sect28">
+            <choiceState section="all" set="disabled" />
+
+            <test not="true" hasDiscipline="hntmstry">
+                <combat combatSkillModifier="-3" />
+                <afterCombatTurn turn="1">
+                    <combat combatSkillModifier="0" />
+                </afterCombatTurn>
+            </test>
+
+            <afterCombats>
+                <test not="true" expression="[COMBATSDURATION] > 4">
+                    <choiceState section="sect169" set="enabled" />
+                </test>
+                <test expression="[COMBATSDURATION] > 4">
+                    <choiceState section="sect309" set="enabled" />
+                </test>
+            </afterCombats>
+        </section>
+
+        <section id="sect29">
+            <test not="true" hasObject="blanket">
+                <endurance count="-1" />
+            </test>
+        </section>
+
+        <section id="sect33">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect34">
+            <endurance count="-2" />
+        </section>
+
+        <section id="sect36">
+            <pick class="arrow" count="-1" />
+        </section>
+
+        <section id="sect38">
+            <test not="true" hasDiscipline="dvnation">
+                <choiceState section="sect157" set="disabled" />
+            </test>
+            <test hasDiscipline="dvnation">
+                <choiceState section="sect275" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect41">
+            <choiceState section="all" set="disabled" />
+
+            <afterCombatTurn turn="3">
+                <test combatsWon="false">
+                    <disableCombats />
+                    <choiceState section="sect10" set="enabled" />
+                </test>
+            </afterCombatTurn>
+
+            <afterCombats>
+                <choiceState section="sect326" set="enabled" />
+            </afterCombats>
+        </section>
+        
+        <section id="sect43">
+            <!-- Drop the second backpack object. Let the player choose -->
+            <message id="msg-drop-second" 
+                en-text="Drop the item you have listed second on the Backpack section" 
+                es-text="Borra el objeto que hayas marcado como segundo en la sección de la mochila"
+            />
+            <onInventoryEvent>
+                <test expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] &lt;= 1 || [BACKPACK-ITEMS-CNT-ON-SECTION] > 0">
+                    <message id="msg-drop-second" op="hide" />
+                    <choiceState section="all" set="enabled" />
+                </test>
+
+                <test not="true" expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] &lt;= 1 || [BACKPACK-ITEMS-CNT-ON-SECTION] > 0">
+                    <message id="msg-drop-second" op="show" />
+                    <choiceState section="all" set="disabled" />
+                </test>
+            </onInventoryEvent>
+        </section>
+
+        <section id="sect44">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="2">
+                    <choiceState section="sect264" set="enabled" />
+                </case>
+                <case from="3" to="5">
+                    <choiceState section="sect121" set="enabled" />
+                </case>
+                <case from="6" to="99">
+                    <choiceState section="sect319" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="+3" />
+            </test>
+        </section>
+
+        <section id="sect48">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect304" set="enabled" />
+                </case>
+                <case from="5" to="9">
+                    <choiceState section="sect289" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect50">
+            <test not="true" hasDiscipline="dvnation">
+                <choiceState section="sect314" set="disabled" />
+            </test>
+            <test hasDiscipline="dvnation">
+                <choiceState section="sect89" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect52">
+            <test canUseBow="false">
+                <!-- TODO: drop arrow -->
+                <choiceState section="sect109" set="disabled" />
+            </test>
+        </section>
+
+        <!-- Up to sect53 -->
         
     </sections>
 
