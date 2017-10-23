@@ -373,7 +373,21 @@
             </test>
         </section>
 
-        <!-- Up to sect53 -->
+        <section id="sect54">
+            <choiceState section="all" set="disabled" />
+            <combat combatSkillModifier="-3" />
+            <test currentWeaponSpecial="false">
+                <combat noWeapon="true" />
+            </test>
+            <test currentWeaponSpecial="true">
+                <combat noWeapon="false" />
+            </test>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <!-- Up to sect54 -->
         
     </sections>
 

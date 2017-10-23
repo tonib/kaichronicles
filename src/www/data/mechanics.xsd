@@ -144,6 +144,7 @@
         <xs:attribute name="hasWeaponType" type="xs:string" />
         <xs:attribute name="hasCircle" type="xs:string" />
         <xs:attribute name="hasWeaponskillWith" type="xs:string" />
+        <xs:attribute name="currentWeaponSpecial" type="xs:boolean" />
         <xs:attribute name="not" type="xs:boolean" />
     </xs:complexType>
 

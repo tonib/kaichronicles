@@ -220,6 +220,7 @@ will be executed.
 * **hasCircle="loreCircleId"**: The player has this Lore Circle (see loreCircle.ts for codes)
 * **hasWeaponskillWith="weaponType"** : The player has weaponskill / weaponmastery with the given weapon?
 * **canUseBow="boolean"** : The player has a bow and one arrow (or not)?
+* **currentWeaponSpecial="boolean"** : Current weapon is a Special Item (or not)?
 
 To make AND conditions, embed test tags. Example: Enable a choice if the player has the lantern, or torch AND tinderbox:
 ```xml
@@ -308,7 +309,7 @@ the following properties:
 * **noMindblast="true"**: The enemy is immune to Mindblast
 * **noPsiSurge="true"**: The enemy is immune to Psi-Surge
 * **mindblastBonus="number"**: Special CS bonus to apply for Mindblast discipline on this combat
-* **noWeapon="true"**: Lone Wolf cannot use any weapon on this combat
+* **noWeapon="boolean"**: If true, Lone Wolf cannot use any weapon on this combat
 * **eludeTurn="number"**: Turn number after which LW can elude the combat
 * **dammageMultiplier="number"**: LW dammage multiplier
 * **enemyMultiplier="number"**: Enemy dammage multiplier

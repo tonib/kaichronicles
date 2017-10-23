@@ -572,7 +572,16 @@ const mechanicsEngine = {
         const hasWeaponskillWith : string = $(rule).attr('hasWeaponskillWith');
         if( hasWeaponskillWith && state.actionChart.hasWeaponskillWith( hasWeaponskillWith ) )
             conditionStatisfied = true;
-        
+
+        // Current hand-to-hand weapon is special?
+        const currentWeaponSpecial = mechanicsEngine.getBooleanProperty( $rule , 'currentWeaponSpecial' );
+        if( currentWeaponSpecial != null ) {
+            const currentWeapon = state.actionChart.getselectedWeaponItem(false);
+            const currentIsSpecial = ( currentWeapon && currentWeapon.type == Item.SPECIAL );
+            if( currentIsSpecial == currentWeaponSpecial )
+                conditionStatisfied = true;
+        }
+
         // Check if the test should be inversed
         if( $(rule).attr('not') == 'true' )
             conditionStatisfied = !conditionStatisfied;
@@ -700,11 +709,13 @@ const mechanicsEngine = {
             combat.mindforceEP = parseInt( txtMindforceEP );
 
         // Check if the enemy is immune to Mindblast
+        // TODO: Use mechanicsEngine.getBooleanProperty here
         var txtNoMindblast = $(rule).attr('noMindblast');
         if( txtNoMindblast )
             combat.noMindblast = ( txtNoMindblast == 'true' );
 
         // Check if the enemy is immune to Psi-Surge
+        // TODO: Use mechanicsEngine.getBooleanProperty here
         const txtNoPsiSurge : string = $(rule).attr('noPsiSurge');
         if( txtNoPsiSurge )
             combat.noPsiSurge = ( txtNoPsiSurge == 'true' );
@@ -715,9 +726,9 @@ const mechanicsEngine = {
             combat.mindblastBonus = parseInt( txtMindblastBonus );
 
         // Check if the player cannot use weapons on this combat
-        var txtNoWeapon = $(rule).attr('noWeapon');
-        if( txtNoWeapon )
-            combat.noWeapon = ( txtNoWeapon == 'true' );
+        const noWeapon = mechanicsEngine.getBooleanProperty( $rule , 'noWeapon' );
+        if( noWeapon != null )
+            combat.noWeapon = noWeapon;
 
         // Initial turn to allow to elude the combat
         if( $(rule).attr('eludeTurn') )
@@ -748,6 +759,7 @@ const mechanicsEngine = {
             combat.turnLoss = parseInt( txtPlayerTurnLoss );
 
         // It's a fake combat?
+        // TODO: Use mechanicsEngine.getBooleanProperty here
         var txtFake = $(rule).attr('fake');
         if( txtFake ) {
             combat.fakeCombat = ( txtFake == 'true' );
@@ -758,6 +770,7 @@ const mechanicsEngine = {
         }
 
         // It's a bow combat?
+        // TODO: Use mechanicsEngine.getBooleanProperty here
         if( $rule.attr('bow') == 'true' )
             combat.bowCombat = true;
         
