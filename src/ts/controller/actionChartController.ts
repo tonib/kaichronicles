@@ -123,8 +123,13 @@ const actionChartController = {
         if( !o )
             return;
         
-        // Number of arrows on the quiver (to keep it on the dropped object)
-        const arrows = ( objectId == 'quiver' ? state.actionChart.arrows : 0 );
+        var count = 0;
+        if( objectId == 'quiver' ) {
+            // Number of arrows on the quiver (to keep it on the dropped object)
+            count = state.actionChart.arrows % 6;
+            if( count == 0 && state.actionChart.arrows > 0 )
+                count = 6;
+        }
 
         if( state.actionChart.drop(objectId) ) {
             actionChartView.showInventoryMsg('drop', o , 
@@ -140,7 +145,7 @@ const actionChartController = {
             if( availableOnSection ) {
                 // Add the droped object as available on the current section
                 var sectionState = state.sectionStates.getSectionState();
-                sectionState.addObjectToSection( objectId , 0 , false , arrows );
+                sectionState.addObjectToSection( objectId , 0 , false , count );
 
                 // Render available objects on this section (game view)
                 mechanicsEngine.fireInventoryEvents( fromUI , o );
@@ -355,6 +360,7 @@ const actionChartController = {
         actionChartController.pickItemsList( inventoryState.backpackItems );
         actionChartController.pickItemsList( inventoryState.specialItems );
         actionChartController.increaseMoney( inventoryState.beltPouch );
+        actionChartController.increaseArrows( inventoryState.arrows );
         actionChartController.increaseMeals( inventoryState.meals );
     },
 

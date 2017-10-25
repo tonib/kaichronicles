@@ -1237,8 +1237,7 @@
             <image book="1" name="pouch.png" />
         </object>
 
-        <!-- This not really an object, but needed for mechanics -->
-        <!-- TODO: Check this object, I think it can be removed (replaced by quiver) -->
+        <!-- Usually used as part of a quiver, but occasionally found by themselves -->
         <object id="arrow">
             <name lang="en">Arrows</name>
             <name lang="es">Flechas</name>
