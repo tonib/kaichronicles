@@ -624,6 +624,18 @@
             <name lang="es">Llave de Oro</name>
         </special>
 
+        <!-- BOOK 10 -->
+
+        <special id="bullwhip">
+            <name lang="en">Bullwhip</name>
+            <name lang="es">Látigo</name>
+        </special>
+
+        <special id="medal">
+            <name lang="en">Medal</name>
+            <name lang="es">Medalla</name>
+        </special>
+
     </specials>
 
     <objects>

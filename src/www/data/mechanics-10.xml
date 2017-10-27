@@ -387,7 +387,162 @@
             </afterCombats>
         </section>
 
-        <!-- Up to sect54 -->
+        <section id="sect55">
+            <death />
+        </section>
+
+        <section id="sect58">
+            <test not="true" hasDiscipline="curing">
+                <choiceState section="sect276" set="disabled" />
+            </test>
+            <test hasDiscipline="curing">
+                <choiceState section="sect325" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect59">
+            <meal />
+            <test canUseBow="false">
+                <!-- TODO: sect76, drop arrow -->
+                <choiceState section="sect76" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect62">
+            <test not="true" hasObject="rope|largerope">
+                <choiceState section="sect48" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect63">
+            <death />
+        </section>
+
+        <section id="sect64">
+            <endurance count="-5" />
+        </section>
+
+        <section id="sect66">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="2">
+                    <choiceState section="sect264" set="enabled" />
+                </case>
+                <case from="3" to="5">
+                    <choiceState section="sect121" set="enabled" />
+                </case>
+                <case from="6" to="99">
+                    <choiceState section="sect319" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="+3" />
+            </test>
+        </section>
+
+        <section id="sect67">
+            <test canUseBow="false">
+                <!-- TODO: sect119, drop arrow -->
+                <choiceState section="sect119" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect70">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <pick class="arrow" count="-1" />
+                <case from="-99" to="2">
+                    <choiceState section="sect336" set="enabled" />
+                </case>
+                <case from="3" to="7">
+                    <choiceState section="sect349" set="enabled" />
+                </case>
+                <case from="8" to="99">
+                    <choiceState section="sect195" set="enabled" />
+                </case>
+            </randomTable>
+            <randomTableIncrement increment="[BOWBONUS]" />
+        </section>
+
+        <section id="sect71">
+            <choiceState section="sect133" set="disabled" />
+            <choiceState section="sect168" set="disabled" />
+            <test hasObject="sommerswerd">
+                <choiceState section="sect133" set="enabled" />
+                <choiceState section="sect74" set="disabled" />
+            </test>
+            <test hasObject="bullwhip">
+                <choiceState section="sect168" set="enabled" />
+                <choiceState section="sect74" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect73">
+            <test not="true" hasObject="sommerswerd">
+                <choiceState section="sect113" set="disabled" />
+            </test>
+            <test hasObject="sommerswerd">
+                <choiceState section="sect126" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect74">
+            <death />
+        </section>
+
+        <section id="sect75">
+            <test not="true" hasDiscipline="pthmnshp">
+                <choiceState section="sect102" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect76">
+            <pick class="arrow" count="-1" />
+
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect77">
+            <endurance count="-5" />
+        </section>
+
+        <section id="sect78">
+            <test not="true" hasDiscipline="dvnation">
+                <choiceState section="sect14" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect79">
+            <object objectId="medal" />
+        </section>
+
+        <section id="sect80">
+            <!--
+                TODO: Have you visited the Danarg in a previous Lone Wolf adventure?
+                Do the same here than in book 3 / sect268 (a TODO too)
+            -->
+        </section>
+
+        <!-- section id="sect81">
+            <choiceState section="all" set="disabled" />
+            TODO: This should be applied if you have Mindblast too (finished all 5 first books)
+            <test hasDiscipline="psisurge">
+                <combat dammageMultiplier="2" />
+            </test>
+            <test hasCircle="circleSpirit">
+                <combat dammageMultiplier="3" />
+            </test>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section-->
+
+
+        <!-- Up to sect80 -->
         
     </sections>
 
