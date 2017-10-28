@@ -20,6 +20,7 @@ interface InventoryState {
     backpackItems: Array<string>;
     specialItems: Array<string>;
     beltPouch: number;
+    arrows: number;
     meals: number;
 }
 
@@ -79,7 +80,7 @@ class ActionChart {
     /** The latests scroll position on the game section */
     public yScrollPosition = 0;
 
-    /** Number of arrows on the quiver. This MUST to be zero if the player has no quiver. */
+    /** Number of arrows on the quiver. This MUST be zero if the player has no quiver. */
     public arrows = 0;
 
     /** The player has used adgana previously? (see "pouchadgana" object) */
@@ -267,8 +268,8 @@ class ActionChart {
         if( this.backpackItems.removeValue(objectId) || this.specialItems.removeValue(objectId)) {
             this.checkMaxEndurance();
             this.checkCurrentWeapon();
-            if( objectId == 'quiver' )
-                this.arrows = 0;
+            if( objectId == Item.QUIVER )
+                this.sanitizeArrowCount();
             return true;
         }
         
@@ -614,6 +615,7 @@ class ActionChart {
                 backpackItems: this.backpackItems.clone(),
                 specialItems: this.specialItems.clone(),
                 beltPouch: this.beltPouch,
+                arrows: this.arrows,
                 meals: this.meals
             };
         else if( objectTypes == 'weaponlike' ) {
@@ -623,6 +625,7 @@ class ActionChart {
                 backpackItems: [],
                 specialItems: [],
                 beltPouch: 0,
+                arrows: 0,
                 meals: 0
             };
 
@@ -650,8 +653,21 @@ class ActionChart {
             backpackItems: s1.backpackItems.concat( s2.backpackItems ),
             specialItems: s1.specialItems.concat ( s2.specialItems ),
             beltPouch: s1.beltPouch + s2.beltPouch,
+            arrows: s1.arrows + s2.arrows,
             meals: s1.meals + s2.meals
         };
+    }
+
+    /**
+     * Makes sure the arrow count fits our current quiver count
+     */
+    private sanitizeArrowCount() {
+        var max = 0;
+        for( var i=0; i<this.specialItems.length; i++ ) {
+            if( this.specialItems[i] == Item.QUIVER )
+                max += 6;
+        }
+        this.arrows = Math.max( 0, Math.min( this.arrows, max ) );
     }
 
     /**
@@ -659,11 +675,8 @@ class ActionChart {
      * @param increment N. of arrows to increment. Negative to decrement
      */
     public increaseArrows(increment : number) {
-        if( !this.hasObject( Item.QUIVER ) )
-            return;
         this.arrows += increment;
-        if( this.arrows < 0 )
-            this.arrows = 0;
+        this.sanitizeArrowCount();
     }
 
     /**
