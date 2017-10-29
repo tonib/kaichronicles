@@ -725,6 +725,11 @@ const mechanicsEngine = {
         if( txtMindblastBonus )
             combat.mindblastBonus = parseInt( txtMindblastBonus );
 
+        // Special Psi-Surgen bonus?
+        const txtPsiSurgeBonus : string = $(rule).attr('psiSurgeBonus');
+        if( txtPsiSurgeBonus )
+            combat.psiSurgeBonus = parseInt( txtPsiSurgeBonus );
+
         // Check if the player cannot use weapons on this combat
         const noWeapon = mechanicsEngine.getBooleanProperty( $rule , 'noWeapon' );
         if( noWeapon != null )

@@ -30,7 +30,10 @@ class Combat {
     public noPsiSurge = false;
 
     /** The CS bonus to apply if the player has Mindblast discipline */
-    public mindblastBonus = 2;
+    public mindblastBonus = +2;
+
+    /** The CS bonus to apply if the player has Psi-Surge discipline */
+    public psiSurgeBonus = +4;
 
     /** The player cannot use weapons on this combat */
     public noWeapon = false;

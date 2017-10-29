@@ -482,7 +482,7 @@ class ActionChart {
         if( combat.psiSurge ) {
             bonuses.push( {
                 concept: translations.text( 'psisurge' ),
-                increment: +4
+                increment: combat.psiSurgeBonus ? combat.psiSurgeBonus : +4
             });
         }
         else if( !combat.noMindblast && ( this.disciplines.contains( 'mndblst' ) || this.disciplines.contains( 'psisurge' ) ) ) {

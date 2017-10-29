@@ -177,6 +177,7 @@
         <xs:attribute name="noMindblast" type="xs:boolean" />
         <xs:attribute name="noPsiSurge" type="xs:boolean" />
         <xs:attribute name="mindblastBonus" type="xs:integer" />
+        <xs:attribute name="psiSurgeBonus" type="xs:integer" />
         <xs:attribute name="noWeapon" type="xs:boolean" />
         <xs:attribute name="eludeTurn" type="xs:integer" />
         <xs:attribute name="maxEludeTurn" type="xs:integer" />
