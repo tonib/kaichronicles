@@ -638,7 +638,7 @@
             <object objectId="bow" price="7" unlimited="true" />
             <object objectId="quarterstaff" price="3" unlimited="true" />
             <object objectId="sword" price="4" unlimited="true" />
-            <object objectId="quiver" count="2" price="1" unlimited="true" />
+            <object objectId="arrow" count="2" price="1" unlimited="true" />
 
             <sell objectId="broadsword" price="6" />
             <sell objectId="dagger" price="1" />
@@ -650,7 +650,7 @@
             <sell objectId="bow" price="6" />
             <sell objectId="quarterstaff" price="2" />
             <sell objectId="sword" price="3" />
-            <sell objectId="quiver" count="4" price="1" />
+            <sell objectId="arrow" count="4" price="1" />
 
         </section>
 
