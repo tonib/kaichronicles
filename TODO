@@ -21,6 +21,7 @@
 - Remove the "Alert" text from the message dialog
 
 FOR FUTURE (1.9+):
+- Add section "Improved Disciplines" to the "Game rules" page
 - Support for kai disciplines on magnakai books:
   * https://github.com/tonib/kaichronicles/issues/5
   * https://www.projectaon.org/es/foro3/viewtopic.php?p=27752#p27752

@@ -1,10 +1,11 @@
+/// <reference path="../external.ts" />
 
 /**
  * Stuff to access the file system via cordova
  * TODO: This is almost crap. Replace by promises (oh javascript...)
  */
-var cordovaFS = {
-
+const cordovaFS = {
+    
     /**
      * The current download (see downloadAsync and cancelCurrentDownload)
      */
@@ -297,3 +298,4 @@ var cordovaFS = {
         return dfd.promise();
     }
 };
+    

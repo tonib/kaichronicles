@@ -5,7 +5,6 @@ declare var cordovaApp:any;
 declare var views:any;
 declare var routing:any;
 declare var setupView:any;
-declare var cordovaFS:any;
 
 // index.html:
 declare const ENVIRONMENT : string;
@@ -29,10 +28,19 @@ declare var ga;
 // xmllint.js
 declare function validateXML(parms : any) : string;
 
-// commons.js: 
+// Cordova
+declare const LocalFileSystem;
+declare const FileTransfer;
+declare const zip;
+
 interface Window { 
+    // commons.js: 
     getUrlParameter( parmName : string ) : string 
+
+    // Cordova:
+    requestFileSystem;
 }
+
 interface Array<T> { 
     removeValue( value : T ) : boolean;
     contains( value : T ) : boolean;
