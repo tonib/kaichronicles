@@ -60,6 +60,7 @@ FOR FUTURE (1.9+):
 - Allow to read the "Lore-circles of the Magnakai" section from the "Magnakai Disciplines" section (with a dialog?)
 - If a object description is too long, do not show the entire description: Show the first characters, and add a link
   to display the entire description (see pouchadgana object, and sommerswerd?)
+- Action chart buttons don't work on iPad Safari
 
 Reminders:
 

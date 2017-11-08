@@ -1193,10 +1193,10 @@
         </section>
 
         <section id="sect219">
-            <test not="true" canUseBow="true">
+            <test canUseBow="false">
                 <choiceState section="sect301" set="disabled" />
             </test>
-            <test canUseBow="false">
+            <test canUseBow="true">
                 <choiceState section="sect78" set="disabled" />
             </test>
         </section>

@@ -79,15 +79,7 @@ const cordovaFS = {
         });
     },
 
-    getDirectoryFiles: function( callback ) {
-        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
-            function (fs) {
-                cordovaFS.enumerateFiles(fs, callback);
-            }, 
-            function() { alert('Error requesting file system'); }
-        );
-    },
-
+    // TODO: Remove this and use getRootFilesAsync
     enumerateFiles: function( fs, callback ) {
         console.log('file system open: ' + fs.name);
 
@@ -104,6 +96,31 @@ const cordovaFS = {
                 callback( [] );
             }
         );
+    },
+
+    /**
+     * Get the the entries contained on the file syste root directory
+     * @param fs {FileSystem} The cordova file sytem
+     * @returns {Promise<Array<Entry>>} Promise with array of entries on the root file system
+     */
+    getRootFilesAsync : function( fs : any ) : Promise< Array<any> > {
+        console.log('file system open: ' + fs.name);
+
+        var dfd = jQuery.Deferred();
+        var dirReader = fs.root.createReader();
+        dirReader.readEntries(
+            function( entries : Array<any> ) {
+                console.log('Got list of files');
+                dfd.resolve( entries );
+            },
+            function( error /*: FileError*/ ) { 
+                const msg = 'Error listing files. Error code: ' + error.code;
+                console.log( msg );
+                dfd.reject( msg );
+            }
+        );
+
+        return dfd.promise();
     },
 
     loadFile: function( fileName, callback ) {
@@ -183,6 +200,7 @@ const cordovaFS = {
     /**
      * Requests a filesystem in which to store application data.
      * TODO: Use this anywhere
+     * @returns Promise with the LocalFileSystem.PERSISTENT file System
      */
     requestFileSystemAsync: function() {
         var dfd = jQuery.Deferred();
@@ -298,4 +316,3 @@ const cordovaFS = {
         return dfd.promise();
     }
 };
-    

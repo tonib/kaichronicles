@@ -8,7 +8,10 @@ const loadGameView = {
     /**
      * Hide the Android files list
      */
-    hideFilesList: function() { $('#loadGame-fileslist').hide(); },
+    hideFilesList: function() { 
+        $('#loadGame-fileslist').hide(); 
+        $('#loadGame-importexportfunctions').hide();
+    },
 
     /**
      * Hide the web file uploader
@@ -67,6 +70,11 @@ const loadGameView = {
                 return;
             loadGameController.deleteFile( fileName );
         });
+
+        $('#loadGame-export').click(function(e : Event) {
+            e.preventDefault();
+            loadGameController.exportSavedGames();
+        });
     },
 
     /**
@@ -91,5 +99,13 @@ const loadGameView = {
                 return;
             loadGameController.fileUploaderChanged( this.files[0] );
         });
+    },
+
+    /**
+     * Show an error
+     * @param errorMsg Message to show
+     */
+    showError: function(errorMsg : string) {
+        $('#loadGame-errors').text( errorMsg );
     }
 };
