@@ -125,4 +125,4 @@ MIT. This application uses the following third-party code:
 * [xml.js](https://github.com/kripken/xml.js/), code taken from 
   [http://syssgx.github.io/xml.js/](http://syssgx.github.io/xml.js/) ([CC License](https://creativecommons.org/licenses/by/3.0/))
 
-Thanks to [LSI](http://www.lsisoluciones.com) fo letting us use its Google Play account for this app.
+Thanks to [LSI](http://www.lsisoluciones.com) for letting us use its Google Play account for this app.
