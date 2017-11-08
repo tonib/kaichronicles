@@ -641,6 +641,17 @@
         <special id="greycrystalring">
             <name lang="en">Grey Crystal Ring</name>
             <name lang="es">Anillo de Cristal Gris</name>
+
+        <!-- BOOK 10 -->
+
+        <special id="bullwhip">
+            <name lang="en">Bullwhip</name>
+            <name lang="es">Látigo</name>
+        </special>
+
+        <special id="medal">
+            <name lang="en">Medal</name>
+            <name lang="es">Medalla</name>
         </special>
 
     </specials>
@@ -1143,7 +1154,18 @@
 
         <object id="lantern">
             <name lang="en">Lantern</name>
+            <description lang="en">
+                The Lantern is designed to be self-lighting. You will not need a Tinderbox or any other means of 
+                creating a flame to light it.
+            </description>
+
             <name lang="es">Linterna</name>
+            <description lang="es">
+                La Linterna ha sido creada para funcionar por sí sola. No necesitarás Yesca ni ninguna otra cosa para 
+                crear una llama con la que encenderla.
+            </description>
+
+            <image book="9" name="lantern.png" />
         </object>
 
         <object id="laumspurpotion8">
@@ -1277,6 +1299,7 @@
         </object>
 
         <!-- This not really an object, but needed for mechanics -->
+        <!-- TODO: Check this object, I think it can be removed -->
         <object id="backpackcontent">
             <name lang="en">Backpack Content</name>
             <name lang="es">Contenido de la mochila</name>
@@ -1290,8 +1313,7 @@
             <image book="1" name="pouch.png" />
         </object>
 
-        <!-- This not really an object, but needed for mechanics -->
-        <!-- TODO: Check this object, I think it can be removed (replaced by quiver) -->
+        <!-- Usually used as part of a quiver, but occasionally found by themselves -->
         <object id="arrow">
             <name lang="en">Arrows</name>
             <name lang="es">Flechas</name>

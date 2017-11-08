@@ -21,3 +21,10 @@
 - Book 7 available
 - Show authors biography
 - Added warning about book 5 map (cities flags)
+
+1.8.1 / 1.9
+- Book 1, sect342: Fixed bug with mindblast
+- Kai monastery safekeeping: Now you can drop objects on the Kai monastery and they will be available on the next book
+- Added "Lore-circles of the Magnakai" to "Game rules"
+- Fixed bug on book 5 / sect242: +3 for Mindshield was not applied
+

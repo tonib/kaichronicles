@@ -135,6 +135,7 @@ will be available on the section.
 * **class**: This for counters. If you are going to pick meals (="meal") money (="money") or "arrow"
 * **count**: Only if class is "meal", "money" or "arrow". Expression with the number of coins / meals
   to pick
+* **index="number"** Required, for ugly reasons, when there are two o more pick rules with the same object id on a section
 
 ### drop (execute once only)
 ```xml
@@ -208,8 +209,8 @@ will be executed.
 * **expression="Java expression"**: Is the expression true?
 * **sectionVisited="sectionId1|sectionId1|..."**: Has some of the sections been visited?
 * **currentWeapon="weaponId"**: Is this the current weapon?
-* **combatsWon="true"**: Have been won all combats on this section?
-* **combatsActive="true"**: Do some combat still active?
+* **combatsWon="boolean"**: Have been won all combats on this section (or not)?
+* **combatsActive="true"**: Do some combat still active (unfinished)?
 * **bookLanguage="language code (en/es)"**: Is this the current book language?
 * **weaponskillActive="true"**: Has the player Weaponskill with the current weapon?
 * **not="true"**: This will negate the current test. So if all of these conditions are false,
@@ -218,6 +219,8 @@ will be executed.
 * **hasWeaponType="weaponType1|weaponType2|..."**: The player has some weapon of some of the given types?
 * **hasCircle="loreCircleId"**: The player has this Lore Circle (see loreCircle.ts for codes)
 * **hasWeaponskillWith="weaponType"** : The player has weaponskill / weaponmastery with the given weapon?
+* **canUseBow="boolean"** : The player has a bow and one arrow (or not)?
+* **currentWeaponSpecial="boolean"** : Current weapon is a Special Item (or not)?
 
 To make AND conditions, embed test tags. Example: Enable a choice if the player has the lantern, or torch AND tinderbox:
 ```xml
@@ -252,11 +255,14 @@ Enable or disable section choices
 ```xml
 <object objectId="laumspurpotion" />
 <object objectId="sword" price="4" unlimited="true" />
+<object objectId="meal" index="0" />
+<object objectId="meal" index="1" />
 ```
 Make an object available on the section. The player will can pick / buy it.
 * **objectId**: The available object id 
 * **price**: If it's set, the price to buy the object (not free)
 * **unlimited="true"**: There is an unlimited number of objects of this class on the section
+* **index="number"** Required, for ugly reasons, when there are two o more objects with the same object id on a section
 
 ### sell
 ```xml
@@ -304,7 +310,8 @@ the following properties:
 * **noPsiSurge="true"**: The enemy is immune to Psi-Surge
 * **mindblastBonus="number"**: Special CS bonus to apply for Mindblast discipline on this combat
 * **mindblastMultiplier="number"**: CS multiplier to apply to Mindblast/Psi-Surge attacks this combat
-* **noWeapon="true"**: Lone Wolf cannot use any weapon on this combat
+* **psiSurgeBonus="number"**: Special CS bonus to apply for Psi-Surge discipline on this combat
+* **noWeapon="boolean"**: If true, Lone Wolf cannot use any weapon on this combat
 * **mentalOnly="true"**: Lone Wolf cannot use any physical bonuses on this combat
 * **eludeTurn="number"**: Turn number after which LW can elude the combat
 * **dammageMultiplier="number"**: LW dammage multiplier
@@ -388,7 +395,7 @@ These rules has an "id", and they will be executed each section until the rule
 Event handler for an object use. If some of the objects on the "objectId" property is used
 on this section, the chilren rules will be executed
 
-### numberPicker
+### numberPicker / numberPickerChoosed
 ```xml
 <numberPicker 
     en-text="Choose the number of Gold Crowns you are going to throw"
@@ -397,8 +404,19 @@ on this section, the chilren rules will be executed
     money="true"
     />
 <numberPicker enabled="false" />
+<numberPickerChoosed>
+    <test expression="[NUMBERPICKER] == 34">
+        <goToSection section="sect34" />
+    </test>
+    <test expression="[NUMBERPICKER] != 34">
+        <toast 
+            en-text="Wrong number!"
+            es-text="¡Número incorrecto!" />
+    </test>
+</numberPickerChoosed>
 ```
-Add a control on the UI to select a number
+Add a control on the UI to select a number. "numberPickerChoosed" is an optional event handler to execute when
+the number is picked
 
 ### goToSection
 ```xml
@@ -420,8 +438,43 @@ Add a control on the UI to select a number
     </test>
 </numberPickerChoosed>
 ```
-
 Forces a jump to another section. "section" property specifies the section where to jump.
+
+### currentWeapon
+```xml
+<currentWeapon objectId="sommerswerd" />
+```
+Changes the player current weapon to the set on "objectId" property
+
+### toast
+```xml
+<toast 
+    en-text="Wrong number!"
+    es-text="¡Número incorrecto!" />
+```
+Display a "toast" message
+
+### dropDisciplines
+```xml
+<dropDisciplines />
+```
+Remove all disciplines from the Action Chart. Only used when changing of book series (ex. from to Kai to Magnakai)
+
+### textToChoice
+```xml
+<textToChoice 
+    text-en="turn immediately to 335"
+    text-es="pasa inmediatamente al 335"
+    section="sect335"
+/>
+```
+Replaces a section text by a choice link. This could be needed when there is no link on the original Project AON XML
+
+### kaiMonasteryStorage
+```xml
+<kaiMonasteryStorage />
+```
+Add a button to access to the Kai monastery stored objects. It can be added inside "equipmnt" sections only.
 
 ### special sections
 

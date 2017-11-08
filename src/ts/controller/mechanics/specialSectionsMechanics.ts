@@ -381,7 +381,7 @@ class Book6sect340 {
         mechanicsEngine.setChoiceState('all' , true );
 
         // Bow bonus:
-        $('#mechanics-book6sect340-bonus').text( mechanicsEngine.evaluateExpression('[BOWBONUS]') );
+        $('#mechanics-book6sect340-bonus').text( ExpressionEvaluator.evalInteger('[BOWBONUS]') );
 
         for( let i=0; i<3; i++)
             this.bindRandomLink(i);
@@ -416,7 +416,7 @@ class Book6sect340 {
 
     private updateUI() {
 
-        let sum = mechanicsEngine.evaluateExpression('[BOWBONUS]');
+        let sum = ExpressionEvaluator.evalInteger('[BOWBONUS]');
         const tournmentState = this.getState();
         for( let i=0; i<3; i++) {
             if( tournmentState[i] < 0 )

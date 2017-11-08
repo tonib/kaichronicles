@@ -30,6 +30,9 @@ function recreateDist() {
 
     console.log("Copying src to dist");
     fs.copySync( 'src' , 'dist/src' );
+
+    // Remove xmllint.js: too big for production (2.2 MB) and only used for tests
+    fs.removeSync( 'dist/src/www/lib/xmllint.js');
 }
 
 /**
@@ -189,6 +192,7 @@ function prepareDistDirectory() {
     console.log('Prepare www dir');
     fs.renameSync( 'dist/src/www', 'dist/www' );
     fs.removeSync( 'dist/src' );
+
 }
 
 /**

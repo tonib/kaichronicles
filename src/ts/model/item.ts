@@ -17,9 +17,14 @@ interface ItemEffect {
  */
 class Item {
 
+    // Object types
     public static readonly SPECIAL = 'special';
     public static readonly OBJECT = 'object';
     public static readonly WEAPON = 'weapon';
+
+    // Object ids
+    public static readonly MONEY = 'money';
+    public static readonly QUIVER = 'quiver';
 
     /** The object type ('special', 'object' or 'weapon' ) */
     public type : string;

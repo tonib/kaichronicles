@@ -333,6 +333,11 @@ class SectionRenderer {
                 open = '<span>';
                 close = '</span>';
                 break;
+            case 'lorecrcl':
+                // Lore circles info. Link to "Game rules", specifically to the "Lore circles" section
+                open = '<a href="#gameRules?section=lorecrcl">';
+                close = '</a>';
+                break;
             default:
                 if( this.sectionToRender.book.hasSection( idRef ) )
                     // Link to other section (ignore)

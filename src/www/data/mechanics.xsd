@@ -1,0 +1,418 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!--
+        *** ROOT ELEMENT ***
+    -->
+    <xs:element name="mechanics">
+        <xs:complexType>
+
+            <!-- "mechanics" children -->
+            <xs:sequence>
+
+                <!-- Book translated images -->
+                <xs:element name="translated-images" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <!-- Each translated image file name -->
+                            <xs:element name="image" type="xs:string" maxOccurs="unbounded" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                
+                <!-- Book sections -->
+                <xs:element name="sections">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <!-- Each section rules -->
+                            <xs:element name="section" type="section" minOccurs="0" maxOccurs="unbounded" />
+                        </xs:sequence>
+
+                        <!-- Number of sections on book. Default is 350 -->
+                        <xs:attribute name="count" type="xs:integer" />
+                    </xs:complexType>
+                </xs:element>
+
+            </xs:sequence>
+
+            <!-- Book number -->
+            <xs:attribute name="book" type="xs:integer" use="required" />
+
+        </xs:complexType>
+    </xs:element>
+
+    <!--
+        *** SECTION ***
+    -->
+
+    <!-- "section" tag definition -->
+    <xs:complexType name="section">
+
+        <!-- "section" children -->
+        <xs:group ref="any_rule" minOccurs="0" maxOccurs="unbounded" />
+
+        <!-- Section id -->
+        <xs:attribute name="id" type="xs:string" use="required" />
+        <xs:attribute name="pickMaximum" type="xs:integer" />
+        <xs:attribute name="en-text" type="xs:string" />
+        <xs:attribute name="es-text" type="xs:string" />
+    </xs:complexType>
+
+    <!--
+        *** RULES ***
+    -->
+
+    <!-- "setSkills" rule -->
+    <xs:complexType name="setSkills" />
+
+    <!-- "setDisciplines" rule -->
+    <xs:complexType name="setDisciplines" />
+    
+    <!-- "pick" rule -->
+    <xs:complexType name="pick">
+        <!-- Object picked id -->
+        <xs:attribute name="objectId" type="xs:string" />
+        <!-- Object class (for counters: "meal", "arrow", "money") -->
+        <xs:attribute name="class">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="meal"/>
+                    <xs:enumeration value="arrow"/>
+                    <xs:enumeration value="money"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <!-- Items count (for counters: "meals", "arrow", "money"). Value can be a number or an expresion -->
+        <xs:attribute name="count" type="xs:string" />
+        <xs:attribute name="index" type="xs:nonNegativeInteger" />
+    </xs:complexType>
+
+    <!-- "randomTable" rule -->
+    <xs:complexType name="randomTable">
+        <!-- Children. It can be any rule, or "case" -->
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <!-- case definition -->
+            <xs:element name="case">
+                <xs:complexType>
+                    <!-- case children -->
+                    <xs:group ref="any_rule" minOccurs="0" maxOccurs="unbounded" />
+
+                    <xs:attribute name="value" type="xs:integer" />
+                    <xs:attribute name="from" type="xs:integer" />
+                    <xs:attribute name="to" type="xs:integer" />
+                </xs:complexType>
+            </xs:element>
+
+            <!-- Any other rule -->
+            <xs:group ref="any_rule" />
+        </xs:choice>
+
+        <!-- Random table index, default is zero -->
+        <xs:attribute name="index" type="xs:nonNegativeInteger" />
+        <!-- Section text selection (English) -->
+        <xs:attribute name="text-en" type="xs:string" />
+        <!-- Section text selection (Spanish) -->
+        <xs:attribute name="text-es" type="xs:string" />
+        <!-- 0 == 10? -->
+        <xs:attribute name="zeroAsTen" type="xs:boolean" />
+    </xs:complexType>
+
+    
+    <!-- "chooseEquipment" rule -->
+    <xs:complexType name="chooseEquipment">
+        <!-- English description -->
+        <xs:attribute name="en-text" type="xs:string" use="required" />
+        <!-- Spanish description -->
+        <xs:attribute name="es-text" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="test">
+        <!-- Children -->
+        <xs:group ref="any_rule" minOccurs="0" maxOccurs="unbounded" />
+
+        <xs:attribute name="hasDiscipline" type="xs:string" />
+        <xs:attribute name="hasObject" type="xs:string" />
+        <xs:attribute name="expression" type="xs:string" />
+        <xs:attribute name="sectionVisited" type="xs:string" />
+        <xs:attribute name="currentWeapon" type="xs:string" />
+        <xs:attribute name="weaponskillActive" type="xs:boolean" />
+        <xs:attribute name="combatsWon" type="xs:boolean" />
+        <xs:attribute name="combatsActive" type="xs:boolean" />
+        <xs:attribute name="bookLanguage" type="xs:string" />
+        <xs:attribute name="isChoiceEnabled" type="xs:string" />
+        <xs:attribute name="canUseBow" type="xs:boolean" />
+        <xs:attribute name="hasWeaponType" type="xs:string" />
+        <xs:attribute name="hasCircle" type="xs:string" />
+        <xs:attribute name="hasWeaponskillWith" type="xs:string" />
+        <xs:attribute name="currentWeaponSpecial" type="xs:boolean" />
+        <xs:attribute name="not" type="xs:boolean" />
+    </xs:complexType>
+
+    <xs:complexType name="choiceState">
+        <xs:attribute name="section" type="xs:string" use="required" />
+        <xs:attribute name="set" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="enabled"/>
+                    <xs:enumeration value="disabled"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+    
+    <xs:complexType name="object">
+        <xs:attribute name="objectId" type="xs:string" use="required" />
+        <xs:attribute name="price" type="xs:string" />
+        <xs:attribute name="count" type="xs:nonNegativeInteger" />
+        <xs:attribute name="useOnSection" type="xs:boolean" />
+        <xs:attribute name="unlimited" type="xs:boolean" />
+        <xs:attribute name="index" type="xs:nonNegativeInteger" />
+    </xs:complexType>
+    
+    <xs:complexType name="combat">
+        <xs:attribute name="index" type="xs:nonNegativeInteger" />
+        <xs:attribute name="combatSkillModifier" type="xs:string" />
+        <xs:attribute name="mindforceCS" type="xs:integer" />
+        <xs:attribute name="mindforceEP" type="xs:integer" />
+        <xs:attribute name="noMindblast" type="xs:boolean" />
+        <xs:attribute name="noPsiSurge" type="xs:boolean" />
+        <xs:attribute name="mindblastBonus" type="xs:integer" />
+        <xs:attribute name="psiSurgeBonus" type="xs:integer" />
+        <xs:attribute name="noWeapon" type="xs:boolean" />
+        <xs:attribute name="eludeTurn" type="xs:integer" />
+        <xs:attribute name="maxEludeTurn" type="xs:integer" />
+        <xs:attribute name="dammageMultiplier" type="xs:integer" />
+        <xs:attribute name="enemyMultiplier" type="xs:integer" />
+        <xs:attribute name="enemyTurnLoss" type="xs:integer" />
+        <xs:attribute name="turnLoss" type="xs:integer" />
+        <xs:attribute name="fake" type="xs:boolean" />
+        <xs:attribute name="restoreFactor" type="xs:decimal" />
+        <xs:attribute name="bow" type="xs:boolean" />
+        <xs:attribute name="disabledObjects" type="xs:string" />
+    </xs:complexType>
+
+    <xs:complexType name="afterCombats">
+        <!-- Children -->
+        <xs:group ref="any_rule" minOccurs="0" maxOccurs="unbounded" />
+    </xs:complexType>
+
+    <xs:complexType name="afterElude">
+        <!-- Children -->
+        <xs:group ref="any_rule" minOccurs="0" maxOccurs="unbounded" />
+    </xs:complexType>
+
+    <xs:complexType name="onInventoryEvent">
+        <!-- Children -->
+        <xs:group ref="any_rule" minOccurs="0" maxOccurs="unbounded" />
+    </xs:complexType>
+
+    <xs:complexType name="afterCombatTurn">
+        <!-- Children -->
+        <xs:group ref="any_rule" minOccurs="0" maxOccurs="unbounded" />
+
+        <xs:attribute name="turn" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="choiceSelected">
+        <!-- Children -->
+        <xs:group ref="any_rule" minOccurs="0" maxOccurs="unbounded" />
+
+        <xs:attribute name="section" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="numberPickerChoosed">
+        <!-- Children -->
+        <xs:group ref="any_rule" minOccurs="0" maxOccurs="unbounded" />
+    </xs:complexType>
+
+    <xs:complexType name="death">
+    </xs:complexType>
+    
+    <xs:complexType name="endurance">
+        <xs:attribute name="count" type="xs:string" />
+    </xs:complexType>
+    
+    <xs:complexType name="meal">
+        <xs:attribute name="index" type="xs:nonNegativeInteger" />
+        <xs:attribute name="huntDisabled" type="xs:boolean" />
+        <xs:attribute name="price" type="xs:nonNegativeInteger" />
+    </xs:complexType>
+    
+    <xs:complexType name="resetSectionState">
+        <xs:attribute name="sectionId" type="xs:string" use="required" />
+    </xs:complexType>
+    
+    <xs:complexType name="message">
+        <xs:attribute name="en-text" type="xs:string"/>
+        <xs:attribute name="es-text" type="xs:string" />
+        <xs:attribute name="id" type="xs:string" />
+        <xs:attribute name="op">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="show"/>
+                    <xs:enumeration value="hide"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+    
+    <xs:complexType name="drop">
+        <xs:attribute name="objectId" type="xs:string" use="required" />
+    </xs:complexType>
+    
+    <xs:complexType name="disableCombats">
+        <xs:attribute name="disabled" type="xs:boolean" />
+    </xs:complexType>
+
+    <xs:complexType name="combatSkill">
+        <xs:attribute name="count" type="xs:integer" use="required" />
+    </xs:complexType>
+
+    <!-- START HERE -->
+    
+    <xs:complexType name="randomTableIncrement">
+        <xs:attribute name="increment" type="xs:string" use="required" />
+        <xs:attribute name="index" type="xs:nonNegativeInteger" />
+    </xs:complexType>
+    
+    <xs:complexType name="currentWeapon">
+        <xs:attribute name="objectId" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="numberPicker">
+        <xs:attribute name="enabled" type="xs:boolean" />
+        <xs:attribute name="money" type="xs:boolean" />
+        <xs:attribute name="en-actionButton" type="xs:string" />
+        <xs:attribute name="es-actionButton" type="xs:string" />
+        <xs:attribute name="en-text" type="xs:string" />
+        <xs:attribute name="es-text" type="xs:string" />
+        <xs:attribute name="min" type="xs:integer" />
+        <xs:attribute name="max" type="xs:integer" />
+    </xs:complexType>
+
+    <xs:complexType name="huntStatus">
+        <xs:attribute name="enabled" type="xs:boolean" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="sell">
+        <xs:attribute name="objectId" type="xs:string" use="required" />
+        <xs:attribute name="price" type="xs:nonNegativeInteger" use="required" />
+        <xs:attribute name="count" type="xs:nonNegativeInteger" />
+    </xs:complexType>
+
+    <xs:complexType name="saveInventoryState">
+        <xs:attribute name="restorePoint" type="xs:string" use="required" />
+        <xs:attribute name="objectsType">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="all"/>
+                    <xs:enumeration value="weaponlike"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="restoreInventoryState">
+        <xs:attribute name="restorePoint" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="goToSection">
+        <xs:attribute name="section" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="toast">
+        <xs:attribute name="en-text" type="xs:string" use="required" />
+        <xs:attribute name="es-text" type="xs:string" />
+    </xs:complexType>
+    
+    <xs:complexType name="registerGlobalRule">
+        <!-- Children -->
+        <xs:group ref="any_rule" minOccurs="0" maxOccurs="unbounded" />
+
+        <xs:attribute name="id" type="xs:string" use="required" />
+    </xs:complexType>
+    
+    <xs:complexType name="unregisterGlobalRule">
+        <xs:attribute name="id" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="objectUsed">
+        <!-- Children -->
+        <xs:group ref="any_rule" minOccurs="0" maxOccurs="unbounded" />
+
+        <xs:attribute name="objectId" type="xs:string" use="required" />
+    </xs:complexType>
+    
+    <xs:complexType name="dropDisciplines" />
+
+    <xs:complexType name="textToChoice">
+        <xs:attribute name="text-en" type="xs:string" use="required" />
+        <xs:attribute name="text-es" type="xs:string" use="required" />
+        <xs:attribute name="section" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="kaiMonasteryStorage" />
+
+    <!--
+        *** SPECIAL SECTIONS ***
+    -->
+
+    <xs:complexType name="specialsection_type" />
+    
+    <!--
+        *** ANY RULE DEFINITION ***
+    -->
+
+    <xs:group name="any_rule">
+        <xs:choice>
+            <xs:element name="setSkills" type="setSkills" />
+            <xs:element name="setDisciplines" type="setDisciplines" />
+            <xs:element name="pick" type="pick" />
+            <xs:element name="randomTable" type="randomTable" />
+            <xs:element name="chooseEquipment" type="chooseEquipment" />
+            <xs:element name="test" type="test" />
+            <xs:element name="choiceState" type="choiceState" />
+            <xs:element name="object" type="object" />
+            <xs:element name="combat" type="combat" />
+            <xs:element name="afterCombats" type="afterCombats" />
+            <xs:element name="afterElude" type="afterElude" />
+            <xs:element name="afterCombatTurn" type="afterCombatTurn" />
+            <xs:element name="onInventoryEvent" type="onInventoryEvent" />
+            <xs:element name="death" type="death" />
+            <xs:element name="endurance" type="endurance" />
+            <xs:element name="meal" type="meal" />
+            <xs:element name="resetSectionState" type="resetSectionState" />
+            <xs:element name="message" type="message" />
+            <xs:element name="drop" type="drop" />
+            <xs:element name="disableCombats" type="disableCombats" />
+            <xs:element name="combatSkill" type="combatSkill" />
+            <xs:element name="randomTableIncrement" type="randomTableIncrement" />
+            <xs:element name="choiceSelected" type="choiceSelected" />
+            <xs:element name="currentWeapon" type="currentWeapon" />
+            <xs:element name="numberPicker" type="numberPicker" />
+            <xs:element name="huntStatus" type="huntStatus" />
+            <xs:element name="sell" type="sell" />
+            <xs:element name="saveInventoryState" type="saveInventoryState" />
+            <xs:element name="restoreInventoryState" type="restoreInventoryState" />
+            <xs:element name="numberPickerChoosed" type="numberPickerChoosed" />
+            <xs:element name="goToSection" type="goToSection" />
+            <xs:element name="toast" type="toast" />
+            <xs:element name="registerGlobalRule" type="registerGlobalRule" />
+            <xs:element name="objectUsed" type="objectUsed" />
+            <xs:element name="unregisterGlobalRule" type="unregisterGlobalRule" />
+            <xs:element name="dropDisciplines" type="dropDisciplines" />
+            <xs:element name="textToChoice" type="textToChoice" />
+            <xs:element name="kaiMonasteryStorage" type="kaiMonasteryStorage" />
+
+            <!-- Special sections -->
+            <xs:element name="book2Sect238" type="specialsection_type" />
+            <xs:element name="book2sect308" type="specialsection_type" />
+            <xs:element name="book3sect88" type="specialsection_type" />
+            <xs:element name="book6sect26" type="specialsection_type" />
+            <xs:element name="book6sect284" type="specialsection_type" />
+            <xs:element name="book6sect340" type="specialsection_type" />
+            
+        </xs:choice>
+    </xs:group>
+
+</xs:schema>

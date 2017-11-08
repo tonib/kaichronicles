@@ -1,9 +1,10 @@
+/// <reference path="../external.ts" />
 
 /**
  * Load stored game controller
  */
-var loadGameController = {
-
+const loadGameController = {
+    
     /**  
      * The load game page 
      */
@@ -34,33 +35,29 @@ var loadGameController = {
         cordovaFS.getDirectoryFiles( function(entries) {
 
             // Get file names
-            var fileNames = [];
-            var i;
-            for(i=0; i<entries.length; i++) {
+            let fileNames : Array<string> = [];
+            for(let entry of entries) {
                 // There can be directories here (ex. downloaded books)
-                if( entries[i].isFile )
-                    fileNames.push(entries[i].name);
+                if( entry.isFile )
+                    fileNames.push( entry.name );
             }
 
-            if( fileNames.length === 0 )
-                loadGameView.addFileToList( null );
-            else {
-                // The list may be unsorted:
-                fileNames.sort();
-                // Show files
-                for(i=0; i<fileNames.length; i++)
-                    loadGameView.addFileToList( fileNames[i] );
-                loadGameView.bindListEvents();
-            }
-            
+            // The list may be unsorted:
+            fileNames.sort();
+            loadGameView.addFilesToList( fileNames );
+            loadGameView.bindListEvents();
         });
     },
 
-    fileUploaderChanged: function(fileToUpload) {
+    /** 
+     * Called when the selected file changes (only web)
+     * @param fileToUpload The selected file
+     */
+    fileUploaderChanged: function(fileToUpload : Blob) {
         try {
             var reader = new FileReader();
             reader.onload = function (e) {
-                loadGameController.loadGame( e.target.result );
+                loadGameController.loadGame( (<any>e.target).result );
             };
             reader.readAsText(fileToUpload);
         }
@@ -70,13 +67,20 @@ var loadGameController = {
         }
     },
 
-    fileListClicked: function(fileName) {
+    /**
+     * Called when a file is selected (Android only)
+     */
+    fileListClicked: function(fileName : string) {
         cordovaFS.loadFile( fileName , function(fileContent) {
             loadGameController.loadGame( fileContent );
         });
     },
 
-    loadGame: function(jsonState) {
+    /**
+     * Load saved game and start to play it
+     * @param jsonState The saved game file content
+     */
+    loadGame: function(jsonState : string) {
         try {
             state.loadSaveGameJson( jsonState );
             routing.redirect('setup');
@@ -87,12 +91,17 @@ var loadGameController = {
                 alert(e.toString());
             else
                 $('#loadGame-errors').text(e.toString());
-        } 
+        }
     },
 
-    deleteFile: function(fileName) {
+    /**
+     * Delete a saved game (Android only)
+     * @param fileName The file name to delete
+     */
+    deleteFile: function(fileName : string) {
         cordovaFS.deleteFile(fileName, function() {
-            loadGameController.listGameFiles();
+            //loadGameController.listGameFiles();
+            loadGameView.removeFilenameFromList( fileName );
         });
     },
 

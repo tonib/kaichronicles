@@ -28,6 +28,7 @@ var views = {
             });
         })
         .then(null, function( jqXHR, textStatus, errorThrown ) {
+            // TODO: "then"??? should not be this the "fail"???
             // Format a error message as a reason
             var msg = 'Error loading views.html, error: ' + 
                 ajaxErrorMsg(this, jqXHR, textStatus, errorThrown);

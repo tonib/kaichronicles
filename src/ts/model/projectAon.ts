@@ -1,8 +1,9 @@
+/// <reference path="../external.ts" />
 
 /**
  * Metadata about books and Project Aon web structure
  */
-var projectAon = {
+const projectAon = {
 
     /**
      * Books metadata
@@ -121,8 +122,6 @@ var projectAon = {
             zipSize: 3129146
         },
 
-        ///////////////////////////////////////
-
         // Book 8:
         {
             title_en: 'The Jungle of Horrors',
@@ -138,8 +137,9 @@ var projectAon = {
             zipSize: 3537081
         }
 
+        ///////////////////////////////////////
         /*
-        // Book 9 (NOT IMPLEMENTED):
+        // Book 9 (NOT IMPLEMENTED / Work in progress (Colin) ):
         {
             title_en: 'The Cauldron of Fear',
             code_en: '09tcof',
@@ -152,9 +152,38 @@ var projectAon = {
             biographies: [ 'jdbiolw' , 'bwbiolw' ],
             
             zipSize: 2839095
-        }
-        */
+        },
+
+        // Book 10 (NOT IMPLEMENTED / Work in progress (Toni) ):
+        {
+            title_en: 'The Dungeons of Torgar',
+            code_en: '10tdot',
+
+            title_es: 'Las Mazmorras de Torgar',
+            code_es: '10lmdt',
+
+            illustrators: [ 'williams' ],
+
+            biographies: [ 'jdbiolw' , 'bwbiolw' ],
+            
+            zipSize: 3079362
+        },
         
+        // Book 11 (NOT IMPLEMENTED / Nobody working on it):
+        {
+            title_en: 'The Prisoners of Time',
+            code_en: '11tpot',
+
+            title_es: 'Prisioneros del Tiempo',
+            code_es: '11pdt',
+
+            illustrators: [ 'williams' ],
+
+            biographies: [ 'jdbiolw' , 'bwbiolw' ],
+            
+            zipSize: 3007751
+        }
+
     ],
 
     /**
@@ -173,6 +202,7 @@ var projectAon = {
 
 };
 
+// Do not use Typescript modules here, plain node.js modules for browser JS compatiblity (oh javascript...)
 try {
     if (typeof exports !== 'undefined')
         exports.projectAon = projectAon;

@@ -97,7 +97,10 @@ const combatMechanics = {
                 $psiSurgeCheck.click(function(e : Event) {
                     combatMechanics.onPsiSurgeClick(e , $(this) );
                 });
-                $('#mechanics-combatTables-psisurgeCS').text( 4 * combat.mindblastMultiplier );
+                // There is a special Psi-Surge bonus?
+                var psiSurgeBonus = combat.psiSurgeBonus ? combat.psiSurgeBonus : 4;
+                psiSurgeBonus *= combat.mindblastMultiplier;
+                $combatUI.find('.psisurgebonus').text( psiSurgeBonus );
             }
         });
 

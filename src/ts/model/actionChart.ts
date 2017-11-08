@@ -20,6 +20,7 @@ interface InventoryState {
     backpackItems: Array<string>;
     specialItems: Array<string>;
     beltPouch: number;
+    arrows: number;
     meals: number;
 }
 
@@ -27,6 +28,9 @@ interface InventoryState {
  * The action chart / player state 
  */
 class ActionChart {
+
+    /** First book number with a limit on Special Items count */
+    public static BOOK_WITH_MAX_SPECIALS = 8;
 
     /** The original combat skill */ 
     public combatSkill = 0;
@@ -76,11 +80,16 @@ class ActionChart {
     /** The latests scroll position on the game section */
     public yScrollPosition = 0;
 
-    /** Number of arrows on the quiver. This MUST to be zero if the player has no quiver. */
+    /** Number of arrows on the quiver. This MUST be zero if the player has no quiver. */
     public arrows = 0;
 
     /** The player has used adgana previously? (see "pouchadgana" object) */
     public adganaUsed = false;
+
+    /**
+     * Objects in safekeeping at Kai monastery
+     */
+    public kaiMonasterySafekeeping : Array<SectionItem>  = [];
 
     constructor() {
         // Debug fast setup:
@@ -127,6 +136,9 @@ class ActionChart {
                 return true;
 
             case 'special':
+                const nMax = ActionChart.getMaxSpecials();
+                if( nMax && this.specialItems.length >= nMax )
+                    throw translations.text( 'msgNoMoreSpecialItems' );
                 this.specialItems.push(o.id);
                 if(o.isWeapon())
                     this.checkCurrentWeapon();
@@ -201,14 +213,16 @@ class ActionChart {
     /**
      * Increase / decrease the money number
      * @param count Number to increase. Negative to decrease 
+     * @returns Amount really picked.
      */
-    public increaseMoney(count : number) {
+    public increaseMoney(count : number) : number {
+        const oldBeltPouch = this.beltPouch;
         this.beltPouch += count;
         if( this.beltPouch > 50 )
             this.beltPouch = 50;
         else if( this.beltPouch < 0 )
             this.beltPouch = 0;
-        //console.log('Picked ' + count + ' crowns');
+        return this.beltPouch - oldBeltPouch;
     }
 
     /**
@@ -254,8 +268,8 @@ class ActionChart {
         if( this.backpackItems.removeValue(objectId) || this.specialItems.removeValue(objectId)) {
             this.checkMaxEndurance();
             this.checkCurrentWeapon();
-            if( objectId == 'quiver' )
-                this.arrows = 0;
+            if( objectId == Item.QUIVER )
+                this.sanitizeArrowCount();
             return true;
         }
         
@@ -473,7 +487,7 @@ class ActionChart {
         if( combat.psiSurge ) {
             bonuses.push( {
                 concept: translations.text( 'psisurge' ),
-                increment: +4 * combat.mindblastMultiplier
+                increment: (combat.psiSurgeBonus ? combat.psiSurgeBonus : +4) * combat.mindblastMultiplier
             });
         }
         else if( !combat.noMindblast && ( this.disciplines.contains( 'mndblst' ) || this.disciplines.contains( 'psisurge' ) ) ) {
@@ -611,6 +625,7 @@ class ActionChart {
                 backpackItems: this.backpackItems.clone(),
                 specialItems: this.specialItems.clone(),
                 beltPouch: this.beltPouch,
+                arrows: this.arrows,
                 meals: this.meals
             };
         else if( objectTypes == 'weaponlike' ) {
@@ -620,6 +635,7 @@ class ActionChart {
                 backpackItems: [],
                 specialItems: [],
                 beltPouch: 0,
+                arrows: 0,
                 meals: 0
             };
 
@@ -647,8 +663,21 @@ class ActionChart {
             backpackItems: s1.backpackItems.concat( s2.backpackItems ),
             specialItems: s1.specialItems.concat ( s2.specialItems ),
             beltPouch: s1.beltPouch + s2.beltPouch,
+            arrows: s1.arrows + s2.arrows,
             meals: s1.meals + s2.meals
         };
+    }
+
+    /**
+     * Makes sure the arrow count fits our current quiver count
+     */
+    private sanitizeArrowCount() {
+        var max = 0;
+        for( var i=0; i<this.specialItems.length; i++ ) {
+            if( this.specialItems[i] == Item.QUIVER )
+                max += 6;
+        }
+        this.arrows = Math.max( 0, Math.min( this.arrows, max ) );
     }
 
     /**
@@ -657,8 +686,7 @@ class ActionChart {
      */
     public increaseArrows(increment : number) {
         this.arrows += increment;
-        if( this.arrows < 0 )
-            this.arrows = 0;
+        this.sanitizeArrowCount();
     }
 
     /**
@@ -706,6 +734,14 @@ class ActionChart {
         }
         return selectedWeapon;
     }
-    
+
+    /**
+     * Return the maximum number of special items that can be picked on the curernt book.
+     * @returns The max number. Zero if there is no limit on the current book
+     */
+    public static getMaxSpecials() : number {
+        return state.book.bookNumber >= ActionChart.BOOK_WITH_MAX_SPECIALS ? 12 : 0;
+    }
+
 }
 

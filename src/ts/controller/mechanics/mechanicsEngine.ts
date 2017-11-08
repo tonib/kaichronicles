@@ -235,6 +235,7 @@ const mechanicsEngine = {
                 return 'ignoreDescendants';
             else if( rule.nodeName == 'test' ) {
                 // test rule
+                // TODO: Use mechanicsEngine.getArrayProperty here
                 var objects = $(rule).attr('hasObject');
                 if( objects ) {
                     objects = objects.split('|');
@@ -300,9 +301,8 @@ const mechanicsEngine = {
             var rule = mechanicsEngine.onAfterCombatTurns[i];
 
             // Turn when to execute the rule:
-            var txtRuleTurn = $(rule).attr('turn');
-            var ruleTurn = txtRuleTurn == 'any' ? 'any' : 
-                mechanicsEngine.evaluateExpression(txtRuleTurn);
+            const txtRuleTurn : string = $(rule).attr('turn');
+            const ruleTurn = ( txtRuleTurn == 'any' ? 'any' : ExpressionEvaluator.evalInteger( txtRuleTurn ) );
 
             // We reapply all rules accumulatively
             if( txtRuleTurn == 'any' || combat.turns.length >= ruleTurn )
@@ -331,6 +331,7 @@ const mechanicsEngine = {
             return;
 
         var $eventRule = $(mechanicsEngine.onObjectUsedRule);
+        // TODO: Use mechanicsEngine.getArrayProperty here
         var objectIds = $eventRule.attr('objectId').split('|');
         if( objectIds.contains(objectId) ) 
             mechanicsEngine.runChildRules( $eventRule );
@@ -409,7 +410,7 @@ const mechanicsEngine = {
         var cls = $(rule).attr('class');
 
         // Check the amount
-        var count = mechanicsEngine.evaluateExpression( $(rule).attr('count') );
+        const count = ExpressionEvaluator.evalInteger( $(rule).attr('count') );
 
         // Add to the action chart 
         if( cls == 'meal')
@@ -449,7 +450,11 @@ const mechanicsEngine = {
         // Initially the condition is false
         var conditionStatisfied = false;
 
+        // TODO: Remove references to $(rule), use and re-use this
+        const $rule = $(rule);
+
         // Check discipline
+        // TODO: Use mechanicsEngine.getArrayProperty here
         var disciplineToTest = $(rule).attr('hasDiscipline');
         var i;
         if( disciplineToTest ) {
@@ -470,6 +475,7 @@ const mechanicsEngine = {
         var objectIdsToTest = $(rule).attr('hasObject');
         if( objectIdsToTest ) {
             // Check if the player has some of the objects
+            // TODO: Use mechanicsEngine.getArrayProperty here
             var objects = objectIdsToTest.split('|');
             for(i=0; i < objects.length; i++ ) {
                 if( !state.mechanics.getObject( objects[i] ) )
@@ -483,10 +489,11 @@ const mechanicsEngine = {
 
         // Check expression
         var expression = $(rule).attr('expression');
-        if( expression && mechanicsEngine.evaluateExpression( expression ) )
+        if( expression && ExpressionEvaluator.evalBoolean( expression ) )
             conditionStatisfied = true;
         
         // Check section visited:
+        // TODO: Use mechanicsEngine.getArrayProperty here
         var sectionIds = $(rule).attr('sectionVisited');
         if( sectionIds ) {
             sectionIds = sectionIds.split('|');
@@ -504,6 +511,7 @@ const mechanicsEngine = {
             conditionStatisfied = true;
             
         // Test weaponskill with current weapon
+        // TODO: Use mechanicsEngine.getBooleanProperty here
         var weaponskillActive = $(rule).attr('weaponskillActive');
         if( weaponskillActive == 'true' ) {
             if( state.actionChart.isWeaponskillActive() )
@@ -511,6 +519,7 @@ const mechanicsEngine = {
         }
 
         // Test combats won:
+        // TODO: Use mechanicsEngine.getBooleanProperty here
         var combatsWon = $(rule).attr('combatsWon');
         if( combatsWon ) {
             var allCombatsWon = state.sectionStates.getSectionState().areAllCombatsWon();
@@ -521,6 +530,7 @@ const mechanicsEngine = {
         }
 
         // Test some combat active:
+        // TODO: Use mechanicsEngine.getBooleanProperty here
         var combatsActive = $(rule).attr('combatsActive');
         if( combatsActive == 'true' && 
             state.sectionStates.getSectionState().someCombatActive() )
@@ -537,11 +547,12 @@ const mechanicsEngine = {
             conditionStatisfied = true;
 
         // Test if the player can use the bow
-        let canUseBow = $(rule).attr('canUseBow');
-        if( canUseBow && state.actionChart.canUseBow() )
+        const canUseBow = mechanicsEngine.getBooleanProperty( $rule , 'canUseBow' );
+        if( canUseBow != null && canUseBow == state.actionChart.canUseBow() )
             conditionStatisfied = true;
 
         // Test if the player has a kind of weapon
+        // TODO: Use mechanicsEngine.getArrayProperty here
         let hasWeaponType : string = $(rule).attr( 'hasWeaponType' );
         if( hasWeaponType ) {
             for( let weaponType of hasWeaponType.split('|') ) {
@@ -561,7 +572,16 @@ const mechanicsEngine = {
         const hasWeaponskillWith : string = $(rule).attr('hasWeaponskillWith');
         if( hasWeaponskillWith && state.actionChart.hasWeaponskillWith( hasWeaponskillWith ) )
             conditionStatisfied = true;
-        
+
+        // Current hand-to-hand weapon is special?
+        const currentWeaponSpecial = mechanicsEngine.getBooleanProperty( $rule , 'currentWeaponSpecial' );
+        if( currentWeaponSpecial != null ) {
+            const currentWeapon = state.actionChart.getselectedWeaponItem(false);
+            const currentIsSpecial = ( currentWeapon && currentWeapon.type == Item.SPECIAL );
+            if( currentIsSpecial == currentWeaponSpecial )
+                conditionStatisfied = true;
+        }
+
         // Check if the test should be inversed
         if( $(rule).attr('not') == 'true' )
             conditionStatisfied = !conditionStatisfied;
@@ -617,7 +637,7 @@ const mechanicsEngine = {
         // Object price (optional)
         var price = $(rule).attr('price');
         if( price )
-            price = mechanicsEngine.evaluateExpression( price );
+            price = ExpressionEvaluator.evalInteger( price );
 
         // Unlimited number of this kind of object?
         const unlimited = ( $(rule).attr('unlimited') == 'true' );
@@ -711,7 +731,7 @@ const mechanicsEngine = {
         var txtCombatSkillModifier = $(rule).attr('combatSkillModifier');
         if( txtCombatSkillModifier ) {
             var combatSkillModifier = 
-                mechanicsEngine.evaluateExpression( txtCombatSkillModifier );
+                ExpressionEvaluator.evalInteger( txtCombatSkillModifier );
             combat.combatModifier = combatSkillModifier;
         }
 
@@ -724,11 +744,13 @@ const mechanicsEngine = {
             combat.mindforceEP = parseInt( txtMindforceEP );
 
         // Check if the enemy is immune to Mindblast
+        // TODO: Use mechanicsEngine.getBooleanProperty here
         var txtNoMindblast = $(rule).attr('noMindblast');
         if( txtNoMindblast )
             combat.noMindblast = ( txtNoMindblast == 'true' );
 
         // Check if the enemy is immune to Psi-Surge
+        // TODO: Use mechanicsEngine.getBooleanProperty here
         const txtNoPsiSurge : string = $(rule).attr('noPsiSurge');
         if( txtNoPsiSurge )
             combat.noPsiSurge = ( txtNoPsiSurge == 'true' );
@@ -739,14 +761,19 @@ const mechanicsEngine = {
             combat.mindblastBonus = parseInt( txtMindblastBonus );
 
         // Mindblast multiplier (to all mental attacks too, like psi-surge)
-        var txtMindblastMultiplier = $(rule).attr('mindblastMultiplier');
+        const txtMindblastMultiplier : string = $(rule).attr('mindblastMultiplier');
         if( txtMindblastMultiplier )
             combat.mindblastMultiplier = parseInt( txtMindblastMultiplier );
 
+        // Special Psi-Surgen bonus?
+        const txtPsiSurgeBonus : string = $(rule).attr('psiSurgeBonus');
+        if( txtPsiSurgeBonus )
+            combat.psiSurgeBonus = parseInt( txtPsiSurgeBonus );
+
         // Check if the player cannot use weapons on this combat
-        var txtNoWeapon = $(rule).attr('noWeapon');
-        if( txtNoWeapon )
-            combat.noWeapon = ( txtNoWeapon == 'true' );
+        const noWeapon = mechanicsEngine.getBooleanProperty( $rule , 'noWeapon' );
+        if( noWeapon != null )
+            combat.noWeapon = noWeapon;
 
         // Check if the combat is non-physical (disables most bonuses)
         var txtMentalOnly = $(rule).attr('mentalOnly');
@@ -782,6 +809,7 @@ const mechanicsEngine = {
             combat.turnLoss = parseInt( txtPlayerTurnLoss );
 
         // It's a fake combat?
+        // TODO: Use mechanicsEngine.getBooleanProperty here
         var txtFake = $(rule).attr('fake');
         if( txtFake ) {
             combat.fakeCombat = ( txtFake == 'true' );
@@ -792,6 +820,7 @@ const mechanicsEngine = {
         }
 
         // It's a bow combat?
+        // TODO: Use mechanicsEngine.getBooleanProperty here
         if( $rule.attr('bow') == 'true' )
             combat.bowCombat = true;
         
@@ -857,7 +886,7 @@ const mechanicsEngine = {
             // Execute only once
             return;
 
-        var increase = mechanicsEngine.evaluateExpression( $(rule).attr('count') );
+        const increase = ExpressionEvaluator.evalInteger( $(rule).attr('count') );
         actionChartController.increaseEndurance( increase );
 
         state.sectionStates.markRuleAsExecuted(rule);
@@ -871,7 +900,7 @@ const mechanicsEngine = {
             // Execute only once
             return;
 
-        var increase = mechanicsEngine.evaluateExpression( $(rule).attr('count') );
+        const increase = ExpressionEvaluator.evalInteger( $(rule).attr('count') );
         const showToast = ( $(rule).attr('toast') != 'false' );
         actionChartController.increaseCombatSkill( increase , showToast );
         state.sectionStates.markRuleAsExecuted(rule);
@@ -1063,7 +1092,7 @@ const mechanicsEngine = {
     },
 
     /**
-     * Show a "dialog" message
+     * Show a "toast" message
      */
     toast: function(rule) {
         toastr.info( mechanicsEngine.getRuleText(rule) );
@@ -1088,7 +1117,7 @@ const mechanicsEngine = {
      */
     textToChoice: function( rule ) {
 
-        var linkText : string = $(rule).attr('text-' + state.language);
+        const linkText : string = $(rule).attr('text-' + state.language);
         if( !linkText ) {
             mechanicsEngine.debugWarning( 'textToChoice: text-' + state.language +' attribute not found');
             return;
@@ -1104,6 +1133,21 @@ const mechanicsEngine = {
         var newHtml = $textContainer.html().replace( linkText , 
             '<p class="choice" style="display: inline; margin: 0"><a href="#" class="action choice-link" data-section="' + sectionId + '">' + linkText + '</a></p>' );
         $textContainer.html( newHtml );           
+    },
+
+    /**
+     * Add a button to access to the Kai monastery stored objects
+     */
+    kaiMonasteryStorage: function( rule : any ) {
+        const $tag = mechanicsEngine.getMechanicsUI( 'mechanics-kaimonasterystorage' );
+        gameView.appendToSection( $tag , true );
+        $tag.find( 'button' ).click( function( e : Event ) {
+            e.preventDefault();
+            // Move to the fake section for Kai monastery
+            state.sectionStates.currentSection = Book.KAIMONASTERY_SECTION;
+            state.persistState();
+            routing.redirect( 'kaimonastery' );
+        });
     },
 
     /************************************************************/
@@ -1139,9 +1183,37 @@ const mechanicsEngine = {
     /************************************************************/
 
     /**
-     * Show or update the table with the available objects on the section
+     * Get an array of strings stored on a rule property
+     * @param $rule {jQuery} The rule
+     * @param property The property to get. Property values must be separated by '|' (ex. 'a|b|c' )
+     * @returns The values stored on the property. An empty array if the property does not exists
      */
-    showAvailableObjects: function() {
+    getArrayProperty : function( $rule : any , property : string ) : Array<string> {
+        const propertyText = $rule.attr( property );
+        if( !propertyText )
+            return [];
+        return propertyText.split('|');
+    },
+
+    /**
+     * Get a boolean rule property
+     * @param $rule {jQuery} The rule
+     * @param property The property to get
+     * @returns The property value. null if the property was not present
+     */
+    getBooleanProperty : function( $rule : any , property : string ) : boolean | null {
+        const txtValue : string = $rule.attr( property );
+        if( !txtValue )
+            return null;
+        return txtValue == 'true';
+    },
+
+    /**
+     * Show or update the table with the available objects on the section
+     * @param renderEmptyTable If it's true and there are no objects on the current section section, 
+     * a empty objects table will be rendered. If it's empty, no table will be rendered
+     */
+    showAvailableObjects: function( renderEmptyTable = false ) {
 
         var sectionState = state.sectionStates.getSectionState();
         var thereAreObjects = ( sectionState.objects.length >= 1 );
@@ -1149,16 +1221,15 @@ const mechanicsEngine = {
         // Check if the table was already inserted on the UI:
         var $table = $('#mechanics-availableObjectsList');
         if( $table.length === 0 ) {
-            if( thereAreObjects ) {
-                // Add the template
-                gameView.appendToSection( 
-                    mechanicsEngine.getMechanicsUI('mechanics-availableObjects') );
+            if( thereAreObjects || renderEmptyTable ) {
+                // Add the objects table template
+                gameView.appendToSection( mechanicsEngine.getMechanicsUI('mechanics-availableObjects') );
                 $table = $('#mechanics-availableObjectsList');
             }
             else
                 // Nothing to do
                 return;
-        }       
+        }
 
         // Fill the objects list:
         new ObjectsTable(sectionState.objects, $table, ObjectsTableType.AVAILABLE).renderTable();
@@ -1217,76 +1288,6 @@ const mechanicsEngine = {
         if( $selector.length === 0 )
             return false;
         return !$selector.hasClass('disabled');
-    },
-
-    /** 
-     * Evaluates an expression
-     * @param txtExpression Expression to evaluate
-     * @return The expression current value
-     */
-    evaluateExpression: function(txtExpression) {
-        if( !txtExpression )
-            return 0;
-        // Do replacements:
-        var sectionState = state.sectionStates.getSectionState();
-        var expression = txtExpression
-            .replaceAll( '[RANDOM]' , randomMechanics.lastValue )
-            .replaceAll( '[COMBATRANDOM]' , sectionState.getLastRandomCombatTurn() )
-            // Money on the belt pouch
-            .replaceAll( '[MONEY]' , state.actionChart.beltPouch )
-            // Money available on the section
-            .replaceAll( '[MONEY-ON-SECTION]' , sectionState.getAvailableMoney() )
-            // Backpack items on section (includes meals)
-            .replaceAll( '[BACKPACK-ITEMS-CNT-ON-SECTION]' , sectionState.getCntSectionObjects('object') )
-            // Backpack items on action chart (includes meals)
-            .replaceAll( '[BACKPACK-ITEMS-CNT-ON-ACTIONCHART]' , state.actionChart.getNBackpackItems() )
-            // This does NOT include special items:
-            .replaceAll( '[WEAPON-ITEMS-CNT-ON-SECTION]' , sectionState.getCntSectionObjects('weapon') )
-            // This does NOT include special items:
-            .replaceAll( '[WEAPON-ITEMS-CNT-ON-ACTIONCHART]' , state.actionChart.weapons.length )
-            // This includes special items
-            .replaceAll( '[WEAPONLIKE-CNT-ON-SECTION]' , sectionState.getWeaponObjects().length )
-            // This includes special items
-            .replaceAll( '[WEAPONLIKE-CNT-ON-ACTIONCHART]' , state.actionChart.getWeaponObjects().length )
-            // Count of special items on section
-            .replaceAll( '[SPECIAL-ITEMS-ON-SECTION]' , sectionState.getCntSectionObjects('special') )
-            .replaceAll( '[ENDURANCE]' , state.actionChart.currentEndurance )
-            .replaceAll( '[MAXENDURANCE]' , state.actionChart.getMaxEndurance() )
-            .replaceAll( '[ORIGINALCOMBATSKILL]' , state.actionChart.combatSkill )
-            .replaceAll( '[COMBATSENDURANCELOST]', sectionState.combatsEnduranceLost('player') )
-            .replaceAll( '[COMBATSENEMYLOST]', sectionState.combatsEnduranceLost('enemy') )
-            .replaceAll( '[ENEMYENDURANCE]', sectionState.getEnemyEndurance() )
-            // Number of meals on the backpack
-            .replaceAll( '[MEALS]', state.actionChart.meals )
-            .replaceAll( '[KAILEVEL]', state.actionChart.disciplines.length )
-            .replaceAll( '[NUMBERPICKER]', numberPickerMechanics.getNumberPickerValue() )
-            .replaceAll( '[COMBATSDURATION]', sectionState.combatsDuration() )
-            .replaceAll( '[BOWBONUS]', state.actionChart.getBowBonus() )
-            // Current number of arrows
-            .replaceAll( '[ARROWS]', state.actionChart.arrows )
-            ;
-
-        // Extra randoms:
-        for(var i=0; i<3; i++) {
-            var text = '[RANDOM' + i + ']';
-            if( text.indexOf( text ) >= 0 ) {
-                expression = expression.replaceAll( text , 
-                    randomMechanics.getRandomValueChoosed(i) );
-            }
-        }
-
-        try {
-            // Be sure to return always an integer (expression can contain divisions...)
-            // We REALLY need eval, so disable warnings about the evilness of eval
-            /* jshint ignore:start */
-            // TODO: The expression can be boolean too!. floor only numbers...
-            return Math.floor( eval( expression ) );
-            /* jshint ignore:end */
-        }
-        catch(e) {
-            mechanicsEngine.debugWarning("Error evaluating expression " + txtExpression + ": " + e);
-            return null;
-        }
     },
 
     /**

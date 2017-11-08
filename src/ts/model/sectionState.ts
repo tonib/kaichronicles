@@ -233,14 +233,14 @@ class SectionState {
      * @param objectId Object id to add
      * @param price The object price
      * @param unlimited True if there are an infinite number of this kind of object on the section
-     * @param count Only applies if id = 'quiver' (number of arrows on the quiver) or money (number of Gold Crowns)
+     * @param count Only applies if id = 'quiver' (number of arrows on the quiver), 'arrow', or 'money' (number of Gold Crowns)
      * @param useOnSection The object is allowed to be used on the section (not picked object)?
      */
     public addObjectToSection(objectId : string , price : number = 0, unlimited : boolean = false, count : number = 0 ,
         useOnSection : boolean = false ) {
 
         // Special cases:
-        if( objectId == 'money' || objectId == 'quiver' ) {
+        if( objectId == 'money' ) {
             // Try to increase the current money amount / arrows on the section:
             for( let o of this.objects ) {
                 if( o.id == objectId ) {
@@ -254,7 +254,7 @@ class SectionState {
             id: objectId,
             price: price,
             unlimited: unlimited,
-            count: (objectId == 'quiver' || objectId == 'money' ? count : 0 ),
+            count: (objectId == 'quiver' || objectId == 'arrow' || objectId == 'money' ? count : 0 ),
             useOnSection: useOnSection
         });
     }
@@ -263,8 +263,9 @@ class SectionState {
      * Remove an object from the section
      * @param objectId Object id to remove
      * @param price Price of the object to remove
+     * @param count Count to decrease. Only applies if the object is 'money'
      */
-    public removeObjectFromSection(objectId : string, price: number) {
+    public removeObjectFromSection(objectId : string, price: number, count: number = -1) {
         // Be sure price is not null
         if( !price )
             price = 0;
@@ -276,7 +277,15 @@ class SectionState {
                 currentPrice = 0;
 
             if( this.objects[i].id == objectId && currentPrice == price ) {
-                this.objects.splice(i, 1);
+                let removeObject = true;
+                if( objectId == 'money' && count >= 0 && this.objects[i].count > count ) {
+                    // Still money available:
+                    this.objects[i].count -= count;
+                    removeObject = false;
+                }
+
+                if( removeObject )
+                    this.objects.splice(i, 1);
                 return;
             }
         }

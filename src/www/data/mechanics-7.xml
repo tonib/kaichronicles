@@ -40,6 +40,9 @@
                 <pick class="money" count="[RANDOM] + 10" />
             </randomTable>
 
+            <!-- Kai monastery safekeeping -->
+            <kaiMonasteryStorage />
+            
             <object objectId="sword" />
             <object objectId="bow" />
             <object objectId="quiver" count="6" />
@@ -64,6 +67,7 @@
                 en-text="You may take up to five of the following (all meals and fireseeds count as one object):" 
                 es-text="Puedes elegir hasta cinco de los objetos (todas las comidas y petardos cuentan como un objeto):" 
             />
+
         </section>
 
         <section id="sect1">

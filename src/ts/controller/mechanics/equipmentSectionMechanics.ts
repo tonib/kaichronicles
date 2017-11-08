@@ -44,20 +44,40 @@ class EquipmentSectionMechanics {
         // Add the UI:
         gameView.appendToSection( mechanicsEngine.getMechanicsUI('mechanics-chooseEquipment') );
         gameView.enableNextLink(false);
-        $('#mechanics-chooseEquipment-msg').text( mechanicsEngine.getRuleText( rule ) );
+        $('#mechanics-chooseEquipment-randoms-msg').text( mechanicsEngine.getRuleText( rule ) );
 
         // Initial test. Other tests are in randomMechanics.onRandomTableMechanicsClicked()
-        EquipmentSectionMechanics.chooseEquipmentTestAllClicked();
+        EquipmentSectionMechanics.checkExitEquipmentSection();
     }
 
     /**
      * Checks if all links on the Equipment section have been clicked
+     * Also check max number of 
      */
-    public static chooseEquipmentTestAllClicked() {
-        if( $('.action').not('.disabled').length === 0 ) {
+    public static checkExitEquipmentSection() {
+
+        let ok = true;
+
+        // There are pending random links to click?
+        if( $('.action').not('.disabled').length > 0 )
+            ok = false;
+        else
+            $('#mechanics-chooseEquipment-randoms').hide();
+
+        // Check the max. number of special items. This limit starts on book 8, and you can come here
+        // from book 7 with more special items
+        const maxSpecials = ActionChart.getMaxSpecials();
+        if( maxSpecials && state.actionChart.specialItems.length > maxSpecials )
+            ok = false;
+        else
+            $('#mechanics-chooseEquipment-maxSpecials').hide();
+
+        if( ok ) {
+            // The section can be left
             $('#mechanics-chooseEquipment').hide();
             gameView.enableNextLink(true);
         }
+
     }
 
     /**

@@ -4,7 +4,7 @@ This is a "guide" to develop mechanics for new books.
 
 ## Previous steps
 * Download the code (or clone the git repository)
-* Be sure the book you want to develop is listed at the file /src/www/js/model/projectAon.js. If it's not
+* Be sure the book you want to develop is listed at the file /src/ts/model/projectAon.ts. If it's not
   here, the book will not be downloaded from the PAON
 * Setup the web part (compile Typescript, download books, etc), as it's described at ../README.md, 
   at sections "Setup" and "Setup web site". The Android part will not be needed
@@ -33,6 +33,7 @@ functions to debug and test the book:
 * **Project AON section page**: Link to the PAON page for the current section. Only to debug HTML rendering, not needed
 * **Reset section state**: This will reset the section state, as it's the first time you visit it
 * **Origin sections**: Sections where you come from to this section
+* **Tests**: Open a page to make some tests to validate the game mechanics.
 * Also there are buttons to move to the previous and next section
 
 Other actions for debug can be done at the console of the Developer Tools of the browser. Usually, you will need only
@@ -79,3 +80,4 @@ Cough Cough. Sources for mechanics documentation:
 * /doc/README-objects.md and /doc/README-objects.md (unfinished)
 * Already implemented production books XML
 * The mechanicsEngine.ts source file
+* The /src/www/data/mechanics.xsd file describes and validates the mechanics file format

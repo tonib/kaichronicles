@@ -50,10 +50,20 @@
     </div>
 
     <!-- Choose equipment -->
-    <div class="well" id="mechanics-chooseEquipment">
-        <b id="mechanics-chooseEquipment-msg" >
-            Message goes here
-        </b>
+    <div id="mechanics-chooseEquipment">
+        <div class="well" id="mechanics-chooseEquipment-randoms">
+            <b id="mechanics-chooseEquipment-randoms-msg" >
+                Message goes here
+            </b>
+        </div>
+        <!-- Max. Special Items, starting from book 8 -->
+        <div class="well" id="mechanics-chooseEquipment-maxSpecials">
+            <b data-translation="maxSpecialItems">
+                From this book, the maximum number of Special Items that can be carried is twelve.
+                Any additional Special Items may be left for safekeeping at the Kai Monastery, or left here.
+                If it's left here, the Item will be lost. Please, drop other Items before continue.
+            </b>
+        </div>
     </div>
 
     <!-- Display available objects on the section -->
@@ -91,7 +101,7 @@
             <label>
                 <input type="checkbox"> 
                 <span data-translation="mechanics-combat-psisurge">
-                    Psi-surge: +<span id="mechanics-combatTables-psisurgeCS">4</span> CS, −2 EP per round
+                    Psi-surge: +<span class="psisurgebonus">4</span> CS, −2 EP per round
                 </span>
             </label>
         </div>
@@ -201,6 +211,59 @@
             Action
         </button>
     </div>
+
+    <!-- Access to Kai monastery stored objects -->
+    <div id="mechanics-kaimonasterystorage">
+        <p>
+            <button class="btn btn-primary btn-block" type="button" data-translation="kaiMonasteryStorage">
+                Objects on the Kai monastery
+            </button>
+        </p>
+    </div>
+
+    <!-- Modal to pick / drop money (moneyDialog.ts) -->
+    <div class="modal fade" id="mechanics-moneydialog" tabindex="-1" role="dialog" aria-labelledby="mechanics-moneytitle">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title" id="mechanics-moneytitle" data-translation="dropMoney">
+                        Drop money
+                    </h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="mechanics-moneyamount" data-translation="amount">Amount</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="mechanics-moneyamount" min="1" 
+                                data-ismoneypicker="true" value="1">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default add-number">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </button> 
+                                <button type="button" class="btn btn-default sub-number">
+                                    <span class="glyphicon glyphicon-minus"></span>
+                                </button> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" data-translation="close">
+                        Close
+                    </button>
+                    <button class="btn btn-primary" type="button" id="mechanics-moneyapply" data-translation="dropMoney">
+                        Drop money
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <!-- *** SPECIAL SECTIONS *** -->
 
     <!-- Cartwheel game -->
     <div class="well" id="mechanics-book2Sect238">

@@ -43,30 +43,11 @@ const actionChartView = {
      * Bind events for drop money UI
      */
     bindDropMoneyEvents: function() {
-
         // Bind drop money button event
         $('#achart-dropmoneybutton').click( function(e: Event) {
             e.preventDefault();
-            // Update the maximum amount to drop
-            $('#achart-dropmoneyamount')
-                .attr('max', state.actionChart.beltPouch )
-                .val('1');
-            $('#achart-dropmoneydialog').modal('show');
+            MoneyDialog.show( true );
         });
-
-        // Bind money picker events
-        $('#achart-dropmoneyamount').bindNumberEvents();
-
-        // Bind drop money confirmation button
-        $('#achart-dropmoneyapply').click( function(e : Event) {
-            e.preventDefault();
-            const $moneyAmount = $('#achart-dropmoneyamount');
-            if( $moneyAmount.isValid() ) {
-                actionChartController.increaseMoney( - $moneyAmount.getNumber() , true );
-                $('#achart-dropmoneydialog').modal('hide');
-            }
-        });
-
     },
 
     /**
@@ -137,7 +118,8 @@ const actionChartView = {
 
     updateMoney: function() {
         $('#achart-beltPouch').val( state.actionChart.beltPouch + ' ' + translations.text('goldCrowns') );
-        $('#achart-dropmoneybutton').prop( 'disabled', state.actionChart.beltPouch <= 0 );
+        // Disable if the player has no money or it's death
+        $('#achart-dropmoneybutton').prop( 'disabled', state.actionChart.beltPouch <= 0 || state.actionChart.currentEndurance <= 0 );
     },
 
     /**
@@ -145,7 +127,8 @@ const actionChartView = {
      */
     updateMeals: function() {
         $('#achart-meals').val( state.actionChart.meals );
-        $('#achart-dropmeal').prop( 'disabled', state.actionChart.meals <= 0 );
+        // Disable if the player has no meals or it's death
+        $('#achart-dropmeal').prop( 'disabled', state.actionChart.meals <= 0 || state.actionChart.currentEndurance <= 0 );
     },
 
     /**
@@ -213,8 +196,9 @@ const actionChartView = {
         // Meals
         actionChartView.updateMeals();
 
-        // Total number of backpack objects
+        // Total number of backpack / special objects
         $('#achart-backpacktotal').text('(' + state.actionChart.getNBackpackItems() + ')');
+        $('#achart-specialtotal').text('(' + state.actionChart.specialItems.length + ')');
     },
 
     showInventoryMsg: function(action : string, object : Item, msg : string) {

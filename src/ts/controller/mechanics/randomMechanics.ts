@@ -69,7 +69,7 @@ const randomMechanics = {
     /** Increment for random table selection */
     randomTableIncrement: function(rule : any) {
         var $link = randomMechanics.getRandomTableRefByRule(rule);
-        var newIncrement = mechanicsEngine.evaluateExpression( $(rule).attr('increment') );
+        const newIncrement = ExpressionEvaluator.evalInteger( $(rule).attr('increment') );
 
         // Check if already there is an increment:
         var increment = 0;
@@ -197,11 +197,31 @@ const randomMechanics = {
 
         // Ugly hack: If we are on the 'equipment' section, check if all link has been clicked
         if( state.sectionStates.currentSection == 'equipmnt' )
-            EquipmentSectionMechanics.chooseEquipmentTestAllClicked();
+            EquipmentSectionMechanics.checkExitEquipmentSection();
 
         // Mark the rule as executed
         var r = randomValue, i = increment;
         state.sectionStates.markRuleAsExecuted( rule, { randomValue: r , increment: i } );
+    },
+
+    getCaseRuleBounds: function( $rule : any) : Array<number> {
+
+        // Test single value
+        const txtValue : string = $rule.attr('value');
+        if( txtValue ) {
+            var value = parseInt(txtValue);
+            return [value, value];
+        }
+
+        // Test from / to value
+        var txtFromValue  : string = $rule.attr('from');
+        if( txtFromValue ) {
+            var fromValue = parseInt( txtFromValue );
+            var toValue = parseInt( $rule.attr('to') );
+            return [fromValue, toValue];
+        }
+
+        return null;
     },
 
     /**
@@ -211,22 +231,11 @@ const randomMechanics = {
      */
     evaluateCaseRule: function(rule : any, randomValue : number) : boolean {
 
-        // Test single value
-        var txtValue : string = $(rule).attr('value');
-        if( txtValue ) {
-            var value = parseInt(txtValue);
-            return randomValue == value;
-        }
+        const bounds = randomMechanics.getCaseRuleBounds( $(rule) );
+        if( !bounds )
+            return false;
+        return randomValue >= bounds[0] && randomValue <= bounds[1];
 
-        // Test from / to value
-        var txtFromValue  : string = $(rule).attr('from');
-        if( txtFromValue ) {
-            var fromValue = parseInt( txtFromValue );
-            var toValue = parseInt( $(rule).attr('to') );
-            return randomValue >= fromValue && randomValue <=toValue;
-        }
-
-        return false;
     },
 
     /**

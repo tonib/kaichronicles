@@ -6,6 +6,15 @@
  */
 class Book {
 
+    /** Initial books section */
+    public static INITIAL_SECTION = 'tssf';
+
+    /** Special unexistent section where to store objects on the Kai monastery */
+    public static KAIMONASTERY_SECTION = 'kaimonastery';
+
+    /** Books equipment section */
+    public static EQUIPMENT_SECTION = 'equipmnt';
+
     /** Book index number (1 = first book) */
     public bookNumber : number;
 
@@ -129,15 +138,19 @@ class Book {
             dataType: "text"
         })
         .done(function(xml) {
-            try {
-                xml = Book.fixXml(xml);
-                self.bookXml = $.parseXML(xml);
-                self.bookRandomTable = self.getRandomTable();
-            }
-            catch(e) {
-                throw e;
-            }
+            self.setXml(xml);
         });
+    }
+
+    public setXml(xml : string) {
+        try {
+            xml = Book.fixXml(xml);
+            this.bookXml = $.parseXML(xml);
+            this.bookRandomTable = this.getRandomTable();
+        }
+        catch(e) {
+            throw e;
+        }
     }
 
     /**
@@ -244,9 +257,8 @@ class Book {
 
     /**
      * Returns a dictionary with the disciplines info
-     * TODO: Check what return type put here
      */
-    public getDisciplinesTable() : {} {
+    public getDisciplinesTable() : { [disciplineId : string] : { id : string , name : string , description : string } } {
         let result = {};
         // Parse the disciplines section
         $(this.bookXml).find('section[id=discplnz] > data > section')
@@ -369,7 +381,7 @@ class Book {
      * Get the book random table number
      * @return Array with the 100 numbers of the random table
      */
-    private getRandomTable() : Array<number> {
+    public getRandomTable() : Array<number> {
         var $randomCells = $(this.bookXml)
             .find('section[id=random] > data > illustration > instance[class=text]')
             .find('td');
@@ -379,5 +391,11 @@ class Book {
         }
         return numbers;
     }
+
+    /** Is it a book of Kai series (1-5)? */
+    public isKaiBook() : boolean { return this.bookNumber <= 5; }
+
+    /** Is it a book of Magnakai series (6-?)? */
+    public isMagnakaiBook() : boolean { return this.bookNumber > 5; }
 
 }

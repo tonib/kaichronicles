@@ -1,22 +1,30 @@
-- Test controller: Test rules
-  XSD validation with node.js: 
-    https://stackoverflow.com/questions/11050759/validate-xml-syntax-structure-with-node-js
-    https://www.w3schools.com/xml/schema_complex_empty.asp
-    https://stackoverflow.com/questions/16512617/what-is-the-proper-way-in-xsd-to-define-a-set-of-elements-that-may-be-child-elem
-    https://www.freeformatter.com/xml-validator-xsd.html
+- Allow to export / import saved games to the SD card
 - Check reported bugs on Google play:
-  * Should be the healing kai discipline be enabled on magnakai books?
   * Saved games removed when adding new games
   * Objects types
   * Others?
-- projectAon to TS
-- Add the section "Lore-circles of the Magnakai" to the game rules view
+- Erratas:
+  * Book 5+ equimpnt: English ref to "safekeeping", Spanish hasn't
+  * Book 10 / sect1 / Spanish: "estudias el mapaque" should be "estudias el mapa que"
+  * Book 10 / sect3,4,5,6 / Spanish: Two points on choices
+  * Book 10 / sect11 / Spanish: No foot page
+  * Book 10 / sect53 / Spanish: vistas en  .., vez de tu ("..,")
+  * Book 10 / sect64 / Spanish: "Adamas" should be "Además"
+  
+- Add button to explain combat ratio
+- Kai level "Tutelary" with "Weaponmastery": Tutelaries are able to use defensive combat skills to great effect 
+  when fighting unarmed. When entering combat without a weapon, Tutelaries lose only 2 points from their COMBAT SKILL, instead of the usual 4 points.
+- Kai level "Mentora" with "Weaponmastery": Mentoras skilled in Weaponmastery are more accurate when using all missile 
+  weapons, whether fired (e.g. a bow) or thrown (e.g. a dagger). When using a bow or thrown weapon and instructed to pick a 
+  number from the Random Number Table, add 2 to the number picked if you are a Mentora with the Magnakai Discipline 
+  of Weaponmastery.
+- Remove the "Alert" text from the message dialog
 
 FOR FUTURE (1.9+):
-- Add button to explain combat ratio
-- Implement the Kai Monastery "safekeeping" mentioned on the "Equipment" sections
+- Support for kai disciplines on magnakai books:
+  * https://github.com/tonib/kaichronicles/issues/5
+  * https://www.projectaon.org/es/foro3/viewtopic.php?p=27752#p27752
 - Allow to select the current bow
-- Allow to export / import saved games to the SD card
 - Describe:
   * Where play on the web
   * Where Report bugs
@@ -27,6 +35,7 @@ FOR FUTURE (1.9+):
   * App lifeciclye
   * Load games page: Show info about saved games
   * Load games page: Remove ".json" extension
+  * Save game: Do not be so restrictive with file names characters
   * Replace toastr by Android toasts ???
   * Remove animations from modal dialogs (only for Android, performance...)
 - Save games is not working on Safari
@@ -50,10 +59,6 @@ FOR FUTURE (1.9+):
 - Allow to read the "Lore-circles of the Magnakai" section from the "Magnakai Disciplines" section (with a dialog?)
 - If a object description is too long, do not show the entire description: Show the first characters, and add a link
   to display the entire description (see pouchadgana object, and sommerswerd?)
-- Objects table: If the quiver has no arrows, show "(0 arrows)"
-- Dont let drop money if the player is death
-- Death: Option to restart from the section 1
-- Saved games deletion: Do not refresh the entire table (ugly)
 
 Reminders:
 
@@ -89,5 +94,7 @@ Reminders:
   Install dependencies: npm install
   Run script: npm run lint
   
+* Debug Cordova app on Chrome:
+  URL: chrome://inspect/#devices
 
 Work done on this commit:

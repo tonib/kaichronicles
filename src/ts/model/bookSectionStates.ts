@@ -31,14 +31,20 @@ class BookSectionStates {
     public globalRulesIds = [];
 
     /**
-     * Get the current section state. If it does not exists, it will be created
+     * Get a section state. If it does not exists, it will be created
+     * @param sectionId The section state to return. If it's null, the current section state (this.currentSection) 
+     * will be returned.
      * @return The section state
      */
-    public getSectionState() : SectionState {
-        var sectionState = this.sectionStates[ this.currentSection ];
+    public getSectionState( sectionId : string = null ) : SectionState {
+        
+        if( !sectionId )
+            sectionId = this.currentSection;
+
+        var sectionState = this.sectionStates[ sectionId ];
         if( !sectionState ) {
             sectionState = new SectionState();
-            this.sectionStates[ this.currentSection ] = sectionState;
+            this.sectionStates[ sectionId ] = sectionState;
         }
         return sectionState;
     }

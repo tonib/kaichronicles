@@ -57,6 +57,7 @@ class Translations {
         'msgNoMoreWeapons' : 'No puedes coger mas armas',
         'msgAlreadyBackpack' : 'Ya tienes una mochila',
         'msgNoMoreBackpackItems' : 'No puedes coger mas Objetos de Mochila',
+        'msgNoMoreSpecialItems' : 'No puedes coger mas Objetos Especiales',
         'noWeapon' : 'Sin arma',
         'weaponskill' : 'Dominio Manejo Armas',
         'weaponmastery' : 'Maestría Manejo Armas',
@@ -70,8 +71,12 @@ class Translations {
         'circleSpirit' : 'Círculo del Espíritu',
         'circles' : 'Círculos de la Ciencia:',
         'dropMoney' : 'Dejar dinero',
+        'pickMoney' : 'Coger dinero',
         'amount' : 'Cantidad',
-        
+        'maxSpecialItems' : 'A partir de este libro, el número máximo de Objetos Especiales que puedes ' + 
+            'llevar es de 12. Podrás dejar el resto en un lugar seguro del monasterio del Kai, o dejarlo aquí. ' +
+            'Si se deja aquí, el objeto se perderá. Por favor, deja los Objetos Especiales antes de continuar.',
+
         //////////////////////////////////////
         // Combats
         //////////////////////////////////////
@@ -85,7 +90,7 @@ class Translations {
         'playTurn' : 'Jugar turno',
         'eludeCombat' : 'Eludir combate',
         'deathLetter' : 'M',
-        'mechanics-combat-psisurge' : 'Acometida Psíquica: +<span id="mechanics-combatTables-psisurgeCS">4</span> DC, -2 R por asalto',
+        'mechanics-combat-psisurge' : 'Acometida Psíquica: +<span class="psisurgebonus">4</span> DC, -2 R por asalto',
 
         //////////////////////////////////////
         // Meals
@@ -153,7 +158,7 @@ class Translations {
         'forSommerlund' : '¡Por Sommerlund y el Kai!',
         'dedication' : 'Dedicatoria',
         'gameMechanics' : 'Mecanicas del juego',
-        'aboutKaiChronicles' : 'Mecánicas del juego escritas por Toni Bennasar y Timendum. El código está bajo licencia MIT. Contien partes de código de <a href="https://lonewolfadventures.projectaon.org">Lone Wolf Adventures</a>, creado por Liquid State Limited.',
+        'aboutKaiChronicles' : 'Mecánicas del juego escritas por Toni Bennasar, Timendum y Michael Terry. El código está bajo licencia MIT. Contien partes de código de <a href="https://lonewolfadventures.projectaon.org">Lone Wolf Adventures</a>, creado por Liquid State Limited.',
         'distribution' : 'Distribución',
         'distributionInfo' : 'Libro distribuido por el <a href="https://www.projectaon.org">Proyecto Aon</a>, bajo la <a href="#projectAonLicense">licencia del Proyecto Aon</a>.',
         'about-authors' : 'Sobre los autores del libro',
@@ -239,6 +244,16 @@ class Translations {
         'processCancelled' : 'Proceso cancelado',
 
         //////////////////////////////////////
+        // Kai monastery safekeeping
+        //////////////////////////////////////
+
+        'kaiMonasteryStorage' : 'Objetos en el monasterio del Kai',
+        'kaiMonastery' : 'Monasterio del Kai',
+        'kaiMonasteryInfo' : 'Aquí puedes guardar objetos en custodia en el monasterio del Kai. Los objetos ' + 
+            'dejados aquí estarán disponibles cuando continues al próximo libro, en la sección "Equipo".',
+        'backToEquipment' : 'Volver a la sección de Equipo',
+
+        //////////////////////////////////////
         // Others
         //////////////////////////////////////
 
@@ -256,7 +271,6 @@ class Translations {
         'noSavedGames' : 'No se encontraron juegos guardados',
         'maximumPick' : 'Sólo puedes coger {0} objetos',
         'zeroIgnored' : 'Cero ignorado'
-
     };
 
     /**
@@ -302,6 +316,7 @@ class Translations {
         'msgNoMoreWeapons' : 'You cannot get more weapons',
         'msgAlreadyBackpack' : 'You already have a Backpack',
         'msgNoMoreBackpackItems' : 'You cannot get more Backpack Items',
+        'msgNoMoreSpecialItems' : 'You cannot get more Special Items',
         'noWeapon' : 'No weapon',
         'weaponskill' : 'Weaponskill',
         'weaponmastery' : 'Weaponmastery',
@@ -312,7 +327,10 @@ class Translations {
         'circleLight' : 'Circle of Light',
         'circleSolaris' : 'Circle of Solaris',
         'circleSpirit' : 'Circle of the Spirit',
-        
+        'dropMoney' : 'Drop money',
+        'pickMoney' : 'Pick money',
+        'amount' : 'Amount',
+
         //////////////////////////////////////
         // Combats
         //////////////////////////////////////
@@ -438,7 +456,12 @@ class Translations {
         return $clonedView;
     }
 
-    public translateTags( $tags , table ) {
+    /**
+     * Translate an HTML fragment
+     * @param  $tags jQuery selector of tags to translate
+     * @param table Translations table to use. If null, the current language will be used
+     */
+    public translateTags( $tags : any , table : { [key : string] : string } = null ) {
 
         if( !table ) {
             table = this[state.language];

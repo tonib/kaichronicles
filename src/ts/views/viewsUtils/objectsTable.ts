@@ -28,13 +28,13 @@ class ObjectsTableItem {
 
     /**
      * Constructor
-     * @param type Table type
-     * @param itemInfo Object info. It can be a string with the object id, or a SectionItem with the object info
+     * @param itemInfo Object info as a SectionItem
      * on the section
+     * @param type Table type
      */
-    constructor( itemInfo : any , type : ObjectsTableType ) {
+    constructor( itemInfo : SectionItem , type : ObjectsTableType ) {
         this.type = type;
-        this.objectInfo = this.toSectionItem( itemInfo );
+        this.objectInfo = itemInfo;
 
         // Get the object info
         if( this.objectInfo )
@@ -61,10 +61,10 @@ class ObjectsTableItem {
 
         // If it's a sell table, and we don't have the object, do not show it
         if( this.type == ObjectsTableType.SELL  ) {
-            if( !state.actionChart.hasObject( this.objectInfo.id ) )
+            if( this.objectInfo.id != 'arrow' && !state.actionChart.hasObject( this.objectInfo.id ) )
                 return '';
             // We don't have enougth arrows to sell, do not show
-            if( this.objectInfo.id == 'quiver' && state.actionChart.arrows < this.objectInfo.count )
+            if( this.objectInfo.id == 'arrow' && state.actionChart.arrows < this.objectInfo.count )
                 return '';
         }
 
@@ -74,8 +74,16 @@ class ObjectsTableItem {
         var name = this.item.name;
 
         // Number of arrows on the quiver
-        if( this.objectInfo.id == 'quiver' && this.objectInfo.count )
-            name += ' (' + this.objectInfo.count + ' ' + translations.text('arrows') + ')';
+        if( this.objectInfo.id == 'quiver' ) {
+            // Be sure count is not null
+            const count = ( this.objectInfo.count ? this.objectInfo.count : 0 );
+            name += ' (' + count + ' ' + translations.text('arrows') + ')';
+        }
+
+        // Arrow amount
+        if( this.objectInfo.id == 'arrow' && this.objectInfo.count ) {
+            name = this.objectInfo.count + ' ' + name;
+        }
 
         // Money amount
         if( this.objectInfo.id == 'money' && this.objectInfo.count )
@@ -121,7 +129,7 @@ class ObjectsTableItem {
     private getOperationTag(operation : string, title : string = null , opDescription : string ) {
         let link = '<a href="#" data-objectId="' + this.item.id + '" class="equipment-op btn btn-default" ';
 
-        if( this.item.id == 'quiver' || this.item.id == 'money' )
+        if( this.item.id == 'quiver' || this.item.id == 'arrow' || this.item.id == 'money' )
             // Store the number of arrows on the quiver / gold crowns
             link += 'data-count="' + this.objectInfo.count + '" ';
 
@@ -244,42 +252,6 @@ class ObjectsTableItem {
         return new ObjectsTableItem( objectInfo , tableType );
     }
 
-    /**
-     * Convert, if needed, the string object id to a SectionItem
-     * @param objectInfo A string with the object id, or a SectionItem with the object info
-     * @return A SectionItem with the object info
-     */
-    private toSectionItem( info : any ) : SectionItem {
-
-        if( !info )
-            return null;
-        
-        if( typeof(info) === 'string' ) {
-
-            let count = 0;
-            if( this.type == ObjectsTableType.INVENTORY && info == 'quiver' )
-                // The current number of arrows on the quiver:
-                count = state.actionChart.arrows;
-
-            return { 
-                // The object info is directly the object id
-                id : info,
-                price : 0,
-                unlimited : false,
-                count : count,
-                useOnSection : false
-            }
-        }
-        else if( info.id ) {
-            // The object info is the info about objects available on the section
-            // See SectionState.objects documentation
-            return info as SectionItem;
-        }
-        else 
-            return null;
-        
-    }
-
     ///////////////////////////////////////////////////////////////////////
     // OPERATIONS
     ///////////////////////////////////////////////////////////////////////
@@ -293,6 +265,12 @@ class ObjectsTableItem {
 
     private get() {
 
+        // Special case. On kai monastery, ask the money amount to pick
+        if( this.objectInfo.id == Item.MONEY && routing.getControllerName() == kaimonasteryController.NAME ) {
+            MoneyDialog.show(false);
+            return;
+        }
+
         // Check if it's a buy
         if( this.objectInfo.price ) {
             if( state.actionChart.beltPouch < this.objectInfo.price ) {
@@ -305,10 +283,7 @@ class ObjectsTableItem {
         }
 
         let objectPicked : boolean;
-        if( this.item.id == 'quiver' && state.actionChart.hasObject(this.item.id) )
-            // Do not pick two quivers
-            objectPicked = true;
-        else if( this.item.id == 'money' )
+        if( this.item.id == 'money' || this.item.id == 'arrow' )
             // Not really an object
             objectPicked = true;
         else
@@ -316,18 +291,20 @@ class ObjectsTableItem {
 
         if( objectPicked ) {
 
-            if( this.item.id == 'quiver' )
+            let countPicked = this.objectInfo.count;
+
+            if( this.item.id == 'quiver' || this.item.id == 'arrow' )
                 // Increase the number of arrows on the quiver
                 actionChartController.increaseArrows( this.objectInfo.count );
 
             if( this.item.id == 'money' )
                 // Pick the money
-                actionChartController.increaseMoney( this.objectInfo.count );
+                countPicked = actionChartController.increaseMoney( this.objectInfo.count );
 
             if( !this.objectInfo.unlimited ) {
                 // Remove it from the available objects on the section
                 const sectionState = state.sectionStates.getSectionState();
-                sectionState.removeObjectFromSection( this.item.id , this.objectInfo.price );
+                sectionState.removeObjectFromSection( this.item.id , this.objectInfo.price , countPicked );
             }
 
             if( this.objectInfo.price ) {
@@ -344,7 +321,7 @@ class ObjectsTableItem {
         if( !confirm( translations.text( 'confirmSell' , [ this.objectInfo.price ] ) ) )
             return;
 
-        if( this.item.id == 'quiver' && this.objectInfo.count > 0 )
+        if( this.item.id == 'arrow' && this.objectInfo.count > 0 )
             // Drop arrows
             actionChartController.increaseArrows( -this.objectInfo.count );
         else
@@ -414,8 +391,39 @@ class ObjectsTable {
 
         this.type = type;
         this.$tableBody = $tableBody;
-        for( let o of objects )
-            this.objects.push( new ObjectsTableItem(o, type) );
+
+        this.fillObjectsList( objects );
+    }
+
+    /**
+     * Converts the provided array of either strings or SectionItems to
+     * a proper array of ObjectsTableItems.
+     */
+    public fillObjectsList( objects : Array<any> ) {
+        let arrows = ( this.type == ObjectsTableType.INVENTORY ) ? state.actionChart.arrows : 0;
+
+        for( let obj of objects ) {
+            let info = obj;
+
+            if( typeof(obj) === 'string' ) {
+                let count = 0;
+
+                if( obj == Item.QUIVER ) {
+                    count = Math.min( 6, arrows );
+                    arrows -= count;
+                }
+
+                info = {
+                    id : obj,
+                    price : 0,
+                    unlimited : false,
+                    count : count,
+                    useOnSection : false
+                }
+            }
+
+            this.objects.push( new ObjectsTableItem( info, this.type ) );
+        }
     }
 
     /**

@@ -192,6 +192,10 @@
     <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script src="lib/toastr/toastr.min.js"></script>
     <script src="lib/filesaver.js"></script>
+    <!-- @ifndef PRODUCTION -->
+        <!-- xmllint.js is 2.2 MB and only used for tests, so don't include it on production -->
+        <script src="lib/xmllint.js"></script>
+    <!-- @endif -->
 
     <!-- This is the Apache Cordova API (only for App) 
          Keep it in development (to run cordova from command line on src dir)
@@ -257,25 +261,28 @@
       <script src="js/ts-generated/model/sectionState.js"></script>
       <script src="js/ts-generated/model/bookSectionStates.js"></script>
       <script src="js/ts-generated/model/item.js"></script>
-      <script src="js/model/projectAon.js"></script>
+      <script src="js/ts-generated/model/projectAon.js"></script>
       <script src="js/model/bookDownloadState.js"></script>
       <script src="js/model/localBooksLibrary.js"></script>
       <script src="js/ts-generated/model/loreCircle.js"></script>
-      
+      <script src="js/ts-generated/model/bookValidator.js"></script>
+      <script src="js/ts-generated/model/expressionEvaluator.js"></script>
+
       <!-- Controllers -->
-      <script src="js/controller/setupController.js"></script>
+      <script src="js/ts-generated/controller/setupController.js"></script>
       <script src="js/ts-generated/controller/gameController.js"></script>
       <script src="js/ts-generated/controller/actionChartController.js"></script>
       <script src="js/ts-generated/controller/mapController.js"></script>
       <script src="js/ts-generated/controller/settingsController.js"></script>
-      <script src="js/controller/testsController.js"></script>
+      <script src="js/ts-generated/controller/testsController.js"></script>
       <script src="js/controller/mainMenuController.js"></script>
       <script src="js/controller/newGameController.js"></script>
       <script src="js/ts-generated/controller/aboutController.js"></script>
-      <script src="js/controller/loadGameController.js"></script>
+      <script src="js/ts-generated/controller/loadGameController.js"></script>
       <script src="js/controller/projectAonLicenseController.js"></script>
-      <script src="js/controller/gameRulesController.js"></script>
+      <script src="js/ts-generated/controller/gameRulesController.js"></script>
       <script src="js/controller/workWithBooks.js"></script>
+      <script src="js/ts-generated/controller/kaimonasteryController.js"></script>
 
       <!-- Mechanics -->
       <script src="js/ts-generated/controller/mechanics/mechanicsEngine.js"></script>
@@ -292,6 +299,7 @@
       <script src="js/views/viewsUtils/numberPicker.js"></script>
       <script src="js/ts-generated/views/viewsUtils/translations.js"></script>
       <script src="js/ts-generated/views/viewsUtils/objectsTable.js"></script>
+      <script src="js/ts-generated/views/viewsUtils/moneyDialog.js"></script>
 
       <!-- Views -->
       <script src="js/ts-generated/views/actionChartView.js"></script>
@@ -301,7 +309,7 @@
       <script src="js/ts-generated/views/settingsView.js"></script>
       <script src="js/views/mainMenuView.js"></script>
       <script src="js/views/newGameView.js"></script>
-      <script src="js/views/loadGameView.js"></script>
+      <script src="js/ts-generated/views/loadGameView.js"></script>
       <script src="js/views/workWithBooksView.js"></script>
       
       <!-- This HTML page template handler -->

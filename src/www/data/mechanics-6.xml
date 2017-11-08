@@ -42,6 +42,9 @@
                 <pick class="money" count="[RANDOM] + 10" />
             </randomTable>
 
+            <!-- Kai monastery safekeeping -->
+            <kaiMonasteryStorage />
+            
             <object objectId="sword" />
             <object objectId="laumspurpotion4" />
             <object objectId="warhammer" />
@@ -635,7 +638,7 @@
             <object objectId="bow" price="7" unlimited="true" />
             <object objectId="quarterstaff" price="3" unlimited="true" />
             <object objectId="sword" price="4" unlimited="true" />
-            <object objectId="quiver" count="2" price="1" unlimited="true" />
+            <object objectId="arrow" count="2" price="1" unlimited="true" />
 
             <sell objectId="broadsword" price="6" />
             <sell objectId="dagger" price="1" />
@@ -647,7 +650,7 @@
             <sell objectId="bow" price="6" />
             <sell objectId="quarterstaff" price="2" />
             <sell objectId="sword" price="3" />
-            <sell objectId="quiver" count="4" price="1" />
+            <sell objectId="arrow" count="4" price="1" />
 
         </section>
 
@@ -835,7 +838,7 @@
         </section>
 
         <section id="sect144">
-            <choiceState section="sect144" set="disabled" />
+            <choiceState section="all" set="disabled" />
             <message id="msg-drop-object" 
                 en-text="Drop one Backpack Item" 
                 es-text="Deja un Objeto de Mochila"
@@ -995,7 +998,7 @@
         </section>
 
         <section id="sect166">
-            <choiceState section="sect144" set="disabled" />
+            <choiceState section="all" set="disabled" />
             <message id="msg-drop-object" 
                 en-text="Drop two Backpack Items" 
                 es-text="Deja dos Objetos de Mochila"
@@ -1590,7 +1593,9 @@
 
         <section id="sect298">
             <pick objectId="tournamentbow" />
-            <choiceState section="sect335" set="disabled" />
+            <test bookLanguage="es">
+                <choiceState section="sect335" set="disabled" />
+            </test>
         </section>
 
         <section id="sect299">

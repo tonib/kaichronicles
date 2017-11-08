@@ -160,8 +160,8 @@
 
         <section id="sect20">
             <object objectId="backpack" />
-            <object objectId="meal" idx="0" />
-            <object objectId="meal" idx="1" />
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
             <object objectId="dagger" />
         </section>
 
@@ -328,14 +328,14 @@
 
         <section id="sect62">
             <pick class="money" count="28" />
-            <object objectId="backpack" idx="0" />
-            <object objectId="backpack" idx="1" />
-            <object objectId="meal" idx="0" />
-            <object objectId="meal" idx="1" />
-            <object objectId="meal" idx="2" />
-            <object objectId="sword" idx="0" />
-            <object objectId="sword" idx="1" />
-            <object objectId="sword" idx="2" />
+            <object objectId="backpack" index="0" />
+            <object objectId="backpack" index="1" />
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
+            <object objectId="meal" index="2" />
+            <object objectId="sword" index="0" />
+            <object objectId="sword" index="1" />
+            <object objectId="sword" index="2" />
         </section>
 
         <section id="sect63">
@@ -424,9 +424,9 @@
         </section>
 
         <section id="sect113">
-            <!-- The idx are used to identify the rules, if they are repeated -->
-            <object objectId="laumspurmeal" idx="0"/>
-            <object objectId="laumspurmeal" idx="1" />
+            <!-- The index are used to identify the rules, if they are repeated -->
+            <object objectId="laumspurmeal" index="0"/>
+            <object objectId="laumspurmeal" index="1" />
         </section>
         
         <section id="sect119">
@@ -666,10 +666,10 @@
         <section id="sect184">
             <pick class="money" count="40" />
             <object objectId="sword" />
-            <object objectId="meal" idx="0" />
-            <object objectId="meal" idx="1" />
-            <object objectId="meal" idx="2" />
-            <object objectId="meal" idx="3" />
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
+            <object objectId="meal" index="2" />
+            <object objectId="meal" index="3" />
             <meal />
         </section>
 
@@ -1209,7 +1209,7 @@
 
         <section id="sect342">
             <choiceState section="all" set="disabled" />
-            <combat hasMindforce="true" mindforceCS="-2" />
+            <combat mindforceCS="-2" noMindblast="true" />
             <afterCombats>
                 <choiceState section="all" set="enabled" />
             </afterCombats>
