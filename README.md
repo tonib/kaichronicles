@@ -1,11 +1,11 @@
 ## Kai Chronicles
 
-This is a game player for Lone Wolf game books. Only books 1 - 7 are playable right
-now. It runs as a website or Android app. You can play it at 
+Kai Chronicles is a game player for Lone Wolf game books. Only books 1 - 7 are
+curently playable. The game playe can runs as a website or Android app. You can play it at 
 [https://www.projectaon.org/staff/toni](https://www.projectaon.org/staff/toni) or download
-from the [Google Play](https://play.google.com/store/apps/details?id=org.projectaon.kaichronicles).
+the app from [Google Play](https://play.google.com/store/apps/details?id=org.projectaon.kaichronicles).
 
-This repository does not contain game books data. It must to be downloaded from the 
+This repository does not contain game books data. Data must be downloaded from the 
 [Project Aon web site](https://www.projectaon.org). 
 **REMEMBER** that game books data is under the
 [Project Aon license](https://www.projectaon.org/en/Main/License), so:
@@ -16,7 +16,7 @@ This repository does not contain game books data. It must to be downloaded from 
 * You cannot redistribute the game books data in any way
 
 The Android older version supported is the 4.4.2 (API 19). The web is tested with the 
-latest version of Chrome and Firefox. So, other browsers or/and older versions may don't 
+latest version of Chrome and Firefox. Other browsers or/and older versions may don't 
 work.
 
 ## Setup
@@ -38,8 +38,8 @@ This will require Node.js (any recent version), zip command and the SVN client o
 * Put the folder src/www on your private web server
 * Open http://localhost/[dir-for-src-www]/index.html
 
-Done. If you have Firefox, you dont need a web server. You can open directly the 
-file src/www/index.html. This will not work with Chrome (see 
+You are now done. If you have Firefox, you dont need a web server. You can open
+directly the file src/www/index.html. This will not work with Chrome (see 
 http://stackoverflow.com/questions/10752055/cross-origin-requests-are-only-supported-for-http-error-when-loading-a-local)
 
 ### Setup Android app
@@ -55,7 +55,7 @@ Install Cordova (https://cordova.apache.org/) and the Android requeriments
 This will generate a file src/platforms/android/build/outputs/apk/android-debug.apk with the
 Android app.
 
-You can test it with the emulator:
+You can test the app with the emulator:
 
 ```bash
     cd src
@@ -77,9 +77,9 @@ There is (unfished) documentation for [rules](doc/README-mechanics.md) and
 
 The game rules implementation are at src/ts/controller/mechanics and src/www/controller/mechanics/.
 
-If you add "?debug=true" to the game URL, they will appear some debug tools.
-You also can use the browser Developer Tools to prepare the Action Chart to test sections.
-So, in the console you can execute things like:
+If you add "?debug=true" to the game URL, some debug tools will appear.
+You also can use the browser Developer Tools to prepare the Action Chart to test individual sections.
+For example, in the console you can execute things like:
 ```javascript
 actionChartController.pick('axe')
 actionChartController.increaseMoney(-10)
@@ -97,7 +97,7 @@ There are some scripts for development:
 ```
 
 "npm run prepareversion" will generate a version to upload to the Google Play and the Project Aon 
-website on the "dist" directory. If you are me (probably not), you have the keystore to sign the 
+website on the "dist" directory. If you are me (probably not), you will have the keystore to sign the 
 apk to upload to the Google Play. Then "KEYSTOREPASSWORD" is the password for the keystore. If 
 it's not specified, an unsigned .apk will be generated. I suspect it's not a good idea to publish 
 keystores on github.
@@ -125,4 +125,4 @@ MIT. This application uses the following third-party code:
 * [xml.js](https://github.com/kripken/xml.js/), code taken from 
   [http://syssgx.github.io/xml.js/](http://syssgx.github.io/xml.js/) ([CC License](https://creativecommons.org/licenses/by/3.0/))
 
-Thanks to [LSI](http://www.lsisoluciones.com) to let us use its Google Play account.
+Thanks to [LSI](http://www.lsisoluciones.com) fo letting us use its Google Play account for this app.
