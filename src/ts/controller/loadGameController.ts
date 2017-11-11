@@ -28,6 +28,24 @@ class loadGameController {
     }
 
     /**
+     * Get a set a of file system entries, and return the names of those that are files
+     * @param entries {Array<Entry>} Filesystem entries to check
+     * @returns The file names
+     */
+    private static getFileNames( entries : Array<any> ) : Array<string> {
+        
+        // Get file names (entries is Array<Entry>)
+        let fileNames : Array<string> = [];
+        for(let entry of entries) {
+            // There can be directories here (ex. downloaded books)
+            if( entry.isFile )
+                fileNames.push( entry.name );
+        }
+
+        return fileNames;
+    }
+
+    /**
      * Fill the Cordova app saved games list
      */
     private static listGameFiles() {
@@ -41,12 +59,7 @@ class loadGameController {
         .then( function(entries : Array<any> ) {
 
             // Get file names (entries is Array<Entry>)
-            let fileNames : Array<string> = [];
-            for(let entry of entries) {
-                // There can be directories here (ex. downloaded books)
-                if( entry.isFile )
-                    fileNames.push( entry.name );
-            }
+            let fileNames = loadGameController.getFileNames(entries);
 
             // The list may be unsorted:
             fileNames.sort();
@@ -121,7 +134,7 @@ class loadGameController {
      * Export saved games to Downloads file (Android only)
      */
     public static exportSavedGames() {
-        
+        new SavedGamesExport().export();
     }
 
     /** Return page */

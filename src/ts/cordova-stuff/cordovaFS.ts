@@ -99,7 +99,7 @@ const cordovaFS = {
     },
 
     /**
-     * Get the the entries contained on the file syste root directory
+     * Get the the entries contained on the file system root directory
      * @param fs {FileSystem} The cordova file sytem
      * @returns {Promise<Array<Entry>>} Promise with array of entries on the root file system
      */
@@ -115,6 +115,28 @@ const cordovaFS = {
             },
             function( error /*: FileError*/ ) { 
                 const msg = 'Error listing files. Error code: ' + error.code;
+                console.log( msg );
+                dfd.reject( msg );
+            }
+        );
+
+        return dfd.promise();
+    },
+
+    /**
+     * Copy a file to other directory
+     * @param {Entry} fileEntry The file / directory to copy
+     * @param {DirectoryEntry} parent The destination directory
+     * @returns {Promise<Entry>} The new copied file
+     */
+    copyToAsync: function( fileEntry : any , parent : any ) : Promise<any> {
+        var dfd = jQuery.Deferred();
+        fileEntry.copyTo( parent , null , 
+            function( entry /*: Entry*/ ) {
+                dfd.resolve( entry );
+            },
+            function( error /*: FileError*/ ) {
+                const msg = 'Error copying file. Error code: ' + error.code;
                 console.log( msg );
                 dfd.reject( msg );
             }
@@ -219,8 +241,12 @@ const cordovaFS = {
     /**
      * Creates or looks up a directory
      * TODO: Use this anywhere
+     * @param {DirectoryEntry} dir  The parent directory
+     * @param path Either an absolute path or a relative path from the parent directory to the directory to be looked up or created.
+     * @param {Flags} options  create : true to create the directory, if it does not exist
+     * @returns {Promise<DirectoryEntry>} Promise with the directory
      */
-    getDirectoryAsync: function(dir, path, options) {
+    getDirectoryAsync: function(dir : any , path : string , options : any ) : Promise<any> {
         var dfd = jQuery.Deferred();
         dir.getDirectory( path , options, 
             function( subdir ) {
@@ -286,6 +312,28 @@ const cordovaFS = {
         catch(e) {
             console.log(e);
         }
+    },
+
+    zipAsync: function( dirToCompressPath : string , zipFilePath : string ) : Promise<void> {
+
+        var dfd = jQuery.Deferred();
+
+        // Create the zip
+        Zeep.zip( { from : dirToCompressPath, to : zipFilePath } , 
+            function() {
+                console.log( 'Zip created succesfuly' );
+                dfd.resolve();
+            },
+            function( error ) {
+                let msg = 'Error creating zip file';
+                if( error )
+                    msg += ': ' + error.toString();
+                console.log( msg );
+                dfd.reject( msg );
+            }
+        );
+
+        return dfd.promise();
     },
 
     unzipAsync: function(dstPath , dstDir) {

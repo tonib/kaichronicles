@@ -19,6 +19,8 @@
   number from the Random Number Table, add 2 to the number picked if you are a Mentora with the Magnakai Discipline 
   of Weaponmastery.
 - Remove the "Alert" text from the message dialog
+- Add adknowlegment to https://github.com/MobileChromeApps/cordova-plugin-zip
+- Add adknowlegment to https://github.com/FortuneN/cordova-plugin-zeep
 
 FOR FUTURE (1.9+):
 - Add section "Improved Disciplines" to the "Game rules" page

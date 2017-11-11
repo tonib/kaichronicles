@@ -31,16 +31,14 @@ declare function validateXML(parms : any) : string;
 // Cordova
 declare const LocalFileSystem;
 declare const FileTransfer;
+
+// cordova-plugin-zip (Cordova plugin)
 declare const zip;
 
-interface Window { 
-    // commons.js: 
-    getUrlParameter( parmName : string ) : string 
+// cordova-plugin-zeep (Cordova plugin)
+declare const Zeep;
 
-    // Cordova:
-    requestFileSystem;
-}
-
+// commons.js: 
 interface Array<T> { 
     removeValue( value : T ) : boolean;
     contains( value : T ) : boolean;
@@ -54,3 +52,11 @@ interface String {
 }
 declare function ajaxErrorMsg(context : any, jqXHR : any, textStatus : string, errorThrown : string);
 
+// Mixed:
+interface Window { 
+    // commons.js: 
+    getUrlParameter( parmName : string ) : string 
+
+    // Cordova:
+    requestFileSystem;
+}
