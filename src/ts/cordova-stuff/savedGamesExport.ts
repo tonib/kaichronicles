@@ -25,6 +25,8 @@ class SavedGamesExport {
      */
     public export() : Promise<void> {
         const self = this;
+        let zipPath : string = null;
+        const zipFileName = 'KaiChroniclesExport-' + settingsController.getDateForFileNames() + '.zip';
 
         return this.setup()
         .then( function() {
@@ -33,28 +35,19 @@ class SavedGamesExport {
         .then( function() {
             // Create the zip
             console.log( 'Creating zip file' );
-            return cordovaFS.zipAsync( self.tmpDir.toURL() , self.fs.root.toURL() + '/achilipu.zip' );
+            zipPath = self.fs.root.toURL() + zipFileName;
+            return cordovaFS.zipAsync( self.tmpDir.toURL() , zipPath );
         })
         .then( function() {
             console.log( 'Copying the zip to Download directory' );
             // Copy the zip
-            CopyToDownload.copyToDownload(self.fs.root.toURL() + '/achilipu.zip', 'achilipu.zip' , 'Kai Chronicles save games export' , 
-                false , 'application/zip' , true , 
-                function() { 
-                    console.log('ok');
-                },
-                function( error ) {
-                    let msg = 'error';
-                    if( error )
-                        msg += ': ' + error.toString();
-                    console.log( msg );
-                }
-            );
+            return cordovaFS.copyToDownloadAsync(zipPath , zipFileName , 'Kai Chronicles save games export' , 'application/zip' );
         });
 
         // TODO: Check errors
         // TODO: Delete tmp dir
-        // TODO: Show download notification ???
+        // TODO: Delete zip file
+        // TODO: Show toast with success / error
     }
 
     /** 

@@ -59,18 +59,22 @@ const settingsController = {
         $('#settings-saveDialog').modal('show');
     },
 
-    /**
-     * Return a default save game file name
-     */
-    defaultSaveGameName: function() {
+    /** Return a string to put on saved games files */
+    getDateForFileNames : function() : string {
         var now = new Date();
         return now.getFullYear() + '_' + 
             ( now.getMonth() + 1 ).toString().padLeft( 2 , '0' ) + '_' + 
             now.getDate().toString().padLeft( 2 , '0' ) + '_' +
             now.getHours().toString().padLeft( 2 , '0' ) + '_' +
             now.getMinutes().toString().padLeft( 2 , '0' ) + '_' + 
-            now.getSeconds().toString().padLeft( 2 , '0' ) + '-book-' +
-            state.book.bookNumber + '-savegame.json';
+            now.getSeconds().toString().padLeft( 2 , '0' );
+    },
+
+    /**
+     * Return a default save game file name
+     */
+    defaultSaveGameName: function() {
+        return settingsController.getDateForFileNames() + '-book-' + state.book.bookNumber + '-savegame.json';
     },
 
     /**

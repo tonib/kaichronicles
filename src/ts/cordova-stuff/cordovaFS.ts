@@ -350,6 +350,33 @@ const cordovaFS = {
         return dfd.promise();
     },
 
+    /**
+     * Copy a file to the Download directory, and notify the DownloadManager of that file.
+     * @param url URL / path to the local file to copy to the Download directory.
+     * @param title the title that would appear for this file in Downloads App.
+     * @param description the description that would appear for this file in Downloads App.
+     * @param mimeType    mimetype of the file.
+     */
+    copyToDownloadAsync: function( url : string , title : string , description : string , mimeType : string ) : Promise<void> {
+        
+        var dfd = jQuery.Deferred();
+
+        CopyToDownload.copyToDownload( url , title , description , false , mimeType , true , 
+            function() { 
+                console.log( 'copyToDownloadAsync ok' );
+                dfd.resolve();
+            },
+            function( error ) {
+                let msg = 'error copying file to Download folder';
+                if( error )
+                    msg += ': ' + error.toString();
+                console.log( msg );
+                dfd.reject( error );
+            }
+        );
+        return dfd.promise();
+    },
+
     removeRecursivelyAsync: function(directoryEntry) {
 
         var dfd = jQuery.Deferred();
