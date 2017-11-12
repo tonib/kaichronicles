@@ -63,6 +63,7 @@ FOR FUTURE (1.9+):
 - If a object description is too long, do not show the entire description: Show the first characters, and add a link
   to display the entire description (see pouchadgana object, and sommerswerd?)
 - Action chart buttons don't work on iPad Safari
+- Add night mode (brffff...)
 
 Reminders:
 
@@ -100,5 +101,8 @@ Reminders:
   
 * Debug Cordova app on Chrome:
   URL: chrome://inspect/#devices
+
+* Remove plugin code
+  cordova plugin remove cordova-plugin-copytodownload
 
 Work done on this commit:

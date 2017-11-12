@@ -34,11 +34,26 @@ class SavedGamesExport {
             // Create the zip
             console.log( 'Creating zip file' );
             return cordovaFS.zipAsync( self.tmpDir.toURL() , self.fs.root.toURL() + '/achilipu.zip' );
+        })
+        .then( function() {
+            console.log( 'Copying the zip to Download directory' );
+            // Copy the zip
+            CopyToDownload.copyToDownload(self.fs.root.toURL() + '/achilipu.zip', 'achilipu.zip' , 'Kai Chronicles save games export' , 
+                false , 'application/zip' , true , 
+                function() { 
+                    console.log('ok');
+                },
+                function( error ) {
+                    let msg = 'error';
+                    if( error )
+                        msg += ': ' + error.toString();
+                    console.log( msg );
+                }
+            );
         });
 
         // TODO: Check errors
         // TODO: Delete tmp dir
-        // TODO: Save to downloads directory
         // TODO: Show download notification ???
     }
 

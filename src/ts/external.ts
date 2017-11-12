@@ -38,6 +38,9 @@ declare const zip;
 // cordova-plugin-zeep (Cordova plugin)
 declare const Zeep;
 
+// cordova-plugin-copytodownload (Cordova plugin)
+declare const CopyToDownload;
+
 // commons.js: 
 interface Array<T> { 
     removeValue( value : T ) : boolean;
