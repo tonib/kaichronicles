@@ -125,6 +125,7 @@ class loadGameController {
      * @param fileName The file name to delete
      */
     public static deleteFile(fileName : string) {
+        // TODO: Use deleteFileAsync here, and check errors, and show a toast
         cordovaFS.deleteFile(fileName, function() {
             loadGameView.removeFilenameFromList( fileName );
         });

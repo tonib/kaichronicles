@@ -185,6 +185,7 @@ const cordovaFS = {
         );
     },
 
+    // TODO: Remove this and use deleteFileAsync
     deleteFile: function(fileName, callback) {
 
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
@@ -217,6 +218,27 @@ const cordovaFS = {
             }, 
             function() { alert('Error requesting file system'); }
         );
+    },
+
+    /**
+     * Delete a file
+     * @param {FileEntry} fileEntry The file to delete
+     * @returns Promise with the deletion process
+     */
+    deleteFileAsync: function( fileEntry : any ) : Promise<void> {
+        var dfd = jQuery.Deferred();
+        fileEntry.remove(
+            function() { 
+                console.log('File deleted');
+                dfd.resolve();
+            },
+            function( error /* : FileError*/ ) { 
+                let msg = 'Error deleting file. Error code: ' + error.code;
+                console.log( msg );
+                dfd.reject( msg );
+            }
+        );
+        return dfd.promise();
     },
 
     /**
@@ -256,6 +278,29 @@ const cordovaFS = {
                 // TODO: Test this (codes?)
                 dfd.reject( 'Error getting / creating directory ' + dir.toURL() + '/' + path + 
                     ': (code ' + fileError.code + ')' );
+            }
+        );
+        return dfd.promise();
+    },
+
+    /**
+     * Get a file from a directory
+     * @param {DirectoryEntry} dir The directory
+     * @param fileName The file name to get / create
+     * @param options Options to get / create the file
+     * @returns {Promise<FileEntry>} Promise with the file
+     */
+    getFileAsync: function(dir : any , fileName : string , options : Object = { create: false, exclusive: false } ) : Promise<any> {
+        var dfd = jQuery.Deferred();
+        dir.getFile(fileName, options, 
+            function ( fileEntry /* : FileEntry */ ) {
+                console.log('Got the file: ' + fileName);
+                dfd.resolve( fileEntry );
+            }, 
+            function( error /* : FileError */ ) { 
+                let msg = 'Error getting / creating file. Error code: ' + error.code;
+                console.log( msg );
+                dfd.reject( msg );
             }
         );
         return dfd.promise();

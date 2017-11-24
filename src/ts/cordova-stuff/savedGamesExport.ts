@@ -41,7 +41,15 @@ class SavedGamesExport {
         .then( function() {
             console.log( 'Copying the zip to Download directory' );
             // Copy the zip
-            return cordovaFS.copyToDownloadAsync(zipPath , zipFileName , 'Kai Chronicles save games export' , 'application/zip' );
+            return cordovaFS.copyToDownloadAsync(zipPath , zipFileName , 'Kai Chronicles saved games export' , 'application/zip' );
+        })
+        .then( function() {
+            console.log( 'Get the zip file entry' );
+            return cordovaFS.getFileAsync( self.fs.root , zipFileName );
+        })
+        .then( function( fileEntry /* : FileEntry */ ) {
+            console.log( 'Delete the zip file' );
+            return cordovaFS.deleteFileAsync( fileEntry );
         });
 
         // TODO: Check errors
