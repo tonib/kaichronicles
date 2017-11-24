@@ -186,26 +186,52 @@ const cordovaFS = {
     },
 
     /**
-     * Delete a file
-     * @param {FileEntry} fileEntry The file to delete
+     * Delete file
+     * @param {FileEntry} entry The file entry to delete
      * @returns Promise with the deletion process
      */
     deleteFileAsync: function( fileEntry : any ) : Promise<void> {
+
         var dfd = jQuery.Deferred();
+
+        console.log('Deleting file ' + fileEntry.toURL() );
         fileEntry.remove(
             function() { 
                 console.log('File deleted');
                 dfd.resolve();
-            },
+            }, 
             function( error /* : FileError*/ ) { 
-                let msg = 'Error deleting file. Error code: ' + error.code;
+                let msg = 'Error deleting entry. Error code: ' + error.code;
                 console.log( msg );
                 dfd.reject( msg );
             }
         );
+        
         return dfd.promise();
     },
 
+    /**
+     * Delete directory recursivelly
+     * @param {DirectoryEntry} directoryEntry The directory entry to delete
+     * @returns Promise with the deletion process
+     */
+    deleteDirRecursivelyAsync: function( directoryEntry : any ) : Promise<void> {
+
+        var dfd = jQuery.Deferred();
+        console.log('Deleting directory ' + directoryEntry.toURL() );
+        directoryEntry.removeRecursively(
+            function() { 
+                console.log('Directory deleted');
+                dfd.resolve(); 
+            },
+            function(fileError) { 
+                dfd.reject( 'Error deleting directory ' + directoryEntry.toURL() + 
+                    ' (code ' + fileError.code + ')' );
+            }
+        );
+        return dfd.promise();
+    },
+    
     /**
      * Requests a filesystem in which to store application data.
      * TODO: Use this anywhere
@@ -385,19 +411,6 @@ const cordovaFS = {
             }
         );
         return dfd.promise();
-    },
-
-    removeRecursivelyAsync: function(directoryEntry) {
-
-        var dfd = jQuery.Deferred();
-        console.log('Deleting directory ' + directoryEntry.toURL() );
-        directoryEntry.removeRecursively(
-            function() { dfd.resolve(); },
-            function(fileError) { 
-                dfd.reject( 'Error deleting directory ' + directoryEntry.toURL() + 
-                    ' (code ' + fileError.code + ')' );
-            }
-        );
-        return dfd.promise();
     }
+
 };

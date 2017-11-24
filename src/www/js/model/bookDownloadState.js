@@ -52,7 +52,7 @@ BookDownloadState.prototype.deleteAsync = function( booksDir ) {
     console.log( 'Deleting book ' + this.bookNumber );
     var self = this;
     return cordovaFS.getDirectoryAsync( booksDir , this.bookNumber.toString() )
-        .then(function(bookDir) { return cordovaFS.removeRecursivelyAsync( bookDir ); })
+        .then(function(bookDir) { return cordovaFS.deleteDirRecursivelyAsync( bookDir ); })
         .done(function() { self.downloaded = false; });
 };
 

@@ -50,12 +50,27 @@ class SavedGamesExport {
         .then( function( fileEntry /* : FileEntry */ ) {
             console.log( 'Delete the zip file' );
             return cordovaFS.deleteFileAsync( fileEntry );
-        });
+        })
+        .then( function() {
+            // Delete tmp dir
+            return self.deleteTmpDirectory();
+        })
+        .then( 
+            function() {
+                // OK
+                toastr.success( 'Saved games exported to Downloads')
+            },
+            function( error ) {
+                // ERROR
+                let msg = 'Error exporting saved games';
+                if( error )
+                    msg += ': ' + error.toString();
+                alert( msg );
+            }
+        );
 
-        // TODO: Check errors
-        // TODO: Delete tmp dir
-        // TODO: Delete zip file
-        // TODO: Show toast with success / error
+        // TODO: Translate messages
+        // TODO: Test errors
     }
 
     /** 
@@ -91,6 +106,24 @@ class SavedGamesExport {
             // Store the tmp directory entry
             self.tmpDir = tmpDirEntry;
         });
+    }
+
+    /**
+     * Delete the temporal directory and all its content
+     * @returns The deletion process
+     */
+    private deleteTmpDirectory() : Promise<void> {
+        
+        if( !this.tmpDir ) {
+            console.log( 'No tmp dir stored, so nothing to delete');
+            // Nothing to do
+            var dfd = jQuery.Deferred();
+            dfd.resolve();
+            return dfd.promise();
+        }
+        
+        console.log( 'Deleting tmp directory' );
+        return cordovaFS.deleteDirRecursivelyAsync( this.tmpDir );
     }
 
     /** 
