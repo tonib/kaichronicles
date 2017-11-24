@@ -263,6 +263,7 @@ class Translations {
         'kaiChronicles' : 'Crónicas del Kai',
         'gameRules' : 'Reglas del juego',
         'loadGame' : 'Cargar juego',
+        'fileDeleted' : '{0} borrado',
         'confirmDeleteSave' : '¿Seguro que quiere borrar el juego guardado {0}?',
         'projectAonLicense' : 'Licencia del Proyecto Aon',
         'combatTables' : 'Tablas de Combate',
@@ -428,7 +429,8 @@ class Translations {
         'bookNotDownloaded' : 'Book {0} is not downloaded',
         'noSavedGames' : 'No saved games found',
         'maximumPick' : 'You can pick only {0} objects',
-        'zeroIgnored' : 'Zero ignored'
+        'zeroIgnored' : 'Zero ignored',
+        'fileDeleted' : '{0} deleted',
 
     };
 

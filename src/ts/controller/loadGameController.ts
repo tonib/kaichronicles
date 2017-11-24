@@ -125,9 +125,23 @@ class loadGameController {
      * @param fileName The file name to delete
      */
     public static deleteFile(fileName : string) {
-        // TODO: Use deleteFileAsync here, and check errors, and show a toast
-        cordovaFS.deleteFile(fileName, function() {
+   
+        cordovaFS.requestFileSystemAsync()
+        .then( function( fs /* : FileSystem */ ) {
+            return cordovaFS.getFileAsync( fs.root , fileName );
+        })
+        .then( function( fileEntry /* : FileEntry */ ) {
+            return cordovaFS.deleteFileAsync( fileEntry );
+        })
+        .done( function() {
+            toastr.success( translations.text( 'fileDeleted' , [ fileName ] ) );
             loadGameView.removeFilenameFromList( fileName );
+        })
+        .fail( function( error ) {
+            let msg = 'Error deleting file';
+            if( error )
+                msg += ': ' + error.toString();
+            alert( msg );
         });
     }
 

@@ -185,41 +185,6 @@ const cordovaFS = {
         );
     },
 
-    // TODO: Remove this and use deleteFileAsync
-    deleteFile: function(fileName, callback) {
-
-        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
-            function (fs) {
-                console.log('file system open: ' + fs.name);
-
-                // Get the file to save
-                console.log('Get file to delete: ' + fileName);
-                fs.root.getFile(fileName, 
-                    { 
-                        create: false, 
-                        exclusive: false
-                    }, 
-                    function (fileEntry) {
-                        console.log('Got the file to delete: ' + fileName);
-                        fileEntry.remove(
-                            function() { 
-                                console.log('File deleted. Now callback()');
-                                callback(); 
-                            },
-                            function() { 
-                                console.log('Error deleting file');
-                                alert('Error deleting file'); 
-                            }
-                        );
-                    }, 
-                    function() { alert('Error getting file'); }
-                );
-
-            }, 
-            function() { alert('Error requesting file system'); }
-        );
-    },
-
     /**
      * Delete a file
      * @param {FileEntry} fileEntry The file to delete
