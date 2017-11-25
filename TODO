@@ -22,7 +22,8 @@
 - Remove the "Alert" text from the message dialog
 - Add adknowlegment to https://github.com/MobileChromeApps/cordova-plugin-zip
 - Add adknowlegment to https://github.com/FortuneN/cordova-plugin-zeep
-
+- Add adknowlegment to https://github.com/don/cordova-filechooser
+- Check all boolean properties on books mechanics, seach for not="true" bugs...
 
 FOR FUTURE (1.9+):
 - Add section "Improved Disciplines" to the "Game rules" page
@@ -107,4 +108,7 @@ Reminders:
 * Remove plugin code
   cordova plugin remove cordova-plugin-copytodownload
 
+* Cordova plugins list
+  cordova plugin list
+  
 Work done on this commit:

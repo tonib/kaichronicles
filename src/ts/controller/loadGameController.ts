@@ -152,6 +152,17 @@ class loadGameController {
         new SavedGamesExport().export();
     }
 
+    /**
+     * Import saved games from a zip file
+     */
+    public static importSavedGames() {
+        // Select the file to import
+        //alert( 'importSavedGames' );
+        fileChooser.open(function(uri) {
+            alert(uri);
+        });
+    }
+
     /** Return page */
     public static getBackController() { return 'mainMenu'; }
     

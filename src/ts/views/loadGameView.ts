@@ -71,10 +71,16 @@ const loadGameView = {
             loadGameController.deleteFile( fileName );
         });
 
+        // Export / import saved games
         $('#loadGame-export').click(function(e : Event) {
             e.preventDefault();
             loadGameController.exportSavedGames();
         });
+        $('#loadGame-import').click(function(e : Event) {
+            e.preventDefault();
+            loadGameController.importSavedGames();
+        });
+        
     },
 
     /**
