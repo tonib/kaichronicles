@@ -157,9 +157,8 @@ class loadGameController {
      */
     public static importSavedGames() {
         // Select the file to import
-        //alert( 'importSavedGames' );
         fileChooser.open(function(uri) {
-            alert(uri);
+            new SavedGamesExport().import( uri );
         });
     }
 

@@ -41,7 +41,7 @@ declare const Zeep;
 // cordova-plugin-copytodownload (Cordova plugin)
 declare const CopyToDownload;
 
-// cordova-filechooser (Cordova plugin)
+// com.megster.cordova.FileChooser (Cordova plugin)
 declare const fileChooser;
 
 // commons.js: 

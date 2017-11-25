@@ -73,6 +73,15 @@ class SavedGamesExport {
         // TODO: Test errors
     }
 
+    /**
+     * Import saved games from a file
+     * @param uri File URL with the games to import
+     * @returns Promise with the export process
+     */
+    public import( uri : string ) {
+        alert( uri );
+    }
+
     /** 
      * Setup current instance members
      * @returns Promise with the members setup process

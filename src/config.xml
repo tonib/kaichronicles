@@ -30,7 +30,7 @@
     <plugin name="cordova-plugin-copytodownload" spec="https://github.com/tonib/cordova-plugin-copytodownload.git#1.0" />
     <!--plugin name="/home/toni/proyectos/pluginsCordova/copyToDownloads" /-->
     <!-- https://github.com/don/cordova-filechooser -->
-    <plugin name="cordova-filechooser" spec="http://github.com/don/cordova-filechooser.git#c97ffb70a339ed2fa20eec5d7a7344a14cf268fd" />
+    <plugin name="com.megster.cordova.FileChooser" spec="http://github.com/don/cordova-filechooser.git" />
 
     <access origin="*" />
     <allow-intent href="http://*/*" />
