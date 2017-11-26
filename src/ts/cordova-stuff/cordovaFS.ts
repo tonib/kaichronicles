@@ -34,16 +34,42 @@ const cordovaFS = {
         function() { alert('Error requesting file system'); } );
     },
 
-    getUnusedName: function(fileName, fs, callback) {
-        var idx = fileName.lastIndexOf('.');
+    /**
+     * Get the name and extension of a file name
+     * @param fileName The file name to check
+     * @returns The name and extension. The extension will be an empty string, if no extension was found
+     */
+    getFileNameAndExtension: function( fileName : string ) : { name : string , extension : string } {
+        const idx = fileName.lastIndexOf('.');
+        if( idx < 0 )
+            return { name : fileName , extension : '' };
+
+        return { 
+            name : fileName.substr(0, idx) , 
+            extension : fileName.substr( idx + 1 ) 
+        };
+    },
+
+    /**
+     * Get an unused name "version" for a file name.
+     * If the file name is "a.ext", and it exists, it will return a "a-xxx.ext", where xxx is a number
+     * TODO: Change to return a Promise
+     * @param fileName The file name to check
+     * @param {FileSystem} fs The file system. We will check existing files on the root directory
+     * @param callback Callback to call with the new file name
+     */
+    getUnusedName: function( fileName : string, fs : any, callback : (string) => void ) {
+        /*var idx = fileName.lastIndexOf('.');
         var name = fileName.substr(0, idx);
-        var extension = fileName.substr(idx +1);
+        const extension = fileName.substr(idx +1);*/
+        const nameAndExtension = cordovaFS.getFileNameAndExtension( fileName );
+
         cordovaFS.enumerateFiles(fs, function(entries) {
             console.log('Searching unused name for ' + fileName);
-            idx = 0;
+            let idx = 0;
             var hasSameName = function(f) { return f.name == fileName; };
             while(true) {
-                fileName = name + ( idx > 0 ? '-' + idx : '' ) + '.' + extension;
+                fileName = nameAndExtension.name + ( idx > 0 ? '-' + idx : '' ) + '.' + nameAndExtension.extension;
                 console.log('Checking ' + fileName);
                 if( entries.some( hasSameName ) ) {
                     idx++;

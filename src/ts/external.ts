@@ -65,4 +65,8 @@ interface Window {
 
     // Cordova:
     requestFileSystem;
+
+    // Cordova:
+    resolveLocalFileSystemURI;
+    
 }

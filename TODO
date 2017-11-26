@@ -24,6 +24,7 @@
 - Add adknowlegment to https://github.com/FortuneN/cordova-plugin-zeep
 - Add adknowlegment to https://github.com/don/cordova-filechooser
 - Check all boolean properties on books mechanics, seach for not="true" bugs...
+- Typo: ShellPrice should be SellPrice (brfff)
 
 FOR FUTURE (1.9+):
 - Add section "Improved Disciplines" to the "Game rules" page
@@ -110,5 +111,5 @@ Reminders:
 
 * Cordova plugins list
   cordova plugin list
-  
+
 Work done on this commit:

@@ -80,6 +80,27 @@ class SavedGamesExport {
      */
     public import( uri : string ) {
         alert( uri );
+
+        window.resolveLocalFileSystemURI( uri ,
+            function( entry /* : FileEntry */ ) {
+                //alert( 'OK: ' + entry.toURL() + ', name: ' + entry.name + ', isFile: ' + entry.isFile );
+                entry.file( 
+                    function( file /* : File */ ) {
+                        alert( 'OK: ' + file.name );
+                    },
+                    function( error /* : FileError */ ) {
+                        alert( 'Error: ' + error.code );
+                    }
+                );
+                /*cordovaFS.readFile( entry , function(content) {
+                    alert(content);
+                });*/
+            },
+            function( error /* : FileError */ ) {
+                alert( 'Error: ' + error.code );
+            }
+        );
+        
     }
 
     /** 
