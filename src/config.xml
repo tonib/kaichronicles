@@ -26,11 +26,11 @@
     <plugin name="cordova-plugin-zip" spec="~3.1.0" />
     <!-- https://github.com/FortuneN/cordova-plugin-zeep -->
     <plugin name="cordova-plugin-zeep" spec="~0.0.4" />
-    <!-- https://github.com/tonib/cordova-plugin-copytodownload -->
-    <plugin name="cordova-plugin-copytodownload" spec="https://github.com/tonib/cordova-plugin-copytodownload.git#1.0" />
-    <!--plugin name="/home/toni/proyectos/pluginsCordova/copyToDownloads" /-->
     <!-- https://github.com/don/cordova-filechooser -->
     <plugin name="com.megster.cordova.FileChooser" spec="http://github.com/don/cordova-filechooser.git" />
+    <!-- https://github.com/tonib/cordova-plugin-copytodownload -->
+    <plugin name="cordova-plugin-copytodownload" spec="https://github.com/tonib/cordova-plugin-copytodownload.git#1.1.1" />
+    <!--plugin name="/home/toni/proyectos/pluginsCordova/copyToDownloads" /-->
 
     <access origin="*" />
     <allow-intent href="http://*/*" />

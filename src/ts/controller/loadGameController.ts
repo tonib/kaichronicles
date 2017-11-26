@@ -150,6 +150,7 @@ class loadGameController {
      */
     public static exportSavedGames() {
         try {
+            // TODO: Show info about the operation
             new SavedGamesExport().export();
         }
         catch(e) {
