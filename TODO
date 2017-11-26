@@ -1,4 +1,5 @@
 - Allow to export / import saved games to the SD card
+  https://github.com/danjarvis/cordova-plugin-document-contract
 - BookDownloadState to TS
 - Check reported bugs on Google play:
   * Saved games removed when adding new games

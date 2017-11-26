@@ -149,17 +149,36 @@ class loadGameController {
      * Export saved games to Downloads file (Android only)
      */
     public static exportSavedGames() {
-        new SavedGamesExport().export();
+        try {
+            new SavedGamesExport().export();
+        }
+        catch(e) {
+            console.log(e);
+            alert( 'Error exporting: ' + e.toString() );
+        }
     }
 
     /**
      * Import saved games from a zip file
      */
     public static importSavedGames() {
-        // Select the file to import
-        fileChooser.open(function(uri) {
-            new SavedGamesExport().import( uri );
-        });
+        // TODO: fileChooser.open should return a CordovaFS method, and it should return a Promise
+        try {
+            // Select the file to import
+            fileChooser.open(function(uri) {
+                try {
+                    new SavedGamesExport().import( uri );
+                }
+                catch(e) {
+                    console.log(e);
+                    alert('Error exporting: ' + e );
+                }
+            });
+        }
+        catch(e) {
+            console.log(e);
+            alert( 'Error importing: ' + e.toString() );
+        }
     }
 
     /** Return page */
