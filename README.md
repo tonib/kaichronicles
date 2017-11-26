@@ -106,7 +106,7 @@ A "guide" to develop new books can be found at [doc/README-developing.md](doc/RE
 
 ### License
 
-MIT. This application uses the following third-party code:
+MIT. This application uses the following third-party code / resources:
 
 * The HTML rendering, books XML processing and Project Aon license HTML contains code
   taken from [Lone Wolf Adventures](https://lonewolfadventures.projectaon.org/), 
@@ -124,5 +124,9 @@ MIT. This application uses the following third-party code:
 * [Apache Cordova](https://cordova.apache.org/) (Apache license)
 * [xml.js](https://github.com/kripken/xml.js/), code taken from 
   [http://syssgx.github.io/xml.js/](http://syssgx.github.io/xml.js/) ([CC License](https://creativecommons.org/licenses/by/3.0/))
+* [cordova-plugin-zip](https://github.com/MobileChromeApps/cordova-plugin-zip) ([License](https://github.com/MobileChromeApps/cordova-plugin-zip/blob/master/LICENSE))
+* [cordova-plugin-zeep](https://github.com/FortuneN/cordova-plugin-zeep) (Apache License 2.0)
+* [cordova-filechooser](https://github.com/don/cordova-filechooser) (Apache License 2.0)
+* [cordova-plugin-copytodownload](https://github.com/tonib/cordova-plugin-copytodownload) (MIT)
 
 Thanks to [LSI](http://www.lsisoluciones.com) for letting us use its Google Play account for this app.

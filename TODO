@@ -1,6 +1,8 @@
 - Allow to export / import saved games to the SD card
   https://github.com/danjarvis/cordova-plugin-document-contract
 - BookDownloadState to TS
+- Typo: ShellPrice should be SellPrice (brfff)
+- Check all boolean properties on books mechanics, seach for not="true" bugs...
 - Check reported bugs on Google play:
   * Saved games removed when adding new games
   * Objects types
@@ -21,11 +23,6 @@
   number from the Random Number Table, add 2 to the number picked if you are a Mentora with the Magnakai Discipline 
   of Weaponmastery.
 - Remove the "Alert" text from the message dialog
-- Add adknowlegment to https://github.com/MobileChromeApps/cordova-plugin-zip
-- Add adknowlegment to https://github.com/FortuneN/cordova-plugin-zeep
-- Add adknowlegment to https://github.com/don/cordova-filechooser
-- Check all boolean properties on books mechanics, seach for not="true" bugs...
-- Typo: ShellPrice should be SellPrice (brfff)
 
 FOR FUTURE (1.9+):
 - Add section "Improved Disciplines" to the "Game rules" page
