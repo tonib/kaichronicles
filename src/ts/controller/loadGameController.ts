@@ -163,23 +163,11 @@ class loadGameController {
      * Import saved games from a zip file
      */
     public static importSavedGames() {
-        // TODO: fileChooser.open should return a CordovaFS method, and it should return a Promise
-        try {
-            // Select the file to import
-            fileChooser.open(function(uri) {
-                try {
-                    new SavedGamesExport().import( uri );
-                }
-                catch(e) {
-                    console.log(e);
-                    alert('Error exporting: ' + e );
-                }
-            });
-        }
-        catch(e) {
-            console.log(e);
-            alert( 'Error importing: ' + e.toString() );
-        }
+        
+        DocumentSelection.selectDocument()
+        .then(function(doc : DocumentSelection) {
+            new SavedGamesExport().import(doc);
+        });
     }
 
     /** Return page */

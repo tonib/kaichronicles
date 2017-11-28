@@ -78,29 +78,26 @@ class SavedGamesExport {
      * @param uri File URL with the games to import
      * @returns Promise with the export process
      */
-    public import( uri : string ) {
-        alert( uri );
+    public import( doc : DocumentSelection ) {
+        alert( doc.fileName );
+        const self = this;
+        this.setup()
+        .then( function() {
+            // Get the file type. It can be a zip file or a json file
+            const nameAndExtension = cordovaFS.getFileNameAndExtension( doc.fileName.toLowerCase() );
+            if( nameAndExtension.extension == 'zip' )
+                return self.importZip( doc );
+            else
+                return self.importJson( doc );
+        });
+    }
 
-        window.resolveLocalFileSystemURI( uri ,
-            function( entry /* : FileEntry */ ) {
-                //alert( 'OK: ' + entry.toURL() + ', name: ' + entry.name + ', isFile: ' + entry.isFile );
-                entry.file( 
-                    function( file /* : File */ ) {
-                        alert( 'OK: ' + file.name );
-                    },
-                    function( error /* : FileError */ ) {
-                        alert( 'Error: ' + error.code );
-                    }
-                );
-                /*cordovaFS.readFile( entry , function(content) {
-                    alert(content);
-                });*/
-            },
-            function( error /* : FileError */ ) {
-                alert( 'Error: ' + error.code );
-            }
-        );
-        
+    private importZip( doc : DocumentSelection ) : Promise<void> {
+        return null;
+    }
+
+    private importJson( doc : DocumentSelection ) : Promise<void> {
+        return null;
     }
 
     /** 

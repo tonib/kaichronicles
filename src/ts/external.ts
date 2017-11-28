@@ -68,5 +68,10 @@ interface Window {
 
     // Cordova:
     resolveLocalFileSystemURI;
+   
+    // cordova-plugin-document-contract (Cordova plugin)
+    plugins : {
+        DocumentContract;
+    }
     
 }

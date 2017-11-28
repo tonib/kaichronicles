@@ -1,5 +1,6 @@
 /// <reference path="../external.ts" />
 
+
 /**
  * Stuff to access the file system via cordova
  * TODO: This is almost crap. Replace by promises (oh javascript...)
@@ -421,7 +422,7 @@ const cordovaFS = {
      */
     copyToDownloadAsync: function( url : string , title : string , description : string , mimeType : string ) : Promise<void> {
         
-        var dfd = jQuery.Deferred();
+        const dfd = jQuery.Deferred();
 
         CopyToDownload.copyToDownload( url , title , description , false , mimeType , true , 
             function() { 
