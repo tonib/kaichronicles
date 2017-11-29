@@ -127,14 +127,22 @@ const cordovaFS = {
 
     /**
      * Get the the entries contained on the file system root directory
-     * @param fs {FileSystem} The cordova file sytem
+     * @param {FileSystem} fs The cordova file sytem
      * @returns {Promise<Array<Entry>>} Promise with array of entries on the root file system
      */
     getRootFilesAsync : function( fs : any ) : Promise< Array<any> > {
         console.log('file system open: ' + fs.name);
+        return cordovaFS.readEntriesAsync( fs.root );
+    },
 
+    /**
+     * Get the the entries contained on a directory
+     * @param {DirectoryEntry} dirEntry The directory to read
+     * @returns {Promise<Array<Entry>>} Promise with array of entries on the directory
+     */
+    readEntriesAsync : function( dirEntry : any ) : Promise< Array<any> > {
         var dfd = jQuery.Deferred();
-        var dirReader = fs.root.createReader();
+        var dirReader = dirEntry.createReader();
         dirReader.readEntries(
             function( entries : Array<any> ) {
                 console.log('Got list of files');
@@ -154,11 +162,12 @@ const cordovaFS = {
      * Copy a file to other directory
      * @param {Entry} fileEntry The file / directory to copy
      * @param {DirectoryEntry} parent The destination directory
-     * @returns {Promise<Entry>} The new copied file
+     * @param newFileName The new file name. If it's null, it will be the original
+     * @returns {Promise<Entry>} Promise with the new copied file
      */
-    copyToAsync: function( fileEntry : any , parent : any ) : Promise<any> {
+    copyToAsync: function( fileEntry : any , parent : any , newFileName : string = null ) : Promise<any> {
         var dfd = jQuery.Deferred();
-        fileEntry.copyTo( parent , null , 
+        fileEntry.copyTo( parent , newFileName , 
             function( entry /*: Entry*/ ) {
                 dfd.resolve( entry );
             },
@@ -170,6 +179,23 @@ const cordovaFS = {
         );
 
         return dfd.promise();
+    },
+
+    /**
+     * Copy a set of files to other directory
+     * @param {Array<Entry>} entries The files to copy
+     * @param {DirectoryEntry} parent The destination directory
+     * @returns Promise with the copy process
+     */
+    copySetToAsync : function( entries : Array<any> , parent : any ) : Promise<void> {
+        console.log( 'Copying ' + entries + ' files to other directory' );
+        
+        let promises : Array< Promise<any> > = [];
+        for( let entry of entries )
+            promises.push( cordovaFS.copyToAsync( entry , parent ) );
+
+        // Wait for all copys to finish
+        return $.when.apply($, promises);
     },
 
     loadFile: function( fileName, callback ) {
@@ -399,16 +425,22 @@ const cordovaFS = {
         return dfd.promise();
     },
 
-    unzipAsync: function(dstPath , dstDir) {
+    /**
+     * Uncompress a zip file
+     * @param zipPath Path to the zip file
+     * @param dstDir Path to the directory where uncompress the zip file
+     * @returns Promise with the process
+     */
+    unzipAsync: function( zipPath : string , dstDir : string ) : Promise<void> {
 
         var dfd = jQuery.Deferred();
-        console.log('Unzipping ' + dstPath + ' to ' + dstDir);
-        zip.unzip( dstPath , dstDir , function(resultCode) {
+        console.log('Unzipping ' + zipPath + ' to ' + dstDir);
+        zip.unzip( zipPath , dstDir , function(resultCode) {
             // Check the unzip operation
             if(resultCode === 0)
                 dfd.resolve();
             else
-                dfd.reject('Unknown error unzipping ' + dstPath + ' to ' + dstDir );
+                dfd.reject('Unknown error unzipping ' + zipPath + ' to ' + dstDir );
         });
         return dfd.promise();
     },

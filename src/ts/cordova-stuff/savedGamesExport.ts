@@ -30,7 +30,8 @@ class SavedGamesExport {
 
         return this.setup()
         .then( function() {
-            return self.copySavedGamesToTmpDir();
+            console.log( 'Copying file games to tmp dir (' + self.fileGameEntries.length + ')' );
+            return cordovaFS.copySetToAsync( self.fileGameEntries , self.tmpDir );
         })
         .then( function() {
             // Create the zip
@@ -58,7 +59,7 @@ class SavedGamesExport {
         .then( 
             function() {
                 // OK
-                toastr.success( 'Saved games exported to Downloads')
+                toastr.success( 'Saved games exported to Downloads');
             },
             function( error ) {
                 // ERROR
@@ -69,8 +70,9 @@ class SavedGamesExport {
             }
         );
 
+        // TODO: Move UI stuff (messages) outside this class (it's part of the "model")
         // TODO: Translate messages
-        // TODO: Test errors
+        // TODO: Test errors. If there are errors, remove sub-products (tmp dir, etc)
     }
 
     /**
@@ -84,6 +86,7 @@ class SavedGamesExport {
         this.setup()
         .then( function() {
             // Get the file type. It can be a zip file or a json file
+            // TODO: Check the mime type too
             const nameAndExtension = cordovaFS.getFileNameAndExtension( doc.fileName.toLowerCase() );
             if( nameAndExtension.extension == 'zip' )
                 return self.importZip( doc );
@@ -93,11 +96,61 @@ class SavedGamesExport {
     }
 
     private importZip( doc : DocumentSelection ) : Promise<void> {
-        return null;
+
+        const self = this;
+        const docEntry = window.resolveLocalFileSystemURI( doc.uri );
+        let nNewGames = 0;
+
+        // Well, the Entry returned by window.resolveLocalFileSystemURI( doc.uri ) is not really a FileEntry: It cannot be
+        // copied with "copyTo". I suspect it's because is not a "file://" URL (it's a "content://"). 
+        // So, get the file content, and create the the file on the tmp directory manually
+
+        // TODO: Check files will not be overwritten!
+        console.log( 'Copy zip to the tmp directory' );
+        return cordovaFS.copyToAsync( docEntry , this.tmpDir , doc.fileName )
+        .then( function( entry /* : FileEntry */ ) {
+            console.log( 'Unziping file on tmp directory' );
+            return cordovaFS.unzipAsync( entry.toURL() , self.tmpDir.toURL() );
+        })
+        .then( function() { 
+            console.log( 'Get unziped files' );
+            return cordovaFS.readEntriesAsync( self.tmpDir );
+        })
+        .then( function( entries : Array<any> ) {
+            console.log( 'Filtering unziped files' );
+            entries = SavedGamesExport.filterSavedGamesEntries( entries );
+
+            console.log( 'Copying saved games to the root' );
+            nNewGames = entries.length;
+            return cordovaFS.copySetToAsync( entries , self.fs.root );
+        })
+        .then( 
+            function() {
+                // OK
+                toastr.success( nNewGames + ' imported' );
+            },
+            function( error ) {
+                // ERROR
+                let msg = 'Error importing saved games';
+                if( error )
+                    msg += ': ' + error.toString();
+                alert( msg );
+            }
+        );
     }
 
     private importJson( doc : DocumentSelection ) : Promise<void> {
         return null;
+    }
+
+    private static filterSavedGamesEntries( entries : Array<any> ) {
+        let result = []
+        for(let entry of entries) {
+            // TODO: Check extension (.json)
+            if( entry.isFile )
+                result.push( entry );
+        }
+        return result;
     }
 
     /** 
@@ -117,13 +170,8 @@ class SavedGamesExport {
         })
         .then( function( entries : Array<any> ) {
             console.log( 'Storing saved games entries' );
-            // Store saved games
-            self.fileGameEntries = []
-            for(let entry of entries) {
-                // There can be directories here (ex. downloaded books)
-                if( entry.isFile )
-                    self.fileGameEntries.push( entry );
-            }
+            // Store saved games, and ignore others. There can be directories here (ex. downloaded books)
+            self.fileGameEntries = SavedGamesExport.filterSavedGamesEntries( entries );
 
             // Create a tmp directory, if it does not exists
             console.log( 'Creating tmp directory');
@@ -153,18 +201,4 @@ class SavedGamesExport {
         return cordovaFS.deleteDirRecursivelyAsync( this.tmpDir );
     }
 
-    /** 
-     * Copy saved games to the temporal dir 
-     * @returns Promise with the copy process
-     */
-    private copySavedGamesToTmpDir() : Promise<void> {
-        console.log( 'Copying file games to tmp dir (' + this.fileGameEntries.length + ')' );
-
-        let promises : Array< Promise<any> > = [];
-        for( let fileGameEntry of this.fileGameEntries )
-            promises.push( cordovaFS.copyToAsync( fileGameEntry , this.tmpDir ) );
-
-        // Wait for all copys to finish
-        return $.when.apply($, promises);
-    }
 }

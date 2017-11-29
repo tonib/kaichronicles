@@ -13,6 +13,12 @@ class DocumentSelection {
     /** Selected mime type */
     public mimeType : string;
 
+    public copyTo( parent : any ) : Promise<void> {
+
+        
+        return null;
+    }
+
     /**
      * Select a document from the UI, and get info about it
      * @returns Promise with the selected file
