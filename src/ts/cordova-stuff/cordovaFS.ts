@@ -64,9 +64,9 @@ const cordovaFS = {
      * Write a content on a file
      * @param {FileEntry} fileEntry The file to write
      * @param fileContent The file content
-     * @returns Promise with the write process
+     * @returns {Promise<FileEntry>} Promise with the write process. The parameter is the written file entry
      */
-    writeFileContentAsync: function( fileEntry : any, fileContent: any ) : Promise<void> {
+    writeFileContentAsync: function( fileEntry : any, fileContent: any ) : Promise<any> {
         var dfd = jQuery.Deferred();
 
         cordovaFS.createWriterAsync( fileEntry )
@@ -74,7 +74,7 @@ const cordovaFS = {
             
             fileWriter.onwriteend = function() {
                 console.log( 'Successful file write' );
-                dfd.resolve();
+                dfd.resolve(fileEntry);
             };
 
             fileWriter.onerror = function( error ) {
@@ -317,7 +317,8 @@ const cordovaFS = {
                     dfd.reject( msg );
                 }
                 if( binary )
-                    reader.readAsBinaryString(file);
+                    //reader.readAsBinaryString(file);
+                    reader.readAsArrayBuffer(file);
                 else
                     reader.readAsText(file);
             },
