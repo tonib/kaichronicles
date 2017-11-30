@@ -198,53 +198,19 @@ const cordovaFS = {
         return $.when.apply($, promises);
     },
 
-    loadFile: function( fileName, callback ) {
-        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
-            function (fs) {
-                console.log('file system open: ' + fs.name);
-
-                // Get the file to save
-                fs.root.getFile(fileName, 
-                    { 
-                        create: false, 
-                        exclusive: false
-                    }, 
-                    function (fileEntry) {
-                        console.log("fileEntry is file?" + fileEntry.isFile.toString());
-                        cordovaFS.readFile(fileEntry, callback);
-                    }, 
-                    function() { alert('Error getting file'); }
-                );
-
-            }, 
-            function() { alert('Error requesting file system'); }
-        );
-    },
-
-    // TODO: Remove this file and use readFileAsync
-    readFile: function(fileEntry, callback) {
-        /*
-        fileEntry.file(
-            function (file) {
-                var reader = new FileReader();
-
-                reader.onloadend = function() {
-                    console.log("Successful file read: " + this.result);
-                    callback(this.result);
-                };
-
-                reader.readAsText(file);
-
-            }, 
-            function() { alert('Error reading file'); }
-        );*/
-        cordovaFS.readFileAsync( fileEntry , false )
-        .then(
-            function( fileContent : any ) {
-                callback( fileContent );
-            },
-            function() { alert('Error reading file'); }
-        );
+    /**
+     * Load the text content from a file on the root of the persistent file system.
+     * @param fileName The file name to read
+     * @returns The promise with the file content
+     */
+    readRootTextFile: function( fileName : string ) : Promise<string> {
+        return cordovaFS.requestFileSystemAsync()
+        .then( function( fs /* : FileSystem */ ) {
+            return cordovaFS.getFileAsync( fs.root , fileName );
+        })
+        .then( function( fileEntry /* : FileEntry */ ) {
+            return cordovaFS.readFileAsync( fileEntry , false );
+        });
     },
 
     /** 
@@ -388,7 +354,7 @@ const cordovaFS = {
                 dfd.reject( msg );
             }
         );
-        
+
         return dfd.promise();
     },
 

@@ -97,9 +97,18 @@ class loadGameController {
      * Called when a file is selected (Android only)
      */
     public static fileListClicked(fileName : string) {
-        cordovaFS.loadFile( fileName , function(fileContent) {
-            loadGameController.loadGame( fileContent );
-        });
+        cordovaFS.readRootTextFile( fileName )
+        .then(
+            function( fileContent : string ) {
+                loadGameController.loadGame( fileContent );
+            },
+            function( error : any ) {
+                let msg = 'Error loading saved game';
+                if( error )
+                    msg += ': ' + error.toString();
+                alert( msg );
+            }
+        );
     }
 
     /**
