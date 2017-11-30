@@ -100,6 +100,7 @@ class SavedGamesExport {
         const self = this;
         //const docEntry = window.resolveLocalFileSystemURI( doc.uri );
         let nNewGames = 0;
+        let zipContent : any = null;
 
         // Well, the Entry returned by window.resolveLocalFileSystemURI( doc.uri ) is not really a FileEntry: It cannot be
         // copied with "copyTo". I suspect it's because is not a "file://" URL (it's a "content://"). 
@@ -111,8 +112,15 @@ class SavedGamesExport {
         .then( function( entry /* : Entry */ ) {
             return cordovaFS.readFileAsync( entry , true );
         })
-        .then( function( content ) {
-            alert( typeof( content ) );
+        .then( function( content : any ) {
+            //alert( typeof( content ) );
+            zipContent = content;
+            // Create the zip file on the tmp dir (empty)
+            return cordovaFS.getFileAsync( self.tmpDir , doc.fileName , { create: true, exclusive: false } );
+        })
+        .then( function( fileEntry /* : FileEntry */ ) {
+            // Save the zip content
+            return cordovaFS.writeFileContentAsync( fileEntry , zipContent );
         });
 
         // return cordovaFS.resolveLocalFileSystemURIAsync( doc.uri )

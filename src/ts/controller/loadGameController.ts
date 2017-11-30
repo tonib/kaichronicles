@@ -97,7 +97,7 @@ class loadGameController {
      * Called when a file is selected (Android only)
      */
     public static fileListClicked(fileName : string) {
-        cordovaFS.readRootTextFile( fileName )
+        cordovaFS.readRootTextFileAsync( fileName )
         .then(
             function( fileContent : string ) {
                 loadGameController.loadGame( fileContent );

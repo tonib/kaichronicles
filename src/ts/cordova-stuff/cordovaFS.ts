@@ -12,6 +12,7 @@ const cordovaFS = {
      */
     currentDownload: null,
 
+    // TODO: Replace this with functions with Promises
     saveFile: function(originalFileName, fileContent, callback) {
         cordovaFS.requestFileSystemAsync()
         .then( function(fs) {
@@ -33,6 +34,83 @@ const cordovaFS = {
             });
         }, 
         function() { alert('Error requesting file system'); } );
+    },
+
+    // TODO: Remove this and use writeFileContentAsync
+    writeFile: function (fileEntry, fileContent, callback) {
+        /*
+        // Create a FileWriter object for our FileEntry (log.txt).
+        fileEntry.createWriter(function (fileWriter) {
+
+            fileWriter.onwriteend = function() {
+                console.log("Successful file write");
+                callback();
+            };
+
+            fileWriter.onerror = function (e) {
+                console.log("Failed file read: " + e.toString());
+            };
+
+            // If we are appending data to file, go to the end of the file.
+            fileWriter.write(fileContent);
+
+        });
+        */
+        cordovaFS.writeFileContentAsync( fileEntry , fileContent )
+        .then( function() { callback(); } );
+    },
+    
+    /**
+     * Write a content on a file
+     * @param {FileEntry} fileEntry The file to write
+     * @param fileContent The file content
+     * @returns Promise with the write process
+     */
+    writeFileContentAsync: function( fileEntry : any, fileContent: any ) : Promise<void> {
+        var dfd = jQuery.Deferred();
+
+        cordovaFS.createWriterAsync( fileEntry )
+        .then( function( fileWriter /* : FileWriter */ ) {
+            
+            fileWriter.onwriteend = function() {
+                console.log( 'Successful file write' );
+                dfd.resolve();
+            };
+
+            fileWriter.onerror = function( error ) {
+                let msg = 'Failed to write file';
+                if( error )
+                    msg += ': ' + error.toString();
+                console.log( msg );
+                dfd.reject( msg );
+            };
+
+            fileWriter.write(fileContent);
+        });
+
+        return dfd.promise();
+    },
+
+    /**
+     * Creates a new FileWriter associated with a file
+     * @param {FileEntry} fileEntry The file
+     * @returns Promise with the new FileWriter
+     */
+    createWriterAsync: function( fileEntry : any ) : Promise<any> {
+        var dfd = jQuery.Deferred();
+
+        fileEntry.createWriter(
+            function( fileWriter /* : FileWriter */ ) {
+                dfd.resolve( fileWriter );
+            },
+            function( error /* : FileError */ ) {
+                let msg = 'Error creating file writer. Code: ' + error.code;
+                console.log( msg );
+                dfd.reject( msg );
+            }
+        );
+
+        return dfd.promise();
     },
 
     /**
@@ -83,26 +161,6 @@ const cordovaFS = {
                     return;
                 }
             }
-        });
-    },
-
-    writeFile: function (fileEntry, fileContent, callback) {
-
-        // Create a FileWriter object for our FileEntry (log.txt).
-        fileEntry.createWriter(function (fileWriter) {
-
-            fileWriter.onwriteend = function() {
-                console.log("Successful file write");
-                callback();
-            };
-
-            fileWriter.onerror = function (e) {
-                console.log("Failed file read: " + e.toString());
-            };
-
-            // If we are appending data to file, go to the end of the file.
-            fileWriter.write(fileContent);
-
         });
     },
 
@@ -203,7 +261,7 @@ const cordovaFS = {
      * @param fileName The file name to read
      * @returns The promise with the file content
      */
-    readRootTextFile: function( fileName : string ) : Promise<string> {
+    readRootTextFileAsync: function( fileName : string ) : Promise<string> {
         return cordovaFS.requestFileSystemAsync()
         .then( function( fs /* : FileSystem */ ) {
             return cordovaFS.getFileAsync( fs.root , fileName );
