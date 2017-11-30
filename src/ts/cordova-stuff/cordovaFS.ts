@@ -221,7 +221,9 @@ const cordovaFS = {
         );
     },
 
+    // TODO: Remove this file and use readFileAsync
     readFile: function(fileEntry, callback) {
+        /*
         fileEntry.file(
             function (file) {
                 var reader = new FileReader();
@@ -235,7 +237,70 @@ const cordovaFS = {
 
             }, 
             function() { alert('Error reading file'); }
+        );*/
+        cordovaFS.readFileAsync( fileEntry , false )
+        .then(
+            function( fileContent : any ) {
+                callback( fileContent );
+            },
+            function() { alert('Error reading file'); }
         );
+    },
+
+    /** 
+     * Get a file from an FileEntry
+     * @param {FileEntry} entry The entry
+     * @returns {Promise<File>} Promise with the File
+     */
+    fileAsync: function( entry : any ) : Promise<any> {
+        var dfd = jQuery.Deferred();
+        entry.file(
+            function (file /* : File */ ) {
+                console.log( 'file call OK' );
+                dfd.resolve(file);
+            }, 
+            function( fileError /* : FileError */ ) { 
+                let msg = 'Error getting file: ' + fileError.code;
+                console.log( msg );
+                dfd.reject( msg );
+            }
+        );
+        return dfd.promise();
+    },
+
+    /**
+     * Read a file content
+     * @param {Entry} entry The entry to read
+     * @param binary True if the content should be read as binary. False to read as text
+     * @returns Promise with the contet file (text or binary)
+     */
+    readFileAsync: function( entry : any, binary : boolean ) : Promise<any> {
+        var dfd = jQuery.Deferred();
+
+        cordovaFS.fileAsync( entry )
+        .then(
+            function( file /* : File */ ) {
+                var reader = new FileReader();
+                reader.onloadend = function() {
+                    console.log( 'File read finished' );
+                    dfd.resolve( this.result );
+                };
+                reader.onerror = function( error ) {
+                    let msg = 'Error reading file';
+                    if( error && error.message )
+                        msg += ': ' + error.message;
+                    console.log( msg );
+                    dfd.reject( msg );
+                }
+                if( binary )
+                    reader.readAsBinaryString(file);
+                else
+                    reader.readAsText(file);
+            },
+            function( error : any ) { dfd.reject( error ); }
+        );
+
+        return dfd.promise();
     },
 
     /**
@@ -301,6 +366,29 @@ const cordovaFS = {
                 dfd.reject( 'Error requesting file system (code ' + fileError.code + ')' );
             }
         );
+        return dfd.promise();
+    },
+
+    /**
+     * Look up file system Entry referred to by local URI.
+     * @param uri URI referring to a local file or directory
+     * @returns {Promise<Entry>} Promise with the file / directory entry
+     */
+    resolveLocalFileSystemURIAsync: function(uri : string) : Promise<any> {
+        var dfd = jQuery.Deferred();
+
+        window.resolveLocalFileSystemURI( uri, 
+            function( entry /* : Entry */ ) {
+                console.log( 'URI resolved' );
+                dfd.resolve( entry );
+            },
+            function( error /* : FileError */ ) {
+                let msg = 'Error resolving local file URI (code ' + error.code + ')';
+                console.log( msg );
+                dfd.reject( msg );
+            }
+        );
+        
         return dfd.promise();
     },
 

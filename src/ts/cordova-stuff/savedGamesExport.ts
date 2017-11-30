@@ -98,7 +98,7 @@ class SavedGamesExport {
     private importZip( doc : DocumentSelection ) : Promise<void> {
 
         const self = this;
-        const docEntry = window.resolveLocalFileSystemURI( doc.uri );
+        //const docEntry = window.resolveLocalFileSystemURI( doc.uri );
         let nNewGames = 0;
 
         // Well, the Entry returned by window.resolveLocalFileSystemURI( doc.uri ) is not really a FileEntry: It cannot be
@@ -106,37 +106,49 @@ class SavedGamesExport {
         // So, get the file content, and create the the file on the tmp directory manually
 
         // TODO: Check files will not be overwritten!
-        console.log( 'Copy zip to the tmp directory' );
-        return cordovaFS.copyToAsync( docEntry , this.tmpDir , doc.fileName )
-        .then( function( entry /* : FileEntry */ ) {
-            console.log( 'Unziping file on tmp directory' );
-            return cordovaFS.unzipAsync( entry.toURL() , self.tmpDir.toURL() );
-        })
-        .then( function() { 
-            console.log( 'Get unziped files' );
-            return cordovaFS.readEntriesAsync( self.tmpDir );
-        })
-        .then( function( entries : Array<any> ) {
-            console.log( 'Filtering unziped files' );
-            entries = SavedGamesExport.filterSavedGamesEntries( entries );
 
-            console.log( 'Copying saved games to the root' );
-            nNewGames = entries.length;
-            return cordovaFS.copySetToAsync( entries , self.fs.root );
+        return cordovaFS.resolveLocalFileSystemURIAsync( doc.uri )
+        .then( function( entry /* : Entry */ ) {
+            return cordovaFS.readFileAsync( entry , true );
         })
-        .then( 
-            function() {
-                // OK
-                toastr.success( nNewGames + ' imported' );
-            },
-            function( error ) {
-                // ERROR
-                let msg = 'Error importing saved games';
-                if( error )
-                    msg += ': ' + error.toString();
-                alert( msg );
-            }
-        );
+        .then( function( content ) {
+            alert( typeof( content ) );
+        });
+
+        // return cordovaFS.resolveLocalFileSystemURIAsync( doc.uri )
+        // .then( function( entry /* : Entry */ ) {
+        //     console.log( 'Copy zip to the tmp directory' );
+        //     return cordovaFS.copyToAsync( entry , self.tmpDir , doc.fileName )
+        // })
+        // .then( function( entry /* : FileEntry */ ) {
+        //     console.log( 'Unziping file on tmp directory' );
+        //     return cordovaFS.unzipAsync( entry.toURL() , self.tmpDir.toURL() );
+        // })
+        // .then( function() { 
+        //     console.log( 'Get unziped files' );
+        //     return cordovaFS.readEntriesAsync( self.tmpDir );
+        // })
+        // .then( function( entries : Array<any> ) {
+        //     console.log( 'Filtering unziped files' );
+        //     entries = SavedGamesExport.filterSavedGamesEntries( entries );
+
+        //     console.log( 'Copying saved games to the root' );
+        //     nNewGames = entries.length;
+        //     return cordovaFS.copySetToAsync( entries , self.fs.root );
+        // })
+        // .then( 
+        //     function() {
+        //         // OK
+        //         toastr.success( nNewGames + ' imported' );
+        //     },
+        //     function( error ) {
+        //         // ERROR
+        //         let msg = 'Error importing saved games';
+        //         if( error )
+        //             msg += ': ' + error.toString();
+        //         alert( msg );
+        //     }
+        // );
     }
 
     private importJson( doc : DocumentSelection ) : Promise<void> {
