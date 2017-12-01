@@ -4,13 +4,18 @@
     <!-- Web upload -->
     <input name="file" type="file" id="loadGame-file" class="form-control" 
         accept=".json" style="height:auto" value="">
+
+    <!-- Errors (Web) -->
+    <p style="color: red" id="loadGame-errors">
+    </p>
     
+    <!-- Export / import games (Android) -->
     <p id="loadGame-importexportfunctions" >
-        <button type="submit" class="btn btn-primary btn-block" id="loadGame-export">
-            Export saved games
+        <button type="submit" class="btn btn-primary btn-block" id="loadGame-export" data-translation="exportGames">
+            Export saved games...
         </button>
-        <button type="submit" class="btn btn-primary btn-block" id="loadGame-import">
-            Import saved games
+        <button type="submit" class="btn btn-primary btn-block" id="loadGame-import" data-translation="importGames">
+            Import saved games...
         </button>
     </p>
 
@@ -20,6 +25,4 @@
         </tbody>
     </table>
 
-    <p style="color: red" id="loadGame-errors">
-    </p>
 </form>

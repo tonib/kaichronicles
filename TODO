@@ -23,6 +23,8 @@
   of Weaponmastery.
 - Remove the "Alert" text from the message dialog
 - Acknowledgements to https://github.com/danjarvis/cordova-plugin-document-contract
+- Ask help to Alarion with english translations
+- Add Alarion to authors
 
 FOR FUTURE (1.9+):
 - Add section "Improved Disciplines" to the "Game rules" page

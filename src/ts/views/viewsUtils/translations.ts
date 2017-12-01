@@ -254,6 +254,19 @@ class Translations {
         'backToEquipment' : 'Volver a la sección de Equipo',
 
         //////////////////////////////////////
+        // Load game
+        //////////////////////////////////////
+
+        'loadGame' : 'Cargar juego',
+        'fileDeleted' : '{0} borrado',
+        'confirmDeleteSave' : '¿Seguro que quiere borrar el juego guardado {0}?',
+        'noSavedGames' : 'No se encontraron juegos guardados',
+        'exportedDownloads' : 'Juegos exportados a Descargas',
+        'importedGames' : '{0} juegos importados',
+        'exportGames' : 'Exportar juegos guardados...',
+        'importGames' : 'Importar juegos guardados...',
+
+        //////////////////////////////////////
         // Others
         //////////////////////////////////////
 
@@ -262,14 +275,10 @@ class Translations {
         'doMealFirst' : 'Haz primero la comida',
         'kaiChronicles' : 'Crónicas del Kai',
         'gameRules' : 'Reglas del juego',
-        'loadGame' : 'Cargar juego',
-        'fileDeleted' : '{0} borrado',
-        'confirmDeleteSave' : '¿Seguro que quiere borrar el juego guardado {0}?',
         'projectAonLicense' : 'Licencia del Proyecto Aon',
         'combatTables' : 'Tablas de Combate',
         'mainMenu' : 'Menú principal',
         'bookNotDownloaded' : 'El libro {0} no está descargado',
-        'noSavedGames' : 'No se encontraron juegos guardados',
         'maximumPick' : 'Sólo puedes coger {0} objetos',
         'zeroIgnored' : 'Cero ignorado'
     };
@@ -417,20 +426,27 @@ class Translations {
         'processCancelled' : 'Process cancelled',
 
         //////////////////////////////////////
+        // Load game
+        //////////////////////////////////////
+
+        'noSavedGames' : 'No saved games found',
+        'confirmDeleteSave' : 'Are you sure you want to delete the save game {0} ?',
+        'fileDeleted' : '{0} deleted',
+        'exportedDownloads' : 'Saved games exported to Downloads',
+        'importedGames' : '{0} games imported',
+
+        //////////////////////////////////////
         // Others
         //////////////////////////////////////
 
         'doMealFirst' : 'Please, do the Meal first',
         'kaiChronicles' : 'Kai Chronicles',
-        'confirmDeleteSave' : 'Are you sure you want to delete the save game {0} ?',
         'projectAonLicense' : 'Project Aon license',
         'combatTables' : 'Combat Tables',
         'mainMenu' : 'Main Menu',
         'bookNotDownloaded' : 'Book {0} is not downloaded',
-        'noSavedGames' : 'No saved games found',
         'maximumPick' : 'You can pick only {0} objects',
-        'zeroIgnored' : 'Zero ignored',
-        'fileDeleted' : '{0} deleted',
+        'zeroIgnored' : 'Zero ignored'
 
     };
 

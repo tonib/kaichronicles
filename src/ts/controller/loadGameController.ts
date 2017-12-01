@@ -160,12 +160,11 @@ class loadGameController {
      */
     public static exportSavedGames() {
         try {
-            // TODO: Translate messages
             new SavedGamesExport().export()
             .then( 
                 function() {
                     // OK
-                    toastr.success( 'Saved games exported to Downloads');
+                    toastr.success( translations.text( 'exportedDownloads' ) );
                 },
                 function( error ) {
                     // ERROR
@@ -187,7 +186,6 @@ class loadGameController {
      */
     public static importSavedGames() {
         try {
-            // TODO: Translate messages
             DocumentSelection.selectDocument()
             .then(function(doc : DocumentSelection) {
                 return new SavedGamesExport().import(doc);
@@ -195,7 +193,7 @@ class loadGameController {
             .then( 
                 function(nNewGames : number) {
                     // OK
-                    toastr.success( nNewGames + ' games imported' );
+                    toastr.success( translations.text( 'importedGames' , [ nNewGames ] ) );
                     // Refresh games list
                     loadGameController.listGameFiles();
                 },
