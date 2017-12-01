@@ -21,6 +21,7 @@ class loadGameController {
             else {
                 // Cordova app files list
                 loadGameView.hideFileUpload();
+                loadGameView.bindAppEvents();
                 loadGameController.listGameFiles();
             }
 
@@ -159,8 +160,21 @@ class loadGameController {
      */
     public static exportSavedGames() {
         try {
-            // TODO: Show info about the operation
-            new SavedGamesExport().export();
+            // TODO: Translate messages
+            new SavedGamesExport().export()
+            .then( 
+                function() {
+                    // OK
+                    toastr.success( 'Saved games exported to Downloads');
+                },
+                function( error ) {
+                    // ERROR
+                    let msg = 'Error exporting saved games';
+                    if( error )
+                        msg += ': ' + error.toString();
+                    alert( msg );
+                }
+            );
         }
         catch(e) {
             console.log(e);
@@ -172,11 +186,32 @@ class loadGameController {
      * Import saved games from a zip file
      */
     public static importSavedGames() {
-        
-        DocumentSelection.selectDocument()
-        .then(function(doc : DocumentSelection) {
-            new SavedGamesExport().import(doc);
-        });
+        try {
+            // TODO: Translate messages
+            DocumentSelection.selectDocument()
+            .then(function(doc : DocumentSelection) {
+                return new SavedGamesExport().import(doc);
+            })
+            .then( 
+                function(nNewGames : number) {
+                    // OK
+                    toastr.success( nNewGames + ' games imported' );
+                    // Refresh games list
+                    loadGameController.listGameFiles();
+                },
+                function( error : any ) {
+                    // ERROR
+                    let msg = 'Error importing saved games';
+                    if( error )
+                        msg += ': ' + error.toString();
+                    alert( msg );
+                }
+            );
+        }
+        catch(e) {
+            console.log(e);
+            alert( 'Error importing: ' + e.toString() );
+        }
     }
 
     /** Return page */

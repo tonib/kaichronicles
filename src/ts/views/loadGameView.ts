@@ -50,6 +50,21 @@ const loadGameView = {
     },
 
     /**
+     * Bind Android page events
+     */
+    bindAppEvents: function() {
+        // Export / import saved games
+        $('#loadGame-export').click(function(e : Event) {
+            e.preventDefault();
+            loadGameController.exportSavedGames();
+        });
+        $('#loadGame-import').click(function(e : Event) {
+            e.preventDefault();
+            loadGameController.importSavedGames();
+        });
+    },
+
+    /**
      * Bind Android files list events
      */
     bindListEvents: function() {
@@ -69,16 +84,6 @@ const loadGameView = {
             if( !confirm( translations.text('confirmDeleteSave' , [ fileName ] ) ) )
                 return;
             loadGameController.deleteFile( fileName );
-        });
-
-        // Export / import saved games
-        $('#loadGame-export').click(function(e : Event) {
-            e.preventDefault();
-            loadGameController.exportSavedGames();
-        });
-        $('#loadGame-import').click(function(e : Event) {
-            e.preventDefault();
-            loadGameController.importSavedGames();
         });
         
     },

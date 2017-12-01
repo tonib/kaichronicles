@@ -38,24 +38,6 @@ const cordovaFS = {
 
     // TODO: Remove this and use writeFileContentAsync
     writeFile: function (fileEntry, fileContent, callback) {
-        /*
-        // Create a FileWriter object for our FileEntry (log.txt).
-        fileEntry.createWriter(function (fileWriter) {
-
-            fileWriter.onwriteend = function() {
-                console.log("Successful file write");
-                callback();
-            };
-
-            fileWriter.onerror = function (e) {
-                console.log("Failed file read: " + e.toString());
-            };
-
-            // If we are appending data to file, go to the end of the file.
-            fileWriter.write(fileContent);
-
-        });
-        */
         cordovaFS.writeFileContentAsync( fileEntry , fileContent )
         .then( function() { callback(); } );
     },

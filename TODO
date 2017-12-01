@@ -1,5 +1,4 @@
 - Allow to export / import saved games to the SD card
-  https://github.com/danjarvis/cordova-plugin-document-contract
 - BookDownloadState to TS
 - Typo: ShellPrice should be SellPrice (brfff)
 - Check all boolean properties on books mechanics, seach for not="true" bugs...
@@ -67,6 +66,7 @@ FOR FUTURE (1.9+):
   to display the entire description (see pouchadgana object, and sommerswerd?)
 - Action chart buttons don't work on iPad Safari
 - Add night mode (brffff...)
+- Dialogs with text input: Allow to confirm with the screen keyboard ("go" button)
 
 Reminders:
 

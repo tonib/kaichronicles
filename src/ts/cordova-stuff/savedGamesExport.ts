@@ -55,76 +55,49 @@ class SavedGamesExport {
         .then( function() {
             // Delete tmp dir
             return self.deleteTmpDirectory();
-        })
-        .then( 
-            function() {
-                // OK
-                toastr.success( 'Saved games exported to Downloads');
-            },
-            function( error ) {
-                // ERROR
-                let msg = 'Error exporting saved games';
-                if( error )
-                    msg += ': ' + error.toString();
-                alert( msg );
-            }
-        );
+        });
 
-        // TODO: Move UI stuff (messages) outside this class (it's part of the "model")
-        // TODO: Translate messages
         // TODO: Test errors. If there are errors, remove sub-products (tmp dir, etc)
     }
 
     /**
      * Import saved games from a file
-     * @param uri File URL with the games to import
-     * @returns Promise with the export process
+     * @param doc File with the games to import
+     * @returns Promise with the export process. Parameter is the number of imported games
      */
-    public import( doc : DocumentSelection ) {
+    public import( doc : DocumentSelection ) : Promise<number> {
         const self = this;
-        this.setup()
+        return this.setup()
         .then( function() {
             // Get the file type. It can be a zip file or a json file
             // TODO: Check the mime type too
             const nameAndExtension = cordovaFS.getFileNameAndExtension( doc.fileName.toLowerCase() );
             if( nameAndExtension.extension == 'zip' )
                 return self.importZip( doc );
-            else
+            else if( nameAndExtension.extension == 'json' )
                 return self.importJson( doc );
+            else
+                // TODO: Translate this message
+                return jQuery.Deferred().reject('Only files with extension "zip" or "json" can be imported').promise();
         });
+
+        // TODO: Test errors. If there are errors, remove sub-products (tmp dir, etc)
     }
 
-    private importZip( doc : DocumentSelection ) : Promise<void> {
+    /**
+     * Import saved games from a zip file
+     * @param doc File with the games to import
+     * @returns Promise with the import process. Parameter is the number of imported games
+     */
+    private importZip( doc : DocumentSelection ) : Promise<number> {
 
         const self = this;
-        //const docEntry = window.resolveLocalFileSystemURI( doc.uri );
         let nNewGames = 0;
         let zipContent : any = null;
 
-        // Well, the Entry returned by window.resolveLocalFileSystemURI( doc.uri ) is not really a FileEntry: It cannot be
-        // copied with "copyTo". I suspect it's because is not a "file://" URL (it's a "content://"). 
-        // So, get the file content, and create the the file on the tmp directory manually
-
         // TODO: Check files will not be overwritten!
 
-        return cordovaFS.resolveLocalFileSystemURIAsync( doc.uri )
-        // .then( function( entry /* : Entry */ ) {
-        //     console.log( 'Copy zip to the tmp directory' );
-        //     return cordovaFS.copyToAsync( entry , self.tmpDir , doc.fileName )
-        // })
-        .then( function( entry /* : Entry */ ) {
-            console.log( 'Reading zip content' );
-            return cordovaFS.readFileAsync( entry , true );
-        })
-        .then( function( content : any ) {
-            zipContent = content;
-            console.log( 'Create the zip file on the tmp dir (empty)' );
-            return cordovaFS.getFileAsync( self.tmpDir , doc.fileName , { create: true, exclusive: false } );
-        })
-        .then( function( zipFileEntryOnTmpDir /* : FileEntry */ ) {
-            console.log( 'Save the zip content' );
-            return cordovaFS.writeFileContentAsync( zipFileEntryOnTmpDir , zipContent );
-        })
+        return this.copyFileContent( doc , this.tmpDir )
         .then( function( zipFileEntryOnTmpDir /* : FileEntry */ ) {
             console.log( 'Unziping file on tmp directory' );
             return cordovaFS.unzipAsync( zipFileEntryOnTmpDir.toURL() , self.tmpDir.toURL() );
@@ -141,30 +114,87 @@ class SavedGamesExport {
             nNewGames = entries.length;
             return cordovaFS.copySetToAsync( entries , self.fs.root );
         })
-        .then( 
-            function() {
-                // OK
-                toastr.success( nNewGames + ' imported' );
-            },
-            function( error ) {
-                // ERROR
-                let msg = 'Error importing saved games';
-                if( error )
-                    msg += ': ' + error.toString();
-                alert( msg );
-            }
-        );
+        .then( function() {
+            // Delete tmp dir
+            return self.deleteTmpDirectory();
+        })
+        .then( function() {
+            // Notify the number of imported games
+            return jQuery.Deferred().resolve(nNewGames).promise();
+        });
     }
 
-    private importJson( doc : DocumentSelection ) : Promise<void> {
-        return null;
+    /**
+     * Import a saved game file
+     * @param doc File with the saved game to import
+     * @returns Promise with the import process. Parameter is the number of imported games
+     */
+    private importJson( doc : DocumentSelection ) : Promise<number> {
+
+        const self = this;
+        let fileContent : string = null;
+
+        // TODO: Check files will not be overwritten!
+
+        return this.copyFileContent( doc , this.fs.root )
+        .then( function() {
+            // Delete tmp dir
+            return self.deleteTmpDirectory();
+        })
+        .then( function() {
+            // Notify the number of imported games
+            return jQuery.Deferred().resolve(1).promise();
+        });
     }
 
-    private static filterSavedGamesEntries( entries : Array<any> ) {
+    /**
+     * Copy a file content to other directory
+     * @param doc The file to copy
+     * @param {DirectoryEntry} parent Directory where to create the new file
+     */
+    private copyFileContent( doc : DocumentSelection , parent : any ) : Promise<any>  {
+
+        let fileContent : any = null;
+
+        // Well, the Entry returned by window.resolveLocalFileSystemURI( doc.uri ) is not really a FileEntry: It cannot be
+        // copied with "copyTo". I suspect it's because is not a "file://" URL (it's a "content://"). 
+        // So, get the file content, and create the the file on the tmp directory manually
+
+        return cordovaFS.resolveLocalFileSystemURIAsync( doc.uri )
+        // THIS DOES NOT WORK FOR "content://" entries
+        // .then( function( entry /* : Entry */ ) {
+        //     console.log( 'Copy zip to the tmp directory' );
+        //     return cordovaFS.copyToAsync( entry , self.tmpDir , doc.fileName )
+        // })
+        .then( function( entry /* : Entry */ ) {
+            console.log( 'Reading file content' );
+            return cordovaFS.readFileAsync( entry , true );
+        })
+        .then( function( content : any ) {
+            fileContent = content;
+            console.log( 'Creating empty file' );
+            return cordovaFS.getFileAsync( parent , doc.fileName , { create: true, exclusive: false } );
+        })
+        .then( function( newFileEntry /* : FileEntry */ ) {
+            console.log( 'Save the file content' );
+            return cordovaFS.writeFileContentAsync( newFileEntry , fileContent );
+        })
+    }
+
+    /**
+     * Check file entries, get those that are saved games
+     * @param {Array<Entry>} entries File entries to check
+     * @returns {Array<Entry>} The saved games
+     */
+    private static filterSavedGamesEntries( entries : Array<any> ) : Array<any> {
         let result = []
         for(let entry of entries) {
-            // TODO: Check extension (.json)
-            if( entry.isFile )
+            let ok = true;
+            if( !entry.isFile )
+                ok = false;
+            if( cordovaFS.getFileNameAndExtension( entry.name ).extension.toLowerCase() != 'json' )
+                ok = false;
+            if( ok )
                 result.push( entry );
         }
         return result;
