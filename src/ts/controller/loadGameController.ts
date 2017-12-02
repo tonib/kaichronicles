@@ -186,14 +186,15 @@ class loadGameController {
      */
     public static importSavedGames() {
         try {
+            const importProcess = new SavedGamesExport();
             DocumentSelection.selectDocument()
             .then(function(doc : DocumentSelection) {
-                return new SavedGamesExport().import(doc);
+                return importProcess.import(doc);
             })
             .then( 
-                function(nNewGames : number) {
+                function() {
                     // OK
-                    toastr.success( translations.text( 'importedGames' , [ nNewGames ] ) );
+                    toastr.success( translations.text( 'importedGames' , [ importProcess.nImportedGames ] ) );
                     // Refresh games list
                     loadGameController.listGameFiles();
                 },

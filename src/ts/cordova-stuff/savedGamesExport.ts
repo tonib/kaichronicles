@@ -20,6 +20,14 @@ class SavedGamesExport {
     private tmpDir : any = null;
 
     /**
+     * Files to delete after the process end
+     */
+    private filesToDeleteAtEnd : Array<any> = [];
+
+    /** Number of imported games */
+    public nImportedGames = 0;
+
+    /**
      * Export saved games to Download directory
      * @returns Promise with the export process
      */
@@ -28,36 +36,34 @@ class SavedGamesExport {
         let zipPath : string = null;
         const zipFileName = 'KaiChroniclesExport-' + settingsController.getDateForFileNames() + '.zip';
 
-        return this.setup()
+        const process = this.setup()
         .then( function() {
             console.log( 'Copying file games to tmp dir (' + self.fileGameEntries.length + ')' );
             return cordovaFS.copySetToAsync( self.fileGameEntries , self.tmpDir );
         })
         .then( function() {
-            // Create the zip
-            console.log( 'Creating zip file' );
+            // Create the zip. If it's created on the tmp directory, the zip creation will fail
+            console.log( 'Creating zip file on root directory' );
             zipPath = self.fs.root.toURL() + zipFileName;
             return cordovaFS.zipAsync( self.tmpDir.toURL() , zipPath );
-        })
-        .then( function() {
-            console.log( 'Copying the zip to Download directory' );
-            // Copy the zip
-            return cordovaFS.copyToDownloadAsync(zipPath , zipFileName , 'Kai Chronicles saved games export' , 'application/zip' );
         })
         .then( function() {
             console.log( 'Get the zip file entry' );
             return cordovaFS.getFileAsync( self.fs.root , zipFileName );
         })
-        .then( function( fileEntry /* : FileEntry */ ) {
-            console.log( 'Delete the zip file' );
-            return cordovaFS.deleteFileAsync( fileEntry );
-        })
-        .then( function() {
-            // Delete tmp dir
-            return self.deleteTmpDirectory();
-        });
+        .then( function( entry : any ) {
+            // This generated zip file will be removed at the end of the process
+            self.filesToDeleteAtEnd.push( entry );
 
-        // TODO: Test errors. If there are errors, remove sub-products (tmp dir, etc)
+            console.log( 'Copying the zip to Download directory' );
+            // Copy the zip
+            return cordovaFS.copyToDownloadAsync(zipPath , zipFileName , 'Kai Chronicles saved games export' , 'application/zip' );
+        });
+        
+        // Cleant tmp files
+        return this.clean( process );
+
+        // TODO: Test errors
     }
 
     /**
@@ -67,21 +73,22 @@ class SavedGamesExport {
      */
     public import( doc : DocumentSelection ) : Promise<number> {
         const self = this;
-        return this.setup()
+
+        const process = this.setup()
         .then( function() {
             // Get the file type. It can be a zip file or a json file
-            // TODO: Check the mime type too
+            // TODO: Check the mime type too?
             const nameAndExtension = cordovaFS.getFileNameAndExtension( doc.fileName.toLowerCase() );
             if( nameAndExtension.extension == 'zip' )
                 return self.importZip( doc );
             else if( nameAndExtension.extension == 'json' )
                 return self.importJson( doc );
             else
-                // TODO: Translate this message
-                return jQuery.Deferred().reject('Only files with extension "zip" or "json" can be imported').promise();
+                return jQuery.Deferred().reject( translations.text( 'importExtensionsError' ) ).promise();
         });
 
-        // TODO: Test errors. If there are errors, remove sub-products (tmp dir, etc)
+        // Cleant tmp files
+        return this.clean( process );
     }
 
     /**
@@ -115,11 +122,8 @@ class SavedGamesExport {
             return cordovaFS.copySetToAsync( entries , self.fs.root );
         })
         .then( function() {
-            // Delete tmp dir
-            return self.deleteTmpDirectory();
-        })
-        .then( function() {
             // Notify the number of imported games
+            self.nImportedGames = nNewGames;
             return jQuery.Deferred().resolve(nNewGames).promise();
         });
     }
@@ -138,11 +142,8 @@ class SavedGamesExport {
 
         return this.copyFileContent( doc , this.fs.root )
         .then( function() {
-            // Delete tmp dir
-            return self.deleteTmpDirectory();
-        })
-        .then( function() {
             // Notify the number of imported games
+            self.nImportedGames = 1;
             return jQuery.Deferred().resolve(1).promise();
         });
     }
@@ -221,6 +222,7 @@ class SavedGamesExport {
             self.fileGameEntries = SavedGamesExport.filterSavedGamesEntries( entries );
 
             // Create a tmp directory, if it does not exists
+            // TODO: Delete tmp directory, if it exists
             console.log( 'Creating tmp directory');
             return cordovaFS.getDirectoryAsync( self.fs.root , 'tmpKaiChronicles' , { create : true } );
         })
@@ -231,21 +233,88 @@ class SavedGamesExport {
     }
 
     /**
-     * Delete the temporal directory and all its content
+     * Re-create the temporal directory
+     * @returns The process
+     */
+    /*private createTmpDirectory() : Promise<void> {
+
+        const dirName = 'tmpKaiChronicles';
+        // Check if the directory exists
+        return cordovaFS.getDirectoryAsync( this.fs.root , dirName , { create : false } )
+        .then( 
+            function( dirEntry ) {
+                // Directory exists. Remove it
+                console.log( 'Deleting previous' );
+                return cordovaFS.deleteDirRecursivelyAsync( dirEntry );
+            },
+            function( errorDirDontExists ) {
+                // Directory does not exists. Do nothing
+                return jQuery.Deferred().resolve().promise();
+            }
+        )
+        .then( function() {
+            // Create the directory
+        });
+    }*/
+
+    /**
+     * Add execution to clean the generated tmp files
+     * @param process The process to run
+     * @returns The "process" parameter
+     */
+    private clean( process : Promise<any> ) : Promise<any> {
+        const self = this;
+
+        // This is an horror. Any better way to do this ???
+
+        // Delete tmp files in any case (success or error)
+        return process
+        .then( 
+            // Ok. Clean
+            self.cleanTmpFiles.bind(self), 
+            function( error ) {
+                // Error happened. Clean and return the PREVIOUS error
+                return self.cleanTmpFiles()
+                .then(
+                    function() { return jQuery.Deferred().reject( error ).promise(); },
+                    function() { return jQuery.Deferred().reject( error ).promise(); }
+                );
+            }
+        );
+
+    }
+
+    /**
+     * Delete the temporal directory and other generated tmp files
      * @returns The deletion process
      */
-    private deleteTmpDirectory() : Promise<void> {
-        
+    private cleanTmpFiles() : Promise<void> {
+
+        // Delete tmp directory
+        let rootPromise;
         if( !this.tmpDir ) {
-            console.log( 'No tmp dir stored, so nothing to delete');
+            console.log( 'No tmp dir stored' );
             // Nothing to do
-            var dfd = jQuery.Deferred();
-            dfd.resolve();
-            return dfd.promise();
+            rootPromise = jQuery.Deferred().resolve().promise();
         }
-        
-        console.log( 'Deleting tmp directory' );
-        return cordovaFS.deleteDirRecursivelyAsync( this.tmpDir );
+        else {
+            console.log( 'Deleting tmp directory' );
+            rootPromise = cordovaFS.deleteDirRecursivelyAsync( this.tmpDir );
+        }
+
+        // Delete other tmp files
+        const self = this;
+        return rootPromise
+        .then( function() {
+            console.log( 'Deleting other tmp files' );
+
+            let promises : Array< Promise<any> > = [];
+            for( let tmpFile of self.filesToDeleteAtEnd )
+                promises.push( cordovaFS.deleteFileAsync( tmpFile ) );
+            
+            // Wait for all deletions to finish
+            return $.when.apply($, promises);
+        });
     }
 
 }

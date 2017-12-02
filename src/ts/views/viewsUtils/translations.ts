@@ -265,6 +265,7 @@ class Translations {
         'importedGames' : '{0} juegos importados',
         'exportGames' : 'Exportar juegos guardados...',
         'importGames' : 'Importar juegos guardados...',
+        'importExtensionsError' : 'Sólo se pueden importar archivos con extensión "zip" o "json"',
 
         //////////////////////////////////////
         // Others
@@ -434,6 +435,7 @@ class Translations {
         'fileDeleted' : '{0} deleted',
         'exportedDownloads' : 'Saved games exported to Downloads',
         'importedGames' : '{0} games imported',
+        'importExtensionsError' : 'Only files with extension "zip" or "json" can be imported',
 
         //////////////////////////////////////
         // Others

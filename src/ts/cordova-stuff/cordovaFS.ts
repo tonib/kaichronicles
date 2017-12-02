@@ -228,7 +228,7 @@ const cordovaFS = {
      * @returns Promise with the copy process
      */
     copySetToAsync : function( entries : Array<any> , parent : any ) : Promise<void> {
-        console.log( 'Copying ' + entries + ' files to other directory' );
+        console.log( 'Copying ' + entries.length + ' files to other directory' );
         
         let promises : Array< Promise<any> > = [];
         for( let entry of entries )
