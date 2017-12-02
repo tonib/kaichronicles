@@ -84,6 +84,7 @@ class SavedGamesExport {
             else if( nameAndExtension.extension == 'json' )
                 return self.importJson( doc );
             else
+                // Wrong extension
                 return jQuery.Deferred().reject( translations.text( 'importExtensionsError' ) ).promise();
         });
 
@@ -221,10 +222,8 @@ class SavedGamesExport {
             // Store saved games, and ignore others. There can be directories here (ex. downloaded books)
             self.fileGameEntries = SavedGamesExport.filterSavedGamesEntries( entries );
 
-            // Create a tmp directory, if it does not exists
-            // TODO: Delete tmp directory, if it exists
-            console.log( 'Creating tmp directory');
-            return cordovaFS.getDirectoryAsync( self.fs.root , 'tmpKaiChronicles' , { create : true } );
+            // Re-create the tmp directory
+            return self.createTmpDirectory();
         })
         .then(function(tmpDirEntry) {
             // Store the tmp directory entry
@@ -236,7 +235,8 @@ class SavedGamesExport {
      * Re-create the temporal directory
      * @returns The process
      */
-    /*private createTmpDirectory() : Promise<void> {
+    private createTmpDirectory() : Promise<void> {
+        const self = this;
 
         const dirName = 'tmpKaiChronicles';
         // Check if the directory exists
@@ -244,7 +244,7 @@ class SavedGamesExport {
         .then( 
             function( dirEntry ) {
                 // Directory exists. Remove it
-                console.log( 'Deleting previous' );
+                console.log( 'Deleting previous tmp directory' );
                 return cordovaFS.deleteDirRecursivelyAsync( dirEntry );
             },
             function( errorDirDontExists ) {
@@ -254,8 +254,10 @@ class SavedGamesExport {
         )
         .then( function() {
             // Create the directory
+            console.log( 'Creating tmp directory');
+            return cordovaFS.getDirectoryAsync( self.fs.root , dirName , { create : true } );
         });
-    }*/
+    }
 
     /**
      * Add execution to clean the generated tmp files
@@ -265,7 +267,7 @@ class SavedGamesExport {
     private clean( process : Promise<any> ) : Promise<any> {
         const self = this;
 
-        // This is an horror. Any better way to do this ???
+        // This is horrifying. Any better way to do it???
 
         // Delete tmp files in any case (success or error)
         return process
