@@ -63,7 +63,6 @@ class SavedGamesExport {
         // Cleant tmp files
         return this.clean( process );
 
-        // TODO: Test errors
     }
 
     /**
@@ -102,6 +101,7 @@ class SavedGamesExport {
         const self = this;
         let nNewGames = 0;
         let zipContent : any = null;
+        let entriesToImport : Array<any> = null;
 
         // TODO: Check files will not be overwritten!
 
@@ -116,11 +116,19 @@ class SavedGamesExport {
         })
         .then( function( entries : Array<any> ) {
             console.log( 'Filtering unziped files' );
-            entries = SavedGamesExport.filterSavedGamesEntries( entries );
+            entriesToImport = SavedGamesExport.filterSavedGamesEntries( entries );
 
+            // Check if some file will be overwritten
+            let newFileNames : Array<string> = [];
+            for( let entry of entriesToImport )
+                newFileNames.push( entry.name );
+
+            return self.checkOverwritting( newFileNames );
+        })
+        .then( function() {
             console.log( 'Copying saved games to the root' );
-            nNewGames = entries.length;
-            return cordovaFS.copySetToAsync( entries , self.fs.root );
+            nNewGames = entriesToImport.length;
+            return cordovaFS.copySetToAsync( entriesToImport , self.fs.root );
         })
         .then( function() {
             // Notify the number of imported games
@@ -135,18 +143,49 @@ class SavedGamesExport {
      * @returns Promise with the import process. Parameter is the number of imported games
      */
     private importJson( doc : DocumentSelection ) : Promise<number> {
-
         const self = this;
-        let fileContent : string = null;
 
-        // TODO: Check files will not be overwritten!
-
-        return this.copyFileContent( doc , this.fs.root )
+        return self.checkOverwritting( [ doc.fileName ] )
+        .then( function() {
+            // Create the json file
+            return self.copyFileContent( doc , self.fs.root );
+        })
         .then( function() {
             // Notify the number of imported games
             self.nImportedGames = 1;
             return jQuery.Deferred().resolve(1).promise();
         });
+    }
+
+    /**
+     * Check if some file will be overwritten on import
+     * @param newFiles File names to import
+     * @returns Promise with the user confirmation to continue the process
+     */
+    private checkOverwritting( newFiles : Array<string> ) : Promise<void> {
+
+        let duplicatedFiles : Array<string> = [];
+        for( let newFile of newFiles ) {
+            for( let oldFile of this.fileGameEntries ) {
+                // Case sensitive
+                if( oldFile.name == newFile )
+                    duplicatedFiles.push( newFile );
+            }
+        }
+
+        const dfd = jQuery.Deferred();
+        if( duplicatedFiles.length == 0 )
+            // Ok, there will be no duplicates
+            dfd.resolve();
+        else {
+            const msg = translations.text( 'confirmSavedOverwrite' , [ duplicatedFiles.join( '\n' ) ] );
+            if( confirm( msg ) )
+                dfd.resolve();
+            else
+                dfd.reject( 'Import cancelled' );
+        }
+
+        return dfd.promise();
     }
 
     /**

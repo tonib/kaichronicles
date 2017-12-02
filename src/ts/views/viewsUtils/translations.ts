@@ -266,6 +266,7 @@ class Translations {
         'exportGames' : 'Exportar juegos guardados...',
         'importGames' : 'Importar juegos guardados...',
         'importExtensionsError' : 'Sólo se pueden importar archivos con extensión "zip" o "json"',
+        'confirmSavedOverwrite' : 'Las siguientes partidas se sobreescribirán. ¿Seguro que quiere continuar?:\n{0}',
 
         //////////////////////////////////////
         // Others
@@ -436,6 +437,7 @@ class Translations {
         'exportedDownloads' : 'Saved games exported to Downloads',
         'importedGames' : '{0} games imported',
         'importExtensionsError' : 'Only files with extension "zip" or "json" can be imported',
+        'confirmSavedOverwrite' : 'Following saved games will be overwritten. Are you sure you want to continue?:\n{0}',
 
         //////////////////////////////////////
         // Others
