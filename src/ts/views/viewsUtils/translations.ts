@@ -267,6 +267,9 @@ class Translations {
         'importGames' : 'Importar juegos guardados...',
         'importExtensionsError' : 'Sólo se pueden importar archivos con extensión "zip" o "json"',
         'confirmSavedOverwrite' : 'Las siguientes partidas se sobreescribirán. ¿Seguro que quiere continuar?:\n{0}',
+        'confirmExport' : 'Esto creará un archivo Zip con todos los juegos guardados en "Descargas". ¿Continuamos?',
+        'infoImport' : 'Con esta función puedes importar juegos guardados a la aplicación. Puedes seleccionar ficheros con ' +
+            'extensión "json" (un juego guardado) o "zip" (múltiples juegos guardados)',
 
         //////////////////////////////////////
         // Others
@@ -438,6 +441,9 @@ class Translations {
         'importedGames' : '{0} games imported',
         'importExtensionsError' : 'Only files with extension "zip" or "json" can be imported',
         'confirmSavedOverwrite' : 'Following saved games will be overwritten. Are you sure you want to continue?:\n{0}',
+        'confirmExport' : 'This will create a Zip file with all your saved games at "Downloads". Continue?',
+        'infoImport' : 'With this function you can import saved games to the application. You can select files with ' + 
+            'extension "json" (single saved games) or "zip" (multiple saved games)',
 
         //////////////////////////////////////
         // Others

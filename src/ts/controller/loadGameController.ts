@@ -160,6 +160,10 @@ class loadGameController {
      */
     public static exportSavedGames() {
         try {
+
+            if( !confirm( translations.text( 'confirmExport' ) ) )
+                return;
+
             new SavedGamesExport().export()
             .then( 
                 function() {
@@ -186,6 +190,9 @@ class loadGameController {
      */
     public static importSavedGames() {
         try {
+
+            alert( translations.text( 'infoImport' ) );
+
             const importProcess = new SavedGamesExport();
             DocumentSelection.selectDocument()
             .then(function(doc : DocumentSelection) {
