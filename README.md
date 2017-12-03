@@ -128,5 +128,6 @@ MIT. This application uses the following third-party code / resources:
 * [cordova-plugin-zeep](https://github.com/FortuneN/cordova-plugin-zeep) (Apache License 2.0)
 * [cordova-filechooser](https://github.com/don/cordova-filechooser) (Apache License 2.0)
 * [cordova-plugin-copytodownload](https://github.com/tonib/cordova-plugin-copytodownload) (MIT)
+* [cordova-plugin-document-contract](https://github.com/danjarvis/cordova-plugin-document-contract) (MIT)
 
 Thanks to [LSI](http://www.lsisoluciones.com) for letting us use its Google Play account for this app.
