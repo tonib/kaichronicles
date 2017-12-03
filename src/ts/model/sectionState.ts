@@ -28,7 +28,7 @@ interface SectionItem {
 /**
  * Store a price on a section where the player can shell an object
  */
-interface ShellPrice {
+interface SellPrice {
     /** The object id */
     id : string;
 
@@ -53,7 +53,7 @@ class SectionState {
      * Sell prices on the section. Applies only on sections where you can
      * sell inventory objects.
      */
-    public sellPrices : Array<ShellPrice> = [];
+    public sellPrices : Array<SellPrice> = [];
 
     /** Combats on the section */
     public combats : Array<Combat> = [];

@@ -1,4 +1,3 @@
-- Typo: ShellPrice should be SellPrice (brfff)
 - Check all boolean properties on books mechanics, seach for not="true" bugs...
 - Check reported bugs on Google play:
   * Saved games removed when adding new games
@@ -22,7 +21,6 @@
   of Weaponmastery.
 - Acknowledgements to https://github.com/danjarvis/cordova-plugin-document-contract
 - Ask help to Alarion with english translations
-- Add Alarion to authors
 
 FOR FUTURE (1.9+):
 - Add section "Improved Disciplines" to the "Game rules" page
