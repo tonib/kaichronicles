@@ -188,8 +188,10 @@ const projectAon = {
 
     /**
      * Returns the title of a book on a given language
+     * @param bookNumber Book number, 1-index based
+     * @param language Language code ("es" or "en")
      */
-    getBookTitle: function(bookNumber, language) {
+    getBookTitle: function( bookNumber : number, language : string ) : string {
         return projectAon.supportedBooks[bookNumber-1][ 'title_' + language ];
     },
 

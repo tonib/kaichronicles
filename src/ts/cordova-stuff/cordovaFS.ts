@@ -1,9 +1,7 @@
 /// <reference path="../external.ts" />
 
-
 /**
- * Stuff to access the file system via cordova
- * TODO: This is almost crap. Replace by promises (oh javascript...)
+ * Stuff to access the file system on Cordova app
  */
 const cordovaFS = {
     
@@ -445,7 +443,15 @@ const cordovaFS = {
         return dfd.promise();
     },
 
-    downloadAsync: function(url, dstPath, progressCallback) {
+    /**
+     * Download a file from Internet
+     * @param url URL to dowload
+     * @param dstPath Destination path where the file will be download
+     * @param progressCallback Optional callback to call with the download progress. Parameter is the downloaded 
+     * percentage (0.0 - 100.0)
+     * @returns Promise with the process. Parameter is the downloaded file FileEntry 
+     */
+    downloadAsync: function( url : string, dstPath : string, progressCallback : (number) => void = null ) : Promise<any> {
         
         var dfd = jQuery.Deferred();
         console.log('Downloading ' + url + ' to ' + dstPath);

@@ -1,5 +1,3 @@
-- Allow to export / import saved games to the SD card
-- BookDownloadState to TS
 - Typo: ShellPrice should be SellPrice (brfff)
 - Check all boolean properties on books mechanics, seach for not="true" bugs...
 - Check reported bugs on Google play:
@@ -8,6 +6,7 @@
   * Others?
 - Erratas:
   * Book 5+ equimpnt: English ref to "safekeeping", Spanish hasn't
+  * Book 7 / gamerulz: "Solitairo" should be "Solitario"
   * Book 10 / sect1 / Spanish: "estudias el mapaque" should be "estudias el mapa que"
   * Book 10 / sect3,4,5,6 / Spanish: Two points on choices
   * Book 10 / sect11 / Spanish: No foot page

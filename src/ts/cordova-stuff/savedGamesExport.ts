@@ -103,8 +103,6 @@ class SavedGamesExport {
         let zipContent : any = null;
         let entriesToImport : Array<any> = null;
 
-        // TODO: Check files will not be overwritten!
-
         return this.copyFileContent( doc , this.tmpDir )
         .then( function( zipFileEntryOnTmpDir /* : FileEntry */ ) {
             console.log( 'Unziping file on tmp directory' );
