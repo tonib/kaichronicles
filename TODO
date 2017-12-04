@@ -1,6 +1,3 @@
-- ERROR: Book 5, search "<drop objectId="rope" />". Change rule "drop" to allow drop one of multiple objects:
-  <drop objectId="largerope|rope" />
-- Check all boolean properties on books mechanics, seach for not="true" bugs...
 - Check reported bugs on Google play:
   * Saved games removed when adding new games
   * Objects types
@@ -61,7 +58,6 @@ FOR FUTURE (1.9+):
   * Do not show the license text on Android (the book was already downloaded)
   * Ask for the random table type
 - Use latest version on PAON data on SVN (a fixed commit number)
-- Allow to read the "Lore-circles of the Magnakai" section from the "Magnakai Disciplines" section (with a dialog?)
 - If a object description is too long, do not show the entire description: Show the first characters, and add a link
   to display the entire description (see pouchadgana object, and sommerswerd?)
 - Action chart buttons don't work on iPad Safari

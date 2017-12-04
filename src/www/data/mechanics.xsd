@@ -1,6 +1,13 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
+    <!-- Type for attributes that can be only "true" -->
+    <xs:simpleType name="trueOnly">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="true" />
+        </xs:restriction>
+    </xs:simpleType>
+
     <!--
         *** ROOT ELEMENT ***
     -->
@@ -135,9 +142,9 @@
         <xs:attribute name="expression" type="xs:string" />
         <xs:attribute name="sectionVisited" type="xs:string" />
         <xs:attribute name="currentWeapon" type="xs:string" />
-        <xs:attribute name="weaponskillActive" type="xs:boolean" />
+        <xs:attribute name="weaponskillActive" type="trueOnly" />
         <xs:attribute name="combatsWon" type="xs:boolean" />
-        <xs:attribute name="combatsActive" type="xs:boolean" />
+        <xs:attribute name="combatsActive" type="trueOnly" />
         <xs:attribute name="bookLanguage" type="xs:string" />
         <xs:attribute name="isChoiceEnabled" type="xs:string" />
         <xs:attribute name="canUseBow" type="xs:boolean" />
@@ -145,7 +152,7 @@
         <xs:attribute name="hasCircle" type="xs:string" />
         <xs:attribute name="hasWeaponskillWith" type="xs:string" />
         <xs:attribute name="currentWeaponSpecial" type="xs:boolean" />
-        <xs:attribute name="not" type="xs:boolean" />
+        <xs:attribute name="not" type="trueOnly" />
     </xs:complexType>
 
     <xs:complexType name="choiceState">
@@ -187,7 +194,7 @@
         <xs:attribute name="turnLoss" type="xs:integer" />
         <xs:attribute name="fake" type="xs:boolean" />
         <xs:attribute name="restoreFactor" type="xs:decimal" />
-        <xs:attribute name="bow" type="xs:boolean" />
+        <xs:attribute name="bow" type="trueOnly" />
         <xs:attribute name="disabledObjects" type="xs:string" />
     </xs:complexType>
 
@@ -267,8 +274,6 @@
     <xs:complexType name="combatSkill">
         <xs:attribute name="count" type="xs:integer" use="required" />
     </xs:complexType>
-
-    <!-- START HERE -->
     
     <xs:complexType name="randomTableIncrement">
         <xs:attribute name="increment" type="xs:string" use="required" />
