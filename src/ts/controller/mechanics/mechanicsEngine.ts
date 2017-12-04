@@ -906,7 +906,13 @@ const mechanicsEngine = {
         if( state.sectionStates.ruleHasBeenExecuted(rule) )
             // Execute only once
             return;
-        actionChartController.drop( $(rule).attr('objectId') , false );
+        
+        // Drop the first one of the specified
+        for( let objectId of mechanicsEngine.getArrayProperty( $(rule) , 'objectId' ) ) {
+            if( actionChartController.drop( objectId , false ) )
+                break;
+        }
+
         state.sectionStates.markRuleAsExecuted(rule);
     },
 

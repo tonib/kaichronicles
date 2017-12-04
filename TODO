@@ -1,3 +1,5 @@
+- ERROR: Book 5, search "<drop objectId="rope" />". Change rule "drop" to allow drop one of multiple objects:
+  <drop objectId="largerope|rope" />
 - Check all boolean properties on books mechanics, seach for not="true" bugs...
 - Check reported bugs on Google play:
   * Saved games removed when adding new games

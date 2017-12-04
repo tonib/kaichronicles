@@ -74,18 +74,19 @@ const actionChartController = {
      * @param availableOnSection True if the object should be available on 
      * the current section
      * @param fromUI True if the action is fired from the UI
+     * @returns True if the object has been dropped
      */
-    drop: function( objectId : string, availableOnSection : boolean = false, fromUI : boolean = false ) {
+    drop: function( objectId : string, availableOnSection : boolean = false, fromUI : boolean = false ) : boolean {
 
         if( objectId == 'allweapons' ) {
             actionChartController.dropItemsList( state.actionChart.weapons );
-            return;
+            return true;
         }
 
         if( objectId == 'currentweapon' ) {
             if( state.actionChart.selectedWeapon )
                 this.drop( state.actionChart.selectedWeapon );
-            return;
+            return true;
         }
 
         if( objectId == 'allweaponlike' ) {
@@ -93,22 +94,22 @@ const actionChartController = {
             for( let w of state.actionChart.getWeaponObjects(false) )
                 weaponsIds.push(w.id);
             actionChartController.dropItemsList( weaponsIds );
-            return;
+            return true;
         }
 
         if( objectId == 'backpackcontent' ) {
             actionChartController.dropBackpackContent();
-            return;
+            return true;
         }
 
         if( objectId == 'allspecial') {
             actionChartController.dropItemsList( state.actionChart.specialItems );
-            return;
+            return true;
         }
 
         if( objectId == 'allmeals' ) {
             actionChartController.increaseMeals( -state.actionChart.meals );
-            return;
+            return true;
         }
         
         if( objectId == 'all' ) {
@@ -116,12 +117,12 @@ const actionChartController = {
             actionChartController.drop('allweapons');
             actionChartController.drop('allspecial');
             actionChartController.increaseMoney( - state.actionChart.beltPouch );
-            return;
+            return true;
         }
 
         var o = state.mechanics.getObject(objectId);
         if( !o )
-            return;
+            return false;
         
         var count = 0;
         if( objectId == 'quiver' ) {
@@ -131,7 +132,8 @@ const actionChartController = {
                 count = 6;
         }
 
-        if( state.actionChart.drop(objectId) ) {
+        const dropped = state.actionChart.drop(objectId);
+        if( dropped ) {
             actionChartView.showInventoryMsg('drop', o , 
                 translations.text('msgDropObject' , [o.name] ) );
 
@@ -150,8 +152,8 @@ const actionChartController = {
                 // Render available objects on this section (game view)
                 mechanicsEngine.fireInventoryEvents( fromUI , o );
             }
-
         }
+        return dropped;
     },
 
     /**

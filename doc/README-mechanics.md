@@ -141,9 +141,11 @@ will be available on the section.
 ```xml
 <drop objectId="fireseed" />
 <drop objectId="allmeals" />
+<!-- Drop largerope OR rope -->
+<drop objectId="largerope|rope" />
 ```
 Drop an object, or a set of objects. This rules is not used for counters (money, meals and arrows). If you want to
-decrease a counter, use the pick rule. The "objectId" can be a an object id, or one of the following:
+decrease a counter, use the "pick" rule. The "objectId" can be one or more object id, or one of the following:
 * **allweapons**: Drop all weapons (it does not drop special items weapons)
 * **allweaponlike**: Drop all weapons and special items weapons
 * **backpackcontent**: Drop all backpack content, but not the backpack
@@ -151,6 +153,8 @@ decrease a counter, use the pick rule. The "objectId" can be a an object id, or 
 * **allspecial**: Drop all the special items
 * **allmeals**: Drop all meals
 * **all**: Drop all (weapons, backpack, special items, and money)
+
+If you set more than one object id, the first one owned by the player will be dropped
 
 ### randomTable (has state) / case / randomTableIncrement
 ```xml

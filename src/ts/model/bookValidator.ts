@@ -504,7 +504,7 @@ class BookValidator {
         if( objectId && this.specialDropValues.contains( objectId ) )
             return;
 
-        this.validateObjectIdsAttribute( $rule , 'objectId' , false , false );
+        this.validateObjectIdsAttribute( $rule , 'objectId' , true , false );
     }
 
     private disableCombats( $rule ) {

@@ -277,7 +277,8 @@
         </section>
 
         <section id="sect29">
-            <drop objectId="rope" />
+            <!-- Drop largerope OR rope -->
+            <drop objectId="largerope|rope" />
         </section>
 
         <section id="sect30">
@@ -1566,9 +1567,8 @@
         </section>
 
         <section id="sect305">
-            <!-- TODO: You should drop the rope OR the largerope, not both -->
-            <drop objectId="rope" />
-            <drop objectId="largerope" />
+            <!-- Drop largerope OR rope -->
+            <drop objectId="largerope|rope" />
             <choiceState section="all" set="disabled" />
             <randomTable>
                 <case from="0" to="2">
