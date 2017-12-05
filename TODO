@@ -18,8 +18,8 @@
   weapons, whether fired (e.g. a bow) or thrown (e.g. a dagger). When using a bow or thrown weapon and instructed to pick a 
   number from the Random Number Table, add 2 to the number picked if you are a Mentora with the Magnakai Discipline 
   of Weaponmastery.
-- Acknowledgements to https://github.com/danjarvis/cordova-plugin-document-contract
 - Ask help to Alarion with english translations
+- Info for Michael: <combat mindblastBonus="+6" psiSurgeBonus="+12" /> can be used as multiplier for Mindblast
 
 FOR FUTURE (1.9+):
 - Add section "Improved Disciplines" to the "Game rules" page
