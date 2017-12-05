@@ -667,7 +667,48 @@
             </afterCombats>
         </section>
 
-        <!-- Up to sect112 -->
+        <section id="sect113">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" eludeTurn="3" />
+            <afterCombats>
+                <choiceState section="sect300" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect229" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect115">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect116">
+            <test not="true" hasDiscipline="psiscrn">
+                <choiceState section="sect26" set="disabled" />
+            </test>
+            <test hasDiscipline="psiscrn">
+                <choiceState section="sect213" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect118">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="2" />
+            <test hasDiscipline="anmlctrl">
+                <combat combatSkillModifier="+2" />
+            </test>
+            <afterCombats>
+                <choiceState section="sect239" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect39" set="enabled" />
+            </afterElude>
+        </section>
+
+        <!-- Up to 118 -->
         
     </sections>
 
