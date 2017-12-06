@@ -762,7 +762,29 @@
             </test>
         </section>
 
-        <!-- Up to 118 -->
+        <section id="sect129">
+            <test not="true" hasDiscipline="invsblty">
+                <choiceState section="sect331" set="disabled" />
+            </test>
+            <test hasDiscipline="invsblty">
+                <choiceState section="sect267" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect130">
+            <choiceState section="sect328" set="disabled" />
+            <choiceState section="sect142" set="disabled" />
+            <test hasDiscipline="nexus">
+                <choiceState section="sect328" set="enabled" />
+                <choiceState section="sect17" set="disabled" />
+            </test>
+            <test hasWeaponType="dagger">
+                <choiceState section="sect142" set="enabled" />
+                <choiceState section="sect17" set="disabled" />
+            </test>
+        </section>
+
+        <!-- Up to 130 -->
         
     </sections>
 
