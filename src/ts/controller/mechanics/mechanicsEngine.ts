@@ -506,10 +506,19 @@ const mechanicsEngine = {
         }
 
         // Test current weapon:
-        var currentWeapon = $(rule).attr('currentWeapon');
-        if( currentWeapon && state.actionChart.selectedWeapon == currentWeapon )
-            conditionStatisfied = true;
-            
+        const currentWeaponList = mechanicsEngine.getArrayProperty( $rule , 'currentWeapon' );
+        if( currentWeaponList.length > 0 ) {
+            const selectedWeapon : Item = state.actionChart.getselectedWeaponItem(false);
+            if( selectedWeapon ) {
+                for( let w of currentWeaponList ) {
+                    if( selectedWeapon.isWeaponType( w ) ) {
+                        conditionStatisfied = true;
+                        break;
+                    }
+                }
+            }
+        }
+
         // Test weaponskill with current weapon
         // TODO: Use mechanicsEngine.getBooleanProperty here
         var weaponskillActive = $(rule).attr('weaponskillActive');

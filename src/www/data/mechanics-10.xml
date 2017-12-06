@@ -708,6 +708,60 @@
             </afterElude>
         </section>
 
+        <section id="sect119">
+            <pick class="arrow" count="-1" />
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect121">
+            <endurance count="-2" />
+            <test canUseBow="false">
+                <choiceState section="sect36" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect123">
+            <test not="true" hasObject="rope|largerope">
+                <choiceState section="sect48" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect126">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <test not="true" expression="[COMBATSDURATION] >= 5">
+                    <choiceState section="sect11" set="enabled" />
+                </test>
+                <test expression="[COMBATSDURATION] >= 5">
+                    <choiceState section="sect321" set="enabled" />
+                </test>
+            </afterCombats>
+        </section>
+
+        <section id="sect128">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="-99" to="6">
+                    <choiceState section="sect95" set="enabled" />
+                </case>
+                <case from="7" to="99">
+                    <choiceState section="sect233" set="enabled" />
+                </case>
+            </randomTable>
+            <test currentWeapon="dagger|quarterstaff">
+                <randomTableIncrement increment="-3" />
+            </test>
+            <test currentWeapon="axe|mace">
+                <randomTableIncrement increment="+1" />
+            </test>
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="+2" />
+            </test>
+        </section>
+
         <!-- Up to 118 -->
         
     </sections>

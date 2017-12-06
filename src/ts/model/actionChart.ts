@@ -384,7 +384,7 @@ class ActionChart {
 
     /**
      * Get the selected weapon info
-     * @return {Item} The current weapon info. null if the is player has no weapon
+     * @return The current weapon info. null if the is player has no weapon
      */
     public getselectedWeaponItem( bow : boolean = false ) : Item {
 
