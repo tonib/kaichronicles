@@ -113,7 +113,6 @@
 
         <section id="sect8">
             <test canUseBow="false">
-                <!-- TODO: sect131, drop arrow -->
                 <choiceState section="sect131" set="disabled" />
             </test>
         </section>
@@ -223,7 +222,6 @@
         <section id="sect26">
             <endurance count="-1" />
             <test canUseBow="false">
-                <!-- TODO: drop arrow -->
                 <choiceState section="sect147" set="disabled" />
             </test>
         </section>
@@ -784,7 +782,137 @@
             </test>
         </section>
 
-        <!-- Up to 130 -->
+        <section id="sect131">
+            <pick class="arrow" count="-1" />
+            <test not="true" expression="[ARROWS] >= 2">
+                <choiceState section="sect344" set="disabled" />
+            </test>
+            <test canUseBow="false">
+                <!-- TODO: Drop 2!!! arrows -->
+                <choiceState section="sect344" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect132">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="0" />
+            <afterCombats>
+                <choiceState section="sect170" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect23" set="enabled" />
+            </afterElude>
+        </section>        
+
+        <section id="sect133">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <test hasObject="sommerswerd">
+                <combat dammageMultiplier="2" />
+            </test>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect134">
+            <endurance count="-3" />
+            <test not="true" hasObject="bullwhip">
+                <choiceState section="sect214" set="disabled" />
+            </test>
+            <test hasObject="bullwhip">
+                <choiceState section="sect327" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect135">
+            <endurance count="-3" />
+        </section>
+
+        <section id="sect140">
+            <meal />
+            <test hasDiscipline="hntmstry">
+                <test expression="[KAILEVEL] >= 6">
+                    <choiceState section="sect122" set="disabled" />
+                </test>
+            </test>
+            <test not="true" hasDiscipline="hntmstry">
+                <choiceState section="sect12" set="disabled" />
+            </test>
+            <test not="true" expression="[KAILEVEL] >= 6">
+                <choiceState section="sect12" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect141">
+            <test not="true" hasDiscipline="anmlctrl">
+                <choiceState section="sect35" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect142">
+            <!-- Do not lose Dagger of Vashna -->
+            <drop objectId="dagger" />
+            <!--
+                TODO: If you have visited the Danarg...
+                Do the same here than in book 3 / sect268 (a TODO too)
+            -->
+        </section>
+
+        <section id="sect143">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect144">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect59" set="enabled" />
+                </case>
+                <case from="5" to="9">
+                    <choiceState section="sect259" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect145">
+            <object objectId="bullwhip" />
+            <pick class="money" count="9" />
+            <object objectId="torch" />
+            <object objectId="tinderbox" />
+            <object objectId="bottlewater" />
+        </section>
+
+        <section id="sect146">
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
+            <object objectId="meal" index="2" />
+            <object objectId="meal" index="3" />
+            <object objectId="meal" index="4" />
+        </section>
+
+        <section id="sect147">
+            <pick class="arrow" count="-1" />
+            <test not="true" hasObject="sommerswerd">
+                <choiceState section="sect286" set="disabled" />
+            </test>
+            <test hasObject="sommerswerd">
+                <choiceState section="sect333" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect148">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <!-- Up to sect148 -->
         
     </sections>
 
