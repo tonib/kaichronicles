@@ -912,7 +912,96 @@
             </afterCombats>
         </section>
 
-        <!-- Up to sect148 -->
+        <section id="sect150">
+            <choiceState section="sect323" set="disabled" />
+            <choiceState section="sect258" set="disabled" />
+
+            <test hasDiscipline="dvnation">
+                <test expression="[KAILEVEL] >= 5">
+                    <choiceState section="sect323" set="enabled" />
+                    <choiceState section="sect42" set="disabled" />
+                </test>
+            </test>
+
+            <test hasDiscipline="hntmstry">
+                <test expression="[KAILEVEL] >= 6">
+                    <choiceState section="sect258" set="enabled" />
+                    <choiceState section="sect42" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect153">
+            <test canUseBow="false">
+                <choiceState section="sect131" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect155">
+            <test canUseBow="false">
+                <choiceState section="sect96" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect158">
+            <test not="true" hasDiscipline="psiscrn">
+                <choiceState section="sect262" set="disabled" />
+            </test>
+            <test hasDiscipline="psiscrn">
+                <choiceState section="sect64" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect159">
+            <drop objectId="bullwhip" />
+        </section>
+
+        <section id="sect166">
+            <choiceState section="all" set="disabled" />
+            <randomTable zeroAsTen="true">
+                <test expression="[RANDOM] >= 0">
+                    <endurance count="-[RANDOM]" />
+                </test>
+                <choiceState section="all" set="enabled" />
+            </randomTable>
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="-2" />
+            </test>
+        </section>
+
+        <section id="sect167">
+            <test not="true" hasObject="bullwhip">
+                <choiceState section="sect214" set="disabled" />
+            </test>
+            <test hasObject="bullwhip">
+                <choiceState section="sect327" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect168">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" combatSkillModifier="+2" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect170">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect172">
+            <choiceState section="all" set="disabled" />
+            <combat enemyMultiplier="0.5" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <!-- Up to sect172 -->
         
     </sections>
 

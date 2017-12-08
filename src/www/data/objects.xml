@@ -629,6 +629,8 @@
         <special id="bullwhip">
             <name lang="en">Bullwhip</name>
             <name lang="es">Látigo</name>
+
+            <image book="10" name="small7.png" />
         </special>
 
         <special id="medal">
@@ -904,6 +906,8 @@
         <object id="whip">
             <name lang="en">Whip</name>
             <name lang="es">Látigo</name>
+
+            <image book="10" name="small7.png" />
         </object>
 
         <object id="ironkey">

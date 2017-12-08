@@ -12,10 +12,10 @@ class CombatTurn {
     /** The random table result  */
     public randomValue : number;
 
-    /** Lone wolf dammage multiplier */
+    /** Lone wolf dammage multiplier (can have decimals) */
     public dammageMultiplier : number;
 
-    /** Enemy dammage multiplier */
+    /** Enemy dammage multiplier (can have decimals) */
     public enemyMultiplier : number;
 
     /** Enemy EP base loss.
@@ -159,16 +159,22 @@ class CombatTurn {
     /**
      * Apply a multiplier to a combat endurance loss
      * @param {number|string} enduranceLoss The original endurance loss
-     * @param multiplier The multiplier
+     * @param multiplier The multiplier (can have decimals)
      * @return {number|string} The final endurance loss
      */
     public static applyMultiplier( enduranceLoss : any , multiplier : number ) : any {
+
         if( multiplier === 0 )
             // Ensure no death
             return 0;
-        if( enduranceLoss != combatTable_DEATH )
+
+        if( enduranceLoss != combatTable_DEATH ) {
             // Apply the dammage multiplier
             enduranceLoss *= multiplier;
+            // Round result (multiplier can have decimals)
+            enduranceLoss = Math.round( enduranceLoss );
+        }
+
         return enduranceLoss; 
     }
 

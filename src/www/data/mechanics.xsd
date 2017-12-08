@@ -188,8 +188,8 @@
         <xs:attribute name="noWeapon" type="xs:boolean" />
         <xs:attribute name="eludeTurn" type="xs:integer" />
         <xs:attribute name="maxEludeTurn" type="xs:integer" />
-        <xs:attribute name="dammageMultiplier" type="xs:integer" />
-        <xs:attribute name="enemyMultiplier" type="xs:integer" />
+        <xs:attribute name="dammageMultiplier" type="xs:decimal" />
+        <xs:attribute name="enemyMultiplier" type="xs:decimal" />
         <xs:attribute name="enemyTurnLoss" type="xs:integer" />
         <xs:attribute name="turnLoss" type="xs:integer" />
         <xs:attribute name="fake" type="xs:boolean" />

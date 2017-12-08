@@ -754,13 +754,14 @@ const mechanicsEngine = {
             combat.maxEludeTurn = parseInt( txtmaxEludeTurn );
 
         // Dammage multiplier (player)
-        if( $(rule).attr('dammageMultiplier') )
-            combat.dammageMultiplier = parseInt( $(rule).attr('dammageMultiplier') );
+        const txtDammageMultiplier : string = $rule.attr('dammageMultiplier');
+        if( txtDammageMultiplier )
+            combat.dammageMultiplier = parseFloat( txtDammageMultiplier );
 
         // Dammage multiplier (enemy)
-        var txtEnemyMultiplier = $(rule).attr('enemyMultiplier'); 
+        const txtEnemyMultiplier : string = $rule.attr('enemyMultiplier'); 
         if( txtEnemyMultiplier )
-            combat.enemyMultiplier = parseInt( txtEnemyMultiplier );
+            combat.enemyMultiplier = parseFloat( txtEnemyMultiplier );
 
         // Enemy extra loss per turn
         var txtEnemyTurnLoss = $(rule).attr('enemyTurnLoss'); 

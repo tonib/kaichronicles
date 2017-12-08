@@ -316,8 +316,8 @@ the following properties:
 * **psiSurgeBonus="number"**: Special CS bonus to apply for Psi-Surge discipline on this combat
 * **noWeapon="boolean"**: If true, Lone Wolf cannot use any weapon on this combat
 * **eludeTurn="number"**: Turn number after which LW can elude the combat
-* **dammageMultiplier="number"**: LW dammage multiplier
-* **enemyMultiplier="number"**: Enemy dammage multiplier
+* **dammageMultiplier="number"**: LW dammage multiplier. Can have decimals (ex. "0.5")
+* **enemyMultiplier="number"**: Enemy dammage multiplier. Can have decimals (ex. "0.5")
 * **fake="true"**: This is a fake combat. When it's finished, LW endurance points lost will be restored
 * **restoreFactor="floatNumber"**: Only applies if fake="true". Factor of the EP lost to restore after the combat.
   Default is 1.0 (100% of the EP lost)
