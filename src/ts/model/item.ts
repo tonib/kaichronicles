@@ -41,7 +41,10 @@ class Item {
     /** True if the object can be dropped */
     public droppable : boolean;
 
-    /** Number of items the object it occupies on the backpack */
+    /** 
+     * Number of items the object it occupies on the backpack. It can be zero.
+     * It's used too for the Special Items max. limit
+     */
     public itemCount : number;
 
     /** The translated object description */
@@ -99,7 +102,7 @@ class Item {
 
         /** The translated object description */
         this.description = $o.find('description[lang=' + book.language + ']').text();
-        if( this.itemCount > 1 ) {
+        if( this.itemCount != 1 ) {
             // Add description of the size used 
             if( this.description )
                 this.description += ' ';

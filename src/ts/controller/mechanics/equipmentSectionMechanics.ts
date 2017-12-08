@@ -67,7 +67,7 @@ class EquipmentSectionMechanics {
         // Check the max. number of special items. This limit starts on book 8, and you can come here
         // from book 7 with more special items
         const maxSpecials = ActionChart.getMaxSpecials();
-        if( maxSpecials && state.actionChart.specialItems.length > maxSpecials )
+        if( maxSpecials && state.actionChart.getNSpecialItems() > maxSpecials )
             ok = false;
         else
             $('#mechanics-chooseEquipment-maxSpecials').hide();

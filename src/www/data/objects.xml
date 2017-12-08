@@ -638,6 +638,18 @@
             <name lang="es">Medalla</name>
         </special>
 
+        <special id="signetring" itemCount="0">
+            <name lang="en">Signet Ring</name>
+            <description lang="en">
+                Bears Prince Graygor royal crest
+            </description>
+
+            <name lang="es">Sello</name>
+            <description lang="es">
+                Luce el escudo real del Príncipe Graygor
+            </description>
+        </special>
+
     </specials>
 
     <objects>

@@ -198,7 +198,7 @@ const actionChartView = {
 
         // Total number of backpack / special objects
         $('#achart-backpacktotal').text('(' + state.actionChart.getNBackpackItems() + ')');
-        $('#achart-specialtotal').text('(' + state.actionChart.specialItems.length + ')');
+        $('#achart-specialtotal').text('(' + state.actionChart.getNSpecialItems() + ')');
     },
 
     showInventoryMsg: function(action : string, object : Item, msg : string) {

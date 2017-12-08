@@ -1001,7 +1001,24 @@
             </afterCombats>
         </section>
 
-        <!-- Up to sect172 -->
+        <section id="sect174">
+            <test not="true" hasObject="sommerswerd">
+                <choiceState section="sect286" set="disabled" />
+            </test>
+            <test hasObject="sommerswerd">
+                <choiceState section="sect333" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect175">
+            <meal />
+        </section>
+
+        <section id="sect176">
+            <pick objectId="signetring" />
+        </section>
+
+        <!-- Up to sect176 -->
         
     </sections>
 

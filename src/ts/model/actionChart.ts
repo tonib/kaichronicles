@@ -112,13 +112,15 @@ class ActionChart {
 
     /**
      * Pick an object
-     * @param {Item} o Object to pick
-     * @return {boolean} True if the object was really picked
+     * TODO: It's a nosense: It returns false ONLY if o is null. On all other cases, it throws an exception.
+     * TODO: If o is null, throw an exception too, and do not return any value
+     * @param o Object to pick
+     * @return True if the object was really picked
      */
-    public pick(o) {
+    public pick( o : Item ) : boolean {
 
         if( !o )
-            return;
+            return false;
 
         // Check incompatibilities
         if( o.incompatibleWith && this.hasObject(o.incompatibleWith) ) {
@@ -137,7 +139,7 @@ class ActionChart {
 
             case 'special':
                 const nMax = ActionChart.getMaxSpecials();
-                if( nMax && this.specialItems.length >= nMax )
+                if( nMax && ( this.getNSpecialItems() + o.itemCount ) > nMax )
                     throw translations.text( 'msgNoMoreSpecialItems' );
                 this.specialItems.push(o.id);
                 if(o.isWeapon())
@@ -176,12 +178,25 @@ class ActionChart {
     }
 
     /**
-     * Returns the total number of backpack items 
+     * Returns the total number of backpack items, according to the number of slots each item consum 
      */
     public getNBackpackItems() : number {
         var count = this.meals;
         for( var i=0; i<this.backpackItems.length; i++) {
             var o = state.mechanics.getObject(this.backpackItems[i]);
+            if( o )
+                count += o.itemCount;
+        }
+        return count;
+    }
+
+    /**
+     * Returns the total number of special items, according to the number of slots each item consum 
+     */
+    public getNSpecialItems() : number {
+        let count = 0;
+        for( let specialId of this.specialItems ) {
+            const o = state.mechanics.getObject( specialId );
             if( o )
                 count += o.itemCount;
         }
