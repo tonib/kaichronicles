@@ -650,6 +650,12 @@
             </description>
         </special>
 
+        <special id="blackkey">
+            <name lang="en">Black Key</name>
+            <name lang="es">Llave Negra</name>
+            <image book="1" name="small15.png" />
+        </special>
+
     </specials>
 
     <objects>

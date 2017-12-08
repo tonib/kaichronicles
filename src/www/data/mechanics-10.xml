@@ -1018,7 +1018,83 @@
             <pick objectId="signetring" />
         </section>
 
-        <!-- Up to sect176 -->
+        <section id="sect177">
+            <object objectId="blackkey" />
+            <pick class="money" count="20" />
+            <object objectId="dagger" />
+        </section>
+
+        <section id="sect179">
+            <!--
+                TODO: If you have ever visited the land of Talestria...
+                Do the same here than in book 3 / sect268 (a TODO too)
+            -->
+        </section>
+
+        <section id="sect180">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombats>
+                <test not="true" expression="[COMBATSDURATION] >= 3">
+                    <choiceState section="sect316" set="enabled" />
+                </test>
+                <test expression="[COMBATSDURATION] >= 3">
+                    <choiceState section="sect261" set="enabled" />
+                </test>
+            </afterCombats>
+        </section>
+
+        <section id="sect182">
+            <choiceState section="sect192" set="disabled" />
+            <choiceState section="sect246" set="disabled" />
+
+            <test hasDiscipline="curing">
+                <test expression="[KAILEVEL] >= 7">
+                    <choiceState section="sect192" set="enabled" />
+                    <choiceState section="sect343" set="disabled" />
+                </test>
+            </test>
+
+            <test hasDiscipline="curing">
+                <test expression="[KAILEVEL] >= 4">
+                    <choiceState section="sect246" set="enabled" />
+                    <choiceState section="sect343" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect185">
+            <test not="true" hasDiscipline="dvnation">
+                <choiceState section="sect302" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect186">
+            <meal />
+        </section>
+
+        <section id="sect187">
+            <choiceState section="all" set="disabled" />
+            <afterCombatTurn turn="4">
+                <test combatsWon="false">
+                    <disableCombats />
+                    <choiceState section="sect234" set="enabled" />
+                </test>
+            </afterCombatTurn>
+            <afterCombats>
+                <choiceState section="sect202" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect189">
+            <death />
+        </section>
+
+        <section id="sect192">
+            <endurance count="-3" />
+        </section>
+
+        <!-- Up to sect192 -->
         
     </sections>
 
