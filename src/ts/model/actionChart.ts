@@ -434,15 +434,25 @@ class ActionChart {
 
         // Weapons
         if( noWeapon || !currentWeapon ) {
-            // No weapon:
+            // No weapon: -4 CS
+            
+            /*  Exception (Magnakai books):
+                Kai level "Tutelary" with "Weaponmastery": Tutelaries are able to use defensive combat skills to great effect 
+                when fighting unarmed. When entering combat without a weapon, Tutelaries lose only 2 points from their COMBAT SKILL, 
+                instead of the usual 4 points. */
+            let bonus = -4;
+            if( state.book.isMagnakaiBook() && state.actionChart.disciplines.length >= 5 && 
+                state.actionChart.disciplines.contains( 'wpnmstry' ) )
+                bonus = -2;
+
             bonuses.push( {
                 concept: translations.text('noWeapon'),
-                increment: -4
+                increment: bonus
             });
         }
         else if( this.isWeaponskillActive( bowCombat ) ) {
             // Weapon skill bonus
-            if( state.book.bookNumber <= 5 )
+            if( state.book.isKaiBook() )
                 // Kai book:
                 bonuses.push( {
                     concept: translations.text( 'weaponskill' ),
