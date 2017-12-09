@@ -13,7 +13,6 @@
   * Book 10 / sect142: No foot page
   * Book 10 / sect177 / Black key: English -> Special item, Spanish -> Backpack item
   
-- Add button to explain combat ratio
 - Kai level "Tutelary" with "Weaponmastery": Tutelaries are able to use defensive combat skills to great effect 
   when fighting unarmed. When entering combat without a weapon, Tutelaries lose only 2 points from their COMBAT SKILL, instead of the usual 4 points.
 - Kai level "Mentora" with "Weaponmastery": Mentoras skilled in Weaponmastery are more accurate when using all missile 
@@ -111,3 +110,8 @@ Reminders:
   cordova plugin list
 
 Work done on this commit:
+
+<p>
+            <span class="attribute" data-translation="combatRatio">COMBAT RATIO</span>: 
+            <a href="#" class="mechanics-combatRatio">CR</a>
+        </p>

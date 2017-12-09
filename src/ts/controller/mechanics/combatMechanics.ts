@@ -56,6 +56,12 @@ const combatMechanics = {
                     true );
             });
 
+            // Bind combat ratio link click
+            $combatUI.find('.crlink').click(function( e : Event ) {
+                e.preventDefault();
+                combatMechanics.showCombatRatioDetails( $(this).parents('.mechanics-combatUI').first() );
+            });
+
             // Set enemy name on table
             $combatUI.find('.mechanics-enemyName').html( combat.enemy );
             // Set combat ratio:
@@ -175,9 +181,9 @@ const combatMechanics = {
      */
     runCombatTurn: function( $combatUI : any, elude : boolean ) {
         // Get the combat info:
-        var combatIndex = parseInt( $combatUI.attr( 'data-combatIdx' ) );
-        var sectionState = state.sectionStates.getSectionState();
-        var combat = sectionState.combats[ combatIndex ];
+        const combatIndex = parseInt( $combatUI.attr( 'data-combatIdx' ) );
+        const sectionState = state.sectionStates.getSectionState();
+        const combat = sectionState.combats[ combatIndex ];
 
         combat.nextTurnAsync( elude )
         .then(function(turn) {
@@ -318,6 +324,42 @@ const combatMechanics = {
         $psiSurgeCheck.prop('checked', false);
         $psiSurgeCheck.prop('disabled', true);
         combatMechanics.updateCombatRatio( $combatUI , combat );
+    },
+
+    /**
+     * Show dialog with combat ratio details
+     * @param {jQuery} $combatUI The combat UI
+     */
+    showCombatRatioDetails : function( $combatUI : any ) {
+        // Get the combat info:
+        const combatIndex = parseInt( $combatUI.attr( 'data-combatIdx' ) );
+        const sectionState = state.sectionStates.getSectionState();
+        const combat = sectionState.combats[ combatIndex ];
+
+        const finalCSPlayer = combat.getCurrentCombatSkill();
+
+        // Player CS for this combat:
+        let csPlayer : string = state.actionChart.combatSkill.toString();
+        const bonuses = combat.getCSBonuses();
+        for( let bonus of bonuses ) {
+            csPlayer += ' ';
+            if( bonus.increment >= 0 )
+                csPlayer += '+';
+            csPlayer += bonus.increment.toString() + ' (' + bonus.concept + ')';
+        }
+        if( bonuses.length > 0 )
+            csPlayer += ' = ' + finalCSPlayer.toString();
+        $('#game-ratioplayer').text( csPlayer );
+
+        // Enemy info:
+        $('#game-ratioenemyname').text( combat.enemy );
+        $('#game-ratioenemy').text( combat.combatSkill );
+
+        // Combat ratio result:
+        $('#game-ratioresult').text( finalCSPlayer + ' - ' + combat.combatSkill + ' =  ' + ( finalCSPlayer - combat.combatSkill ) );
+
+        // Show dialog
+        $('#game-ratiodetails').modal();
     }
 
 };

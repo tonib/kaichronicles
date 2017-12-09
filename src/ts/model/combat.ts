@@ -122,15 +122,44 @@ class Combat {
      * @return The current combat skill
      */
     public getCurrentCombatSkill() : number {
-        var cs = state.actionChart.getCurrentCombatSkill(this) + 
-            this.combatModifier + 
-            this.objectsUsageModifier;
-
-        // Check enemy mindforce attack
-        if( this.mindforceCS < 0 && !state.actionChart.hasMindShield() )
-            cs += this.mindforceCS;
-
+        let cs = state.actionChart.combatSkill;
+        for( let bonus of this.getCSBonuses() )
+            cs += bonus.increment;
         return cs;
+    }
+
+    /**
+     * Get the current combat bonuses
+     * @returns The combat bonuses. It includes the Action Chart bonuses
+     */
+    public getCSBonuses() : Array<Bonus> {
+        let bonuses : Array<Bonus> = [];
+
+        for( let bonus of state.actionChart.getCurrentCombatSkillBonuses(this) )
+            bonuses.push( bonus );
+        
+        if( this.combatModifier ) {
+            bonuses.push({
+                increment : this.combatModifier,
+                concept : translations.text( 'sectionModifier' )
+            });
+        }
+
+        if( this.objectsUsageModifier ) {
+            bonuses.push({
+                increment : this.objectsUsageModifier,
+                concept : translations.text( 'objectsUse' )
+            });
+        }
+
+        if( this.mindforceCS < 0 && !state.actionChart.hasMindShield() ) {
+            bonuses.push({
+                increment : this.mindforceCS,
+                concept : translations.text( 'enemyMindblast' )
+            });
+        }
+
+        return bonuses;
     }
 
     /**

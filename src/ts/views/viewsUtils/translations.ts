@@ -91,6 +91,9 @@ class Translations {
         'eludeCombat' : 'Eludir combate',
         'deathLetter' : 'M',
         'mechanics-combat-psisurge' : 'Acometida Psíquica: +<span class="psisurgebonus">4</span> DC, -2 R por asalto',
+        'sectionModifier' : 'Modificador sección',
+        'objectsUse' : 'Uso objetos',
+        'enemyMindblast' : 'Ataque psíquico enemigo',
 
         //////////////////////////////////////
         // Meals
@@ -355,6 +358,9 @@ class Translations {
         'enduranceUpper' : 'ENDURANCE',
         'loneWolf': 'Lone Wolf',
         'deathLetter' : 'K',
+        'sectionModifier' : 'Section modifier',
+        'objectsUse' : 'Objects use',
+        'enemyMindblast' : 'Enemy mindblast',
 
         //////////////////////////////////////
         // Number picker

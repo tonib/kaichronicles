@@ -59,3 +59,41 @@
         Origin sections: <span id="game-sourceSections"></span>
     </p>
 </div>
+
+<!-- Modal to see Combat ratio details (see combatMechanics.ts)-->
+<div class="modal fade" id="game-ratiodetails" tabindex="-1" role="dialog" 
+    aria-labelledby="game-ratiotitle">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="game-ratiotitle" data-translation="combatRatio">
+                    COMBAT RATIO
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <p>
+                    <b data-translation="loneWolf">Lone Wolf</b>: <span id="game-ratioplayer"></span>
+                </p>
+                <p>
+                    <b id="game-ratioenemyname">Enemy name</b>: <span id="game-ratioenemy"></span>
+                </p>
+                <p>
+                    <b data-translation="combatRatio">COMBAT RATIO</b>: <span id="game-ratioresult"></span>
+                </p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"
+                data-translation="close">
+                    Close
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
