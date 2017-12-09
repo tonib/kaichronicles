@@ -1094,7 +1094,85 @@
             <endurance count="-3" />
         </section>
 
-        <!-- Up to sect192 -->
+        <section id="sect194">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="6">
+                    <choiceState section="sect67" set="enabled" />
+                </case>
+                <case from="7" to="99">
+                    <choiceState section="sect335" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasCircle="circleSolaris">
+                <randomTableIncrement increment="+3" />
+            </test>
+        </section>
+
+        <section id="sect200">
+            <!--
+                TODO: If you have travelled the Stornlands...
+                Do the same here than in book 3 / sect268 (a TODO too)
+            -->
+        </section>
+
+        <section id="sect203">
+            <choiceState section="all" set="disabled" />
+            <randomTable zeroAsTen="true">
+                <test expression="[RANDOM] > 0">
+                    <endurance count="-[RANDOM]" />
+                </test>
+                <test not="true" expression="[RANDOM] > 0">
+                    <endurance count="-1" />
+                </test>
+                <choiceState section="all" set="enabled" />
+            </randomTable>
+            <test hasDiscipline="curing">
+                <randomTableIncrement increment="-3" />
+            </test>
+        </section>
+
+        <section id="sect204">
+            <meal />
+        </section>
+
+        <section id="sect205">
+            <meal />
+        </section>
+
+        <section id="sect206">
+            <choiceState section="sect225" set="disabled" />
+            <test hasDiscipline="pthmnshp">
+                <test expression="[KAILEVEL] >= 5">
+                    <choiceState section="sect225" set="enabled" />
+                    <choiceState section="sect345" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect207">
+            <death />
+        </section>
+
+        <section id="sect208">
+            <endurance count="-2" />
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect209">
+            <choiceState section="sect191" set="disabled" />
+            <test hasDiscipline="pthmnshp">
+                <test expression="[KAILEVEL] >= 5">
+                    <choiceState section="sect191" set="enabled" />
+                    <choiceState section="sect28" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <!-- Up to sect209 -->
         
     </sections>
 
