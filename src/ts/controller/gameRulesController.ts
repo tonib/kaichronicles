@@ -18,13 +18,17 @@ const gameRulesController = {
         .then(function() {
             
             // Push game rules sections:
-            gameRulesController.appendSection( 'crsumary' );
-            gameRulesController.appendSection( 'levels' );
-            gameRulesController.appendSection( 'howcarry'  );
-            gameRulesController.appendSection( 'howuse' );
-            if( state.book.isMagnakaiBook() )
+            gameRulesController.appendSection( Book.COMBATRULESSUMMARY_SECTION );
+            gameRulesController.appendSection( Book.KAILEVELS_SECTION );
+            gameRulesController.appendSection( Book.HOWTOCARRY_SECTION );
+            gameRulesController.appendSection( Book.HOWTOUSE_SECTION );
+
+            if( state.book.isMagnakaiBook() ) {
                 // Lore-circles rules
-                gameRulesController.appendSection( 'lorecrcl' );
+                gameRulesController.appendSection( Book.LORECIRCLES_SECTION );
+                // Improved disciplines
+                gameRulesController.appendSection( Book.IMPROVEDDISCIPLINES_SECTION );
+            }
 
             // Bind combat table links
             gameView.bindCombatTablesLinks();

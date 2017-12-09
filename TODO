@@ -13,15 +13,10 @@
   * Book 10 / sect142: No foot page
   * Book 10 / sect177 / Black key: English -> Special item, Spanish -> Backpack item
   
-- Kai level "Mentora" with "Weaponmastery": Mentoras skilled in Weaponmastery are more accurate when using all missile 
-  weapons, whether fired (e.g. a bow) or thrown (e.g. a dagger). When using a bow or thrown weapon and instructed to pick a 
-  number from the Random Number Table, add 2 to the number picked if you are a Mentora with the Magnakai Discipline 
-  of Weaponmastery.
 - Ask help to Alarion with english translations
 - Info for Michael: <combat mindblastBonus="+6" psiSurgeBonus="+12" /> can be used as multiplier for Mindblast
 
 FOR FUTURE (1.9+):
-- Add section "Improved Disciplines" to the "Game rules" page
 - Support for kai disciplines on magnakai books:
   * https://github.com/tonib/kaichronicles/issues/5
   * https://www.projectaon.org/es/foro3/viewtopic.php?p=27752#p27752

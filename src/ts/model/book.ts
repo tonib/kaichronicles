@@ -7,13 +7,26 @@
 class Book {
 
     /** Initial books section */
-    public static INITIAL_SECTION = 'tssf';
+    public static readonly INITIAL_SECTION = 'tssf';
 
     /** Special unexistent section where to store objects on the Kai monastery */
-    public static KAIMONASTERY_SECTION = 'kaimonastery';
+    public static readonly KAIMONASTERY_SECTION = 'kaimonastery';
 
     /** Books equipment section */
-    public static EQUIPMENT_SECTION = 'equipmnt';
+    public static readonly EQUIPMENT_SECTION = 'equipmnt';
+
+    public static readonly COMBATRULESSUMMARY_SECTION = 'crsumary';
+    
+    public static readonly KAILEVELS_SECTION = 'levels';
+
+    public static readonly HOWTOCARRY_SECTION = 'howcarry';
+
+    public static readonly HOWTOUSE_SECTION = 'howuse';
+
+    public static readonly LORECIRCLES_SECTION = 'lorecrcl';
+
+    public static readonly IMPROVEDDISCIPLINES_SECTION = 'imprvdsc';
+    
 
     /** Book index number (1 = first book) */
     public bookNumber : number;
