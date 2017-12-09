@@ -474,9 +474,27 @@ class ActionChart {
             });
         }
 
+        if( bowCombat ) {
+            /* Improved disciplines:
+                Kai level "Mentora" with "Weaponmastery": Mentoras skilled in Weaponmastery are more accurate when using all missile 
+                weapons, whether fired (e.g. a bow) or thrown (e.g. a dagger). When using a bow or thrown weapon and instructed to pick a 
+                number from the Random Number Table, add 2 to the number picked if you are a Mentora with the Magnakai Discipline 
+                of Weaponmastery */
+            if( state.book.isMagnakaiBook() && this.disciplines.length >= 7 && this.disciplines.contains( 'wpnmstry' ) ) {
+                bonuses.push( {
+                    concept: state.book.getKaiTitle(7), // "Mentora" traslation
+                    increment: +2
+                });
+            }
+        }
+        
         return bonuses;
     }
 
+    /**
+     * Get total bonus for bow shots
+     * @returns The bonus increment. It can be negative
+     */
     public getBowBonus() : number {
         let bonus = 0
         for( let b of this.getWeaponCombatSkillBonuses(false, true, []) )
