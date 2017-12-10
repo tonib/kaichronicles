@@ -105,8 +105,3 @@ Reminders:
   cordova plugin list
 
 Work done on this commit:
-
-<p>
-            <span class="attribute" data-translation="combatRatio">COMBAT RATIO</span>: 
-            <a href="#" class="mechanics-combatRatio">CR</a>
-        </p>
