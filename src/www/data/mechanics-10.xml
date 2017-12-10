@@ -132,7 +132,7 @@
 
         <section id="sect11">
             <!-- TODO: Drop weapon. Foot page is not clear, and there are differences between language.
-                 Let the player choose -->
+                 Let the player choose (COPY CODE FROM sect210) -->
             <choiceState section="all" set="disabled" />
             <randomTable>
                 <case from="0" to="3">
@@ -1172,7 +1172,110 @@
             </test>
         </section>
 
-        <!-- Up to sect209 -->
+        <section id="sect210">
+            <endurance count="-2" />
+            <!-- TODO: sect333, disable sect210 if no weapon -->
+            <message id="msg-drop-weapon" 
+                en-text="Drop a weapon before continue" 
+                es-text="Deja un arma antes de continuar"
+            />
+            <choiceState section="all" set="disabled" />
+            <onInventoryEvent>
+                <test expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] == 0 || [WEAPONLIKE-CNT-ON-SECTION] > 0">
+                    <message id="msg-drop-weapon" op="hide" />
+                    <choiceState section="all" set="enabled" />
+                    <test expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] == 0">
+                        <choiceState section="sect128" set="disabled" />
+                    </test>
+                </test>
+                <test not="true" expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] == 0 || [WEAPONLIKE-CNT-ON-SECTION] > 0">
+                    <message id="msg-drop-weapon" op="show" />
+                    <choiceState section="all" set="disabled" />
+                </test>
+            </onInventoryEvent>
+        </section>
+
+        <section id="sect211">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect212">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect221" set="enabled" />
+                </case>
+                <case from="5" to="9">
+                    <choiceState section="sect32" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect213">
+            <endurance count="-5" />
+            <test canUseBow="false">
+                <choiceState section="sect147" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect214">
+            <death />
+        </section>
+
+        <section id="sect215">
+            <endurance count="-2" />
+        </section>
+
+        <section id="sect216">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="0" />
+            <afterCombats>
+                <choiceState section="sect170" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect23" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect217">
+            <object objectId="gorodonhorn" />
+        </section>
+
+        <section id="sect218">
+            <!-- TODO: Portholes game -->
+        </section>
+
+        <section id="sect219">
+            <!--
+                TODO: Have you visited the Danarg in a previous Lone Wolf adventure?
+                Do the same here than in book 3 / sect268 (a TODO too)
+            -->
+        </section>
+
+        <section id="sect220">
+            <choiceState section="sect161" set="disabled" />
+            <test hasDiscipline="pthmnshp">
+                <test expression="[KAILEVEL] >= 7">
+                    <choiceState section="sect161" set="enabled" />
+                    <choiceState section="sect3" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect223">
+            <test not="true" hasObject="bullwhip">
+                <choiceState section="sect185" set="disabled" />
+            </test>
+            <test hasObject="bullwhip">
+                <choiceState section="sect342" set="disabled" />
+            </test>
+        </section>
+
+        <!-- Up to sect223 -->
         
     </sections>
 

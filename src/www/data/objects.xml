@@ -656,6 +656,18 @@
             <image book="1" name="small15.png" />
         </special>
 
+        <special id="gorodonhorn">
+            <name lang="en">Gorodon Horn</name>
+            <description lang="en">
+                “There are potion-makers in Humbold who’ll pay a grand price for these”
+            </description>
+
+            <name lang="es">Cuerno de Gorodon</name>
+            <description lang="es">
+                “Hay en Humbold fabricantes de pociones que pagarían un gran precio por éstos”
+            </description>
+        </special>
+
     </specials>
 
     <objects>

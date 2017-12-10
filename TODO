@@ -18,6 +18,7 @@
 - Info for Michael: <combat mindblastBonus="+6" psiSurgeBonus="+12" /> can be used as multiplier for Mindblast
 
 FOR FUTURE (1.9+):
+- Action chart / disciplines: Add a number before then name ("1. Discipline") for each discipline
 - Support for kai disciplines on magnakai books:
   * https://github.com/tonib/kaichronicles/issues/5
   * https://www.projectaon.org/es/foro3/viewtopic.php?p=27752#p27752
