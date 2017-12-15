@@ -912,16 +912,28 @@ const mechanicsEngine = {
     },
 
     /** Drop an object (object lost) */
-    drop: function(rule) {
+    drop: function( rule ) {
         if( state.sectionStates.ruleHasBeenExecuted(rule) )
             // Execute only once
             return;
         
+        const $rule = $(rule);
+
         // Drop the first one of the specified
-        for( let objectId of mechanicsEngine.getArrayProperty( $(rule) , 'objectId' ) ) {
-            if( actionChartController.drop( objectId , false ) )
+        for( let objectId of mechanicsEngine.getArrayProperty( $rule , 'objectId' ) ) {
+            if( actionChartController.drop( objectId ) )
                 break;
         }
+
+        // Drop backpack item slots by its index (1-based index)
+        let slotObjectsIds : Array<string> = [];
+        for( let itemSlotTxt of mechanicsEngine.getArrayProperty( $rule , 'backpackItemSlots' ) ) {
+            const slotIndex = parseInt( itemSlotTxt ) - 1;
+            if( state.actionChart.backpackItems.length > slotIndex )
+                slotObjectsIds.push( state.actionChart.backpackItems[slotIndex] );
+        }
+        for( let objectId of slotObjectsIds )
+            actionChartController.drop( objectId );
 
         state.sectionStates.markRuleAsExecuted(rule);
     },

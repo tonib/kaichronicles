@@ -264,7 +264,8 @@
     </xs:complexType>
     
     <xs:complexType name="drop">
-        <xs:attribute name="objectId" type="xs:string" use="required" />
+        <xs:attribute name="objectId" type="xs:string" />
+        <xs:attribute name="backpackItemSlots" type="xs:string" />
     </xs:complexType>
     
     <xs:complexType name="disableCombats">

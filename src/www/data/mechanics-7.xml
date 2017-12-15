@@ -854,25 +854,18 @@
         </section>
 
         <section id="sect131">
+            <drop backpackItemSlots="2" />
             <message id="msg-drop-weapon" 
-                en-text="Drop a weapon and the second item on your list of Backpack Items before continue" 
-                es-text="Deja un arma y el segundo objeto de la lista de artículos de la mochila antes de continuar"
+                en-text="Drop a weapon before continue" 
+                es-text="Deja un arma antes de continuar"
             />
             <choiceState section="all" set="disabled" />
-            <!-- What if the player has a single Backpack Item? Should drop the first? Nope, drop only the second -->
-            <!-- Use WEAPON, But no WEAPONLIKE (they include Special Items) -->
             <onInventoryEvent>
                 <test expression="[WEAPON-ITEMS-CNT-ON-ACTIONCHART] == 0 || [WEAPON-ITEMS-CNT-ON-SECTION] > 0">
-                    <test expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] &lt;= 1 || [BACKPACK-ITEMS-CNT-ON-SECTION] > 0">
-                        <message id="msg-drop-weapon" op="hide" />
-                        <choiceState section="all" set="enabled" />
-                    </test>
+                    <message id="msg-drop-weapon" op="hide" />
+                    <choiceState section="all" set="enabled" />
                 </test>
                 <test not="true" expression="[WEAPON-ITEMS-CNT-ON-ACTIONCHART] == 0 || [WEAPON-ITEMS-CNT-ON-SECTION] > 0">
-                    <message id="msg-drop-weapon" op="show" />
-                    <choiceState section="all" set="disabled" />
-                </test>
-                <test not="true" expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] &lt;= 1 || [BACKPACK-ITEMS-CNT-ON-SECTION] > 0">
                     <message id="msg-drop-weapon" op="show" />
                     <choiceState section="all" set="disabled" />
                 </test>
