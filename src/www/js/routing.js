@@ -121,7 +121,7 @@ var routing = {
             if( routing.lastControllerName ) {
                 controller = routing.getController(routing.lastControllerName);
                 if( controller && controller.onLeave ) {
-                    console.log('Leaving ' + routing.lastControllerName);
+                    //console.log('Leaving ' + routing.lastControllerName);
                     controller.onLeave();
                 }
             }

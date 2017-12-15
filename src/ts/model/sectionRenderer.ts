@@ -338,6 +338,11 @@ class SectionRenderer {
                 open = '<a href="#gameRules?section=lorecrcl">';
                 close = '</a>';
                 break;
+            case 'err230':
+                // Book 12, sect230: Link to erratas (Plain text)
+                open = '<span>';
+                close = '</span>';
+                break;
             default:
                 if( this.sectionToRender.book.hasSection( idRef ) )
                     // Link to other section (ignore)

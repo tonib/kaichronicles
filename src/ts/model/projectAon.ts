@@ -182,6 +182,21 @@ const projectAon = {
             biographies: [ 'jdbiolw' , 'bwbiolw' ],
             
             zipSize: 3007751
+        },
+
+        // Book 12 (NOT IMPLEMENTED / Nobody working on it):
+        {
+            title_en: 'The Masters of Darkness',
+            code_en: '12tmod',
+
+            title_es: 'Los Señores de la Oscuridad',
+            code_es: '12lsdlo',
+
+            illustrators: [ 'williams' ],
+
+            biographies: [ 'jdbiolw' , 'bwbiolw' ],
+            
+            zipSize: 3180171
         }
 
     ],
