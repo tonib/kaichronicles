@@ -1494,7 +1494,65 @@
             <drop backpackItemSlots="4|5|6" />
         </section>
 
-        <!-- Up to sect264 -->
+        <section id="sect266">
+            <choiceState section="sect303" set="disabled" />
+            <test hasDiscipline="dvnation">
+                <test expression="[KAILEVEL] >= 7">
+                    <choiceState section="sect303" set="enabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect267">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect208" set="enabled" />
+                </case>
+                <case from="5" to="99">
+                    <choiceState section="sect33" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="+3" />
+            </test>
+        </section>
+
+        <section id="sect268">
+            <test not="true" hasDiscipline="curing">
+                <choiceState section="sect276" set="disabled" />
+            </test>
+            <test hasDiscipline="curing">
+                <choiceState section="sect325" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect271">
+            <!-- TODO: If you pick arrows and you don't have enougth quivers, the arrows disappers. They should not
+                 TODO: See pick "money" object, and do the same -->
+            <object objectId="sword" index="0" />
+            <object objectId="sword" index="1" />
+            <object objectId="quiver" index="0" />
+            <object objectId="quiver" index="1" />
+            <object objectId="quiver" index="2" />
+            <object objectId="dagger" index="0" />
+            <object objectId="dagger" index="1" />
+            <object objectId="arrow" count="11" />
+            <object objectId="bow" index="0" />
+            <object objectId="bow" index="1" />
+            <object objectId="bow" index="2" />
+            <object objectId="axe" index="0" />
+            <object objectId="axe" index="1" />
+            <object objectId="mace" />
+            <object objectId="broadsword" />
+            <pick class="money" count="4" />
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
+            <object objectId="meal" index="2" />
+            <object objectId="meal" index="3" />
+        </section>
+
+        <!-- Up to sect271 -->
         
     </sections>
 
