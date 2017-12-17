@@ -1,6 +1,24 @@
 
 /// <reference path="../external.ts" />
 
+/** Book disciplines table */
+interface DisciplinesTable {
+
+    /** Discipline id */
+    [disciplineId : string] : { 
+
+        /** Discipline id */
+        id : string , 
+
+        /** Discipline translated name */
+        name : string ,
+
+        /** Discipline translated description */
+        description : string 
+    }
+
+}
+
 /**
  * Class to handle the Project Aon books XML
  */
@@ -38,15 +56,18 @@ class Book {
     public bookXml : any;
 
     /**
-     * Array of 100 positions with the random table number as they appear on the book
+     * Array of 100 positions with the random table numbers as they appear on the book
      */
     public bookRandomTable : Array<number>;
 
-    /** The book title, plain text */
-    private bookTitle : string;
+    /** The book title cache, plain text */
+    private bookTitle : string = null;
 
-    /** The book copyright text, HTML formatted */
-    private bookCopyrightHtml : string;
+    /** The book copyright text cache, HTML formatted */
+    private bookCopyrightHtml : string = null;
+
+    /** The book disciplines cache */
+    private disciplines : DisciplinesTable = null;
 
     /**
      * Constructor
@@ -280,28 +301,36 @@ class Book {
     /**
      * Returns a dictionary with the disciplines info
      */
-    public getDisciplinesTable() : { [disciplineId : string] : { id : string , name : string , description : string } } {
-        let result = {};
-        // Parse the disciplines section
-        $(this.bookXml).find('section[id=discplnz] > data > section')
-        .each( function(disciplineSection) {
-            var disciplineId = $(this).attr('id');
+    public getDisciplinesTable() : DisciplinesTable {
 
-            let description : string; 
-            if( disciplineId == 'psisurge' )
-                // Special case, with useful info on second paragraph
-                description = $(this).find('p:not(:last)').text();
-            else
-                description = $(this).find('p').first().text();
+        if( !this.disciplines ) {
 
-            result[disciplineId] = {
-                id: disciplineId,
-                name: $(this).find('> meta > title').text(),
-                description: description
-            };
-        });
+            this.disciplines = {};
+            const self = this;
+            // Parse the disciplines section
+            $(this.bookXml).find('section[id=discplnz] > data > section')
+            .each( function(disciplineSection) {
 
-        return result;
+                const $node = $(this);
+
+                var disciplineId = $node.attr('id');
+
+                let description : string; 
+                if( disciplineId == 'psisurge' )
+                    // Special case, with useful info on second paragraph
+                    description = $node.find('p:not(:last)').text();
+                else
+                    description = $node.find('p').first().text();
+
+                self.disciplines[disciplineId] = {
+                    id: disciplineId,
+                    name: $node.find('> meta > title').text(),
+                    description: description
+                };
+            });
+        }
+
+        return this.disciplines;
     }
 
     /**

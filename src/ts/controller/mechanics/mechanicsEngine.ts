@@ -450,12 +450,11 @@ const mechanicsEngine = {
         // Initially the condition is false
         var conditionStatisfied = false;
 
-        // TODO: Remove references to $(rule), use and re-use this
         const $rule = $(rule);
 
         // Check discipline
         // TODO: Use mechanicsEngine.getArrayProperty here
-        var disciplineToTest = $(rule).attr('hasDiscipline');
+        var disciplineToTest = $rule.attr('hasDiscipline');
         var i;
         if( disciplineToTest ) {
             // Check if the player has some of the disciplines
@@ -472,7 +471,7 @@ const mechanicsEngine = {
         }
 
         // Check objects
-        var objectIdsToTest = $(rule).attr('hasObject');
+        var objectIdsToTest = $rule.attr('hasObject');
         if( objectIdsToTest ) {
             // Check if the player has some of the objects
             // TODO: Use mechanicsEngine.getArrayProperty here
@@ -488,13 +487,13 @@ const mechanicsEngine = {
         }
 
         // Check expression
-        var expression = $(rule).attr('expression');
+        var expression = $rule.attr('expression');
         if( expression && ExpressionEvaluator.evalBoolean( expression ) )
             conditionStatisfied = true;
         
         // Check section visited:
         // TODO: Use mechanicsEngine.getArrayProperty here
-        var sectionIds = $(rule).attr('sectionVisited');
+        var sectionIds = $rule.attr('sectionVisited');
         if( sectionIds ) {
             sectionIds = sectionIds.split('|');
             for(i=0; i < sectionIds.length; i++ ) {
@@ -521,7 +520,7 @@ const mechanicsEngine = {
 
         // Test weaponskill with current weapon
         // TODO: Use mechanicsEngine.getBooleanProperty here
-        var weaponskillActive = $(rule).attr('weaponskillActive');
+        var weaponskillActive = $rule.attr('weaponskillActive');
         if( weaponskillActive == 'true' ) {
             if( state.actionChart.isWeaponskillActive() )
                 conditionStatisfied = true;
@@ -529,7 +528,7 @@ const mechanicsEngine = {
 
         // Test combats won:
         // TODO: Use mechanicsEngine.getBooleanProperty here
-        var combatsWon = $(rule).attr('combatsWon');
+        var combatsWon = $rule.attr('combatsWon');
         if( combatsWon ) {
             var allCombatsWon = state.sectionStates.getSectionState().areAllCombatsWon();
             if( combatsWon == 'true' && allCombatsWon )
@@ -540,18 +539,18 @@ const mechanicsEngine = {
 
         // Test some combat active:
         // TODO: Use mechanicsEngine.getBooleanProperty here
-        var combatsActive = $(rule).attr('combatsActive');
+        var combatsActive = $rule.attr('combatsActive');
         if( combatsActive == 'true' && 
             state.sectionStates.getSectionState().someCombatActive() )
             conditionStatisfied = true;
 
         // Test book language
-        var bookLanguage = $(rule).attr('bookLanguage');
+        var bookLanguage = $rule.attr('bookLanguage');
         if( bookLanguage && state.book.language == bookLanguage )
             conditionStatisfied = true;
         
         // Test section choice is enabled:
-        var sectionToCheck = $(rule).attr('isChoiceEnabled');
+        var sectionToCheck = $rule.attr('isChoiceEnabled');
         if( sectionToCheck && mechanicsEngine.isChoiceEnabled(sectionToCheck) )
             conditionStatisfied = true;
 
@@ -562,7 +561,7 @@ const mechanicsEngine = {
 
         // Test if the player has a kind of weapon
         // TODO: Use mechanicsEngine.getArrayProperty here
-        let hasWeaponType : string = $(rule).attr( 'hasWeaponType' );
+        let hasWeaponType : string = $rule.attr( 'hasWeaponType' );
         if( hasWeaponType ) {
             for( let weaponType of hasWeaponType.split('|') ) {
                 if( state.actionChart.getWeaponType( weaponType ) ) {
@@ -573,12 +572,12 @@ const mechanicsEngine = {
         }
 
         // Test if the player has a lore-circle
-        let circleId : string = $(rule).attr('hasCircle');
+        let circleId : string = $rule.attr('hasCircle');
         if( circleId && LoreCircle.getCircle( circleId ).matchCircle( state.actionChart.disciplines ) )
             conditionStatisfied = true;
 
         // Check if the player has weaponskill / weaponmastery with a given weapon
-        const hasWeaponskillWith : string = $(rule).attr('hasWeaponskillWith');
+        const hasWeaponskillWith : string = $rule.attr('hasWeaponskillWith');
         if( hasWeaponskillWith && state.actionChart.hasWeaponskillWith( hasWeaponskillWith ) )
             conditionStatisfied = true;
 
@@ -592,12 +591,12 @@ const mechanicsEngine = {
         }
 
         // Check if the test should be inversed
-        if( $(rule).attr('not') == 'true' )
+        if( $rule.attr('not') == 'true' )
             conditionStatisfied = !conditionStatisfied;
 
         if( conditionStatisfied )
             // Run child items
-            mechanicsEngine.runChildRules( $(rule) );
+            mechanicsEngine.runChildRules( $rule );
         
     },
 
