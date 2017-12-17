@@ -190,15 +190,6 @@ function buildAndroidApp() {
         src += '.apk';
         dst += '.apk';
 
-        /*if( pwd ) {
-            src = 'platforms/android/build/outputs/apk/android-release.apk';
-            dst = 'kai-signed.apk'
-        }
-        else {
-            src = 'platforms/android/build/outputs/apk/android-release-unsigned.apk';
-            dst = 'kai-UNSIGNED.apk'
-        }*/
-
         console.log( 'Copying ' + src + ' to dist/' + dst );
         fs.copySync( src , '../' + dst );
     }

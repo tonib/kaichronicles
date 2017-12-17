@@ -138,6 +138,7 @@ var routing = {
             else {
                 // Store the new hash
                 routing.lastControllerName = routing.getControllerName();
+                console.log( routing.lastControllerName + '.index()' );
                 controller.index();
             }
         }

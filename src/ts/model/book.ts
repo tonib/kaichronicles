@@ -42,6 +42,12 @@ class Book {
      */
     public bookRandomTable : Array<number>;
 
+    /** The book title, plain text */
+    private bookTitle : string;
+
+    /** The book copyright text, HTML formatted */
+    private bookCopyrightHtml : string;
+
     /**
      * Constructor
      * @param number The book index number to create
@@ -263,9 +269,12 @@ class Book {
 
     /**
      * Returns the book title
+     * @returns The book title, plain text
      */
-    public getBookTitle() {
-        return $( this.bookXml ).find( 'gamebook > meta > title').first().text();
+    public getBookTitle() : string {
+        if( !this.bookTitle )
+            this.bookTitle = $( this.bookXml ).find( 'gamebook > meta > title').first().text();
+        return this.bookTitle;
     }
 
     /**
@@ -314,14 +323,19 @@ class Book {
     }
 
     /**
-     * Get the book copyright HTML
+     * Get the book copyright HTML 
+     * @returns The book copyright text, HTML formatted
      */
     public getCopyrightHtml() : string {
-        var fakeSection = new Section(this, 'fakeSection', null);
-        var renderer = new SectionRenderer(fakeSection);
-        var selector = 'rights[class="copyrights"]';
-        return renderer.renderNodeChildren( 
-            $(this.bookXml).find(selector) , 0 );
+
+        if( !this.bookCopyrightHtml ) {
+            var fakeSection = new Section(this, 'fakeSection', null);
+            var renderer = new SectionRenderer(fakeSection);
+            var selector = 'rights[class="copyrights"]';
+            this.bookCopyrightHtml = renderer.renderNodeChildren( $(this.bookXml).find(selector) , 0 );
+        }
+
+        return this.bookCopyrightHtml;
     }
 
     /**
