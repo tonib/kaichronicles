@@ -90,11 +90,18 @@ function minifyJavascript() {
  */
 function getApkSignPassword() {
 
-    if( process.argv.length < 3 ) {
+    var pwd = null;
+    if( process.argv.length >= 3 ) {
+        pwd = process.argv[ process.argv.length - 1 ];
+        if( pwd.startsWith('--') )
+            // Option, not the password:
+            pwd = null;
+    }
+
+    if( pwd == null ) {
         console.log('Password for keystore was not specified on command line (Unsigned apk)');
         return null;
     }
-    var pwd = process.argv[2];
 
     // accessSync throws if any accessibility checks fail (oh javascript...)
     var keystoreExists;
@@ -139,8 +146,19 @@ function buildAndroidApp() {
         // Clean
         child_process.execFileSync('cordova', ['clean', 'android'] , {stdio:[0,1,2]} );
 
-        var params = ['build', 'android' , '--release' ];
+        var params = ['build', 'android' ];
 
+        // Check if we are compiling for debug
+        var debug = false;
+        if( process.argv.indexOf( '--debug' ) >= 0 ) {
+            params.push( '--debug' );
+            debug = true;
+            console.log('Building DEBUG');
+        }
+        else
+            params.push( '--release' );
+
+        // Compile
         if( pwd ) {
             // cordova build android --release -- --keystore=../../keystore/projectaon.keystore --storePassword=[PASSWORD] --alias=projectaon --password=[PASSWORD]
             console.log('Building SIGNED');
@@ -152,18 +170,34 @@ function buildAndroidApp() {
         }
         else
             console.log('Building UNSIGNED');
-        
+        console.log( 'cordova ' + params.join( ' ' ) );
         child_process.execFileSync('cordova', params , {stdio:[0,1,2]} );
 
-        var src, dst;
-        if( pwd ) {
+        // Copy apk to dist root
+        var src = 'platforms/android/build/outputs/apk/android', dst = 'kai';
+        if( debug ) {
+            src += '-debug';
+            dst += '-DEBUG';
+        }
+        else {
+            src += '-release';
+        }
+        if( !pwd ) {
+            if( !debug )
+                src += '-unsigned';
+            dst += '-UNSIGNED';
+        }
+        src += '.apk';
+        dst += '.apk';
+
+        /*if( pwd ) {
             src = 'platforms/android/build/outputs/apk/android-release.apk';
             dst = 'kai-signed.apk'
         }
         else {
             src = 'platforms/android/build/outputs/apk/android-release-unsigned.apk';
             dst = 'kai-UNSIGNED.apk'
-        }
+        }*/
 
         console.log( 'Copying ' + src + ' to dist/' + dst );
         fs.copySync( src , '../' + dst );
