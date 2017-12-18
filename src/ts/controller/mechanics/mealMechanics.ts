@@ -108,7 +108,7 @@ const mealMechanics = {
             // Enable section choices, and re-execute section rules to disable not available
             // choices
             mechanicsEngine.setChoiceState('all', false);
-            mechanicsEngine.runSectionRules();
+            mechanicsEngine.runSectionRules( true );
             
             // Remove UI
             $(mealSelector).remove();

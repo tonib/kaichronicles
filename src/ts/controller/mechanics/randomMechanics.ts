@@ -66,6 +66,14 @@ const randomMechanics = {
         return randomMechanics.getRandomTableRefByIndex( $(rule).attr('index') );
     },
 
+    /**
+     * This will clear any increment on the random table links
+     * It can be needed if a section rules need to be re-executed without re-rendering the section
+     */
+    resetRandomTableIncrements : function() {
+        $('.random[data-increment]').attr( 'data-increment' , '0' );
+    },
+
     /** Increment for random table selection */
     randomTableIncrement: function(rule : any) {
         var $link = randomMechanics.getRandomTableRefByRule(rule);

@@ -1552,7 +1552,26 @@
             <object objectId="meal" index="3" />
         </section>
 
-        <!-- Up to sect271 -->
+        <section id="sect272">
+            <test not="true" hasObject="sommerswerd">
+                <choiceState section="sect113" set="disabled" />
+            </test>
+            <test hasObject="sommerswerd">
+                <choiceState section="sect126" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect273">
+            <choiceState section="sect22" set="disabled" />
+            <test hasDiscipline="dvnation">
+                <test expression="[KAILEVEL] >= 5">
+                    <choiceState section="sect22" set="enabled" />
+                    <choiceState section="sect57" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <!-- Up to sect273 -->
         
     </sections>
 

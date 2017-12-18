@@ -23,10 +23,11 @@
 - Added warning about book 5 map (cities flags)
 
 1.8.1 / 1.9
-- Book 1, sect342: Fixed bug with mindblast
-- Kai monastery safekeeping: Now you can drop objects on the Kai monastery and they will be available on the next book
-- Added "Lore-circles of the Magnakai" to "Game rules"
-- Fixed bug on book 5 / sect242: +3 for Mindshield was not applied
-- Added 6 arrows limit for quivers
 - Import / export saved games
+- Kai monastery safekeeping: Now you can drop objects on the Kai monastery and they will be available on the next book
+- Added 6 arrows limit for quivers
+- Added "Lore-circles of the Magnakai" to "Game rules"
+- Book 1, sect342: Fixed bug with mindblast
+- Fixed bug on book 5 / sect242: +3 for Mindshield was not applied
 - Book 5, sect29, sect305: Fixed bug dropping rope
+- Book 3, sect155: Fixed bug if you pick 9 on the Random table and you had Endurance > 20 (wrong bonus)

@@ -135,8 +135,15 @@ const mechanicsEngine = {
 
     /**
      * Run current section rules
+     * @param resetRandomTableIncrements If it's true, any random table link increment will be reset before
+     * run the rules. Random table increments are stored on the UI, and they are accumulative. So if rules are re-executed
+     * without refresh the section, it can be needed
      */
-    runSectionRules: function() {
+    runSectionRules: function(resetRandomTableIncrements : boolean = false) {
+
+        if( resetRandomTableIncrements )
+            randomMechanics.resetRandomTableIncrements();
+
         // Run section rules
         var $sectionMechanics = 
             state.mechanics.getSection( state.sectionStates.currentSection );
