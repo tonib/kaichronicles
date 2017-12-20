@@ -21,7 +21,7 @@
     <sections>
 
         <section id="tssf">
-            <!-- Restore the endurace to the maximum -->
+            <!-- Restore the endurance to the maximum -->
             <endurance count="+[MAXENDURANCE]" />
         </section>
 

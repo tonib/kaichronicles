@@ -591,7 +591,7 @@
 		
         <special id="skeletonkey">
             <name lang="en">Skeleton Key</name>
-            <name lang="es">Llave de hueso</name>
+            <name lang="es">Llave de Hueso</name>
             <image book="1" name="small15.png" />
         </special>
 		
@@ -1250,6 +1250,23 @@
         <object id="redrobe">
             <name lang="en">Red Robe</name>
             <name lang="es">Túnica con Capucha</name>
+        </object>
+
+        <!-- BOOK 10 -->
+
+        <object id="meallaumwort">
+            <!-- Can be used as Meal ???? Not mentioned on book 10 / sect276 -->
+            <name lang="en">Meal of Laumwort</name>
+            <description lang="en">
+                A herb very similar to Laumspur. Restores 2 ENDURANCE points.
+            </description>
+
+            <name lang="es">Comida de Laumwort</name>
+            <description lang="es">
+                Una hierba muy semejante a la Laumspur. Devuelve 2 puntos de RESISTENCIA.
+            </description>
+
+            <usage class="endurance" increment="2" />
         </object>
 
         <!-- OTHERS -->

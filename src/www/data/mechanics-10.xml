@@ -11,7 +11,7 @@
     <sections>
 
         <section id="tssf">
-            <!-- Restore the endurace to the maximum -->
+            <!-- Restore the endurance to the maximum -->
             <endurance count="+[MAXENDURANCE]" />
             <!-- Drop the previous books map -->
             <drop objectId="map" />
@@ -203,7 +203,6 @@
 
         <section id="sect22">
             <test canUseBow="false">
-                <!-- TODO: sect293, drop arrow -->
                 <choiceState section="sect293" set="disabled" />
             </test>
         </section>
@@ -1571,7 +1570,147 @@
             </test>
         </section>
 
-        <!-- Up to sect273 -->
+        <section id="sect274">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect276">
+            <object objectId="meallaumwort" index="0" />
+            <object objectId="meallaumwort" index="1" />
+            <object objectId="meallaumwort" index="2" />
+        </section>
+
+        <section id="sect277">
+            <object objectId="broadsword" />
+            <object objectId="axe" />
+            <object objectId="bottlewater" />
+            <object objectId="torch" />
+            <object objectId="blanket" />
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
+            <object objectId="meal" index="2" />
+        </section>
+
+        <section id="sect281">
+            <choiceState section="all" set="disabled" />
+            <randomTable zeroAsTen="true">
+                <endurance count="-[RANDOM]" />
+                <choiceState section="all" set="enabled" />
+            </randomTable>
+        </section>
+
+        <section id="sect283">
+            <endurance count="-3" />
+            <test canUseBow="false">
+                <choiceState section="sect131" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect284">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect236" set="enabled" />
+                </case>
+                <case from="5" to="99">
+                    <choiceState section="sect183" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="anmlctrl">
+                <test hasDiscipline="hntmstry">
+                    <randomTableIncrement increment="+3" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect285">
+            <choiceState section="sect80" set="disabled" />
+            <choiceState section="sect219" set="disabled" />
+            <test hasObject="blackkey">
+                <choiceState section="sect80" set="enabled" />
+                <choiceState section="sect130" set="disabled" />
+            </test>
+            <test hasObject="skeletonkey">
+                <choiceState section="sect219" set="enabled" />
+                <choiceState section="sect130" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect286">
+            <choiceState section="all" set="disabled" />
+            <afterCombatTurn turn="any">
+                <test expression="[COMBATSENEMYLOST] >= 45">
+                    <!-- Enemy endurance is less or equal to 20 (enemy original endurance = 65) -->
+                    <disableCombats />
+                    <choiceState section="all" set="enabled" />
+                </test>
+            </afterCombatTurn>
+        </section>
+
+        <section id="sect288">
+            <choiceState section="all" set="disabled" />
+            <combat combatSkillModifier="+2" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect293">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <pick class="arrow" count="-1" />
+                <case from="-99" to="7">
+                    <choiceState section="sect149" set="enabled" />
+                </case>
+                <case from="8" to="99">
+                    <choiceState section="sect164" set="enabled" />
+                </case>
+            </randomTable>
+            <randomTableIncrement increment="[BOWBONUS]" />
+        </section>
+        
+        <section id="sect295">
+            <choiceState section="sect194" set="disabled" />
+            <test hasDiscipline="invsblty|pthmnshp">
+                <choiceState section="sect194" set="enabled" />
+                <choiceState section="sect67" set="disabled" />
+            </test>
+        </section>
+
+
+        <section id="sect296">
+            <object objectId="sword" />
+            <object objectId="dagger" />
+            <object objectId="bow" />
+            <object objectId="blanket" />
+            <object objectId="quiver" />
+            <object objectId="arrow" count="3" />
+            <pick class="money" count="4" />
+        </section>
+
+        <section id="sect297">
+            <test not="true" hasObject="sommerswerd">
+                <choiceState section="sect252" set="disabled" />
+            </test>
+            <test hasObject="sommerswerd">
+                <choiceState section="sect143" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect304">
+            <choiceState section="all" set="disabled" />
+            <!-- you cannot make use of a shield or any two-handed weapon (i.e. Broadsword, Spear, Quarterstaff) 
+                 during the combat -->
+            <combat combatSkillModifier="-3" disabledObjects="shield|broadsword|spear|quarterstaff" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <!-- Up to sect304 -->
         
     </sections>
 
