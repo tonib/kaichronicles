@@ -306,6 +306,7 @@
         </section>
         
         <section id="sect43">
+            <!-- TODO: NOT CHOICE HERE, USE drop backpackItemSlots="2" >
             <!-- Drop the second backpack object. Let the player choose -->
             <message id="msg-drop-second" 
                 en-text="Drop the item you have listed second on the Backpack section" 
@@ -1641,6 +1642,7 @@
 
         <section id="sect286">
             <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
             <afterCombatTurn turn="any">
                 <test expression="[COMBATSENEMYLOST] >= 45">
                     <!-- Enemy endurance is less or equal to 20 (enemy original endurance = 65) -->
@@ -1710,7 +1712,167 @@
             </afterCombats>
         </section>
 
-        <!-- Up to sect304 -->
+        <section id="sect306">
+            <!--
+                TODO: If you have travelled the Stornlands of Central Magnamund...
+                Do the same here than in book 3 / sect268 (a TODO too)
+            -->
+        </section>
+
+        <section id="sect309">
+            <endurance count="-2" />
+        </section>
+
+        <section id="sect310">
+            <endurance count="-8" />
+        </section>
+
+        <section id="sect311">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect312">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect313">
+            <meal />
+        </section>
+
+        <section id="sect315">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect316">
+            <endurance count="-4" />
+        </section>
+
+        <section id="sect318">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect319">
+            <test canUseBow="false">
+                <choiceState section="sect36" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect320">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect328">
+            <!--
+                TODO: If you have visited the Danarg in a previous Lone Wolf adventure...
+                Do the same here than in book 3 / sect268 (a TODO too)
+            -->
+        </section>
+
+        <section id="sect329">
+            <test canUseBow="false">
+                <choiceState section="sect70" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect330">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="1">
+                    <choiceState section="sect243" set="enabled" />
+                </case>
+                <case from="2" to="7">
+                    <choiceState section="sect99" set="enabled" />
+                </case>
+                <case from="8" to="99">
+                    <choiceState section="sect184" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="+2" />
+            </test>
+            <test hasCircle="circleSolaris">
+                <randomTableIncrement increment="+2" />
+            </test>
+        </section>
+
+        <section id="sect332">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="6">
+                    <choiceState section="sect348" set="enabled" />
+                </case>
+                <case from="7" to="99">
+                    <choiceState section="sect47" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasCircle="circleSolaris">
+                <randomTableIncrement increment="+3" />
+            </test>
+        </section>
+
+        <section id="sect335">
+            <meal />
+        </section>
+
+        <section id="sect336">
+            <choiceState section="all" set="disabled" />
+
+            <combat noWeapon="true" />
+            <afterCombatTurn turn="1">
+                <combat noWeapon="false" />
+            </afterCombatTurn>
+
+            <afterCombatTurn turn="4">
+                <test combatsWon="false">
+                    <disableCombats />
+                    <choiceState section="sect234" set="enabled" />
+                </test>
+            </afterCombatTurn>
+
+            <afterCombats>
+                <choiceState section="sect202" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <!--section id="sect340">
+            <endurance count="-4" />
+            <drop backpackItemSlots="2|3|5|7" />
+            <pick class="money" count="-( [MONEY] / 2 )" />
+
+            <message id="msg-drop-special" 
+                en-text="Drop one Special Item of your choice" 
+                es-text="Deja el Objeto Especial que prefieras"
+            />
+            <onInventoryEvent>
+                <test expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] &lt;= 1 || [BACKPACK-ITEMS-CNT-ON-SECTION] > 0">
+                    <message id="msg-drop-second" op="hide" />
+                    <choiceState section="all" set="enabled" />
+                </test>
+
+                <test not="true" expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] &lt;= 1 || [BACKPACK-ITEMS-CNT-ON-SECTION] > 0">
+                    <message id="msg-drop-second" op="show" />
+                    <choiceState section="all" set="disabled" />
+                </test>
+            </onInventoryEvent>
+        </section-->
+
+        <!-- Up to sect339 -->
         
     </sections>
 
