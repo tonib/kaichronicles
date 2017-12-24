@@ -392,7 +392,8 @@ class BookValidator {
     }
 
     private randomTableIncrement( $rule ) {
-        this.validateNumericExpression( $rule , 'increment' );
+        if( $rule.attr( 'increment' ) != 'reset' )
+            this.validateNumericExpression( $rule , 'increment' );
         this.validateRandomTableIndex( $rule );
     }
 

@@ -69,15 +69,29 @@ const randomMechanics = {
     /**
      * This will clear any increment on the random table links
      * It can be needed if a section rules need to be re-executed without re-rendering the section
+     * @param {jQuery} $link The random table link to reset. If it's null all section random table link will be reset
      */
-    resetRandomTableIncrements : function() {
-        $('.random[data-increment]').attr( 'data-increment' , '0' );
+    resetRandomTableIncrements : function( $link : any = null ) {
+        if( !$link )
+            // Reset all random tables
+            $link = $('.random[data-increment]');
+        $link.attr( 'data-increment' , '0' );
     },
 
     /** Increment for random table selection */
     randomTableIncrement: function(rule : any) {
+
         var $link = randomMechanics.getRandomTableRefByRule(rule);
-        const newIncrement = ExpressionEvaluator.evalInteger( $(rule).attr('increment') );
+        const txtIncrement : string = $(rule).attr('increment');
+
+        if( txtIncrement == 'reset' ) {
+            // Reset the random table increment to zero
+            randomMechanics.resetRandomTableIncrements( $link );
+            return;
+        }
+
+        // Increase the increment
+        const newIncrement = ExpressionEvaluator.evalInteger( txtIncrement );
 
         // Check if already there is an increment:
         var increment = 0;
@@ -141,7 +155,7 @@ const randomMechanics = {
 
     /**
      * Setup a tag to link to the random table
-     * @param {jquery} $element The DOM element to setup
+     * @param {jQuery} $element The DOM element to setup
      * @param alreadyChoose If it's true, the link will be set disabled
      * @param valueAlreadyChoose Only needed if alreadyChoose is true. It's the 
      * previously random value got
@@ -150,6 +164,11 @@ const randomMechanics = {
      */
     setupRandomTableLink: function($element : any, alreadyChoose : boolean = false, valueAlreadyChoose : number = 0, 
         increment : number = 0) : any {
+
+        if( !$element || $element.length == 0 ) {
+            console.log('Random table link not found');
+            return;
+        }
 
         // Initially, the random table links are plain text (spans). When they got setup by a random rule, they
         // are converted to links:
@@ -169,6 +188,11 @@ const randomMechanics = {
      * Change a random table link to clicked
      */
     linkAddChooseValue: function( $link : any , valueChoose : number, increment : number) {
+
+        if( $link.hasClass('picked') )
+            // The link text / format has been already assigned
+            return;
+
         var html = valueChoose.toString();
         if( increment > 0 )
             html += ' + ' + increment;

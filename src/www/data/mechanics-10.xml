@@ -131,20 +131,37 @@
         </section>
 
         <section id="sect11">
-            <!-- TODO: Drop weapon. Foot page is not clear, and there are differences between language.
-                 Let the player choose (COPY CODE FROM sect210) -->
+            <message id="msg-drop-weapon" 
+                en-text="Drop a weapon before continue" 
+                es-text="Deja un arma antes de continuar"
+            />
             <choiceState section="all" set="disabled" />
-            <randomTable>
-                <case from="0" to="3">
-                    <choiceState section="sect310" set="enabled" />
-                </case>
-                <case from="4" to="99">
-                    <choiceState section="sect229" set="enabled" />
-                </case>
-            </randomTable>
-            <test hasDiscipline="hntmstry">
-                <randomTableIncrement increment="+2" />
-            </test>
+            <onInventoryEvent>
+                <test expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] == 0 || [WEAPONLIKE-CNT-ON-SECTION] > 0">
+                    <message id="msg-drop-weapon" op="hide" />
+
+                    <!-- Reset the increment. "onInventoryEvent" can be called multiple times -->
+                    <randomTableIncrement increment="reset" />
+
+                    <choiceState section="all" set="disabled" />
+                    <randomTable>
+                        <case from="0" to="3">
+                            <choiceState section="sect310" set="enabled" />
+                        </case>
+                        <case from="4" to="99">
+                            <choiceState section="sect229" set="enabled" />
+                        </case>
+                    </randomTable>
+                    <test hasDiscipline="hntmstry">
+                        <randomTableIncrement increment="+2" />
+                    </test>
+                </test>
+
+                <test not="true" expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] == 0 || [WEAPONLIKE-CNT-ON-SECTION] > 0">
+                    <message id="msg-drop-weapon" op="show" />
+                    <choiceState section="all" set="disabled" />
+                </test>
+            </onInventoryEvent>
         </section>
 
         <section id="sect15">
