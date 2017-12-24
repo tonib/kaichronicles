@@ -787,7 +787,6 @@
                 <choiceState section="sect344" set="disabled" />
             </test>
             <test canUseBow="false">
-                <!-- TODO: Drop 2!!! arrows -->
                 <choiceState section="sect344" set="disabled" />
             </test>
         </section>
@@ -1872,7 +1871,54 @@
             </onInventoryEvent>
         </section>
 
-        <!-- Up to sect340 -->
+        <section id="sect343">
+            <death />
+        </section>
+
+        <section id="sect344">
+            <pick class="arrow" count="-2" />
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect346">
+            <test not="true" hasDiscipline="dvnation">
+                <choiceState section="sect86" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect347">
+            <death />
+        </section>
+
+        <section id="sect348">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect349">
+            <choiceState section="all" set="disabled" />
+            <afterCombatTurn turn="4">
+                <test combatsWon="false">
+                    <disableCombats />
+                    <choiceState section="sect234" set="enabled" />
+                </test>
+            </afterCombatTurn>
+            <afterCombats>
+                <choiceState section="sect202" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect350">
+            <message 
+                en-text="This is the last implemented book. Thank you for playing!" 
+                es-text="Este es el último libro implementado. ¡Gracias por jugar!" 
+            />
+        </section>
         
     </sections>
 
