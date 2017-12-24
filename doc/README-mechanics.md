@@ -59,16 +59,18 @@ There are some keywords that can be used on expressions. They have the following
 * **[MONEY]**: The current amount of money
 * **[BACKPACK-ITEMS-CNT-ON-SECTION]**: The current count of available backpack items 
   on the section
+* **[BACKPACK-ITEMS-CNT-ON-ACTIONCHART]**: The current count of backpack items on the
+  action chart
 * **[WEAPON-ITEMS-CNT-ON-SECTION]**: The current count of available weapons on the section.
+  Special items that are weapons too are ignored
+* **[WEAPON-ITEMS-CNT-ON-ACTIONCHART]**: The current count of weapons on the action chart.
   Special items that are weapons too are ignored
 * **[WEAPONLIKE-CNT-ON-SECTION]**: The current count of weapons on the action chart.
   Special items that are weapons too are included
-* **[BACKPACK-ITEMS-CNT-ON-ACTIONCHART]**: The current count of backpack items on the
-  action chart
-* **[WEAPON-ITEMS-CNT-ON-ACTIONCHART]**: The current count of weapons on the action chart.
-  Special items that are weapons too are ignored
 * **[WEAPONLIKE-CNT-ON-ACTIONCHART]**: The current count of weapons on the action chart.
   Special items that are weapons too are included
+* **[SPECIAL-ITEMS-ON-SECTION]**: The current count of special items on the action chart.
+* **[SPECIAL-ITEMS-ON-ACTIONCHART]**: The current count of special items on the action chart.
 * **[ENDURANCE]**: The current endurance points
 * **[MAXENDURANCE]**: The maximum endurance points
 * **[COMBATSENDURANCELOST]**: The number of endurance points lost by Lone Wolf on combats on 

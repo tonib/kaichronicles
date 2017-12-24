@@ -306,7 +306,7 @@
         </section>
         
         <section id="sect43">
-            <!-- TODO: NOT CHOICE HERE, USE drop backpackItemSlots="2" >
+            <!-- TODO: NOT CHOICE HERE, USE drop backpackItemSlots="2" -->
             <!-- Drop the second backpack object. Let the player choose -->
             <message id="msg-drop-second" 
                 en-text="Drop the item you have listed second on the Backpack section" 
@@ -1850,7 +1850,7 @@
             </afterCombats>
         </section>
 
-        <!--section id="sect340">
+        <section id="sect340">
             <endurance count="-4" />
             <drop backpackItemSlots="2|3|5|7" />
             <pick class="money" count="-( [MONEY] / 2 )" />
@@ -1860,19 +1860,19 @@
                 es-text="Deja el Objeto Especial que prefieras"
             />
             <onInventoryEvent>
-                <test expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] &lt;= 1 || [BACKPACK-ITEMS-CNT-ON-SECTION] > 0">
-                    <message id="msg-drop-second" op="hide" />
+                <test expression="[SPECIAL-ITEMS-ON-ACTIONCHART] &lt; 1 || [SPECIAL-ITEMS-ON-SECTION] > 0">
+                    <message id="msg-drop-special" op="hide" />
                     <choiceState section="all" set="enabled" />
                 </test>
 
-                <test not="true" expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] &lt;= 1 || [BACKPACK-ITEMS-CNT-ON-SECTION] > 0">
-                    <message id="msg-drop-second" op="show" />
+                <test not="true" expression="[SPECIAL-ITEMS-ON-ACTIONCHART] &lt; 1 || [SPECIAL-ITEMS-ON-SECTION] > 0">
+                    <message id="msg-drop-special" op="show" />
                     <choiceState section="all" set="disabled" />
                 </test>
             </onInventoryEvent>
-        </section-->
+        </section>
 
-        <!-- Up to sect339 -->
+        <!-- Up to sect340 -->
         
     </sections>
 

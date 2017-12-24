@@ -77,6 +77,11 @@ class ExpressionEvaluator {
             return sectionState.getCntSectionObjects('special');
         },
 
+        // Count of special items on on action chart
+        '[SPECIAL-ITEMS-ON-ACTIONCHART]' : function() { 
+            return state.actionChart.specialItems.length;
+        },
+
         // Current endurance
         '[ENDURANCE]' : function() { 
             return state.actionChart.currentEndurance;
