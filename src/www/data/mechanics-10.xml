@@ -323,23 +323,7 @@
         </section>
         
         <section id="sect43">
-            <!-- TODO: NOT CHOICE HERE, USE drop backpackItemSlots="2" -->
-            <!-- Drop the second backpack object. Let the player choose -->
-            <message id="msg-drop-second" 
-                en-text="Drop the item you have listed second on the Backpack section" 
-                es-text="Borra el objeto que hayas marcado como segundo en la sección de la mochila"
-            />
-            <onInventoryEvent>
-                <test expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] &lt;= 1 || [BACKPACK-ITEMS-CNT-ON-SECTION] > 0">
-                    <message id="msg-drop-second" op="hide" />
-                    <choiceState section="all" set="enabled" />
-                </test>
-
-                <test not="true" expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] &lt;= 1 || [BACKPACK-ITEMS-CNT-ON-SECTION] > 0">
-                    <message id="msg-drop-second" op="show" />
-                    <choiceState section="all" set="disabled" />
-                </test>
-            </onInventoryEvent>
+            <drop backpackItemSlots="2" />
         </section>
 
         <section id="sect44">
@@ -417,7 +401,6 @@
         <section id="sect59">
             <meal />
             <test canUseBow="false">
-                <!-- TODO: sect76, drop arrow -->
                 <choiceState section="sect76" set="disabled" />
             </test>
         </section>
@@ -456,7 +439,6 @@
 
         <section id="sect67">
             <test canUseBow="false">
-                <!-- TODO: sect119, drop arrow -->
                 <choiceState section="sect119" set="disabled" />
             </test>
         </section>
