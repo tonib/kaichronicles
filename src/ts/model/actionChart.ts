@@ -258,9 +258,10 @@ class ActionChart {
      * Drop an object
      * @param objectId Object id to drop, or 'meal' to drop one meal, or 'backpack' to drop the 
      * backpack.
+     * @param count Object count. Only for quivers. count == n. arrows to drop. It must to be >= 0
      * @return True if player had the object 
      */
-    public drop(objectId : string) : boolean {
+    public drop(objectId : string, count : number = 0) : boolean {
 
         if( objectId == 'meal' ) {
             // Special
@@ -283,8 +284,11 @@ class ActionChart {
         if( this.backpackItems.removeValue(objectId) || this.specialItems.removeValue(objectId)) {
             this.checkMaxEndurance();
             this.checkCurrentWeapon();
-            if( objectId == Item.QUIVER )
+            if( objectId == Item.QUIVER ) {
+                // Decrease arrows count
+                this.arrows -= count;
                 this.sanitizeArrowCount();
+            }
             return true;
         }
         

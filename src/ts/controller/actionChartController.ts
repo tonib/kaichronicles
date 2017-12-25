@@ -74,9 +74,10 @@ const actionChartController = {
      * @param availableOnSection True if the object should be available on 
      * the current section
      * @param fromUI True if the action is fired from the UI
+     * @param count Object count (only for quivers. count == n. arrows to drop)
      * @returns True if the object has been dropped
      */
-    drop: function( objectId : string, availableOnSection : boolean = false, fromUI : boolean = false ) : boolean {
+    drop: function( objectId : string, availableOnSection : boolean = false, fromUI : boolean = false, count : number = 0 ) : boolean {
 
         if( objectId == 'allweapons' ) {
             actionChartController.dropItemsList( state.actionChart.weapons );
@@ -124,15 +125,19 @@ const actionChartController = {
         if( !o )
             return false;
         
-        var count = 0;
-        if( objectId == 'quiver' ) {
+        // There is a problem with this: The player clicks "drop" on a quiver with a given number
+        // of arrows. You should drop THAT quiver (and no other). So, pass the number of arrows as parameter
+        /*
+        let count = 0;
+        if( objectId == Item.QUIVER ) {
             // Number of arrows on the quiver (to keep it on the dropped object)
             count = state.actionChart.arrows % 6;
             if( count == 0 && state.actionChart.arrows > 0 )
                 count = 6;
         }
+        */
 
-        const dropped = state.actionChart.drop(objectId);
+        const dropped = state.actionChart.drop(objectId, count);
         if( dropped ) {
             actionChartView.showInventoryMsg('drop', o , 
                 translations.text('msgDropObject' , [o.name] ) );

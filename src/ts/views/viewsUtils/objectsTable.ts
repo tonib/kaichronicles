@@ -74,19 +74,19 @@ class ObjectsTableItem {
         var name = this.item.name;
 
         // Number of arrows on the quiver
-        if( this.objectInfo.id == 'quiver' ) {
+        if( this.objectInfo.id == Item.QUIVER ) {
             // Be sure count is not null
             const count = ( this.objectInfo.count ? this.objectInfo.count : 0 );
             name += ' (' + count + ' ' + translations.text('arrows') + ')';
         }
 
         // Arrow amount
-        if( this.objectInfo.id == 'arrow' && this.objectInfo.count ) {
+        if( this.objectInfo.id == Item.ARROW && this.objectInfo.count ) {
             name = this.objectInfo.count + ' ' + name;
         }
 
         // Money amount
-        if( this.objectInfo.id == 'money' && this.objectInfo.count )
+        if( this.objectInfo.id == Item.MONEY && this.objectInfo.count )
             name += ' (' + this.objectInfo.count + ' ' + translations.text('goldCrowns') + ')';
 
         // Buy / sell price
@@ -129,7 +129,7 @@ class ObjectsTableItem {
     private getOperationTag(operation : string, title : string = null , opDescription : string ) {
         let link = '<a href="#" data-objectId="' + this.item.id + '" class="equipment-op btn btn-default" ';
 
-        if( this.item.id == 'quiver' || this.item.id == 'arrow' || this.item.id == 'money' )
+        if( this.item.id == Item.QUIVER || this.item.id == Item.ARROW || this.item.id == Item.MONEY )
             // Store the number of arrows on the quiver / gold crowns
             link += 'data-count="' + this.objectInfo.count + '" ';
 
@@ -355,7 +355,7 @@ class ObjectsTableItem {
 
     private drop() {
         if( confirm( translations.text( 'confirmDrop' , [this.item.name] ) ) )
-            actionChartController.drop( this.item.id , true , true );
+            actionChartController.drop( this.item.id , true , true , this.objectInfo.count );
     }
 
     private currentWeapon() {
