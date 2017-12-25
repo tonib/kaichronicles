@@ -369,16 +369,18 @@ const actionChartController = {
     /**
      * Increase the number of arrows of the player
      * @param increment N. of arrows to increment. Negative to decrement
+     * @returns Number of really increased arrows. Arrows number on action chart is limited by the number of quivers
      */
-    increaseArrows : function(increment : number) {
-        state.actionChart.increaseArrows(increment);
+    increaseArrows : function(increment : number) : number {
+        const realIncrement = state.actionChart.increaseArrows(increment);
         var o = state.mechanics.getObject('arrow');
-        if( increment > 0 )
+        if( realIncrement > 0 )
             actionChartView.showInventoryMsg('pick' , o , 
-                translations.text( 'msgGetArrows' , [increment] ) );
-        else if( increment < 0 )
+                translations.text( 'msgGetArrows' , [realIncrement] ) );
+        else if( realIncrement < 0 )
             actionChartView.showInventoryMsg('drop' , o , 
-                translations.text( 'msgDropArrows' , [-increment] ) );
+                translations.text( 'msgDropArrows' , [-realIncrement] ) );
+        return realIncrement;
     },
 
     /** Return page */

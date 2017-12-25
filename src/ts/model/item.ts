@@ -25,6 +25,7 @@ class Item {
     // Object ids
     public static readonly MONEY = 'money';
     public static readonly QUIVER = 'quiver';
+    public static readonly ARROW = 'arrow';
 
     /** The object type ('special', 'object' or 'weapon' ) */
     public type : string;

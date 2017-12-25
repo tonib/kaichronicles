@@ -86,7 +86,7 @@ class BookDownloadState {
     public downloadAsync( booksDir : any , progressCallback : (number) => void = null ) {
         
         const fileName = this.bookNumber + '.zip';
-        //var url = 'http://192.168.1.2/ls/data/projectAon/' + fileName;
+        //var url = 'http://192.168.1.4/ls/data/projectAon/' + fileName;
         const url = 'https://www.projectaon.org/staff/toni/data/projectAon/' + fileName;
         const dstDir = booksDir.toURL();
         const dstPath = dstDir + '/' + fileName;

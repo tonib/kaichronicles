@@ -283,7 +283,7 @@ class ObjectsTableItem {
         }
 
         let objectPicked : boolean;
-        if( this.item.id == 'money' || this.item.id == 'arrow' )
+        if( this.item.id == Item.MONEY || this.item.id == Item.ARROW )
             // Not really an object
             objectPicked = true;
         else
@@ -293,11 +293,15 @@ class ObjectsTableItem {
 
             let countPicked = this.objectInfo.count;
 
-            if( this.item.id == 'quiver' || this.item.id == 'arrow' )
-                // Increase the number of arrows on the quiver
-                actionChartController.increaseArrows( this.objectInfo.count );
+            if( this.item.id == Item.QUIVER || this.item.id == Item.ARROW ) {
+                // Increase the number of arrows on the action chart
+                const realIncrement = actionChartController.increaseArrows( this.objectInfo.count );
+                if( this.item.id == Item.ARROW )
+                    // Track real number of arrows picked
+                    countPicked = realIncrement;
+            }
 
-            if( this.item.id == 'money' )
+            if( this.item.id == Item.MONEY )
                 // Pick the money
                 countPicked = actionChartController.increaseMoney( this.objectInfo.count );
 

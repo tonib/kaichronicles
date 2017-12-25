@@ -278,8 +278,8 @@ class SectionState {
 
             if( this.objects[i].id == objectId && currentPrice == price ) {
                 let removeObject = true;
-                if( objectId == 'money' && count >= 0 && this.objects[i].count > count ) {
-                    // Still money available:
+                if( ( objectId == Item.MONEY || objectId == Item.ARROW ) && count >= 0 && this.objects[i].count > count ) {
+                    // Still money / arrows available:
                     this.objects[i].count -= count;
                     removeObject = false;
                 }

@@ -708,6 +708,7 @@ class ActionChart {
         var max = 0;
         for( var i=0; i<this.specialItems.length; i++ ) {
             if( this.specialItems[i] == Item.QUIVER )
+                // Only 6 arrows per quiver
                 max += 6;
         }
         this.arrows = Math.max( 0, Math.min( this.arrows, max ) );
@@ -716,10 +717,13 @@ class ActionChart {
     /**
      * Increase the number of arrows of the player
      * @param increment N. of arrows to increment. Negative to decrement
+     * @returns Number of really increased arrows. Arrows number on action chart is limited by the number of quivers
      */
-    public increaseArrows(increment : number) {
+    public increaseArrows(increment : number) : number {
+        const oldArrows = this.arrows;
         this.arrows += increment;
         this.sanitizeArrowCount();
+        return this.arrows - oldArrows;
     }
 
     /**

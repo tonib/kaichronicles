@@ -1171,7 +1171,7 @@
 
         <section id="sect210">
             <endurance count="-2" />
-            <!-- TODO: sect333, disable sect210 if no weapon -->
+            <!-- sect333, disable sect210 if no weapon ??? not sure -->
             <message id="msg-drop-weapon" 
                 en-text="Drop a weapon before continue" 
                 es-text="Deja un arma antes de continuar"
@@ -1243,7 +1243,8 @@
         </section>
 
         <section id="sect218">
-            <!-- TODO: Portholes game -->
+            <!-- Portholes -->
+            <book2sect308 />
         </section>
 
         <section id="sect219">

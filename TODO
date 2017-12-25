@@ -19,6 +19,7 @@
 - Info for Michael: <combat mindblastBonus="+6" psiSurgeBonus="+12" /> can be used as multiplier for Mindblast
 - Performance
 - Quivers with no arrows available on section should not show "(0 arrows)". Show "(0 arrows)" only on Action chart
+- Error dropping quiver (check the quiver arrows count)
 
 FOR FUTURE (1.9+):
 - Support for kai disciplines on magnakai books:
