@@ -378,13 +378,20 @@ const actionChartController = {
      */
     increaseArrows : function(increment : number) : number {
         const realIncrement = state.actionChart.increaseArrows(increment);
-        var o = state.mechanics.getObject('arrow');
+        const o = state.mechanics.getObject('arrow');
+
         if( realIncrement > 0 )
             actionChartView.showInventoryMsg('pick' , o , 
                 translations.text( 'msgGetArrows' , [realIncrement] ) );
-        else if( realIncrement < 0 )
+        // If increment is negative, show always the original amount, not the real (useful for debugging)
+        else if( increment < 0 )
             actionChartView.showInventoryMsg('drop' , o , 
-                translations.text( 'msgDropArrows' , [-realIncrement] ) );
+                translations.text( 'msgDropArrows' , [-increment] ) );
+        else if( increment > 0 && realIncrement == 0 ) {
+            // You cannot pick more arrows (not quivers enougth)
+            toastr.error( translations.text( 'noQuiversEnougth' ) );
+        }
+
         return realIncrement;
     },
 

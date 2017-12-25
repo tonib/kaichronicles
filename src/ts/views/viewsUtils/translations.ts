@@ -76,6 +76,7 @@ class Translations {
         'maxSpecialItems' : 'A partir de este libro, el número máximo de Objetos Especiales que puedes ' + 
             'llevar es de 12. Podrás dejar el resto en un lugar seguro del monasterio del Kai, o dejarlo aquí. ' +
             'Si se deja aquí, el objeto se perderá. Por favor, deja los Objetos Especiales antes de continuar.',
+        'noQuiversEnougth' : 'No tienes suficientes Carcajes (sólo 6 Flechas por Carcaj)',
 
         //////////////////////////////////////
         // Combats
@@ -348,6 +349,7 @@ class Translations {
         'dropMoney' : 'Drop money',
         'pickMoney' : 'Pick money',
         'amount' : 'Amount',
+        'noQuiversEnougth' : 'You don\'t have enought Quivers (only 6 Arrows per Quiver)',
 
         //////////////////////////////////////
         // Combats
