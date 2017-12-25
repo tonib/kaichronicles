@@ -63,7 +63,7 @@ class ObjectsTableItem {
         if( this.type == ObjectsTableType.SELL  ) {
             if( this.objectInfo.id != 'arrow' && !state.actionChart.hasObject( this.objectInfo.id ) )
                 return '';
-            // We don't have enougth arrows to sell, do not show
+            // We don't have enough arrows to sell, do not show
             if( this.objectInfo.id == 'arrow' && state.actionChart.arrows < this.objectInfo.count )
                 return '';
         }

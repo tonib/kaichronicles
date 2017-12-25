@@ -388,8 +388,8 @@ const actionChartController = {
             actionChartView.showInventoryMsg('drop' , o , 
                 translations.text( 'msgDropArrows' , [-increment] ) );
         else if( increment > 0 && realIncrement == 0 ) {
-            // You cannot pick more arrows (not quivers enougth)
-            toastr.error( translations.text( 'noQuiversEnougth' ) );
+            // You cannot pick more arrows (not quivers enough)
+            toastr.error( translations.text( 'noQuiversEnough' ) );
         }
 
         return realIncrement;

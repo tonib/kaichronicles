@@ -1527,8 +1527,6 @@
         </section>
 
         <section id="sect271">
-            <!-- TODO: If you pick arrows and you don't have enougth quivers, the arrows disappers. They should not
-                 TODO: See pick "money" object, and do the same -->
             <object objectId="sword" index="0" />
             <object objectId="sword" index="1" />
             <object objectId="quiver" index="0" />

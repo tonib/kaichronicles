@@ -115,7 +115,7 @@
         }
 
         if( this.attr('data-ismoneypicker') == 'true' ) {
-            // Check if you have enougth money
+            // Check if you have enough money
             if( state.actionChart.beltPouch < number) {
                 alert( translations.text( 'noEnoughMoney' ) );
                 return false;
