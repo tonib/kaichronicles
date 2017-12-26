@@ -38,8 +38,8 @@ class Combat {
     /** The CS multiplier to apply to Mindblast/Psi-Surge attacks */
     public mindblastMultiplier = 1;
 
-    /** The player cannot use weapons on this combat */
-    public noWeapon = false;
+    /** How many turns the player cannot use weapons on this combat. -1 = never */
+    public noWeaponTurns = 0;
 
     /** Check if the combat is non-physical (disables most bonuses) */
     public mentalOnly = false;
@@ -52,6 +52,12 @@ class Combat {
 
     /** Combat has been disabled? */
     public disabled = false;
+
+    /** Enemy is immune for X turns */
+    public enemyImmuneTurns = 0;
+
+    /** LW is immune for X turns */
+    public immuneTurns = 0;
 
     /** Player dammage multiplier */
     public dammageMultiplier = 1.0;

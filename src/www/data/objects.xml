@@ -643,6 +643,16 @@
             <name lang="es">Anillo de Cristal Gris</name>
         </special>
 
+        <special id="vialofclearliquid">
+            <name lang="en">Vial of Clear Liquid</name>
+            <name lang="es">Frasco con un Líquido Transparente</name>
+        </special>
+
+        <special id="lodestone">
+            <name lang="en">Lodestone</name>
+            <name lang="es">Piedra Imán</name>
+        </special>
+
         <!-- BOOK 10 -->
 
         <special id="bullwhip">
@@ -1263,9 +1273,9 @@
             <name lang="es">Saco de Plata</name>
         </object>
 
-        <object id="wristguards">
-            <name lang="en">Wrist and Finger Guards</name>
-            <name lang="es">Muñequeras y Dediles</name>
+        <object id="wristandfingerguard">
+            <name lang="en">Wrist and Finger Guard</name>
+            <name lang="es">Muñequera y Dedile</name>
         </object>
 
         <object id="woodbowcase">
@@ -1281,6 +1291,25 @@
         <object id="bowstring">
             <name lang="en">Bowstring</name>
             <name lang="es">Cuerda de Arco</name>
+        </object>
+
+        <object id="mapoftharro">
+            <name lang="en">Map of Tharro</name>
+            <name lang="es">Mapa de Tharro</name>
+        </object>
+
+        <object id="larnumaliqueur">
+            <name lang="en">Larnuma Liqueur</name>
+            <description lang="en">
+                Restores 3 ENDURANCE points per dose
+            </description>
+
+            <name lang="es">Licor de Larnuma</name>
+            <description lang="es">
+                Cada dosis restablece 3 puntos de RESISTENCIA
+            </description>
+
+            <usage class="endurance" increment="3" />
         </object>
 
         <!-- OTHERS -->

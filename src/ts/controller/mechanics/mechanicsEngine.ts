@@ -771,9 +771,15 @@ const mechanicsEngine = {
             combat.psiSurgeBonus = parseInt( txtPsiSurgeBonus );
 
         // Check if the player cannot use weapons on this combat
-        const noWeapon = mechanicsEngine.getBooleanProperty( $rule , 'noWeapon' );
-        if( noWeapon != null )
-            combat.noWeapon = noWeapon;
+        const txtNoWeapon : string = $(rule).attr('noWeapon');
+        if( txtNoWeapon ) {
+            if( txtNoWeapon == 'true' )
+                combat.noWeaponTurns = -1; // all turns
+            else if( txtNoWeapon == 'false' )
+                combat.noWeaponTurns = 0;
+            else
+                combat.noWeaponTurns = parseInt( txtNoWeapon );
+        }
 
         // Check if the combat is non-physical (disables most bonuses)
         var txtMentalOnly = $(rule).attr('mentalOnly');
@@ -797,6 +803,16 @@ const mechanicsEngine = {
         var txtEnemyMultiplier = $(rule).attr('enemyMultiplier'); 
         if( txtEnemyMultiplier )
             combat.enemyMultiplier = parseFloat( txtEnemyMultiplier );
+
+        // Enemy is immune for X turns
+        const txtEnemyImmuneTurns : string = $(rule).attr('enemyImmuneTurns'); 
+        if( txtEnemyImmuneTurns )
+            combat.enemyImmuneTurns = parseInt( txtEnemyImmuneTurns );
+
+        // LW is immune for X turns
+        const txtImmuneTurns : string = $(rule).attr('immuneTurns'); 
+        if( txtImmuneTurns )
+            combat.immuneTurns = parseInt( txtImmuneTurns );
 
         // Enemy extra loss per turn
         var txtEnemyTurnLoss = $(rule).attr('enemyTurnLoss'); 
