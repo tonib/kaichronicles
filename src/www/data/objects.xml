@@ -635,7 +635,14 @@
 
         <special id="medal">
             <name lang="en">Medal</name>
+            <description lang="en">
+                “I won this at the Battle of Luomi”
+            </description>
+
             <name lang="es">Medalla</name>
+            <description lang="es">
+                “Ésta la gané en la batalla de Luomi”
+            </description>
         </special>
 
         <special id="signetring" itemCount="0">

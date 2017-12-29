@@ -6,9 +6,7 @@
 - Info for Michael: <combat mindblastBonus="+6" psiSurgeBonus="+12" /> can be used as multiplier for Mindblast
 - Performance
 - Quivers with no arrows available on section should not show "(0 arrows)". Show "(0 arrows)" only on Action chart
-- Erratas:
-  * Book 10 / sect69: "encarcelamiento ‘Sé en dónde", should be "encarcelamiento. ‘Sé en dónde" (point)
-  
+
 FOR FUTURE (1.9+):
 - Support for kai disciplines on magnakai books:
   * https://github.com/tonib/kaichronicles/issues/5
