@@ -1433,6 +1433,7 @@
         </section>
 
         <section id="sect254">
+            <endurance count="-6" />
             <choiceState section="all" set="disabled" />
             <combat mindblastBonus="+4" psiSurgeBonus="+8" />
             <test hasCircle="circleSpirit">

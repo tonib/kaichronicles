@@ -157,8 +157,9 @@ const gameView = {
 
     /**
      * Called when a choice link is clicked
+     * @param {DOM} link The clicked link
      */
-    choiceLinkClicked: function(e : Event, link : string) {
+    choiceLinkClicked: function(e : Event, link : any) {
         e.preventDefault();
 
         // Validate money picker, if there is. If its not valid, don't follow with this link
@@ -166,7 +167,7 @@ const gameView = {
             return;
 
         var section = $(link).attr('data-section');
-        console.log('Jump to section ' + section);
+        //console.log('Jump to section ' + section);
         if( section )
             gameController.loadSection( section , true );
     },
