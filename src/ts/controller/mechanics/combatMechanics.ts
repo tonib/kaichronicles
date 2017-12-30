@@ -104,8 +104,9 @@ const combatMechanics = {
                     combatMechanics.onPsiSurgeClick(e , $(this) );
                 });
                 // There is a special Psi-Surge bonus?
-                if( combat.psiSurgeBonus )
-                    $combatUI.find('.psisurgebonus').text( combat.psiSurgeBonus );
+                var psiSurgeBonus = combat.psiSurgeBonus ? combat.psiSurgeBonus : 4;
+                psiSurgeBonus *= combat.mindblastMultiplier;
+                $combatUI.find('.psisurgebonus').text( psiSurgeBonus );
             }
         });
 

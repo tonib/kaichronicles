@@ -449,6 +449,8 @@ class BookValidator {
             if( nCombats <= combatIndex ) 
                 this.addError( $rule , 'There is no combat with index ' + combatIndex );
         }
+
+        // TODO: Check attr "noWeapon" is boolean or number
     }
 
     private afterCombats( $rule ) {
