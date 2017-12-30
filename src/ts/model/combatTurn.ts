@@ -76,7 +76,7 @@ class CombatTurn {
         var tableResult = combatTable.getCombatTableResult(combat.getCombatRatio(), this.randomValue);
 
         /** Enemy base loss  */
-        this.enemyBase = ( elude ? 0 : tableResult[0] );
+        this.enemyBase = ( ( elude || combat.enemyImmuneTurns >= this.turnNumber ) ? 0 : tableResult[0] );
         /** The enemy loss */
         this.enemy = CombatTurn.applyMultiplier( this.enemyBase , this.dammageMultiplier );
         /** Enemy extra loss (combat.enemyTurnLoss is negative)*/
@@ -85,7 +85,7 @@ class CombatTurn {
             this.enemy -= combat.enemyTurnLoss;
 
         /** The player base loss */
-        this.loneWolfBase = tableResult[1];
+        this.loneWolfBase = ( ( combat.immuneTurns >= this.turnNumber ) ? 0 : tableResult[1] );
         /** Player loss */
         this.loneWolf = CombatTurn.applyMultiplier( this.loneWolfBase , this.enemyMultiplier );
         /** Player extra loss. TODO: Add magnakai discipline */
@@ -168,13 +168,10 @@ class CombatTurn {
             // Ensure no death
             return 0;
 
-        if( enduranceLoss != combatTable_DEATH ) {
+        if( enduranceLoss != combatTable_DEATH )
             // Apply the dammage multiplier
-            enduranceLoss *= multiplier;
-            // Round result (multiplier can have decimals)
-            enduranceLoss = Math.round( enduranceLoss );
-        }
-
+            enduranceLoss = Math.floor( enduranceLoss * multiplier );
+            
         return enduranceLoss; 
     }
 

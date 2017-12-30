@@ -43,7 +43,10 @@ LocalBooksLibrary.prototype.getDownloadedBooks = function() {
  * @return {bool} True if the book is downloaded
  */
 LocalBooksLibrary.prototype.isBookDownloaded = function(bookNumber) {
-    return this.booksLibrary[bookNumber - 1].downloaded;
+    var idx = bookNumber - 1;
+    if( idx >= this.booksLibrary.length )
+        return false;
+    return this.booksLibrary[ idx ].downloaded;
 };
 
 /**

@@ -120,12 +120,10 @@ const projectAon = {
             biographies: [ 'jdbiolw' , 'gcbiolw' ],
 
             zipSize: 3129146
-        }
+        },
 
-        ///////////////////////////////////////
-        
-        // Book 8 (NOT IMPLEMENTED / Work in progress (Michael) ):
-        ,{
+        // Book 8:
+        {
             title_en: 'The Jungle of Horrors',
             code_en: '08tjoh',
 
@@ -137,9 +135,11 @@ const projectAon = {
             biographies: [ 'jdbiolw' , 'gcbiolw' ],
 
             zipSize: 3537081
-        },
+        }
 
-        // Book 9 (NOT IMPLEMENTED / Work in progress (Colin) ):
+        ///////////////////////////////////////
+        /*
+        // Book 9 (NOT IMPLEMENTED / Nobody working on it):
         {
             title_en: 'The Cauldron of Fear',
             code_en: '09tcof',
@@ -198,6 +198,7 @@ const projectAon = {
             
             zipSize: 3180171
         }
+        */
 
     ],
 

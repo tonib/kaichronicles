@@ -679,11 +679,46 @@ const mechanicsEngine = {
         if( sectionState.ruleHasBeenExecuted(rule) )
             // Execute only once
             return;
-        sectionState.sellPrices.push({
-            id: $(rule).attr('objectId'),
-            price: parseInt( $(rule).attr('price') ),
-            count: parseInt( $(rule).attr('count') )
-        });
+
+        var price = parseInt( $(rule).attr('price') );
+
+        var objectId = $(rule).attr('objectId');
+        if( objectId ) {
+            sectionState.sellPrices.push({
+                id: objectId,
+                price: price,
+                count: parseInt( $(rule).attr('count') )
+            });
+        }
+
+        // Other things (money or meals)
+        var cls = $(rule).attr('class');
+        if( cls ) {
+            var objectIds = [];
+            var except = [];
+
+            const txtExcept = $(rule).attr('except');
+            if( txtExcept )
+                except = txtExcept.split('|');
+
+            if( cls == 'special') {
+                objectIds = state.actionChart.specialItems;
+                except.push( 'map' ); // don't sell this, come on!
+            }
+            else
+                mechanicsEngine.debugWarning('Sell rule with invalid class');
+
+            for( let id of objectIds ) {
+                if( !except.contains( id ) ) {
+                    sectionState.sellPrices.push({
+                        id: id,
+                        price: price,
+                        count: 0,
+                    });
+                }
+            }
+        }
+
         state.sectionStates.markRuleAsExecuted(rule);
     },
 
@@ -741,15 +776,31 @@ const mechanicsEngine = {
         if( txtMindblastBonus )
             combat.mindblastBonus = parseInt( txtMindblastBonus );
 
+        // Mindblast multiplier (to all mental attacks too, like psi-surge)
+        const txtMindblastMultiplier : string = $(rule).attr('mindblastMultiplier');
+        if( txtMindblastMultiplier )
+            combat.mindblastMultiplier = parseInt( txtMindblastMultiplier );
+
         // Special Psi-Surgen bonus?
         const txtPsiSurgeBonus : string = $(rule).attr('psiSurgeBonus');
         if( txtPsiSurgeBonus )
             combat.psiSurgeBonus = parseInt( txtPsiSurgeBonus );
 
         // Check if the player cannot use weapons on this combat
-        const noWeapon = mechanicsEngine.getBooleanProperty( $rule , 'noWeapon' );
-        if( noWeapon != null )
-            combat.noWeapon = noWeapon;
+        const txtNoWeapon : string = $(rule).attr('noWeapon');
+        if( txtNoWeapon ) {
+            if( txtNoWeapon == 'true' )
+                combat.noWeaponTurns = -1; // all turns
+            else if( txtNoWeapon == 'false' )
+                combat.noWeaponTurns = 0;
+            else
+                combat.noWeaponTurns = parseInt( txtNoWeapon );
+        }
+
+        // Check if the combat is non-physical (disables most bonuses)
+        var txtMentalOnly = $(rule).attr('mentalOnly');
+        if( txtMentalOnly )
+            combat.mentalOnly = ( txtMentalOnly == 'true' );
 
         // Initial turn to allow to elude the combat
         if( $(rule).attr('eludeTurn') )
@@ -769,6 +820,16 @@ const mechanicsEngine = {
         const txtEnemyMultiplier : string = $rule.attr('enemyMultiplier'); 
         if( txtEnemyMultiplier )
             combat.enemyMultiplier = parseFloat( txtEnemyMultiplier );
+
+        // Enemy is immune for X turns
+        const txtEnemyImmuneTurns : string = $(rule).attr('enemyImmuneTurns'); 
+        if( txtEnemyImmuneTurns )
+            combat.enemyImmuneTurns = parseInt( txtEnemyImmuneTurns );
+
+        // LW is immune for X turns
+        const txtImmuneTurns : string = $(rule).attr('immuneTurns'); 
+        if( txtImmuneTurns )
+            combat.immuneTurns = parseInt( txtImmuneTurns );
 
         // Enemy extra loss per turn
         var txtEnemyTurnLoss = $(rule).attr('enemyTurnLoss'); 
@@ -873,7 +934,8 @@ const mechanicsEngine = {
             return;
 
         const increase = ExpressionEvaluator.evalInteger( $(rule).attr('count') );
-        actionChartController.increaseCombatSkill( increase );
+        const showToast = ( $(rule).attr('toast') != 'false' );
+        actionChartController.increaseCombatSkill( increase , showToast );
         state.sectionStates.markRuleAsExecuted(rule);
     },
 

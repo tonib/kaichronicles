@@ -1,5 +1,7 @@
 /// <reference path="../external.ts" />
 
+// TODO: Rename this file to combat.ts
+
 class Combat {
 
     /** Enemy name */
@@ -35,8 +37,14 @@ class Combat {
     /** The CS bonus to apply if the player has Psi-Surge discipline */
     public psiSurgeBonus = +4;
 
-    /** The player cannot use weapons on this combat */
-    public noWeapon = false;
+    /** The CS multiplier to apply to Mindblast/Psi-Surge attacks */
+    public mindblastMultiplier = 1;
+
+    /** How many turns the player cannot use weapons on this combat. -1 = never */
+    public noWeaponTurns = 0;
+
+    /** Check if the combat is non-physical (disables most bonuses) */
+    public mentalOnly = false;
 
     /** Turn beyond which the combat can be eluded. -1 = no elude */
     public eludeTurn = -1;
@@ -46,6 +54,12 @@ class Combat {
 
     /** Combat has been disabled? */
     public disabled = false;
+
+    /** Enemy is immune for X turns */
+    public enemyImmuneTurns = 0;
+
+    /** LW is immune for X turns */
+    public immuneTurns = 0;
 
     /** Player dammage multiplier */
     public dammageMultiplier = 1.0;
@@ -126,6 +140,12 @@ class Combat {
         for( let bonus of this.getCSBonuses() )
             cs += bonus.increment;
         return cs;
+        // TODO: CHANGE this.getCSBonuses() to use this.mentalOnly !!!!
+        /*
+        var cs = state.actionChart.getCurrentCombatSkill(this) + 
+            this.combatModifier + 
+            ( this.mentalOnly ? 0 : this.objectsUsageModifier );
+        */
     }
 
     /**
@@ -281,5 +301,13 @@ class Combat {
         }
         return lost;
     }
+
+    /**
+     * Returns true if the player can NOT use the weapon on the current turn
+     */
+    public noWeaponCurrentTurn() : boolean {
+        return this.noWeaponTurns > this.turns.length;
+    }
+
 }
 
