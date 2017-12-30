@@ -1,7 +1,5 @@
 /// <reference path="../external.ts" />
 
-// TODO: Rename this file to combat.ts
-
 class Combat {
 
     /** Enemy name */
@@ -140,12 +138,6 @@ class Combat {
         for( let bonus of this.getCSBonuses() )
             cs += bonus.increment;
         return cs;
-        // TODO: CHANGE this.getCSBonuses() to use this.mentalOnly !!!!
-        /*
-        var cs = state.actionChart.getCurrentCombatSkill(this) + 
-            this.combatModifier + 
-            ( this.mentalOnly ? 0 : this.objectsUsageModifier );
-        */
     }
 
     /**
@@ -165,7 +157,7 @@ class Combat {
             });
         }
 
-        if( this.objectsUsageModifier ) {
+        if( !this.mentalOnly && this.objectsUsageModifier ) {
             bonuses.push({
                 increment : this.objectsUsageModifier,
                 concept : translations.text( 'objectsUse' )
