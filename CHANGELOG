@@ -31,3 +31,4 @@
 - Fixed bug on book 5 / sect242: +3 for Mindshield was not applied
 - Book 5, sect29, sect305: Fixed bug dropping rope
 - Book 3, sect155: Fixed bug if you pick 9 on the Random table and you had Endurance > 20 (wrong bonus)
+- Book 1, sect307: Fixed bug (missed pick Meal)

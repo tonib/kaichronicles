@@ -128,7 +128,12 @@
             <test not="true" hasDiscipline="dvnation">
                 <choiceState section="sect341" set="disabled" />
             </test>
+            <test hasDiscipline="dvnation">
+                <choiceState section="sect122" set="disabled" />
+            </test>
         </section>
+
+        <!-- TODO: START HERE -->
 
         <section id="sect13">
             <choiceState section="all" set="disabled" />

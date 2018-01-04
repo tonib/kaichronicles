@@ -1077,6 +1077,7 @@
         </section>
 
         <section id="sect307">
+            <pick objectId="meal" />
             <object objectId="warhammer" />
             <message id="msg-drop-weapon" 
                 en-text="Drop a weapon before continue" 
