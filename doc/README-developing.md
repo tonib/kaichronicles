@@ -81,6 +81,13 @@ Other example:
 
 If you have the Sommerswerd, disable 248. If you don't have the Sommerswerd, disable 308 (both texts are explicit)
 
+Other example:
+
+* If you have the Magnakai Discipline of Invisibility, turn to 95.
+* If you do not possess this skill, turn to 210.
+
+If you have Invisibility discipline, disable 210. If you don't have it, disable 95 (explicit texts)
+
 ## Documentation
 
 Cough Cough. Sources for mechanics documentation:

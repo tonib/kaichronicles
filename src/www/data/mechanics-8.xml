@@ -384,8 +384,6 @@
             <death />
         </section>
 
-        <!-- TODO: START HERE -->
-        
         <section id="sect52">
             <choiceState section="all" set="disabled" />
             <combat enemyMultiplier="2" mindblastMultiplier="3" />
@@ -419,6 +417,9 @@
             <test not="true" hasDiscipline="pthmnshp">
                 <choiceState section="sect108" set="disabled" />
             </test>
+            <test hasDiscipline="pthmnshp">
+                <choiceState section="sect335" set="disabled" />
+            </test>
         </section>
 
         <section id="sect59">
@@ -429,11 +430,17 @@
             <test not="true" hasObject="sommerswerd">
                 <choiceState section="sect308" set="disabled" />
             </test>
+            <test hasObject="sommerswerd">
+                <choiceState section="sect248" set="disabled" />
+            </test>
         </section>
 
         <section id="sect61">
             <test not="true" hasDiscipline="invsblty">
                 <choiceState section="sect95" set="disabled" />
+            </test>
+            <test hasDiscipline="invsblty">
+                <choiceState section="sect210" set="disabled" />
             </test>
         </section>
 
@@ -463,11 +470,14 @@
         </section>
 
         <section id="sect73">
+            <choiceState section="sect325" set="disabled" />
             <test not="true" hasDiscipline="psiscrn">
                 <choiceState section="sect23" set="disabled" />
+                <choiceState section="sect325" set="enabled" />
             </test>
             <test not="true" expression="[KAILEVEL] >= 5">
                 <choiceState section="sect23" set="disabled" />
+                <choiceState section="sect325" set="enabled" />
             </test>
         </section>
 
@@ -514,11 +524,21 @@
             <test not="true" hasDiscipline="dvnation">
                 <choiceState section="sect319" set="disabled" />
             </test>
+
             <test not="true" hasDiscipline="psisurge">
                 <choiceState section="sect25" set="disabled" />
             </test>
             <test not="true" expression="[KAILEVEL] >= 4">
                 <choiceState section="sect25" set="disabled" />
+            </test>
+
+            <test hasDiscipline="dvnation">
+                <choiceState section="sect243" set="disabled" />
+            </test>
+            <test hasDiscipline="psisurge">
+                <test expression="[KAILEVEL] >= 4">
+                    <choiceState section="sect243" set="disabled" />
+                </test>
             </test>
         </section>
 
@@ -543,11 +563,17 @@
             <test not="true" hasDiscipline="dvnation">
                 <choiceState section="sect341" set="disabled" />
             </test>
+            <test hasDiscipline="dvnation">
+                <choiceState section="sect122" set="disabled" />
+            </test>
         </section>
 
         <section id="sect85">
             <test not="true" hasDiscipline="dvnation">
                 <choiceState section="sect94" set="disabled" />
+            </test>
+            <test hasDiscipline="dvnation">
+                <choiceState section="sect298" set="disabled" />
             </test>
         </section>
 
@@ -610,6 +636,9 @@
             <test not="true" hasDiscipline="curing">
                 <choiceState section="sect19" set="disabled" />
             </test>
+            <test hasDiscipline="curing">
+                <choiceState section="sect317" set="disabled" />
+            </test>
         </section>
 
         <section id="sect97">
@@ -622,6 +651,8 @@
             </choiceSelected>
         </section>
 
+        <!-- TODO: START HERE -->
+        
         <section id="sect101">
             <choiceState section="all" set="disabled" />
             <combat noMindblast="true" />

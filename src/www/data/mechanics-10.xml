@@ -526,6 +526,7 @@
         <section id="sect81">
             <choiceState section="all" set="disabled" />
             <combat eludeTurn="0" />
+            <!-- TODO: Change this and use the new property "mindblastMultiplier" -->
             <combat mindblastBonus="+4" psiSurgeBonus="+8" />
             <test hasCircle="circleSpirit">
                 <combat mindblastBonus="+6" psiSurgeBonus="+12" />
@@ -1435,6 +1436,7 @@
         <section id="sect254">
             <endurance count="-6" />
             <choiceState section="all" set="disabled" />
+            <!-- TODO: Change this and use the new property "mindblastMultiplier" -->
             <combat mindblastBonus="+4" psiSurgeBonus="+8" />
             <test hasCircle="circleSpirit">
                 <combat mindblastBonus="+6" psiSurgeBonus="+12" />
