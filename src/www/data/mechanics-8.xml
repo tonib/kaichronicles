@@ -83,9 +83,10 @@
             <test not="true" canUseBow="true">
                 <choiceState section="sect310" set="disabled" />
             </test>
-            <choiceSelected section="sect310">
+            <!-- Do not remove arrow here. You shot the arrow at sect310 -->
+            <!--choiceSelected section="sect310">
                 <pick class="arrow" count="-1" />
-            </choiceSelected>
+            </choiceSelected-->
         </section>
 
         <section id="sect5">
@@ -133,8 +134,6 @@
             </test>
         </section>
 
-        <!-- TODO: START HERE -->
-
         <section id="sect13">
             <choiceState section="all" set="disabled" />
             <combat noMindblast="true" mindforceCS="-2" index="0" />
@@ -176,7 +175,7 @@
         <section id="sect17">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="7">
+                <case from="-99" to="7">
                     <choiceState section="sect6" set="enabled" />
                 </case>
                 <case from="8" to="99">
@@ -188,11 +187,12 @@
                     <randomTableIncrement increment="+3" />
                 </test>
             </test>
+            <randomTableIncrement increment="[BOWBONUS]" />
             <choiceSelected section="all">
                 <pick class="arrow" count="-1" />
             </choiceSelected>
         </section>
-
+        
         <section id="sect18">
             <choiceState section="all" set="disabled" />
             <endurance count="-2" />
@@ -234,13 +234,14 @@
         <section id="sect28">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="4">
+                <case from="-99" to="4">
                     <choiceState section="sect38" set="enabled" />
                 </case>
                 <case from="5" to="99">
                     <choiceState section="sect125" set="enabled" />
                 </case>
             </randomTable>
+            <randomTableIncrement increment="[BOWBONUS]" />
             <choiceSelected section="all">
                 <pick class="arrow" count="-1" />
             </choiceSelected>
@@ -264,6 +265,14 @@
             <test not="true" sectionVisited="sect156">
                 <choiceState section="sect237" set="disabled" />
             </test>
+            <!-- TODO: added this, check it's ok -->
+            <test sectionVisited="sect156">
+                <choiceState section="sect91" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect33">
+            <!-- TODO: Check fireseed lost-->
         </section>
 
         <section id="sect36">
@@ -360,11 +369,14 @@
         </section>
 
         <section id="sect49">
+            <choiceState section="sect257" set="disabled" />
             <test not="true" hasDiscipline="psisurge">
                 <choiceState section="sect84" set="disabled" />
+                <choiceState section="sect257" set="enabled" />
             </test>
             <test not="true" expression="[KAILEVEL] >= 4">
                 <choiceState section="sect84" set="disabled" />
+                <choiceState section="sect257" set="enabled" />
             </test>
         </section>
 
@@ -372,6 +384,8 @@
             <death />
         </section>
 
+        <!-- TODO: START HERE -->
+        
         <section id="sect52">
             <choiceState section="all" set="disabled" />
             <combat enemyMultiplier="2" mindblastMultiplier="3" />

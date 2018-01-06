@@ -63,8 +63,8 @@ I have a rule: Don't be restrictive with choices. If a choice text explains a co
 * If you wish to pick up the Silver Sceptre, turn to 223.
 * If you wish to leave it where it is and continue, turn to 308.
 
-If you have the "Lore-circle of the Spirit", don't disable choices to 223 and 308. I know this is subjective, and probably wrong,
-but let some freedom to the player. 
+If don't have the "Lore-circle of the Spirit", disable 25.  If you have the "Lore-circle of the Spirit", 
+DON'T disable choices 223 and 308. I know this is subjective, and probably wrong, but let some freedom to the player. 
 
 Other example:
 
@@ -73,6 +73,13 @@ Other example:
 * If you have neither of these Special Items, turn to 331.
 
 If you don't have Fireseeds, disable 10. If you don't have Sommerswerd, disable 317. If you have Fireseeds OR Sommerswerd, disable 331, because the choice text say it explicitly.
+
+Other example:
+
+* If you possess the Sommerswerd turn to 308.
+* If you do not possess this Special Item, turn to 248.
+
+If you have the Sommerswerd, disable 248. If you don't have the Sommerswerd, disable 308 (both texts are explicit)
 
 ## Documentation
 

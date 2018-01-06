@@ -9,13 +9,12 @@
 - Erratas:
   * Book 8, equimpnt: Not in spanish version: "The maximum number of Special Items that can be carried on any adventure is twelve...."
   * 8, sect13: Differences english / spanish: turns number, and do not continue with combat
-- Bugs reported on google play:
-  * Es increible. Me encantan este tipo de historia, puedes hacer muchas aventuras en el mismo libro y mas con esta saga donde sabes cual 
-    es tu destino pero no como sera el camino. Por cierto, y es solo un detalle que he encontrado en la pagina 307 del primer libro 
-    indica que guarda en la mochila una comida de fruta pero esta no se añade a la carta de accion. A parte de ese detalle me encanta.
-  * Buen juego. Bug en la adivinanza del.Zakhan en el laberinto. Te dice número incorrecto cuando introduces la respuesta correcta
-  * Ey hay algo mal con el libro 5? Me parece que no puede conseguir el rompecabezas correcta. La ubicación de la tumba de la Majhan ..
-  
+  * 8, sect18: "(pierdes 2 puntos de RESISTENCIA."
+  * 8, sect30: 1) differences between english and spanish (foot note). 2) Miss this: "If you have completed the Lore-circle of the Spirit, 
+    you may increase your COMBAT SKILL by 2 points for the duration of this combat"
+  * 8, sect47: 1) differences between english and spanish (foot note). 2) Miss this: "If you have completed the Lore-circle of the Spirit, 
+    you may increase your COMBAT SKILL by 2 points for the duration of this combat"
+
 FOR FUTURE (1.9+):
 - Support for kai disciplines on magnakai books:
   * https://github.com/tonib/kaichronicles/issues/5
