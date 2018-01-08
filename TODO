@@ -3,7 +3,9 @@
   * Objects types
   * Others?
 - Ask help to Alarion with english translations
-- Info for Michael: <combat mindblastBonus="+6" psiSurgeBonus="+12" /> can be used as multiplier for Mindblast
+- Bugs reported on Google Play:
+  * Finally, finally there's a proper LW game book app. The only problem I've noticed is that it only gives Silver Bow's bonus in the 
+    sections of book 6 that specifically mention it, and not at all 'rolls' as it is supposed to.
 - Performance
 - Quivers with no arrows available on section should not show "(0 arrows)". Show "(0 arrows)" only on Action chart
 - Erratas:
@@ -16,8 +18,10 @@
     you may increase your COMBAT SKILL by 2 points for the duration of this combat"
   * 8, sect76: 1) Foot note references to 221 (not available on this section). 2) Different text on english and spanish versions
   * 8, sect96: "La plata forma sube" should be "La plataforma sube"
+  * 8, sect1 and sect135 (and maybe others): "pass" object is referenced on some places as "Pase" and others as "Salvoconducto"
 
 FOR FUTURE (1.9+):
+- Map links on text: Do not follow them if you don't have the "map" special object
 - Support for kai disciplines on magnakai books:
   * https://github.com/tonib/kaichronicles/issues/5
   * https://www.projectaon.org/es/foro3/viewtopic.php?p=27752#p27752

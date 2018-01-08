@@ -628,14 +628,14 @@
 
         <special id="pass">
             <name lang="en">Pass</name>
-            <name lang="es">Pase</name>
+            <name lang="es">Salvoconducto</name>
         </special>
 
         <!-- This is more appropriately a normal weapon, but its use is mandatory and by making it a special object, 
              we don't force the user to drop another weapon for one combat just to pick original weapon back up -->
         <special id="paidosword" weaponType="sword">
             <name lang="en">Paido’s Sword</name>
-            <name lang="es">Espada del Paido</name>
+            <name lang="es">Espada de Paido</name>
             <image book="1" name="sword.png" />
         </special>
 

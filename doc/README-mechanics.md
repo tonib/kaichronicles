@@ -218,7 +218,7 @@ will be executed.
 * **hasObject="objectId1|objectId2|...**: Do the player carry any of the objects?
 * **expression="Java expression"**: Is the expression true?
 * **sectionVisited="sectionId1|sectionId1|..."**: Has some of the sections been visited?
-* **currentWeapon="weaponId1|weaponId2|..."**: Is the current weapon of some of these kinds?
+* **currentWeapon="weaponId1|weaponId2|..."**: Is the current weapon (hand-to-hand) some of these kinds?
 * **combatsWon="boolean"**: Have been won all combats on this section (or not)?
 * **combatsActive="true"**: Do some combat still active (unfinished)?
 * **bookLanguage="language code (en/es)"**: Is this the current book language?

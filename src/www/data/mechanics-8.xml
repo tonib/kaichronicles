@@ -650,8 +650,6 @@
                 <endurance count="[MAXENDURANCE] - [ENDURANCE]" />
             </choiceSelected>
         </section>
-
-        <!-- TODO: START HERE -->
         
         <section id="sect101">
             <choiceState section="all" set="disabled" />
@@ -732,6 +730,9 @@
             <test not="true" hasObject="sommerswerd">
                 <choiceState section="sect30" set="disabled" />
             </test>
+            <test hasObject="sommerswerd">
+                <choiceState section="sect183" set="disabled" />
+            </test>
         </section>
 
         <section id="sect115">
@@ -739,12 +740,12 @@
         </section>
 
         <section id="sect116">
-            <!-- TODO -->
-            <test not="true" expression="[CURRENTWEAPON]">
+            <!-- TODO: Check this (only hand-to-hand weapons, implement currentWeapon="any"??? ) -->
+            <test not="true" expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] > 0">
                 <choiceState section="sect214" set="disabled" />
             </test>
         </section>
-
+        
         <section id="sect117">
             <choiceState section="all" set="disabled" />
             <randomTable>
@@ -839,6 +840,9 @@
             <test not="true" sectionVisited="sect262">
                 <choiceState section="sect329" set="disabled" />
             </test>
+            <test sectionVisited="sect262">
+                <choiceState section="sect193" set="disabled" />
+            </test>
         </section>
 
         <section id="sect132">
@@ -864,6 +868,9 @@
             <test not="true" hasDiscipline="pthmnshp">
                 <choiceState section="sect256" set="disabled" />
             </test>
+            <test hasDiscipline="pthmnshp">
+                <choiceState section="sect342" set="disabled" />
+            </test>
         </section>
 
         <section id="sect138">
@@ -874,6 +881,8 @@
                 <choiceState section="sect203" set="disabled" />
             </test>
         </section>
+
+        <!-- TODO: START HERE -->
 
         <section id="sect139">
             <pick objectId="greycrystalring" />
