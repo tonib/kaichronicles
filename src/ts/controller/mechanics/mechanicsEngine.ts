@@ -675,6 +675,9 @@ const mechanicsEngine = {
      * Allow to sell an inventory object rule
      */
     sell: function(rule) {
+
+        // TODO: Use a single "$rule" variable instead referencing $(rule) (performance...)
+
         var sectionState = state.sectionStates.getSectionState();
         if( sectionState.ruleHasBeenExecuted(rule) )
             // Execute only once
@@ -697,6 +700,7 @@ const mechanicsEngine = {
             var objectIds = [];
             var except = [];
 
+            // TODO: Use mechanicsEngine.getArrayProperty here
             const txtExcept = $(rule).attr('except');
             if( txtExcept )
                 except = txtExcept.split('|');
@@ -798,6 +802,7 @@ const mechanicsEngine = {
         }
 
         // Check if the combat is non-physical (disables most bonuses)
+        // TODO: Use mechanicsEngine.getBooleanProperty here
         var txtMentalOnly = $(rule).attr('mentalOnly');
         if( txtMentalOnly )
             combat.mentalOnly = ( txtMentalOnly == 'true' );

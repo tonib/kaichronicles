@@ -197,6 +197,8 @@
         <xs:attribute name="restoreFactor" type="xs:decimal" />
         <xs:attribute name="bow" type="trueOnly" />
         <xs:attribute name="disabledObjects" type="xs:string" />
+        <xs:attribute name="mindblastMultiplier" type="xs:integer" />
+        <xs:attribute name="mentalOnly" type="xs:boolean" />
     </xs:complexType>
 
     <xs:complexType name="afterCombats">
@@ -302,7 +304,9 @@
     </xs:complexType>
 
     <xs:complexType name="sell">
-        <xs:attribute name="objectId" type="xs:string" use="required" />
+        <xs:attribute name="objectId" type="xs:string" />
+        <xs:attribute name="class" type="xs:string" />
+        <xs:attribute name="except" type="xs:string" />
         <xs:attribute name="price" type="xs:nonNegativeInteger" use="required" />
         <xs:attribute name="count" type="xs:nonNegativeInteger" />
     </xs:complexType>

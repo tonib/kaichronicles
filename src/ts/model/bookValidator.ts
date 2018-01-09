@@ -522,7 +522,22 @@ class BookValidator {
     }
 
     private sell( $rule ) {
-        this.validateObjectIdsAttribute( $rule , 'objectId' , false , false );
+        
+        const objectId = $rule.attr('objectId');
+        if( objectId )
+            this.validateObjectIdsAttribute( $rule , 'objectId' , false , false );
+
+        const cls = $rule.attr('class');
+        if( cls && cls != 'special' )
+            this.addError( $rule , 'Wrong "class" property value' );
+
+        if( !cls && $rule.attr('except') )
+            this.addError( $rule , 'Attribute "except" only applies if "class" is present' );
+        this.validateObjectIdsAttribute( $rule , 'except' , true , false );
+
+        // "objectId" or "class" are mandatory, and exclusive
+        if( ( !objectId && !cls ) || ( objectId && cls ) )
+            this.addError( $rule , 'One and only one of "objectId" and "class" are mandatory' );
     }
 
     private goToSection( $rule ) {

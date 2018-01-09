@@ -7,7 +7,8 @@
   * Finally, finally there's a proper LW game book app. The only problem I've noticed is that it only gives Silver Bow's bonus in the 
     sections of book 6 that specifically mention it, and not at all 'rolls' as it is supposed to.
 - Performance
-- Quivers with no arrows available on section should not show "(0 arrows)". Show "(0 arrows)" only on Action chart
+- Quivers with no arrows available on section should not show "(0 arrows)". Show "(0 arrows)" only on Action chart. Same to sell quiver
+  object (see book 8, sect139)
 - Erratas:
   * Book 8, equimpnt: Not in spanish version: "The maximum number of Special Items that can be carried on any adventure is twelve...."
   * 8, sect13: Differences english / spanish: turns number, and do not continue with combat
