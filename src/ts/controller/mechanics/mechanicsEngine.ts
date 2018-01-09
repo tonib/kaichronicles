@@ -685,6 +685,7 @@ const mechanicsEngine = {
 
         var price = parseInt( $(rule).attr('price') );
 
+        // Sell a specific item
         var objectId = $(rule).attr('objectId');
         if( objectId ) {
             sectionState.sellPrices.push({
@@ -694,7 +695,7 @@ const mechanicsEngine = {
             });
         }
 
-        // Other things (money or meals)
+        // Other things (money / meals / special items ...)
         var cls = $(rule).attr('class');
         if( cls ) {
             var objectIds = [];
@@ -705,9 +706,9 @@ const mechanicsEngine = {
             if( txtExcept )
                 except = txtExcept.split('|');
 
-            if( cls == 'special') {
+            if( cls == Item.SPECIAL ) {
                 objectIds = state.actionChart.specialItems;
-                except.push( 'map' ); // don't sell this, come on!
+                except.push( Item.MAP ); // don't sell this, come on!
             }
             else
                 mechanicsEngine.debugWarning('Sell rule with invalid class');

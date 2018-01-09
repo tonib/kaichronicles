@@ -277,9 +277,12 @@ Make an object available on the section. The player will can pick / buy it.
 ### sell
 ```xml
 <sell objectId="sword" price="3" />
+<sell class="special" except="greycrystalring" price="8" />
 ```
 This will allow to the player to sell a class of objects by a given price
 * **objectId**: The object id you can sell
+* **class="special"** You can sell any Special Item object
+* **except="objectId1|objectId2|..."** Only applies if "class" was specified. Objects id that you cannot sell
 * **price**: The money got by selling the object
 
 ### resetSectionState
@@ -347,8 +350,6 @@ replace that value. Ex:
 <combat noMindblast="true" />
 <combat noMindblast="false" />
 ```
-
-TODO: Continue here
 
 ### disableCombats
 ```xml
@@ -539,8 +540,3 @@ There are rules that need to store a state:
 * Meals: The meal has been done?
 * Random table pick: Has been done? What result we got?
 * etc
-
-
-
-
-

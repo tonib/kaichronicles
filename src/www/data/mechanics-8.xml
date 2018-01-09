@@ -882,13 +882,13 @@
             </test>
         </section>
 
-        <!-- TODO: START HERE -->
-
         <section id="sect139">
             <pick objectId="greycrystalring" />
             <sell class="special" except="greycrystalring" price="8" />
         </section>
 
+        <!-- TODO: START HERE -->
+        
         <section id="sect141">
             <numberPicker
                 en-text="Answer the riddle"
