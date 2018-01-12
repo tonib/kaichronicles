@@ -262,11 +262,19 @@
         </section>
 
         <section id="sect31">
-            <test not="true" sectionVisited="sect156">
+            <!-- 
+                See sect156 
+                <test not="true" sectionVisited="sect156">
+                    <choiceState section="sect237" set="disabled" />
+                </test>
+                <test sectionVisited="sect156">
+                    <choiceState section="sect91" set="disabled" />
+                </test>
+            -->
+            <test not="true" isGlobalRuleRegistered="book8sect156">
                 <choiceState section="sect237" set="disabled" />
             </test>
-            <!-- TODO: added this, check it's ok -->
-            <test sectionVisited="sect156">
+            <test isGlobalRuleRegistered="book8sect156">
                 <choiceState section="sect91" set="disabled" />
             </test>
         </section>
@@ -887,8 +895,6 @@
             <sell class="special" except="greycrystalring" price="8" />
         </section>
 
-        <!-- TODO: START HERE -->
-        
         <section id="sect141">
             <numberPicker
                 en-text="Answer the riddle"
@@ -899,7 +905,7 @@
                 />
             <numberPickerChoosed>
                 <test expression="[NUMBERPICKER] == 59">
-                    <goToSection section="sect3" />
+                    <goToSection section="sect59" />
                 </test>
                 <test expression="[NUMBERPICKER] != 59">
                     <toast
@@ -934,7 +940,7 @@
         <section id="sect154">
             <death />
         </section>
-
+        
         <section id="sect155">
             <choiceState section="all" set="disabled" />
             <test not="true" hasDiscipline="curing">
@@ -952,14 +958,21 @@
             <endurance count="-6" />
             <registerGlobalRule id="book8sect156">
                 <objectUsed objectId="tinctureoxydine|oedeherb">
+                    <!-- 
+                        There is a problem with this: If you use the "tinctureoxydine|oedeherb" on THIS section, on the action chart,
+                        when you return to the section, the book8sect156 is re-registered, because the "sect156" section was reset...
+                        Instead this, on sect31 we will check if "book8sect156" is still registered
+                    -->
+                    <!--resetSectionState sectionId="sect156" /-->
                     <unregisterGlobalRule id="book8sect156" />
-                    <resetSectionState sectionId="sect156" />
                     <toast
                         en-text="Your wound has been healed!"
                         es-text="¡Tu herida ha sido curada!" />
                 </objectUsed>
             </registerGlobalRule>
         </section>
+
+        <!-- TODO: START HERE -->
 
         <section id="sect157">
             <test not="true" hasDiscipline="invsblty">

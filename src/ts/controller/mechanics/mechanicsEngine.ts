@@ -598,6 +598,11 @@ const mechanicsEngine = {
                 conditionStatisfied = true;
         }
 
+        // A global rule id is registered?
+        const globalRuleId : string = $rule.attr( 'isGlobalRuleRegistered' );
+        if( globalRuleId && state.sectionStates.globalRulesIds.contains( globalRuleId ) )
+            conditionStatisfied = true;
+
         // Check if the test should be inversed
         if( $rule.attr('not') == 'true' )
             conditionStatisfied = !conditionStatisfied;

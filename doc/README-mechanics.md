@@ -231,6 +231,7 @@ will be executed.
 * **hasWeaponskillWith="weaponType"** : The player has weaponskill / weaponmastery with the given weapon?
 * **canUseBow="boolean"** : The player has a bow and one arrow (or not)?
 * **currentWeaponSpecial="boolean"** : Current weapon is a Special Item (or not)?
+* **isGlobalRuleRegistered="globalRuleId"** : A global rule with a given id is currently registered?
 
 To make AND conditions, embed test tags. Example: Enable a choice if the player has the lantern, or torch AND tinderbox:
 ```xml
@@ -397,7 +398,11 @@ choice section destination or "all" for any choice on the section
 ```
 "registerGlobalRule" registers a set of rules that will be executed each section.
 These rules has an "id", and they will be executed each section until the rule 
-"unregisterGlobalRule" is executed with the same "id" property
+"unregisterGlobalRule" is executed with the same "id" property.
+You can check if a global rule is still registered with:
+```xml
+<test isGlobalRuleRegistered="globalruleid">...</test>
+```
 
 ### objectUsed
 ```xml

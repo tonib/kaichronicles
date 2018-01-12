@@ -152,6 +152,7 @@
         <xs:attribute name="hasCircle" type="xs:string" />
         <xs:attribute name="hasWeaponskillWith" type="xs:string" />
         <xs:attribute name="currentWeaponSpecial" type="xs:boolean" />
+        <xs:attribute name="isGlobalRuleRegistered" type="xs:string" />
         <xs:attribute name="not" type="trueOnly" />
     </xs:complexType>
 

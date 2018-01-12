@@ -426,6 +426,8 @@ class BookValidator {
             this.addError( $rule , 'Wrong circle: ' + circle );
 
         this.validateObjectIdsAttribute( $rule , 'hasWeaponskillWith' , false , true );
+
+        // TODO: attribute "isGlobalRuleRegistered". Check the ruleId exists on the current mechanics XML
     }
 
     private choiceState( $rule ) {
