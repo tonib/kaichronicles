@@ -800,11 +800,11 @@ const mechanicsEngine = {
         const txtNoWeapon : string = $(rule).attr('noWeapon');
         if( txtNoWeapon ) {
             if( txtNoWeapon == 'true' )
-                combat.noWeaponTurns = -1; // all turns
+                combat.noWeaponTurns = -1; // All turns no weapon
             else if( txtNoWeapon == 'false' )
-                combat.noWeaponTurns = 0;
+                combat.noWeaponTurns = 0;  // Use weapon on all turns
             else
-                combat.noWeaponTurns = parseInt( txtNoWeapon );
+                combat.noWeaponTurns = parseInt( txtNoWeapon ); // Use weapon after "n" turns
         }
 
         // Check if the combat is non-physical (disables most bonuses)

@@ -1057,19 +1057,16 @@
             </test>
         </section>
 
-        <!-- TODO: START HERE -->
-        
         <section id="sect169">
             <choiceState section="all" set="disabled" />
-            <combat noMindblast="true" noWeapon="true" />
-            <test not="true" hasDiscipline="psiscrn">
-                <combat combatSkillModifier="-2" />
-            </test>
+            <combat noMindblast="true" noWeapon="true" mindforceCS="-2" />
             <afterCombats>
                 <choiceState section="all" set="enabled" />
             </afterCombats>
         </section>
 
+        <!-- TODO: START HERE -->
+        
         <section id="sect170">
             <meal/>
         </section>

@@ -298,6 +298,11 @@ class Combat {
      * Returns true if the player can NOT use the weapon on the current turn
      */
     public noWeaponCurrentTurn() : boolean {
+        if( this.noWeaponTurns < 0 )
+            // All turns no weapon
+            return true;
+
+        // No weapon if we still on a "No weapon" turn
         return this.noWeaponTurns > this.turns.length;
     }
 

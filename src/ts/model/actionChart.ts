@@ -523,7 +523,8 @@ class ActionChart {
 
         // Current weapon bonuses
         if ( !combat.mentalOnly ) {
-            for( let b of this.getWeaponCombatSkillBonuses( combat.noWeaponCurrentTurn() , combat.bowCombat , combat.disabledObjects ) )
+            const noWeapon = combat.noWeaponCurrentTurn();
+            for( let b of this.getWeaponCombatSkillBonuses( noWeapon , combat.bowCombat , combat.disabledObjects ) )
                 bonuses.push( b );
         }
 

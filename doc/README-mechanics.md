@@ -325,7 +325,8 @@ the following properties:
 * **mindblastBonus="number"**: Special CS bonus to apply for Mindblast discipline on this combat
 * **mindblastMultiplier="number"**: CS multiplier to apply to Mindblast/Psi-Surge attacks this combat
 * **psiSurgeBonus="number"**: Special CS bonus to apply for Psi-Surge discipline on this combat
-* **noWeapon="boolean|number"**: If true, Lone Wolf cannot use any weapon on this combat. If a number, LW cannot use any weapon for that many turns
+* **noWeapon="boolean|number"**: If true, Lone Wolf cannot use any weapon on this combat. If a number, LW cannot use any weapon for 
+  that many turns
 * **mentalOnly="true"**: Lone Wolf cannot use any physical bonuses on this combat (any object bonus)
 * **eludeTurn="number"**: Turn number after which LW can elude the combat
 * **enemyImmuneTurns="number"**: Turns during which the enemy will suffer no damage
