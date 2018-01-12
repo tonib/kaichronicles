@@ -1065,8 +1065,6 @@
             </afterCombats>
         </section>
 
-        <!-- TODO: START HERE -->
-        
         <section id="sect170">
             <meal/>
         </section>
@@ -1074,6 +1072,9 @@
         <section id="sect174">
             <test not="true" hasDiscipline="dvnation">
                 <choiceState section="sect93" set="disabled" />
+            </test>
+            <test hasDiscipline="dvnation">
+                <choiceState section="sect128" set="disabled" />
             </test>
         </section>
 
@@ -1096,6 +1097,12 @@
             </test>
         </section>
 
+        <section id="sect178">
+            <!-- TODO: Drop potion? -->
+        </section>
+
+        <!-- TODO: START HERE -->
+        
         <section id="sect183">
             <choiceState section="all" set="disabled" />
             <pick objectId="paidosword" />
