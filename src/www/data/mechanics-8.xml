@@ -972,14 +972,20 @@
             </registerGlobalRule>
         </section>
 
-        <!-- TODO: START HERE -->
-
         <section id="sect157">
             <test not="true" hasDiscipline="invsblty">
                 <choiceState section="sect67" set="disabled" />
             </test>
             <test not="true" expression="[KAILEVEL] >= 5">
                 <choiceState section="sect67" set="disabled" />
+            </test>
+            <!-- If you do not possess this skill.. you can, or, or -->
+            <test hasDiscipline="invsblty">
+                <test expression="[KAILEVEL] >= 5">
+                    <choiceState section="sect96" set="disabled" />
+                    <choiceState section="sect198" set="disabled" />
+                    <choiceState section="sect305" set="disabled" />
+                </test>
             </test>
         </section>
 
@@ -1019,6 +1025,9 @@
             <test not="true" hasDiscipline="dvnation">
                 <choiceState section="sect341" set="disabled" />
             </test>
+            <test hasDiscipline="dvnation">
+                <choiceState section="sect122" set="disabled" />
+            </test>
         </section>
 
         <section id="sect164">
@@ -1043,8 +1052,13 @@
             <test not="true" hasObject="silverbowduadon">
                 <choiceState section="sect304" set="disabled" />
             </test>
+            <test hasObject="silverbowduadon">
+                <choiceState section="sect264" set="disabled" />
+            </test>
         </section>
 
+        <!-- TODO: START HERE -->
+        
         <section id="sect169">
             <choiceState section="all" set="disabled" />
             <combat noMindblast="true" noWeapon="true" />

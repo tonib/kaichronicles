@@ -263,6 +263,7 @@ class ObjectsTableItem {
             this[op]();
     }
 
+    /** Pick / buy object operation */
     private get() {
 
         // Special case. On kai monastery, ask the money amount to pick
@@ -273,8 +274,15 @@ class ObjectsTableItem {
 
         // Check if it's a buy
         if( this.objectInfo.price ) {
+
             if( state.actionChart.beltPouch < this.objectInfo.price ) {
                 alert( translations.text('noEnoughMoney') );
+                return;
+            }
+
+            if( this.item.id == Item.ARROW && state.actionChart.arrows >= state.actionChart.getMaxArrowCount() ) {
+                // Don't let spend money on arrows you can't carry
+                alert( translations.text('noQuiversEnough') );
                 return;
             }
 

@@ -713,15 +713,24 @@ class ActionChart {
     }
 
     /**
-     * Makes sure the arrow count fits our current quiver count
+     * Get the maximum arrows number the player can carry, given by the number of owned quivers
+     * @returns The max. arrows number
      */
-    private sanitizeArrowCount() {
-        var max = 0;
-        for( var i=0; i<this.specialItems.length; i++ ) {
+    public getMaxArrowCount() : number {
+        let max = 0;
+        for( let i=0; i<this.specialItems.length; i++ ) {
             if( this.specialItems[i] == Item.QUIVER )
                 // Only 6 arrows per quiver
                 max += 6;
         }
+        return max;
+    }
+
+    /**
+     * Makes sure the arrow count fits our current quiver count
+     */
+    private sanitizeArrowCount() {
+        const max = this.getMaxArrowCount();
         this.arrows = Math.max( 0, Math.min( this.arrows, max ) );
     }
 

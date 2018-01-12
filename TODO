@@ -20,6 +20,7 @@
   * 8, sect76: 1) Foot note references to 221 (not available on this section). 2) Different text on english and spanish versions
   * 8, sect96: "La plata forma sube" should be "La plataforma sube"
   * 8, sect1 and sect135 (and maybe others): "pass" object is referenced on some places as "Pase" and others as "Salvoconducto"
+  * 8, sect163: "¡Que me quemo! -chilla." should be "-¡Que me quemo! -chilla.
 
 FOR FUTURE (1.9+):
 - Map links on text: Do not follow them if you don't have the "map" special object
