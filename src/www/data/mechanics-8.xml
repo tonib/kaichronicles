@@ -1100,8 +1100,6 @@
         <section id="sect178">
             <!-- TODO: Drop potion? -->
         </section>
-
-        <!-- TODO: START HERE -->
         
         <section id="sect183">
             <choiceState section="all" set="disabled" />
@@ -1124,10 +1122,28 @@
             <test not="true" hasDiscipline="nexus">
                 <choiceState section="sect345" set="disabled" />
             </test>
+            <test hasDiscipline="nexus">
+                <choiceState section="sect159" set="disabled" />
+            </test>
         </section>
 
         <section id="sect187">
-            <!-- TODO -->
+            <!-- Complex. Let the player choose (TODO: This could be improved, checking the dropped weapon type) -->
+            <message id="msg-drop-weapon" 
+                en-text="Drop a non-edged weapon before continue" 
+                es-text="Deja un arma sin filo antes de continuar"
+            />
+            <choiceState section="all" set="disabled" />
+            <onInventoryEvent>
+                <test expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] == 0 || [WEAPONLIKE-CNT-ON-SECTION] > 0">
+                    <message id="msg-drop-weapon" op="hide" />
+                    <choiceState section="all" set="enabled" />
+                </test>
+                <test not="true" expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] == 0 || [WEAPONLIKE-CNT-ON-SECTION] > 0">
+                    <message id="msg-drop-weapon" op="show" />
+                    <choiceState section="all" set="disabled" />
+                </test>
+            </onInventoryEvent>
         </section>
 
         <section id="sect188">
@@ -1140,6 +1156,9 @@
             <test not="true" hasObject="sommerswerd">
                 <choiceState section="sect287" set="disabled" />
             </test>
+            <test hasObject="sommerswerd">
+                <choiceState section="sect13" set="disabled" />
+            </test>
         </section>
 
         <section id="sect190">
@@ -1148,6 +1167,11 @@
             </test>
             <test not="true" expression="[KAILEVEL] >= 4">
                 <choiceState section="sect146" set="disabled" />
+            </test>
+            <test hasDiscipline="curing">
+                <test expression="[KAILEVEL] >= 4">
+                    <choiceState section="sect222" set="disabled" />
+                </test>
             </test>
         </section>
 
@@ -1159,8 +1183,18 @@
         </section>
 
         <section id="sect194">
-            <test not="true" hasObject="lantern|torch|tinderbox|firesphere">
+            <!-- Torch and tinderbox go together -->
+            <!--test not="true" hasObject="lantern|torch|tinderbox|firesphere">
                 <choiceState section="sect283" set="disabled" />
+            </test-->
+            <choiceState section="sect283" set="disabled" />
+            <test hasObject="lantern|firesphere">
+                <choiceState section="sect283" set="enabled" />
+            </test>
+            <test hasObject="torch">
+                <test hasObject="tinderbox">
+                    <choiceState section="sect283" set="enabled" />
+                </test>
             </test>
         </section>
 
@@ -1176,6 +1210,9 @@
         <section id="sect198">
             <test not="true" hasDiscipline="anmlctrl">
                 <choiceState section="sect279" set="disabled" />
+            </test>
+            <test hasDiscipline="anmlctrl">
+                <choiceState section="sect241" set="disabled" />
             </test>
         </section>
 
@@ -1232,7 +1269,7 @@
         <section id="sect209">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="6">
+                <case from="-99" to="6">
                     <choiceState section="sect162" set="enabled" />
                 </case>
                 <case from="7" to="99">
@@ -1242,6 +1279,7 @@
             <test hasDiscipline="anmlctrl">
                 <randomTableIncrement increment="+3" />
             </test>
+            <randomTableIncrement increment="[BOWBONUS]" />
             <choiceSelected section="all">
                 <pick class="arrow" count="-1" />
             </choiceSelected>
@@ -1254,18 +1292,21 @@
         </section>
 
         <section id="sect214">
-            <!-- OK, this is tricky.  We want to care about the weapon the player entered this section with
-            TODO
-            <registerGlobalRule id="book8sect156">
-                <objectUsed objectId="tinctureoxydine|oedeherb">
-                    <unregisterGlobalRule id="book8sect156" />
-                    <resetSectionState sectionId="sect156" />
-                    <toast
-                        en-text="Your wound has been healed!"
-                        es-text="¡Tu herida ha sido curada!" />
-                </objectUsed>
-            </registerGlobalRule>
-            -->
+            <!-- OK, this is tricky.  We want to care about the weapon the player entered this section with -->
+            <!-- Yes, it is. Let the player choose if he/she can. Ignore current weapon (bow cannot set as current weapon),
+                 and check all player weapons -->
+            <!-- edged weapons -->
+            <test not="true" hasWeaponType="sword|dagger|axe|spear|shortsword|broadsword">
+                <choiceState section="sect235" set="disabled" />
+            </test>
+            <!-- non-edged weapons -->
+            <test not="true" hasWeaponType="mace|warhammer|quarterstaff|bow">
+                <choiceState section="sect187" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect215">
+            <!-- TODO: Check drop arrow -->
         </section>
 
         <section id="sect216">
@@ -1277,6 +1318,9 @@
         <section id="sect217">
             <test not="true" hasDiscipline="dvnation">
                 <choiceState section="sect93" set="disabled" />
+            </test>
+            <test hasDiscipline="dvnation">
+                <choiceState section="sect128" set="disabled" />
             </test>
         </section>
 
@@ -1293,6 +1337,8 @@
             <meal />
         </section>
 
+        <!-- TODO: START HERE -->
+        
         <section id="sect228">
             <!-- TODO: two uses -->
             <object objectId="larnumaliqueur" />

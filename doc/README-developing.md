@@ -88,6 +88,14 @@ Other example:
 
 If you have Invisibility discipline, disable 210. If you don't have it, disable 95 (explicit texts)
 
+## Reminders and tricks
+
+Sections with bow shots with a Random Table link to check if you hit, should contain this:
+```xml
+<randomTableIncrement increment="[BOWBONUS]" />
+```
+This will add the bonuses to the shot (Weaponmastery, bow object, etc.). Remember this bonus can be negative.
+
 ## Documentation
 
 Cough Cough. Sources for mechanics documentation:

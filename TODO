@@ -22,6 +22,8 @@
   * 8, sect96: "La plata forma sube" should be "La plataforma sube"
   * 8, sect1 and sect135 (and maybe others): "pass" object is referenced on some places as "Pase" and others as "Salvoconducto"
   * 8, sect163: "¡Que me quemo! -chilla." should be "-¡Que me quemo! -chilla.
+  * 8, sect206: Two points: ".."
+  * 8, sect214: "Si tu arma es de filo..." should contain "Lanza"
 
 FOR FUTURE (1.9+):
 - Map links on text: Do not follow them if you don't have the "map" special object

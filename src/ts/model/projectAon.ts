@@ -135,10 +135,10 @@ const projectAon = {
             biographies: [ 'jdbiolw' , 'gcbiolw' ],
 
             zipSize: 3537081
-        }
+        },
 
         ///////////////////////////////////////
-        /*
+        
         // Book 9 (NOT IMPLEMENTED / Nobody working on it):
         {
             title_en: 'The Cauldron of Fear',
@@ -198,7 +198,7 @@ const projectAon = {
             
             zipSize: 3180171
         }
-        */
+        
 
     ],
 
