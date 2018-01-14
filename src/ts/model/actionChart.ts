@@ -139,7 +139,7 @@ class ActionChart {
 
             case 'special':
                 const nMax = ActionChart.getMaxSpecials();
-                if( nMax && ( this.getNSpecialItems() + o.itemCount ) > nMax )
+                if( nMax && ( this.getNSpecialItems(false) + o.itemCount ) > nMax )
                     throw translations.text( 'msgNoMoreSpecialItems' );
                 this.specialItems.push(o.id);
                 if(o.isWeapon())
@@ -159,7 +159,7 @@ class ActionChart {
 
                 if( !this.hasBackpack )
                     throw translations.text( 'backpackLost' );
-                if( ( this.getNBackpackItems() + o.itemCount ) > 8 )
+                if( ( this.getNBackpackItems(false) + o.itemCount ) > 8 )
                     throw translations.text( 'msgNoMoreBackpackItems' );
                 if( o.id == 'meal')
                     // Special case
@@ -178,28 +178,36 @@ class ActionChart {
     }
 
     /**
-     * Returns the total number of backpack items, according to the number of slots each item consum 
+     * Returns the total number of backpack items, according to the number of slots each item consum
+     * @param roundToInteger If true, the total number of objects will be rounded up to a integer (Item.itemCount can have decimals)
+     * @returns The number of objects on the backpack
      */
-    public getNBackpackItems() : number {
+    public getNBackpackItems( roundToInteger : boolean = true ) : number {
         var count = this.meals;
         for( var i=0; i<this.backpackItems.length; i++) {
             var o = state.mechanics.getObject(this.backpackItems[i]);
             if( o )
                 count += o.itemCount;
         }
+        if( roundToInteger )
+            count = Math.ceil( count );
         return count;
     }
 
     /**
      * Returns the total number of special items, according to the number of slots each item consum 
+     * @param roundToInteger If true, the total number of objects will be rounded up to a integer (Item.itemCount can have decimals)
+     * @returns The number of Special Items
      */
-    public getNSpecialItems() : number {
+    public getNSpecialItems( roundToInteger : boolean = true ) : number {
         let count = 0;
         for( let specialId of this.specialItems ) {
             const o = state.mechanics.getObject( specialId );
             if( o )
                 count += o.itemCount;
         }
+        if( roundToInteger )
+            count = Math.ceil( count );
         return count;
     }
 

@@ -1340,7 +1340,7 @@
             <name lang="es">Mapa de Tharro</name>
         </object>
 
-        <object id="larnumaliqueur">
+        <object id="larnumaliqueur" itemCount="0.5">
             <name lang="en">Larnuma Liqueur</name>
             <description lang="en">
                 Restores 3 ENDURANCE points per dose

@@ -1336,14 +1336,15 @@
             <endurance count="-3" />
             <meal />
         </section>
+        
+        <section id="sect228">
+            <!-- TODO: This is semi-supported. Bot objects should occupy a single slot on the action chart -->
+            <object objectId="larnumaliqueur" index="0" />
+            <object objectId="larnumaliqueur" index="1" />
+        </section>
 
         <!-- TODO: START HERE -->
         
-        <section id="sect228">
-            <!-- TODO: two uses -->
-            <object objectId="larnumaliqueur" />
-        </section>
-
         <section id="sect230">
             <endurance count="-8" />
         </section>

@@ -44,7 +44,8 @@ class Item {
     public droppable : boolean;
 
     /** 
-     * Number of items the object it occupies on the backpack. It can be zero.
+     * Number of items the object it occupies on the backpack. 
+     * It can be zero. It can be decimal (ex. 0.5)
      * It's used too for the Special Items max. limit
      */
     public itemCount : number;
@@ -100,7 +101,7 @@ class Item {
 
         /** Number of items the object it occupies on the backpack */
         const txtItemCount : string = $o.attr('itemCount');
-        this.itemCount = txtItemCount ? parseInt( txtItemCount ) : 1;
+        this.itemCount = txtItemCount ? parseFloat( txtItemCount ) : 1;
 
         /** The translated object description */
         this.description = $o.find('description[lang=' + book.language + ']').text();
