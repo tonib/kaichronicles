@@ -1343,8 +1343,6 @@
             <object objectId="larnumaliqueur" index="1" />
         </section>
 
-        <!-- TODO: START HERE -->
-        
         <section id="sect230">
             <endurance count="-8" />
         </section>
@@ -1371,6 +1369,9 @@
             <test not="true" hasDiscipline="psiscrn">
                 <choiceState section="sect186" set="disabled" />
             </test>
+            <test hasDiscipline="psiscrn">
+                <choiceState section="sect230" set="disabled" />
+            </test>
         </section>
 
         <section id="sect241">
@@ -1379,6 +1380,8 @@
                 <choiceState section="all" set="enabled" />
             </afterCombats>
         </section>
+
+        <!-- TODO: START HERE -->
 
         <section id="sect242">
             <!-- TODO: swap items -->
