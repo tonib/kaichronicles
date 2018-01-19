@@ -603,6 +603,18 @@ const mechanicsEngine = {
         if( globalRuleId && state.sectionStates.globalRulesIds.contains( globalRuleId ) )
             conditionStatisfied = true;
 
+        // There are some of these objects on the section?
+        const objectOnSection = mechanicsEngine.getArrayProperty( $rule , 'objectOnSection' );
+        if( objectOnSection.length > 0 ) {
+            let sectionState = state.sectionStates.getSectionState();
+            for( let objectId of objectOnSection ) {
+                if( sectionState.containsObject( objectId ) ) {
+                    conditionStatisfied = true;
+                    break;
+                }
+            }
+        }
+
         // Check if the test should be inversed
         if( $rule.attr('not') == 'true' )
             conditionStatisfied = !conditionStatisfied;
@@ -867,7 +879,7 @@ const mechanicsEngine = {
         // TODO: Use mechanicsEngine.getBooleanProperty here
         if( $rule.attr('bow') == 'true' )
             combat.bowCombat = true;
-        
+
         // Objects to disable on this combat:
         const txtDisabledObjects : string = $rule.attr('disabledObjects');
         if( txtDisabledObjects )

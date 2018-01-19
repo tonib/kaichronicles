@@ -23,7 +23,7 @@
   * 8, sect163: "¡Que me quemo! -chilla." should be "-¡Que me quemo! -chilla.
   * 8, sect206: Two points: ".."
   * 8, sect214: "Si tu arma es de filo..." should contain "Lanza"
-  * 8, sect242: "Casaco de plata" should be "Yelmo Mágico de Plata"
+  * 8, sect242: "Casaco de plata" should be "Yelmo Mágico de Plata", "Maza con rubies" should be "Maza Enjoyada"
 
 FOR FUTURE (1.9+):
 - Map links on text: Do not follow them if you don't have the "map" special object

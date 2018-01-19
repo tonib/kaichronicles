@@ -1381,12 +1381,26 @@
             </afterCombats>
         </section>
 
-        <!-- TODO: START HERE -->
-
         <section id="sect242">
-            <!-- TODO: swap items -->
+            <object objectId="greycrystalring" />
+            <message id="msg-drop-weapon" 
+                en-text="Drop a Lodestone, a Jewelled Mace, a Silver Helm or the Grey Crystal Ring before continue" 
+                es-text="Deja una Piedra Imán, una Maza Enjoyada, un Yelmo Mágico de Plata o el Anillo de Cristal Gris antes de continuar"
+            />
+            <onInventoryEvent>
+                <test objectOnSection="greycrystalring|lodestone|jewelledmace|silverhelm">
+                    <message id="msg-drop-weapon" op="hide" />
+                    <choiceState section="all" set="enabled" />
+                </test>
+                <test not="true" objectOnSection="greycrystalring|lodestone|jewelledmace|silverhelm">
+                    <message id="msg-drop-weapon" op="show" />
+                    <choiceState section="all" set="disabled" />
+                </test>
+            </onInventoryEvent>
         </section>
 
+        <!-- TODO: START HERE -->
+        
         <section id="sect244">
             <test not="true" expression="[MONEY] >= 20">
                 <choiceState section="sect20" set="disabled" />

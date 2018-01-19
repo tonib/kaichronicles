@@ -232,6 +232,7 @@ will be executed.
 * **canUseBow="boolean"** : The player has a bow and one arrow (or not)?
 * **currentWeaponSpecial="boolean"** : Current weapon is a Special Item (or not)?
 * **isGlobalRuleRegistered="globalRuleId"** : A global rule with a given id is currently registered?
+* **objectOnSection="objectId1|objectId2|..."**: Some of these objects is available on the current section?
 
 To make AND conditions, embed test tags. Example: Enable a choice if the player has the lantern, or torch AND tinderbox:
 ```xml

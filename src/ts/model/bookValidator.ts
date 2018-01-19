@@ -413,7 +413,8 @@ class BookValidator {
         this.validateBooleanExpression( $rule , 'expression' );
         this.validateSectionsAttribute( $rule , 'sectionVisited' , true );
         this.validateObjectIdsAttribute( $rule , 'currentWeapon' , true , true );
-
+        this.validateObjectIdsAttribute( $rule , 'objectOnSection' , true , false );
+        
         const language : string = $rule.attr('bookLanguage');
         if( language && ( language != 'en' && language != 'es' ) )
             this.addError( $rule , 'Wrong language: ' + language );

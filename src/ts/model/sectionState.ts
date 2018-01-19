@@ -337,4 +337,13 @@ class SectionState {
             combat.objectsUsageModifier += combatSkillModifier;
     }
 
+    /** Return true if the object is on the section */
+    public containsObject( objectId : string ) : boolean {
+        for( let sectionItem of this.objects ) {
+            if( sectionItem.id == objectId )
+                return true;
+        }
+        return false;
+    }
+    
 }
