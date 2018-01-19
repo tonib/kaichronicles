@@ -1469,8 +1469,58 @@
             </afterCombats>
         </section>
 
-        <!-- TODO: START HERE -->
-        
+        <section id="sect257">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombatTurn turn="2">
+                <test combatsWon="false">
+                    <disableCombats />
+                    <choiceState section="sect163" set="enabled" />
+                </test>
+            </afterCombatTurn>
+            <afterCombats>
+                <test combatsWon="true">
+                    <choiceState section="sect12" set="enabled" />
+                </test>
+            </afterCombats>
+        </section>
+
+        <section id="sect258">
+            <endurance count="-8" />
+            <message id="msg-drop-weapon" 
+                en-text="Drop a weapon before continue" 
+                es-text="Deja un arma antes de continuar"
+            />
+            <onInventoryEvent>
+                <choiceState section="all" set="disabled" />
+                <test expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] == 0 || [WEAPONLIKE-CNT-ON-SECTION] > 0">
+                    <message id="msg-drop-weapon" op="hide" />
+                    <choiceState section="sect27" set="enabled" />
+                    <test expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] > 0">
+                        <choiceState section="sect75" set="enabled" />
+                    </test>
+                </test>
+                <test not="true" expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] == 0 || [WEAPONLIKE-CNT-ON-SECTION] > 0">
+                    <message id="msg-drop-weapon" op="show" />
+                    <choiceState section="all" set="disabled" />
+                </test>
+            </onInventoryEvent>
+        </section>
+
+        <section id="sect260">
+            <test not="true" expression="[MEALS] > 0">
+                <choiceState section="sect34" set="disabled" />
+            </test>
+            <test not="true" hasDiscipline="psisurge">
+                <choiceState section="sect250" set="disabled" />
+            </test>
+            <test expression="[MEALS] > 0" hasDiscipline="psisurge">
+                <choiceState section="sect5" set="disabled" />
+            </test>
+        </section>
+
+        <!-- Up to sect260-->
+
         <section id="sect350">
             <message
                 en-text="This is the last implemented book. Thank you for playing!" 

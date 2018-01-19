@@ -235,8 +235,8 @@ const mechanicsEngine = {
         if( $sectionRules === null )
             return false;
 
-        // I suspect this is a bad idea. All this kind of rules should go under a "onInventoryEvent" rule.
-        // So, try to do not add more stuff here
+        // TODO: Here there is a huge design error: Or use this re-render, or use "onInventoryEvent" rule
+        // TODO: Both do the same
 
         var reRender = false;
         mechanicsEngine.enumerateSectionRules( $sectionRules[0] , function(rule) {
@@ -245,8 +245,11 @@ const mechanicsEngine = {
                 return 'ignoreDescendants';
             else if( rule.nodeName == 'test' ) {
                 // test rule
+
+                const $rule = $(rule);
+
                 // TODO: Use mechanicsEngine.getArrayProperty here
-                var objects = $(rule).attr('hasObject');
+                var objects = $rule.attr('hasObject');
                 if( objects ) {
                     objects = objects.split('|');
                     if( objects.contains(o.id) ) {
@@ -256,21 +259,27 @@ const mechanicsEngine = {
                     }
                 }
 
-                if( $(rule).attr('canUseBow') && ( o.id == 'quiver' || o.isWeaponType( 'bow' ) ) ) {
+                if( $rule.attr('canUseBow') && ( o.id == Item.QUIVER || o.isWeaponType( Item.BOW ) ) ) {
                     // Section should be re-rendered
                     reRender = true;
                     return 'finish';
                 }
 
-                if( $(rule).attr('hasWeaponType') && o.isWeapon() ) {
+                if( $rule.attr('hasWeaponType') && o.isWeapon() ) {
                     // Section should be re-rendered
                     reRender = true;
                     return 'finish';
                 }
 
-                const expression : string = $(rule).attr( 'expression' );
+                const expression : string = $rule.attr( 'expression' );
                 if( expression ) {
-                    if( o.id == 'money' && ( expression.indexOf('[MONEY]') >= 0 ||  expression.indexOf('[MONEY-ON-SECTION]') >= 0 ) ) {
+                    if( o.id == Item.MONEY && ( expression.indexOf('[MONEY]') >= 0 ||  expression.indexOf('[MONEY-ON-SECTION]') >= 0 ) ) {
+                        // Section should be re-rendered
+                        reRender = true;
+                        return 'finish';
+                    }
+
+                    if( o.id == Item.MEAL && expression.indexOf('[MEALS]') >= 0 ) {
                         // Section should be re-rendered
                         reRender = true;
                         return 'finish';
@@ -279,7 +288,7 @@ const mechanicsEngine = {
             }
             else if( rule.nodeName == 'meal' ) {
                 // meal rule
-                if( o.id == 'meal' || o.isMeal ) {
+                if( o.id == Item.MEAL || o.isMeal ) {
                     // Section should be re-rendered
                     reRender = true;
                     return 'finish';
