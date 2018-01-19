@@ -201,6 +201,7 @@
         <xs:attribute name="disabledObjects" type="xs:string" />
         <xs:attribute name="mindblastMultiplier" type="xs:integer" />
         <xs:attribute name="mentalOnly" type="xs:boolean" />
+        <xs:attribute name="immuneTurns" type="xs:nonNegativeInteger" />
         <xs:attribute name="enemyImmuneTurns" type="xs:nonNegativeInteger" />
     </xs:complexType>
 

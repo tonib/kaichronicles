@@ -1398,8 +1398,6 @@
                 </test>
             </onInventoryEvent>
         </section>
-
-        <!-- TODO: START HERE -->
         
         <section id="sect244">
             <test not="true" expression="[MONEY] >= 20">
@@ -1413,7 +1411,7 @@
         <section id="sect246">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="4">
+                <case from="-99" to="4">
                     <choiceState section="sect184" set="enabled" />
                 </case>
                 <case from="5" to="7">
@@ -1423,9 +1421,7 @@
                     <choiceState section="sect213" set="enabled" />
                 </case>
             </randomTable>
-            <test hasWeaponskillWith="bow">
-                <randomTableIncrement increment="+3" />
-            </test>
+            <randomTableIncrement increment="[BOWBONUS]" />
             <choiceSelected section="all">
                 <pick class="arrow" count="-1" />
             </choiceSelected>
@@ -1438,12 +1434,22 @@
             <choiceSelected section="sect39">
                 <pick class="arrow" count="-1" />
             </choiceSelected>
-            <!-- TODO: only allow sect258 if we have a weapon equipped -->
+            <onInventoryEvent>
+                <test not="true" expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] > 0">
+                    <choiceState section="sect258" set="disabled" />
+                </test>
+                <test expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] > 0">
+                    <choiceState section="sect258" set="enabled" />
+                </test>
+            </onInventoryEvent>
         </section>
 
         <section id="sect249">
             <test not="true" hasDiscipline="dvnation">
                 <choiceState section="sect76" set="disabled" />
+            </test>
+            <test hasDiscipline="dvnation">
+                <choiceState section="sect221" set="disabled" />
             </test>
         </section>
 
@@ -1457,12 +1463,14 @@
 
         <section id="sect252">
             <choiceState section="all" set="disabled" />
-            <combat immuneTurns="1" />
+            <combat noWeapon="2" />
             <afterCombats>
                 <choiceState section="all" set="enabled" />
             </afterCombats>
         </section>
 
+        <!-- TODO: START HERE -->
+        
         <section id="sect350">
             <message
                 en-text="This is the last implemented book. Thank you for playing!" 

@@ -235,6 +235,9 @@ const mechanicsEngine = {
         if( $sectionRules === null )
             return false;
 
+        // I suspect this is a bad idea. All this kind of rules should go under a "onInventoryEvent" rule.
+        // So, try to do not add more stuff here
+
         var reRender = false;
         mechanicsEngine.enumerateSectionRules( $sectionRules[0] , function(rule) {
             if( rule.nodeName == 'onInventoryEvent' )
