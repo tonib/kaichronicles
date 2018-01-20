@@ -135,7 +135,7 @@ const projectAon = {
             biographies: [ 'jdbiolw' , 'gcbiolw' ],
 
             zipSize: 3537081
-        },
+        } /*,
 
         ///////////////////////////////////////
         
@@ -154,7 +154,7 @@ const projectAon = {
             zipSize: 2839095
         },
 
-        // Book 10 (NOT IMPLEMENTED / Work in progress (Toni) ):
+        // Book 10 (FINISHED) :
         {
             title_en: 'The Dungeons of Torgar',
             code_en: '10tdot',
@@ -197,7 +197,7 @@ const projectAon = {
             biographies: [ 'jdbiolw' , 'bwbiolw' ],
             
             zipSize: 3180171
-        }
+        }*/
         
 
     ],

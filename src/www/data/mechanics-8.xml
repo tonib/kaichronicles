@@ -1978,8 +1978,6 @@
             <drop objectId="laumspurpotion3|laumspurmeal|laumspurpotion4|laumspurpotion|redpotionlaumspur|rendalimelixir|laumspurpotion8|oedeherb" />
         </section>
 
-        <!-- Up to sect269 -->
-
         <section id="sect350">
             <message
                 en-text="This is the last implemented book. Thank you for playing!" 
