@@ -282,6 +282,7 @@
 
     <xs:complexType name="combatSkill">
         <xs:attribute name="count" type="xs:integer" use="required" />
+        <xs:attribute name="toast" type="xs:boolean" />
     </xs:complexType>
     
     <xs:complexType name="randomTableIncrement">

@@ -654,6 +654,13 @@
             <name lang="es">Piedra Imán</name>
         </special>
 
+        <special id="giakscroll2">
+            <name lang="en">Giak’s Scroll</name>
+            <name lang="es">Pergamino Giak</name>
+
+            <image book="8" name="small10.png" />
+        </special>
+
         <!-- BOOK 10 -->
 
         <special id="bullwhip">

@@ -293,6 +293,7 @@ const actionChartController = {
     /**
      * Increase / decrease the combat skill permanently
      * @param count Number to increase. Negative to decrease 
+     * @param showToast True if we should show a "toast" on the UI with the CS increase
      */
     increaseCombatSkill: function(count , showToast : boolean = true ) {
         state.actionChart.combatSkill += count;

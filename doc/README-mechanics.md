@@ -519,6 +519,22 @@ Add a button to access to the Kai monastery stored objects. It can be added insi
 Single rules as "drop" have state and they will not be re-executed. If you need the same behaviour on a set of rules, you can use 
 "executeOnce"
 
+
+### endurance (has state)
+```xml
+<endurance count="-2" />
+```
+Increase / decrease the current player endurance (not permanent)
+
+### combatSkill (has state)
+```xml
+<combatSkill count="-5" toast="false" />
+```
+Increase / decrease the original player combat skill (permanent). 
+
+The "toast" property is optional (default value="true"). If true, a toast will be displayed with the CS increase / decrease.
+
+
 ### special sections
 
 There are sections (or parts of them) that cannot be described by the game rules.

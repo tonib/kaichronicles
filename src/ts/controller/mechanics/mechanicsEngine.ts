@@ -968,9 +968,14 @@ const mechanicsEngine = {
             // Execute only once
             return;
 
-        const increase = ExpressionEvaluator.evalInteger( $(rule).attr('count') );
-        const showToast = ( $(rule).attr('toast') != 'false' );
+        const $rule = $(rule);
+
+        const increase = ExpressionEvaluator.evalInteger( $rule.attr('count') );
+
+        // TODO: Use mechanicsEngine.getBooleanProperty here. Default value = "true"
+        const showToast = ( $rule.attr('toast') != 'false' );
         actionChartController.increaseCombatSkill( increase , showToast );
+
         state.sectionStates.markRuleAsExecuted(rule);
     },
 
