@@ -145,7 +145,7 @@ will be available on the section.
 <drop objectId="allmeals" />
 <!-- Drop largerope OR rope -->
 <drop objectId="largerope|rope" />
-<!-- Delete the items you have listed fourth, fifth, and sixth on the Backpack section -->
+<!-- Delete the items you have listed fourth, fifth, AND sixth on the Backpack section -->
 <drop backpackItemSlots="4|5|6" />
 ```
 Drop an object, or a set of objects. This rules is not used for counters (money, meals and arrows). If you want to

@@ -1098,7 +1098,7 @@
         </section>
 
         <section id="sect178">
-            <!-- TODO: Drop potion? -->
+            <drop objectId="laumspurpotion3|laumspurmeal|laumspurpotion4|laumspurpotion|redpotionlaumspur|rendalimelixir|laumspurpotion8|oedeherb" />
         </section>
         
         <section id="sect183">
@@ -1519,7 +1519,62 @@
             </test>
         </section>
 
-        <!-- Up to sect260-->
+        <section id="sect261">
+            <test not="true" hasObject="laumspurpotion3|laumspurmeal|laumspurpotion4|laumspurpotion|redpotionlaumspur|rendalimelixir|laumspurpotion8|oedeherb" >
+                <!-- TODO: Drop object on sect349 -->
+                <choiceState section="sect349" set="disabled" />
+            </test>
+            <test hasObject="laumspurpotion3|laumspurmeal|laumspurpotion4|laumspurpotion|redpotionlaumspur|rendalimelixir|laumspurpotion8|oedeherb" >
+                <choiceState section="sect121" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect263">
+            <death />
+        </section>
+
+        <section id="sect265">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect268">
+        <!--
+            laumspurmeal: 3
+            laumspurpotion3: 3 + meal
+            laumspurpotion4: 4
+            laumspurpotion: 5
+            redpotionlaumspur: 5
+            rendalimelixir: 6
+            laumspurpotion8: 8
+            oedeherb: 10
+            sorted: laumspurpotion3|laumspurmeal|laumspurpotion4|laumspurpotion|redpotionlaumspur|rendalimelixir|laumspurpotion8|oedeherb
+        -->
+            <test not="true" hasObject="laumspurpotion3|laumspurmeal|laumspurpotion4|laumspurpotion|redpotionlaumspur|rendalimelixir|laumspurpotion8|oedeherb" >
+                <choiceState section="sect178" set="disabled" />
+            </test>
+            <test hasObject="laumspurpotion3|laumspurmeal|laumspurpotion4|laumspurpotion|redpotionlaumspur|rendalimelixir|laumspurpotion8|oedeherb" >
+                <choiceState section="sect281" set="disabled" />
+            </test>
+        </section>
+
+        <!--section id="sect269">
+            <executeOnce>
+                <test expression="[SPECIAL-ITEMS-ON-ACTIONCHART] == 0">
+                    <drop backpackItemSlots="1" />
+                </test>
+                <test not="true" expression="[SPECIAL-ITEMS-ON-ACTIONCHART] >= 4">
+                    <drop specialItemSlots="last" />
+                </test>
+                <test expression="[SPECIAL-ITEMS-ON-ACTIONCHART] >= 4">
+                    <drop specialItemSlots="4" />
+                </test>
+            </executeOnce>
+        </section-->
+
+        <!-- Up to sect268 -->
 
         <section id="sect350">
             <message

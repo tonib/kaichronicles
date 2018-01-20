@@ -24,7 +24,8 @@
   * 8, sect206: Two points: ".."
   * 8, sect214: "Si tu arma es de filo..." should contain "Lanza"
   * 8, sect242: "Casaco de plata" should be "Yelmo Mágico de Plata", "Maza con rubies" should be "Maza Enjoyada"
-
+  * 8, sect261: "If you possess any Laumspur, Rendalim’s Elixir, or Oede herb" / "Si tienes poción de Laumspur"
+  
 FOR FUTURE (1.9+):
 - Map links on text: Do not follow them if you don't have the "map" special object
 - Support for kai disciplines on magnakai books:
