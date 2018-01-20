@@ -22,9 +22,11 @@
 - Show authors biography
 - Added warning about book 5 map (cities flags)
 
-1.8.1 / 1.9
+1.9
+- Book 8 available
 - Import / export saved games
 - Kai monastery safekeeping: Now you can drop objects on the Kai monastery and they will be available on the next book
+- Combats: Explain combat ratio link
 - Added 6 arrows limit for quivers
 - Added "Lore-circles of the Magnakai" to "Game rules"
 - Book 1, sect342: Fixed bug with mindblast
