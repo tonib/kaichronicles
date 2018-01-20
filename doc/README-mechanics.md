@@ -147,6 +147,8 @@ will be available on the section.
 <drop objectId="largerope|rope" />
 <!-- Delete the items you have listed fourth, fifth, AND sixth on the Backpack section -->
 <drop backpackItemSlots="4|5|6" />
+<!-- Delete first AND last Special item -->
+<drop specialItemSlots="1|last" />
 ```
 Drop an object, or a set of objects. This rules is not used for counters (money, meals and arrows). If you want to
 decrease a counter, use the "pick" rule. The "objectId" can be one or more object Id, or one of the following:
@@ -160,7 +162,8 @@ decrease a counter, use the "pick" rule. The "objectId" can be one or more objec
 
 If you set more than one object id, the first one owned by the player will be dropped
 
-The property "backpackItemSlots" is used to drop objects on some given Backpack positions
+The property "backpackItemSlots" and specialItemSlots is used to drop objects on some given Backpack / Special Items positions. They
+can contain the index positions (1-based), or "last" for the last item
 
 ### randomTable (has state) / case / randomTableIncrement
 ```xml
@@ -495,6 +498,26 @@ Replaces a section text by a choice link. This could be needed when there is no 
 <kaiMonasteryStorage />
 ```
 Add a button to access to the Kai monastery stored objects. It can be added inside "equipmnt" sections only.
+
+### executeOnce
+```xml
+<section id="sect269">
+    <executeOnce>
+        <!-- Order of rules is important here -->
+        <test expression="[SPECIAL-ITEMS-ON-ACTIONCHART] == 0">
+            <drop backpackItemSlots="1" />
+        </test>
+        <test not="true" expression="[SPECIAL-ITEMS-ON-ACTIONCHART] >= 4">
+            <drop specialItemSlots="last" />
+        </test>
+        <test expression="[SPECIAL-ITEMS-ON-ACTIONCHART] >= 4">
+            <drop specialItemSlots="4" />
+        </test>
+    </executeOnce>
+</section>
+```
+Single rules as "drop" have state and they will not be re-executed. If you need the same behaviour on a set of rules, you can use 
+"executeOnce"
 
 ### special sections
 

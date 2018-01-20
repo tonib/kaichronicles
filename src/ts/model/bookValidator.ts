@@ -512,8 +512,8 @@ class BookValidator {
 
         this.validateObjectIdsAttribute( $rule , 'objectId' , true , false );
 
-        // TODO: Validate "backpackItemSlots" property values
-        // TODO: "objectId" AND/OR "backpackItemSlots" should have value
+        // TODO: Validate "backpackItemSlots" / "specialItemSlots" property values
+        // TODO: "objectId" AND/OR "backpackItemSlots"/"specialItemSlots" should have value
     }
 
     private disableCombats( $rule ) {

@@ -1560,8 +1560,9 @@
             </test>
         </section>
 
-        <!--section id="sect269">
+        <section id="sect269">
             <executeOnce>
+                <!-- Order of rules is important here -->
                 <test expression="[SPECIAL-ITEMS-ON-ACTIONCHART] == 0">
                     <drop backpackItemSlots="1" />
                 </test>
@@ -1572,9 +1573,9 @@
                     <drop specialItemSlots="4" />
                 </test>
             </executeOnce>
-        </section-->
+        </section>
 
-        <!-- Up to sect268 -->
+        <!-- Up to sect269 -->
 
         <section id="sect350">
             <message

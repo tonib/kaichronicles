@@ -1030,14 +1030,16 @@ const mechanicsEngine = {
         }
 
         // Drop backpack item slots by its index (1-based index)
-        let slotObjectsIds : Array<string> = [];
+        /*let slotObjectsIds : Array<string> = [];
         for( let itemSlotTxt of mechanicsEngine.getArrayProperty( $rule , 'backpackItemSlots' ) ) {
             const slotIndex = parseInt( itemSlotTxt ) - 1;
             if( state.actionChart.backpackItems.length > slotIndex )
                 slotObjectsIds.push( state.actionChart.backpackItems[slotIndex] );
         }
         for( let objectId of slotObjectsIds )
-            actionChartController.drop( objectId );
+            actionChartController.drop( objectId );*/
+        mechanicsEngine.dropActionChartSlots( $rule , 'backpackItemSlots' , state.actionChart.backpackItems );
+        mechanicsEngine.dropActionChartSlots( $rule , 'specialItemSlots' , state.actionChart.specialItems );
 
         state.sectionStates.markRuleAsExecuted(rule);
     },
@@ -1234,6 +1236,17 @@ const mechanicsEngine = {
             state.persistState();
             routing.redirect( 'kaimonastery' );
         });
+    },
+
+    /**
+     * Set of rules that should be executed only once
+     */
+    executeOnce: function( rule : any ) {
+        if( state.sectionStates.ruleHasBeenExecuted(rule) )
+            // Execute only once
+            return;
+        mechanicsEngine.runChildRules( $(rule) );
+        state.sectionStates.markRuleAsExecuted(rule);
     },
 
     /************************************************************/
@@ -1500,6 +1513,34 @@ const mechanicsEngine = {
                 return 'finish';
         }
 
+    },
+
+    /**
+     * Drop backpack / special items slots by its index (1-based index)
+     * @param $rule The "drop" rule
+     * @param property The rule property with the slots to drop
+     * @param objectsArray The Action Chart array (the Special Items or BackBackItems)
+     */
+    dropActionChartSlots : function( $rule : any , property : string , objectsArray : Array<string> ) {
+
+        // Objects to drop
+        let slotObjectsIds : Array<string> = [];
+        for( let itemSlotTxt of mechanicsEngine.getArrayProperty( $rule , property ) ) {
+
+            let slotIndex;
+            if( itemSlotTxt == 'last' )
+                slotIndex = objectsArray.length;
+            else
+                slotIndex = parseInt( itemSlotTxt );
+            slotIndex -= 1;
+
+            if( slotIndex >= 0 && objectsArray.length > slotIndex )
+                slotObjectsIds.push( objectsArray[slotIndex] );
+        }
+        
+        // Drop objects
+        for( let objectId of slotObjectsIds )
+            actionChartController.drop( objectId );
     }
 
 };
