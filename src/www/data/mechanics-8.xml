@@ -279,10 +279,6 @@
             </test>
         </section>
 
-        <section id="sect33">
-            <!-- TODO: Check fireseed lost-->
-        </section>
-
         <section id="sect36">
             <test not="true" canUseBow="true">
                 <choiceState section="sect182" set="disabled" />
@@ -748,7 +744,6 @@
         </section>
 
         <section id="sect116">
-            <!-- TODO: Check this (only hand-to-hand weapons, implement currentWeapon="any"??? ) -->
             <test not="true" expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] > 0">
                 <choiceState section="sect214" set="disabled" />
             </test>
@@ -1130,8 +1125,8 @@
         <section id="sect187">
             <!-- Complex. Let the player choose (TODO: This could be improved, checking the dropped weapon type) -->
             <message id="msg-drop-weapon" 
-                en-text="Drop a non-edged weapon before continue" 
-                es-text="Deja un arma sin filo antes de continuar"
+                en-text="Drop a non-edged weapon before continue (i.e. a Mace, Warhammer, Quarterstaff, or Bow)" 
+                es-text="Deja un arma sin filo antes de continuar (por ejemplo, una maza, un martillo de guerra, una estaca o un arco)"
             />
             <choiceState section="all" set="disabled" />
             <onInventoryEvent>

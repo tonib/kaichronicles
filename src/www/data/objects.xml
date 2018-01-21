@@ -368,7 +368,7 @@
                 If worn during combat, it will increase your COMBAT SKILL by 2 points
             </description>
 
-            <name lang="es">Yelmo Mágico de Plata</name>
+            <name lang="es">Yelmo de Plata</name>
             <description lang="es">
                 Siempre que lo lleves puesto en un combate, te permitirá aumentar tu 
                 DESTREZA EN EL COMBATE 2 puntos
@@ -628,7 +628,8 @@
 
         <special id="pass">
             <name lang="en">Pass</name>
-            <name lang="es">Salvoconducto</name>
+            <!-- On some places is called "Pase" and on others "Salvoconducto" -->
+            <name lang="es">Pase (Salvoconducto)</name>
         </special>
 
         <!-- This is more appropriately a normal weapon, but its use is mandatory and by making it a special object, 

@@ -9,26 +9,9 @@
 - Performance
 - Quivers with no arrows available on section should not show "(0 arrows)". Show "(0 arrows)" only on Action chart. Same to sell quiver
   object (see book 8, sect139)
-- Erratas:
-  * Book 8, equimpnt: Not in spanish version: "The maximum number of Special Items that can be carried on any adventure is twelve...."
-  * 8, sect13: Differences english / spanish: turns number, and do not continue with combat
-  * 8, sect18: "(pierdes 2 puntos de RESISTENCIA."
-  * 8, sect30: 1) differences between english and spanish (foot note). 2) Miss this: "If you have completed the Lore-circle of the Spirit, 
-    you may increase your COMBAT SKILL by 2 points for the duration of this combat"
-  * 8, sect47: 1) differences between english and spanish (foot note). 2) Miss this: "If you have completed the Lore-circle of the Spirit, 
-    you may increase your COMBAT SKILL by 2 points for the duration of this combat"
-  * 8, sect76: 1) Foot note references to 221 (not available on this section). 2) Different text on english and spanish versions
-  * 8, sect96: "La plata forma sube" should be "La plataforma sube"
-  * 8, sect1 and sect135 (and maybe others): "pass" object is referenced on some places as "Pase" and others as "Salvoconducto"
-  * 8, sect163: "¡Que me quemo! -chilla." should be "-¡Que me quemo! -chilla.
-  * 8, sect206: Two points: ".."
-  * 8, sect214: "Si tu arma es de filo..." should contain "Lanza"
-  * 8, sect242: "Casaco de plata" should be "Yelmo Mágico de Plata", "Maza con rubies" should be "Maza Enjoyada"
-  * 8, sect261: "If you possess any Laumspur, Rendalim’s Elixir, or Oede herb" / "Si tienes poción de Laumspur"
-  * 8, sect296: "Si está entre 5 y 9" should be "Si está entre 5 y 12"
-  * 8, sect305: "Si tienes un Arco y quieres usarlo" should be "Si tienes un Arco, y **dos** Flechas, y quieres usarlas"
-  
+
 FOR FUTURE (1.9+):
+- Use latest version on PAON data on SVN (a fixed commit number)
 - Map links on text: Do not follow them if you don't have the "map" special object
 - Support for kai disciplines on magnakai books:
   * https://github.com/tonib/kaichronicles/issues/5
@@ -64,7 +47,6 @@ FOR FUTURE (1.9+):
 - New game page: 
   * Do not show the license text on Android (the book was already downloaded)
   * Ask for the random table type
-- Use latest version on PAON data on SVN (a fixed commit number)
 - If a object description is too long, do not show the entire description: Show the first characters, and add a link
   to display the entire description (see pouchadgana object, and sommerswerd?)
 - Action chart buttons don't work on iPad Safari
