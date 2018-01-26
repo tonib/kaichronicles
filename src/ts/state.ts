@@ -242,8 +242,14 @@ const state = {
      * Restore the game from a save game file
      */
     loadSaveGameJson: function(json) {
-        var saveGameObject = JSON.parse(json);
 
+        // replace BOM Character (https://en.wikipedia.org/wiki/Byte_order_mark). Otherwise call to JSON.parse will fail 
+        json = json.replace(/\ufeff/g, '');
+
+        //alert( json );
+        //console.log( json );
+        var saveGameObject = JSON.parse( json );
+        
         // Restore current state
         if( !saveGameObject || !saveGameObject.currentState)
             throw "Wrong format";

@@ -1,3 +1,4 @@
+- Error when importing games directly from file exporer
 - Check reported bugs on Google play:
   * Saved games removed when adding new games
   * Objects types
@@ -54,6 +55,7 @@ FOR FUTURE (1.9+):
 - Dialogs with text input: Allow to confirm with the screen keyboard ("go" button)
 - Remove the "Alert" text from the message dialog (same for confirms)
 - Objects on the Action Chart should have a "available uses count". See "larnumaliqueur" object, book 8, sect228
+- Google Play will require API 26 on november 2018 (upgrade Cordova version?)
 
 Reminders:
 
