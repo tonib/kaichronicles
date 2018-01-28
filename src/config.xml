@@ -31,7 +31,7 @@
     <!-- https://github.com/danjarvis/cordova-plugin-document-contract -->
     <plugin name="cordova-plugin-document-contract" spec="https://github.com/danjarvis/cordova-plugin-document-contract.git#0.4.1" />
     <!-- https://github.com/tonib/cordova-plugin-copytodownload -->
-    <plugin name="cordova-plugin-copytodownload" spec="https://github.com/tonib/cordova-plugin-copytodownload.git#1.1.1" />
+    <plugin name="cordova-plugin-copytodownload" spec="https://github.com/tonib/cordova-plugin-copytodownload.git#1.2" />
     <!--plugin name="/home/toni/proyectos/pluginsCordova/copyToDownloads" /-->
 
     <access origin="*" />

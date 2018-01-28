@@ -55,6 +55,7 @@ interface String {
     padLeft(padLength : number, padChar : string) : string;
     endsWith(suffix : string);
     isValidFileName() : boolean;
+    startsWith( text : string ) : boolean;
 }
 declare function ajaxErrorMsg(context : any, jqXHR : any, textStatus : string, errorThrown : string);
 

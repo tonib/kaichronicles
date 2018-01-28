@@ -45,8 +45,24 @@ class DocumentSelection {
         return dfd.promise();
     }
 
-    private static getDocumentInfo(uri : string) : Promise<DocumentSelection>{
+    /**
+     * Get information about a selected document
+     * @param uri The selected document URI
+     * @returns Promise with the document info
+     */
+    private static getDocumentInfo(uri : string) : Promise<DocumentSelection> {
         const dfd = jQuery.Deferred();
+
+        // OK, a weird exception. If uri is "file://...", getContract fails...
+        if( uri.toLowerCase().startsWith('file://') ) {
+            const doc = new DocumentSelection();
+            doc.fileName = uri.split('/').pop();
+            if( !doc.fileName )
+                doc.fileName = 'Unknown';
+            doc.mimeType = 'Unknown';
+            doc.uri = uri;
+            return dfd.resolve(doc).promise();
+        }
 
         window.plugins.DocumentContract.getContract(
             {

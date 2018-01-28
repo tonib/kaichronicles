@@ -199,25 +199,34 @@ class SavedGamesExport {
         // copied with "copyTo". I suspect it's because is not a "file://" URL (it's a "content://"). 
         // So, get the file content, and create the the file on the tmp directory manually
 
-        return cordovaFS.resolveLocalFileSystemURIAsync( doc.uri )
-        // THIS DOES NOT WORK FOR "content://" entries
-        // .then( function( entry /* : Entry */ ) {
-        //     console.log( 'Copy zip to the tmp directory' );
-        //     return cordovaFS.copyToAsync( entry , self.tmpDir , doc.fileName )
-        // })
-        .then( function( entry /* : Entry */ ) {
-            console.log( 'Reading file content' );
-            return cordovaFS.readFileAsync( entry , true );
-        })
-        .then( function( content : any ) {
-            fileContent = content;
-            console.log( 'Creating empty file' );
-            return cordovaFS.getFileAsync( parent , doc.fileName , { create: true, exclusive: false } );
-        })
-        .then( function( newFileEntry /* : FileEntry */ ) {
-            console.log( 'Save the file content' );
-            return cordovaFS.writeFileContentAsync( newFileEntry , fileContent );
-        })
+        // Well, second part, oh... If you pick a file with the "File Explorer", you get a "file://" uri, and the readFileAsync does not work...
+        // Who knows why. The error code is 1 (not found). Also, "copyToAsync" fails (or "resolveLocalFileSystemURIAsync") if sems to fail
+        // with a URL outside the app content. So, I have created a external plugin function.
+        if( doc.uri.toLowerCase().startsWith('file://' ) ) {
+            console.log( 'Copy zip to the tmp directory' );
+            return cordovaFS.copyNativePathsAsync( doc.uri , parent.toURL() );
+        }
+        else {
+            return cordovaFS.resolveLocalFileSystemURIAsync( doc.uri )
+            // THIS DOES NOT WORK FOR "content://" entries
+            // .then( function( entry /* : Entry */ ) {
+            //     console.log( 'Copy zip to the tmp directory' );
+            //     return cordovaFS.copyToAsync( entry , self.tmpDir , doc.fileName )
+            // })
+            .then( function( entry /* : Entry */ ) {
+                console.log( 'Reading file content' );
+                return cordovaFS.readFileAsync( entry , true );
+            })
+            .then( function( content : any ) {
+                fileContent = content;
+                console.log( 'Creating empty file' );
+                return cordovaFS.getFileAsync( parent , doc.fileName , { create: true, exclusive: false } );
+            })
+            .then( function( newFileEntry /* : FileEntry */ ) {
+                console.log( 'Save the file content' );
+                return cordovaFS.writeFileContentAsync( newFileEntry , fileContent );
+            });
+        }
     }
 
     /**

@@ -567,10 +567,42 @@ const cordovaFS = {
                 if( error )
                     msg += ': ' + error.toString();
                 console.log( msg );
-                dfd.reject( error );
+                dfd.reject( msg );
             }
         );
         return dfd.promise();
+    },
+
+    /** 
+     * Copy a file with native filesystem URLs, without Cordova functions 
+     * @param srcFileUrl URL to the source file to copy
+     * @param dstDirectoryUrl URL to the target directory where to copy
+     * @returns Promise with the process. The parameter is the FileEntry for the new copied file
+     */
+    copyNativePathsAsync : function( srcFileUrl : string , dstDirectoryUrl : string ) : Promise<any> {
+
+        const dfd = jQuery.Deferred();
+
+        // Do the copy
+        CopyToDownload.copyNativePaths( srcFileUrl , dstDirectoryUrl , 
+            function( dstFilePath : string ) { 
+                console.log( 'copyNativePathsAsync ok' );
+                dfd.resolve( dstFilePath );
+            },
+            function( error ) {
+                let msg = 'error copying file with native paths';
+                if( error )
+                    msg += ': ' + error.toString();
+                console.log( msg );
+                dfd.reject( msg );
+            }
+        );
+        
+        // Return the FileEntry for the copied file
+        return dfd.promise()
+        .then( function( dstFilePath : string ) {
+            return cordovaFS.resolveLocalFileSystemURIAsync( dstFilePath );
+        });
     }
 
 };
