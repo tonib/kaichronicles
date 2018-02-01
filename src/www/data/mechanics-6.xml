@@ -1625,6 +1625,7 @@
 
         <section id="sect307">
             <meal price="2" />
+            <object objectId="meal" price="2" unlimited="true" />
         </section>
 
         <section id="sect310">
