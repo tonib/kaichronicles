@@ -22,9 +22,19 @@ function BookData( bookNumber ) {
 }
 
 /**
- * The SVN root
+ * Returns the SVN root for this book
  */
-BookData.SVN_ROOT = 'https://www.projectaon.org/data/tags/20151013';
+BookData.prototype.getSvnRoot = function() {
+    if( this.bookMetadata.revision == 0 )
+        return 'https://www.projectaon.org/data/tags/20151013';
+    else
+        return 'https://www.projectaon.org/data/trunk';
+}
+
+/**
+ * The SVN default root
+ */
+//BookData.SVN_ROOT = 'https://www.projectaon.org/data/tags/20151013';
 
 /**
  * The target directory root
@@ -51,21 +61,21 @@ BookData.prototype.getBookDir = function() {
  */
 BookData.prototype.downloadXml = function(language) {
     var xmlFileName = this.getBookCode( language ) + '.xml';
-    var sourcePath = BookData.SVN_ROOT + '/' + language + '/xml/' + 
+    var sourcePath = this.getSvnRoot() + '/' + language + '/xml/' + 
         xmlFileName;
     var targetPath = this.getBookDir() + '/' + xmlFileName;
     var svnParams = [ 'export' , sourcePath , targetPath ];
-    BookData.runSvnCommand( svnParams );
+    this.runSvnCommand( svnParams );
 }
 
 /**
  * Download an author biography file
  */
 BookData.prototype.downloadAuthorBio = function(language, bioFileName) {
-    var sourcePath = BookData.SVN_ROOT + '/' + language + '/xml/' + bioFileName + '.inc';
+    var sourcePath = this.getSvnRoot() + '/' + language + '/xml/' + bioFileName + '.inc';
     var targetPath = this.getBookDir() + '/' + bioFileName + '-' + language + '.inc';
     var svnParams = [ 'export' , sourcePath , targetPath ];
-    BookData.runSvnCommand( svnParams );
+    this.runSvnCommand( svnParams );
 }
 
 /**
@@ -73,7 +83,7 @@ BookData.prototype.downloadAuthorBio = function(language, bioFileName) {
  */
 BookData.prototype.getSvnIllustrationsDir = function( language, author) {
     var booksSet = language == 'en' ? 'lw' : 'ls';
-    return BookData.SVN_ROOT + '/' + language + '/png/' + 
+    return this.getSvnRoot() + '/' + language + '/png/' + 
         booksSet + '/' + this.getBookCode(language) + '/ill/' + 
         author;
 }
@@ -86,7 +96,7 @@ BookData.prototype.downloadIllustrations = function(language, author) {
     var targetDir = this.getBookDir() + '/ill_' + language;
     fs.mkdirSync( targetDir );
     var svnParams = [ '--force', 'export' , sourceSvnDir , targetDir ];
-    BookData.runSvnCommand( svnParams );
+    this.runSvnCommand( svnParams );
 }
 
 /**
@@ -94,11 +104,11 @@ BookData.prototype.downloadIllustrations = function(language, author) {
  */
 BookData.prototype.downloadCover = function() {
 
-    var coverPath = BookData.SVN_ROOT + '/en/jpeg/lw/' + this.getBookCode('en') +
+    var coverPath = this.getSvnRoot() + '/en/jpeg/lw/' + this.getBookCode('en') +
         '/skins/ebook/cover.jpg';
     var targetPath = this.getBookDir() + '/cover.jpg';
     var svnParams = [ 'export' , coverPath , targetPath ];
-    BookData.runSvnCommand( svnParams );
+    this.runSvnCommand( svnParams );
 }
 
 BookData.prototype.zipBook = function() {
@@ -141,16 +151,26 @@ BookData.prototype.downloadBookData = function() {
 BookData.prototype.downloadCombatTablesImages = function(language) {
     var sourceSvnDir = this.getSvnIllustrationsDir(language, 'blake');
     var targetDir = this.getBookDir() + '/ill_' + language;
-    BookData.runSvnCommand( [ 'export' , sourceSvnDir + '/crtneg.png' , 
+    this.runSvnCommand( [ 'export' , sourceSvnDir + '/crtneg.png' , 
         targetDir + '/crtneg.png' ] );
-    BookData.runSvnCommand( [ 'export' , sourceSvnDir + '/crtpos.png' , 
+        this.runSvnCommand( [ 'export' , sourceSvnDir + '/crtpos.png' , 
         targetDir + '/crtpos.png' ] );
 }
 
-BookData.runSvnCommand = function( params ) {
+BookData.prototype.runSvnCommand = function( params ) {
+
+    if( this.bookMetadata.revision ) {
+        // Add the revision number
+        params = [ '-r' , this.bookMetadata.revision ].concat( params );
+    }
+
     console.log( 'svn ' + params.join( ' ' ) );
     child_process.execFileSync( 'svn' , params , {stdio:[0,1,2]} );
 }
+
+/////////////////////////////////////////
+// MAIN
+/////////////////////////////////////////
 
 // Check if we should download only a single book
 var bookNumber = 0;

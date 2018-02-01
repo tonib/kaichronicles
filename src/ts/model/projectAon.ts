@@ -29,7 +29,13 @@ const projectAon = {
             biographies: [ 'jdbiolw' , 'gcbiolw' ],
 
             // Zip size, in bytes
-            zipSize: 4887076
+            zipSize: 4887076,
+
+            // Project AON SVN revision number to use. 
+            // If == 0, the version at https://www.projectaon.org/data/tags/20151013 will be used
+            // If it's not zero, the file at https://www.projectaon.org/data/trunk/ will be used, with this SVN Revision number
+            // This is used at downloadProjectAonData.js
+            revision: 0
         },
 
         // Book 2:
@@ -44,7 +50,9 @@ const projectAon = {
 
             biographies: [ 'jdbiolw' , 'gcbiolw' ],
 
-            zipSize: 5117979
+            zipSize: 5117979,
+
+            revision: 0
         }, 
 
         // Book 3:
@@ -59,7 +67,9 @@ const projectAon = {
 
             biographies: [ 'jdbiolw' , 'gcbiolw' ],
 
-            zipSize: 4178493
+            zipSize: 4178493,
+
+            revision: 0
         }, 
 
         // Book 4:
@@ -74,7 +84,9 @@ const projectAon = {
 
             biographies: [ 'jdbiolw' , 'gcbiolw' ],
 
-            zipSize: 4408246
+            zipSize: 4408246,
+
+            revision: 0
         }, 
 
         // Book 5:
@@ -89,7 +101,9 @@ const projectAon = {
 
             biographies: [ 'jdbiolw' , 'gcbiolw' ],
 
-            zipSize: 4183069
+            zipSize: 4183069,
+
+            revision: 0
         },
 
         // Book 6:
@@ -104,7 +118,9 @@ const projectAon = {
 
             biographies: [ 'jdbiolw' , 'gcbiolw' ],
 
-            zipSize: 3088890
+            zipSize: 3088890,
+
+            revision: 0
         },
 
         // Book 7:
@@ -119,7 +135,9 @@ const projectAon = {
 
             biographies: [ 'jdbiolw' , 'gcbiolw' ],
 
-            zipSize: 3129146
+            zipSize: 3129146,
+
+            revision: 0
         },
 
         // Book 8:
@@ -134,12 +152,14 @@ const projectAon = {
 
             biographies: [ 'jdbiolw' , 'gcbiolw' ],
 
-            zipSize: 3537081
-        } /*,
+            zipSize: 3537081,
+
+            revision: 0
+        },
 
         ///////////////////////////////////////
         
-        // Book 9 (NOT IMPLEMENTED / Nobody working on it):
+        // Book 9 (NOT IMPLEMENTED / Toni):
         {
             title_en: 'The Cauldron of Fear',
             code_en: '09tcof',
@@ -151,8 +171,10 @@ const projectAon = {
 
             biographies: [ 'jdbiolw' , 'bwbiolw' ],
             
-            zipSize: 2839095
-        },
+            zipSize: 2839095,
+
+            revision: 2655
+        } /*,
 
         // Book 10 (FINISHED) :
         {
