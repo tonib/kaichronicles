@@ -1362,6 +1362,33 @@
             <usage class="endurance" increment="3" />
         </object>
 
+        <!-- BOOK 9 -->
+
+        <object id="silverbowl">
+            <name lang="en">Silver Bowl</name>
+            <name lang="es">Copa de Plata</name>
+        </object>
+
+        <object id="vialgolddust">
+            <name lang="en">Vial of Gold Dust</name>
+            <name lang="es">Redoma de Oro en Polvo</name>
+        </object>
+
+        <object id="altarcloth">
+            <name lang="en">Altar Cloth</name>
+            <name lang="es">Sábana</name>
+        </object>
+
+        <object id="scrollhonour">
+            <name lang="en">Scroll of Honour</name>
+            <name lang="es">Diploma</name>
+        </object>
+
+        <object id="jadinanklets">
+            <name lang="en">Jadin Anklets</name>
+            <name lang="es">Ajorca</name>
+        </object>
+
         <!-- BOOK 10 -->
 
         <object id="meallaumwort">

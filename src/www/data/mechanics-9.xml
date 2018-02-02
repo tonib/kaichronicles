@@ -81,6 +81,68 @@
             </afterCombats>
         </section>
 
+        <section id="sect4">
+            <death />
+        </section>
+
+        <section id="sect5" pickMaximum="2">
+            <object objectId="silverbowl" />
+            <object objectId="vialgolddust" />
+            <object objectId="altarcloth" />
+            <object objectId="scrollhonour" />
+            <object objectId="jadinanklets" />
+        </section>
+
+        <section id="sect7">
+            <drop objectId="largerope|rope" />
+        </section>
+
+        <section id="sect8">
+            <choiceState section="all" set="disabled" />
+            <test hasDiscipline="hntmstry">
+                <choiceState section="sect36" set="enabled" />
+            </test>
+            <test not="true" hasDiscipline="hntmstry">
+                <randomTable>
+                    <case from="0" to="3">
+                        <choiceState section="sect119" set="enabled" />
+                    </case>
+                    <case from="4" to="99">
+                        <choiceState section="sect260" set="enabled" />
+                    </case>
+                </randomTable>
+            </test>
+        </section>
+
+        <section id="sect9">
+            <!-- TODO: Drop arrow? -->
+        </section>
+
+        <section id="sect10">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" noPsiSurge="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect11">
+            <meal index="0" />
+            <meal index="1" />
+            <test canUseBow="false">
+                <!-- TODO: Drop arrow? -->
+                <choiceState section="sect171" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect12">
+            <pick class="arrow" count="-1" />
+            <test canUseBow="false">
+                <!-- TODO: Drop arrow? -->
+                <choiceState section="sect229" set="disabled" />
+            </test>
+        </section>
+
     </sections>
 
 </mechanics>

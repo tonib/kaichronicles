@@ -16,6 +16,9 @@
   * 9, tssf: "la Muer te", "un pode roso", "de Des si, era", "su cono cimiento de la urbe"
   * 9, gamerlz: "Si el lápiz señala 0, no cuenta." / check English version ???
   * 9, sect3: combat classes: "<enemy-attribute class="DESTREZA EN EL COMBATE">13</enemy-attribute><enemy-attribute class="RESISTENCIA">22</enemy-attribute>"
+  * 9, sect5: "CATALEJO", not in English version
+  * 9, sect8: "Ahórrate LAS condolencias"
+  * 9, sect11: Spanish / English differences about meals
 
 FOR FUTURE (1.9+):
 - Use latest version on PAON data on SVN (a fixed commit number)
