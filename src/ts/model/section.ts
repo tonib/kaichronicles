@@ -137,7 +137,7 @@ class Section {
             const $combat = $(combat);
             result.push( new Combat(  
                 $combat.find('enemy').text(), 
-                parseInt( $combat.find('enemy-attribute[class=combatskill]').text() ),
+                parseInt( SectionRenderer.getEnemyCombatSkill( $combat ).text() ),
                 parseInt( SectionRenderer.getEnemyEndurance( $combat ).text() )
             ));
         });

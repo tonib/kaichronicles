@@ -11,6 +11,11 @@
 - Performance
 - Quivers with no arrows available on section should not show "(0 arrows)". Show "(0 arrows)" only on Action chart. Same to sell quiver
   object (see book 8, sect139)
+- ERRATAS:
+  * Send patch!!!
+  * 9, tssf: "la Muer te", "un pode roso", "de Des si, era", "su cono cimiento de la urbe"
+  * 9, gamerlz: "Si el lápiz señala 0, no cuenta." / check English version ???
+  * 9, sect3: combat classes: "<enemy-attribute class="DESTREZA EN EL COMBATE">13</enemy-attribute><enemy-attribute class="RESISTENCIA">22</enemy-attribute>"
 
 FOR FUTURE (1.9+):
 - Use latest version on PAON data on SVN (a fixed commit number)

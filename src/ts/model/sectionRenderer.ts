@@ -464,7 +464,18 @@ class SectionRenderer {
         if( $enduranceAttr.length == 0 )
             // Book 6 / sect156: The endurance attribute is "resistance"
             $enduranceAttr = $combat.find('enemy-attribute[class=resistance]');
+        if( $enduranceAttr.length == 0 )
+            // Book 9 / sect3 (Spanish version bug)
+            $enduranceAttr = $combat.find('enemy-attribute[class=RESISTENCIA]');
         return $enduranceAttr;
+    }
+
+    public static getEnemyCombatSkill( $combat : any ) : any {
+        let $cs = $combat.find('.combatskill');
+        if( $cs.length == 0 )
+            // Book 9 / sect3 (Spanish version bug)
+            $cs = $combat.find('enemy-attribute[class="DESTREZA EN EL COMBATE"]');
+        return $cs;
     }
 
     /**
@@ -474,7 +485,7 @@ class SectionRenderer {
      */
     private combat( $combat : any , level : number ) : string {
         let enemyHtml = this.renderNodeChildren( $combat.find('enemy') , level );
-        var combatSkill = $combat.find('.combatskill').text();
+        var combatSkill = SectionRenderer.getEnemyCombatSkill( $combat ).text();
         var endurance = SectionRenderer.getEnemyEndurance( $combat ).text();
         return '<div class="combat well"><b>' + enemyHtml + '</b><br />' + 
             '<span class="attribute">' + translations.text('combatSkillUpper') + '</span>: ' + 

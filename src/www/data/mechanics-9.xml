@@ -27,7 +27,7 @@
             <setDisciplines />
         </section>
         
-        <section id="equipmnt">
+        <section id="equipmnt" pickMaximum="5">
             <!-- Do not pick 2 maps! -->
             <test not="true" hasObject="map" >
                 <pick objectId="map" />
@@ -36,8 +36,49 @@
                 <pick objectId="backpack" />
             </test>
 
+            <randomTable>
+                <pick class="money" count="[RANDOM] + 10" />
+            </randomTable>
+
             <!-- Kai monastery safekeeping -->
             <kaiMonasteryStorage />
+
+            <object objectId="sword" />
+            <object objectId="bow" />
+            <object objectId="quiver" count="6" />
+            <object objectId="rope" />
+            <object objectId="laumspurpotion4" />
+            <object objectId="lantern" />
+            <object objectId="mace" />
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
+            <object objectId="meal" index="2" />
+            <object objectId="dagger" />
+            <object objectId="fireseed" index="0" />
+            <object objectId="fireseed" index="1" />
+            <object objectId="fireseed" index="2" />
+
+            <chooseEquipment
+                en-text="Click on the Random Table link to get money before continue" 
+                es-text="Haz click en el link de la Tabla de la Suerte para obtener dinero antes de continuar"
+            />
+
+            <message
+                en-text="You may take up to five of the following (all meals and fireseeds count as one object):" 
+                es-text="Puedes elegir hasta cinco de los objetos (todas las comidas y petardos cuentan como un objeto):" 
+            />
+        </section>
+
+        <section id="sect3">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <test not="true" expression="[COMBATSDURATION] >= 3">
+                    <choiceState section="sect117" set="enabled" />
+                </test>
+                <test expression="[COMBATSDURATION] >= 3">
+                    <choiceState section="sect276" set="enabled" />
+                </test>
+            </afterCombats>
         </section>
 
     </sections>
