@@ -41,7 +41,7 @@ the "actionChartController" object:
 
 * actionChartController.pick( objectId )
 * actionChartController.increaseMoney( amount )
-* etc. (increaseArrows, increaseCombatSkill, increaseEndurance, increaseMeals, increaseMoney, increaseMoney,...). Look at
+* etc. (increaseArrows, increaseCombatSkill, increaseEndurance, increaseMeals, increaseMoney, increaseArrows,...). Look at
   actionChartController.ts file for details
 
 ## Develop sections

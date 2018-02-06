@@ -19,7 +19,7 @@
   * 9, sect5: "CATALEJO", not in English version
   * 9, sect8: "Ahórrate LAS condolencias"
   * 9, sect11: Spanish / English differences about meals
-
+  * 9, 14: "(If your source of light is a Torch, remember to erase it from your Action Chart.)" if not in Spanish (it's on sect 197)
 FOR FUTURE (1.9+):
 - Use latest version on PAON data on SVN (a fixed commit number)
 - Map links on text: Do not follow them if you don't have the "map" special object

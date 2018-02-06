@@ -143,6 +143,84 @@
             </test>
         </section>
 
+        <section id="sect13">
+            <object objectId="dagger" />
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
+            <object objectId="meal" index="2" />
+            <object objectId="rope" />
+            <object objectId="canteenwater" />
+            <object objectId="torch" />
+            <object objectId="tinderbox" />
+            <object objectId="bow" />
+            <object objectId="arrow" count="3" />
+            <object objectId="blanket" />
+            <object objectId="spear" />
+        </section>
+
+        <section id="sect14">
+            <!-- (If your source of light is a Torch, remember to erase it from your Action Chart.) -->
+            <test not="true" hasObject="lantern|firesphere">
+                <drop objectId="torch" />
+            </test>
+            <choiceState section="sect345" set="disabled" />
+            <test hasDiscipline="anmlctrl">
+                <test expression="[KAILEVEL] >= 4">
+                    <choiceState section="sect345" set="enabled" />
+                    <choiceState section="sect32" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect15">
+            <test canUseBow="false">
+                <choiceState section="sect216" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect16">
+            <drop objectId="fireseed" />
+            <endurance count="-2" />
+        </section>
+
+        <section id="sect18">
+            <test not="true" hasDiscipline="dvnation">
+                <choiceState section="sect143" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect20">
+            <death />
+        </section>
+
+        <section id="sect22">
+            <pick class="arrow" count="-1" />
+        </section>
+
+        <section id="sect23">
+            <test not="true" hasDiscipline="pthmnshp">
+                <choiceState section="sect337" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect24">
+            <message id="msg-drop-weapon" 
+                en-text="Drop a weapon before continue" 
+                es-text="Deja un arma antes de continuar"
+            />
+            <choiceState section="all" set="disabled" />
+            <onInventoryEvent>
+                <test expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] == 0 || [WEAPONLIKE-CNT-ON-SECTION] > 0">
+                    <message id="msg-drop-weapon" op="hide" />
+                    <choiceState section="all" set="enabled" />
+                </test>
+                <test not="true" expression="[WEAPONLIKE-CNT-ON-ACTIONCHART] == 0 || [WEAPONLIKE-CNT-ON-SECTION] > 0">
+                    <message id="msg-drop-weapon" op="show" />
+                    <choiceState section="all" set="disabled" />
+                </test>
+            </onInventoryEvent>
+        </section>
+
     </sections>
 
 </mechanics>
