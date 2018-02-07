@@ -31,7 +31,7 @@ const projectAon = {
             // Zip size, in bytes
             zipSize: 4887076,
 
-            // Project AON SVN revision number to use. 
+            // Project AON SVN revision number to use.
             // If == 0, the version at https://www.projectaon.org/data/tags/20151013 will be used
             // If it's not zero, the file at https://www.projectaon.org/data/trunk/ will be used, with this SVN Revision number
             // This is used at downloadProjectAonData.js
@@ -53,7 +53,7 @@ const projectAon = {
             zipSize: 5117979,
 
             revision: 0
-        }, 
+        },
 
         // Book 3:
         {
@@ -70,7 +70,7 @@ const projectAon = {
             zipSize: 4178493,
 
             revision: 0
-        }, 
+        },
 
         // Book 4:
         {
@@ -87,7 +87,7 @@ const projectAon = {
             zipSize: 4408246,
 
             revision: 0
-        }, 
+        },
 
         // Book 5:
         {
@@ -158,7 +158,7 @@ const projectAon = {
         },
 
         ///////////////////////////////////////
-        
+
         // Book 9 (NOT IMPLEMENTED / Toni):
         {
             title_en: 'The Cauldron of Fear',
@@ -170,11 +170,11 @@ const projectAon = {
             illustrators: [ 'williams' ],
 
             biographies: [ 'jdbiolw' , 'bwbiolw' ],
-            
+
             zipSize: 2839095,
 
             revision: 2655
-        } /*,
+        },
 
         // Book 10 (FINISHED) :
         {
@@ -187,10 +187,10 @@ const projectAon = {
             illustrators: [ 'williams' ],
 
             biographies: [ 'jdbiolw' , 'bwbiolw' ],
-            
+
             zipSize: 3079362
-        },
-        
+            },
+
         // Book 11 (NOT IMPLEMENTED / Nobody working on it):
         {
             title_en: 'The Prisoners of Time',
@@ -202,9 +202,9 @@ const projectAon = {
             illustrators: [ 'williams' ],
 
             biographies: [ 'jdbiolw' , 'bwbiolw' ],
-            
+
             zipSize: 3007751
-        },
+            }/*,
 
         // Book 12 (NOT IMPLEMENTED / Nobody working on it):
         {
@@ -217,10 +217,10 @@ const projectAon = {
             illustrators: [ 'williams' ],
 
             biographies: [ 'jdbiolw' , 'bwbiolw' ],
-            
+
             zipSize: 3180171
         }*/
-        
+
 
     ],
 

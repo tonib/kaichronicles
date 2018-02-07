@@ -26,7 +26,7 @@
             <!-- Select the Kai disciplines UI -->
             <setDisciplines />
         </section>
-        
+
         <section id="equipmnt">
             <!-- Do not pick 2 maps! -->
             <test not="true" hasObject="map" >
@@ -36,8 +36,112 @@
                 <pick objectId="backpack" />
             </test>
 
-            <!-- Kai monastery safekeeping -->
-            <kaiMonasteryStorage />
+            <!-- There are two free meals -->
+            <pick objectId="meal" index="free-1"/>
+            <pick objectId="meal" index="free-2"/>
+
+            <randomTable>
+                <pick class="money" count="[RANDOM] + 10" />
+            </randomTable>
+
+            <object objectId="sword" />
+            <object objectId="bow" />
+            <object objectId="quiver" count="6" />
+            <object objectId="rope" />
+            <object objectId="laumspurpotion4" />
+            <object objectId="lantern" />
+            <object objectId="mace" />
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
+            <object objectId="meal" index="2" />
+            <object objectId="dagger" />
+
+            <chooseEquipment
+                en-text="Click on the Random Table link to get money before continue"
+                es-text="Haz click en el link de la Tabla de la Suerte para obtener dinero antes de continuar"
+            />
+
+            <message
+                en-text="You may take up to six of the following (all meals count as one object):"
+                es-text="Puedes elegir hasta seis de los objetos (todas las comidas cuentan como un objeto):"
+            />
+        </section>
+
+        <section id="sect1">
+            <randomTable>
+              <case from="0" to="0">
+                <endurance count="-10" />
+              </case>
+              <case from="1" to="9">
+                <endurance count="-[RANDOM]" />
+              </case>
+            </randomTable>
+        </section>
+
+        <section id="sect5">
+          <choiceState section="all" set="disabled" />
+
+          <object objectId="meal" index="sect5-1" />
+          <object objectId="meal" index="sect5-2" />
+          <object objectId="meal" index="sect5-3" />
+
+          <randomTable>
+            <case from="0" to="6">
+              <choiceState section="sect202" set="enabled" />
+            </case>
+            <case from="7" to="9">
+              <choiceState section="sect318" set="enabled" />
+            </case>
+          </randomTable>
+        </section>
+
+        <section id="sect20">
+          <test not="true" hasDiscipline="dvnation">
+              <choiceState section="sect145" set="disabled" />
+          </test>
+          <test not="true" expression="[KAILEVEL] >= 5">
+              <choiceState section="sect145" set="disabled" />
+          </test>
+          <test hasDiscipline="dvnation">
+              <test expression="[KAILEVEL] >= 5">
+                <choiceState section="sect297" set="disabled" />
+              </test>
+          </test>
+        </section>
+
+        <section id="sect7">
+          <!-- TODO Change the name to Ironheart Broadsword -->
+          <object objectId="broadsword" />
+        </section>
+
+        <section id="sect10">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" noWeapon="2" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect11">
+          <death />
+        </section>
+
+        <section id="sect13">
+          <choiceState section="all" set="disabled" />
+
+          <randomTable>
+            <case from="0" to="8">
+              <choiceState section="sect271" set="enabled" />
+            </case>
+            <case from="9" to="99">
+              <choiceState section="sect199" set="enabled" />
+            </case>
+          </randomTable>
+
+          <randomTableIncrement increment="+[KAILEVEL]" />
+        </section>
+
+        <section id="sect">
         </section>
 
     </sections>
