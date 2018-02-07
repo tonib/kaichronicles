@@ -221,6 +221,21 @@
             </onInventoryEvent>
         </section>
 
+        <section id="sect25">
+            <drop objectId="vialbluepills|vialbluepills2" />
+            <test not="true" hasDiscipline="dvnation">
+                <choiceState section="sect298" set="disabled" />
+            </test>
+            <test hasDiscipline="dvnation">
+                <choiceState section="sect41" set="disabled" />
+            </test>
+        </section>
+        
+        <section id="sect29">
+            <object objectId="vialbluepills2" index="0" />
+            <object objectId="vialbluepills2" index="1" />
+        </section>
+        
     </sections>
 
 </mechanics>

@@ -1187,6 +1187,13 @@
         </section>
 
         <section id="sect238">
+            <!-- 
+                TODO: "You are given a silver token worth 1 Gold Crown, that can only be used in this gaming-house. (You only receive the 
+                free silver token once, regardless of how many times you may enter the gaming-house.)"
+                By now, give 1 Gold Crown to the player (it should be a Special Item?)
+            -->
+            <pick class="money" count="1" />
+
             <!-- Special section -->
             <book2Sect238 />
         </section>

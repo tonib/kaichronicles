@@ -1389,6 +1389,22 @@
             <name lang="es">Ajorca</name>
         </object>
 
+        <object id="vialbluepills2" itemCount="0.5">
+            <name lang="en">Vial of Blue Pills</name>
+            <description lang="en">
+                They are made from the dried and crushed roots of the Sabito plant, 
+                commonly found in the Boari Jungle, but rare in any other part of Magnamund. 
+                They enable the human body to extract oxygen from water by absorbing it through the skin.
+            </description>
+
+            <name lang="es">Frasco de Píldoras Azules</name>
+            <description lang="es">
+                Las píldoras azules están hechas de raíces secas y trituradas de sabito, una planta que crece 
+                abundantemente en el bosque de Boari, pero que es muy rara en otras partes de Magnamund. 
+                Esas píldoras permiten al cuerpo humano extraer oxígeno del agua absorbiéndolo a través de la piel. 
+            </description>
+        </object>
+
         <!-- BOOK 10 -->
 
         <object id="meallaumwort">
