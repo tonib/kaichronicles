@@ -22,3 +22,5 @@ node_modules
 
 # Keystore to sign apks
 keystore
+
+package-lock.json
