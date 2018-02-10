@@ -464,7 +464,8 @@ class Translations {
         'mainMenu' : 'Main Menu',
         'bookNotDownloaded' : 'Book {0} is not downloaded',
         'maximumPick' : 'You can pick only {0} objects',
-        'zeroIgnored' : 'Zero ignored'
+        'zeroIgnored' : 'Zero ignored',
+        'gameRules' : 'Game rules'
 
     };
 
