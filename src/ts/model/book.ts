@@ -45,6 +45,7 @@ class Book {
 
     public static readonly IMPROVEDDISCIPLINES_SECTION = 'imprvdsc';
     
+    public static readonly DISCIPLINES_SECTION = 'discplnz';
 
     /** Book index number (1 = first book) */
     public bookNumber : number;

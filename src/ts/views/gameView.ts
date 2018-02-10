@@ -91,9 +91,12 @@ const gameView = {
 
             $('#game-goDisciplines').click(function(e) {
                 e.preventDefault();
+                if( state.sectionStates.currentSection == Book.DISCIPLINES_SECTION )
+                    return;
+                    
                 // Keep the current section, to ease the go-back
                 $('#game-debugNSection').val( state.sectionStates.currentSection );
-                gameController.loadSection( 'discplnz' );
+                gameController.loadSection( Book.DISCIPLINES_SECTION );
             });
 
             $('#game-switchlanguage').click(function(e : Event) {
