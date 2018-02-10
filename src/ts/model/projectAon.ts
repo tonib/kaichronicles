@@ -159,7 +159,7 @@ const projectAon = {
 
         ///////////////////////////////////////
 
-        // Book 9 (NOT IMPLEMENTED / Toni):
+        // Book 9 (IN PROGRESS / Toni):
         {
             title_en: 'The Cauldron of Fear',
             code_en: '09tcof',
@@ -193,7 +193,7 @@ const projectAon = {
             revision: 0
         },
 
-        // Book 11 (NOT IMPLEMENTED / Nobody working on it):
+        // Book 11 (IN PROGRESS / James):
         {
             title_en: 'The Prisoners of Time',
             code_en: '11tpot',
@@ -224,7 +224,7 @@ const projectAon = {
 
             zipSize: 3180171,
 
-            revision: 0
+            revision: 2655
         }*/
 
 

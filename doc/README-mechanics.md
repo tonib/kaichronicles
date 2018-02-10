@@ -205,6 +205,8 @@ The "randomTableIncrement" will add a bonus to the random value picked. They are
 more than one randomTableIncrement executed, all the increments will be added. For bow, use the [BOWBONUS].
 This will add the combat skill bonus, plus bow object bonus
 
+A "randomTableIncrement" with a increment="reset" will reset to zero any previous increment.
+
 ### test
 ```xml
 <test not="true" hasDiscipline="anmlknsp">

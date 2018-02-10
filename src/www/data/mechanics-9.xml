@@ -236,6 +236,79 @@
             <object objectId="vialbluepills2" index="1" />
         </section>
         
+        <section id="sect32">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" noPsiSurge="true" combatSkillModifier="-2" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect33">
+            <!-- TODO: "If you have seen and examined one of these hexagonal tokens previously in your adventure" ??? 
+                sect43, 
+            -->
+        </section>
+
+        <section id="sect36">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="0" />
+            <afterCombats>
+                <choiceState section="sect170" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect328" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect38">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect317" set="enabled" />
+                </case>
+                <case from="5" to="99">
+                    <choiceState section="sect138" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="dvnation|hntmstry">
+                <randomTableIncrement increment="+3" />
+            </test>
+        </section>
+
+        <section id="sect40">
+            <choiceState section="sect199" set="disabled" />
+            <test hasDiscipline="dvnation">
+                <test expression="[KAILEVEL] >= 4">
+                    <choiceState section="sect199" set="enabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect44">
+            <death />
+        </section>
+
+        <section id="sect46">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" immuneTurns="2" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect47">
+            <endurance count="-2" />
+        </section>
+
+        <section id="sect48">
+            <endurance count="-5" />
+        </section>
+
+        <section id="sect50">
+            <!-- This is the correct answer to Khmar’s riddle about his youngest son -->
+        </section>
+
     </sections>
 
 </mechanics>
