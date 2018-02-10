@@ -1,4 +1,4 @@
-- ERROR: Book 4 / sect283: You should drop the Flask
+- If you are on disciplines section, and you click "Go to disciplines", dont reset the "Jump to section" field
 - Improvements: Scion-kai / Weaponmastery	/ When entering combat with a weapon they have mastered, Scion-kai may add 4 points 
   (instead of the usual 3 points) to their COMBAT SKILL. Also, when in combat without a weapon they lose only 1 point from their COMBAT SKILL.
 
@@ -27,7 +27,6 @@
 
 FOR FUTURE (1.9+):
 - Use latest version on PAON data on SVN (a fixed commit number)
-- Map links on text: Do not follow them if you don't have the "map" special object
 - Support for kai disciplines on magnakai books:
   * https://github.com/tonib/kaichronicles/issues/5
   * https://www.projectaon.org/es/foro3/viewtopic.php?p=27752#p27752

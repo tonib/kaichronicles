@@ -1423,6 +1423,7 @@
         </section>
 
         <section id="sect283">
+            <drop objectId="flaskofholywater" />
             <endurance count="-3" />
         </section>
 
