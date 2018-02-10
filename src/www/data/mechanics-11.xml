@@ -27,7 +27,7 @@
             <setDisciplines />
         </section>
 
-        <section id="equipmnt">
+        <section id="equipmnt" pickMaximum="6">
             <!-- Do not pick 2 maps! -->
             <test not="true" hasObject="map" >
                 <pick objectId="map" />
@@ -37,8 +37,8 @@
             </test>
 
             <!-- There are two free meals -->
-            <pick objectId="meal" index="free-1"/>
-            <pick objectId="meal" index="free-2"/>
+            <pick objectId="meal" index="0"/>
+            <pick objectId="meal" index="1"/>
 
             <randomTable>
                 <pick class="money" count="[RANDOM] + 10" />
@@ -68,22 +68,23 @@
         </section>
 
         <section id="sect1">
-            <randomTable>
-              <case from="0" to="0">
-                <endurance count="-10" />
-              </case>
-              <case from="1" to="9">
+            <choiceState section="all" set="disabled" />
+            <randomTable zeroAsTen="true">
                 <endurance count="-[RANDOM]" />
-              </case>
+                <choiceState section="all" set="enabled" />
             </randomTable>
+        </section>
+
+        <section id="sect2">
+            <!-- TODO: Check fireseed loss -->
         </section>
 
         <section id="sect5">
           <choiceState section="all" set="disabled" />
 
-          <object objectId="meal" index="sect5-1" />
-          <object objectId="meal" index="sect5-2" />
-          <object objectId="meal" index="sect5-3" />
+          <object objectId="meal" index="0" />
+          <object objectId="meal" index="1" />
+          <object objectId="meal" index="2" />
 
           <randomTable>
             <case from="0" to="6">
@@ -95,23 +96,13 @@
           </randomTable>
         </section>
 
-        <section id="sect20">
-          <test not="true" hasDiscipline="dvnation">
-              <choiceState section="sect145" set="disabled" />
-          </test>
-          <test not="true" expression="[KAILEVEL] >= 5">
-              <choiceState section="sect145" set="disabled" />
-          </test>
-          <test hasDiscipline="dvnation">
-              <test expression="[KAILEVEL] >= 5">
-                <choiceState section="sect297" set="disabled" />
-              </test>
-          </test>
-        </section>
-
         <section id="sect7">
           <!-- TODO Change the name to Ironheart Broadsword -->
           <object objectId="broadsword" />
+        </section>
+
+        <section id="sect8">
+            <!-- TODO: Pick (standard) sword??? -->
         </section>
 
         <section id="sect10">
@@ -141,8 +132,21 @@
           <randomTableIncrement increment="+[KAILEVEL]" />
         </section>
 
-        <section id="sect">
+        <section id="sect20">
+          <test not="true" hasDiscipline="dvnation">
+              <choiceState section="sect145" set="disabled" />
+          </test>
+          <test not="true" expression="[KAILEVEL] >= 5">
+              <choiceState section="sect145" set="disabled" />
+          </test>
+          <test hasDiscipline="dvnation">
+              <test expression="[KAILEVEL] >= 5">
+                <choiceState section="sect297" set="disabled" />
+              </test>
+          </test>
         </section>
+
+        <!-- Up to sect13 -->
 
     </sections>
 

@@ -188,8 +188,10 @@ const projectAon = {
 
             biographies: [ 'jdbiolw' , 'bwbiolw' ],
 
-            zipSize: 3079362
-            },
+            zipSize: 3079362,
+
+            revision: 0
+        },
 
         // Book 11 (NOT IMPLEMENTED / Nobody working on it):
         {
@@ -203,8 +205,10 @@ const projectAon = {
 
             biographies: [ 'jdbiolw' , 'bwbiolw' ],
 
-            zipSize: 3007751
-            }/*,
+            zipSize: 3007751,
+
+            revision: 0
+        }/*,
 
         // Book 12 (NOT IMPLEMENTED / Nobody working on it):
         {
@@ -218,7 +222,9 @@ const projectAon = {
 
             biographies: [ 'jdbiolw' , 'bwbiolw' ],
 
-            zipSize: 3180171
+            zipSize: 3180171,
+
+            revision: 0
         }*/
 
 

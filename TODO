@@ -1,4 +1,8 @@
+- BOOK 12: Set revision (projectAon.ts)
 - ERROR: Book 4 / sect283: You should drop the Flask
+- Improvements: Scion-kai / Weaponmastery	/ When entering combat with a weapon they have mastered, Scion-kai may add 4 points 
+  (instead of the usual 3 points) to their COMBAT SKILL. Also, when in combat without a weapon they lose only 1 point from their COMBAT SKILL.
+
 - When you cancel a saved games import, it say "error", and it is not
 - Check reported bugs on Google play:
   * Saved games removed when adding new games
@@ -20,6 +24,8 @@
   * 9, sect8: "Ahórrate LAS condolencias"
   * 9, sect11: Spanish / English differences about meals
   * 9, 14: "(If your source of light is a Torch, remember to erase it from your Action Chart.)" if not in Spanish (it's on sect 197)
+  * 11, equipmnt: Spanish wrong foot note 1 (Lantern)
+
 FOR FUTURE (1.9+):
 - Use latest version on PAON data on SVN (a fixed commit number)
 - Map links on text: Do not follow them if you don't have the "map" special object
@@ -110,3 +116,4 @@ Reminders:
   cordova plugin list
 
 Work done on this commit:
+Comments: index for rules can be anything
