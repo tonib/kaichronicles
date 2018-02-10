@@ -426,6 +426,7 @@ class ActionChart {
      * @param noWeapon True if the combat is with no weapons
      * @param bowCombat True if it's a combat with bow
      * @param disabledObjectsIds Objects ids that cannot be used on this combat
+     * @returns Action chart bonuses for the combat
      */
     private getWeaponCombatSkillBonuses( noWeapon : boolean , bowCombat : boolean , disabledObjectsIds : Array<string> ) 
     : Array<Bonus> {
@@ -449,13 +450,21 @@ class ActionChart {
             // No weapon: -4 CS
             
             /*  Exception (Magnakai books):
-                Kai level "Tutelary" with "Weaponmastery": Tutelaries are able to use defensive combat skills to great effect 
-                when fighting unarmed. When entering combat without a weapon, Tutelaries lose only 2 points from their COMBAT SKILL, 
-                instead of the usual 4 points. */
+                1) Kai level "Tutelary" with "Weaponmastery": Tutelaries are able to use defensive combat skills to great effect 
+                   when fighting unarmed. When entering combat without a weapon, Tutelaries lose only 2 points from their COMBAT SKILL, 
+                   instead of the usual 4 points. 
+                2) Kai level "Scion-kai" with "Weaponmastery": ...Also, when in combat without a weapon they lose only 1 point 
+                   from their COMBAT SKILL.
+            */
             let bonus = -4;
-            if( state.book.isMagnakaiBook() && state.actionChart.disciplines.length >= 5 && 
-                state.actionChart.disciplines.contains( 'wpnmstry' ) )
-                bonus = -2;
+            if( state.book.isMagnakaiBook() && state.actionChart.disciplines.contains( 'wpnmstry' ) ) {
+                if(state.actionChart.disciplines.length >= 8 )
+                    // Scion-kai
+                    bonus = -1;
+                else if( state.actionChart.disciplines.length >= 5 )
+                    // Tutelary
+                    bonus = -2;
+            }
 
             bonuses.push( {
                 concept: translations.text('noWeapon'),
@@ -470,12 +479,22 @@ class ActionChart {
                     concept: translations.text( 'weaponskill' ),
                     increment: +2
                 });
-            else
+            else {
                 // Magnakai book
+                let bonus = +3;
+                /*  Exception (Magnakai books):
+                    Improvements: Scion-kai / Weaponmastery	/ When entering combat with a weapon they have mastered, Scion-kai may add 4 points 
+                    (instead of the usual 3 points) to their COMBAT SKILL...
+                */
+                if(state.actionChart.disciplines.length >= 8 )
+                    // Scion-kai
+                    bonus = +4;
+
                 bonuses.push( {
                     concept: translations.text( 'weaponmastery' ),
-                    increment: +3
+                    increment: bonus
                 });
+            }
         }
 
         // Check current weapon bonuses

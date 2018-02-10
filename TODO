@@ -1,3 +1,4 @@
+- Game rules controller: Wrong window title: "gameRules"
 - Improvements: Scion-kai / Weaponmastery	/ When entering combat with a weapon they have mastered, Scion-kai may add 4 points 
   (instead of the usual 3 points) to their COMBAT SKILL. Also, when in combat without a weapon they lose only 1 point from their COMBAT SKILL.
 
