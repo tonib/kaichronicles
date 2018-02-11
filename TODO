@@ -51,9 +51,6 @@ FOR FUTURE (1.9+):
   (https://validator.w3.org/docs/api.html)
 - Test tags <ch.* /> replacements
 - Find "TODO" and do it
-- Shared images on multiples books:
-  * Allow to declare images on multiple books
-  * Choose the latest available image
 - New game page: 
   * Do not show the license text on Android (the book was already downloaded)
   * Ask for the random table type

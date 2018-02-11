@@ -63,13 +63,13 @@ class Item {
     public weaponType : string;
 
     /** Get the object image URL, untranslated. null if the object has no image. */
-    public imageUrl : string;
+    private imageUrl : string;
 
     /** 
-     * The book number that contains the image. 
+     * The book number that contains the image (1-index based). 
      * Needed to check if the book has been downloaded on the Cordova app
      */
-    public imageBookNumber : number;
+    private imageBookNumber : number;
 
     /** Effect (when the player carry the object) */
     public effect : ItemEffect;
@@ -223,7 +223,6 @@ class Item {
 
         this.imageBookNumber = parseInt( $image.attr('book') );
         const imageBook = new Book( this.imageBookNumber , state.book.language );
-        // Get the object image URL, untranslated
         this.imageUrl = imageBook.getIllustrationURL( $image.attr('name') );
     }
 }
