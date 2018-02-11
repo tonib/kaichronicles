@@ -263,6 +263,7 @@ class Book {
      * @param fileName The illustration file name
      * @param {Mechanics} mechanics The book mechanics. It can be null. In this case,
      * no translated images will be searched
+     * @returns The image URL, relative to application root
      */
     public getIllustrationURL(fileName : string, mechanics : any = null) : string {
         var illDirectory;

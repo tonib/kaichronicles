@@ -1,3 +1,4 @@
+- Use latest version on PAON data on SVN (a fixed commit number)
 - When you cancel a saved games import, it say "error", and it is not
 - Check reported bugs on Google play:
   * Saved games removed when adding new games
@@ -22,7 +23,6 @@
   * 11, equipmnt: Spanish wrong foot note 1 (Lantern)
 
 FOR FUTURE (1.9+):
-- Use latest version on PAON data on SVN (a fixed commit number)
 - Support for kai disciplines on magnakai books:
   * https://github.com/tonib/kaichronicles/issues/5
   * https://www.projectaon.org/es/foro3/viewtopic.php?p=27752#p27752

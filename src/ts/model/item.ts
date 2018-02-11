@@ -62,7 +62,7 @@ class Item {
      */
     public weaponType : string;
 
-    /** Get the object image URL, untranslated */
+    /** Get the object image URL, untranslated. null if the object has no image. */
     public imageUrl : string;
 
     /** 
@@ -123,17 +123,7 @@ class Item {
         this.weaponType = $o.attr('weaponType');
 
         // Object image
-        var $image = $o.find('image');
-        if( $image.length > 0 ) {
-            var bookNumber = parseInt( $image.attr('book') );
-            var imageBook = new Book( bookNumber , state.book.language );
-            // Get the object image URL, untranslated
-            this.imageUrl = imageBook.getIllustrationURL( $image.attr('name') );
-            /** 
-             * The referenced book. Needed to check if the book has been downloaded on the Cordova app
-             */
-            this.imageBookNumber = bookNumber;
-        }
+        this.loadImageInfo( $o );
 
         // Usage (only one use, and then the object is dropped)
         var $usage = $o.find('usage');
@@ -220,6 +210,21 @@ class Item {
         if( this.effect.cls != 'combatSkill' )
             return 0;
         return this.effect.increment;
+    }
+
+    /**
+     * Get information about the book
+     * @param {jQuery} $o XML node for object
+     */
+    private loadImageInfo( $o : any ) {
+        const $image = $o.find('image');
+        if( $image.length == 0 )
+            return;
+
+        this.imageBookNumber = parseInt( $image.attr('book') );
+        const imageBook = new Book( this.imageBookNumber , state.book.language );
+        // Get the object image URL, untranslated
+        this.imageUrl = imageBook.getIllustrationURL( $image.attr('name') );
     }
 }
 
