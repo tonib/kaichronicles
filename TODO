@@ -1,4 +1,5 @@
 - Use latest version on PAON data on SVN (a fixed commit number)
+- Better explanation about how to drop objects on the Kai monastery
 - When you cancel a saved games import, it say "error", and it is not
 - Check reported bugs on Google play:
   * Saved games removed when adding new games
@@ -68,6 +69,10 @@ Reminders:
 * DON'T BE RESTRICTIVE WITH CHOICES !!!!
 
 * JsDoc docs: http://usejsdoc.org/
+
+* Emulate with a given emulator name
+cordova emulate --target=Android_4_4_2 android
+cordova emulate --target=Android_5_0_1 android
 
 * Build project AON xhtml:
   cd [trunk or tag directory]

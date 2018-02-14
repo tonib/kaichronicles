@@ -44,7 +44,7 @@ http://stackoverflow.com/questions/10752055/cross-origin-requests-are-only-suppo
 
 ### Setup Android app
 
-Install Cordova (https://cordova.apache.org/) and the Android requeriments
+Install Cordova 6.4 (https://cordova.apache.org/) and the Android requeriments
 (https://cordova.apache.org/docs/en/latest/guide/platforms/android/index.html). Then:
 ```bash
     cd src
@@ -61,11 +61,6 @@ You can test the app with the emulator:
     cd src
     cordova emulate android
 ```
-
-There is a bug with Android on Cordova 6.4 with the app icons. If the app icon don't appear,
-read this:
-http://stackoverflow.com/questions/40351434/cordova-android-6-4-0-creates-res-folder-top-level-not-inside-platforms-android
-
 
 ### Developing 
 
