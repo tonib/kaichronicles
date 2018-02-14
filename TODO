@@ -1,3 +1,7 @@
+- Map should not count for twelf Special Items limit: Google play comment:
+  "Está Genial! Gran Juego! Me ha Encantado! Como Sugerencia, para la próxima Actualización, poner el Límite de 12 Objetos Especiales desde el 
+   Libro 6, el Mapa no debería contar como Objeto Especial para contar en el Limite y si hubiera una forma de poder organiza el inventario 
+   estaría bien."
 - Use latest version on PAON data on SVN (a fixed commit number)
 - Better explanation about how to drop objects on the Kai monastery
 - When you cancel a saved games import, it say "error", and it is not

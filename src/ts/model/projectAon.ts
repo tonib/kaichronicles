@@ -155,7 +155,7 @@ const projectAon = {
             zipSize: 3537081,
 
             revision: 0
-        }/*,
+        },
 
         ///////////////////////////////////////
 
@@ -208,7 +208,7 @@ const projectAon = {
             zipSize: 3007751,
 
             revision: 0
-        },
+        }/*,
 
         // Book 12 (NOT IMPLEMENTED / Nobody working on it):
         {
