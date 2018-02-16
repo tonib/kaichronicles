@@ -306,9 +306,140 @@
         </section>
 
         <section id="sect50">
-            <!-- This is the correct answer to Khmar’s riddle about his youngest son -->
+            <!-- TODO: This is the correct answer to Khmar’s riddle about his youngest son -->
         </section>
 
+        <section id="sect51">
+            <test not="true" hasDiscipline="nexus">
+                <choiceState section="sect118" set="disabled" />
+            </test>
+            <test hasDiscipline="nexus">
+                <choiceState section="sect291" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect52">
+            <test not="true" hasDiscipline="pthmnshp">
+                <choiceState section="sect96" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect54">
+            <!-- TODO: Where is lost the inventory -->
+            <!--restoreInventoryState restorePoint="book8nventoryLost" /-->
+        </section>
+
+        <section id="sect56">
+            <choiceState section="sect144" set="disabled" />
+            <test hasDiscipline="invsblty">
+                <test expression="[KAILEVEL] >= 6">
+                    <choiceState section="sect144" set="enabled" />
+                    <choiceState section="sect349" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect58">
+            <object objectId="rope" />
+            <object objectId="shortsword" />
+            <object objectId="blanket" />
+            <object objectId="mace" />
+            <object objectId="bow" />
+            <object objectId="canteenwater" />
+            <object objectId="arrow" count="6" />
+            <object objectId="quiver" />
+            <object objectId="broadsword" />
+            <object objectId="lantern" />
+            <object objectId="dagger" />
+        </section>
+
+        <section id="sect59">
+            <endurance count="-2" />
+        </section>
+
+        <section id="sect61">
+            <test not="true" hasDiscipline="psiscrn">
+                <endurance count="-3" />
+            </test>
+            <test hasDiscipline="psiscrn">
+                <test not="true" expression="[KAILEVEL] >= 5">
+                    <endurance count="-3" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect63">
+            <meal />
+        </section>
+
+        <section id="sect64">
+            <endurance count="-5" />
+        </section>
+
+        <section id="sect67">
+            <choiceState section="sect16" set="disabled" />
+            <choiceState section="sect214" set="disabled" />
+            <test hasObject="fireseed">
+                <choiceState section="sect16" set="enabled" />
+                <choiceState section="sect277" set="disabled" />
+            </test>
+            <!-- TODO: psychicring? -->
+            <!--test hasObject="psychicring">
+                <choiceState section="sect214" set="enabled" />
+                <choiceState section="sect277" set="disabled" />
+            </test-->
+        </section>
+
+        <section id="sect72">
+            <choiceState section="all" set="disabled" />
+            <randomTable zeroAsTen="true">
+                <endurance count=" -( [RANDOM] + 2 ) " />
+                <choiceState section="all" set="enabled" />
+            </randomTable>
+        </section>
+
+        <section id="sect73">
+            <death />
+        </section>
+
+        <section id="sect75">
+            <endurance count="+3" />
+        </section>
+
+        <section id="sect78">
+            <test not="true" hasDiscipline="anmlctrl">
+                <choiceState section="sect167" set="disabled" />
+            </test>
+            <test hasDiscipline="anmlctrl">
+                <choiceState section="sect290" set="disabled" />
+            </test>
+        </section>
+        
+        <section id="sect82">
+            <choiceState section="all" set="disabled" />
+
+            <combat noMindblast="true" noPsiSurge="true" enemyMultiplier="2" />
+            <test not="true" hasDiscipline="hntmstry">
+                <combat combatSkillModifier="-2" />
+            </test>
+
+            <afterCombatTurn turn="any">
+                <test expression="[COMBATSDURATION] >= 4">
+                    <test combatsWon="false">
+                        <disableCombats />
+                        <choiceState section="sect151" set="enabled" />
+                    </test>
+                </test>
+            </afterCombatTurn>
+            <afterCombats>
+                <test combatsWon="true">
+                    <choiceState section="sect247" set="enabled" />
+                </test>
+            </afterCombats>
+        </section>
+
+        <!-- Up to sect84 -->
+        
     </sections>
 
 </mechanics>

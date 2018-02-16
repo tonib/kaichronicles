@@ -2,6 +2,10 @@
   "Está Genial! Gran Juego! Me ha Encantado! Como Sugerencia, para la próxima Actualización, poner el Límite de 12 Objetos Especiales desde el 
    Libro 6, el Mapa no debería contar como Objeto Especial para contar en el Limite y si hubiera una forma de poder organiza el inventario 
    estaría bien."
+- Object images on book 9+:
+  1) After downloaded books 9-12 convert SVG object images to PNG into the book directory. This is needed because the books SVN don't contain
+     ALL images (only some)
+  2) Use the current book image
 - Use latest version on PAON data on SVN (a fixed commit number)
 - Better explanation about how to drop objects on the Kai monastery
 - When you cancel a saved games import, it say "error", and it is not
@@ -25,6 +29,7 @@
   * 9, sect8: "Ahórrate LAS condolencias"
   * 9, sect11: Spanish / English differences about meals
   * 9, 14: "(If your source of light is a Torch, remember to erase it from your Action Chart.)" if not in Spanish (it's on sect 197)
+  * 9, 82: "Agresión mental" should be "Acometida Psíquica"
   * 11, equipmnt: Spanish wrong foot note 1 (Lantern)
 
 FOR FUTURE (1.10+):
