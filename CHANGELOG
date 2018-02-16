@@ -40,3 +40,7 @@
 - Book 6, sect307: Fixed bug (you can buy many meals as you want)
 - Book 2, sect238: Fixed bug with the "silver token" (semi-fixed, now you get 1 Gold Crown)
 - Book 4, sect283: Fixed bug, drop Flask of Holy Water
+
+1.10
+- Book 8, sect183 and sect47: Added message about the Paido's sword. Sword changed to count as zero items (be sure you always pick it).
+  Update combat state after any object is picked

@@ -357,12 +357,20 @@
 
         <section id="sect47">
             <choiceState section="all" set="disabled" />
+
             <pick objectId="paidosword" />
             <currentWeapon objectId="paidosword" />
-            <disableCombats />
-            <test currentWeapon="paidosword">
-                <disableCombats disabled="false" />
-            </test>
+            <message id="msg-drop-weapon" 
+                en-text="You must use the Paido sword as current weapon on this combat" 
+                es-text="Debes usar la espada de Paido como arma actual en este combate"
+            />
+            <onInventoryEvent>
+                <disableCombats />
+                <test currentWeapon="paidosword">
+                    <disableCombats disabled="false" />
+                </test>
+            </onInventoryEvent>
+
             <combat noMindblast="true" mindforceEP="-2" />
             <test hasCircle="circleSpirit">
                 <combat combatSkillModifier="+2" />
@@ -1098,12 +1106,20 @@
         
         <section id="sect183">
             <choiceState section="all" set="disabled" />
+
             <pick objectId="paidosword" />
             <currentWeapon objectId="paidosword" />
-            <disableCombats />
-            <test currentWeapon="paidosword">
-                <disableCombats disabled="false" />
-            </test>
+            <message id="msg-drop-weapon" 
+                en-text="You must use the Paido sword as current weapon on this combat" 
+                es-text="Debes usar la espada de Paido como arma actual en este combate"
+            />
+            <onInventoryEvent>
+                <disableCombats />
+                <test currentWeapon="paidosword">
+                    <disableCombats disabled="false" />
+                </test>
+            </onInventoryEvent>
+
             <combat noMindblast="true" mindforceEP="-2" enemyImmuneTurns="1" />
             <test hasCircle="circleSpirit">
                 <combat combatSkillModifier="+2" />
