@@ -153,6 +153,8 @@ class Translations {
         'number' : 'Número {0}',
         'shoot' : 'Disparo',
         'adganaUse' : 'Uso de adgana, número Tabla Suerte: {0}',
+        'heads' : 'Cara',
+        'tails' : 'Cruz',
 
         //////////////////////////////////////
         // About page
@@ -389,6 +391,8 @@ class Translations {
         'playerNumber' : 'Player {0}',
         'number' : 'Number {0}',
         'adganaUse' : 'Adgana use, Random Table number: {0}',
+        'heads' : 'Heads',
+        'tails' : 'Tails',
 
         //////////////////////////////////////
         // About page

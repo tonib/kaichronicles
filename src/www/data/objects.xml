@@ -662,6 +662,24 @@
             <image book="8" name="small10.png" />
         </special>
 
+        <!-- BOOK 11 -->
+
+        <special id="psychicring">
+            <name lang="en">Psychic Ring</name>
+            <description lang="en">
+                It gleams incredibly, as though only minutes old, and the deep yellow stone that is set in the silvery metal glows with 
+                an eldritch light
+            </description>
+
+            <name lang="es">Anillo Psíquico</name>
+            <description lang="es">
+                Brilla de un modo increíble, como creado hace tan sólo unos minutos, y la piedra de un amarillo oscuro que está engastada 
+                en metal plateado reluce de un modo fantástico
+            </description>
+
+            <image book="9" name="small10.png" />
+        </special>
+
         <!-- BOOK 10 -->
 
         <special id="bullwhip">

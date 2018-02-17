@@ -215,12 +215,8 @@ const mechanicsEngine = {
      */
     debugWarning: function(msg : string) {
         console.log(msg);
-        if( window.getUrlParameter( 'debug' ) ) {
-            var $messageUI = mechanicsEngine.getMechanicsUI('mechanics-message');
-            $messageUI.attr('id', '' );
-            $messageUI.find('b').text( msg );
-            gameView.appendToSection( $messageUI );
-        }
+        if( window.getUrlParameter( 'debug' ) )
+            mechanicsEngine.showMessage( msg );
     },
 
     /**
@@ -994,9 +990,10 @@ const mechanicsEngine = {
     /** Display message rule */
     message: function(rule) {
 
-        var msgId = $(rule).attr('id');
+        const $rule = $(rule);
+        var msgId = $rule.attr('id');
 
-        var op = $(rule).attr('op');
+        var op = $rule.attr('op');
         if( op ) {
             // Change the state of the message
             if( op == 'show' )
@@ -1007,10 +1004,7 @@ const mechanicsEngine = {
         }
 
         // Display a new message
-        var $messageUI = mechanicsEngine.getMechanicsUI('mechanics-message');
-        $messageUI.attr('id', msgId );
-        $messageUI.find('b').text( mechanicsEngine.getRuleText(rule) );
-        gameView.appendToSection( $messageUI );
+        mechanicsEngine.showMessage( mechanicsEngine.getRuleText(rule) , msgId );
     },
 
     /** Inventory events rule */
@@ -1282,6 +1276,10 @@ const mechanicsEngine = {
         new Book6sect340();
     },
 
+    book9sect91 : function(rule) {
+        Book9sect91.dropHalfBackpack();
+    },
+
     /************************************************************/
     /**************** RULES HELPERS *****************************/
     /************************************************************/
@@ -1546,6 +1544,19 @@ const mechanicsEngine = {
         // Drop objects
         for( let objectId of slotObjectsIds )
             actionChartController.drop( objectId );
+    },
+
+    /**
+     * Append a message to the section
+     * @param msg Message text
+     * @param msgId Id to set on the message HTML tag. It's optional
+     */
+    showMessage : function( msg : string , msgId : string = null) {
+        var $messageUI = mechanicsEngine.getMechanicsUI( 'mechanics-message' );
+        if( msgId )
+            $messageUI.attr('id', msgId );
+        $messageUI.find('b').text( msg );
+        gameView.appendToSection( $messageUI );
     }
 
 };

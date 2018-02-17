@@ -385,11 +385,10 @@
                 <choiceState section="sect16" set="enabled" />
                 <choiceState section="sect277" set="disabled" />
             </test>
-            <!-- TODO: psychicring? -->
-            <!--test hasObject="psychicring">
+            <test hasObject="psychicring">
                 <choiceState section="sect214" set="enabled" />
                 <choiceState section="sect277" set="disabled" />
-            </test-->
+            </test>
         </section>
 
         <section id="sect72">
@@ -440,7 +439,55 @@
             </afterCombats>
         </section>
 
-        <!-- Up to sect84 -->
+        <section id="sect85">
+            <choiceState section="all" set="disabled" />
+            <test hasDiscipline="anmlctrl">
+                <combat combatSkillModifier="+2" />
+            </test>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect86">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="0" />
+            <afterCombats>
+                <choiceState section="sect170" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect328" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect87">
+            <object objectId="psychicring" />
+        </section>
+        
+        <section id="sect88">
+            <endurance count="+[MAXENDURANCE]" />
+        </section>
+
+        <section id="sect89">
+            <endurance count="-4" />
+        </section>
+
+        <section id="sect91">
+            <book9sect91 />
+
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect73" set="enabled" />
+                </case>
+                <case from="5" to="99">
+                    <choiceState section="sect246" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="nexus">
+                <randomTableIncrement increment="+4" />
+            </test>
+        </section>
 
     </sections>
 

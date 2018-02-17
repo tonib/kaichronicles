@@ -271,7 +271,7 @@ class ActionChart {
      */
     public drop(objectId : string, count : number = 0) : boolean {
 
-        if( objectId == 'meal' ) {
+        if( objectId == Item.MEAL ) {
             // Special
             this.increaseMeals(-1);
             return true;
