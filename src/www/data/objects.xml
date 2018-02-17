@@ -156,7 +156,7 @@
             <effect class="endurance" increment="4" />
         </special>
 
-        <special id="map">
+        <special id="map" itemCount="0">
             <name lang="en">Map</name>
             <name lang="es">Mapa</name>
         </special>

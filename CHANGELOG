@@ -44,3 +44,5 @@
 1.10
 - Book 8, sect183 and sect47: Added message about the Paido's sword. Sword changed to count as zero items (be sure you always pick it).
   Update combat state after any object is picked
+- Book 6, sect259: Bug with disciplines. Divination should be Nexus
+- Now map don't count for the 12 Special Items limit

@@ -107,13 +107,18 @@ class Item {
 
         /** The translated object description */
         this.description = $o.find('description[lang=' + book.language + ']').text();
+        // If it's the map, add description from the book:
+        if( objectId == Item.MAP ) {
+            var mapSection = new Section( book , Book.MAP_SECTION , null);
+            if( mapSection.exists() )
+                this.description = mapSection.getTitleText();
+        }
         if( this.itemCount != 1 ) {
             // Add description of the size used 
             if( this.description )
                 this.description += ' ';
             this.description += translations.text( 'countAsObjects' , [this.itemCount] );
         }
-            
 
         /** 
          * The weapon type. Only for special and object types. It is the kind of weapon.
@@ -145,13 +150,6 @@ class Item {
 
         // Incompatibilities
         this.incompatibleWith = $o.attr('incompatibleWith');
-
-        // If it's the map, add description from the book:
-        if( objectId == 'map' ) {
-            var mapSection = new Section( book , 'map', null);
-            if( mapSection.exists() )
-                this.description = mapSection.getTitleText();
-        }
 
     }
 

@@ -1377,10 +1377,10 @@
         </section>
 
         <section id="sect259">
-            <test not="true" hasDiscipline="dvnation|psisurge">
+            <test not="true" hasDiscipline="nexus|psisurge">
                 <choiceState section="sect186" set="disabled" />
             </test>
-            <test hasDiscipline="dvnation|psisurge">
+            <test hasDiscipline="nexus|psisurge">
                 <choiceState section="sect156" set="disabled" />
             </test>
         </section>

@@ -47,6 +47,8 @@ class Book {
     
     public static readonly DISCIPLINES_SECTION = 'discplnz';
 
+    public static readonly MAP_SECTION = 'map';
+
     /** Book index number (1 = first book) */
     public bookNumber : number;
 
