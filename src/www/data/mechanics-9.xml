@@ -489,6 +489,100 @@
             </test>
         </section>
 
+        <section id="sect92">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect293" set="enabled" />
+                </case>
+                <case from="5" to="9">
+                    <choiceState section="sect257" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect93">
+            <endurance count="-2" />
+        </section>
+
+        <section id="sect94">
+            <choiceState section="sect194" set="disabled" />
+            <test hasObject="lantern|firesphere">
+                <choiceState section="sect194" set="enabled" />
+            </test>
+            <test hasObject="torch">
+                <test hasObject="tinderbox">
+                    <choiceState section="sect194" set="enabled" />
+                </test>
+            </test>
+            <!-- TODO: If you only have the torch, remove it at sect194 (copy code from sect14)-->
+        </section>
+
+        <section id="sect95">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="3">
+                    <choiceState section="sect125" set="enabled" />
+                </case>
+                <case from="4" to="8">
+                    <choiceState section="sect309" set="enabled" />
+                </case>
+                <case from="9" to="99">
+                    <choiceState section="sect238" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="+2" />
+            </test>
+            <test hasCircle="circleSolaris">
+                <randomTableIncrement increment="+3" />
+            </test>
+        </section>
+
+        <section id="sect97">
+            <choiceState section="all" set="disabled" />
+            <test not="true" hasDiscipline="hntmstry">
+                <combat combatSkillModifier="-3" />
+            </test>
+            <test currentWeapon="sommerswerd">
+                <combat dammageMultiplier="2" />
+            </test>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect98">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="1" />
+            <afterCombats>
+                <choiceState section="sect174" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect223" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect99">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <pick class="arrow" count="-1" />
+                <case from="-99" to="6">
+                    <choiceState section="sect70" set="enabled" />
+                </case>
+                <case from="7" to="99">
+                    <choiceState section="sect198" set="enabled" />
+                </case>
+            </randomTable>
+            <randomTableIncrement increment="[BOWBONUS]" />
+        </section>
+
+        <section id="sect100">
+            <!-- TODO: If you have an Invitation and wish to show it -->
+        </section>
+        
+        <!-- Up to sect103 -->
+        
     </sections>
 
 </mechanics>

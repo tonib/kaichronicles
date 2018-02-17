@@ -446,7 +446,7 @@ const mechanicsEngine = {
      * Assing an action to a random table link.  
      */
     randomTable: function(rule) {
-        console.log( 'randomTable rule' );
+        //console.log( 'randomTable rule' );
         randomMechanics.randomTable(rule);
     },
 
