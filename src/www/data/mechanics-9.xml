@@ -679,8 +679,191 @@
             </afterCombats>
         </section>
 
-        <!-- Up to sect118 -->
-        
+        <section id="sect119">
+            <endurance count="-3" />
+
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="0" />
+            <afterCombats>
+                <choiceState section="sect170" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect49" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect120">
+            <test canUseBow="false">
+                <choiceState section="sect12" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect122">
+            <test not="true" hasDiscipline="psiscrn">
+                <choiceState section="sect203" set="disabled" />
+            </test>
+            <test hasDiscipline="psiscrn">
+                <choiceState section="sect191" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect125">
+            <death />
+        </section>
+
+        <section id="sect127">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="1" />
+            <afterCombats>
+                <choiceState section="sect174" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect223" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect128">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" noPsiSurge="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect129">
+            <choiceState section="all" set="disabled" />
+
+            <combat noMindblast="true" />
+            <test not="true" hasDiscipline="anmlctrl">
+                <combat combatSkillModifier="-2" />
+            </test>
+
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect130">
+            <test not="true" hasObject="mirror">
+                <choiceState section="sect237" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect133">
+            <test not="true" hasObject="mirror">
+                <choiceState section="sect237" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect134">
+            <choiceState section="sect47" set="disabled" />
+            <test hasDiscipline="psisurge">
+                <test expression="[KAILEVEL] >= 4">
+                    <choiceState section="sect47" set="enabled" />
+                    <choiceState section="sect227" set="disabled" />
+                </test>
+            </test>
+
+            <choiceState section="sect202" set="disabled" />
+            <test hasDiscipline="nexus">
+                <choiceState section="sect202" set="enabled" />
+                <choiceState section="sect227" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect137">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="3">
+                    <choiceState section="sect182" set="enabled" />
+                </case>
+                <case from="4" to="99">
+                    <choiceState section="sect236" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="+1" />
+            </test>
+            <test hasCircle="circleFire">
+                <randomTableIncrement increment="+2" />
+            </test>
+        </section>
+
+        <section id="sect141">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="3">
+                    <choiceState section="sect4" set="enabled" />
+                </case>
+                <case from="4" to="7">
+                    <choiceState section="sect289" set="enabled" />
+                </case>
+                <case from="8" to="99">
+                    <choiceState section="sect114" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="nexus">
+                <randomTableIncrement increment="+4" />
+            </test>
+        </section>
+
+        <section id="sect142">
+            <!--
+                TODO: If you have ever visited the city of Varetta or a hut on the Ruanon Pike in a previous Lone Wolf adventure...
+                Do the same here than in book 3 / sect268 (a TODO too)
+            -->
+        </section>
+
+        <section id="sect144">
+            <test not="true" hasDiscipline="dvnation">
+                <choiceState section="sect77" set="disabled" />
+            </test>
+            <test hasDiscipline="dvnation">
+                <choiceState section="sect313" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect145">
+            <test not="true" expression="[MONEY] >= 3">
+                <choiceState section="sect34" set="disabled" />
+            </test>
+            <test expression="[MONEY] >= 3">
+                <choiceState section="sect132" set="disabled" />
+            </test>
+            <choiceSelected section="sect34">
+                <pick class="money" count="-3" />
+            </choiceSelected>
+        </section>
+
+        <section id="sect146">
+            <endurance count="+3" />
+        </section>
+
+        <section id="sect148">
+            <choiceState section="all" set="disabled" />
+
+            <combat combatSkillModifier="-2" />
+            <afterCombatTurn turn="2">
+                <combat combatSkillModifier="0" />
+            </afterCombatTurn>
+
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect150">
+            <endurance count="+[MAXENDURANCE]" />
+        </section>
+
+        <section id="sect152">
+            <death />
+        </section>
+
+        <section id="sect154">
+            <!-- TODO: If you decided to keep any of the items you discovered in the hut -->
+        </section>
+
     </sections>
 
 </mechanics>
