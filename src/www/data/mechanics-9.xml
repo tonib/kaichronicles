@@ -416,6 +416,10 @@
             </test>
         </section>
         
+        <section id="sect79">
+            <!-- TODO: sect239, check this: There is a bonus for dagger throw?, I suspect yes -->
+        </section>
+
         <section id="sect82">
             <choiceState section="all" set="disabled" />
 
@@ -544,6 +548,7 @@
             <test not="true" hasDiscipline="hntmstry">
                 <combat combatSkillModifier="-3" />
             </test>
+            <combat dammageMultiplier="1" />
             <test currentWeapon="sommerswerd">
                 <combat dammageMultiplier="2" />
             </test>
@@ -581,7 +586,100 @@
             <!-- TODO: If you have an Invitation and wish to show it -->
         </section>
         
-        <!-- Up to sect103 -->
+        <section id="sect104">
+            <choiceState section="all" set="disabled" />
+
+            <combat dammageMultiplier="1" />
+            <test currentWeapon="sommerswerd">
+                <combat dammageMultiplier="2" />
+            </test>
+            <test not="true" hasDiscipline="hntmstry|dvnation">
+                <combat combatSkillModifier="-2" />
+            </test>
+
+            <afterCombats>
+                <test not="true" expression="[COMBATSDURATION] >= 4">
+                    <choiceState section="sect228" set="enabled" />
+                </test>
+                <test expression="[COMBATSDURATION] >= 4">
+                    <choiceState section="sect322" set="enabled" />
+                </test>
+            </afterCombats>
+        </section>
+
+        <section id="sect106">
+            <drop objectId="fireseed" />
+            <!-- TODO: "If you have seen and examined one of these hexagonal tokens previously in your adventure" ??? -->
+        </section>
+        
+        <section id="sect107">
+            <!-- TODO: Drop arrow? -->
+        </section>
+
+        <section id="sect108">
+            <test not="true" hasDiscipline="dvnation">
+                <choiceState section="sect272" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect111">
+            <endurance count="-3" />
+            <choiceState section="sect262" set="disabled" />
+            <test hasDiscipline="dvnation">
+                <test expression="[KAILEVEL] >= 4">
+                    <choiceState section="sect262" set="enabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect112">
+            <death />
+        </section>
+
+        <section id="sect113">
+            <pick objectId="receipt" />
+        </section>
+
+        <section id="sect114">
+            <test not="true" hasDiscipline="dvnation">
+                <choiceState section="sect298" set="disabled" />
+            </test>
+            <test hasDiscipline="dvnation">
+                <choiceState section="sect41" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect115">
+            <numberPicker
+                en-text="Answer the riddle"
+                es-text="Responde al acertijo"
+                min="1" max="350"
+                en-actionButton="Choose"
+                es-actionButton="Elige"
+                />
+            <numberPickerChoosed>
+                <test expression="[NUMBERPICKER] == 5">
+                    <goToSection section="sect5" />
+                </test>
+                <test expression="[NUMBERPICKER] != 5">
+                    <toast
+                        en-text="Wrong number!"
+                        es-text="¡Número incorrecto!" />
+                </test>
+            </numberPickerChoosed>
+
+            <!-- TODO: Don't allow go to sect204 without dropping objects? -->
+        </section>
+
+        <section id="sect116">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" immuneTurns="2" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <!-- Up to sect118 -->
         
     </sections>
 

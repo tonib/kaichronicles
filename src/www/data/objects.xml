@@ -662,7 +662,7 @@
             <image book="8" name="small10.png" />
         </special>
 
-        <!-- BOOK 11 -->
+        <!-- BOOK 9 -->
 
         <special id="psychicring">
             <name lang="en">Psychic Ring</name>
@@ -678,6 +678,18 @@
             </description>
 
             <image book="9" name="small10.png" />
+        </special>
+
+        <special id="receipt" itemCount="0">
+            <name lang="en">Receipt</name>
+            <description lang="en">
+                A piece of vellum stamped with a date and a number
+            </description>
+
+            <name lang="es">Recibo</name>
+            <description lang="es">
+                Un pedazo de pergamino con una fecha y un número
+            </description>
         </special>
 
         <!-- BOOK 10 -->

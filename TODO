@@ -1,9 +1,5 @@
 - Show a toast when you change the current weapon on the Action Chart
 - Documentation for "onInventoryEvent" rule
-- Map should not count for twelf Special Items limit: Google play comment:
-  "Está Genial! Gran Juego! Me ha Encantado! Como Sugerencia, para la próxima Actualización, poner el Límite de 12 Objetos Especiales desde el 
-   Libro 6, el Mapa no debería contar como Objeto Especial para contar en el Limite y si hubiera una forma de poder organiza el inventario 
-   estaría bien."
 - Object images on book 9+:
   1) After downloaded books 9-12 convert SVG object images to PNG into the book directory. This is needed because the books SVN don't contain
      ALL images (only some)
