@@ -1080,6 +1080,10 @@ const mechanicsEngine = {
      */
     numberPickerChoosed: function(rule) {
         mechanicsEngine.onNumberPickerChoosed = rule;
+
+        // If the action button has been already picked, run the event handler right now, if it's requested
+        if( mechanicsEngine.getBooleanProperty( $(rule) , 'executeAtStart' ) && numberPickerMechanics.actionButtonWasClicked() )
+            mechanicsEngine.runChildRules( $(mechanicsEngine.onNumberPickerChoosed) );
     },
 
     /**

@@ -864,6 +864,64 @@
             <!-- TODO: If you decided to keep any of the items you discovered in the hut -->
         </section>
 
+        <section id="sect155">
+            <object objectId="dagger" />
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
+            <pick class="money" count="7" />
+            <object objectId="blanket" />
+            <!-- Moved to sect29 -->
+            <!--object objectId="vialbluepills" /-->
+            <test not="true" hasDiscipline="curing">
+                <choiceState section="sect29" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect156">
+            <choiceState section="sect69" set="disabled" />
+            <test hasDiscipline="hntmstry">
+                <test expression="[KAILEVEL] >= 6">
+                    <choiceState section="sect69" set="enabled" />
+                    <choiceState section="sect240" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect158">
+            <test not="true" hasDiscipline="dvnation|hntmstry">
+                <choiceState section="sect201" set="disabled" />
+            </test>
+            <test hasDiscipline="dvnation|hntmstry">
+                <choiceState section="sect273" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect162">
+            <endurance count="-2" />
+        </section>
+
+        <section id="sect163">
+            <choiceState section="all" set="disabled" />
+            <numberPicker 
+                en-text="Choose the number of Gold Crowns you wish to give to the villagers"
+                es-text="Elige el número de Coronas de Oro que quieres dar a los aldeanos"
+                min="1" 
+                money="true"
+                en-actionButton="Choose"
+                es-actionButton="Elige"
+            />
+            <numberPickerChoosed executeAtStart="true">
+                <numberPicker enabled="false" />
+                <pick class="money" count="-[NUMBERPICKER]" />
+                <test expression="[NUMBERPICKER] >= 3">
+                    <choiceState section="sect28" set="enabled" />
+                </test>
+                <test not="true" expression="[NUMBERPICKER] >= 3">
+                    <choiceState section="sect235" set="enabled" />
+                </test>
+            </numberPickerChoosed>
+        </section>
+
     </sections>
 
 </mechanics>

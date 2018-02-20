@@ -84,6 +84,7 @@ the current section
 * **[ARROWS]**: Current number of arrows on the quiver
 * **[BOWBONUS]** : Bonus for bow usage: It's Weaponmastery bonus + bow object bonus (see 
 "silverbowduadon" object). It will be -4 if the player has no bow
+* **[NUMBERPICKER]**: The selected number on the "numberPicker" UI
 
 ## Codes for Magnakai disciplines
 
@@ -439,9 +440,20 @@ on this section, the chilren rules will be executed
             es-text="¡Número incorrecto!" />
     </test>
 </numberPickerChoosed>
+<numberPickerChoosed executeAtStart="true">
+    <numberPicker enabled="false" />
+    <pick class="money" count="-[NUMBERPICKER]" />
+    <test expression="[NUMBERPICKER] >= 3">
+        <choiceState section="sect28" set="enabled" />
+    </test>
+    <test not="true" expression="[NUMBERPICKER] >= 3">
+        <choiceState section="sect235" set="enabled" />
+    </test>
+</numberPickerChoosed>
 ```
 Add a control on the UI to select a number. "numberPickerChoosed" is an optional event handler to execute when
-the number is picked
+the number is picked. If the property "executeAtStart" is true, and the number picker action button was clicked
+on a previous rendering, the "numberPickerChoosed" will be executed at the section startup.
 
 ### goToSection
 ```xml

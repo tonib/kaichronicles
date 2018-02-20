@@ -71,8 +71,8 @@ class SectionState {
     public healingExecuted = false;
 
     /** 
-     * Last value for number pickers. The key is the number picker id and the value is the
-     * last value
+     * Number picker states for this section. 
+     * See numberPicker.js and numberPickerMechanics.ts
      */
     public numberPickersState = {};
 

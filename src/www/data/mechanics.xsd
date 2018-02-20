@@ -237,6 +237,8 @@
     <xs:complexType name="numberPickerChoosed">
         <!-- Children -->
         <xs:group ref="any_rule" minOccurs="0" maxOccurs="unbounded" />
+
+        <xs:attribute name="executeAtStart" type="xs:boolean" />
     </xs:complexType>
 
     <xs:complexType name="death">

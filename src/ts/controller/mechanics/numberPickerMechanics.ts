@@ -29,6 +29,9 @@ const numberPickerMechanics = {
             var $pickNumberButton = $ui.find('#mechanics-picknumber');
             $pickNumberButton.show().text( actionButtonTitle );
             numberPickerMechanics.bindButtonActionEvent( $pickNumberButton , function() {
+                // Store that the picker action has been fired
+                const sectionState = state.sectionStates.getSectionState();
+                sectionState.numberPickersState[ 'actionFired' ] = true;
                 mechanicsEngine.fireNumberPickerChoosed();
             });
         }
@@ -55,6 +58,12 @@ const numberPickerMechanics = {
         // Initialize (or restore) the value
         $('#mechanics-mpAmount').initializeValue();
 
+    },
+
+    /** Return true if the action button has been already clicked  */
+    actionButtonWasClicked : function() : boolean {
+        const sectionState = state.sectionStates.getSectionState();
+        return sectionState.numberPickersState[ 'actionFired' ] == true;
     },
 
     bindButtonActionEvent : function( $pickNumberButton : any , callback : () => void) {
