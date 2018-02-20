@@ -29,10 +29,11 @@ const numberPickerMechanics = {
             var $pickNumberButton = $ui.find('#mechanics-picknumber');
             $pickNumberButton.show().text( actionButtonTitle );
             numberPickerMechanics.bindButtonActionEvent( $pickNumberButton , function() {
-                // Store that the picker action has been fired
-                const sectionState = state.sectionStates.getSectionState();
-                sectionState.numberPickersState[ 'actionFired' ] = true;
-                mechanicsEngine.fireNumberPickerChoosed();
+                if( mechanicsEngine.fireNumberPickerChoosed() ) {
+                    // Store that the picker action has been fired
+                    const sectionState = state.sectionStates.getSectionState();
+                    sectionState.numberPickersState[ 'actionFired' ] = true;
+                }
             });
         }
 

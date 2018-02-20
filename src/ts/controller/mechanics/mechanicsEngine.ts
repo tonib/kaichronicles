@@ -354,14 +354,17 @@ const mechanicsEngine = {
 
     /**
      * The action button of a picker number was clicked
+     * @returns True if the number picker value was valid (== if the action has been executed)
      */
-    fireNumberPickerChoosed: function() {
+    fireNumberPickerChoosed: function() : boolean {
         // Be sure the picker number value is valid
         if( !numberPickerMechanics.isValid() )
-            return;
+            return false;
 
         if( mechanicsEngine.onNumberPickerChoosed )
             mechanicsEngine.runChildRules( $(mechanicsEngine.onNumberPickerChoosed) );
+
+        return true;
     },
 
     /************************************************************/

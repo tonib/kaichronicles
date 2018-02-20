@@ -901,6 +901,7 @@
         </section>
 
         <section id="sect163">
+            <!-- TODO: Disable calls to this section if the player has no money!!! -->
             <choiceState section="all" set="disabled" />
             <numberPicker 
                 en-text="Choose the number of Gold Crowns you wish to give to the villagers"
