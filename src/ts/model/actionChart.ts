@@ -686,31 +686,34 @@ class ActionChart {
 
     /**
      * Return an object with the current inventory state
-     * @param objectTypes Kind of objects to get: 'all' = all, 'weaponlike' = weapons and weapon Special Objects
+     * @param objectTypes Kind of objects to get: 'all' = all, 'weaponlike' = weapons and weapon Special Objects,
+     * 'allobjects' = weapons, special items and backpack items
      */
-    public getInventoryState( objectTypes ) : InventoryState {
+    public getInventoryState( objectTypes : string ) : InventoryState {
 
-        if( objectTypes == 'all')
-            return {
-                weapons: this.weapons.clone(),
-                hasBackpack: this.hasBackpack,
-                backpackItems: this.backpackItems.clone(),
-                specialItems: this.specialItems.clone(),
-                beltPouch: this.beltPouch,
-                arrows: this.arrows,
-                meals: this.meals
-            };
+        let objects : InventoryState = {
+            weapons: [],
+            hasBackpack: false,
+            backpackItems: [],
+            specialItems: [],
+            beltPouch: 0,
+            arrows: 0,
+            meals: 0
+        };
+
+        if( objectTypes == 'all' || objectTypes == 'allobjects' ) {
+            objects.weapons = this.weapons.clone();
+            objects.backpackItems = this.backpackItems.clone();
+            objects.specialItems = this.specialItems.clone();
+            objects.arrows = this.arrows;
+            objects.meals = this.meals;
+
+            if( objectTypes == 'all' ) {
+                objects.hasBackpack = this.hasBackpack;
+                objects.beltPouch = this.beltPouch;
+            }
+        }
         else if( objectTypes == 'weaponlike' ) {
-            let objects : InventoryState = {
-                weapons: [],
-                hasBackpack: false,
-                backpackItems: [],
-                specialItems: [],
-                beltPouch: 0,
-                arrows: 0,
-                meals: 0
-            };
-
             for( let w of this.getWeaponObjects(false) ) {
                 if( w.type == Item.WEAPON )
                     objects.weapons.push(w.id);
@@ -719,10 +722,11 @@ class ActionChart {
                 else if( w.type == Item.OBJECT)
                     objects.backpackItems.push(w.id);
             }
-            return objects;
         }
         else
             throw 'Wrong objectTypes: ' + objectTypes;
+
+        return objects;
     }
 
     /**

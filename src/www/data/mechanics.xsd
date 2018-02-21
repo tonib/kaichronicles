@@ -326,6 +326,7 @@
                 <xs:restriction base="xs:string">
                     <xs:enumeration value="all"/>
                     <xs:enumeration value="weaponlike"/>
+                    <xs:enumeration value="allobjects"/>
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>

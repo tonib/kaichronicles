@@ -160,6 +160,7 @@ decrease a counter, use the "pick" rule. The "objectId" can be one or more objec
 * **allspecial**: Drop all the special items
 * **allmeals**: Drop all meals
 * **all**: Drop all (weapons, backpack, special items, and money)
+* **allobjects** Drop all objects (weapons, special items, and backpack content, but not the backpack itself)
 
 If you set more than one object id, the first one owned by the player will be dropped
 
@@ -378,8 +379,10 @@ the objects stored will be re-added to the player inventory. "restorePoint" prop
 is used to identify the place on the book where it was lost the inventory (they can be more
 than one).
 
-The optional property "objectsType" identifies the objects to lose / restore. "all" means all objects, meals and money
-will be lost. "weaponlike" means only weapons and weapon special items will be lost. The default value is "all"
+The optional property "objectsType" identifies the objects to lose / restore:
+* **all**: The backpack content, the backpack itself, special items, meals and money (This is the default value)
+* **weaponlike**: Weapons and weapon-like special items
+* **allobjects**: The backpack content, special items and meals
 
 ### choiceSelected
 ```xml

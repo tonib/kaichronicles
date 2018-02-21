@@ -327,8 +327,7 @@
         </section>
 
         <section id="sect54">
-            <!-- TODO: Where is lost the inventory -->
-            <!--restoreInventoryState restorePoint="book8nventoryLost" /-->
+            <restoreInventoryState restorePoint="book9InventoryLost" />
         </section>
 
         <section id="sect56">
@@ -921,6 +920,25 @@
                     <choiceState section="sect235" set="enabled" />
                 </test>
             </numberPickerChoosed>
+        </section>
+
+        <section id="sect166">
+            <choiceState section="all" set="disabled" />
+
+            <combat combatSkillModifier="+2" />
+            <combat dammageMultiplier="1" />
+            <test currentWeapon="sommerswerd">
+                <combat dammageMultiplier="2" />
+            </test>
+
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect170">
+            <saveInventoryState objectsType="allobjects" restorePoint="book9InventoryLost" />
+            <drop objectId="allobjects" />
         </section>
 
     </sections>

@@ -71,6 +71,7 @@ const actionChartController = {
      * or "allspecial" to drop all the special items
      * or "allmeals" to drop all meals
      * or "all" to drop all (weapons, backpack, special items, and money)
+     * or "allobjects" to drop all objects (weapons, backpack content, special items)
      * @param availableOnSection True if the object should be available on 
      * the current section
      * @param fromUI True if the action is fired from the UI
@@ -113,11 +114,19 @@ const actionChartController = {
             return true;
         }
         
-        if( objectId == 'all' ) {
-            actionChartController.drop('backpack');
+        if( objectId == 'all' || objectId == 'allobjects' ) {
+
+            if( objectId == 'all' ) {
+                actionChartController.drop('backpack');
+                actionChartController.increaseMoney( - state.actionChart.beltPouch );
+            }
+            else {
+                // objectId == 'allobjects' => Backpack content, but not the backpack itself
+                actionChartController.drop('backpackcontent');
+            }
+
             actionChartController.drop('allweapons');
             actionChartController.drop('allspecial');
-            actionChartController.increaseMoney( - state.actionChart.beltPouch );
             return true;
         }
 
