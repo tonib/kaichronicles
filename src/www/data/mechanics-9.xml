@@ -132,7 +132,6 @@
             <meal index="0" />
             <meal index="1" />
             <test canUseBow="false">
-                <!-- TODO: Drop arrow? -->
                 <choiceState section="sect171" set="disabled" />
             </test>
         </section>
@@ -250,6 +249,10 @@
             <!-- TODO: "If you have seen and examined one of these hexagonal tokens previously in your adventure" ??? 
                 sect43, 
             -->
+            <!-- (If your source of light is a Torch, remember to erase it from your Action Chart.) -->
+            <test not="true" hasObject="lantern|firesphere">
+                <drop objectId="torch" />
+            </test>
         </section>
 
         <section id="sect36">
@@ -941,6 +944,70 @@
             <drop objectId="allobjects" />
         </section>
 
+        <section id="sect171">
+            <pick class="arrow" count="-1" />
+
+            <choiceState section="sect33" set="disabled" />
+            <test hasObject="lantern|firesphere">
+                <choiceState section="sect33" set="enabled" />
+            </test>
+            <test hasObject="torch">
+                <test hasObject="tinderbox">
+                    <choiceState section="sect33" set="enabled" />
+                </test>
+            </test>
+
+            <test not="true" hasObject="fireseed">
+                <choiceState section="sect106" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect172">
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
+            <object objectId="meal" index="2" />
+            <object objectId="meal" index="3" />
+            <object objectId="meal" index="4" />
+            <object objectId="meal" index="5" />
+            <object objectId="dagger" />
+            <object objectId="sword" />
+            <object objectId="silvercandlestick" />
+            <object objectId="lantern" />
+            <object objectId="brasswhistle" />
+            <object objectId="blanket" />
+            <object objectId="silvergoblet" />
+            <object objectId="silkjacket" />
+            <object objectId="torch" />
+            <object objectId="crystaldecanter" />
+        </section>
+
+        <section id="sect173">
+            <test not="true" hasObject="largerope|rope">
+                <choiceState section="sect7" set="disabled" />
+            </test>
+            <test not="true" expression="[MONEY] > 0 || [BACKPACK-ITEMS-CNT-ON-ACTIONCHART] > 0 || [SPECIAL-ITEMS-ON-ACTIONCHART] > 0 || [WEAPON-ITEMS-CNT-ON-ACTIONCHART] > 0">
+                <!-- TODO: sect261, drop something -->
+                <choiceState section="sect261" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect174">
+            <saveInventoryState objectsType="allobjects" restorePoint="book9InventoryLost" />
+            <drop objectId="allobjects" />
+        </section>
+
+        <section id="sect175">
+            <meal />
+            <test not="true" hasCircle="circleSpirit">
+                <choiceState section="sect281" set="disabled" />
+            </test>
+            <test hasCircle="circleSpirit">
+                <choiceState section="sect122" set="disabled" />
+            </test>
+        </section>
+
+        <!-- Up to sect176 -->
+        
     </sections>
 
 </mechanics>

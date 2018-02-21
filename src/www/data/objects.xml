@@ -1435,6 +1435,27 @@
             </description>
         </object>
 
+        <object id="silvercandlestick">
+            <name lang="en">Silver Candlestick</name>
+            <name lang="es">Candelabro de Plata</name>
+        </object>
+        
+        <object id="silvergoblet">
+            <name lang="en">Silver Goblet</name>
+            <name lang="es">Copa de Plata</name>
+        </object>
+        
+        <object id="silkjacket">
+            <name lang="en">Silk Jacket</name>
+            <name lang="es">Chaqueta de Seda</name>
+        </object>
+
+        <object id="crystaldecanter">
+            <name lang="en">Crystal Decanter</name>
+            <name lang="es">Garrafa de Cristal</name>
+        </object>
+        
+
         <!-- BOOK 10 -->
 
         <object id="meallaumwort">
