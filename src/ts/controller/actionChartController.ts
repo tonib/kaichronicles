@@ -373,17 +373,52 @@ const actionChartController = {
 
     /**
      * Restore the inventory from an object generated with ActionChart.getInventoryState.
-     * This does not replace the current inventory, just append objects to the current
+     * This does not replace the current inventory, just append objects to the current.
+     * @param inventoryState Inventory to recover. Objects restored will be removed from the state
+     * @param recoverWeapons Should we recover weapons (includes special items)?
      */
-    restoreInventoryState: function(inventoryState : InventoryState) {
+    restoreInventoryState: function(inventoryState : InventoryState, recoverWeapons : boolean) {
+
         if( !state.actionChart.hasBackpack && inventoryState.hasBackpack )
-            actionChartController.pick('backpack', false, false);
-        actionChartController.pickItemsList( inventoryState.weapons );
-        actionChartController.pickItemsList( inventoryState.backpackItems );
-        actionChartController.pickItemsList( inventoryState.specialItems );
+            actionChartController.pick( Item.BACKPACK, false, false);
+        inventoryState.hasBackpack = false;
+
         actionChartController.increaseMoney( inventoryState.beltPouch );
-        actionChartController.increaseArrows( inventoryState.arrows );
+        inventoryState.beltPouch = 0;
+
         actionChartController.increaseMeals( inventoryState.meals );
+        inventoryState.meals = 0;
+
+        actionChartController.pickItemsList( inventoryState.backpackItems );
+        inventoryState.backpackItems = [];
+
+        if( recoverWeapons ) {
+            actionChartController.pickItemsList( inventoryState.weapons );
+            inventoryState.weapons = [];
+        }
+
+        if( recoverWeapons ) {
+            actionChartController.pickItemsList( inventoryState.specialItems );
+            inventoryState.specialItems = [];
+        }
+        else {
+            // Recover only non-weapon special items
+            let toRecover : Array<string> = [];
+            for(let itemId of inventoryState.specialItems) {
+                const i = state.mechanics.getObject( itemId );
+                if( i && !i.isWeapon() )
+                    toRecover.push( itemId );
+            }
+            actionChartController.pickItemsList( toRecover );
+
+            // Remove recovered items
+            for( let itemId of toRecover)
+                inventoryState.specialItems.removeValue( itemId );
+        }
+
+        // This must be done after picking quivers (special items)
+        actionChartController.increaseArrows( inventoryState.arrows );
+        inventoryState.arrows = 0;
     },
 
     /**

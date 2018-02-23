@@ -29,6 +29,7 @@ class Item {
     public static readonly MAP = 'map';
     public static readonly BOW = 'bow';
     public static readonly MEAL = 'meal';
+    public static readonly BACKPACK = 'backpack';
     
     /** The object type ('special', 'object' or 'weapon' ) */
     public type : string;

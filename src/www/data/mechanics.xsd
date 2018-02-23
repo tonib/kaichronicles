@@ -334,6 +334,7 @@
 
     <xs:complexType name="restoreInventoryState">
         <xs:attribute name="restorePoint" type="xs:string" use="required" />
+        <xs:attribute name="restoreWeapons" type="xs:boolean" />
     </xs:complexType>
 
     <xs:complexType name="goToSection">

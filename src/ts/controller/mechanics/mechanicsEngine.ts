@@ -1128,15 +1128,21 @@ const mechanicsEngine = {
             // Execute only once
             return;
 
-        var restorePoint = $(rule).attr('restorePoint');
+        const $rule = $(rule);
+
+        // Get the restore point
+        var restorePoint = $rule.attr('restorePoint');
         var inventoryState = state.sectionStates.otherStates[ restorePoint ];
         if( !inventoryState ) {
             mechanicsEngine.debugWarning('restorePoint ' + restorePoint + ' not found!');
             return;
         }
-        actionChartController.restoreInventoryState( inventoryState );
-        // Clean the restore point, to avoid space overhead
-        state.sectionStates.otherStates[ restorePoint ] = null;
+
+        // Restore weapons?
+        const restoreWeapons = mechanicsEngine.getBooleanProperty( $rule , 'restoreWeapons' , true );
+
+        // Restore objects
+        actionChartController.restoreInventoryState( inventoryState , restoreWeapons );
 
         state.sectionStates.markRuleAsExecuted(rule);
     },
@@ -1308,12 +1314,13 @@ const mechanicsEngine = {
      * Get a boolean rule property
      * @param $rule {jQuery} The rule
      * @param property The property to get
-     * @returns The property value. null if the property was not present
+     * @param defaultValue Value to return if the attribute is not present (default "defaultValue" is null)
+     * @returns The property value. defaultValue if the property was not present
      */
-    getBooleanProperty : function( $rule : any , property : string ) : boolean | null {
+    getBooleanProperty : function( $rule : any , property : string , defaultValue : boolean = null ) : boolean | null {
         const txtValue : string = $rule.attr( property );
         if( !txtValue )
-            return null;
+            return defaultValue;
         return txtValue == 'true';
     },
 

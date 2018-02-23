@@ -1006,7 +1006,17 @@
             </test>
         </section>
 
-        <!-- Up to sect176 -->
+        <section id="sect177">
+            <restoreInventoryState restorePoint="book9InventoryLost" restoreWeapons="false" />
+
+            <object objectId="sword" />
+            <object objectId="axe" />
+            <object objectId="bow" />
+            <object objectId="quiver" />
+            <object objectId="arrow" count="6" />
+            <object objectId="broadsword" />
+            <object objectId="warhammer" />
+        </section>
         
     </sections>
 

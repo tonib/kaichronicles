@@ -371,7 +371,7 @@ all section combats will be re-enabled
 ### saveInventoryState / restoreInventoryState
 ```xml
 <saveInventoryState restorePoint="book4sect10Inventory" />
-<restoreInventoryState restorePoint="book4sect10Inventory" />
+<restoreInventoryState restorePoint="book4sect10Inventory" restoreWeapons="false" />
 ```
 It can be used when player loses part of the inventory, and they can be found after. "saveInventoryState"
 stores the player current inventory state. When the "restoreInventoryState" rule is executed
@@ -379,10 +379,14 @@ the objects stored will be re-added to the player inventory. "restorePoint" prop
 is used to identify the place on the book where it was lost the inventory (they can be more
 than one).
 
-The optional property "objectsType" identifies the objects to lose / restore:
+The saveInventoryState optional property "objectsType" identifies the objects to lose / restore:
 * **all**: The backpack content, the backpack itself, special items, meals and money (This is the default value)
 * **weaponlike**: Weapons and weapon-like special items
 * **allobjects**: The backpack content, special items and meals
+
+The restoreInventoryState optional property "restoreWeapons" identifies if the Weapons, and weapon Special Items
+should be recovered. Default value is true. If it's false, weapons are not lost, and they can be recovered after
+with the same restore point.
 
 ### choiceSelected
 ```xml
