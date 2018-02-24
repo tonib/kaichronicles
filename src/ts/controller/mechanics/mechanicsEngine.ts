@@ -1036,14 +1036,6 @@ const mechanicsEngine = {
         }
 
         // Drop backpack item slots by its index (1-based index)
-        /*let slotObjectsIds : Array<string> = [];
-        for( let itemSlotTxt of mechanicsEngine.getArrayProperty( $rule , 'backpackItemSlots' ) ) {
-            const slotIndex = parseInt( itemSlotTxt ) - 1;
-            if( state.actionChart.backpackItems.length > slotIndex )
-                slotObjectsIds.push( state.actionChart.backpackItems[slotIndex] );
-        }
-        for( let objectId of slotObjectsIds )
-            actionChartController.drop( objectId );*/
         mechanicsEngine.dropActionChartSlots( $rule , 'backpackItemSlots' , state.actionChart.backpackItems );
         mechanicsEngine.dropActionChartSlots( $rule , 'specialItemSlots' , state.actionChart.specialItems );
 

@@ -12,19 +12,6 @@ interface Bonus {
 }
 
 /**
- * Inventory state on a given moment
- */
-interface InventoryState {
-    weapons: Array<string>;
-    hasBackpack: boolean;
-    backpackItems: Array<string>;
-    specialItems: Array<string>;
-    beltPouch: number;
-    arrows: number;
-    meals: number;
-}
-
-/**
  * The action chart / player state 
  */
 class ActionChart {

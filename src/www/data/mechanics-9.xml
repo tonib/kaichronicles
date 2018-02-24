@@ -1124,7 +1124,26 @@
             </test>
         </section>
 
-        <!-- Up to sect200 -->
+        <!--section id="sect201">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <executeOnce>
+                    <test not="true" expression="[SPECIAL-ITEMS-ON-ACTIONCHART] > 1">
+                        <drop backpackItemSlots="1" restorePoint="book9ItemStolen" />
+                    </test>
+                    <test expression="[SPECIAL-ITEMS-ON-ACTIONCHART] > 1">
+                        <test expression="[RANDOM] >= 0 &amp;&amp; [RANDOM] &lt;= 4">
+                            <drop specialItemSlots="1" restorePoint="book9ItemStolen" />
+                        </test>
+                        <test expression="[RANDOM] >= 5 &amp;&amp; [RANDOM] &lt;= 9">
+                            <drop specialItemSlots="2" restorePoint="book9ItemStolen" />
+                        </test>
+                    </test>
+                </executeOnce>
+                <choiceState section="all" set="enabled" />
+            </randomTable>
+        </section-->
+
     </sections>
 
 </mechanics>
