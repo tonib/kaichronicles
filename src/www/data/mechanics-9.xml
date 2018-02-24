@@ -867,6 +867,7 @@
         </section>
 
         <section id="sect155">
+            <!-- TODO: Recover object lost at sect201 and sect273 (and others?) -->
             <object objectId="dagger" />
             <object objectId="meal" index="0" />
             <object objectId="meal" index="1" />
@@ -1038,6 +1039,92 @@
             </afterCombats>
         </section>
 
+        <section id="sect183">
+            <pick class="arrow" count="-1" />
+        </section>
+
+        <section id="sect184">
+            <pick class="arrow" count="-2" />
+        </section>
+
+        <section id="sect187">
+            <choiceState section="sect140" set="disabled" />
+            <test hasDiscipline="hntmstry">
+                <test expression="[KAILEVEL] >= 6">
+                    <choiceState section="sect140" set="enabled" />
+                    <choiceState section="sect74" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect188">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect189">
+            <!-- TODO: We should keep the count of the different currencies (Lunes, Gold Crows,...). Unimplemented -->
+            <test not="true" expression="[MONEY] >= 1">
+                <choiceState section="sect253" set="disabled" />
+                <choiceState section="sect319" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect190">
+            <object objectId="rope" />
+            <object objectId="lantern" />
+            <object objectId="blanket" />
+            <object objectId="comb" />
+        </section>
+
+        <section id="sect191">
+            <endurance count="-6" />
+
+            <choiceState section="all" set="disabled" />
+            <combat combatSkillModifier="-4" />
+            <combat dammageMultiplier="1" />
+            <test currentWeapon="sommerswerd">
+                <combat dammageMultiplier="2" />
+            </test>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect193">
+            <!-- TODO: If you have an Invitation and wish to show it -->
+        </section>
+
+        <section id="sect195">
+            <death />
+        </section>
+
+        <section id="sect196">
+            <test not="true" hasDiscipline="invsblty">
+                <choiceState section="sect42" set="disabled" />
+            </test>
+            <test hasDiscipline="invsblty">
+                <choiceState section="sect109" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect197">
+            <choiceState section="sect14" set="disabled" />
+            <test hasObject="lantern|firesphere">
+                <choiceState section="sect14" set="enabled" />
+                <choiceState section="sect327" set="disabled" />
+            </test>
+            <test hasObject="torch">
+                <test hasObject="tinderbox">
+                    <choiceState section="sect14" set="enabled" />
+                    <choiceState section="sect327" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <!-- Up to sect200 -->
     </sections>
 
 </mechanics>

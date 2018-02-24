@@ -78,6 +78,7 @@ FOR FUTURE (1.10+):
 - Objects on the Action Chart should have a "available uses count". See "larnumaliqueur" object, book 8, sect228; see "vialbluepills2" object
 - Google Play will require API 26 on november 2018 (upgrade Cordova version?)
 - Allow to change the font size
+- Book 9, sect189: We should keep the count of the different currencies (Lunes, Gold Crows,...)
 
 Reminders:
 

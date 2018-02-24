@@ -1455,6 +1455,10 @@
             <name lang="es">Garrafa de Cristal</name>
         </object>
         
+        <object id="comb">
+            <name lang="en">Comb</name>
+            <name lang="es">Peine</name>
+        </object>
 
         <!-- BOOK 10 -->
 
