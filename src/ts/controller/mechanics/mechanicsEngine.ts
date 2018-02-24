@@ -893,8 +893,12 @@ const mechanicsEngine = {
 
         // Objects to disable on this combat:
         const txtDisabledObjects : string = $rule.attr('disabledObjects');
-        if( txtDisabledObjects )
-            combat.disabledObjects = txtDisabledObjects.split('|');
+        if( txtDisabledObjects ) {
+            if( txtDisabledObjects == 'none' )
+                combat.disabledObjects = [];
+            else
+                combat.disabledObjects = txtDisabledObjects.split('|');
+        }
         
     },
 

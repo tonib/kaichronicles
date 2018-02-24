@@ -442,7 +442,9 @@ class BookValidator {
 
     private combat( $rule ) {
         this.validateNumericExpression( $rule , 'combatSkillModifier' );
-        this.validateObjectIdsAttribute( $rule , 'disabledObjects' , true , false );
+
+        if( $rule.attr('disabledObjects') != 'none' )
+            this.validateObjectIdsAttribute( $rule , 'disabledObjects' , true , false );
 
         this.checkThereAreCombats( $rule );
 

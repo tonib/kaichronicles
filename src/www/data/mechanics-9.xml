@@ -1017,7 +1017,27 @@
             <object objectId="broadsword" />
             <object objectId="warhammer" />
         </section>
-        
+
+        <section id="sect179">
+            <test canUseBow="false">
+                <choiceState section="sect99" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect182">
+            <endurance count="-3" />
+            <choiceState section="all" set="disabled" />
+
+            <combat noWeapon="4" disabledObjects="shield" />
+            <afterCombatTurn turn="4">
+                <combat disabledObjects="none" />
+            </afterCombatTurn>
+
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
     </sections>
 
 </mechanics>
