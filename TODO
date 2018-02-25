@@ -1,3 +1,4 @@
+- TEST inventory states with weaponlike and all
 - Google play:
   * Desde el punto 118 no puedo avanzar de ninguna manera en la primer historia. Por favor arreglen eso. Excelente libro gracias.
 - Show a toast when you change the current weapon on the Action Chart
@@ -131,5 +132,20 @@ cordova emulate --target=Android_5_0_1 android
 TODO: Check differences between spaces options (see https://stackoverflow.com/questions/16423024/how-can-i-diff-2-files-while-ignoring-leading-white-space)
 svn diff -x --ignore-all-space https://www.projectaon.org/data/tags/20151013/es/xml/01hdlo.xml https://www.projectaon.org/data/trunk/es/xml/01hdlo.xml | iconv -f ISO-8859-1 | colordiff | less -R
 svn diff -x --ignore-all-space https://www.projectaon.org/data/tags/20151013/en/xml/01fftd.xml https://www.projectaon.org/data/trunk/en/xml/01fftd.xml | iconv -f ISO-8859-1 | colordiff | less -R
+
+* Create a default inventory
+actionChartController.drop('all')
+actionChartController.pick('backpack')
+actionChartController.pick('sword')
+actionChartController.pick('bow')
+actionChartController.increaseMoney(15)
+actionChartController.pick('meal')
+actionChartController.pick('meal')
+actionChartController.pick('rope')
+actionChartController.pick('comb')
+actionChartController.pick('sommerswerd')
+actionChartController.pick('quiver')
+actionChartController.increaseArrows(5)
+actionChartController.pick('shield')
 
 Work done on this commit:

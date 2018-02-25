@@ -1106,12 +1106,13 @@ const mechanicsEngine = {
             objectsType = 'all';
 
         // Save the inventory state:
-        const currentRestorePoint : InventoryState = state.sectionStates.otherStates[ restorePoint ];
-        var newRestorePoint = state.actionChart.getInventoryState( objectsType );
-        if( currentRestorePoint )
+        let newRestorePoint = InventoryState.fromActionChart( objectsType , state.actionChart );
+        const currentRestorePointObject : any = state.sectionStates.otherStates[ restorePoint ];
+        if( currentRestorePointObject ) {
             // Join both
-            newRestorePoint = ActionChart.joinInventoryStates(currentRestorePoint, newRestorePoint);
-        state.sectionStates.otherStates[ restorePoint ] = newRestorePoint;
+            newRestorePoint.addInventoryToThis( InventoryState.fromObject( currentRestorePointObject ) );
+        }
+        state.sectionStates.otherStates[ restorePoint ] = newRestorePoint.toObject();
 
         state.sectionStates.markRuleAsExecuted(rule);
     },
@@ -1127,18 +1128,24 @@ const mechanicsEngine = {
         const $rule = $(rule);
 
         // Get the restore point
-        var restorePoint = $rule.attr('restorePoint');
-        var inventoryState = state.sectionStates.otherStates[ restorePoint ];
-        if( !inventoryState ) {
-            mechanicsEngine.debugWarning('restorePoint ' + restorePoint + ' not found!');
+        const restorePoint = $rule.attr('restorePoint');
+        const inventoryStateObject : any = state.sectionStates.otherStates[ restorePoint ];
+        if( !inventoryStateObject ) {
+            // Sometimes it's OK if the restore point does not exist, so don't be so expressive
+            //mechanicsEngine.debugWarning('restorePoint ' + restorePoint + ' not found!');
+            console.log('restorePoint ' + restorePoint + ' not found');
             return;
         }
+        const inventoryState = InventoryState.fromObject( inventoryStateObject );
 
         // Restore weapons?
         const restoreWeapons = mechanicsEngine.getBooleanProperty( $rule , 'restoreWeapons' , true );
 
         // Restore objects
         actionChartController.restoreInventoryState( inventoryState , restoreWeapons );
+
+        // Save the current inventory state, modified by restoreInventoryState
+        state.sectionStates.otherStates[ restorePoint ] = inventoryState.toObject();
 
         state.sectionStates.markRuleAsExecuted(rule);
     },

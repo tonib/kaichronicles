@@ -670,67 +670,7 @@ class ActionChart {
         });
         return result;
     }
-
-    /**
-     * Return an object with the current inventory state
-     * @param objectTypes Kind of objects to get: 'all' = all, 'weaponlike' = weapons and weapon Special Objects,
-     * 'allobjects' = weapons, special items and backpack items
-     */
-    public getInventoryState( objectTypes : string ) : InventoryState {
-
-        let objects : InventoryState = {
-            weapons: [],
-            hasBackpack: false,
-            backpackItems: [],
-            specialItems: [],
-            beltPouch: 0,
-            arrows: 0,
-            meals: 0
-        };
-
-        if( objectTypes == 'all' || objectTypes == 'allobjects' ) {
-            objects.weapons = this.weapons.clone();
-            objects.backpackItems = this.backpackItems.clone();
-            objects.specialItems = this.specialItems.clone();
-            objects.arrows = this.arrows;
-            objects.meals = this.meals;
-
-            if( objectTypes == 'all' ) {
-                objects.hasBackpack = this.hasBackpack;
-                objects.beltPouch = this.beltPouch;
-            }
-        }
-        else if( objectTypes == 'weaponlike' ) {
-            for( let w of this.getWeaponObjects(false) ) {
-                if( w.type == Item.WEAPON )
-                    objects.weapons.push(w.id);
-                else if( w.type == Item.SPECIAL)
-                    objects.specialItems.push(w.id);
-                else if( w.type == Item.OBJECT)
-                    objects.backpackItems.push(w.id);
-            }
-        }
-        else
-            throw 'Wrong objectTypes: ' + objectTypes;
-
-        return objects;
-    }
-
-    /**
-     * Joins two inventory states
-     */
-    public static joinInventoryStates = function(s1 : InventoryState, s2 : InventoryState) {
-        return {
-            weapons: s1.weapons.concat( s2.weapons ),
-            hasBackpack: s1.hasBackpack || s2.hasBackpack ,
-            backpackItems: s1.backpackItems.concat( s2.backpackItems ),
-            specialItems: s1.specialItems.concat ( s2.specialItems ),
-            beltPouch: s1.beltPouch + s2.beltPouch,
-            arrows: s1.arrows + s2.arrows,
-            meals: s1.meals + s2.meals
-        };
-    }
-
+    
     /**
      * Get the maximum arrows number the player can carry, given by the number of owned quivers
      * @returns The max. arrows number

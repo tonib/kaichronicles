@@ -356,7 +356,11 @@ const actionChartController = {
         return txt.join(", ");
     },
 
-    pickItemsList: function(arrayOfItems) {
+    /**
+     * The player pick a set of objects
+     * @param arrayOfItems Array with object ids to pick
+     */
+    pickItemsList: function( arrayOfItems : Array<string> ) {
         var renderAvailableObjects = false;
         var sectionState = state.sectionStates.getSectionState();
         for(var i=0; i<arrayOfItems.length; i++) {
@@ -403,17 +407,7 @@ const actionChartController = {
         }
         else {
             // Recover only non-weapon special items
-            let toRecover : Array<string> = [];
-            for(let itemId of inventoryState.specialItems) {
-                const i = state.mechanics.getObject( itemId );
-                if( i && !i.isWeapon() )
-                    toRecover.push( itemId );
-            }
-            actionChartController.pickItemsList( toRecover );
-
-            // Remove recovered items
-            for( let itemId of toRecover)
-                inventoryState.specialItems.removeValue( itemId );
+            actionChartController.pickItemsList( inventoryState.getAndRemoveSpecialItemsNonWeapon() );
         }
 
         // This must be done after picking quivers (special items)
