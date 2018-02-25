@@ -585,7 +585,9 @@
         </section>
 
         <section id="sect100">
-            <!-- TODO: If you have an Invitation and wish to show it -->
+            <test not="true" hasObject="invitation">
+                <choiceState section="sect321" set="disabled" />
+            </test>
         </section>
         
         <section id="sect104">
@@ -1095,7 +1097,9 @@
         </section>
 
         <section id="sect193">
-            <!-- TODO: If you have an Invitation and wish to show it -->
+            <test not="true" hasObject="invitation">
+                <choiceState section="sect136" set="disabled" />
+            </test>
         </section>
 
         <section id="sect195">
@@ -1143,6 +1147,51 @@
                 </executeOnce>
                 <choiceState section="all" set="enabled" />
             </randomTable>
+        </section>
+
+        <section id="sect203">
+            <endurance count="-3" />
+        </section>
+
+        <section id="sect204">
+            <numberPicker
+                en-text="Answer the riddle"
+                es-text="Responde al acertijo"
+                min="1" max="350"
+                en-actionButton="Choose"
+                es-actionButton="Elige"
+                />
+            <numberPickerChoosed>
+                <test expression="[NUMBERPICKER] == 50">
+                    <goToSection section="sect50" />
+                </test>
+                <test expression="[NUMBERPICKER] != 50">
+                    <toast
+                        en-text="Wrong number!"
+                        es-text="¡Número incorrecto!" />
+                </test>
+            </numberPickerChoosed>
+            <!-- TODO: Drop objects here or at sect204 ??? -->
+        </section>
+
+        <section id="sect206">
+            <test not="true" expression="[MEALS] >= 1">
+                <choiceState section="sect271" set="disabled" />
+            </test>
+            <!-- TODO: sect271: Drop a meal -->
+        </section>
+
+        <section id="sect207">
+            <test not="true" hasObject="sommerswerd">
+                <choiceState section="sect336" set="disabled" />
+            </test>
+            <test hasObject="sommerswerd">
+                <choiceState section="sect67" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect209">
+            <pick objectId="invitation" />
         </section>
 
     </sections>

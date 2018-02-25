@@ -692,6 +692,11 @@
             </description>
         </special>
 
+        <special id="invitation">
+            <name lang="en">Invitation</name>
+            <name lang="es">Invitación</name>
+        </special>
+
         <!-- BOOK 10 -->
 
         <special id="bullwhip">
