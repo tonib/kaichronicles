@@ -868,6 +868,7 @@
 
         <section id="sect155">
             <!-- TODO: Recover object lost at sect201 and sect273 (and others?) -->
+            <restoreInventoryState restorePoint="book9ItemStolen" />
             <object objectId="dagger" />
             <object objectId="meal" index="0" />
             <object objectId="meal" index="1" />
@@ -1124,7 +1125,7 @@
             </test>
         </section>
 
-        <!--section id="sect201">
+        <section id="sect201">
             <choiceState section="all" set="disabled" />
             <randomTable>
                 <executeOnce>
@@ -1142,7 +1143,7 @@
                 </executeOnce>
                 <choiceState section="all" set="enabled" />
             </randomTable>
-        </section-->
+        </section>
 
     </sections>
 

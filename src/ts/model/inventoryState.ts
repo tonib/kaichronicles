@@ -60,6 +60,15 @@ class InventoryState {
             this.backpackItems.push(item.id);
     }
 
+    public addObjectIds( objectIds : Array<string> ) {
+        for( let objectId of objectIds ) {
+            const item = state.mechanics.getObject( objectId );
+            if( !item )
+                continue;
+            this.addItem( item );
+        }
+    }
+
     /**
      * Append to this inventory state other state
      * @param s2 The state to append to this

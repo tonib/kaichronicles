@@ -1029,15 +1029,30 @@ const mechanicsEngine = {
         
         const $rule = $(rule);
 
+        // Object ids dropped on this rule execution
+        let droppedObjects : Array<string> = [];
+
         // Drop the first one of the specified
         for( let objectId of mechanicsEngine.getArrayProperty( $rule , 'objectId' ) ) {
-            if( actionChartController.drop( objectId ) )
+            if( actionChartController.drop( objectId ) ) {
+                droppedObjects.push( objectId );
                 break;
+            }
         }
 
         // Drop backpack item slots by its index (1-based index)
-        mechanicsEngine.dropActionChartSlots( $rule , 'backpackItemSlots' , state.actionChart.backpackItems );
-        mechanicsEngine.dropActionChartSlots( $rule , 'specialItemSlots' , state.actionChart.specialItems );
+        droppedObjects = droppedObjects.concat( 
+            mechanicsEngine.dropActionChartSlots( $rule , 'backpackItemSlots' , state.actionChart.backpackItems ) );
+        droppedObjects = droppedObjects.concat(
+            mechanicsEngine.dropActionChartSlots( $rule , 'specialItemSlots' , state.actionChart.specialItems ) );
+
+        // Store dropped objects as an inventory state
+        const restorePointId : string = $rule.attr( 'restorePoint' );
+        if( restorePointId ) {
+            const inventoryState = new InventoryState();
+            inventoryState.addObjectIds( droppedObjects );
+            mechanicsEngine.appedToInventoryState( inventoryState , restorePointId );
+        }
 
         state.sectionStates.markRuleAsExecuted(rule);
     },
@@ -1100,19 +1115,14 @@ const mechanicsEngine = {
             // Execute only once
             return;
         
-        const restorePoint : string = $(rule).attr('restorePoint');
+        const restorePointId : string = $(rule).attr('restorePoint');
         let objectsType : string = $(rule).attr('objectsType');
         if( !objectsType )
             objectsType = 'all';
 
         // Save the inventory state:
         let newRestorePoint = InventoryState.fromActionChart( objectsType , state.actionChart );
-        const currentRestorePointObject : any = state.sectionStates.otherStates[ restorePoint ];
-        if( currentRestorePointObject ) {
-            // Join both
-            newRestorePoint.addInventoryToThis( InventoryState.fromObject( currentRestorePointObject ) );
-        }
-        state.sectionStates.otherStates[ restorePoint ] = newRestorePoint.toObject();
+        mechanicsEngine.appedToInventoryState( newRestorePoint , restorePointId );
 
         state.sectionStates.markRuleAsExecuted(rule);
     },
@@ -1540,8 +1550,9 @@ const mechanicsEngine = {
      * @param $rule The "drop" rule
      * @param property The rule property with the slots to drop
      * @param objectsArray The Action Chart array (the Special Items or BackBackItems)
+     * @returns Ids of dropped objects
      */
-    dropActionChartSlots : function( $rule : any , property : string , objectsArray : Array<string> ) {
+    dropActionChartSlots : function( $rule : any , property : string , objectsArray : Array<string> ) : Array<string> {
 
         // Objects to drop
         let slotObjectsIds : Array<string> = [];
@@ -1561,6 +1572,18 @@ const mechanicsEngine = {
         // Drop objects
         for( let objectId of slotObjectsIds )
             actionChartController.drop( objectId );
+
+        return slotObjectsIds;
+    },
+
+    appedToInventoryState : function(newRestorePoint : InventoryState, restorePointId : string ) {
+
+        const currentRestorePointObject : any = state.sectionStates.otherStates[ restorePointId ];
+        if( currentRestorePointObject ) {
+            // Join both
+            newRestorePoint.addInventoryToThis( InventoryState.fromObject( currentRestorePointObject ) );
+        }
+        state.sectionStates.otherStates[ restorePointId ] = newRestorePoint.toObject();
     },
 
     /**

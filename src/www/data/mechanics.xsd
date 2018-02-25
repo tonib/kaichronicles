@@ -276,6 +276,7 @@
         <xs:attribute name="objectId" type="xs:string" />
         <xs:attribute name="backpackItemSlots" type="xs:string" />
         <xs:attribute name="specialItemSlots" type="xs:string" />
+        <xs:attribute name="restorePoint" type="xs:string" />
     </xs:complexType>
     
     <xs:complexType name="disableCombats">

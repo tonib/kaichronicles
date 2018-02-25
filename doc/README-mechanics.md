@@ -167,6 +167,9 @@ If you set more than one object id, the first one owned by the player will be dr
 The property "backpackItemSlots" and specialItemSlots is used to drop objects on some given Backpack / Special Items positions. They
 can contain the index positions (1-based), or "last" for the last item
 
+If the optional property "restorePoint" is specified, the dropped item will can be restored with the rule "restoreInventoryState", with
+the given restore point id.
+
 ### randomTable (has state) / case / randomTableIncrement
 ```xml
 <randomTable index="0" zeroAsTen="true" >
