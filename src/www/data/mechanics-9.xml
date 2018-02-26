@@ -121,6 +121,7 @@
         </section>
 
         <section id="sect10">
+            <!-- TODO: Do you must use dagger of vashna as current weapon??? -->
             <choiceState section="all" set="disabled" />
             <combat noMindblast="true" noPsiSurge="true" />
             <afterCombats>
@@ -419,7 +420,7 @@
         </section>
         
         <section id="sect79">
-            <!-- TODO: sect239, check this: There is a bonus for dagger throw?, I suspect yes -->
+            <!-- TODO: sect239, check this: There is a bonus for dagger throw?, I suspect yes (improved disciplines)-->
         </section>
 
         <section id="sect82">
@@ -1192,6 +1193,197 @@
 
         <section id="sect209">
             <pick objectId="invitation" />
+        </section>
+
+        <section id="sect210">
+            <endurance count="-5" />
+
+            <choiceState section="sect188" set="disabled" />
+            <test hasObject="psychicring">
+                <choiceState section="sect188" set="enabled" />
+                <choiceState section="sect20" set="disabled" />
+            </test>
+
+            <choiceState section="sect79" set="disabled" />
+            <test hasObject="daggerofvashna">
+                <choiceState section="sect79" set="enabled" />
+                <choiceState section="sect20" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect211">
+            <death />
+        </section>
+
+        <section id="sect212">
+            <!-- TODO: If you have ever escaped from the South Gate tower (do you know Sogh?)... -->
+        </section>
+
+        <section id="sect213">
+            <choiceState section="sect160" set="disabled" />
+            <test hasDiscipline="pthmnshp">
+                <test expression="[KAILEVEL] >= 5">
+                    <choiceState section="sect160" set="enabled" />
+                    <choiceState section="sect314" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect214">
+            <choiceState section="all" set="disabled" />
+            <combat combatSkillModifier="+8" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect215">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="6">
+                    <choiceState section="sect287" set="enabled" />
+                </case>
+                <case from="7" to="99">
+                    <choiceState section="sect117" set="enabled" />
+                </case>
+            </randomTable>
+            <!-- TODO: There is a bonus for dagger throw?, I suspect yes (improved disciplines) -->
+            <test hasWeaponskillWith="dagger">
+                <randomTableIncrement increment="+4" />
+            </test>
+        </section>
+
+        <section id="sect216">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <pick class="arrow" count="-1" />
+                <case from="-99" to="7">
+                    <choiceState section="sect9" set="enabled" />
+                </case>
+                <case from="8" to="99">
+                    <choiceState section="sect310" set="enabled" />
+                </case>
+            </randomTable>
+            <randomTableIncrement increment="[BOWBONUS]" />
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="+1" />
+            </test>
+        </section>
+
+        <section id="sect217">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="0" />
+            <afterCombats>
+                <choiceState section="sect155" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect334" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect218">
+            <meal />
+        </section>
+
+        <section id="sect220">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect222">
+            <test not="true" hasDiscipline="anmlctrl">
+                <choiceState section="sect15" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect224">
+            <test not="true" hasDiscipline="pthmnshp|dvnation">
+                <choiceState section="sect133" set="disabled" />
+            </test>
+            <test hasDiscipline="pthmnshp|dvnation">
+                <choiceState section="sect264" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect226">
+            <test not="true" hasDiscipline="dvnation">
+                <choiceState section="sect251" set="disabled" />
+            </test>
+            <test hasDiscipline="dvnation">
+                <choiceState section="sect53" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect227">
+            <endurance count="-2" />
+        </section>
+
+        <section id="sect229">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <pick class="arrow" count="-1" />
+                <case from="-99" to="5">
+                    <choiceState section="sect330" set="enabled" />
+                </case>
+                <case from="6" to="99">
+                    <choiceState section="sect107" set="enabled" />
+                </case>
+            </randomTable>
+            <!-- NO bow bonus on this section, only divination -->
+            <!--randomTableIncrement increment="[BOWBONUS]" /-->
+            <test hasDiscipline="dvnation">
+                <randomTableIncrement increment="+3" />
+            </test>
+        </section>
+
+        <section id="sect230">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="6">
+                    <choiceState section="sect89" set="enabled" />
+                </case>
+                <case from="7" to="99">
+                    <choiceState section="sect297" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="+3" />
+            </test>
+        </section>
+
+        <section id="sect231">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="1">
+                    <choiceState section="sect195" set="enabled" />
+                </case>
+                <case from="2" to="6">
+                    <choiceState section="sect332" set="enabled" />
+                </case>
+                <case from="7" to="99">
+                    <choiceState section="sect81" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hntmstry|nexus">
+                <randomTableIncrement increment="+3" />
+            </test>
+        </section>
+
+        <section id="sect235">
+            <drop backpackItemSlots="3|4" />
+        </section>
+
+        <section id="sect237">
+            <choiceState section="sect184" set="disabled" />
+            <test canUseBow="true">
+                <test expression="[ARROWS] >= 2">
+                    <choiceState section="sect184" set="enabled" />
+                    <choiceState section="sect116" set="disabled" />
+                </test>
+            </test>
         </section>
 
     </sections>
