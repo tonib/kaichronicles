@@ -991,7 +991,6 @@
                 <choiceState section="sect7" set="disabled" />
             </test>
             <test not="true" expression="[MONEY] > 0 || [BACKPACK-ITEMS-CNT-ON-ACTIONCHART] > 0 || [SPECIAL-ITEMS-ON-ACTIONCHART] > 0 || [WEAPON-ITEMS-CNT-ON-ACTIONCHART] > 0">
-                <!-- TODO: sect261, drop something -->
                 <choiceState section="sect261" set="disabled" />
             </test>
         </section>
@@ -1179,7 +1178,6 @@
             <test not="true" expression="[MEALS] >= 1">
                 <choiceState section="sect271" set="disabled" />
             </test>
-            <!-- TODO: sect271: Drop a meal -->
         </section>
 
         <section id="sect207">
@@ -1386,6 +1384,67 @@
             </test>
         </section>
 
+        <section id="sect259">
+            <pick objectId="sword" />
+            <pick objectId="dagger" />
+            <!-- Same iron key that appears on book 4? -->
+            <pick objectId="ironkey" />
+        </section>
+
+        <section id="sect260">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="0" />
+            <afterCombats>
+                <choiceState section="sect170" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect328" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect261">
+            <choiceState section="all" set="disabled" />
+
+            <message id="msg-drop-something" 
+                en-text="Drop a coin, Weapon, Backpack Item or Special Item before continue" 
+                es-text="Deja una moneda, Arma, Objeto de Mochila u Objeto Especial antes de continuar"
+            />
+            <onInventoryEvent>
+                <choiceState section="all" set="disabled" />
+                <message id="msg-drop-something" op="show" />
+                <test not="true" expression="( [MONEY] > 0 || [BACKPACK-ITEMS-CNT-ON-ACTIONCHART] > 0 || [SPECIAL-ITEMS-ON-ACTIONCHART] > 0 || [WEAPON-ITEMS-CNT-ON-ACTIONCHART] > 0 )">
+                    <!-- The player has nothing -->
+                    <choiceState section="all" set="enabled" />
+                    <message id="msg-drop-something" op="hide" />
+                </test>
+                <test expression="( [MONEY-ON-SECTION] > 0 || [BACKPACK-ITEMS-CNT-ON-SECTION] > 0 || [SPECIAL-ITEMS-ON-SECTION] > 0 || [WEAPON-ITEMS-CNT-ON-SECTION] > 0 )">
+                    <!-- The player has drop something -->
+                    <choiceState section="all" set="enabled" />
+                    <message id="msg-drop-something" op="hide" />
+                </test>
+            </onInventoryEvent>
+        </section>
+
+        <section id="sect264">
+            <endurance count="-3" />
+        </section>
+
+        <section id="sect265">
+            <object objectId="comb" />
+            <object objectId="rope" />
+            <object objectId="lantern" />
+            <object objectId="blanket" />
+        </section>
+
+        <section id="sect266">
+            <endurance count="-1" />
+        </section>
+
+        <section id="sect271">
+            <drop objectId="meal" />
+        </section>
+
+        <!-- Up to sect272 -->
     </sections>
 
 </mechanics>

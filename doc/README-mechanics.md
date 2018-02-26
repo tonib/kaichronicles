@@ -56,7 +56,8 @@ There are some keywords that can be used on expressions. They have the following
 * **[RANDOMxxx]**: Ex. "[RANDOM2], The value of the xxx-th random table value picked 
   (not for combat random values), where xxx is the random table index (0=first, 1=second,...)
 * **[COMBATRANDOM]**: The value of the last random table value picked on combats in this section
-* **[MONEY]**: The current amount of money
+* **[MONEY]**: The current amount of money on the action chart (Belt pouch)
+* **[MONEY-ON-SECTION]**: The current amount of money available on the section
 * **[BACKPACK-ITEMS-CNT-ON-SECTION]**: The current count of available backpack items 
   on the section
 * **[BACKPACK-ITEMS-CNT-ON-ACTIONCHART]**: The current count of backpack items on the
