@@ -1444,7 +1444,21 @@
             <drop objectId="meal" />
         </section>
 
-        <!-- Up to sect272 -->
+        <section id="sect273">
+            <executeOnce>
+                <!-- Order is important here -->
+                <test expression="[SPECIAL-ITEMS-ON-ACTIONCHART] == 0">
+                    <drop backpackItemSlots="1" restorePoint="book9ItemStolen" />
+                </test>
+                <test expression="[SPECIAL-ITEMS-ON-ACTIONCHART] == 1">
+                    <drop specialItemSlots="1" restorePoint="book9ItemStolen" />
+                </test>
+                <test expression="[SPECIAL-ITEMS-ON-ACTIONCHART] > 1">
+                    <drop specialItemSlots="2" restorePoint="book9ItemStolen" />
+                </test>
+            </executeOnce>
+        </section>
+
     </sections>
 
 </mechanics>

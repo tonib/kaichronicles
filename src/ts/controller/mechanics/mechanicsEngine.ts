@@ -1032,6 +1032,9 @@ const mechanicsEngine = {
         // Object ids dropped on this rule execution
         let droppedObjects : Array<string> = [];
 
+        // Track dropped arrows
+        const originalArrows = state.actionChart.arrows;
+
         // Drop the first one of the specified
         for( let objectId of mechanicsEngine.getArrayProperty( $rule , 'objectId' ) ) {
             if( actionChartController.drop( objectId ) ) {
@@ -1051,6 +1054,11 @@ const mechanicsEngine = {
         if( restorePointId ) {
             const inventoryState = new InventoryState();
             inventoryState.addObjectIds( droppedObjects );
+
+            if( state.actionChart.arrows < originalArrows )
+                // One or more quivers have been dropped. Save arrows:
+                inventoryState.arrows += originalArrows - state.actionChart.arrows;
+
             mechanicsEngine.appedToInventoryState( inventoryState , restorePointId );
         }
 
