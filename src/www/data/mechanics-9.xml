@@ -1283,6 +1283,13 @@
             <meal />
         </section>
 
+        <section id="sect219">
+            <!-- (If your source of light is a Torch, remember to erase it from your Action Chart.) -->
+            <test not="true" hasObject="lantern|firesphere">
+                <drop objectId="torch" />
+            </test>
+        </section>
+
         <section id="sect220">
             <choiceState section="all" set="disabled" />
             <combat noMindblast="true" />
@@ -1457,6 +1464,133 @@
                     <drop specialItemSlots="2" restorePoint="book9ItemStolen" />
                 </test>
             </executeOnce>
+        </section>
+
+        <section id="sect277">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect282">
+            <choiceState section="sect219" set="disabled" />
+            <test hasObject="lantern|firesphere">
+                <choiceState section="sect219" set="enabled" />
+                <choiceState section="sect341" set="disabled" />
+            </test>
+            <test hasObject="torch">
+                <test hasObject="tinderbox">
+                    <choiceState section="sect219" set="enabled" />
+                    <choiceState section="sect341" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect283">
+            <endurance count="-4" />
+        </section>
+
+        <section id="sect285">
+            <choiceState section="all" set="disabled" />
+            <combat immuneTurns="2" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect286">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="5">
+                    <choiceState section="sect112" set="enabled" />
+                </case>
+                <case from="6" to="99">
+                    <choiceState section="sect270" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasCircle="circleSolaris">
+                <randomTableIncrement increment="+4" />
+            </test>
+        </section>
+
+        <section id="sect289">
+            <choiceState section="sect25" set="disabled" />
+            <test hasObject="vialbluepills|vialbluepills2">
+                <choiceState section="sect25" set="enabled" />
+                <choiceState section="sect329" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect291">
+            <test not="true" hasDiscipline="curing">
+                <endurance count="-8" />
+            </test>
+            <test hasDiscipline="curing">
+                <test not="true" expression="[KAILEVEL] >= 5">
+                    <endurance count="-8" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect297">
+            <endurance count="-1" />
+        </section>
+
+        <section id="sect300">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect58" set="enabled" />
+                </case>
+                <case from="5" to="9">
+                    <choiceState section="sect137" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect301">
+            <choiceState section="all" set="disabled" />
+
+            <combat dammageMultiplier="1" />
+            <test currentWeapon="sommerswerd">
+                <combat dammageMultiplier="2" />
+            </test>
+
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect303">
+            <choiceState section="sect35" set="disabled" />
+            <test hasDiscipline="hntmstry">
+                <test expression="[KAILEVEL] >= 6">
+                    <choiceState section="sect35" set="enabled" />
+                    <choiceState section="sect168" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect307">
+            <test not="true" hasObject="sommerswerd">
+                <choiceState section="sect27" set="disabled" />
+            </test>
+            <test hasObject="sommerswerd">
+                <choiceState section="sect152" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect308">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="1" />
+            <afterCombats>
+                <choiceState section="sect174" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect223" set="enabled" />
+            </afterElude>
         </section>
 
     </sections>
