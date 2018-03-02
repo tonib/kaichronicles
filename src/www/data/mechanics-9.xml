@@ -191,6 +191,10 @@
             </test>
         </section>
 
+        <section id="sect19">
+            <pick class="money" count="-3" />
+        </section>
+
         <section id="sect20">
             <death />
         </section>
@@ -1391,6 +1395,156 @@
             </test>
         </section>
 
+        <section id="sect238">
+            <choiceState section="all" set="disabled" />
+            <combat combatSkillModifier="+2" index="0" />
+            <combat combatSkillModifier="+2" index="1" />
+            <combat combatSkillModifier="+2" index="2" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect239">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect20" set="enabled" />
+                </case>
+                <case from="5" to="99">
+                    <choiceState section="sect350" set="enabled" />
+                </case>
+            </randomTable>
+            <!-- TODO: There is a bonus for dagger throw?, I suspect yes (improved disciplines) -->
+            <test hasWeaponskillWith="dagger">
+                <randomTableIncrement increment="+3" />
+            </test>
+            <test hasCircle="circleFire">
+                <randomTableIncrement increment="+1" />
+            </test>
+        </section>
+
+        <section id="sect240">
+            <test not="true" hasObject="invitation">
+                <choiceState section="sect136" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect241">
+            <numberPicker
+                en-text="Choose the number"
+                es-text="Elige el número"
+                min="1" max="350"
+                en-actionButton="Choose"
+                es-actionButton="Elige"
+                />
+            <!-- Numbers: sect320, sect6, sect326 -->
+            <numberPickerChoosed>
+                <test expression="[NUMBERPICKER] == 6">
+                    <goToSection section="sect6" />
+                </test>
+                <test expression="[NUMBERPICKER] == 320">
+                    <goToSection section="sect320" />
+                </test>
+                <test expression="[NUMBERPICKER] == 326">
+                    <goToSection section="sect326" />
+                </test>
+                <test not="true" expression="[NUMBERPICKER] == 6 || [NUMBERPICKER] == 320 || [NUMBERPICKER] == 326">
+                    <toast
+                        en-text="Wrong number!"
+                        es-text="¡Número incorrecto!" />
+                </test>
+            </numberPickerChoosed>
+        </section>
+
+        <section id="sect243">
+            <test not="true" hasDiscipline="psiscrn">
+                <choiceState section="sect101" set="disabled" />
+            </test>
+            <test hasDiscipline="psiscrn">
+                <choiceState section="sect64" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect244">
+            <choiceState section="all" set="disabled" />
+            <test hasDiscipline="anmlctrl">
+                <combat combatSkillModifier="+2" />
+            </test>
+            <afterCombats>
+                <test not="true" expression="[COMBATSDURATION] >= 4">
+                    <choiceState section="sect306" set="enabled" />
+                </test>
+                <test expression="[COMBATSDURATION] >= 4">
+                    <choiceState section="sect148" set="enabled" />
+                </test>
+            </afterCombats>
+        </section>
+
+        <section id="sect246">
+            <test not="true" hasDiscipline="dvnation">
+                <choiceState section="sect298" set="disabled" />
+            </test>
+            <test hasDiscipline="dvnation">
+                <choiceState section="sect41" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect247">
+            <meal />
+        </section>
+
+        <section id="sect248">
+            <choiceState section="sect84" set="disabled" />
+            <test hasDiscipline="psisurge">
+                <test expression="[KAILEVEL] >= 6">
+                    <choiceState section="sect84" set="enabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect249">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect252">
+            <meal />
+        </section>
+
+        <section id="sect253">
+            <!-- TODO: We should keep the count of the different currencies (Lunes, Gold Crows,...). Unimplemented -->
+            <!-- 10 Lunes == 2,5 GC -->
+            <test not="true" expression="[MONEY] >= 3">
+                <choiceState section="sect19" set="disabled" />
+            </test>
+        </section>
+        
+        <section id="sect254">
+            <choiceState section="all" set="disabled" />
+
+            <combat dammageMultiplier="1" />
+            <test currentWeapon="sommerswerd">
+                <combat dammageMultiplier="2" />
+            </test>
+
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect258">
+            <test not="true" hasObject="sommerswerd">
+                <choiceState section="sect48" set="disabled" />
+            </test>
+            <test hasObject="sommerswerd">
+                <choiceState section="sect210" set="disabled" />
+            </test>
+        </section>
+
         <section id="sect259">
             <pick objectId="sword" />
             <pick objectId="dagger" />
@@ -1591,6 +1745,66 @@
             <afterElude>
                 <choiceState section="sect223" set="enabled" />
             </afterElude>
+        </section>
+
+        <section id="sect309">
+            <endurance count="-8" />
+            <choiceState section="all" set="disabled" />
+            <combat combatSkillModifier="+2" index="1" />
+            <combat combatSkillModifier="+2" index="2" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect312">
+            <saveInventoryState objectsType="allobjects" restorePoint="book9InventoryLost" />
+            <drop objectId="allobjects" />
+        </section>
+
+        <section id="sect313">
+            <choiceState section="sect33" set="disabled" />
+            <test hasObject="lantern|firesphere">
+                <choiceState section="sect33" set="enabled" />
+            </test>
+            <test hasObject="torch">
+                <test hasObject="tinderbox">
+                    <choiceState section="sect33" set="enabled" />
+                </test>
+            </test>
+
+            <test not="true" hasObject="fireseed">
+                <choiceState section="sect106" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect314">
+            <test canUseBow="false">
+                <choiceState section="sect183" set="disabled" />
+            </test>
+
+            <choiceState section="sect293" set="disabled" />
+            <choiceState section="sect257" set="disabled" />
+            <randomTable>
+                <case from="0" to="3">
+                    <choiceState section="sect293" set="enabled" />
+                </case>
+                <case from="4" to="9">
+                    <choiceState section="sect257" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect315">
+            <pick class="money" count="-[MONEY]" />
+        </section>
+
+        <section id="sect316">
+            <choiceState section="all" set="disabled" />
+            <combat noWeapon="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
         </section>
 
     </sections>

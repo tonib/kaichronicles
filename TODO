@@ -1,4 +1,3 @@
-- ERROR: book 9, sect201: If you drop a quiver, arrows are not recovered later
 - Google play:
   * Desde el punto 118 no puedo avanzar de ninguna manera en la primer historia. Por favor arreglen eso. Excelente libro gracias.
 - Show a toast when you change the current weapon on the Action Chart
@@ -35,6 +34,9 @@
   * 9, 145: "cuatro Coronas de Oro" should be "tres Coronas de Oro"
   * 9, 182: english: "Special ItemWeapon" should be "Special Item"???, spanish: "ni Objeto Especial alguno" should be 
     "ni Objeto Especial que sea arma, ni Escudo" ???
+  * 9, 241: só1o -> sólo ("1" -> "l")
+  * 9, equimnt: "The currency of Anari is the Lune, but Gold Crowns are readily accepted at an exchange rate of four Lune for every 1 Gold Crown."
+    not in spanish
   * 11, equipmnt: Spanish wrong foot note 1 (Lantern)
   
 
