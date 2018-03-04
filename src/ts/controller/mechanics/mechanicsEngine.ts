@@ -1493,8 +1493,9 @@ const mechanicsEngine = {
         
         var $nextBook = $('.bookref');
         if( $nextBook.length === 0 ) {
-            // XML bug with spanish book 4. It has no bookref...
-            $nextBook = $('cite');
+            // XML bug with spanish book 4 (and 9, and others???). It has no bookref...
+            // Just the first one, spanish book 9 contains two cites
+            $nextBook = $('cite').first();
         }
 
         $nextBook.replaceWith( '<a href="#" id="game-nextBook" class="action">' + 

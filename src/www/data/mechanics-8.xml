@@ -1990,10 +1990,6 @@
         </section>
 
         <section id="sect350">
-            <message
-                en-text="This is the last implemented book. Thank you for playing!" 
-                es-text="Este es el último libro implementado. ¡Gracias por jugar!" 
-            />
             <test sectionVisited="sect71">
                 <combatSkill count="+2" toast="false" />
             </test>

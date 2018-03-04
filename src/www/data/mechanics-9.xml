@@ -1858,15 +1858,87 @@
             </afterCombats>
         </section>
 
-        <section id="sect329">
-            <!--
-                TODO: sect346, drop entire backpack content
-            -->
-        </section>
-
         <section id="sect331">
             <object objectId="meal" count="2" price="1" unlimited="true" />
             <object objectId="flaskofboza" price="1" unlimited="true" />
+        </section>
+
+        <section id="sect332">
+            <endurance count="-2" />
+        </section>
+
+        <section id="sect336">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect338">
+            <test canUseBow="false">
+                <choiceState section="sect22" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect340">
+            <death />
+        </section>
+
+        <section id="sect342">
+            <choiceState section="sect159" set="disabled" />
+            <test hasDiscipline="nexus">
+                <test expression="[KAILEVEL] >= 6">
+                    <choiceState section="sect159" set="enabled" />
+                    <choiceState section="sect59" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect346">
+            <drop objectId="backpackcontent" />
+            <choiceState section="sect298" set="disabled" />
+            <test hasDiscipline="dvnation">
+                <choiceState section="sect298" set="enabled" />
+                <choiceState section="sect41" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect347">
+            <choiceState section="all" set="disabled" />
+            <test hasDiscipline="dvnation|hntmstry">
+                <choiceState section="sect36" set="enabled" />
+            </test>
+            <test not="true" hasDiscipline="dvnation|hntmstry">
+                <randomTable>
+                    <case from="0" to="6">
+                        <choiceState section="sect260" set="enabled" />
+                    </case>
+                    <case from="7" to="9">
+                        <choiceState section="sect119" set="enabled" />
+                    </case>
+                </randomTable>
+            </test>
+        </section>
+
+        <section id="sect349">
+            <choiceState section="sect33" set="disabled" />
+            <test hasObject="lantern|firesphere">
+                <choiceState section="sect33" set="enabled" />
+            </test>
+            <test hasObject="torch">
+                <test hasObject="tinderbox">
+                    <choiceState section="sect33" set="enabled" />
+                </test>
+            </test>
+
+            <test not="true" hasObject="fireseed">
+                <choiceState section="sect106" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect350">
+            <restoreInventoryState restorePoint="book9InventoryLost" />
         </section>
 
     </sections>
