@@ -1465,6 +1465,12 @@
             <name lang="es">Peine</name>
         </object>
 
+        <object id="flaskofboza">
+            <name lang="en">Flask of Boza</name>
+            <name lang="es">Jarrita de Boza</name>
+        </object>
+        
+
         <!-- BOOK 10 -->
 
         <object id="meallaumwort">

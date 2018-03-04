@@ -231,9 +231,10 @@ class SectionState {
     /**
      * Add an object to the section
      * @param objectId Object id to add
-     * @param price The object price
+     * @param price The object price. 0 == no buy (free)
      * @param unlimited True if there are an infinite number of this kind of object on the section
-     * @param count Only applies if id = 'quiver' (number of arrows on the quiver), 'arrow', or 'money' (number of Gold Crowns)
+     * @param count Only applies if id = 'quiver' (number of arrows on the quiver), 'arrow' (number of arrows), or 'money' (number of Gold Crowns),
+     * or if price is is not zero (-> you buy "count" items for one "price")
      * @param useOnSection The object is allowed to be used on the section (not picked object)?
      */
     public addObjectToSection(objectId : string , price : number = 0, unlimited : boolean = false, count : number = 0 ,
@@ -254,7 +255,7 @@ class SectionState {
             id: objectId,
             price: price,
             unlimited: unlimited,
-            count: (objectId == 'quiver' || objectId == 'arrow' || objectId == 'money' ? count : 0 ),
+            count: (objectId == Item.QUIVER || objectId == Item.ARROW || objectId == Item.MONEY || price > 0 ? count : 0 ),
             useOnSection: useOnSection
         });
     }

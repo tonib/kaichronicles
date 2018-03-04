@@ -93,7 +93,12 @@ class ObjectsTableItem {
         if( this.objectInfo.price )
             name += ' (' + this.objectInfo.price + ' ' + translations.text('goldCrowns') + ')';
 
-        // Objet Image
+        // Buy X objects for a given price
+        if( this.objectInfo.id != Item.MONEY && this.objectInfo.id != Item.ARROW && this.objectInfo.id != Item.QUIVER &&
+            this.objectInfo.price > 0 && this.objectInfo.count > 1 )
+            name = this.objectInfo.count + " x " + name;
+
+        // Object Image
         var imageUrl = this.item.getImageUrl();
         if( imageUrl ) {
             html += '<span class="inventoryImgContainer"><img class="inventoryImg" src=' + 
@@ -129,8 +134,9 @@ class ObjectsTableItem {
     private getOperationTag(operation : string, title : string = null , opDescription : string ) {
         let link = '<a href="#" data-objectId="' + this.item.id + '" class="equipment-op btn btn-default" ';
 
-        if( this.item.id == Item.QUIVER || this.item.id == Item.ARROW || this.item.id == Item.MONEY )
-            // Store the number of arrows on the quiver / gold crowns
+        if( this.item.id == Item.QUIVER || this.item.id == Item.ARROW || this.item.id == Item.MONEY || 
+            ( this.objectInfo.price > 0 && this.objectInfo.count > 0 ) )
+            // Store the number of arrows on the quiver / gold crowns / number of items to buy by the given price
             link += 'data-count="' + this.objectInfo.count + '" ';
 
         if( this.objectInfo.price )
@@ -294,8 +300,19 @@ class ObjectsTableItem {
         if( this.item.id == Item.MONEY || this.item.id == Item.ARROW )
             // Not really an object
             objectPicked = true;
-        else
-            objectPicked = actionChartController.pick( this.item.id , true, true);
+        else {
+
+            // A count == 0 means one object
+            // "Count" for quivers means "count of arrows", not "count of quivers" 
+            let nItems = this.objectInfo.count;
+            if( !nItems || this.item.id == Item.QUIVER )
+                nItems = 1;
+            
+            for(let i=0; i<nItems; i++) {
+                 if( actionChartController.pick( this.item.id , true, true) )
+                    objectPicked = true;
+            }
+        }
 
         if( objectPicked ) {
 
@@ -329,6 +346,7 @@ class ObjectsTableItem {
         }
     }
 
+    /** Sell object operation */
     private sell() {
         if( !confirm( translations.text( 'confirmSell' , [ this.objectInfo.price ] ) ) )
             return;

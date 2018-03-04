@@ -686,7 +686,7 @@ const mechanicsEngine = {
         // Unlimited number of this kind of object?
         const unlimited = ( $(rule).attr('unlimited') == 'true' );
 
-        // Number of items (only for quiver (n. arrows) and money (n.gold crowns))
+        // Number of items (only for quiver (n. arrows) and money (n.gold crowns), arrows or if you buy X objects for a single price)
         const txtCount : string = $(rule).attr('count');
         const count = ( txtCount ? parseInt( txtCount ) : 0 );
         
