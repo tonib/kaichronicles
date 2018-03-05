@@ -116,12 +116,20 @@
             </test>
         </section>
 
-        <section id="sect9">
-            <!-- TODO: Drop arrow? -->
-        </section>
-
         <section id="sect10">
-            <!-- TODO: Do you must use dagger of vashna as current weapon??? -->
+            
+            <currentWeapon objectId="daggerofvashna" />
+            <message id="msg-drop-weapon" 
+                en-text="You must use the Dagger of Vashna as current weapon on this combat" 
+                es-text="Debes usar la Daga de Vashna como arma actual en este combate"
+            />
+            <onInventoryEvent>
+                <disableCombats />
+                <test currentWeapon="daggerofvashna">
+                    <disableCombats disabled="false" />
+                </test>
+            </onInventoryEvent>
+
             <choiceState section="all" set="disabled" />
             <combat noMindblast="true" noPsiSurge="true" />
             <afterCombats>
@@ -140,7 +148,6 @@
         <section id="sect12">
             <pick class="arrow" count="-1" />
             <test canUseBow="false">
-                <!-- TODO: Drop arrow? -->
                 <choiceState section="sect229" set="disabled" />
             </test>
         </section>
@@ -251,9 +258,14 @@
         </section>
 
         <section id="sect33">
-            <!-- TODO: "If you have seen and examined one of these hexagonal tokens previously in your adventure" ??? 
-                sect43, 
-            -->
+            <!-- If you have seen and examined one of these hexagonal tokens previously in your adventure... -->
+            <test not="true" sectionVisited="sect43">
+                <choiceState section="sect161" set="disabled" />
+            </test>
+            <test sectionVisited="sect43">
+                <choiceState section="sect283" set="disabled" />
+            </test>
+
             <!-- (If your source of light is a Torch, remember to erase it from your Action Chart.) -->
             <test not="true" hasObject="lantern|firesphere">
                 <drop objectId="torch" />
@@ -316,7 +328,7 @@
         </section>
 
         <section id="sect50">
-            <!-- TODO: This is the correct answer to Khmar’s riddle about his youngest son -->
+            <!-- This is the correct answer to Khmar’s riddle about his youngest son -->
         </section>
 
         <section id="sect51">
@@ -423,10 +435,6 @@
             </test>
         </section>
         
-        <section id="sect79">
-            <!-- TODO: sect239, check this: There is a bonus for dagger throw?, I suspect yes (improved disciplines)-->
-        </section>
-
         <section id="sect82">
             <choiceState section="all" set="disabled" />
 
@@ -526,7 +534,6 @@
                     <choiceState section="sect194" set="enabled" />
                 </test>
             </test>
-            <!-- TODO: If you only have the torch, remove it at sect194 (copy code from sect14)-->
         </section>
 
         <section id="sect95">
@@ -618,13 +625,15 @@
 
         <section id="sect106">
             <drop objectId="fireseed" />
-            <!-- TODO: "If you have seen and examined one of these hexagonal tokens previously in your adventure" ??? -->
+            <!-- If you have seen and examined one of these hexagonal tokens previously in your adventure... -->
+            <test not="true" sectionVisited="sect43">
+                <choiceState section="sect161" set="disabled" />
+            </test>
+            <test sectionVisited="sect43">
+                <choiceState section="sect283" set="disabled" />
+            </test>
         </section>
         
-        <section id="sect107">
-            <!-- TODO: Drop arrow? -->
-        </section>
-
         <section id="sect108">
             <test not="true" hasDiscipline="dvnation">
                 <choiceState section="sect272" set="disabled" />
@@ -1106,6 +1115,13 @@
             </test>
         </section>
 
+        <section id="sect194">
+            <!-- (If your source of light is a Torch, remember to erase it from your Action Chart.) -->
+            <test not="true" hasObject="lantern|firesphere">
+                <drop objectId="torch" />
+            </test>
+        </section>
+
         <section id="sect195">
             <death />
         </section>
@@ -1415,7 +1431,7 @@
                     <choiceState section="sect350" set="enabled" />
                 </case>
             </randomTable>
-            <!-- TODO: There is a bonus for dagger throw?, I suspect yes (improved disciplines) -->
+            <!-- There is a bonus for dagger throw?, NO: It starts at Mentora (not available on this book) -->
             <test hasWeaponskillWith="dagger">
                 <randomTableIncrement increment="+3" />
             </test>
