@@ -62,7 +62,7 @@ class ActionChart {
     public annotations = '';
 
     /** Use manual random table? */
-    public manualRandomTable = false;
+    public manualRandomTable = true;
 
     /** The latests scroll position on the game section */
     public yScrollPosition = 0;

@@ -1,6 +1,6 @@
 ## Kai Chronicles
 
-Kai Chronicles is a game player for Lone Wolf game books. Only books 1 - 8 are
+Kai Chronicles is a game player for Lone Wolf game books. Only books 1 - 10 are
 curently playable. The game player can run as a website or Android app. You can play it at 
 [https://www.projectaon.org/staff/toni](https://www.projectaon.org/staff/toni) or download
 the app from [Google Play](https://play.google.com/store/apps/details?id=org.projectaon.kaichronicles).
@@ -15,7 +15,7 @@ This repository does not contain game books data. Data must be downloaded from t
   web site
 * You cannot redistribute the game books data in any way
 
-The Android older version supported is the 4.4.2 (API 19). The web is tested with the 
+The Android older version supported is the 4.4 (API 19). The web is tested with the 
 latest version of Chrome and Firefox. Other browsers or/and older versions may don't 
 work.
 
