@@ -886,7 +886,6 @@
         </section>
 
         <section id="sect155">
-            <!-- TODO: Recover object lost at sect201 and sect273 (and others?) -->
             <restoreInventoryState restorePoint="book9ItemStolen" />
             <object objectId="dagger" />
             <object objectId="meal" index="0" />
@@ -924,7 +923,6 @@
         </section>
 
         <section id="sect163">
-            <!-- TODO: Disable calls to this section if the player has no money!!! -->
             <choiceState section="all" set="disabled" />
             <numberPicker 
                 en-text="Choose the number of Gold Crowns you wish to give to the villagers"
@@ -1904,6 +1902,12 @@
         <section id="sect331">
             <object objectId="meal" count="2" price="1" unlimited="true" />
             <object objectId="flaskofboza" price="1" unlimited="true" />
+            <onInventoryEvent>
+                <choiceState section="sect163" set="enabled" />
+                <test not="true" expression="[MONEY] > 0">
+                    <choiceState section="sect163" set="disabled" />
+                </test>
+            </onInventoryEvent>
         </section>
 
         <section id="sect332">
