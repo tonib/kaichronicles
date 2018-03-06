@@ -21,7 +21,7 @@ class EquipmentSectionMechanics {
         const nPickableObjects = parseInt( txtNPickableObjects );
 
         // Get the original objects on the section:
-        var originalObjects = EquipmentSectionMechanics.getOriginalObjects( $sectionMechanics );
+        const originalObjects = EquipmentSectionMechanics.getOriginalObjects( $sectionMechanics );
 
         // If the object was not originally on the section, ignore it
         if( !originalObjects[ pickedObjectId ] ) 
@@ -34,6 +34,26 @@ class EquipmentSectionMechanics {
         if( pickedObjects.length >= nPickableObjects && !pickedObjects.contains(pickedObjectId) )
             // D'oh!
             throw translations.text( 'maximumPick' , [nPickableObjects] );
+    }
+
+    /** 
+     * Get the number of picked objects on a section
+     * @param sectionId The section to check
+     * @returns The number of picked objects on the section
+     */
+    public static getNPickedObjects( sectionId : string ) : number {
+
+        const $sectionMechanics : any = state.mechanics.getSection( sectionId );
+        if( !$sectionMechanics )
+            return 0;
+
+        // Get the original objects on the section:
+        const originalObjects = EquipmentSectionMechanics.getOriginalObjects( $sectionMechanics );
+
+        // Get the the number of picked objects
+        let pickedObjects = EquipmentSectionMechanics.getPickedObjects( $sectionMechanics , originalObjects , sectionId);
+
+        return pickedObjects.length;
     }
 
     /** 
@@ -104,17 +124,18 @@ class EquipmentSectionMechanics {
     }
 
     /**
-     * Get the currently  picked objects on the section
+     * Get the currently picked objects on a section
      * @param {jQuery} $sectionMechanics XML tag with the current section mechanics
      * @param originalObjects Original objects on the section. Key is the object id and 
      * the value is the number of objects
+     * @param sectionId The section where to check picked objects. If it's null, the current section will be checked
      * @returns The different picked objects ids
      */
-    private static getPickedObjects( $sectionMechanics : any , originalObjects : { [objectId : string ] : number } ) 
+    private static getPickedObjects( $sectionMechanics : any , originalObjects : { [objectId : string ] : number } , sectionId : string = null ) 
     : Array<string> {
         
         // Get the current number of objects on the section:
-        var sectionStateObjects = state.sectionStates.getSectionState().objects;
+        var sectionStateObjects = state.sectionStates.getSectionState(sectionId).objects;
         var currentObjects : { [objectId : string ] : number } = {};
         let objectId : string;
         for(let i=0; i<sectionStateObjects.length; i++) {

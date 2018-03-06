@@ -877,7 +877,12 @@
         </section>
 
         <section id="sect154">
-            <!-- TODO: If you decided to keep any of the items you discovered in the hut -->
+            <!-- If you decided to keep any of the items you discovered in the hut -->
+            <choiceState section="sect232" set="disabled" />
+            <test pickedSomethingOnSection="sect265">
+                <choiceState section="sect232" set="enabled" />
+                <choiceState section="sect206" set="disabled" />
+            </test>
         </section>
 
         <section id="sect155">

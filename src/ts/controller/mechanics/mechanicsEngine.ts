@@ -626,6 +626,11 @@ const mechanicsEngine = {
             }
         }
 
+        // Any object picked on a given section?
+        const pickedSomethingOnSection : string = $rule.attr( 'pickedSomethingOnSection' )
+        if( pickedSomethingOnSection && EquipmentSectionMechanics.getNPickedObjects(pickedSomethingOnSection) > 0 )
+            conditionStatisfied = true;
+
         // Check if the test should be inversed
         if( $rule.attr('not') == 'true' )
             conditionStatisfied = !conditionStatisfied;
