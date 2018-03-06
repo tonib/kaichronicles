@@ -685,8 +685,6 @@
                         es-text="¡Número incorrecto!" />
                 </test>
             </numberPickerChoosed>
-
-            <!-- TODO: Don't allow go to sect204 without dropping objects? -->
         </section>
 
         <section id="sect116">
@@ -1174,6 +1172,7 @@
         </section>
 
         <section id="sect204">
+
             <numberPicker
                 en-text="Answer the riddle"
                 es-text="Responde al acertijo"
@@ -1191,7 +1190,25 @@
                         es-text="¡Número incorrecto!" />
                 </test>
             </numberPickerChoosed>
-            <!-- TODO: Drop objects here or at sect204 ??? -->
+
+            <message id="msg-drop-objects" 
+                en-text="Drop one Special Item or three Backpack Items, if you want to go to the section 302" 
+                es-text="Deja un Objeto Especial o tres Objetos de la mochila, si quieres ir a la sección 302"
+            />
+            <onInventoryEvent>
+                <choiceState section="all" set="disabled" />
+                <message id="msg-drop-objects" op="show" />
+                <test not="true" expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] > 0 || [SPECIAL-ITEMS-ON-ACTIONCHART] > 0">
+                    <!-- The player has nothing -->
+                    <choiceState section="all" set="enabled" />
+                    <message id="msg-drop-objects" op="hide" />
+                </test>
+                <test expression="[BACKPACK-ITEMS-CNT-ON-SECTION] >= 3 || [SPECIAL-ITEMS-ON-SECTION] >= 1">
+                    <!-- The player has drop the required objects -->
+                    <choiceState section="all" set="enabled" />
+                    <message id="msg-drop-objects" op="hide" />
+                </test>
+            </onInventoryEvent>
         </section>
 
         <section id="sect206">
@@ -1234,7 +1251,12 @@
         </section>
 
         <section id="sect212">
-            <!-- TODO: If you have ever escaped from the South Gate tower (do you know Sogh?)... -->
+            <!-- If you have ever escaped from the South Gate tower (do you know Sogh?)... -->
+            <choiceState section="sect164" set="disabled" />
+            <test sectionVisited="sect316">
+                <choiceState section="sect164" set="enabled" />
+                <choiceState section="sect315" set="disabled" />
+            </test>
         </section>
 
         <section id="sect213">
@@ -1265,7 +1287,7 @@
                     <choiceState section="sect117" set="enabled" />
                 </case>
             </randomTable>
-            <!-- TODO: There is a bonus for dagger throw?, I suspect yes (improved disciplines) -->
+            <!-- There is a bonus for dagger throw?, NO: It starts at Mentora (not available on this book) -->
             <test hasWeaponskillWith="dagger">
                 <randomTableIncrement increment="+4" />
             </test>
