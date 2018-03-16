@@ -34,7 +34,7 @@ const state = {
      * The local books download state for the Cordova app.
      * This member is not persisted
      */
-    localBooksLibrary: null,
+    localBooksLibrary: <LocalBooksLibrary> null,
 
     /**
      * Setup the default browser language
