@@ -171,7 +171,7 @@ const projectAon = {
 
             biographies: [ 'jdbiolw' , 'bwbiolw' ],
 
-            zipSize: 2839095,
+            zipSize: 2850093,
 
             revision: 2655
         },

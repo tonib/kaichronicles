@@ -109,11 +109,39 @@ BookData.prototype.getSvnIllustrationsDir = function( language, author) {
  * Download illustrations
  */
 BookData.prototype.downloadIllustrations = function(language, author) {
+
     var sourceSvnDir = this.getSvnIllustrationsDir(language, author);
     var targetDir = this.getBookDir() + '/ill_' + language;
     fs.mkdirSync( targetDir );
     var svnParams = [ '--force', 'export' , sourceSvnDir , targetDir ];
     this.runSvnCommand( svnParams );
+
+    if( this.bookNumber == 9 && language == 'en')
+        this.book9ObjectIllustrations();
+}
+
+/** 
+ * Download extra book 9 object illustrations.
+ * On book 9, there is a illustrator change (Brian Williams). He did illustrations for objects that
+ * exists on previous books. So, include on this book all existing objects illustrations
+ */
+BookData.prototype.book9ObjectIllustrations = function() {
+
+    var williamsIllustrations = {
+        'axe.png' : '12tmod/ill/williams/axe.png',
+        'spear.png' : '13tplor/ill/williams/spear.png',
+        'bsword.png' : '17tdoi/ill/williams/bsword.png',
+        'qstaff.png' : '12tmod/ill/williams/qurtstff.png'  // NAME CHANGED!!!
+    };
+    // Already included on book 9: dagger.png, sword.png, mace.png, bow.png, food.png, potion.png, quiver.png, rope.png
+    // NOT included at any book: ssword.png,  warhammr.png. (TODO) There are SVGZ for these objects on the SVN, but then
+    // we should convert them to png, and I'm pretty tired...
+
+    for( var illName in williamsIllustrations ) {
+        var svnSourcePath = this.getSvnRoot() + '/en/png/lw/' + williamsIllustrations[illName];
+        var targetDir = this.getBookDir() + '/ill_en/' + illName;
+        this.runSvnCommand( [ 'export' , svnSourcePath , targetDir ] );
+    }
 }
 
 /**
@@ -124,8 +152,7 @@ BookData.prototype.downloadCover = function() {
     var coverPath = this.getSvnRoot() + '/en/jpeg/lw/' + this.getBookCode('en') +
         '/skins/ebook/cover.jpg';
     var targetPath = this.getBookDir() + '/cover.jpg';
-    var svnParams = [ 'export' , coverPath , targetPath ];
-    this.runSvnCommand( svnParams );
+    this.runSvnCommand( [ 'export' , coverPath , targetPath ] );
 }
 
 BookData.prototype.zipBook = function() {

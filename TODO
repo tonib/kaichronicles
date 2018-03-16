@@ -1,3 +1,4 @@
+- laumspur.png is on book 5, 8. Use it?
 - Google play:
   * Desde el punto 118 no puedo avanzar de ninguna manera en la primer historia. Por favor arreglen eso. Excelente libro gracias.
 - Show a toast when you change the current weapon on the Action Chart
@@ -153,5 +154,8 @@ actionChartController.pick('sommerswerd')
 actionChartController.pick('quiver')
 actionChartController.increaseArrows(5)
 actionChartController.pick('shield')
+
+* Top Google Play RPG 
+  https://play.google.com/store/apps/category/GAME_ROLE_PLAYING/collection/topselling_free
 
 Work done on this commit:
