@@ -20,7 +20,7 @@
         <weapon id="sword">
             <name lang="en">Sword</name>
             <name lang="es">Espada</name>
-            <image book="1" name="sword.png" />
+            <image book="1|9" name="sword.png" />
         </weapon>
 
         <weapon id="spear">

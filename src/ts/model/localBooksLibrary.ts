@@ -7,8 +7,7 @@
 class LocalBooksLibrary {
 
     /**
-     * Info about the books state.
-     * Array of BookDownloadState
+     * Info about the books states
      */
     public booksLibrary : Array<BookDownloadState> = [];
 

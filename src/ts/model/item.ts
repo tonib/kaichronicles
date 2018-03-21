@@ -220,7 +220,28 @@ class Item {
         if( $image.length == 0 )
             return;
 
-        this.imageBookNumber = parseInt( $image.attr('book') );
+        // Get the book number:
+        let candidateBookNumbers : Array<number> = [];
+        const txtBook : string = $image.attr('book');
+        for( let txtBookNumber of txtBook.split('|') )
+            candidateBookNumbers.push( parseInt( txtBookNumber ) );
+        if( candidateBookNumbers.length == 0 )
+            return;
+        candidateBookNumbers.sort();
+
+        // Default to the first one
+        this.imageBookNumber = candidateBookNumbers[0];
+
+        if(candidateBookNumbers.length > 1) {
+            // Choose the last played (or playing) book.
+            for( let i = candidateBookNumbers.length - 1 ; i >= 0 ; i-- ) {
+                if( state.book.bookNumber >= candidateBookNumbers[i] && state.localBooksLibrary.isBookDownloaded(candidateBookNumbers[i]) ) {
+                    this.imageBookNumber = candidateBookNumbers[i];
+                    break;
+                }
+            }
+        }
+
         const imageBook = new Book( this.imageBookNumber , state.book.language );
         this.imageUrl = imageBook.getIllustrationURL( $image.attr('name') );
     }
