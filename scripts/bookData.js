@@ -127,21 +127,44 @@ BookData.prototype.downloadIllustrations = function(language, author) {
  */
 BookData.prototype.book9ObjectIllustrations = function() {
 
+    // Already included on book 9: dagger.png, sword.png, mace.png, bow.png, food.png, potion.png, quiver.png, rope.png
+
+    var targetDir = this.getBookDir() + '/ill_en';
+
+    // Not included on book 9, but in later books:
     var williamsIllustrations = {
         'axe.png' : '12tmod/ill/williams/axe.png',
         'spear.png' : '13tplor/ill/williams/spear.png',
         'bsword.png' : '17tdoi/ill/williams/bsword.png',
         'qstaff.png' : '12tmod/ill/williams/qurtstff.png'  // NAME CHANGED!!!
     };
-    // Already included on book 9: dagger.png, sword.png, mace.png, bow.png, food.png, potion.png, quiver.png, rope.png
-    // NOT included at any book: ssword.png,  warhammr.png. (TODO) There are SVGZ for these objects on the SVN, but then
-    // we should convert them to png, and I'm pretty tired...
-
     for( var illName in williamsIllustrations ) {
         var svnSourcePath = this.getSvnRoot() + '/en/png/lw/' + williamsIllustrations[illName];
-        var targetDir = this.getBookDir() + '/ill_en/' + illName;
-        this.runSvnCommand( [ 'export' , svnSourcePath , targetDir ] );
+        var targetPath = targetDir + '/' + illName;
+        this.runSvnCommand( [ 'export' , svnSourcePath , targetPath ] );
     }
+
+    // NOT included at any book: ssword.png,  warhammr.png. Added to https://projectaon.org/staff/toni/missWilliamsIll-DONOTREMOVE
+    williamsIllustrations = [
+        'https://projectaon.org/staff/toni/missWilliamsIll-DONOTREMOVE/ssword.png',
+        'https://projectaon.org/staff/toni/missWilliamsIll-DONOTREMOVE/warhammr.png',
+    ];
+    for( var i=0; i<williamsIllustrations.length; i++ )
+        BookData.downloadWithWGet( williamsIllustrations[i] , targetDir );
+    
+}
+
+/** 
+ * Download a file with wget
+ * @param {string} url URL to download
+ * @param {string} targetDirectory Destination directory
+ */
+BookData.downloadWithWGet = function( url , targetDirectory ) {
+    // wget https://projectaon.org/staff/toni/missWilliamsIll-DONOTREMOVE/ssword.png -P targetDirectory/
+
+    var params = [ url , '-P' , targetDirectory ];
+    console.log( 'wget ' + params.join( ' ' ) );
+    child_process.execFileSync( 'wget' , params , {stdio:[0,1,2]} );
 }
 
 /**

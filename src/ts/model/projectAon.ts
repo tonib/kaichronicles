@@ -157,9 +157,7 @@ const projectAon = {
             revision: 0
         },
 
-        ///////////////////////////////////////
-
-        // Book 9 (IN PROGRESS / Toni):
+        // Book 9:
         {
             title_en: 'The Cauldron of Fear',
             code_en: '09tcof',
@@ -171,12 +169,12 @@ const projectAon = {
 
             biographies: [ 'jdbiolw' , 'bwbiolw' ],
 
-            zipSize: 2850093,
+            zipSize: 2873932,
 
             revision: 2655
         },
 
-        // Book 10 (FINISHED) :
+        // Book 10:
         {
             title_en: 'The Dungeons of Torgar',
             code_en: '10tdot',
@@ -192,6 +190,8 @@ const projectAon = {
 
             revision: 0
         },
+
+        ///////////////////////////////////////
 
         // Book 11 (IN PROGRESS / James):
         {
