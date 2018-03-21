@@ -60,12 +60,13 @@ Optional. A extended description for the object, translated to some language
 ### "image" tag
 ```xml
 <weapon id="broadsword">
-    <image book="1" name="bsword.png" />
+    <image book="1|9" name="bsword.png" />
     ...
 </weapon>
 ```
 Optional. It references to some book image for the object. The image should be at 
-/src/www/data/projectAon/[BOOKNUMBER]/ill_en/[IMAGENAME]
+/src/www/data/projectAon/[BOOKNUMBER]/ill_en/[IMAGENAME]. If object image was drawed by different
+illustrators (Chalk / Williams), different books versions should be separated by a "|" character
 
 ### "droppable" property
 ```xml

@@ -1,20 +1,20 @@
+- Describe:
+  * Where play on the web
+  * Where Report bugs
+  * FAQ
 - Better explanation about how to drop objects on the Kai monastery
 - laumspur.png is on book 5, 8. Use it?
 - Google play:
   * Desde el punto 118 no puedo avanzar de ninguna manera en la primer historia. Por favor arreglen eso. Excelente libro gracias.
 - Show a toast when you change the current weapon on the Action Chart
 - Documentation for "onInventoryEvent" rule
-- Object images on book 9+:
-  1) After downloaded books 9-12 convert SVG object images to PNG into the book directory. This is needed because the books SVN don't contain
-     ALL images (only some)
-  2) Use the current book image
+- Object images on book 9+: Use the current book image
 - Use latest version on PAON data on SVN (a fixed commit number)
 - When you cancel a saved games import, it say "error", and it is not
 - Check reported bugs on Google play:
   * Saved games removed when adding new games
   * Objects types
   * Others?
-- Ask help to Alarion with english translations
 - Bugs reported on Google Play:
   * Finally, finally there's a proper LW game book app. The only problem I've noticed is that it only gives Silver Bow's bonus in the 
     sections of book 6 that specifically mention it, and not at all 'rolls' as it is supposed to.
@@ -48,10 +48,6 @@ FOR FUTURE (1.11+):
   * https://github.com/tonib/kaichronicles/issues/5
   * https://www.projectaon.org/es/foro3/viewtopic.php?p=27752#p27752
 - Allow to select the current bow
-- Describe:
-  * Where play on the web
-  * Where Report bugs
-  * FAQ
 - ERROR: Hunting STILL activated on book 3... 
   (maybe fixed: BookSectionStates.fromStateObject, added line "this.huntEnabled = stateObject.huntEnabled;" on v 1.6.3)
 - Android application:
@@ -155,7 +151,26 @@ actionChartController.pick('quiver')
 actionChartController.increaseArrows(5)
 actionChartController.pick('shield')
 
+* Test book images:
+state.sectionStates.getSectionState().addObjectToSection('axe')
+state.sectionStates.getSectionState().addObjectToSection('dagger')
+state.sectionStates.getSectionState().addObjectToSection('sword')
+state.sectionStates.getSectionState().addObjectToSection('spear')
+state.sectionStates.getSectionState().addObjectToSection('mace')
+state.sectionStates.getSectionState().addObjectToSection('shortsword')
+state.sectionStates.getSectionState().addObjectToSection('quarterstaff')
+state.sectionStates.getSectionState().addObjectToSection('warhammer')
+state.sectionStates.getSectionState().addObjectToSection('broadsword')
+state.sectionStates.getSectionState().addObjectToSection('bow')
+state.sectionStates.getSectionState().addObjectToSection('quiver')
+state.sectionStates.getSectionState().addObjectToSection('rope')
+state.sectionStates.getSectionState().addObjectToSection('largerope')
+state.sectionStates.getSectionState().addObjectToSection('taunorwater')
+state.sectionStates.getSectionState().addObjectToSection('meal')
+state.sectionStates.getSectionState().addObjectToSection('arrow')
+
 * Top Google Play RPG 
   https://play.google.com/store/apps/category/GAME_ROLE_PLAYING/collection/topselling_free
 
 Work done on this commit:
+

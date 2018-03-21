@@ -8,13 +8,13 @@
         <weapon id="axe">
             <name lang="en">Axe</name>
             <name lang="es">Hacha</name>
-            <image book="1" name="axe.png" />
+            <image book="1|9" name="axe.png" />
         </weapon>
 
         <weapon id="dagger">
             <name lang="en">Dagger</name>
             <name lang="es">Daga</name>
-            <image book="1" name="dagger.png" />
+            <image book="1|9" name="dagger.png" />
         </weapon>
 
         <weapon id="sword">
@@ -26,37 +26,37 @@
         <weapon id="spear">
             <name lang="en">Spear</name>
             <name lang="es">Lanza</name>
-            <image book="1" name="spear.png" />
+            <image book="1|9" name="spear.png" />
         </weapon>
 
         <weapon id="mace">
             <name lang="en">Mace</name>
             <name lang="es">Maza</name>
-            <image book="1" name="mace.png" />
+            <image book="1|9" name="mace.png" />
         </weapon>
 
         <weapon id="shortsword">
             <name lang="en">Short Sword</name>
             <name lang="es">Espada corta</name>
-            <image book="1" name="ssword.png" />
+            <image book="1|9" name="ssword.png" />
         </weapon>
 
         <weapon id="quarterstaff">
             <name lang="en">Quarterstaff</name>
             <name lang="es">Estaca</name>
-            <image book="1" name="qstaff.png" />
+            <image book="1|9" name="qstaff.png" />
         </weapon>
 
         <weapon id="warhammer">
             <name lang="en">Warhammer</name>
             <name lang="es">Martillo de Guerra</name>
-            <image book="1" name="warhammr.png" />
+            <image book="1|9" name="warhammr.png" />
         </weapon>
 
         <weapon id="broadsword">
             <name lang="en">Broad Sword</name>
             <name lang="es">Espadón</name>
-            <image book="1" name="bsword.png" />
+            <image book="1|9" name="bsword.png" />
         </weapon>
 
         <!-- BOOOK 3 -->
@@ -108,7 +108,7 @@
         <weapon id="bow">
             <name lang="en">Bow</name>
             <name lang="es">Arco</name>
-            <image book="6" name="bow.png" />
+            <image book="6|9" name="bow.png" />
         </weapon>
 
         <weapon id="broninwarhammer" weaponType="warhammer">
@@ -481,7 +481,7 @@
         <special id="quiver">
             <name lang="en">Quiver</name>
             <name lang="es">Carcaj</name>
-            <image book="6" name="quiver.png" />
+            <image book="6|9" name="quiver.png" />
         </special>
 
         <special id="mapvaretta">
@@ -897,7 +897,7 @@
         <object id="rope">
             <name lang="en">Rope</name>
             <name lang="es">Cuerda</name>
-            <image book="6" name="rope.png" />
+            <image book="6|9" name="rope.png" />
         </object>
 
         <object id="orangepotion">
@@ -937,7 +937,7 @@
         <object id="largerope" itemCount="2">
             <name lang="en">Rope</name>
             <name lang="es">Cuerda</name>
-            <image book="6" name="rope.png" />
+            <image book="6|9" name="rope.png" />
         </object>
 
         <object id="potionblackgraveweed">
@@ -1495,7 +1495,7 @@
             <name lang="en">Meal</name>
             <name lang="es">Comida</name>
             
-            <image book="1" name="food.png" />
+            <image book="1|9" name="food.png" />
         </object>
 
         <!-- This not really an object, but needed for mechanics -->
@@ -1524,7 +1524,7 @@
             <name lang="en">Arrows</name>
             <name lang="es">Flechas</name>
 
-            <image book="6" name="quiver.png" />
+            <image book="6|9" name="quiver.png" />
         </object>
 
     </objects>
