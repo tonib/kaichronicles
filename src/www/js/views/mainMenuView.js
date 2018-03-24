@@ -28,6 +28,10 @@ var mainMenuView = {
             e.preventDefault();
             mainMenuController.changeTranslation();
         });
+        $('#menu-faq').click(function(e) {
+            e.preventDefault();
+            routing.redirect('faq');
+        });
 
         // Download books (only for app)
         var $downloadBooksBtn = $('#menu-downloadbooks');
