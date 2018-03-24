@@ -8,7 +8,7 @@
   * Desde el punto 118 no puedo avanzar de ninguna manera en la primer historia. Por favor arreglen eso. Excelente libro gracias.
 - Show a toast when you change the current weapon on the Action Chart
 - Documentation for "onInventoryEvent" rule
-- Object images on book 9+: Use the current book image
+- Object images on book 9+: Use the current book image, if available
 - Use latest version on PAON data on SVN (a fixed commit number)
 - When you cancel a saved games import, it say "error", and it is not
 - Check reported bugs on Google play:

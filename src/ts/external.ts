@@ -1,6 +1,5 @@
 // External declarations
 
-declare var template:any;
 declare var cordovaApp:any;
 declare var views:any;
 declare var routing:any;

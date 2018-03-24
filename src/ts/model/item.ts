@@ -212,7 +212,7 @@ class Item {
     }
 
     /**
-     * Get information about the book
+     * Get information about the image
      * @param {jQuery} $o XML node for object
      */
     private loadImageInfo( $o : any ) {

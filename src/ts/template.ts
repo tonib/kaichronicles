@@ -1,16 +1,18 @@
+/// <reference path="external.ts" />
+
 /**
  * The HTML template API
  */
-var template = {
+const template = {
 
     /**
      * Set the navbar title and target URL
-     * @param {String} title The title to put on the navigation bar
-     * @param {String} url The target URL for the title on the nav. bar
-     * @param {boolean} showTitleOnSmallDevs True if the main title should be shown on
+     * @param title The title to put on the navigation bar
+     * @param url The target URL for the title on the nav. bar
+     * @param showTitleOnSmallDevs True if the main title should be shown on
      * small devices.
      */
-    setNavTitle: function(title, url, showTitleOnSmallDevs ) { 
+    setNavTitle: function(title : string, url : string, showTitleOnSmallDevs : boolean ) { 
         // Update the title
         $('#template-title').text(title);
         $('#template-title').attr('href', url);
@@ -68,7 +70,7 @@ var template = {
     /**
     * Hide statistics on navigation bar
     */
-    showStatistics: function(show) {
+    showStatistics: function(show : boolean) {
         if( show ) {
             $('#navbar-content').show();
             $('#template-menubutton').removeClass( 'hideImportant' );
@@ -84,7 +86,7 @@ var template = {
     /**
      * Update player statistics
      */
-    updateStatistics: function(doNotAnimate) {
+    updateStatistics: function(doNotAnimate : boolean = false) {
 
         // Update statistics
         if( !state.actionChart || 
@@ -101,16 +103,16 @@ var template = {
 
             // Update map link
             if( state.actionChart.hasObject('map') )
-            $('#template-map').show();
+                $('#template-map').show();
             else
-            $('#template-map').hide(); 
+                $('#template-map').hide(); 
         }
     },
 
     /**
      * Return true if the template menu is expanded
      */
-    isMenuExpanded: function() { 
+    isMenuExpanded: function() : boolean { 
         return $('#template-menubutton').attr('aria-expanded') == 'true'; 
     },
 
@@ -123,7 +125,7 @@ var template = {
      * Show an HTML view
      * @param {DOM} viewContent The view to show
      */
-    setViewContent: function(viewContent) {
+    setViewContent: function(viewContent : any) {
         $('#body').html(viewContent);
         // Scroll to top
         window.scrollTo(0, 0);
@@ -133,15 +135,15 @@ var template = {
     /**
      * Display an error
      */
-    setErrorMessage: function(msg) {
+    setErrorMessage: function(msg : string) {
         template.setViewContent('<p style="color: red">' + msg + '</p>');
     },
     
     /**
      * Show dialog with object details
-     * @param {Item} o The object to show
+     * @param o The object to show
      */
-    showObjectDetails: function(o) {
+    showObjectDetails: function(o : Item) {
         if( !o )
             return;
 
@@ -167,12 +169,12 @@ var template = {
      * Change a number value by other, with an animation. On the Cordova app, the
      * change will not be animated (performance...)
      * @param {jQuery} $element Element selector to change
-     * @param {number} newValue The new value to set
-     * @param {boolean} doNotAnimate True if we should do not perform the animation
-     * @param {string} newColor The final HTML color of the element. If it's null, the default
+     * @param newValue The new value to set
+     * @param doNotAnimate True if we should do not perform the animation
+     * @param newColor The final HTML color of the element. If it's null, the default
      * color for the DOM element will be used
      */
-    animateValueChange: function( $element , newValue , doNotAnimate , newColor ) {
+    animateValueChange: function( $element : any , newValue : number , doNotAnimate : boolean , newColor : string = null ) {
 
         // Disable animations on Cordova app (bad performance)
         if( cordovaApp.isRunningApp() )
@@ -223,9 +225,9 @@ var template = {
     },
 
     /**
-     * Show the random table dialog
+     * Show / hide the random table dialog
      */
-    showRandomTable: function(show) {
+    showRandomTable: function(show : boolean) {
         var $randomModal = $('#template-randomtable');
         if( show ) {
             // Hide toasts
@@ -239,7 +241,7 @@ var template = {
     /**
      * Populate the random table values with the current book random table
      */
-    fillRandomTableModal: function(numbers) {
+    fillRandomTableModal: function(numbers : Array<number>) {
 
         // Fill table
         var html = '';
