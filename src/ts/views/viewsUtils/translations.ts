@@ -291,7 +291,8 @@ class Translations {
         'mainMenu' : 'Menú principal',
         'bookNotDownloaded' : 'El libro {0} no está descargado',
         'maximumPick' : 'Sólo puedes coger {0} objetos',
-        'zeroIgnored' : 'Cero ignorado'
+        'zeroIgnored' : 'Cero ignorado',
+        'faq' : 'Preguntas frecuentes'
     };
 
     /**
