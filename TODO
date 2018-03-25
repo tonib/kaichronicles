@@ -15,26 +15,7 @@
 - Performance
 - Quivers with no arrows available on section should not show "(0 arrows)". Show "(0 arrows)" only on Action chart. Same to sell quiver
   object (see book 8, sect139)
-- ERRATAS:
-  * Send patch!!!
-  * 6, 259: "Adivinación" should be "Concentración"
-  * 9, tssf: "la Muer te", "un pode roso", "de Des si, era", "su cono cimiento de la urbe"
-  * 9, gamerlz: "Si el lápiz señala 0, no cuenta." / check English version ???
-  * 9, sect3: combat classes: "<enemy-attribute class="DESTREZA EN EL COMBATE">13</enemy-attribute><enemy-attribute class="RESISTENCIA">22</enemy-attribute>"
-  * 9, sect5: "CATALEJO", not in English version
-  * 9, sect8: "Ahórrate LAS condolencias"
-  * 9, sect11: Spanish / English differences about meals
-  * 9, 14: "(If your source of light is a Torch, remember to erase it from your Action Chart.)" if not in Spanish (it's on sect 197)
-  * 9, 82: "Agresión mental" should be "Acometida Psíquica"
-  * 9, 145: "cuatro Coronas de Oro" should be "tres Coronas de Oro"
-  * 9, 182: english: "Special ItemWeapon" should be "Special Item"???, spanish: "ni Objeto Especial alguno" should be 
-    "ni Objeto Especial que sea arma, ni Escudo" ???
-  * 9, 241: só1o -> sólo ("1" -> "l")
-  * 9, equimnt: "The currency of Anari is the Lune, but Gold Crowns are readily accepted at an exchange rate of four Lune for every 1 Gold Crown."
-    not in spanish
-  * 9, 318: "sedes vía" -> "se desvía"
-  * 11, equipmnt: Spanish wrong foot note 1 (Lantern)
-  
+
 
 FOR FUTURE (1.11+):
 - Book 9, sect189: We should keep the count of the different currencies (Lunes, Gold Crows,...)
