@@ -168,6 +168,7 @@ class Translations {
         'distribution' : 'Distribución',
         'distributionInfo' : 'Libro distribuido por el <a href="https://www.projectaon.org">Proyecto Aon</a>, bajo la <a href="#projectAonLicense">licencia del Proyecto Aon</a>.',
         'about-authors' : 'Sobre los autores del libro',
+        'webPlay' : 'Puedes jugar a este juego en un navegador web en <a class="breakable" href="https://www.projectaon.org/staff/toni">https://www.projectaon.org/staff/toni</a>.',
         
         //////////////////////////////////////
         // Main menu
@@ -256,7 +257,8 @@ class Translations {
         'kaiMonasteryStorage' : 'Objetos en el monasterio del Kai',
         'kaiMonastery' : 'Monasterio del Kai',
         'kaiMonasteryInfo' : 'Aquí puedes guardar objetos en custodia en el monasterio del Kai. Los objetos ' + 
-            'dejados aquí estarán disponibles cuando continues al próximo libro, en la sección "Equipo".',
+            'dejados aquí estarán disponibles cuando continues al próximo libro, en la sección "Equipo". Para guardarlos, ve ' +
+            'a la <a href="#actionChart">Carta de Acción</a> y deja los objetos que quieres guardar.',
         'backToEquipment' : 'Volver a la sección de Equipo',
 
         //////////////////////////////////////

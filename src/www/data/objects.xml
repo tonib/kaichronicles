@@ -925,7 +925,7 @@
                 Sólo hay cantidad suficiente para una dosis
             </description>
 
-            <image book="3" name="potion.png" />
+            <image book="3|9" name="potion.png" />
             <usage class="endurance" increment="4" />
         </object>
         
