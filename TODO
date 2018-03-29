@@ -1,3 +1,4 @@
+- Search "if( !confirm( 'Are you sure you want to cancel?') )". Missed translation
 - Google play:
   * Desde el punto 118 no puedo avanzar de ninguna manera en la primer historia. Por favor arreglen eso. Excelente libro gracias.
 - Show a toast when you change the current weapon on the Action Chart
@@ -125,6 +126,7 @@ actionChartController.pick('sommerswerd')
 actionChartController.pick('quiver')
 actionChartController.increaseArrows(5)
 actionChartController.pick('shield')
+actionChartController.pick('map')
 
 * Test book images:
 state.sectionStates.getSectionState().addObjectToSection('axe')

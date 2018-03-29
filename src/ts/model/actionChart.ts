@@ -84,15 +84,17 @@ class ActionChart {
             this.endurance = this.currentEndurance = 25;
             this.combatSkill = 15;
             this.manualRandomTable = true;
-            if( state.book.bookNumber <= 5 ) {
-                // debug data for kai series
-                this.disciplines = [ 'camflage' , 'hunting' , 'sixthsns' , 'healing' , 'wepnskll' ];
-                this.weaponSkill = [ 'axe' ];
-            }
-            else {
-                // debug data for magnakai
-                this.disciplines = [ 'wpnmstry' , 'curing' , 'hntmstry' ];
-                this.weaponSkill = [ 'axe' , 'sword' , 'bow' ];
+            if( state.book ) {
+                if( state.book.bookNumber <= 5 ) {
+                    // debug data for kai series
+                    this.disciplines = [ 'camflage' , 'hunting' , 'sixthsns' , 'healing' , 'wepnskll' ];
+                    this.weaponSkill = [ 'axe' ];
+                }
+                else {
+                    // debug data for magnakai
+                    this.disciplines = [ 'wpnmstry' , 'curing' , 'hntmstry' ];
+                    this.weaponSkill = [ 'axe' , 'sword' , 'bow' ];
+                }
             }
         }
     }

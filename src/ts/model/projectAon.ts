@@ -189,7 +189,7 @@ const projectAon = {
             zipSize: 3079362,
 
             revision: 0
-        },
+        } /*,
 
         ///////////////////////////////////////
 
@@ -208,9 +208,9 @@ const projectAon = {
             zipSize: 3007751,
 
             revision: 0
-        }/*,
+        },
 
-        // Book 12 (NOT IMPLEMENTED / Nobody working on it):
+        // Book 12 (IN PROGRESS / Toni):
         {
             title_en: 'The Masters of Darkness',
             code_en: '12tmod',
