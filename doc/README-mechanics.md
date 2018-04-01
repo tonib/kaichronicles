@@ -231,7 +231,7 @@ will be executed.
 * **sectionVisited="sectionId1|sectionId1|..."**: Has some of the sections been visited?
 * **currentWeapon="weaponId1|weaponId2|..."**: Is the current weapon (hand-to-hand) some of these kinds?
 * **combatsWon="boolean"**: Have been won all combats on this section (or not)?
-* **combatsActive="true"**: Do some combat still active (unfinished)?
+* **combatsActive="true"**: Do some combat still active (not won and not eluded)?
 * **bookLanguage="language code (en/es)"**: Is this the current book language?
 * **weaponskillActive="true"**: Has the player Weaponskill with the current weapon?
 * **not="true"**: This will negate the current test. So if all of these conditions are false,

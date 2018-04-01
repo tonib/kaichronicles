@@ -243,6 +243,36 @@
             <randomTableIncrement increment="+[KAILEVEL]" />
         </section>
 
+        <section id="sect22">
+            <choiceState section="all" set="disabled" />
+
+            <!-- Sommerswerd stuff -->
+            <!-- TODO: Disable sommerswerd on sect247 -->
+            <message id="msg-sommerswerd" 
+                en-text="If you don't want to go to section 247, change the current weapon to other than Sommerswerd" 
+                es-text="Si no quieres ir a la sección 247, cambia la arma actual a otra que no sea la Sommerswerd"
+            />
+            <onInventoryEvent>
+                <disableCombats disabled="false" />
+                <choiceState section="sect247" set="disabled" />
+                <test currentWeapon="sommerswerd">
+                    <test combatsActive="true">
+                        <disableCombats />
+                        <choiceState section="sect247" set="enabled" />
+                    </test>
+                </test>
+            </onInventoryEvent>
+
+            <combat eludeTurn="0" />
+            <afterCombats>
+                <choiceState section="sect349" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect96" set="enabled" />
+            </afterElude>
+
+        </section>
+
     </sections>
 
 </mechanics>
