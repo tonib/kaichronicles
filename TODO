@@ -1,3 +1,11 @@
+- Archmaster level:
+  * Archmasters are able to use their healing power to repair serious wounds sustained in battle. If, whilst in combat, their ENDURANCE is 
+    reduced to 6 points or less, they can use their skill to restore 20 ENDURANCE points. This ability can only be used once every 100 days.
+  * When using their psychic ability to attack an enemy, Archmasters may add 6 points to their COMBAT SKILL instead of the usual 4 points.
+    For every round in which Psi-surge is used, Archmasters need only deduct 1 ENDURANCE point. When using the weaker psychic 
+    attack—Mindblast—they may add 3 points to their COMBAT SKILL without loss of ENDURANCE points. Archmasters cannot use Psi-surge if their 
+    ENDURANCE score falls to 4 points or below.
+- Tests: Check spanish and english combats: Enemies should have the same statistics
 - Search "if( !confirm( 'Are you sure you want to cancel?') )". Missed translation
 - Google play:
   * Desde el punto 118 no puedo avanzar de ninguna manera en la primer historia. Por favor arreglen eso. Excelente libro gracias.
@@ -16,7 +24,10 @@
 - Performance
 - Quivers with no arrows available on section should not show "(0 arrows)". Show "(0 arrows)" only on Action chart. Same to sell quiver
   object (see book 8, sect139)
-
+- Erratas:
+  * 12, disciplines: "Si concluyes con éxito la.." paragraph should not exists
+  * 12, equipmnt: "añadiéndolso"
+  * 12, Improved Disciplines: miss "o Archimaestro (nueve Disciplinas)"
 
 FOR FUTURE (1.11+):
 - Book 9, sect189: We should keep the count of the different currencies (Lunes, Gold Crows,...)

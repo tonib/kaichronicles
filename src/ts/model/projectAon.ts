@@ -189,7 +189,7 @@ const projectAon = {
             zipSize: 3079362,
 
             revision: 0
-        } /*,
+        } ,
 
         ///////////////////////////////////////
 
@@ -225,7 +225,7 @@ const projectAon = {
             zipSize: 3180171,
 
             revision: 2655
-        }*/
+        }
 
 
     ],
