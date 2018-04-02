@@ -28,9 +28,10 @@
   * 12, disciplines: "Si concluyes con éxito la.." paragraph should not exists
   * 12, equipmnt: "añadiéndolso"
   * 12, Improved Disciplines: miss "o Archimaestro (nueve Disciplinas)"
+  * 12, 35: Xargath endurance is 100 in English version
 
 FOR FUTURE (1.11+):
-- Book 9, sect189: We should keep the count of the different currencies (Lunes, Gold Crows,...)
+- Book 9, sect189: We should keep the count of the different currencies (Lunes, Gold Crows,...). Also on book 12, sect43
 - Support for kai disciplines on magnakai books:
   * https://github.com/tonib/kaichronicles/issues/5
   * https://www.projectaon.org/es/foro3/viewtopic.php?p=27752#p27752
