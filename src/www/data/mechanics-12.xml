@@ -450,6 +450,10 @@
             <object objectId="rope" />
         </section>
 
+        <section id="sect53">
+            <endurance count="-3" />
+        </section>
+
     </sections>
 
 </mechanics>
