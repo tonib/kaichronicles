@@ -132,6 +132,7 @@ before continue")
 <pick objectId="magicspear" />
 <pick class="money" count="[RANDOM] + 5" />
 <pick class="arrow" count="-1" />
+<pick class="money" count="20" currency="kika" />
 ```
 Pick an object. If the object cannot be picked (ex, the backpack is full), the object
 will be available on the section. 
@@ -140,6 +141,8 @@ will be available on the section.
 * **count**: Only if class is "meal", "money" or "arrow". Expression with the number of coins / meals
   to pick
 * **index="number"** Required, for ugly reasons, when there are two o more pick rules with the same object id on a section
+* **currency="currencyId"** Optional, and only for class="money". Picked coins currency, default is "crown". 
+  Values can be "crown", "lune" or "kika".
 
 ### drop (execute once only)
 ```xml

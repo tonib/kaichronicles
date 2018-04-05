@@ -406,8 +406,10 @@ const mechanicsEngine = {
         if( sectionState.ruleHasBeenExecuted(rule) )
             return;
 
+        const $rule = $(rule);
+
         // Check if we are picking an object
-        var objectId = $(rule).attr('objectId');
+        var objectId = $rule.attr('objectId');
         if( objectId ) {
             if( !state.mechanics.getObject( objectId ) )
                 mechanicsEngine.debugWarning( 'Unknown object: ' + objectId );
@@ -425,18 +427,22 @@ const mechanicsEngine = {
         }
 
         // Other things (money or meals)
-        var cls = $(rule).attr('class');
+        var cls = $rule.attr('class');
 
         // Check the amount
-        const count = ExpressionEvaluator.evalInteger( $(rule).attr('count') );
+        let count = ExpressionEvaluator.evalInteger( $rule.attr('count') );
 
         // Add to the action chart 
         if( cls == 'meal')
             actionChartController.increaseMeals(count);
-        else if( cls == 'money' )
-            actionChartController.increaseMoney(count);
         else if( cls == 'arrow' )
             actionChartController.increaseArrows(count);
+        else if( cls == Item.MONEY ) {
+            // TODO: We should store the amount of each currency. Unsupported
+            // Exchange to Gold Crows
+            count = Currency.toGoldCrowns( count , $rule.attr('currency') );
+            actionChartController.increaseMoney(count);
+        }
         else
             mechanicsEngine.debugWarning('Pick rule with no objectId / class');
 

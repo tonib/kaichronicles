@@ -443,6 +443,13 @@
             </test>
         </section>
 
+        <section id="sect52">
+            <object objectId="shortsword" />
+            <object objectId="dagger" />
+            <pick class="money" count="20" currency="kika" />
+            <object objectId="rope" />
+        </section>
+
     </sections>
 
 </mechanics>

@@ -8,6 +8,15 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <!-- Currencies (at currency.ts) -->
+    <xs:simpleType name="currency">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="crown" />
+            <xs:enumeration value="lune" />
+            <xs:enumeration value="kika" />
+        </xs:restriction>
+    </xs:simpleType>
+
     <!--
         *** ROOT ELEMENT ***
     -->
@@ -92,6 +101,8 @@
         <!-- Items count (for counters: "meals", "arrow", "money"). Value can be a number or an expresion -->
         <xs:attribute name="count" type="xs:string" />
         <xs:attribute name="index" type="xs:nonNegativeInteger" />
+        <!-- Currencies, only if class="money" -->
+        <xs:attribute name="currency" type="currency" />
     </xs:complexType>
 
     <!-- "randomTable" rule -->
