@@ -97,16 +97,18 @@ const combatMechanics = {
                 if( combat.psiSurge )
                     $psiSurgeCheck.attr( 'checked' , true );
                 // Check if the Psi-surge cannot be used (EP <= 6)
-                if( state.actionChart.currentEndurance <= 6 )
+                if( state.actionChart.currentEndurance <= Combat.minimumEPForPsiSurge() )
                     combatMechanics.disablePsiSurge( $combatUI , combat );
                 // Psi surge selection
                 $psiSurgeCheck.click(function(e : Event) {
                     combatMechanics.onPsiSurgeClick(e , $(this) );
                 });
-                // There is a special Psi-Surge bonus?
-                var psiSurgeBonus = combat.psiSurgeBonus ? combat.psiSurgeBonus : 4;
+
+                // UI Psi-Surge texts
+                var psiSurgeBonus = combat.psiSurgeBonus ? combat.psiSurgeBonus : Combat.defaultPsiSurgeBonus();
                 psiSurgeBonus *= combat.mindblastMultiplier;
                 $combatUI.find('.psisurgebonus').text( psiSurgeBonus );
+                $combatUI.find('.psisurgeloss').text( Combat.psiSurgeTurnLoss() );
             }
         });
 
@@ -304,7 +306,7 @@ const combatMechanics = {
 
         if( !state.actionChart.disciplines.contains('psisurge') )
             return;
-        if( state.actionChart.currentEndurance > 6 )
+        if( state.actionChart.currentEndurance > Combat.minimumEPForPsiSurge() )
             return;
         var sectionState = state.sectionStates.getSectionState();
         if( sectionState.combats.length === 0 )

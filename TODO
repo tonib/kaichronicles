@@ -1,7 +1,3 @@
-  * When using their psychic ability to attack an enemy, Archmasters may add 6 points to their COMBAT SKILL instead of the usual 4 points.
-    For every round in which Psi-surge is used, Archmasters need only deduct 1 ENDURANCE point. When using the weaker psychic 
-    attack—Mindblast—they may add 3 points to their COMBAT SKILL without loss of ENDURANCE points. Archmasters cannot use Psi-surge if their 
-    ENDURANCE score falls to 4 points or below.
 - Tests: Check spanish and english combats: Enemies should have the same statistics
 - Search "if( !confirm( 'Are you sure you want to cancel?') )". Missed translation
 - Google play:

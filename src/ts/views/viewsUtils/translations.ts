@@ -93,7 +93,8 @@ class Translations {
         'playTurn' : 'Jugar turno',
         'eludeCombat' : 'Eludir combate',
         'deathLetter' : 'M',
-        'mechanics-combat-psisurge' : 'Acometida Psíquica: +<span class="psisurgebonus">4</span> DC, -2 R por asalto',
+        'mechanics-combat-psisurge' : 'Acometida Psíquica: +<span class="psisurgebonus">4</span> DC, ' + 
+            '-<span class="psisurgeloss">2</span> R por asalto',
         'sectionModifier' : 'Modificador sección',
         'objectsUse' : 'Uso objetos',
         'enemyMindblast' : 'Ataque psíquico enemigo',

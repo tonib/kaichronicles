@@ -556,13 +556,13 @@ class ActionChart {
         if( combat.psiSurge ) {
             bonuses.push( {
                 concept: translations.text( 'psisurge' ),
-                increment: (combat.psiSurgeBonus ? combat.psiSurgeBonus : +4) * combat.mindblastMultiplier
+                increment: (combat.psiSurgeBonus ? combat.psiSurgeBonus : Combat.defaultPsiSurgeBonus()) * combat.mindblastMultiplier
             });
         }
         else if( !combat.noMindblast && ( this.disciplines.contains( 'mndblst' ) || this.disciplines.contains( 'psisurge' ) ) ) {
             bonuses.push( {
                 concept: translations.text( 'mindblast' ),
-                increment: (combat.mindblastBonus ? combat.mindblastBonus : +2) * combat.mindblastMultiplier
+                increment: (combat.mindblastBonus ? combat.mindblastBonus : Combat.defaultMindblastBonus()) * combat.mindblastMultiplier
             });
         }
 

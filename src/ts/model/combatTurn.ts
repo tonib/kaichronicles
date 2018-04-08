@@ -104,9 +104,10 @@ class CombatTurn {
 
         // Psi-surge loss
         if( combat.psiSurge ) {
+            const psiSurgeLoss = Combat.psiSurgeTurnLoss();
             if( this.loneWolf != combatTable_DEATH )
-                this.loneWolf += 2;
-            this.loneWolfExtra -= 2;
+                this.loneWolf += psiSurgeLoss;
+            this.loneWolfExtra -= psiSurgeLoss;
         }
 
         /** Text with the player loss */

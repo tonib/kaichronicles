@@ -30,10 +30,10 @@ class Combat {
     public noPsiSurge = false;
 
     /** The CS bonus to apply if the player has Mindblast discipline */
-    public mindblastBonus = +2;
+    public mindblastBonus;
 
     /** The CS bonus to apply if the player has Psi-Surge discipline */
-    public psiSurgeBonus = +4;
+    public psiSurgeBonus;
 
     /** The CS multiplier to apply to Mindblast/Psi-Surge attacks */
     public mindblastMultiplier = 1;
@@ -127,6 +127,10 @@ class Combat {
 
         /** The original endurance of the player before the combat (for fake combats) */
         this.originalPlayerEndurance = state.actionChart.currentEndurance;
+
+        // Default Psi-Surge / Mindblast bonuses
+        this.psiSurgeBonus = Combat.defaultPsiSurgeBonus();
+        this.mindblastBonus = Combat.defaultMindblastBonus();
     }
 
     /**
@@ -295,7 +299,7 @@ class Combat {
     }
 
     /**
-     * Returns true if the player can NOT use the weapon on the current turn
+     * Returns true if the player can NOT use any weapon on the current turn
      */
     public noWeaponCurrentTurn() : boolean {
         if( this.noWeaponTurns < 0 )
@@ -304,6 +308,48 @@ class Combat {
 
         // No weapon if we still on a "No weapon" turn
         return this.noWeaponTurns > this.turns.length;
+    }
+
+    /** Get the default Psi-Surge bonus */
+    public static defaultPsiSurgeBonus() : number {
+        /*
+            Magnakai / Psi-Surge:
+            When using their psychic ability to attack an enemy, Archmasters may add 6 points to their COMBAT SKILL instead of the usual 4 points.
+            For every round in which Psi-surge is used, Archmasters need only deduct 1 ENDURANCE point. When using the weaker psychic 
+            attack—Mindblast—they may add 3 points to their COMBAT SKILL without loss of ENDURANCE points. Archmasters cannot use Psi-surge if their 
+            ENDURANCE score falls to 4 points or below.
+        */
+        let bonus = +4;
+        if( state.book.isMagnakaiBook() && state.actionChart.disciplines.length >= 9 )
+            bonus = +6;
+        return bonus;
+    }
+
+    /** Get the default Mindblast bonus */
+    public static defaultMindblastBonus() : number {
+        // See defaultPsiSurgeBonus comment
+        let bonus = +2;
+        if( state.book.isMagnakaiBook() && state.actionChart.disciplines.length >= 9 )
+            bonus = +3;
+        return bonus;
+    }
+
+    /** Returns the number of EP loss by turn when using Psi-Surge */
+    public static psiSurgeTurnLoss() : number {
+        // See defaultPsiSurgeBonus comment
+        let loss = 2;
+        if( state.book.isMagnakaiBook() && state.actionChart.disciplines.length >= 9 )
+            loss = 1;
+        return loss;
+    }
+
+    /** Returns the minumum Endurance Points to use the Psi-Surge */
+    public static minimumEPForPsiSurge() : number {
+        // See defaultPsiSurgeBonus comment
+        let min = 6;
+        if( state.book.isMagnakaiBook() && state.actionChart.disciplines.length >= 9 )
+            min = 4;
+        return min;
     }
 
 }
