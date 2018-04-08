@@ -195,6 +195,11 @@ div.signpost {
     margin-right: 10px;
 }
 
+/* Multiline text on buttons */
+.multilinebtn {
+    white-space: normal;
+}
+
 /* The statistics on header is like a link */
 #template-statistics {
     cursor: pointer;

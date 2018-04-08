@@ -77,6 +77,8 @@ class Translations {
             'llevar es de 12. Podrás dejar el resto en un lugar seguro del monasterio del Kai, o dejarlo aquí. ' +
             'Si se deja aquí, el objeto se perderá. Por favor, deja los Objetos Especiales antes de continuar.',
         'noQuiversEnough' : 'No tienes suficientes Carcajes (sólo 6 Flechas por Carcaj)',
+        'restore20EP': 'Medicina: +20 R (sólo si R 6 o menos, cada 100 días)',
+        'confirm20EP': 'Esta habilidad solo puede ser usada una vez cada 100 días. ¿Continuamos?',
 
         //////////////////////////////////////
         // Combats
@@ -355,6 +357,7 @@ class Translations {
         'pickMoney' : 'Pick money',
         'amount' : 'Amount',
         'noQuiversEnough' : 'You don\'t have enough Quivers (only 6 Arrows per Quiver)',
+        'confirm20EP': 'This ability can only be used once every 100 days. Continue?',
 
         //////////////////////////////////////
         // Combats

@@ -74,6 +74,14 @@ class ActionChart {
     public adganaUsed = false;
 
     /**
+     * Restore 20 EP used?.
+     * Archmaster level:
+     * Archmasters are able to use their healing power to repair serious wounds sustained in battle. If, whilst in combat, their ENDURANCE is
+     * reduced to 6 points or less, they can use their skill to restore 20 ENDURANCE points. This ability can only be used once every 100 days.
+     */
+    private restore20EPUsed = false;
+
+    /**
      * Objects in safekeeping at Kai monastery
      */
     public kaiMonasterySafekeeping : Array<SectionItem>  = [];
@@ -761,5 +769,37 @@ class ActionChart {
         return state.book.bookNumber >= ActionChart.BOOK_WITH_MAX_SPECIALS ? 12 : 0;
     }
 
+    /**
+     * The Magnakai Medicine Archmaster +20 EP can be used on this book?
+     */
+    public canUse20EPRestoreOnThisBook() : boolean {
+        return this.disciplines.length >= 9 && state.book.isMagnakaiBook() && this.disciplines.contains('curing');
+    }
+
+    /**
+     * The Magnakai Medicine Archmaster +20 EP can be used now?
+     */
+    public canUse20EPRestoreNow() : boolean {
+        return this.currentEndurance <= 6 && !this.restore20EPUsed && this.canUse20EPRestoreOnThisBook();
+    }
+
+    /**
+     * Use the Magnakai Medicine Archmaster +20 EP.
+     * @returns true if was really used. False if it cannot be used
+     */
+    public use20EPRestore() : boolean {
+        if( !this.canUse20EPRestoreNow() )
+            return false;
+        this.restore20EPUsed  = true;
+        this.increaseEndurance(20);
+        return true;
+    }
+
+    /**
+     * Reset the +20 EP used flag
+     */
+    public reset20EPRestoreUsed() {
+        this.restore20EPUsed  = false;
+    }
 }
 

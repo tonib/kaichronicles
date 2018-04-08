@@ -31,11 +31,39 @@ const actionChartView = {
         // Bind event for drop meals
         ObjectsTable.bindTableEquipmentEvents( $('#achart-dropmeal') , ObjectsTableType.INVENTORY );
 
+        // Bind restore 20 EP (Curing)
+        actionChartView.bindRestore20EP();
+
         // Annotations
         $('#achart-annotations').val( actionChart.annotations );
         $('#achart-annotations').off();
         $('#achart-annotations').on('input', function() {
             state.actionChart.annotations = $(this).val();
+        });
+    },
+
+    /**
+     * Hide / disable the restore 20 EP button if needed
+     */
+    updateRestore20EPState: function() {
+        const $restoreButton = $('#achart-restore20Ep');
+        if( !state.actionChart.canUse20EPRestoreOnThisBook() )
+            $restoreButton.hide();
+        if( !state.actionChart.canUse20EPRestoreNow() )
+            $restoreButton.prop( 'disabled', true );
+    },
+
+    /**
+     * Bind events to restore 20 EP (Curing)
+     */
+    bindRestore20EP: function() {
+        actionChartView.updateRestore20EPState();
+        $('#achart-restore20Ep').click( function(e: Event) {
+            e.preventDefault();
+            if( !confirm( translations.text('confirm20EP') ) )
+                return;
+            actionChartController.use20EPRestore();
+            actionChartView.updateRestore20EPState();
         });
     },
 

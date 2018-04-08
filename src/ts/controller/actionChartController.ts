@@ -439,6 +439,16 @@ const actionChartController = {
         return realIncrement;
     },
 
+    /**
+     * Use the Magnakai Medicine Archmaster +20 EP.
+     */
+    use20EPRestore: function() {
+        if( state.actionChart.use20EPRestore() ) {
+            toastr.success( translations.text( 'msgEndurance' , ['+20'] ) );
+            template.updateStatistics();
+        }
+    },
+
     /** Return page */
     getBackController: function() { return 'game'; },
 
