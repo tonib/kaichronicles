@@ -352,8 +352,8 @@ the following properties:
 * **fake="true"**: This is a fake combat. When it's finished, LW endurance points lost will be restored
 * **restoreFactor="floatNumber"**: Only applies if fake="true". Factor of the EP lost to restore after the combat.
   Default is 1.0 (100% of the EP lost)
-* **enemyTurnLoss="-number"** Extra E.P. lost by the enemy each turn
-* **turnLoss="-number"** Extra E.P. lost by LW each turn
+* **enemyTurnLoss="-number"** Extra E.P. lost by the enemy each turn. Should be negative or zero
+* **turnLoss="-number"** Extra E.P. lost by LW each turn. Should be negative or zero
 * **bow="true"** It's a combat with bow? (false = hand-to-hand)
 * **disabledObjects="objectId1|objectId2|..."** Set objects that cannot be used on this combat. "none" to enable all objects previously
   disabled.

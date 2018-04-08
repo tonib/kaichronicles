@@ -205,8 +205,8 @@
         <xs:attribute name="maxEludeTurn" type="xs:integer" />
         <xs:attribute name="dammageMultiplier" type="xs:decimal" />
         <xs:attribute name="enemyMultiplier" type="xs:decimal" />
-        <xs:attribute name="enemyTurnLoss" type="xs:integer" />
-        <xs:attribute name="turnLoss" type="xs:integer" />
+        <xs:attribute name="enemyTurnLoss" type="xs:nonPositiveInteger" />
+        <xs:attribute name="turnLoss" type="xs:nonPositiveInteger" />
         <xs:attribute name="fake" type="xs:boolean" />
         <xs:attribute name="restoreFactor" type="xs:decimal" />
         <xs:attribute name="bow" type="trueOnly" />

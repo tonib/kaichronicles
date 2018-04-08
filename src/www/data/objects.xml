@@ -1488,6 +1488,12 @@
             <usage class="endurance" increment="2" />
         </object>
 
+        <!-- BOOK 12 -->
+        <object id="blackcube">
+            <name lang="en">Black Cube</name>
+            <name lang="es">Cubo Negro</name>
+        </object>
+
         <!-- OTHERS -->
 
         <!-- This not really an object, but needed for mechanics -->

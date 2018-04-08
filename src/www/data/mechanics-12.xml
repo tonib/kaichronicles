@@ -454,6 +454,63 @@
             <endurance count="-3" />
         </section>
 
+        <section id="sect54">
+            <test not="true" hasObject="blackcube">
+                <choiceState section="sect40" set="disabled" />
+            </test>
+            <test hasObject="blackcube">
+                <choiceState section="sect320" set="disabled" />
+            </test>
+        </section>
+        
+        <section id="sect55">
+            <choiceState section="all" set="disabled" />
+
+            <combat turnLoss="-1" />
+            <test hasDiscipline="nexus">
+                <test expression="[KAILEVEL] >= 9">
+                    <combat turnLoss="0" />
+                </test>
+            </test>
+
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect56">
+            <test not="true" hasObject="sommerswerd">
+                <choiceState section="sect208" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect57">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <test not="true" expression="[COMBATSDURATION] > 3">
+                    <choiceState section="sect6" set="enabled" />
+                </test>
+                <test expression="[COMBATSDURATION] > 3">
+                    <choiceState section="sect195" set="enabled" />
+                </test>
+            </afterCombats>
+        </section>
+
+        <section id="sect58">
+            <choiceState section="all" set="disabled" />
+
+            <test not="true" hasDiscipline="hntmstry">
+                <combat combatSkillModifier="-2" />
+                <afterCombatTurn turn="1">
+                    <combat combatSkillModifier="0" />
+                </afterCombatTurn>
+            </test>
+
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
     </sections>
 
 </mechanics>
