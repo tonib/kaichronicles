@@ -748,6 +748,26 @@
             </description>
         </special>
 
+        <!-- BOOK 12 -->
+
+        <special id="kagonitechainmail">
+            <name lang="en">Kagonite Chainmail</name>
+            <description lang="en">
+                It's crafted from a metallic mineral called kagonite. It is as light as wood, yet ten times harder than steel.
+                It will increase your COMBAT SKILL by 3 and your ENDURANCE by 1
+            </description>
+
+            <name lang="es">Cota de Malla de Kagonita</name>
+            <description lang="es">
+                Está fabricada con un mineral metálico llamado kagonita. Es un material liviano como la madera, pero diez veces 
+                más resistente que el acero. Incrementará tu DESTREZA EN EL COMBATE en 3 y tu RESISTENCIA en 1
+            </description>
+
+            <image book="1" name="mail.png" />
+            <effect class="combatSkill" increment="+3" />
+            <effect class="endurance" increment="+1" />
+        </special>
+
     </specials>
 
     <objects>
