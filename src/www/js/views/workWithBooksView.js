@@ -47,7 +47,7 @@ var workWithBooksView = {
     closeCancelClicked: function() {
         if( workWithBooksController.changingBooks ) {
             // Cancel process
-            if( !confirm( 'Are you sure you want to cancel?') )
+            if( !confirm( translations.text( 'confirmCancel' ) ) )
                 return;
         }
 

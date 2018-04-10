@@ -252,6 +252,7 @@ class Translations {
         'noInternet' : 'No hay conexión a Internet',
         'cancel' : 'Cancelar',
         'processCancelled' : 'Proceso cancelado',
+        'confirmCancel' : '¿Seguro que quiere cancelar?',
 
         //////////////////////////////////////
         // Kai monastery safekeeping
@@ -448,6 +449,7 @@ class Translations {
         'noInternet' : 'There is no Internet connection',
         'cancel' : 'Cancel',
         'processCancelled' : 'Process cancelled',
+        'confirmCancel' : 'Are you sure you want to cancel?',
 
         //////////////////////////////////////
         // Load game
