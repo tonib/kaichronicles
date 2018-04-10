@@ -210,9 +210,9 @@ const actionChartController = {
             return;
 
         // Do the usage action:
-        if( o.usage.cls == 'endurance' )
+        if( o.usage.cls == Item.ENDURANCE )
             actionChartController.increaseEndurance( o.usage.increment );
-        else if( o.usage.cls == 'combatSkill' ) {
+        else if( o.usage.cls == Item.COMBATSKILL ) {
             // Combat skill modifiers only apply to the current section combats
             const sectionState = state.sectionStates.getSectionState();
             sectionState.combatSkillUsageModifier( o.usage.increment );

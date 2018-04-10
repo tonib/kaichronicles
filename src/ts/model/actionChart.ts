@@ -495,7 +495,7 @@ class ActionChart {
         }
 
         // Check current weapon bonuses
-        if( !noWeapon && currentWeapon && currentWeapon.effect && currentWeapon.effect.cls == 'combatSkill' ) {
+        if( !noWeapon && currentWeapon && currentWeapon.effect && currentWeapon.effect.cls == Item.COMBATSKILL ) {
             bonuses.push( {
                 concept: currentWeapon.name,
                 increment: currentWeapon.effect.increment
@@ -568,8 +568,8 @@ class ActionChart {
 
         // Other objects (not weapons). Ex. shield. They are not applied for bow combats
         if( !combat.mentalOnly && !combat.bowCombat ) {
-            this.enumerateObjects( function(o) {
-                if( !o.isWeapon() && o.effect && o.effect.cls == 'combatSkill' && !combat.disabledObjects.contains(o.id) ) {
+            this.enumerateObjects( function(o : Item) {
+                if( !o.isWeapon() && o.effect && o.effect.cls == Item.COMBATSKILL && !combat.disabledObjects.contains(o.id) ) {
                     bonuses.push( {
                         concept: o.name,
                         increment: o.effect.increment 
@@ -593,12 +593,12 @@ class ActionChart {
 
     /**
      * Function to enumerate backpack objects and special items
-     * @param {function} callback Function to be called for each object
+     * @param callback Function to be called for each object. Parameter is each Item owned by the player
      */
-    private enumerateObjects( callback ) {
+    private enumerateObjects( callback : ( o : Item ) => void ) {
 
-        var enumerateFunction = function(index, objectId) {
-            var o = state.mechanics.getObject(objectId);
+        var enumerateFunction = function(index : number , objectId : string ) {
+            const o = state.mechanics.getObject( objectId );
             if( !o )
                 return;
             callback(o);
@@ -627,8 +627,8 @@ class ActionChart {
     public getEnduranceBonuses() : Array<Bonus> {
 
         var bonuses = [];
-        this.enumerateObjects( function(o) {
-            if( o.effect && o.effect.cls == 'endurance' ) {
+        this.enumerateObjects( function( o : Item ) {
+            if( o.effect && o.effect.cls == Item.ENDURANCE ) {
                 bonuses.push( {
                     concept: o.name,
                     increment: o.effect.increment 
@@ -650,7 +650,7 @@ class ActionChart {
     public getMealObjects() {
 
         var result = [];
-        this.enumerateObjects( function(o) {
+        this.enumerateObjects( function( o : Item ) {
             if( o.isMeal && !result.contains(o.id) )
                 result.push(o.id);
         });

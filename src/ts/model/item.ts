@@ -5,7 +5,7 @@
  */
 interface ItemEffect {
 
-    /** 'combatSkill' for combat skill increment. 'endurance' for endurance points increment. */
+    /** Combat.COMBATSKILL for combat skill increment. Item.ENDURANCE for endurance points increment. */
     cls : string;
 
     /** Attribute increment */
@@ -16,6 +16,10 @@ interface ItemEffect {
  * Game object information
  */
 class Item {
+
+    // Item effect classes (see ItemEffect interface)
+    public static readonly COMBATSKILL = 'combatSkill';
+    public static readonly ENDURANCE = 'endurance';
 
     // Object types
     public static readonly SPECIAL = 'special';
@@ -206,7 +210,7 @@ class Item {
     public getCombatSkillEffect() : number {
         if( !this.effect )
             return 0;
-        if( this.effect.cls != 'combatSkill' )
+        if( this.effect.cls != Item.COMBATSKILL )
             return 0;
         return this.effect.increment;
     }
