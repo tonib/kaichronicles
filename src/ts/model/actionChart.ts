@@ -495,10 +495,10 @@ class ActionChart {
         }
 
         // Check current weapon bonuses
-        if( !noWeapon && currentWeapon && currentWeapon.effect && currentWeapon.effect.cls == Item.COMBATSKILL ) {
+        if( !noWeapon && currentWeapon && currentWeapon.combatSkillEffect ) {
             bonuses.push( {
                 concept: currentWeapon.name,
-                increment: currentWeapon.effect.increment
+                increment: currentWeapon.combatSkillEffect
             });
         }
 
@@ -568,11 +568,11 @@ class ActionChart {
 
         // Other objects (not weapons). Ex. shield. They are not applied for bow combats
         if( !combat.mentalOnly && !combat.bowCombat ) {
-            this.enumerateObjects( function(o : Item) {
-                if( !o.isWeapon() && o.effect && o.effect.cls == Item.COMBATSKILL && !combat.disabledObjects.contains(o.id) ) {
+            this.enumerateObjects( function( o : Item ) {
+                if( !o.isWeapon() && o.combatSkillEffect && !combat.disabledObjects.contains(o.id) ) {
                     bonuses.push( {
                         concept: o.name,
-                        increment: o.effect.increment 
+                        increment: o.combatSkillEffect
                     });
                 }
             });
@@ -628,10 +628,10 @@ class ActionChart {
 
         var bonuses = [];
         this.enumerateObjects( function( o : Item ) {
-            if( o.effect && o.effect.cls == Item.ENDURANCE ) {
+            if( o.enduranceEffect ) {
                 bonuses.push( {
                     concept: o.name,
-                    increment: o.effect.increment 
+                    increment: o.enduranceEffect
                 });
             }
         });
@@ -751,9 +751,8 @@ class ActionChart {
         let selectedWeapon : Item = null;
         for( let weapon of this.getWeaponObjects() ) {
             if( weapon.isWeaponType( weaponType ) ) {
-                let weaponBonus : number = weapon.getCombatSkillEffect();
-                if( weaponBonus >= maxBonus ) {
-                    maxBonus = weaponBonus;
+                if( weapon.combatSkillEffect >= maxBonus ) {
+                    maxBonus = weapon.combatSkillEffect;
                     selectedWeapon = weapon;
                 }
             }

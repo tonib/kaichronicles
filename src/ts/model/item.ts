@@ -76,8 +76,14 @@ class Item {
      */
     private imageBookNumber : number;
 
-    /** Effect (when the player carry the object) */
-    public effect : ItemEffect;
+    /** 
+     * Combat skill increment. 
+     * If it's a weapon, only when it's the current weapon. Otherwise, when the player carry the object 
+     */
+    public combatSkillEffect : number = 0;
+
+    /** Endurance increment when the player carry the object */
+    public enduranceEffect : number = 0;
 
     /** Usage (only one use, and then the object is dropped) */
     public usage : ItemEffect;
@@ -144,13 +150,18 @@ class Item {
             };
         }
 
-        // Effect (when the player carry the object)
-        var $effect = $o.find('effect');
-        if( $effect.length > 0 ) {
-            this.effect = {
-                cls: $effect.attr('class'),
-                increment: parseInt( $effect.attr('increment') ) 
-            };
+        // Effects (when the player carry the object)
+        const $effects : Array<any> = $o.find('effect');
+        for( let effect of $effects ) {
+            const $effect = $(effect);
+            const increment = parseInt( $effect.attr('increment') );
+            const cls : string = $effect.attr('class');
+            if( cls == Item.COMBATSKILL ) 
+                this.combatSkillEffect = increment;
+            else if( cls == Item.ENDURANCE )
+                this.enduranceEffect = increment;
+            else
+                console.log( 'Object ' + this.id + ', wrong class effect: ' + cls );
         }
 
         // Incompatibilities
@@ -202,17 +213,6 @@ class Item {
             return null;
         
         return this.imageUrl;
-    }
-
-    /**
-     * Returns the combat skill effect bonus for this object. Zero if it has no effect
-     */
-    public getCombatSkillEffect() : number {
-        if( !this.effect )
-            return 0;
-        if( this.effect.cls != Item.COMBATSKILL )
-            return 0;
-        return this.effect.increment;
     }
 
     /**
