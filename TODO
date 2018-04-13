@@ -7,7 +7,7 @@
 - Use latest version on PAON data on SVN (a fixed commit number)
 - When you cancel a saved games import, it say "error", and it is not
 - Check reported bugs on Google play:
-  * Saved games removed when adding new games
+  * Saved games removed when adding new books
   * Objects types
   * Others?
 - Bugs reported on Google Play:
@@ -110,10 +110,16 @@ cordova emulate --target=Android_5_0_1 android
 * Cordova plugins list
   cordova plugin list
 
+* Verify Project AON patches:
+  - Verify XML changes:
+    svn diff | iconv -f ISO-8859-1 | dwdiff --diff-input -c | less -R
+  - Verify patch:
+    cat [**PATCHFILE**] | iconv -f ISO-8859-1 | dwdiff --diff-input -c | less -R
+
 * Script to check XML differences between PAON SVN versions (to upgrade XML versions):
-TODO: Check differences between spaces options (see https://stackoverflow.com/questions/16423024/how-can-i-diff-2-files-while-ignoring-leading-white-space)
-svn diff -x --ignore-all-space https://www.projectaon.org/data/tags/20151013/es/xml/01hdlo.xml https://www.projectaon.org/data/trunk/es/xml/01hdlo.xml | iconv -f ISO-8859-1 | colordiff | less -R
-svn diff -x --ignore-all-space https://www.projectaon.org/data/tags/20151013/en/xml/01fftd.xml https://www.projectaon.org/data/trunk/en/xml/01fftd.xml | iconv -f ISO-8859-1 | colordiff | less -R
+  TODO: Check differences between spaces options (see https://stackoverflow.com/questions/16423024/how-can-i-diff-2-files-while-ignoring-leading-white-space)
+  svn diff -x --ignore-all-space https://www.projectaon.org/data/tags/20151013/es/xml/01hdlo.xml https://www.projectaon.org/data/trunk/es/xml/01hdlo.xml | iconv -f ISO-8859-1 | colordiff | less -R
+  svn diff -x --ignore-all-space https://www.projectaon.org/data/tags/20151013/en/xml/01fftd.xml https://www.projectaon.org/data/trunk/en/xml/01fftd.xml | iconv -f ISO-8859-1 | colordiff | less -R
 
 * Create a default inventory
 actionChartController.drop('all')
