@@ -31,7 +31,7 @@ Download the Project Aon game data:
 ```bash
     npm run downloaddata
 ```
-This will require Node.js (any recent version), zip command, SVN client, and wget on your path
+This will require Node.js (any recent version), zip command, SVN client, wget and patch on your path
 
 ### Setup web site
 

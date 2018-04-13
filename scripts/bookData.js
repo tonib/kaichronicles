@@ -25,6 +25,8 @@ function BookData( bookNumber ) {
     this.illAuthors = this.bookMetadata.illustrators;
 }
 
+//BookData.prototype.XMLPATCHES_URL = 
+
 /**
  * Returns the SVN root for this book.
  * See projectAon.ts for an explanation
@@ -79,10 +81,23 @@ BookData.prototype.getXmlSvnSourcePath = function(language) {
  * @param {string} language The language code (en/es)
  */
 BookData.prototype.downloadXml = function(language) {
+
+    // Download the book XML
     var sourcePath = this.getXmlSvnSourcePath(language);
     var targetPath = this.getBookDir() + '/' + this.getBookXmlName( language );
     var svnParams = [ 'export' , sourcePath , targetPath ];
     this.runSvnCommand( svnParams );
+
+    // Check if there are book patches 
+    // Patches are at [ROOT]/src/patches/projectAonPatches/, and they are downloaded by BookData.prototype.downloadPatches
+    var patchFileName = this.getBookCode( language ) + '-' + this.bookMetadata.revision + '.diff'
+    var patchPath = 'src/patches/projectAonPatches/' + patchFileName;
+    if( fs.existsSync( patchPath ) ) {
+        console.log( 'Applying patch ' + patchFileName + ' to ' + targetPath );
+        // patch [options] [originalfile [patchfile]]
+        child_process.execFileSync( 'patch' , [ targetPath , patchPath ] , {stdio:[0,1,2]} );
+    }
+    
 }
 
 /**
