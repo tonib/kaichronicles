@@ -235,9 +235,6 @@ BookData.prototype.runSvnCommand = function( params ) {
     child_process.execFileSync( 'svn' , params , {stdio:[0,1,2]} );
 }
 
-BookData.prototype.checkNewupgrades = new function( language ) {
-}
-
 // Export BookData, JS insane way
 try {
     if (typeof exports !== 'undefined')
