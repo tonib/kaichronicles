@@ -25,7 +25,11 @@ function BookData( bookNumber ) {
     this.illAuthors = this.bookMetadata.illustrators;
 }
 
-//BookData.prototype.XMLPATCHES_URL = 
+/** 
+  * URL base directory for extra contents for this application. 
+  * 
+  */
+BookData.EXTRA_TONI_CONTENTS_URL = 'https://projectaon.org/staff/toni/extraContent-DONOTREMOVE';
 
 /**
  * Returns the SVN root for this book.
@@ -159,10 +163,10 @@ BookData.prototype.book9ObjectIllustrations = function() {
         this.runSvnCommand( [ 'export' , svnSourcePath , targetPath ] );
     }
 
-    // NOT included at any book: ssword.png,  warhammr.png. Added to https://projectaon.org/staff/toni/missWilliamsIll-DONOTREMOVE
+    // NOT included at any book: ssword.png,  warhammr.png. Added to https://projectaon.org/staff/toni/extraContent-DONOTREMOVE
     williamsIllustrations = [
-        'https://projectaon.org/staff/toni/missWilliamsIll-DONOTREMOVE/ssword.png',
-        'https://projectaon.org/staff/toni/missWilliamsIll-DONOTREMOVE/warhammr.png',
+        BookData.EXTRA_TONI_CONTENTS_URL + '/ssword.png',
+        BookData.EXTRA_TONI_CONTENTS_URL + '/warhammr.png'
     ];
     for( var i=0; i<williamsIllustrations.length; i++ )
         BookData.downloadWithWGet( williamsIllustrations[i] , targetDir );
@@ -171,11 +175,11 @@ BookData.prototype.book9ObjectIllustrations = function() {
 
 /** 
  * Download a file with wget
- * @param {string} url URL to download
+ * @param {string} url File URL to download
  * @param {string} targetDirectory Destination directory
  */
 BookData.downloadWithWGet = function( url , targetDirectory ) {
-    // wget https://projectaon.org/staff/toni/missWilliamsIll-DONOTREMOVE/ssword.png -P targetDirectory/
+    // wget https://projectaon.org/staff/toni/extraContent-DONOTREMOVE/ssword.png -P targetDirectory/
 
     var params = [ url , '-P' , targetDirectory ];
     console.log( 'wget ' + params.join( ' ' ) );
@@ -249,6 +253,25 @@ BookData.prototype.runSvnCommand = function( params ) {
     console.log( 'svn ' + params.join( ' ' ) );
     child_process.execFileSync( 'svn' , params , {stdio:[0,1,2]} );
 }
+
+/**
+ * Download book XML patches from PAON web site
+ */
+BookData.downloadBooksXmlPatches = function() {
+    
+    var patchesDirectory = 'src/patches/projectAonPatches';
+    if( !fs.existsSync( patchesDirectory ) ) {
+        console.log( 'Creating PAON book xml patches directory: ' + patchesDirectory );
+        fs.mkdirSync( patchesDirectory );
+    }
+
+    var patchFileNames = [ '09ecdm-2655.diff' ];
+    for( var i=0; i<patchFileNames.length; i++ ) {
+        if( !fs.existsSync( patchesDirectory + '/' + patchFileNames[i] ) )
+            this.downloadWithWGet( BookData.EXTRA_TONI_CONTENTS_URL + '/' + patchFileNames[i] , patchesDirectory );
+    }
+}
+
 
 // Export BookData, JS insane way
 try {

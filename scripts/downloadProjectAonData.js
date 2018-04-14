@@ -8,6 +8,9 @@ const projectAon = require( '../src/www/js/ts-generated/model/projectAon.js' ).p
     1) Book index (1-based). If it does not exists, the "src/www/data/projectAon" will be re-created and all books will be downloaded
 */
 
+// Download PAON XML patches
+BookData.downloadBooksXmlPatches();
+
 // Check if we should download only a single book
 var bookNumber = 0;
 if( process.argv.length >= 3 )
