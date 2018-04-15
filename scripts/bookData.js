@@ -27,9 +27,11 @@ function BookData( bookNumber ) {
 
 /** 
   * URL base directory for extra contents for this application. 
-  * 
   */
 BookData.EXTRA_TONI_CONTENTS_URL = 'https://projectaon.org/staff/toni/extraContent-DONOTREMOVE';
+
+/** URL for the PAON trunk (current version) */
+BookData.SVN_TRUNK_URL = 'https://www.projectaon.org/data/trunk';
 
 /**
  * Returns the SVN root for this book.
@@ -74,10 +76,13 @@ BookData.prototype.getBookXmlName = function(language) {
 /**
  * Get the SVN source path for the book XML, as it is configured on projectAon.ts
  * @param {string} language The language code (en/es)
+ * @param {string} root Optional. The SVN root to use. If null, the current published version will be used
  * @returns The currently used book XML URL at the PAON web site
  */
-BookData.prototype.getXmlSvnSourcePath = function(language) {
-    return this.getSvnRoot() + '/' + language + '/xml/' + this.getBookXmlName( language );
+BookData.prototype.getXmlSvnSourcePath = function(language, root) {
+    if( !root )
+        root = this.getSvnRoot();
+    return root + '/' + language + '/xml/' + this.getBookXmlName( language );
 }
 
 /**
@@ -272,6 +277,27 @@ BookData.downloadBooksXmlPatches = function() {
     }
 }
 
+/**
+ * Check changes from the published app version with the trunk current version
+ * @param {String} language Language to compare
+ */
+BookData.prototype.reviewChangesCurrentVersion = function(language) {
+    //svn diff -x --ignore-all-space https://www.projectaon.org/data/tags/20151013/es/xml/01hdlo.xml https://www.projectaon.org/data/trunk/es/xml/01hdlo.xml | iconv -f ISO-8859-1 | dwdiff --diff-input -c | less -R
+
+    // The currently publised version with the app
+    var publishedWithAppSvnPath = this.getXmlSvnSourcePath(language);
+    if( this.bookMetadata.revision )
+        publishedWithAppSvnPath += '@' + this.bookMetadata.revision;
+
+    // The latest version on the PAON site
+    var currentVersionPath = this.getXmlSvnSourcePath(language, BookData.SVN_TRUNK_URL);
+
+    var shellCommand = 'svn diff -x --ignore-all-space ' + 
+        publishedWithAppSvnPath + ' ' +  currentVersionPath + 
+        ' | iconv -f ISO-8859-1 | dwdiff --diff-input -c | less -R';
+    console.log( shellCommand );
+    child_process.spawn( 'sh', ['-c', shellCommand], { stdio: 'inherit' });
+}
 
 // Export BookData, JS insane way
 try {

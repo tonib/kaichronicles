@@ -23,7 +23,8 @@
         "cleandist": "rm -rf dist",
         "downloaddata": "node scripts/downloadProjectAonData.js",
         "ts": "tsc -p tsconfig.json",
-        "cleants": "rm -rf src/www/js/ts-generated"
+        "cleants": "rm -rf src/www/js/ts-generated",
+        "reviewchanges": "node scripts/reviewBookChanges.js"
     }
 }
 
