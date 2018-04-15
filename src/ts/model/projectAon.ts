@@ -53,7 +53,12 @@ const projectAon = {
 
             zipSize: 5117979,
 
+            /*
+                CURRENTLY UNPUBLISHABLE: App version should be updated BEFORE use this revision. See mechanics-2.xml > sect299
+                If a previous app version is used with the new revision, app will fail
+            */
             revision: 0
+            //revision: 2713      // Upgraded 15/4/2018
         },
 
         // Book 3:

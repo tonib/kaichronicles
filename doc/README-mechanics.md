@@ -236,6 +236,7 @@ will be executed.
 * **combatsWon="boolean"**: Have been won all combats on this section (or not)?
 * **combatsActive="true"**: Do some combat still active (not won and not eluded)?
 * **bookLanguage="language code (en/es)"**: Is this the current book language?
+* **sectionContainsText="text"**: Does the current section contain this text?
 * **weaponskillActive="true"**: Has the player Weaponskill with the current weapon?
 * **not="true"**: This will negate the current test. So if all of these conditions are false,
   the inner rules will be executed

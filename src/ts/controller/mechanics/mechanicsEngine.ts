@@ -637,6 +637,14 @@ const mechanicsEngine = {
         if( pickedSomethingOnSection && EquipmentSectionMechanics.getNPickedObjects(pickedSomethingOnSection) > 0 )
             conditionStatisfied = true;
 
+        // Section contains text?
+        const sectionContainsText : string = $rule.attr( 'sectionContainsText' )
+        if( sectionContainsText ) {
+            const section = new Section(state.book, state.sectionStates.currentSection, state.mechanics);
+            if( section.containsText(sectionContainsText) )
+                conditionStatisfied = true;
+        }
+
         // Check if the test should be inversed
         if( $rule.attr('not') == 'true' )
             conditionStatisfied = !conditionStatisfied;

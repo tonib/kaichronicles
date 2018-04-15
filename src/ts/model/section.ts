@@ -190,6 +190,17 @@ class Section {
     public getSectionAonPage = function(language : string) : string {
         return this.book.getBookProjectAonHtmlDir(language) + this.sectionId + ".htm";
     }
+
+    /**
+     * Returns true if the section text contains the given text
+     * @param text The text to check
+     * @returns true if the section contains the given text
+     */
+    public containsText(text : string) : boolean {
+        const sectionText : string = this.$xmlSection.text();
+        return sectionText.indexOf(text) > 0;
+    }
+
 }
 
 

@@ -166,6 +166,7 @@
         <xs:attribute name="isGlobalRuleRegistered" type="xs:string" />
         <xs:attribute name="objectOnSection" type="xs:string" />
         <xs:attribute name="pickedSomethingOnSection" type="xs:string" />
+        <xs:attribute name="sectionContainsText" type="xs:string" />
         <xs:attribute name="not" type="trueOnly" />
     </xs:complexType>
 

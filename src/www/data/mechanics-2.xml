@@ -1471,10 +1471,22 @@
 
             <test not="true" bookLanguage="en">
                 <!-- Spanish version -->
-                <choiceSelected section="sect102">
-                    <drop objectId="magicspear" />
-                </choiceSelected>
+
+                <!-- Before changes -->
+                <test sectionContainsText=" o no quieres">
+                    <choiceSelected section="sect102">
+                        <drop objectId="magicspear" />
+                    </choiceSelected>
+                </test>
+
+                <!-- After changes (same as English version) -->
+                <test not="true" sectionContainsText=" o no quieres">
+                    <choiceSelected section="sect118">
+                        <drop objectId="magicspear" />
+                    </choiceSelected>
+                </test>
             </test>
+
         </section>
 
         <section id="sect300">
