@@ -93,7 +93,8 @@ const projectAon = {
 
             zipSize: 4408246,
 
-            revision: 0
+            //revision: 0
+            revision: 2713     // Upgraded 15/4/2018 
         },
 
         // Book 5:

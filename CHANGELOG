@@ -53,4 +53,5 @@
 - Update combat state after any object is picked
 
 1.11
- - Upgrade of book 1 and 3 to the latest version
+ - Upgrade of books 1, 3, 4 to the latest version
+ - Fixed bug with tinderbox on book4 / sect270

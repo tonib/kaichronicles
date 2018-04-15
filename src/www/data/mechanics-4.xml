@@ -1339,9 +1339,14 @@
         </section>
 
         <section id="sect270">
-            <test not="true" hasObject="torch">
-                <choiceState section="sect29" set="disabled" />
+
+            <choiceState section="sect29" set="disabled" />
+            <test hasObject="tinderbox">
+                <test hasObject="torch">
+                    <choiceState section="sect29" set="enabled" />
+                </test>
             </test>
+
             <test not="true" hasObject="firesphere">
                 <choiceState section="sect168" set="disabled" />
             </test>
