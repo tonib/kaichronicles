@@ -35,7 +35,8 @@ const projectAon = {
             // If == 0, the version at https://www.projectaon.org/data/tags/20151013 will be used
             // If it's not zero, the file at https://www.projectaon.org/data/trunk/ will be used, with this SVN Revision number
             // This is used at downloadProjectAonData.js
-            revision: 0
+            //revision: 0
+            revision: 2713      // Upgraded 15/4/2018 
         },
 
         // Book 2:

@@ -51,3 +51,6 @@
 - Book 8, sect183 and sect47: Added message about the Paido's sword. Sword changed to count as zero items (be sure you always pick it).
 - Fixed bug on link to the current PAON license
 - Update combat state after any object is picked
+
+1.11
+ - Upgrade of book 1 to the latest version
