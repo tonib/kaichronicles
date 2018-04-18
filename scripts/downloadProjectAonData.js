@@ -9,7 +9,8 @@ const projectAon = require( '../src/www/js/ts-generated/model/projectAon.js' ).p
 */
 
 // Download PAON XML patches
-BookData.downloadBooksXmlPatches();
+// THIS COULD BREAK THE PAON LICENSE, SO, DON'T DO IT
+//BookData.downloadBooksXmlPatches();
 
 // Check if we should download only a single book
 var bookNumber = 0;

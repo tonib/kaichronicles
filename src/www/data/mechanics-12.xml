@@ -606,6 +606,59 @@
             </afterCombats>
         </section>
 
+        <section id="sect68">
+            <choiceState section="all" set="disabled" />
+
+            <combat eludeTurn="2" />
+            <onInventoryEvent>
+                <combat combatSkillModifier="0" />
+                <test not="true" currentWeapon="broadsword|spear|quarterstaff">
+                    <combat combatSkillModifier="-2" />
+                </test>
+            </onInventoryEvent>
+
+            <afterCombats>
+                <choiceState section="sect51" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect169" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect69">
+            <death />
+        </section>
+
+        <section id="sect72">
+            <death />
+        </section>
+
+        <section id="sect73">
+            <death />
+        </section>
+
+        <section id="sect74">
+            <choiceState section="all" set="disabled" />
+            <test hasDiscipline="nexus">
+                <test expression="[KAILEVEL] >= 6">
+                    <choiceState section="sect177" set="enabled" />
+                </test>
+            </test>
+            <test not="true" isChoiceEnabled="sect177">
+                <randomTable>
+                    <case from="0" to="3">
+                        <choiceState section="sect42" set="enabled" />
+                    </case>
+                    <case from="4" to="6">
+                        <choiceState section="sect288" set="enabled" />
+                    </case>
+                    <case from="7" to="9">
+                        <choiceState section="sect332" set="enabled" />
+                    </case>
+                </randomTable>
+            </test>
+        </section>
+
     </sections>
 
 </mechanics>
