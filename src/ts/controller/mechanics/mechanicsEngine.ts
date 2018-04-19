@@ -1301,6 +1301,13 @@ const mechanicsEngine = {
         state.sectionStates.markRuleAsExecuted(rule);
     },
 
+    /**
+     * Fire the inventory event
+     */
+    runInventoryEvent: function( rule : any ) {
+        mechanicsEngine.fireInventoryEvents();
+    },
+
     /************************************************************/
     /**************** SPECIAL SECTIONS **************************/
     /************************************************************/

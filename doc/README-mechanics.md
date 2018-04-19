@@ -565,6 +565,21 @@ Increase / decrease the original player combat skill (permanent).
 
 The "toast" property is optional (default value="true"). If true, a toast will be displayed with the CS increase / decrease.
 
+### onInventoryEvent (Event handler)
+```xml
+<onInventoryEvent>
+    <disableCombats />
+    <test currentWeapon="paidosword">
+        <disableCombats disabled="false" />
+    </test>
+</onInventoryEvent>
+```
+Rules inside "onInventoryEvent" will be called when the player picks / drops some object, or the section is rendered (at the section startup).
+It's not called when rules "pick" / "drop" are executed, only when the player does some action from the UI.
+This rule was a big design mistake. 
+
+### runInventoryEvent
+It runs the "onInventoryEvent" event handler, if it exists on the section.
 
 ### special sections
 

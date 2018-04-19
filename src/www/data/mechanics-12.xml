@@ -612,6 +612,7 @@
             <combat eludeTurn="2" />
             <onInventoryEvent>
                 <combat combatSkillModifier="0" />
+                <!-- TODO: Sommerswerd is like a broadword. OK? -->
                 <test not="true" currentWeapon="broadsword|spear|quarterstaff">
                     <combat combatSkillModifier="-2" />
                 </test>
@@ -657,6 +658,52 @@
                     </case>
                 </randomTable>
             </test>
+        </section>
+
+        <section id="sect75">
+            <choiceState section="all" set="disabled" />
+
+            <!-- Drop / recover Sommerswerd -->
+            <drop objectId="sommerswerd" />
+            <combat noMindblast="true" />
+            <afterCombatTurn turn="3">
+                <executeOnce>
+                    <pick objectId="sommerswerd" />
+                    <currentWeapon objectId="sommerswerd" />
+                    <runInventoryEvent />
+                </executeOnce>
+            </afterCombatTurn>
+
+            <!-- Dammage / CS modifiers -->
+            <onInventoryEvent>
+                <combat dammageMultiplier="1" />
+                <test not="true" currentWeapon="sommerswerd|daggerofvashna">
+                    <combat dammageMultiplier="0" />
+                </test>
+
+                <combat combatSkillModifier="0" />
+                <test currentWeapon="daggerofvashna">
+                    <combat combatSkillModifier="+7" />
+                </test>
+            </onInventoryEvent>
+
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+                <!-- Recover sommerswerd if we did not reach turn 3 -->
+                <test not="true" hasObject="sommerswerd">
+                    <pick objectId="sommerswerd" />
+                    <currentWeapon objectId="sommerswerd" />
+                </test>
+            </afterCombats>
+
+            <test bookLanguage="es">
+                <!-- Miss English foot page 2 -->
+                <message 
+                    es-text="Solo la Daga de Vashna o la Sommerswerd pueden herirle. Si no tienes la Daga, no podrás herirle durante los tres primeros turnos" 
+                    en-text="This text will not appear" 
+                />
+            </test>
+
         </section>
 
     </sections>

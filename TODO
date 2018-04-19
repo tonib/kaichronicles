@@ -3,7 +3,6 @@
 - Google play:
   * Desde el punto 118 no puedo avanzar de ninguna manera en la primer historia. Por favor arreglen eso. Excelente libro gracias.
 - Show a toast when you change the current weapon on the Action Chart
-- Documentation for "onInventoryEvent" rule
 - Object images on book 9+: Use the current book image, if available
 - Use latest version on PAON data on SVN (a fixed commit number)
 - When you cancel a saved games import, it say "error", and it is not
@@ -22,6 +21,7 @@
   * 12, equipmnt: "añadiéndolso"
   * 12, Improved Disciplines: miss "o Archimaestro (nueve Disciplinas)"
   * 12, 35: Xargath endurance is 100 in English version
+  * 12, 75: Miss English foot page 2
 
 FOR FUTURE (1.11+):
 - Book 9, sect189: We should keep the count of the different currencies (Lunes, Gold Crows,...). Also on:
