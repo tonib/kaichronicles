@@ -706,6 +706,100 @@
 
         </section>
 
+        <section id="sect76">
+            <!-- TODO: Crystal Explosive ??? -->
+        </section>
+
+        <section id="sect77">
+            <choiceState section="sect163" set="disabled" />
+            <test hasDiscipline="dvnation">
+                <test expression="[KAILEVEL] >= 5">
+                    <choiceState section="sect163" set="enabled" />
+                    <choiceState section="sect5" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect79">
+            <object objectId="sword" />
+            <object objectId="dagger" />
+            <object objectId="bow" />
+            <object objectId="quiver" />
+            <object objectId="arrow" count="4" />
+            <pick class="money" count="30" currency="kika" />
+        </section>
+
+        <section id="sect80">
+            <choiceState section="sect33" set="disabled" />
+            <test hasDiscipline="hntmstry">
+                <test expression="[KAILEVEL] >= 9">
+                    <choiceState section="sect33" set="enabled" />
+                    <choiceState section="sect249" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect82">
+            <pick class="arrow" count="-1" />
+        </section>
+
+        <section id="sect83">
+            <choiceState section="all" set="disabled" />
+            <combat immuneTurns="2" />
+
+            <!-- Sommerswerd stuff -->
+            <message id="msg-sommerswerd" 
+                en-text="If you don't want to go to section 208, change the current weapon to other than Sommerswerd" 
+                es-text="Si no quieres ir a la sección 208, cambia la arma actual a otra que no sea la Sommerswerd"
+            />
+            <onInventoryEvent>
+                <disableCombats disabled="false" />
+                <choiceState section="sect208" set="disabled" />
+                <test currentWeapon="sommerswerd">
+                    <test combatsActive="true">
+                        <disableCombats />
+                        <choiceState section="sect208" set="enabled" />
+                    </test>
+                </test>
+            </onInventoryEvent>
+
+            <afterCombats>
+                <choiceState section="sect228" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect86">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="6">
+                    <choiceState section="sect22" set="enabled" />
+                </case>
+                <case from="7" to="99">
+                    <choiceState section="sect227" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="invsblty">
+                <randomTableIncrement increment="+2" />
+            </test>
+            <test hasDiscipline="hntmstry">
+                <test expression="[KAILEVEL] >= 4">
+                    <randomTableIncrement increment="+3" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect88">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" combatSkillModifier="+12" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect90">
+            <death />
+        </section>
+
     </sections>
 
 </mechanics>
