@@ -800,6 +800,49 @@
             <death />
         </section>
 
+        <section id="sect91">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect16" set="enabled" />
+                </case>
+                <case from="5" to="9">
+                    <choiceState section="sect194" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect92">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="6">
+                    <choiceState section="sect189" set="enabled" />
+                </case>
+                <case from="7" to="99">
+                    <choiceState section="sect65" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="invsblty">
+                <randomTableIncrement increment="+3" />
+            </test>
+            <test expression="[KAILEVEL] >= 7">
+                <randomTableIncrement increment="+2" />
+            </test>
+        </section>
+
+        <section id="sect93">
+            <object objectId="gnallia" useOnSection="true" index="0" />
+            <object objectId="gnallia" useOnSection="true" index="1" />
+            <object objectId="gnallia" useOnSection="true" index="2" />
+            <object objectId="gnallia" useOnSection="true" index="3" />
+            <object objectId="gnallia" useOnSection="true" index="4" />
+            <object objectId="gnallia" useOnSection="true" index="5" />
+            <object objectId="gnallia" useOnSection="true" index="6" />
+            <object objectId="gnallia" useOnSection="true" index="7" />
+            <object objectId="gnallia" useOnSection="true" index="8" />
+            <object objectId="gnallia" useOnSection="true" index="9" />
+        </section>
+
     </sections>
 
 </mechanics>

@@ -809,14 +809,15 @@
         <object id="laumspurmeal" isMeal="true">
             <name lang="en">Meal of Laumspur</name>
             <description lang="en">
-                It can be used as a Meal, or to restore 3 ENDURANCE points
+                It can be used as a Meal. Restores 3 ENDURANCE points
             </description>
 
             <name lang="es">Comida de Laumspur</name>
             <description lang="es">
-                Puede ser usado como comida, o para recuperar 3 puntos de RESISTENCIA 
+                Puede ser usado como comida. Devuelve 3 puntos de RESISTENCIA 
             </description>
 
+            <image book="1|9" name="food.png" />
             <usage class="endurance" increment="3" />
         </object>
         
@@ -1509,9 +1510,24 @@
         </object>
 
         <!-- BOOK 12 -->
+        
         <object id="blackcube">
             <name lang="en">Black Cube</name>
             <name lang="es">Cubo Negro</name>
+        </object>
+
+        <object id="gnallia" isMeal="true">
+            <name lang="en">Gnallia</name>
+            <description lang="en">
+                A beneficial edible bacillus. Restores 2 ENDURANCE points.
+            </description>
+            <name lang="es">Gnallia</name>
+            <description lang="es">
+                Un beneficioso bacilo comestible. Devuelve 2 puntos de RESISTENCIA.
+            </description>
+            
+            <image book="1|9" name="food.png" />
+            <usage class="endurance" increment="2" />
         </object>
 
         <!-- OTHERS -->

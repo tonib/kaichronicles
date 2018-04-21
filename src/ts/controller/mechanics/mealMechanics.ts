@@ -98,9 +98,16 @@ const mealMechanics = {
                 }
                 actionChartController.increaseMoney( -price );
             }
-            else
-                // Drop the selected object
-                actionChartController.drop(option, false);
+            else {
+                // Eat object (option is the object id)
+                const item = state.mechanics.getObject(option);
+                if( item && item.usage )
+                    // Use / eat the object
+                    actionChartController.use(option, true);
+                else
+                    // Drop the selected object
+                    actionChartController.drop(option, false);
+            }
 
             // Mark the rule as executed
             state.sectionStates.markRuleAsExecuted(rule);

@@ -425,8 +425,8 @@
 
         <section id="sect113">
             <!-- The index are used to identify the rules, if they are repeated -->
-            <object objectId="laumspurmeal" index="0"/>
-            <object objectId="laumspurmeal" index="1" />
+            <object objectId="laumspurmeal" index="0" useOnSection="true" />
+            <object objectId="laumspurmeal" index="1" useOnSection="true" />
         </section>
         
         <section id="sect119">

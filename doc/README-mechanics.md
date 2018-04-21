@@ -281,7 +281,7 @@ Enable or disable section choices
 
 ### object
 ```xml
-<object objectId="laumspurpotion" />
+<object objectId="laumspurpotion" useOnSection="true" />
 <object objectId="sword" price="4" unlimited="true" />
 <object objectId="meal" index="0" />
 <object objectId="meal" index="1" />
@@ -291,6 +291,7 @@ Make an object available on the section. The player will can pick / buy it.
 * **price**: If it's set, the price to buy the object (not free)
 * **unlimited="true"**: There is an unlimited number of objects of this class on the section
 * **index="number"** Required, for ugly reasons, when there are two o more objects with the same object id on a section
+* **useOnSection="true"**: If true, the player will can use the object without picking it
 
 ### sell
 ```xml
