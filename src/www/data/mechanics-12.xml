@@ -843,6 +843,34 @@
             <object objectId="gnallia" useOnSection="true" index="9" />
         </section>
 
+        <section id="sect95">
+            <test not="true" hasObject="blackcube">
+                <choiceState section="sect40" set="disabled" />
+            </test>
+            <test hasObject="blackcube">
+                <choiceState section="sect320" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect96">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect72" set="enabled" />
+                </case>
+                <case from="5" to="99">
+                    <choiceState section="sect161" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasCircle="circleLight">
+                <test hasCircle="circleSolaris">
+                    <randomTableIncrement increment="+3" />
+                </test>
+            </test>
+        </section>
+
+        <!-- Up to sect97 -->
+        
     </sections>
 
 </mechanics>
