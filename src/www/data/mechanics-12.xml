@@ -227,6 +227,7 @@
         <section id="sect18">
             <test canUseBow="false">
                 <choiceState section="sect264" set="disabled" />
+                <!-- TODO: Drop arrow? -->
             </test>
         </section>
 
@@ -422,6 +423,7 @@
         <section id="sect48">
             <test canUseBow="false">
                 <choiceState section="sect324" set="disabled" />
+                <!-- TODO: Drop arrow? -->
             </test>
         </section>
 
@@ -530,6 +532,7 @@
         <section id="sect60">
             <test canUseBow="false">
                 <choiceState section="sect270" set="disabled" />
+                <!-- TODO: Drop arrow? -->
             </test>
             <test not="true" hasObject="sommerswerd">
                 <choiceState section="sect192" set="disabled" />
@@ -869,8 +872,197 @@
             </test>
         </section>
 
-        <!-- Up to sect97 -->
+        <section id="sect98">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect233" set="enabled" />
+                </case>
+                <case from="5" to="99">
+                    <choiceState section="sect205" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasCircle="circleLight">
+                <test hasCircle="circleSolaris">
+                    <randomTableIncrement increment="+3" />
+                </test>
+            </test>
+        </section>
         
+        <section id="sect99">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <pick class="arrow" count="-1" />
+                <case from="-99" to="4">
+                    <choiceState section="sect336" set="enabled" />
+                </case>
+                <case from="5" to="99">
+                    <choiceState section="sect212" set="enabled" />
+                </case>
+            </randomTable>
+            <randomTableIncrement increment="+[BOWBONUS]" />
+        </section>
+
+        <section id="sect100">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="0" />
+            <afterCombats>
+                <choiceState section="sect248" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect7" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect101">
+            <choiceState section="sect4" set="disabled" />
+            <test hasDiscipline="dvnation|hntmstry">
+                <choiceState section="sect4" set="enabled" />
+                <choiceState section="sect224" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect102">
+            <choiceState section="all" set="disabled" />
+            <combat mindblastMultiplier="2" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+        
+        <section id="sect103">
+            <!-- TODO: Drop arrows on called sections? -->
+        </section>
+
+        <section id="sect104">
+            <!-- TODO: If you possess the sword Helshezag... -->
+            <choiceState section="all" set="disabled" />
+
+            <!-- Sommerswerd stuff -->
+            <message id="msg-sommerswerd" 
+                en-text="If you don't want to go to section 208, change the current weapon to other than Sommerswerd" 
+                es-text="Si no quieres ir a la sección 208, cambia la arma actual a otra que no sea la Sommerswerd"
+            />
+            <onInventoryEvent>
+                <disableCombats disabled="false" />
+                <choiceState section="sect208" set="disabled" />
+                <test currentWeapon="sommerswerd">
+                    <test combatsActive="true">
+                        <disableCombats />
+                        <choiceState section="sect208" set="enabled" />
+                    </test>
+                </test>
+            </onInventoryEvent>
+
+            <afterCombats>
+                <choiceState section="sect164" set="enabled" />
+            </afterCombats>
+
+        </section>
+
+        <section id="sect105">
+            <!-- TODO: Drop arrow? -->
+        </section>
+
+        <section id="sect107">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <pick class="arrow" count="-1" />
+                <case from="-99" to="6">
+                    <choiceState section="sect245" set="enabled" />
+                </case>
+                <case from="7" to="99">
+                    <choiceState section="sect211" set="enabled" />
+                </case>
+            </randomTable>
+            <randomTableIncrement increment="+[BOWBONUS]" />
+        </section>
+
+        <section id="sect108">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect109">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect110">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect194" set="enabled" />
+                </case>
+                <case from="5" to="9">
+                    <choiceState section="sect16" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect111">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="-99" to="7">
+                    <choiceState section="sect8" set="enabled" />
+                </case>
+                <case from="8" to="99">
+                    <choiceState section="sect279" set="enabled" />
+                </case>
+            </randomTable>
+            <randomTableIncrement increment="[KAILEVEL] - 3" />
+        </section>
+
+        <section id="sect113">
+            <test canUseBow="false">
+                <choiceState section="sect131" set="disabled" />
+                <!-- TODO: Drop arrow? -->
+            </test>
+        </section>
+
+        <section id="sect114">
+            <choiceState section="all" set="disabled" />
+            <combat mindblastMultiplier="2" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect117">
+            <choiceState section="sect34" set="disabled" />
+            <test hasDiscipline="hntmstry">
+                <test expression="[KAILEVEL] >= 9">
+                    <choiceState section="sect34" set="enabled" />
+                    <choiceState section="sect143" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect118">
+            <test canUseBow="false">
+                <choiceState section="sect231" set="disabled" />
+                <!-- TODO: Drop arrow? -->
+            </test>
+        </section>
+
+        <section id="sect119">
+            <pick class="arrow" count="-1" />
+        </section>
+
+        <section id="sect120">
+            <choiceState section="sect13" set="disabled" />
+            <test hasDiscipline="curing">
+                <test expression="[KAILEVEL] >= 7">
+                    <choiceState section="sect13" set="enabled" />
+                    <choiceState section="sect38" set="disabled" />
+                </test>
+            </test>
+        </section>
+
     </sections>
 
 </mechanics>

@@ -1,3 +1,9 @@
+- Error: There is a bug with the map zoom when the orientation is changed:
+  * Go to map (portrait)
+  * Click on the map
+  * Rotate to landscape
+  * Press back button
+  The app then does a wrong zoom...
 - Tests: Check spanish and english combats: Enemies should have the same statistics
 - Review upgrades to book 5+
 - Google play:
