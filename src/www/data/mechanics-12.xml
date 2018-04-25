@@ -1020,7 +1020,6 @@
         <section id="sect113">
             <test canUseBow="false">
                 <choiceState section="sect131" set="disabled" />
-                <!-- TODO: Drop arrow? -->
             </test>
         </section>
 
@@ -1061,6 +1060,82 @@
                     <choiceState section="sect38" set="disabled" />
                 </test>
             </test>
+        </section>
+
+        <section id="sect121">
+            <!-- TODO: Drop Golden Amulet??? -->
+            <choiceState section="sect220" set="disabled" />
+            <test hasDiscipline="nexus">
+                <test expression="[KAILEVEL] >= 9">
+                    <choiceState section="sect220" set="enabled" />
+                    <choiceState section="sect331" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect122">
+            <death />
+        </section>
+
+        <section id="sect124">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect342" set="enabled" />
+                </case>
+                <case from="5" to="99">
+                    <choiceState section="sect48" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasCircle="circleSolaris">
+                <randomTableIncrement increment="+4" />
+            </test>
+        </section>
+
+        <section id="sect125">
+            <choiceState section="sect296" set="disabled" />
+            <test hasDiscipline="hntmstry">
+                <test expression="[KAILEVEL] >= 6">
+                    <choiceState section="sect296" set="enabled" />
+                    <choiceState section="sect327" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect129">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="6">
+                    <choiceState section="sect20" set="enabled" />
+                </case>
+                <case from="7" to="9">
+                    <choiceState section="sect180" set="enabled" />
+                </case>
+            </randomTable>
+        </section>
+
+        <section id="sect130">
+            <test hasObject="blackkeybook12">
+                <choiceState section="sect29" set="disabled" />
+            </test>
+            <test not="true" hasObject="blackkeybook12">
+                <choiceState section="sect278" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect131">
+            <pick class="arrow" count="-1" />
+
+            <choiceState section="sect259" set="disabled" />
+            <test canUseBow="true">
+                <test expression="[ARROWS] >= 2">
+                    <choiceState section="sect259" set="enabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect132">
+            <death />
         </section>
 
     </sections>

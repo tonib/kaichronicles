@@ -1530,6 +1530,12 @@
             <usage class="endurance" increment="2" />
         </object>
 
+        <object id="blackkeybook12">
+            <name lang="en">Black Key</name>
+            <name lang="es">Llave Negra</name>
+            <image book="1" name="small15.png" />
+        </object>
+
         <!-- OTHERS -->
 
         <!-- This not really an object, but needed for mechanics -->
