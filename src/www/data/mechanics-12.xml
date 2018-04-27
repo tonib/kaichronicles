@@ -960,10 +960,6 @@
 
         </section>
 
-        <section id="sect105">
-            <!-- TODO: Drop arrow? -->
-        </section>
-
         <section id="sect107">
             <choiceState section="all" set="disabled" />
             <randomTable>
@@ -1136,6 +1132,73 @@
 
         <section id="sect132">
             <death />
+        </section>
+
+        <section id="sect133">
+            <!-- TODO: Implement Helshezag loss. Don't apply loss on this combat! -->
+            <pick objectId="helshezag" />
+            <currentWeapon objectId="helshezag" />
+            <message id="msg-drop-weapon" 
+                en-text="You must use the Helshezag as current weapon on this combat" 
+                es-text="Debes usar la Helshezag como arma actual en este combate"
+            />
+
+            <onInventoryEvent>
+                <disableCombats />
+                <test currentWeapon="helshezag">
+                    <disableCombats disabled="false" />
+                </test>
+            </onInventoryEvent>
+
+            <choiceState section="all" set="disabled" />
+            <!-- +2 to get +7 with Helshezag -->
+            <combat combatSkillModifier="+2" noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+
+        </section>
+
+        <section id="sect135">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <pick class="arrow" count="-1" />
+                <case from="-99" to="8">
+                    <choiceState section="sect313" set="enabled" />
+                </case>
+                <case from="9" to="99">
+                    <choiceState section="sect105" set="enabled" />
+                </case>
+            </randomTable>
+            <randomTableIncrement increment="+[BOWBONUS]" />
+        </section>
+
+        <section id="sect136">
+            <endurance count="-4" />
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" noPsiSurge="true" />
+            <test not="true" hasDiscipline="hntmstry">
+                <combat noWeapon="1" />
+            </test>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect137">
+            <meal />
+        </section>
+
+        <section id="sect139">
+            <object objectId="spear" />
+            <object objectId="dagger" />
+            <object objectId="axe" />
+            <object objectId="pouchtobacco" />
+            <object objectId="bottlewine" />
+            <object objectId="pipe" />
+            <pick class="money" count="60" currency="kika" />
+            <object objectId="ironkey" />
+            <object objectId="meal" />
         </section>
 
     </sections>

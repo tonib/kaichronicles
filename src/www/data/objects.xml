@@ -768,6 +768,25 @@
             <effect class="endurance" increment="+1" />
         </special>
 
+        <special id="helshezag" weaponType="sword">
+            <name lang="en">Helshezag</name>
+            <description lang="en">
+                It will add 5 points to your COMBAT SKILL, and 7 when used against a Darklord.
+                In the second and subsequent rounds of every combat in which you use the sword, you must reduce your 
+                ENDURANCE level by 1 point permanently
+            </description>
+
+            <name lang="es">Helshezag</name>
+            <description lang="es">
+                Añadirá 5 puntos a tu DESTREZA EN EL COMBATE, y 7 puntos cuando la uses contra un Señor de la Oscuridad. 
+                Cada vez que la utilices un combate, deberás restar 1 punto de RESISTENCIA en el segundo asalto y en los siguientes,
+                permanentemente
+            </description>
+
+            <image book="9" name="sword.png" />
+            <effect class="combatSkill" increment="+5" />
+        </special>
+
     </specials>
 
     <objects>
@@ -1534,6 +1553,16 @@
             <name lang="en">Black Key</name>
             <name lang="es">Llave Negra</name>
             <image book="1" name="small15.png" />
+        </object>
+
+        <object id="pouchtobacco">
+            <name lang="en">Pouch of Tobacco</name>
+            <name lang="es">Tabaquera</name>
+        </object>
+
+        <object id="pipe">
+            <name lang="en">Pipe</name>
+            <name lang="es">Pipa</name>
         </object>
 
         <!-- OTHERS -->
