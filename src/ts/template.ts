@@ -162,6 +162,8 @@ const template = {
         }
 
         $('#template-objectDescription').text(o.description);
+        $('#template-objectDescriptionExtra').text(o.extraDescription);
+        
         $('#template-objectDetails').modal('show');
     },
 

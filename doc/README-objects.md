@@ -57,6 +57,23 @@ The object name, translated to some language. **The english name translation is
 ```
 Optional. A extended description for the object, translated to some language
 
+### "extraDescription" tag
+```xml
+<special id="sommerswerd" weaponType="sword|broadsword|shortsword" >
+    <name lang="en">Sommerswerd</name>
+    <description lang="en">
+        When used in combat, the Sommerswerd will add 8 points to your COMBAT SKILL 
+        (+ Weaponskill with swords).
+    </description>
+    <extraDescription lang="en">
+        It has the ability to absorb any magic that is used against its bearer, and it doubles 
+        the total of all ENDURANCE points lost by undead enemies in combat
+    </extraDescription>
+    ...
+</special>
+```
+Optional. A more extended description for the object, translated to some language
+
 ### "image" tag
 ```xml
 <weapon id="broadsword">

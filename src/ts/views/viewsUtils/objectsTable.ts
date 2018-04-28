@@ -109,16 +109,21 @@ class ObjectsTableItem {
         if( this.objectInfo.id == 'map' )
             // It's the map:
             name = '<a href="#map">' + name + '</a>';
-        else if( imageUrl )
-            // Add a link to view a larger version of the image
+        else if( imageUrl || this.item.extraDescription )
+            // Add a link to view a larger version of the image / view object extra description
             name = '<a href="#" class="equipment-op" data-op="details" data-objectId="' + 
             this.item.id + '">' + name + '</a>';
 
         html += '<span><b>' + name + '</b></span>';
 
         // Description
-        if( this.item.description )
-            html += '<br/><i><small>' + this.item.description +'</small></i>';
+        if( this.item.description ) {
+            html += '<br/><i><small>' + this.item.description;
+            if( this.item.extraDescription )
+                html += '<a href="#" class="equipment-op" data-op="details" data-objectId="' + 
+                this.item.id + '"> ' + translations.text( 'more' ) + '...</a>';
+            html += '</small></i>';
+        }
 
         return html;
 

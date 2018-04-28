@@ -61,6 +61,12 @@ class Item {
     public description : string;
 
     /** 
+     * Translated extra description.
+     * It's optional (can be null)
+     */
+    public extraDescription : string = null;
+
+    /** 
      * The weapon type. Only for special and object types. It is the kind of weapon.
      * If it can be handled as more than one weapon type, separate the with a '|'.
      * Ex. 'sword|shortsword'
@@ -130,6 +136,9 @@ class Item {
                 this.description += ' ';
             this.description += translations.text( 'countAsObjects' , [this.itemCount] );
         }
+
+        // Extra description
+        this.extraDescription = $o.find('extraDescription[lang=' + book.language + ']').text();
 
         /** 
          * The weapon type. Only for special and object types. It is the kind of weapon.

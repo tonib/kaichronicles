@@ -202,18 +202,25 @@
             <name lang="en">Sommerswerd</name>
             <description lang="en">
                 When used in combat, the Sommerswerd will add 8 points to your COMBAT SKILL 
-                (+ Weaponskill with swords). It has 
-                the ability to absorb any magic that is used against its bearer, and it doubles 
-                the total of all ENDURANCE points lost by undead enemies in combat
+                (+ Weaponskill with swords).
             </description>
+            <extraDescription lang="en">
+                It has the ability to absorb any magic that is used against its bearer, and it doubles 
+                the total of all ENDURANCE points lost by undead enemies in combat
+            </extraDescription>
+
             <name lang="es">Sommerswerd</name>
             <description lang="es">
                 La Espada del Sol. Cuando luches con ella, la Sommerswerd sumarás 8 puntos a tu 
                 DESTREZA EN EL COMBATE (+ Maestría en el Manejo de 
-                Armas con cualquier tipo de espada). Tiene la capacidad de absorber cualquier 
+                Armas con cualquier tipo de espada).
+            </description>
+            <extraDescription lang="es">
+                Tiene la capacidad de absorber cualquier 
                 fuerza mágica que sea usada contra quien la esgrima y multiplica por dos los 
                 puntos de RESISTENCIA perdidos en combate por enemigos de ultratumba
-            </description>
+            </extraDescription>
+
             <effect class="combatSkill" increment="8" />
             <image book="2" name="ill5.png" />
         </special>
@@ -389,25 +396,29 @@
         <special id="scrollpoetry">
             <name lang="en">Scroll</name>
             <description lang="en">
-                Upon the scroll is written the following verse: /
+                Upon the scroll is written the following verse:
+            </description>
+            <extraDescription lang="en">
                 When the full moon shines o’er the temple deep, /
                 A sacrifice will stir from sleep /
                 The legions of a long forgotten lord. /
                 When a fair royal maid on the altar dies, /
                 The dead of Maakengorge shall rise /
                 To claim their long-awaited reward.
-            </description>
+            </extraDescription>
 
             <name lang="es">Pergamino</name>
             <description lang="es">
-                En él ves escritos los siguientes versos: 
+                En él ves escritos los siguientes versos:
+            </description>
+            <extraDescription lang="es">
                 Cuando la luna llena brille sobre el templo, /
                 Un sacrificio pondrá fin al sueño /
                 De las legiones de un señor ya olvidado. /
                 Cuando sobre el altar muera una rubia doncella de estirpe real, /
                 Los muertos del precipicio de Maaken despertarán /
                 Para reclamar la recompensa que tanto han esperado.
-            </description>
+            </extraDescription>
         </special>
 
         <special id="daggerofvashna" weaponType="dagger">
@@ -772,16 +783,20 @@
             <name lang="en">Helshezag</name>
             <description lang="en">
                 It will add 5 points to your COMBAT SKILL, and 7 when used against a Darklord.
+            </description>
+            <extraDescription lang="en">
                 In the second and subsequent rounds of every combat in which you use the sword, you must reduce your 
                 ENDURANCE level by 1 point permanently
-            </description>
+            </extraDescription>
 
             <name lang="es">Helshezag</name>
             <description lang="es">
-                Añadirá 5 puntos a tu DESTREZA EN EL COMBATE, y 7 puntos cuando la uses contra un Señor de la Oscuridad. 
+                Añadirá 5 puntos a tu DESTREZA EN EL COMBATE, y 7 puntos cuando la uses contra un Señor de la Oscuridad.
+            </description>
+            <extraDescription lang="es">
                 Cada vez que la utilices un combate, deberás restar 1 punto de RESISTENCIA en el segundo asalto y en los siguientes,
                 permanentemente
-            </description>
+            </extraDescription>
 
             <image book="9" name="sword.png" />
             <effect class="combatSkill" increment="+5" />
@@ -1324,17 +1339,21 @@
         <object id="vialbluepills">
             <name lang="en">Vial of Blue Pills</name>
             <description lang="en">
-                They are made from the dried and crushed roots of the Sabito plant, 
-                commonly found in the Boari Jungle, but rare in any other part of Magnamund. 
                 They enable the human body to extract oxygen from water by absorbing it through the skin.
             </description>
+            <extraDescription lang="en">
+                They are made from the dried and crushed roots of the Sabito plant, 
+                commonly found in the Boari Jungle, but rare in any other part of Magnamund. 
+            </extraDescription>
 
             <name lang="es">Frasco de Píldoras Azules</name>
             <description lang="es">
+                Esas píldoras permiten al cuerpo humano extraer oxígeno del agua absorbiéndolo a través de la piel.
+            </description>
+            <extraDescription lang="es">
                 Las píldoras azules están hechas de raíces secas y trituradas de sabito, una planta que crece 
                 abundantemente en el bosque de Boari, pero que es muy rara en otras partes de Magnamund. 
-                Esas píldoras permiten al cuerpo humano extraer oxígeno del agua absorbiéndolo a través de la piel. 
-            </description>
+            </extraDescription>
         </object>
 		
         <object id="bottlewater">
@@ -1346,25 +1365,31 @@
             <name lang="en">Pouch of Adgana</name>
             <description lang="en">
                 Crushed Adgana leaves. One dose is enough to increase your COMBAT SKILL by 6 points for the duration of a fight.
-                It is highly addictive. If you decide to take this potion prior to combat, as soon as the combat is resolved, 
+                It is highly addictive.
+            </description>
+            <extraDescription lang="en">
+                If you decide to take this potion prior to combat, as soon as the combat is resolved, 
                 you must pick a number from the Random Number Table. If the number you pick is 0 or 1, you have become 
                 addicted and your ENDURANCE score must be reduced permanently by 4 points.
                 Should the opportunity to use a further dose of Adgana ever arise, its effect on that occasion will be 
                 only half that of the original dose (i.e. it will increase your COMBAT SKILL by 3 points instead of 6), and
                 the risks of addiction are doubled (you will become addicted if you pick a 0, 1, 2, or 3 on the Random Number Table).
-            </description>
+            </extraDescription>
 
             <name lang="es">Bolsa con Adgana</name>
             <description lang="es">
                 Hojas trituradas de adgana. Una dosis de estas hierbas es suficiente para aumentar en 6 puntos tu 
-                DESTREZA EN EL COMBATE durante una pelea. Produce adicción. Si decides tomar esta poción antes de un combate, 
+                DESTREZA EN EL COMBATE durante una pelea. Produce adicción. 
+            </description>
+            <extraDescription lang="es">
+                Si decides tomar esta poción antes de un combate, 
                 existe una pequeña probabilidad de que te hagas adicto. Al terminar el combate, debes elegir al azar un 
                 número de la Tabla de la Suerte. Si el número que obtienes es 0 ó 1, te has vuelto adicto y 
                 tu RESISTENCIA disminuye permanentemente en 4 puntos.
                 Si se presenta una segunda oportunidad de tomar otra dosis de adgana, su efecto en esta ocasión será sólo 
                 la mitad que el de la primera dosis (es decir, incrementará tu DESTREZA EN EL COMBATE en 3 puntos en vez de 6), y
                 los riesgos de volverte adicto se doblan (esto es, te vuelves adicto con cualquier número de 0 a 3).
-            </description>
+            </extraDescription>
 
             <usage class="special" />
         </object>
@@ -1469,17 +1494,21 @@
         <object id="vialbluepills2" itemCount="0.5">
             <name lang="en">Vial of Blue Pills</name>
             <description lang="en">
-                They are made from the dried and crushed roots of the Sabito plant, 
-                commonly found in the Boari Jungle, but rare in any other part of Magnamund. 
                 They enable the human body to extract oxygen from water by absorbing it through the skin.
             </description>
+            <extraDescription lang="en">
+                They are made from the dried and crushed roots of the Sabito plant, 
+                commonly found in the Boari Jungle, but rare in any other part of Magnamund. 
+            </extraDescription>
 
             <name lang="es">Frasco de Píldoras Azules</name>
             <description lang="es">
+                Esas píldoras permiten al cuerpo humano extraer oxígeno del agua absorbiéndolo a través de la piel.
+            </description>
+            <extraDescription lang="es">
                 Las píldoras azules están hechas de raíces secas y trituradas de sabito, una planta que crece 
                 abundantemente en el bosque de Boari, pero que es muy rara en otras partes de Magnamund. 
-                Esas píldoras permiten al cuerpo humano extraer oxígeno del agua absorbiéndolo a través de la piel. 
-            </description>
+            </extraDescription>
         </object>
 
         <object id="silvercandlestick">

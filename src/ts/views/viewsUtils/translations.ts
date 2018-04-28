@@ -79,6 +79,7 @@ class Translations {
         'noQuiversEnough' : 'No tienes suficientes Carcajes (sólo 6 Flechas por Carcaj)',
         'restore20EP': 'Medicina: +20 R (sólo si R 6 o menos, cada 100 días)',
         'confirm20EP': 'Esta habilidad solo puede ser usada una vez cada 100 días. ¿Continuamos?',
+        'more' : 'Más',
 
         //////////////////////////////////////
         // Combats
@@ -360,6 +361,7 @@ class Translations {
         'amount' : 'Amount',
         'noQuiversEnough' : 'You don\'t have enough Quivers (only 6 Arrows per Quiver)',
         'confirm20EP': 'This ability can only be used once every 100 days. Continue?',
+        'more' : 'More',
 
         //////////////////////////////////////
         // Combats

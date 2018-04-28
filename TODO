@@ -60,8 +60,6 @@ FOR FUTURE (1.11+):
 - New game page: 
   * Do not show the license text on Android (the book was already downloaded)
   * Ask for the random table type
-- If a object description is too long, do not show the entire description: Show the first characters, and add a link
-  to display the entire description (see pouchadgana object, and sommerswerd?)
 - Action chart buttons don't work on iPad Safari
 - Add night mode (brffff...)
 - Dialogs with text input: Allow to confirm with the screen keyboard ("go" button)
