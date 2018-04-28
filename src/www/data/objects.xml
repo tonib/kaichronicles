@@ -1350,7 +1350,8 @@
                 you must pick a number from the Random Number Table. If the number you pick is 0 or 1, you have become 
                 addicted and your ENDURANCE score must be reduced permanently by 4 points.
                 Should the opportunity to use a further dose of Adgana ever arise, its effect on that occasion will be 
-                only half that of the original dose (i.e. it will increase your COMBAT SKILL by 3 points instead of 6).
+                only half that of the original dose (i.e. it will increase your COMBAT SKILL by 3 points instead of 6), and
+                the risks of addiction are doubled (you will become addicted if you pick a 0, 1, 2, or 3 on the Random Number Table).
             </description>
 
             <name lang="es">Bolsa con Adgana</name>
@@ -1361,7 +1362,8 @@
                 número de la Tabla de la Suerte. Si el número que obtienes es 0 ó 1, te has vuelto adicto y 
                 tu RESISTENCIA disminuye permanentemente en 4 puntos.
                 Si se presenta una segunda oportunidad de tomar otra dosis de adgana, su efecto en esta ocasión será sólo 
-                la mitad que el de la primera dosis (es decir, incrementará tu DESTREZA EN EL COMBATE en 3 puntos en vez de 6).
+                la mitad que el de la primera dosis (es decir, incrementará tu DESTREZA EN EL COMBATE en 3 puntos en vez de 6), y
+                los riesgos de volverte adicto se doblan (esto es, te vuelves adicto con cualquier número de 0 a 3).
             </description>
 
             <usage class="special" />

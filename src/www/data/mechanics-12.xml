@@ -1201,6 +1201,40 @@
             <object objectId="meal" />
         </section>
 
+        <section id="sect141">
+            <test not="true" hasObject="blackcube">
+                <choiceState section="sect40" set="disabled" />
+            </test>
+            <test hasObject="blackcube">
+                <choiceState section="sect320" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect143">
+            <test not="true" hasDiscipline="curing">
+                <choiceState section="sect93" set="disabled" />
+            </test>
+            <test hasDiscipline="curing">
+                <choiceState section="sect303" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect144">
+            <choiceState section="sect273" set="disabled" />
+            <test hasDiscipline="anmlctrl">
+                <test expression="[KAILEVEL] >= 7">
+                    <choiceState section="sect273" set="enabled" />
+                    <choiceState section="sect98" set="disabled" />
+                </test>
+            </test>
+            <meal />
+        </section>
+
+        <section id="sect145">
+            <object objectId="pouchadgana" />
+        </section>
+        
+
     </sections>
 
 </mechanics>

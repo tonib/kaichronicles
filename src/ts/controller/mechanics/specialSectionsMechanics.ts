@@ -518,16 +518,26 @@ class SpecialObjectsUse {
             SpecialObjectsUse.postAdganaUse();
         }
 
-        // Rembember adgana use
-        state.actionChart.adganaUsed = true;
     }
 
     /** Effects of Adgana after combats ( object id "pouchadgana") */
     public static postAdganaUse() {
-        const r = randomTable.getRandomValue(); 
-        toastr.info( translations.text('adganaUse' , [r] ));
-        if( r == 0 || r == 1 )
+        const r = randomTable.getRandomValue();
+        toastr.info( translations.text( 'adganaUse' , [r] ) );
+
+        // If you have ever used Adgana in a previous Lone Wolf adventure, the risks of addiction are doubled should you decide to 
+        // use this dose (you will become addicted if you pick a 0, 1, 2, or 3 on the Random Number Table
+        let addicted = false;
+        if( state.actionChart.adganaUsed )
+            addicted = ( r >= 0 && r <= 3 );
+        else
+            addicted = ( r == 0 || r == 1 );
+
+        if( addicted )
             actionChartController.increaseEndurance( -4 , false , true );
+
+        // Rembember adgana use
+        state.actionChart.adganaUsed = true;
     }
 
 }
