@@ -1,9 +1,3 @@
-- Error: There is a bug with the map zoom when the orientation is changed:
-  * Go to map (portrait)
-  * Click on the map
-  * Rotate to landscape
-  * Press back button
-  The app then does a wrong zoom...
 - Tests: Check spanish and english combats: Enemies should have the same statistics
 - Review upgrades to book 5+
 - Google play:
@@ -28,6 +22,9 @@
   * 12, Improved Disciplines: miss "o Archimaestro (nueve Disciplinas)"
   * 12, 35: Xargath endurance is 100 in English version
   * 12, 75: Miss English foot page 2
+- Rendering:
+  "<dl class="paragraphed">" at "equipmnt" rendered as a table is very ugly and hard to read. Change to paragraphs.
+- HTML error / FAQ page: ul tag is not allowed inside p tags (wrong rendering after ul end)
 
 FOR FUTURE (1.11+):
 - Book 9, sect189: We should keep the count of the different currencies (Lunes, Gold Crows,...). Also on:

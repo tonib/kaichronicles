@@ -27,6 +27,13 @@ const mapController = {
         
     },
 
+    /**
+     * On leave controller
+     */
+    onLeave: function() {
+        mapView.unbindEvents();
+    },
+
     /** Return page */
     getBackController: function() { return 'game'; }
     

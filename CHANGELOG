@@ -57,3 +57,4 @@
  - Fixed bug with tinderbox on book4 / sect270
  - Fixed bug with meals: If the meal object has some effect, apply that effect when the object is eaten
  - Objects now can have a short / long description
+ - Fixed bug with map zoom when device orientation is changed (wrong zoom)

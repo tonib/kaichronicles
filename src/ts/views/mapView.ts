@@ -21,9 +21,10 @@ const mapView = {
         // Bind clicks on image to resize it
         $('#map-section div.illustration img').click(function() {
             // Reset fixed width / height
-            $(this).removeAttr( 'width' );
-            $(this).removeAttr( 'height' );
-            $(this).toggleClass('originalsize');
+            const $this = $(this);
+            $this.removeAttr( 'width' );
+            $this.removeAttr( 'height' );
+            $this.toggleClass('originalsize');
         });
         $('#map-increasezoom').click(function(e : Event) {
             mapView.changeZoom(true, e);
@@ -31,6 +32,30 @@ const mapView = {
         $('#map-decreasezoom').click(function(e : Event) {
             mapView.changeZoom(false, e);
         });
+
+        // Add window resize event handler
+        window.addEventListener( 'resize' , mapView.onWindowResize , false);
+    },
+
+    /**
+     * Unbind map events
+     */
+    unbindEvents: function() {
+        //console.log( 'mapView.unbindEvents' );
+        window.removeEventListener( 'resize' , mapView.onWindowResize );
+    },
+
+    /**
+     * Event handler for window resize.
+     * This will reset the map zoom
+     */
+    onWindowResize: function( e : Event ) {
+        // Window has been resized (orientation change). Reset to original size:
+        //console.log( 'onWindowResize' );
+        let $image = $('#map-section img');
+        $image.removeAttr( 'width' );
+        $image.removeAttr( 'height' );
+        $image.removeClass( 'originalsize' );
     },
 
     /**
