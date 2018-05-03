@@ -24,7 +24,6 @@
   * 12, 75: Miss English foot page 2
 - Rendering:
   "<dl class="paragraphed">" at "equipmnt" rendered as a table is very ugly and hard to read. Change to paragraphs.
-- HTML error / FAQ page: ul tag is not allowed inside p tags (wrong rendering after ul end)
 
 FOR FUTURE (1.11+):
 - Book 9, sect189: We should keep the count of the different currencies (Lunes, Gold Crows,...). Also on:
