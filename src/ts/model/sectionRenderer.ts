@@ -364,16 +364,16 @@ class SectionRenderer {
     private dl($dl : any, level : number) : string {
         var definitionContent = '';
         var self = this;
-        $dl.find('> dt, > dd').each(function() {
-            var content = self.renderNodeChildren( $(this) , level );
-            if ($(this).is('dt')) {
-                //definitionContent += '<tr><th>' + content + '</th>';
+        
+        for( let element of $dl.find('> dt, > dd') ) {
+            const $this = $(element);
+            var content = self.renderNodeChildren( $this , level );
+            if ( $this.is('dt') )
                 definitionContent += '<tr><td><dl><dt>' + content + '</dt>';
-            } else if ($(this).is('dd')) {
-                //definitionContent += '<td>' + content + '</td></tr>';
+            else if( $this.is('dd') )
                 definitionContent += '<dd>' + content + '</dd></dl></td></tr>';
-            }
-        });
+        }
+
         return '<table class="table table-striped table-bordered table-dl"><tbody>' + 
             definitionContent + '</tbody></table>';
 
