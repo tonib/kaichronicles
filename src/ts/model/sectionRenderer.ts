@@ -367,12 +367,14 @@ class SectionRenderer {
         $dl.find('> dt, > dd').each(function() {
             var content = self.renderNodeChildren( $(this) , level );
             if ($(this).is('dt')) {
-                definitionContent += '<tr><th>' + content + '</th>';
+                //definitionContent += '<tr><th>' + content + '</th>';
+                definitionContent += '<tr><td><dl><dt>' + content + '</dt>';
             } else if ($(this).is('dd')) {
-                definitionContent += '<td>' + content + '</tr></td>';
+                //definitionContent += '<td>' + content + '</td></tr>';
+                definitionContent += '<dd>' + content + '</dd></dl></td></tr>';
             }
         });
-        return '<table class="table table-striped table-bordered"><tbody>' + 
+        return '<table class="table table-striped table-bordered table-dl"><tbody>' + 
             definitionContent + '</tbody></table>';
 
     }

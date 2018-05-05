@@ -112,6 +112,15 @@ div.illustration img.originalsize {
     background-color: #f9f9f9;
 }
 
+/* Table with definition lists */
+.table-dl dl {
+    margin-bottom:0;
+}
+.table-dl dd {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
 /* Tables with bold texts on header */
 table.bold-head > thead > tr > td {
     font-weight: bold;

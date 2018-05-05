@@ -22,8 +22,6 @@
   * 12, Improved Disciplines: miss "o Archimaestro (nueve Disciplinas)"
   * 12, 35: Xargath endurance is 100 in English version
   * 12, 75: Miss English foot page 2
-- Rendering:
-  "<dl class="paragraphed">" at "equipmnt" rendered as a table is very ugly and hard to read. Change to paragraphs.
 
 FOR FUTURE (1.11+):
 - Book 9, sect189: We should keep the count of the different currencies (Lunes, Gold Crows,...). Also on:
