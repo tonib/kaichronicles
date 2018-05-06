@@ -94,10 +94,10 @@ class Item {
     /** Usage (only one use, and then the object is dropped) */
     public usage : ItemEffect;
 
-    /** Id of object that cannot be carried at same time with this object.
-      * null if there are no incompatibilities
+    /** Object ids that cannot be carried at same time with this object.
+      * Empty array if there are no incompatibilities
       */
-    public incompatibleWith : string;
+    public incompatibleWith : Array<string> = [];
 
     /**
      * Game object information
@@ -174,7 +174,7 @@ class Item {
         }
 
         // Incompatibilities
-        this.incompatibleWith = $o.attr('incompatibleWith');
+        this.incompatibleWith = mechanicsEngine.getArrayProperty( $o , 'incompatibleWith' );
 
     }
 

@@ -120,9 +120,13 @@ class ActionChart {
             return false;
 
         // Check incompatibilities
-        if( o.incompatibleWith && this.hasObject(o.incompatibleWith) ) {
-            var incombatibleObject = state.mechanics.getObject(o.incompatibleWith);
-            throw translations.text( 'msgIncompatible' , [incombatibleObject.name] );
+        if( o.incompatibleWith.length > 0 ) {
+            for( let incompatibleId of o.incompatibleWith ) {
+                if( this.hasObject( incompatibleId ) ) {
+                    var incombatibleObject = state.mechanics.getObject( incompatibleId );
+                    throw translations.text( 'msgIncompatible' , [incombatibleObject.name] );
+                }
+            }
         }
 
         switch( o.type ) {
@@ -247,8 +251,7 @@ class ActionChart {
 
     /**
      * Returns true if the player has the object
-     * @param {string} objectId The object id to test. "backpack" to check if the player
-     * has a backpack
+     * @param objectId The object id to test. "backpack" to check if the player has a backpack
      */
     public hasObject = function(objectId : string) : boolean {
         if( objectId == 'backpack' )

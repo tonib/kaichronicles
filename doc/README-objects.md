@@ -112,12 +112,12 @@ Optional. If it's set, the object as some effect when it's carried:
 
 ### "incompatibleWith" property
 ```xml
-<special id="silverhelm" incompatibleWith="helmet" >
+<special id="chainmail" incompatibleWith="chainmail|broninvest">
     ...
 </special>
 ```
-Optional. If it's set, the player cannot pick the object if it already has the
-incompatible object
+Optional. If it's set, the player cannot pick the object if it already has some of the
+incompatible objects
 
 ## Weapons
 

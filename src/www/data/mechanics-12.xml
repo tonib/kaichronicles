@@ -103,7 +103,7 @@
 
         <section id="sect5">
             <pick class="arrow" count="-1" />
-            <!-- Drop a bow. It should be the current bow, but it's not stored what is the current bow. Drop the worst -->
+            <!-- TODO: Drop a bow. It should be the current bow, but it's not stored what is the current bow. Drop the worst -->
             <drop objectId="jakan|tournamentbow|bow|silverbowduadon" />
 
             <choiceState section="all" set="disabled" />
@@ -1234,6 +1234,71 @@
             <object objectId="pouchadgana" />
         </section>
         
+        <section id="sect146">
+            <test canUseBow="false">
+                <choiceState section="sect99" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect148">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect155">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="2">
+                    <choiceState section="sect341" set="enabled" />
+                </case>
+                <case from="3" to="8">
+                    <choiceState section="sect9" set="enabled" />
+                </case>
+                <case from="9" to="99">
+                    <choiceState section="sect319" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="+1" />
+            </test>
+            <test hasCircle="circleSolaris">
+                <randomTableIncrement increment="+3" />
+            </test>
+        </section>
+
+        <section id="sect156">
+            <test not="true" hasCircle="circleSolaris">
+                <choiceState section="sect190" set="disabled" />
+            </test>
+            <test hasCircle="circleSolaris">
+                <choiceState section="sect56" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect157">
+            <meal />
+            <choiceState section="sect234" set="disabled" />
+            <test hasDiscipline="anmlctrl">
+                <test hasDiscipline="dvnation">
+                    <choiceState section="sect234" set="enabled" />
+                    <choiceState section="sect307" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect158">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect159">
+            <object objectId="broninvest" />
+            <object objectId="silverbracers" />
+        </section>
 
     </sections>
 

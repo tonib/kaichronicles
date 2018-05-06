@@ -1346,7 +1346,7 @@ const mechanicsEngine = {
 
     /**
      * Get an array of strings stored on a rule property
-     * @param $rule {jQuery} The rule
+     * @param $rule {jQuery} The rule (a jQuery tag)
      * @param property The property to get. Property values must be separated by '|' (ex. 'a|b|c' )
      * @returns The values stored on the property. An empty array if the property does not exists
      */

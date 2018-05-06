@@ -145,7 +145,7 @@
             <effect class="endurance" increment="2" />
         </special>
 
-        <special id="chainmail" incompatibleWith="chainmail">
+        <special id="chainmail" incompatibleWith="chainmail|broninvest">
             <name lang="en">Chainmail Waistcoat</name>
             <description lang="en">This adds 4 ENDURANCE points to your total.</description>
 
@@ -800,6 +800,37 @@
 
             <image book="9" name="sword.png" />
             <effect class="combatSkill" increment="+5" />
+        </special>
+
+        <special id="broninvest" incompatibleWith="chainmail|broninvest">
+            <name lang="en">Bronin Vest</name>
+            <description lang="en">
+                Adds 3 points to your COMBAT SKILL and 1 to your ENDURANCE
+            </description>
+
+            <name lang="es">Cota de Malla de Bronin</name>
+            <description lang="es">
+                Añadirá 3 puntos a tu DESTREZA EN EL COMBATE y 1 a tu RESISTENCIA
+            </description>
+
+            <image book="1" name="mail.png" />
+            <effect class="combatSkill" increment="+3" />
+            <effect class="endurance" increment="+1" />
+        </special>
+
+        <special id="silverbracers">
+            <name lang="en">Silver Bracers</name>
+            <description lang="en">
+                Add 2 points to your COMBAT SKILL and 1 to your ENDURANCE
+            </description>
+
+            <name lang="es">Brazales de Plata</name>
+            <description lang="es">
+                Añadirán 2 puntos a tu DESTREZA EN EL COMBATE y 1 a tu RESISTENCIA
+            </description>
+
+            <effect class="combatSkill" increment="+2" />
+            <effect class="endurance" increment="+1" />
         </special>
 
     </specials>
