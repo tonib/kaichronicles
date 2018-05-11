@@ -1300,6 +1300,68 @@
             <object objectId="silverbracers" />
         </section>
 
+        <section id="sect160">
+            <choiceState section="all" set="disabled" />
+            <combat mindforceEP="-1" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect161">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect162">
+            <!-- TODO: We should keep the count of the different currencies (Lunes, Gold Crows,...). Unimplemented -->
+            <test not="true" expression="[MONEY] > 0">
+                <choiceState section="sect43" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect165">
+            <choiceState section="sect323" set="disabled" />
+            <test hasDiscipline="dvnation">
+                <test expression="[KAILEVEL] >= 7">
+                    <choiceState section="sect323" set="enabled" />
+                    <choiceState section="sect191" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect166">
+            <pick objectId="crystalexplosive" />
+            <test not="true" hasObject="sommerswerd">
+                <choiceState section="sect282" set="disabled" />
+            </test>
+            <test hasObject="sommerswerd">
+                <choiceState section="sect229" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect168">
+            <choiceState section="sect329" set="disabled" />
+            <test hasDiscipline="psiscrn">
+                <test expression="[KAILEVEL] >= 8">
+                    <choiceState section="sect329" set="enabled" />
+                    <choiceState section="sect258" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect169">
+            <choiceState section="sect219" set="disabled" />
+            <test hasDiscipline="invsblty">
+                <test hasDiscipline="pthmnshp">
+                    <choiceState section="sect219" set="enabled" />
+                    <choiceState section="sect84" set="disabled" />
+                </test>
+            </test>
+        </section>
+
     </sections>
 
 </mechanics>

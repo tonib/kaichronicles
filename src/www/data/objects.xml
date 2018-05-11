@@ -833,6 +833,13 @@
             <effect class="endurance" increment="+1" />
         </special>
 
+        <special id="crystalexplosive">
+            <name lang="en">Crystal Explosive</name>
+            <name lang="es">Cristal Explosivo</name>
+            <image book="10" name="small9.png" />
+        </special>
+        
+
     </specials>
 
     <objects>
