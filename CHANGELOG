@@ -59,3 +59,4 @@
  - Objects now can have a short / long description
  - Fixed bug with map zoom when device orientation is changed (wrong zoom)
  - Changed rendering of definitions lists (hard to read on small devices)
+- Fixed  bugs with the Crystal Star Pendant ("If you have **ever** been given a Crystal Star Pendant", not if you have it NOW)

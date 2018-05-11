@@ -1085,12 +1085,16 @@
         </section>
 
         <section id="sect221">
+            <!-- 
+                If you have **ever** been given a Crystal Star Pendant, not if you have it NOW 
+                TODO: Add a flag when you pick the crystalstar, and check it here.
+            -->
             <test hasObject="crystalstar">
                 <choiceState section="sect275" set="disabled" />
             </test>
-            <test not="true" hasObject="crystalstar">
+            <!--test not="true" hasObject="crystalstar">
                 <choiceState section="sect336" set="disabled" />
-            </test>
+            </test-->
         </section>
 
         <section id="sect222">
@@ -1494,9 +1498,13 @@
         </section>
 
         <section id="sect288">
-            <test not="true" hasObject="crystalstar">
+            <!-- 
+                If you have **ever** been given a Crystal Star Pendant, not if you have it NOW 
+                TODO: Add a flag when you pick the crystalstar, and check it here.
+            -->
+            <!--test not="true" hasObject="crystalstar">
                 <choiceState section="sect399" set="disabled" />
-            </test>
+            </test-->
             <test hasObject="crystalstar">
                 <choiceState section="sect294" set="disabled" />
             </test>
@@ -1995,12 +2003,16 @@
         </section>
 
         <section id="sect382">
+            <!-- 
+                If you have **ever** been given a Crystal Star Pendant, not if you have it NOW 
+                TODO: Add a flag when you pick the crystalstar, and check it here.
+            -->
             <test hasObject="crystalstar">
                 <choiceState section="sect294" set="disabled" />
             </test>
-            <test not="true" hasObject="crystalstar">
+            <!--test not="true" hasObject="crystalstar">
                 <choiceState section="sect399" set="disabled" />
-            </test>
+            </test-->
         </section>
 
         <section id="sect385">

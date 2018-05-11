@@ -434,6 +434,7 @@
         </section>
         
         <section id="sect70">
+            <!-- If you have the crystalstar NOW -->
             <test not="true" hasObject="crystalstar">
                 <choiceState section="sect219" set="disabled" />
             </test>
@@ -1611,9 +1612,13 @@
         </section>
 
         <section id="sect328">
-            <test not="true" hasObject="crystalstar">
+            <!-- 
+                If you have **ever** been given a Crystal Star Pendant, not if you have it NOW 
+                TODO: Add a flag when you pick the crystalstar, and check it here.
+            -->
+            <!--test not="true" hasObject="crystalstar">
                 <choiceState section="sect113" set="disabled" />
-            </test>            
+            </test-->
             <test not="true" hasDiscipline="tracking">
                 <choiceState section="sect204" set="disabled" />
             </test>
