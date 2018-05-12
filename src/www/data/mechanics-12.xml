@@ -1362,6 +1362,68 @@
             </test>
         </section>
 
+        <section id="sect170">
+            <choiceState section="all" set="disabled" />
+
+            <!-- Sommerswerd stuff -->
+            <message id="msg-sommerswerd" 
+                en-text="If you don't want to go to section 208, change the current weapon to other than Sommerswerd" 
+                es-text="Si no quieres ir a la sección 208, cambia la arma actual a otra que no sea la Sommerswerd"
+            />
+            <onInventoryEvent>
+                <disableCombats disabled="false" />
+                <choiceState section="sect208" set="disabled" />
+                <test currentWeapon="sommerswerd">
+                    <test combatsActive="true">
+                        <disableCombats />
+                        <choiceState section="sect208" set="enabled" />
+                    </test>
+                </test>
+            </onInventoryEvent>
+
+            <combat noMindblast="true" noPsiSurge="true" />
+            <afterCombats>
+                <choiceState section="sect280" set="enabled" />
+            </afterCombats>
+            
+        </section>
+
+        <section id="sect171">
+            <choiceState section="all" set="disabled" />
+            <currentWeapon objectId="daggerofvashna" />
+
+            <!-- Dammage / CS modifiers -->
+            <onInventoryEvent>
+                <combat dammageMultiplier="1" />
+                <test not="true" currentWeapon="sommerswerd|daggerofvashna">
+                    <combat dammageMultiplier="0" />
+                </test>
+
+                <combat combatSkillModifier="0" />
+                <test currentWeapon="daggerofvashna">
+                    <combat combatSkillModifier="+7" />
+                </test>
+            </onInventoryEvent>
+
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect172">
+            <choiceState section="all" set="disabled" />
+            <randomTable zeroAsTen="true">
+                <test expression="[RANDOM] >= 0">
+                    <endurance count="-[RANDOM]" />
+                </test>
+                <choiceState section="all" set="enabled" />
+            </randomTable>
+            <test hasCircle="circleSolaris">
+                <randomTableIncrement increment="-2" />
+            </test>
+        </section>
+        
     </sections>
 
 </mechanics>
