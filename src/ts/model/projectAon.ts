@@ -54,7 +54,7 @@ const projectAon = {
             zipSize: 5117979,
 
             /*
-                CURRENTLY UNPUBLISHABLE: App version (current 1.10) should be updated BEFORE use this revision. See mechanics-2.xml > sect299
+                TODO: CURRENTLY UNPUBLISHABLE: App version (current 1.10) should be updated BEFORE use this revision. See mechanics-2.xml > sect299
                 If a previous app version is used with the new revision, app will fail
             */
             revision: 0
@@ -112,7 +112,7 @@ const projectAon = {
             zipSize: 4183069,
 
             /*
-                CURRENTLY UNPUBLISHABLE without patches. Spanish XML revision 2713 has a bug on the map section: Wrong close "illustration" tag
+                TODO: CURRENTLY UNPUBLISHABLE without patches. Spanish XML revision 2713 has a bug on the map section: Wrong close "illustration" tag
             */
             revision: 0
             //revision: 2713     // Upgraded 12/5/2018 

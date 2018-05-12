@@ -101,18 +101,31 @@ class BookValidator {
 
     private validateRule( rule ) {
         try {
-            if( this[rule.nodeName] )
-                this[rule.nodeName]( $(rule) );
 
-            // Special case: If this is a "test" rule with "bookLanguage" attr. set, check it:
-            // (there are semantic differences between languages...)
+            const $rule = $(rule);
+
+            if( this[rule.nodeName] )
+                // There is a function to validate the rule. Validate it:
+                this[rule.nodeName]( $rule );
+
             if( rule.nodeName == 'test' ) {
-                const language : string = $(rule).attr('bookLanguage');
+
+                // Special case: If this is a "test" rule with "bookLanguage" attr. set, check it:
+                // (there are semantic differences between languages...)
+                const language : string = $rule.attr('bookLanguage');
                 if( language && language != this.book.language )
                     // Ignore children
                     return;
+
+                // Other special case for books XML update. If the current XML does not contain the test text, ignore children
+                const text : string = $rule.attr('sectionContainsText');
+                if( text && !this.currentSection.containsText( text ) )
+                    // Ignore children
+                    return;
+                
             }
-            this.validateChildrenRules( $(rule) );
+
+            this.validateChildrenRules( $rule );
         }
         catch(e) {
             console.log(e);
