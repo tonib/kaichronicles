@@ -111,7 +111,11 @@ const projectAon = {
 
             zipSize: 4183069,
 
+            /*
+                CURRENTLY UNPUBLISHABLE without patches. Spanish XML revision 2713 has a bug on the map section: Wrong close "illustration" tag
+            */
             revision: 0
+            //revision: 2713     // Upgraded 12/5/2018 
         },
 
         // Book 6:

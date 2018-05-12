@@ -1473,14 +1473,14 @@
             <test not="true" bookLanguage="en">
                 <!-- Spanish version -->
 
-                <!-- Before changes -->
+                <!-- Before changes (revision 0) -->
                 <test sectionContainsText=" o no quieres">
                     <choiceSelected section="sect102">
                         <drop objectId="magicspear" />
                     </choiceSelected>
                 </test>
 
-                <!-- After changes (same as English version) -->
+                <!-- After changes (revision 2713, same as English version) -->
                 <test not="true" sectionContainsText=" o no quieres">
                     <choiceSelected section="sect118">
                         <drop objectId="magicspear" />

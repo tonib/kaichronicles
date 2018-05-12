@@ -1,4 +1,4 @@
-- Tests: Check spanish and english combats: Enemies should have the same statistics
+- objects with image "potion.png" should reference to book 9 image too (all???). Check objects with name "Potion" with no image
 - Review upgrades to book 5+
 - Google play:
   * Desde el punto 118 no puedo avanzar de ninguna manera en la primer historia. Por favor arreglen eso. Excelente libro gracias.
@@ -22,6 +22,8 @@
   * 12, Improved Disciplines: miss "o Archimaestro (nueve Disciplinas)"
   * 12, 35: Xargath endurance is 100 in English version
   * 12, 75: Miss English foot page 2
+  * 5: Map: instance outside illustration, wrong illustration close
+  * 5, sect58: "incorrecdta"
 
 FOR FUTURE (1.11+):
 - Book 9, sect189: We should keep the count of the different currencies (Lunes, Gold Crows,...). Also on:
@@ -62,6 +64,7 @@ FOR FUTURE (1.11+):
 - Google Play will require API 26 on november 2018 (upgrade Cordova version?)
 - Allow to change the font size / family
   * See http://www.lalit.org/lab/javascript-css-font-detect/
+- Tests: Check spanish and english combats: Enemies should have the same statistics
 
 Reminders:
 

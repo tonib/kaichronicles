@@ -202,14 +202,17 @@
         <section id="sect20">
             <choiceState section="all" set="disabled" />
             <combat eludeTurn="0" fake="true" restoreFactor="0.5" />
+
+            <afterCombatTurn turn="3">
+                <test combatsActive="true">
+                    <disableCombats />
+                    <choiceState section="sect82" set="enabled" />
+                </test>
+            </afterCombatTurn>
+
             <afterCombats>
                 <test combatsWon="true">
-                    <test not="true" expression="[COMBATSDURATION] >= 4">
-                        <choiceState section="sect125" set="enabled" />
-                    </test>
-                    <test expression="[COMBATSDURATION] >= 4">
-                        <choiceState section="sect82" set="enabled" />
-                    </test>
+                    <choiceState section="sect125" set="enabled" />
                 </test>
                 <test combatsWon="false">
                     <choiceState section="sect161" set="enabled" />
@@ -426,6 +429,13 @@
             <test bookLanguage="en">
                 <choiceState section="sect98" set="disabled" />
             </test>
+            <test bookLanguage="es">
+                <test sectionContainsText="Pasa inmediatamente al 98">
+                    <!-- SVN revision >= 2713 -->
+                    <choiceState section="sect98" set="disabled" />
+                </test>
+            </test>
+
             <numberPicker 
                 en-text="Choose the number for the Cloeasian combination lock"
                 es-text="Elige el número para la cerradura"
@@ -441,12 +451,7 @@
                     <toast 
                         en-text="Wrong number!"
                         es-text="¡Número incorrecto!" />
-                    <test bookLanguage="es">
-                        <goToSection section="sect156" />
-                    </test>
-                    <test bookLanguage="en">
-                        <goToSection section="sect98" />
-                    </test>
+                    <goToSection section="sect98" />
                 </test>
             </numberPickerChoosed>
         </section>
@@ -824,13 +829,7 @@
 
         <section id="sect154">
             <object objectId="potionofstrength" price="4" unlimited="true" />
-            <!-- Errata: -->
-            <test bookLanguage="en">
-                <object objectId="potiongallowbrush" price="2" unlimited="true" />
-            </test>
-            <test bookLanguage="es">
-                <object objectId="potiongallowbrush" price="3" unlimited="true" />
-            </test>
+            <object objectId="potiongallowbrush" price="2" unlimited="true" />
             <object objectId="laumspurpotion4" price="5" unlimited="true" />
             <object objectId="larnumaoil" price="3" unlimited="true" />
             <object objectId="tincturegraveweed" price="1" unlimited="true" />
@@ -1703,13 +1702,14 @@
 
         <section id="sect330">
             <choiceState section="all" set="disabled" />
-            <afterCombats>
-                <test not="true" expression="[COMBATSDURATION] >= 3">
-                    <choiceState section="sect243" set="enabled" />
-                </test>
-                <test expression="[COMBATSDURATION] >= 3">
+            <afterCombatTurn turn="2">
+                <test combatsWon="false">
+                    <disableCombats />
                     <choiceState section="sect394" set="enabled" />
                 </test>
+            </afterCombatTurn>
+            <afterCombats>
+                <choiceState section="sect243" set="enabled" />
             </afterCombats>
         </section>
 
