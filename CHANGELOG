@@ -53,7 +53,7 @@
 - Update combat state after any object is picked
 
 1.11
- - Upgrade of books 1, 3, 4 to the latest version (erratas)
+ - Upgrade of books 1, 3, 4 and 6 to the latest version (erratas). Books 2 and 5 currently cannot be upgraded
  - Fixed bug with tinderbox on book4 / sect270
  - Fixed bug with meals: If the meal object has some effect, apply that effect when the object is eaten
  - Objects now can have a short / long description
