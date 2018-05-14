@@ -224,9 +224,6 @@
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-            ga('create', 'UA-96192501-1', 'auto');
-            ga('send', 'pageview');
           }
           catch(e) {
             console.log(e);
@@ -274,6 +271,7 @@
       <script src="js/ts-generated/model/expressionEvaluator.js"></script>
       <script src="js/ts-generated/model/inventoryState.js"></script>
       <script src="js/ts-generated/model/currency.js"></script>
+      <script src="js/ts-generated/model/googleAnalytics.js"></script>
 
       <!-- Controllers -->
       <script src="js/ts-generated/controller/setupController.js"></script>
@@ -291,6 +289,7 @@
       <script src="js/controller/workWithBooks.js"></script>
       <script src="js/ts-generated/controller/kaimonasteryController.js"></script>
       <script src="js/ts-generated/controller/faqController.js"></script>
+      <script src="js/ts-generated/controller/privacyController.js"></script>
 
       <!-- Mechanics -->
       <script src="js/ts-generated/controller/mechanics/mechanicsEngine.js"></script>
@@ -308,6 +307,7 @@
       <script src="js/ts-generated/views/viewsUtils/translations.js"></script>
       <script src="js/ts-generated/views/viewsUtils/objectsTable.js"></script>
       <script src="js/ts-generated/views/viewsUtils/moneyDialog.js"></script>
+      <script src="js/ts-generated/views/viewsUtils/cookie.js"></script>
 
       <!-- Views -->
       <script src="js/ts-generated/views/actionChartView.js"></script>
@@ -364,6 +364,9 @@
                 state.setupDefaultLanguage();
                 template.setup();
                 routing.setup();
+
+                // Setup google analytics, if we are on web
+                GoogleAnalytics.setup();
 
                 if( debugMode && state.existsPersistedState() ) {
                     // If we are developing a book, avoid to press the "Continue game"

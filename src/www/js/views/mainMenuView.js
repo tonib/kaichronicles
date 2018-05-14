@@ -32,6 +32,10 @@ var mainMenuView = {
             e.preventDefault();
             routing.redirect('faq');
         });
+        $('#menu-privacy').click(function(e) {
+            e.preventDefault();
+            routing.redirect('privacy');
+        });
 
         // Download books (only for app)
         var $downloadBooksBtn = $('#menu-downloadbooks');

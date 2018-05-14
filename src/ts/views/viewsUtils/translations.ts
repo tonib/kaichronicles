@@ -186,6 +186,7 @@ class Translations {
         'continueGame' : 'Continuar el juego',
         'newGame' : 'Nuevo juego',
         'downloadBooks' : 'Descargar libros',
+        'privacy' : 'Política de privacidad',
 
         //////////////////////////////////////
         // New game

@@ -137,6 +137,8 @@ if (typeof Window.prototype.getUrlParameter !== 'function') {
 
 }
 
+/****************** AJAX UTILS ******************/
+
 /**
  * Get a human readable error for an AJAX error
  * @param {Object} context The "this" value for the error callback (oh javascript...)
