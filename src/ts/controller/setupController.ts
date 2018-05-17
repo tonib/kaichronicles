@@ -154,16 +154,12 @@ const setupController = {
      * Record page on Google Analytics
      * @param {string} pageName The page name to record
      */
-    recordPageVisit: function(pageName) {
+    recordPageVisit: function( pageName : string ) {
         try {
-            if( ENVIRONMENT == 'PRODUCTION' && !cordovaApp.isRunningApp() ) {
-                var url = '/' + pageName + '-' + state.book.bookNumber + '.html';
-                ga('set', 'page', url);
-                ga('send', 'pageview');
-            }
+            GoogleAnalytics.sendPageView( '/' + pageName + '-' + state.book.bookNumber + '.html' );
         }
         catch(e) {
-            console.log(e);
+            console.log( e );
         }
     },
 
