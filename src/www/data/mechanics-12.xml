@@ -541,7 +541,6 @@
 
         <section id="sect61">
             <!-- TODO: We should keep the count of the different currencies (Lunes, Gold Crows,...). Unimplemented -->
-            <!-- TODO: Disable this section if the player has no money -->
             <numberPicker 
                 en-text="Decide how many Gold Crowns you wish to bet"
                 es-text="Decide cuántas Coronas de Oro vas a apostar"
@@ -931,7 +930,9 @@
         </section>
         
         <section id="sect103">
-            <!-- TODO: Drop arrows on called sections? -->
+            <choiceSelected section="all">
+                <pick class="arrow" count="-1" />
+            </choiceSelected>
         </section>
 
         <section id="sect104">
@@ -1423,7 +1424,118 @@
                 <randomTableIncrement increment="-2" />
             </test>
         </section>
-        
+
+        <section id="sect174">
+            <choiceState section="sect234" set="disabled" />
+            <test hasDiscipline="anmlctrl">
+                <test hasDiscipline="dvnation">
+                    <choiceState section="sect307" set="disabled" />
+                    <choiceState section="sect234" set="enabled" />
+                </test>
+            </test>
+            <meal />
+        </section>
+
+        <section id="sect175">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect176">
+            <test not="true" hasObject="sommerswerd">
+                <choiceState section="sect208" set="disabled" />
+            </test>
+            <test not="true" hasObject="daggerofvashna">
+                <test not="true" hasObject="helshezag">
+                    <!-- TODO: sect230 add +7 CS -->
+                    <choiceState section="sect230" set="disabled" />
+                </test>
+            </test>
+            <!-- TODO: A Zejar-dulaga Arrow ??? -->
+            <test canUseBow="false">
+                <!-- TODO: Drop  Zejar-dulaga at sect238 -->
+                <choiceState section="sect238" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect178">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="7">
+                    <choiceState section="sect158" set="enabled" />
+                </case>
+                <case from="8" to="99">
+                    <choiceState section="sect11" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasCircle="circleSolaris">
+                <test hasCircle="circleFire">
+                    <randomTableIncrement increment="+1" />
+                </test>
+            </test>
+            <test hasDiscipline="anmlctrl">
+                <test expression="[KAILEVEL] >= 9">
+                    <randomTableIncrement increment="+3" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect179">
+            <!-- TODO: Show these objects on sect308, only if no Divination -->
+            <object objectId="blackkeybook12" />
+            <object objectId="blackcube" />
+        </section>
+
+        <section id="sect180">
+            <choiceState section="all" set="disabled" />
+            <randomTable zeroAsTen="true">
+                <endurance count="-[RANDOM]" />
+                <choiceState section="all" set="enabled" />
+            </randomTable>
+        </section>
+
+        <section id="sect181">
+            <choiceState section="sect4" set="disabled" />
+            <test hasDiscipline="hntmstry|pthmnshp|dvnation">
+                <choiceState section="sect224" set="disabled" />
+                <choiceState section="sect4" set="enabled" />
+            </test>
+        </section>
+
+        <section id="sect182">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect183">
+            <endurance count="-4" />
+        </section>
+
+        <section id="sect184">
+            <!-- TODO: We should keep the count of the different currencies (Lunes, Gold Crows,...). Unimplemented -->
+            <test not="true" expression="[MONEY] > 0">
+                <choiceState section="sect61" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect186">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="8">
+                    <choiceState section="sect313" set="enabled" />
+                </case>
+                <case from="9" to="99">
+                    <choiceState section="sect105" set="enabled" />
+                </case>
+                <pick class="arrow" count="-1" />
+            </randomTable>
+            <randomTableIncrement increment="+[BOWBONUS]" />
+        </section>
+
     </sections>
 
 </mechanics>
