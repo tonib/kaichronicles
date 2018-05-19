@@ -1540,6 +1540,35 @@
             <object objectId="zejardulaga" />
         </section>
 
+        <section id="sect188">
+            <!-- Language differences
+                 en: Curing **or** have reached the Kai rank of Principalin or higher
+                 es: Medicina **y** has alcanzado el rango de Principal
+            -->
+            <test bookLanguage="es">
+                <choiceState section="sect145" set="disabled" />
+                <test hasDiscipline="curing">
+                    <test expression="[KAILEVEL] >= 6">
+                        <choiceState section="sect145" set="enabled" />
+                        <choiceState section="sect201" set="disabled" />
+                    </test>
+                </test>
+            </test>
+            
+            <test bookLanguage="en">
+                <choiceState section="sect145" set="disabled" />
+                <test hasDiscipline="curing">
+                    <choiceState section="sect145" set="enabled" />
+                    <choiceState section="sect201" set="disabled" />
+                </test>
+                <test expression="[KAILEVEL] >= 6">
+                    <choiceState section="sect145" set="enabled" />
+                    <choiceState section="sect201" set="disabled" />
+                </test>
+            </test>
+
+        </section>
+
     </sections>
 
 </mechanics>
