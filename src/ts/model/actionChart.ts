@@ -139,12 +139,25 @@ class ActionChart {
                 return true;
 
             case 'special':
+
+                // Check Special Items limit
                 const nMax = ActionChart.getMaxSpecials();
                 if( nMax && ( this.getNSpecialItems(false) + o.itemCount ) > nMax )
                     throw translations.text( 'msgNoMoreSpecialItems' );
-                this.specialItems.push(o.id);
-                if(o.isWeapon())
+
+                // If the object is an Arrow, check if the player has some quiver
+                if( o.isArrow && !this.hasObject( Item.QUIVER ) )
+                    throw translations.text( 'noQuiversEnough' );
+
+                this.specialItems.push( o.id );
+
+                if( o.isWeapon() )
                     this.checkCurrentWeapon();
+
+                if( o.isArrow )
+                    // The object is an Arrow. Drop a normal Arrow if needed
+                    this.sanitizeArrowCount();
+
                 return true;
 
             case 'object':
@@ -689,12 +702,21 @@ class ActionChart {
      * @returns The max. arrows number
      */
     public getMaxArrowCount() : number {
+
+        // Compute the maximum number of arrows, given the carried quivers 
         let max = 0;
         for( let i=0; i<this.specialItems.length; i++ ) {
             if( this.specialItems[i] == Item.QUIVER )
                 // Only 6 arrows per quiver
                 max += 6;
         }
+
+        // Objects with isArrow="true" occupies the same space in quiver as a normal Arrow
+        this.enumerateObjects( function( o : Item ) {
+            if( o.isArrow )
+                max -= 1;
+        });
+
         return max;
     }
 
@@ -764,7 +786,7 @@ class ActionChart {
     }
 
     /**
-     * Return the maximum number of special items that can be picked on the curernt book.
+     * Return the maximum number of special items that can be picked on the current book.
      * @returns The max number. Zero if there is no limit on the current book
      */
     public static getMaxSpecials() : number {

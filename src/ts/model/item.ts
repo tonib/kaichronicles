@@ -47,6 +47,9 @@ class Item {
     /** True if the object is a meal */
     public isMeal : boolean;
 
+    /** True if the object is an Arrow */
+    public isArrow : boolean;
+    
     /** True if the object can be dropped */
     public droppable : boolean;
 
@@ -113,8 +116,13 @@ class Item {
         this.id = objectId;
         /** The translated object name */
         this.name = $o.find('name[lang=' + book.language + ']').text();
-        /** True if the object is a meal */
+
+        // True if the object is a meal
         this.isMeal = $o.attr('isMeal') == 'true';
+
+        // True if the object is an Arrow
+        this.isArrow = $o.attr('isArrow') == 'true';
+
         /** True if the object can be dropped */
         this.droppable = $o.attr('droppable') != 'false';
 

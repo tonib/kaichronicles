@@ -839,6 +839,19 @@
             <image book="10" name="small9.png" />
         </special>
         
+        <special id="zejardulaga" isArrow="true">
+            <name lang="en">Zejar-dulaga</name>
+            <description lang="en">
+                A poisonous arrow imbued with magical accuracy. It occupies the same space in your Quiver as a normal Arrow
+            </description>
+
+            <name lang="es">Zejar-dulaga</name>
+            <description lang="es">
+                Una flecha venenosa dotada de gran precisión mágica. Ocupa el mismo espacio en tu Carcaj que una Flecha normal
+            </description>
+
+            <image book="12" name="small6.png" />
+        </special>
 
     </specials>
 

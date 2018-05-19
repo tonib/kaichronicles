@@ -142,7 +142,18 @@ discipline). If it can be more than one, each class is separated with a "|" char
 </weapon>
 ```
 
-## Objects and Special items
+### "weaponType" property
+```xml
+<special id="sommerswerd" weaponType="sword|broadsword|shortsword" >
+    <name lang="en">Sommerswerd</name>
+    ...
+</special>
+```
+If it's set, the object can be used as a weapon. In the property value is set the 
+class of weapon as it can be used. If it can be more than one, each class is separated
+with a "|" character.
+
+## Objects and Special Items
 
 They can have some optional tags / properties:
 
@@ -168,13 +179,8 @@ inventory.
       current section
 * **"increment" property**: Amount to increment
 
-### "weaponType" property
-```xml
-<special id="sommerswerd" weaponType="sword|broadsword|shortsword" >
-    <name lang="en">Sommerswerd</name>
-    ...
-</special>
-```
-If it's set, the object can be used as a weapon. In the property value is set the 
-class of weapon as it can be used. If it can be more than one, each class is separated
-with a "|" character.
+### "isMeal" property
+If true, the object can be eaten as a Meal.
+
+### "isArrow" property
+If true, the object it's an Arrow, and it occupies an slot on a Quiver as a normal Arrow

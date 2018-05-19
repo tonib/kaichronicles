@@ -1536,6 +1536,10 @@
             <randomTableIncrement increment="+[BOWBONUS]" />
         </section>
 
+        <section id="sect187">
+            <object objectId="zejardulaga" />
+        </section>
+
     </sections>
 
 </mechanics>
