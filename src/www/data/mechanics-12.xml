@@ -486,6 +486,8 @@
         </section>
 
         <section id="sect57">
+            <currentWeapon objectId="sommerswerd" />
+            <!-- TODO: Force to use sommerswerd on this combat? -->
             <choiceState section="all" set="disabled" />
             <afterCombats>
                 <test not="true" expression="[COMBATSDURATION] > 3">
@@ -1621,6 +1623,25 @@
             <afterCombats>
                 <choiceState section="all" set="enabled" />
             </afterCombats>
+        </section>
+
+        <section id="sect195">
+            <!-- TODO: Force to use sommerswerd on this combat? -->
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect197">
+            <choiceState section="sect124" set="disabled" />
+            <test hasDiscipline="dvnation">
+                <test expression="[KAILEVEL] >= 9">
+                    <choiceState section="sect124" set="enabled" />
+                    <choiceState section="sect283" set="disabled" />
+                </test>
+            </test>
         </section>
 
     </sections>
