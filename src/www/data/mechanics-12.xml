@@ -1566,7 +1566,61 @@
                     <choiceState section="sect201" set="disabled" />
                 </test>
             </test>
+        </section>
 
+        <section id="sect189">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect190">
+            <!-- TODO: Disable Sommerswerd on sect289 -->
+            <test not="true" hasObject="sommerswerd">
+                <choiceState section="sect208" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect191">
+            <choiceState section="sect251" set="disabled" />
+            <test hasDiscipline="hntmstry">
+                <test expression="[KAILEVEL] >= 6">
+                    <choiceState section="sect251" set="enabled" />
+                    <choiceState section="sect37" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect192">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect193">
+            <!-- TODO: Drop arrow? -->
+            <!-- TODO: Disable Sommerswerd on sect289 -->
+            <test not="true" hasObject="sommerswerd">
+                <choiceState section="sect208" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect194">
+            <choiceState section="all" set="disabled" />
+
+            <test not="true" hasDiscipline="hntmstry">
+                <combat combatSkillModifier="-2" />
+                <afterCombatTurn turn="1">
+                    <combat combatSkillModifier="0" />
+                </afterCombatTurn>
+            </test>
+
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
         </section>
 
     </sections>
