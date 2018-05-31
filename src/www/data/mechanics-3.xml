@@ -56,7 +56,7 @@
             <object objectId="broadsword" />
 
             <chooseEquipment 
-                en-text="Click on the Random Table link to get money before continue" 
+                en-text="Click on the Random Table link to get money before continuing" 
                 es-text="Haz click en el link de la Tabla de la Suerte para obtener dinero antes de continuar"
             />
 
@@ -126,7 +126,7 @@
 
         <section id="sect16">
             <message id="msg-drop-object" 
-                en-text="Drop two Backpack Items before continue" 
+                en-text="Drop two Backpack Items before continuing" 
                 es-text="Deja dos Objetos de Mochila antes de continuar" 
             />
             <choiceState section="all" set="disabled" />

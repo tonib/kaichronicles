@@ -68,7 +68,7 @@
 
             <!-- Choose equipment UI -->
             <chooseEquipment 
-                en-text="Click on both Random Table links before continue" 
+                en-text="Click on both Random Table links before continuing" 
                 es-text="Haz click en ambos links de la Tabla de la Suerte antes de continuar"
             />
 
@@ -496,7 +496,7 @@
 
         <section id="sect144">
             <message id="msg-drop-object" 
-                en-text="Drop a Backpack item or weapon before continue"
+                en-text="Drop a Backpack item or weapon before continuing"
                 es-text="Deja un Objeto de Mochila o una arma antes de continuar"
             />
 
@@ -964,7 +964,7 @@
 
         <section id="sect277">
             <message id="msg-drop-weapon" 
-                en-text="Drop a weapon before continue" 
+                en-text="Drop a weapon before continuing" 
                 es-text="Deja un arma antes de continuar"
             />
             <choiceState section="all" set="disabled" />
@@ -1080,7 +1080,7 @@
             <pick objectId="meal" />
             <object objectId="warhammer" />
             <message id="msg-drop-weapon" 
-                en-text="Drop a weapon before continue" 
+                en-text="Drop a weapon before continuing" 
                 es-text="Deja un arma antes de continuar"
             />
             <onInventoryEvent>
