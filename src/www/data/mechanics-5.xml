@@ -54,7 +54,7 @@
             <object objectId="shield" />
 
             <chooseEquipment 
-                en-text="Click on the Random Table link to get money before continue" 
+                en-text="Click on the Random Table link to get money before continuing" 
                 es-text="Haz click en el link de la Tabla de la Suerte para obtener dinero antes de continuar"
             />
 
@@ -316,7 +316,7 @@
             <pick class="money" count="-[MONEY]" />
             <endurance count="-2" />
             <message id="msg-drop-object" 
-                en-text="Drop one Backpack Item before continue" 
+                en-text="Drop one Backpack Item before continuing" 
                 es-text="Deja un Objeto de Mochila antes de continuar" 
             />
             <choiceState section="all" set="disabled" />
@@ -1383,7 +1383,7 @@
         <section id="sect270">
             <!-- TODO: Unsupported -->
             <message 
-                en-text="Drop two object before continue" 
+                en-text="Drop two object before continuing" 
                 es-text="Deja dos objetos antes de continuar" 
             />
         </section>

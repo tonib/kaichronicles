@@ -59,7 +59,7 @@
             <object objectId="fireseed" index="2" />
 
             <chooseEquipment
-                en-text="Click on the Random Table link to get money before continue" 
+                en-text="Click on the Random Table link to get money before continuing" 
                 es-text="Haz click en el link de la Tabla de la Suerte para obtener dinero antes de continuar"
             />
 
@@ -1141,7 +1141,7 @@
         <section id="sect187">
             <!-- Complex. Let the player choose (TODO: This could be improved, checking the dropped weapon type) -->
             <message id="msg-drop-weapon" 
-                en-text="Drop a non-edged weapon before continue (i.e. a Mace, Warhammer, Quarterstaff, or Bow)" 
+                en-text="Drop a non-edged weapon before continuing (i.e. a Mace, Warhammer, Quarterstaff, or Bow)" 
                 es-text="Deja un arma sin filo antes de continuar (por ejemplo, una maza, un martillo de guerra, una estaca o un arco)"
             />
             <choiceState section="all" set="disabled" />
@@ -1391,7 +1391,7 @@
         <section id="sect242">
             <object objectId="greycrystalring" />
             <message id="msg-drop-weapon" 
-                en-text="Drop a Lodestone, a Jewelled Mace, a Silver Helm or the Grey Crystal Ring before continue" 
+                en-text="Drop a Lodestone, a Jewelled Mace, a Silver Helm or the Grey Crystal Ring before continuing" 
                 es-text="Deja una Piedra Imán, una Maza Enjoyada, un Yelmo Mágico de Plata o el Anillo de Cristal Gris antes de continuar"
             />
             <onInventoryEvent>
@@ -1495,7 +1495,7 @@
         <section id="sect258">
             <endurance count="-8" />
             <message id="msg-drop-weapon" 
-                en-text="Drop a weapon before continue" 
+                en-text="Drop a weapon before continuing" 
                 es-text="Deja un arma antes de continuar"
             />
             <onInventoryEvent>

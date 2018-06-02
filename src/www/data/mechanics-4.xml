@@ -62,7 +62,7 @@
             <object objectId="shield" />
 
             <chooseEquipment 
-                en-text="Click on the Random Table link to get money before continue" 
+                en-text="Click on the Random Table link to get money before continuing" 
                 es-text="Haz click en el link de la Tabla de la Suerte para obtener dinero antes de continuar"
             />
 
@@ -167,7 +167,7 @@
             <!-- I dont want to force any rule here... What if the player has no 
                  other backpack / weapon? -->
             <message 
-                en-text="Drop some object before continue" 
+                en-text="Drop some object before continuing" 
                 es-text="Deja algún objeto antes de continuar" 
             />
         </section>
@@ -1376,7 +1376,7 @@
         <section id="sect272">
             <endurance count="-5" />
             <message id="msg-drop-weapon" 
-                en-text="Drop a weapon before continue" 
+                en-text="Drop a weapon before continuing" 
                 es-text="Deja un arma antes de continuar"
             />
             <choiceState section="all" set="disabled" />

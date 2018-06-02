@@ -59,7 +59,7 @@
             <object objectId="fireseed" index="2" />
 
             <chooseEquipment 
-                en-text="Click on the Random Table link to get money before continue" 
+                en-text="Click on the Random Table link to get money before continuing" 
                 es-text="Haz click en el link de la Tabla de la Suerte para obtener dinero antes de continuar"
             />
 
@@ -207,7 +207,7 @@
         <section id="sect32">
             <!-- TODO: We should control the kind of weapon droped -->
             <message id="msg-drop-weapon" 
-                en-text="Drop a sword or spear before continue" 
+                en-text="Drop a sword or spear before continuing" 
                 es-text="Deja una espada o lanza antes de continuar"
             />
             <choiceState section="all" set="disabled" />
@@ -856,7 +856,7 @@
         <section id="sect131">
             <drop backpackItemSlots="2" />
             <message id="msg-drop-weapon" 
-                en-text="Drop a weapon before continue" 
+                en-text="Drop a weapon before continuing" 
                 es-text="Deja un arma antes de continuar"
             />
             <choiceState section="all" set="disabled" />
@@ -1025,7 +1025,7 @@
         <section id="sect158">
             <drop objectId="allmeals" />
             <message id="msg-drop-two-backpack" 
-                en-text="Drop two Backpack items before continue" 
+                en-text="Drop two Backpack items before continuing" 
                 es-text="Deja 2 objetos de la mochila antes de continuar"
             />
             <choiceState section="all" set="disabled" />

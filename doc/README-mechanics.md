@@ -125,7 +125,7 @@ Game setup: The player selects the Kai disciplines
 
 ### chooseEquipment
 Game setup: Choose equipment. Property "en-text" is the text to show on the UI ("Pick X objects
-before continue")
+before continuing")
 
 ### pick (execute once only)
 ```xml

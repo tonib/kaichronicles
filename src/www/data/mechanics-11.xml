@@ -57,7 +57,7 @@
             <object objectId="dagger" />
 
             <chooseEquipment
-                en-text="Click on the Random Table link to get money before continue"
+                en-text="Click on the Random Table link to get money before continuing"
                 es-text="Haz click en el link de la Tabla de la Suerte para obtener dinero antes de continuar"
             />
 
