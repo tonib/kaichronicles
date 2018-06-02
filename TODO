@@ -23,6 +23,7 @@
   * 12, 75: Miss English foot page 2
   * 12, 188: Language differences for sect145: English: OR, Spanish AND
   * 12, 220: Miss foot page
+  * 12, 230: Miss foot page
   * 5: Map: instance outside illustration, wrong illustration tag close
   * 5, sect58: "incorrecdta"
   * 6, sect17: foot note "sect17-1-foot" is not referenced, and, so, not rendered
@@ -71,6 +72,8 @@ FOR FUTURE (1.11+):
 - Tests: Check spanish and english combats: Enemies should have the same statistics
 - Game rules: Move equipment stuff to the bottom of the page
 - Remove links to Lone Wolf Adventures
+- Add erratas section?
+- Add illustrations index?
 
 Reminders:
 

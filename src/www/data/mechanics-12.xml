@@ -613,7 +613,7 @@
         <section id="sect68">
             <choiceState section="all" set="disabled" />
 
-            <combat eludeTurn="2" />
+            <combat eludeTurn="1" />
             <onInventoryEvent>
                 <combat combatSkillModifier="0" />
                 <!-- TODO: Sommerswerd is like a broadword. OK? -->
@@ -1043,7 +1043,6 @@
         <section id="sect118">
             <test canUseBow="false">
                 <choiceState section="sect231" set="disabled" />
-                <!-- TODO: Drop arrow? -->
             </test>
         </section>
 
@@ -1449,16 +1448,19 @@
             <test not="true" hasObject="sommerswerd">
                 <choiceState section="sect208" set="disabled" />
             </test>
+
             <test not="true" hasObject="daggerofvashna">
                 <test not="true" hasObject="helshezag">
                     <!-- TODO: sect230 add +7 CS -->
                     <choiceState section="sect230" set="disabled" />
                 </test>
             </test>
-            <!-- TODO: A Zejar-dulaga Arrow ??? -->
-            <test canUseBow="false">
-                <!-- TODO: Drop  Zejar-dulaga at sect238 -->
-                <choiceState section="sect238" set="disabled" />
+
+            <choiceState section="sect238" set="disabled" />
+            <test hasWeaponType="bow">
+                <test hasObject="zejardulaga">
+                    <choiceState section="sect238" set="enabled" />
+                </test>
             </test>
         </section>
 
@@ -1800,6 +1802,137 @@
 
         <section id="sect220">
             <endurance count="-2" />
+        </section>
+
+        <section id="sect221">
+            <!-- TODO: We should keep the count of the different currencies (Lunes, Gold Crows,...). Unimplemented -->
+            <test not="true" expression="[MONEY] > 0">
+                <choiceState section="sect108" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect222">
+            <choiceState section="sect32" set="disabled" />
+            <test hasDiscipline="invsblty">
+                <test expression="[KAILEVEL] >= 8">
+                    <choiceState section="sect32" set="enabled" />
+                    <choiceState section="sect198" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect224">
+            <choiceState section="all" set="disabled" />
+            <!-- you are unable to evade combat or draw a weapon until the ***beginning*** of the third round == turn 2-->
+            <combat eludeTurn="2" noMindblast="true" noWeapon="2" />
+            <afterCombats>
+                <choiceState section="sect91" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect58" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect226">
+            <endurance count="-3" />
+            <choiceState section="all" set="disabled" />
+
+            <!-- TODO: "every time this creature inflicts a wound during the combat", so, only if the player loss any EP???. Not sure -->
+            <combat turnLoss="-1" />
+            <test hasDiscipline="nexus">
+                <test expression="[KAILEVEL] >= 9">
+                    <combat turnLoss="0" />
+                </test>
+            </test>
+
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect228">
+            <object objectId="dagger" />
+            <object objectId="sword" />
+            <object objectId="axe" />
+            <object objectId="shortsword" />
+            <pick class="money" count="40" currency="kika" />
+            <object objectId="blanket" />
+            <object objectId="blackkeybook12" />
+        </section>
+
+        <section id="sect229">
+            <pick objectId="goldenamulet" />
+        </section>
+        
+        <section id="sect230">
+
+            <message id="msg-drop-weapon" 
+                en-text="You must use the Dagger of Vashna or the sword Helshezag as current weapon on this combat" 
+                es-text="Debes usar la Daga de Vashna o la espada Helshezag como arma actual en este combate"
+            />
+            <test hasObject="daggerofvashna">
+                <currentWeapon objectId="daggerofvashna" />
+            </test>
+            <test not="true" hasObject="daggerofvashna">
+                <currentWeapon objectId="helshezag" />
+            </test>
+
+            <onInventoryEvent>
+                <disableCombats />
+                <combat combatSkillModifier="0" />
+                <test currentWeapon="daggerofvashna|helshezag">
+                    <disableCombats disabled="false" />
+                    <test currentWeapon="helshezag">
+                        <!-- +2 to get +7 with Helshezag -->
+                        <combat combatSkillModifier="+2" />
+                    </test>
+                    <test currentWeapon="daggerofvashna">
+                        <!-- +7 with Dagger of Vashna -->
+                        <combat combatSkillModifier="+7" />
+                    </test>
+                </test>
+            </onInventoryEvent>
+
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect231">
+            <pick class="arrow" count="-1" />
+
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect233">
+            <choiceState section="sect136" set="disabled" />
+            <test hasDiscipline="curing">
+                <test expression="[KAILEVEL] >= 7">
+                    <choiceState section="sect136" set="enabled" />
+                    <choiceState section="sect73" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect235">
+            <pick objectId="greenmask" />
+        </section>
+        
+        <section id="sect236">
+            <pick class="arrow" count="-1" />
+        </section>
+
+        <section id="sect237">
+            <endurance count="-1" />
+        </section>
+
+        <section id="sect238">
+            <drop objectId="zejardulaga" />
         </section>
 
     </sections>

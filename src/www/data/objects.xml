@@ -853,6 +853,32 @@
             <image book="12" name="small6.png" />
         </special>
 
+        <special id="goldenamulet" itemCount="0">
+            <name lang="en">Golden Amulet</name>
+            <description lang="en">
+                "It will keep you safe from the heat and poisonous atmospheres that pervade your destination"
+            </description>
+
+            <name lang="es">Amuleto Dorado</name>
+            <description lang="es">
+                "Te mantendrá a salvo del calor y la atmósfera ponzoñosa del lugar al que vas"
+            </description>
+
+            <image book="12" name="small5.png" />
+        </special>
+
+        <special id="greenmask" itemCount="0">
+            <name lang="en">Green Mask</name>
+            <description lang="en">
+                It is made of a green, glass-like mineral and is shaped into a hideous visage
+            </description>
+
+            <name lang="es">Máscara Verde</name>
+            <description lang="es">
+                Está hecha de un mineral verde parecido al vidrio y tiene la forma de un horrible rostro
+            </description>
+        </special>
+
     </specials>
 
     <objects>
