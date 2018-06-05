@@ -21,6 +21,8 @@ work.
 
 ## Setup
 
+#### Method 1
+
 Compile Typescript
 ```bash
     npm install
@@ -33,9 +35,23 @@ Download the Project Aon game data:
 ```
 This will require Node.js (any recent version), zip command, SVN client, wget and patch on your path
 
+#### Method 2
+##### Only for running a local website. 
+This method downloads, configures and runs the website inside a Docker container.
+ * `git clone` the repository (q.v. basic instructions for Git)
+ * Download and install [Docker](https://docs.docker.com/install/) and make sure it's is in your PATH environment variable
+ * Using a terminal (Linux or iOS) or PowerShell (Windows 10) navigate to the project's directory
+ * Type `docker build -t kai:1.10 .` 
+     * This command only needs to be run once.
+     * Remember to include the `.`
+ * Type `docker run -p 8080:8080 kai:1.10` 
+     * This command must be run again any time the container is stopped.
+     * If you want to access the site via a different port, change the *second* 8080 e.g. `docker run -p 8080:5000 kai:1.10`
+     * If you want to run the website independently of your terminal window (i.e. as a daemon), add a `-d` flag e.g. `docker run -d -p 8080:8080 kai:1.10`
+     * On Windows, by default, the container must be stopped manually.
+ * Open http://localhost:8080
+ 
 ### Setup web site
-
-#### Method 1
 
 * Put the folder src/www on your private web server
 * Open http://localhost/[dir-for-src-www]/index.html
@@ -43,14 +59,6 @@ This will require Node.js (any recent version), zip command, SVN client, wget an
 You are now done. If you have Firefox, you dont need a web server. You can open
 directly the file src/www/index.html. This will not work with Chrome (see 
 http://stackoverflow.com/questions/10752055/cross-origin-requests-are-only-supported-for-http-error-when-loading-a-local)
-
-#### Method 2
- 
- * Download and install [Docker](https://docs.docker.com/install/) and make sure it's is in your PATH environment variable
- * Using a terminal (Linux or iOS) or PowerShell (Windows 10) navigate to the project's directory
- * Type `docker build -t kai:1.0 .`
- * Type `docker run -p 8080:8080 kai:1.0`
- * Open http://localhost:8080
 
 ### Setup Android app
 
