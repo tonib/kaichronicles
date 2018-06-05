@@ -21,8 +21,6 @@ work.
 
 ## Setup
 
-#### Method 1
-
 Compile Typescript
 ```bash
     npm install
@@ -35,20 +33,19 @@ Download the Project Aon game data:
 ```
 This will require Node.js (any recent version), zip command, SVN client, wget and patch on your path
 
-#### Method 2
-##### Only for running a local website. 
-This method downloads, configures and runs the website inside a Docker container.
- * `git clone` the repository (q.v. basic instructions for Git)
+##### Alternative method
+###### Recommended for running a local website only to play the game
+This method downloads, configures and runs a local website for playing the game. If you intend to develop the game and are not familiar with Docker, then this method is not recommended.
  * Download and install [Docker](https://docs.docker.com/install/) and make sure it's is in your PATH environment variable
+ * `git clone` the repository (q.v. [basic instructions for Git](https://help.github.com/articles/cloning-a-repository/))
  * Using a terminal (Linux or iOS) or PowerShell (Windows 10) navigate to the project's directory
  * Type `docker build -t kai:1.10 .` 
      * This command only needs to be run once.
      * Remember to include the `.`
  * Type `docker run -p 8080:8080 kai:1.10` 
-     * This command must be run again any time the container is stopped.
      * If you want to access the site via a different port, change the *second* 8080 e.g. `docker run -p 8080:5000 kai:1.10`
      * If you want to run the website independently of your terminal window (i.e. as a daemon), add a `-d` flag e.g. `docker run -d -p 8080:8080 kai:1.10`
-     * On Windows, by default, the container must be stopped manually.
+     * Run this command any time the container is stopped (i.e. you cannot access the website). On Windows, by default, the container must be stopped manually.
  * Open http://localhost:8080
  
 ### Setup web site
