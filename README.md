@@ -39,15 +39,13 @@ This method downloads, configures and runs a local website for playing the game.
  * Download and install [Docker](https://docs.docker.com/install/) and make sure it's is in your PATH environment variable
  * `git clone` the repository (q.v. [basic instructions for Git](https://help.github.com/articles/cloning-a-repository/))
  * Using a terminal (Linux or iOS) or PowerShell (Windows 10) navigate to the project's directory
- * Type `docker build -t kai:1.10 .` 
-     * This command only needs to be run once.
-     * Remember to include the `.`
+ * Type `docker build -t kai:1.10 .` (including the `.`)
  * Type `docker run -p 8080:8080 kai:1.10` 
-     * If you want to access the site via a different port, change the *second* 8080 e.g. `docker run -p 8080:5000 kai:1.10`
-     * If you want to run the website independently of your terminal window (i.e. as a daemon), add a `-d` flag e.g. `docker run -d -p 8080:8080 kai:1.10`
-     * Run this command any time the container is stopped (i.e. you cannot access the website). On Windows, by default, the container must be stopped manually.
  * Open http://localhost:8080
- 
+     * The build command only needs to be run once.
+     * If you want to access the site via a different port, change the *first* 8080 e.g. `docker run -p 5000:8080 kai:1.10`
+     * If you want to run the website independently of your terminal window (i.e. as a daemon), add a `-d` flag e.g. `docker run -d -p 8080:8080 kai:1.10`
+
 ### Setup web site
 
 * Put the folder src/www on your private web server
