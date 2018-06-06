@@ -9,5 +9,6 @@ Running Kai Chronicles inside a Docker cointainer configures and runs a local we
  * Type `docker run -p 8080:8080 kai:1.10` 
      * If you want to access the site via a different port, change the *first* 8080 e.g. `docker run -p 5000:8080 kai:1.10`
      * If you want to run the website independently of your terminal window (i.e. as a daemon), add a `-d` flag e.g. `docker run -d -p 8080:8080 kai:1.10`
+     * If you try this command and you get some kind of 'conflicting port' error, then try a different port per instructions above.
  * Open http://localhost:8080
-     * The server's ready message has incorrect URLs. Use the URL above, with the correct port.
+     * The server's ready message has incorrect URLs. Use the URL above, swapping in the correct port if you changed it.
