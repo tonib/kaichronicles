@@ -2177,6 +2177,24 @@
             <endurance count="-8" />
         </section>
 
+        <section id="sect268">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+
+            <!-- Check turn 1 loss -->
+            <afterCombatTurn turn="1">
+                <executeOnce>
+                    <test expression="[COMBATSENDURANCELOST] > [COMBATSENEMYLOST]">
+                        <combat permanentDammage="true" />
+                    </test>
+                </executeOnce>
+            </afterCombatTurn>
+
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
     </sections>
 
 </mechanics>

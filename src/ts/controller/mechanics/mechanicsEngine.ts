@@ -910,6 +910,11 @@ const mechanicsEngine = {
         if( $rule.attr('bow') == 'true' )
             combat.bowCombat = true;
 
+        // LW loss is permament (applied to the original endurance)?
+        const permanentDammage = mechanicsEngine.getBooleanProperty( $rule , 'permanentDammage' );
+        if( permanentDammage != null )
+            combat.permanentDammage = permanentDammage;
+
         // Objects to disable on this combat:
         const txtDisabledObjects : string = $rule.attr('disabledObjects');
         if( txtDisabledObjects ) {

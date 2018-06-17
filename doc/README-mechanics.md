@@ -359,6 +359,7 @@ the following properties:
 * **bow="true"** It's a combat with bow? (false = hand-to-hand)
 * **disabledObjects="objectId1|objectId2|..."** Set objects that cannot be used on this combat. "none" to enable all objects previously
   disabled.
+* **permanentDammage="boolean"** EP lost by LW on this combat will be permanent?
 
 Different combat tags with different attributes are cumulative. Different combat tags with the same attribute will
 replace that value. Ex:

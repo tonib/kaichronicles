@@ -345,8 +345,24 @@ class ActionChart {
     }
 
     /**
+     * Returns the maximum endurance of the player
+     */
+    public getMaxEndurance() : number {
+
+        if( this.endurance <= 0 )
+            // If the original endurance is zero, the player is death
+            return 0;
+
+        let e = this.endurance;
+        const bonuses = this.getEnduranceBonuses();
+        for(var i=0; i<bonuses.length; i++)
+            e += bonuses[i].increment;
+        return e;
+    }
+
+    /**
      * Checks if the current endurance if bigger than the maximum.
-     * This can happens if an object that has effects (increase endurance) has ben dropped
+     * This can happens if an object that has effects (increase endurance) has ben dropped, or if the original endurance has changed
      */
     private checkMaxEndurance() {
         var max = this.getMaxEndurance();
@@ -359,9 +375,15 @@ class ActionChart {
      * @param count Number to increase. Negative to decrease 
      * @param permanent True if the increase is permanent (it changes the original endurance)
      */
-    public increaseEndurance = function(count : number, permanent : boolean = false) {
-        if( permanent )
+    public increaseEndurance(count : number, permanent : boolean = false) {
+
+        if( permanent ) {
+            // Change the original endurance
             this.endurance += count;
+            if( this.endurance < 0 )
+                this.endurance = 0;
+        }
+
         this.currentEndurance += count;
         this.checkMaxEndurance();
         if( this.currentEndurance < 0 )
@@ -623,17 +645,6 @@ class ActionChart {
         // Check objects:
         $.each( this.backpackItems , enumerateFunction );
         $.each( this.specialItems , enumerateFunction );
-    }
-
-    /**
-     * Returns the maximum endurance of the player
-     */
-    public getMaxEndurance() : number {
-        var e = this.endurance;
-        var bonuses = this.getEnduranceBonuses();
-        for(var i=0; i<bonuses.length; i++)
-            e += bonuses[i].increment;
-        return e;
     }
 
     /**

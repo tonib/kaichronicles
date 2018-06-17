@@ -108,6 +108,9 @@ class Combat {
     /** Adgana has been used on this combat? (see "pouchadgana" object) */
     public adganaUsed = false;
 
+    /** Loss on this combat is permanent (reduce original endurance)? */
+    public permanentDammage = false;
+
     /**
      * Create a combat
      * @param enemy Enemy name
@@ -227,7 +230,7 @@ class Combat {
         if( turn.loneWolf == combatTable_DEATH )
             state.actionChart.currentEndurance = 0;
         else
-            state.actionChart.increaseEndurance( -turn.loneWolf );
+            state.actionChart.increaseEndurance( -turn.loneWolf , this.permanentDammage );
         
         // Apply enemy damages:
         this.endurance = Combat.applyLoss( this.endurance , turn.enemy );

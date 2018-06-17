@@ -216,6 +216,7 @@
         <xs:attribute name="mentalOnly" type="xs:boolean" />
         <xs:attribute name="immuneTurns" type="xs:nonNegativeInteger" />
         <xs:attribute name="enemyImmuneTurns" type="xs:nonNegativeInteger" />
+        <xs:attribute name="permanentDammage" type="xs:boolean" />
     </xs:complexType>
 
     <xs:complexType name="afterCombats">
