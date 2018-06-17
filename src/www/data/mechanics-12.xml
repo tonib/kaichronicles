@@ -180,6 +180,9 @@
         </section>
 
         <section id="sect12">
+            <!-- you draw a fresh Arrow... (drop previous) -->
+            <pick class="arrow" count="-1" />
+
             <endurance count="-2" />
         </section>
 
@@ -2193,6 +2196,82 @@
             <afterCombats>
                 <choiceState section="all" set="enabled" />
             </afterCombats>
+        </section>
+
+        <section id="sect269">
+            <drop objectId="medal" />
+        </section>
+
+        <section id="sect270">
+            <choiceState section="sect186" set="disabled" />
+            <test hasDiscipline="anmlctrl">
+                <test hasDiscipline="dvnation">
+                    <choiceState section="sect186" set="enabled" />
+                    <choiceState section="sect12" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect271">
+            <object objectId="sword" />
+            <object objectId="axe" />
+            <object objectId="broadsword" />
+            <object objectId="bow" />
+            <object objectId="arrow" count="6" />
+            <object objectId="quiver" />
+            <object objectId="dagger" />
+            <object objectId="mace" />
+            <pick class="money" count="400" currency="kika" />
+
+            <meal />
+        </section>
+
+        <section id="sect273">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="4">
+                    <choiceState section="sect59" set="enabled" />
+                </case>
+                <case from="5" to="99">
+                    <choiceState section="sect23" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hntmstry">
+                <test hasDiscipline="pthmnshp">
+                    <randomTableIncrement increment="+2" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect275">
+            <!-- TODO: Use sommerswerd only on this combat? -->
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+         <section id="sect276">
+            <endurance count="-3" />
+
+            <choiceState section="all" set="disabled" />
+            <combat noWeapon="2" />
+
+            <combat turnLoss="-1" />
+            <test hasDiscipline="nexus">
+                <test expression="[KAILEVEL] >= 9">
+                    <combat turnLoss="0" />
+                </test>
+            </test>
+
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect277">
+            <death />
         </section>
 
     </sections>
