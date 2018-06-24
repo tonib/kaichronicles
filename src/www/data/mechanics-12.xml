@@ -795,6 +795,7 @@
         </section>
 
         <section id="sect88">
+            <!-- TODO: Force use Dagger of Vashna or Helshezag on this section? -->
             <choiceState section="all" set="disabled" />
             <combat noMindblast="true" combatSkillModifier="+12" />
             <afterCombats>
@@ -1393,6 +1394,7 @@
         </section>
 
         <section id="sect171">
+            <!-- TODO: Force Dagger of Vashna as current weapon on this combat? -->
             <choiceState section="all" set="disabled" />
             <currentWeapon objectId="daggerofvashna" />
 
@@ -2172,7 +2174,6 @@
         <section id="sect266">
             <test not="true" hasObject="fireseed">
                 <choiceState section="sect302" set="disabled" />
-                <!-- TODO: Drop fireseed on sect302 -->
             </test>
         </section>
 
@@ -2272,6 +2273,141 @@
 
         <section id="sect277">
             <death />
+        </section>
+
+        <section id="sect282">
+            <pick objectId="korliniumscabbard" />
+        </section>
+
+        <section id="sect284">
+            <meal />
+        </section>
+
+        <section id="sect286">
+            <choiceState section="sect57" set="disabled" />
+            <choiceState section="sect171" set="disabled" />
+            <test hasObject="sommerswerd">
+                <choiceState section="sect57" set="enabled" />
+                <choiceState section="sect109" set="disabled" />
+            </test>
+
+            <test hasObject="daggerofvashna">
+                <choiceState section="sect171" set="enabled" />
+                <choiceState section="sect109" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect287">
+            <!-- TODO: sect324, drop arrow -->
+        </section>
+
+        <section id="sect288">
+            <endurance count="-2" />
+        </section>
+
+        <section id="sect289">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" noPsiSurge="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect290">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="3">
+                    <choiceState section="sect122" set="enabled" />
+                </case>
+                <case from="4" to="7">
+                    <choiceState section="sect53" set="enabled" />
+                </case>
+                <case from="8" to="99">
+                    <choiceState section="sect321" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="+2" />
+            </test>
+            <test hasCircle="circleSpirit">
+                <randomTableIncrement increment="+3" />
+            </test>
+        </section>
+
+        <section id="sect291">
+            <choiceState section="all" set="disabled" />
+
+            <combat noMindblast="true" />
+
+            <!-- Sommerswerd stuff -->
+            <message id="msg-sommerswerd" 
+                en-text="If you don't want to go to section 208, change the current weapon to other than Sommerswerd" 
+                es-text="Si no quieres ir a la sección 208, cambia la arma actual a otra que no sea la Sommerswerd"
+            />
+            <onInventoryEvent>
+                <disableCombats disabled="false" />
+                <choiceState section="sect208" set="disabled" />
+                <test currentWeapon="sommerswerd">
+                    <test combatsActive="true">
+                        <disableCombats />
+                        <choiceState section="sect208" set="enabled" />
+                    </test>
+                </test>
+            </onInventoryEvent>
+
+            <afterCombats>
+                <test not="true" expression="[COMBATSDURATION] > 5">
+                    <choiceState section="sect95" set="enabled" />
+                </test>
+                <test expression="[COMBATSDURATION] > 5">
+                    <choiceState section="sect199" set="enabled" />
+                </test>
+            </afterCombats>
+        </section>
+
+        <section id="sect292">
+            <choiceState section="all" set="disabled" />
+            <combat immuneTurns="2" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect294">
+            <test not="true" hasDiscipline="dvnation">
+                <choiceState section="sect89" set="disabled" />
+            </test>
+            <test hasDiscipline="dvnation">
+                <choiceState section="sect172" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect302">
+            <drop objectId="fireseed" />
+        </section>
+
+        <section id="sect303">
+            <choiceState section="sect315" set="disabled" />
+            <test hasCircle="circleSolaris">
+                <test hasCircle="circleSpirit">
+                    <choiceState section="sect315" set="enabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect306">
+            <choiceState section="sect214" set="disabled" />
+            <choiceState section="sect88" set="disabled" />
+
+            <test hasObject="sommerswerd">
+                <choiceState section="sect214" set="enabled" />
+                <choiceState section="sect3" set="disabled" />
+            </test>
+
+            <test hasObject="daggerofvashna|helshezag">
+                <choiceState section="sect88" set="enabled" />
+                <!-- "and wish to use either of them", so don't disable sect3 -->
+            </test>
         </section>
 
     </sections>

@@ -879,6 +879,20 @@
             </description>
         </special>
 
+        <special id="korliniumscabbard" itemCount="0">
+            <name lang="en">Korlinium Scabbard</name>
+            <description lang="en">
+                It will contain and keep hidden the powers of the Sommerswerd
+            </description>
+
+            <name lang="es">Vaina de Korlinium</name>
+            <description lang="es">
+                Controlará y mantendrá ocultos los poderes de la Sommerswerd
+            </description>
+            <image book="12" name="small4.png" />
+        </special>
+        
+
     </specials>
 
     <objects>
