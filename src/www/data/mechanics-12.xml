@@ -1491,7 +1491,6 @@
         </section>
 
         <section id="sect179">
-            <!-- TODO: Show these objects on sect308, only if no Divination -->
             <object objectId="blackkeybook12" />
             <object objectId="blackcube" />
         </section>
@@ -1958,7 +1957,6 @@
             </test>
             <test canUseBow="false">
                 <choiceState section="sect310" set="disabled" />
-                <!-- TODO: Drop arrow? -->
             </test>
         </section>
 
@@ -2408,6 +2406,100 @@
                 <choiceState section="sect88" set="enabled" />
                 <!-- "and wish to use either of them", so don't disable sect3 -->
             </test>
+        </section>
+
+        <section id="sect307">
+            <choiceState section="all" set="disabled" />
+            <combat mindblastMultiplier="2" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect308">
+            <test not="true" hasDiscipline="dvnation">
+                <choiceState section="sect179" set="disabled" />
+                <object objectId="blackkeybook12" />
+                <object objectId="blackcube" />
+            </test>
+            <test hasDiscipline="dvnation">
+                <choiceState section="sect263" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect309">
+            <test canUseBow="false">
+                <choiceState section="sect77" set="disabled" />
+            </test>
+            <test not="true" hasObject="sommerswerd">
+                <choiceState section="sect128" set="disabled" />
+            </test>
+            <!-- Disable sommerswerd on sect213?: No, it has no real effect -->
+        </section>
+
+        <section id="sect310">
+            <pick class="arrow" count="-1" />
+
+            <object objectId="spear" />
+            <object objectId="axe" />
+            <object objectId="dagger" />
+            <pick class="money" count="60" currency="kika" />
+            <object objectId="bottlewine" />
+            <object objectId="pouchtobacco" />
+            <object objectId="pipe" />
+            <object objectId="ironkey" />
+            <object objectId="meal" />
+        </section>
+
+        <section id="sect314">
+            <!-- TODO: We should keep the count of the different currencies (Lunes, Gold Crows,...). Unimplemented -->
+            <test not="true" expression="[MONEY] > 0">
+                <choiceState section="sect202" set="disabled" />
+                <choiceState section="sect126" set="disabled" />
+            </test>
+
+            <test not="true" hasObject="medal">
+                <choiceState section="sect269" set="disabled" />
+            </test>
+
+            <!-- There is a dead end if you have no money and medal. In this case, let the player choose -->
+            <test not="true" expression="[MONEY] > 0">
+                <test not="true" hasObject="medal">
+                    <choiceState section="sect202" set="enabled" />
+                    <choiceState section="sect126" set="enabled" />
+                    <choiceState section="sect269" set="enabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect315">
+            <test canUseBow="false">
+                <choiceState section="sect103" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect316">
+            <choiceState section="sect124" set="disabled" />
+            <test hasDiscipline="dvnation">
+                <test expression="[KAILEVEL] >= 9">
+                    <choiceState section="sect124" set="enabled" />
+                    <choiceState section="sect283" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect317">
+            <object objectId="sword" index="0" />
+            <object objectId="sword" index="1" />
+            <object objectId="sword" index="2" />
+            <object objectId="axe" index="0" />
+            <object objectId="axe" index="1" />
+            <object objectId="dagger" index="0" />
+            <object objectId="dagger" index="1" />
+            <object objectId="bow" />
+            <object objectId="arrow" count="4" />
+            <object objectId="rope" />
+            <!-- Pouch of herbs is Adgana. Can be picked only on sect145 -->
         </section>
 
     </sections>
