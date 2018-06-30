@@ -106,7 +106,7 @@ class Translations {
 
         'meal' : 'Comida',
         'useHunting' : 'Usar la disciplina de Caza',
-        'eatBackpackMeal' : 'Comer una comida de la mochila',
+        'eatBackpackMeal' : 'Comer una Comida de la Mochila',
         'eatBackpackObject' : 'Comer',
         'buyMeal' : 'Comprar comida',
         'doNotEat' : 'No comer (-3 RESISTENCIA)',

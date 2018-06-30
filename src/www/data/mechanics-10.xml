@@ -1913,13 +1913,6 @@
                 <choiceState section="sect202" set="enabled" />
             </afterCombats>
         </section>
-
-        <section id="sect350">
-            <message 
-                en-text="This is the last implemented book. Thank you for playing!" 
-                es-text="Este es el último libro implementado. ¡Gracias por jugar!" 
-            />
-        </section>
         
     </sections>
 

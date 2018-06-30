@@ -293,7 +293,6 @@
         </section>
 
         <section id="sect25">
-            <!-- TODO: Drop arrow? -->
             <test not="true" hasObject="sommerswerd">
                 <choiceState section="sect208" set="disabled" />
             </test>
@@ -425,7 +424,6 @@
         <section id="sect48">
             <test canUseBow="false">
                 <choiceState section="sect324" set="disabled" />
-                <!-- TODO: Drop arrow? -->
             </test>
         </section>
 
@@ -1532,7 +1530,7 @@
         <section id="sect186">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="8">
+                <case from="-99" to="8">
                     <choiceState section="sect313" set="enabled" />
                 </case>
                 <case from="9" to="99">
@@ -1608,7 +1606,6 @@
         </section>
 
         <section id="sect193">
-            <!-- TODO: Drop arrow? -->
             <!-- TODO: Disable Sommerswerd on sect289 -->
             <test not="true" hasObject="sommerswerd">
                 <choiceState section="sect208" set="disabled" />
@@ -2295,10 +2292,6 @@
             </test>
         </section>
 
-        <section id="sect287">
-            <!-- TODO: sect324, drop arrow -->
-        </section>
-
         <section id="sect288">
             <endurance count="-2" />
         </section>
@@ -2502,6 +2495,174 @@
             <!-- Pouch of herbs is Adgana. Can be picked only on sect145 -->
         </section>
 
+        <section id="sect318">
+            <death />
+        </section>
+
+        <section id="sect322">
+            <object objectId="sword" index="0" />
+            <object objectId="sword" index="1" />
+            <object objectId="sword" index="2" />
+            <object objectId="dagger" />
+            <object objectId="pipe" />
+            <pick class="money" count="40" currency="kika" />
+            <object objectId="whip" />
+        </section>
+
+        <section id="sect324">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <pick class="arrow" count="-1" />
+                <case from="-99" to="4">
+                    <choiceState section="sect25" set="enabled" />
+                </case>
+                <case from="5" to="9">
+                    <choiceState section="sect193" set="enabled" />
+                </case>
+                <case from="10" to="99">
+                    <choiceState section="sect287" set="enabled" />
+                </case>
+            </randomTable>
+            <randomTableIncrement increment="+[BOWBONUS]" />
+            <test hasDiscipline="hntmstry">
+                <test expression="[KAILEVEL] >= 9">
+                    <randomTableIncrement increment="+3" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect325">
+            <choiceState section="sect47" set="disabled" />
+            <test hasDiscipline="hntmstry">
+                <test expression="[KAILEVEL] >= 9">
+                    <choiceState section="sect47" set="enabled" />
+                    <choiceState section="sect256" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect327">
+            <choiceState section="sect207" set="disabled" />
+            <test hasDiscipline="anmlctrl">
+                <test expression="[KAILEVEL] >= 4">
+                    <choiceState section="sect207" set="enabled" />
+                </test>
+            </test>
+
+            <choiceState section="sect49" set="disabled" />
+            <test not="true" isChoiceEnabled="sect207">
+                <test canUseBow="true">
+                    <choiceState section="sect49" set="enabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect331">
+            <death />
+        </section>
+
+        <section id="sect333">
+            <endurance count="-4" />
+        </section>
+
+        <section id="sect334">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="3">
+                    <choiceState section="sect122" set="enabled" />
+                </case>
+                <case from="4" to="7">
+                    <choiceState section="sect53" set="enabled" />
+                </case>
+                <case from="8" to="99">
+                    <choiceState section="sect321" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="+2" />
+            </test>
+            <test hasCircle="circleSpirit">
+                <randomTableIncrement increment="+3" />
+            </test>
+        </section>
+
+        <section id="sect337">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect338">
+            <choiceState section="sect273" set="disabled" />
+            <test hasDiscipline="anmlctrl">
+                <test expression="[KAILEVEL] >= 7">
+                    <choiceState section="sect273" set="enabled" />
+                    <choiceState section="sect98" set="disabled" />
+                </test>
+            </test>
+            <meal />
+        </section>
+
+        <section id="sect340">
+            <death />
+        </section>
+
+        <section id="sect341">
+            <death />
+        </section>
+
+        <section id="sect342">
+            <choiceState section="all" set="disabled" />
+
+            <!-- Sommerswerd stuff -->
+            <message id="msg-sommerswerd" 
+                en-text="If you don't want to go to section 208, change the current weapon to other than Sommerswerd" 
+                es-text="Si no quieres ir a la sección 208, cambia la arma actual a otra que no sea la Sommerswerd"
+            />
+            <onInventoryEvent>
+                <disableCombats disabled="false" />
+                <choiceState section="sect208" set="disabled" />
+                <test currentWeapon="sommerswerd">
+                    <test combatsActive="true">
+                        <disableCombats />
+                        <choiceState section="sect208" set="enabled" />
+                    </test>
+                </test>
+            </onInventoryEvent>
+
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect345">
+            <death />
+        </section>
+
+        <section id="sect347">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect348">
+            <choiceState section="all" set="disabled" />
+            <combat mindforceEP="-1" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect350">
+            <message 
+                en-text="This is the last implemented book. Thank you for playing!" 
+                es-text="Este es el último libro implementado. ¡Gracias por jugar!" 
+            />
+        </section>
+        
     </sections>
 
 </mechanics>

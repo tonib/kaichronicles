@@ -335,9 +335,9 @@ the following properties:
 * **index="number"**: Index (zero based) of the combat to which it refers
 * **combatSkillModifier="bonus"**: Bonus (positive or negative) for Lone Wolf combat skill
 * **mindforceCS="-number"**: Bonus (negative) to the Lone Wolf combat skill due to the enemy
-  Mindblast. It will not be applied if the player as Mindshield
+  Mindblast. It will not be applied if the player has Mindshield / Psi-screen
 * **mindforceEP="-number"**: Endurance points lost by LW each turn, due to the enemy Mindblast.
-  It will not be applied if the player as Mindshield
+  It will not be applied if the player has Mindshield / Psi-screen
 * **noMindblast="true"**: The enemy is immune to Mindblast
 * **noPsiSurge="true"**: The enemy is immune to Psi-Surge
 * **mindblastBonus="number"**: Special CS bonus to apply for Mindblast discipline on this combat
