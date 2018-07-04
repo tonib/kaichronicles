@@ -34,6 +34,11 @@ const actionChartView = {
         // Bind restore 20 EP (Curing)
         actionChartView.bindRestore20EP();
 
+        // Bind "Fight unarmed"
+        $('#achart-fightUnarmed').click( function(e : Event) {
+            actionChartController.setFightUnarmed( $(this).prop('checked') ? true : false );
+        });
+
         // Annotations
         $('#achart-annotations').val( actionChart.annotations );
         $('#achart-annotations').off();
@@ -196,8 +201,15 @@ const actionChartView = {
 
         // Current weapon:
         const current : Item = state.actionChart.getselectedWeaponItem();
-        
         $('#achart-currentWeapon').html( current ? current.name : '<i>' + translations.text('noneFemenine') + '</i>' );
+
+        // Fight unarmed?
+        const $fightUnarmed = $('#achart-fightUnarmed');
+        $fightUnarmed.prop( 'checked' , state.actionChart.fightUnarmed );
+
+        // If the player has no weapons, disable the option "Fight unarmed"
+        const noWeapon = ( !state.actionChart.fightUnarmed && !state.actionChart.getSelectedWeapon() );
+        $('#achart-fightUnarmed-container').prop( 'disabled' , noWeapon );
     },
 
     /**

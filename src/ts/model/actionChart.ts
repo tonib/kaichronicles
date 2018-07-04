@@ -31,6 +31,12 @@ class ActionChart {
     /** The player weapons (up to 2) */
     public weapons : Array<string> = [];
 
+    /**
+      * If true, the player will fight with no weapons (hand-to-hand).
+      * This may seem stupid, but in book 12 there are places where, if you try to fight with the Sommerswerd, you die. 
+      */
+    public fightUnarmed = false;
+
     /** The currently hand-to-hand selected weapon id. Empty string if the player has no weapon  */ 
     private selectedWeapon = '';
 
@@ -112,15 +118,20 @@ class ActionChart {
      * @returns The currently selected weapon id. Empty string if the player has no weapon selected
      */
     public getSelectedWeapon() : string {
+        if( this.fightUnarmed )
+            return '';
+
         return this.selectedWeapon;
     }
 
     /**
      * Set the selected hand-to-hand weapon id.
+     * This will set the fightUnarmed flag to false.
      * @param weaponId The new selected weapon id. No tests are done over this weapon id!
      */
     public setSelectedWeapon( weaponId : string ) {
         this.selectedWeapon = weaponId;
+        this.fightUnarmed = false;
     }
 
     /**
@@ -133,7 +144,8 @@ class ActionChart {
         if( bow )
             return this.getSelectedBow();
         
-        return this.selectedWeapon ? state.mechanics.getObject(this.selectedWeapon) : null;
+        const weaponId = this.getSelectedWeapon();
+        return weaponId ? state.mechanics.getObject( weaponId ) : null;
     }
 
     /**
@@ -364,6 +376,7 @@ class ActionChart {
         if( weaponObjects.length === 0 ) {
             // No weapons
             this.selectedWeapon = '';
+            this.fightUnarmed = false;
             return;
         }
         else if( weaponObjects.length >= 1 ) {

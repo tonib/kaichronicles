@@ -80,6 +80,7 @@ class Translations {
         'restore20EP': 'Medicina: +20 R (sólo si R 6 o menos, cada 100 días)',
         'confirm20EP': 'Esta habilidad solo puede ser usada una vez cada 100 días. ¿Continuamos?',
         'more' : 'Más',
+        'fightUnarmed' : 'Luchar desarmado',
 
         //////////////////////////////////////
         // Combats

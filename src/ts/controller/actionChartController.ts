@@ -319,7 +319,7 @@ const actionChartController = {
     /**
      * Set the current weapon
      * @param weaponId The weapon id to set selected
-     * @param showToast True if we should show a message to the user   
+     * @param showToast True if we should show a message to the user with the current weapon change
      */
     setSelectedWeapon: function( weaponId : string , showToast : boolean = false ) {
         if( state.actionChart.getSelectedWeapon() == weaponId )
@@ -329,14 +329,32 @@ const actionChartController = {
             return;
 
         state.actionChart.setSelectedWeapon( weaponId );
+        actionChartController.updateSelectedWeaponUI( showToast );
+    },
+
+    /**
+     * Change the "Fight unarmed" flag.
+     * @param fightUnarmed New value for "Fight unarmed" flag
+     */
+    setFightUnarmed : function( fightUnarmed : boolean ) {
+        state.actionChart.fightUnarmed = fightUnarmed;
+        actionChartController.updateSelectedWeaponUI( false );
+    },
+
+    /**
+     * Update the UI related to the currently selected weapon
+     * @param showToast True if we should show a message to the user with the current weapon change
+     */
+    updateSelectedWeaponUI : function(showToast : boolean) {
         actionChartView.updateWeapons();
         // There can be weapons on backpack / special items:
         actionChartView.updateObjectsLists();
         actionChartView.updateStatistics();
         template.updateStatistics();
         if( showToast ) {
-            var o = state.mechanics.getObject( weaponId );
-            toastr.info( translations.text( 'msgCurrentWeapon' , [o.name] ) );
+            const weapon = state.actionChart.getselectedWeaponItem( false );
+            const name = weapon ? weapon.name : translations.text( 'noneFemenine' );
+            toastr.info( translations.text( 'msgCurrentWeapon' , [ name ] ) );
         }
     },
 
