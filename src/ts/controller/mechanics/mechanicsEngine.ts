@@ -532,7 +532,7 @@ const mechanicsEngine = {
         // Test current weapon:
         const currentWeaponList = mechanicsEngine.getArrayProperty( $rule , 'currentWeapon' );
         if( currentWeaponList.length > 0 ) {
-            const selectedWeapon : Item = state.actionChart.getselectedWeaponItem(false);
+            const selectedWeapon : Item = state.actionChart.getSelectedWeaponItem(false);
             if( selectedWeapon ) {
                 for( let w of currentWeaponList ) {
                     if( selectedWeapon.isWeaponType( w ) ) {
@@ -609,7 +609,7 @@ const mechanicsEngine = {
         // Current hand-to-hand weapon is special?
         const currentWeaponSpecial = mechanicsEngine.getBooleanProperty( $rule , 'currentWeaponSpecial' );
         if( currentWeaponSpecial != null ) {
-            const currentWeapon = state.actionChart.getselectedWeaponItem(false);
+            const currentWeapon = state.actionChart.getSelectedWeaponItem(false);
             const currentIsSpecial = ( currentWeapon && currentWeapon.type == Item.SPECIAL );
             if( currentIsSpecial == currentWeaponSpecial )
                 conditionStatisfied = true;

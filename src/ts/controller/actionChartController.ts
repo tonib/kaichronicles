@@ -356,7 +356,7 @@ const actionChartController = {
         template.updateStatistics();
 
         // Show toast with the weapon change
-        const weapon = state.actionChart.getselectedWeaponItem( false );
+        const weapon = state.actionChart.getSelectedWeaponItem( false );
         const name = weapon ? weapon.name : translations.text( 'noneFemenine' );
         toastr.info( translations.text( 'msgCurrentWeapon' , [ name ] ) );
     },

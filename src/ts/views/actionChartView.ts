@@ -200,7 +200,7 @@ const actionChartView = {
             .renderTable();
 
         // Current weapon:
-        const current : Item = state.actionChart.getselectedWeaponItem();
+        const current : Item = state.actionChart.getSelectedWeaponItem();
         $('#achart-currentWeapon').html( current ? current.name : '<i>' + translations.text('noneFemenine') + '</i>' );
 
         // Fight unarmed?

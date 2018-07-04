@@ -139,7 +139,7 @@ class ActionChart {
      * @param bow True if we should return the selected bow info. False to return the selected hand-to-hand weapon info.
      * @return The current weapon info. null if the is player has no weapon
      */
-    public getselectedWeaponItem( bow : boolean = false ) : Item {
+    public getSelectedWeaponItem( bow : boolean = false ) : Item {
 
         if( bow )
             return this.getSelectedBow();
@@ -458,7 +458,7 @@ class ActionChart {
             // Player has no Weaponskill
             return false;
 
-        const currentWeapon = this.getselectedWeaponItem( bow );
+        const currentWeapon = this.getSelectedWeaponItem( bow );
         if( !currentWeapon )
             // Player has no weapon
             return false;
@@ -497,7 +497,7 @@ class ActionChart {
     : Array<Bonus> {
 
         var bonuses = [];
-        var currentWeapon = this.getselectedWeaponItem( bowCombat );
+        var currentWeapon = this.getSelectedWeaponItem( bowCombat );
 
         // Check if the current weapon is disabled
         if( disabledObjectsIds.length > 0 && currentWeapon ) {
@@ -611,7 +611,7 @@ class ActionChart {
 
         var bonuses = [];
 
-        var currentWeapon = this.getselectedWeaponItem( combat.bowCombat );
+        var currentWeapon = this.getSelectedWeaponItem( combat.bowCombat );
 
         // Current weapon bonuses
         if ( !combat.mentalOnly ) {
