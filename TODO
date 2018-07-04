@@ -1,3 +1,4 @@
+- Rename actionChart.getselectedWeaponItem() to actionChart.get**S**electedWeaponItem()
 - Review upgrades to book 7+
 - Warn about permanent losses (toastr)
 - Google play:

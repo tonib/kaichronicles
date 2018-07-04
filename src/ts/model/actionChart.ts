@@ -31,8 +31,8 @@ class ActionChart {
     /** The player weapons (up to 2) */
     public weapons : Array<string> = [];
 
-    /** The currently selected weapon  */ 
-    public selectedWeapon = '';
+    /** The currently hand-to-hand selected weapon id. Empty string if the player has no weapon  */ 
+    private selectedWeapon = '';
 
     /** Money amount */
     public beltPouch = 0;
@@ -105,6 +105,35 @@ class ActionChart {
                 }
             }
         }
+    }
+
+    /**
+     * Returns the currently hand-to-hand selected weapon id.
+     * @returns The currently selected weapon id. Empty string if the player has no weapon selected
+     */
+    public getSelectedWeapon() : string {
+        return this.selectedWeapon;
+    }
+
+    /**
+     * Set the selected hand-to-hand weapon id.
+     * @param weaponId The new selected weapon id. No tests are done over this weapon id!
+     */
+    public setSelectedWeapon( weaponId : string ) {
+        this.selectedWeapon = weaponId;
+    }
+
+    /**
+     * Get the selected weapon info
+     * @param bow True if we should return the selected bow info. False to return the selected hand-to-hand weapon info.
+     * @return The current weapon info. null if the is player has no weapon
+     */
+    public getselectedWeaponItem( bow : boolean = false ) : Item {
+
+        if( bow )
+            return this.getSelectedBow();
+        
+        return this.selectedWeapon ? state.mechanics.getObject(this.selectedWeapon) : null;
     }
 
     /**
@@ -445,18 +474,6 @@ class ActionChart {
     }
 
     /**
-     * Get the selected weapon info
-     * @return The current weapon info. null if the is player has no weapon
-     */
-    public getselectedWeaponItem( bow : boolean = false ) : Item {
-
-        if( bow )
-            return this.getSelectedBow();
-        
-        return this.selectedWeapon ? state.mechanics.getObject(this.selectedWeapon) : null;
-    }
-
-    /**
      * Get bonuses for the selected weapon
      * @param noWeapon True if the combat is with no weapons
      * @param bowCombat True if it's a combat with bow
@@ -775,7 +792,7 @@ class ActionChart {
      * TODO: This returns the bow with the maximum CS bonus. Allow to selected the current bow
      */
     public getSelectedBow() : Item {
-        return this.getWeaponType( 'bow' );
+        return this.getWeaponType( Item.BOW );
     }
 
     /** 
@@ -784,16 +801,16 @@ class ActionChart {
      */
     public getWeaponType( weaponType : string ) : Item {
         let maxBonus = 0;
-        let selectedWeapon : Item = null;
+        let w : Item = null;
         for( let weapon of this.getWeaponObjects() ) {
             if( weapon.isWeaponType( weaponType ) ) {
                 if( weapon.combatSkillEffect >= maxBonus ) {
                     maxBonus = weapon.combatSkillEffect;
-                    selectedWeapon = weapon;
+                    w = weapon;
                 }
             }
         }
-        return selectedWeapon;
+        return w;
     }
 
     /**

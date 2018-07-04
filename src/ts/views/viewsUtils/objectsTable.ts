@@ -210,7 +210,7 @@ class ObjectsTableItem {
                 // Use object operation
                 html += this.getUseOperation();
 
-            if( this.item.isHandToHandWeapon() && state.actionChart.selectedWeapon != this.item.id ) {
+            if( this.item.isHandToHandWeapon() && state.actionChart.getSelectedWeapon() != this.item.id ) {
                 // Op to set the weapon as current
                 const title = translations.text('setCurrentWeapon');
                 html += this.getOperationTag( 'currentWeapon' , title , '<span class="glyphicon glyphicon-hand-left"></span>' );

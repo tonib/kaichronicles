@@ -86,8 +86,9 @@ const actionChartController = {
         }
 
         if( objectId == 'currentweapon' ) {
-            if( state.actionChart.selectedWeapon )
-                this.drop( state.actionChart.selectedWeapon );
+            const selectedWeapon = state.actionChart.getSelectedWeapon();
+            if( selectedWeapon )
+                this.drop( selectedWeapon );
             return true;
         }
 
@@ -321,13 +322,13 @@ const actionChartController = {
      * @param showToast True if we should show a message to the user   
      */
     setSelectedWeapon: function( weaponId : string , showToast : boolean = false ) {
-        if( state.actionChart.selectedWeapon == weaponId )
+        if( state.actionChart.getSelectedWeapon() == weaponId )
             return;
 
         if( !state.actionChart.hasObject(weaponId) )
             return;
 
-        state.actionChart.selectedWeapon = weaponId;
+        state.actionChart.setSelectedWeapon( weaponId );
         actionChartView.updateWeapons();
         // There can be weapons on backpack / special items:
         actionChartView.updateObjectsLists();

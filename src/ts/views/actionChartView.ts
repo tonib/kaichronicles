@@ -195,9 +195,7 @@ const actionChartView = {
             .renderTable();
 
         // Current weapon:
-        var current = null;
-        if( state.actionChart.selectedWeapon )
-            current = state.mechanics.getObject( state.actionChart.selectedWeapon );
+        const current : Item = state.actionChart.getselectedWeaponItem();
         
         $('#achart-currentWeapon').html( current ? current.name : '<i>' + translations.text('noneFemenine') + '</i>' );
     },
