@@ -1,10 +1,9 @@
-- Review upgrades to book 7+
+- Use latest version on PAON data on SVN (a fixed commit number)
+  * Review upgrades to book 7+
 - Warn about permanent losses (toastr)
 - Google play:
   * Desde el punto 118 no puedo avanzar de ninguna manera en la primer historia. Por favor arreglen eso. Excelente libro gracias.
-- Show a toast when you change the current weapon on the Action Chart
 - Object images on book 9+: Use the current book image, if available
-- Use latest version on PAON data on SVN (a fixed commit number)
 - When you cancel a saved games import, it say "error", and it is not
 - Check reported bugs on Google play:
   * Saved games removed when adding new books
@@ -64,7 +63,6 @@ FOR FUTURE (1.11+):
 - Allow to change the font size / family
   * See http://www.lalit.org/lab/javascript-css-font-detect/
 - Tests: Check spanish and english combats: Enemies should have the same statistics
-- Game rules: Move equipment stuff to the bottom of the page
 - Remove links to Lone Wolf Adventures
 - Add erratas section?
 - Add illustrations index?

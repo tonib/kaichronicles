@@ -20,8 +20,6 @@ const gameRulesController = {
             // Push game rules sections:
             gameRulesController.appendSection( Book.COMBATRULESSUMMARY_SECTION );
             gameRulesController.appendSection( Book.KAILEVELS_SECTION );
-            gameRulesController.appendSection( Book.HOWTOCARRY_SECTION );
-            gameRulesController.appendSection( Book.HOWTOUSE_SECTION );
 
             if( state.book.isMagnakaiBook() ) {
                 // Lore-circles rules
@@ -30,6 +28,9 @@ const gameRulesController = {
                 gameRulesController.appendSection( Book.IMPROVEDDISCIPLINES_SECTION );
             }
 
+            gameRulesController.appendSection( Book.HOWTOCARRY_SECTION );
+            gameRulesController.appendSection( Book.HOWTOUSE_SECTION );
+            
             // Bind combat table links
             gameView.bindCombatTablesLinks();
 
