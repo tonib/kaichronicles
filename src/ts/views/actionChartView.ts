@@ -207,9 +207,11 @@ const actionChartView = {
         const $fightUnarmed = $('#achart-fightUnarmed');
         $fightUnarmed.prop( 'checked' , state.actionChart.fightUnarmed );
 
-        // If the player has no weapons, disable the option "Fight unarmed"
-        const noWeapon = ( !state.actionChart.fightUnarmed && !state.actionChart.getSelectedWeapon() );
-        $('#achart-fightUnarmed-container').prop( 'disabled' , noWeapon );
+        // If the player has no weapons, or has died, disable the option "Fight unarmed"
+        let noWeapon = ( !state.actionChart.fightUnarmed && !state.actionChart.getSelectedWeapon() );
+        if( state.actionChart.currentEndurance <= 0 ) 
+            noWeapon = true;
+        $fightUnarmed.prop( 'disabled' , noWeapon );
     },
 
     /**

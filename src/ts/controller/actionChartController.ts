@@ -319,9 +319,8 @@ const actionChartController = {
     /**
      * Set the current weapon
      * @param weaponId The weapon id to set selected
-     * @param showToast True if we should show a message to the user with the current weapon change
      */
-    setSelectedWeapon: function( weaponId : string , showToast : boolean = false ) {
+    setSelectedWeapon: function( weaponId : string ) {
         if( state.actionChart.getSelectedWeapon() == weaponId )
             return;
 
@@ -329,7 +328,7 @@ const actionChartController = {
             return;
 
         state.actionChart.setSelectedWeapon( weaponId );
-        actionChartController.updateSelectedWeaponUI( showToast );
+        actionChartController.updateSelectedWeaponUI();
     },
 
     /**
@@ -338,24 +337,28 @@ const actionChartController = {
      */
     setFightUnarmed : function( fightUnarmed : boolean ) {
         state.actionChart.fightUnarmed = fightUnarmed;
-        actionChartController.updateSelectedWeaponUI( false );
+        actionChartController.updateSelectedWeaponUI();
     },
 
     /**
      * Update the UI related to the currently selected weapon
-     * @param showToast True if we should show a message to the user with the current weapon change
      */
-    updateSelectedWeaponUI : function(showToast : boolean) {
+    updateSelectedWeaponUI : function() {
+
+        // Update weapon list
         actionChartView.updateWeapons();
-        // There can be weapons on backpack / special items:
+
+        // There can be weapons on backpack / special items, so update these lists
         actionChartView.updateObjectsLists();
+
+        // Update statistics
         actionChartView.updateStatistics();
         template.updateStatistics();
-        if( showToast ) {
-            const weapon = state.actionChart.getselectedWeaponItem( false );
-            const name = weapon ? weapon.name : translations.text( 'noneFemenine' );
-            toastr.info( translations.text( 'msgCurrentWeapon' , [ name ] ) );
-        }
+
+        // Show toast with the weapon change
+        const weapon = state.actionChart.getselectedWeaponItem( false );
+        const name = weapon ? weapon.name : translations.text( 'noneFemenine' );
+        toastr.info( translations.text( 'msgCurrentWeapon' , [ name ] ) );
     },
 
     /** 

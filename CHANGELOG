@@ -64,3 +64,4 @@
  - Book 5, sect330: Fixed bug, stop combat after turn 2
  - Added privacy policy
  - New option on Action Chart to fight unarmed (can be useful on book 12)
+ - Show message when current weapon is changed

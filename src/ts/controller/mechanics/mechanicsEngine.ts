@@ -1103,7 +1103,7 @@ const mechanicsEngine = {
         if( state.sectionStates.ruleHasBeenExecuted(rule) )
             // Execute only once
             return;
-        actionChartController.setSelectedWeapon( $(rule).attr('objectId') , true );
+        actionChartController.setSelectedWeapon( $(rule).attr('objectId') );
         state.sectionStates.markRuleAsExecuted(rule);
     },
 
