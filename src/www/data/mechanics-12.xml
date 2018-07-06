@@ -792,10 +792,37 @@
         </section>
 
         <section id="sect88">
-            <!-- TODO: WRONG: +12 should not be applied to Helshezag, only +7 ??? -->
-            <!-- TODO: Force use Dagger of Vashna or Helshezag on this section? -->
+            <test hasObject="daggerofvashna">
+                <currentWeapon objectId="daggerofvashna" />
+            </test>
+            <test not="true" hasObject="daggerofvashna">
+                <currentWeapon objectId="helshezag" />
+            </test>
+
+            <!-- Dammage / CS modifiers -->
+            <message
+                en-text="You must use the Dagger of Vashna or the sword Helshezag as current weapon on this combat" 
+                es-text="Debes usar la Daga de Vashna o la espada Helshezag como arma actual en este combate"
+            />
+            <onInventoryEvent>
+                <combat dammageMultiplier="1" />
+                <test not="true" currentWeapon="helshezag|daggerofvashna|sommerswerd">
+                    <combat dammageMultiplier="0" />
+                </test>
+
+                <combat combatSkillModifier="0" />
+                <test currentWeapon="daggerofvashna|sommerswerd">
+                    <combat combatSkillModifier="+12" />
+                </test>
+
+                <test currentWeapon="helshezag">
+                    <!-- The +5 default Helshezag default bonus is already included. Add +2 to get the +7 against Dark Lords, plus +12 -->
+                    <combat combatSkillModifier="+14" />
+                </test>
+            </onInventoryEvent>
+            
             <choiceState section="all" set="disabled" />
-            <combat noMindblast="true" combatSkillModifier="+12" />
+            <combat noMindblast="true" />
             <afterCombats>
                 <choiceState section="all" set="enabled" />
             </afterCombats>
@@ -1141,7 +1168,7 @@
             <!-- TODO: Implement Helshezag loss. Don't apply loss on this combat! -->
             <pick objectId="helshezag" />
             <currentWeapon objectId="helshezag" />
-            <message id="msg-drop-weapon" 
+            <message
                 en-text="You must use the Helshezag as current weapon on this combat" 
                 es-text="Debes usar la Helshezag como arma actual en este combate"
             />
@@ -1866,7 +1893,7 @@
         
         <section id="sect230">
 
-            <message id="msg-drop-weapon" 
+            <message
                 en-text="You must use the Dagger of Vashna or the sword Helshezag as current weapon on this combat" 
                 es-text="Debes usar la Daga de Vashna o la espada Helshezag como arma actual en este combate"
             />
