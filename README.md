@@ -33,9 +33,17 @@ Download the Project Aon game data:
 ```
 This will require Node.js (any recent version), zip command, SVN client, wget and patch on your path
 
-### Setup web site
+### Alternative method
+#### Recommended for running a local website only to play the game
+ * Download and install [Docker](https://docs.docker.com/install/) and make sure it's is in your PATH environment variable
+ * Using a terminal (Linux or iOS) or PowerShell (Windows 10) navigate to the project's directory
+ * Type `docker build -t kai:1.0 .`
+ * Type `docker run -p 8080:8080 kai:1.0`
+ * Open http://localhost:8080
 
-#### Method 1
+More information about this method [here](./doc/README-docker.md)
+
+### Setup web site
 
 * Put the folder src/www on your private web server
 * Open http://localhost/[dir-for-src-www]/index.html
@@ -43,14 +51,6 @@ This will require Node.js (any recent version), zip command, SVN client, wget an
 You are now done. If you have Firefox, you dont need a web server. You can open
 directly the file src/www/index.html. This will not work with Chrome (see 
 http://stackoverflow.com/questions/10752055/cross-origin-requests-are-only-supported-for-http-error-when-loading-a-local)
-
-#### Method 2
- 
- * Download and install [Docker](https://docs.docker.com/install/) and make sure it's is in your PATH environment variable
- * Using a terminal (Linux or iOS) or PowerShell (Windows 10) navigate to the project's directory
- * Type `docker build -t kai:1.0 .`
- * Type `docker run -p 8080:8080 kai:1.0`
- * Open http://localhost:8080
 
 ### Setup Android app
 
