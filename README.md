@@ -33,8 +33,6 @@ Download the Project Aon game data:
 ```
 This will require Node.js (any recent version), zip command, SVN client, wget and patch on your path
 
-More information about this method [here](./doc/README-docker.md)
-
 ### Setup web site
 
 * Put the folder src/www on your private web server
@@ -72,6 +70,8 @@ Optional method for running a local website only to play the game
  * Type `docker run -p 8080:8080 kai:1.0`
  * Open http://localhost:8080
  
+ More information about this method [here](./doc/README-docker.md)
+
 ### Developing 
 
 Game rules for each book are located at [src/www/data](src/www/data). "mechanics-X" are the game rules
