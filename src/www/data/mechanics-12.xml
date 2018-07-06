@@ -254,7 +254,6 @@
             <choiceState section="all" set="disabled" />
 
             <!-- Sommerswerd stuff -->
-            <!-- TODO: Disable sommerswerd on sect247 -->
             <message id="msg-sommerswerd" 
                 en-text="If you don't want to go to section 247, change the current weapon to other than Sommerswerd" 
                 es-text="Si no quieres ir a la sección 247, cambia la arma actual a otra que no sea la Sommerswerd"
@@ -373,7 +372,6 @@
         </section>
 
         <section id="sect43">
-            <!-- TODO: Do not come to this section if you don't have money -->
             <!-- TODO: We should keep the count of the different currencies (Lunes, Gold Crows,...). Unimplemented -->
             <pick class="money" count="-1" />
         </section>
@@ -487,7 +485,7 @@
 
         <section id="sect57">
             <currentWeapon objectId="sommerswerd" />
-            <!-- TODO: Force to use sommerswerd on this combat? -->
+            <!-- Force to use sommerswerd on this combat?: NO -->
             <choiceState section="all" set="disabled" />
             <afterCombats>
                 <test not="true" expression="[COMBATSDURATION] > 3">
@@ -534,7 +532,6 @@
         <section id="sect60">
             <test canUseBow="false">
                 <choiceState section="sect270" set="disabled" />
-                <!-- TODO: Drop arrow? -->
             </test>
             <test not="true" hasObject="sommerswerd">
                 <choiceState section="sect192" set="disabled" />
@@ -616,7 +613,7 @@
             <combat eludeTurn="1" />
             <onInventoryEvent>
                 <combat combatSkillModifier="0" />
-                <!-- TODO: Sommerswerd is like a broadword. OK? -->
+                <!-- Sommerswerd is like a broadword. OK?: YES -->
                 <test not="true" currentWeapon="broadsword|spear|quarterstaff">
                     <combat combatSkillModifier="-2" />
                 </test>
@@ -666,7 +663,7 @@
 
         <section id="sect75">
             <choiceState section="all" set="disabled" />
-
+            
             <!-- Drop / recover Sommerswerd -->
             <drop objectId="sommerswerd" />
             <combat noMindblast="true" />
@@ -711,7 +708,9 @@
         </section>
 
         <section id="sect76">
-            <!-- TODO: Crystal Explosive ??? -->
+            <test not="true" hasObject="crystalexplosive">
+                <choiceState section="sect69" set="disabled" />
+            </test>
         </section>
 
         <section id="sect77">
@@ -793,6 +792,7 @@
         </section>
 
         <section id="sect88">
+            <!-- TODO: WRONG: +12 should not be applied to Helshezag, only +7 ??? -->
             <!-- TODO: Force use Dagger of Vashna or Helshezag on this section? -->
             <choiceState section="all" set="disabled" />
             <combat noMindblast="true" combatSkillModifier="+12" />
@@ -2658,6 +2658,7 @@
         </section>
 
         <section id="sect350">
+            <drop objectId="crystalexplosive" />
             <message 
                 en-text="This is the last implemented book. Thank you for playing!" 
                 es-text="Este es el último libro implementado. ¡Gracias por jugar!" 
