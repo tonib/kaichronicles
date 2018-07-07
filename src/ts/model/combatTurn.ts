@@ -47,18 +47,24 @@ class CombatTurn {
     /** Text with the player loss */
     public playerLossText : string;
 
+    /** Helshezag used on this turn? */
+    public helshezagUsed : boolean = false;
+
     /**
      * Create a combat turn
      * TODO: Do not pass all those parameters. Pass only Combat, and read the properties
      * @param combat The combat owner of this turn
      * @param randomValue The random table value for this turn
      * @param elude True if the player is eluding the combat
+     * @param helshezagUsed Helshezag used on this turn?
      */
-    public constructor( combat : Combat , randomValue : number , elude : boolean ) {
+    public constructor( combat : Combat , randomValue : number , elude : boolean , helshezagUsed : boolean ) {
 
         if( !combat )
             // Default constructor (called on BookSectionStates.prototype.fromStateObject)
             return;
+        
+        this.helshezagUsed = helshezagUsed;
         
         /** True if the player is eluding the combat */
         this.elude = elude;

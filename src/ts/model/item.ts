@@ -34,6 +34,7 @@ class Item {
     public static readonly BOW = 'bow';
     public static readonly MEAL = 'meal';
     public static readonly BACKPACK = 'backpack';
+    public static readonly HELSHEZAG = 'helshezag';
     
     /** The object type ('special', 'object' or 'weapon' ) */
     public type : string;

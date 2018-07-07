@@ -201,7 +201,8 @@ class Combat {
         var self = this;
         randomTable.getRandomValueAsync()
         .then(function(randomValue) {
-            var turn = new CombatTurn( self, randomValue, elude );
+            const helshezagUsed = ( state.actionChart.getSelectedWeapon() == Item.HELSHEZAG );
+            const turn = new CombatTurn( self, randomValue, elude , helshezagUsed );
             self.turns.push( turn );
             dfd.resolve(turn);
         });
@@ -221,6 +222,29 @@ class Combat {
     } 
 
     /**
+     * Check if the player should lose permanently 1 EP due to use of Helshezag on this combat
+     * @param turn The current played turn
+     * @returns True if the player should lose 1 EP on this turn
+     */
+    private checkHelshezagPermanentLoss( turn : CombatTurn ) : boolean {
+
+        if( !turn.helshezagUsed )
+            // Helshezag not used on this turn
+            return false;
+
+        // Helshezag effects do not apply on book 12 / sect133
+        if( state.book.bookNumber == 12 && state.sectionStates.currentSection == 'sect133' )
+            return false;
+
+        // Check if this is the second or subsequent turn where the Helshezag was used on this combat
+        for( let i = 0; i < ( turn.turnNumber - 1 ) ; i++ ) {
+            if( this.turns[i].helshezagUsed )
+                return true;
+        }
+        return false;
+    }
+
+    /**
      * Apply the combat turn effects
      * @param turn The turn to apply
      */
@@ -229,8 +253,20 @@ class Combat {
         // Apply player damages:
         if( turn.loneWolf == combatTable_DEATH )
             state.actionChart.currentEndurance = 0;
-        else
+        else {
+
+            // Aply dammage
             state.actionChart.increaseEndurance( -turn.loneWolf , this.permanentDammage );
+
+            // If dammage is permanent, display a toast
+            if( this.permanentDammage )
+                actionChartController.displayEnduranceChangeToast( -turn.loneWolf , true );
+    
+            if( this.checkHelshezagPermanentLoss( turn ) ) {
+                // Apply a permanent -1 EP due to Helshezag use
+                actionChartController.increaseEndurance( -1 , false , true );
+            }
+        }
         
         // Apply enemy damages:
         this.endurance = Combat.applyLoss( this.endurance , turn.enemy );

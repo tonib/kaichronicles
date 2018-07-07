@@ -966,7 +966,6 @@
         </section>
 
         <section id="sect104">
-            <!-- TODO: If you possess the sword Helshezag... -->
             <choiceState section="all" set="disabled" />
 
             <!-- Sommerswerd stuff -->
@@ -1089,7 +1088,7 @@
         </section>
 
         <section id="sect121">
-            <!-- TODO: Drop Golden Amulet??? -->
+            <drop objectId="goldenamulet" />
             <choiceState section="sect220" set="disabled" />
             <test hasDiscipline="nexus">
                 <test expression="[KAILEVEL] >= 9">
@@ -1165,7 +1164,7 @@
         </section>
 
         <section id="sect133">
-            <!-- TODO: Implement Helshezag loss. Don't apply loss on this combat! -->
+            <!-- Helshezag EP permanent loss is not applied on this section (see Combat.checkHelshezagPermanentLoss()) -->
             <pick objectId="helshezag" />
             <currentWeapon objectId="helshezag" />
             <message
@@ -1186,7 +1185,6 @@
             <afterCombats>
                 <choiceState section="all" set="enabled" />
             </afterCombats>
-
         </section>
 
         <section id="sect135">

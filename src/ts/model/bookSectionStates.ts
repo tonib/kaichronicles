@@ -110,7 +110,7 @@ class BookSectionStates {
                 // Restore combat turns
                 var turns = [];
                 $.each( rightCombat.turns , function( index , turn ) {
-                    turns.push( $.extend( new CombatTurn(null, 0, false) , turn ) );
+                    turns.push( $.extend( new CombatTurn(null, 0, false, false) , turn ) );
                 });
                 rightCombat.turns = turns;
             });

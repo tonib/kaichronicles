@@ -81,6 +81,7 @@ class Translations {
         'confirm20EP': 'Esta habilidad solo puede ser usada una vez cada 100 días. ¿Continuamos?',
         'more' : 'Más',
         'fightUnarmed' : 'Luchar desarmado',
+        'permanent' : 'Permanente',
 
         //////////////////////////////////////
         // Combats
@@ -364,6 +365,7 @@ class Translations {
         'noQuiversEnough' : 'You don\'t have enough Quivers (only 6 Arrows per Quiver)',
         'confirm20EP': 'This ability can only be used once every 100 days. Continue?',
         'more' : 'More',
+        'permanent' : 'Permanent',
 
         //////////////////////////////////////
         // Combats

@@ -279,25 +279,46 @@ const actionChartController = {
     },
 
     /**
+     * Display a toast with an endurance increase / decrease 
+     * @param count Number to increase. Negative to decrease
+     * @param permanent True if the increase is permanent (it changes the original endurance)
+     */
+    displayEnduranceChangeToast : function( count : number , permanent : boolean ) {
+        if( count > 0 )
+            toastr.success( translations.text('msgEndurance' , ['+' + count] ) );
+        else if( count < 0 ) {
+            let toast = translations.text( 'msgEndurance' , [count] );
+            if( permanent ) {
+                toast += ' (' + translations.text( 'permanent' ) + ')';
+                toastr.error( toast );
+            }
+            else
+                toastr.warning( toast );
+        }
+    },
+    
+    /**
      * Increase / decrease the current endurance
      * @param count Number to increase. Negative to decrease
      * @param noToast True if no message should be show
      * @param permanent True if the increase is permanent (it changes the original endurance)
      */
     increaseEndurance: function( count : number, noToast : boolean = false, permanent : boolean = false ) {
+
         state.actionChart.increaseEndurance(count, permanent);
-        if( count > 0 ) {
-            if( !noToast )
-                toastr.success( translations.text('msgEndurance' , ['+' + count] ) );
-        }
-        else if( count < 0 ) {
-            if( !noToast )
-                toastr.warning( translations.text('msgEndurance' , [count] ) );
+
+        if( !noToast )
+            // Display toast
+            actionChartController.displayEnduranceChangeToast( count , permanent );
+
+        if( count < 0 ) {
             mechanicsEngine.testDeath();
             // Check if the Psi-surge should be disabled
             combatMechanics.checkPsiSurgeEnabled();
         }
+
         template.updateStatistics();
+
     },
 
     /**
