@@ -16,6 +16,7 @@
 - Quivers with no arrows available on section should not show "(0 arrows)". Show "(0 arrows)" only on Action chart. Same to sell quiver
   object (see book 8, sect139)
 - Erratas:
+  * 12, 342: Image title: "con ***suhacha*** lista para segarte"
   * 5: Map: instance outside illustration, wrong illustration tag close
   * 5, sect58: "incorrecdta"
   * 6, sect17: foot note "sect17-1-foot" is not referenced, and, so, not rendered

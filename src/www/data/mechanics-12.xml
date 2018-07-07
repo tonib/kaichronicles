@@ -119,7 +119,6 @@
         </section>
 
         <section id="sect6">
-            <!-- Drop sommerswerd here?: NO -->
             <choiceState section="all" set="disabled" />
             <randomTable>
                 <case from="0" to="5">
@@ -213,6 +212,7 @@
         </section>
 
         <section id="sect16">
+            <endurance count="-3" />
             <choiceState section="all" set="disabled" />
 
             <test not="true" hasDiscipline="hntmstry">
@@ -485,7 +485,6 @@
 
         <section id="sect57">
             <currentWeapon objectId="sommerswerd" />
-            <!-- Force to use sommerswerd on this combat?: NO -->
             <choiceState section="all" set="disabled" />
             <afterCombats>
                 <test not="true" expression="[COMBATSDURATION] > 3">
@@ -666,7 +665,6 @@
             
             <!-- Drop / recover Sommerswerd -->
             <drop objectId="sommerswerd" />
-            <combat noMindblast="true" />
             <afterCombatTurn turn="3">
                 <executeOnce>
                     <pick objectId="sommerswerd" />
@@ -688,6 +686,7 @@
                 </test>
             </onInventoryEvent>
 
+            <combat noMindblast="true" />
             <afterCombats>
                 <choiceState section="all" set="enabled" />
                 <!-- Recover sommerswerd if we did not reach turn 3 -->
@@ -1125,6 +1124,10 @@
                     <choiceState section="sect327" set="disabled" />
                 </test>
             </test>
+        </section>
+
+        <section id="sect128">
+            <currentWeapon objectId="sommerswerd" />
         </section>
 
         <section id="sect129">
@@ -1625,6 +1628,7 @@
         </section>
 
         <section id="sect192">
+            <currentWeapon objectId="sommerswerd" />
             <choiceState section="all" set="disabled" />
             <combat noMindblast="true" />
             <afterCombats>
@@ -1766,7 +1770,6 @@
         </section>
 
         <section id="sect208">
-            <!-- TODO: Check all references to "sommerswerd" , "daggerofvashna" , "helshezag" -->
             <death />
         </section>
 
@@ -2305,12 +2308,12 @@
         <section id="sect286">
             <!-- TODO: To Test WELL paths starting here -->
             <choiceState section="sect57" set="disabled" />
-            <choiceState section="sect171" set="disabled" />
             <test hasObject="sommerswerd">
                 <choiceState section="sect57" set="enabled" />
                 <choiceState section="sect109" set="disabled" />
             </test>
 
+            <choiceState section="sect171" set="disabled" />
             <test hasObject="daggerofvashna">
                 <choiceState section="sect171" set="enabled" />
                 <choiceState section="sect109" set="disabled" />
