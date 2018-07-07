@@ -208,6 +208,7 @@
         <xs:attribute name="enemyMultiplier" type="xs:decimal" />
         <xs:attribute name="enemyTurnLoss" type="xs:nonPositiveInteger" />
         <xs:attribute name="turnLoss" type="xs:nonPositiveInteger" />
+        <xs:attribute name="turnLossIfWounded" type="xs:nonPositiveInteger" />
         <xs:attribute name="fake" type="xs:boolean" />
         <xs:attribute name="restoreFactor" type="xs:decimal" />
         <xs:attribute name="bow" type="trueOnly" />

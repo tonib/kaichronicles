@@ -84,6 +84,11 @@ class Combat {
      */
     public turnLoss = 0;
 
+    /**
+     * Extra E.P. lost by the player, if the player has been wounded on that turn. It must to be negative.
+     */
+    public turnLossIfWounded = 0;
+
     /** Book 2 / sect276: True if the combat is not a combat to death */
     public fakeCombat = false;
 

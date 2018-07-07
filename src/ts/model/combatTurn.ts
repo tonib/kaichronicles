@@ -94,7 +94,8 @@ class CombatTurn {
         this.loneWolfBase = ( ( combat.immuneTurns >= this.turnNumber ) ? 0 : tableResult[1] );
         /** Player loss */
         this.loneWolf = CombatTurn.applyMultiplier( this.loneWolfBase , this.enemyMultiplier );
-        /** Player extra loss */
+
+        // Player extra loss
         this.loneWolfExtra = 0;
         if( this.loneWolf != combatTable_DEATH && combat.mindforceEP < 0 && !state.actionChart.hasMindShield() ) {
             // Enemy mind force attack (combat.mindforceEP is negative):
@@ -102,11 +103,16 @@ class CombatTurn {
                 this.loneWolf -= combat.mindforceEP;
             this.loneWolfExtra = combat.mindforceEP;
         }
-
-        // Extra loss
-        if( this.loneWolf != combatTable_DEATH)
+        if( this.loneWolf != combatTable_DEATH) {
+            // Extra loss per turn
             this.loneWolf -= combat.turnLoss;
+            // Extra loss if wounded on this turn
+            if( this.loneWolfBase != 0 )
+                this.loneWolf -= combat.turnLossIfWounded;
+        }
         this.loneWolfExtra += combat.turnLoss;
+        if( this.loneWolfBase != 0 )
+            this.loneWolfExtra += combat.turnLossIfWounded;
 
         // Psi-surge loss
         if( combat.psiSurge ) {

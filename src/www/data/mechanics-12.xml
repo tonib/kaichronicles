@@ -465,10 +465,10 @@
         <section id="sect55">
             <choiceState section="all" set="disabled" />
 
-            <combat turnLoss="-1" />
+            <combat turnLossIfWounded="-1" />
             <test hasDiscipline="nexus">
                 <test expression="[KAILEVEL] >= 9">
-                    <combat turnLoss="0" />
+                    <combat turnLossIfWounded="0" />
                 </test>
             </test>
 
@@ -1703,7 +1703,6 @@
         </section>
 
         <section id="sect202">
-            <!-- TODO: Do not come to this section if you don't have money -->
             <!-- TODO: We should keep the count of the different currencies (Lunes, Gold Crows,...). Unimplemented -->
             <pick class="money" count="-1" />
         </section>
@@ -1864,11 +1863,10 @@
             <endurance count="-3" />
             <choiceState section="all" set="disabled" />
 
-            <!-- TODO: "every time this creature inflicts a wound during the combat", so, only if the player loss any EP???. Not sure -->
-            <combat turnLoss="-1" />
+            <combat turnLossIfWounded="-1" />
             <test hasDiscipline="nexus">
                 <test expression="[KAILEVEL] >= 9">
-                    <combat turnLoss="0" />
+                    <combat turnLossIfWounded="0" />
                 </test>
             </test>
 
@@ -1976,7 +1974,6 @@
 
         <section id="sect240">
             <test not="true" sectionVisited="sect133">
-                <!-- TODO: Check other places where the helshezag can be picked -->
                 <object objectId="helshezag" />
             </test>
             <test canUseBow="false">
@@ -2267,7 +2264,7 @@
         </section>
 
         <section id="sect275">
-            <!-- TODO: Use sommerswerd only on this combat? -->
+            <currentWeapon objectId="sommerswerd" />
             <choiceState section="all" set="disabled" />
             <combat noMindblast="true" />
             <afterCombats>
@@ -2281,10 +2278,10 @@
             <choiceState section="all" set="disabled" />
             <combat noWeapon="2" />
 
-            <combat turnLoss="-1" />
+            <combat turnLossIfWounded="-1" />
             <test hasDiscipline="nexus">
                 <test expression="[KAILEVEL] >= 9">
-                    <combat turnLoss="0" />
+                    <combat turnLossIfWounded="0" />
                 </test>
             </test>
 
@@ -2488,7 +2485,7 @@
                 <choiceState section="sect269" set="disabled" />
             </test>
 
-            <!-- There is a dead end if you have no money and medal. In this case, let the player choose -->
+            <!-- There is a dead end if you have no money and no medal. In this case, let the player choose -->
             <test not="true" expression="[MONEY] > 0">
                 <test not="true" hasObject="medal">
                     <choiceState section="sect202" set="enabled" />

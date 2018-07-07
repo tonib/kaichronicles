@@ -890,9 +890,14 @@ const mechanicsEngine = {
             combat.enemyTurnLoss = parseInt( txtEnemyTurnLoss );
 
         // Player extra loss per turn
-        var txtPlayerTurnLoss = $(rule).attr('turnLoss'); 
+        const txtPlayerTurnLoss : string = $rule.attr('turnLoss');
         if( txtPlayerTurnLoss )
             combat.turnLoss = parseInt( txtPlayerTurnLoss );
+
+        // Player extra loss per turn if he/she has been wounded on that turn.
+        const txtPlayerTurnLossIfWounded : string = $rule.attr('turnLossIfWounded');
+        if( txtPlayerTurnLossIfWounded )
+            combat.turnLossIfWounded = parseInt( txtPlayerTurnLossIfWounded );
 
         // It's a fake combat?
         // TODO: Use mechanicsEngine.getBooleanProperty here

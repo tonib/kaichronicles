@@ -356,6 +356,7 @@ the following properties:
   Default is 1.0 (100% of the EP lost)
 * **enemyTurnLoss="-number"** Extra E.P. lost by the enemy each turn. Should be negative or zero
 * **turnLoss="-number"** Extra E.P. lost by LW each turn. Should be negative or zero
+* **turnLossIfWounded="-number"** Extra E.P. lost by LW, if the player has been wounded on that turn. Should be negative or zero
 * **bow="true"** It's a combat with bow? (false = hand-to-hand)
 * **disabledObjects="objectId1|objectId2|..."** Set objects that cannot be used on this combat. "none" to enable all objects previously
   disabled.
