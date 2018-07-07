@@ -1417,7 +1417,6 @@
         </section>
 
         <section id="sect171">
-            <!-- TODO: Force Dagger of Vashna as current weapon on this combat? -->
             <choiceState section="all" set="disabled" />
             <currentWeapon objectId="daggerofvashna" />
 
@@ -1438,6 +1437,11 @@
             <afterCombats>
                 <choiceState section="all" set="enabled" />
             </afterCombats>
+
+            <message
+                en-text="You must use the Dagger of Vashna as current weapon on this combat" 
+                es-text="Debes usar la Daga de Vashna como arma actual en este combate"
+            />
         </section>
 
         <section id="sect172">
@@ -1478,7 +1482,6 @@
 
             <test not="true" hasObject="daggerofvashna">
                 <test not="true" hasObject="helshezag">
-                    <!-- TODO: sect230 add +7 CS -->
                     <choiceState section="sect230" set="disabled" />
                 </test>
             </test>
@@ -1606,7 +1609,6 @@
         </section>
 
         <section id="sect190">
-            <!-- TODO: Disable Sommerswerd on sect289 -->
             <test not="true" hasObject="sommerswerd">
                 <choiceState section="sect208" set="disabled" />
             </test>
@@ -1631,7 +1633,6 @@
         </section>
 
         <section id="sect193">
-            <!-- TODO: Disable Sommerswerd on sect289 -->
             <test not="true" hasObject="sommerswerd">
                 <choiceState section="sect208" set="disabled" />
             </test>
@@ -1653,7 +1654,7 @@
         </section>
 
         <section id="sect195">
-            <!-- TODO: Force to use sommerswerd on this combat? -->
+            <currentWeapon objectId="sommerswerd" />
             <choiceState section="all" set="disabled" />
             <combat noMindblast="true" />
             <afterCombats>
@@ -1766,6 +1767,7 @@
         </section>
 
         <section id="sect208">
+            <!-- TODO: Check all references to "sommerswerd" , "daggerofvashna" , "helshezag" -->
             <death />
         </section>
 
@@ -2323,8 +2325,13 @@
         </section>
 
         <section id="sect289">
+            <message id="msg-sommerswerd" 
+                en-text="You cannot use the Sommerswerd on this combat" 
+                es-text="No puedes usar la Sommerswerd en este combate"
+            />
+
             <choiceState section="all" set="disabled" />
-            <combat noMindblast="true" noPsiSurge="true" />
+            <combat noMindblast="true" noPsiSurge="true" disabledObjects="sommerswerd" />
             <afterCombats>
                 <choiceState section="all" set="enabled" />
             </afterCombats>
