@@ -1423,6 +1423,17 @@
             <choiceState section="all" set="disabled" />
             <currentWeapon objectId="daggerofvashna" />
 
+            <message
+                en-text="You must use the Dagger of Vashna as current weapon on this combat" 
+                es-text="Debes usar la Daga de Vashna como arma actual en este combate"
+            />
+            <onInventoryEvent>
+                <disableCombats />
+                <test currentWeapon="daggerofvashna">
+                    <disableCombats disabled="false" />
+                </test>
+            </onInventoryEvent>
+
             <!-- Dammage / CS modifiers -->
             <onInventoryEvent>
                 <combat dammageMultiplier="1" />
@@ -1440,11 +1451,6 @@
             <afterCombats>
                 <choiceState section="all" set="enabled" />
             </afterCombats>
-
-            <message
-                en-text="You must use the Dagger of Vashna as current weapon on this combat" 
-                es-text="Debes usar la Daga de Vashna como arma actual en este combate"
-            />
         </section>
 
         <section id="sect172">
@@ -2666,7 +2672,7 @@
             </onInventoryEvent>
 
             <afterCombats>
-                <choiceState section="all" set="enabled" />
+                <choiceState section="sect106" set="enabled" />
             </afterCombats>
         </section>
 

@@ -146,6 +146,10 @@ actionChartController.pick('quiver')
 actionChartController.increaseArrows(5)
 actionChartController.pick('shield')
 actionChartController.pick('map')
+actionChartController.pick('helmet')
+actionChartController.pick('chainmail')
+actionChartController.pick('leatherwaistcoat')
+actionChartController.pick('daggerofvashna')
 
 * Test book images:
 state.sectionStates.getSectionState().addObjectToSection('axe')
