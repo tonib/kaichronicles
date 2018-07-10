@@ -28,43 +28,41 @@
         </section>
 
         <section id="equipmnt" pickMaximum="6">
-            <!-- Do not pick 2 maps! -->
-            <test not="true" hasObject="map" >
-                <pick objectId="map" />
+            <!-- No map / backpack / Kai monastery safekeeping at the start of this book -->
+            <!-- TODO: It seems there is no map at this book. The book map is the "Northern Magnamund" map -->
+
+            <!-- You can pick equipment only if it's your first book -->
+            <test expression="[KAILEVEL] == 3">
+                <!-- There are two free meals -->
+                <pick objectId="meal" index="0"/>
+                <pick objectId="meal" index="1"/>
+
+                <randomTable>
+                    <pick class="money" count="[RANDOM] + 10" />
+                </randomTable>
+
+                <object objectId="sword" />
+                <object objectId="bow" />
+                <object objectId="quiver" count="6" />
+                <object objectId="rope" />
+                <object objectId="laumspurpotion4" />
+                <object objectId="lantern" />
+                <object objectId="mace" />
+                <object objectId="meal" index="0" />
+                <object objectId="meal" index="1" />
+                <object objectId="meal" index="2" />
+                <object objectId="dagger" />
+
+                <chooseEquipment
+                    en-text="Click on the Random Table link to get money before continuing"
+                    es-text="Haz click en el link de la Tabla de la Suerte para obtener dinero antes de continuar"
+                />
+
+                <message
+                    en-text="You may take up to six of the following (all meals count as one object):"
+                    es-text="Puedes elegir hasta seis de los objetos (todas las comidas cuentan como un objeto):"
+                />
             </test>
-            <test not="true" hasObject="backpack" >
-                <pick objectId="backpack" />
-            </test>
-
-            <!-- There are two free meals -->
-            <pick objectId="meal" index="0"/>
-            <pick objectId="meal" index="1"/>
-
-            <randomTable>
-                <pick class="money" count="[RANDOM] + 10" />
-            </randomTable>
-
-            <object objectId="sword" />
-            <object objectId="bow" />
-            <object objectId="quiver" count="6" />
-            <object objectId="rope" />
-            <object objectId="laumspurpotion4" />
-            <object objectId="lantern" />
-            <object objectId="mace" />
-            <object objectId="meal" index="0" />
-            <object objectId="meal" index="1" />
-            <object objectId="meal" index="2" />
-            <object objectId="dagger" />
-
-            <chooseEquipment
-                en-text="Click on the Random Table link to get money before continuing"
-                es-text="Haz click en el link de la Tabla de la Suerte para obtener dinero antes de continuar"
-            />
-
-            <message
-                en-text="You may take up to six of the following (all meals count as one object):"
-                es-text="Puedes elegir hasta seis de los objetos (todas las comidas cuentan como un objeto):"
-            />
         </section>
 
         <section id="sect1">
@@ -76,33 +74,32 @@
         </section>
 
         <section id="sect2">
-            <!-- TODO: Check fireseed loss -->
+            <drop objectId="fireseed" />
         </section>
 
         <section id="sect5">
-          <choiceState section="all" set="disabled" />
+            <choiceState section="all" set="disabled" />
 
-          <object objectId="meal" index="0" />
-          <object objectId="meal" index="1" />
-          <object objectId="meal" index="2" />
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
+            <object objectId="meal" index="2" />
 
-          <randomTable>
+            <randomTable>
             <case from="0" to="6">
-              <choiceState section="sect202" set="enabled" />
+                <choiceState section="sect202" set="enabled" />
             </case>
             <case from="7" to="9">
-              <choiceState section="sect318" set="enabled" />
+                <choiceState section="sect318" set="enabled" />
             </case>
-          </randomTable>
+            </randomTable>
         </section>
 
         <section id="sect7">
-          <!-- TODO Change the name to Ironheart Broadsword -->
-          <object objectId="broadsword" />
+            <object objectId="ironheartbroadsword" />
         </section>
 
         <section id="sect8">
-            <!-- TODO: Pick (standard) sword??? -->
+            <object objectId="sword" />
         </section>
 
         <section id="sect10">
@@ -114,39 +111,64 @@
         </section>
 
         <section id="sect11">
-          <death />
+            <death />
+        </section>
+
+        <section id="sect12">
+            <!-- TODO: Drop objects like meal -->
+            <drop objectId="meal" index="0" />
+            <drop objectId="meal" index="1" />
+            <drop objectId="meal" index="2" />
+            <drop objectId="meal" index="3" />
         </section>
 
         <section id="sect13">
-          <choiceState section="all" set="disabled" />
+            <choiceState section="all" set="disabled" />
 
-          <randomTable>
-            <case from="0" to="8">
-              <choiceState section="sect271" set="enabled" />
-            </case>
-            <case from="9" to="99">
-              <choiceState section="sect199" set="enabled" />
-            </case>
-          </randomTable>
+            <randomTable>
+                <case from="0" to="8">
+                    <choiceState section="sect271" set="enabled" />
+                </case>
+                <case from="9" to="99">
+                    <choiceState section="sect199" set="enabled" />
+                </case>
+            </randomTable>
+            <randomTableIncrement increment="+[KAILEVEL]" />
+        </section>
 
-          <randomTableIncrement increment="+[KAILEVEL]" />
+        <section id="sect14">
+            <choiceState section="sect223" set="disabled" />
+            <test hasDiscipline="curing">
+                <test expression="[KAILEVEL] >= 7">
+                    <choiceState section="sect223" set="enabled" />
+                    <choiceState section="sect99" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect17">
+            <!-- TODO: Drop arrow on sect151 -->
+        </section>
+
+        <section id="sect18">
+            <object objectId="ookorcharm" />
+        </section>
+
+        <section id="sect19">
+            <!-- TODO: Drop arrow on sect193 -->
         </section>
 
         <section id="sect20">
-          <test not="true" hasDiscipline="dvnation">
-              <choiceState section="sect145" set="disabled" />
-          </test>
-          <test not="true" expression="[KAILEVEL] >= 5">
-              <choiceState section="sect145" set="disabled" />
-          </test>
-          <test hasDiscipline="dvnation">
-              <test expression="[KAILEVEL] >= 5">
-                <choiceState section="sect297" set="disabled" />
-              </test>
-          </test>
+            <choiceState section="sect145" set="disabled" />
+            <test hasDiscipline="dvnation">
+                <test expression="[KAILEVEL] >= 5">
+                    <choiceState section="sect145" set="enabled" />
+                    <choiceState section="sect297" set="disabled" />
+                </test>
+            </test>
         </section>
 
-        <!-- Up to sect13 -->
+        <!-- Up to sect20 -->
 
     </sections>
 

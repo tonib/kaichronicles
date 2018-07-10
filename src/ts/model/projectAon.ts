@@ -206,7 +206,7 @@ const projectAon = {
 
         ///////////////////////////////////////
 
-        // Book 11 (IN PROGRESS / James):
+        // Book 11 (IN PROGRESS / Toni):
         {
             title_en: 'The Prisoners of Time',
             code_en: '11tpot',
@@ -218,12 +218,12 @@ const projectAon = {
 
             biographies: [ 'jdbiolw' , 'bwbiolw' ],
 
-            zipSize: 3007751,
+            zipSize: 3007750, 
 
-            revision: 0
+            revision: 2713
         },
 
-        // Book 12 (IN PROGRESS / Toni):
+        // Book 12 (Finished, pending of some game tests):
         {
             title_en: 'The Masters of Darkness',
             code_en: '12tmod',

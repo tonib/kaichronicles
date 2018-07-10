@@ -759,6 +759,33 @@
             </description>
         </special>
 
+        <!-- BOOK 11 -->
+
+        <special id="ironheartbroadsword" weaponType="broadsword">
+            <name lang="en">Ironheart Broadsword</name>
+            <description lang="en">
+                A mighty broadsword set with rubies, emeralds, and polished korlinium
+            </description>
+
+            <name lang="es">Espadón de Corazón de Hierro</name>
+            <description lang="es">
+                Es un enorme espadón recamado de rubíes, esmeraldas y korlinium bruñido
+            </description>
+            <image book="9" name="bsword.png" />
+        </special>
+
+        <special id="ookorcharm">
+            <name lang="en">Ookor Charm</name>
+            <description lang="en">
+                A large, wooden charm shaped like the wing of a bird
+            </description>
+
+            <name lang="es">Talismán Ookor</name>
+            <description lang="es">
+                Un gran talismán de madera que posee la forma del ala de un ave
+            </description>
+        </special>
+
         <!-- BOOK 12 -->
 
         <special id="kagonitechainmail">
