@@ -1672,6 +1672,20 @@
             <usage class="endurance" increment="2" />
         </object>
 
+        <!-- BOOK 11 -->
+
+        <object id="khetuspore">
+            <name lang="en">Khetu Spore</name>
+            <description lang="en">
+                If swallowed, or if the spores are allowed to infect the bloodstream, the toxin can kill in a matter of minutes
+            </description>
+
+            <name lang="es">Esporas Jetu</name>
+            <description lang="es">
+                Por vía bucal o introducidas en el torrente sanguíneo pueden provocar la muerte en cuestión de minutos
+            </description>
+        </object>
+
         <!-- BOOK 12 -->
         
         <object id="blackcube">
