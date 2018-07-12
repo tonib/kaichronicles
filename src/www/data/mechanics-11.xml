@@ -118,6 +118,7 @@
         <section id="sect12">
             <!-- TODO: Drop objects like meal -->
             <!-- TODO: Bug here. I got a state.actionChart.meals == -1 after executing this -->
+            <!-- TODO: Use pick class="meal" count="-4" ?? -->
             <drop objectId="meal" index="0" />
             <drop objectId="meal" index="1" />
             <drop objectId="meal" index="2" />
@@ -459,7 +460,78 @@
             </afterCombats>
         </section>
 
-        <!-- Up to sect72 -->
+        <section id="sect73">
+            <pick class="meal" count="-([MEALS]/2)" />
+            <drop specialItemSlots="2|4" />
+        </section>
+
+        <section id="sect74">
+            <object objectId="haina" />
+            <meal huntDisabled="true" />
+        </section>
+
+        <section id="sect75">
+            <choiceState section="all" set="disabled" />
+            <test hasDiscipline="invsblty">
+                <choiceState section="sect167" set="enabled" />
+            </test>
+            <test not="true" hasDiscipline="invsblty">
+                <randomTable>
+                    <case from="0" to="4">
+                        <choiceState section="sect142" set="enabled" />
+                    </case>
+                    <case from="5" to="9">
+                        <choiceState section="sect240" set="enabled" />
+                    </case>
+                </randomTable>
+            </test>
+        </section>
+
+        <section id="sect76">
+            <pick class="arrow" count="-1" />
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="-99" to="4">
+                    <choiceState section="sect249" set="enabled" />
+                </case>
+                <case from="5" to="8">
+                    <choiceState section="sect171" set="enabled" />
+                </case>
+                <case from="9" to="99">
+                    <choiceState section="sect113" set="enabled" />
+                </case>
+            </randomTable>
+            <randomTableIncrement increment="+[BOWBONUS]" />
+        </section>
+
+        <section id="sect77">
+            <pick class="arrow" count="-1" />
+
+            <choiceState section="all" set="disabled" />
+
+            <combat noMindblast="true"/>
+            <test not="true" hasDiscipline="hntmstry">
+                <combat combatSkillModifier="-3" />
+                <afterCombatTurn turn="2">
+                    <combat combatSkillModifier="0" />
+                </afterCombatTurn>
+            </test>
+
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect78">
+            <test not="true" expression="[MEALS] >= 1">
+                <choiceState section="sect231" set="disabled" />
+            </test>
+            <choiceSelected section="sect231">
+                <pick class="meal" count="-1" />
+            </choiceSelected>
+        </section>
+
+        <!-- Up to sect78 -->
 
     </sections>
 

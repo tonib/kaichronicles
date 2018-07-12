@@ -1686,6 +1686,22 @@
             </description>
         </object>
 
+        <object id="haina">
+            <name lang="en">Haina</name>
+            <description lang="en">
+                Its red petals are effective in the treatment of battle-wounds. Restores 5 ENDURANCE points. 
+                They can only be used after combat
+            </description>
+
+            <name lang="es">Haina</name>
+            <description lang="es">
+                Sus rojos pétalos resultan eficaces en el tratamiento de las heridas de guerra. 
+                Devuelve 5 puntos de RESISTENCIA. Sólo es posible emplearlos tras una lucha
+            </description>
+
+            <usage class="endurance" increment="+5" />
+        </object>
+
         <!-- BOOK 12 -->
         
         <object id="blackcube">
