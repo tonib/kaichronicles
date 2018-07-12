@@ -12,6 +12,7 @@
 
         <section id="tssf">
             <!-- Restore the endurance to the maximum -->
+            <!-- TODO: Sure??? -->
             <endurance count="+[MAXENDURANCE]" />
             <!-- Drop the previous books map -->
             <drop objectId="map" />
@@ -423,7 +424,42 @@
             </test>
         </section>
 
-        <!-- Up to sect65 -->
+        <section id="sect66">
+            <!-- TODO: Silver Flask available on sect261 -->
+        </section>
+        
+        <section id="sect67">
+            <test not="true" hasDiscipline="dvnation">
+                <choiceState section="sect347" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect68">
+            <choiceState section="all" set="disabled" />
+
+            <combat noMindblast="true"/>
+            <test not="true" hasDiscipline="hntmstry">
+                <combat combatSkillModifier="-3" />
+                <afterCombatTurn turn="2">
+                    <combat combatSkillModifier="0" />
+                </afterCombatTurn>
+            </test>
+
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect72">
+            <pick class="arrow" count="-1" />
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true"/>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <!-- Up to sect72 -->
 
     </sections>
 
