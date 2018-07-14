@@ -86,12 +86,12 @@
             <object objectId="meal" index="2" />
 
             <randomTable>
-            <case from="0" to="6">
-                <choiceState section="sect202" set="enabled" />
-            </case>
-            <case from="7" to="9">
-                <choiceState section="sect318" set="enabled" />
-            </case>
+                <case from="0" to="6">
+                    <choiceState section="sect202" set="enabled" />
+                </case>
+                <case from="7" to="9">
+                    <choiceState section="sect318" set="enabled" />
+                </case>
             </randomTable>
         </section>
 
@@ -531,7 +531,172 @@
             </choiceSelected>
         </section>
 
-        <!-- Up to sect78 -->
+        <section id="sect79">
+            <choiceState section="sect270" set="disabled" />
+            <test hasDiscipline="psisurge">
+                <choiceState section="sect270" set="enabled" />
+                <choiceState section="sect41" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect81">
+            <endurance count="-5" />
+
+            <choiceState section="sect270" set="disabled" />
+            <test hasDiscipline="psisurge">
+                <choiceState section="sect270" set="enabled" />
+                <choiceState section="sect41" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect83">
+            <endurance count="-2" />
+        </section>
+
+        <section id="sect84">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect86">
+            <endurance count="-2" />
+
+            <choiceState section="sect311" set="disabled" />
+            <test hasDiscipline="psiscrn">
+                <test expression="[KAILEVEL] >= 5">
+                    <choiceState section="sect311" set="enabled" />
+                    <choiceState section="sect58" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect87">
+            <!-- TODO: Drop Obsidian Seal? -->
+        </section>
+
+        <section id="sect88">
+            <choiceState section="sect223" set="disabled" />
+            <test hasDiscipline="curing">
+                <test expression="[KAILEVEL] >= 7">
+                    <choiceState section="sect223" set="enabled" />
+                    <choiceState section="sect99" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect92">
+            <test canUseBow="false">
+                <choiceState section="sect296" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect93">
+            <choiceState section="sect291" set="disabled" />
+            <test hasDiscipline="dvnation">
+                <choiceState section="sect291" set="enabled" />
+                <choiceState section="sect152" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect95">
+            <!-- TODO: Drop arrow on sect193 -->
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="5">
+                    <choiceState section="sect310" set="enabled" />
+                </case>
+                <case from="6" to="99">
+                    <choiceState section="sect49" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="nexus|hntmstry">
+                <randomTableIncrement increment="+4" />
+            </test>
+        </section>
+
+        <section id="sect97">
+            <choiceState section="all" set="disabled" />
+
+            <afterCombatTurn turn="any">
+                <test expression="[COMBATSENEMYLOST] >= 14">
+                    <test combatsActive="true">
+                        <disableCombats />
+                        <choiceState section="sect306" set="enabled" />
+                    </test>
+                </test>
+            </afterCombatTurn>
+
+            <afterCombats>
+                <choiceState section="sect123" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect98">
+            <death />
+        </section>
+
+        <section id="sect99">
+            <death />
+        </section>
+
+        <section id="sect101">
+            <endurance count="+[MAXENDURANCE]" />
+        </section>
+
+        <section id="sect102">
+            <endurance count="-3" />
+        </section>
+
+        <section id="sect103">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="3" noMindblast="true" />
+            <afterCombats>
+                <choiceState section="sect71" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect298" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect104">
+            <death />
+        </section>
+
+        <section id="sect105">
+            <!-- TODO: Drop arrow in sect322 -->
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect108">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect109">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="-99" to="6">
+                    <choiceState section="sect130" set="enabled" />
+                </case>
+                <case from="7" to="99">
+                    <choiceState section="sect295" set="enabled" />
+                </case>
+            </randomTable>
+            <randomTableIncrement increment="[KAILEVEL] - 3" />
+        </section>
+
+        <section id="sect111">
+            <death />
+        </section>
+
+        <!-- Up to sect111 -->
 
     </sections>
 
