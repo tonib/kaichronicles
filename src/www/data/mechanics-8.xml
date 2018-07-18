@@ -1194,10 +1194,6 @@
         </section>
 
         <section id="sect194">
-            <!-- Torch and tinderbox go together -->
-            <!--test not="true" hasObject="lantern|torch|tinderbox|firesphere">
-                <choiceState section="sect283" set="disabled" />
-            </test-->
             <choiceState section="sect283" set="disabled" />
             <test hasObject="lantern|firesphere">
                 <choiceState section="sect283" set="enabled" />

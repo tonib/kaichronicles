@@ -282,7 +282,7 @@
         </section>
 
         <section id="sect36">
-            <object objectId="khetuspore" />
+            <object objectId="khetuspores" />
         </section>
 
         <section id="sect37">
@@ -696,7 +696,132 @@
             <death />
         </section>
 
-        <!-- Up to sect111 -->
+        <section id="sect114">
+            <choiceState section="sect150" set="disabled" />
+            <test hasDiscipline="dvnation|pthmnshp">
+                <choiceState section="sect150" set="enabled" />
+                <choiceState section="sect63" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect117">
+            <choiceState section="sect48" set="disabled" />
+            <test hasDiscipline="hntmstry">
+                <test expression="[KAILEVEL] >= 6">
+                    <choiceState section="sect48" set="enabled" />
+                    <choiceState section="sect321" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect118">
+            <!-- This is tricky -->
+            <test not="true" hasDiscipline="curing">
+                <test not="true" hasDiscipline="nexus">
+                    <endurance count="-5" />
+                </test>
+                <test hasDiscipline="nexus">
+                    <test not="true" expression="[KAILEVEL] >= 4">
+                        <endurance count="-5" />
+                    </test>
+                </test>
+            </test>
+            <test hasDiscipline="curing">
+                <test not="true" expression="[KAILEVEL] >= 7">
+                    <test not="true" hasDiscipline="nexus">
+                        <endurance count="-5" />
+                    </test>
+                    <test hasDiscipline="nexus">
+                        <test not="true" expression="[KAILEVEL] >= 4">
+                            <endurance count="-5" />
+                        </test>
+                    </test>
+                </test>
+            </test>
+        </section>
+
+        <section id="sect119">
+            <endurance count="+3" />
+            <object objectId="meal3" />
+        </section>
+
+        <section id="sect120">
+            <endurance count="-5" />
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" noPsiSurge="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect121">
+            <object objectId="khetuspores" />
+        </section>
+        
+        <section id="sect125">
+            <choiceState section="sect223" set="disabled" />
+            <test hasDiscipline="curing">
+                <test expression="[KAILEVEL] >= 7">
+                    <choiceState section="sect223" set="enabled" />
+                    <choiceState section="sect99" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect126">
+            <choiceState section="sect61" set="disabled" />
+            <test hasObject="lantern|firesphere">
+                <choiceState section="sect61" set="enabled" />
+            </test>
+            <test hasObject="torch">
+                <test hasObject="tinderbox">
+                    <choiceState section="sect61" set="enabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect127">
+            <!-- TODO: Drop arrow in sect284 -->
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect128">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect129">
+            <object objectId="mealofsenara" unlimited="true" useOnSection="true" />
+        </section>
+
+        <section id="sect131">
+            <choiceState section="sect116" set="disabled" />
+            <test hasDiscipline="pthmnshp|dvnation">
+                <choiceState section="sect116" set="enabled" />
+                <choiceState section="sect25" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect132">
+            <test not="true" hasDiscipline="dvnation">
+                <choiceState section="sect347" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect134">
+            <test not="true" hasObject="rope|largerope">
+                <choiceState section="sect198" set="disabled" />
+            </test>
+        </section>
+
+        <!-- Up to sect134 -->
 
     </sections>
 

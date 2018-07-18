@@ -1674,8 +1674,8 @@
 
         <!-- BOOK 11 -->
 
-        <object id="khetuspore">
-            <name lang="en">Khetu Spore</name>
+        <object id="khetuspores">
+            <name lang="en">Khetu Spores</name>
             <description lang="en">
                 If swallowed, or if the spores are allowed to infect the bloodstream, the toxin can kill in a matter of minutes
             </description>
@@ -1700,6 +1700,34 @@
             </description>
 
             <usage class="endurance" increment="+5" />
+        </object>
+
+        <object id="meal3" isMeal="true">
+            <name lang="en">Meal: +3 EP</name>
+            <description lang="en">
+                Yoacor food. Restores 3 ENDURANCE points
+            </description>
+            <name lang="es">Comida: +3PR</name>
+            <description lang="es">
+                Comida de los Yoacors. Devuelve 3 puntos de RESISTENCIA
+            </description>
+            
+            <image book="1|9" name="food.png" />
+            <usage class="endurance" increment="3" />
+        </object>
+
+        <object id="mealofsenara" isMeal="true">
+            <name lang="en">Meal of Senara</name>
+            <description lang="en">
+                Restores 3 ENDURANCE points
+            </description>
+            <name lang="es">Comida de Senaras</name>
+            <description lang="es">
+                Devuelve 3 puntos de RESISTENCIA
+            </description>
+            
+            <image book="1|9" name="food.png" />
+            <usage class="endurance" increment="3" />
         </object>
 
         <!-- BOOK 12 -->
