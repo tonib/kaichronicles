@@ -821,7 +821,58 @@
             </test>
         </section>
 
-        <!-- Up to sect134 -->
+        <section id="sect135">
+            <test canUseBow="false">
+                <choiceState section="sect256" set="disabled" />
+                <!-- TODO: Drop arrow at sect256 -->
+            </test>
+        </section>
+
+        <section id="sect137">
+            <choiceState section="sect85" set="disabled" />
+            <test hasDiscipline="anmlctrl">
+                <choiceState section="sect85" set="enabled" />
+                <choiceState section="sect332" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect138">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="2">
+                    <choiceState section="sect318" set="enabled" />
+                </case>
+                <case from="3" to="9">
+                    <choiceState section="sect202" set="enabled" />
+                </case>
+            </randomTable>
+            <meal />
+        </section>
+
+        <section id="sect140">
+            <choiceState section="sect3" set="disabled" />
+            <test hasDiscipline="anmlctrl">
+                <choiceState section="sect3" set="enabled" />
+                <choiceState section="sect168" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect141">
+            <test canUseBow="false">
+                <choiceState section="sect284" set="disabled" />
+                <!-- TODO: Drop arrow at sect284 -->
+            </test>
+        </section>
+
+        <section id="sect143">
+            <meal huntDisabled="true" />
+        </section>
+
+        <section id="sect144">
+            <drop objectId="ironheartbroadsword" />
+        </section>
+
+        <!-- Up to sect144 -->
 
     </sections>
 
