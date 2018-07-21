@@ -872,7 +872,52 @@
             <drop objectId="ironheartbroadsword" />
         </section>
 
-        <!-- Up to sect144 -->
+        <section id="sect146">
+            <endurance count="-4" />
+            <object objectId="baylonboughfungi" />
+        </section>
+
+        <section id="sect151">
+            <pick class="arrow" count="-1" />
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="-99" to="4">
+                    <choiceState section="sect147" set="enabled" />
+                </case>
+                <case from="5" to="8">
+                    <choiceState section="sect326" set="enabled" />
+                </case>
+                <case from="9" to="99">
+                    <choiceState section="sect17" set="enabled" />
+                </case>
+            </randomTable>
+            <randomTableIncrement increment="+[BOWBONUS]" />
+        </section>
+
+        <section id="sect155">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect157">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="8">
+                    <choiceState section="sect349" set="enabled" />
+                </case>
+                <case from="9" to="99">
+                    <choiceState section="sect230" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="invsblty">
+                <randomTableIncrement increment="+[KAILEVEL]" />
+            </test>
+        </section>
+
+        <!-- Up to sect157 -->
 
     </sections>
 

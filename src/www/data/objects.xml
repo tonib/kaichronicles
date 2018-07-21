@@ -1730,6 +1730,12 @@
             <usage class="endurance" increment="3" />
         </object>
 
+        <object id="baylonboughfungi">
+            <name lang="en">Baylon’s Bough Fungi</name>
+            <name lang="es">Hongos del Árbol de Baylon</name>
+        </object>
+        
+
         <!-- BOOK 12 -->
         
         <object id="blackcube">
