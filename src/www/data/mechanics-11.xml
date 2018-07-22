@@ -208,6 +208,11 @@
         </section>
 
         <section id="sect25">
+            <!-- There are loops here, reset destination section states -->
+            <resetSectionState sectionId="sect216" />
+            <resetSectionState sectionId="sect344" />
+            <resetSectionState sectionId="sect169" />
+
             <!-- TODO: Display illustration on sect131 -->
         </section>
 
@@ -914,6 +919,88 @@
             </randomTable>
             <test hasDiscipline="invsblty">
                 <randomTableIncrement increment="+[KAILEVEL]" />
+            </test>
+        </section>
+
+        <section id="sect158">
+            <test canUseBow="false">
+                <choiceState section="sect77" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect160">
+            <choiceState section="sect312" set="disabled" />
+            <test hasCircle="circleSpirit">
+                <choiceState section="sect312" set="enabled" />
+                <choiceState section="sect106" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect161">
+            <choiceState section="sect13" set="disabled" />
+            <test hasDiscipline="anmlctrl">
+                <test expression="[KAILEVEL] >= 4">
+                    <choiceState section="sect13" set="enabled" />
+                    <choiceState section="sect271" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect165">
+            <choiceState section="sect69" set="disabled" />
+            <test hasDiscipline="pthmnshp">
+                <test expression="[KAILEVEL] >= 5">
+                    <choiceState section="sect69" set="enabled" />
+                    <choiceState section="sect196" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect166">
+            <choiceState section="sect197" set="disabled" />
+            <test hasDiscipline="pthmnshp|dvnation">
+                <choiceState section="sect197" set="enabled" />
+                <choiceState section="sect315" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect168">
+            <choiceState section="sect12" set="disabled" />
+            <!-- TODO: What about isMeal="true" objects ??? -->
+            <test expression="[MEALS] >= 4">
+                <choiceState section="sect12" set="enabled" />
+                <choiceState section="sect327" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect169">
+            <endurance count="-10" />
+        </section>
+
+        <section id="sect170">
+            <test not="true" hasDiscipline="curing">
+                <choiceState section="sect78" set="disabled" />
+            </test>
+            <choiceSelected section="sect231">
+                <!-- TODO: What about isMeal="true" objects ??? -->
+                <test not="true" expression="[MEALS] > 0">
+                    <endurance count="-3" />
+                </test>
+                <test expression="[MEALS] > 0">
+                    <pick class="meal" count="-1" />
+                </test>
+            </choiceSelected>
+        </section>
+
+        <section id="sect174">
+            <endurance count="-1" />
+        </section>
+
+        <section id="sect176">
+            <choiceState section="sect29" set="disabled" />
+            <test hasDiscipline="nexus">
+                <choiceState section="sect29" set="enabled" />
+                <choiceState section="sect134" set="disabled" />
             </test>
         </section>
 
