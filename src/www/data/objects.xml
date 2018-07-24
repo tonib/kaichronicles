@@ -786,6 +786,11 @@
             </description>
         </special>
 
+        <special id="silverrod">
+            <name lang="en">Silver Rod</name>
+            <name lang="es">Varilla de Plata</name>
+        </special>
+
         <!-- BOOK 12 -->
 
         <special id="kagonitechainmail">
@@ -913,7 +918,6 @@
             </description>
             <image book="12" name="small4.png" />
         </special>
-        
 
     </specials>
 

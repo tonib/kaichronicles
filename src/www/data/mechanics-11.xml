@@ -1004,7 +1004,66 @@
             </test>
         </section>
 
-        <!-- Up to sect157 -->
+        <section id="sect177">
+            <object objectId="silverrod" />
+        </section>
+
+        <section id="sect179">
+            <drop backpackItemSlots="3|4|5" />
+        </section>
+
+        <section id="sect183">
+            <choiceState section="sect235" set="disabled" />
+            <test hasDiscipline="dvnation">
+                <choiceState section="sect235" set="enabled" />
+                <choiceState section="sect292" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect184">
+            <test canUseBow="false">
+                <choiceState section="sect72" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect187">
+            <choiceState section="all" set="disabled" />
+            <combat eludeTurn="3" noMindblast="true" />
+            <afterCombats>
+                <choiceState section="sect71" set="enabled" />
+            </afterCombats>
+            <afterElude>
+                <choiceState section="sect298" set="enabled" />
+            </afterElude>
+        </section>
+
+        <section id="sect189">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="2">
+                    <choiceState section="sect104" set="enabled" />
+                </case>
+                <case from="3" to="7">
+                    <choiceState section="sect269" set="enabled" />
+                </case>
+                <case from="8" to="99">
+                    <choiceState section="sect342" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="[KAILEVEL] - 3" />
+            </test>
+        </section>
+
+        <section id="sect190">
+            <choiceState section="sect79" set="disabled" />
+            <test expression="[KAILEVEL] >= 8">
+                <choiceState section="sect79" set="enabled" />
+                <choiceState section="sect336" set="disabled" />
+            </test>
+        </section>
+
+        <!-- Up to sect190 -->
 
     </sections>
 
