@@ -791,6 +791,11 @@
             <name lang="es">Varilla de Plata</name>
         </special>
 
+        <special id="obsidianseal">
+            <name lang="en">Obsidian Seal</name>
+            <name lang="es">Sello de Obsidiana</name>
+        </special>
+
         <!-- BOOK 12 -->
 
         <special id="kagonitechainmail">
@@ -1739,6 +1744,10 @@
             <name lang="es">Hongos del Árbol de Baylon</name>
         </object>
         
+        <object id="conchshell">
+            <name lang="en">Conch Shell</name>
+            <name lang="es">Caracola</name>
+        </object>
 
         <!-- BOOK 12 -->
         

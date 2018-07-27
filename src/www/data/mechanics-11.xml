@@ -324,6 +324,7 @@
         <section id="sect40">
             <choiceState section="sect341" set="disabled" />
             <test hasObject="sommerswerd">
+                <!-- TODO: Set sommerswerd as current weapon at sect341 -->
                 <choiceState section="sect341" set="enabled" />
                 <choiceState section="sect111" set="disabled" />
             </test>
@@ -574,7 +575,7 @@
         </section>
 
         <section id="sect87">
-            <!-- TODO: Drop Obsidian Seal? -->
+            <drop objectId="obsidianseal" />
         </section>
 
         <section id="sect88">
@@ -1135,7 +1136,106 @@
             </test>
         </section>
 
-        <!-- Up to 200 -->
+        <section id="sect201">
+            <endurance count="-3" />
+            <choiceState section="all" set="disabled" />
+
+            <onInventoryEvent>
+                <combat combatSkillModifier="0" />
+                <!-- Sommerswerd can be used as any "sword", and this includes the "broadsword", avoid the comparison -->
+                <test not="true" currentWeapon="sommerswerd">
+                    <test currentWeapon="quarterstaff|broadsword|spear">
+                        <combat combatSkillModifier="-2" />
+                    </test>
+                </test>
+            </onInventoryEvent>
+
+            <combat noMindblast="true" disabledObjects="shield" />
+            <afterCombats>
+                <test not="true" expression="[COMBATSDURATION] > 3">
+                    <choiceState section="sect254" set="enabled" />
+                </test>
+                <test expression="[COMBATSDURATION] > 3">
+                    <choiceState section="sect37" set="enabled" />
+                </test>
+            </afterCombats>
+        </section>
+
+        <section id="sect203">
+            <object objectId="spear" index="0" />
+            <object objectId="spear" index="1" />
+            <object objectId="spear" index="2" />
+            <object objectId="spear" index="3" />
+            <object objectId="spear" index="4" />
+            <object objectId="spear" index="5" />
+            <object objectId="sword" index="0" />
+            <object objectId="sword" index="1" />
+            <object objectId="axe" />
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
+            <object objectId="meal" index="2" />
+            <object objectId="conchshell" index="2" />
+        </section>
+
+        <section id="sect204">
+            <choiceState section="all" set="disabled" />
+
+            <currentWeapon objectId="ironheartbroadsword" />
+            <onInventoryEvent>
+                <combat combatSkillModifier="0" />
+                <test currentWeapon="ironheartbroadsword">
+                    <combat combatSkillModifier="+8" />
+                </test>
+            </onInventoryEvent>
+
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect206">
+            <choiceState section="all" set="disabled" />
+
+            <afterCombatTurn turn="any">
+                <test expression="[COMBATSENEMYLOST] >= 10">
+                    <test combatsActive="true">
+                        <disableCombats />
+                        <choiceState section="sect306" set="enabled" />
+                    </test>
+                </test>
+            </afterCombatTurn>
+
+            <afterCombats>
+                <choiceState section="sect123" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect207">
+            <choiceState section="sect159" set="disabled" />
+            <test hasDiscipline="psiscrn">
+                <choiceState section="sect159" set="enabled" />
+                <choiceState section="sect293" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect208">
+            <endurance count="-3" />
+        </section>
+
+        <section id="sect209">
+            <choiceState section="sect290" set="disabled" />
+            <test hasDiscipline="psiscrn">
+                <choiceState section="sect290" set="enabled" />
+                <choiceState section="sect30" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect210">
+            <pick objectId="obsidianseal" />
+        </section>
+
+        <!-- Up to sect210 -->
 
     </sections>
 
