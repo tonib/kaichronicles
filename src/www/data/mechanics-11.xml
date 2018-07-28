@@ -1235,7 +1235,76 @@
             <pick objectId="obsidianseal" />
         </section>
 
-        <!-- Up to sect210 -->
+        <section id="sect212">
+            <choiceState section="sect44" set="disabled" />
+            <test hasDiscipline="pthmnshp">
+                <choiceState section="sect44" set="enabled" />
+                <choiceState section="sect260" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect214">
+            <death />
+        </section>
+
+        <section id="sect215">
+            <choiceState section="sect325" set="disabled" />
+            <test hasDiscipline="pthmnshp">
+                <test expression="[KAILEVEL] >= 8">
+                    <choiceState section="sect325" set="enabled" />
+                    <choiceState section="sect337" set="disabled" />
+                </test>
+            </test>
+            <test hasDiscipline="anmlctrl">
+                <choiceState section="sect325" set="enabled" />
+                <choiceState section="sect337" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect216">
+            <endurance count="-10" />
+        </section>
+
+        <section id="sect217">
+            <test not="true" hasDiscipline="nexus">
+                <endurance count="-3" />
+            </test>
+        </section>
+
+        <section id="sect220">
+            <!-- TODO: Drop arrow at sect284 -->
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" noWeapon="1" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect225">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect226">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect227">
+            <choiceState section="all" set="disabled" />
+            <combat mindblastMultiplier="2" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <!-- Up to sect227 -->
 
     </sections>
 
