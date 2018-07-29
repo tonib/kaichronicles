@@ -1304,7 +1304,26 @@
             </afterCombats>
         </section>
 
-        <!-- Up to sect227 -->
+        <section id="sect228">
+            <choiceState section="sect64" set="disabled" />
+            <test hasDiscipline="hntmstry">
+                <test expression="[KAILEVEL] >= 6">
+                    <choiceState section="sect64" set="enabled" />
+                    <choiceState section="sect148" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect231">
+            <object objectId="sword" />
+        </section>
+
+        <section id="sect233">
+            <!-- TODO: This is really the "book map". Show it on the map page -->
+            <pick objectId="map" />
+        </section>
+
+        <!-- Up to sect233 -->
 
     </sections>
 

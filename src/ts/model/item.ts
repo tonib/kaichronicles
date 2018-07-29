@@ -133,12 +133,11 @@ class Item {
 
         /** The translated object description */
         this.description = $o.find('description[lang=' + book.language + ']').text();
+
         // If it's the map, add description from the book:
-        if( objectId == Item.MAP ) {
-            var mapSection = new Section( book , Book.MAP_SECTION , null);
-            if( mapSection.exists() )
-                this.description = mapSection.getTitleText();
-        }
+        if( objectId == Item.MAP )
+            this.assignMapDescription(book);
+
         if( this.itemCount != 1 ) {
             // Add description of the size used 
             if( this.description )
@@ -185,6 +184,16 @@ class Item {
         // Incompatibilities
         this.incompatibleWith = mechanicsEngine.getArrayProperty( $o , 'incompatibleWith' );
 
+    }
+
+    private assignMapDescription(book : Book) {
+        // Exception with book 11: The "map" section refers to "Northern Magnamund", no the real map at sect233
+        if( book.bookNumber == 11)
+            return;
+
+        const mapSection = new Section( book , Book.MAP_SECTION , null);
+        if( mapSection.exists() )
+            this.description = mapSection.getTitleText();
     }
 
     /** Returns true if the object is a weapon */
