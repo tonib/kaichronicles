@@ -7,11 +7,37 @@ const mapView = {
      * @param section The map Section
      */
     setSectionContent: function( section : Section ) {
-        document.title = section.getTitleText();
-        $('#map-title').text( section.getTitleText() );
+
+        /*const titleText = section.getTitleText();
+        document.title = titleText;
+        $('#map-title').text( titleText );
         // Render the map, with the illustrations text. On book 5, it's the 
         // map description
-        $('#map-section').html( section.getHtml(true) );
+        $('#map-section').html( section.getHtml(true) );*/
+        mapView.setContent( section.getTitleText() , section.getHtml(true) );
+    },
+
+    /**
+     * Set map for book 11 (special case)
+     */
+    setMapBook11: function() {
+        const map = state.mechanics.getObject( Item.MAP );
+        // On book 11, map is on section 233
+        const mapSection = new Section( state.book , 'sect233' , state.mechanics );
+        mapView.setContent( map.name , mapSection.getFirstIllustrationHtml() );
+    },
+
+    /**
+     * Set the view content
+     * @param titleText Page title
+     * @param mapSectionHtml The map HTML
+     */
+    setContent: function( titleText : string , mapSectionHtml : string ) {
+        document.title = titleText;
+        $('#map-title').text( titleText );
+        // Render the map, with the illustrations text. On book 5, there is a textual 
+        // map description
+        $('#map-section').html( mapSectionHtml );
     },
 
     /**

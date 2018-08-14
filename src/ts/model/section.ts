@@ -201,6 +201,17 @@ class Section {
         return sectionText.indexOf(text) > 0;
     }
 
+    /**
+     * Get the HTML for the first illustration on the section
+     * @returns The illustration HTML. Empty string if there are no illustrations
+     */
+    public getFirstIllustrationHtml() : string {
+        const $illustrations = this.$xmlSection.find( 'illustration' );
+        if( $illustrations.length == 0 )
+            return '';
+        const $firstIll = $illustrations.first();
+        return SectionRenderer.renderIllustration(this, $firstIll);
+    }
 }
 
 

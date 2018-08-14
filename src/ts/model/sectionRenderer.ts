@@ -397,6 +397,16 @@ class SectionRenderer {
             this.renderNodeChildren( $choice , level ) + '</p>';
     }
 
+    /**
+     * Render an illustration
+     * @param section The ill. Section owner
+     * @param $illustration Illustration to render (jQuery)
+     * @returns The illustration HTML
+     */
+    public static renderIllustration(section : Section, $illustration : any ) : string {
+        const renderer = new SectionRenderer(section);
+        return renderer.illustration($illustration, 0);
+    }
 
     /**
      * Illustration renderer

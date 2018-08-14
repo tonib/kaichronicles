@@ -21,7 +21,11 @@ const mapController = {
 
         views.loadView('map.html')
         .then(function() {
-            mapView.setSectionContent( mapSection );
+            if( state.book.bookNumber == 11 )
+                // Special case
+                mapView.setMapBook11();
+            else
+                mapView.setSectionContent( mapSection );
             mapView.bindEvents();
         });
         
