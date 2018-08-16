@@ -1637,6 +1637,13 @@ const mechanicsEngine = {
      * @param msgId Id to set on the message HTML tag. It's optional
      */
     showMessage : function( msg : string , msgId : string = null) {
+
+        if( msgId ) {
+            // Avoid duplicated messages
+            if( $('.mechanics-message[id=' + msgId + ']').length > 0 )
+                return;
+        }
+
         var $messageUI = mechanicsEngine.getMechanicsUI( 'mechanics-message' );
         if( msgId )
             $messageUI.attr('id', msgId );

@@ -1427,6 +1427,17 @@
             <death />
         </section>
 
+        <section id="sect290">
+            <test bookLanguage="es">
+                <!-- Spanish version -->
+                <message id="food"
+                    en-text="This text will not appear" 
+                    es-text="Debes comer otra Comida en lugar de la envenenada o perder 3 puntos de RESISTENCIA" 
+                />
+            </test>
+            <meal />
+        </section>
+
         <section id="sect296">
             <choiceState section="all" set="disabled" />
             <combat index="0" eludeTurn="0" />

@@ -502,18 +502,26 @@ class BookValidator {
     }
     
     private message( $rule ) {
+        const msgId : string = $rule.attr('id');
+
         if( $rule.attr( 'op' ) ) {
-            var msgId = $rule.attr('id');
             if( !msgId )
                 this.addError( $rule , '"id" attribute required' );
             else {
                 // Find the referenced message
                 const $sectionMechanics = this.mechanics.getSection( this.currentSection.sectionId );
                 if( $sectionMechanics.find( 'message[id=' + msgId + ']:not([op])' ).length == 0 )
-                    this.addError( $rule , 'No "message" found with English text and id ' + msgId );
+                    this.addError( $rule , 'No "message" found with id ' + msgId );
             }
         }
         else {
+            if( msgId ) {
+                // Check there are no duplicated ids
+                const $sectionMechanics = this.mechanics.getSection( this.currentSection.sectionId );
+                if( $sectionMechanics.find( 'message[id=' + msgId + ']:not([op])' ).length > 1 )
+                    this.addError( $rule , 'Multiple "message" with the same id=' + msgId );
+            }
+
             if( !$rule.attr( 'en-text' ) )
                 this.addError( $rule , '"en-text" or "op" attribute required' );
         }

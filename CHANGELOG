@@ -66,4 +66,5 @@
  - New option on Action Chart to fight unarmed (can be useful on book 12)
  - Show message when current weapon is changed
  - Fixed horrible bug restarting the current book, from Settings or after a dead: The Kai Monastery objects were lost
- 
+ - Book 1, sect88: Spear is capitalized, thus you should be able to take and equip it as a normal weapon
+ - Book 2, sect290: According to the text, you need to eat a meal from your backpack in this section

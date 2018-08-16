@@ -376,6 +376,7 @@
         </section>
 
         <section id="sect88">
+            <object objectId="spear" />
             <test not="true" hasDiscipline="healing">
                 <choiceState section="sect216" set="disabled" />
             </test>
