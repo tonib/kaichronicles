@@ -55,20 +55,25 @@ const state = {
         if( !bookNumber )
             bookNumber = 1;
 
+        state.sectionStates = new BookSectionStates();
+
         // Action chart
         state.actionChart = null;
         if( keepActionChart ) {
             // Try to get the previous book action chart, and set it as the current
             state.actionChart = state.getPreviousBookActionChart(bookNumber - 1);
-            if( state.actionChart )
+            if( state.actionChart ) {
                 // Convert the Object to ActionChart
                 state.actionChart = $.extend(new ActionChart(), state.actionChart);
+            }
+
+            // Restore Kai monastery objects
+            state.restoreKaiMonasterySectionObjects();
         }
 
         state.language = language;
         state.book = new Book(bookNumber, state.language);
         state.mechanics = new Mechanics(state.book);
-        state.sectionStates = new BookSectionStates();
 
         if( !state.actionChart )
             state.actionChart = new ActionChart();
@@ -184,6 +189,14 @@ const state = {
     },
 
     /**
+     * Restore objects on the Kai Monastery section from the Action Chart
+     */
+    restoreKaiMonasterySectionObjects : function() {
+        const kaiMonasterySection = state.sectionStates.getSectionState( Book.KAIMONASTERY_SECTION );
+        kaiMonasterySection.objects = state.actionChart.kaiMonasterySafekeeping;
+    },
+
+    /**
      * Update state to start the next book
      */
     nextBook: function() {
@@ -197,9 +210,8 @@ const state = {
         state.mechanics = new Mechanics(state.book);
         state.sectionStates = new BookSectionStates();
 
-        // Save on the next book Kai monastery safekeeping section the objects stored on the last book
-        const kaiMonasterySection = state.sectionStates.getSectionState( Book.KAIMONASTERY_SECTION );
-        kaiMonasterySection.objects = state.actionChart.kaiMonasterySafekeeping;
+        // Restore Kai monastery objects
+        state.restoreKaiMonasterySectionObjects();
 
         state.persistState();
     },

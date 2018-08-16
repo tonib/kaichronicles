@@ -65,3 +65,5 @@
  - Added privacy policy
  - New option on Action Chart to fight unarmed (can be useful on book 12)
  - Show message when current weapon is changed
+ - Fixed horrible bug restarting the current book, from Settings or after a dead: The Kai Monastery objects were lost
+ 
