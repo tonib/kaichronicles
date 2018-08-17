@@ -68,10 +68,14 @@
         </section>
 
         <section id="sect2">
-            <!-- Restore temporal CS loss (Limbdeath) -->
+        
             <test sectionVisited="sect166">
+                <!-- Restore temporal CS loss (Limbdeath) -->
                 <combatSkill count="+3" />
+                <!-- Now you can use shield -->
+                <unregisterGlobalRule id="book5sect166" />
             </test>
+
             <object objectId="oedeherb" />
         </section>
 
@@ -894,6 +898,10 @@
         <section id="sect166">
             <!-- ARM Limbdeath HERE!!! -->
             <combatSkill count="-3" />
+            <registerGlobalRule id="book5sect166">
+                <!-- ...as you are suffering from this disease, you cannot use a shield of any sort... -->
+                <combat disabledObjects="shield" />
+            </registerGlobalRule>
         </section>
 
         <section id="sect167">
