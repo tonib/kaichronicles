@@ -89,6 +89,14 @@ FOR FUTURE (1.11+):
 - Add illustrations index?
 - Mechanics: Allow to declare a set of rules that can be runned on multiple sections. See book 12, references to sect208 
   ("Sommerswerd stuff", repeated rules)
+- "Restart book" (at Settings / book death): Add the book number you will restart (ex. "Restart book 9"). On confirmation, explain
+  you will restart with your previous book Action Chart status
+- PAON English reports:
+  "General - You are erroneously allowed to apply multiple Alether effects per combat. You are always limited to one (the berries you can purchase in book 6 even explicitly say so)."
+  "Suggestion - An extension of the above, consider saving a snapshot of the action chart when starting a book in section 1. Then add that option to restart the book at section 1 if you die. That way, you don't have to go through and re-do Disciplines and equipment. Keep the option to completely restart the book, though, in case you want to pick different Disciplines or equipment options  "General - You are erroneously allowed to use healing items (Laumspur, etc.) in combat sections before combat has started. Healing items are only to be used in combat sections after combat is over (and if you're still alive and not evading combat)."
+  "Add a "random discipline" button that will randomly select the proper number of initial disciplines, as well as your bonus discipline each book from the choices remaining"
+  "You are erroneously allowed to use healing items (Laumspur, etc.) in combat sections before combat has started. Healing items are only to be used in combat sections after combat is over (and if you're still alive and not evading combat)."
+  "Add a Seventh-Sense-like achievement system"
 
 Reminders:
 

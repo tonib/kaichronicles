@@ -27,6 +27,12 @@ const settingsView = {
                 setupController.restartBook();
         });
 
+        // Start new game
+        $('#settings-new').click(function(e) {
+            e.preventDefault();
+            routing.redirect('newGame');
+        });
+
         // Game rules
         $('#settings-gamerules').click(function() {
             routing.redirect('gameRules');
