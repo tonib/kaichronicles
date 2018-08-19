@@ -1433,7 +1433,44 @@
             </afterCombats>
         </section>
 
-        <!-- Up to sect256 -->
+        <section id="sect257">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect258">
+            <choiceState section="sect74" set="disabled" />
+            <test hasDiscipline="curing">
+                <test expression="[KAILEVEL] >= 7">
+                    <choiceState section="sect74" set="enabled" />
+                    <choiceState section="sect143" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect259">
+            <choiceState section="all" set="disabled" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect260">
+            <choiceState section="sect177" set="disabled" />
+            <test hasObject="firesphere|lantern">
+                <choiceState section="sect177" set="enabled" />
+            </test>
+            <test hasObject="torch">
+                <test hasObject="tinderbox">
+                    <choiceState section="sect177" set="enabled" />
+                </test>
+            </test>
+        </section>
+
+        <!-- Up to sect260 -->
 
     </sections>
 
