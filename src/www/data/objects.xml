@@ -1749,6 +1749,22 @@
             <name lang="es">Caracola</name>
         </object>
 
+        <object id="silverflask" itemCount="0.5">
+            <name lang="en">Silver Flask</name>
+            <description lang="en">
+                The wine has been charmed with a potent magical spell, imbuing it with special healing properties.
+                Each draught restores 4 ENDURANCE points
+            </description>
+
+            <name lang="es">Frasco de Plata</name>
+            <description lang="es">
+                Este vino se halla encantado por un poderoso sortilegio que le proporciona especiales propiedades curativa.
+                Cada trago te permite recobrar 4 puntos de RESISTENCIA
+            </description>
+
+            <usage class="endurance" increment="4" />
+        </object>
+
         <!-- BOOK 12 -->
         
         <object id="blackcube">

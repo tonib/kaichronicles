@@ -1470,7 +1470,63 @@
             </test>
         </section>
 
-        <!-- Up to sect260 -->
+        <section id="sect261">
+            <endurance count="+4" />
+            <object objectId="silverflask" useOnSection="true" index="0" />
+            <object objectId="silverflask" useOnSection="true" index="1" />
+        </section>
+
+        <section id="sect264">
+            <choiceState section="sect305" set="disabled" />
+            <test hasDiscipline="pthmnshp">
+                <test expression="[KAILEVEL] >= 8">
+                    <choiceState section="sect305" set="enabled" />
+                    <choiceState section="sect132" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect265">
+            <choiceState section="sect190" set="disabled" />
+            <test hasDiscipline="psiscrn">
+                <choiceState section="sect190" set="enabled" />
+                <choiceState section="sect81" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect266">
+            <test not="true" hasDiscipline="anmlctrl">
+                <choiceState section="sect85" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect267">
+            <object objectId="sword" />
+            <object objectId="spear" />
+            <object objectId="mace" />
+            <object objectId="dagger" />
+            <object objectId="arrow" count="6" />
+            <object objectId="bow" />
+            <object objectId="quiver" />
+            <object objectId="backpack" />
+            <object objectId="quarterstaff" />
+            <object objectId="shortsword" />
+        </section>
+
+        <section id="sect268">
+            <choiceState section="sect174" set="disabled" />
+            <test hasDiscipline="psiscrn">
+                <choiceState section="sect174" set="enabled" />
+                <choiceState section="sect102" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect269">
+            <endurance count="-4" />
+        </section>
+
+
+        <!-- Up to sect269 -->
 
     </sections>
 
