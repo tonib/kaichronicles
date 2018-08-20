@@ -194,6 +194,7 @@
     <xs:complexType name="combat">
         <xs:attribute name="index" type="xs:nonNegativeInteger" />
         <xs:attribute name="combatSkillModifier" type="xs:string" />
+        <xs:attribute name="combatSkillModifierIncrement" type="xs:string" />
         <xs:attribute name="mindforceCS" type="xs:integer" />
         <xs:attribute name="mindforceEP" type="xs:integer" />
         <xs:attribute name="noMindblast" type="xs:boolean" />

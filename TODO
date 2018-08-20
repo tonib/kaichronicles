@@ -100,6 +100,8 @@ FOR FUTURE (1.11+):
   "Add a "random discipline" button that will randomly select the proper number of initial disciplines, as well as your bonus discipline each book from the choices remaining"
   "You are erroneously allowed to use healing items (Laumspur, etc.) in combat sections before combat has started. Healing items are only to be used in combat sections after combat is over (and if you're still alive and not evading combat)."
   "Add a Seventh-Sense-like achievement system"
+- Allow to add a concept description for combat skill modifiers rules on combat ratio explanation
+- Display concepts for objects usages (Adgana, etc) on combat ratio explanation
 
 Reminders:
 

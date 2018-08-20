@@ -333,7 +333,8 @@ on map zones where there is no food (deserts, etc)
 The combat tag add modifiers to some combat of the current section. It can have
 the following properties:
 * **index="number"**: Index (zero based) of the combat to which it refers
-* **combatSkillModifier="bonus"**: Bonus (positive or negative) for Lone Wolf combat skill
+* **combatSkillModifier="bonus"**: Absolute bonus (positive or negative) for Lone Wolf combat skill on this combat
+* **combatSkillModifierIncrement="bonus"**: Bonus increment (positive or negative) for Lone Wolf combat skill on this combat
 * **mindforceCS="-number"**: Bonus (negative) to the Lone Wolf combat skill due to the enemy
   Mindblast. It will not be applied if the player has Mindshield / Psi-screen
 * **mindforceEP="-number"**: Endurance points lost by LW each turn, due to the enemy Mindblast.
@@ -373,6 +374,8 @@ replace that value. Ex:
 <combat noMindblast="true" />
 <combat noMindblast="false" />
 ```
+
+The exception is "combatSkillModifierIncrement": It's always cumulative
 
 ### disableCombats
 ```xml

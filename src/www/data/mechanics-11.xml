@@ -1525,8 +1525,32 @@
             <endurance count="-4" />
         </section>
 
+        <section id="sect270">
+            <choiceState section="all" set="disabled" />
+            <combat mentalOnly="true" />
 
-        <!-- Up to sect269 -->
+            <!-- TODO: Any bonuses to ENDURANCE due to armour should likewise not be applied during this combat. HOW ??? -->
+            <!-- Compute combat skills increment -->
+            <combat combatSkillModifier="0" /> 
+            <test hasObject="psychicring">
+                <combat combatSkillModifierIncrement="+3" />
+            </test>
+            <test hasObject="greycrystalring">
+                <combat combatSkillModifierIncrement="+3" />
+            </test>
+            <!-- "mentalOnly" disables Silver Helm -->
+            <test hasObject="silverhelm">
+                <combat combatSkillModifierIncrement="+2" />
+            </test>
+            <combat combatSkillModifierIncrement="[KAILEVEL] - 3" />
+
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+
+        <!-- Up to sect270 -->
 
     </sections>
 

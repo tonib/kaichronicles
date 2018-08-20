@@ -795,13 +795,15 @@ const mechanicsEngine = {
         }
         var combat = sectionState.combats[ combatIndex ];
 
-        // Check LW combat skill modifiers:
-        var txtCombatSkillModifier = $(rule).attr('combatSkillModifier');
-        if( txtCombatSkillModifier ) {
-            var combatSkillModifier = 
-                ExpressionEvaluator.evalInteger( txtCombatSkillModifier );
+        // Check LW combat ABSOLUTE skill modifier for this section:
+        const combatSkillModifier = mechanicsEngine.getIntProperty( $rule , 'combatSkillModifier', true );
+        if( combatSkillModifier != null )
             combat.combatModifier = combatSkillModifier;
-        }
+
+        // Check LW combat skill modifier INCREMENT
+        const combatSkillModifierIncrement = mechanicsEngine.getIntProperty( $rule , 'combatSkillModifierIncrement' , true );
+        if( combatSkillModifierIncrement != null )
+            combat.combatModifier += combatSkillModifierIncrement;
 
         // Check if the enemy has mindforce attack
         var txtMindforceCS = $(rule).attr('mindforceCS');
@@ -1379,6 +1381,24 @@ const mechanicsEngine = {
         if( !txtValue )
             return defaultValue;
         return txtValue == 'true';
+    },
+
+    /**
+     * Get a integer property
+     * TODO: Use this where a parseInt is used on this file
+     * @param $rule {jQuery} The rule
+     * @param property The property to get
+     * @returns The property value. null if the property was not present
+     */
+    getIntProperty : function( $rule : any , property : string , evaluateReplacements : boolean ) : number | null {
+        const txtValue : string = $rule.attr( property );
+        if( !txtValue )
+            return null;
+
+        if( evaluateReplacements )
+            return ExpressionEvaluator.evalInteger( txtValue );
+
+        return parseInt( txtValue );
     },
 
     /**
