@@ -1549,8 +1549,45 @@
             </afterCombats>
         </section>
 
+        <section id="sect271">
+            <test canUseBow="false">
+                <!-- TODO: Drop arrow on sect322 -->
+                <choiceState section="sect322" set="disabled" />
+            </test>
+        </section>
 
-        <!-- Up to sect270 -->
+        <section id="sect272">
+            <test not="true" hasObject="fireseed">
+                <choiceState section="sect2" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect273">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect274">
+            <choiceState section="all" set="disabled" />
+
+            <afterCombatTurn turn="any">
+                <test expression="[COMBATSENEMYLOST] >= 18">
+                    <test combatsActive="true">
+                        <disableCombats />
+                        <choiceState section="sect306" set="enabled" />
+                    </test>
+                </test>
+            </afterCombatTurn>
+
+            <afterCombats>
+                <choiceState section="sect123" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <!-- Up to sect274 -->
 
     </sections>
 
