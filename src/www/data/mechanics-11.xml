@@ -860,7 +860,6 @@
         <section id="sect141">
             <test canUseBow="false">
                 <choiceState section="sect284" set="disabled" />
-                <!-- TODO: Drop arrow at sect284 -->
             </test>
         </section>
 
@@ -1587,7 +1586,73 @@
             </afterCombats>
         </section>
 
-        <!-- Up to sect274 -->
+        <section id="sect275">
+            <choiceState section="sect283" set="disabled" />
+            <test hasDiscipline="pthmnshp">
+                <test expression="[KAILEVEL] >= 5">
+                    <choiceState section="sect283" set="enabled" />
+                    <choiceState section="sect6" set="disabled" />
+                </test>
+            </test>
+        </section>
+        
+        <section id="sect276">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="2">
+                    <choiceState section="sect318" set="enabled" />
+                </case>
+                <case from="3" to="9">
+                    <choiceState section="sect202" set="enabled" />
+                </case>
+            </randomTable>
+            <meal />
+        </section>
+
+        <section id="sect277">
+            <object objectId="khetuspores" />
+        </section>
+
+        <section id="sect280">
+            <choiceState section="sect39" set="disabled" />
+            <test hasObject="silverrod">
+                <choiceState section="sect39" set="enabled" />
+                <choiceState section="sect67" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect281">
+            <test canUseBow="false">
+                <choiceState section="sect193" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect284">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="-99" to="4">
+                    <choiceState section="sect220" set="enabled" />
+                </case>
+                <case from="5" to="8">
+                    <choiceState section="sect127" set="enabled" />
+                </case>
+                <case from="9" to="99">
+                    <choiceState section="sect21" set="enabled" />
+                </case>
+                <pick class="arrow" count="-1" />
+            </randomTable>
+            <randomTableIncrement increment="+[BOWBONUS]" />
+        </section>
+
+        <section id="sect285">
+            <choiceState section="sect36" set="disabled" />
+            <test hasDiscipline="curing">
+                <choiceState section="sect36" set="enabled" />
+                <choiceState section="sect163" set="disabled" />
+            </test>
+        </section>
+
+        <!-- Up to sect285 -->
 
     </sections>
 
