@@ -1652,7 +1652,121 @@
             </test>
         </section>
 
-        <!-- Up to sect285 -->
+        <section id="sect286">
+            <!-- TODO: Drop arrow on sect322 -->
+        </section>
+
+        <section id="sect293">
+            <endurance count="-2" />
+        </section>
+
+        <section id="sect294">
+            <test canUseBow="false">
+                <choiceState section="sect46" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect296">
+            <pick class="arrow" count="-1" />
+        </section>
+
+        <section id="sect298">
+            <choiceState section="all" set="disabled" />
+
+            <!-- TODO: 
+                 If you have not already visited Baylon’s Tomb, you may evade... WHAT SECTION/S?  
+                 sect253 ???
+                 -->
+            <combat eludeTurn="0" />
+            
+            <test not="true" hasDiscipline="curing" >
+                <combat turnLossIfWounded="-2" />
+            </test>
+            <test hasDiscipline="curing" >
+                <test not="true" expression="[KAILEVEL] >= 7">
+                    <combat turnLossIfWounded="-2" />
+                </test>
+            </test>
+
+            <afterElude>
+                <choiceState section="sect166" set="enabled" />
+            </afterElude>
+            <afterCombats>
+                <choiceState section="sect133" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect299">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="-99" to="3">
+                    <endurance count="-2" />
+                </case>
+                <case from="4" to="6">
+                    <endurance count="-3" />
+                </case>
+                <case from="7" to="9">
+                    <endurance count="-4" />
+                </case>
+                <choiceState section="all" set="enabled" />
+            </randomTable>
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="-2" />
+            </test>
+        </section>
+
+        <section id="sect301">
+            <choiceState section="sect309" set="disabled" />
+            <test hasDiscipline="pthmnshp">
+                <test expression="[KAILEVEL] >= 8">
+                    <choiceState section="sect309" set="enabled" />
+                    <choiceState section="sect108" set="disabled" />
+                </test>
+            </test>
+            <test hasDiscipline="anmlctrl">
+                <choiceState section="sect309" set="enabled" />
+                <choiceState section="sect108" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect310">
+            <endurance count="-7" />
+        </section>
+
+        <section id="sect312">
+            <choiceState section="all" set="disabled" />
+            <randomTable zeroAsTen="true">
+                <endurance count="+[RANDOM]" />
+                <choiceState section="all" set="enabled" />
+            </randomTable>
+        </section>
+
+        <section id="sect313">
+            <test not="true" hasCircle="circleSolaris">
+                <endurance count="-3" />
+            </test>
+        </section>
+
+        <section id="sect315">
+            <!-- TODO: Display illustration on sect166 -->
+        </section>
+
+        <section id="sect316">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="3">
+                    <choiceState section="sect214" set="enabled" />
+                </case>
+                <case from="4" to="99">
+                    <choiceState section="sect128" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="anmlctrl">
+                <randomTableIncrement increment="+3" />
+            </test>
+        </section>
+
+        <!-- Up to sect316 -->
 
     </sections>
 
