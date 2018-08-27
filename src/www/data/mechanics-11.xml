@@ -1766,7 +1766,81 @@
             </test>
         </section>
 
-        <!-- Up to sect316 -->
+        <section id="sect318">
+            <choiceState section="sect109" set="disabled" />
+            <test hasDiscipline="anmlctrl">
+                <choiceState section="sect109" set="enabled" />
+                <choiceState section="sect227" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect319">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+
+            <test not="true" hasDiscipline="hntmstry">
+                <combat combatSkillModifier="-3" />
+                <afterCombatTurn turn="2">
+                    <combat combatSkillModifier="0" />
+                </afterCombatTurn>
+            </test>
+
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect322">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="-99" to="8">
+                    <choiceState section="sect105" set="enabled" />
+                </case>
+                <case from="9" to="99">
+                    <choiceState section="sect286" set="enabled" />
+                </case>
+                <pick class="arrow" count="-1" />
+            </randomTable>
+            <randomTableIncrement increment="+[BOWBONUS]" />
+        </section>
+
+        <section id="sect324">
+            <death />
+        </section>
+
+        <section id="sect327">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect328">
+            <death />
+        </section>
+
+        <section id="sect329">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect330">
+            <test not="true" hasDiscipline="dvnation">
+                <choiceState section="sect52" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect331">
+            <test not="true" hasObject="fireseed">
+                <choiceState section="sect2" set="disabled" />
+            </test>
+        </section>
+
+        <!-- Up to sect331 -->
 
     </sections>
 
