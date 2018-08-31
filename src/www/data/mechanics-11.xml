@@ -1859,7 +1859,98 @@
             </test>
         </section>
 
-        <!-- Up to sect332 -->
+        <section id="sect333">
+            <pick class="arrow" count="-1" />
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="-99" to="4">
+                    <choiceState section="sect45" set="enabled" />
+                </case>
+                <case from="5" to="8">
+                    <choiceState section="sect263" set="enabled" />
+                </case>
+                <case from="9" to="99">
+                    <choiceState section="sect287" set="enabled" />
+                </case>
+            </randomTable>
+            <randomTableIncrement increment="+[BOWBONUS]" />
+        </section>
+
+        <section id="sect334">
+            <meal />
+        </section>
+
+        <section id="sect336">
+            <test not="true" hasDiscipline="psisurge">
+                <choiceState section="sect270" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect338">
+            <drop backpackItemSlots="1|3" />
+            <message id="msg-drop-object" 
+                en-text="Drop one Special Item of your choice" 
+                es-text="Deja el Objeto Especial que prefieras"
+            />
+            <onInventoryEvent>
+                <test expression="[SPECIAL-ITEMS-ON-ACTIONCHART] == 0 || [SPECIAL-ITEMS-ON-SECTION] >= 1">
+                    <message id="msg-drop-object" op="hide" />
+                    <choiceState section="all" set="enabled" />
+                </test>
+                <test not="true" expression="[SPECIAL-ITEMS-ON-ACTIONCHART] == 0 || [SPECIAL-ITEMS-ON-SECTION] >= 1">
+                    <message id="msg-drop-object" op="show" />
+                    <choiceState section="all" set="disabled" />
+                </test>
+            </onInventoryEvent>
+        </section>
+
+        <section id="sect339">
+            <pick class="arrow" count="-1" />
+        </section>
+
+        <section id="sect340">
+            <choiceState section="sect83" set="disabled" />
+            <test hasDiscipline="dvnation">
+                <test expression="[KAILEVEL] >= 8">
+                    <choiceState section="sect83" set="enabled" />
+                    <choiceState section="sect9" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect341">
+            <choiceState section="all" set="disabled" />
+            <currentWeapon objectId="sommerswerd" />
+            <combat noMindblast="true" />
+            <test hasCircle="circleSpirit">
+                <combat combatSkillModifier="+2" />
+            </test>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
+        </section>
+
+        <section id="sect342">
+            <test not="true" hasDiscipline="dvnation">
+                <choiceState section="sect52" set="disabled" />
+            </test>
+        </section>
+
+        <section id="sect343">
+            <choiceState section="sect309" set="disabled" />
+            <test hasDiscipline="pthmnshp">
+                <test expression="[KAILEVEL] >= 8">
+                    <choiceState section="sect309" set="enabled" />
+                    <choiceState section="sect108" set="disabled" />
+                </test>
+            </test>
+            <test hasDiscipline="anmlctrl">
+                <choiceState section="sect309" set="enabled" />
+                <choiceState section="sect108" set="disabled" />
+            </test>
+        </section>
+
+        <!-- Up to sect343 -->
 
     </sections>
 
