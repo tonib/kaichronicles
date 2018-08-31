@@ -1237,8 +1237,15 @@
                         <choiceState section="sect303" set="enabled" />
                     </case>
                 </randomTable>
-                <test hasDiscipline="hunting|tracking|camflage">
-                    <randomTableIncrement increment="+2" />
+                <test hasDiscipline="hunting">
+                    <test hasDiscipline="tracking">
+                        <test hasDiscipline="camflage">
+                            <randomTableIncrement increment="+2" />
+                        </test>
+                    </test>
+                </test>
+                <test expression="[KAILEVEL] >= 7">
+                    <randomTableIncrement increment="+3" />
                 </test>
             </test>
         </section>

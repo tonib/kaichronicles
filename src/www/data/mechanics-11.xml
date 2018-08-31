@@ -1840,7 +1840,26 @@
             </test>
         </section>
 
-        <!-- Up to sect331 -->
+        <section id="sect332">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="-99" to="3">
+                    <endurance count="-1" />
+                </case>
+                <case from="4" to="6">
+                    <endurance count="-2" />
+                </case>
+                <case from="7" to="9">
+                    <endurance count="-3" />
+                </case>
+                <choiceState section="all" set="enabled" />
+            </randomTable>
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="-2" />
+            </test>
+        </section>
+
+        <!-- Up to sect332 -->
 
     </sections>
 
