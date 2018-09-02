@@ -241,10 +241,6 @@
             </afterCombats>
         </section>
 
-        <section id="sect32">
-            <!-- TODO: Drop arrow on sections 76, 151 and 333 -->
-        </section>
-
         <section id="sect33">
             <choiceState section="sect85" set="disabled" />
             <test hasDiscipline="anmlctrl">
@@ -314,7 +310,6 @@
         <section id="sect40">
             <choiceState section="sect341" set="disabled" />
             <test hasObject="sommerswerd">
-                <!-- TODO: Set sommerswerd as current weapon at sect341 -->
                 <choiceState section="sect341" set="enabled" />
                 <choiceState section="sect111" set="disabled" />
             </test>
@@ -415,10 +410,6 @@
                     <choiceState section="sect324" set="disabled" />
                 </test>
             </test>
-        </section>
-
-        <section id="sect66">
-            <!-- TODO: Silver Flask available on sect261 -->
         </section>
         
         <section id="sect67">
@@ -656,7 +647,6 @@
         </section>
 
         <section id="sect105">
-            <!-- TODO: Drop arrow in sect322 -->
             <choiceState section="all" set="disabled" />
             <afterCombats>
                 <choiceState section="all" set="enabled" />
@@ -772,7 +762,6 @@
         </section>
 
         <section id="sect127">
-            <!-- TODO: Drop arrow in sect284 -->
             <choiceState section="all" set="disabled" />
             <combat noMindblast="true" />
             <afterCombats>
@@ -1260,7 +1249,6 @@
         </section>
 
         <section id="sect220">
-            <!-- TODO: Drop arrow at sect284 -->
             <choiceState section="all" set="disabled" />
             <combat noMindblast="true" noWeapon="1" />
             <afterCombats>
@@ -1540,7 +1528,6 @@
 
         <section id="sect271">
             <test canUseBow="false">
-                <!-- TODO: Drop arrow on sect322 -->
                 <choiceState section="sect322" set="disabled" />
             </test>
         </section>
@@ -1640,10 +1627,6 @@
                 <choiceState section="sect36" set="enabled" />
                 <choiceState section="sect163" set="disabled" />
             </test>
-        </section>
-
-        <section id="sect286">
-            <!-- TODO: Drop arrow on sect322 -->
         </section>
 
         <section id="sect293">
