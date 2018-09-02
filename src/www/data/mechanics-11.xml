@@ -1950,7 +1950,34 @@
             </test>
         </section>
 
-        <!-- Up to sect343 -->
+        <section id="sect344">
+            <endurance count="-10" />
+        </section>
+
+        <section id="sect348">
+            <choiceState section="sect69" set="disabled" />
+            <test hasDiscipline="pthmnshp">
+                <test expression="[KAILEVEL] >= 5">
+                    <choiceState section="sect69" set="enabled" />
+                    <choiceState section="sect196" set="disabled" />
+                </test>
+            </test>
+        </section>
+
+        <section id="sect349">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case from="0" to="5">
+                    <choiceState section="sect310" set="enabled" />
+                </case>
+                <case from="6" to="99">
+                    <choiceState section="sect49" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="nexus|hntmstry">
+                <randomTableIncrement increment="+4" />
+            </test>
+        </section>
 
     </sections>
 
