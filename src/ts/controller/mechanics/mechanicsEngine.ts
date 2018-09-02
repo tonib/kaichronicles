@@ -70,10 +70,10 @@ const mechanicsEngine = {
 
     /**
      * Get a mechanics tag from the mechanicsEngine.html file, translated
-     * @param {string} tagId The tag id to get
+     * @param tagId The tag id to get
      * @returns {jQuery} The translated tag
      */
-    getMechanicsUI: function( tagId ) {
+    getMechanicsUI: function( tagId : string ) : any {
         var $tag = mechanicsEngine.$mechanicsUI.find('#' + tagId ).clone();
         return translations.translateView($tag, true);
     },
@@ -1318,6 +1318,30 @@ const mechanicsEngine = {
      */
     runInventoryEvent: function( rule : any ) {
         mechanicsEngine.fireInventoryEvents();
+    },
+
+    /**
+     * Display section illustration
+     */
+    displayIllustration: function( rule : any ) {
+
+        // Get the UI
+        const $illContainer = mechanicsEngine.getMechanicsUI( 'mechanics-displayillustration' );
+
+        // Set title
+        const title = mechanicsEngine.getRuleText( rule );
+        if( title )
+            $illContainer.find('#mechanics-illtitle').text( title );
+        else
+            $illContainer.find('#mechanics-illtitlecontainer').hide();
+
+        // Set illustration
+        const sectionId = $(rule).attr('section');
+        const section = new Section(state.book, sectionId, state.mechanics);
+        const illustrationHtml = section.getFirstIllustrationHtml();
+        $illContainer.find('#mechanics-ill').html( illustrationHtml );
+
+        gameView.appendToSection( $illContainer );
     },
 
     /************************************************************/

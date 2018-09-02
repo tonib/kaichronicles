@@ -587,7 +587,16 @@ This rule was a big design mistake.
 ### runInventoryEvent
 It runs the "onInventoryEvent" event handler, if it exists on the section.
 
-### special sections
+### displayIllustration
+```xml
+<displayIllustration section="sect131" 
+    en-text="Illustration on section 131"
+    es-text="Ilustración en la sección 131"
+/>
+```
+Displays the first illustration on the "section" attribute section. "xx-text" is an option title to display with the illustration.
+
+### Special sections
 
 There are sections (or parts of them) that cannot be described by the game rules.
 In that case, they are specific implementations:

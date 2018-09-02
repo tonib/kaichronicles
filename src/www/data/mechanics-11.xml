@@ -196,7 +196,10 @@
             <resetSectionState sectionId="sect344" />
             <resetSectionState sectionId="sect169" />
 
-            <!-- TODO: Display illustration on sect131 -->
+            <displayIllustration section="sect131" 
+                en-text="Illustration on section 131"
+                es-text="Ilustración en la sección 131"
+            />
         </section>
 
         <section id="sect26">

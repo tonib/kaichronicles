@@ -589,4 +589,13 @@ class BookValidator {
         if( $rule.closest( 'section[id=equipmnt]' ).length == 0 )
             this.addError( $rule , 'Rule "kaiMonasteryStorage" should be included only on section with id=equipmnt' );
     }
+
+    private displayIllustration( $rule ) {
+        this.validateSectionsAttribute( $rule , 'section' , false );
+        const sectionId : string = $rule.attr( 'section' );
+        const section = new Section( this.book , sectionId , this.mechanics );
+        if( !section.getFirstIllustrationHtml() )
+            this.addError( $rule , 'There are no illustrations on ' + sectionId );
+    }
+
 }
