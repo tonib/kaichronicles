@@ -144,10 +144,6 @@
             </test>
         </section>
 
-        <section id="sect17">
-            <!-- TODO: Drop arrow on sect151 -->
-        </section>
-
         <section id="sect18">
             <object objectId="ookorcharm" />
         </section>
@@ -160,10 +156,6 @@
                     <choiceState section="sect297" set="disabled" />
                 </test>
             </test>
-        </section>
-
-        <section id="sect21">
-            <!-- TODO: Drop arrow on sect284 -->
         </section>
 
         <section id="sect22">
