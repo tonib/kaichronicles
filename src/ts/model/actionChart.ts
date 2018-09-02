@@ -272,8 +272,8 @@ class ActionChart {
      * @return The number of really picked meals 
      */
     public increaseMeals(count : number) : number {
-        if( count > 0 ) {
 
+        if( count > 0 ) {
             if( !this.hasBackpack )
                 throw translations.text( 'backpackLost' );
 
@@ -283,7 +283,13 @@ class ActionChart {
             else if( count > maxToPick )
                 count = maxToPick; 
         }
+
         this.meals += count;
+
+        // Sanitize for negative count values
+        if( this.meals < 0 )
+            this.meals = 0;
+
         //console.log('Picked ' + count + ' meals');
         return count;
     }

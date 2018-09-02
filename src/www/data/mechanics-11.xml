@@ -12,8 +12,9 @@
 
         <section id="tssf">
             <!-- Restore the endurance to the maximum -->
-            <!-- TODO: Sure??? -->
-            <endurance count="+[MAXENDURANCE]" />
+            <!-- NOT ON THIS BOOK: IT'S A IMMEDIATE CONTINUATION OF THE PREVIOUS BOOK -->
+            <!--endurance count="+[MAXENDURANCE]" /-->
+
             <!-- Drop the previous books map -->
             <drop objectId="map" />
         </section>
@@ -30,7 +31,6 @@
 
         <section id="equipmnt" pickMaximum="6">
             <!-- No map / backpack / Kai monastery safekeeping at the start of this book -->
-            <!-- TODO: It seems there is no map at this book. The book map is the "Northern Magnamund" map -->
 
             <!-- You can pick equipment only if it's your first book -->
             <test expression="[KAILEVEL] == 3">
@@ -117,12 +117,7 @@
 
         <section id="sect12">
             <!-- TODO: Drop objects like meal -->
-            <!-- TODO: Bug here. I got a state.actionChart.meals == -1 after executing this -->
-            <!-- TODO: Use pick class="meal" count="-4" ?? -->
-            <drop objectId="meal" index="0" />
-            <drop objectId="meal" index="1" />
-            <drop objectId="meal" index="2" />
-            <drop objectId="meal" index="3" />
+            <pick class="meal" count="-4" />
         </section>
 
         <section id="sect13">
