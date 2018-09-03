@@ -1646,12 +1646,14 @@
         <section id="sect298">
             <choiceState section="all" set="disabled" />
 
-            <!-- TODO: 
-                 If you have not already visited Baylon’s Tomb, you may evade... WHAT SECTION/S?  
-                 sect253 ???
-                 -->
-            <combat eludeTurn="0" />
-            
+            <!-- 
+                "If you have not already visited Baylon’s Tomb, you may evade..." 
+                Baylon’s Tomb is at sect253
+            -->
+            <test not="true" sectionVisited="sect253">
+                <combat eludeTurn="0" />
+            </test>
+
             <test not="true" hasDiscipline="curing" >
                 <combat turnLossIfWounded="-2" />
             </test>
@@ -1721,7 +1723,10 @@
         </section>
 
         <section id="sect315">
-            <!-- TODO: Display illustration on sect166 -->
+            <displayIllustration section="sect166" 
+                en-text="Illustration on section 166"
+                es-text="Ilustración en la sección 166"
+            />
         </section>
 
         <section id="sect316">
