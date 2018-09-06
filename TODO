@@ -17,11 +17,7 @@
 - Quivers with no arrows available on section should not show "(0 arrows)". Show "(0 arrows)" only on Action chart. Same to sell quiver
   object (see book 8, sect139)
 - Erratas:
-  * 1, sect88: English -> "Spear" is capitalized, but not in Spanish
-  * 2, sect290: Spanish missed the foot note ("You must eat another Meal...")
-  * 12, 342: Image title: "con ***suhacha*** lista para segarte"
   * 5: Map: instance outside illustration, wrong illustration tag close
-  * 5, sect58: "incorrecdta"
   * 6, sect17: foot note "sect17-1-foot" is not referenced, and, so, not rendered
   * 6, sect98: foot note "sect98-1-foot" is not referenced, and, so, not rendered
   * 6, sect98: "4 Flechas for 1 Corona" should be "4 Flechas por 1 Corona"
