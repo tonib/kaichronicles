@@ -1011,7 +1011,13 @@
         </section>
 
         <section id="sect109">
+            <message id="msg-sommerswerd" 
+                en-text="You cannot use Sommerswerd or Dagger of Vashna on this combat" 
+                es-text="No puedes usar la Sommerswerd ni la Daga de Vashna en este combate"
+            />
+
             <choiceState section="all" set="disabled" />
+            <combat disabledObjects="sommerswerd|daggerofvashna" />
             <afterCombats>
                 <choiceState section="all" set="enabled" />
             </afterCombats>
@@ -2312,16 +2318,12 @@
         </section>
 
         <section id="sect286">
-            <choiceState section="sect57" set="disabled" />
-            <test hasObject="sommerswerd">
-                <choiceState section="sect57" set="enabled" />
-                <choiceState section="sect109" set="disabled" />
+            <!-- And WISH to use... -->
+            <test not="true" hasObject="sommerswerd">
+                <choiceState section="sect57" set="disabled" />
             </test>
-
-            <choiceState section="sect171" set="disabled" />
-            <test hasObject="daggerofvashna">
-                <choiceState section="sect171" set="enabled" />
-                <choiceState section="sect109" set="disabled" />
+            <test not="true" hasObject="daggerofvashna">
+                <choiceState section="sect171" set="disabled" />
             </test>
         </section>
 
@@ -2697,8 +2699,8 @@
         <section id="sect350">
             <drop objectId="crystalexplosive" />
             <message 
-                en-text="This is the last implemented book. Thank you for playing!" 
-                es-text="Este es el último libro implementado. ¡Gracias por jugar!" 
+                en-text="It has been fun, but there are no plans to support more books. Thank you for playing!" 
+                es-text="Ha sido divertido, pero no hay planes de soportar más libros. ¡Gracias por jugar!" 
             />
         </section>
         
