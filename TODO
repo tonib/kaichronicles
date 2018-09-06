@@ -1,14 +1,3 @@
-- BUG?:
-  Es una excelente app que permite jugar de una manera muy intuitiva y 
-  práctica; pero recientemente me pasó algo extraño. Resulta que antes de 
-  empezar el libro 5 dejé guardada La Espada del Sol ☀ junto con La Daga 🗡 
-  de Vashna y otros objetos especiales en el monasterio. Al empezar el libro 
-  6 aún seguían allí, pero decidí llevar conmigo sólo la Sommerswerd, hasta 
-  aquí todo normal. El problema es que morí y al reiniciar el libro no 
-  aparecen los objetos que dejé en el monasterio ni tampoco los traigo en el 
-  inventario (incluida la antes mencionada Sommerswerd) ; simplemente 
-  desaparecieron. Ya intenté cerrar la app y volverla a abrir e incluso 
-  reiniciar el libro pero nada, arreglenlo y le doy 5 estrellas
 - FAQ: Add info about change the Random Table
 - Use latest version on PAON data on SVN (a fixed commit number)
   * Review upgrades to book 7+

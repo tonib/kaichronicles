@@ -180,7 +180,7 @@ class Translations {
         // Main menu
         //////////////////////////////////////
 
-        'appInfo' : 'Esto es una aplicación para jugar a los librojuegos de Lobo Solitario, del 1 al 10.',
+        'appInfo' : 'Esto es una aplicación para jugar a los librojuegos de Lobo Solitario, del 1 al 12.',
         'browsersWarning' : 'Sólo se soportan las últimas versiones de Chrome y Firefox. Otros navegadores o versiones no están soportados (pueden funcionar... o no).',
         'historyWarning' : 'Ten en cuenta que si borras el historial de tu navegador, perderás la partida actual. Puedes guardar la partida actual a un archivo en <i>Ajustes &gt; Guardar juego</i>.',
         'androidInfo' : 'Puedes jugar a esto en una aplicación Android (versión mínima 4.4). Descárgala en el <a href="https://play.google.com/store/apps/details?id=org.projectaon.kaichronicles">Google Play</a>.',
