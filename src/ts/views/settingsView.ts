@@ -14,6 +14,12 @@ const settingsView = {
             settingsController.changeLanguage( $(this).val() , true );
         });
 
+        // Color theme
+        $('#settings-color-theme').val( state.color );
+        $('#settings-color-theme').change(function() {
+            settingsController.changeColorTheme($(this).val());
+        });
+
         // Random table type
         $('#settings-randomtable').val( state.actionChart.manualRandomTable ? 'manual' : 'computer' );
         $('#settings-randomtable').change(function() {

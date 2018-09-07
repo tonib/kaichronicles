@@ -52,6 +52,14 @@ const settingsController = {
         });
     },
 
+
+    /**
+     * Change the current color theme
+     */
+    changeColorTheme: function(color: string) : void {
+        template.changeColorTheme( color );
+    },
+
     /**
      * Show the save game dialog
      */
