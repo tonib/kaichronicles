@@ -57,6 +57,7 @@ const template = {
         });
         template.updateStatistics(true);
         template.translateMainMenu();
+        template.changeColorTheme(state.color);
 
         if( cordovaApp.isRunningApp() ) {
             // If we are on the cordova app, disable the animation (performance)
@@ -262,5 +263,23 @@ const template = {
             e.preventDefault();
             randomTable.randomTableUIClicked( parseInt( $(this).attr('data-number') ) );
         });
+    },
+
+    /**
+     * Change the color theme of the templates
+     */
+    changeColorTheme: function(theme: string) {
+        state.updateColorTheme( theme );
+        state.persistState();
+        
+        switch(theme) {
+            case 'dark':
+                $('body').addClass('dark');
+                break;
+            default:
+                // we will default to "light" theme, or no class
+                $('body').removeClass();
+                break;
+        }
     }
 };
