@@ -31,7 +31,7 @@ const state = {
     language: 'en',
 
     /**
-     * The current language ('en' = english / 'es' = spanish)
+     * Color Theme ( 'light' or 'dark' )
      */
     color: 'light',
 

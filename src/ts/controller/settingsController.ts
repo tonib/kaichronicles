@@ -58,6 +58,7 @@ const settingsController = {
      */
     changeColorTheme: function(color: string) : void {
         template.changeColorTheme( color );
+        state.persistState();
     },
 
     /**

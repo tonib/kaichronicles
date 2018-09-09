@@ -270,7 +270,6 @@ const template = {
      */
     changeColorTheme: function(theme: string) {
         state.updateColorTheme( theme );
-        state.persistState();
         
         switch(theme) {
             case 'dark':
