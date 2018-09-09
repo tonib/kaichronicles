@@ -45,6 +45,8 @@ var mainMenuView = {
 
         // Download books (only for app)
         var $downloadBooksBtn = $('#menu-downloadbooks');
+        // Switch this to test the "Download books" view with the web browser
+        //if( true ) {
         if( cordovaApp.isRunningApp() ) {
             $('#menu-downloadbooks').click(function(e) {
                 e.preventDefault();

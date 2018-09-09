@@ -337,3 +337,8 @@ body.dark #template-containertable tbody tr:nth-child(even) td:nth-child(even) {
 body.dark #template-containertable {
     border-color: #ddd!important;
 }
+
+/** Downloaded book on Work With Books */
+body.dark #wwbooks-list tr.success > td {
+    background-color: #001a00;
+}
