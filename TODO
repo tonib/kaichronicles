@@ -89,6 +89,7 @@ FOR FUTURE (1.11+):
 - Allow to add a concept description for combat skill modifiers rules on combat ratio explanation
 - Display concepts for objects usages (Adgana, etc) on combat ratio explanation
 - Display book 11 map ("Northern magnamund") somewhere?
+- Change all pending javascript files to typescript
 
 Reminders:
 
