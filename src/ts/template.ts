@@ -267,6 +267,7 @@ const template = {
 
     /**
      * Change the color theme of the templates
+     * @param theme 'light' or 'dark'
      */
     changeColorTheme: function(theme: string) {
         state.updateColorTheme( theme );
