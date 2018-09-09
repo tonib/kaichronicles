@@ -32,6 +32,15 @@ var mainMenuController = {
         mainMenuController.index();
     },
 
+    /**
+     * Change the current color theme
+     */
+    changeColor: function() {
+        settingsController.changeColorTheme(state.color == 'light' ? 'dark' : 'light');
+        mainMenuController.index();
+    },
+
+
     /** Return page */
     getBackController: function() { return 'exitApp'; }
     

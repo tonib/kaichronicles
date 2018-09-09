@@ -282,3 +282,63 @@ td.center {
 #template-containertable tbody tr:nth-child(even) td:nth-child(even) {
    background-color: #ccc;
 }
+
+
+/**
+ * Dark Theme coloring
+*/
+body.dark {
+    background: #222;
+    color: #ccc;
+}
+
+
+body.dark .action.random.picked {
+    color: #ddd;
+}
+
+body.dark .well,
+body.dark .modal-content {
+    background: #333;
+}
+
+body.dark .btn img {
+    filter: invert(87%);
+}
+
+body.dark .btn-default, 
+body.dark .form-control[disabled], 
+body.dark .form-control[readonly], 
+body.dark fieldset[disabled], 
+body.dark .form-control {
+    color: #ccc;
+    background-color: #333;
+    border-color: #ddd;
+}
+
+/* List tables */
+body.dark .list-table {
+    border-color: #ddd;
+}
+body.dark .list-table li {
+    color: #ccc;
+    border-color: #ddd;
+}
+body.dark .list-table > li:nth-of-type(odd),
+body.dark .table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #333;
+}
+
+body.dark #template-containertable tbody tr:nth-child(odd) td:nth-child(odd),
+body.dark #template-containertable tbody tr:nth-child(even) td:nth-child(even) {
+    background-color: #222;
+ }
+
+body.dark #template-containertable {
+    border-color: #ddd!important;
+}
+
+/** Downloaded book on Work With Books */
+body.dark #wwbooks-list tr.success > td {
+    background-color: #001a00;
+}

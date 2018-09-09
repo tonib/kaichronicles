@@ -31,6 +31,11 @@ const state = {
     language: 'en',
 
     /**
+     * Color Theme ( 'light' or 'dark' )
+     */
+    color: 'light',
+
+    /**
      * The local books download state for the Cordova app.
      * This member is not persisted
      */
@@ -45,6 +50,25 @@ const state = {
             return;
         if( navigator.language.toLowerCase().substr(0,2) == 'es' )
             state.language = 'es';
+    },
+
+    /**
+     * Setup the default color or persist from local storage
+     */
+    setupDefaultColorTheme: function() {
+        if( !state.existsPersistedState() ) {
+            state.color = 'light';
+            return;
+        }
+
+        // Be sure this does not fail (it's called from the app setup)
+        try {
+            state.color = JSON.parse(localStorage.getItem( 'state' )).color;
+        }
+        catch(e) {
+            state.color = 'light';
+            console.log(e);
+        }
     },
 
     /**
@@ -111,7 +135,8 @@ const state = {
             bookNumber: state.book ? state.book.bookNumber : 0,
             actionChart: state.actionChart,
             sectionStates: state.sectionStates,
-            language: state.language
+            language: state.language,
+            color: state.color
         };
     },
 
@@ -170,7 +195,10 @@ const state = {
         // On version 1.6.3 / 1.7, we store the number of arrows (magnakai)
         if( !stateKeys.actionChart.arrows )
             stateKeys.actionChart.arrows = 0;
-            
+        
+        // On version 1.11 added theme color
+        state.color = stateKeys.color || 'light';
+
         state.language = stateKeys.language;
         state.book = new Book(stateKeys.bookNumber, state.language);
         state.mechanics = new Mechanics(state.book);
@@ -189,11 +217,20 @@ const state = {
     },
 
     /**
+     * Update state to change the book language
+     * @param color 'light' or 'dark'
+     */
+    updateColorTheme: function(color) {
+        state.color = color;
+    },
+
+
+    /**
      * Restore objects on the Kai Monastery section from the Action Chart
      */
     restoreKaiMonasterySectionObjects : function() {
         const kaiMonasterySection = state.sectionStates.getSectionState( Book.KAIMONASTERY_SECTION );
-        kaiMonasterySection.objects = state.actionChart.kaiMonasterySafekeeping;
+        kaiMonasterySection.objects = state.actionChart ? state.actionChart.kaiMonasterySafekeeping : [];
     },
 
     /**

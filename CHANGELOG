@@ -53,6 +53,9 @@
 - Update combat state after any object is picked
 
 1.11
+ - Book 11 and 12 available
+ - Added night mode
+ - Fixed horrible bug restarting the current book, from Settings or after a dead: The Kai Monastery objects were lost
  - Upgrade of books 1, 3, 4 and 6 to the latest version (erratas). Books 2 and 5 currently cannot be upgraded
  - Fixed bug with tinderbox on book4 / sect270
  - Fixed bug with meals: If the meal object has some effect, apply that effect when the object is eaten
@@ -65,7 +68,6 @@
  - Added privacy policy
  - New option on Action Chart to fight unarmed (can be useful on book 12)
  - Show message when current weapon is changed
- - Fixed horrible bug restarting the current book, from Settings or after a dead: The Kai Monastery objects were lost
  - Book 1, sect88: Spear is capitalized, thus you should be able to take and equip it as a normal weapon
  - Book 2, sect290: According to the text, you need to eat a meal from your backpack in this section
  - Book 5, sect166: You cannot use a Shield when afflicted by Limbdeath

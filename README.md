@@ -117,8 +117,7 @@ A "guide" to develop new books can be found at [doc/README-developing.md](doc/RE
 MIT. This application uses the following third-party code / resources:
 
 * The HTML rendering, books XML processing and Project Aon license HTML contains code
-  taken from [Lone Wolf Adventures](https://lonewolfadventures.projectaon.org/), 
-  by Liquid State Limited
+  taken from Lone Wolf Adventures, by Liquid State Limited
 * The Lone Wolf logo and splashes are taken directly, or adapted, from the 
   [Spanish Project Aon](https://projectaon.org/es)
 * Button icons are create by [Delapouite](http://delapouite.com/), 

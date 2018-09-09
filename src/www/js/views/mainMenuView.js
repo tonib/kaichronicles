@@ -7,10 +7,12 @@ var mainMenuView = {
      */
     setup: function( section ) {
         document.title = translations.text('kaiChronicles');
+
+        // TODO: Use translation on mainMenu.html instead of this ?
         if( state.language == 'es' )
-            $('#menu-translate').text('English version');
+            $('#menu-translate').text('English');
         else
-            $('#menu-translate').text('Versión española');
+            $('#menu-translate').text('Español');
 
         $('#menu-continue').click(function(e) {
             e.preventDefault();
@@ -28,6 +30,10 @@ var mainMenuView = {
             e.preventDefault();
             mainMenuController.changeTranslation();
         });
+        $('#menu-color-theme').click(function(e) {
+            e.preventDefault();
+            mainMenuController.changeColor();
+        });
         $('#menu-faq').click(function(e) {
             e.preventDefault();
             routing.redirect('faq');
@@ -39,6 +45,8 @@ var mainMenuView = {
 
         // Download books (only for app)
         var $downloadBooksBtn = $('#menu-downloadbooks');
+        // Switch this to test the "Download books" view with the web browser
+        //if( true ) {
         if( cordovaApp.isRunningApp() ) {
             $('#menu-downloadbooks').click(function(e) {
                 e.preventDefault();
