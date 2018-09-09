@@ -28,6 +28,10 @@ var mainMenuView = {
             e.preventDefault();
             mainMenuController.changeTranslation();
         });
+        $('#menu-color-theme').click(function(e) {
+            e.preventDefault();
+            mainMenuController.changeColor();
+        });
         $('#menu-faq').click(function(e) {
             e.preventDefault();
             routing.redirect('faq');

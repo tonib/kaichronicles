@@ -31,6 +31,11 @@ const state = {
     language: 'en',
 
     /**
+     * The current language ('en' = english / 'es' = spanish)
+     */
+    color: 'light',
+
+    /**
      * The local books download state for the Cordova app.
      * This member is not persisted
      */
@@ -45,6 +50,17 @@ const state = {
             return;
         if( navigator.language.toLowerCase().substr(0,2) == 'es' )
             state.language = 'es';
+    },
+
+    /**
+     * Setup the default color or persist from local storage
+     */
+    setupDefaultColorTheme: function() {
+        if( !state.existsPersistedState() ) {
+            state.color = 'light';
+            return;
+        }
+        state.color = JSON.parse(localStorage.getItem( 'state' )).color;
     },
 
     /**
@@ -111,7 +127,8 @@ const state = {
             bookNumber: state.book ? state.book.bookNumber : 0,
             actionChart: state.actionChart,
             sectionStates: state.sectionStates,
-            language: state.language
+            language: state.language,
+            color: state.color,
         };
     },
 
@@ -171,6 +188,7 @@ const state = {
         if( !stateKeys.actionChart.arrows )
             stateKeys.actionChart.arrows = 0;
             
+        state.color = stateKeys.color || 'light';
         state.language = stateKeys.language;
         state.book = new Book(stateKeys.bookNumber, state.language);
         state.mechanics = new Mechanics(state.book);
@@ -189,11 +207,19 @@ const state = {
     },
 
     /**
+     * Update state to change the book language
+     */
+    updateColorTheme: function(color) {
+        state.color = color;
+    },
+
+
+    /**
      * Restore objects on the Kai Monastery section from the Action Chart
      */
     restoreKaiMonasterySectionObjects : function() {
         const kaiMonasterySection = state.sectionStates.getSectionState( Book.KAIMONASTERY_SECTION );
-        kaiMonasterySection.objects = state.actionChart.kaiMonasterySafekeeping;
+        kaiMonasterySection.objects = state.actionChart ? state.actionChart.kaiMonasterySafekeeping : [];
     },
 
     /**
