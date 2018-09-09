@@ -7,10 +7,12 @@ var mainMenuView = {
      */
     setup: function( section ) {
         document.title = translations.text('kaiChronicles');
+
+        // TODO: Use translation on mainMenu.html instead of this ?
         if( state.language == 'es' )
-            $('#menu-translate').text('English version');
+            $('#menu-translate').text('English');
         else
-            $('#menu-translate').text('Versión española');
+            $('#menu-translate').text('Español');
 
         $('#menu-continue').click(function(e) {
             e.preventDefault();

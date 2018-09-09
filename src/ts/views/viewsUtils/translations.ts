@@ -189,6 +189,7 @@ class Translations {
         'newGame' : 'Nuevo juego',
         'downloadBooks' : 'Descargar libros',
         'privacy' : 'Política de privacidad',
+        'menu-changecolor' : 'Cambiar color',
 
         //////////////////////////////////////
         // New game
@@ -221,6 +222,9 @@ class Translations {
         'randomTableValues' : 'Valores de la Tabla de la Suerte',
         'computerGenerated' : 'Generados por ordenador',
         'manual' : 'Manuales',
+        'colorTheme' : 'Tema de color',
+        'settings-light' : 'Dia',
+        'settings-dark' : 'Noche',
 
         //////////////////////////////////////
         // Template (Main page)
