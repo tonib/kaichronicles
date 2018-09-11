@@ -28,7 +28,7 @@ var mainMenuController = {
      * Change the current language
      */
     changeTranslation: function() {
-        state.language = state.language == 'es' ? 'en' : 'es';
+        state.language = ( state.language == 'es' ? 'en' : 'es' );
         mainMenuController.index();
     },
 
@@ -36,7 +36,7 @@ var mainMenuController = {
      * Change the current color theme
      */
     changeColor: function() {
-        settingsController.changeColorTheme(state.color == 'light' ? 'dark' : 'light', false);
+        settingsController.changeColorTheme(state.color == 'light' ? 'dark' : 'light');
         mainMenuController.index();
     },
 

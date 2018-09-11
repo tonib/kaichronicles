@@ -2,7 +2,7 @@
 
 /** 
  * The application state
- */
+*/
 const state = {
 
     /**
@@ -31,7 +31,8 @@ const state = {
     language: 'en',
 
     /**
-     * Color Theme ( 'light' or 'dark' )
+     * Color Theme ( 'light' or 'dark' ).
+     * This is stored at localStorage['color'], not with the game state
      */
     color: 'light',
 
@@ -57,13 +58,8 @@ const state = {
      */
     setupDefaultColorTheme: function() {
         
-        if( !state.existsPersistedState() ) {
-            return;
-        }
-
-        // Be sure this does not fail (it's called from the app setup)
         try {
-            state.color = JSON.parse(localStorage.getItem( 'state' )).color;
+            state.color = localStorage.getItem( 'state' );
             if( !state.color )
                 state.color = 'light';
         }
@@ -137,8 +133,7 @@ const state = {
             bookNumber: state.book ? state.book.bookNumber : 0,
             actionChart: state.actionChart,
             sectionStates: state.sectionStates,
-            language: state.language,
-            color: state.color
+            language: state.language
         };
     },
 
@@ -198,9 +193,6 @@ const state = {
         if( !stateKeys.actionChart.arrows )
             stateKeys.actionChart.arrows = 0;
         
-        // On version 1.11 added theme color
-        state.color = stateKeys.color || 'light';
-
         state.language = stateKeys.language;
         state.book = new Book(stateKeys.bookNumber, state.language);
         state.mechanics = new Mechanics(state.book);
@@ -224,8 +216,8 @@ const state = {
      */
     updateColorTheme: function(color) {
         state.color = color;
+        localStorage.setItem( 'color' , state.color );
     },
-
 
     /**
      * Restore objects on the Kai Monastery section from the Action Chart

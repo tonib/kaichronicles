@@ -17,7 +17,7 @@ const settingsView = {
         // Color theme
         $('#settings-color-theme').val( state.color );
         $('#settings-color-theme').change(function() {
-            settingsController.changeColorTheme($(this).val(), true);
+            settingsController.changeColorTheme($(this).val());
         });
 
         // Random table type

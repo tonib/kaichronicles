@@ -278,7 +278,7 @@ const template = {
                 break;
             default:
                 // we will default to "light" theme, or no class
-                $('body').removeClass();
+                $('body').removeClass('dark');
                 break;
         }
     }
