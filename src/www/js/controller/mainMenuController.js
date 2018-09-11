@@ -36,7 +36,7 @@ var mainMenuController = {
      * Change the current color theme
      */
     changeColor: function() {
-        settingsController.changeColorTheme(state.color == 'light' ? 'dark' : 'light');
+        settingsController.changeColorTheme(state.color == 'light' ? 'dark' : 'light', false);
         mainMenuController.index();
     },
 

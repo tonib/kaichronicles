@@ -56,14 +56,16 @@ const state = {
      * Setup the default color or persist from local storage
      */
     setupDefaultColorTheme: function() {
+        
         if( !state.existsPersistedState() ) {
-            state.color = 'light';
             return;
         }
 
         // Be sure this does not fail (it's called from the app setup)
         try {
             state.color = JSON.parse(localStorage.getItem( 'state' )).color;
+            if( !state.color )
+                state.color = 'light';
         }
         catch(e) {
             state.color = 'light';

@@ -55,10 +55,13 @@ const settingsController = {
 
     /**
      * Change the current color theme
+     * @param color 'light' or 'dark'
+     * @param persistState True if the current game state should be persisted
      */
-    changeColorTheme: function(color: string) : void {
+    changeColorTheme: function(color: string, persistState : boolean) : void {
         template.changeColorTheme( color );
-        state.persistState();
+        if( persistState )
+            state.persistState();
     },
 
     /**
