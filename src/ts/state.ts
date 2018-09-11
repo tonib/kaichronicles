@@ -59,7 +59,7 @@ const state = {
     setupDefaultColorTheme: function() {
         
         try {
-            state.color = localStorage.getItem( 'state' );
+            state.color = localStorage.getItem( 'color' );
             if( !state.color )
                 state.color = 'light';
         }
