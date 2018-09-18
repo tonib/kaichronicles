@@ -1,5 +1,4 @@
 - FIXED BUG ON book 6 / sect284. ADD NEW VERSION FOR THIS FIX
-- BUG: book 6 / sect284. Drop all money, sect76 enabled. Pick dropped money, UI state is not upgraded. RE-RENDER SECTION!
 - FAQ: Add info about change the Random Table
 - Use latest version on PAON data on SVN (a fixed commit number)
   * Review upgrades to book 7+
