@@ -357,15 +357,17 @@ class Book6sect284 {
         // Can you quit?
         let quitEnabled = ( betsState.length < 3 && !allMoneyLost );
         mechanicsEngine.setChoiceState('sect336' , !quitEnabled );
-        if( !quitEnabled ) 
+        if( !quitEnabled ) {
             numberPickerMechanics.hideButtonActionEvent();
+            numberPickerMechanics.disable();
+        }
 
         // 3 bets played and still money?
         let sect347Enabled = ( betsState.length >= 3 && state.actionChart.beltPouch > 0 );
         mechanicsEngine.setChoiceState('sect347' , !sect347Enabled );
 
         // All money lost?
-        mechanicsEngine.setChoiceState('sect76' , !allMoneyLost );
+        mechanicsEngine.setChoiceState( 'sect76' , !allMoneyLost );
 
     }
 
