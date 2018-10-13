@@ -1,4 +1,4 @@
-- FIXED BUG ON book 6 / sect284. ADD NEW VERSION FOR THIS FIX
+- UPLOAD NEW VERSION 1.11.1
 - FAQ: Add info about change the Random Table
 - FAQ: "I cannot write on the Action Chart"
 - Use latest version on PAON data on SVN (a fixed commit number)
@@ -96,6 +96,7 @@ Reminders:
 * Emulate with a given emulator name
 cordova emulate --target=Android_4_4_2 android
 cordova emulate --target=Android_5_0_1 android
+cordova emulate --target=Android_6 android
 
 * Build project AON xhtml:
   cd [trunk or tag directory]
@@ -190,4 +191,3 @@ state.sectionStates.getSectionState().addObjectToSection('arrow')
   https://play.google.com/store/apps/category/GAME_ROLE_PLAYING/collection/topselling_free
 
 Work done on this commit:
-
