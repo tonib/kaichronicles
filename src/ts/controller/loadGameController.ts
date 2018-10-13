@@ -172,7 +172,7 @@ class loadGameController {
                 },
                 function( error ) {
                     // ERROR
-                    let msg = 'Error exporting saved games';
+                    let msg = translations.text( 'errorExporting' );
                     if( error )
                         msg += ': ' + error.toString();
                     alert( msg );
@@ -181,7 +181,7 @@ class loadGameController {
         }
         catch(e) {
             console.log(e);
-            alert( 'Error exporting: ' + e.toString() );
+            alert( translations.text( 'errorExporting' ) + ': ' + e.toString() );
         }
     }
 

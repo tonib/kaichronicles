@@ -297,6 +297,8 @@ class Translations {
         'exportImportGames' : 'Exportar / importar partidas',
         'exportImportGamesExplain': 'Puedes exportar e importar las partidas guardadas en la aplicación. Esto puede ser útil ' +
             'para copiarlas desde / hacia otros dispositivos.',
+        'errorExporting' : 'Error exportando juegos guardados',
+        'noGamesToExport' : 'No hay ninguna partida guardada que exportar',
 
         //////////////////////////////////////
         // Others
@@ -484,6 +486,8 @@ class Translations {
         'infoImport' : 'With this function you can import saved games to the application. ' +
             'This can be useful to copy your saved games from other device. You can select files with ' +
             'extension "json" (single saved games) or "zip" (multiple saved games)',
+        'errorExporting' : 'Error exporting saved games',
+        'noGamesToExport' : 'There is no saved game to export',
 
         //////////////////////////////////////
         // Others

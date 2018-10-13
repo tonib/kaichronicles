@@ -22,10 +22,6 @@
 - "Okay okay. Didn't know about the lone wolf series and went through the 10 programmed books in 2 days. Turns out the rest are online !!! 
    So it won't be as fast to play but I'm definitely continuing. One remark. I'd like to be able to know what was in the Kai monastery at 
    the end so I can continue with that too !"
-- Everything is really nice, the only bad thing is that saving games doesn't work, it gives an error message when saving and 
-  when trying to load. When saving: Error exporting saved games: Error creating zip file: No entries. This error message comes up, 
-  but if I leave and reopen it the saved game is there. They are all zip files. When loading (by clicking on the saved game, right?) 
-  It says: SyntaxError: Unexpected end of JSON input. Can you please tell me what to do?
 - Suggestions and bugs on http://projectaon.proboards.com/post/43740
 
 FOR FUTURE (1.11+):

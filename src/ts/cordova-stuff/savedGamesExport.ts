@@ -38,6 +38,13 @@ class SavedGamesExport {
 
         const process = this.setup()
         .then( function() {
+            // Return a human readable error if there are no files to export:
+            if( self.fileGameEntries.length == 0 )
+                return jQuery.Deferred().reject( translations.text( 'noGamesToExport' ) ).promise();
+            else
+                return jQuery.Deferred().resolve().promise();
+        })
+        .then( function() {
             console.log( 'Copying file games to tmp dir (' + self.fileGameEntries.length + ')' );
             return cordovaFS.copySetToAsync( self.fileGameEntries , self.tmpDir );
         })
