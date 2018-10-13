@@ -69,7 +69,7 @@ const template = {
     },
 
     /**
-    * Hide statistics on navigation bar
+    * Show / hide statistics on navigation bar
     */
     showStatistics: function(show : boolean) {
         if( show ) {

@@ -9,8 +9,7 @@ const loadGameView = {
      * Hide the Android files list
      */
     hideFilesList: function() { 
-        $('#loadGame-fileslist').hide(); 
-        $('#loadGame-importexportfunctions').hide();
+        $('#loadGame-app').hide(); 
     },
 
     /**

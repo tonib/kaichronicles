@@ -292,6 +292,11 @@ class Translations {
         'infoImport' : 'Con esta función puedes importar juegos guardados a la aplicación. Esto puede ser útil para copiar ' +
             'tus juegos guardados desde otro dispositivo. Puedes seleccionar ficheros con ' +
             'extensión "json" (un juego guardado) o "zip" (múltiples juegos guardados)',
+        'fileslistExplain' : 'Pincha en un juego de la lista para recuperarlo. Puedes guardar el juego actual en ' +
+            '<i>Ajustes &gt; Guardar partida</i>.',
+        'exportImportGames' : 'Exportar / importar partidas',
+        'exportImportGamesExplain': 'Puedes exportar e importar las partidas guardadas en la aplicación. Esto puede ser útil ' +
+            'para copiarlas desde / hacia otros dispositivos.',
 
         //////////////////////////////////////
         // Others

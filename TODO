@@ -26,6 +26,7 @@
   when trying to load. When saving: Error exporting saved games: Error creating zip file: No entries. This error message comes up, 
   but if I leave and reopen it the saved game is there. They are all zip files. When loading (by clicking on the saved game, right?) 
   It says: SyntaxError: Unexpected end of JSON input. Can you please tell me what to do?
+- Suggestions and bugs on http://projectaon.proboards.com/post/43740
 
 FOR FUTURE (1.11+):
 - Book 9, sect189: We should keep the count of the different currencies (Lunes, Gold Crows,...). Also on:

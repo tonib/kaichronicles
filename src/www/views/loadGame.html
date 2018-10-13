@@ -5,24 +5,36 @@
     <input name="file" type="file" id="loadGame-file" class="form-control" 
         accept=".json" style="height:auto" value="">
 
-    <!-- Errors (Web) -->
+    <!-- Errors (Web / Android) -->
     <p style="color: red" id="loadGame-errors">
-    </p>
-    
-    <!-- Export / import games (Android) -->
-    <p id="loadGame-importexportfunctions" >
-        <button type="submit" class="btn btn-primary btn-block" id="loadGame-export" data-translation="exportGames">
-            Export saved games...
-        </button>
-        <button type="submit" class="btn btn-primary btn-block" id="loadGame-import" data-translation="importGames">
-            Import saved games...
-        </button>
     </p>
 
     <!-- Saved games (Android) -->
-    <table class="table table-striped table-bordered" id="loadGame-fileslist">
-        <tbody>
-        </tbody>
-    </table>
+    <div id="loadGame-app">
+
+        <!-- Games list -->
+        <p id="loadGame-fileslistExplain" data-translation="fileslistExplain">
+            Click on a game on the list to restore it. You can save the current game
+            at <i>Settings &gt; Save game</i>.
+        </p>
+        <table class="table table-striped table-bordered" id="loadGame-fileslist">
+            <tbody>
+            </tbody>
+        </table>
+
+        <!-- Export / import games -->
+        <h2 data-translation="exportImportGames">Export / import games</h2>
+        <p data-translation="exportImportGamesExplain">
+            You can export and import saved games from the application. This can be useful to copy from / to other devices.
+        </p>
+        <p>
+            <button type="submit" class="btn btn-primary btn-block" id="loadGame-export" data-translation="exportGames">
+                Export saved games...
+            </button>
+            <button type="submit" class="btn btn-primary btn-block" id="loadGame-import" data-translation="importGames">
+                Import saved games...
+            </button>
+        </p>
+    </div>
 
 </form>
