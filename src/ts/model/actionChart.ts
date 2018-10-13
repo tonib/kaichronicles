@@ -183,7 +183,7 @@ class ActionChart {
 
                 // Check Special Items limit
                 const nMax = ActionChart.getMaxSpecials();
-                if( nMax && ( this.getNSpecialItems(false) + o.itemCount ) > nMax )
+                if( o.itemCount && nMax && ( this.getNSpecialItems(false) + o.itemCount ) > nMax )
                     throw translations.text( 'msgNoMoreSpecialItems' );
 
                 // If the object is an Arrow, check if the player has some quiver

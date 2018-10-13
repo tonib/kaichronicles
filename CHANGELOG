@@ -76,3 +76,4 @@
 
 1.11.1
  - Fixed bug on book 6 / sect284: If you lost all your money, you could not go to sect76
+ - Fixed bug picking map on book 6 if you had 12 or more Special Items
