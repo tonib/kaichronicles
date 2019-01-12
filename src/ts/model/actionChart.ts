@@ -78,6 +78,9 @@ class ActionChart {
 
     /** The player has used adgana previously? (see "pouchadgana" object) */
     public adganaUsed = false;
+    
+    /** Container for a fake combat used to update stats, so rules can be applied to them */
+    public combats : Array<Combat> = [];
 
     /**
      * Restore 20 EP used?.
@@ -611,10 +614,17 @@ class ActionChart {
      */
     public getCurrentCombatSkillBonuses(combat : Combat = null) : Array<Bonus> {
 
-        if( !combat )
+        if( !combat ) {
             // Create a fake combat with the default values
-            combat = new Combat('Fake enemy' , 0 , 0 );
-
+            // make it in the action chart object so other parts of the system can read it
+            this.combats[0] = new Combat('Fake enemy' , 0 , 0 );
+            // apply all global rules (to setup disabled objects for example)
+            for (var i = 0; i < state.sectionStates.globalRulesIds.length; i++) {
+               var id = state.sectionStates.globalRulesIds[i];
+               mechanicsEngine.runChildRules(state.mechanics.getGlobalRule(id));
+            }
+            combat = this.combats[0];
+        }
         var bonuses = [];
 
         var currentWeapon = this.getSelectedWeaponItem( combat.bowCombat );
@@ -661,6 +671,9 @@ class ActionChart {
             for( let c of circlesBonuses )
                 bonuses.push(c);
         }
+
+        // remove fake combat from action chart object
+        delete this.combats[0];
 
         return bonuses;
     }
