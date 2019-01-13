@@ -330,11 +330,17 @@ const combatTable = {
      */
     getCombatTableResult: function(combatRatio : number, randomTableValue : number) : Array<any> {
         var ponderatedIndex = combatRatio / 2.0;
-        // round up, to represent the column on the table we're going to use
-        ponderatedIndex = Math.ceil(ponderatedIndex);
-        // check if we're using the extended CRT or not
+        // check if we're using the extended CRT or not and set max column
         var maxPonderatedIndex = state.actionChart.extendedCRT ? 15 : 6;
-        // limit to the min and max columns possible
+        // Set to the right column
+        if( ponderatedIndex < 0) {
+            // round -4.5 to -5
+            ponderatedIndex = Math.floor(ponderatedIndex);
+        } else if( ponderatedIndex > 0) {
+            // round 4.5 to 5
+            ponderatedIndex = Math.ceil(ponderatedIndex);
+        }
+        // stick to min and max columns
         if( ponderatedIndex < -6 ) {
             ponderatedIndex  = -6;
         } else if( ponderatedIndex > maxPonderatedIndex ) {
