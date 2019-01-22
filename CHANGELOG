@@ -79,3 +79,5 @@
  - Fixed bug picking map on book 6 if you had 12 or more Special Items
  - Better explanation for export / import / save / load games
  - Fixed bug trying to export saved games if there was none
+ - Fixed bug on book 10 / Equipment: Missed Potion of Alether
+ 
