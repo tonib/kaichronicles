@@ -995,7 +995,7 @@
                 Aumentará en 2 puntos tu DESTREZA EN EL COMBATE mientras dure una lucha
             </description>
 
-            <image book="1" name="potion.png" />
+            <image book="1|9" name="potion.png" />
             <usage class="combatSkill" increment="2" />
         </object>
        

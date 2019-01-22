@@ -54,6 +54,7 @@
             <object objectId="meal" index="1" />
             <object objectId="meal" index="2" />
             <object objectId="dagger" />
+            <object objectId="potionofstrength" />
 
             <chooseEquipment 
                 en-text="Click on the Random Table link to get money before continuing" 
