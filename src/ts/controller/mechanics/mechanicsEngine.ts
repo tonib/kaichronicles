@@ -151,9 +151,28 @@ const mechanicsEngine = {
             mechanicsEngine.runChildRules( $sectionMechanics );
         
         // Run global rules
+        mechanicsEngine.runGlobalRules();
+    },
+
+    /**
+     * Run registered global rules
+     * @param onlyCombatRules True to apply only "combat" rules
+     * @param combatToApply Only applies if onlyCombatRules is true. Single combat where to apply the combat rules
+     */
+    runGlobalRules : function(onlyCombatRules : boolean = false, combatToApply : Combat = null) {
+
         for( var i=0; i<state.sectionStates.globalRulesIds.length; i++) {
-            var id = state.sectionStates.globalRulesIds[i];
-            mechanicsEngine.runChildRules( state.mechanics.getGlobalRule(id) );
+            const id = state.sectionStates.globalRulesIds[i];
+            const $globalRule = state.mechanics.getGlobalRule(id);
+            
+            if( onlyCombatRules ) {
+                for( let rule of $globalRule.children() ) {
+                    if( rule.nodeName == 'combat' )
+                        mechanicsEngine.combat(rule, combatToApply);
+                }
+            }
+            else
+                mechanicsEngine.runChildRules( $globalRule );
         }
     },
 
@@ -776,8 +795,11 @@ const mechanicsEngine = {
 
     /**
      * Combat options
+     * @param rule The combat rule to apply
+     * @param combatToApply If null, the rule will be applied to a current section combat. If not null
+     * the rule will be applied to this combat
      */
-    combat: function(rule) {
+    combat: function(rule, combatToApply : Combat = null) {
 
         // TODO: Reuse this selector, performance:
         const $rule = $(rule);
@@ -788,12 +810,19 @@ const mechanicsEngine = {
             combatIndex = 0;
 
         var sectionState = state.sectionStates.getSectionState();
-        if( combatIndex >= sectionState.combats.length ) {
-            mechanicsEngine.debugWarning('Rule "combat": Combat with index ' +
-                combatIndex + ' not found');
-            return;
+
+        // Get the combat where to apply the rule
+        let combat : Combat;
+        if( combatToApply )
+            combat = combatToApply;
+        else {
+            if( combatIndex >= sectionState.combats.length ) {
+                mechanicsEngine.debugWarning('Rule "combat": Combat with index ' +
+                    combatIndex + ' not found');
+                return;
+            }
+            combat = sectionState.combats[ combatIndex ];
         }
-        var combat = sectionState.combats[ combatIndex ];
 
         // Check LW combat ABSOLUTE skill modifier for this section:
         const combatSkillModifier = mechanicsEngine.getIntProperty( $rule , 'combatSkillModifier', true );
@@ -1215,6 +1244,9 @@ const mechanicsEngine = {
         }
 
         state.sectionStates.markRuleAsExecuted(rule);
+        // update stats in case global rule affects them...
+        actionChartView.updateStatistics();
+        template.updateStatistics();
     },
 
     /**
@@ -1224,6 +1256,10 @@ const mechanicsEngine = {
         var ruleId = $(rule).attr('id');
         console.log('Unregistering global rule ' + ruleId );
         state.sectionStates.globalRulesIds.removeValue(ruleId);
+        // update stats in case global rule affected them...
+        actionChartView.updateStatistics();
+        template.updateStatistics();
+
     },
 
     /**

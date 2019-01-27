@@ -170,7 +170,7 @@ class Translations {
         'forSommerlund' : '¡Por Sommerlund y el Kai!',
         'dedication' : 'Dedicatoria',
         'gameMechanics' : 'Mecanicas del juego',
-        'aboutKaiChronicles' : 'Mecánicas del juego escritas por Toni Bennasar, Timendum, Michael Terry, Javier Fernández-Sanguino, James Koval, Rendall y Garrett Scott. El código está bajo licencia MIT. Contien partes de código de Lone Wolf Adventures, creado por Liquid State Limited.',
+        'aboutKaiChronicles' : 'Mecánicas del juego escritas por Toni Bennasar, Timendum, Michael Terry, Javier Fernández-Sanguino, James Koval, Rendall, Garrett Scott y Julian Egelstaff. El código está bajo licencia MIT. Contien partes de código de Lone Wolf Adventures, creado por Liquid State Limited.',
         'distribution' : 'Distribución',
         'distributionInfo' : 'Libro distribuido por el <a href="https://www.projectaon.org">Proyecto Aon</a>, bajo la <a href="#projectAonLicense">licencia del Proyecto Aon</a>.',
         'about-authors' : 'Sobre los autores del libro',

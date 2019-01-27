@@ -78,7 +78,7 @@ class ActionChart {
 
     /** The player has used adgana previously? (see "pouchadgana" object) */
     public adganaUsed = false;
-
+    
     /**
      * Restore 20 EP used?.
      * Archmaster level:
@@ -611,9 +611,12 @@ class ActionChart {
      */
     public getCurrentCombatSkillBonuses(combat : Combat = null) : Array<Bonus> {
 
-        if( !combat )
+        if( !combat ) {
             // Create a fake combat with the default values
             combat = new Combat('Fake enemy' , 0 , 0 );
+            // apply all global rules (to setup disabled objects for example)
+            mechanicsEngine.runGlobalRules(true, combat);
+        }
 
         var bonuses = [];
 
