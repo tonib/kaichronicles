@@ -789,11 +789,18 @@ const mechanicsEngine = {
 
         var sectionState = state.sectionStates.getSectionState();
         if( combatIndex >= sectionState.combats.length ) {
-            mechanicsEngine.debugWarning('Rule "combat": Combat with index ' +
-                combatIndex + ' not found');
-            return;
+            // are we just updating stats?
+            if(state.actionChart.combats[ combatIndex ]) {
+                var combat = state.actionChart.combats[ combatIndex ];
+            } else {
+                // no combats available...
+                mechanicsEngine.debugWarning('Rule "combat": Combat with index ' +
+                    combatIndex + ' not found. Not updating Action Chart stats either.');
+                return;
+            }
+        } else {
+            var combat = sectionState.combats[ combatIndex ];
         }
-        var combat = sectionState.combats[ combatIndex ];
 
         // Check LW combat ABSOLUTE skill modifier for this section:
         const combatSkillModifier = mechanicsEngine.getIntProperty( $rule , 'combatSkillModifier', true );
@@ -1215,6 +1222,9 @@ const mechanicsEngine = {
         }
 
         state.sectionStates.markRuleAsExecuted(rule);
+        // update stats in case global rule affects them...
+        actionChartView.updateStatistics();
+        template.updateStatistics();
     },
 
     /**
@@ -1224,6 +1234,10 @@ const mechanicsEngine = {
         var ruleId = $(rule).attr('id');
         console.log('Unregistering global rule ' + ruleId );
         state.sectionStates.globalRulesIds.removeValue(ruleId);
+        // update stats in case global rule affected them...
+        actionChartView.updateStatistics();
+        template.updateStatistics();
+
     },
 
     /**
