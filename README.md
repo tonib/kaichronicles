@@ -74,6 +74,9 @@ Optional method for running a local website only to play the game
 
 ### Developing 
 
+**IMPORTANT**: Official Lone Wolf mobile products are currently in development. At some point this year all fanmade unofficial apps **will be discontinued**.
+Please, keep in mind this if you have plans to add a Pull Request, because Kai Chronicles will be removed at some point of this year (2019).
+
 Game rules for each book are located at [src/www/data](src/www/data). "mechanics-X" are the game rules
 for the book X. "objects.xml" are the game objects
 
