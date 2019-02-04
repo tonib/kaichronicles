@@ -70,6 +70,9 @@ class ActionChart {
     /** Use manual random table? */
     public manualRandomTable = true;
 
+    /** Use extended CRT? */
+    public extendedCRT = false;
+
     /** The latests scroll position on the game section */
     public yScrollPosition = 0;
 
@@ -98,6 +101,7 @@ class ActionChart {
             this.endurance = this.currentEndurance = 25;
             this.combatSkill = 15;
             this.manualRandomTable = true;
+            this.extendedCRT = false;
             if( state.book ) {
                 if( state.book.bookNumber <= 5 ) {
                     // debug data for kai series

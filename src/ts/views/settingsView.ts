@@ -25,6 +25,12 @@ const settingsView = {
         $('#settings-randomtable').change(function() {
             state.actionChart.manualRandomTable = ( $(this).val() == 'manual' );
         });
+        
+        // Extended CRT
+        $('#settings-extendedcrt').val( state.actionChart.extendedCRT ? 'yes' : 'no' );
+        $('#settings-extendedcrt').change(function() {
+            state.actionChart.extendedCRT = ( $(this).val() == 'yes' );
+        });
 
         // Restart book
         $('#settings-restart').click(function(e) {
