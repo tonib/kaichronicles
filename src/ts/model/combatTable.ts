@@ -16,10 +16,10 @@ const combatTable = {
         
         // Random table result = 1
         1: {
-            0: [ 3 , 5 ],
-            1: [ 2 , 5 ],
-            2: [ 1 , 6 ],
-            3: [ 0 , 6 ],
+            0: [ 3 , 5 ], // Combat ratio 0 => E: 3 / LW: 5
+            1: [ 2 , 5 ], // Combat ratio -1 / -2 => E: 2 / LW: 5
+            2: [ 1 , 6 ], // Combat ratio -3 / -4, => E: 1 / LW: 6
+            3: [ 0 , 6 ], // ...
             4: [ 0 , 8 ],
             5: [ 0 , combatTable_DEATH],
             6: [ 0 , combatTable_DEATH ]
@@ -132,12 +132,21 @@ const combatTable = {
         
         // Random table result = 1
         1: {
-            1: [4 , 5],
-            2: [5 , 4],
-            3: [6 , 4],
+            1: [4 , 5], // Combat ratio +1 / +2 => E: 4 , LW: 5
+            2: [5 , 4], // Combat ratio +3 / +4 => E: 5 , LW: 4
+            3: [6 , 4], // ...
             4: [7 , 4],
             5: [8 , 3],
-            6: [9 , 3]
+            6: [9 , 3], // Combat ratio +11 or more if NO extended table (+11 / +12 if extended table)
+            7: [10, 2], // EXTENDED TABLE STARTS HERE (Combat ratio +13 / +14)
+            8: [11, 2],
+            9: [12, 1],
+            10: [14, 1],
+            11: [16, 1],
+            12: [18, 0],
+            13: [20, 0],
+            14: [22, 0],
+            15: [combatTable_DEATH, 0]
         },
         
         // Random table result = 2
@@ -147,7 +156,16 @@ const combatTable = {
             3: [7  , 3],
             4: [8  , 3],
             5: [9  , 3],
-            6: [10 , 2]
+            6: [10 , 2],
+            7: [11, 2],
+            8: [12, 1],
+            9: [14, 1],
+            10: [16, 1],
+            11: [18, 0],
+            12: [20, 0],
+            13: [22, 0],
+            14: [combatTable_DEATH, 0],
+            15: [combatTable_DEATH, 0]
         },
         
         // Random table result = 3
@@ -157,7 +175,16 @@ const combatTable = {
             3: [8  , 3],
             4: [9  , 2],
             5: [10 , 2],
-            6: [11 , 2]
+            6: [11 , 2],
+            7: [12, 1],
+            8: [14, 1],
+            9: [16, 1],
+            10: [18, 0],
+            11: [20, 0],
+            12: [22, 0],
+            13: [combatTable_DEATH, 0],
+            14: [combatTable_DEATH, 0],
+            15: [combatTable_DEATH, 0]
         },
         
         // Random table result = 4
@@ -167,7 +194,16 @@ const combatTable = {
             3: [9 , 2],
             4: [10 , 2],
             5: [11 , 2],
-            6: [12 , 2]
+            6: [12 , 2],
+            7: [14, 1],
+            8: [16, 1],
+            9: [18, 0],
+            10: [20, 0],
+            11: [combatTable_DEATH, 0],
+            12: [combatTable_DEATH, 0],
+            13: [combatTable_DEATH, 0],
+            14: [combatTable_DEATH, 0],
+            15: [combatTable_DEATH, 0]
         },
         
         // Random table result = 5
@@ -177,7 +213,16 @@ const combatTable = {
             3: [10 , 2],
             4: [11 , 2],
             5: [12 , 2],
-            6: [14 , 1]
+            6: [14 , 1],
+            7: [16, 1],
+            8: [18, 0],
+            9: [20, 0],
+            10: [combatTable_DEATH, 0],
+            11: [combatTable_DEATH, 0],
+            12: [combatTable_DEATH, 0],
+            13: [combatTable_DEATH, 0],
+            14: [combatTable_DEATH, 0],
+            15: [combatTable_DEATH, 0]
         },
         
         // Random table result = 6
@@ -187,7 +232,16 @@ const combatTable = {
             3: [11, 1],
             4: [12, 1],
             5: [14, 1],
-            6: [16, 1]
+            6: [16, 1],
+            7: [18, 0],
+            8: [20, 0],
+            9: [combatTable_DEATH, 0],
+            10: [combatTable_DEATH, 0],
+            11: [combatTable_DEATH, 0],
+            12: [combatTable_DEATH, 0],
+            13: [combatTable_DEATH, 0],
+            14: [combatTable_DEATH, 0],
+            15: [combatTable_DEATH, 0]
         },
         
         // Random table result = 7
@@ -197,7 +251,16 @@ const combatTable = {
             3: [12, 0],
             4: [14, 0],
             5: [16, 0],
-            6: [18, 0]
+            6: [18, 0],
+            7: [20, 0],
+            8: [combatTable_DEATH, 0],
+            9: [combatTable_DEATH, 0],
+            10: [combatTable_DEATH, 0],
+            11: [combatTable_DEATH, 0],
+            12: [combatTable_DEATH, 0],
+            13: [combatTable_DEATH, 0],
+            14: [combatTable_DEATH, 0],
+            15: [combatTable_DEATH, 0]
         },
         
         // Random table result = 8
@@ -207,7 +270,16 @@ const combatTable = {
             3: [14, 0],
             4: [16, 0],
             5: [18, 0],
-            6: [combatTable_DEATH, 0]
+            6: [combatTable_DEATH, 0],
+            7: [combatTable_DEATH, 0],
+            8: [combatTable_DEATH, 0],
+            9: [combatTable_DEATH, 0],
+            10: [combatTable_DEATH, 0],
+            11: [combatTable_DEATH, 0],
+            12: [combatTable_DEATH, 0],
+            13: [combatTable_DEATH, 0],
+            14: [combatTable_DEATH, 0],
+            15: [combatTable_DEATH, 0]
         },
         
         // Random table result = 9
@@ -217,7 +289,16 @@ const combatTable = {
             3: [16, 0],
             4: [18, 0],
             5: [combatTable_DEATH, 0],
-            6: [combatTable_DEATH, 0]
+            6: [combatTable_DEATH, 0],
+            7: [combatTable_DEATH, 0],
+            8: [combatTable_DEATH, 0],
+            9: [combatTable_DEATH, 0],
+            10: [combatTable_DEATH, 0],
+            11: [combatTable_DEATH, 0],
+            12: [combatTable_DEATH, 0],
+            13: [combatTable_DEATH, 0],
+            14: [combatTable_DEATH, 0],
+            15: [combatTable_DEATH, 0]
         },
         
         // Random table result = 0
@@ -227,7 +308,16 @@ const combatTable = {
             3: [18, 0],
             4: [combatTable_DEATH, 0],
             5: [combatTable_DEATH, 0],
-            6: [combatTable_DEATH, 0]
+            6: [combatTable_DEATH, 0],
+            7: [combatTable_DEATH, 0],
+            8: [combatTable_DEATH, 0],
+            9: [combatTable_DEATH, 0],
+            10: [combatTable_DEATH, 0],
+            11: [combatTable_DEATH, 0],
+            12: [combatTable_DEATH, 0],
+            13: [combatTable_DEATH, 0],
+            14: [combatTable_DEATH, 0],
+            15: [combatTable_DEATH, 0]
         }
     },
 
@@ -239,19 +329,54 @@ const combatTable = {
      * EP enemy loss. Index 1 is the Lone Wolf loss
      */
     getCombatTableResult: function(combatRatio : number, randomTableValue : number) : Array<any> {
+        /*
         var ponderatedIndex = combatRatio / 2.0;
+        // check if we're using the extended CRT or not and set max column
+        var maxPonderatedIndex = state.actionChart.extendedCRT ? 15 : 6;
+        // Set to the right column
+        if( ponderatedIndex < 0) {
+            // round -4.5 to -5
+            ponderatedIndex = Math.floor(ponderatedIndex);
+        } else if( ponderatedIndex > 0) {
+            // round 4.5 to 5
+            ponderatedIndex = Math.ceil(ponderatedIndex);
+        }
+        // stick to min and max columns
+        if( ponderatedIndex < -6 ) {
+            ponderatedIndex  = -6;
+        } else if( ponderatedIndex > maxPonderatedIndex ) {
+            ponderatedIndex = maxPonderatedIndex;
+        }
         var table;
+        if( combatRatio <= 0 ) {
+            table = combatTable.tableBelowOrEqualToEnemy;
+            // flip the sign to select the right column
+            ponderatedIndex = - ponderatedIndex;
+        } else {
+            table = combatTable.tableAboveEnemy;
+        }
+        return table[randomTableValue][ponderatedIndex];
+        */
+
+        let ponderatedIndex = combatRatio / 2.0;
+        let table;
         if( combatRatio <= 0 ) {
             table = combatTable.tableBelowOrEqualToEnemy;
             ponderatedIndex = - ponderatedIndex;
         }
         else
-            table = combatTable.tableAboveEnemy;
+           table = combatTable.tableAboveEnemy;
+
+        // round 4.5 to 5
         ponderatedIndex = Math.ceil(ponderatedIndex);
-        if( ponderatedIndex > 6 )
-            ponderatedIndex = 6;
-        
+
+        // check if we're using the extended CRT or not and set max column
+        const maxPonderatedIndex = state.actionChart.extendedCRT && combatRatio > 0 ? 15 : 6;
+        if( ponderatedIndex > maxPonderatedIndex )
+            ponderatedIndex = maxPonderatedIndex;
+
         return table[randomTableValue][ponderatedIndex];
+
     }
 };
 

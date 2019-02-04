@@ -70,6 +70,11 @@ class ActionChart {
     /** Use manual random table? */
     public manualRandomTable = true;
 
+    /** Use extended Combat Results Table?
+     * See LW club newsletter 29 (https://www.projectaon.org/en/pdf/lwcn/Newsletters-All.pdf , page 415)
+     */
+    public extendedCRT = false;
+
     /** The latests scroll position on the game section */
     public yScrollPosition = 0;
 
@@ -98,6 +103,7 @@ class ActionChart {
             this.endurance = this.currentEndurance = 25;
             this.combatSkill = 15;
             this.manualRandomTable = true;
+            this.extendedCRT = false;
             if( state.book ) {
                 if( state.book.bookNumber <= 5 ) {
                     // debug data for kai series
