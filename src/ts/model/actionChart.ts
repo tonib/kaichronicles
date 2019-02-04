@@ -70,7 +70,9 @@ class ActionChart {
     /** Use manual random table? */
     public manualRandomTable = true;
 
-    /** Use extended CRT? */
+    /** Use extended Combat Results Table?
+     * See LW club newsletter 29 (https://www.projectaon.org/en/pdf/lwcn/Newsletters-All.pdf , page 415)
+     */
     public extendedCRT = false;
 
     /** The latests scroll position on the game section */

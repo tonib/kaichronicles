@@ -81,3 +81,4 @@
  - Fixed bug trying to export saved games if there was none
  - Fixed bug on book 10 / Equipment: Missed Potion of Alether
  - Book 5: Do not show +2 CS on stats if you cannot use Shield by Limbdeath (Thanks Julian!)
+ - Support for Extended Combat Results Table (LW club newsletter 29). Thanks Julian!

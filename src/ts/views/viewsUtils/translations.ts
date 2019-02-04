@@ -222,7 +222,7 @@ class Translations {
         'randomTableValues' : 'Valores de la Tabla de la Suerte',
         'computerGenerated' : 'Generados por ordenador',
         'manual' : 'Manuales',
-        'extendedCRT' : '¿Usa las Tablas de Combate Extendidas?',
+        'extendedCRT' : '¿Usar Tablas de Combate Extendidas (LW club newsletter 29)?',
         'Yes' : 'Sí',
         'No' : 'No',
         'colorTheme' : 'Tema de color',

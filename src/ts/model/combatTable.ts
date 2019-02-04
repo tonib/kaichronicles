@@ -16,10 +16,10 @@ const combatTable = {
         
         // Random table result = 1
         1: {
-            0: [ 3 , 5 ],
-            1: [ 2 , 5 ],
-            2: [ 1 , 6 ],
-            3: [ 0 , 6 ],
+            0: [ 3 , 5 ], // Combat ratio 0 => E: 3 / LW: 5
+            1: [ 2 , 5 ], // Combat ratio -1 / -2 => E: 2 / LW: 5
+            2: [ 1 , 6 ], // Combat ratio -3 / -4, => E: 1 / LW: 6
+            3: [ 0 , 6 ], // ...
             4: [ 0 , 8 ],
             5: [ 0 , combatTable_DEATH],
             6: [ 0 , combatTable_DEATH ]
@@ -132,13 +132,13 @@ const combatTable = {
         
         // Random table result = 1
         1: {
-            1: [4 , 5],
-            2: [5 , 4],
-            3: [6 , 4],
+            1: [4 , 5], // Combat ratio +1 / +2 => E: 4 , LW: 5
+            2: [5 , 4], // Combat ratio +3 / +4 => E: 5 , LW: 4
+            3: [6 , 4], // ...
             4: [7 , 4],
             5: [8 , 3],
-            6: [9 , 3],
-            7: [10, 2],
+            6: [9 , 3], // Combat ratio +11 or more if NO extended table (+11 / +12 if extended table)
+            7: [10, 2], // EXTENDED TABLE STARTS HERE (Combat ratio +13 / +14)
             8: [11, 2],
             9: [12, 1],
             10: [14, 1],
@@ -329,6 +329,7 @@ const combatTable = {
      * EP enemy loss. Index 1 is the Lone Wolf loss
      */
     getCombatTableResult: function(combatRatio : number, randomTableValue : number) : Array<any> {
+        /*
         var ponderatedIndex = combatRatio / 2.0;
         // check if we're using the extended CRT or not and set max column
         var maxPonderatedIndex = state.actionChart.extendedCRT ? 15 : 6;
@@ -355,6 +356,27 @@ const combatTable = {
             table = combatTable.tableAboveEnemy;
         }
         return table[randomTableValue][ponderatedIndex];
+        */
+
+        let ponderatedIndex = combatRatio / 2.0;
+        let table;
+        if( combatRatio <= 0 ) {
+            table = combatTable.tableBelowOrEqualToEnemy;
+            ponderatedIndex = - ponderatedIndex;
+        }
+        else
+           table = combatTable.tableAboveEnemy;
+
+        // round 4.5 to 5
+        ponderatedIndex = Math.ceil(ponderatedIndex);
+
+        // check if we're using the extended CRT or not and set max column
+        const maxPonderatedIndex = state.actionChart.extendedCRT && combatRatio > 0 ? 15 : 6;
+        if( ponderatedIndex > maxPonderatedIndex )
+            ponderatedIndex = maxPonderatedIndex;
+
+        return table[randomTableValue][ponderatedIndex];
+
     }
 };
 
