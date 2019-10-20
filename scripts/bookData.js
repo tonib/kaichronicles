@@ -33,6 +33,8 @@ BookData.EXTRA_TONI_CONTENTS_URL = 'https://projectaon.org/staff/toni/extraConte
 /** URL for the PAON trunk (current version) */
 BookData.SVN_TRUNK_URL = 'https://www.projectaon.org/data/trunk';
 
+BookData.LANGUAGES = ['en','es'];
+
 /**
  * Returns the SVN root for this book.
  * See projectAon.ts for an explanation
@@ -215,26 +217,31 @@ BookData.prototype.zipBook = function() {
 
 BookData.prototype.downloadBookData = function() {
 
+    fs.removeSync( BookData.TARGET_ROOT + '/' + this.bookNumber );
     fs.mkdirSync( BookData.TARGET_ROOT + '/' + this.bookNumber );
-
-    // Download authors biographies
-    this.bookMetadata.biographies.forEach( (authorBio) => {
-        this.downloadAuthorBio('en', authorBio);
-        this.downloadAuthorBio('es', authorBio);
-    });
 
     this.downloadCover();
 
-    this.downloadXml('en');
-    this.downloadXml('es');
+    for(var i=0; i < BookData.LANGUAGES.length; i++) {        
+        var language = BookData.LANGUAGES[i];
+        if(!this.getBookCode( language )) {
+            // Skip books without given language
+            continue;
+        }
 
-    this.illAuthors.forEach( (author) => {
-        this.downloadIllustrations('en' , author);
-        this.downloadIllustrations('es' , author);
-    });
+        // Download authors biographies
+        this.bookMetadata.biographies.forEach( (authorBio) => {
+            this.downloadAuthorBio(language, authorBio);
+        });
 
-    this.downloadCombatTablesImages('en');
-    this.downloadCombatTablesImages('es');
+        this.downloadXml(language);
+
+        this.illAuthors.forEach( (author) => {
+            this.downloadIllustrations(language , author);
+        });
+
+        this.downloadCombatTablesImages(language);
+    }
 
     this.zipBook();
 }
