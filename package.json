@@ -1,30 +1,26 @@
 {
     "name": "kaichronicles",
     "version": "1.11.1",
-    "repository" :
-    { 
-        "type" : "git",
-        "url" : "https://github.com/tonib/kaichronicles.git"
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/tonib/kaichronicles.git"
     },
-    "license" : "MIT",
-
+    "license": "MIT",
     "devDependencies": {
-        "jshint": "2.9.5",
+        "jshint": "2.10.2",
         "node-fs-extra": "0.8.2",
-        "uglify-js": "3.0.25",
-        "klaw-sync": "2.1.0",
+        "uglify-js": "3.6.2",
+        "klaw-sync": "6.0.0",
         "preprocess": "3.1.0",
-        "typescript": "2.4.1"
+        "typescript": "2.6.2"
     },
-
     "scripts": {
         "lint": "jshint src/www/js",
         "prepareversion": "node scripts/prepareVersion.js",
         "cleandist": "rm -rf dist",
         "downloaddata": "node scripts/downloadProjectAonData.js",
-        "ts": "tsc -p tsconfig.json",
+        "ts": "tsc -p tsconfig.json --watch",
         "cleants": "rm -rf src/www/js/ts-generated",
         "reviewchanges": "node scripts/reviewBookChanges.js"
     }
 }
-
