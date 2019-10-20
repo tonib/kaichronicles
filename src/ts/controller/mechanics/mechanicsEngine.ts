@@ -731,8 +731,11 @@ const mechanicsEngine = {
         // Object can be used directly from the section, without picking it?
         const useOnSection = ( $(rule).attr('useOnSection') == 'true' );
         
+        // Show arrows count for quiver
+        const showCount = ( $(rule).attr('showCount') == 'true' );
+        
         // Add the object to the available objects on the section
-        sectionState.addObjectToSection( objectId , price , unlimited , count , useOnSection );
+        sectionState.addObjectToSection( objectId , price , unlimited , count , showCount , useOnSection );
 
         sectionState.markRuleAsExecuted(rule);
     },

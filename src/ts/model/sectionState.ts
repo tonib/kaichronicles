@@ -19,6 +19,11 @@ interface SectionItem {
      */
     count : number;
 
+    /** 
+     * Only applies if id = 'quiver' (show the number of arrows on the quiver) 
+     */
+    showCount : boolean;
+
     /**
      * Object is allowed to be used from the section (not picked object)?
      */
@@ -235,10 +240,11 @@ class SectionState {
      * @param unlimited True if there are an infinite number of this kind of object on the section
      * @param count Only applies if id = 'quiver' (number of arrows on the quiver), 'arrow' (number of arrows), or 'money' (number of Gold Crowns),
      * or if price is is not zero (-> you buy "count" items for one "price")
+     * @param showCount Only applies if id = 'quiver' (show the number of arrows on the quiver)
      * @param useOnSection The object is allowed to be used on the section (not picked object)?
      */
     public addObjectToSection(objectId : string , price : number = 0, unlimited : boolean = false, count : number = 0 ,
-        useOnSection : boolean = false ) {
+        showCount : boolean = false , useOnSection : boolean = false ) {
 
         // Special cases:
         if( objectId == 'money' ) {
@@ -256,6 +262,7 @@ class SectionState {
             price: price,
             unlimited: unlimited,
             count: (objectId == Item.QUIVER || objectId == Item.ARROW || objectId == Item.MONEY || price > 0 ? count : 0 ),
+            showCount: (objectId == Item.QUIVER ? showCount : false),
             useOnSection: useOnSection
         });
     }

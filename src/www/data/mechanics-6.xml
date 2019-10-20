@@ -49,7 +49,7 @@
             <object objectId="laumspurpotion4" />
             <object objectId="warhammer" />
             <object objectId="bow" />
-            <object objectId="quiver" count="6" />
+            <object objectId="quiver" count="6" showCount="true" />
             <object objectId="meal" index="0" />
             <object objectId="meal" index="1" />
             <object objectId="meal" index="2" />

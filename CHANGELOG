@@ -82,3 +82,6 @@
  - Fixed bug on book 10 / Equipment: Missed Potion of Alether
  - Book 5: Do not show +2 CS on stats if you cannot use Shield by Limbdeath (Thanks Julian!)
  - Support for Extended Combat Results Table (LW club newsletter 29). Thanks Julian!
+
+1.12
+ - Fixed Quivers with no arrows available on section should not show "(0 arrows)". Show "(0 arrows)" only on Action chart. Same to sell quiver object (see book 8, sect168)

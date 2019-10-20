@@ -44,7 +44,7 @@
 
                 <object objectId="sword" />
                 <object objectId="bow" />
-                <object objectId="quiver" count="6" />
+                <object objectId="quiver" count="6" showCount="true" />
                 <object objectId="rope" />
                 <object objectId="laumspurpotion4" />
                 <object objectId="lantern" />
