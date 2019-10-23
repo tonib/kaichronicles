@@ -122,6 +122,14 @@ class CombatTurn {
             this.loneWolfExtra -= psiSurgeLoss;
         }
 
+        // Kai-surge loss
+        if( combat.kaiSurge ) {
+            const kaiSurgeLoss = Combat.kaiSurgeTurnLoss();
+            if( this.loneWolf != combatTable_DEATH )
+                this.loneWolf += kaiSurgeLoss;
+            this.loneWolfExtra -= kaiSurgeLoss;
+        }
+
         /** Text with the player loss */
         this.playerLossText = this.calculatePlayerLossText();
     }

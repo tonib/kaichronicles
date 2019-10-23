@@ -87,15 +87,41 @@ const combatMechanics = {
                 // Check if the combat can be eluded
                 combatMechanics.showHideEludeButton( combat , $combatUI );
 
-            if( !state.actionChart.disciplines.contains('psisurge' ) || combat.noPsiSurge ) {
+            if( !state.actionChart.disciplines.contains('kaisurge' ) || combat.noKaiSurge ) {
+                // Hide Psi-surge check
+                $combatUI.find('.kaisurgecheck').hide();
+            } else {
+                const $kaiSurgeCheck = $combatUI.find('.kaisurgecheck input');
+                // Initialice Psi surge:
+                if( combat.kaiSurge ) {
+                    $kaiSurgeCheck.attr( 'checked' , true );
+                    combatMechanics.disablePsiSurge( $combatUI , combat );
+                }
+                // Check if the Psi-surge cannot be used (EP <= 6)
+                if( state.actionChart.currentEndurance <= Combat.minimumEPForKaiSurge() )
+                    combatMechanics.disableKaiSurge( $combatUI , combat );
+                // Psi surge selection
+                $kaiSurgeCheck.click(function(e : Event) {
+                    combatMechanics.onKaiSurgeClick(e , $(this) );
+                });
+
+                // UI Psi-Surge texts
+                var kaiSurgeBonus = combat.kaiSurgeBonus ? combat.kaiSurgeBonus : Combat.defaultKaiSurgeBonus();
+                kaiSurgeBonus *= combat.mindblastMultiplier;
+                $combatUI.find('.kaisurgebonus').text( kaiSurgeBonus );
+                $combatUI.find('.kaisurgeloss').text( Combat.kaiSurgeTurnLoss() );
+            }
+
+            if( !(state.actionChart.disciplines.contains('psisurge' ) || state.book.isGrandMasterBook()) || combat.noPsiSurge ) {
                 // Hide Psi-surge check
                 $combatUI.find('.psisurgecheck').hide();
-            }
-            else {
+            } else {
                 const $psiSurgeCheck = $combatUI.find('.psisurgecheck input');
                 // Initialice Psi surge:
-                if( combat.psiSurge )
+                if( combat.psiSurge ) {
                     $psiSurgeCheck.attr( 'checked' , true );
+                    combatMechanics.disableKaiSurge( $combatUI , combat );
+                }
                 // Check if the Psi-surge cannot be used (EP <= 6)
                 if( state.actionChart.currentEndurance <= Combat.minimumEPForPsiSurge() )
                     combatMechanics.disablePsiSurge( $combatUI , combat );
@@ -253,6 +279,9 @@ const combatMechanics = {
             
             // Check if the Psi-surge should be disabled after this turn
             combatMechanics.checkPsiSurgeEnabled();
+            
+            // Check if the Kai-surge should be disabled after this turn
+            combatMechanics.checkKaiSurgeEnabled();
         });
 
     },
@@ -295,6 +324,37 @@ const combatMechanics = {
 
         const selected : boolean = $psiSurgeCheck.prop( 'checked' ) ? true : false;
         combat.psiSurge = selected;
+
+        const $kaiSurgeCheck = $combatUI.find('.kaisurgecheck input');
+        $kaiSurgeCheck.attr('disabled', selected);
+        $kaiSurgeCheck.attr('checked', false);
+        
+        if( !selected && state.actionChart.currentEndurance <= Combat.minimumEPForKaiSurge() )
+            combatMechanics.disableKaiSurge( $combatUI , combat );
+
+        combatMechanics.updateCombatRatio( $combatUI , combat);
+    },
+
+    /**
+     * Kai-surge event handler
+     */
+    onKaiSurgeClick : function(e : Event, $kaiSurgeCheck : any) {
+
+        const $combatUI = $kaiSurgeCheck.parents('.mechanics-combatUI').first();
+        const combatIndex = parseInt( $combatUI.attr( 'data-combatIdx' ) );
+        const sectionState = state.sectionStates.getSectionState();
+        const combat = sectionState.combats[ combatIndex ];
+
+        const selected : boolean = $kaiSurgeCheck.prop( 'checked' ) ? true : false;
+        combat.kaiSurge = selected;
+
+        const $psiSurgeCheck = $combatUI.find('.psisurgecheck input');
+        $psiSurgeCheck.attr('disabled', selected);
+        $psiSurgeCheck.attr('checked', false);
+        
+        if( !selected && state.actionChart.currentEndurance <= Combat.minimumEPForPsiSurge() )
+            combatMechanics.disablePsiSurge( $combatUI , combat );
+
         combatMechanics.updateCombatRatio( $combatUI , combat);
     },
 
@@ -304,7 +364,7 @@ const combatMechanics = {
      */
     checkPsiSurgeEnabled : function() {
 
-        if( !state.actionChart.disciplines.contains('psisurge') )
+        if( !state.actionChart.disciplines.contains('psisurge') || !state.actionChart.disciplines.contains('kaisurge') )
             return;
         if( state.actionChart.currentEndurance > Combat.minimumEPForPsiSurge() )
             return;
@@ -319,6 +379,26 @@ const combatMechanics = {
     },
 
     /**
+     * Check if the Psi-surge can be enabled. 
+     * It cannot be used if the EP <= 6
+     */
+    checkKaiSurgeEnabled : function() {
+
+        if( !state.actionChart.disciplines.contains('kaisurge') )
+            return;
+        if( state.actionChart.currentEndurance > Combat.minimumEPForKaiSurge() )
+            return;
+        var sectionState = state.sectionStates.getSectionState();
+        if( sectionState.combats.length === 0 )
+            return;
+        for( let i=0; i<sectionState.combats.length; i++ ) {
+            var $combatUI = $('.mechanics-combatUI:eq(' + i + ')');
+            combatMechanics.disableKaiSurge( $combatUI , sectionState.combats[i]);
+        }
+        
+    },
+
+    /**
      * Disable Psi-surge on a combat
      */
     disablePsiSurge : function( $combatUI : any , combat : Combat ) {
@@ -326,6 +406,17 @@ const combatMechanics = {
         const $psiSurgeCheck = $combatUI.find('.psisurgecheck input');
         $psiSurgeCheck.prop('checked', false);
         $psiSurgeCheck.prop('disabled', true);
+        combatMechanics.updateCombatRatio( $combatUI , combat );
+    },
+
+    /**
+     * Disable Psi-surge on a combat
+     */
+    disableKaiSurge : function( $combatUI : any , combat : Combat ) {
+        combat.kaiSurge = false;
+        const $kaiSurgeCheck = $combatUI.find('.kaisurgecheck input');
+        $kaiSurgeCheck.prop('checked', false);
+        $kaiSurgeCheck.prop('disabled', true);
         combatMechanics.updateCombatRatio( $combatUI , combat );
     },
 

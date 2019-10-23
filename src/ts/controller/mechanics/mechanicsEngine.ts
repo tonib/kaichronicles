@@ -846,16 +846,13 @@ const mechanicsEngine = {
             combat.mindforceEP = parseInt( txtMindforceEP );
 
         // Check if the enemy is immune to Mindblast
-        // TODO: Use mechanicsEngine.getBooleanProperty here
-        var txtNoMindblast = $(rule).attr('noMindblast');
-        if( txtNoMindblast )
-            combat.noMindblast = ( txtNoMindblast == 'true' );
+        combat.noMindblast = mechanicsEngine.getBooleanProperty( $rule , 'noMindblast', false );
 
         // Check if the enemy is immune to Psi-Surge
-        // TODO: Use mechanicsEngine.getBooleanProperty here
-        const txtNoPsiSurge : string = $(rule).attr('noPsiSurge');
-        if( txtNoPsiSurge )
-            combat.noPsiSurge = ( txtNoPsiSurge == 'true' );
+        combat.noPsiSurge = mechanicsEngine.getBooleanProperty( $rule , 'noPsiSurge', false );
+
+        // Check if the enemy is immune to Psi-Surge
+        combat.noKaiSurge = mechanicsEngine.getBooleanProperty( $rule , 'noKaiSurge', false );
 
         // Special mindblast bonus?
         var txtMindblastBonus = $(rule).attr('mindblastBonus');
@@ -867,10 +864,15 @@ const mechanicsEngine = {
         if( txtMindblastMultiplier )
             combat.mindblastMultiplier = parseInt( txtMindblastMultiplier );
 
-        // Special Psi-Surgen bonus?
+        // Special Psi-Surge bonus?
         const txtPsiSurgeBonus : string = $(rule).attr('psiSurgeBonus');
         if( txtPsiSurgeBonus )
             combat.psiSurgeBonus = parseInt( txtPsiSurgeBonus );
+
+        // Special Kai-Surge bonus?
+        const txtKaiSurgeBonus : string = $(rule).attr('kaiSurgeBonus');
+        if( txtKaiSurgeBonus )
+            combat.kaiSurgeBonus = parseInt( txtKaiSurgeBonus );
 
         // Check if the player cannot use weapons on this combat
         const txtNoWeapon : string = $(rule).attr('noWeapon');
@@ -897,6 +899,10 @@ const mechanicsEngine = {
         const txtmaxEludeTurn : string = $(rule).attr('maxEludeTurn');
         if( txtmaxEludeTurn )
             combat.maxEludeTurn = parseInt( txtmaxEludeTurn );
+
+        // Enemy EP to allow to elude the combat
+        if( $(rule).attr('eludeEnemyEP') )
+            combat.eludeEnemyEP = parseInt( $(rule).attr('eludeEnemyEP') );
 
         // Dammage multiplier (player)
         const txtDammageMultiplier : string = $rule.attr('dammageMultiplier');
@@ -1586,7 +1592,7 @@ const mechanicsEngine = {
      * Apply the healing discipline on the current section
      */
     healingDiscipline: function() {
-        if( !state.actionChart.disciplines.contains('healing') && !state.actionChart.disciplines.contains('curing') )
+        if( !state.actionChart.disciplines.contains('healing') && !state.actionChart.disciplines.contains('curing') && !state.actionChart.disciplines.contains('deliver') )
             return;
         var sectionState = state.sectionStates.getSectionState();
         if( sectionState.combats.length > 0 )

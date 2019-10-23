@@ -348,6 +348,8 @@ the following properties:
   that many turns
 * **mentalOnly="true"**: Lone Wolf cannot use any physical bonuses on this combat (any object bonus)
 * **eludeTurn="number"**: Turn number after which LW can elude the combat
+* **maxEludeTurn="number"**: Turn number after which LW cannot elude the combat anymore
+* **eludeEnemyEP="number"**: LW can elude the combat once the enemy EP is at the value or below. eludeTurn has to be set
 * **enemyImmuneTurns="number"**: Turns during which the enemy will suffer no damage
 * **immuneTurns="number"**: Turns during which LW will suffer no damage
 * **dammageMultiplier="number"**: LW dammage multiplier. Can have decimals (ex. "0.5")

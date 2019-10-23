@@ -105,15 +105,21 @@ class ActionChart {
             this.manualRandomTable = true;
             this.extendedCRT = false;
             if( state.book ) {
-                if( state.book.bookNumber <= 5 ) {
-                    // debug data for kai series
-                    this.disciplines = [ 'camflage' , 'hunting' , 'sixthsns' , 'healing' , 'wepnskll' ];
-                    this.weaponSkill = [ 'axe' ];
-                }
-                else {
+                if( state.book.isGrandMasterBook() ) {
+                    this.endurance = this.currentEndurance = 35;
+                    this.combatSkill = 30;
+                    // debug data for Grand Master
+                    this.disciplines = [ 'wpnmstry' , 'deliver' , 'hntmstry', 'assimila' ];
+                    this.weaponSkill = [ 'axe' , 'sword' ];
+                } else if (state.book.isMagnakaiBook()) {
                     // debug data for magnakai
                     this.disciplines = [ 'wpnmstry' , 'curing' , 'hntmstry' ];
                     this.weaponSkill = [ 'axe' , 'sword' , 'bow' ];
+                }
+                else {
+                    // debug data for kai series
+                    this.disciplines = [ 'camflage' , 'hunting' , 'sixthsns' , 'healing' , 'wepnskll' ];
+                    this.weaponSkill = [ 'axe' ];
                 }
             }
         }
@@ -636,13 +642,18 @@ class ActionChart {
         }
 
         // Mindblast / Psi-surge
-        if( combat.psiSurge ) {
+        if( combat.kaiSurge ) {
+            bonuses.push( {
+                concept: translations.text( 'kaisurge' ),
+                increment: (combat.kaiSurgeBonus ? combat.kaiSurgeBonus : Combat.defaultKaiSurgeBonus()) * combat.mindblastMultiplier
+            });
+        } else if( combat.psiSurge ) {
             bonuses.push( {
                 concept: translations.text( 'psisurge' ),
                 increment: (combat.psiSurgeBonus ? combat.psiSurgeBonus : Combat.defaultPsiSurgeBonus()) * combat.mindblastMultiplier
             });
         }
-        else if( !combat.noMindblast && ( this.disciplines.contains( 'mndblst' ) || this.disciplines.contains( 'psisurge' ) ) ) {
+        else if( !combat.noMindblast && ( this.disciplines.contains( 'mndblst' ) || this.disciplines.contains( 'psisurge' ) || this.disciplines.contains( 'kaisurge' ) ) ) {
             bonuses.push( {
                 concept: translations.text( 'mindblast' ),
                 increment: (combat.mindblastBonus ? combat.mindblastBonus : Combat.defaultMindblastBonus()) * combat.mindblastMultiplier
@@ -853,14 +864,16 @@ class ActionChart {
      * The Magnakai Medicine Archmaster +20 EP can be used on this book?
      */
     public canUse20EPRestoreOnThisBook() : boolean {
-        return this.disciplines.length >= 9 && state.book.isMagnakaiBook() && this.disciplines.contains('curing');
+        return (this.disciplines.length >= 9 && state.book.isMagnakaiBook() && this.disciplines.contains('curing')) ||
+            (state.book.isGrandMasterBook() && this.disciplines.contains('deliver'));
     }
 
     /**
      * The Magnakai Medicine Archmaster +20 EP can be used now?
      */
     public canUse20EPRestoreNow() : boolean {
-        return this.currentEndurance <= 6 && !this.restore20EPUsed && this.canUse20EPRestoreOnThisBook();
+        return ((!state.book.isGrandMasterBook() && this.currentEndurance <= 6) || (state.book.isGrandMasterBook() && this.currentEndurance <= 8))
+            && !this.restore20EPUsed && this.canUse20EPRestoreOnThisBook();
     }
 
     /**
