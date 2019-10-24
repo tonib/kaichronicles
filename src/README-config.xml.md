@@ -1,3 +1,82 @@
 Starting from Cordova 8.x.x it seems a package.json is required / generated. 
 It's generated if it does not exists from the config.xml content, but it's not updated if the config.xml is updated. 
 I dont' know if this file should be under git control.
+
+And, also, each time I do a "cordova build android" the config.xml is overwritten removing all coments. Good.
+Here is the config.xml I want to keep:
+
+```xml
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="org.projectaon.kaichronicles" version="1.11.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Kai Chronicles</name>
+    <description>
+        Game player for Lone Wolf gamebooks 1 - 12
+    </description>
+    <author email="toni.bennasar@projectaon.org" href="https://www.projectaon.org">
+        Project AON
+    </author>
+    <content src="index.html" />
+
+    <engine name="android" spec="~7.1.4" />
+
+    <!-- TODO: Fix plugin versions to use -->
+
+    <!-- Core plugins -->
+    <plugin name="cordova-plugin-whitelist" />
+    <plugin name="cordova-plugin-file" />
+    <plugin name="cordova-plugin-splashscreen" />
+    <plugin name="cordova-plugin-file-transfer" />
+    <plugin name="cordova-plugin-network-information" />
+
+    <!-- External plugins -->
+    <!-- https://github.com/MobileChromeApps/cordova-plugin-zip -->
+    <plugin name="cordova-plugin-zip" />
+    <!-- https://github.com/FortuneN/cordova-plugin-zeep -->
+    <plugin name="cordova-plugin-zeep" />
+    <plugin name="com.megster.cordova.FileChooser" spec="https://github.com/ihadeed/cordova-filechooser.git" />
+    <plugin name="cordova-plugin-document-contract" spec="https://github.com/danjarvis/cordova-plugin-document-contract.git" />
+    <plugin name="cordova-plugin-copytodownload" spec="https://github.com/tonib/cordova-plugin-copytodownload.git" />
+
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <icon density="xxxhdpi" height="192" platform="android" src="res/android/xxxhdpi.png" width="192" />
+
+    <platform name="android">
+
+        <!-- 
+            - Min version is 4.4.2 (API 19), the first one that uses 
+              Chromium (Chrome v32), the previous fails to render Bootstrap.
+            - The Project Aon hosting only supports TLS 1.2 or greater. Android 4.4 don't support TLS 1.2. 
+              So, min supported API is 5.0.0 (API 21)
+        -->
+        <preference name="android-minSdkVersion" value="21" />
+
+        <allow-intent href="market:*" />
+
+        <!-- Icons -->
+        <icon src="res/android/xxhdpi.png" />
+        <icon density="ldpi" src="res/android/icons/ldpi.png" />
+        <icon density="mdpi" src="res/android/icons/mdpi.png" />
+        <icon density="hdpi" src="res/android/icons/hdpi.png" />
+        <icon density="xhdpi" src="res/android/icons/xhdpi.png" />
+        <icon density="xxhdpi" src="res/android/icons/xxhdpi.png" />
+        <icon density="xxxhdpi" src="res/android/icons/xxxhdpi.png" />
+
+        <!-- Splashes -->
+        <splash density="land-hdpi" src="res/android/splashes/drawable-land-hdpi.png" />
+        <splash density="land-ldpi" src="res/android/splashes/drawable-land-ldpi.png" />
+        <splash density="land-mdpi" src="res/android/splashes/drawable-land-mdpi.png" />
+        <splash density="land-xhdpi" src="res/android/splashes/drawable-land-xhdpi.png" />
+        <splash density="port-hdpi" src="res/android/splashes/drawable-port-hdpi.png" />
+        <splash density="port-ldpi" src="res/android/splashes/drawable-port-ldpi.png" />
+        <splash density="port-mdpi" src="res/android/splashes/drawable-port-mdpi.png" />
+        <splash density="port-xhdpi" src="res/android/splashes/drawable-port-xhdpi.png" />
+    </platform>
+    
+</widget>
+```
