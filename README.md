@@ -15,7 +15,7 @@ This repository does not contain game books data. Data must be downloaded from t
   web site
 * You cannot redistribute the game books data in any way
 
-The Android older version supported is the 4.4 (API 19). The web is tested with the 
+The Android older supported version is 5.0 (API 21). The web is tested with the 
 latest version of Chrome and Firefox. Other browsers or/and older versions may don't 
 work.
 
@@ -44,7 +44,7 @@ http://stackoverflow.com/questions/10752055/cross-origin-requests-are-only-suppo
 
 ### Setup Android app
 
-Install Cordova 6.4 (https://cordova.apache.org/) and the Android requeriments
+Install Cordova 8.1.2 (https://cordova.apache.org/) and the Android requeriments
 (https://cordova.apache.org/docs/en/latest/guide/platforms/android/index.html). Then:
 ```bash
     cd src

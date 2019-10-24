@@ -1,0 +1,13 @@
+{
+  "name": "org.projectaon.kaichronicles",
+  "version": "1.11.1",
+  "displayName": "Kai Chronicles",
+  "cordova": {
+    "platforms": [
+      "android"
+    ]
+  },
+  "dependencies": {
+    "cordova-android": "~7.1.4"
+  }
+}

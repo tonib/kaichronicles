@@ -8,32 +8,16 @@
         Project AON
     </author>
     <content src="index.html" />
-
-    <!-- Use cordova version 6.1 to avoid bug with icons on 6.4 
-         http://stackoverflow.com/questions/40351434/cordova-android-6-4-0-creates-res-folder-top-level-not-inside-platforms-android) 
-    -->
-    <engine name="android" spec="~6.1.0" />
-
-    <!-- Core plugins -->
-    <plugin name="cordova-plugin-whitelist" spec="1" />
-    <plugin name="cordova-plugin-file" spec="~4.3.1" />
-    <plugin name="cordova-plugin-splashscreen" spec="~4.0.1" />
-    <plugin name="cordova-plugin-file-transfer" spec="~1.6.2" />
-    <plugin name="cordova-plugin-network-information" spec="~1.3.2" />
-
-    <!-- External plugins -->
-    <!-- https://github.com/MobileChromeApps/cordova-plugin-zip -->
-    <plugin name="cordova-plugin-zip" spec="~3.1.0" />
-    <!-- https://github.com/FortuneN/cordova-plugin-zeep -->
-    <plugin name="cordova-plugin-zeep" spec="~0.0.4" />
-    <!-- https://github.com/don/cordova-filechooser -->
-    <plugin name="com.megster.cordova.FileChooser" spec="http://github.com/don/cordova-filechooser.git" />
-    <!-- https://github.com/danjarvis/cordova-plugin-document-contract -->
-    <plugin name="cordova-plugin-document-contract" spec="https://github.com/danjarvis/cordova-plugin-document-contract.git#0.4.1" />
-    <!-- https://github.com/tonib/cordova-plugin-copytodownload -->
-    <plugin name="cordova-plugin-copytodownload" spec="https://github.com/tonib/cordova-plugin-copytodownload.git#1.2" />
-    <!--plugin name="/home/toni/proyectos/pluginsCordova/copyToDownloads" /-->
-
+    <plugin name="cordova-plugin-whitelist" />
+    <plugin name="cordova-plugin-file" />
+    <plugin name="cordova-plugin-splashscreen" />
+    <plugin name="cordova-plugin-file-transfer" />
+    <plugin name="cordova-plugin-network-information" />
+    <plugin name="cordova-plugin-zip" />
+    <plugin name="cordova-plugin-zeep" />
+    <plugin name="com.megster.cordova.FileChooser" spec="https://github.com/ihadeed/cordova-filechooser.git" />
+    <plugin name="cordova-plugin-document-contract" spec="https://github.com/danjarvis/cordova-plugin-document-contract.git" />
+    <plugin name="cordova-plugin-copytodownload" spec="https://github.com/tonib/cordova-plugin-copytodownload.git" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -42,16 +26,9 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <icon density="xxxhdpi" height="192" platform="android" src="res/android/xxxhdpi.png" width="192" />
-
     <platform name="android">
-
-        <!-- Min version is 4.4.2 (API 19), the first one that uses 
-             Chromium (Chrome v32), the previous fails to render Bootstrap -->
-        <preference name="android-minSdkVersion" value="19" />
-
+        <preference name="android-minSdkVersion" value="21" />
         <allow-intent href="market:*" />
-
-        <!-- Icons -->
         <icon src="res/android/xxhdpi.png" />
         <icon density="ldpi" src="res/android/icons/ldpi.png" />
         <icon density="mdpi" src="res/android/icons/mdpi.png" />
@@ -59,8 +36,6 @@
         <icon density="xhdpi" src="res/android/icons/xhdpi.png" />
         <icon density="xxhdpi" src="res/android/icons/xxhdpi.png" />
         <icon density="xxxhdpi" src="res/android/icons/xxxhdpi.png" />
-
-        <!-- Splashes -->
         <splash density="land-hdpi" src="res/android/splashes/drawable-land-hdpi.png" />
         <splash density="land-ldpi" src="res/android/splashes/drawable-land-ldpi.png" />
         <splash density="land-mdpi" src="res/android/splashes/drawable-land-mdpi.png" />
@@ -70,5 +45,5 @@
         <splash density="port-mdpi" src="res/android/splashes/drawable-port-mdpi.png" />
         <splash density="port-xhdpi" src="res/android/splashes/drawable-port-xhdpi.png" />
     </platform>
-    
+    <engine name="android" spec="~7.1.4" />
 </widget>
