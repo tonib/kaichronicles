@@ -143,6 +143,17 @@ class Translations {
         'choose' : 'Elige',
         'maxDisciplines' : 'Sólo puede elegir {0} disciplinas',
         'onlyNWeapons' : 'Sólo puedes elegir {0} armas',
+        'actionchartinfo' : '<p>' +
+            'Las siguientes secciones explican como jugar con los libros en papel. Esta aplicación es una adaptación de los ' +
+            'librojuegos,  y no necesitarás escribir nada en la Carta de Acción (excepto en el campo de "Anotaciones"). La ' +
+            'aplicación intenta hacer toda la contabilidad del juego.</p>' +
+            '<p>Cada vez que vean un texto azul en negrita como este "<a class="random action">Un texto</a>" en el texto ' +
+            'del libro, es una acción. Normalmente será elegir un número de la Tabla de la Suerte. Pincha en el para hacer ' +
+            'dicha acción.</p>' +
+            '<p>Los textos en azul que no estén en negrita como este "<a>Un texto</a>" son enlaces a otros sitios (p.ej. a ' + 
+            'la Carta de Acción, o al mapa, ...). Si pinchas en ellos irás allí.</p>' + 
+            'Al final de esta página encontrás dos enlaces para elegir tu Destreza en el Combate y Resistencia. Pincha en ' +
+            'ellos antes de continuar a la siguiente sección.</p>',
 
         //////////////////////////////////////
         // Special sections

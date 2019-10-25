@@ -9,6 +9,11 @@ class SkillsSetup {
      * Choose player skills UI
      */
     public static setSkills() {
+
+        // Add mechanics info, only for first played book
+        if( state.getPreviousBookActionChart( state.book.bookNumber - 1) == null)
+            gameView.appendToSection( mechanicsEngine.getMechanicsUI('mechanics-actionChartInfo'), 'afterTitle' );
+
         // If the skills are already set, do nothing
         if( state.actionChart.combatSkill !== 0 && state.actionChart.endurance !== 0 )
             return;

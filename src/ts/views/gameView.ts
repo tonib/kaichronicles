@@ -113,13 +113,16 @@ const gameView = {
     /**
      * Appends HTML to the current section
      * @param {string|jQuery} html The HTML to append
-     * @param afterChoices True if it should be append after choices. False, after
-     * section body and before choices
+     * @param where Where to place the html:
+     * - 'beforeChoices': Before section choices
+     * - 'afterChoices': After section choices
+     * - 'afterTitle': After section title
      */
-    appendToSection: function(html : any, afterChoices : boolean = false) {
+    //appendToSection: function(html : any, afterChoices : boolean = false) {
+    appendToSection: function(html : any, where : string = 'beforeChoices' ) {
 
-        // Try to add the html before the first choice:
-        if( !afterChoices ) {
+        if( where == 'beforeChoices' ) {
+            // Try to add the html before the first choice:
             var $firstChoice = $('p.choice').first();
             if( $firstChoice.length > 0 ) {
                 $firstChoice.before(html);
@@ -127,6 +130,13 @@ const gameView = {
             }
         }
         
+        if( where == 'afterTitle' ) {
+            // Add at "game-section" top
+            $('#game-section').prepend(html);
+            return;
+        }
+
+        // After choices, or something failed with the location
         if( $('div.footnotes').length > 0 ) {
             // Add to the end, but before foot notes
             $('hr').first().before(html);
