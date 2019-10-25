@@ -455,10 +455,10 @@ class Book {
     /** Is it a book of Kai series (1-5)? */
     public isKaiBook() : boolean { return this.bookNumber <= 5; }
 
-    /** Is it a book of Magnakai series (6-?)? */
+    /** Is it a book of Magnakai series (6-12)? */
     public isMagnakaiBook() : boolean { return this.bookNumber > 5 && this.bookNumber <= 12; }
 
-    /** Is it a book of Magnakai series (6-?)? */
+    /** Is it a book of Magnakai series (13-?)? */
     public isGrandMasterBook() : boolean { return this.bookNumber > 12; }
 
 }
