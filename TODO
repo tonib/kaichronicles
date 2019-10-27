@@ -1,5 +1,4 @@
 - Fix link to https://www.projectaon.org/en/Main/Books#tools , now it does not contain tools to play books....
-- Android 4 is no longer supported, remove patch for that version. Change texts for that
 - UPLOAD NEW VERSION 1.11.1
 - Fix config.xml plugin versions to use
 - package.json should be versioned with git ???
