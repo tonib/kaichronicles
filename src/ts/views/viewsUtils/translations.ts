@@ -147,6 +147,8 @@ class Translations {
             'Las siguientes secciones explican como jugar con los libros en papel. Esta aplicación es una adaptación de los ' +
             'librojuegos,  y no necesitarás escribir nada en la Carta de Acción (excepto en el campo de "Anotaciones"). La ' +
             'aplicación intenta hacer toda la contabilidad del juego.</p>' +
+            '<p>En la Carta de Acción puedes consultar tus estadisticas y gestionar tu inventario (usar o dejar objetos, ' +
+            'cambiar tu arma actual, ...).</p>' +
             '<p>Cada vez que vean un texto azul en negrita como este "<a class="random action">Un texto</a>" en el texto ' +
             'del libro, es una acción. Normalmente será elegir un número de la Tabla de la Suerte. Pincha en el para hacer ' +
             'dicha acción.</p>' +

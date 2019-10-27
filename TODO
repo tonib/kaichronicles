@@ -2,7 +2,6 @@
 - Fix config.xml plugin versions to use
 - package.json should be versioned with git ???
 - FAQ: Add info about change the Random Table
-- FAQ: "I cannot write on the Action Chart"
 - Add help for "LW club newsletter 29" setting
 - Use latest version on PAON data on SVN (a fixed commit number)
   * Review upgrades to book 7+
