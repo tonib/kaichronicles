@@ -170,7 +170,7 @@ class Book {
      * Start the download and fix a game book
      * @return Promise with the download / fix task
      */
-    public downloadBookXml() : Promise<void> {
+    public downloadBookXml() : JQueryPromise<void> {
 
         var self = this;
         var bookXmlUrl = this.getBookXmlURL();
@@ -201,10 +201,10 @@ class Book {
      * Added on v 1.8
      * @returns The download promises. The promises text is the author XML bio, fixed
      */
-    public downloadAuthorsBio() : Array<Promise<string>> {
+    public downloadAuthorsBio() : Array<JQueryPromise<string>> {
 
         try {
-            let promises : Array<Promise<string>> = [];
+            let promises : Array<JQueryPromise<string>> = [];
             for( let authorId of projectAon.supportedBooks[this.bookNumber - 1].biographies ) {
                 promises.push( this.downloadAuthorInfo( authorId ) );
             }
@@ -222,7 +222,7 @@ class Book {
      * @param authorId The author id (ex. "jdbiolw")
      * @returns The download promise. The promise text is the author XML bio, fixed
      */
-    private downloadAuthorInfo( authorId : string ) : Promise<string> {
+    private downloadAuthorInfo( authorId : string ) : JQueryPromise<string> {
         const authorFileUrl = Book.getBaseUrl() + this.bookNumber + '/' + authorId + '-' + this.language + '.inc';
         return $.ajax({
             url: authorFileUrl,

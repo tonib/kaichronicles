@@ -53,9 +53,9 @@ const mealMechanics = {
             $('.mechanics-eatMeal').show();
 
         // Check if you can buy a meal
-        var price = $(rule).attr('price'); 
-        if( price ) {
-            price = parseInt( price );
+        var priceValue = $(rule).attr('price'); 
+        if( priceValue ) {
+            var price = parseInt( priceValue );
             $(mealSelector + ' .mechanics-mealPrice').text(price);
         }
         else

@@ -264,9 +264,9 @@ const mechanicsEngine = {
                 const $rule = $(rule);
 
                 // TODO: Use mechanicsEngine.getArrayProperty here
-                var objects = $rule.attr('hasObject');
-                if( objects ) {
-                    objects = objects.split('|');
+                var objectsList = $rule.attr('hasObject');
+                if( objectsList ) {
+                    const objects = objectsList.split('|');
                     if( objects.contains(o.id) ) {
                         // Section should be re-rendered
                         reRender = true;
@@ -537,9 +537,9 @@ const mechanicsEngine = {
         
         // Check section visited:
         // TODO: Use mechanicsEngine.getArrayProperty here
-        var sectionIds = $rule.attr('sectionVisited');
-        if( sectionIds ) {
-            sectionIds = sectionIds.split('|');
+        var sectionIdsList = $rule.attr('sectionVisited');
+        if( sectionIdsList ) {
+            const sectionIds = sectionIdsList.split('|');
             for(i=0; i < sectionIds.length; i++ ) {
                 if( state.sectionStates.sectionIsVisited(sectionIds[i]) ) {
                     conditionStatisfied = true;
@@ -717,9 +717,9 @@ const mechanicsEngine = {
             mechanicsEngine.debugWarning( 'Unknown object: ' + objectId );
 
         // Object price (optional)
-        var price = $(rule).attr('price');
-        if( price )
-            price = ExpressionEvaluator.evalInteger( price );
+        var priceValue = $(rule).attr('price');
+        if( priceValue )
+            var price = ExpressionEvaluator.evalInteger( priceValue );
 
         // Unlimited number of this kind of object?
         const unlimited = ( $(rule).attr('unlimited') == 'true' );

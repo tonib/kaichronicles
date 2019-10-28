@@ -1,19 +1,26 @@
 // External declarations
+interface JQuery {
+    getNumber(): number;
+    setNumber(value: number): void;
+    getTitle(): string;
+    bindNumberEvents(): void;
+    fireValueChanged(): void;
+    getMinValue(): number;
+    getMaxValue(): number;
+    isValid(): boolean;
+    setEnabled(enabled: boolean): void;
+    isEnabled(): boolean;
+    initializeValue(): void;
+}
 
 declare var cordovaApp:any;
-declare var views:any;
 declare var routing:any;
-declare var setupView:any;
 
 // index.html:
 declare const ENVIRONMENT : string;
 
-// jQuery
-declare var $:any;
-declare var jQuery:any;
-
 // toastr.js
-declare var toastr:any;
+declare var toastr:Toastr;
 
 // FileSaver.js
 declare var saveAs:any;

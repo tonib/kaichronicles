@@ -4,7 +4,7 @@
  */
 var newGameView = {
 
-    setup: function(downloadedBooks) {
+    setup: function(downloadedBooks: Array<BookDownloadState>) {
 
         // Set current language
         $('#newgame-language').val( state.language );
@@ -43,7 +43,7 @@ var newGameView = {
      * Change the current book cover
      * @param {string} url The cover URL
      */
-    setCoverImage: function(url) {
+    setCoverImage: function(url: string) {
         if( !cordovaApp.isRunningApp() ) {
             // Web: Clear the previous cover (PA server has a slow connection)
             $('#newgame-cover').attr('src', '');

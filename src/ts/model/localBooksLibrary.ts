@@ -59,9 +59,9 @@ class LocalBooksLibrary {
      * Get the directory where books are stored on the device
      * @returns {Promise<DirectoryEntry>} Promise with the Cordova directory entry where the books are stored
      */
-    public static getBooksDirectoryAsync() : Promise<any> {
+    public static getBooksDirectoryAsync() : JQueryPromise<any> {
         return cordovaFS.requestFileSystemAsync()
-        .then(function(fs) {
+        .then(function(fs: any) {
             return cordovaFS.getDirectoryAsync(fs.root, 'books', { create: true });
         });
     }
@@ -72,11 +72,11 @@ class LocalBooksLibrary {
      * this.BOOKS_PATH
      * @return The resolution promise
      */
-    public resolveBooksDirectoryAsync() : Promise<void> {
+    public resolveBooksDirectoryAsync() : JQueryPromise<void> {
 
         if( !cordovaApp.isRunningApp() )
             // This is just for the app
-            return jQuery.Deferred().resolve().promise();
+            return jQuery.Deferred<void>().resolve().promise();
 
         var self = this;
         console.log('Resolving books directory');
@@ -91,11 +91,11 @@ class LocalBooksLibrary {
      * Check if books are downloaded or not
      * @return The resolution promise
      */
-    public updateBooksDownloadStateAsync() : Promise<void> {
+    public updateBooksDownloadStateAsync() : JQueryPromise<void> {
 
         if( !cordovaApp.isRunningApp() )
             // This is just for the app
-            return jQuery.Deferred().resolve().promise();
+            return jQuery.Deferred<void>().resolve().promise();
 
         // Cordova app: Check downloaded books
         var self = this;
@@ -117,7 +117,7 @@ class LocalBooksLibrary {
      * Setup the books states
      * @return The resolution promise
      */
-    public setupAsync() : Promise<void> {
+    public setupAsync() : JQueryPromise<void> {
         var self = this;
         return this.resolveBooksDirectoryAsync()
         .then(function() { 

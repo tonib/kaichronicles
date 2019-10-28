@@ -63,7 +63,7 @@ const randomMechanics = {
     },
 
     getRandomTableRefByRule: function(rule : any) {
-        return randomMechanics.getRandomTableRefByIndex( $(rule).attr('index') );
+        return randomMechanics.getRandomTableRefByIndex( parseInt($(rule).attr('index')) );
     },
 
     /**
@@ -138,11 +138,10 @@ const randomMechanics = {
             randomTable.getRandomValueAsync(ignoreZero, zeroAsTen)
             .then(function(value) {
                 // Get the increment
-                var increment = $(self).attr('data-increment');
-                if( increment )
-                    increment = parseInt( increment );
-                else
-                    increment = 0;
+                var incrementValue = $(self).attr('data-increment');
+                var increment = 0;
+                if( incrementValue )
+                    increment = parseInt( incrementValue );                    
 
                 // Show the result on the link
                 randomMechanics.linkAddChooseValue( $(self) , value , increment);

@@ -174,7 +174,7 @@ const specialSectionsMechanics = {
         // Replace the combat turns generation:
         var sectionState = state.sectionStates.getSectionState();
 
-        var nextTurnAsyncFunction = function() : Promise<CombatTurn> {
+        var nextTurnAsyncFunction = function() : JQueryPromise<CombatTurn> {
             return Combat.prototype.nextTurnAsync.call(this)
             .then(function(turn : CombatTurn) {
                 // Check the bite:
@@ -223,7 +223,7 @@ class Book6sect26 {
     }
 
     /** Replacement for combat turns generation */
-    private static nextTurnAsync() : Promise<CombatTurn> {
+    private static nextTurnAsync() : JQueryPromise<CombatTurn> {
         return Combat.prototype.nextTurnAsync.call(this)
         .then(function(turn : CombatTurn) {
             // Do not remove EP to the player. Do a backup of the real loss at turn.loneWolfExtra

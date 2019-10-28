@@ -62,11 +62,11 @@ class RandomTable {
         }
     }
 
-    public getRandomValueAsync(ignoreZero : boolean = false, zeroAsTen : boolean = false) : Promise<number> {
+    public getRandomValueAsync(ignoreZero : boolean = false, zeroAsTen : boolean = false) : JQueryPromise<number> {
 
         if( !state.actionChart.manualRandomTable )
             // Use computer generated random numbers:
-            return jQuery.Deferred().resolve( this.getRandomValue(ignoreZero, zeroAsTen) ).promise();
+            return jQuery.Deferred<number>().resolve( this.getRandomValue(ignoreZero, zeroAsTen) ).promise();
 
         // Store info about the current selection
         this.currentAsync = {

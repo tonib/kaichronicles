@@ -1,3 +1,4 @@
+/// <reference path="../external.ts" />
 
 /** 
  * Handle / download books (only for Cordova app)
@@ -55,7 +56,7 @@ var workWithBooksController = {
         
     },
 
-    downloadBooks: function(selectedBookNumbers) {
+    downloadBooks: function(selectedBookNumbers: Array<number>) {
 
 
         // Check differences:
@@ -92,7 +93,7 @@ var workWithBooksController = {
             workWithBooksView.displayModal(true);
 
             // Initial empty resolved promise
-            var changesPromise = jQuery.Deferred().resolve().promise();
+            var changesPromise = jQuery.Deferred<void>().resolve().promise();
 
             // If we will remove books, clean the cached book: Needed, because
             // the cached book may be deleted now
@@ -117,7 +118,7 @@ var workWithBooksController = {
 
     },
 
-    deleteBook: function(booksDir , book, changesPromise) {
+    deleteBook: function(booksDir: string , book: BookDownloadState, changesPromise: JQueryPromise<void>) : JQueryPromise<void> {
 
         // Work to delete the book
         var work = function() {
@@ -148,10 +149,10 @@ var workWithBooksController = {
         });
     },
 
-    downloadBook: function(booksDir , book, changesPromise) {
+    downloadBook: function(booksDir: string , book: BookDownloadState, changesPromise: JQueryPromise<void>): JQueryPromise<void> {
 
         // Work to download the book
-        var work = function() {
+        var work = function(): JQueryPromise<void> {
 
             if( workWithBooksController.processCancelled )
                 // Process cancelled. Do nothing else
@@ -182,7 +183,7 @@ var workWithBooksController = {
 
     },
 
-    updateUIAfterProcess: function(changesPromise) {
+    updateUIAfterProcess: function(changesPromise: JQueryPromise<void>) {
 
         var updateUI = function() {
             // Refresh the books list
@@ -234,7 +235,7 @@ var workWithBooksController = {
     },
 
     /** Return page */
-    getBackController: function() { 
+    getBackController: function(): string { 
         if( workWithBooksController.changingBooks ) {
             // Cancel download
             workWithBooksView.closeCancelClicked();

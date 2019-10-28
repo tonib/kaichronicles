@@ -42,7 +42,7 @@ class Mechanics {
      * Start the download of the mechanics XML
      * @return Promise with the download
      */
-    public downloadXml() : Promise<void> {
+    public downloadXml() : JQueryPromise<void> {
 
         var self = this;
         return $.ajax({
@@ -68,7 +68,7 @@ class Mechanics {
      * Start the download of the objects XML
      * @return Promise with the download
      */
-    public downloadObjectsXml() : Promise<void> {
+    public downloadObjectsXml() : JQueryPromise<void> {
 
         var self = this;
         return $.ajax({
@@ -134,7 +134,7 @@ class Mechanics {
 
         // Get nodes from the section rule to the given rule
         //var $path = $( $(rule).parentsUntil( 'section' ).andSelf().get().reverse() );
-        var $path = $(rule).parentsUntil( 'section' ).andSelf();
+        var $path = $(rule).parentsUntil( 'section' ).addBack();
 
         // Build the jquery selector:
         return $path

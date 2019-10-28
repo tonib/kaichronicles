@@ -517,7 +517,7 @@ class Translations {
      * @param {boolean} doNotClone True if the view should be modified. False, if a clone of the view
      * should be returned
      */
-    public translateView( view , doNotClone ) {
+    public translateView( view: String , doNotClone: Boolean = false ) {
 
         var table = this[state.language];
         if( !table )

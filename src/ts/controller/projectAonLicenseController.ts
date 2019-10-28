@@ -1,8 +1,9 @@
+/// <reference path="../external.ts" />
 
 /**
  * Project Aon license controller
  */
-var projectAonLicenseController = {
+const projectAonLicenseController = {
 
     index: function() {
         document.title = translations.text('projectAonLicense');

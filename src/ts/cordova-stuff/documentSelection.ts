@@ -23,8 +23,8 @@ class DocumentSelection {
      * Select a document from the UI, and get info about it
      * @returns Promise with the selected file
      */
-    public static selectDocument() : Promise<DocumentSelection> {
-        const dfd = jQuery.Deferred();
+    public static selectDocument() : JQueryPromise<DocumentSelection> {
+        const dfd = jQuery.Deferred<DocumentSelection>();
 
         DocumentSelection.selectDocumentWithUI()
         .then( function(uri : string) {
@@ -37,8 +37,8 @@ class DocumentSelection {
         return dfd.promise();
     }
 
-    private static selectDocumentWithUI() : Promise<string> {
-        const dfd = jQuery.Deferred();
+    private static selectDocumentWithUI() : JQueryPromise<string> {
+        const dfd = jQuery.Deferred<string>();
         fileChooser.open(function(uri) {
             dfd.resolve(uri);
         });
@@ -50,8 +50,8 @@ class DocumentSelection {
      * @param uri The selected document URI
      * @returns Promise with the document info
      */
-    private static getDocumentInfo(uri : string) : Promise<DocumentSelection> {
-        const dfd = jQuery.Deferred();
+    private static getDocumentInfo(uri : string) : JQueryPromise<DocumentSelection> {
+        const dfd = jQuery.Deferred<DocumentSelection>();
 
         // OK, a weird exception. If uri is "file://...", getContract fails...
         if( uri.toLowerCase().startsWith('file://') ) {

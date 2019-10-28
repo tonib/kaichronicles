@@ -32,7 +32,7 @@ class BookValidator {
         this.book = book;
     }
 
-    public static downloadBookAndGetValidator( bookNumber : number , language : string ) : Promise<BookValidator> {
+    public static downloadBookAndGetValidator( bookNumber : number , language : string ) : JQueryPromise<BookValidator> {
 
         const book = new Book(bookNumber, language );
         const mechanics = new Mechanics( book );
@@ -42,7 +42,7 @@ class BookValidator {
         promises.push( mechanics.downloadXml() );
         promises.push( mechanics.downloadObjectsXml() );
 
-        const dfd = jQuery.Deferred();
+        const dfd = jQuery.Deferred<BookValidator>();
 
         $.when.apply($, promises)
         .done( function() {
@@ -286,11 +286,11 @@ class BookValidator {
     /**
      * Download the XSD to validate the XML, if this has not been done yet
      */
-    public static downloadXsd() : Promise<void> {
+    public static downloadXsd() : JQueryPromise<void> {
 
         if( BookValidator.xsdText )
             // Already downloaded
-            return jQuery.Deferred().resolve().promise();
+            return jQuery.Deferred<void>().resolve().promise();
 
         return $.ajax({
             url: 'data/mechanics.xsd',
