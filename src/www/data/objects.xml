@@ -924,6 +924,20 @@
             <image book="12" name="small4.png" />
         </special>
 
+        <!-- BOOK 13 -->
+
+        <special id="restrainer">
+            <name lang="en">Restrainer</name>
+        </special>
+
+        <special id="mapofmogaruith" itemCount="0">
+            <name lang="en">Map of Mogaruith</name>
+        </special>
+
+        <special id="cenerrobemask" itemCount="0">
+            <name lang="en">Cener Robe &amp; Mask</name>
+        </special>
+
     </specials>
 
     <objects>
@@ -1800,6 +1814,27 @@
         <object id="pipe">
             <name lang="en">Pipe</name>
             <name lang="es">Pipa</name>
+        </object>
+
+        <!-- BOOK 13 -->
+
+        <object id="cenerrobe">
+            <name lang="en">Cener Robe</name>
+        </object>
+
+        <object id="cenermask">
+            <name lang="en">Cener Mask</name>
+        </object>
+
+        <object id="copperkeybook13">
+            <name lang="en">Copper Key</name>
+            <name lang="es">Llave de Cobre</name>
+
+            <image book="1" name="small15.png" />
+        </object>
+
+        <object id="blackberriesjar">
+            <name lang="en">Jar of Black Berries</name>
         </object>
 
         <!-- OTHERS -->
