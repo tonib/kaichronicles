@@ -1337,7 +1337,7 @@ const mechanicsEngine = {
      */
     kaiMonasteryStorage: function( rule : any ) {
         const $tag = mechanicsEngine.getMechanicsUI( 'mechanics-kaimonasterystorage' );
-        gameView.appendToSection( $tag , true );
+        gameView.appendToSection( $tag , 'afterChoices' );
         $tag.find( 'button' ).click( function( e : Event ) {
             e.preventDefault();
             // Move to the fake section for Kai monastery
@@ -1565,7 +1565,7 @@ const mechanicsEngine = {
         if( state.actionChart.currentEndurance <= 0 && $('#mechanics-death').length === 0 ) {
 
             // Add the death UI
-            gameView.appendToSection( mechanicsEngine.getMechanicsUI('mechanics-death') , true );
+            gameView.appendToSection( mechanicsEngine.getMechanicsUI('mechanics-death') , 'afterChoices' );
 
             // Disable all choice links
             mechanicsEngine.setChoiceState('all' , true);

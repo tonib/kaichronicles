@@ -1,3 +1,11 @@
+Starting from Cordova 8.x.x it seems a package.json is required / generated. 
+It's generated if it does not exists from the config.xml content, but it's not updated if the config.xml is updated. 
+I dont' know if this file should be under git control.
+
+And, also, each time I do a "cordova build android" the config.xml is overwritten removing all coments. Good.
+Here is the config.xml I want to keep:
+
+```xml
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="org.projectaon.kaichronicles" version="1.11.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Kai Chronicles</name>
@@ -71,3 +79,4 @@
     </platform>
     
 </widget>
+```

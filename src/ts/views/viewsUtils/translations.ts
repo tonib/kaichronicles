@@ -144,6 +144,19 @@ class Translations {
         'choose' : 'Elige',
         'maxDisciplines' : 'Sólo puede elegir {0} disciplinas',
         'onlyNWeapons' : 'Sólo puedes elegir {0} armas',
+        'actionchartinfo' : '<p>' +
+            'Las siguientes secciones explican como jugar con los libros en papel. Esta aplicación es una adaptación de los ' +
+            'librojuegos,  y no necesitarás escribir nada en la Carta de Acción (excepto en el campo de "Anotaciones"). La ' +
+            'aplicación intenta hacer toda la contabilidad del juego.</p>' +
+            '<p>En la Carta de Acción puedes consultar tus estadisticas y gestionar tu inventario (usar o dejar objetos, ' +
+            'cambiar tu arma actual, ...).</p>' +
+            '<p>Cada vez que vean un texto azul en negrita como este "<a class="random action">Un texto</a>" en el texto ' +
+            'del libro, es una acción. Normalmente será elegir un número de la Tabla de la Suerte. Pincha en el para hacer ' +
+            'dicha acción.</p>' +
+            '<p>Los textos en azul que no estén en negrita como este "<a>Un texto</a>" son enlaces a otros sitios (p.ej. a ' + 
+            'la Carta de Acción, o al mapa, ...). Si pinchas en ellos irás allí.</p>' + 
+            'Al final de esta página encontrás dos enlaces para elegir tu Destreza en el Combate y Resistencia. Pincha en ' +
+            'ellos antes de continuar a la siguiente sección.</p>',
 
         //////////////////////////////////////
         // Special sections
@@ -184,7 +197,7 @@ class Translations {
         'appInfo' : 'Esto es una aplicación para jugar a los librojuegos de Lobo Solitario, del 1 al 12.',
         'browsersWarning' : 'Sólo se soportan las últimas versiones de Chrome y Firefox. Otros navegadores o versiones no están soportados (pueden funcionar... o no).',
         'historyWarning' : 'Ten en cuenta que si borras el historial de tu navegador, perderás la partida actual. Puedes guardar la partida actual a un archivo en <i>Ajustes &gt; Guardar juego</i>.',
-        'androidInfo' : 'Puedes jugar a esto en una aplicación Android (versión mínima 4.4). Descárgala en el <a href="https://play.google.com/store/apps/details?id=org.projectaon.kaichronicles">Google Play</a>.',
+        'androidInfo' : 'Puedes jugar a esto en una aplicación Android (versión mínima 5.0). Descárgala en el <a href="https://play.google.com/store/apps/details?id=org.projectaon.kaichronicles">Google Play</a>.',
         'haveFun' : '¡Divierte!',
         'continueGame' : 'Continuar el juego',
         'newGame' : 'Nuevo juego',

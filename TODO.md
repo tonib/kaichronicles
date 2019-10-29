@@ -30,8 +30,10 @@ TODO
 ## Other
 
 - UPLOAD NEW VERSION 1.11.1
+- Fix config.xml plugin versions to use
+- package.json should be versioned with git ???
 - FAQ: Add info about change the Random Table
-- FAQ: "I cannot write on the Action Chart"
+- Add help for "LW club newsletter 29" setting
 - Use latest version on PAON data on SVN (a fixed commit number)
   * Review upgrades to book 7+
 - Warn about permanent losses (toastr)
@@ -45,6 +47,8 @@ TODO
   * Others?
 - Performance
 - FAQ: Questions about "I cannot write on the Action Chart"
+- Quivers with no arrows available on section should not show "(0 arrows)". Show "(0 arrows)" only on Action chart. Same to sell quiver
+  object (see book 8, sect139)
 - "Okay okay. Didn't know about the lone wolf series and went through the 10 programmed books in 2 days. Turns out the rest are online !!! 
    So it won't be as fast to play but I'm definitely continuing. One remark. I'd like to be able to know what was in the Kai monastery at 
    the end so I can continue with that too !"
@@ -105,6 +109,7 @@ Reminders
 cordova emulate --target=Android_4_4_2 android
 cordova emulate --target=Android_5_0_1 android
 cordova emulate --target=Android_6 android
+cordova emulate --target=Android_9 android
 
 * Build project AON xhtml:
   cd [trunk or tag directory]
