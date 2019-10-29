@@ -1396,11 +1396,21 @@
         </section>
 
         <section id="sect270">
-            <!-- TODO: Unsupported -->
-            <message 
+            <message id="msg-drop-object" 
                 en-text="Drop two object before continuing" 
                 es-text="Deja dos objetos antes de continuar" 
             />
+            <choiceState section="all" set="disabled" />
+            <onInventoryEvent>
+                <test expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] == 0 || [BACKPACK-ITEMS-CNT-ON-SECTION] >= 2">
+                    <message id="msg-drop-object" op="hide" />
+                    <choiceState section="all" set="enabled" />
+                </test>
+                <test not="true" expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] == 0 || [BACKPACK-ITEMS-CNT-ON-SECTION] >= 2">
+                    <message id="msg-drop-object" op="show" />
+                    <choiceState section="all" set="disabled" />
+                </test>
+            </onInventoryEvent>
         </section>
 
         <section id="sect273">
