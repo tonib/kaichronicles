@@ -116,6 +116,11 @@ class ObjectsTableItem {
 
         html += '<span><b>' + name + '</b></span>';
 
+        // Usage count
+        if( this.item.usageCount > 1 ) {
+            html += ' <span>' + translations.text( 'usageCount' , [this.item.usageCount] ) + '</span>';
+        }
+
         // Description
         if( this.item.description ) {
             html += '<br/><i><small>' + this.item.description;
@@ -376,7 +381,7 @@ class ObjectsTableItem {
             return;
 
         // Use the object
-        const dropObject = ( this.type == ObjectsTableType.INVENTORY );
+        const dropObject = ( this.type == ObjectsTableType.INVENTORY && --this.item.usageCount <= 0 );
         actionChartController.use( this.item.id , dropObject );
 
         // If the object was used from the section, remove it

@@ -83,6 +83,7 @@ class Translations {
         'more' : 'Más',
         'fightUnarmed' : 'Luchar desarmado',
         'permanent' : 'Permanente',
+        'usageCount' : '(se puede usar {0} veces)',
 
         //////////////////////////////////////
         // Combats
@@ -398,6 +399,7 @@ class Translations {
         'confirm20EPGrdMaster': 'This ability can only be used once every 20 days. Continue?',
         'more' : 'More',
         'permanent' : 'Permanent',
+        'usageCount' : '(can be used {0} times)',
 
         //////////////////////////////////////
         // Combats
