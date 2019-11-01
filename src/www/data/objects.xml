@@ -1818,7 +1818,7 @@
 
         <!-- BOOK 13 -->
 
-        <object id="cenerrobe">
+        <object id="cenerrobe" itemCount="2">
             <name lang="en">Cener Robe</name>
         </object>
 
