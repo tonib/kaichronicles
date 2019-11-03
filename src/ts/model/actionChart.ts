@@ -562,7 +562,7 @@ class ActionChart {
                     concept: translations.text( 'weaponskill' ),
                     increment: +2
                 });
-            else {
+            else if( state.book.isMagnakaiBook() ) {
                 // Magnakai book
                 let bonus = +3;
                 /*  Exception (Magnakai books):
@@ -576,6 +576,11 @@ class ActionChart {
                 bonuses.push( {
                     concept: translations.text( 'weaponmastery' ),
                     increment: bonus
+                });
+            } else {
+                bonuses.push( {
+                    concept: translations.text( 'grdweaponmastery' ),
+                    increment: +5
                 });
             }
         }

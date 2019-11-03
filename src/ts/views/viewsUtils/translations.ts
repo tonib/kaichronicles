@@ -383,6 +383,7 @@ class Translations {
         'noWeapon' : 'No weapon',
         'weaponskill' : 'Weaponskill',
         'weaponmastery' : 'Weaponmastery',
+        'grdweaponmastery' : 'Grand Weaponmastery',
         'mindblast' : 'Mindblast',
         'psisurge' : 'Psi-surge',
         'kaisurge' : 'Kai-surge',
