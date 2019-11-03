@@ -6,7 +6,7 @@ TODO
 - Replace var with let/const
 - Replace main const/var with TS classes
 - Replace Google analytics with Matomo
-
+- Replace list of items with available object list
 
 ## Gameplay
 
