@@ -20,7 +20,6 @@ dist
 # NPM / node.js stuff
 npm-debug.log
 node_modules
-package-lock.json
 
 # Keystore to sign apks
 keystore

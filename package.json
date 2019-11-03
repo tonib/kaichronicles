@@ -6,12 +6,13 @@
         "url": "https://github.com/tonib/kaichronicles.git"
     },
     "license": "MIT",
+    "dependencies": {},
     "devDependencies": {
         "@types/bootstrap": "^3.3.42",
         "@types/cordova": "0.0.34",
         "@types/jquery": "^2.0.54",
         "@types/toastr": "^2.1.37",
-        "jshint": "2.10.2",
+        "tslint": "^5.20.0",
         "klaw-sync": "6.0.0",
         "node-fs-extra": "0.8.2",
         "preprocess": "3.1.0",
@@ -19,7 +20,7 @@
         "uglify-js": "3.6.2"
     },
     "scripts": {
-        "lint": "jshint src/www/js",
+        "lint": "tslint -p tsconfig.json",
         "prepareversion": "node scripts/prepareVersion.js",
         "cleandist": "rm -rf dist",
         "downloaddata": "node scripts/downloadProjectAonData.js",
