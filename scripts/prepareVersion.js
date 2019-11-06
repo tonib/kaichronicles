@@ -4,7 +4,7 @@
  * Run this as "npm run prepareversion -- [KEYSTOREPASSWORD]"
  */ 
 
-const fs = require('node-fs-extra');
+const fs = require('fs-extra');
 const klawSync = require( 'klaw-sync' );
 const uglifyJS = require( 'uglify-js' );
 const preprocess = require( 'preprocess' );

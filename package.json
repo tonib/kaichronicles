@@ -14,9 +14,9 @@
         "@types/toastr": "^2.1.37",
         "tslint": "^5.20.0",
         "klaw-sync": "6.0.0",
-        "node-fs-extra": "0.8.2",
+        "fs-extra": "8.1.0",
         "preprocess": "3.1.0",
-        "typescript": "2.6.2",
+        "typescript": "^3.7.2",
         "uglify-js": "3.6.2"
     },
     "scripts": {
