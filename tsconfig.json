@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "outDir" : "src/www/js/ts-generated",
+        "outDir" : "src/www/js",
         "rootDir" : "src/ts",
         "target": "es5"
     },

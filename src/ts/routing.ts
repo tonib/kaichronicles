@@ -3,7 +3,7 @@
  * The routes handler.
  * As this is a single page app, routes are implemented with the URL hash
  */
-var routing = {
+const routing = {
 
     /**
      * The current controller name
@@ -16,7 +16,7 @@ var routing = {
      * @param {object} parameters Hash with parameters for the route. It can be null
      * @returns True if the redirection can be done. False otherwise
      */
-    redirect: function(route, parameters) {
+    redirect: function(route, parameters: any = null) {
         try {
 
             // Remove hash
