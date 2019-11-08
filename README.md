@@ -35,12 +35,11 @@ This will require Node.js (any recent version), zip command, SVN client, wget an
 
 ### Setup web site
 
-* Put the folder src/www on your private web server
-* Open http://localhost/[dir-for-src-www]/index.html
-
-You are now done. If you have Firefox, you dont need a web server. You can open
-directly the file src/www/index.html. This will not work with Chrome (see 
-http://stackoverflow.com/questions/10752055/cross-origin-requests-are-only-supported-for-http-error-when-loading-a-local)
+```bash
+    npm install -g serve
+    serve src/www
+```
+Open your browser on http://localhost:5000.
 
 ### Setup Android app
 

@@ -1,6 +1,6 @@
 const fs = require('fs-extra');
 const BookData = require( './bookData.js' ).BookData;
-const projectAon = require( '../src/www/js/ts-generated/model/projectAon.js' ).projectAon;
+const projectAon = require( '../src/www/js/model/projectAon.js' ).projectAon;
 
 /*
     Dowload Project Aon book data
