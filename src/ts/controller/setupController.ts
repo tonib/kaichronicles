@@ -86,20 +86,14 @@ const setupController = {
 
         // Stuff to handle each download
         const promises = [];
-        let someError = false;
-        const failFunction = (jqXHR: JQueryXHR, textStatus: string, errorThrown: string) => {
-            setupView.log(ajaxErrorMsg(this, jqXHR, textStatus, errorThrown), "error");
-            someError = true;
-        };
-        const doneFunction = () => {
-            setupView.log(this.url + " OK!", "ok");
-        };
         for (const download of downloads) {
             setupView.log(download.url + " download started...");
             download.promise.url = download.url;
             download.promise
-                .fail(failFunction)
-                .done(doneFunction);
+                .fail(function(jqXHR: JQueryXHR, textStatus: string, errorThrown: string) {
+                    setupView.log(ajaxErrorMsg(this, jqXHR, textStatus, errorThrown), "error");
+                })
+                .done(function() { setupView.log(this.url + " OK!", "ok"); });
             promises.push(download.promise);
         }
 

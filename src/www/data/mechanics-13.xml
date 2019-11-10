@@ -20,7 +20,7 @@
         <section id="gamerulz">
             <!-- Select the player skills (weapons skill and endurance) UI -->
             <setSkills />
-            /* TODO Drop special items */
+            <drop objectId="allspecialgrdmaster" />
         </section>
 
         <section id="discplnz">
