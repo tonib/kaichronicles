@@ -722,6 +722,14 @@ class ActionChart {
             }
         }
 
+        // Grand Master level bonus
+        if (state.book.isGrandMasterBook() && this.disciplines.length > 4) {
+            bonuses.push({
+                concept: translations.text("kaiLevel"),
+                increment: (this.disciplines.length - 4),
+            });
+        }
+
         return bonuses;
     }
 
@@ -763,6 +771,14 @@ class ActionChart {
         const circlesBonuses = LoreCircle.getCirclesBonuses(this.disciplines, "EP");
         for (const c of circlesBonuses) {
             bonuses.push(c);
+        }
+
+        // Grand Master level bonus
+        if (state.book.isGrandMasterBook() && this.disciplines.length > 4) {
+            bonuses.push({
+                concept: translations.text("kaiLevel"),
+                increment: (this.disciplines.length - 4) * 2,
+            });
         }
 
         return bonuses;
