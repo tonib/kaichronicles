@@ -1,17 +1,15 @@
-/// <reference path="../external.ts" />
-
 const mapView = {
 
     /**
      * Show the map section
      * @param section The map Section
      */
-    setSectionContent: function( section : Section ) {
+    setSectionContent( section: Section ) {
 
         /*const titleText = section.getTitleText();
         document.title = titleText;
         $('#map-title').text( titleText );
-        // Render the map, with the illustrations text. On book 5, it's the 
+        // Render the map, with the illustrations text. On book 5, it's the
         // map description
         $('#map-section').html( section.getHtml(true) );*/
         mapView.setContent( section.getTitleText() , section.getHtml(true) );
@@ -20,10 +18,10 @@ const mapView = {
     /**
      * Set map for book 11 (special case)
      */
-    setMapBook11: function() {
+    setMapBook11() {
         const map = state.mechanics.getObject( Item.MAP );
         // On book 11, map is on section 233
-        const mapSection = new Section( state.book , 'sect233' , state.mechanics );
+        const mapSection = new Section( state.book , "sect233" , state.mechanics );
         mapView.setContent( map.name , mapSection.getFirstIllustrationHtml() );
     },
 
@@ -32,56 +30,56 @@ const mapView = {
      * @param titleText Page title
      * @param mapSectionHtml The map HTML
      */
-    setContent: function( titleText : string , mapSectionHtml : string ) {
+    setContent( titleText: string , mapSectionHtml: string ) {
         document.title = titleText;
-        $('#map-title').text( titleText );
-        // Render the map, with the illustrations text. On book 5, there is a textual 
+        $("#map-title").text( titleText );
+        // Render the map, with the illustrations text. On book 5, there is a textual
         // map description
-        $('#map-section').html( mapSectionHtml );
+        $("#map-section").html( mapSectionHtml );
     },
 
     /**
      * Bind map events
      */
-    bindEvents: function() {
+    bindEvents() {
         // Bind clicks on image to resize it
-        $('#map-section div.illustration img').click(function() {
+        $("#map-section div.illustration img").click(function() {
             // Reset fixed width / height
             const $this = $(this);
-            $this.removeAttr( 'width' );
-            $this.removeAttr( 'height' );
-            $this.toggleClass('originalsize');
+            $this.removeAttr( "width" );
+            $this.removeAttr( "height" );
+            $this.toggleClass("originalsize");
         });
-        $('#map-increasezoom').click(function(e : Event) {
+        $("#map-increasezoom").click((e: Event) => {
             mapView.changeZoom(true, e);
         });
-        $('#map-decreasezoom').click(function(e : Event) {
+        $("#map-decreasezoom").click((e: Event) => {
             mapView.changeZoom(false, e);
         });
 
         // Add window resize event handler
-        window.addEventListener( 'resize' , mapView.onWindowResize , false);
+        window.addEventListener( "resize" , mapView.onWindowResize , false);
     },
 
     /**
      * Unbind map events
      */
-    unbindEvents: function() {
-        //console.log( 'mapView.unbindEvents' );
-        window.removeEventListener( 'resize' , mapView.onWindowResize );
+    unbindEvents() {
+        // console.log( 'mapView.unbindEvents' );
+        window.removeEventListener( "resize" , mapView.onWindowResize );
     },
 
     /**
      * Event handler for window resize.
      * This will reset the map zoom
      */
-    onWindowResize: function( e : Event ) {
+    onWindowResize( e: Event ) {
         // Window has been resized (orientation change). Reset to original size:
-        //console.log( 'onWindowResize' );
-        let $image = $('#map-section img');
-        $image.removeAttr( 'width' );
-        $image.removeAttr( 'height' );
-        $image.removeClass( 'originalsize' );
+        // console.log( 'onWindowResize' );
+        const $image = $("#map-section img");
+        $image.removeAttr( "width" );
+        $image.removeAttr( "height" );
+        $image.removeClass( "originalsize" );
     },
 
     /**
@@ -89,18 +87,18 @@ const mapView = {
      * @param increase True to increase the zoom. False to decrease
      * @param e The click event on the zoom links
      */
-    changeZoom: function(increase: boolean, e : Event) {
+    changeZoom(increase: boolean, e: Event) {
         e.preventDefault();
 
-        let $image = $('#map-section img');
-        let image = $image[0];
+        const $image = $("#map-section img");
+        const image = $image[0];
 
-        let factor = ( increase ? 1.1 : 0.9 );
+        const factor = ( increase ? 1.1 : 0.9 );
         $image.width($image.width() * factor);
         $image.height($image.height() * factor);
 
         // If originalsize class is not set, the width is fixed to 100%, and the image appears distorted
-        $image.addClass('originalsize');
-    }
+        $image.addClass("originalsize");
+    },
 
 };

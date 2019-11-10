@@ -1,25 +1,23 @@
 
-/// <reference path="../external.ts" />
-
 /**
  * Bonus for CS/EP definition
  */
 interface Bonus {
     /** The bonus description */
-    concept : string;
+    concept: string;
     /** The increment / decrement of the CS/EP */
-    increment : number;
+    increment: number;
 }
 
 /**
- * The action chart / player state 
+ * The action chart / player state
  */
 class ActionChart {
 
     /** First book number with a limit on Special Items count */
     public static BOOK_WITH_MAX_SPECIALS = 8;
 
-    /** The original combat skill */ 
+    /** The original combat skill */
     public combatSkill = 0;
 
     /** The original endurance */
@@ -29,16 +27,16 @@ class ActionChart {
     public currentEndurance = 0;
 
     /** The player weapons (up to 2) */
-    public weapons : Array<string> = [];
+    public weapons: string[] = [];
 
     /**
-      * If true, the player will fight with no weapons (hand-to-hand).
-      * This may seem stupid, but in book 12 there are places where, if you try to fight with the Sommerswerd, you die. 
-      */
+     * If true, the player will fight with no weapons (hand-to-hand).
+     * This may seem stupid, but in book 12 there are places where, if you try to fight with the Sommerswerd, you die.
+     */
     public fightUnarmed = false;
 
-    /** The currently hand-to-hand selected weapon id. Empty string if the player has no weapon  */ 
-    private selectedWeapon = '';
+    /** The currently hand-to-hand selected weapon id. Empty string if the player has no weapon  */
+    private selectedWeapon = "";
 
     /** Money amount */
     public beltPouch = 0;
@@ -47,7 +45,7 @@ class ActionChart {
     public meals = 0;
 
     /** Backpack items ids (up to 8) */
-    public backpackItems : Array<string> = [];
+    public backpackItems: string[] = [];
 
     /** Special items ids */
     public specialItems = [];
@@ -56,16 +54,16 @@ class ActionChart {
     public hasBackpack = true;
 
     /** Disciplines ids */
-    public disciplines : Array<string> = [];
-    
-    /** 
+    public disciplines: string[] = [];
+
+    /**
      * The weapon codes for the "wepnskll" / "wpnmstry" disciplines.
      * On kai series, it's a single weapon. On magnakai, they are 3 or more
      */
-    public weaponSkill : Array<string> = [];
+    public weaponSkill: string[] = [];
 
     /** Player annotations */
-    public annotations = '';
+    public annotations = "";
 
     /** Use manual random table? */
     public manualRandomTable = true;
@@ -83,7 +81,7 @@ class ActionChart {
 
     /** The player has used adgana previously? (see "pouchadgana" object) */
     public adganaUsed = false;
-    
+
     /**
      * Restore 20 EP used?.
      * Archmaster level:
@@ -95,31 +93,30 @@ class ActionChart {
     /**
      * Objects in safekeeping at Kai monastery
      */
-    public kaiMonasterySafekeeping : Array<SectionItem>  = [];
+    public kaiMonasterySafekeeping: SectionItem[] = [];
 
     constructor() {
         // Debug fast setup:
-        if( window.getUrlParameter('debug') ) {
+        if (window.getUrlParameter("debug")) {
             this.endurance = this.currentEndurance = 25;
             this.combatSkill = 15;
             this.manualRandomTable = true;
             this.extendedCRT = false;
-            if( state.book ) {
-                if( state.book.isGrandMasterBook() ) {
+            if (state.book) {
+                if (state.book.isGrandMasterBook()) {
                     this.endurance = this.currentEndurance = 35;
                     this.combatSkill = 30;
                     // debug data for Grand Master
-                    this.disciplines = [ 'wpnmstry' , 'deliver' , 'hntmstry', 'assimila' ];
-                    this.weaponSkill = [ 'axe' , 'sword' ];
+                    this.disciplines = ["wpnmstry", "deliver", "hntmstry", "assimila"];
+                    this.weaponSkill = ["axe", "sword"];
                 } else if (state.book.isMagnakaiBook()) {
                     // debug data for magnakai
-                    this.disciplines = [ 'wpnmstry' , 'curing' , 'hntmstry' ];
-                    this.weaponSkill = [ 'axe' , 'sword' , 'bow' ];
-                }
-                else {
+                    this.disciplines = ["wpnmstry", "curing", "hntmstry"];
+                    this.weaponSkill = ["axe", "sword", "bow"];
+                } else {
                     // debug data for kai series
-                    this.disciplines = [ 'camflage' , 'hunting' , 'sixthsns' , 'healing' , 'wepnskll' ];
-                    this.weaponSkill = [ 'axe' ];
+                    this.disciplines = ["camflage", "hunting", "sixthsns", "healing", "wepnskll"];
+                    this.weaponSkill = ["axe"];
                 }
             }
         }
@@ -129,9 +126,10 @@ class ActionChart {
      * Returns the currently hand-to-hand selected weapon id.
      * @returns The currently selected weapon id. Empty string if the player has no weapon selected
      */
-    public getSelectedWeapon() : string {
-        if( this.fightUnarmed )
-            return '';
+    public getSelectedWeapon(): string {
+        if (this.fightUnarmed) {
+            return "";
+        }
 
         return this.selectedWeapon;
     }
@@ -141,7 +139,7 @@ class ActionChart {
      * This will set the fightUnarmed flag to false.
      * @param weaponId The new selected weapon id. No tests are done over this weapon id!
      */
-    public setSelectedWeapon( weaponId : string ) {
+    public setSelectedWeapon(weaponId: string) {
         this.selectedWeapon = weaponId;
         this.fightUnarmed = false;
     }
@@ -151,13 +149,14 @@ class ActionChart {
      * @param bow True if we should return the selected bow info. False to return the selected hand-to-hand weapon info.
      * @return The current weapon info. null if the is player has no weapon
      */
-    public getSelectedWeaponItem( bow : boolean = false ) : Item {
+    public getSelectedWeaponItem(bow: boolean = false): Item {
 
-        if( bow )
+        if (bow) {
             return this.getSelectedBow();
-        
+        }
+
         const weaponId = this.getSelectedWeapon();
-        return weaponId ? state.mechanics.getObject( weaponId ) : null;
+        return weaponId ? state.mechanics.getObject(weaponId) : null;
     }
 
     /**
@@ -167,79 +166,90 @@ class ActionChart {
      * @param o Object to pick
      * @return True if the object was really picked
      */
-    public pick( o : Item ) : boolean {
+    public pick(o: Item): boolean {
 
-        if( !o )
+        if (!o) {
             return false;
+        }
 
         // Check incompatibilities
-        if( o.incompatibleWith.length > 0 ) {
-            for( let incompatibleId of o.incompatibleWith ) {
-                if( this.hasObject( incompatibleId ) ) {
-                    var incombatibleObject = state.mechanics.getObject( incompatibleId );
-                    throw translations.text( 'msgIncompatible' , [incombatibleObject.name] );
+        if (o.incompatibleWith.length > 0) {
+            for (const incompatibleId of o.incompatibleWith) {
+                if (this.hasObject(incompatibleId)) {
+                    const incombatibleObject = state.mechanics.getObject(incompatibleId);
+                    throw translations.text("msgIncompatible", [incombatibleObject.name]);
                 }
             }
         }
 
-        switch( o.type ) {
-            case 'weapon':
-                if( this.weapons.length >= 2 )
-                    throw translations.text('msgNoMoreWeapons');
-                //console.log('Picked weapon ' + o.id);
+        switch (o.type) {
+            case "weapon":
+                if (this.weapons.length >= 2) {
+                    throw translations.text("msgNoMoreWeapons");
+                }
+                // console.log('Picked weapon ' + o.id);
                 this.weapons.push(o.id);
                 this.checkCurrentWeapon();
                 return true;
 
-            case 'special':
+            case "special":
 
                 // Check Special Items limit
                 const nMax = ActionChart.getMaxSpecials();
-                if( o.itemCount && nMax && ( this.getNSpecialItems(false) + o.itemCount ) > nMax )
-                    throw translations.text( 'msgNoMoreSpecialItems' );
+                if (o.itemCount && nMax && (this.getNSpecialItems(false) + o.itemCount) > nMax) {
+                    throw translations.text("msgNoMoreSpecialItems");
+                }
 
                 // If the object is an Arrow, check if the player has some quiver
-                if( o.isArrow && !this.hasObject( Item.QUIVER ) )
-                    throw translations.text( 'noQuiversEnough' );
+                if (o.isArrow && !this.hasObject(Item.QUIVER)) {
+                    throw translations.text("noQuiversEnough");
+                }
 
-                this.specialItems.push( o.id );
+                this.specialItems.push(o.id);
 
-                if( o.isWeapon() )
+                if (o.isWeapon()) {
                     this.checkCurrentWeapon();
+                }
 
-                if( o.isArrow )
+                if (o.isArrow) {
                     // The object is an Arrow. Drop a normal Arrow if needed
                     this.sanitizeArrowCount();
+                }
 
                 return true;
 
-            case 'object':
+            case "object":
 
-                if( o.id == 'backpack' ) {
+                if (o.id === "backpack") {
                     // Special case
-                    if( this.hasBackpack )
-                        throw translations.text( 'msgAlreadyBackpack' );
+                    if (this.hasBackpack) {
+                        throw translations.text("msgAlreadyBackpack");
+                    }
 
                     this.hasBackpack = true;
                     return true;
                 }
 
-                if( !this.hasBackpack )
-                    throw translations.text( 'backpackLost' );
-                if( ( this.getNBackpackItems(false) + o.itemCount ) > (state.book.isGrandMasterBook() ? 10 : 8) )
-                    throw translations.text( 'msgNoMoreBackpackItems' );
-                if( o.id == 'meal')
+                if (!this.hasBackpack) {
+                    throw translations.text("backpackLost");
+                }
+                if ((this.getNBackpackItems(false) + o.itemCount) > (state.book.isGrandMasterBook() ? 10 : 8)) {
+                    throw translations.text("msgNoMoreBackpackItems");
+                }
+                if (o.id === "meal") {
                     // Special case
                     this.increaseMeals(1);
-                else
+                } else {
                     this.backpackItems.push(o.id);
-                if(o.isWeapon())
+                }
+                if (o.isWeapon()) {
                     this.checkCurrentWeapon();
-                console.log('Picked object ' + o.id);
+                }
+                console.log("Picked object " + o.id);
                 return true;
-                
+
             default:
-                throw 'Unknown object type: ' + o.type;
+                throw new Error("Unknown object type: " + o.type);
         }
 
     }
@@ -249,75 +259,83 @@ class ActionChart {
      * @param roundToInteger If true, the total number of objects will be rounded up to a integer (Item.itemCount can have decimals)
      * @returns The number of objects on the backpack
      */
-    public getNBackpackItems( roundToInteger : boolean = true ) : number {
-        var count = this.meals;
-        for( var i=0; i<this.backpackItems.length; i++) {
-            var o = state.mechanics.getObject(this.backpackItems[i]);
-            if( o )
+    public getNBackpackItems(roundToInteger: boolean = true): number {
+        let count = this.meals;
+        for (const item of this.backpackItems) {
+            const o = state.mechanics.getObject(item);
+            if (o) {
                 count += o.itemCount;
+            }
         }
-        if( roundToInteger )
-            count = Math.ceil( count );
+        if (roundToInteger) {
+            count = Math.ceil(count);
+        }
         return count;
     }
 
     /**
-     * Returns the total number of special items, according to the number of slots each item consum 
+     * Returns the total number of special items, according to the number of slots each item consum
      * @param roundToInteger If true, the total number of objects will be rounded up to a integer (Item.itemCount can have decimals)
      * @returns The number of Special Items
      */
-    public getNSpecialItems( roundToInteger : boolean = true ) : number {
+    public getNSpecialItems(roundToInteger: boolean = true): number {
         let count = 0;
-        for( let specialId of this.specialItems ) {
-            const o = state.mechanics.getObject( specialId );
-            if( o )
+        for (const specialId of this.specialItems) {
+            const o = state.mechanics.getObject(specialId);
+            if (o) {
                 count += o.itemCount;
+            }
         }
-        if( roundToInteger )
-            count = Math.ceil( count );
+        if (roundToInteger) {
+            count = Math.ceil(count);
+        }
         return count;
     }
 
     /**
      * Increase / decrease the meals number
      * @param count Number to increase. Negative to decrease
-     * @return The number of really picked meals 
+     * @return The number of really picked meals
      */
-    public increaseMeals(count : number) : number {
+    public increaseMeals(count: number): number {
 
-        if( count > 0 ) {
-            if( !this.hasBackpack )
-                throw translations.text( 'backpackLost' );
+        if (count > 0) {
+            if (!this.hasBackpack) {
+                throw translations.text("backpackLost");
+            }
 
-            var maxToPick = 8 - this.getNBackpackItems();
-            if( maxToPick < 0 )
+            const maxToPick = 8 - this.getNBackpackItems();
+            if (maxToPick < 0) {
                 count = 0;
-            else if( count > maxToPick )
-                count = maxToPick; 
+            } else if (count > maxToPick) {
+                count = maxToPick;
+            }
         }
 
         this.meals += count;
 
         // Sanitize for negative count values
-        if( this.meals < 0 )
+        if (this.meals < 0) {
             this.meals = 0;
+        }
 
-        //console.log('Picked ' + count + ' meals');
+        // console.log('Picked ' + count + ' meals');
         return count;
     }
 
     /**
      * Increase / decrease the money number
-     * @param count Number to increase. Negative to decrease 
+     * @param count Number to increase. Negative to decrease
      * @returns Amount really picked.
      */
-    public increaseMoney(count : number) : number {
+    public increaseMoney(count: number): number {
         const oldBeltPouch = this.beltPouch;
         this.beltPouch += count;
-        if( this.beltPouch > 50 )
+        if (this.beltPouch > 50) {
             this.beltPouch = 50;
-        else if( this.beltPouch < 0 )
+        } else if (this.beltPouch < 0) {
             this.beltPouch = 0;
+        }
         return this.beltPouch - oldBeltPouch;
     }
 
@@ -325,34 +343,36 @@ class ActionChart {
      * Returns true if the player has the object
      * @param objectId The object id to test. "backpack" to check if the player has a backpack
      */
-    public hasObject = function(objectId : string) : boolean {
-        if( objectId == 'backpack' )
+    public hasObject = function(objectId: string): boolean {
+        if (objectId === "backpack") {
             return this.hasBackpack;
-            
-        return this.backpackItems.contains( objectId ) ||
-            this.specialItems.contains( objectId ) ||
-            this.weapons.contains( objectId );
-    }
+        }
+
+        return this.backpackItems.contains(objectId) ||
+            this.specialItems.contains(objectId) ||
+            this.weapons.contains(objectId);
+    };
 
     /**
      * Drop an object
-     * @param objectId Object id to drop, or 'meal' to drop one meal, or 'backpack' to drop the 
+     * @param objectId Object id to drop, or 'meal' to drop one meal, or 'backpack' to drop the
      * backpack.
-     * @param count Object count. Only for quivers. count == n. arrows to drop. It must to be >= 0
-     * @return True if player had the object 
+     * @param count Object count. Only for quivers. count === n. arrows to drop. It must to be >= 0
+     * @return True if player had the object
      */
-    public drop(objectId : string, count : number = 0) : boolean {
+    public drop(objectId: string, count: number = 0): boolean {
 
-        if( objectId == Item.MEAL ) {
+        if (objectId === Item.MEAL) {
             // Special
             this.increaseMeals(-1);
             return true;
         }
 
-        if( objectId == 'backpack' ) {
+        if (objectId === "backpack") {
             // Special
-            if( !this.hasBackpack )
+            if (!this.hasBackpack) {
                 return false;
+            }
 
             this.hasBackpack = false;
             this.meals = 0;
@@ -361,18 +381,18 @@ class ActionChart {
             return true;
         }
 
-        if( this.backpackItems.removeValue(objectId) || this.specialItems.removeValue(objectId)) {
+        if (this.backpackItems.removeValue(objectId) || this.specialItems.removeValue(objectId)) {
             this.checkMaxEndurance();
             this.checkCurrentWeapon();
-            if( objectId == Item.QUIVER ) {
+            if (objectId === Item.QUIVER) {
                 // Decrease arrows count
                 this.arrows -= count;
                 this.sanitizeArrowCount();
             }
             return true;
         }
-        
-        if( this.weapons.removeValue(objectId) ) {
+
+        if (this.weapons.removeValue(objectId)) {
             // Check changes on selected weapon
             this.checkCurrentWeapon();
             return true;
@@ -385,19 +405,19 @@ class ActionChart {
      */
     private checkCurrentWeapon() {
 
-        if( this.selectedWeapon && this.hasObject(this.selectedWeapon) )
+        if (this.selectedWeapon && this.hasObject(this.selectedWeapon)) {
             // All is ok
             return;
+        }
 
         // Try to set the current weapon, only hand-to-hand weapons
-        var weaponObjects = this.getWeaponObjects(true);
-        if( weaponObjects.length === 0 ) {
+        const weaponObjects = this.getWeaponObjects(true);
+        if (weaponObjects.length === 0) {
             // No weapons
-            this.selectedWeapon = '';
+            this.selectedWeapon = "";
             this.fightUnarmed = false;
             return;
-        }
-        else if( weaponObjects.length >= 1 ) {
+        } else if (weaponObjects.length >= 1) {
             // Get one
             this.selectedWeapon = weaponObjects[0].id;
             return;
@@ -407,16 +427,18 @@ class ActionChart {
     /**
      * Returns the maximum endurance of the player
      */
-    public getMaxEndurance() : number {
+    public getMaxEndurance(): number {
 
-        if( this.endurance <= 0 )
+        if (this.endurance <= 0) {
             // If the original endurance is zero, the player is death
             return 0;
+        }
 
         let e = this.endurance;
         const bonuses = this.getEnduranceBonuses();
-        for(var i=0; i<bonuses.length; i++)
-            e += bonuses[i].increment;
+        for (const bonus of bonuses) {
+            e += bonus.increment;
+        }
         return e;
     }
 
@@ -425,29 +447,32 @@ class ActionChart {
      * This can happens if an object that has effects (increase endurance) has ben dropped, or if the original endurance has changed
      */
     private checkMaxEndurance() {
-        var max = this.getMaxEndurance();
-        if( this.currentEndurance > max )
+        const max = this.getMaxEndurance();
+        if (this.currentEndurance > max) {
             this.currentEndurance = max;
+        }
     }
 
     /**
      * Increase / decrease the current endurance
-     * @param count Number to increase. Negative to decrease 
+     * @param count Number to increase. Negative to decrease
      * @param permanent True if the increase is permanent (it changes the original endurance)
      */
-    public increaseEndurance(count : number, permanent : boolean = false) {
+    public increaseEndurance(count: number, permanent: boolean = false) {
 
-        if( permanent ) {
+        if (permanent) {
             // Change the original endurance
             this.endurance += count;
-            if( this.endurance < 0 )
+            if (this.endurance < 0) {
                 this.endurance = 0;
+            }
         }
 
         this.currentEndurance += count;
         this.checkMaxEndurance();
-        if( this.currentEndurance < 0 )
+        if (this.currentEndurance < 0) {
             this.currentEndurance = 0;
+        }
     }
 
     /**
@@ -456,12 +481,13 @@ class ActionChart {
      * @return The current combat skill. It includes bonuses for weapons and mindblast
      * discipline
      */
-    public getCurrentCombatSkill( combat : Combat = null ) : number {
-        
-        var cs = this.combatSkill;
-        var bonuses = this.getCurrentCombatSkillBonuses(combat);
-        for(var i=0; i<bonuses.length; i++)
-            cs += bonuses[i].increment;
+    public getCurrentCombatSkill(combat: Combat = null): number {
+
+        let cs = this.combatSkill;
+        const bonuses = this.getCurrentCombatSkillBonuses(combat);
+        for (const bonus of bonuses) {
+            cs += bonus.increment;
+        }
 
         return cs;
     }
@@ -470,20 +496,23 @@ class ActionChart {
      * Return true if the Weaponskill is active with the selected weapon
      * @return True if Weaponskill is active
      */
-    public isWeaponskillActive( bow : boolean = false ) : boolean {
+    public isWeaponskillActive(bow: boolean = false): boolean {
 
-        if( !this.disciplines.contains( 'wepnskll' ) && !this.disciplines.contains( 'wpnmstry' ) )
+        if (!this.disciplines.contains("wepnskll") && !this.disciplines.contains("wpnmstry")) {
             // Player has no Weaponskill
             return false;
+        }
 
-        const currentWeapon = this.getSelectedWeaponItem( bow );
-        if( !currentWeapon )
+        const currentWeapon = this.getSelectedWeaponItem(bow);
+        if (!currentWeapon) {
             // Player has no weapon
             return false;
-            
-        for(let i=0; i< this.weaponSkill.length; i++ ) {
-            if( currentWeapon.isWeaponType( this.weaponSkill[i] ) )
+        }
+
+        for (const skill of this.weaponSkill) {
+            if (currentWeapon.isWeaponType(skill)) {
                 return true;
+            }
         }
     }
 
@@ -492,14 +521,17 @@ class ActionChart {
      * @param weaponType Weapon type to check
      * @return True if the player has weaponskill with that weapon
      */
-    public hasWeaponskillWith( weaponType : string ) : boolean {
-        if( !this.disciplines.contains( 'wepnskll' ) && !this.disciplines.contains( 'wpnmstry' ) )
+    public hasWeaponskillWith(weaponType: string): boolean {
+        if (!this.disciplines.contains("wepnskll") && !this.disciplines.contains("wpnmstry")) {
             // Player has no Weaponskill
             return false;
+        }
 
-        for( let w of this.weaponSkill )
-            if( w == weaponType )
+        for (const w of this.weaponSkill) {
+            if (w === weaponType) {
                 return true;
+            }
+        }
 
         return false;
     }
@@ -511,102 +543,103 @@ class ActionChart {
      * @param disabledObjectsIds Objects ids that cannot be used on this combat
      * @returns Action chart bonuses for the combat
      */
-    private getWeaponCombatSkillBonuses( noWeapon : boolean , bowCombat : boolean , disabledObjectsIds : Array<string> ) 
-    : Array<Bonus> {
+    private getWeaponCombatSkillBonuses(noWeapon: boolean, bowCombat: boolean, disabledObjectsIds: string[])
+        : Bonus[] {
 
-        var bonuses = [];
-        var currentWeapon = this.getSelectedWeaponItem( bowCombat );
+        const bonuses = [];
+        let currentWeapon = this.getSelectedWeaponItem(bowCombat);
 
         // Check if the current weapon is disabled
-        if( disabledObjectsIds.length > 0 && currentWeapon ) {
-            if( disabledObjectsIds.contains( currentWeapon.id ) )
+        if (disabledObjectsIds.length > 0 && currentWeapon) {
+            if (disabledObjectsIds.contains(currentWeapon.id)) {
                 // Disabled
                 currentWeapon = null;
-            else if( currentWeapon.weaponType && disabledObjectsIds.contains( currentWeapon.weaponType ) ) {
+            } else if (currentWeapon.weaponType && disabledObjectsIds.contains(currentWeapon.weaponType)) {
                 // Base weapon disabled
                 currentWeapon = null;
             }
         }
 
         // Weapons
-        if( noWeapon || !currentWeapon ) {
+        if (noWeapon || !currentWeapon) {
             // No weapon: -4 CS
-            
+
             /*  Exception (Magnakai books):
-                1) Kai level "Tutelary" with "Weaponmastery": Tutelaries are able to use defensive combat skills to great effect 
-                   when fighting unarmed. When entering combat without a weapon, Tutelaries lose only 2 points from their COMBAT SKILL, 
-                   instead of the usual 4 points. 
-                2) Kai level "Scion-kai" with "Weaponmastery": ...Also, when in combat without a weapon they lose only 1 point 
+                1) Kai level "Tutelary" with "Weaponmastery": Tutelaries are able to use defensive combat skills to great effect
+                   when fighting unarmed. When entering combat without a weapon, Tutelaries lose only 2 points from their COMBAT SKILL,
+                   instead of the usual 4 points.
+                2) Kai level "Scion-kai" with "Weaponmastery": ...Also, when in combat without a weapon they lose only 1 point
                    from their COMBAT SKILL.
             */
             let bonus = -4;
-            if( state.book.isMagnakaiBook() && state.actionChart.disciplines.contains( 'wpnmstry' ) ) {
-                if(state.actionChart.disciplines.length >= 8 )
+            if (state.book.isMagnakaiBook() && state.actionChart.disciplines.contains("wpnmstry")) {
+                if (state.actionChart.disciplines.length >= 8) {
                     // Scion-kai
                     bonus = -1;
-                else if( state.actionChart.disciplines.length >= 5 )
+                } else if (state.actionChart.disciplines.length >= 5) {
                     // Tutelary
                     bonus = -2;
+                }
             }
 
-            bonuses.push( {
-                concept: translations.text('noWeapon'),
-                increment: bonus
+            bonuses.push({
+                concept: translations.text("noWeapon"),
+                increment: bonus,
             });
-        }
-        else if( this.isWeaponskillActive( bowCombat ) ) {
+        } else if (this.isWeaponskillActive(bowCombat)) {
             // Weapon skill bonus
-            if( state.book.isKaiBook() )
+            if (state.book.isKaiBook()) {
                 // Kai book:
-                bonuses.push( {
-                    concept: translations.text( 'weaponskill' ),
-                    increment: +2
+                bonuses.push({
+                    concept: translations.text("weaponskill"),
+                    increment: +2,
                 });
-            else if( state.book.isMagnakaiBook() ) {
+            } else if (state.book.isMagnakaiBook()) {
                 // Magnakai book
                 let bonus = +3;
                 /*  Exception (Magnakai books):
-                    Improvements: Scion-kai / Weaponmastery	/ When entering combat with a weapon they have mastered, Scion-kai may add 4 points 
+                    Improvements: Scion-kai / Weaponmastery	/ When entering combat with a weapon they have mastered, Scion-kai may add 4 points
                     (instead of the usual 3 points) to their COMBAT SKILL...
                 */
-                if(state.actionChart.disciplines.length >= 8 )
+                if (state.actionChart.disciplines.length >= 8) {
                     // Scion-kai
                     bonus = +4;
+                }
 
-                bonuses.push( {
-                    concept: translations.text( 'weaponmastery' ),
-                    increment: bonus
+                bonuses.push({
+                    concept: translations.text("weaponmastery"),
+                    increment: bonus,
                 });
             } else {
-                bonuses.push( {
-                    concept: translations.text( 'grdweaponmastery' ),
-                    increment: +5
+                bonuses.push({
+                    concept: translations.text("grdweaponmastery"),
+                    increment: +5,
                 });
             }
         }
 
         // Check current weapon bonuses
-        if( !noWeapon && currentWeapon && currentWeapon.combatSkillEffect ) {
-            bonuses.push( {
+        if (!noWeapon && currentWeapon && currentWeapon.combatSkillEffect) {
+            bonuses.push({
                 concept: currentWeapon.name,
-                increment: currentWeapon.combatSkillEffect
+                increment: currentWeapon.combatSkillEffect,
             });
         }
 
-        if( bowCombat ) {
+        if (bowCombat) {
             /* Improved disciplines:
-                Kai level "Mentora" with "Weaponmastery": Mentoras skilled in Weaponmastery are more accurate when using all missile 
-                weapons, whether fired (e.g. a bow) or thrown (e.g. a dagger). When using a bow or thrown weapon and instructed to pick a 
-                number from the Random Number Table, add 2 to the number picked if you are a Mentora with the Magnakai Discipline 
+                Kai level "Mentora" with "Weaponmastery": Mentoras skilled in Weaponmastery are more accurate when using all missile
+                weapons, whether fired (e.g. a bow) or thrown (e.g. a dagger). When using a bow or thrown weapon and instructed to pick a
+                number from the Random Number Table, add 2 to the number picked if you are a Mentora with the Magnakai Discipline
                 of Weaponmastery */
-            if( state.book.isMagnakaiBook() && this.disciplines.length >= 7 && this.disciplines.contains( 'wpnmstry' ) ) {
-                bonuses.push( {
+            if (state.book.isMagnakaiBook() && this.disciplines.length >= 7 && this.disciplines.contains("wpnmstry")) {
+                bonuses.push({
                     concept: state.book.getKaiTitle(7), // "Mentora" traslation
-                    increment: +2
+                    increment: +2,
                 });
             }
         }
-        
+
         return bonuses;
     }
 
@@ -614,10 +647,11 @@ class ActionChart {
      * Get total bonus for bow shots
      * @returns The bonus increment. It can be negative
      */
-    public getBowBonus() : number {
-        let bonus = 0
-        for( let b of this.getWeaponCombatSkillBonuses(false, true, []) )
+    public getBowBonus(): number {
+        let bonus = 0;
+        for (const b of this.getWeaponCombatSkillBonuses(false, true, [])) {
             bonus += b.increment;
+        }
         return bonus;
     }
 
@@ -626,65 +660,66 @@ class ActionChart {
      * @param combat The current combat. null to check default bonuses
      * @return Array of objects with the bonuses concepts
      */
-    public getCurrentCombatSkillBonuses(combat : Combat = null) : Array<Bonus> {
+    public getCurrentCombatSkillBonuses(combat: Combat = null): Bonus[] {
 
-        if( !combat ) {
+        if (!combat) {
             // Create a fake combat with the default values
-            combat = new Combat('Fake enemy' , 0 , 0 );
+            combat = new Combat("Fake enemy", 0, 0);
             // apply all global rules (to setup disabled objects for example)
             mechanicsEngine.runGlobalRules(true, combat);
         }
 
-        var bonuses = [];
+        const bonuses = [];
 
-        var currentWeapon = this.getSelectedWeaponItem( combat.bowCombat );
+        const currentWeapon = this.getSelectedWeaponItem(combat.bowCombat);
 
         // Current weapon bonuses
-        if ( !combat.mentalOnly ) {
+        if (!combat.mentalOnly) {
             const noWeapon = combat.noWeaponCurrentTurn();
-            for( let b of this.getWeaponCombatSkillBonuses( noWeapon , combat.bowCombat , combat.disabledObjects ) )
-                bonuses.push( b );
+            for (const b of this.getWeaponCombatSkillBonuses(noWeapon, combat.bowCombat, combat.disabledObjects)) {
+                bonuses.push(b);
+            }
         }
 
         // Mindblast / Psi-surge
-        if( combat.kaiSurge ) {
-            bonuses.push( {
-                concept: translations.text( 'kaisurge' ),
-                increment: (combat.kaiSurgeBonus ? combat.kaiSurgeBonus : Combat.defaultKaiSurgeBonus()) * combat.mindblastMultiplier
+        if (combat.kaiSurge) {
+            bonuses.push({
+                concept: translations.text("kaisurge"),
+                increment: (combat.kaiSurgeBonus ? combat.kaiSurgeBonus : Combat.defaultKaiSurgeBonus()) * combat.mindblastMultiplier,
             });
-        } else if( combat.psiSurge ) {
-            bonuses.push( {
-                concept: translations.text( 'psisurge' ),
-                increment: (combat.psiSurgeBonus ? combat.psiSurgeBonus : Combat.defaultPsiSurgeBonus()) * combat.mindblastMultiplier
+        } else if (combat.psiSurge) {
+            bonuses.push({
+                concept: translations.text("psisurge"),
+                increment: (combat.psiSurgeBonus ? combat.psiSurgeBonus : Combat.defaultPsiSurgeBonus()) * combat.mindblastMultiplier,
             });
-        }
-        else if( !combat.noMindblast && ( this.disciplines.contains( 'mndblst' ) || this.disciplines.contains( 'psisurge' ) || this.disciplines.contains( 'kaisurge' ) ) ) {
-            bonuses.push( {
-                concept: translations.text( 'mindblast' ),
-                increment: (combat.mindblastBonus ? combat.mindblastBonus : Combat.defaultMindblastBonus()) * combat.mindblastMultiplier
+        } else if (!combat.noMindblast && (this.disciplines.contains("mndblst") || this.disciplines.contains("psisurge") || this.disciplines.contains("kaisurge"))) {
+            bonuses.push({
+                concept: translations.text("mindblast"),
+                increment: (combat.mindblastBonus ? combat.mindblastBonus : Combat.defaultMindblastBonus()) * combat.mindblastMultiplier,
             });
         }
 
         // Other objects (not weapons). Ex. shield. They are not applied for bow combats
-        if( !combat.mentalOnly && !combat.bowCombat ) {
-            this.enumerateObjects( function( o : Item ) {
-                if( !o.isWeapon() && o.combatSkillEffect && !combat.disabledObjects.contains(o.id) ) {
-                    bonuses.push( {
+        if (!combat.mentalOnly && !combat.bowCombat) {
+            this.enumerateObjects((o: Item) => {
+                if (!o.isWeapon() && o.combatSkillEffect && !combat.disabledObjects.contains(o.id)) {
+                    bonuses.push({
                         concept: o.name,
-                        increment: o.combatSkillEffect
+                        increment: o.combatSkillEffect,
                     });
                 }
             });
         }
-        
+
         // Lore-circles bonuses
         // We disable these in a mental combat, but flavor-wise, we should
         // arguably still allow the Spirit circle. Although the game rules are
         // not that detailed.
-        if ( !combat.mentalOnly ) {
-            const circlesBonuses = LoreCircle.getCirclesBonuses( this.disciplines , 'CS' );
-            for( let c of circlesBonuses )
+        if (!combat.mentalOnly) {
+            const circlesBonuses = LoreCircle.getCirclesBonuses(this.disciplines, "CS");
+            for (const c of circlesBonuses) {
                 bonuses.push(c);
+            }
         }
 
         return bonuses;
@@ -694,39 +729,41 @@ class ActionChart {
      * Function to enumerate backpack objects and special items
      * @param callback Function to be called for each object. Parameter is each Item owned by the player
      */
-    private enumerateObjects( callback : ( o : Item ) => void ) {
+    private enumerateObjects(callback: (o: Item) => void) {
 
-        var enumerateFunction = function(index : number , objectId : string ) {
-            const o = state.mechanics.getObject( objectId );
-            if( !o )
+        const enumerateFunction = (index: number, objectId: string) => {
+            const o = state.mechanics.getObject(objectId);
+            if (!o) {
                 return;
+            }
             callback(o);
         };
 
         // Check objects:
-        $.each( this.backpackItems , enumerateFunction );
-        $.each( this.specialItems , enumerateFunction );
+        $.each(this.backpackItems, enumerateFunction);
+        $.each(this.specialItems, enumerateFunction);
     }
 
     /**
      * Get the current bonuses for endurance
      * @return Array of objects with the bonuses concepts
      */
-    public getEnduranceBonuses() : Array<Bonus> {
+    public getEnduranceBonuses(): Bonus[] {
 
-        var bonuses = [];
-        this.enumerateObjects( function( o : Item ) {
-            if( o.enduranceEffect ) {
-                bonuses.push( {
+        const bonuses = [];
+        this.enumerateObjects((o: Item) => {
+            if (o.enduranceEffect) {
+                bonuses.push({
                     concept: o.name,
-                    increment: o.enduranceEffect
+                    increment: o.enduranceEffect,
                 });
             }
         });
 
-        const circlesBonuses = LoreCircle.getCirclesBonuses( this.disciplines , 'EP' );
-        for( let c of circlesBonuses )
+        const circlesBonuses = LoreCircle.getCirclesBonuses(this.disciplines, "EP");
+        for (const c of circlesBonuses) {
             bonuses.push(c);
+        }
 
         return bonuses;
     }
@@ -737,10 +774,11 @@ class ActionChart {
      */
     public getMealObjects() {
 
-        var result = [];
-        this.enumerateObjects( function( o : Item ) {
-            if( o.isMeal && !result.contains(o.id) )
+        const result = [];
+        this.enumerateObjects((o: Item) => {
+            if (o.isMeal && !result.contains(o.id)) {
                 result.push(o.id);
+            }
         });
         return result;
     }
@@ -751,42 +789,46 @@ class ActionChart {
      * @param onlyHandToHand If it's true, only hand to hand weapons will be returned
      * @return All weapon objects
      */
-    public getWeaponObjects(onlyHandToHand : boolean = false) : Array<Item> {
+    public getWeaponObjects(onlyHandToHand: boolean = false): Item[] {
 
         // Weapons
-        let result : Array<Item> = [];
-        for( let i=0; i<this.weapons.length; i++) {
-            let o = state.mechanics.getObject(this.weapons[i]);
-            if( o && ( !onlyHandToHand || o.isHandToHandWeapon() ) )
+        const result: Item[] = [];
+        for (const weapon of this.weapons) {
+            const o = state.mechanics.getObject(weapon);
+            if (o && (!onlyHandToHand || o.isHandToHandWeapon())) {
                 result.push(o);
+            }
         }
 
         // Weapon-like objects
-        this.enumerateObjects( function(o : Item) {
-            if( o.isWeapon() && ( !onlyHandToHand || o.isHandToHandWeapon() ) )
+        this.enumerateObjects((o: Item) => {
+            if (o.isWeapon() && (!onlyHandToHand || o.isHandToHandWeapon())) {
                 result.push(o);
+            }
         });
         return result;
     }
-    
+
     /**
      * Get the maximum arrows number the player can carry, given by the number of owned quivers
      * @returns The max. arrows number
      */
-    public getMaxArrowCount() : number {
+    public getMaxArrowCount(): number {
 
-        // Compute the maximum number of arrows, given the carried quivers 
+        // Compute the maximum number of arrows, given the carried quivers
         let max = 0;
-        for( let i=0; i<this.specialItems.length; i++ ) {
-            if( this.specialItems[i] == Item.QUIVER )
+        for (const item of this.specialItems) {
+            if (item === Item.QUIVER) {
                 // Only 6 arrows per quiver
                 max += 6;
+            }
         }
 
         // Objects with isArrow="true" occupies the same space in quiver as a normal Arrow
-        this.enumerateObjects( function( o : Item ) {
-            if( o.isArrow )
+        this.enumerateObjects((o: Item) => {
+            if (o.isArrow) {
                 max -= 1;
+            }
         });
 
         return max;
@@ -797,7 +839,7 @@ class ActionChart {
      */
     private sanitizeArrowCount() {
         const max = this.getMaxArrowCount();
-        this.arrows = Math.max( 0, Math.min( this.arrows, max ) );
+        this.arrows = Math.max(0, Math.min(this.arrows, max));
     }
 
     /**
@@ -805,7 +847,7 @@ class ActionChart {
      * @param increment N. of arrows to increment. Negative to decrement
      * @returns Number of really increased arrows. Arrows number on action chart is limited by the number of quivers
      */
-    public increaseArrows(increment : number) : number {
+    public increaseArrows(increment: number): number {
         const oldArrows = this.arrows;
         this.arrows += increment;
         this.sanitizeArrowCount();
@@ -815,19 +857,20 @@ class ActionChart {
     /**
      * Get the magnakai lore circles owned by the player
      */
-    public getLoreCircles() : Array<LoreCircle> {
+    public getLoreCircles(): LoreCircle[] {
         return LoreCircle.getCircles(this.disciplines);
     }
 
     /** The player has Mindshield / Psi-screen? */
-    public hasMindShield() : boolean {
-        return this.disciplines.contains( 'mindshld' ) || this.disciplines.contains( 'psiscrn' );
+    public hasMindShield(): boolean {
+        return this.disciplines.contains("mindshld") || this.disciplines.contains("psiscrn");
     }
 
     /** The player has a bow and some arrow? */
-    public canUseBow() : boolean {
-        if( this.getSelectedBow() == null )
+    public canUseBow(): boolean {
+        if (this.getSelectedBow() === null) {
             return false;
+        }
         return this.arrows > 0;
     }
 
@@ -835,20 +878,20 @@ class ActionChart {
      * Get the selected bow weapon
      * TODO: This returns the bow with the maximum CS bonus. Allow to selected the current bow
      */
-    public getSelectedBow() : Item {
-        return this.getWeaponType( Item.BOW );
+    public getSelectedBow(): Item {
+        return this.getWeaponType(Item.BOW);
     }
 
-    /** 
-     * Return the weapon of a given type, with the bigger bonus for combat skill. 
-     * null if the player has not that kind of weapon 
+    /**
+     * Return the weapon of a given type, with the bigger bonus for combat skill.
+     * null if the player has not that kind of weapon
      */
-    public getWeaponType( weaponType : string ) : Item {
+    public getWeaponType(weaponType: string): Item {
         let maxBonus = 0;
-        let w : Item = null;
-        for( let weapon of this.getWeaponObjects() ) {
-            if( weapon.isWeaponType( weaponType ) ) {
-                if( weapon.combatSkillEffect >= maxBonus ) {
+        let w: Item = null;
+        for (const weapon of this.getWeaponObjects()) {
+            if (weapon.isWeaponType(weaponType)) {
+                if (weapon.combatSkillEffect >= maxBonus) {
                     maxBonus = weapon.combatSkillEffect;
                     w = weapon;
                 }
@@ -861,22 +904,22 @@ class ActionChart {
      * Return the maximum number of special items that can be picked on the current book.
      * @returns The max number. Zero if there is no limit on the current book
      */
-    public static getMaxSpecials() : number {
+    public static getMaxSpecials(): number {
         return state.book.bookNumber >= ActionChart.BOOK_WITH_MAX_SPECIALS ? 12 : 0;
     }
 
     /**
      * The Magnakai Medicine Archmaster +20 EP can be used on this book?
      */
-    public canUse20EPRestoreOnThisBook() : boolean {
-        return (this.disciplines.length >= 9 && state.book.isMagnakaiBook() && this.disciplines.contains('curing')) ||
-            (state.book.isGrandMasterBook() && this.disciplines.contains('deliver'));
+    public canUse20EPRestoreOnThisBook(): boolean {
+        return (this.disciplines.length >= 9 && state.book.isMagnakaiBook() && this.disciplines.contains("curing")) ||
+            (state.book.isGrandMasterBook() && this.disciplines.contains("deliver"));
     }
 
     /**
      * The Magnakai Medicine Archmaster +20 EP can be used now?
      */
-    public canUse20EPRestoreNow() : boolean {
+    public canUse20EPRestoreNow(): boolean {
         return ((!state.book.isGrandMasterBook() && this.currentEndurance <= 6) || (state.book.isGrandMasterBook() && this.currentEndurance <= 8))
             && !this.restore20EPUsed && this.canUse20EPRestoreOnThisBook();
     }
@@ -885,10 +928,11 @@ class ActionChart {
      * Use the Magnakai Medicine Archmaster +20 EP.
      * @returns true if was really used. False if it cannot be used
      */
-    public use20EPRestore() : boolean {
-        if( !this.canUse20EPRestoreNow() )
+    public use20EPRestore(): boolean {
+        if (!this.canUse20EPRestoreNow()) {
             return false;
-        this.restore20EPUsed  = true;
+        }
+        this.restore20EPUsed = true;
         this.increaseEndurance(20);
         return true;
     }
@@ -897,7 +941,6 @@ class ActionChart {
      * Reset the +20 EP used flag
      */
     public reset20EPRestoreUsed() {
-        this.restore20EPUsed  = false;
+        this.restore20EPUsed = false;
     }
 }
-

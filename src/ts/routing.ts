@@ -16,7 +16,7 @@ const routing = {
      * @param {object} parameters Hash with parameters for the route. It can be null
      * @returns True if the redirection can be done. False otherwise
      */
-    redirect(route, parameters: any = null) {
+    redirect(route: string, parameters: any = null) {
         try {
 
             // Remove hash

@@ -176,7 +176,7 @@ const template = {
      * @param newColor The final HTML color of the element. If it's null, the default
      * color for the DOM element will be used
      */
-    animateValueChange( $element: any , newValue: number , doNotAnimate: boolean , newColor: string = null ) {
+    animateValueChange( $element: JQuery<HTMLElement> , newValue: number , doNotAnimate: boolean , newColor: string = null ) {
 
         // Disable animations on Cordova app (bad performance)
         if ( cordovaApp.isRunningApp() ) {

@@ -1,43 +1,45 @@
-/// <reference path="../external.ts" />
-
 /**
  * The Kai monastery storage controller
  */
-class kaimonasteryController {
+const kaimonasteryController = {
 
     /** Controller name */
-    public static readonly NAME = 'kaimonasteryController';
+    NAME : "kaimonasteryController",
 
     /**
      * Render page
      */
-    public static index() {
+    index() {
 
-        if( !setupController.checkBook() )
-            return;
-
-        if( state.sectionStates.currentSection != Book.KAIMONASTERY_SECTION ) {
-            // This page should be only available if the current section is KAIMONASTERY_SECTION
-            // This is beacause on that section state will be stored the objects info
-            routing.redirect('game');
+        if ( !setupController.checkBook() ) {
             return;
         }
 
-        views.loadView('kaimonastery.html')
-        .then( function() {
+        if ( state.sectionStates.currentSection !== Book.KAIMONASTERY_SECTION ) {
+            // This page should be only available if the current section is KAIMONASTERY_SECTION
+            // This is beacause on that section state will be stored the objects info
+            routing.redirect("game");
+            return;
+        }
+
+        views.loadView("kaimonastery.html")
+        .then( () => {
             // Go back to the equipment section
-            $('#monastery-goback').click( function(e : Event) {
+            $("#monastery-goback").click( (e: Event) => {
                 kaimonasteryController.onGoBackToEquipment(e);
             });
 
             // Render available objects on the Kai monastery
             mechanicsEngine.showAvailableObjects( true );
         });
-        
-    }
-    
+
+    },
+
+    /** Return page */
+    getBackController() { return "mainMenu"; },
+
     /** Go back to the Equipment section clicked */
-    private static onGoBackToEquipment(e : Event) {
+    onGoBackToEquipment(e: Event) {
         e.preventDefault();
 
         // Save the Kai monastery inventory to the Action Chart
@@ -46,11 +48,7 @@ class kaimonasteryController {
 
         // Go back to Equipment section
         state.sectionStates.currentSection = Book.EQUIPMENT_SECTION;
-        routing.redirect( 'game' );
-    }
+        routing.redirect( "game" );
+    },
 
-    /** Return page */
-    public static getBackController() { return 'mainMenu'; }
-
-}
-    
+};

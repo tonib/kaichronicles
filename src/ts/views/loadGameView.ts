@@ -1,63 +1,62 @@
-/// <reference path="../external.ts" />
 
 /**
  * The load game view interface functions
  */
 const loadGameView = {
-    
+
     /**
      * Hide the Android files list
      */
-    hideFilesList: function() { 
-        $('#loadGame-app').hide(); 
+    hideFilesList() {
+        $("#loadGame-app").hide();
     },
 
     /**
      * Hide the web file uploader
      */
-    hideFileUpload: function() { $('#loadGame-file').hide(); },
+    hideFileUpload() { $("#loadGame-file").hide(); },
 
     /**
      * Remove all rows on the files list (Android)
      */
-    clearFilesList: function() { $('#loadGame-fileslist tbody').empty(); },
+    clearFilesList() { $("#loadGame-fileslist tbody").empty(); },
 
     /**
      * Add a file to the file games list (Cordova app)
      * @param fileNames File names to load
      */
-    addFilesToList: function(fileNames : Array<string>) {
-        
-        let html = '';
-        if( fileNames.length == 0 ) 
-            html += '<tr><td><i>' + translations.text( 'noSavedGames' ) + '</i></td></tr>';
-        else {
-            for( let fileName of fileNames ) {
+    addFilesToList(fileNames: string[]) {
+
+        let html = "";
+        if (fileNames.length === 0) {
+            html += "<tr><td><i>" + translations.text("noSavedGames") + "</i></td></tr>";
+        } else {
+            for (const fileName of fileNames) {
                 html += '<tr id="' + fileName + '"><td>';
-                html += '<button class="btn btn-default table-op" title="Delete" data-filename="' + 
-                    fileName + '">' + 
-                        '<span class="glyphicon glyphicon-remove"></span>' + 
-                    '</button>' +
-                    '<a class="savegame" href="' + fileName + '">' + 
-                        fileName + 
-                    '</a>';
-                html += '</td></tr>';
+                html += '<button class="btn btn-default table-op" title="Delete" data-filename="' +
+                    fileName + '">' +
+                    '<span class="glyphicon glyphicon-remove"></span>' +
+                    "</button>" +
+                    '<a class="savegame" href="' + fileName + '">' +
+                    fileName +
+                    "</a>";
+                html += "</td></tr>";
             }
         }
 
-        $('#loadGame-fileslist tbody').append( html );
+        $("#loadGame-fileslist tbody").append(html);
     },
 
     /**
      * Bind Android page events
      */
-    bindAppEvents: function() {
+    bindAppEvents() {
         // Export / import saved games
-        $('#loadGame-export').click(function(e : Event) {
+        $("#loadGame-export").click((e: Event) => {
             e.preventDefault();
             loadGameController.exportSavedGames();
         });
-        $('#loadGame-import').click(function(e : Event) {
+        $("#loadGame-import").click((e: Event) => {
             e.preventDefault();
             loadGameController.importSavedGames();
         });
@@ -66,48 +65,51 @@ const loadGameView = {
     /**
      * Bind Android files list events
      */
-    bindListEvents: function() {
+    bindListEvents() {
 
         // Load game events
-        $('.savegame').click(function(e : Event) {
+        $(".savegame").click(function(e: Event) {
             e.preventDefault();
-            loadGameController.fileListClicked( $(this).attr( 'href' ) );
+            loadGameController.fileListClicked($(this).attr("href"));
         });
 
         // Delete file events
-        $('#loadGame-fileslist tbody button').click(function(e : Event) {
+        $("#loadGame-fileslist tbody button").click(function(e: Event) {
             // IMPORTANT: Do not remove this preventDefault(), otherwise
             // Cordova beleaves we have changed the current page
             e.preventDefault();
-            var fileName = $(this).attr('data-filename');
-            if( !confirm( translations.text('confirmDeleteSave' , [ fileName ] ) ) )
+            const fileName = $(this).attr("data-filename");
+            if (!confirm(translations.text("confirmDeleteSave", [fileName]))) {
                 return;
-            loadGameController.deleteFile( fileName );
+            }
+            loadGameController.deleteFile(fileName);
         });
-        
+
     },
 
     /**
      * Remove a file name from the files list (Android)
      */
-    removeFilenameFromList: function( fileName : string ) {
+    removeFilenameFromList(fileName: string) {
         // It does not work, because fileName can contain points...
-        //$('#' + fileName).remove();
+        // $('#' + fileName).remove();
         $('tr[id="' + fileName + '"]').remove();
-        
-        if( $('#loadGame-fileslist tr').length == 0 )
+
+        if ($("#loadGame-fileslist tr").length === 0) {
             // Show the "No games found" message
             loadGameView.addFilesToList([]);
+        }
     },
 
     /**
      * Bind web file uploader events
      */
-    bindFileUploaderEvents: function() {
-        $('#loadGame-file').change(function() {
-            if( !this.files || !this.files[0] )
+    bindFileUploaderEvents() {
+        $("#loadGame-file").change(function() {
+            if (!this.files || !this.files[0]) {
                 return;
-            loadGameController.fileUploaderChanged( this.files[0] );
+            }
+            loadGameController.fileUploaderChanged(this.files[0]);
         });
     },
 
@@ -115,7 +117,7 @@ const loadGameView = {
      * Show an error
      * @param errorMsg Message to show
      */
-    showError: function(errorMsg : string) {
-        $('#loadGame-errors').text( errorMsg );
-    }
+    showError(errorMsg: string) {
+        $("#loadGame-errors").text(errorMsg);
+    },
 };
