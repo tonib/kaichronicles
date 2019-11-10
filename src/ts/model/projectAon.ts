@@ -253,6 +253,20 @@ const projectAon = {
             revision: 2752,
         },
 
+        // Book 14:
+        {
+            title_en: "The Captives of Kaag",
+            code_en: "14tcok",
+
+            illustrators: [ "williams" ],
+
+            biographies: [ "jdbiolw" , "bwbiolw" ],
+
+            zipSize: 2980342,
+
+            revision: 2752,
+        },
+
     ],
 
     /**
