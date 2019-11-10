@@ -86,10 +86,12 @@ class ObjectsTable {
                     price : 0,
                     unlimited : false,
                     count,
-                    showCount : (obj === Item.QUIVER && this.type === ObjectsTableType.INVENTORY),
                     useOnSection : false,
                 };
             }
+
+            // Show arrows count of quiver only in action chart or count > 0
+            info.showCount = (info.id === Item.QUIVER && (info.count > 0 || this.type === ObjectsTableType.INVENTORY));
 
             this.objects.push( new ObjectsTableItem( info, this.type ) );
         }
