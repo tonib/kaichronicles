@@ -12,4 +12,4 @@ const faqController = {
     /** Return page */
     getBackController() { return "mainMenu"; },
 
-}
+};

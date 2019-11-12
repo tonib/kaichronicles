@@ -80,7 +80,7 @@ class BookDownloadState {
      * @param progressCallback Optional callback to call with the download progress. Parameter is the downloaded
      * percentage (0.0 - 100.0)
      */
-    public downloadAsync( booksDir: any , progressCallback: (number: number) => void = null ): JQueryPromise<void> {
+    public downloadAsync( booksDir: any , progressCallback: (percent: number) => void = null ): JQueryPromise<void> {
 
         const fileName = this.bookNumber + ".zip";
         // var url = 'http://192.168.1.4/ls/data/projectAon/' + fileName;

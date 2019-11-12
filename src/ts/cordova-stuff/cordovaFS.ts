@@ -117,7 +117,7 @@ const cordovaFS = {
      * @param {FileSystem} fs The file system. We will check existing files on the root directory
      * @param callback Callback to call with the new file name
      */
-    getUnusedName(fileName: string, fs: any, callback: (string) => void) {
+    getUnusedName(fileName: string, fs: any, callback: (str: string) => void) {
         /*var idx = fileName.lastIndexOf('.');
         var name = fileName.substr(0, idx);
         const extension = fileName.substr(idx +1);*/
@@ -453,7 +453,7 @@ const cordovaFS = {
      * percentage (0.0 - 100.0)
      * @returns Promise with the process. Parameter is the downloaded file FileEntry
      */
-    downloadAsync(url: string, dstPath: string, progressCallback: (num: number) => void = null): JQueryPromise<any> {
+    downloadAsync(url: string, dstPath: string, progressCallback: (percent: number) => void = null): JQueryPromise<any> {
 
         const dfd = jQuery.Deferred();
         console.log("Downloading " + url + " to " + dstPath);

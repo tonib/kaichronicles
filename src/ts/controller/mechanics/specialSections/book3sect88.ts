@@ -11,12 +11,12 @@ const book3sect88 = {
             return Combat.prototype.nextTurnAsync.call(this)
             .then((turn: CombatTurn) => {
                 // Check the bite:
-                if ( turn.loneWolf > 0 && turn.loneWolf !== combatTable_DEATH ) {
+                if ( turn.loneWolf > 0 && turn.loneWolf !== COMBATTABLE_DEATH ) {
                     const biteRandomValue = randomTable.getRandomValue();
                     turn.playerLossText = "(" + turn.playerLossText + ")";
                     turn.playerLossText += " Random: " + biteRandomValue;
                     if ( biteRandomValue === 9 ) {
-                        turn.loneWolf = combatTable_DEATH;
+                        turn.loneWolf = COMBATTABLE_DEATH;
                     } else {
                         turn.loneWolf = 0;
                     }

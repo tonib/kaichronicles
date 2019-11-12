@@ -2,7 +2,7 @@
 /**
  * Combat result for death
  */
-const combatTable_DEATH = "D";
+const COMBATTABLE_DEATH = "D";
 
 /**
  * The combat table
@@ -21,8 +21,8 @@ const combatTable = {
             2: [ 1 , 6 ], // Combat ratio -3 / -4, => E: 1 / LW: 6
             3: [ 0 , 6 ], // ...
             4: [ 0 , 8 ],
-            5: [ 0 , combatTable_DEATH],
-            6: [ 0 , combatTable_DEATH ],
+            5: [ 0 , COMBATTABLE_DEATH],
+            6: [ 0 , COMBATTABLE_DEATH ],
         },
 
         // Random table result = 2
@@ -33,7 +33,7 @@ const combatTable = {
             3: [ 1 , 6 ],
             4: [ 0 , 7 ],
             5: [ 0 , 8 ],
-            6: [ 0 , combatTable_DEATH ],
+            6: [ 0 , COMBATTABLE_DEATH ],
         },
 
         // Random table result = 3
@@ -146,7 +146,7 @@ const combatTable = {
             12: [18, 0],
             13: [20, 0],
             14: [22, 0],
-            15: [combatTable_DEATH, 0],
+            15: [COMBATTABLE_DEATH, 0],
         },
 
         // Random table result = 2
@@ -164,8 +164,8 @@ const combatTable = {
             11: [18, 0],
             12: [20, 0],
             13: [22, 0],
-            14: [combatTable_DEATH, 0],
-            15: [combatTable_DEATH, 0],
+            14: [COMBATTABLE_DEATH, 0],
+            15: [COMBATTABLE_DEATH, 0],
         },
 
         // Random table result = 3
@@ -182,9 +182,9 @@ const combatTable = {
             10: [18, 0],
             11: [20, 0],
             12: [22, 0],
-            13: [combatTable_DEATH, 0],
-            14: [combatTable_DEATH, 0],
-            15: [combatTable_DEATH, 0],
+            13: [COMBATTABLE_DEATH, 0],
+            14: [COMBATTABLE_DEATH, 0],
+            15: [COMBATTABLE_DEATH, 0],
         },
 
         // Random table result = 4
@@ -199,11 +199,11 @@ const combatTable = {
             8: [16, 1],
             9: [18, 0],
             10: [20, 0],
-            11: [combatTable_DEATH, 0],
-            12: [combatTable_DEATH, 0],
-            13: [combatTable_DEATH, 0],
-            14: [combatTable_DEATH, 0],
-            15: [combatTable_DEATH, 0],
+            11: [COMBATTABLE_DEATH, 0],
+            12: [COMBATTABLE_DEATH, 0],
+            13: [COMBATTABLE_DEATH, 0],
+            14: [COMBATTABLE_DEATH, 0],
+            15: [COMBATTABLE_DEATH, 0],
         },
 
         // Random table result = 5
@@ -217,12 +217,12 @@ const combatTable = {
             7: [16, 1],
             8: [18, 0],
             9: [20, 0],
-            10: [combatTable_DEATH, 0],
-            11: [combatTable_DEATH, 0],
-            12: [combatTable_DEATH, 0],
-            13: [combatTable_DEATH, 0],
-            14: [combatTable_DEATH, 0],
-            15: [combatTable_DEATH, 0],
+            10: [COMBATTABLE_DEATH, 0],
+            11: [COMBATTABLE_DEATH, 0],
+            12: [COMBATTABLE_DEATH, 0],
+            13: [COMBATTABLE_DEATH, 0],
+            14: [COMBATTABLE_DEATH, 0],
+            15: [COMBATTABLE_DEATH, 0],
         },
 
         // Random table result = 6
@@ -235,13 +235,13 @@ const combatTable = {
             6: [16, 1],
             7: [18, 0],
             8: [20, 0],
-            9: [combatTable_DEATH, 0],
-            10: [combatTable_DEATH, 0],
-            11: [combatTable_DEATH, 0],
-            12: [combatTable_DEATH, 0],
-            13: [combatTable_DEATH, 0],
-            14: [combatTable_DEATH, 0],
-            15: [combatTable_DEATH, 0],
+            9: [COMBATTABLE_DEATH, 0],
+            10: [COMBATTABLE_DEATH, 0],
+            11: [COMBATTABLE_DEATH, 0],
+            12: [COMBATTABLE_DEATH, 0],
+            13: [COMBATTABLE_DEATH, 0],
+            14: [COMBATTABLE_DEATH, 0],
+            15: [COMBATTABLE_DEATH, 0],
         },
 
         // Random table result = 7
@@ -253,14 +253,14 @@ const combatTable = {
             5: [16, 0],
             6: [18, 0],
             7: [20, 0],
-            8: [combatTable_DEATH, 0],
-            9: [combatTable_DEATH, 0],
-            10: [combatTable_DEATH, 0],
-            11: [combatTable_DEATH, 0],
-            12: [combatTable_DEATH, 0],
-            13: [combatTable_DEATH, 0],
-            14: [combatTable_DEATH, 0],
-            15: [combatTable_DEATH, 0],
+            8: [COMBATTABLE_DEATH, 0],
+            9: [COMBATTABLE_DEATH, 0],
+            10: [COMBATTABLE_DEATH, 0],
+            11: [COMBATTABLE_DEATH, 0],
+            12: [COMBATTABLE_DEATH, 0],
+            13: [COMBATTABLE_DEATH, 0],
+            14: [COMBATTABLE_DEATH, 0],
+            15: [COMBATTABLE_DEATH, 0],
         },
 
         // Random table result = 8
@@ -270,16 +270,16 @@ const combatTable = {
             3: [14, 0],
             4: [16, 0],
             5: [18, 0],
-            6: [combatTable_DEATH, 0],
-            7: [combatTable_DEATH, 0],
-            8: [combatTable_DEATH, 0],
-            9: [combatTable_DEATH, 0],
-            10: [combatTable_DEATH, 0],
-            11: [combatTable_DEATH, 0],
-            12: [combatTable_DEATH, 0],
-            13: [combatTable_DEATH, 0],
-            14: [combatTable_DEATH, 0],
-            15: [combatTable_DEATH, 0],
+            6: [COMBATTABLE_DEATH, 0],
+            7: [COMBATTABLE_DEATH, 0],
+            8: [COMBATTABLE_DEATH, 0],
+            9: [COMBATTABLE_DEATH, 0],
+            10: [COMBATTABLE_DEATH, 0],
+            11: [COMBATTABLE_DEATH, 0],
+            12: [COMBATTABLE_DEATH, 0],
+            13: [COMBATTABLE_DEATH, 0],
+            14: [COMBATTABLE_DEATH, 0],
+            15: [COMBATTABLE_DEATH, 0],
         },
 
         // Random table result = 9
@@ -288,17 +288,17 @@ const combatTable = {
             2: [14, 0],
             3: [16, 0],
             4: [18, 0],
-            5: [combatTable_DEATH, 0],
-            6: [combatTable_DEATH, 0],
-            7: [combatTable_DEATH, 0],
-            8: [combatTable_DEATH, 0],
-            9: [combatTable_DEATH, 0],
-            10: [combatTable_DEATH, 0],
-            11: [combatTable_DEATH, 0],
-            12: [combatTable_DEATH, 0],
-            13: [combatTable_DEATH, 0],
-            14: [combatTable_DEATH, 0],
-            15: [combatTable_DEATH, 0],
+            5: [COMBATTABLE_DEATH, 0],
+            6: [COMBATTABLE_DEATH, 0],
+            7: [COMBATTABLE_DEATH, 0],
+            8: [COMBATTABLE_DEATH, 0],
+            9: [COMBATTABLE_DEATH, 0],
+            10: [COMBATTABLE_DEATH, 0],
+            11: [COMBATTABLE_DEATH, 0],
+            12: [COMBATTABLE_DEATH, 0],
+            13: [COMBATTABLE_DEATH, 0],
+            14: [COMBATTABLE_DEATH, 0],
+            15: [COMBATTABLE_DEATH, 0],
         },
 
         // Random table result = 0
@@ -306,18 +306,18 @@ const combatTable = {
             1: [14, 0],
             2: [16, 0],
             3: [18, 0],
-            4: [combatTable_DEATH, 0],
-            5: [combatTable_DEATH, 0],
-            6: [combatTable_DEATH, 0],
-            7: [combatTable_DEATH, 0],
-            8: [combatTable_DEATH, 0],
-            9: [combatTable_DEATH, 0],
-            10: [combatTable_DEATH, 0],
-            11: [combatTable_DEATH, 0],
-            12: [combatTable_DEATH, 0],
-            13: [combatTable_DEATH, 0],
-            14: [combatTable_DEATH, 0],
-            15: [combatTable_DEATH, 0],
+            4: [COMBATTABLE_DEATH, 0],
+            5: [COMBATTABLE_DEATH, 0],
+            6: [COMBATTABLE_DEATH, 0],
+            7: [COMBATTABLE_DEATH, 0],
+            8: [COMBATTABLE_DEATH, 0],
+            9: [COMBATTABLE_DEATH, 0],
+            10: [COMBATTABLE_DEATH, 0],
+            11: [COMBATTABLE_DEATH, 0],
+            12: [COMBATTABLE_DEATH, 0],
+            13: [COMBATTABLE_DEATH, 0],
+            14: [COMBATTABLE_DEATH, 0],
+            15: [COMBATTABLE_DEATH, 0],
         },
     },
 
@@ -325,7 +325,7 @@ const combatTable = {
      * Get a combat table result
      * @param combatRatio The combat ratio
      * @param randomTableValue The random table value
-     * @returns Array with endurance points loses, or combatTable_DEATH. Index 0 is the
+     * @returns Array with endurance points loses, or COMBATTABLE_DEATH. Index 0 is the
      * EP enemy loss. Index 1 is the Lone Wolf loss
      */
     getCombatTableResult(combatRatio: number, randomTableValue: number): any[] {

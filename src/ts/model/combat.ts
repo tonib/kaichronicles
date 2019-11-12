@@ -229,7 +229,7 @@ class Combat {
     }
 
     public static applyLoss(currentEndurance: number, loss: any): number {
-        if (loss === combatTable_DEATH) {
+        if (loss === COMBATTABLE_DEATH) {
             return 0;
         } else {
             currentEndurance -= loss;
@@ -273,7 +273,7 @@ class Combat {
     public applyTurn(turn: CombatTurn) {
 
         // Apply player damages:
-        if (turn.loneWolf === combatTable_DEATH) {
+        if (turn.loneWolf === COMBATTABLE_DEATH) {
             state.actionChart.currentEndurance = 0;
         } else {
 
@@ -343,7 +343,7 @@ class Combat {
         let lost = 0;
         for (let i = 0, len = this.turns.length; i < len; i++) {
             const turn = this.turns[i];
-            if (turn.loneWolf === combatTable_DEATH) {
+            if (turn.loneWolf === COMBATTABLE_DEATH) {
                 lost += state.actionChart.getMaxEndurance();
             } else {
                 lost += turn.loneWolf;
@@ -359,7 +359,7 @@ class Combat {
         let lost = 0;
         for (let i = 0, len = this.turns.length; i < len; i++) {
             const turn = this.turns[i];
-            if (turn.enemy === combatTable_DEATH) {
+            if (turn.enemy === COMBATTABLE_DEATH) {
                 lost += this.originalEndurance;
             } else {
                 lost += turn.enemy;

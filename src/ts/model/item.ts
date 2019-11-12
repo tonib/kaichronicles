@@ -276,7 +276,7 @@ class Item {
         const candidateBookNumbers: number[] = [];
         const txtBook: string = $image.attr("book");
         for (const txtBookNumber of txtBook.split("|")) {
-            candidateBookNumbers.push(parseInt(txtBookNumber), 10);
+            candidateBookNumbers.push(parseInt(txtBookNumber, 10));
         }
         if (candidateBookNumbers.length === 0) {
             return;
