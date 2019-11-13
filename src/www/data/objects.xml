@@ -1891,6 +1891,18 @@
 
         <object id="brasskeybook14">
             <name lang="en">Brass Key</name>
+            
+            <image book="1" name="small15.png" />
+        </object>
+
+        <object id="greenkey">
+            <name lang="en">Green Key</name>
+            
+            <image book="1" name="small15.png" />
+        </object>
+
+        <object id="silverflaskempty">
+            <name lang="en">Silver Flask</name>
         </object>
 
         <!-- OTHERS -->
