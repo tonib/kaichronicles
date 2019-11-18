@@ -252,11 +252,21 @@ const randomMechanics = {
         }
 
         // Test from / to value
+        let fromValue = null;
         const txtFromValue: string = $rule.attr("from");
         if (txtFromValue) {
-            const fromValue = parseInt(txtFromValue, 10);
-            const toValue = parseInt($rule.attr("to"), 10);
-            return [fromValue, toValue];
+            fromValue = parseInt(txtFromValue, 10);
+        }
+
+        // Test from / to value
+        let toValue = null;
+        const txtToValue: string = $rule.attr("to");
+        if (txtToValue) {
+            toValue = parseInt(txtToValue, 10);
+        }
+
+        if (fromValue !== null || toValue !== null) {
+            return [fromValue ? fromValue : -99, toValue ? toValue : 99];
         }
 
         return null;
