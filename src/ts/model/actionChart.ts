@@ -692,7 +692,7 @@ class ActionChart {
                 concept: translations.text("psisurge"),
                 increment: (combat.psiSurgeBonus ? combat.psiSurgeBonus : Combat.defaultPsiSurgeBonus()) * combat.mindblastMultiplier,
             });
-        } else if (!combat.noMindblast && (this.disciplines.contains("mndblst") || this.disciplines.contains("psisurge") || this.disciplines.contains("kaisurge"))) {
+        } else if (!combat.noMindblast && (this.disciplines.contains("mndblst") || this.disciplines.contains("psisurge") || this.disciplines.contains("kaisurge") || state.hasCompletedKaiSerie() || state.hasCompletedMagnakaiSerie())) {
             bonuses.push({
                 concept: translations.text("mindblast"),
                 increment: (combat.mindblastBonus ? combat.mindblastBonus : Combat.defaultMindblastBonus()) * combat.mindblastMultiplier,
