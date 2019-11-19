@@ -183,7 +183,7 @@ const state = {
     /**
      * Restore the state from an object
      */
-    restoreStateFromObject(stateKeys) {
+    restoreStateFromObject(stateKeys: any) {
 
         // On version 1.6.3 / 1.7, the stateKeys.actionChart.weaponSkill has been changed from string to Array<string> (magnakai)
         if ( typeof stateKeys.actionChart.weaponSkill === "string" ) {
@@ -210,7 +210,7 @@ const state = {
     /**
      * Update state to change the book language
      */
-    updateBookTranslation(book) {
+    updateBookTranslation(book: Book) {
         state.book = book;
         state.mechanics.book = book;
         state.language = book.language;
@@ -220,7 +220,7 @@ const state = {
      * Update state to change the book language
      * @param color 'light' or 'dark'
      */
-    updateColorTheme(color) {
+    updateColorTheme(color: string) {
         state.color = color;
         localStorage.setItem( "color" , state.color );
     },
@@ -258,13 +258,31 @@ const state = {
      * @param {number} bookNumber Book which get the action chart
      * @returns {object} The action chart. null if it was not found. The returned value is an Object, not an ActionChart
      */
-    getPreviousBookActionChart(bookNumber): any {
+    getPreviousBookActionChart(bookNumber: number): ActionChart {
         const key = "state-book-" + bookNumber.toString();
         const json = localStorage.getItem( key );
         if ( !json ) {
             return null;
         }
-        return JSON.parse(json);
+        return JSON.parse(json) as ActionChart;
+    },
+
+    /**
+     * Check if the Kai serie of books was completed
+     * @returns {object} true if serie was completed
+     */
+    hasCompletedKaiSerie(): boolean {
+        const json = localStorage.getItem( "state-book-1" );
+        return !!json && (state.book.isMagnakaiBook() || state.book.isGrandMasterBook());
+    },
+
+    /**
+     * Check if the Magnakai serie of books was completed
+     * @returns {object} true if serie was completed
+     */
+    hasCompletedMagnakaiSerie(): boolean {
+        const json = localStorage.getItem( "state-book-6" );
+        return !!json && state.book.isGrandMasterBook();
     },
 
     /**
@@ -292,7 +310,7 @@ const state = {
     /**
      * Restore the game from a save game file
      */
-    loadSaveGameJson(json) {
+    loadSaveGameJson(json: string) {
 
         // replace BOM Character (https://en.wikipedia.org/wiki/Byte_order_mark). Otherwise call to JSON.parse will fail
         json = json.replace(/\ufeff/g, "");

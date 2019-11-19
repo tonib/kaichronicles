@@ -3,8 +3,6 @@ TODO
 
 ## Dev
 
-- Replace var with let/const
-- Replace main const/var with TS classes
 - Replace Google analytics with Matomo
 - Replace list of items with available object list
 
@@ -15,23 +13,31 @@ TODO
   * book 12, sect43
   * book 12, sect61
 - At new game, ask for the random table type
+- An extension of the above, consider saving a snapshot of the action chart when starting a book in section 1. Then add that option to restart the book at section 1 if you die. That way, you don't have to go through and re-do Disciplines and equipment. Keep the option to completely restart the book, though, in case you want to pick different Disciplines or equipment options  "General - You are erroneously allowed to use healing items (Laumspur, etc.) in combat sections before combat has started. Healing items are only to be used in combat sections after combat is over (and if you're still alive and not evading combat).
+- Add a "random discipline" button that will randomly select the proper number of initial disciplines, as well as your bonus discipline each book from the choices remaining
+- Add a Seventh-Sense-like achievement system
+- "Restart book" (at Settings / book death): Add the book number you will restart (ex. "Restart book 9"). On confirmation, explain
+  you will restart with your previous book Action Chart status
 
 ## Android
 
 - Compile android app and test it
 - Do not show the license text on Android (the book was already downloaded)
+- Fix config.xml plugin versions to use
+- package.json should be versioned with git ???
 
 ## Bugs
 
 - Bugs reported on Google Play:
   * Finally, finally there's a proper LW game book app. The only problem I've noticed is that it only gives Silver Bow's bonus in the sections of book 6 that specifically mention it, and not at all 'rolls' as it is supposed to.
 - Save games is not working on Safari
+- You are erroneously allowed to apply multiple Alether effects per combat. You are always limited to one (the berries you can purchase in book 6 even explicitly say so).
+- You are erroneously allowed to use healing items (Laumspur, etc.) in combat sections before combat has started. Healing items are only to be used in combat sections after combat is over (and if you're still alive and not evading combat).
+- Action chart buttons don't work on iPad Safari
 
 ## Other
 
 - UPLOAD NEW VERSION 1.11.1
-- Fix config.xml plugin versions to use
-- package.json should be versioned with git ???
 - FAQ: Add info about change the Random Table
 - Add help for "LW club newsletter 29" setting
 - Use latest version on PAON data on SVN (a fixed commit number)
@@ -47,8 +53,6 @@ TODO
   * Others?
 - Performance
 - FAQ: Questions about "I cannot write on the Action Chart"
-- Quivers with no arrows available on section should not show "(0 arrows)". Show "(0 arrows)" only on Action chart. Same to sell quiver
-  object (see book 8, sect139)
 - "Okay okay. Didn't know about the lone wolf series and went through the 10 programmed books in 2 days. Turns out the rest are online !!! 
    So it won't be as fast to play but I'm definitely continuing. One remark. I'd like to be able to know what was in the Kai monastery at 
    the end so I can continue with that too !"
@@ -70,7 +74,6 @@ TODO
 - Test all books / all sections rendering. It should be valid HTML5
   (https://validator.w3.org/docs/api.html)
 - Test tags <ch.* /> replacements
-- Action chart buttons don't work on iPad Safari
 - Dialogs with text input: Allow to confirm with the screen keyboard ("go" button)
 - Remove the "Alert" text from the message dialog (same for confirms)
 - Google Play will require API 26 on november 2018 (upgrade Cordova version?)
@@ -82,14 +85,6 @@ TODO
 - Add illustrations index?
 - Mechanics: Allow to declare a set of rules that can be runned on multiple sections. See book 12, references to sect208 
   ("Sommerswerd stuff", repeated rules)
-- "Restart book" (at Settings / book death): Add the book number you will restart (ex. "Restart book 9"). On confirmation, explain
-  you will restart with your previous book Action Chart status
-- PAON English reports:
-  "General - You are erroneously allowed to apply multiple Alether effects per combat. You are always limited to one (the berries you can purchase in book 6 even explicitly say so)."
-  "Suggestion - An extension of the above, consider saving a snapshot of the action chart when starting a book in section 1. Then add that option to restart the book at section 1 if you die. That way, you don't have to go through and re-do Disciplines and equipment. Keep the option to completely restart the book, though, in case you want to pick different Disciplines or equipment options  "General - You are erroneously allowed to use healing items (Laumspur, etc.) in combat sections before combat has started. Healing items are only to be used in combat sections after combat is over (and if you're still alive and not evading combat)."
-  "Add a "random discipline" button that will randomly select the proper number of initial disciplines, as well as your bonus discipline each book from the choices remaining"
-  "You are erroneously allowed to use healing items (Laumspur, etc.) in combat sections before combat has started. Healing items are only to be used in combat sections after combat is over (and if you're still alive and not evading combat)."
-  "Add a Seventh-Sense-like achievement system"
 - Allow to add a concept description for combat skill modifiers rules on combat ratio explanation
 - Display concepts for objects usages (Adgana, etc) on combat ratio explanation
 - Display book 11 map ("Northern magnamund") somewhere?
