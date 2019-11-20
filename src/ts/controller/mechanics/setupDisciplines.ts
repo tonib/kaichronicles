@@ -7,13 +7,13 @@ class SetupDisciplines {
     /**
      * Weapons table for Weaponskill discipline on Kai books
      */
-    private readonly kaiWeapons = ["dagger", "spear", "mace", "shortsword", "warhammer", "sword",
+    public static readonly kaiWeapons = ["dagger", "spear", "mace", "shortsword", "warhammer", "sword",
         "axe", "sword", "quarterstaff", "broadsword"];
 
     /**
      * Weapons table for Weaponmastery discipline on Magnakai books
      */
-    private readonly magnakaiWeapons = ["dagger", "spear", "mace", "shortsword", "warhammer", "bow",
+    private static readonly magnakaiWeapons = ["dagger", "spear", "mace", "shortsword", "warhammer", "bow",
         "axe", "sword", "quarterstaff", "broadsword"];
     /**
      * Expected number of disciplines to choose
@@ -79,19 +79,19 @@ class SetupDisciplines {
         // Add checkboxes
         const $checkboxTemplate = mechanicsEngine.getMechanicsUI("mechanics-magnakaiWeapon");
         let html = "";
-        for (let i = 0; i < this.magnakaiWeapons.length; i++) {
+        for (let i = 0; i < SetupDisciplines.magnakaiWeapons.length; i++) {
             if (i % 2 === 0) {
                 html += '<div class="row">';
             }
 
             // Prepare the weapon UI
-            const weaponItem = state.mechanics.getObject(this.magnakaiWeapons[i]);
+            const weaponItem = state.mechanics.getObject(SetupDisciplines.magnakaiWeapons[i]);
             const $checkbox = $checkboxTemplate.clone();
             $checkbox.attr("id", weaponItem.id);
             $checkbox.find(".mechanics-wName").text(weaponItem.name);
 
             // The weapon has been already selected?
-            const selected: boolean = state.actionChart.weaponSkill.contains(this.magnakaiWeapons[i]);
+            const selected: boolean = state.actionChart.weaponSkill.contains(SetupDisciplines.magnakaiWeapons[i]);
             $checkbox.find("input").attr("checked", selected);
 
             html += $checkbox[0].outerHTML;
@@ -308,23 +308,22 @@ class SetupDisciplines {
         }
 
         // Pick a  random number
-        const self = this;
         randomTable.getRandomValueAsync()
             .then((value: number) => {
 
                 // Store the discipline
                 state.actionChart.disciplines.push("wepnskll");
-                state.actionChart.weaponSkill.push(self.kaiWeapons[value]);
+                state.actionChart.weaponSkill.push(SetupDisciplines.kaiWeapons[value]);
 
                 // Show on UI the selected weapon
-                self.setWeaponSkillWeaponNameOnUI();
+                this.setWeaponSkillWeaponNameOnUI();
                 const $well = $("#wepnskll .well");
                 $well.append("<div><i><small>" + translations.text("randomTable") + ": " + value + "</small></i></div>");
 
                 // Mark the checkbox
                 $well.find("input[type=checkbox]").prop("checked", true);
 
-                self.afterDisciplineSelection();
+                this.afterDisciplineSelection();
             });
     }
 

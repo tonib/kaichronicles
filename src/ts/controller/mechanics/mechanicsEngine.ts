@@ -1683,8 +1683,7 @@ const mechanicsEngine = {
         if (!state.actionChart.disciplines.contains("healing")
             && !state.actionChart.disciplines.contains("curing")
             && !state.actionChart.disciplines.contains("deliver")
-            && !state.hasCompletedKaiSerie()
-            && !state.hasCompletedMagnakaiSerie() ) {
+            && !state.hasCompletedKaiSerie() ) {
             // Only if having healing discipline or loyalty bonus
             return;
         }

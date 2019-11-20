@@ -498,7 +498,7 @@ class ActionChart {
      */
     public isWeaponskillActive(bow: boolean = false): boolean {
 
-        if (!this.disciplines.contains("wepnskll") && !this.disciplines.contains("wpnmstry")) {
+        if (!this.disciplines.contains("wepnskll") && !this.disciplines.contains("wpnmstry") && !state.hasCompletedKaiSerie()) {
             // Player has no Weaponskill
             return false;
         }
@@ -509,7 +509,7 @@ class ActionChart {
             return false;
         }
 
-        for (const skill of this.weaponSkill) {
+        for (const skill of this.getWeaponSkill()) {
             if (currentWeapon.isWeaponType(skill)) {
                 return true;
             }
@@ -522,18 +522,38 @@ class ActionChart {
      * @return True if the player has weaponskill with that weapon
      */
     public hasWeaponskillWith(weaponType: string): boolean {
-        if (!this.disciplines.contains("wepnskll") && !this.disciplines.contains("wpnmstry")) {
+        if (!this.disciplines.contains("wepnskll") && !this.disciplines.contains("wpnmstry") && !state.hasCompletedKaiSerie()) {
             // Player has no Weaponskill
             return false;
         }
 
-        for (const w of this.weaponSkill) {
+        for (const w of this.getWeaponSkill()) {
             if (w === weaponType) {
                 return true;
             }
         }
 
         return false;
+    }
+
+    /**
+     * Get the weaponSkill array.
+     * If no weaponSkill but the kai serie is completed, add a random weaponSkill from kai serie.
+     * @return Array of weapon skill
+     */
+    private getWeaponSkill(): string[] {
+        let weaponSkill = this.weaponSkill;
+        if (!this.disciplines.contains("wpnmstry") && state.hasCompletedKaiSerie()) {
+            weaponSkill = state.getPreviousBookActionChart(5).weaponSkill;
+            if (weaponSkill.length === 0) {
+                if (this.weaponSkill.length === 0) {
+                    this.weaponSkill.push(SetupDisciplines.kaiWeapons[randomTable.getRandomValue()]);
+                }
+                weaponSkill = this.weaponSkill;
+            }
+        }
+
+        return weaponSkill;
     }
 
     /**
@@ -588,7 +608,7 @@ class ActionChart {
             });
         } else if (this.isWeaponskillActive(bowCombat)) {
             // Weapon skill bonus
-            if (state.book.isKaiBook()) {
+            if (state.book.isKaiBook() || (state.hasCompletedKaiSerie() && state.book.isMagnakaiBook() && !state.actionChart.disciplines.contains("wpnmstry"))) {
                 // Kai book:
                 bonuses.push({
                     concept: translations.text("weaponskill"),
@@ -671,8 +691,6 @@ class ActionChart {
 
         const bonuses = [];
 
-        const currentWeapon = this.getSelectedWeaponItem(combat.bowCombat);
-
         // Current weapon bonuses
         if (!combat.mentalOnly) {
             const noWeapon = combat.noWeaponCurrentTurn();
@@ -692,7 +710,7 @@ class ActionChart {
                 concept: translations.text("psisurge"),
                 increment: (combat.psiSurgeBonus ? combat.psiSurgeBonus : Combat.defaultPsiSurgeBonus()) * combat.mindblastMultiplier,
             });
-        } else if (!combat.noMindblast && (this.disciplines.contains("mndblst") || this.disciplines.contains("psisurge") || this.disciplines.contains("kaisurge") || state.hasCompletedKaiSerie() || state.hasCompletedMagnakaiSerie())) {
+        } else if (!combat.noMindblast && (this.disciplines.contains("mndblst") || this.disciplines.contains("psisurge") || this.disciplines.contains("kaisurge") || state.hasCompletedKaiSerie())) {
             bonuses.push({
                 concept: translations.text("mindblast"),
                 increment: (combat.mindblastBonus ? combat.mindblastBonus : Combat.defaultMindblastBonus()) * combat.mindblastMultiplier,
