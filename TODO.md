@@ -4,7 +4,7 @@ TODO
 ## Gameplay
 
 - Replace list of items with available object list ??
-- Get Kai/Magnakai bonuses as specified in the handbook (See Healing for example)
+- Get Magnakai bonuses as specified in the handbook (See Healing for example)
 - Book 9, sect189: We should keep the count of the different currencies (Lunes, Gold Crows,...). Also on:
   * book 12, sect43
   * book 12, sect61
