@@ -114,7 +114,7 @@ const combatMechanics = {
                 $combatUI.find(".kaisurgeloss").text( Combat.kaiSurgeTurnLoss() );
             }
 
-            if ( !(state.actionChart.disciplines.contains("psisurge" ) || state.actionChart.disciplines.contains("kaisurge" )) || combat.noPsiSurge ) {
+            if ( !(state.actionChart.disciplines.contains("psisurge" ) || state.actionChart.disciplines.contains("kaisurge" ) || state.hasCompletedKaiMagnakaiSerie()) || combat.noPsiSurge ) {
                 // Hide Psi-surge check
                 $combatUI.find(".psisurgecheck").hide();
             } else {

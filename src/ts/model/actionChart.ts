@@ -509,6 +509,11 @@ class ActionChart {
             return false;
         }
 
+        if (state.hasCompletedKaiMagnakaiSerie()) {
+            // Weapon mastery loyalty bonus
+            return true;
+        }
+
         for (const skill of this.getWeaponSkill()) {
             if (currentWeapon.isWeaponType(skill)) {
                 return true;
@@ -527,8 +532,10 @@ class ActionChart {
             return false;
         }
 
+        const weaponTypes = weaponType.split("|");
+
         for (const w of this.getWeaponSkill()) {
-            if (w === weaponType) {
+            if (weaponTypes.contains(w)) {
                 return true;
             }
         }
@@ -614,14 +621,14 @@ class ActionChart {
                     concept: translations.text("weaponskill"),
                     increment: +2,
                 });
-            } else if (state.book.isMagnakaiBook()) {
+            } else if (state.book.isMagnakaiBook() || (state.hasCompletedKaiMagnakaiSerie() && (!this.disciplines.contains("wpnmstry") || !this.hasWeaponskillWith(currentWeapon.weaponType || currentWeapon.id)))) {
                 // Magnakai book
                 let bonus = +3;
                 /*  Exception (Magnakai books):
                     Improvements: Scion-kai / Weaponmastery	/ When entering combat with a weapon they have mastered, Scion-kai may add 4 points
                     (instead of the usual 3 points) to their COMBAT SKILL...
                 */
-                if (state.actionChart.disciplines.length >= 8) {
+                if (state.actionChart.disciplines.length >= 8 || state.hasCompletedKaiMagnakaiSerie()) {
                     // Scion-kai
                     bonus = +4;
                 }

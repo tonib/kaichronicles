@@ -62,7 +62,7 @@
  - Objects now can have a short / long description
  - Fixed bug with map zoom when device orientation is changed (wrong zoom)
  - Changed rendering of definitions lists (hard to read on small devices)
- - Fixed  bugs with the Crystal Star Pendant ("If you have **ever** been given a Crystal Star Pendant", not if you have it NOW)
+ - Fixed bugs with the Crystal Star Pendant ("If you have **ever** been given a Crystal Star Pendant", not if you have it NOW)
  - Book 5, sect20: Fixed bug, stop combat after turn 3
  - Book 5, sect330: Fixed bug, stop combat after turn 2
  - Added privacy policy
@@ -91,4 +91,4 @@
  - Fixed Quivers with no arrows available on section should not show "(0 arrows)". Show "(0 arrows)" only on Action chart. Same to sell quiver object (see book 8, sect168)
  - Objects on the Action Chart can have a available uses count (used in book 8, 9 11). 
  - Book 8 Section 138: Avoid duplicates in sell objects list.
- - Kai serie loyalty bonus for healing/mindblast/weaponskill/hunting implemented
+ - Add Kai/Magnakai serie loyalty bonus, effective only if played all the 5 kai books (for magnakai) or 12 kai/magnakai books (for grand master)

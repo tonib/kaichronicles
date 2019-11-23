@@ -45,7 +45,7 @@ const mealMechanics = {
         const huntDisabled = $(rule).attr("huntDisabled") === "true";
         const hntmstryDisabled = $(rule).attr("hntmstryDisabled") === "true";
         const hasHuntingDiscipline = state.actionChart.disciplines.contains("hunting") || state.hasCompletedKaiSerie();
-        const hasHntmstryDiscipline = state.actionChart.disciplines.contains("hntmstry");
+        const hasHntmstryDiscipline = state.actionChart.disciplines.contains("hntmstry") || state.hasCompletedKaiMagnakaiSerie();
         if ( (!hasHuntingDiscipline && !hasHntmstryDiscipline) || !state.sectionStates.huntEnabled || (huntDisabled && !hasHntmstryDiscipline) || (hntmstryDisabled)) {
             $(mealSelector + " .mechanics-eatHunt").hide();
         }
