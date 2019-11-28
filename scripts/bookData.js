@@ -1,5 +1,5 @@
 
-const fs = require('node-fs-extra');
+const fs = require('fs-extra');
 const projectAon = require( '../src/www/js/ts-generated/model/projectAon.js' ).projectAon;
 const child_process = require('child_process');
 

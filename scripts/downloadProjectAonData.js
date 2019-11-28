@@ -1,4 +1,4 @@
-const fs = require('node-fs-extra');
+const fs = require('fs-extra');
 const BookData = require( './bookData.js' ).BookData;
 const projectAon = require( '../src/www/js/ts-generated/model/projectAon.js' ).projectAon;
 
