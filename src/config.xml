@@ -9,8 +9,6 @@
     </author>
     <content src="index.html" />
 
-    <engine name="android" spec="~7.1.4" />
-
     <!-- TODO: Fix plugin versions to use -->
 
     <!-- Core plugins -->

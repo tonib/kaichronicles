@@ -44,7 +44,7 @@ http://stackoverflow.com/questions/10752055/cross-origin-requests-are-only-suppo
 
 ### Setup Android app
 
-Install Cordova 8.1.2 (https://cordova.apache.org/) and the Android requeriments
+Install Cordova 9.0 (https://cordova.apache.org/) and the Android requeriments
 (https://cordova.apache.org/docs/en/latest/guide/platforms/android/index.html). Then:
 ```bash
     cd src
