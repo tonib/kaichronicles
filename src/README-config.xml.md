@@ -68,6 +68,12 @@ Here is the config.xml I want to keep:
         <icon density="xxxhdpi" src="res/android/icons/xxxhdpi.png" />
 
         <!-- Splashes -->
+        <!-- These defaults are required to avoid "MissingDefaultResource" warnings in Cordova 9.0 
+            (see https://github.com/apache/cordova-android/issues/689) -->
+        <splash density="hdpi" src="res/android/splashes/drawable-port-hdpi.png" />
+        <splash density="ldpi" src="res/android/splashes/drawable-port-ldpi.png" />
+        <splash density="mdpi" src="res/android/splashes/drawable-port-mdpi.png" />
+        <splash density="xhdpi" src="res/android/splashes/drawable-port-xhdpi.png" />
         <splash density="land-hdpi" src="res/android/splashes/drawable-land-hdpi.png" />
         <splash density="land-ldpi" src="res/android/splashes/drawable-land-ldpi.png" />
         <splash density="land-mdpi" src="res/android/splashes/drawable-land-mdpi.png" />

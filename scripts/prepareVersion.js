@@ -1,7 +1,7 @@
 
 /**
  * Build a production to upload to Project Aon
- * Run this as "npm run prepareversion -- [KEYSTOREPASSWORD]"
+ * Run this as "npm run prepareversion [ -- [--debug] [KEYSTOREPASSWORD] ]
  */ 
 
 const fs = require('fs-extra');
@@ -13,9 +13,9 @@ const process = require('process');
 const path = require('path');
 
 /**
- * The keystore to sign the apk
+ * The keystore to sign the apk (absolute path to the project root)
  */
-const KEYSTORE_PATH = 'keystore/projectaon.keystore';
+const KEYSTORE_PATH = process.cwd() + '/keystore/projectaon.keystore';
 
 /**
  * Recreate the dist directory
@@ -104,6 +104,7 @@ function getApkSignPassword() {
     }
 
     // accessSync throws if any accessibility checks fail (oh javascript...)
+    // Do not use relative paths, it fails with Cordova 8 when I build a release version and the I do a cordova clean (oh Cordova...)
     var keystoreExists;
     try {
         fs.accessSync(KEYSTORE_PATH);
@@ -160,10 +161,10 @@ function buildAndroidApp() {
 
         // Compile
         if( pwd ) {
-            // cordova build android --release -- --keystore=../../keystore/projectaon.keystore --storePassword=[PASSWORD] --alias=projectaon --password=[PASSWORD]
+            // cordova build android --release -- --keystore=ROOTPROJECTPATH/keystore/projectaon.keystore --storePassword=PASSWORD --alias=projectaon --password=PASSWORD
             console.log('Building SIGNED');
             params.push( '--' );
-            params.push( '--keystore=../../' + KEYSTORE_PATH );
+            params.push( '--keystore=' + KEYSTORE_PATH );
             params.push( '--storePassword=' + pwd );
             params.push( '--password=' + pwd );
             params.push( '--alias=projectaon' );
@@ -174,13 +175,17 @@ function buildAndroidApp() {
         child_process.execFileSync('cordova', params , {stdio:[0,1,2]} );
 
         // Copy apk to dist root
-        var src = 'platforms/android/build/outputs/apk/android', dst = 'kai';
+        // File is generated at platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
+        //                      platforms/android/app/build/outputs/apk/release/app-release.apk
+        //                      platforms/android/app/build/outputs/apk/debug/app-debug.apk
+        //                      ...
+        var src = 'platforms/android/app/build/outputs/apk/', dst = 'kai';
         if( debug ) {
-            src += '-debug';
+            src += 'debug/app-debug';
             dst += '-DEBUG';
         }
         else {
-            src += '-release';
+            src += 'release/app-release';
         }
         if( !pwd ) {
             if( !debug )

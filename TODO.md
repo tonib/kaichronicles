@@ -94,6 +94,7 @@ Reminders
 cordova emulate --target=Android_4_4_2 android
 cordova emulate --target=Android_5_0_1 android
 cordova emulate --target=Android_6 android
+cordova emulate --target=Android_7 android
 cordova emulate --target=Android_9 android
 
 * Build project AON xhtml:
