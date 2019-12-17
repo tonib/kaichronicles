@@ -783,12 +783,6 @@
             <object objectId="brasskeybook14" />
         </section>
 
-        <section id="sect120">
-        </section>
-
-        <section id="sect121">
-        </section>
-
         <section id="sect122">
             <endurance count="-3" />
             <choiceState section="all" set="disabled" />
@@ -1211,7 +1205,6 @@
         </section>
 
         <section id="sect189">
-        </section>
             <choiceState section="all" set="disabled" />
             <randomTable>
                 <case to="6">
@@ -1224,6 +1217,7 @@
             <test hasDiscipline="kaiscrn">
                 <randomTableIncrement increment="+3" />
             </test>
+        </section>
 
         <section id="sect190">
             <endurance count="+2" />
@@ -1774,9 +1768,6 @@
                 <choiceState section="sect141" set="enabled" />
                 <choiceState section="sect255" set="disabled" />
             </test>
-        </section>
-
-        <section id="sect272">
         </section>
 
         <section id="sect273">

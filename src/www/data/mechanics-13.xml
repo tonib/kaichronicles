@@ -1094,9 +1094,6 @@
             </test>
         </section>
 
-        <section id="sect173">
-        </section>
-
         <section id="sect174">
             <choiceState section="all" set="disabled" />
             <randomTable>
