@@ -1087,7 +1087,9 @@ const mechanicsEngine = {
         }
 
         const increase = ExpressionEvaluator.evalInteger($(rule).attr("count"));
-        actionChartController.increaseEndurance(increase);
+        const noToast = mechanicsEngine.getBooleanProperty($(rule), "noToast", false);
+        const permanent = mechanicsEngine.getBooleanProperty($(rule), "permanent", false);
+        actionChartController.increaseEndurance(increase, noToast, permanent);
 
         state.sectionStates.markRuleAsExecuted(rule);
     },

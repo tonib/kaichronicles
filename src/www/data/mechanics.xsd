@@ -265,6 +265,8 @@
     
     <xs:complexType name="endurance">
         <xs:attribute name="count" type="xs:string" />
+        <xs:attribute name="noToast" type="xs:boolean" />
+        <xs:attribute name="permanent" type="xs:boolean" />
     </xs:complexType>
     
     <xs:complexType name="meal">
