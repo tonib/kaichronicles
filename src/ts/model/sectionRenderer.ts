@@ -468,6 +468,11 @@ class SectionRenderer {
         return '<i>' + this.renderNodeChildren( $foreign , level ) + '</i>';    
     }
 
+    /** Spell language renderer */
+    private spell( $spell : any , level : number ) : string {
+        return '<i>' + this.renderNodeChildren( $spell , level ) + '</i>';    
+    }
+
     public static getEnemyEndurance( $combat : any ) : any {
         var $enduranceAttr = $combat.find('enemy-attribute[class=endurance]');
         if( $enduranceAttr.length == 0 )
