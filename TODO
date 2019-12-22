@@ -1,3 +1,8 @@
+- ERROR: Book 8, sect139:
+  actionChartController.pick('quiver')
+  actionChartController.pick('quiver')
+  actionChartController.increaseArrows(10)
+  Sell Quiver: OBJECTS TABLE TO SELL IS NOT UPDATED !!!!
 - Google Play reports:
   * Quiero informar un error. Antes que nada gracias a ustedes descubri esta saga y si alguien no lo hizo todavía lean(jueguen)la YA En el libro 5 
     sección 163 dice:  "Si posees la disciplina de Sexto Sentido, pasa al 144  Si quieres atacar a los guardias, pasa al 174  Si posees la disciplina 
