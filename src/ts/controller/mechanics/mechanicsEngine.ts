@@ -730,7 +730,7 @@ const mechanicsEngine = {
         
         // Object can be used directly from the section, without picking it?
         const useOnSection = ( $(rule).attr('useOnSection') == 'true' );
-        
+                
         // Add the object to the available objects on the section
         sectionState.addObjectToSection( objectId , price , unlimited , count , useOnSection );
 

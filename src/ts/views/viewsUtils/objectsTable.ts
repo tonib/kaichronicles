@@ -77,7 +77,9 @@ class ObjectsTableItem {
         if( this.objectInfo.id == Item.QUIVER ) {
             // Be sure count is not null
             const count = ( this.objectInfo.count ? this.objectInfo.count : 0 );
-            name += ' (' + count + ' ' + translations.text('arrows') + ')';
+            // In INVENTORY always show "0 arrows", but not in SELL or AVAILABLE (ugly)
+            if( count > 0 || this.type == ObjectsTableType.INVENTORY )
+                name += ' (' + count + ' ' + translations.text('arrows') + ')';
         }
 
         // Arrow amount
