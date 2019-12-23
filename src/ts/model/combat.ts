@@ -29,11 +29,17 @@ class Combat {
     /** The enemy is immune to Psi-Surge? */
     public noPsiSurge = false;
 
+    /** The enemy is immune to Kai-Surge? */
+    public noKaiSurge = false;
+
     /** The CS bonus to apply if the player has Mindblast discipline */
     public mindblastBonus;
 
     /** The CS bonus to apply if the player has Psi-Surge discipline */
     public psiSurgeBonus;
+
+    /** The CS bonus to apply if the player has Kai-Surge discipline */
+    public kaiSurgeBonus;
 
     /** The CS multiplier to apply to Mindblast/Psi-Surge attacks */
     public mindblastMultiplier = 1;
@@ -49,6 +55,9 @@ class Combat {
 
     /** Maximum turn which the combat can be eluded. -1 == no max turn */
     public maxEludeTurn = -1;
+
+    /** Combat can be eluded if enemy has EP equals or below. -1 == no elude */
+    public eludeEnemyEP = -1;
 
     /** Combat has been disabled? */
     public disabled = false;
@@ -116,6 +125,9 @@ class Combat {
     /** Loss on this combat is permanent (reduce original endurance)? */
     public permanentDammage = false;
 
+    /** Kai-surge is activated on this combat? */
+    public kaiSurge = false;
+
     /**
      * Create a combat
      * @param enemy Enemy name
@@ -136,7 +148,8 @@ class Combat {
         /** The original endurance of the player before the combat (for fake combats) */
         this.originalPlayerEndurance = state.actionChart.currentEndurance;
 
-        // Default Psi-Surge / Mindblast bonuses
+        // Default Kai-Surge / Psi-Surge / Mindblast bonuses
+        this.kaiSurgeBonus = Combat.defaultKaiSurgeBonus();
         this.psiSurgeBonus = Combat.defaultPsiSurgeBonus();
         this.mindblastBonus = Combat.defaultMindblastBonus();
     }
@@ -309,6 +322,8 @@ class Combat {
             return false;
         if( this.maxEludeTurn >= 0 && this.turns.length > this.maxEludeTurn )
             return false;
+        if( this.eludeEnemyEP > 0 && this.endurance > this.eludeEnemyEP )
+            return false;
         return true;
     }
 
@@ -354,6 +369,12 @@ class Combat {
         return this.noWeaponTurns > this.turns.length;
     }
 
+    /** Get the default Kai-Surge bonus */
+    public static defaultKaiSurgeBonus() : number {
+        let bonus = +8;
+        return bonus;
+    }
+
     /** Get the default Psi-Surge bonus */
     public static defaultPsiSurgeBonus() : number {
         /*
@@ -364,7 +385,7 @@ class Combat {
             ENDURANCE score falls to 4 points or below.
         */
         let bonus = +4;
-        if( state.book.isMagnakaiBook() && state.actionChart.disciplines.length >= 9 )
+        if( (state.book.isMagnakaiBook() && state.actionChart.disciplines.length >= 9) || state.book.isGrandMasterBook() )
             bonus = +6;
         return bonus;
     }
@@ -375,6 +396,8 @@ class Combat {
         let bonus = +2;
         if( state.book.isMagnakaiBook() && state.actionChart.disciplines.length >= 9 )
             bonus = +3;
+        else if( state.book.isGrandMasterBook() )
+            bonus = +4;
         return bonus;
     }
 
@@ -382,8 +405,14 @@ class Combat {
     public static psiSurgeTurnLoss() : number {
         // See defaultPsiSurgeBonus comment
         let loss = 2;
-        if( state.book.isMagnakaiBook() && state.actionChart.disciplines.length >= 9 )
+        if( (state.book.isMagnakaiBook() && state.actionChart.disciplines.length >= 9) || state.book.isGrandMasterBook() )
             loss = 1;
+        return loss;
+    }
+
+    /** Returns the number of EP loss by turn when using Kai-Surge */
+    public static kaiSurgeTurnLoss() : number {
+        let loss = 1;
         return loss;
     }
 
@@ -391,8 +420,14 @@ class Combat {
     public static minimumEPForPsiSurge() : number {
         // See defaultPsiSurgeBonus comment
         let min = 6;
-        if( state.book.isMagnakaiBook() && state.actionChart.disciplines.length >= 9 )
+        if( (state.book.isMagnakaiBook() && state.actionChart.disciplines.length >= 9) || state.book.isGrandMasterBook() )
             min = 4;
+        return min;
+    }
+
+    /** Returns the minumum Endurance Points to use the Kai-Surge */
+    public static minimumEPForKaiSurge() : number {
+        let min = 6;
         return min;
     }
 

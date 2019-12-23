@@ -312,7 +312,7 @@ class Book {
             this.disciplines = {};
             const self = this;
             // Parse the disciplines section
-            $(this.bookXml).find('section[id=discplnz] > data > section')
+            $(this.bookXml).find('section[id=discplnz] > data > section[id!="mksumary"]')
             .each( function(disciplineSection) {
 
                 const $node = $(this);
@@ -320,7 +320,7 @@ class Book {
                 var disciplineId = $node.attr('id');
 
                 let description : string; 
-                if( disciplineId == 'psisurge' )
+                if( disciplineId == 'psisurge' || disciplineId == 'kaisurge')
                     // Special case, with useful info on second paragraph
                     description = $node.find('p:not(:last)').text();
                 else
@@ -456,6 +456,9 @@ class Book {
     public isKaiBook() : boolean { return this.bookNumber <= 5; }
 
     /** Is it a book of Magnakai series (6-?)? */
-    public isMagnakaiBook() : boolean { return this.bookNumber > 5; }
+    public isMagnakaiBook() : boolean { return this.bookNumber > 5 && this.bookNumber <= 12; }
+
+    /** Is it a book of Magnakai series (6-?)? */
+    public isGrandMasterBook() : boolean { return this.bookNumber > 12; }
 
 }

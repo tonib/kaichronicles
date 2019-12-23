@@ -51,7 +51,14 @@ const actionChartView = {
      * Hide / disable the restore 20 EP button if needed
      */
     updateRestore20EPState: function() {
-        const $restoreButton = $('#achart-restore20Ep');
+        let $restoreButton = null;
+        if(state.book.isGrandMasterBook()) {
+            $restoreButton = $('#grdmast-restore20Ep');
+            $('#achart-restore20Ep').hide();
+        } else {
+            $restoreButton = $('#achart-restore20Ep');
+            $('#grdmast-restore20Ep').hide();
+        }
         if( !state.actionChart.canUse20EPRestoreOnThisBook() )
             $restoreButton.hide();
         if( !state.actionChart.canUse20EPRestoreNow() )
@@ -62,10 +69,11 @@ const actionChartView = {
      * Bind events to restore 20 EP (Curing)
      */
     bindRestore20EP: function() {
+        const $restoreButton = state.book.isGrandMasterBook() ? $('#grdmast-restore20Ep') : $('#achart-restore20Ep');
         actionChartView.updateRestore20EPState();
-        $('#achart-restore20Ep').click( function(e: Event) {
+        $restoreButton.click( function(e: Event) {
             e.preventDefault();
-            if( !confirm( translations.text('confirm20EP') ) )
+            if( !confirm( translations.text(state.book.isGrandMasterBook() ? 'confirm20EPGrdMaster' : 'confirm20EP') ) )
                 return;
             actionChartController.use20EPRestore();
             actionChartView.updateRestore20EPState();

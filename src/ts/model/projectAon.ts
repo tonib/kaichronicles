@@ -238,6 +238,20 @@ const projectAon = {
             zipSize: 3180171,
 
             revision: 2655
+        },
+
+        // Book 13:
+        {
+            title_en: 'The Plague Lords of Ruel',
+            code_en: '13tplor',
+
+            illustrators: [ 'williams' ],
+
+            biographies: [ 'jdbiolw' , 'bwbiolw' ],
+
+            zipSize: 3149799,
+
+            revision: 2752
         }
 
 

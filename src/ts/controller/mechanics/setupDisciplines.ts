@@ -48,7 +48,7 @@ class SetupDisciplines {
         
         // Add checkbox for each discipline:
         const self = this;
-        $('.subsection').append( mechanicsEngine.getMechanicsUI('mechanics-setDisciplines') )
+        $('.subsection[id!="mksumary"]').append( mechanicsEngine.getMechanicsUI('mechanics-setDisciplines') )
         .each(function(index, disciplineSection) {
             self.setupDisciplineCheckBox( $(disciplineSection) );
         })
@@ -148,6 +148,15 @@ class SetupDisciplines {
      */
     private getExpectedNWeaponsWeaponmastery() : number {
         let nWeapons = 3;
+
+        if( state.book.bookNumber >= 13 ) {
+            nWeapons = 2;
+        }
+        // If first book of a serie, don't check previous book        
+        if(state.book.bookNumber == 13 ) {
+            return nWeapons;
+        }
+
         if( this.previousActionChart && this.previousActionChart.disciplines.contains( 'wpnmstry' ) )
             // One more for this book
             nWeapons = this.previousActionChart.weaponSkill.length + 1;
@@ -334,13 +343,19 @@ class SetupDisciplines {
      * @returns Number of expected disciplines
      */
     private getNExpectedDisciplines() : number {
+        let expectedNDisciplines = 5;
 
-        if( state.book.bookNumber == 6 )
-            // Special case: We start the magnakai series always with 3 disciplines:
-            return 3;
+        if(state.book.bookNumber >= 6 && state.book.bookNumber < 13) {
+            expectedNDisciplines = 3;
+        } else if( state.book.bookNumber >= 13 ) {
+            expectedNDisciplines = 4;
+        }
+        // If first book of a serie, don't check previous book
+        if(state.book.bookNumber == 6 || state.book.bookNumber == 13 ) {
+            return expectedNDisciplines;
+        }
 
-        // Number of disciplines to choose (previous book disciplines + 1, or 5 for kai series, or 3 for magnakai series):
-        let expectedNDisciplines = ( state.book.bookNumber <= 5 ? 5 : 3 );
+        // Number of disciplines to choose (previous book disciplines + 1):
         if( this.previousActionChart )
             expectedNDisciplines = this.previousActionChart.disciplines.length + 1;
         
