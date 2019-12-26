@@ -186,7 +186,6 @@
         <xs:attribute name="objectId" type="xs:string" use="required" />
         <xs:attribute name="price" type="xs:string" />
         <xs:attribute name="count" type="xs:nonNegativeInteger" />
-        <xs:attribute name="showCount" type="xs:boolean" />
         <xs:attribute name="useOnSection" type="xs:boolean" />
         <xs:attribute name="unlimited" type="xs:boolean" />
         <xs:attribute name="index" type="xs:nonNegativeInteger" />
