@@ -2698,10 +2698,6 @@
 
         <section id="sect350">
             <drop objectId="crystalexplosive" />
-            <message 
-                en-text="It has been fun, but there are no plans to support more books. Thank you for playing!" 
-                es-text="Ha sido divertido, pero no hay planes de soportar más libros. ¡Gracias por jugar!" 
-            />
         </section>
         
     </sections>
