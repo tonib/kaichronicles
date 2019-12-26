@@ -87,5 +87,5 @@
  - FAQ: "I cannot write in the Action Chart"
 
 1.12
- - Fixed Quivers with no arrows available on section should not show "(0 arrows)". Show "(0 arrows)" only on Action chart. 
-   Same to sell quiver object (see book 8, sect168)
+ - Fixed Quivers with no arrows available on section should not show "(0 arrows)". Show "(0 arrows)" only on Action chart. Same to sell quiver object (see book 8, sect168)
+ 
