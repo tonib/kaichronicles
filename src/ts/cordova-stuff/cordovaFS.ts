@@ -13,7 +13,7 @@ const cordovaFS = {
     // TODO: Replace this with functions with Promises
     saveFile: function(originalFileName, fileContent, callback) {
         cordovaFS.requestFileSystemAsync()
-        .then( function(fs) {
+        .then( function(fs: any) {
             console.log('file system open: ' + fs.name);
 
             cordovaFS.getUnusedName(originalFileName, fs, function(fileName) {
@@ -46,7 +46,7 @@ const cordovaFS = {
      * @param fileContent The file content
      * @returns {Promise<FileEntry>} Promise with the write process. The parameter is the written file entry
      */
-    writeFileContentAsync: function( fileEntry : any, fileContent: any ) : Promise<any> {
+    writeFileContentAsync: function( fileEntry : any, fileContent: any ) : JQueryPromise<any> {
         var dfd = jQuery.Deferred();
 
         cordovaFS.createWriterAsync( fileEntry )
@@ -76,7 +76,7 @@ const cordovaFS = {
      * @param {FileEntry} fileEntry The file
      * @returns Promise with the new FileWriter
      */
-    createWriterAsync: function( fileEntry : any ) : Promise<any> {
+    createWriterAsync: function( fileEntry : any ) : JQueryPromise<any> {
         var dfd = jQuery.Deferred();
 
         fileEntry.createWriter(
@@ -168,7 +168,7 @@ const cordovaFS = {
      * @param {FileSystem} fs The cordova file sytem
      * @returns {Promise<Array<Entry>>} Promise with array of entries on the root file system
      */
-    getRootFilesAsync : function( fs : any ) : Promise< Array<any> > {
+    getRootFilesAsync : function( fs : any ) : JQueryPromise< Array<any> > {
         console.log('file system open: ' + fs.name);
         return cordovaFS.readEntriesAsync( fs.root );
     },
@@ -178,8 +178,8 @@ const cordovaFS = {
      * @param {DirectoryEntry} dirEntry The directory to read
      * @returns {Promise<Array<Entry>>} Promise with array of entries on the directory
      */
-    readEntriesAsync : function( dirEntry : any ) : Promise< Array<any> > {
-        var dfd = jQuery.Deferred();
+    readEntriesAsync : function( dirEntry : any ) : JQueryPromise< Array<any> > {
+        var dfd = jQuery.Deferred<Array<any>>();
         var dirReader = dirEntry.createReader();
         dirReader.readEntries(
             function( entries : Array<any> ) {
@@ -203,7 +203,7 @@ const cordovaFS = {
      * @param newFileName The new file name. If it's null, it will be the original
      * @returns {Promise<Entry>} Promise with the new copied file
      */
-    copyToAsync: function( fileEntry : any , parent : any , newFileName : string = null ) : Promise<any> {
+    copyToAsync: function( fileEntry : any , parent : any , newFileName : string = null ) : JQueryPromise<any> {
         var dfd = jQuery.Deferred();
         fileEntry.copyTo( parent , newFileName , 
             function( entry /*: Entry*/ ) {
@@ -225,10 +225,10 @@ const cordovaFS = {
      * @param {DirectoryEntry} parent The destination directory
      * @returns Promise with the copy process
      */
-    copySetToAsync : function( entries : Array<any> , parent : any ) : Promise<void> {
+    copySetToAsync : function( entries : Array<any> , parent : any ) : JQueryPromise<void> {
         console.log( 'Copying ' + entries.length + ' files to other directory' );
         
-        let promises : Array< Promise<any> > = [];
+        let promises : Array< JQueryPromise<any> > = [];
         for( let entry of entries )
             promises.push( cordovaFS.copyToAsync( entry , parent ) );
 
@@ -241,9 +241,9 @@ const cordovaFS = {
      * @param fileName The file name to read
      * @returns The promise with the file content
      */
-    readRootTextFileAsync: function( fileName : string ) : Promise<string> {
+    readRootTextFileAsync: function( fileName : string ) : JQueryPromise<string> {
         return cordovaFS.requestFileSystemAsync()
-        .then( function( fs /* : FileSystem */ ) {
+        .then( function( fs: any /* : FileSystem */ ) {
             return cordovaFS.getFileAsync( fs.root , fileName );
         })
         .then( function( fileEntry /* : FileEntry */ ) {
@@ -256,7 +256,7 @@ const cordovaFS = {
      * @param {FileEntry} entry The entry
      * @returns {Promise<File>} Promise with the File
      */
-    fileAsync: function( entry : any ) : Promise<any> {
+    fileAsync: function( entry : any ) : JQueryPromise<any> {
         var dfd = jQuery.Deferred();
         entry.file(
             function (file /* : File */ ) {
@@ -278,7 +278,7 @@ const cordovaFS = {
      * @param binary True if the content should be read as binary. False to read as text
      * @returns Promise with the contet file (text or binary)
      */
-    readFileAsync: function( entry : any, binary : boolean ) : Promise<any> {
+    readFileAsync: function( entry : any, binary : boolean ) : JQueryPromise<any> {
         var dfd = jQuery.Deferred();
 
         cordovaFS.fileAsync( entry )
@@ -289,7 +289,7 @@ const cordovaFS = {
                     console.log( 'File read finished' );
                     dfd.resolve( this.result );
                 };
-                reader.onerror = function( error ) {
+                reader.onerror = function( error: any ) {
                     let msg = 'Error reading file';
                     if( error && error.message )
                         msg += ': ' + error.message;
@@ -313,9 +313,9 @@ const cordovaFS = {
      * @param {FileEntry} entry The file entry to delete
      * @returns Promise with the deletion process
      */
-    deleteFileAsync: function( fileEntry : any ) : Promise<void> {
+    deleteFileAsync: function( fileEntry : any ) : JQueryPromise<void> {
 
-        var dfd = jQuery.Deferred();
+        var dfd = jQuery.Deferred<void>();
 
         console.log('Deleting file ' + fileEntry.toURL() );
         fileEntry.remove(
@@ -338,9 +338,9 @@ const cordovaFS = {
      * @param {DirectoryEntry} directoryEntry The directory entry to delete
      * @returns Promise with the deletion process
      */
-    deleteDirRecursivelyAsync: function( directoryEntry : any ) : Promise<void> {
+    deleteDirRecursivelyAsync: function( directoryEntry : any ) : JQueryPromise<void> {
 
-        var dfd = jQuery.Deferred();
+        var dfd = jQuery.Deferred<void>();
         console.log('Deleting directory ' + directoryEntry.toURL() );
         directoryEntry.removeRecursively(
             function() { 
@@ -379,7 +379,7 @@ const cordovaFS = {
      * @param uri URI referring to a local file or directory
      * @returns {Promise<Entry>} Promise with the file / directory entry
      */
-    resolveLocalFileSystemURIAsync: function(uri : string) : Promise<any> {
+    resolveLocalFileSystemURIAsync: function(uri : string) : JQueryPromise<any> {
         var dfd = jQuery.Deferred();
 
         window.resolveLocalFileSystemURI( uri, 
@@ -405,7 +405,7 @@ const cordovaFS = {
      * @param {Flags} options  create : true to create the directory, if it does not exist
      * @returns {Promise<DirectoryEntry>} Promise with the directory
      */
-    getDirectoryAsync: function(dir : any , path : string , options : any ) : Promise<any> {
+    getDirectoryAsync: function(dir : any , path : string , options : any ) : JQueryPromise<any> {
         var dfd = jQuery.Deferred();
         dir.getDirectory( path , options, 
             function( subdir ) {
@@ -427,7 +427,7 @@ const cordovaFS = {
      * @param options Options to get / create the file
      * @returns {Promise<FileEntry>} Promise with the file
      */
-    getFileAsync: function(dir : any , fileName : string , options : Object = { create: false, exclusive: false } ) : Promise<any> {
+    getFileAsync: function(dir : any , fileName : string , options : Object = { create: false, exclusive: false } ) : JQueryPromise<any> {
         var dfd = jQuery.Deferred();
         dir.getFile(fileName, options, 
             function ( fileEntry /* : FileEntry */ ) {
@@ -451,7 +451,7 @@ const cordovaFS = {
      * percentage (0.0 - 100.0)
      * @returns Promise with the process. Parameter is the downloaded file FileEntry 
      */
-    downloadAsync: function( url : string, dstPath : string, progressCallback : (number) => void = null ) : Promise<any> {
+    downloadAsync: function( url : string, dstPath : string, progressCallback : (number) => void = null ) : JQueryPromise<any> {
         
         var dfd = jQuery.Deferred();
         console.log('Downloading ' + url + ' to ' + dstPath);
@@ -504,9 +504,9 @@ const cordovaFS = {
         }
     },
 
-    zipAsync: function( dirToCompressPath : string , zipFilePath : string ) : Promise<void> {
+    zipAsync: function( dirToCompressPath : string , zipFilePath : string ) : JQueryPromise<void> {
 
-        var dfd = jQuery.Deferred();
+        var dfd = jQuery.Deferred<void>();
 
         // Create the zip
         Zeep.zip( { from : dirToCompressPath, to : zipFilePath } , 
@@ -532,9 +532,9 @@ const cordovaFS = {
      * @param dstDir Path to the directory where uncompress the zip file
      * @returns Promise with the process
      */
-    unzipAsync: function( zipPath : string , dstDir : string ) : Promise<void> {
+    unzipAsync: function( zipPath : string , dstDir : string ) : JQueryPromise<void> {
 
-        var dfd = jQuery.Deferred();
+        var dfd = jQuery.Deferred<void>();
         console.log('Unzipping ' + zipPath + ' to ' + dstDir);
         zip.unzip( zipPath , dstDir , function(resultCode) {
             // Check the unzip operation
@@ -553,9 +553,9 @@ const cordovaFS = {
      * @param description the description that would appear for this file in Downloads App.
      * @param mimeType    mimetype of the file.
      */
-    copyToDownloadAsync: function( url : string , title : string , description : string , mimeType : string ) : Promise<void> {
+    copyToDownloadAsync: function( url : string , title : string , description : string , mimeType : string ) : JQueryPromise<void> {
         
-        const dfd = jQuery.Deferred();
+        const dfd = jQuery.Deferred<void>();
 
         CopyToDownload.copyToDownload( url , title , description , false , mimeType , true , 
             function() { 
@@ -579,7 +579,7 @@ const cordovaFS = {
      * @param dstDirectoryUrl URL to the target directory where to copy
      * @returns Promise with the process. The parameter is the FileEntry for the new copied file
      */
-    copyNativePathsAsync : function( srcFileUrl : string , dstDirectoryUrl : string ) : Promise<any> {
+    copyNativePathsAsync : function( srcFileUrl : string , dstDirectoryUrl : string ) : JQueryPromise<any> {
 
         const dfd = jQuery.Deferred();
 

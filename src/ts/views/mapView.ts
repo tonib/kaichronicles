@@ -96,8 +96,8 @@ const mapView = {
         let image = $image[0];
 
         let factor = ( increase ? 1.1 : 0.9 );
-        image.width *= factor;
-        image.height *= factor;
+        $image.width($image.width() * factor);
+        $image.height($image.height() * factor);
 
         // If originalsize class is not set, the width is fixed to 100%, and the image appears distorted
         $image.addClass('originalsize');

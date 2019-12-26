@@ -1,10 +1,11 @@
+/// <reference path="../external.ts" />
 
 /**
  * The setup view API
  */
-var setupView = {
-    log: function(text, level) {
-        var style;
+const setupView = {
+    log: function(text: string, level: string = null) {
+        let style: string = '';
         if( level == 'ok' )
             style = 'style="color: green"';
         else if( level == 'error' )

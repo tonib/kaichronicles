@@ -7,12 +7,16 @@
     },
     "license": "MIT",
     "devDependencies": {
+        "@types/bootstrap": "^3.3.42",
+        "@types/cordova": "0.0.34",
+        "@types/jquery": "^2.0.54",
+        "@types/toastr": "^2.1.37",
         "jshint": "2.10.2",
         "fs-extra": "8.1.0",
-        "uglify-js": "3.6.2",
         "klaw-sync": "6.0.0",
         "preprocess": "3.1.0",
-        "typescript": "2.6.2"
+        "typescript": "2.6.2",
+        "uglify-js": "3.6.2"
     },
     "scripts": {
         "lint": "jshint src/www/js",

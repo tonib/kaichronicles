@@ -31,7 +31,7 @@ class SavedGamesExport {
      * Export saved games to Download directory
      * @returns Promise with the export process
      */
-    public export() : Promise<void> {
+    public export() : JQueryPromise<void> {
         const self = this;
         let zipPath : string = null;
         const zipFileName = 'KaiChroniclesExport-' + settingsController.getDateForFileNames() + '.zip';
@@ -77,7 +77,7 @@ class SavedGamesExport {
      * @param doc File with the games to import
      * @returns Promise with the export process. Parameter is the number of imported games
      */
-    public import( doc : DocumentSelection ) : Promise<number> {
+    public import( doc : DocumentSelection ) : JQueryPromise<number> {
         const self = this;
 
         const process = this.setup()
@@ -103,7 +103,7 @@ class SavedGamesExport {
      * @param doc File with the games to import
      * @returns Promise with the import process. Parameter is the number of imported games
      */
-    private importZip( doc : DocumentSelection ) : Promise<number> {
+    private importZip( doc : DocumentSelection ) : JQueryPromise<number> {
 
         const self = this;
         let nNewGames = 0;
@@ -138,7 +138,7 @@ class SavedGamesExport {
         .then( function() {
             // Notify the number of imported games
             self.nImportedGames = nNewGames;
-            return jQuery.Deferred().resolve(nNewGames).promise();
+            return jQuery.Deferred<number>().resolve(nNewGames).promise();
         });
     }
 
@@ -147,7 +147,7 @@ class SavedGamesExport {
      * @param doc File with the saved game to import
      * @returns Promise with the import process. Parameter is the number of imported games
      */
-    private importJson( doc : DocumentSelection ) : Promise<number> {
+    private importJson( doc : DocumentSelection ) : JQueryPromise<number> {
         const self = this;
 
         return self.checkOverwritting( [ doc.fileName ] )
@@ -158,7 +158,7 @@ class SavedGamesExport {
         .then( function() {
             // Notify the number of imported games
             self.nImportedGames = 1;
-            return jQuery.Deferred().resolve(1).promise();
+            return jQuery.Deferred<number>().resolve(1).promise();
         });
     }
 
@@ -167,7 +167,7 @@ class SavedGamesExport {
      * @param newFiles File names to import
      * @returns Promise with the user confirmation to continue the process
      */
-    private checkOverwritting( newFiles : Array<string> ) : Promise<void> {
+    private checkOverwritting( newFiles : Array<string> ) : JQueryPromise<void> {
 
         let duplicatedFiles : Array<string> = [];
         for( let newFile of newFiles ) {
@@ -178,7 +178,7 @@ class SavedGamesExport {
             }
         }
 
-        const dfd = jQuery.Deferred();
+        const dfd = jQuery.Deferred<void>();
         if( duplicatedFiles.length == 0 )
             // Ok, there will be no duplicates
             dfd.resolve();
@@ -198,7 +198,7 @@ class SavedGamesExport {
      * @param doc The file to copy
      * @param {DirectoryEntry} parent Directory where to create the new file
      */
-    private copyFileContent( doc : DocumentSelection , parent : any ) : Promise<any>  {
+    private copyFileContent( doc : DocumentSelection , parent : any ) : JQueryPromise<any>  {
 
         let fileContent : any = null;
 
@@ -259,7 +259,7 @@ class SavedGamesExport {
      * Setup current instance members
      * @returns Promise with the members setup process
      */
-    private setup() : Promise<void> {
+    private setup() : JQueryPromise<void> {
         const self = this;
         
         // Retrieve a FS and the saved games
@@ -288,7 +288,7 @@ class SavedGamesExport {
      * Re-create the temporal directory
      * @returns The process
      */
-    private createTmpDirectory() : Promise<void> {
+    private createTmpDirectory() : JQueryPromise<void> {
         const self = this;
 
         const dirName = 'tmpKaiChronicles';
@@ -317,7 +317,7 @@ class SavedGamesExport {
      * @param process The process to run
      * @returns The "process" parameter
      */
-    private clean( process : Promise<any> ) : Promise<any> {
+    private clean( process : JQueryPromise<any> ) : JQueryPromise<any> {
         const self = this;
 
         // This is horrifying. Any better way to do it???
@@ -343,7 +343,7 @@ class SavedGamesExport {
      * Delete the temporal directory and other generated tmp files
      * @returns The deletion process
      */
-    private cleanTmpFiles() : Promise<void> {
+    private cleanTmpFiles() : JQueryPromise<void> {
 
         // Delete tmp directory
         let rootPromise;
@@ -363,7 +363,7 @@ class SavedGamesExport {
         .then( function() {
             console.log( 'Deleting other tmp files' );
 
-            let promises : Array< Promise<any> > = [];
+            let promises : Array< JQueryPromise<any> > = [];
             for( let tmpFile of self.filesToDeleteAtEnd )
                 promises.push( cordovaFS.deleteFileAsync( tmpFile ) );
             

@@ -1,3 +1,4 @@
+/// <reference path="../external.ts" />
 
 /**
  * Work with books view
@@ -58,14 +59,14 @@ var workWithBooksView = {
      * Set the "select all" checked / unchecked
      * @param {bool} checked True to check. False to uncheck
      */
-    setSelectAllState: function(checked) {
+    setSelectAllState: function(checked: boolean) {
         if( checked )
             $('#wwbooks-all').prop( 'checked' , 'checked' );
         else
             $('#wwbooks-all').removeAttr( 'checked' );
     },
 
-    updateBooksList: function(booksState) {
+    updateBooksList: function(booksState: Array<BookDownloadState>) {
         var $tableBody = $('#wwbooks-list > tbody');
         $tableBody.empty();
 
@@ -81,13 +82,13 @@ var workWithBooksView = {
         $tableBody.append(html);
     },
 
-    markBookAsDownloaded: function(bookNumber) {
+    markBookAsDownloaded: function(bookNumber: number) {
         var $row = $('tr[data-book-number=' + bookNumber + ']');
         $row.addClass('success');
         $row.find( 'input' ).prop('checked' , 'checked');
     },
 
-    displayModal: function(show) {
+    displayModal: function(show: boolean) {
         if( show ) {
             // Clear the log
             $('#wwbooks-log').empty();
@@ -116,16 +117,16 @@ var workWithBooksView = {
         $('#wwbooks-modal').removeClass('nobackbutton');
     },
 
-    logEvent: function(msg) {
+    logEvent: function(msg: string) {
         $('#wwbooks-log').append(msg + '\n\n');
     },
 
-    setCurrentWork: function(msg) {
+    setCurrentWork: function(msg: string) {
         $('#wwbooks-current').text(msg);
         workWithBooksView.updateProgress(0);
     },
 
-    updateProgress: function( percent ) {
+    updateProgress: function( percent: number ) {
         $('#wwbooks-progress').css('width', percent + '%');
     },
 

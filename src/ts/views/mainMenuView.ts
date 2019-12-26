@@ -5,7 +5,7 @@ var mainMenuView = {
      * Show the map section
      * @param section The map Section
      */
-    setup: function( section ) {
+    setup: function( ) {
         document.title = translations.text('kaiChronicles');
 
         // TODO: Use translation on mainMenu.html instead of this ?

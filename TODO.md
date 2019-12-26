@@ -1,8 +1,35 @@
-- ERROR: Book 8, sect139:
-  actionChartController.pick('quiver')
-  actionChartController.pick('quiver')
-  actionChartController.increaseArrows(10)
-  Sell Quiver: OBJECTS TABLE TO SELL IS NOT UPDATED !!!!
+
+TODO
+====
+
+## Dev
+
+- Replace var with let/const
+- Replace main const/var with TS classes
+- Replace Google analytics with Matomo
+- Fix Cordova config.xml plugin versions to use
+- Cordova package.json should be versioned with git ???
+
+## Gameplay
+
+- Get Kai/Magnakai bonuses as specified in the handbook (See Healing for example)
+  * https://github.com/tonib/kaichronicles/issues/5
+  * https://www.projectaon.org/es/foro3/viewtopic.php?p=27752#p27752
+- Book 9, sect189: We should keep the count of the different currencies (Lunes, Gold Crows,...). Also on:
+  * book 12, sect43
+  * book 12, sect61
+- At new game, ask for the random table type
+
+## Android
+
+- Compile android app and test it
+- Do not show the license text on Android (the book was already downloaded)
+
+## Bugs
+
+- Bugs reported on Google Play:
+  * Finally, finally there's a proper LW game book app. The only problem I've noticed is that it only gives Silver Bow's bonus in the sections of book 6 that specifically mention it, and not at all 'rolls' as it is supposed to.
+- Save games is not working on Safari
 - Google Play reports:
   * Quiero informar un error. Antes que nada gracias a ustedes descubri esta saga y si alguien no lo hizo todavía lean(jueguen)la YA En el libro 5 
     sección 163 dice:  "Si posees la disciplina de Sexto Sentido, pasa al 144  Si quieres atacar a los guardias, pasa al 174  Si posees la disciplina 
@@ -10,8 +37,13 @@
     En inglés segun Project Aon: If you wish to remain as you are, turn to 18
   * Excelente..esperando los libros finales, por favor!!! Update: En el libro 12, pagina 133 no hay manera de continuar. La unica opcion disponible 
     para avanzar de pagina esta deshabilitada
-- Fix config.xml plugin versions to use
-- package.json should be versioned with git ???
+- ERROR: Book 8, sect139: 
+  ```actionChartController.pick('quiver'); actionChartController.pick('quiver'); actionChartController.increaseArrows(10);```
+  Sell Quiver: OBJECTS TABLE TO SELL IS NOT UPDATED !!!!
+
+## Other
+
+- UPLOAD NEW VERSION 1.11.1
 - FAQ: Add info about change the Random Table
 - Add help for "LW club newsletter 29" setting
 - Use latest version on PAON data on SVN (a fixed commit number)
@@ -25,28 +57,15 @@
   * Saved games removed when adding new books
   * Objects types
   * Others?
-- Bugs reported on Google Play:
-  * Finally, finally there's a proper LW game book app. The only problem I've noticed is that it only gives Silver Bow's bonus in the 
-    sections of book 6 that specifically mention it, and not at all 'rolls' as it is supposed to.
 - Performance
 - FAQ: Questions about "I cannot write on the Action Chart"
 - "Okay okay. Didn't know about the lone wolf series and went through the 10 programmed books in 2 days. Turns out the rest are online !!! 
    So it won't be as fast to play but I'm definitely continuing. One remark. I'd like to be able to know what was in the Kai monastery at 
    the end so I can continue with that too !"
 - Suggestions and bugs on http://projectaon.proboards.com/post/43740
-
-FOR FUTURE (1.11.2+):
 - Keep version number of current downloaded books, and check for book errata fixes
 - On "About the book", display the book number
-- Book 9, sect189: We should keep the count of the different currencies (Lunes, Gold Crows,...). Also on:
-  * book 12, sect43
-  * book 12, sect61
-- Support for kai disciplines on magnakai books:
-  * https://github.com/tonib/kaichronicles/issues/5
-  * https://www.projectaon.org/es/foro3/viewtopic.php?p=27752#p27752
 - Allow to select the current bow
-- ERROR: Hunting STILL activated on book 3... 
-  (maybe fixed: BookSectionStates.fromStateObject, added line "this.huntEnabled = stateObject.huntEnabled;" on v 1.6.3)
 - Android application:
   * App lifeciclye
   * Load games page: Show info about saved games
@@ -54,7 +73,6 @@ FOR FUTURE (1.11.2+):
   * Save game: Do not be so restrictive with file names characters
   * Replace toastr by Android toasts ???
   * Remove animations from modal dialogs (only for Android, performance...)
-- Save games is not working on Safari
 - Toasts with images: align text when the text is multiline
 - Combats should be sequential: First finish the first one, then the second, etc
 - If the hunting is disabled on the current section, show it on some place (Action Chart?)
@@ -64,10 +82,6 @@ FOR FUTURE (1.11.2+):
 - Test all books / all sections rendering. It should be valid HTML5
   (https://validator.w3.org/docs/api.html)
 - Test tags <ch.* /> replacements
-- Find "TODO" and do it
-- New game page: 
-  * Do not show the license text on Android (the book was already downloaded)
-  * Ask for the random table type
 - Action chart buttons don't work on iPad Safari
 - Dialogs with text input: Allow to confirm with the screen keyboard ("go" button)
 - Remove the "Alert" text from the message dialog (same for confirms)
@@ -95,10 +109,11 @@ FOR FUTURE (1.11.2+):
 - Allow to add a concept description for combat skill modifiers rules on combat ratio explanation
 - Display concepts for objects usages (Adgana, etc) on combat ratio explanation
 - Display book 11 map ("Northern magnamund") somewhere?
-- Change all pending javascript files to typescript
 - Add music?
 
-Reminders:
+
+Reminders
+=========
 
 * DON'T BE RESTRICTIVE WITH CHOICES !!!!
 
@@ -158,49 +173,3 @@ cordova emulate --target=Android_9 android
   TODO: Check differences between spaces options (see https://stackoverflow.com/questions/16423024/how-can-i-diff-2-files-while-ignoring-leading-white-space)
   svn diff -x --ignore-all-space https://www.projectaon.org/data/tags/20151013/es/xml/01hdlo.xml https://www.projectaon.org/data/trunk/es/xml/01hdlo.xml | iconv -f ISO-8859-1 | colordiff | less -R
   svn diff -x --ignore-all-space https://www.projectaon.org/data/tags/20151013/en/xml/01fftd.xml https://www.projectaon.org/data/trunk/en/xml/01fftd.xml | iconv -f ISO-8859-1 | colordiff | less -R
-
-* Create a default inventory
-actionChartController.drop('all')
-actionChartController.pick('backpack')
-actionChartController.pick('sword')
-actionChartController.pick('bow')
-actionChartController.increaseMoney(15)
-actionChartController.pick('meal')
-actionChartController.pick('meal')
-actionChartController.pick('rope')
-actionChartController.pick('comb')
-actionChartController.pick('brasskey')
-actionChartController.pick('whip')
-actionChartController.pick('hourglass')
-actionChartController.pick('sommerswerd')
-actionChartController.pick('quiver')
-actionChartController.increaseArrows(5)
-actionChartController.pick('shield')
-actionChartController.pick('map')
-actionChartController.pick('helmet')
-actionChartController.pick('chainmail')
-actionChartController.pick('leatherwaistcoat')
-actionChartController.pick('daggerofvashna')
-
-* Test book images:
-state.sectionStates.getSectionState().addObjectToSection('axe')
-state.sectionStates.getSectionState().addObjectToSection('dagger')
-state.sectionStates.getSectionState().addObjectToSection('sword')
-state.sectionStates.getSectionState().addObjectToSection('spear')
-state.sectionStates.getSectionState().addObjectToSection('mace')
-state.sectionStates.getSectionState().addObjectToSection('shortsword')
-state.sectionStates.getSectionState().addObjectToSection('quarterstaff')
-state.sectionStates.getSectionState().addObjectToSection('warhammer')
-state.sectionStates.getSectionState().addObjectToSection('broadsword')
-state.sectionStates.getSectionState().addObjectToSection('bow')
-state.sectionStates.getSectionState().addObjectToSection('quiver')
-state.sectionStates.getSectionState().addObjectToSection('rope')
-state.sectionStates.getSectionState().addObjectToSection('largerope')
-state.sectionStates.getSectionState().addObjectToSection('taunorwater')
-state.sectionStates.getSectionState().addObjectToSection('meal')
-state.sectionStates.getSectionState().addObjectToSection('arrow')
-
-* Top Google Play RPG 
-  https://play.google.com/store/apps/category/GAME_ROLE_PLAYING/collection/topselling_free
-
-Work done on this commit:

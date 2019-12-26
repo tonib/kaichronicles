@@ -38,8 +38,8 @@ class BookDownloadState {
      * @param {DirectoryEntry} booksDir The books directory root
      * @returns Promise with the check process. The parameter is this instance
      */
-    public checkDownloadStateAsync( booksDir : any ) : Promise<BookDownloadState> {
-        const dfd = jQuery.Deferred();
+    public checkDownloadStateAsync( booksDir : any ) : JQueryPromise<BookDownloadState> {
+        const dfd = jQuery.Deferred<BookDownloadState>();
         const self = this;
 
         cordovaFS.getDirectoryAsync( booksDir , this.bookNumber.toString() , {} )
@@ -63,7 +63,7 @@ class BookDownloadState {
      * @param {DirectoryEntry} booksDir Directory where are stored the books
      * @returns Promise with the process
      */
-    public deleteAsync( booksDir : any ) : Promise<void> {
+    public deleteAsync( booksDir : any ) : JQueryPromise<void> {
 
         console.log( 'Deleting book ' + this.bookNumber );
         const self = this;
@@ -73,7 +73,7 @@ class BookDownloadState {
         })
         .then( function() { 
             self.downloaded = false;
-            return jQuery.Deferred().resolve().promise();
+            return jQuery.Deferred<void>().resolve().promise();
         });
     }
 
@@ -83,7 +83,7 @@ class BookDownloadState {
      * @param progressCallback Optional callback to call with the download progress. Parameter is the downloaded 
      * percentage (0.0 - 100.0)
      */
-    public downloadAsync( booksDir : any , progressCallback : (number) => void = null ) {
+    public downloadAsync( booksDir : any , progressCallback : (number) => void = null ): JQueryPromise<void> {
         
         const fileName = this.bookNumber + '.zip';
         //var url = 'http://192.168.1.4/ls/data/projectAon/' + fileName;
@@ -104,7 +104,7 @@ class BookDownloadState {
                 console.log( 'No downloaded zip found' );
 
             // Return the previous error
-            const dfd = jQuery.Deferred();
+            const dfd = jQuery.Deferred<void>();
             if( withErrors )
                 dfd.reject( error );
             else

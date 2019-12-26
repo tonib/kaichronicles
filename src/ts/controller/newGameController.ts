@@ -1,8 +1,9 @@
+/// <reference path="../external.ts" />
 
 /**
  * New game controller
  */
-var newGameController = {
+const newGameController = {
 
     /**
      * New game page
@@ -34,7 +35,7 @@ var newGameController = {
      * @param {string} bookNumber The book number
      * @param {string} language The book language
      */
-    startNewGame: function( bookNumber, language ) {
+    startNewGame: function( bookNumber: number, language: string ) {
         
         state.reset(true);
         routing.redirect( 'setup' , {
@@ -44,7 +45,7 @@ var newGameController = {
         
     },
 
-    selectedBookChanged: function(newBookNumber) {
+    selectedBookChanged: function(newBookNumber: number) {
         var book = new Book(newBookNumber, 'en');
         newGameView.setCoverImage( book.getCoverURL() );
     },

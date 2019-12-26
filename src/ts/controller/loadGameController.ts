@@ -137,7 +137,7 @@ class loadGameController {
     public static deleteFile(fileName : string) {
    
         cordovaFS.requestFileSystemAsync()
-        .then( function( fs /* : FileSystem */ ) {
+        .then( function( fs: any /* : FileSystem */ ) {
             return cordovaFS.getFileAsync( fs.root , fileName );
         })
         .then( function( fileEntry /* : FileEntry */ ) {

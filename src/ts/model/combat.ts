@@ -211,9 +211,9 @@ class Combat {
      * @param elude True if the player is eluding the combat
      * @return Promise with the next CombatTurn
      */
-    public nextTurnAsync( elude : boolean ) : Promise<CombatTurn> {
+    public nextTurnAsync( elude : boolean ) : JQueryPromise<CombatTurn> {
 
-        var dfd = jQuery.Deferred();
+        var dfd = jQuery.Deferred<CombatTurn>();
 
         // Calculate the turn
         var self = this;

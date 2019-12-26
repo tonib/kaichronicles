@@ -1,6 +1,5 @@
 /// <reference path="../external.ts" />
 
-
 /**
  * Game settings controller
  */
@@ -26,7 +25,7 @@ const settingsController = {
      * @param updateUI Should we show progress on UI. Set true ONLY on the settings page
      * @return The promise to download the book with the new language
      */
-    changeLanguage: function(newLanguage : string, updateUI : boolean) : Promise<void> {
+    changeLanguage: function(newLanguage : string, updateUI : boolean) : JQueryPromise<void> {
 
         // TODO: Check download errors
         

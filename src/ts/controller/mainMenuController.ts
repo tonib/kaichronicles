@@ -2,7 +2,7 @@
 /** 
  * The application menu controller
  */
-var mainMenuController = {
+const mainMenuController = {
 
     /**  
      * The game menu 
