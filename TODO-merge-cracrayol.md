@@ -14,3 +14,5 @@
     - package.json: Added devDependencies for bootstrap, cordova, jquery and toastr... TODO (for me): Check how Typescript compiler
       and VS Code finds declarations for JQuery, and toastr (and others). CHECK VERSIONS MATCH!
     - Check Android app (promises changes)
+
+* https://github.com/tonib/kaichronicles/commit/c43942a7b8e0ccc29751243818b9cbbefb4e5bbd
