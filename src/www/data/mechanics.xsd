@@ -186,6 +186,7 @@
         <xs:attribute name="objectId" type="xs:string" use="required" />
         <xs:attribute name="price" type="xs:string" />
         <xs:attribute name="count" type="xs:nonNegativeInteger" />
+        <xs:attribute name="showCount" type="xs:boolean" />
         <xs:attribute name="useOnSection" type="xs:boolean" />
         <xs:attribute name="unlimited" type="xs:boolean" />
         <xs:attribute name="index" type="xs:nonNegativeInteger" />
@@ -199,12 +200,15 @@
         <xs:attribute name="mindforceEP" type="xs:integer" />
         <xs:attribute name="noMindblast" type="xs:boolean" />
         <xs:attribute name="noPsiSurge" type="xs:boolean" />
+        <xs:attribute name="noKaiSurge" type="xs:boolean" />
         <xs:attribute name="mindblastBonus" type="xs:integer" />
         <xs:attribute name="psiSurgeBonus" type="xs:integer" />
+        <xs:attribute name="kaiSurgeBonus" type="xs:integer" />
         <!-- noWeapon can be a number or a boolean -->
         <xs:attribute name="noWeapon" type="xs:string" />
         <xs:attribute name="eludeTurn" type="xs:integer" />
         <xs:attribute name="maxEludeTurn" type="xs:integer" />
+        <xs:attribute name="eludeEnemyEP" type="xs:integer" />
         <xs:attribute name="dammageMultiplier" type="xs:decimal" />
         <xs:attribute name="enemyMultiplier" type="xs:decimal" />
         <xs:attribute name="enemyTurnLoss" type="xs:nonPositiveInteger" />
