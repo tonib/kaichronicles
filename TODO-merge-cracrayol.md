@@ -10,4 +10,7 @@
 * https://github.com/tonib/kaichronicles/commit/f31306ad54317ad7809bc69a864ae1fa13ea2b57
     
 * https://github.com/tonib/kaichronicles/commit/3b89b305636c1603cac2df431856d86ea46e7961
-    - TODO: "Replace Google analytics with Matomo" Why?
+    - "Replace Google analytics with Matomo" Why?
+    - package.json: Added devDependencies for bootstrap, cordova, jquery and toastr... TODO (for me): Check how Typescript compiler
+      and VS Code finds declarations for JQuery, and toastr (and others). CHECK VERSIONS MATCH!
+    - Check Android app (promises changes)

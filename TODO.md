@@ -29,14 +29,14 @@ TODO
 
 - Bugs reported on Google Play:
   * Finally, finally there's a proper LW game book app. The only problem I've noticed is that it only gives Silver Bow's bonus in the sections of book 6 that specifically mention it, and not at all 'rolls' as it is supposed to.
-- Save games is not working on Safari
-- Google Play reports:
   * Quiero informar un error. Antes que nada gracias a ustedes descubri esta saga y si alguien no lo hizo todavía lean(jueguen)la YA En el libro 5 
-    sección 163 dice:  "Si posees la disciplina de Sexto Sentido, pasa al 144  Si quieres atacar a los guardias, pasa al 174  Si posees la disciplina 
-    de Sexto Sentido, pasa al 18" La ultima opcion, la que lleva al 18, debería indicar que deseas permanecer como estás (o sea no atacar). 
-    En inglés segun Project Aon: If you wish to remain as you are, turn to 18
+  sección 163 dice:  "Si posees la disciplina de Sexto Sentido, pasa al 144  Si quieres atacar a los guardias, pasa al 174  Si posees la disciplina 
+  de Sexto Sentido, pasa al 18" La ultima opcion, la que lleva al 18, debería indicar que deseas permanecer como estás (o sea no atacar). 
+  En inglés segun Project Aon: If you wish to remain as you are, turn to 18
   * Excelente..esperando los libros finales, por favor!!! Update: En el libro 12, pagina 133 no hay manera de continuar. La unica opcion disponible 
-    para avanzar de pagina esta deshabilitada
+  para avanzar de pagina esta deshabilitada
+- Save games is not working on Safari
+
 - ERROR: Book 8, sect139: 
   ```actionChartController.pick('quiver'); actionChartController.pick('quiver'); actionChartController.increaseArrows(10);```
   Sell Quiver: OBJECTS TABLE TO SELL IS NOT UPDATED !!!!
@@ -173,3 +173,49 @@ cordova emulate --target=Android_9 android
   TODO: Check differences between spaces options (see https://stackoverflow.com/questions/16423024/how-can-i-diff-2-files-while-ignoring-leading-white-space)
   svn diff -x --ignore-all-space https://www.projectaon.org/data/tags/20151013/es/xml/01hdlo.xml https://www.projectaon.org/data/trunk/es/xml/01hdlo.xml | iconv -f ISO-8859-1 | colordiff | less -R
   svn diff -x --ignore-all-space https://www.projectaon.org/data/tags/20151013/en/xml/01fftd.xml https://www.projectaon.org/data/trunk/en/xml/01fftd.xml | iconv -f ISO-8859-1 | colordiff | less -R
+
+
+* Create a default inventory (Magnakai books)
+```
+actionChartController.drop('all')
+actionChartController.pick('backpack')
+actionChartController.pick('sword')
+actionChartController.pick('bow')
+actionChartController.increaseMoney(15)
+actionChartController.pick('meal')
+actionChartController.pick('meal')
+actionChartController.pick('rope')
+actionChartController.pick('comb')
+actionChartController.pick('brasskey')
+actionChartController.pick('whip')
+actionChartController.pick('hourglass')
+actionChartController.pick('sommerswerd')
+actionChartController.pick('quiver')
+actionChartController.increaseArrows(5)
+actionChartController.pick('shield')
+actionChartController.pick('map')
+actionChartController.pick('helmet')
+actionChartController.pick('chainmail')
+actionChartController.pick('leatherwaistcoat')
+actionChartController.pick('daggerofvashna')
+```
+
+* Test book images:
+```
+state.sectionStates.getSectionState().addObjectToSection('axe')
+state.sectionStates.getSectionState().addObjectToSection('dagger')
+state.sectionStates.getSectionState().addObjectToSection('sword')
+state.sectionStates.getSectionState().addObjectToSection('spear')
+state.sectionStates.getSectionState().addObjectToSection('mace')
+state.sectionStates.getSectionState().addObjectToSection('shortsword')
+state.sectionStates.getSectionState().addObjectToSection('quarterstaff')
+state.sectionStates.getSectionState().addObjectToSection('warhammer')
+state.sectionStates.getSectionState().addObjectToSection('broadsword')
+state.sectionStates.getSectionState().addObjectToSection('bow')
+state.sectionStates.getSectionState().addObjectToSection('quiver')
+state.sectionStates.getSectionState().addObjectToSection('rope')
+state.sectionStates.getSectionState().addObjectToSection('largerope')
+state.sectionStates.getSectionState().addObjectToSection('taunorwater')
+state.sectionStates.getSectionState().addObjectToSection('meal')
+state.sectionStates.getSectionState().addObjectToSection('arrow')
+```

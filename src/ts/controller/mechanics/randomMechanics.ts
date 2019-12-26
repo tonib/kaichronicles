@@ -63,7 +63,12 @@ const randomMechanics = {
     },
 
     getRandomTableRefByRule: function(rule : any) {
-        return randomMechanics.getRandomTableRefByIndex( parseInt($(rule).attr('index')) );
+        // Not really clear for me: parseInt(undefined) => Nan. It works, because (parseInt(undefined) ? true : false) === false, but, brfff...
+        //return randomMechanics.getRandomTableRefByIndex( parseInt($(rule).attr('index')) );
+        let indexValue = $(rule).attr('index');
+        if(!indexValue)
+            indexValue = '0';
+        return randomMechanics.getRandomTableRefByIndex( parseInt(indexValue) );
     },
 
     /**
