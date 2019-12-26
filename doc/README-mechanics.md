@@ -102,6 +102,23 @@ These are the codes for each Magnakai discipline, used by the mechanics, as they
 * **Nexus**: nexus
 * **Divination**: dvnation
 
+## Codes for Grand Master disciplines
+
+These are the codes for each Grand Master discipline, used by the mechanics, as they appear on the XMLs:
+
+* **Grand Weaponmastery**: wpnmstry
+* **Animal Mastery**: anmlmstr
+* **Deliverance (Advanced Curing)**: deliver
+* **Assimilance (Advanced Invisibility)**: assimila
+* **Grand Huntmastery**: hntmstry
+* **Grand Pathsmanship**: pthmnshp
+* **Kai-surge**: kaisurge
+* **Kai-screen**: kaiscrn
+* **Grand Nexus**: nexus
+* **Telegnosis (Advanced Divination)**: gnosis
+* **Magi-magic**: magi
+* **Kai-alchemy**: alchemy
+
 ## Rules description
 Description of the rules usage:
 

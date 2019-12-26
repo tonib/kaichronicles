@@ -55,7 +55,7 @@
             <object objectId="rope" />
             <object objectId="laumspurpotion4" />
             <object objectId="spear" />
-            <object objectId="quarterstaff" />
+            <object objectId="dagger" />
 
             <chooseEquipment 
                 en-text="Click on the Random Table link to get money before continuing" 

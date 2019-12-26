@@ -1,11 +1,9 @@
 * https://github.com/tonib/kaichronicles/commit/77f6a57aefb41f847fd34e5caa3efef1d82b9369
-    - datadownload did not download spanish data
     - Check "eludeEnemyEP" seems OK, check it in book 13
     - Re-Check all Kai Surge stuff (I cannot play book 13 now)
         * combatMechanics.ts: check "// TODO: What is this for ???" comments
     - Recheck all this commit when book 13 is playable
     - restore20EPUsed should be set to false when you start a new book
-    - Spanish translation. "Esto es una aplicación para jugar a los librojuegos de Lobo Solitario, del 1 al 12." should say 13
 
 * https://github.com/tonib/kaichronicles/commit/f31306ad54317ad7809bc69a864ae1fa13ea2b57
     
@@ -16,3 +14,22 @@
     - Check Android app (promises changes)
 
 * https://github.com/tonib/kaichronicles/commit/c43942a7b8e0ccc29751243818b9cbbefb4e5bbd
+
+* https://github.com/tonib/kaichronicles/commit/6a8fced2fa52641e06ddaac1010811d6c0895945
+
+* https://github.com/tonib/kaichronicles/commit/3db83f64a160c37e7d34ee53542ca093692c7fc8
+    - Hide "Lore-circles" text from Action Chart ???
+    - Translate Action Chart button "Deliverance: +20 EP..."
+    - "equipmnt" section: /* TODO Drop special items */
+    - Spanish, section "gamerulz": Starting from book 13, zero value is allowed for player statistics
+    - Backpack items max. count is now 10
+    - Check disciplines descriptions in Action Chart. Add disciplines images ???
+
+* Book 13 tests:
+    - Up to sect1
+
+* Spanish books erratas:
+    - Book 13, sect equipmnt: "tu nueva Carta de Acciónde Gran Maestro" should be "tu nueva Carta de Acción de Gran Maestro" (space)
+    - Book 13, sect1: 
+        * '" Me gustaría poder"' should be "Me gustaría poder" (space)
+        * 'en tu misión.”dice Rimoah' should be 'en tu misión,” dice Rimoah' (comma, and space)

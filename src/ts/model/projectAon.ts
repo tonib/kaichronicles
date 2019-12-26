@@ -245,6 +245,9 @@ const projectAon = {
             title_en: 'The Plague Lords of Ruel',
             code_en: '13tplor',
 
+            title_es: 'Los Señores de la Plaga de Ruel',
+            code_es: '13lsdlpdr',
+
             illustrators: [ 'williams' ],
 
             biographies: [ 'jdbiolw' , 'bwbiolw' ],
