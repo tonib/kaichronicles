@@ -27,6 +27,8 @@
 
 * https://github.com/tonib/kaichronicles/commit/92026b396efe8661d356de79c897107af7f6dc70
 
+* https://github.com/tonib/kaichronicles/commit/eed867198d60c99b54c3640976762125e8ee91e7
+
 * Book 13 tests:
     - Up to sect1
 

@@ -226,7 +226,7 @@ class ActionChart {
 
                 if( !this.hasBackpack )
                     throw translations.text( 'backpackLost' );
-                if( ( this.getNBackpackItems(false) + o.itemCount ) > (state.book.isGrandMasterBook() ? 10 : 8) )
+                if( ( this.getNBackpackItems(false) + o.itemCount ) > ActionChart.getMaxBackpackItems() )
                     throw translations.text( 'msgNoMoreBackpackItems' );
                 if( o.id == 'meal')
                     // Special case
@@ -289,7 +289,7 @@ class ActionChart {
             if( !this.hasBackpack )
                 throw translations.text( 'backpackLost' );
 
-            var maxToPick = 8 - this.getNBackpackItems();
+            var maxToPick = ActionChart.getMaxBackpackItems() - this.getNBackpackItems();
             if( maxToPick < 0 )
                 count = 0;
             else if( count > maxToPick )
@@ -893,6 +893,13 @@ class ActionChart {
      */
     public reset20EPRestoreUsed() {
         this.restore20EPUsed  = false;
+    }
+
+    /**
+     * Return the maximum number of backpack items in the current book
+     */
+    private static getMaxBackpackItems() : number {
+        return state.book.isGrandMasterBook() ? 10 : 8;
     }
 }
 
