@@ -129,7 +129,12 @@ class SectionState {
      * @return The count of objects on this section
      */
     public getCntSectionObjects(type : string) : number {
-        return this.getSectionObjects(type).length;
+        let count = 0;
+        const items = this.getSectionObjects(type);
+        for(let i = 0; i < items.length; i++) {
+            count += items[i].itemCount ? items[i].itemCount : 1;
+        }
+        return count;
     }
 
     /**
