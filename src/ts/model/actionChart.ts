@@ -226,7 +226,7 @@ class ActionChart {
 
                 if( !this.hasBackpack )
                     throw translations.text( 'backpackLost' );
-                if( ( this.getNBackpackItems(false) + o.itemCount ) > 8 )
+                if( ( this.getNBackpackItems(false) + o.itemCount ) > (state.book.isGrandMasterBook() ? 10 : 8) )
                     throw translations.text( 'msgNoMoreBackpackItems' );
                 if( o.id == 'meal')
                     // Special case
