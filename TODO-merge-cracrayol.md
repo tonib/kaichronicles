@@ -22,12 +22,14 @@
     - Translate Action Chart button "Deliverance: +20 EP..."
     - "equipmnt" section: /* TODO Drop special items */
     - Spanish, section "gamerulz": Starting from book 13, zero value is allowed for player statistics
-    - Backpack items max. count is now 10
     - Check disciplines descriptions in Action Chart. Add disciplines images ???
 
 * https://github.com/tonib/kaichronicles/commit/92026b396efe8661d356de79c897107af7f6dc70
 
 * https://github.com/tonib/kaichronicles/commit/eed867198d60c99b54c3640976762125e8ee91e7
+
+* https://github.com/tonib/kaichronicles/commit/c527e2e63ae80c6a5e60ef66cde29f3825ee2725
+    - Change reverted (commented). It will break things
 
 * Book 13 tests:
     - Up to sect1

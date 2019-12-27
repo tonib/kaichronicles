@@ -129,12 +129,15 @@ class SectionState {
      * @return The count of objects on this section
      */
     public getCntSectionObjects(type : string) : number {
-        let count = 0;
+        return this.getSectionObjects(type).length;
+
+        // Code from cracrayol fork (reverted, it will break things, https://github.com/tonib/kaichronicles/commit/c527e2e63ae80c6a5e60ef66cde29f3825ee2725)
+        /*let count = 0;
         const items = this.getSectionObjects(type);
         for(let i = 0; i < items.length; i++) {
             count += items[i].itemCount ? items[i].itemCount : 1;
         }
-        return count;
+        return count;*/
     }
 
     /**
