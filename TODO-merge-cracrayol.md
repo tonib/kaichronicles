@@ -1,6 +1,6 @@
 * https://github.com/tonib/kaichronicles/commit/77f6a57aefb41f847fd34e5caa3efef1d82b9369
     - Check "eludeEnemyEP" seems OK, check it in book 13
-    - Re-Check all Kai Surge stuff (I cannot play book 13 now)
+    - Re-Check all Kai Surge stuff
         * combatMechanics.ts: check "// TODO: What is this for ???" comments
     - Recheck all this commit when book 13 is playable
     - restore20EPUsed should be set to false when you start a new book
@@ -31,6 +31,11 @@
 * https://github.com/tonib/kaichronicles/commit/c527e2e63ae80c6a5e60ef66cde29f3825ee2725
     - Change reverted (commented). It will break things
 
+* https://github.com/tonib/kaichronicles/commit/178ede7fd36f709134b596d983dea7160ea2fcb4
+
+* https://github.com/tonib/kaichronicles/commit/b66fb49cdf956f497a8b35b233fffcc9b6fd4465
+    - Re-Check all Kai Surge stuff
+    
 * Book 13 tests:
     - Up to sect1
 
