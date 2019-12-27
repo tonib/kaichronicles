@@ -25,6 +25,8 @@
     - Backpack items max. count is now 10
     - Check disciplines descriptions in Action Chart. Add disciplines images ???
 
+* https://github.com/tonib/kaichronicles/commit/92026b396efe8661d356de79c897107af7f6dc70
+
 * Book 13 tests:
     - Up to sect1
 

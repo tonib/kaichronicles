@@ -1397,14 +1397,23 @@
 
         <section id="sect270">
             <message id="msg-drop-object" 
-                en-text="Drop two object before continuing" 
-                es-text="Deja dos objetos antes de continuar" 
+                en-text="Drop two Backpack Items" 
+                es-text="Deja dos Objetos de Mochila"
+            />
+            <message id="msg-drop-others" 
+                en-text="Drop a Weapon and a Special Item, if you have"
+                es-text="Deja un Arma y un Objeto Especial, si los tienes"
             />
             <choiceState section="all" set="disabled" />
             <onInventoryEvent>
+                <message id="msg-drop-others" op="hide" />
                 <test expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] == 0 || [BACKPACK-ITEMS-CNT-ON-SECTION] >= 2">
                     <message id="msg-drop-object" op="hide" />
                     <choiceState section="all" set="enabled" />
+                    <test expression="([BACKPACK-ITEMS-CNT-ON-ACTIONCHART] + [BACKPACK-ITEMS-CNT-ON-SECTION]) == 0" >
+                        <!-- Player has no backpack items. TODO: Unsupported -->
+                        <message id="msg-drop-others" op="show" />
+                    </test>
                 </test>
                 <test not="true" expression="[BACKPACK-ITEMS-CNT-ON-ACTIONCHART] == 0 || [BACKPACK-ITEMS-CNT-ON-SECTION] >= 2">
                     <message id="msg-drop-object" op="show" />
