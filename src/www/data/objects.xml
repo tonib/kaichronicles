@@ -1586,7 +1586,7 @@
             <name lang="es">Mapa de Tharro</name>
         </object>
 
-        <object id="larnumaliqueur" itemCount="0.5">
+        <object id="larnumaliqueur" usageCount="2">
             <name lang="en">Larnuma Liqueur</name>
             <description lang="en">
                 Restores 3 ENDURANCE points per dose
@@ -1627,7 +1627,7 @@
             <name lang="es">Ajorca</name>
         </object>
 
-        <object id="vialbluepills2" itemCount="0.5">
+        <object id="vialbluepills2" usageCount="2">
             <name lang="en">Vial of Blue Pills</name>
             <description lang="en">
                 They enable the human body to extract oxygen from water by absorbing it through the skin.
@@ -1763,7 +1763,7 @@
             <name lang="es">Caracola</name>
         </object>
 
-        <object id="silverflask" itemCount="0.5">
+        <object id="silverflask" usageCount="2">
             <name lang="en">Silver Flask</name>
             <description lang="en">
                 The wine has been charmed with a potent magical spell, imbuing it with special healing properties.
@@ -1835,6 +1835,42 @@
 
         <object id="blackberriesjar">
             <name lang="en">Jar of Black Berries</name>
+        </object>
+
+        <object id="laumspurjar" usageCount="5">
+            <name lang="en">Jar of Laumspur</name>
+            <description lang="en">Restores 4 ENDURANCE points when swallowed after combat.</description>
+            <usage class="endurance" increment="4" />
+        </object>
+
+        <object id="aletherjar" usageCount="4">
+            <name lang="en">Jar of Alether</name>
+            <description lang="en">Increases COMBAT SKILL by 2 points for duration of one fight only.</description>
+            <usage class="combatSkill" increment="2" />
+        </object>
+
+        <object id="gallowbrushjar" usageCount="2">
+            <name lang="en">Jar of Gallowbrush</name>
+            <description lang="en">Induces 10 hours’ sleep and loss of 2 ENDURANCE points per dose.</description>
+            <usage class="endurance" increment="-2" />
+        </object>
+
+        <object id="sabitojar" usageCount="2">
+            <name lang="en">Jar of Sabito</name>
+            <description lang="en">Enables user to breathe underwater.</description>
+            <usage class="endurance" increment="-2" />
+        </object>
+
+        <object id="laumwortjar" usageCount="3">
+            <name lang="en">Jar of Laumwort</name>
+            <description lang="en">Restores 2 ENDURANCE points if swallowed before or after combat.</description>
+            <usage class="endurance" increment="+2" />
+        </object>
+
+        <object id="oedejar" usageCount="1">
+            <name lang="en">Jar of Oede</name>
+            <description lang="en">Very rare and valuable. Many healing properties. Cures serious diseases. Restores 10 ENDURANCE points if swallowed before or after combat.</description>
+            <usage class="endurance" increment="+10" />
         </object>
 
         <!-- OTHERS -->

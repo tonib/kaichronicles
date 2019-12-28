@@ -229,6 +229,8 @@ const actionChartController = {
         // Drop the object, and do not keep it on the section
         if( dropObject )
             actionChartController.drop(objectId, false);
+        else        
+            actionChartView.updateObjectsLists();
 
         // Fire mechanics rules
         mechanicsEngine.fireObjectUsed( objectId );

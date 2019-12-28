@@ -1341,9 +1341,7 @@
         </section>
         
         <section id="sect228">
-            <!-- TODO: This is semi-supported. Bot objects should occupy a single slot on the action chart -->
-            <object objectId="larnumaliqueur" index="0" />
-            <object objectId="larnumaliqueur" index="1" />
+            <object objectId="larnumaliqueur" />
         </section>
 
         <section id="sect230">

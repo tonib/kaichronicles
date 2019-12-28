@@ -1449,8 +1449,7 @@
 
         <section id="sect261">
             <endurance count="+4" />
-            <object objectId="silverflask" useOnSection="true" index="0" />
-            <object objectId="silverflask" useOnSection="true" index="1" />
+            <object objectId="silverflask" useOnSection="true" />
         </section>
 
         <section id="sect264">

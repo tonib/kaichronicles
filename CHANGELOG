@@ -88,4 +88,4 @@
 
 1.12
  - Fixed Quivers with no arrows available on section should not show "(0 arrows)". Show "(0 arrows)" only on Action chart. Same to sell quiver object (see book 8, sect168)
- 
+ - Objects on the Action Chart can have a available uses count (used in book 8, 9 11). 

@@ -85,10 +85,6 @@ TODO
 - Action chart buttons don't work on iPad Safari
 - Dialogs with text input: Allow to confirm with the screen keyboard ("go" button)
 - Remove the "Alert" text from the message dialog (same for confirms)
-- Objects on the Action Chart should have a "available uses count". 
-  * See "larnumaliqueur" object, book 8, sect228; 
-  * See "vialbluepills2" object
-  * See "silverflask" object, book 11, sect261
 - Google Play will require API 26 on november 2018 (upgrade Cordova version?)
 - Allow to change the font size / family
   * See http://www.lalit.org/lab/javascript-css-font-detect/

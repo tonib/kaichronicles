@@ -61,6 +61,11 @@ class Item {
      */
     public itemCount : number;
 
+    /** 
+     * Number of allowed usage of the item
+     */
+    public usageCount : number;
+
     /** The translated object description */
     public description : string;
 
@@ -129,7 +134,11 @@ class Item {
 
         /** Number of items the object it occupies on the backpack */
         const txtItemCount : string = $o.attr('itemCount');
-        this.itemCount = txtItemCount ? parseFloat( txtItemCount ) : 1;
+        this.itemCount = txtItemCount ? parseInt( txtItemCount ) : 1;
+
+        /** Number of usage of the object */
+        const txtUsageCount : string = $o.attr('usageCount');
+        this.usageCount = txtUsageCount ? parseInt( txtUsageCount ) : 1;
 
         /** The translated object description */
         this.description = $o.find('description[lang=' + book.language + ']').text();
