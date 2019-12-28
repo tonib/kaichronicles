@@ -1873,6 +1873,10 @@
             <usage class="endurance" increment="+10" />
         </object>
 
+        <object id="copperbowl">
+            <name lang="en">Copper Bowl</name>
+        </object>
+
         <!-- OTHERS -->
 
         <!-- This not really an object, but needed for mechanics -->

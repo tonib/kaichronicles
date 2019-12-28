@@ -45,6 +45,10 @@
 
 * https://github.com/tonib/kaichronicles/commit/4ff3ec7b4d13e57fd97212f84d64de37b0b99a2a
     
+* https://github.com/tonib/kaichronicles/commit/2c735813f81289a264a9311f90be76ebfb1a67ea
+
+* https://github.com/tonib/kaichronicles/commit/d89bbb8b0d8fbb53ae07f4344216369f3129d5ed
+
 * Book 13 tests:
     - Up to sect1
     - Remove showCount property from mechanics-13+
