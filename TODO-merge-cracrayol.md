@@ -36,8 +36,18 @@
 * https://github.com/tonib/kaichronicles/commit/b66fb49cdf956f497a8b35b233fffcc9b6fd4465
     - Re-Check all Kai Surge stuff
     
+* https://github.com/tonib/kaichronicles/commit/5e9d84bc5f9ad18052e9b8d3b23b23d262ea697e
+    - TODO (mine): If an object has no spanish translation, show the english name
+    - Restore persisted state of usages in ActionChart
+    - Keep compatibility with old objects with no usages count
+
+* https://github.com/tonib/kaichronicles/commit/38d0d6700c6297ae411f764b91e693e1497f93bd
+
+* https://github.com/tonib/kaichronicles/commit/4ff3ec7b4d13e57fd97212f84d64de37b0b99a2a
+    
 * Book 13 tests:
     - Up to sect1
+    - Remove showCount property from mechanics-13+
 
 * Spanish books erratas:
     - Book 13, sect equipmnt: "tu nueva Carta de Acciónde Gran Maestro" should be "tu nueva Carta de Acción de Gran Maestro" (space)

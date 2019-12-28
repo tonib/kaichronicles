@@ -61,6 +61,7 @@ class Translations {
         'noWeapon' : 'Sin arma',
         'weaponskill' : 'Dominio Manejo Armas',
         'weaponmastery' : 'Maestría Manejo Armas',
+        'grdweaponmastery' : 'Gran Maestría en el Manejo de Armas',
         'mindblast' : 'Ataque Psíquico',
         'psisurge' : 'Acometida Psíquica',
         'countAsObjects'  : '(Cuenta como {0} objetos)',
