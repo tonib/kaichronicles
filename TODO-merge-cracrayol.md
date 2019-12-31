@@ -49,6 +49,12 @@
 
 * https://github.com/tonib/kaichronicles/commit/d89bbb8b0d8fbb53ae07f4344216369f3129d5ed
 
+* https://github.com/tonib/kaichronicles/commit/1900c726f5c8e65bbfbda97b4d2c9d12985b36d4
+
+* https://github.com/tonib/kaichronicles/commit/45eb52b827f6d0b3038091de9ee97eb847b8037b
+    - Update README: npm install will require npm version >= 5.0 to use package-lock.json
+    - Typescript compilation: Changed es5 to es3
+    
 * Book 13 tests:
     - Up to sect1
     - Remove showCount property from mechanics-13+
