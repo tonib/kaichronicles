@@ -3,7 +3,6 @@
     - Re-Check all Kai Surge stuff
         * combatMechanics.ts: check "// TODO: What is this for ???" comments
     - Recheck all this commit when book 13 is playable
-    - restore20EPUsed should be set to false when you start a new book
 
 * https://github.com/tonib/kaichronicles/commit/f31306ad54317ad7809bc69a864ae1fa13ea2b57
     
@@ -73,7 +72,11 @@
 * Book 13 tests:
     - Up to sect1
     - Remove showCount property from mechanics-13+
-    - "Game rules section": There is a link to the "Readers’ Handbook" ("&link.rh;") that could be rendered (Read this!)
+    - "Game rules section": There is a link to the "Readers’ Handbook": Read this!
+    - Big TODO: Added "dropDisciplines" to "tssf" section. Needed because you don't carry previous Magnakai displiclines.
+      But you should keep your "Lore circles" and other bonuses... So, we should keep a track of old previous book series
+      disciplines.... Or, assume that if you have moved to a new serie from a previous one, you have all the old serie 
+      disciplines
 
 * Book 14+:
     - Add rule "restoreDeliveranceUse" on each book "tssf" section
