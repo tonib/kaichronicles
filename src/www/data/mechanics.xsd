@@ -81,6 +81,9 @@
     <!-- "setSkills" rule -->
     <xs:complexType name="setSkills" />
 
+    <!-- "restoreDeliveranceUse" rule -->
+    <xs:complexType name="restoreDeliveranceUse" />
+
     <!-- "setDisciplines" rule -->
     <xs:complexType name="setDisciplines" />
     
@@ -420,6 +423,7 @@
     <xs:group name="any_rule">
         <xs:choice>
             <xs:element name="setSkills" type="setSkills" />
+            <xs:element name="restoreDeliveranceUse" type="restoreDeliveranceUse" />
             <xs:element name="setDisciplines" type="setDisciplines" />
             <xs:element name="pick" type="pick" />
             <xs:element name="randomTable" type="randomTable" />

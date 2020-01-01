@@ -137,6 +137,9 @@ picked. This is for "Equipment" sections, where meals and fireseeds are grouped.
 ### setSkills
 Game setup: The player selects the initial Endurance and Combat Skill
 
+### restoreDeliveranceUse (execute once only)
+Magnakai and later: Action Chart button to restore +X EP after Y days will available again
+
 ### setDisciplines
 Game setup: The player selects the Kai disciplines
 

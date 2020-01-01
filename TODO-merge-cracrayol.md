@@ -66,10 +66,17 @@
 
 * REMOVE src/ts/test-tslist.ts (TSLint tests)
 
+* Book 12 (Spanish):
+    sect350: This book is different from previous. You have to click on a footer note link to continue to the next book...
+    Ugly. Add a message rule to help?
+
 * Book 13 tests:
     - Up to sect1
     - Remove showCount property from mechanics-13+
     - "Game rules section": There is a link to the "Readers’ Handbook" ("&link.rh;") that could be rendered (Read this!)
+
+* Book 14+:
+    - Add rule "restoreDeliveranceUse" on each book "tssf" section
 
 * Spanish books erratas:
     - Book 13, sect equipmnt: "tu nueva Carta de Acciónde Gran Maestro" should be "tu nueva Carta de Acción de Gran Maestro" (space)
