@@ -121,6 +121,9 @@ class Book {
         xmlText = xmlText.replaceAll('&inclusion.action.chart.magnakai;', '');
         xmlText = xmlText.replaceAll('&inclusion.brian.williams.bio.lw;', '');
         
+        // Link to readers handbook (Book 13)
+        xmlText = xmlText.replaceAll('&link.rh;', 'https://www.projectaon.org/en/ReadersHandbook/Home');
+
         /*xmlText = xmlText.replaceAll('&link.project.website;', '')    
         xmlText = xmlText.replaceAll('&link.staff.contact;', '')
         xmlText = xmlText.replaceAll('&link.01hdlo;', '');*/

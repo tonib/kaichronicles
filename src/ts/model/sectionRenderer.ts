@@ -299,6 +299,12 @@ class SectionRenderer {
             return this.renderNodeChildren( $a , level );
         }
 
+        // Check external links (See book 13 > gamerulz)
+        const href = $a.attr('href');
+        if (href) {
+            return '<a href="' + href + '" target="_blank">' + this.renderNodeChildren( $a , level ) + "</a>";
+        }
+
         var open = '', close="</a>";
         var idRef = $a.attr('idref');
         if( !idRef )
