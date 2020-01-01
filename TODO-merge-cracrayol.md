@@ -18,10 +18,9 @@
 * https://github.com/tonib/kaichronicles/commit/6a8fced2fa52641e06ddaac1010811d6c0895945
 
 * https://github.com/tonib/kaichronicles/commit/3db83f64a160c37e7d34ee53542ca093692c7fc8
-    - Hide "Lore-circles" text from Action Chart ???
+    - Hide "Lore-circles" text from Action Chart ??? NO, SHOW THEM
     - Translate Action Chart button "Deliverance: +20 EP..."
     - "equipmnt" section: /* TODO Drop special items */
-    - Spanish, section "gamerulz": Starting from book 13, zero value is allowed for player statistics
     - Check disciplines descriptions in Action Chart. Add disciplines images ???
 
 * https://github.com/tonib/kaichronicles/commit/92026b396efe8661d356de79c897107af7f6dc70
@@ -71,6 +70,7 @@
 * Book 13 tests:
     - Up to sect1
     - Remove showCount property from mechanics-13+
+    - "Game rules section": There is a link to the "Readers’ Handbook" ("&link.rh;") that could be rendered (Read this!)
 
 * Spanish books erratas:
     - Book 13, sect equipmnt: "tu nueva Carta de Acciónde Gran Maestro" should be "tu nueva Carta de Acción de Gran Maestro" (space)

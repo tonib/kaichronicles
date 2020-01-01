@@ -24,8 +24,9 @@ class SkillsSetup {
         // Disable next link
         gameView.enableNextLink(false);
 
-        // Book language inconsistencies: Spanish books say "ignore zero", english does not
-        var ignoreZero = ( state.book.language == 'es' );
+        // Book language inconsistencies: Spanish books say "ignore zero", english does not. 
+        // Starting from book 13 (Grand Master), Spanish books allow zero:
+        const ignoreZero = ( state.book.language == 'es' && state.book.bookNumber < 13 );
 
         // Combat skill
         if( state.actionChart.combatSkill !== 0 )
