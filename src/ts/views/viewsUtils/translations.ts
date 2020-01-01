@@ -78,7 +78,8 @@ class Translations {
             'llevar es de 12. Podrás dejar el resto en un lugar seguro del monasterio del Kai, o dejarlo aquí. ' +
             'Si se deja aquí, el objeto se perderá. Por favor, deja los Objetos Especiales antes de continuar.',
         'noQuiversEnough' : 'No tienes suficientes Carcajes (sólo 6 Flechas por Carcaj)',
-        'restore20EP': 'Medicina: +20 R (sólo si R 6 o menos, cada 100 días)',
+        'restore20EPMagnakaiButton': 'Medicina: +20 R (sólo si R 6 o menos, cada 100 días)',
+        "restore20EPGrdMasterButton": "Sanación: +20 R (sólo si R 8 o menos, cada 20 días)",
         'confirm20EP': 'Esta habilidad solo puede ser usada una vez cada 100 días. ¿Continuamos?',
         'confirm20EPGrdMaster': 'Esta habilidad solo puede ser usada una vez cada 20 días. ¿Continuamos?',
         'more' : 'Más',
