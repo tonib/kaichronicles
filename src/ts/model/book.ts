@@ -323,9 +323,13 @@ class Book {
                 var disciplineId = $node.attr('id');
 
                 let description : string; 
-                if( disciplineId == 'psisurge' || disciplineId == 'kaisurge')
-                    // Special case, with useful info on second paragraph
+                if( disciplineId == 'psisurge')
+                    // Magnakai: Special case, with useful info on second paragraph. Exclude last paragraph
                     description = $node.find('p:not(:last)').text();
+                else if (disciplineId == 'kaisurge') {
+                    // Grand Master: Other special case (different). Include both (all) paragraphs
+                    description = $node.find('p').text();
+                }
                 else
                     description = $node.find('p').first().text();
 

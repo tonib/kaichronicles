@@ -19,7 +19,6 @@
 
 * https://github.com/tonib/kaichronicles/commit/3db83f64a160c37e7d34ee53542ca093692c7fc8
     - Hide "Lore-circles" text from Action Chart ??? NO, SHOW THEM
-    - Translate Action Chart button "Deliverance: +20 EP..."
     - "equipmnt" section: /* TODO Drop special items */
     - Check disciplines descriptions in Action Chart. Add disciplines images ???
 
