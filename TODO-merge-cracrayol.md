@@ -55,6 +55,15 @@
     - Update README: npm install will require npm version >= 5.0 to use package-lock.json
     - Typescript compilation: Changed es5 to es3
     
+* https://github.com/tonib/kaichronicles/commit/a7f98eb2832e4db499b169991eeb76a3004e3df1
+
+* https://github.com/tonib/kaichronicles/commit/4d15ca61dd6c4a07b4e8708c1ff0abc7651346bd
+
+* https://github.com/tonib/kaichronicles/commit/4b05bff00065aa5c3b75486915803bd4ba1e056b
+    - Missed some change for src/www/js/ts-generated -> src/www/js (added in later commits)
+
+* REMOVE src/ts/test-tslist.ts (TSLint tests)
+
 * Book 13 tests:
     - Up to sect1
     - Remove showCount property from mechanics-13+

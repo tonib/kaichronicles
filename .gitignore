@@ -3,7 +3,7 @@ src/www/data/projectAon
 src/patches/projectAonPatches
 
 # Typescript generated code
-src/www/js/ts-generated
+src/www/js
 
 # Cordova stuff
 src/platforms
