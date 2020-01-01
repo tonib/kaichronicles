@@ -12,11 +12,11 @@
         "@types/cordova": "0.0.34",
         "@types/jquery": "^2.0.54",
         "@types/toastr": "^2.1.37",
-        "fs-extra": "8.1.0",
         "tslint": "^5.20.0",
         "klaw-sync": "6.0.0",
+        "fs-extra": "8.1.0",
         "preprocess": "3.1.0",
-        "typescript": "2.6.2",
+        "typescript": "^3.7.2",
         "uglify-js": "3.6.2"
     },
     "scripts": {
