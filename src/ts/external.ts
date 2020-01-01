@@ -13,8 +13,10 @@ interface JQuery {
     initializeValue(): void;
 }
 
-declare var cordovaApp:any;
-declare var routing:any;
+interface Navigator {
+    connection: any;
+    app: any;
+}
 
 // index.html:
 declare const ENVIRONMENT : string;
@@ -35,6 +37,7 @@ declare var ga;
 declare function validateXML(parms : any) : string;
 
 // Cordova
+declare const Connection: any;
 declare const LocalFileSystem;
 declare const FileTransfer;
 
@@ -62,8 +65,10 @@ interface String {
     endsWith(suffix : string);
     isValidFileName() : boolean;
     startsWith( text : string ) : boolean;
+    escapeRegExp() : string;
+    unescapeHtml() : string;
+    getUrlParameter(sParam: string) : string;
 }
-declare function ajaxErrorMsg(context : any, jqXHR : any, textStatus : string, errorThrown : string);
 
 // Mixed:
 interface Window { 
