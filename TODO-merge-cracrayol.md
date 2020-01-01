@@ -60,7 +60,11 @@
 * https://github.com/tonib/kaichronicles/commit/4d15ca61dd6c4a07b4e8708c1ff0abc7651346bd
 
 * https://github.com/tonib/kaichronicles/commit/4b05bff00065aa5c3b75486915803bd4ba1e056b
-    - Missed some change for src/www/js/ts-generated -> src/www/js (added in later commits)
+    - Missed some changes for src/www/js/ts-generated -> src/www/js (added in later commits)
+
+* https://github.com/tonib/kaichronicles/commit/e0f38a73a81b847d7762937bf423f7e74dbbdd14
+
+
 
 * REMOVE src/ts/test-tslist.ts (TSLint tests)
 
