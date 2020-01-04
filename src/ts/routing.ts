@@ -16,42 +16,43 @@ const routing = {
      * @param {object} parameters Hash with parameters for the route. It can be null
      * @returns True if the redirection can be done. False otherwise
      */
-    redirect: function(route, parameters: Object = null) {
+    redirect(route, parameters: object = null) {
         try {
 
             // Remove hash
             route = routing.normalizeHash(route);
 
             // Add parameters
-            if( parameters ) {
-                var txtParms = routing.objectToUrlParms(parameters );
-                if( txtParms )
-                    route += '?' + txtParms;
+            if ( parameters ) {
+                const txtParms = routing.objectToUrlParms(parameters );
+                if ( txtParms ) {
+                    route += "?" + txtParms;
+                }
             }
 
             template.collapseMenu();
-            
+
             // This will fire the onHashChange callback:
             location.hash = route;
 
-        }
-        catch(e) {
-            console.log(e);
+        } catch (e) {
+            // console.log(e);
             return false;
         }
 
     },
 
     /** Setup the routing events and redirect to the initial action */
-    setup: function() {
+    setup() {
 
         // Hash change events
-        $(window).on('hashchange', routing.onHashChange );
+        $(window).on("hashchange", routing.onHashChange );
 
         // Call the initial controller
-        var initialHash = routing.normalizeHash(location.hash);
-        if( initialHash === '' )
-            initialHash = 'mainMenu';
+        let initialHash = routing.normalizeHash(location.hash);
+        if ( initialHash === "" ) {
+            initialHash = "mainMenu";
+        }
         routing.redirect(initialHash);
 
         // Force the initial load
@@ -61,39 +62,39 @@ const routing = {
     /**
      * Get the controller name from the current URL hash
      */
-    getControllerName: function() {
+    getControllerName() {
         try {
-            var route = routing.normalizeHash( location.hash );
-            var idxParms = route.indexOf('?');
-            if( idxParms >= 0 )
+            let route = routing.normalizeHash( location.hash );
+            const idxParms = route.indexOf("?");
+            if ( idxParms >= 0 ) {
                 route = route.substring( 0 , idxParms );
+            }
 
-            return route + 'Controller';
-        }
-        catch(e) {
-            console.log(e);
+            return route + "Controller";
+        } catch (e) {
+            // console.log(e);
             return null;
         }
     },
 
     /** Get the the controller object by its name */
-    getController: function(controllerName) {
+    getController(controllerName) {
         try {
-            if( !controllerName )
+            if ( !controllerName ) {
                 return null;
+            }
 
             /* jshint ignore:start */
             return eval( controllerName );
             /* jshint ignore:end */
-        }
-        catch(e) {
-            console.log(e);
+        } catch (e) {
+            // console.log(e);
             return null;
         }
     },
 
     /** Get the current controller object */
-    getCurrentController: function() {
+    getCurrentController() {
         return routing.getController( routing.getControllerName() );
     },
 
@@ -102,62 +103,67 @@ const routing = {
      * @param hash The hash to normalized
      * @returns The hash, without '#' and trimmed
      */
-    normalizeHash: function(hash) {
+    normalizeHash(hash) {
         hash = hash.trim();
-        if( hash.startsWith('#') )
+        if ( hash.startsWith("#") ) {
             hash = hash.substr(1);
+        }
         return hash;
     },
 
-    /** 
+    /**
      * Hash change event handler
      */
-    onHashChange: function() {
+    onHashChange() {
 
-        var controller;
+        let controller;
 
         // Notify the previous controler that we leave
         try {
-            if( routing.lastControllerName ) {
+            if ( routing.lastControllerName ) {
                 controller = routing.getController(routing.lastControllerName);
-                if( controller && controller.onLeave ) {
-                    //console.log('Leaving ' + routing.lastControllerName);
+                if ( controller && controller.onLeave ) {
+                    // console.log('Leaving ' + routing.lastControllerName);
                     controller.onLeave();
                 }
             }
-        }
-        catch(e) {
-            console.log(e);
+        } catch (e) {
+            // console.log(e);
+            throw new Error(e);
         }
 
         // Move to the new controller
         try {
             controller = routing.getCurrentController();
-            if( !controller )
-                console.log("Undefined controller: " + routing.getControllerName() );
-            else {
+            if ( !controller ) {
+                // console.log("Undefined controller: " + routing.getControllerName() );
+                throw new Error("Undefined controller: " + routing.getControllerName());
+            } else {
                 // Store the new hash
                 routing.lastControllerName = routing.getControllerName();
-                //console.log( routing.lastControllerName + '.index()' );
+                // console.log( routing.lastControllerName + '.index()' );
                 controller.index();
             }
-        }
-        catch(e) {
-            console.log(e);
+        } catch (e) {
+            // console.log(e);
+            throw new Error(e);
         }
     },
 
     /**
      * Convert an object to URL parameters
      * @param {object} o Object to convert
-     * @returns {string} URL equivalent params 
+     * @returns {string} URL equivalent params
      */
-    objectToUrlParms: function(o) {
-        var str = '';
-        for (var key in o) {
-            if (str !== '')
-                str += "&";
-            str += key + "=" + encodeURIComponent(o[key]);
+    objectToUrlParms(o) {
+        let str = "";
+        for (const key in o) {
+            if (o.hasOwnProperty(key)) {
+                if (str !== "") {
+                    str += "&";
+                }
+                str += key + "=" + encodeURIComponent(o[key]);
+            }
         }
         return str;
     },
@@ -167,44 +173,46 @@ const routing = {
      * @param {string} paramName The hash parameter name
      * @returns {string} The parameter value. null it was not defined
      */
-    getHashParameter: function(paramName) {
+    getHashParameter(paramName) {
 
-        var hash = routing.normalizeHash(location.hash);
-        var idx = hash.indexOf( '?' );
-        if( idx >= 0 )
+        let hash = routing.normalizeHash(location.hash);
+        const idx = hash.indexOf( "?" );
+        if ( idx >= 0 ) {
             hash = hash.substring( idx + 1 );
+        }
         return hash.getUrlParameter(paramName);
     },
 
     /**
      * Hardware back button pressed (Cordova app)
      */
-    onBackButton: function() {
+    onBackButton() {
 
         // Get the current controler
-        var controller = routing.getCurrentController();
-        if( !controller || !controller.getBackController ) {
+        const controller = routing.getCurrentController();
+        if ( !controller || !controller.getBackController ) {
             window.history.back();
             return;
         }
 
         // Get the back page for the current controller, and go there
-        var backController = controller.getBackController();
-        if( backController == 'exitApp' ) {
+        const backController = controller.getBackController();
+        if ( backController === "exitApp" ) {
             cordovaApp.closeApp();
             return;
         }
-        
-        if( backController == 'DONOTHING' )
+
+        if ( backController === "DONOTHING" ) {
             // ok:
             return;
+        }
 
-        if( !backController ){
+        if ( !backController ) {
             window.history.back();
             return;
         }
         routing.redirect( backController );
 
-    }
+    },
 
 };

@@ -19,13 +19,13 @@ interface Navigator {
 }
 
 // index.html:
-declare const ENVIRONMENT : string;
+declare const ENVIRONMENT: string;
 
 // toastr.js
-declare var toastr:Toastr;
+declare var toastr: Toastr;
 
 // FileSaver.js
-declare var saveAs:any;
+declare var saveAs: any;
 
 // node.js
 declare var exports;
@@ -34,7 +34,7 @@ declare var exports;
 declare var ga;
 
 // xmllint.js
-declare function validateXML(parms : any) : string;
+declare function validateXML(parms: any): string;
 
 // Cordova
 declare const Connection: any;
@@ -53,37 +53,37 @@ declare const CopyToDownload;
 // com.megster.cordova.FileChooser (Cordova plugin)
 declare const fileChooser;
 
-// commons.js: 
-interface Array<T> { 
-    removeValue( value : T ) : boolean;
-    contains( value : T ) : boolean;
-    clone() : Array<T>;
+// commons.js:
+interface Array<T> {
+    removeValue( value: T ): boolean;
+    contains( value: T ): boolean;
+    clone(): T[];
 }
 interface String {
-    replaceAll(find : string, replace : string) : string;
-    padLeft(padLength : number, padChar : string) : string;
-    endsWith(suffix : string);
-    isValidFileName() : boolean;
-    startsWith( text : string ) : boolean;
-    escapeRegExp() : string;
-    unescapeHtml() : string;
-    getUrlParameter(sParam: string) : string;
+    replaceAll(find: string, replace: string): string;
+    padLeft(padLength: number, padChar: string): string;
+    endsWith(suffix: string);
+    isValidFileName(): boolean;
+    startsWith( text: string ): boolean;
+    escapeRegExp(): string;
+    unescapeHtml(): string;
+    getUrlParameter(sParam: string): string;
 }
 
 // Mixed:
-interface Window { 
-    // commons.js: 
-    getUrlParameter( parmName : string ) : string 
+interface Window {
 
     // Cordova:
     requestFileSystem;
 
     // Cordova:
     resolveLocalFileSystemURI;
-   
+
     // cordova-plugin-document-contract (Cordova plugin)
-    plugins : {
+    plugins: {
         DocumentContract;
-    }
-    
+    };
+    // commons.js:
+    getUrlParameter( parmName: string ): string
+
 }
