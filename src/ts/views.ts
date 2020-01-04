@@ -17,7 +17,7 @@ let views = {
         // Production. Preload all views, for better UX:
         return $.ajax({
             dataType: "html",
-            url: "views.html",
+            url: "views.html"
         })
         .done( (data: string) => {
             // views.html contains a div for each view, the div id is the html file name
@@ -61,7 +61,7 @@ let views = {
 
         return $.ajax({
             dataType: "html",
-            url: "views/" + viewPath,
+            url: "views/" + viewPath
         })
         .done( (data) => {
             // Save view on cache:

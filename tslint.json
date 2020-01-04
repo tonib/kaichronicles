@@ -6,7 +6,11 @@
     "jsRules": {},
     "rules": {
         "max-line-length": false,
-        "interface-name": false
+        "interface-name": false,
+        "object-literal-sort-keys": false,
+        "member-ordering": false,
+        "no-console": false,
+        "trailing-comma": false
     },
     "rulesDirectory": []
 }

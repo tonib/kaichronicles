@@ -44,7 +44,7 @@ const state = {
      * Setup the default browser language
      */
     setupDefaultLanguage() {
-        // console.log("Current language: " + navigator.language);
+        console.log("Current language: " + navigator.language);
         if ( !navigator.language || navigator.language.length < 2 ) {
             return;
         }
@@ -65,7 +65,7 @@ const state = {
             }
         } catch (e) {
             state.color = "light";
-            // console.log(e);
+            console.log(e);
         }
     },
 
@@ -136,7 +136,7 @@ const state = {
             actionChart: state.actionChart,
             bookNumber: state.book ? state.book.bookNumber : 0,
             language: state.language,
-            sectionStates: state.sectionStates,
+            sectionStates: state.sectionStates
         };
     },
 
@@ -148,8 +148,8 @@ const state = {
             const json = JSON.stringify( state.getCurrentState() );
             localStorage.setItem( "state" , json );
         } catch (e) {
-            // console.log(e);
-            throw new Error(e);
+            console.log(e);
+            // throw new Error(e);
         }
     },
 
@@ -175,7 +175,7 @@ const state = {
             }
             state.restoreStateFromObject( stateKeys );
         } catch (e) {
-            // console.log(e);
+            console.log(e);
             state.setup(1, "en", false);
         }
     },

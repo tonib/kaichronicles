@@ -62,6 +62,10 @@
 * https://github.com/tonib/kaichronicles/commit/e0f38a73a81b847d7762937bf423f7e74dbbdd14
 
 
+* https://github.com/tonib/kaichronicles/commit/de660e6725339cd12cd8f4b7e2b23162a809581e
+    - Add info in README.md about use TSLint
+    - TODO (mine): Re-indent common.ts (4 spaces)
+    - Renomve jshint ignore comments (no longer used)
 
 * REMOVE src/ts/test-tslist.ts (TSLint tests)
 

@@ -36,7 +36,7 @@ const routing = {
             location.hash = route;
 
         } catch (e) {
-            // console.log(e);
+            console.log(e);
             return false;
         }
 
@@ -72,7 +72,7 @@ const routing = {
 
             return route + "Controller";
         } catch (e) {
-            // console.log(e);
+            console.log(e);
             return null;
         }
     },
@@ -88,7 +88,7 @@ const routing = {
             return eval( controllerName );
             /* jshint ignore:end */
         } catch (e) {
-            // console.log(e);
+            console.log(e);
             return null;
         }
     },
@@ -128,16 +128,16 @@ const routing = {
                 }
             }
         } catch (e) {
-            // console.log(e);
-            throw new Error(e);
+            console.log(e);
+            // throw new Error(e);
         }
 
         // Move to the new controller
         try {
             controller = routing.getCurrentController();
             if ( !controller ) {
-                // console.log("Undefined controller: " + routing.getControllerName() );
-                throw new Error("Undefined controller: " + routing.getControllerName());
+                console.log("Undefined controller: " + routing.getControllerName() );
+                // throw new Error("Undefined controller: " + routing.getControllerName());
             } else {
                 // Store the new hash
                 routing.lastControllerName = routing.getControllerName();
@@ -145,8 +145,8 @@ const routing = {
                 controller.index();
             }
         } catch (e) {
-            // console.log(e);
-            throw new Error(e);
+            console.log(e);
+            // throw new Error(e);
         }
     },
 
