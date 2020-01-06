@@ -25,13 +25,6 @@ let views = {
                 const viewName = $(div).attr("id");
                 views.viewCache[viewName] = div;
             });
-        })
-        .then(null, function( jqXHR, textStatus, errorThrown ) {
-            // TODO: "then"??? should not be this the "fail"???
-            // Format a error message as a reason
-            const msg = "Error loading views.html, error: " +
-                ajaxErrorMsg(this, jqXHR, textStatus, errorThrown);
-            return jQuery.Deferred().reject(msg);
         });
     },
 
