@@ -66,6 +66,13 @@
     - Add info in README.md about use TSLint
     - TODO (mine): Re-indent common.ts (4 spaces)
     - Renomve jshint ignore comments (no longer used)
+    - Restore commented throws in root files ????
+
+* https://github.com/tonib/kaichronicles/commit/dc8ff394b48e322ec58c0fd347738c4061c6a57b
+    - I needed sudo to install serve with -g
+
+* https://github.com/tonib/kaichronicles/commit/9f3fe419514c4b82952661f75e0c10c336a11684
+    - Reverted the final fail handler for game setup
 
 * REMOVE src/ts/test-tslist.ts (TSLint tests)
 
