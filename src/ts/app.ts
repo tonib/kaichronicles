@@ -54,13 +54,20 @@ const app = {
                     return jQuery.Deferred().reject(e).promise();
                 }
             })
-            .fail(function(jqXHR, textStatus, errorThrown) {
+            // This chain can fail for any reason, not just because it failed the views load
+            /*.fail(function(jqXHR, textStatus, errorThrown) {
                 let reason = "Error loading views.html, error: " +
                 ajaxErrorMsg(this, jqXHR, textStatus, errorThrown);
                 if ( !reason ) {
                     reason = "Unknown error";
                 }
                 template.setErrorMessage(reason);
+            });*/
+            .fail((reason) => {
+                if ( !reason ) {
+                  reason = "Unknown error";
+                }
+                template.setErrorMessage(reason.toString());
             });
     },
 };

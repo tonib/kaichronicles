@@ -121,7 +121,10 @@ class ObjectsTableItem {
         if ( this.objectInfo.id === Item.QUIVER && this.objectInfo.showCount) {
             // Be sure count is not null
             const count = ( this.objectInfo.count ? this.objectInfo.count : 0 );
-            name += " (" + count + " " + translations.text("arrows") + ")";
+            // In INVENTORY always show "0 arrows", but not in SELL or AVAILABLE (ugly)
+            if ( count > 0 || this.type === ObjectsTableType.INVENTORY ) {
+                name += " (" + count + " " + translations.text("arrows") + ")";
+            }
         }
 
         // Arrow amount
@@ -160,7 +163,7 @@ class ObjectsTableItem {
             // Add a link to view a larger version of the image / view object extra description
             name = '<a href="#" class="equipment-op" data-op="details" data-objectId="' +
             this.item.id + '">' + name + "</a>";
- }
+        }
 
         html += "<span><b>" + name + "</b></span>";
 

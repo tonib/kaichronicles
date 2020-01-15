@@ -1,3 +1,4 @@
+
 TODO
 ====
 
@@ -25,10 +26,20 @@ TODO
 
 - Bugs reported on Google Play:
   * Finally, finally there's a proper LW game book app. The only problem I've noticed is that it only gives Silver Bow's bonus in the sections of book 6 that specifically mention it, and not at all 'rolls' as it is supposed to.
+  * Quiero informar un error. Antes que nada gracias a ustedes descubri esta saga y si alguien no lo hizo todavía lean(jueguen)la YA En el libro 5 
+  sección 163 dice:  "Si posees la disciplina de Sexto Sentido, pasa al 144  Si quieres atacar a los guardias, pasa al 174  Si posees la disciplina 
+  de Sexto Sentido, pasa al 18" La ultima opcion, la que lleva al 18, debería indicar que deseas permanecer como estás (o sea no atacar). 
+  En inglés segun Project Aon: If you wish to remain as you are, turn to 18
+  * Excelente..esperando los libros finales, por favor!!! Update: En el libro 12, pagina 133 no hay manera de continuar. La unica opcion disponible 
+  para avanzar de pagina esta deshabilitada
 - Save games is not working on Safari
 - You are erroneously allowed to apply multiple Alether effects per combat. You are always limited to one (the berries you can purchase in book 6 even explicitly say so).
 - You are erroneously allowed to use healing items (Laumspur, etc.) in combat sections before combat has started. Healing items are only to be used in combat sections after combat is over (and if you're still alive and not evading combat).
 - Action chart buttons don't work on iPad Safari
+
+- ERROR: Book 8, sect139: 
+  ```actionChartController.pick('quiver'); actionChartController.pick('quiver'); actionChartController.increaseArrows(10);```
+  Sell Quiver: OBJECTS TABLE TO SELL IS NOT UPDATED !!!!
 
 ## Other
 
@@ -51,6 +62,8 @@ TODO
    So it won't be as fast to play but I'm definitely continuing. One remark. I'd like to be able to know what was in the Kai monastery at 
    the end so I can continue with that too !"
 - Suggestions and bugs on http://projectaon.proboards.com/post/43740
+- Keep version number of current downloaded books, and check for book errata fixes
+- On "About the book", display the book number
 - Allow to select the current bow
 - Android application:
   * App lifeciclye
@@ -82,6 +95,8 @@ TODO
 - Allow to add a concept description for combat skill modifiers rules on combat ratio explanation
 - Display concepts for objects usages (Adgana, etc) on combat ratio explanation
 - Display book 11 map ("Northern magnamund") somewhere?
+- Add music?
+
 
 Reminders
 =========
@@ -144,3 +159,49 @@ cordova emulate --target=Android_9 android
   TODO: Check differences between spaces options (see https://stackoverflow.com/questions/16423024/how-can-i-diff-2-files-while-ignoring-leading-white-space)
   svn diff -x --ignore-all-space https://www.projectaon.org/data/tags/20151013/es/xml/01hdlo.xml https://www.projectaon.org/data/trunk/es/xml/01hdlo.xml | iconv -f ISO-8859-1 | colordiff | less -R
   svn diff -x --ignore-all-space https://www.projectaon.org/data/tags/20151013/en/xml/01fftd.xml https://www.projectaon.org/data/trunk/en/xml/01fftd.xml | iconv -f ISO-8859-1 | colordiff | less -R
+
+
+* Create a default inventory (Magnakai books)
+```
+actionChartController.drop('all')
+actionChartController.pick('backpack')
+actionChartController.pick('sword')
+actionChartController.pick('bow')
+actionChartController.increaseMoney(15)
+actionChartController.pick('meal')
+actionChartController.pick('meal')
+actionChartController.pick('rope')
+actionChartController.pick('comb')
+actionChartController.pick('brasskey')
+actionChartController.pick('whip')
+actionChartController.pick('hourglass')
+actionChartController.pick('sommerswerd')
+actionChartController.pick('quiver')
+actionChartController.increaseArrows(5)
+actionChartController.pick('shield')
+actionChartController.pick('map')
+actionChartController.pick('helmet')
+actionChartController.pick('chainmail')
+actionChartController.pick('leatherwaistcoat')
+actionChartController.pick('daggerofvashna')
+```
+
+* Test book images:
+```
+state.sectionStates.getSectionState().addObjectToSection('axe')
+state.sectionStates.getSectionState().addObjectToSection('dagger')
+state.sectionStates.getSectionState().addObjectToSection('sword')
+state.sectionStates.getSectionState().addObjectToSection('spear')
+state.sectionStates.getSectionState().addObjectToSection('mace')
+state.sectionStates.getSectionState().addObjectToSection('shortsword')
+state.sectionStates.getSectionState().addObjectToSection('quarterstaff')
+state.sectionStates.getSectionState().addObjectToSection('warhammer')
+state.sectionStates.getSectionState().addObjectToSection('broadsword')
+state.sectionStates.getSectionState().addObjectToSection('bow')
+state.sectionStates.getSectionState().addObjectToSection('quiver')
+state.sectionStates.getSectionState().addObjectToSection('rope')
+state.sectionStates.getSectionState().addObjectToSection('largerope')
+state.sectionStates.getSectionState().addObjectToSection('taunorwater')
+state.sectionStates.getSectionState().addObjectToSection('meal')
+state.sectionStates.getSectionState().addObjectToSection('arrow')
+```

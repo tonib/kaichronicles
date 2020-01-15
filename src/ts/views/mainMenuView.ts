@@ -2,8 +2,7 @@
 let mainMenuView = {
 
     /**
-     * Show the map section
-     * @param section The map Section
+     * Main menu view
      */
     setup( ) {
         document.title = translations.text("kaiChronicles");

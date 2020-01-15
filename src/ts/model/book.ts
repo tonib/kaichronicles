@@ -120,6 +120,9 @@ class Book {
         xmlText = xmlText.replaceAll("&inclusion.action.chart.magnakai;", "");
         xmlText = xmlText.replaceAll("&inclusion.brian.williams.bio.lw;", "");
 
+        // Link to readers handbook (Book 13)
+        xmlText = xmlText.replaceAll("&link.rh;", "https://www.projectaon.org/en/ReadersHandbook/Home");
+
         /*xmlText = xmlText.replaceAll('&link.project.website;', '')
         xmlText = xmlText.replaceAll('&link.staff.contact;', '')
         xmlText = xmlText.replaceAll('&link.01hdlo;', '');*/
@@ -323,9 +326,12 @@ class Book {
                 const disciplineId = $node.attr("id");
 
                 let description: string;
-                if ( disciplineId === "psisurge" || disciplineId === "kaisurge") {
-                    // Special case, with useful info on second paragraph
+                if ( disciplineId === "psisurge") {
+                    // Magnakai: Special case, with useful info on second paragraph. Exclude last paragraph
                     description = $node.find("p:not(:last)").text();
+                } else if (disciplineId === "kaisurge") {
+                    // Grand Master: Other special case (different). Include both (all) paragraphs
+                    description = $node.find("p").text();
                 } else {
                     description = $node.find("p").first().text();
                 }

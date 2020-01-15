@@ -299,6 +299,12 @@ class SectionRenderer {
             return this.renderNodeChildren( $a , level );
         }
 
+        // Check external links (See book 13 > gamerulz)
+        const href = $a.attr("href");
+        if (href) {
+            return '<a href="' + href + '" target="_blank">' + this.renderNodeChildren( $a , level ) + "</a>";
+        }
+
         let open = "";
         let close = "</a>";
         let idRef = $a.attr("idref");
@@ -352,9 +358,9 @@ class SectionRenderer {
                 } else if ( this.sectionToRender.hasTargetLink( idRef ) ) {
                     // Link to anchor on this section. Ignore
                     return this.renderNodeChildren( $a , level );
- } else {
+                } else {
                     throw new Error("a tag: Unknown idref type: " + $a.attr("idref"));
- }
+                }
         }
         return open + this.renderNodeChildren( $a , level ) + close;
     }

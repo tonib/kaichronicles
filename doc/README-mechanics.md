@@ -102,6 +102,23 @@ These are the codes for each Magnakai discipline, used by the mechanics, as they
 * **Nexus**: nexus
 * **Divination**: dvnation
 
+## Codes for Grand Master disciplines
+
+These are the codes for each Grand Master discipline, used by the mechanics, as they appear on the XMLs:
+
+* **Grand Weaponmastery**: wpnmstry
+* **Animal Mastery**: anmlmstr
+* **Deliverance (Advanced Curing)**: deliver
+* **Assimilance (Advanced Invisibility)**: assimila
+* **Grand Huntmastery**: hntmstry
+* **Grand Pathsmanship**: pthmnshp
+* **Kai-surge**: kaisurge
+* **Kai-screen**: kaiscrn
+* **Grand Nexus**: nexus
+* **Telegnosis (Advanced Divination)**: gnosis
+* **Magi-magic**: magi
+* **Kai-alchemy**: alchemy
+
 ## Rules description
 Description of the rules usage:
 
@@ -119,6 +136,9 @@ picked. This is for "Equipment" sections, where meals and fireseeds are grouped.
 
 ### setSkills
 Game setup: The player selects the initial Endurance and Combat Skill
+
+### restoreDeliveranceUse (execute once only)
+Magnakai and later: Action Chart button to restore +X EP after Y days will available again
 
 ### setDisciplines
 Game setup: The player selects the Kai disciplines

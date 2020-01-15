@@ -2,7 +2,7 @@
     "compilerOptions": {
         "outDir" : "src/www/js",
         "rootDir" : "src/ts",
-        "target": "es5"
+        "target": "es3"
     },
 
     "include": [

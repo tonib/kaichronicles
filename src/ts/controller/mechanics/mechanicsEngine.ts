@@ -1425,6 +1425,20 @@ const mechanicsEngine = {
     },
 
     /**
+     * Magnakai: Restore deliverance +20 EP button use (each X days)
+     * Rule has state.
+     */
+    restoreDeliveranceUse(rule: any) {
+        if ( state.sectionStates.ruleHasBeenExecuted(rule) ) {
+            // Execute only once
+            return;
+        }
+
+        state.actionChart.reset20EPRestoreUsed();
+        state.sectionStates.markRuleAsExecuted(rule);
+    },
+
+    /**
      * Set of rules that should be executed only once
      */
     executeOnce(rule: any) {

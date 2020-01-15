@@ -336,6 +336,7 @@ const combatMechanics = {
         const selected: boolean = $psiSurgeCheck.prop( "checked" ) ? true : false;
         combat.psiSurge = selected;
 
+        // If click on PsiSurge, uncheck KaiSurge
         const $kaiSurgeCheck = $combatUI.find(".kaisurgecheck input");
         $kaiSurgeCheck.prop("disabled", selected);
         $kaiSurgeCheck.prop("checked", false);
@@ -360,6 +361,7 @@ const combatMechanics = {
         const selected: boolean = $kaiSurgeCheck.prop( "checked" ) ? true : false;
         combat.kaiSurge = selected;
 
+        // If click on KaiSurge, uncheck PsiSurge
         const $psiSurgeCheck = $combatUI.find(".psisurgecheck input");
         $psiSurgeCheck.prop("disabled", selected);
         $psiSurgeCheck.prop("checked", false);

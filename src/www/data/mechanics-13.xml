@@ -15,6 +15,10 @@
             <endurance count="+[MAXENDURANCE]" />
             <!-- Drop the previous books map -->
             <drop objectId="map" />
+            <!-- Restore Deliverance use each X days -->
+            <restoreDeliveranceUse />
+            <!-- Drop all Magnakai disciplines, now we use Grand Master disciplines -->
+            <dropDisciplines />
         </section>
 
         <section id="gamerulz">
@@ -55,7 +59,7 @@
             <object objectId="rope" />
             <object objectId="laumspurpotion4" />
             <object objectId="spear" />
-            <object objectId="quarterstaff" />
+            <object objectId="dagger" />
 
             <chooseEquipment 
                 en-text="Click on the Random Table link to get money before continuing" 

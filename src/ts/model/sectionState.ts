@@ -19,11 +19,6 @@ interface SectionItem {
     count: number;
 
     /**
-     * Only applies if id = 'quiver' (show the number of arrows on the quiver)
-     */
-    showCount: boolean;
-
-    /**
      * Object is allowed to be used from the section (not picked object)?
      */
     useOnSection: boolean;
@@ -138,12 +133,15 @@ class SectionState {
      * @return The count of objects on this section
      */
     public getCntSectionObjects(type: string): number {
-        let count = 0;
+        return this.getSectionObjects(type).length;
+
+        // Code from cracrayol fork (reverted, it will break things, https://github.com/tonib/kaichronicles/commit/c527e2e63ae80c6a5e60ef66cde29f3825ee2725)
+        /*let count = 0;
         const items = this.getSectionObjects(type);
         for (const item of items) {
             count += item.itemCount ? item.itemCount : 1;
         }
-        return count;
+        return count;*/
     }
 
     /**
@@ -281,8 +279,7 @@ class SectionState {
             price,
             unlimited,
             count: (objectId === Item.QUIVER || objectId === Item.ARROW || objectId === Item.MONEY || price > 0 ? count : 0 ),
-            showCount: false,
-            useOnSection,
+            useOnSection
         });
     }
 
