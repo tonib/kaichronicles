@@ -338,8 +338,8 @@ const combatMechanics = {
 
         // If click on PsiSurge, uncheck KaiSurge
         const $kaiSurgeCheck = $combatUI.find(".kaisurgecheck input");
-        $kaiSurgeCheck.prop("disabled", selected);
         $kaiSurgeCheck.prop("checked", false);
+        combat.kaiSurge = false;
 
         if ( !selected && state.actionChart.currentEndurance <= Combat.minimumEPForKaiSurge() ) {
             combatMechanics.disableKaiSurge( $combatUI , combat );
@@ -363,8 +363,8 @@ const combatMechanics = {
 
         // If click on KaiSurge, uncheck PsiSurge
         const $psiSurgeCheck = $combatUI.find(".psisurgecheck input");
-        $psiSurgeCheck.prop("disabled", selected);
         $psiSurgeCheck.prop("checked", false);
+        combat.psiSurge = false;
 
         if ( !selected && state.actionChart.currentEndurance <= Combat.minimumEPForPsiSurge() ) {
             combatMechanics.disablePsiSurge( $combatUI , combat );
