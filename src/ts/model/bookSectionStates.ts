@@ -23,7 +23,12 @@ class BookSectionStates {
     /**
      * Other states
      */
-    public otherStates = {};
+    public otherStates = {
+        book6sect26TargetPoints: null,
+        book6sect284: null,
+        book6sect340: null,
+        book9sect91: null,
+    };
 
     /**
      * Global rules to run on each section
@@ -118,9 +123,8 @@ class BookSectionStates {
         });
 
         // Other states initialization. Be sure it's not null (created on v1.3)
-        this.otherStates = stateObject.otherStates;
-        if( !this.otherStates )
-            this.otherStates = {};
+        if( !!stateObject.otherStates )
+            this.otherStates = stateObject.otherStates;
             
         // Global rules. Be sure it's not null (created on v1.4)
         this.globalRulesIds = stateObject.globalRulesIds;

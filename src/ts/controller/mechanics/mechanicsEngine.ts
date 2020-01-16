@@ -1404,31 +1404,31 @@ const mechanicsEngine = {
     /************************************************************/
 
     book2Sect238: function(rule) {
-        specialSectionsMechanics.book2Sect238(rule);
+        book2sect238.run(rule);
     },
 
     book2sect308: function(rule) {
-        specialSectionsMechanics.book2sect308();
+        book2sect308.run();
     },
     
     book3sect88: function(rule) {
-        specialSectionsMechanics.book3sect88();
+        book3sect88.run();
     },
 
     book6sect26: function(rule) {
-        new Book6sect26();
+        book6sect26.run();
     },
 
     book6sect284: function(rule) {
-        new Book6sect284(rule);
+        book6sect284.run();
     },
 
     book6sect340 : function(rule) {
-        new Book6sect340();
+        book6sect340.run();
     },
 
     book9sect91 : function(rule) {
-        Book9sect91.dropHalfBackpack();
+        book9sect91.run();
     },
 
     /************************************************************/
