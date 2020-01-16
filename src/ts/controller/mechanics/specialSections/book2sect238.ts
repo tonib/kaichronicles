@@ -3,7 +3,7 @@
  */
 const book2sect238 = {
 
-    run(rule: string) {
+    run(rule: any) {
         // Cartwheel game UI:
         const $gameUI = mechanicsEngine.getMechanicsUI("mechanics-book2Sect238");
         gameView.appendToSection($gameUI);

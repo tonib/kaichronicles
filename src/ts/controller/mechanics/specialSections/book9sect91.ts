@@ -42,7 +42,8 @@ const book9sect91 = {
             // Set UI
             book9sect91.setUI( coinState );
         } catch (e) {
-            throw new Error(e);
+            // throw new Error(e);
+            console.log(e);
         }
     },
 

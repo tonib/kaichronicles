@@ -74,6 +74,9 @@
 * https://github.com/tonib/kaichronicles/commit/9f3fe419514c4b82952661f75e0c10c336a11684
     - Reverted the final fail handler for game setup
 
+* https://github.com/tonib/kaichronicles/commit/5f83d745b84c65dbe940510dbe334fb132db5233
+    
+
 * REMOVE src/ts/test-tslist.ts (TSLint tests)
 
 * Book 12 (Spanish):
