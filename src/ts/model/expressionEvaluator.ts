@@ -71,6 +71,29 @@ class ExpressionEvaluator {
             return state.actionChart.getWeaponObjects().length;
         },
 
+        // This includes special items
+        "[BOW-CNT-ON-SECTION]"() {
+            const sectionState = state.sectionStates.getSectionState();
+            let count = 0;
+            for (const weapon of sectionState.getWeaponObjects()) {
+                if (weapon.isWeaponType(Item.BOW)) {
+                    count++;
+                }
+            }
+            return count;
+        },
+
+        // This includes special items
+        "[BOW-CNT-ON-ACTIONCHART]"() {
+            let count = 0;
+            for (const weapon of state.actionChart.getWeaponObjects()) {
+                if (weapon.isWeaponType(Item.BOW)) {
+                    count++;
+                }
+            }
+            return count;
+        },
+
         // Count of special items on section
         "[SPECIAL-ITEMS-ON-SECTION]"() {
             const sectionState = state.sectionStates.getSectionState();
