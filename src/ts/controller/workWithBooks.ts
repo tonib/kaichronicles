@@ -1,8 +1,9 @@
+/// <reference path="../external.ts" />
 
-/**
+/** 
  * Handle / download books (only for Cordova app)
  */
-let workWithBooksController = {
+var workWithBooksController = {
 
     /** Are we currently downloading / deleting books? */
     changingBooks: false,
@@ -20,20 +21,20 @@ let workWithBooksController = {
     /**
      * Render the work with books
      */
-    index() {
-        template.setNavTitle( translations.text("kaiChronicles") , "#mainMenu", true);
+    index: function() {
+        template.setNavTitle( translations.text('kaiChronicles') , '#mainMenu', true);
         template.showStatistics(false);
 
-        views.loadView("workWithBooks.html")
-        .then(() => {
+        views.loadView('workWithBooks.html')
+        .then(function() { 
             // Setup UI
             workWithBooksView.setup();
             // Update the books list
-            workWithBooksController.updateBooksList();
+            workWithBooksController.updateBooksList(); 
         });
     },
 
-    updateBooksList() {
+    updateBooksList: function() {
 
         // Uncheck the "select all" check
         workWithBooksView.setSelectAllState(false);
@@ -43,50 +44,47 @@ let workWithBooksController = {
 
         // Check books state
         state.localBooksLibrary.updateBooksDownloadStateAsync()
-        .then(() => {
-            const downloadedBooks = state.localBooksLibrary.getDownloadedBooks();
-            for (const downloadedBook of downloadedBooks) {
-                workWithBooksView.markBookAsDownloaded( downloadedBook.bookNumber );
-            }
+        .then(function() {
+            var downloadedBooks = state.localBooksLibrary.getDownloadedBooks();
+            for(var i=0; i<downloadedBooks.length; i++)
+                workWithBooksView.markBookAsDownloaded( downloadedBooks[i].bookNumber );
 
             // If all books are downloaded, check the "select all"
-            if ( downloadedBooks.length === state.localBooksLibrary.booksLibrary.length ) {
+            if( downloadedBooks.length == state.localBooksLibrary.booksLibrary.length )
                 workWithBooksView.setSelectAllState(true);
-            }
         });
-
+        
     },
 
-    downloadBooks(selectedBookNumbers: number[]) {
+    downloadBooks: function(selectedBookNumbers: Array<number>) {
+
 
         // Check differences:
-        const toRemove: BookDownloadState[] = [];
-        const toDownload: BookDownloadState[] = [];
-        for (const book of state.localBooksLibrary.booksLibrary) {
-            const bookSelected = selectedBookNumbers.contains( book.bookNumber );
-            if ( book.downloaded && !bookSelected ) {
+        var toRemove = [], toDownload = [];
+        for( var i=0; i<state.localBooksLibrary.booksLibrary.length; i++) {
+            var book = state.localBooksLibrary.booksLibrary[i];
+            var bookSelected = selectedBookNumbers.contains( book.bookNumber );
+            if( book.downloaded && !bookSelected )
                 toRemove.push( book );
-            } else if ( !book.downloaded && bookSelected ) {
+            else if( !book.downloaded && bookSelected )
                 toDownload.push( book );
- }
         }
 
-        if ( toRemove.length === 0 && toDownload.length === 0 ) {
-            alert( translations.text( "noChangesSelected" ) );
+        if( toRemove.length === 0 && toDownload.length === 0 ) {
+            alert( translations.text( 'noChangesSelected' ) );
             return;
         }
 
-        if ( toDownload.length > 0 && !cordovaApp.thereIsInternetConnection() ) {
-            alert( translations.text( "noInternet" ) );
+        if( toDownload.length > 0 && !cordovaApp.thereIsInternetConnection() ) {
+            alert( translations.text( 'noInternet' ) );
             return;
         }
 
-        if ( !confirm( translations.text("confirmChanges") ) ) {
+        if( !confirm( translations.text('confirmChanges') ) )
             return;
-        }
 
         LocalBooksLibrary.getBooksDirectoryAsync()
-        .then( (booksDir) => {
+        .then( function(booksDir) {
 
             workWithBooksController.changingBooks = true;
             workWithBooksController.processCancelled = false;
@@ -95,21 +93,20 @@ let workWithBooksController = {
             workWithBooksView.displayModal(true);
 
             // Initial empty resolved promise
-            let changesPromise = jQuery.Deferred<void>().resolve().promise();
+            var changesPromise = jQuery.Deferred<void>().resolve().promise();
 
             // If we will remove books, clean the cached book: Needed, because
             // the cached book may be deleted now
-            if ( toRemove.length > 0 ) {
+            if( toRemove.length > 0 )
                 state.removeCachedState();
-            }
-
+            
             // Remove books, chaining promises
-            toRemove.forEach((book) => {
+            toRemove.forEach(function(book) {
                 changesPromise = workWithBooksController.deleteBook( booksDir , book , changesPromise );
             });
 
             // Download books, chaining promises
-            toDownload.forEach((book) => {
+            toDownload.forEach(function(book) {
                 changesPromise = workWithBooksController.downloadBook( booksDir , book , changesPromise );
             });
 
@@ -117,56 +114,53 @@ let workWithBooksController = {
             workWithBooksController.updateUIAfterProcess(changesPromise);
 
         })
-        .fail((reason: string) => { alert(reason); });
+        .fail(function(reason){ alert(reason); });
 
     },
 
-    deleteBook(booksDir: string , book: BookDownloadState, changesPromise: JQueryPromise<void>): JQueryPromise<void> {
+    deleteBook: function(booksDir: string , book: BookDownloadState, changesPromise: JQueryPromise<void>) : JQueryPromise<void> {
 
         // Work to delete the book
-        const work = () => {
+        var work = function() {
 
-            if ( workWithBooksController.processCancelled ) {
+            if( workWithBooksController.processCancelled )
                 // Process cancelled. Do nothing else
                 return changesPromise;
-            }
 
-            workWithBooksView.setCurrentWork(
-                translations.text( "deletingBook" , [book.bookNumber] ) ) ;
+            workWithBooksView.setCurrentWork( 
+                translations.text( 'deletingBook' , [book.bookNumber] ) ) ;
             return book.deleteAsync(booksDir);
 
         };
 
         // Chain always the next promise, it was failed the previous or not
         return changesPromise.then(
-            () => work(),
-            () => work(),
+            function() { return work(); } , 
+            function() { return work(); }
         )
-        .done(() => {
-            workWithBooksView.logEvent(
-                translations.text( "bookDeleted" , [book.bookNumber] ) );
+        .done(function() { 
+            workWithBooksView.logEvent( 
+                translations.text( 'bookDeleted' , [book.bookNumber] ) );
         })
-        .fail((reason: string) => {
-            if ( !workWithBooksController.processCancelled ) {
-                workWithBooksView.logEvent( translations.text( "deletionFailed" , [ book.bookNumber , reason ] ) );
-            }
+        .fail(function(reason) { 
+            if( !workWithBooksController.processCancelled )
+                workWithBooksView.logEvent( translations.text( 'deletionFailed' , [ book.bookNumber , reason ] ) );
             workWithBooksController.allOk = false;
         });
     },
 
-    downloadBook(booksDir: string , book: BookDownloadState, changesPromise: JQueryPromise<void>): JQueryPromise<void> {
+    downloadBook: function(booksDir: string , book: BookDownloadState, changesPromise: JQueryPromise<void>): JQueryPromise<void> {
 
         // Work to download the book
-        const work = (): JQueryPromise<void> => {
+        var work = function(): JQueryPromise<void> {
 
-            if ( workWithBooksController.processCancelled ) {
+            if( workWithBooksController.processCancelled )
                 // Process cancelled. Do nothing else
                 return changesPromise;
-            }
 
             workWithBooksView.setCurrentWork(
-                translations.text( "downloadingBook" , [book.bookNumber] ) );
-            return book.downloadAsync(booksDir, (percent) => {
+                translations.text( 'downloadingBook' , [book.bookNumber] ) );
+            return book.downloadAsync(booksDir, function(percent) {
                 workWithBooksView.updateProgress(percent);
             });
 
@@ -174,37 +168,36 @@ let workWithBooksController = {
 
         // Chain always the next promise, it was failed the previous or not
         return changesPromise.then(
-            () => work(),
-            () => work(),
+            function() { return work(); } , 
+            function() { return work(); }
         )
-        .done(() => {
-            workWithBooksView.logEvent(
-                translations.text( "bookDownloaded" , [book.bookNumber] ) );
+        .done(function() { 
+            workWithBooksView.logEvent( 
+                translations.text( 'bookDownloaded' , [book.bookNumber] ) );
         })
-        .fail((reason) => {
-            if ( !workWithBooksController.processCancelled ) {
-                workWithBooksView.logEvent( translations.text( "downloadFailed" , [ book.bookNumber , reason ] ) );
-            }
+        .fail(function(reason) { 
+            if( !workWithBooksController.processCancelled )
+                workWithBooksView.logEvent( translations.text( 'downloadFailed' , [ book.bookNumber , reason ] ) );
             workWithBooksController.allOk = false;
         });
 
     },
 
-    updateUIAfterProcess(changesPromise: JQueryPromise<void>) {
+    updateUIAfterProcess: function(changesPromise: JQueryPromise<void>) {
 
-        const updateUI = () => {
+        var updateUI = function() {
             // Refresh the books list
             workWithBooksController.updateBooksList();
-
-            if ( workWithBooksController.allOk ) {
+            
+            if( workWithBooksController.allOk )
                 // If all was ok, close the modal
                 workWithBooksView.displayModal(false);
-            } else {
+            else {
                 // Enable the close button
                 workWithBooksView.enableCloseModal();
                 // Show info:
-                workWithBooksView.setCurrentWork(
-                    translations.text( "processFinishedErrors" ) );
+                workWithBooksView.setCurrentWork( 
+                    translations.text( 'processFinishedErrors' ) );
                 workWithBooksView.updateProgress(100);
             }
 
@@ -212,19 +205,20 @@ let workWithBooksController = {
         };
 
         changesPromise.then(
-            () => updateUI(),
-            () => updateUI(),
+            function(){ updateUI(); },
+            function(){ updateUI(); }
         );
     },
 
     /**
      * Close / cancel button clicked
      */
-    closeCancelClicked() {
-        if ( workWithBooksController.changingBooks ) {
+    closeCancelClicked: function() {
+        if( workWithBooksController.changingBooks ) {
             // Cancel process
             workWithBooksController.cancelProcess();
-        } else {
+        }
+        else {
             // Close modal with finished process
             workWithBooksView.displayModal(false);
         }
@@ -233,22 +227,22 @@ let workWithBooksController = {
     /**
      * Cancel the current process
      */
-    cancelProcess() {
+    cancelProcess: function() {
         workWithBooksController.processCancelled = true;
         workWithBooksController.allOk = false;
         cordovaFS.cancelCurrentDownload();
-        workWithBooksView.logEvent( translations.text( "processCancelled" ) );
+        workWithBooksView.logEvent( translations.text( 'processCancelled' ) );
     },
 
     /** Return page */
-    getBackController(): string {
-        if ( workWithBooksController.changingBooks ) {
+    getBackController: function(): string { 
+        if( workWithBooksController.changingBooks ) {
             // Cancel download
             workWithBooksView.closeCancelClicked();
-            return "DONOTHING";
-        } else {
-            return "mainMenu";
+            return 'DONOTHING';
         }
-    },
-
+        else
+            return 'mainMenu'; 
+    }
+    
 };

@@ -1,74 +1,73 @@
 
-let mainMenuView = {
+var mainMenuView = {
 
     /**
      * Main menu view
      */
-    setup( ) {
-        document.title = translations.text("kaiChronicles");
+    setup: function( ) {
+        document.title = translations.text('kaiChronicles');
 
         // TODO: Use translation on mainMenu.html instead of this ?
-        if ( state.language === "es" ) {
-            $("#menu-translate").text("English");
-        } else {
-            $("#menu-translate").text("Español");
-        }
+        if( state.language == 'es' )
+            $('#menu-translate').text('English');
+        else
+            $('#menu-translate').text('Español');
 
-        $("#menu-continue").click((e) => {
+        $('#menu-continue').click(function(e) {
             e.preventDefault();
-            routing.redirect("setup");
+            routing.redirect('setup');
         });
-        $("#menu-new").click((e) => {
+        $('#menu-new').click(function(e) {
             e.preventDefault();
-            routing.redirect("newGame");
+            routing.redirect('newGame');
         });
-        $("#menu-load").click((e) => {
+        $('#menu-load').click(function(e) {
             e.preventDefault();
-            routing.redirect("loadGame");
+            routing.redirect('loadGame');
         });
-        $("#menu-translate").click((e) => {
+        $('#menu-translate').click(function(e) {
             e.preventDefault();
             mainMenuController.changeTranslation();
         });
-        $("#menu-color-theme").click((e) => {
+        $('#menu-color-theme').click(function(e) {
             e.preventDefault();
             mainMenuController.changeColor();
         });
-        $("#menu-faq").click((e) => {
+        $('#menu-faq').click(function(e) {
             e.preventDefault();
-            routing.redirect("faq");
+            routing.redirect('faq');
         });
-        $("#menu-privacy").click((e) => {
+        $('#menu-privacy').click(function(e) {
             e.preventDefault();
-            routing.redirect("privacy");
+            routing.redirect('privacy');
         });
 
         // Download books (only for app)
-        const $downloadBooksBtn = $("#menu-downloadbooks");
+        var $downloadBooksBtn = $('#menu-downloadbooks');
         // Switch this to test the "Download books" view with the web browser
-        // if( true ) {
-        if ( cordovaApp.isRunningApp() ) {
-            $("#menu-downloadbooks").click((e) => {
+        //if( true ) {
+        if( cordovaApp.isRunningApp() ) {
+            $('#menu-downloadbooks').click(function(e) {
                 e.preventDefault();
-                routing.redirect("workWithBooks");
+                routing.redirect('workWithBooks');
             });
-        } else {
-            $downloadBooksBtn.hide();
         }
+        else
+            $downloadBooksBtn.hide();
     },
 
     /**
      * Hide web text info
      */
-    hideWebInfo() {
-        $("#menu-webinfo").hide();
+    hideWebInfo: function() {
+        $('#menu-webinfo').hide();
     },
 
     /**
      * Hide the continue game button
      */
-    hideContinueGame() {
-        $("#menu-continue").hide();
-    },
+    hideContinueGame: function() { 
+        $('#menu-continue').hide();
+    }
 
 };

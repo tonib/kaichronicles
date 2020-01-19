@@ -1,15 +1,16 @@
+/// <reference path="../external.ts" />
 
-/**
+/** 
  * FAQ controller
  */
-const faqController = {
+class faqController {
 
-    index() {
-        template.setNavTitle( translations.text("kaiChronicles"), "#mainMenu", true);
-        views.loadView("faq_" + state.language + ".html");
-    },
+    public static index() {
+        template.setNavTitle( translations.text('kaiChronicles'), '#mainMenu', true);
+        views.loadView('faq_' + state.language + '.html');
+    }
 
     /** Return page */
-    getBackController() { return "mainMenu"; },
-
+    public static getBackController() { return 'mainMenu'; }
+    
 }

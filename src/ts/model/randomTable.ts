@@ -1,3 +1,6 @@
+
+/// <reference path="../external.ts" />
+
 /**
  * Info about a current choose
  */
@@ -33,65 +36,61 @@ class RandomTable {
      * @param zeroAsTen true if the zero must to be returned as ten
      * @return The random number
      */
-    public getRandomValue(ignoreZero: boolean = false, zeroAsTen: boolean = false): number {
-        let value: number;
-        while (true) {
+    public getRandomValue(ignoreZero : boolean = false, zeroAsTen : boolean = false) : number {
+        let value : number;
+        while(true) {
 
-            if ( this.nextValueDebug >= 0 && this.nextValueDebug <= 9 ) {
+            if( this.nextValueDebug >= 0 && this.nextValueDebug <= 9 ) {
                 // Debug value
                 value = this.nextValueDebug;
                 this.nextValueDebug = -1;
-            } else {
+            }
+            else {
                 // Get an index for the picked number
                 const index = Math.floor( Math.random() * 100.0 );
                 // Get the number for that index on the book random table
                 value = state.book.bookRandomTable[index];
             }
 
-            if ( ignoreZero && value === 0 ) {
+            if( ignoreZero && value === 0 )
                 continue;
-            }
-
-            if ( zeroAsTen && value === 0 ) {
+            
+            if( zeroAsTen && value === 0 )
                 return 10;
-            }
 
             return value;
         }
     }
 
-    public getRandomValueAsync(ignoreZero: boolean = false, zeroAsTen: boolean = false): JQueryPromise<number> {
+    public getRandomValueAsync(ignoreZero : boolean = false, zeroAsTen : boolean = false) : JQueryPromise<number> {
 
-        if ( !state.actionChart.manualRandomTable ) {
+        if( !state.actionChart.manualRandomTable )
             // Use computer generated random numbers:
             return jQuery.Deferred<number>().resolve( this.getRandomValue(ignoreZero, zeroAsTen) ).promise();
-        }
 
         // Store info about the current selection
         this.currentAsync = {
-            ignoreZero,
-            zeroAsTen,
-            deferred: jQuery.Deferred(),
+            ignoreZero: ignoreZero,
+            zeroAsTen: zeroAsTen,
+            deferred: jQuery.Deferred()
         };
 
         template.showRandomTable(true);
         return this.currentAsync.deferred.promise();
     }
 
-    public randomTableUIClicked(value: number) {
+    public randomTableUIClicked(value : number) {
 
-        if ( !this.currentAsync ) {
+        if( !this.currentAsync )
+            return;
+
+        if( this.currentAsync.ignoreZero && value === 0 ) {
+            toastr.info( translations.text('zeroIgnored') );
             return;
         }
-
-        if ( this.currentAsync.ignoreZero && value === 0 ) {
-            toastr.info( translations.text("zeroIgnored") );
-            return;
-        }
-
-        if ( this.currentAsync.zeroAsTen && value === 0 ) {
+        
+        if( this.currentAsync.zeroAsTen && value === 0 )
             value = 10;
-        }
 
         template.showRandomTable(false);
 
@@ -99,11 +98,10 @@ class RandomTable {
         this.currentAsync = null;
     }
 
-    public module10( value: number): number {
+    public module10( value : number) : number {
         value = value % 10;
-        if ( value < 0 ) {
+        if( value < 0 )
             value += 10;
-        }
         return value;
     }
 }

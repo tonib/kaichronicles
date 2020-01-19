@@ -1,3 +1,5 @@
+/// <reference path="../external.ts" />
+
 /**
  * The action chart view API
  */
@@ -7,9 +9,9 @@ const actionChartView = {
      * Fill the action chart with the player state
      * @param actionChart The ActionChart
      */
-    fill(actionChart: ActionChart) {
+    fill: function(actionChart : ActionChart) {
 
-        document.title = translations.text( "actionChart" );
+        document.title = translations.text( 'actionChart' );
 
         // Show endurance / combat skills.
         actionChartView.updateStatistics();
@@ -27,20 +29,20 @@ const actionChartView = {
         actionChartView.updateObjectsLists();
 
         // Bind event for drop meals
-        ObjectsTable.bindTableEquipmentEvents( $("#achart-dropmeal") , ObjectsTableType.INVENTORY );
+        ObjectsTable.bindTableEquipmentEvents( $('#achart-dropmeal') , ObjectsTableType.INVENTORY );
 
         // Bind restore 20 EP (Curing)
         actionChartView.bindRestore20EP();
 
         // Bind "Fight unarmed"
-        $("#achart-fightUnarmed").click( function(e: Event) {
-            actionChartController.setFightUnarmed( $(this).prop("checked") ? true : false );
+        $('#achart-fightUnarmed').click( function(e : Event) {
+            actionChartController.setFightUnarmed( $(this).prop('checked') ? true : false );
         });
 
         // Annotations
-        $("#achart-annotations").val( actionChart.annotations );
-        $("#achart-annotations").off();
-        $("#achart-annotations").on("input", function() {
+        $('#achart-annotations').val( actionChart.annotations );
+        $('#achart-annotations').off();
+        $('#achart-annotations').on('input', function() {
             state.actionChart.annotations = $(this).val();
         });
     },
@@ -48,34 +50,31 @@ const actionChartView = {
     /**
      * Hide / disable the restore 20 EP button if needed
      */
-    updateRestore20EPState() {
+    updateRestore20EPState: function() {
         let $restoreButton = null;
-        if (state.book.isGrandMasterBook()) {
-            $restoreButton = $("#grdmast-restore20Ep");
-            $("#achart-restore20Ep").hide();
+        if(state.book.isGrandMasterBook()) {
+            $restoreButton = $('#grdmast-restore20Ep');
+            $('#achart-restore20Ep').hide();
         } else {
-            $restoreButton = $("#achart-restore20Ep");
-            $("#grdmast-restore20Ep").hide();
+            $restoreButton = $('#achart-restore20Ep');
+            $('#grdmast-restore20Ep').hide();
         }
-        if ( !state.actionChart.canUse20EPRestoreOnThisBook() ) {
+        if( !state.actionChart.canUse20EPRestoreOnThisBook() )
             $restoreButton.hide();
-        }
-        if ( !state.actionChart.canUse20EPRestoreNow() ) {
-            $restoreButton.prop( "disabled", true );
-        }
+        if( !state.actionChart.canUse20EPRestoreNow() )
+            $restoreButton.prop( 'disabled', true );
     },
 
     /**
      * Bind events to restore 20 EP (Curing)
      */
-    bindRestore20EP() {
-        const $restoreButton = state.book.isGrandMasterBook() ? $("#grdmast-restore20Ep") : $("#achart-restore20Ep");
+    bindRestore20EP: function() {
+        const $restoreButton = state.book.isGrandMasterBook() ? $('#grdmast-restore20Ep') : $('#achart-restore20Ep');
         actionChartView.updateRestore20EPState();
-        $restoreButton.click( (e: Event) => {
+        $restoreButton.click( function(e: Event) {
             e.preventDefault();
-            if ( !confirm( translations.text(state.book.isGrandMasterBook() ? "confirm20EPGrdMaster" : "confirm20EP") ) ) {
+            if( !confirm( translations.text(state.book.isGrandMasterBook() ? 'confirm20EPGrdMaster' : 'confirm20EP') ) )
                 return;
-            }
             actionChartController.use20EPRestore();
             actionChartView.updateRestore20EPState();
         });
@@ -84,9 +83,9 @@ const actionChartView = {
     /**
      * Bind events for drop money UI
      */
-    bindDropMoneyEvents() {
+    bindDropMoneyEvents: function() {
         // Bind drop money button event
-        $("#achart-dropmoneybutton").click( (e: Event) => {
+        $('#achart-dropmoneybutton').click( function(e: Event) {
             e.preventDefault();
             MoneyDialog.show( true );
         });
@@ -96,180 +95,174 @@ const actionChartView = {
      * Render the disciplines table
      * @param {ActionChart} actionChart The action chart
      */
-    fillDisciplines(actionChart: ActionChart) {
+    fillDisciplines: function(actionChart : ActionChart) {
 
         // Kai title:
-        $("#achart-kaititle")
+        $('#achart-kaititle')
             .text( state.book.getKaiTitle( actionChart.disciplines.length ) );
 
         // Lore circles:
-        if ( state.book.bookNumber <= 5 ) {
+        if( state.book.bookNumber <= 5 )
             // Only for magnakai books
-            $("#achart-circles").hide();
-        } else {
+            $('#achart-circles').hide();
+        else {
             const circles = actionChart.getLoreCircles();
-            if ( circles.length === 0 ) {
-                $("#achart-currentCircles").html( "<i>" + translations.text("noneMasculine") + "</i>" );
-            } else {
-                const circlesNames: string[] = [];
-                for ( const c of actionChart.getLoreCircles() ) {
+            if( circles.length == 0 )
+                $('#achart-currentCircles').html( '<i>' + translations.text('noneMasculine') + '</i>' );
+            else {
+                let circlesNames : Array<string> = [];
+                for( let c of actionChart.getLoreCircles() )
                     circlesNames.push( c.getDescription() );
-                }
-                $("#achart-currentCircles").html( circlesNames.join( ", ") );
+                $('#achart-currentCircles').html( circlesNames.join( ', ') );
             }
         }
 
         // TODO: Display the discipline "quote" tag instead the name
-        const $displines = $("#achart-disciplines > tbody");
-        if ( actionChart.disciplines.length === 0 ) {
-            $displines.append( "<tr><td>(" + translations.text("noneFemenine") + ")</td></tr>" );
-        } else {
-            const bookDisciplines = state.book.getDisciplinesTable();
+        var $displines = $('#achart-disciplines > tbody');
+        if( actionChart.disciplines.length === 0 ) {
+            $displines.append( '<tr><td>(' + translations.text('noneFemenine') + ')</td></tr>' );
+        }
+        else {
+            var bookDisciplines = state.book.getDisciplinesTable();
             // Enumerate disciplines
-            $.each( actionChart.disciplines , (index, disciplineId: string) => {
-                const dInfo = bookDisciplines[disciplineId];
-                let name = dInfo.name;
+            $.each( actionChart.disciplines , function(index, disciplineId : string) {
+                var dInfo = bookDisciplines[disciplineId];
+                var name = dInfo.name;
 
-                if ( disciplineId === "wepnskll" || disciplineId === "wpnmstry" ) {
+                if( disciplineId == 'wepnskll' || disciplineId == 'wpnmstry' ) {
                     // Show selected weapons description
-                    const weapons: string[] = [];
-                    for (const weaponSkill of actionChart.weaponSkill) {
-                        weapons.push( state.mechanics.getObject( weaponSkill ).name );
-                    }
-                    if ( weapons.length > 0 ) {
-                        name += " (" + weapons.join(", ") + ")";
-                    }
+                    let weapons : Array<string> = [];
+                    for(let i=0; i<actionChart.weaponSkill.length; i++)
+                        weapons.push( state.mechanics.getObject( actionChart.weaponSkill[i] ).name );
+                    if( weapons.length > 0 )
+                        name += ' (' + weapons.join(', ') + ')';
                 }
 
                 // Unescape the HTML description:
-                const descriptionHtml = $("<div />").html(dInfo.description).text();
-                $displines.append( "<tr><td>" +
-                    '<button class="btn btn-default table-op" title="' +
-                    translations.text("disciplineDescription") +
-                    '">' +
-                        '<span class="glyphicon glyphicon-question-sign"></span>' +
-                    "</button>" +
-                    "<b>" + name + '</b><br/><i style="display:none"><small>' +
+                var descriptionHtml = $('<div />').html(dInfo.description).text();
+                $displines.append( '<tr><td>' +
+                    '<button class="btn btn-default table-op" title="' + 
+                    translations.text('disciplineDescription') +
+                    '">' + 
+                        '<span class="glyphicon glyphicon-question-sign"></span>' + 
+                    '</button>' + 
+                    '<b>' + name + '</b><br/><i style="display:none"><small>' + 
                     descriptionHtml +
-                    "</small></i></td></tr>" );
+                    '</small></i></td></tr>' );
             });
             // Bind help button events
-            $displines.find("button").click(function(e) {
-                $(this).parent().find("i").toggle();
+            $displines.find('button').click(function(e) {
+                $(this).parent().find('i').toggle();
             });
         }
     },
 
-    updateMoney() {
-        $("#achart-beltPouch").val( state.actionChart.beltPouch + " " + translations.text("goldCrowns") );
+    updateMoney: function() {
+        $('#achart-beltPouch').val( state.actionChart.beltPouch + ' ' + translations.text('goldCrowns') );
         // Disable if the player has no money or it's death
-        $("#achart-dropmoneybutton").prop( "disabled", state.actionChart.beltPouch <= 0 || state.actionChart.currentEndurance <= 0 );
+        $('#achart-dropmoneybutton').prop( 'disabled', state.actionChart.beltPouch <= 0 || state.actionChart.currentEndurance <= 0 );
     },
 
     /**
      * Update meals count
      */
-    updateMeals() {
-        $("#achart-meals").val( state.actionChart.meals );
+    updateMeals: function() {
+        $('#achart-meals').val( state.actionChart.meals );
         // Disable if the player has no meals or it's death
-        $("#achart-dropmeal").prop( "disabled", state.actionChart.meals <= 0 || state.actionChart.currentEndurance <= 0 );
+        $('#achart-dropmeal').prop( 'disabled', state.actionChart.meals <= 0 || state.actionChart.currentEndurance <= 0 );
     },
 
     /**
      * Update the player statistics
      */
-    updateStatistics() {
+    updateStatistics: function() {
 
-        const txtCurrent = translations.text("current") + ": ";
+        var txtCurrent = translations.text('current') + ': ';
         // Combat skill
-        $("#achart-combatSkills").val(
-            txtCurrent +
-            state.actionChart.getCurrentCombatSkill() +
+        $('#achart-combatSkills').val( 
+            txtCurrent +  
+            state.actionChart.getCurrentCombatSkill() + 
             " / Original: " + state.actionChart.combatSkill );
-        $("#achart-cs-bonuses").text(
+        $('#achart-cs-bonuses').text( 
             actionChartController.getBonusesText( state.actionChart.getCurrentCombatSkillBonuses() ) );
 
         // Endurance
-        let txtEndurance = txtCurrent + state.actionChart.currentEndurance;
-        const max = state.actionChart.getMaxEndurance();
-        if ( max !== state.actionChart.endurance ) {
-            txtEndurance += " / Max.: " + max;
-        }
+        var txtEndurance = txtCurrent + state.actionChart.currentEndurance;
+        var max = state.actionChart.getMaxEndurance();
+        if( max != state.actionChart.endurance )
+            txtEndurance += ' / Max.: ' + max;
         txtEndurance += " / Original: " + state.actionChart.endurance;
-
-        $("#achart-endurance").val( txtEndurance );
-        $("#achart-endurance-bonuses").text(
+ 
+        $('#achart-endurance').val( txtEndurance ); 
+        $('#achart-endurance-bonuses').text( 
             actionChartController.getBonusesText( state.actionChart.getEnduranceBonuses() ) );
     },
 
     /**
      * Update weapons
      */
-    updateWeapons() {
+    updateWeapons: function() {
 
         // Weapons list
-        new ObjectsTable( state.actionChart.weapons , $("#achart-weapons > tbody") , ObjectsTableType.INVENTORY )
+        new ObjectsTable( state.actionChart.weapons , $('#achart-weapons > tbody') , ObjectsTableType.INVENTORY )
             .renderTable();
 
         // Current weapon:
-        const current: Item = state.actionChart.getSelectedWeaponItem();
-        $("#achart-currentWeapon").html( current ? current.name : "<i>" + translations.text("noneFemenine") + "</i>" );
+        const current : Item = state.actionChart.getSelectedWeaponItem();
+        $('#achart-currentWeapon').html( current ? current.name : '<i>' + translations.text('noneFemenine') + '</i>' );
 
         // Fight unarmed?
-        const $fightUnarmed = $("#achart-fightUnarmed");
-        $fightUnarmed.prop( "checked" , state.actionChart.fightUnarmed );
+        const $fightUnarmed = $('#achart-fightUnarmed');
+        $fightUnarmed.prop( 'checked' , state.actionChart.fightUnarmed );
 
         // If the player has no weapons, or has died, disable the option "Fight unarmed"
         let noWeapon = ( !state.actionChart.fightUnarmed && !state.actionChart.getSelectedWeapon() );
-        if ( state.actionChart.currentEndurance <= 0 ) {
+        if( state.actionChart.currentEndurance <= 0 ) 
             noWeapon = true;
-        }
-        $fightUnarmed.prop( "disabled" , noWeapon );
+        $fightUnarmed.prop( 'disabled' , noWeapon );
     },
 
     /**
      * Update the chart objects lists
      */
-    updateObjectsLists() {
+    updateObjectsLists: function() {
 
         // Weapons
         actionChartView.updateWeapons();
 
         // Backpack items
-        if ( state.actionChart.hasBackpack ) {
-            new ObjectsTable( state.actionChart.backpackItems , $("#achart-backpack > tbody") , ObjectsTableType.INVENTORY )
+        if( state.actionChart.hasBackpack )
+            new ObjectsTable( state.actionChart.backpackItems , $('#achart-backpack > tbody') , ObjectsTableType.INVENTORY )
                 .renderTable();
-        } else {
-            $("#achart-backpack-content").html("<i>" + translations.text("backpackLost") + "</i>");
-        }
-
+        else
+            $('#achart-backpack-content').html('<i>' + translations.text('backpackLost') + '</i>');
+            
         // Special items
-        new ObjectsTable( state.actionChart.specialItems , $("#achart-special > tbody") , ObjectsTableType.INVENTORY )
+        new ObjectsTable( state.actionChart.specialItems , $('#achart-special > tbody') , ObjectsTableType.INVENTORY )
             .renderTable();
 
         // Meals
         actionChartView.updateMeals();
 
         // Total number of backpack / special objects
-        $("#achart-backpacktotal").text("(" + state.actionChart.getNBackpackItems() + ")");
-        $("#achart-specialtotal").text("(" + state.actionChart.getNSpecialItems() + ")");
+        $('#achart-backpacktotal').text('(' + state.actionChart.getNBackpackItems() + ')');
+        $('#achart-specialtotal').text('(' + state.actionChart.getNSpecialItems() + ')');
     },
 
-    showInventoryMsg(action: string, object: Item, msg: string) {
-        const toastType = ( action === "pick" ? "success" : "warning" );
-        let html = "";
+    showInventoryMsg: function(action : string, object : Item, msg : string) {
+        var toastType = ( action == 'pick' ? 'success' : 'warning' );
+        var html = '';
 
         // Check if the object has an image
-        if ( object) {
-            const imageUrl = object.getImageUrl();
-            if ( imageUrl ) {
+        if( object) {
+            var imageUrl = object.getImageUrl();
+            if( imageUrl )
                 html += '<img class="inventoryImg" src="' + imageUrl + '" /> ';
-            }
         }
 
         html += msg;
-        html = "<div>" + html + "</div>";
-
+        html = '<div>' + html + '</div>';
+        
         toastr[toastType]( html );
-    },
+    }
 };

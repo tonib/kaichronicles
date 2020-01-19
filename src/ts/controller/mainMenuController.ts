@@ -1,48 +1,47 @@
 
-/**
+/** 
  * The application menu controller
  */
 const mainMenuController = {
 
-    /**
-     * The game menu
+    /**  
+     * The game menu 
      */
-    index() {
-        template.setNavTitle( translations.text("kaiChronicles") , "#mainMenu", true);
+    index: function() {
+        template.setNavTitle( translations.text('kaiChronicles') , '#mainMenu', true);
         template.showStatistics(false);
-        views.loadView("mainMenu.html").then(() => {
+        views.loadView('mainMenu.html').then(function() {
             mainMenuView.setup();
 
             // Hide info only for the web site on the app:
-            if ( cordovaApp.isRunningApp() ) {
+            if( cordovaApp.isRunningApp() )
                 mainMenuView.hideWebInfo();
-            }
 
             // Check if there is a current game
-            if ( !state.existsPersistedState() ) {
+            if( !state.existsPersistedState() )
                 mainMenuView.hideContinueGame();
-            }
-
+                
         });
     },
 
     /**
      * Change the current language
      */
-    changeTranslation() {
-        state.language = ( state.language === "es" ? "en" : "es" );
+    changeTranslation: function() {
+        state.language = ( state.language == 'es' ? 'en' : 'es' );
         mainMenuController.index();
     },
 
     /**
      * Change the current color theme
      */
-    changeColor() {
-        settingsController.changeColorTheme(state.color === "light" ? "dark" : "light");
+    changeColor: function() {
+        settingsController.changeColorTheme(state.color == 'light' ? 'dark' : 'light');
         mainMenuController.index();
     },
 
-    /** Return page */
-    getBackController() { return "exitApp"; },
 
+    /** Return page */
+    getBackController: function() { return 'exitApp'; }
+    
 };

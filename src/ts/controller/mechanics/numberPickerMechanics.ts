@@ -1,3 +1,4 @@
+/// <reference path="../../external.ts" />
 
 /**
  * Tool to select a number (or an amount of money)
@@ -7,115 +8,109 @@ const numberPickerMechanics = {
     /**
      * numberPicker rule execution
      */
-    numberPicker(rule: any) {
+    numberPicker: function(rule : any) {
 
-        if ($(rule).attr("enabled") === "false") {
+        if( $(rule).attr('enabled') == 'false' ) {
             // Disable the money picker
             numberPickerMechanics.disable();
             return;
         }
 
         // The number picker UI
-        const $ui = mechanicsEngine.getMechanicsUI("mechanics-numberpicker");
+        var $ui = mechanicsEngine.getMechanicsUI('mechanics-numberpicker');
 
         // Check if it's a money picker
-        if ($(rule).attr("money") === "true") {
-            $ui.find("#mechanics-mpAmount").attr("data-ismoneypicker", "true");
-        }
+        if( $(rule).attr('money') == 'true' )
+            $ui.find('#mechanics-mpAmount').attr('data-ismoneypicker', 'true');
 
         // Check if it has an action button
-        const actionButtonTitle = mechanicsEngine.getRuleText(rule, "actionButton");
-        if (actionButtonTitle) {
-            const $pickNumberButton = $ui.find("#mechanics-picknumber");
-            $pickNumberButton.show().text(actionButtonTitle);
-            numberPickerMechanics.bindButtonActionEvent($pickNumberButton, () => {
-                if (mechanicsEngine.fireNumberPickerChoosed()) {
+        var actionButtonTitle = mechanicsEngine.getRuleText(rule, 'actionButton');
+        if( actionButtonTitle ) {
+            var $pickNumberButton = $ui.find('#mechanics-picknumber');
+            $pickNumberButton.show().text( actionButtonTitle );
+            numberPickerMechanics.bindButtonActionEvent( $pickNumberButton , function() {
+                if( mechanicsEngine.fireNumberPickerChoosed() ) {
                     // Store that the picker action has been fired
                     const sectionState = state.sectionStates.getSectionState();
-                    sectionState.numberPickersState.actionFired = true;
+                    sectionState.numberPickersState[ 'actionFired' ] = true;
                 }
             });
         }
 
         // Add HTML to do the choose
-        gameView.appendToSection($ui);
+        gameView.appendToSection( $ui );
 
         // Set the title
-        $("#mechanics-mpTitle").text(mechanicsEngine.getRuleText(rule));
+        $('#mechanics-mpTitle').text( mechanicsEngine.getRuleText(rule) );
 
         // Bind number picker events
-        $("#mechanics-mpAmount").bindNumberEvents();
+        $('#mechanics-mpAmount').bindNumberEvents();
 
         // Set the minimum value
-        const min = $(rule).attr("min");
-        if (min) {
-            $("#mechanics-mpAmount").attr("min", min);
-        }
+        var min = $(rule).attr('min');
+        if( min )
+            $('#mechanics-mpAmount').attr( 'min' , min );
 
         // Set the maximum value
-        const max = $(rule).attr("max");
-        if (max) {
-            $("#mechanics-mpAmount").attr("max", max);
-        }
+        var max = $(rule).attr('max');
+        if( max )
+            $('#mechanics-mpAmount').attr( 'max' , max );
 
         // Initialize (or restore) the value
-        $("#mechanics-mpAmount").initializeValue();
+        $('#mechanics-mpAmount').initializeValue();
 
     },
 
     /** Return true if the action button has been already clicked  */
-    actionButtonWasClicked(): boolean {
+    actionButtonWasClicked : function() : boolean {
         const sectionState = state.sectionStates.getSectionState();
-        return sectionState.numberPickersState.actionFired === true;
+        return sectionState.numberPickersState[ 'actionFired' ] == true;
     },
 
-    bindButtonActionEvent($pickNumberButton: any, callback: () => void) {
+    bindButtonActionEvent : function( $pickNumberButton : any , callback : () => void) {
 
-        if (!$pickNumberButton) {
-            $pickNumberButton = $("#mechanics-picknumber");
-        }
+        if( !$pickNumberButton )
+            $pickNumberButton = $('#mechanics-picknumber');
 
-        $pickNumberButton.click((e) => {
+        $pickNumberButton.click(function(e) {
             e.preventDefault();
             callback();
         });
 
     },
 
-    hideButtonActionEvent() {
-        $("#mechanics-picknumber").hide();
+    hideButtonActionEvent : function() {
+        $('#mechanics-picknumber').hide();
     },
 
     /**
      * Return true if the money picker value is valid
      */
-    isValid(): boolean {
-        const $picker = $("#mechanics-mpAmount");
+    isValid: function() : boolean {
+        var $picker = $('#mechanics-mpAmount');
 
         // If the money picker has been disabled, dont check it
-        if (!$picker.isEnabled()) {
+        if( !$picker.isEnabled() )
             return true;
-        }
-
-        if ($picker.length > 0) {
+            
+        if( $picker.length > 0 )
             return $picker.isValid();
-        } else {
+        else
             return true;
-        }
     },
 
     /**
      * Get the number picker value
      */
-    getNumberPickerValue(): number {
+    getNumberPickerValue: function() : number {
         try {
-            const $picker = $("#mechanics-mpAmount");
-            if ($picker.length > 0) {
+            var $picker = $('#mechanics-mpAmount');
+            if( $picker.length > 0 )
                 return $picker.getNumber();
-            } else {
+            else
                 return 0;
-            }
-        } catch (e) {
+        }
+        catch(e) {
             return 0;
         }
     },
@@ -123,9 +118,9 @@ const numberPickerMechanics = {
     /**
      * Disable the money picker
      */
-    disable() {
-        $("#mechanics-mpAmount").setEnabled(false);
-        $("#mechanics-picknumber").prop("disabled", true);
-    },
-
+    disable: function() {
+        $('#mechanics-mpAmount').setEnabled(false);
+        $('#mechanics-picknumber').prop('disabled', true);
+    }
+    
 };

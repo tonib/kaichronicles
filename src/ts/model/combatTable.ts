@@ -2,7 +2,7 @@
 /**
  * Combat result for death
  */
-const combatTable_DEATH = "D";
+const combatTable_DEATH= "D";
 
 /**
  * The combat table
@@ -13,7 +13,7 @@ const combatTable = {
      * Combat table results when the combat ratio is <= 0
      */
     tableBelowOrEqualToEnemy: {
-
+        
         // Random table result = 1
         1: {
             0: [ 3 , 5 ], // Combat ratio 0 => E: 3 / LW: 5
@@ -22,9 +22,9 @@ const combatTable = {
             3: [ 0 , 6 ], // ...
             4: [ 0 , 8 ],
             5: [ 0 , combatTable_DEATH],
-            6: [ 0 , combatTable_DEATH ],
+            6: [ 0 , combatTable_DEATH ]
         },
-
+        
         // Random table result = 2
         2: {
             0: [ 4 , 4 ],
@@ -33,9 +33,9 @@ const combatTable = {
             3: [ 1 , 6 ],
             4: [ 0 , 7 ],
             5: [ 0 , 8 ],
-            6: [ 0 , combatTable_DEATH ],
+            6: [ 0 , combatTable_DEATH ]
         },
-
+        
         // Random table result = 3
         3: {
             0: [ 5 , 4 ],
@@ -44,9 +44,9 @@ const combatTable = {
             3: [ 2 , 5 ],
             4: [ 1 , 6 ],
             5: [ 0 , 7 ],
-            6: [ 0 , 8 ],
+            6: [ 0 , 8 ]
         },
-
+        
         // Random table result = 4
         4: {
             0: [6 , 3],
@@ -55,9 +55,9 @@ const combatTable = {
             3: [3 , 5],
             4: [2 , 6],
             5: [1 , 7],
-            6: [0 , 8],
+            6: [0 , 8]
         },
-
+        
         // Random table result = 5
         5: {
             0: [7 , 2],
@@ -66,9 +66,9 @@ const combatTable = {
             3: [4 , 4],
             4: [3 , 5],
             5: [2 , 6],
-            6: [1 , 7],
-        },
-
+            6: [1 , 7]
+        }, 
+        
         // Random table result = 6
         6: {
             0: [8 , 2],
@@ -77,9 +77,9 @@ const combatTable = {
             3: [5 , 4],
             4: [4 , 5],
             5: [3 , 6],
-            6: [2 , 6],
+            6: [2 , 6]
         },
-
+        
         // Random table result = 7
         7: {
             0: [9 , 1],
@@ -88,9 +88,9 @@ const combatTable = {
             3: [6 , 3],
             4: [5 , 4],
             5: [4 , 5],
-            6: [3 , 5],
+            6: [3 , 5]
         },
-
+        
         // Random table result = 8
         8: {
             0: [10 , 0],
@@ -99,9 +99,9 @@ const combatTable = {
             3: [7  , 2],
             4: [6  , 3],
             5: [5  , 4],
-            6: [4  , 4],
+            6: [4  , 4]
         },
-
+        
         // Random table result = 9
         9: {
             0: [11 , 0],
@@ -110,9 +110,9 @@ const combatTable = {
             3: [8  , 0],
             4: [7  , 2],
             5: [6  , 3],
-            6: [5  , 3],
+            6: [5  , 3]
         },
-
+        
         // Random table result = 0
         0: {
             0: [12 , 0],
@@ -121,15 +121,15 @@ const combatTable = {
             3: [9  , 0],
             4: [8  , 0],
             5: [7  , 0],
-            6: [6  , 0],
-        },
+            6: [6  , 0]
+        }
     },
-
+    
     /**
      * Combat table results when the combat ratio is > 0
      */
     tableAboveEnemy: {
-
+        
         // Random table result = 1
         1: {
             1: [4 , 5], // Combat ratio +1 / +2 => E: 4 , LW: 5
@@ -146,9 +146,9 @@ const combatTable = {
             12: [18, 0],
             13: [20, 0],
             14: [22, 0],
-            15: [combatTable_DEATH, 0],
+            15: [combatTable_DEATH, 0]
         },
-
+        
         // Random table result = 2
         2: {
             1: [5  , 4],
@@ -165,9 +165,9 @@ const combatTable = {
             12: [20, 0],
             13: [22, 0],
             14: [combatTable_DEATH, 0],
-            15: [combatTable_DEATH, 0],
+            15: [combatTable_DEATH, 0]
         },
-
+        
         // Random table result = 3
         3: {
             1: [6  , 3],
@@ -184,9 +184,9 @@ const combatTable = {
             12: [22, 0],
             13: [combatTable_DEATH, 0],
             14: [combatTable_DEATH, 0],
-            15: [combatTable_DEATH, 0],
+            15: [combatTable_DEATH, 0]
         },
-
+        
         // Random table result = 4
         4: {
             1: [7 , 3],
@@ -203,9 +203,9 @@ const combatTable = {
             12: [combatTable_DEATH, 0],
             13: [combatTable_DEATH, 0],
             14: [combatTable_DEATH, 0],
-            15: [combatTable_DEATH, 0],
+            15: [combatTable_DEATH, 0]
         },
-
+        
         // Random table result = 5
         5: {
             1: [8 , 2],
@@ -222,9 +222,9 @@ const combatTable = {
             12: [combatTable_DEATH, 0],
             13: [combatTable_DEATH, 0],
             14: [combatTable_DEATH, 0],
-            15: [combatTable_DEATH, 0],
+            15: [combatTable_DEATH, 0]
         },
-
+        
         // Random table result = 6
         6: {
             1: [9, 2],
@@ -241,9 +241,9 @@ const combatTable = {
             12: [combatTable_DEATH, 0],
             13: [combatTable_DEATH, 0],
             14: [combatTable_DEATH, 0],
-            15: [combatTable_DEATH, 0],
+            15: [combatTable_DEATH, 0]
         },
-
+        
         // Random table result = 7
         7: {
             1: [10, 1],
@@ -260,9 +260,9 @@ const combatTable = {
             12: [combatTable_DEATH, 0],
             13: [combatTable_DEATH, 0],
             14: [combatTable_DEATH, 0],
-            15: [combatTable_DEATH, 0],
+            15: [combatTable_DEATH, 0]
         },
-
+        
         // Random table result = 8
         8: {
             1: [11, 0],
@@ -279,9 +279,9 @@ const combatTable = {
             12: [combatTable_DEATH, 0],
             13: [combatTable_DEATH, 0],
             14: [combatTable_DEATH, 0],
-            15: [combatTable_DEATH, 0],
+            15: [combatTable_DEATH, 0]
         },
-
+        
         // Random table result = 9
         9: {
             1: [12, 0],
@@ -298,9 +298,9 @@ const combatTable = {
             12: [combatTable_DEATH, 0],
             13: [combatTable_DEATH, 0],
             14: [combatTable_DEATH, 0],
-            15: [combatTable_DEATH, 0],
+            15: [combatTable_DEATH, 0]
         },
-
+        
         // Random table result = 0
         0: {
             1: [14, 0],
@@ -317,18 +317,18 @@ const combatTable = {
             12: [combatTable_DEATH, 0],
             13: [combatTable_DEATH, 0],
             14: [combatTable_DEATH, 0],
-            15: [combatTable_DEATH, 0],
-        },
+            15: [combatTable_DEATH, 0]
+        }
     },
 
     /**
      * Get a combat table result
      * @param combatRatio The combat ratio
      * @param randomTableValue The random table value
-     * @returns Array with endurance points loses, or combatTable_DEATH. Index 0 is the
+     * @returns Array with endurance points loses, or combatTable_DEATH. Index 0 is the 
      * EP enemy loss. Index 1 is the Lone Wolf loss
      */
-    getCombatTableResult(combatRatio: number, randomTableValue: number): any[] {
+    getCombatTableResult: function(combatRatio : number, randomTableValue : number) : Array<any> {
         /*
         var ponderatedIndex = combatRatio / 2.0;
         // check if we're using the extended CRT or not and set max column
@@ -360,23 +360,23 @@ const combatTable = {
 
         let ponderatedIndex = combatRatio / 2.0;
         let table;
-        if ( combatRatio <= 0 ) {
+        if( combatRatio <= 0 ) {
             table = combatTable.tableBelowOrEqualToEnemy;
             ponderatedIndex = - ponderatedIndex;
-        } else {
-           table = combatTable.tableAboveEnemy;
         }
+        else
+           table = combatTable.tableAboveEnemy;
 
         // round 4.5 to 5
         ponderatedIndex = Math.ceil(ponderatedIndex);
 
         // check if we're using the extended CRT or not and set max column
         const maxPonderatedIndex = state.actionChart.extendedCRT && combatRatio > 0 ? 15 : 6;
-        if ( ponderatedIndex > maxPonderatedIndex ) {
+        if( ponderatedIndex > maxPonderatedIndex )
             ponderatedIndex = maxPonderatedIndex;
-        }
 
         return table[randomTableValue][ponderatedIndex];
 
-    },
+    }
 };
+

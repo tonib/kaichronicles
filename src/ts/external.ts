@@ -38,20 +38,20 @@ declare function validateXML(parms: any): string;
 
 // Cordova
 declare const Connection: any;
-declare const LocalFileSystem: any;
-declare const FileTransfer: any;
+declare const LocalFileSystem;
+declare const FileTransfer;
 
 // cordova-plugin-zip (Cordova plugin)
-declare const zip: any;
+declare const zip;
 
 // cordova-plugin-zeep (Cordova plugin)
-declare const Zeep: any;
+declare const Zeep;
 
 // cordova-plugin-copytodownload (Cordova plugin)
-declare const CopyToDownload: any;
+declare const CopyToDownload;
 
 // com.megster.cordova.FileChooser (Cordova plugin)
-declare const fileChooser: any;
+declare const fileChooser;
 
 // commons.js:
 interface Array<T> {
@@ -74,16 +74,16 @@ interface String {
 interface Window {
 
     // Cordova:
-    requestFileSystem: any;
+    requestFileSystem;
 
     // Cordova:
-    resolveLocalFileSystemURI: any;
+    resolveLocalFileSystemURI;
 
     // cordova-plugin-document-contract (Cordova plugin)
     plugins: {
-        DocumentContract: any;
+        DocumentContract;
     };
     // commons.js:
-    getUrlParameter( parmName: string ): string;
+    getUrlParameter( parmName: string ): string
 
 }

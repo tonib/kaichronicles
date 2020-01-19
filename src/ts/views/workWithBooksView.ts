@@ -1,56 +1,55 @@
+/// <reference path="../external.ts" />
 
 /**
  * Work with books view
  */
-let workWithBooksView = {
+var workWithBooksView = {
 
     /**
      * Setup view
      */
-    setup() {
+    setup: function() {
 
         // Update books event
-        $("#wwbooks-update").click((e) => {
+        $('#wwbooks-update').click(function(e) {
             e.preventDefault();
 
-            if (!$("#wwbooks-license").prop("checked")) {
-                alert(translations.text("youMustAgree"));
+            if( !$('#wwbooks-license').prop('checked') ) {
+                alert( translations.text('youMustAgree') );
                 return;
             }
 
             // Get selected books:
-            const selectedBooks = [];
-            $("tbody input:checked").parent().parent().each((index, tr) => {
-                const bookNumber = parseInt($(tr).attr("data-book-number"), 10);
-                selectedBooks.push(bookNumber);
+            var selectedBooks = [];
+            $('tbody input:checked').parent().parent().each(function(index, tr) {
+                var bookNumber = parseInt( $(tr).attr('data-book-number') );
+                selectedBooks.push( bookNumber );
             });
 
-            workWithBooksController.downloadBooks(selectedBooks);
+            workWithBooksController.downloadBooks( selectedBooks );
         });
 
         // Select / deselect all books
-        $("#wwbooks-all").change(() => {
-            const $allChecks = $("tbody input");
-            if ($(this).prop("checked")) {
-                $allChecks.prop("checked", "checked");
-            } else {
-                $allChecks.removeAttr("checked");
-            }
+        $('#wwbooks-all').change(function() {
+            var $allChecks = $('tbody input');
+            if( $(this).prop('checked') )
+                $allChecks.prop( 'checked' , 'checked' );
+            else
+                $allChecks.removeAttr('checked');
         });
 
         // Close / cancel button
-        $("#wwbooks-closemodal").click((e) => {
+        $('#wwbooks-closemodal').click(function(e) {
             e.preventDefault();
             workWithBooksView.closeCancelClicked();
         });
     },
 
-    closeCancelClicked() {
-        if (workWithBooksController.changingBooks) {
+    closeCancelClicked: function() {
+        if( workWithBooksController.changingBooks ) {
             // Cancel process
-            if (!confirm(translations.text("confirmCancel"))) {
+            if( !confirm( translations.text( 'confirmCancel' ) ) )
                 return;
-            }
         }
 
         workWithBooksController.closeCancelClicked();
@@ -60,77 +59,75 @@ let workWithBooksView = {
      * Set the "select all" checked / unchecked
      * @param {bool} checked True to check. False to uncheck
      */
-    setSelectAllState(checked: boolean) {
-        if (checked) {
-            $("#wwbooks-all").prop("checked", "checked");
-        } else {
-            $("#wwbooks-all").removeAttr("checked");
-        }
+    setSelectAllState: function(checked: boolean) {
+        if( checked )
+            $('#wwbooks-all').prop( 'checked' , 'checked' );
+        else
+            $('#wwbooks-all').removeAttr( 'checked' );
     },
 
-    updateBooksList(booksState: BookDownloadState[]) {
-        const $tableBody = $("#wwbooks-list > tbody");
+    updateBooksList: function(booksState: Array<BookDownloadState>) {
+        var $tableBody = $('#wwbooks-list > tbody');
         $tableBody.empty();
 
-        let html = "";
-        for (const book of booksState) {
-            html += '<tr data-book-number="' + book.bookNumber +
-                '" style="width:100%"><td>' +
-                book.bookNumber + ". " + book.getTitle() +
-                '</td><td style="white-space: nowrap">' + book.size.toString() + " MB</td>" +
+        var html = '';
+        for(var i=0; i<booksState.length; i++) 
+            html += '<tr data-book-number="' + booksState[i].bookNumber + 
+                '" style="width:100%"><td>' + 
+                booksState[i].bookNumber + '. ' + booksState[i].getTitle() + 
+                '</td><td style="white-space: nowrap">' + booksState[i].size.toString() + ' MB</td>' + 
                 '<td class="center"><input type="checkbox"></td>' +
-                "</tr>";
-        }
+                '</tr>';
 
         $tableBody.append(html);
     },
 
-    markBookAsDownloaded(bookNumber: number) {
-        const $row = $("tr[data-book-number=" + bookNumber + "]");
-        $row.addClass("success");
-        $row.find("input").prop("checked", "checked");
+    markBookAsDownloaded: function(bookNumber: number) {
+        var $row = $('tr[data-book-number=' + bookNumber + ']');
+        $row.addClass('success');
+        $row.find( 'input' ).prop('checked' , 'checked');
     },
 
-    displayModal(show: boolean) {
-        if (show) {
+    displayModal: function(show: boolean) {
+        if( show ) {
             // Clear the log
-            $("#wwbooks-log").empty();
+            $('#wwbooks-log').empty();
 
             // Set cancel button
-            $("#wwbooks-closemodal")
-                .removeClass("btn-primary")
-                .addClass("btn-danger")
-                .text(translations.text("cancel"));
-
+            $('#wwbooks-closemodal')
+                .removeClass('btn-primary')
+                .addClass('btn-danger')
+                .text( translations.text('cancel') );
+            
             // Do no close the dialog with the hardware back button
-            $("#wwbooks-modal").addClass("nobackbutton");
+            $('#wwbooks-modal').addClass('nobackbutton');
         }
 
-        $("#wwbooks-modal").modal(show ? "show" : "hide");
+        $('#wwbooks-modal').modal( show ? 'show' : 'hide' );
     },
 
-    enableCloseModal() {
+    enableCloseModal: function() {
         // Set close button
-        $("#wwbooks-closemodal")
-            .removeClass("btn-danger")
-            .addClass("btn-primary")
-            .text(translations.text("close"));
+        $('#wwbooks-closemodal')
+            .removeClass('btn-danger')
+            .addClass('btn-primary')
+            .text( translations.text('close') );
 
         // Enable to close the dialog with the hardware back button
-        $("#wwbooks-modal").removeClass("nobackbutton");
+        $('#wwbooks-modal').removeClass('nobackbutton');
     },
 
-    logEvent(msg: string) {
-        $("#wwbooks-log").append(msg + "\n\n");
+    logEvent: function(msg: string) {
+        $('#wwbooks-log').append(msg + '\n\n');
     },
 
-    setCurrentWork(msg: string) {
-        $("#wwbooks-current").text(msg);
+    setCurrentWork: function(msg: string) {
+        $('#wwbooks-current').text(msg);
         workWithBooksView.updateProgress(0);
     },
 
-    updateProgress(percent: number) {
-        $("#wwbooks-progress").css("width", percent + "%");
+    updateProgress: function( percent: number ) {
+        $('#wwbooks-progress').css('width', percent + '%');
     },
 
 };
