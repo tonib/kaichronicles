@@ -3,7 +3,7 @@ let views = {
     /**
      * Cache with views already loaded
      */
-    viewCache: {},
+    viewCache: [] as HTMLElement[],
 
     /**
      * Views setup

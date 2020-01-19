@@ -1,19 +1,18 @@
-/// <reference path="../../external.ts" />
 
 /**
- * Engine to render and run gamebook mechanics rules 
+ * Engine to render and run gamebook mechanics rules
  */
 const mechanicsEngine = {
 
     /**
      * jquery DOM object with the mechanics HTML
      */
-    $mechanicsUI: null,
+    $mechanicsUI:  null as JQuery<HTMLElement>,
 
     /**
      * Mechanics UI URL
      */
-    mechanicsUIURL: 'views/mechanicsEngine.html',
+    mechanicsUIURL: "views/mechanicsEngine.html",
 
     /** The rule to run after combats */
     onAfterCombatsRule: null,
@@ -44,28 +43,28 @@ const mechanicsEngine = {
      * Starts the mechanics UI download
      * @return The deferred object for the download
      */
-    downloadMechanicsUI: function() {
-        // TODO: This is ugly. The mechanicsEngine.html load should be 
+    downloadMechanicsUI() {
+        // TODO: This is ugly. The mechanicsEngine.html load should be
         // TODO: handled always by views object
 
         // There is a trick here: If we are on production, the UI was already
         // loaded with the views:
-        var cachedView = views.getCachedView( 'mechanicsEngine.html' );
-        if( cachedView ) {
-            mechanicsEngine.$mechanicsUI = $(cachedView).find('#mechanics-container');
+        const cachedView = views.getCachedView("mechanicsEngine.html");
+        if (cachedView) {
+            mechanicsEngine.$mechanicsUI = $(cachedView).find("#mechanics-container");
             // Return a resolved promise
-            var dfd = jQuery.Deferred();
+            const dfd = jQuery.Deferred();
             dfd.resolve();
             return dfd.promise();
         }
 
         return $.ajax({
             url: mechanicsEngine.mechanicsUIURL,
-            dataType: "html"
+            dataType: "html",
         })
-        .done( function(data) {
-            mechanicsEngine.$mechanicsUI = $(data).filter('#mechanics-container');
-        });
+            .done((data) => {
+                mechanicsEngine.$mechanicsUI = $(data).filter("#mechanics-container");
+            });
     },
 
     /**
@@ -73,8 +72,8 @@ const mechanicsEngine = {
      * @param tagId The tag id to get
      * @returns {jQuery} The translated tag
      */
-    getMechanicsUI: function( tagId : string ) : any {
-        var $tag = mechanicsEngine.$mechanicsUI.find('#' + tagId ).clone();
+    getMechanicsUI(tagId: string): any {
+        const $tag = mechanicsEngine.$mechanicsUI.find("#" + tagId).clone();
         return translations.translateView($tag, true);
     },
 
@@ -83,11 +82,11 @@ const mechanicsEngine = {
     /************************************************************/
 
     /**
-     * Run the game mechanics of a section. 
-     * It updates the gameView, binds events, etc. 
+     * Run the game mechanics of a section.
+     * It updates the gameView, binds events, etc.
      * @param section The current game Section
      */
-    run: function(section : Section) {
+    run(section: Section) {
 
         // Defaults:
         gameView.enableNextLink(true);
@@ -100,10 +99,10 @@ const mechanicsEngine = {
         mechanicsEngine.onNumberPickerChoosed = null;
 
         // Disable previous link if we are on "The story so far" section
-        gameView.enablePreviousLink(section.sectionId != 'tssf');
+        gameView.enablePreviousLink(section.sectionId !== "tssf");
 
         // Retrieve or store combat states
-        state.sectionStates.setupCombats( section );
+        state.sectionStates.setupCombats(section);
 
         // Run healing (execute BEFORE the rules, they can decrease the endurance of the
         // player)
@@ -139,17 +138,19 @@ const mechanicsEngine = {
      * run the rules. Random table increments are stored on the UI, and they are accumulative. So if rules are re-executed
      * without refresh the section, it can be needed
      */
-    runSectionRules: function(resetRandomTableIncrements : boolean = false) {
+    runSectionRules(resetRandomTableIncrements: boolean = false) {
 
-        if( resetRandomTableIncrements )
+        if (resetRandomTableIncrements) {
             randomMechanics.resetRandomTableIncrements();
+        }
 
         // Run section rules
-        var $sectionMechanics = 
-            state.mechanics.getSection( state.sectionStates.currentSection );
-        if( $sectionMechanics !== null )
-            mechanicsEngine.runChildRules( $sectionMechanics );
-        
+        const $sectionMechanics =
+            state.mechanics.getSection(state.sectionStates.currentSection);
+        if ($sectionMechanics !== null) {
+            mechanicsEngine.runChildRules($sectionMechanics);
+        }
+
         // Run global rules
         mechanicsEngine.runGlobalRules();
     },
@@ -159,43 +160,45 @@ const mechanicsEngine = {
      * @param onlyCombatRules True to apply only "combat" rules
      * @param combatToApply Only applies if onlyCombatRules is true. Single combat where to apply the combat rules
      */
-    runGlobalRules : function(onlyCombatRules : boolean = false, combatToApply : Combat = null) {
+    runGlobalRules(onlyCombatRules: boolean = false, combatToApply: Combat = null) {
 
-        for( var i=0; i<state.sectionStates.globalRulesIds.length; i++) {
-            const id = state.sectionStates.globalRulesIds[i];
+        for (const id of state.sectionStates.globalRulesIds) {
             const $globalRule = state.mechanics.getGlobalRule(id);
-            
-            if( onlyCombatRules ) {
-                for( let rule of $globalRule.children() ) {
-                    if( rule.nodeName == 'combat' )
+
+            if (onlyCombatRules) {
+                for (const rule of $globalRule.children().toArray()) {
+                    if (rule.nodeName === "combat") {
                         mechanicsEngine.combat(rule, combatToApply);
+                    }
                 }
+            } else {
+                mechanicsEngine.runChildRules($globalRule);
             }
-            else
-                mechanicsEngine.runChildRules( $globalRule );
         }
     },
 
     /**
      * Run child rules of a given rule
-     * @param $rule Rule where to run child rules 
+     * @param $rule Rule where to run child rules
      */
-    runChildRules: function($rule) {
-        var childrenRules = $rule.children();
-        for(var i=0; i<childrenRules.length; i++)
-            mechanicsEngine.runRule( childrenRules[i] );
+    runChildRules($rule: JQuery<HTMLElement>) {
+        const childrenRules = $rule.children();
+        for (const rule of childrenRules.toArray()) {
+            mechanicsEngine.runRule(rule);
+        }
     },
 
     /**
      * Run a game rule
      * @param rule The XML rule node
      */
-    runRule: function(rule) {
-        //console.log( Mechanics.getRuleSelector(rule) );
-        if( !mechanicsEngine[rule.nodeName] )
+    runRule(rule: Element) {
+        // console.log( Mechanics.getRuleSelector(rule) );
+        if (!mechanicsEngine[rule.nodeName]) {
             mechanicsEngine.debugWarning("Unknown rule: " + rule.nodeName);
-        else
+        } else {
             mechanicsEngine[rule.nodeName](rule);
+        }
     },
 
     /**
@@ -203,25 +206,25 @@ const mechanicsEngine = {
      * @param fromUI True if the event was fired from the UI
      * @param o Only applies if fromUI is true. The object picked / droped
      */
-    fireInventoryEvents: function( fromUI : boolean = false , o : Item = null ) {
+    fireInventoryEvents(fromUI: boolean = false, o: Item = null) {
 
         // Render object tables
         mechanicsEngine.showAvailableObjects();
         mechanicsEngine.showSellObjects();
 
-        if( mechanicsEngine.onInventoryEventRule )
-            mechanicsEngine.runChildRules( $(mechanicsEngine.onInventoryEventRule) );
+        if (mechanicsEngine.onInventoryEventRule) {
+            mechanicsEngine.runChildRules($(mechanicsEngine.onInventoryEventRule));
+        }
 
         // Update combat ratio on combats  (have we picked a weapon?)
         combatMechanics.updateCombats();
 
-        if( fromUI && routing.getControllerName() == 'gameController' ) {
-            // Check if we must to re-render the section. This may be needed if the 
+        if (fromUI && routing.getControllerName() === "gameController") {
+            // Check if we must to re-render the section. This may be needed if the
             // picked / dropped object affects to the rules
-            if( mechanicsEngine.checkReRenderAfterInventoryEvent(o) ) {
+            if (mechanicsEngine.checkReRenderAfterInventoryEvent(o)) {
                 // Re-render the section
-                console.log('Re-rendering the section due to rules re-execution');
-                gameController.loadSection( state.sectionStates.currentSection , false , 
+                gameController.loadSection(state.sectionStates.currentSection, false,
                     window.pageYOffset);
             }
         }
@@ -232,81 +235,83 @@ const mechanicsEngine = {
      * Print debug warning to console, and even more prominently if we're in
      * debug mode.
      */
-    debugWarning: function(msg : string) {
+    debugWarning(msg: string) {
+        // tslint:disable-next-line: no-console
         console.log(msg);
-        if( window.getUrlParameter( 'debug' ) )
-            mechanicsEngine.showMessage( msg );
+        if (window.getUrlParameter("debug")) {
+            mechanicsEngine.showMessage(msg);
+        }
     },
 
     /**
-     * Check if we must to re-render the section. This may be needed if the 
+     * Check if we must to re-render the section. This may be needed if the
      * picked / dropped object affects to the rules
      * @param o The object picked / droped
      */
-    checkReRenderAfterInventoryEvent: function(o : Item) {
-        
+    checkReRenderAfterInventoryEvent(o: Item) {
+
         // Get section rules
-        var $sectionRules = state.mechanics.getSection( state.sectionStates.currentSection );
-        if( $sectionRules === null )
+        const $sectionRules = state.mechanics.getSection(state.sectionStates.currentSection);
+        if ($sectionRules === null) {
             return false;
+        }
 
         // TODO: Here there is a huge design error: Or use this re-render, or use "onInventoryEvent" rule
         // TODO: Both do the same
 
-        var reRender = false;
-        mechanicsEngine.enumerateSectionRules( $sectionRules[0] , function(rule) {
-            if( rule.nodeName == 'onInventoryEvent' )
+        let reRender = false;
+        mechanicsEngine.enumerateSectionRules($sectionRules[0], (rule) => {
+            if (rule.nodeName === "onInventoryEvent") {
                 // onInventoryEvent rule don't affect, has been executed
-                return 'ignoreDescendants';
-            else if( rule.nodeName == 'test' ) {
+                return "ignoreDescendants";
+            } else if (rule.nodeName === "test") {
                 // test rule
 
                 const $rule = $(rule);
 
                 // TODO: Use mechanicsEngine.getArrayProperty here
-                var objectsList = $rule.attr('hasObject');
-                if( objectsList ) {
-                    const objects = objectsList.split('|');
-                    if( objects.contains(o.id) ) {
+                const objectsList = $rule.attr("hasObject");
+                if (objectsList) {
+                    const objects = objectsList.split("|");
+                    if (objects.contains(o.id)) {
                         // Section should be re-rendered
                         reRender = true;
-                        return 'finish';
+                        return "finish";
                     }
                 }
 
-                if( $rule.attr('canUseBow') && ( o.id == Item.QUIVER || o.isWeaponType( Item.BOW ) ) ) {
+                if ($rule.attr("canUseBow") && (o.id === Item.QUIVER || o.isWeaponType(Item.BOW))) {
                     // Section should be re-rendered
                     reRender = true;
-                    return 'finish';
+                    return "finish";
                 }
 
-                if( $rule.attr('hasWeaponType') && o.isWeapon() ) {
+                if ($rule.attr("hasWeaponType") && o.isWeapon()) {
                     // Section should be re-rendered
                     reRender = true;
-                    return 'finish';
+                    return "finish";
                 }
 
-                const expression : string = $rule.attr( 'expression' );
-                if( expression ) {
-                    if( o.id == Item.MONEY && ( expression.indexOf('[MONEY]') >= 0 ||  expression.indexOf('[MONEY-ON-SECTION]') >= 0 ) ) {
+                const expression: string = $rule.attr("expression");
+                if (expression) {
+                    if (o.id === Item.MONEY && (expression.indexOf("[MONEY]") >= 0 || expression.indexOf("[MONEY-ON-SECTION]") >= 0)) {
                         // Section should be re-rendered
                         reRender = true;
-                        return 'finish';
+                        return "finish";
                     }
 
-                    if( o.id == Item.MEAL && expression.indexOf('[MEALS]') >= 0 ) {
+                    if (o.id === Item.MEAL && expression.indexOf("[MEALS]") >= 0) {
                         // Section should be re-rendered
                         reRender = true;
-                        return 'finish';
+                        return "finish";
                     }
                 }
-            }
-            else if( rule.nodeName == 'meal' ) {
+            } else if (rule.nodeName === "meal") {
                 // meal rule
-                if( o.id == Item.MEAL || o.isMeal ) {
+                if (o.id === Item.MEAL || o.isMeal) {
                     // Section should be re-rendered
                     reRender = true;
-                    return 'finish';
+                    return "finish";
                 }
             }
         });
@@ -318,41 +323,41 @@ const mechanicsEngine = {
      * @param {Combat} combat The combat that has played turn. null to fire all combats on this
      * section
      */
-    fireAfterCombatTurn: function(combat) {
+    fireAfterCombatTurn(combat: Combat) {
 
-        var sectionState = state.sectionStates.getSectionState();
+        const sectionState = state.sectionStates.getSectionState();
 
-        if( !combat) {
+        if (!combat) {
             // Fire all combats
-            $.each(sectionState.combats, function(index, combat) {
-                mechanicsEngine.fireAfterCombatTurn(combat);
+            $.each(sectionState.combats, (index, turnCombat: Combat) => {
+                mechanicsEngine.fireAfterCombatTurn(turnCombat);
             });
             return;
         }
 
         // Fire the given combat turn events
-        for(var i=0; i< mechanicsEngine.onAfterCombatTurns.length; i++) {
-            var rule = mechanicsEngine.onAfterCombatTurns[i];
-
+        for (const rule of mechanicsEngine.onAfterCombatTurns) {
             // Turn when to execute the rule:
-            const txtRuleTurn : string = $(rule).attr('turn');
-            const ruleTurn = ( txtRuleTurn == 'any' ? 'any' : ExpressionEvaluator.evalInteger( txtRuleTurn ) );
+            const txtRuleTurn: string = $(rule).attr("turn");
+            const ruleTurn = (txtRuleTurn === "any" ? "any" : ExpressionEvaluator.evalInteger(txtRuleTurn));
 
             // We reapply all rules accumulatively
-            if( txtRuleTurn == 'any' || combat.turns.length >= ruleTurn )
-                mechanicsEngine.runChildRules( $(rule) );
+            if (txtRuleTurn === "any" || combat.turns.length >= ruleTurn) {
+                mechanicsEngine.runChildRules($(rule));
+            }
         }
     },
 
     /**
      * Fire events on some choice is selected
-     * @param {string} sectionId The section of the selected choice 
+     * @param {string} sectionId The section of the selected choice
      */
-    fireChoiceSelected: function(sectionId) {
-        $.each( mechanicsEngine.onChoiceSelected , function(index, rule) {
-            var ruleSectionId = $(rule).attr('section');
-            if( ruleSectionId == 'all' || ruleSectionId == sectionId )
-                mechanicsEngine.runChildRules( $(rule) );
+    fireChoiceSelected(sectionId: string) {
+        $.each(mechanicsEngine.onChoiceSelected, (index, rule) => {
+            const ruleSectionId = $(rule).attr("section");
+            if (ruleSectionId === "all" || ruleSectionId === sectionId) {
+                mechanicsEngine.runChildRules($(rule));
+            }
         });
     },
 
@@ -360,28 +365,32 @@ const mechanicsEngine = {
      * Fire events when some object is used
      * @param {string} objectId The id of the object used
      */
-    fireObjectUsed: function(objectId) {
-        if( !mechanicsEngine.onObjectUsedRule )
+    fireObjectUsed(objectId: string) {
+        if (!mechanicsEngine.onObjectUsedRule) {
             return;
+        }
 
-        var $eventRule = $(mechanicsEngine.onObjectUsedRule);
+        const $eventRule = $(mechanicsEngine.onObjectUsedRule);
         // TODO: Use mechanicsEngine.getArrayProperty here
-        var objectIds = $eventRule.attr('objectId').split('|');
-        if( objectIds.contains(objectId) ) 
-            mechanicsEngine.runChildRules( $eventRule );
+        const objectIds = $eventRule.attr("objectId").split("|");
+        if (objectIds.contains(objectId)) {
+            mechanicsEngine.runChildRules($eventRule);
+        }
     },
 
     /**
      * The action button of a picker number was clicked
      * @returns True if the number picker value was valid (== if the action has been executed)
      */
-    fireNumberPickerChoosed: function() : boolean {
+    fireNumberPickerChoosed(): boolean {
         // Be sure the picker number value is valid
-        if( !numberPickerMechanics.isValid() )
+        if (!numberPickerMechanics.isValid()) {
             return false;
+        }
 
-        if( mechanicsEngine.onNumberPickerChoosed )
-            mechanicsEngine.runChildRules( $(mechanicsEngine.onNumberPickerChoosed) );
+        if (mechanicsEngine.onNumberPickerChoosed) {
+            mechanicsEngine.runChildRules($(mechanicsEngine.onNumberPickerChoosed));
+        }
 
         return true;
     },
@@ -393,23 +402,23 @@ const mechanicsEngine = {
     /**
      * Choose player skills UI
      */
-    setSkills: function() {
+    setSkills() {
         SkillsSetup.setSkills();
     },
 
     /**
      * Choose the kai disciplines UI
      */
-    setDisciplines: function() {
-        var setup = new SetupDisciplines();
+    setDisciplines() {
+        const setup = new SetupDisciplines();
         setup.setupDisciplinesChoose();
     },
 
-    /** 
+    /**
      * Choose equipment UI (only for book 1)
      * TODO: This is weird, only for book 1? Fix this
      */
-    chooseEquipment: function(rule) {
+    chooseEquipment(rule: Element) {
         EquipmentSectionMechanics.chooseEquipment(rule);
     },
 
@@ -417,27 +426,29 @@ const mechanicsEngine = {
      * Pick objects, money, etc
      * param rule The pick rule
      */
-    pick: function(rule) {
+    pick(rule: Element) {
 
-        var sectionState = state.sectionStates.getSectionState();
+        const sectionState = state.sectionStates.getSectionState();
 
         // Do not execute the rule twice:
-        if( sectionState.ruleHasBeenExecuted(rule) )
+        if (sectionState.ruleHasBeenExecuted(rule)) {
             return;
+        }
 
         const $rule = $(rule);
 
         // Check if we are picking an object
-        var objectId = $rule.attr('objectId');
-        if( objectId ) {
-            if( !state.mechanics.getObject( objectId ) )
-                mechanicsEngine.debugWarning( 'Unknown object: ' + objectId );
+        const objectId = $rule.attr("objectId");
+        if (objectId) {
+            if (!state.mechanics.getObject(objectId)) {
+                mechanicsEngine.debugWarning("Unknown object: " + objectId);
+            }
 
             // Pick the object
-            if( !actionChartController.pick( objectId , false, false) ) {
+            if (!actionChartController.pick(objectId, false, false)) {
                 // The object has not been picked (ex. full backpack)
                 // Add the object to the section
-                sectionState.addObjectToSection( objectId );
+                sectionState.addObjectToSection(objectId);
             }
 
             // Mark the rule as exececuted
@@ -446,68 +457,69 @@ const mechanicsEngine = {
         }
 
         // Other things (money or meals)
-        var cls = $rule.attr('class');
+        const cls = $rule.attr("class");
 
         // Check the amount
-        let count = ExpressionEvaluator.evalInteger( $rule.attr('count') );
+        let count = ExpressionEvaluator.evalInteger($rule.attr("count"));
 
-        // Add to the action chart 
-        if( cls == 'meal')
+        // Add to the action chart
+        if (cls === "meal") {
             actionChartController.increaseMeals(count);
-        else if( cls == 'arrow' )
+        } else if (cls === "arrow") {
             actionChartController.increaseArrows(count);
-        else if( cls == Item.MONEY ) {
+        } else if (cls === Item.MONEY) {
             // TODO: We should store the amount of each currency. Unsupported
             // Exchange to Gold Crows
-            count = Currency.toGoldCrowns( count , $rule.attr('currency') );
+            count = Currency.toGoldCrowns(count, $rule.attr("currency"));
             actionChartController.increaseMoney(count);
+        } else {
+            mechanicsEngine.debugWarning("Pick rule with no objectId / class");
         }
-        else
-            mechanicsEngine.debugWarning('Pick rule with no objectId / class');
 
         // Mark the rule as exececuted
         sectionState.markRuleAsExecuted(rule);
 
     },
 
-    /** 
-     * Assing an action to a random table link.  
+    /**
+     * Assing an action to a random table link.
      */
-    randomTable: function(rule) {
-        //console.log( 'randomTable rule' );
+    randomTable(rule: Element) {
+        // console.log( 'randomTable rule' );
         randomMechanics.randomTable(rule);
     },
 
     /** Increment for random table selection */
-    randomTableIncrement: function(rule) {
+    randomTableIncrement(rule: Element) {
         randomMechanics.randomTableIncrement(rule);
     },
 
     /**
      * Test a condition
      */
-    test: function(rule) {
+    test(rule: Element) {
 
-        // IF THERE IS MORE THAN ONE CONDITION ON THE RULE, THEY SHOULD WORK LIKE AN 
+        // IF THERE IS MORE THAN ONE CONDITION ON THE RULE, THEY SHOULD WORK LIKE AN
         // "OR" OPERATOR
-        
+
         // Initially the condition is false
-        var conditionStatisfied = false;
+        let conditionStatisfied = false;
 
         const $rule = $(rule);
 
         // Check discipline
         // TODO: Use mechanicsEngine.getArrayProperty here
-        var disciplineToTest = $rule.attr('hasDiscipline');
-        var i;
-        if( disciplineToTest ) {
+        const disciplineToTest = $rule.attr("hasDiscipline");
+        let i;
+        if (disciplineToTest) {
             // Check if the player has some of the disciplines
-            var allDisciplines = Object.keys( state.book.getDisciplinesTable() );
-            var disciplines = disciplineToTest.split('|');
-            for(i=0; i < disciplines.length; i++ ) {
-                if( !allDisciplines.contains( disciplines[i] ) )
-                    mechanicsEngine.debugWarning('Unknown discipline: ' + disciplines[i]);
-                if( state.actionChart.disciplines.contains( disciplines[i] ) ) {
+            const allDisciplines = Object.keys(state.book.getDisciplinesTable());
+            const disciplines = disciplineToTest.split("|");
+            for (i = 0; i < disciplines.length; i++) {
+                if (!allDisciplines.contains(disciplines[i])) {
+                    mechanicsEngine.debugWarning("Unknown discipline: " + disciplines[i]);
+                }
+                if (state.actionChart.disciplines.contains(disciplines[i])) {
                     conditionStatisfied = true;
                     break;
                 }
@@ -515,15 +527,16 @@ const mechanicsEngine = {
         }
 
         // Check objects
-        var objectIdsToTest = $rule.attr('hasObject');
-        if( objectIdsToTest ) {
+        const objectIdsToTest = $rule.attr("hasObject");
+        if (objectIdsToTest) {
             // Check if the player has some of the objects
             // TODO: Use mechanicsEngine.getArrayProperty here
-            var objects = objectIdsToTest.split('|');
-            for(i=0; i < objects.length; i++ ) {
-                if( !state.mechanics.getObject( objects[i] ) )
-                    mechanicsEngine.debugWarning( 'Unknown object: ' + objects[i] );
-                if( state.actionChart.hasObject( objects[i] ) ) {
+            const objects = objectIdsToTest.split("|");
+            for (i = 0; i < objects.length; i++) {
+                if (!state.mechanics.getObject(objects[i])) {
+                    mechanicsEngine.debugWarning("Unknown object: " + objects[i]);
+                }
+                if (state.actionChart.hasObject(objects[i])) {
                     conditionStatisfied = true;
                     break;
                 }
@@ -531,17 +544,18 @@ const mechanicsEngine = {
         }
 
         // Check expression
-        var expression = $rule.attr('expression');
-        if( expression && ExpressionEvaluator.evalBoolean( expression ) )
+        const expression = $rule.attr("expression");
+        if (expression && ExpressionEvaluator.evalBoolean(expression)) {
             conditionStatisfied = true;
-        
+        }
+
         // Check section visited:
         // TODO: Use mechanicsEngine.getArrayProperty here
-        var sectionIdsList = $rule.attr('sectionVisited');
-        if( sectionIdsList ) {
-            const sectionIds = sectionIdsList.split('|');
-            for(i=0; i < sectionIds.length; i++ ) {
-                if( state.sectionStates.sectionIsVisited(sectionIds[i]) ) {
+        const sectionIdsList = $rule.attr("sectionVisited");
+        if (sectionIdsList) {
+            const sectionIds = sectionIdsList.split("|");
+            for (i = 0; i < sectionIds.length; i++) {
+                if (state.sectionStates.sectionIsVisited(sectionIds[i])) {
                     conditionStatisfied = true;
                     break;
                 }
@@ -549,12 +563,12 @@ const mechanicsEngine = {
         }
 
         // Test current weapon:
-        const currentWeaponList = mechanicsEngine.getArrayProperty( $rule , 'currentWeapon' );
-        if( currentWeaponList.length > 0 ) {
-            const selectedWeapon : Item = state.actionChart.getSelectedWeaponItem(false);
-            if( selectedWeapon ) {
-                for( let w of currentWeaponList ) {
-                    if( selectedWeapon.isWeaponType( w ) ) {
+        const currentWeaponList = mechanicsEngine.getArrayProperty($rule, "currentWeapon");
+        if (currentWeaponList.length > 0) {
+            const selectedWeapon: Item = state.actionChart.getSelectedWeaponItem(false);
+            if (selectedWeapon) {
+                for (const w of currentWeaponList) {
+                    if (selectedWeapon.isWeaponType(w)) {
                         conditionStatisfied = true;
                         break;
                     }
@@ -564,51 +578,57 @@ const mechanicsEngine = {
 
         // Test weaponskill with current weapon
         // TODO: Use mechanicsEngine.getBooleanProperty here
-        var weaponskillActive = $rule.attr('weaponskillActive');
-        if( weaponskillActive == 'true' ) {
-            if( state.actionChart.isWeaponskillActive() )
+        const weaponskillActive = $rule.attr("weaponskillActive");
+        if (weaponskillActive === "true") {
+            if (state.actionChart.isWeaponskillActive()) {
                 conditionStatisfied = true;
+            }
         }
 
         // Test combats won:
         // TODO: Use mechanicsEngine.getBooleanProperty here
-        var combatsWon = $rule.attr('combatsWon');
-        if( combatsWon ) {
-            var allCombatsWon = state.sectionStates.getSectionState().areAllCombatsWon();
-            if( combatsWon == 'true' && allCombatsWon )
+        const combatsWon = $rule.attr("combatsWon");
+        if (combatsWon) {
+            const allCombatsWon = state.sectionStates.getSectionState().areAllCombatsWon();
+            if (combatsWon === "true" && allCombatsWon) {
                 conditionStatisfied = true;
-            else if( combatsWon == 'false' && !allCombatsWon )
+            } else if (combatsWon === "false" && !allCombatsWon) {
                 conditionStatisfied = true;
+            }
         }
 
         // Test some combat active:
         // TODO: Use mechanicsEngine.getBooleanProperty here
-        var combatsActive = $rule.attr('combatsActive');
-        if( combatsActive == 'true' && 
-            state.sectionStates.getSectionState().someCombatActive() )
+        const combatsActive = $rule.attr("combatsActive");
+        if (combatsActive === "true" &&
+            state.sectionStates.getSectionState().someCombatActive()) {
             conditionStatisfied = true;
+        }
 
         // Test book language
-        var bookLanguage = $rule.attr('bookLanguage');
-        if( bookLanguage && state.book.language == bookLanguage )
+        const bookLanguage = $rule.attr("bookLanguage");
+        if (bookLanguage && state.book.language === bookLanguage) {
             conditionStatisfied = true;
-        
+        }
+
         // Test section choice is enabled:
-        var sectionToCheck = $rule.attr('isChoiceEnabled');
-        if( sectionToCheck && mechanicsEngine.isChoiceEnabled(sectionToCheck) )
+        const sectionToCheck = $rule.attr("isChoiceEnabled");
+        if (sectionToCheck && mechanicsEngine.isChoiceEnabled(sectionToCheck)) {
             conditionStatisfied = true;
+        }
 
         // Test if the player can use the bow
-        const canUseBow = mechanicsEngine.getBooleanProperty( $rule , 'canUseBow' );
-        if( canUseBow != null && canUseBow == state.actionChart.canUseBow() )
+        const canUseBow = mechanicsEngine.getBooleanProperty($rule, "canUseBow");
+        if (canUseBow !== null && canUseBow === state.actionChart.canUseBow()) {
             conditionStatisfied = true;
+        }
 
         // Test if the player has a kind of weapon
         // TODO: Use mechanicsEngine.getArrayProperty here
-        let hasWeaponType : string = $rule.attr( 'hasWeaponType' );
-        if( hasWeaponType ) {
-            for( let weaponType of hasWeaponType.split('|') ) {
-                if( state.actionChart.getWeaponType( weaponType ) ) {
+        const hasWeaponType: string = $rule.attr("hasWeaponType");
+        if (hasWeaponType) {
+            for (const weaponType of hasWeaponType.split("|")) {
+                if (state.actionChart.getWeaponType(weaponType)) {
                     conditionStatisfied = true;
                     break;
                 }
@@ -616,35 +636,39 @@ const mechanicsEngine = {
         }
 
         // Test if the player has a lore-circle
-        let circleId : string = $rule.attr('hasCircle');
-        if( circleId && LoreCircle.getCircle( circleId ).matchCircle( state.actionChart.disciplines ) )
+        const circleId: string = $rule.attr("hasCircle");
+        if (circleId && LoreCircle.getCircle(circleId).matchCircle(state.actionChart.disciplines)) {
             conditionStatisfied = true;
+        }
 
         // Check if the player has weaponskill / weaponmastery with a given weapon
-        const hasWeaponskillWith : string = $rule.attr('hasWeaponskillWith');
-        if( hasWeaponskillWith && state.actionChart.hasWeaponskillWith( hasWeaponskillWith ) )
+        const hasWeaponskillWith: string = $rule.attr("hasWeaponskillWith");
+        if (hasWeaponskillWith && state.actionChart.hasWeaponskillWith(hasWeaponskillWith)) {
             conditionStatisfied = true;
+        }
 
         // Current hand-to-hand weapon is special?
-        const currentWeaponSpecial = mechanicsEngine.getBooleanProperty( $rule , 'currentWeaponSpecial' );
-        if( currentWeaponSpecial != null ) {
+        const currentWeaponSpecial = mechanicsEngine.getBooleanProperty($rule, "currentWeaponSpecial");
+        if (currentWeaponSpecial !== null) {
             const currentWeapon = state.actionChart.getSelectedWeaponItem(false);
-            const currentIsSpecial = ( currentWeapon && currentWeapon.type == Item.SPECIAL );
-            if( currentIsSpecial == currentWeaponSpecial )
+            const currentIsSpecial = (currentWeapon && currentWeapon.type === Item.SPECIAL);
+            if (currentIsSpecial === currentWeaponSpecial) {
                 conditionStatisfied = true;
+            }
         }
 
         // A global rule id is registered?
-        const globalRuleId : string = $rule.attr( 'isGlobalRuleRegistered' );
-        if( globalRuleId && state.sectionStates.globalRulesIds.contains( globalRuleId ) )
+        const globalRuleId: string = $rule.attr("isGlobalRuleRegistered");
+        if (globalRuleId && state.sectionStates.globalRulesIds.contains(globalRuleId)) {
             conditionStatisfied = true;
+        }
 
         // There are some of these objects on the section?
-        const objectOnSection = mechanicsEngine.getArrayProperty( $rule , 'objectOnSection' );
-        if( objectOnSection.length > 0 ) {
-            let sectionState = state.sectionStates.getSectionState();
-            for( let objectId of objectOnSection ) {
-                if( sectionState.containsObject( objectId ) ) {
+        const objectOnSection = mechanicsEngine.getArrayProperty($rule, "objectOnSection");
+        if (objectOnSection.length > 0) {
+            const sectionState = state.sectionStates.getSectionState();
+            for (const objectId of objectOnSection) {
+                if (sectionState.containsObject(objectId)) {
                     conditionStatisfied = true;
                     break;
                 }
@@ -652,85 +676,93 @@ const mechanicsEngine = {
         }
 
         // Any object picked on a given section?
-        const pickedSomethingOnSection : string = $rule.attr( 'pickedSomethingOnSection' )
-        if( pickedSomethingOnSection && EquipmentSectionMechanics.getNPickedObjects(pickedSomethingOnSection) > 0 )
+        const pickedSomethingOnSection: string = $rule.attr("pickedSomethingOnSection");
+        if (pickedSomethingOnSection && EquipmentSectionMechanics.getNPickedObjects(pickedSomethingOnSection) > 0) {
             conditionStatisfied = true;
+        }
 
         // Section contains text?
-        const sectionContainsText : string = $rule.attr( 'sectionContainsText' )
-        if( sectionContainsText ) {
+        const sectionContainsText: string = $rule.attr("sectionContainsText");
+        if (sectionContainsText) {
             const section = new Section(state.book, state.sectionStates.currentSection, state.mechanics);
-            if( section.containsText(sectionContainsText) )
+            if (section.containsText(sectionContainsText)) {
                 conditionStatisfied = true;
+            }
         }
 
         // Check if the test should be inversed
-        if( $rule.attr('not') == 'true' )
+        if ($rule.attr("not") === "true") {
             conditionStatisfied = !conditionStatisfied;
+        }
 
-        if( conditionStatisfied )
+        if (conditionStatisfied) {
             // Run child items
-            mechanicsEngine.runChildRules( $rule );
-        
+            mechanicsEngine.runChildRules($rule);
+        }
+
     },
 
     /**
-     * Enable / disable a choice 
+     * Enable / disable a choice
      */
-    choiceState: function(rule) {
+    choiceState(rule: Element) {
 
         // Get the choice filter
-        var section = $(rule).attr('section');
+        const section = $(rule).attr("section");
 
         // Test section:
-        if( section != 'all' && 
-            $('a.choice-link[data-section=' + section + ']').length === 0 ) {
-            mechanicsEngine.debugWarning( 'choiceState: Wrong choiceState (section=' + section + ')' );
+        if (section !== "all" &&
+            $("a.choice-link[data-section=" + section + "]").length === 0) {
+            mechanicsEngine.debugWarning("choiceState: Wrong choiceState (section=" + section + ")");
             return;
         }
-        
-        // Get if we must enable or disable:
-        var disabled = ( $(rule).attr('set') == 'disabled' );
 
-        // Set choice/s state        
+        // Get if we must enable or disable:
+        const disabled = ($(rule).attr("set") === "disabled");
+
+        // Set choice/s state
         mechanicsEngine.setChoiceState(section, disabled);
     },
 
     /**
      * There is an available object on the section
      */
-    object: function(rule) {
+    object(rule: Element) {
 
-        var sectionState = state.sectionStates.getSectionState();
+        const sectionState = state.sectionStates.getSectionState();
 
         // Do not execute the rule twice:
-        if( sectionState.ruleHasBeenExecuted(rule) )
-            return;
-
-        const objectId : string = $(rule).attr('objectId');
-        if( !objectId ) {
-            mechanicsEngine.debugWarning( 'Rule object without objectId' );
+        if (sectionState.ruleHasBeenExecuted(rule)) {
             return;
         }
 
-        if( !state.mechanics.getObject( objectId ) )
-            mechanicsEngine.debugWarning( 'Unknown object: ' + objectId );
+        const objectId: string = $(rule).attr("objectId");
+        if (!objectId) {
+            mechanicsEngine.debugWarning("Rule object without objectId");
+            return;
+        }
+
+        if (!state.mechanics.getObject(objectId)) {
+            mechanicsEngine.debugWarning("Unknown object: " + objectId);
+        }
 
         // Object price (optional)
-        var priceValue = $(rule).attr('price');
-        if( priceValue )
-            var price = ExpressionEvaluator.evalInteger( priceValue );
+        const priceValue = $(rule).attr("price");
+        let price: number;
+        if (priceValue) {
+            price = ExpressionEvaluator.evalInteger(priceValue);
+        }
 
         // Unlimited number of this kind of object?
-        const unlimited = ( $(rule).attr('unlimited') == 'true' );
+        const unlimited = ($(rule).attr("unlimited") === "true");
 
         // Number of items (only for quiver (n. arrows) and money (n.gold crowns), arrows or if you buy X objects for a single price)
-        const txtCount : string = $(rule).attr('count');
-        const count = ( txtCount ? parseInt( txtCount ) : 0 );
-        
+        const txtCount: string = $(rule).attr("count");
+        const count = (txtCount ? parseInt(txtCount, 10) : 0);
+
         // Object can be used directly from the section, without picking it?
-        const useOnSection = ( $(rule).attr('useOnSection') == 'true' );
-                
+        const useOnSection = ( $(rule).attr("useOnSection") === "true" );
+
         // Add the object to the available objects on the section
         sectionState.addObjectToSection( objectId , price , unlimited , count , useOnSection );
 
@@ -740,50 +772,51 @@ const mechanicsEngine = {
     /**
      * Allow to sell an inventory object rule
      */
-    sell: function(rule) {
+    sell(rule: Element) {
+        const $rule = $(rule);
 
-        // TODO: Use a single "$rule" variable instead referencing $(rule) (performance...)
-
-        var sectionState = state.sectionStates.getSectionState();
-        if( sectionState.ruleHasBeenExecuted(rule) )
+        const sectionState = state.sectionStates.getSectionState();
+        if (sectionState.ruleHasBeenExecuted(rule)) {
             // Execute only once
             return;
+        }
 
-        var price = parseInt( $(rule).attr('price') );
+        const price = parseInt($rule.attr("price"), 10);
 
         // Sell a specific item
-        var objectId = $(rule).attr('objectId');
-        if( objectId ) {
+        const objectId = $rule.attr("objectId");
+        if (objectId) {
             sectionState.sellPrices.push({
                 id: objectId,
-                price: price,
-                count: parseInt( $(rule).attr('count') )
+                price,
+                count: parseInt($rule.attr("count"), 10),
             });
         }
 
         // Other things (money / meals / special items ...)
-        var cls = $(rule).attr('class');
-        if( cls ) {
-            var objectIds = [];
-            var except = [];
+        const cls = $rule.attr("class");
+        if (cls) {
+            let objectIds = [];
+            let except = [];
 
             // TODO: Use mechanicsEngine.getArrayProperty here
-            const txtExcept = $(rule).attr('except');
-            if( txtExcept )
-                except = txtExcept.split('|');
-
-            if( cls == Item.SPECIAL ) {
-                objectIds = state.actionChart.specialItems;
-                except.push( Item.MAP ); // don't sell this, come on!
+            const txtExcept = $rule.attr("except");
+            if (txtExcept) {
+                except = txtExcept.split("|");
             }
-            else
-                mechanicsEngine.debugWarning('Sell rule with invalid class');
 
-            for( let id of objectIds ) {
-                if( !except.contains( id ) ) {
+            if (cls === Item.SPECIAL) {
+                objectIds = state.actionChart.specialItems;
+                except.push(Item.MAP); // don't sell this, come on!
+            } else {
+                mechanicsEngine.debugWarning("Sell rule with invalid class");
+            }
+
+            for (const id of objectIds) {
+                if (!except.contains(id)) {
                     sectionState.sellPrices.push({
-                        id: id,
-                        price: price,
+                        id,
+                        price,
                         count: 0,
                     });
                 }
@@ -799,232 +832,261 @@ const mechanicsEngine = {
      * @param combatToApply If null, the rule will be applied to a current section combat. If not null
      * the rule will be applied to this combat
      */
-    combat: function(rule, combatToApply : Combat = null) {
+    combat(rule: Element, combatToApply: Combat = null) {
 
         // TODO: Reuse this selector, performance:
         const $rule = $(rule);
 
         // Combat index
-        var combatIndex = parseInt( $rule.attr('index') );
-        if( !combatIndex )
+        let combatIndex = parseInt($rule.attr("index"), 10);
+        if (!combatIndex) {
             combatIndex = 0;
+        }
 
-        var sectionState = state.sectionStates.getSectionState();
+        const sectionState = state.sectionStates.getSectionState();
 
         // Get the combat where to apply the rule
-        let combat : Combat;
-        if( combatToApply )
+        let combat: Combat;
+        if (combatToApply) {
             combat = combatToApply;
-        else {
-            if( combatIndex >= sectionState.combats.length ) {
+        } else {
+            if (combatIndex >= sectionState.combats.length) {
                 mechanicsEngine.debugWarning('Rule "combat": Combat with index ' +
-                    combatIndex + ' not found');
+                    combatIndex + " not found");
                 return;
             }
-            combat = sectionState.combats[ combatIndex ];
+            combat = sectionState.combats[combatIndex];
         }
 
         // Check LW combat ABSOLUTE skill modifier for this section:
-        const combatSkillModifier = mechanicsEngine.getIntProperty( $rule , 'combatSkillModifier', true );
-        if( combatSkillModifier != null )
+        const combatSkillModifier = mechanicsEngine.getIntProperty($rule, "combatSkillModifier", true);
+        if (combatSkillModifier !== null) {
             combat.combatModifier = combatSkillModifier;
+        }
 
         // Check LW combat skill modifier INCREMENT
-        const combatSkillModifierIncrement = mechanicsEngine.getIntProperty( $rule , 'combatSkillModifierIncrement' , true );
-        if( combatSkillModifierIncrement != null )
+        const combatSkillModifierIncrement = mechanicsEngine.getIntProperty($rule, "combatSkillModifierIncrement", true);
+        if (combatSkillModifierIncrement !== null) {
             combat.combatModifier += combatSkillModifierIncrement;
+        }
 
         // Check if the enemy has mindforce attack
-        var txtMindforceCS = $(rule).attr('mindforceCS');
-        if( txtMindforceCS )
-            combat.mindforceCS = parseInt( txtMindforceCS );
-        var txtMindforceEP = $(rule).attr('mindforceEP');
-        if( txtMindforceEP )
-            combat.mindforceEP = parseInt( txtMindforceEP );
+        const txtMindforceCS = $rule.attr("mindforceCS");
+        if (txtMindforceCS) {
+            combat.mindforceCS = parseInt(txtMindforceCS, 10);
+        }
+        const txtMindforceEP = $rule.attr("mindforceEP");
+        if (txtMindforceEP) {
+            combat.mindforceEP = parseInt(txtMindforceEP, 10);
+        }
 
         // Check if the enemy is immune to Mindblast
-        combat.noMindblast = mechanicsEngine.getBooleanProperty( $rule , 'noMindblast', false );
+        combat.noMindblast = mechanicsEngine.getBooleanProperty($rule, "noMindblast", false);
 
         // Check if the enemy is immune to Psi-Surge
-        combat.noPsiSurge = mechanicsEngine.getBooleanProperty( $rule , 'noPsiSurge', false );
+        combat.noPsiSurge = mechanicsEngine.getBooleanProperty($rule, "noPsiSurge", false);
 
         // Check if the enemy is immune to Psi-Surge
-        combat.noKaiSurge = mechanicsEngine.getBooleanProperty( $rule , 'noKaiSurge', false );
+        combat.noKaiSurge = mechanicsEngine.getBooleanProperty($rule, "noKaiSurge", false);
 
         // Special mindblast bonus?
-        var txtMindblastBonus = $(rule).attr('mindblastBonus');
-        if( txtMindblastBonus )
-            combat.mindblastBonus = parseInt( txtMindblastBonus );
+        const txtMindblastBonus = $rule.attr("mindblastBonus");
+        if (txtMindblastBonus) {
+            combat.mindblastBonus = parseInt(txtMindblastBonus, 10);
+        }
 
         // Mindblast multiplier (to all mental attacks too, like psi-surge)
-        const txtMindblastMultiplier : string = $(rule).attr('mindblastMultiplier');
-        if( txtMindblastMultiplier )
-            combat.mindblastMultiplier = parseInt( txtMindblastMultiplier );
+        const txtMindblastMultiplier: string = $rule.attr("mindblastMultiplier");
+        if (txtMindblastMultiplier) {
+            combat.mindblastMultiplier = parseInt(txtMindblastMultiplier, 10);
+        }
 
         // Special Psi-Surge bonus?
-        const txtPsiSurgeBonus : string = $(rule).attr('psiSurgeBonus');
-        if( txtPsiSurgeBonus )
-            combat.psiSurgeBonus = parseInt( txtPsiSurgeBonus );
+        const txtPsiSurgeBonus: string = $rule.attr("psiSurgeBonus");
+        if (txtPsiSurgeBonus) {
+            combat.psiSurgeBonus = parseInt(txtPsiSurgeBonus, 10);
+        }
 
         // Special Kai-Surge bonus?
-        const txtKaiSurgeBonus : string = $(rule).attr('kaiSurgeBonus');
-        if( txtKaiSurgeBonus )
-            combat.kaiSurgeBonus = parseInt( txtKaiSurgeBonus );
+        const txtKaiSurgeBonus: string = $rule.attr("kaiSurgeBonus");
+        if (txtKaiSurgeBonus) {
+            combat.kaiSurgeBonus = parseInt(txtKaiSurgeBonus, 10);
+        }
 
         // Check if the player cannot use weapons on this combat
-        const txtNoWeapon : string = $(rule).attr('noWeapon');
-        if( txtNoWeapon ) {
-            if( txtNoWeapon == 'true' )
-                combat.noWeaponTurns = -1; // All turns no weapon
-            else if( txtNoWeapon == 'false' )
-                combat.noWeaponTurns = 0;  // Use weapon on all turns
-            else
-                combat.noWeaponTurns = parseInt( txtNoWeapon ); // Use weapon after "n" turns
+        const txtNoWeapon: string = $rule.attr("noWeapon");
+        if (txtNoWeapon) {
+            if (txtNoWeapon === "true") {
+                combat.noWeaponTurns = -1;
+            } else if (txtNoWeapon === "false") {
+                combat.noWeaponTurns = 0;
+            } else {
+                combat.noWeaponTurns = parseInt(txtNoWeapon, 10);
+            } // Use weapon after "n" turns
         }
 
         // Check if the combat is non-physical (disables most bonuses)
         // TODO: Use mechanicsEngine.getBooleanProperty here
-        var txtMentalOnly = $(rule).attr('mentalOnly');
-        if( txtMentalOnly )
-            combat.mentalOnly = ( txtMentalOnly == 'true' );
+        const txtMentalOnly = $rule.attr("mentalOnly");
+        if (txtMentalOnly) {
+            combat.mentalOnly = (txtMentalOnly === "true");
+        }
 
         // Initial turn to allow to elude the combat
-        if( $(rule).attr('eludeTurn') )
-            combat.eludeTurn = parseInt( $(rule).attr('eludeTurn') );
-        
+        if ($rule.attr("eludeTurn")) {
+            combat.eludeTurn = parseInt($rule.attr("eludeTurn"), 10);
+        }
+
         // Max. turn to elude combat
-        const txtmaxEludeTurn : string = $(rule).attr('maxEludeTurn');
-        if( txtmaxEludeTurn )
-            combat.maxEludeTurn = parseInt( txtmaxEludeTurn );
+        const txtmaxEludeTurn: string = $rule.attr("maxEludeTurn");
+        if (txtmaxEludeTurn) {
+            combat.maxEludeTurn = parseInt(txtmaxEludeTurn, 10);
+        }
 
         // Enemy EP to allow to elude the combat
-        if( $(rule).attr('eludeEnemyEP') )
-            combat.eludeEnemyEP = parseInt( $(rule).attr('eludeEnemyEP') );
+        if ($rule.attr("eludeEnemyEP")) {
+            combat.eludeEnemyEP = parseInt($rule.attr("eludeEnemyEP"), 10);
+        }
 
         // Dammage multiplier (player)
-        const txtDammageMultiplier : string = $rule.attr('dammageMultiplier');
-        if( txtDammageMultiplier )
-            combat.dammageMultiplier = parseFloat( txtDammageMultiplier );
+        const txtDammageMultiplier: string = $rule.attr("dammageMultiplier");
+        if (txtDammageMultiplier) {
+            combat.dammageMultiplier = parseFloat(txtDammageMultiplier);
+        }
 
         // Dammage multiplier (enemy)
-        const txtEnemyMultiplier : string = $rule.attr('enemyMultiplier'); 
-        if( txtEnemyMultiplier )
-            combat.enemyMultiplier = parseFloat( txtEnemyMultiplier );
+        const txtEnemyMultiplier: string = $rule.attr("enemyMultiplier");
+        if (txtEnemyMultiplier) {
+            combat.enemyMultiplier = parseFloat(txtEnemyMultiplier);
+        }
 
         // Enemy is immune for X turns
-        const txtEnemyImmuneTurns : string = $(rule).attr('enemyImmuneTurns'); 
-        if( txtEnemyImmuneTurns )
-            combat.enemyImmuneTurns = parseInt( txtEnemyImmuneTurns );
+        const txtEnemyImmuneTurns: string = $rule.attr("enemyImmuneTurns");
+        if (txtEnemyImmuneTurns) {
+            combat.enemyImmuneTurns = parseInt(txtEnemyImmuneTurns, 10);
+        }
 
         // LW is immune for X turns
-        const txtImmuneTurns : string = $(rule).attr('immuneTurns'); 
-        if( txtImmuneTurns )
-            combat.immuneTurns = parseInt( txtImmuneTurns );
+        const txtImmuneTurns: string = $rule.attr("immuneTurns");
+        if (txtImmuneTurns) {
+            combat.immuneTurns = parseInt(txtImmuneTurns, 10);
+        }
 
         // Enemy extra loss per turn
-        var txtEnemyTurnLoss = $(rule).attr('enemyTurnLoss'); 
-        if( txtEnemyTurnLoss )
-            combat.enemyTurnLoss = parseInt( txtEnemyTurnLoss );
+        const txtEnemyTurnLoss = $rule.attr("enemyTurnLoss");
+        if (txtEnemyTurnLoss) {
+            combat.enemyTurnLoss = parseInt(txtEnemyTurnLoss, 10);
+        }
 
         // Player extra loss per turn
-        const txtPlayerTurnLoss : string = $rule.attr('turnLoss');
-        if( txtPlayerTurnLoss )
-            combat.turnLoss = parseInt( txtPlayerTurnLoss );
+        const txtPlayerTurnLoss: string = $rule.attr("turnLoss");
+        if (txtPlayerTurnLoss) {
+            combat.turnLoss = parseInt(txtPlayerTurnLoss, 10);
+        }
 
         // Player extra loss per turn if he/she has been wounded on that turn.
-        const txtPlayerTurnLossIfWounded : string = $rule.attr('turnLossIfWounded');
-        if( txtPlayerTurnLossIfWounded )
-            combat.turnLossIfWounded = parseInt( txtPlayerTurnLossIfWounded );
+        const txtPlayerTurnLossIfWounded: string = $rule.attr("turnLossIfWounded");
+        if (txtPlayerTurnLossIfWounded) {
+            combat.turnLossIfWounded = parseInt(txtPlayerTurnLossIfWounded, 10);
+        }
 
         // It's a fake combat?
         // TODO: Use mechanicsEngine.getBooleanProperty here
-        var txtFake = $(rule).attr('fake');
-        if( txtFake ) {
-            combat.fakeCombat = ( txtFake == 'true' );
+        const txtFake = $rule.attr("fake");
+        if (txtFake) {
+            combat.fakeCombat = (txtFake === "true");
             // % of the E.P. lost to restore after the combat on fake combats.
-            var txtFactor = $(rule).attr('restoreFactor');
-            if( txtFactor )
+            const txtFactor = $rule.attr("restoreFactor");
+            if (txtFactor) {
                 combat.fakeRestoreFactor = parseFloat(txtFactor);
+            }
         }
 
         // It's a bow combat?
         // TODO: Use mechanicsEngine.getBooleanProperty here
-        if( $rule.attr('bow') == 'true' )
+        if ($rule.attr("bow") === "true") {
             combat.bowCombat = true;
+        }
 
         // LW loss is permament (applied to the original endurance)?
-        const permanentDammage = mechanicsEngine.getBooleanProperty( $rule , 'permanentDammage' );
-        if( permanentDammage != null )
+        const permanentDammage = mechanicsEngine.getBooleanProperty($rule, "permanentDammage");
+        if (permanentDammage !== null) {
             combat.permanentDammage = permanentDammage;
+        }
 
         // Objects to disable on this combat:
-        const txtDisabledObjects : string = $rule.attr('disabledObjects');
-        if( txtDisabledObjects ) {
-            if( txtDisabledObjects == 'none' )
+        const txtDisabledObjects: string = $rule.attr("disabledObjects");
+        if (txtDisabledObjects) {
+            if (txtDisabledObjects === "none") {
                 combat.disabledObjects = [];
-            else
-                combat.disabledObjects = txtDisabledObjects.split('|');
+            } else {
+                combat.disabledObjects = txtDisabledObjects.split("|");
+            }
         }
-        
+
     },
 
     /**
      * After all combats are finished rule
      */
-    afterCombats: function(rule) {
+    afterCombats(rule: Element) {
 
         mechanicsEngine.onAfterCombatsRule = rule;
-        var sectionState =  state.sectionStates.getSectionState();
-        if( sectionState.areAllCombatsFinished(state.actionChart) == 'finished' )
+        const sectionState = state.sectionStates.getSectionState();
+        if (sectionState.areAllCombatsFinished(state.actionChart) === "finished") {
             // All combats are finished. Fire the rule
-            mechanicsEngine.runChildRules( $(rule) );
-        
+            mechanicsEngine.runChildRules($(rule));
+        }
+
     },
 
     /**
      * After elude combats rule
      */
-    afterElude: function(rule) {
+    afterElude(rule: Element) {
 
         mechanicsEngine.onEludeCombatsRule = rule;
-        var sectionState =  state.sectionStates.getSectionState();
-        if( sectionState.areAllCombatsFinished(state.actionChart) == 'eluded' )
+        const sectionState = state.sectionStates.getSectionState();
+        if (sectionState.areAllCombatsFinished(state.actionChart) === "eluded") {
             // All combats are eluded. Fire the rule
-            mechanicsEngine.runChildRules( $(rule) );
+            mechanicsEngine.runChildRules($(rule));
+        }
 
     },
 
     /** Event for combat turn */
-    afterCombatTurn: function(rule) {
+    afterCombatTurn(rule: Element) {
         mechanicsEngine.onAfterCombatTurns.push(rule);
     },
 
     /**
      * Disable / enable all combats
      */
-    disableCombats: function(rule) {
-        var sectionState = state.sectionStates.getSectionState();
-        var enabled = $(rule).attr('disabled') == 'false';
+    disableCombats(rule: Element) {
+        const sectionState = state.sectionStates.getSectionState();
+        const enabled = $(rule).attr("disabled") === "false";
         sectionState.setCombatsEnabled(enabled);
-        if(enabled)
+        if (enabled) {
             // Enable combats
             combatMechanics.showCombatButtons(null);
-        else
+        } else {
             // Disable combats
             combatMechanics.hideCombatButtons(null);
+        }
     },
 
-    /** 
+    /**
      * Increase endurance rule
      */
-    endurance: function(rule) {
+    endurance(rule: Element) {
 
-        if( state.sectionStates.ruleHasBeenExecuted(rule) )
+        if (state.sectionStates.ruleHasBeenExecuted(rule)) {
             // Execute only once
             return;
+        }
 
-        const increase = ExpressionEvaluator.evalInteger( $(rule).attr('count') );
-        actionChartController.increaseEndurance( increase );
+        const increase = ExpressionEvaluator.evalInteger($(rule).attr("count"));
+        actionChartController.increaseEndurance(increase);
 
         state.sectionStates.markRuleAsExecuted(rule);
     },
@@ -1032,18 +1094,19 @@ const mechanicsEngine = {
     /**
      * Increase combat skill (permanent)
      */
-    combatSkill: function(rule) {
-        if( state.sectionStates.ruleHasBeenExecuted(rule) )
+    combatSkill(rule: Element) {
+        if (state.sectionStates.ruleHasBeenExecuted(rule)) {
             // Execute only once
             return;
+        }
 
         const $rule = $(rule);
 
-        const increase = ExpressionEvaluator.evalInteger( $rule.attr('count') );
+        const increase = ExpressionEvaluator.evalInteger($rule.attr("count"));
 
         // TODO: Use mechanicsEngine.getBooleanProperty here. Default value = "true"
-        const showToast = ( $rule.attr('toast') != 'false' );
-        actionChartController.increaseCombatSkill( increase , showToast );
+        const showToast = ($rule.attr("toast") !== "false");
+        actionChartController.increaseCombatSkill(increase, showToast);
 
         state.sectionStates.markRuleAsExecuted(rule);
     },
@@ -1051,81 +1114,84 @@ const mechanicsEngine = {
     /**
      * Player death rule
      */
-    death: function(rule) {
-        actionChartController.increaseEndurance( -state.actionChart.currentEndurance , true);
+    death(rule: Element) {
+        actionChartController.increaseEndurance(-state.actionChart.currentEndurance, true);
     },
 
     /** Have a meal rule */
-    meal: function(rule) {
+    meal(rule: Element) {
         mealMechanics.runRule(rule);
     },
 
     /** Display message rule */
-    message: function(rule) {
+    message(rule: Element) {
 
         const $rule = $(rule);
-        var msgId = $rule.attr('id');
+        const msgId = $rule.attr("id");
 
-        var op = $rule.attr('op');
-        if( op ) {
+        const op = $rule.attr("op");
+        if (op) {
             // Change the state of the message
-            if( op == 'show' )
-                $('#' + msgId).show();
-            else
-                $('#' + msgId).hide();
+            if (op === "show") {
+                $("#" + msgId).show();
+            } else {
+                $("#" + msgId).hide();
+            }
             return;
         }
 
         // Display a new message
-        mechanicsEngine.showMessage( mechanicsEngine.getRuleText(rule) , msgId );
+        mechanicsEngine.showMessage(mechanicsEngine.getRuleText(rule), msgId);
     },
 
     /** Inventory events rule */
-    onInventoryEvent: function(rule) {
+    onInventoryEvent(rule: Element) {
         mechanicsEngine.onInventoryEventRule = rule;
         // Fire the rule at startup:
-        mechanicsEngine.runChildRules( $(rule) );
+        mechanicsEngine.runChildRules($(rule));
     },
 
     /** Drop an object (object lost) */
-    drop: function( rule ) {
-        if( state.sectionStates.ruleHasBeenExecuted(rule) )
+    drop(rule: Element) {
+        if (state.sectionStates.ruleHasBeenExecuted(rule)) {
             // Execute only once
             return;
-        
+        }
+
         const $rule = $(rule);
 
         // Object ids dropped on this rule execution
-        let droppedObjects : Array<string> = [];
+        let droppedObjects: string[] = [];
 
         // Track dropped arrows
         const originalArrows = state.actionChart.arrows;
 
         // Drop the first one of the specified
-        for( let objectId of mechanicsEngine.getArrayProperty( $rule , 'objectId' ) ) {
-            if( actionChartController.drop( objectId ) ) {
-                droppedObjects.push( objectId );
+        for (const objectId of mechanicsEngine.getArrayProperty($rule, "objectId")) {
+            if (actionChartController.drop(objectId)) {
+                droppedObjects.push(objectId);
                 break;
             }
         }
 
         // Drop backpack item slots by its index (1-based index)
-        droppedObjects = droppedObjects.concat( 
-            mechanicsEngine.dropActionChartSlots( $rule , 'backpackItemSlots' , state.actionChart.backpackItems ) );
         droppedObjects = droppedObjects.concat(
-            mechanicsEngine.dropActionChartSlots( $rule , 'specialItemSlots' , state.actionChart.specialItems ) );
+            mechanicsEngine.dropActionChartSlots($rule, "backpackItemSlots", state.actionChart.backpackItems));
+        droppedObjects = droppedObjects.concat(
+            mechanicsEngine.dropActionChartSlots($rule, "specialItemSlots", state.actionChart.specialItems));
 
         // Store dropped objects as an inventory state
-        const restorePointId : string = $rule.attr( 'restorePoint' );
-        if( restorePointId ) {
+        const restorePointId: string = $rule.attr("restorePoint");
+        if (restorePointId) {
             const inventoryState = new InventoryState();
-            inventoryState.addObjectIds( droppedObjects );
+            inventoryState.addObjectIds(droppedObjects);
 
-            if( state.actionChart.arrows < originalArrows )
+            if (state.actionChart.arrows < originalArrows) {
                 // One or more quivers have been dropped. Save arrows:
                 inventoryState.arrows += originalArrows - state.actionChart.arrows;
+            }
 
-            mechanicsEngine.appedToInventoryState( inventoryState , restorePointId );
+            mechanicsEngine.appedToInventoryState(inventoryState, restorePointId);
         }
 
         state.sectionStates.markRuleAsExecuted(rule);
@@ -1134,69 +1200,73 @@ const mechanicsEngine = {
     /**
      * On choice selected event
      */
-    choiceSelected: function(rule) {
-        mechanicsEngine.onChoiceSelected.push( rule );
+    choiceSelected(rule: Element) {
+        mechanicsEngine.onChoiceSelected.push(rule);
     },
 
     /**
      * Set the current weapon rule
      */
-    currentWeapon: function(rule) {
-        if( state.sectionStates.ruleHasBeenExecuted(rule) )
+    currentWeapon(rule: Element) {
+        if (state.sectionStates.ruleHasBeenExecuted(rule)) {
             // Execute only once
             return;
-        actionChartController.setSelectedWeapon( $(rule).attr('objectId') );
+        }
+        actionChartController.setSelectedWeapon($(rule).attr("objectId"));
         state.sectionStates.markRuleAsExecuted(rule);
     },
 
     /**
      * Enable / disable hunting until new advice
      */
-    huntStatus: function(rule) {
-        state.sectionStates.huntEnabled = ( $(rule).attr('enabled') != 'false' );
+    huntStatus(rule: Element) {
+        state.sectionStates.huntEnabled = ($(rule).attr("enabled") !== "false");
     },
 
     /**
      * Number picker UI
      */
-    numberPicker: function(rule) {
+    numberPicker(rule: Element) {
         numberPickerMechanics.numberPicker(rule);
     },
 
     /**
      * Number picker action button clicked event handler
      */
-    numberPickerChoosed: function(rule) {
+    numberPickerChoosed(rule: Element) {
         mechanicsEngine.onNumberPickerChoosed = rule;
 
         // If the action button has been already picked, run the event handler right now, if it's requested
-        if( mechanicsEngine.getBooleanProperty( $(rule) , 'executeAtStart' ) && numberPickerMechanics.actionButtonWasClicked() )
-            mechanicsEngine.runChildRules( $(mechanicsEngine.onNumberPickerChoosed) );
+        if (mechanicsEngine.getBooleanProperty($(rule), "executeAtStart") && numberPickerMechanics.actionButtonWasClicked()) {
+            mechanicsEngine.runChildRules($(mechanicsEngine.onNumberPickerChoosed));
+        }
     },
 
     /**
      * Reset the state of a given section
      */
-    resetSectionState: function(rule) {
-        state.sectionStates.resetSectionState( $(rule).attr('sectionId') );
+    resetSectionState(rule: Element) {
+        state.sectionStates.resetSectionState($(rule).attr("sectionId"));
     },
 
     /**
      * Save the current inventory state
      */
-    saveInventoryState: function(rule) {
-        if( state.sectionStates.ruleHasBeenExecuted(rule) )
+    saveInventoryState(rule: Element) {
+        if (state.sectionStates.ruleHasBeenExecuted(rule)) {
             // Execute only once
             return;
-        
-        const restorePointId : string = $(rule).attr('restorePoint');
-        let objectsType : string = $(rule).attr('objectsType');
-        if( !objectsType )
-            objectsType = 'all';
+        }
+
+        const restorePointId: string = $(rule).attr("restorePoint");
+        let objectsType: string = $(rule).attr("objectsType");
+        if (!objectsType) {
+            objectsType = "all";
+        }
 
         // Save the inventory state:
-        let newRestorePoint = InventoryState.fromActionChart( objectsType , state.actionChart );
-        mechanicsEngine.appedToInventoryState( newRestorePoint , restorePointId );
+        const newRestorePoint = InventoryState.fromActionChart(objectsType, state.actionChart);
+        mechanicsEngine.appedToInventoryState(newRestorePoint, restorePointId);
 
         state.sectionStates.markRuleAsExecuted(rule);
     },
@@ -1204,32 +1274,33 @@ const mechanicsEngine = {
     /**
      * Restore the inventory state
      */
-    restoreInventoryState: function(rule) {
-        if( state.sectionStates.ruleHasBeenExecuted(rule) )
+    restoreInventoryState(rule: Element) {
+        if (state.sectionStates.ruleHasBeenExecuted(rule)) {
             // Execute only once
             return;
+        }
 
         const $rule = $(rule);
 
         // Get the restore point
-        const restorePoint = $rule.attr('restorePoint');
-        const inventoryStateObject : any = state.sectionStates.otherStates[ restorePoint ];
-        if( !inventoryStateObject ) {
+        const restorePoint = $rule.attr("restorePoint");
+        const inventoryStateObject: any = state.sectionStates.otherStates[restorePoint];
+        if (!inventoryStateObject) {
             // Sometimes it's OK if the restore point does not exist, so don't be so expressive
-            //mechanicsEngine.debugWarning('restorePoint ' + restorePoint + ' not found!');
-            console.log('restorePoint ' + restorePoint + ' not found');
+            // mechanicsEngine.debugWarning('restorePoint ' + restorePoint + ' not found!');
+            console.log("restorePoint " + restorePoint + " not found");
             return;
         }
-        const inventoryState = InventoryState.fromObject( inventoryStateObject );
+        const inventoryState = InventoryState.fromObject(inventoryStateObject);
 
         // Restore weapons?
-        const restoreWeapons = mechanicsEngine.getBooleanProperty( $rule , 'restoreWeapons' , true );
+        const restoreWeapons = mechanicsEngine.getBooleanProperty($rule, "restoreWeapons", true);
 
         // Restore objects
-        actionChartController.restoreInventoryState( inventoryState , restoreWeapons );
+        actionChartController.restoreInventoryState(inventoryState, restoreWeapons);
 
         // Save the current inventory state, modified by restoreInventoryState
-        state.sectionStates.otherStates[ restorePoint ] = inventoryState.toObject();
+        state.sectionStates.otherStates[restorePoint] = inventoryState.toObject();
 
         state.sectionStates.markRuleAsExecuted(rule);
     },
@@ -1238,15 +1309,15 @@ const mechanicsEngine = {
      * Register a set of global rules: Rules to execute at any section until they are
      * unregistered
      */
-    registerGlobalRule: function(rule) {
-        if( state.sectionStates.ruleHasBeenExecuted(rule) )
+    registerGlobalRule(rule: Element) {
+        if (state.sectionStates.ruleHasBeenExecuted(rule)) {
             // Execute only once
             return;
+        }
 
-        var ruleId = $(rule).attr('id');
-        if( !state.sectionStates.globalRulesIds.contains( ruleId ) ) {
-            console.log('Registered global rule ' + ruleId);
-            state.sectionStates.globalRulesIds.push( ruleId );
+        const ruleId = $(rule).attr("id");
+        if (!state.sectionStates.globalRulesIds.contains(ruleId)) {
+            state.sectionStates.globalRulesIds.push(ruleId);
         }
 
         state.sectionStates.markRuleAsExecuted(rule);
@@ -1258,9 +1329,8 @@ const mechanicsEngine = {
     /**
      * Unregister a set of global rules
      */
-    unregisterGlobalRule: function(rule) {
-        var ruleId = $(rule).attr('id');
-        console.log('Unregistering global rule ' + ruleId );
+    unregisterGlobalRule(rule: Element) {
+        const ruleId = $(rule).attr("id");
         state.sectionStates.globalRulesIds.removeValue(ruleId);
         // update stats in case global rule affected them...
         actionChartView.updateStatistics();
@@ -1271,35 +1341,36 @@ const mechanicsEngine = {
     /**
      * Add an event handler for when an object is used on this section
      */
-    objectUsed: function(rule) {
+    objectUsed(rule: Element) {
         mechanicsEngine.onObjectUsedRule = rule;
     },
 
     /**
      * Move to other book section
      */
-    goToSection: function(rule) {
-        gameController.loadSection( $(rule).attr('section') , true );
+    goToSection(rule: Element) {
+        gameController.loadSection($(rule).attr("section"), true);
         // To avoid continuing executing rules, throw an exception
-        throw 'Jumped to a new section, rules execution interrupted ' + 
-            '(This exception is not really an error)';
+        throw new Error("Jumped to a new section, rules execution interrupted " +
+            "(This exception is not really an error)");
     },
 
     /**
      * Show a "toast" message
      */
-    toast: function(rule) {
-        toastr.info( mechanicsEngine.getRuleText(rule) );
+    toast(rule: Element) {
+        toastr.info(mechanicsEngine.getRuleText(rule));
     },
 
     /**
      * Drop all disciplines.
      * Used when changing of book series (kai -> magnakai)
      */
-    dropDisciplines: function(rule) {
-        if( state.sectionStates.ruleHasBeenExecuted(rule) )
+    dropDisciplines(rule: Element) {
+        if (state.sectionStates.ruleHasBeenExecuted(rule)) {
             // Execute only once
             return;
+        }
         state.actionChart.disciplines = [];
         // Redraw current CS / EP on the bar title
         template.updateStatistics();
@@ -1309,38 +1380,38 @@ const mechanicsEngine = {
     /**
      * Change a section text by a section choice
      */
-    textToChoice: function( rule ) {
+    textToChoice(rule: Element) {
 
-        const linkText : string = $(rule).attr('text-' + state.language);
-        if( !linkText ) {
-            mechanicsEngine.debugWarning( 'textToChoice: text-' + state.language +' attribute not found');
+        const linkText: string = $(rule).attr("text-" + state.language);
+        if (!linkText) {
+            mechanicsEngine.debugWarning("textToChoice: text-" + state.language + " attribute not found");
             return;
         }
 
-        var $textContainer = $(':contains("' + linkText + '")').last();
-        if( $textContainer.length == 0 ) {
-            mechanicsEngine.debugWarning( 'textToChoice: text "' + linkText + '" not found');
+        const $textContainer = $(':contains("' + linkText + '")').last();
+        if ($textContainer.length === 0) {
+            mechanicsEngine.debugWarning('textToChoice: text "' + linkText + '" not found');
             return;
         }
 
-        let sectionId = $(rule).attr('section');
-        var newHtml = $textContainer.html().replace( linkText , 
-            '<p class="choice" style="display: inline; margin: 0"><a href="#" class="action choice-link" data-section="' + sectionId + '">' + linkText + '</a></p>' );
-        $textContainer.html( newHtml );           
+        const sectionId = $(rule).attr("section");
+        const newHtml = $textContainer.html().replace(linkText,
+            '<p class="choice" style="display: inline; margin: 0"><a href="#" class="action choice-link" data-section="' + sectionId + '">' + linkText + "</a></p>");
+        $textContainer.html(newHtml);
     },
 
     /**
      * Add a button to access to the Kai monastery stored objects
      */
-    kaiMonasteryStorage: function( rule : any ) {
-        const $tag = mechanicsEngine.getMechanicsUI( 'mechanics-kaimonasterystorage' );
-        gameView.appendToSection( $tag , 'afterChoices' );
-        $tag.find( 'button' ).click( function( e : Event ) {
+    kaiMonasteryStorage(rule: any) {
+        const $tag = mechanicsEngine.getMechanicsUI("mechanics-kaimonasterystorage");
+        gameView.appendToSection($tag, "afterChoices");
+        $tag.find("button").click( (e: Event) => {
             e.preventDefault();
             // Move to the fake section for Kai monastery
             state.sectionStates.currentSection = Book.KAIMONASTERY_SECTION;
             state.persistState();
-            routing.redirect( 'kaimonastery' );
+            routing.redirect("kaimonastery");
         });
     },
 
@@ -1349,10 +1420,11 @@ const mechanicsEngine = {
      * Rule has state.
      */
     restoreDeliveranceUse(rule: any) {
-        if( state.sectionStates.ruleHasBeenExecuted(rule) )
+        if ( state.sectionStates.ruleHasBeenExecuted(rule) ) {
             // Execute only once
             return;
-        
+        }
+
         state.actionChart.reset20EPRestoreUsed();
         state.sectionStates.markRuleAsExecuted(rule);
     },
@@ -1360,74 +1432,76 @@ const mechanicsEngine = {
     /**
      * Set of rules that should be executed only once
      */
-    executeOnce: function( rule : any ) {
-        if( state.sectionStates.ruleHasBeenExecuted(rule) )
+    executeOnce(rule: any) {
+        if (state.sectionStates.ruleHasBeenExecuted(rule)) {
             // Execute only once
             return;
-        mechanicsEngine.runChildRules( $(rule) );
+        }
+        mechanicsEngine.runChildRules($(rule));
         state.sectionStates.markRuleAsExecuted(rule);
     },
 
     /**
      * Fire the inventory event
      */
-    runInventoryEvent: function( rule : any ) {
+    runInventoryEvent(rule: any) {
         mechanicsEngine.fireInventoryEvents();
     },
 
     /**
      * Display section illustration
      */
-    displayIllustration: function( rule : any ) {
+    displayIllustration(rule: any) {
 
         // Get the UI
-        const $illContainer = mechanicsEngine.getMechanicsUI( 'mechanics-displayillustration' );
+        const $illContainer = mechanicsEngine.getMechanicsUI("mechanics-displayillustration");
 
         // Set title
-        const title = mechanicsEngine.getRuleText( rule );
-        if( title )
-            $illContainer.find('#mechanics-illtitle').text( title );
-        else
-            $illContainer.find('#mechanics-illtitlecontainer').hide();
+        const title = mechanicsEngine.getRuleText(rule);
+        if (title) {
+            $illContainer.find("#mechanics-illtitle").text(title);
+        } else {
+            $illContainer.find("#mechanics-illtitlecontainer").hide();
+        }
 
         // Set illustration
-        const sectionId = $(rule).attr('section');
+        const sectionId = $(rule).attr("section");
         const section = new Section(state.book, sectionId, state.mechanics);
         const illustrationHtml = section.getFirstIllustrationHtml();
-        $illContainer.find('#mechanics-ill').html( illustrationHtml );
+        $illContainer.find("#mechanics-ill").html(illustrationHtml);
 
-        gameView.appendToSection( $illContainer );
+        gameView.appendToSection($illContainer);
     },
 
     /************************************************************/
     /**************** SPECIAL SECTIONS **************************/
     /************************************************************/
 
-    book2Sect238: function(rule) {
+    book2Sect238(rule: Element) {
         book2sect238.run(rule);
     },
 
-    book2sect308: function(rule) {
+    book2sect308(rule: Element) {
         book2sect308.run();
     },
-    
-    book3sect88: function(rule) {
+
+    book3sect88(rule: Element) {
         book3sect88.run();
     },
 
-    book6sect26: function(rule) {
+    book6sect26(rule: Element) {
         book6sect26.run();
     },
 
-    book6sect284: function(rule) {
+    book6sect284(rule: Element) {
         book6sect284.run();
     },
 
-    book6sect340 : function(rule) {
+    book6sect340(rule: Element) {
         book6sect340.run();
     },
 
-    book9sect91 : function(rule) {
+    book9sect91(rule: Element) {
         book9sect91.run();
     },
 
@@ -1441,11 +1515,12 @@ const mechanicsEngine = {
      * @param property The property to get. Property values must be separated by '|' (ex. 'a|b|c' )
      * @returns The values stored on the property. An empty array if the property does not exists
      */
-    getArrayProperty : function( $rule : any , property : string ) : Array<string> {
-        const propertyText = $rule.attr( property );
-        if( !propertyText )
+    getArrayProperty($rule: JQuery<HTMLElement>, property: string): string[] {
+        const propertyText = $rule.attr(property);
+        if (!propertyText) {
             return [];
-        return propertyText.split('|');
+        }
+        return propertyText.split("|");
     },
 
     /**
@@ -1455,11 +1530,12 @@ const mechanicsEngine = {
      * @param defaultValue Value to return if the attribute is not present (default "defaultValue" is null)
      * @returns The property value. defaultValue if the property was not present
      */
-    getBooleanProperty : function( $rule : any , property : string , defaultValue : boolean = null ) : boolean | null {
-        const txtValue : string = $rule.attr( property );
-        if( !txtValue )
+    getBooleanProperty($rule: JQuery<HTMLElement>, property: string, defaultValue: boolean = null): boolean | null {
+        const txtValue: string = $rule.attr(property);
+        if (!txtValue) {
             return defaultValue;
-        return txtValue == 'true';
+        }
+        return txtValue === "true";
     },
 
     /**
@@ -1469,38 +1545,40 @@ const mechanicsEngine = {
      * @param property The property to get
      * @returns The property value. null if the property was not present
      */
-    getIntProperty : function( $rule : any , property : string , evaluateReplacements : boolean ) : number | null {
-        const txtValue : string = $rule.attr( property );
-        if( !txtValue )
+    getIntProperty($rule: JQuery<HTMLElement>, property: string, evaluateReplacements: boolean): number | null {
+        const txtValue: string = $rule.attr(property);
+        if (!txtValue) {
             return null;
+        }
 
-        if( evaluateReplacements )
-            return ExpressionEvaluator.evalInteger( txtValue );
+        if (evaluateReplacements) {
+            return ExpressionEvaluator.evalInteger(txtValue);
+        }
 
-        return parseInt( txtValue );
+        return parseInt(txtValue, 10);
     },
 
     /**
      * Show or update the table with the available objects on the section
-     * @param renderEmptyTable If it's true and there are no objects on the current section section, 
+     * @param renderEmptyTable If it's true and there are no objects on the current section section,
      * a empty objects table will be rendered. If it's empty, no table will be rendered
      */
-    showAvailableObjects: function( renderEmptyTable = false ) {
+    showAvailableObjects(renderEmptyTable = false) {
 
-        var sectionState = state.sectionStates.getSectionState();
-        var thereAreObjects = ( sectionState.objects.length >= 1 );
+        const sectionState = state.sectionStates.getSectionState();
+        const thereAreObjects = (sectionState.objects.length >= 1);
 
         // Check if the table was already inserted on the UI:
-        var $table = $('#mechanics-availableObjectsList');
-        if( $table.length === 0 ) {
-            if( thereAreObjects || renderEmptyTable ) {
+        let $table = $("#mechanics-availableObjectsList");
+        if ($table.length === 0) {
+            if (thereAreObjects || renderEmptyTable) {
                 // Add the objects table template
-                gameView.appendToSection( mechanicsEngine.getMechanicsUI('mechanics-availableObjects') );
-                $table = $('#mechanics-availableObjectsList');
-            }
-            else
+                gameView.appendToSection(mechanicsEngine.getMechanicsUI("mechanics-availableObjects"));
+                $table = $("#mechanics-availableObjectsList");
+            } else {
                 // Nothing to do
                 return;
+            }
         }
 
         // Fill the objects list:
@@ -1510,19 +1588,20 @@ const mechanicsEngine = {
     /**
      * Show or update the table with the sell objects table
      */
-    showSellObjects: function() {
-        var sectionState = state.sectionStates.getSectionState();
-        if( sectionState.sellPrices.length === 0 )
+    showSellObjects() {
+        const sectionState = state.sectionStates.getSectionState();
+        if (sectionState.sellPrices.length === 0) {
             return;
+        }
 
         // Check if the table was already inserted on the UI:
-        var $table = $('#mechanics-sellObjectsList');
-        if( $table.length === 0 ) {
+        let $table = $("#mechanics-sellObjectsList");
+        if ($table.length === 0) {
             // Add the template
-            gameView.appendToSection( 
-                mechanicsEngine.getMechanicsUI('mechanics-sellObjects') );
-            $table = $('#mechanics-sellObjectsList');
-        }       
+            gameView.appendToSection(
+                mechanicsEngine.getMechanicsUI("mechanics-sellObjects"));
+            $table = $("#mechanics-sellObjectsList");
+        }
 
         // Fill the objects list:
         new ObjectsTable(sectionState.sellPrices, $table, ObjectsTableType.SELL).renderTable();
@@ -1531,66 +1610,72 @@ const mechanicsEngine = {
     /**
      * Enable or disable choice links
      * @param section The section to enable / disable. 'all' for all choices
-     * @param disabled True to disable the choices. False to enable 
+     * @param disabled True to disable the choices. False to enable
      */
-    setChoiceState: function(section : string, disabled : boolean) {
+    setChoiceState(section: string, disabled: boolean) {
 
         // Do not enable anything if the player is death:
-        if( state.actionChart.currentEndurance <= 0 && !disabled )
+        if (state.actionChart.currentEndurance <= 0 && !disabled) {
             return;
-            
-        var txtSelector = '#game-section .choice';
-        if( section != 'all' )
-             txtSelector += ':has(a[data-section=' + section + '])';
+        }
+
+        let txtSelector = "#game-section .choice";
+        if (section !== "all") {
+            txtSelector += ":has(a[data-section=" + section + "])";
+        }
 
         // Select the choose that contains the link to the section, and enable / disable it
-        var $choose = $( txtSelector );
-        if( disabled )
-            $choose.find('.choice-link').addClass('disabled');
-        else
-            $choose.find('.choice-link').removeClass('disabled');
+        const $choose = $(txtSelector);
+        if (disabled) {
+            $choose.find(".choice-link").addClass("disabled");
+        } else {
+            $choose.find(".choice-link").removeClass("disabled");
+        }
     },
 
     /**
      * Return true if the choice for a given section is enabled
      * @param {String} sectionId The section id for the choice to check
      */
-    isChoiceEnabled: function(sectionId) {
-        var $selector = $('#game-section a[data-section=' + sectionId + ']');
-        if( $selector.length === 0 )
+    isChoiceEnabled(sectionId: string) {
+        const $selector = $("#game-section a[data-section=" + sectionId + "]");
+        if ($selector.length === 0) {
             return false;
-        return !$selector.hasClass('disabled');
+        }
+        return !$selector.hasClass("disabled");
     },
 
     /**
      * Set the death UI if the player is death
      */
-    testDeath: function() {
+    testDeath() {
         // Dont show death on non numbered sections (maybe we have not choose the endurance yet)
-        var section = new Section(state.book, state.sectionStates.currentSection, 
+        const section = new Section(state.book, state.sectionStates.currentSection,
             state.mechanics);
-        if( ! section.getSectionNumber() )
+        if (!section.getSectionNumber()) {
             return;
+        }
 
-        if( state.actionChart.currentEndurance <= 0 && $('#mechanics-death').length === 0 ) {
+        if (state.actionChart.currentEndurance <= 0 && $("#mechanics-death").length === 0) {
 
             // Add the death UI
-            gameView.appendToSection( mechanicsEngine.getMechanicsUI('mechanics-death') , 'afterChoices' );
+            gameView.appendToSection(mechanicsEngine.getMechanicsUI("mechanics-death"), "afterChoices");
 
             // Disable all choice links
-            mechanicsEngine.setChoiceState('all' , true);
+            mechanicsEngine.setChoiceState("all", true);
             // Disable pick any object
-            $('a.equipment-op').addClass('disabled');
+            $("a.equipment-op").addClass("disabled");
             // Disable number picker
             numberPickerMechanics.disable();
             // Disable random table links
-            $('a.random').addClass('disabled');
+            $("a.random").addClass("disabled");
 
             // Bind restart book link
-            $('#mechanics-restart').click(function(e) {
+            $("#mechanics-restart").click( (e) => {
                 e.preventDefault();
-                if( confirm( translations.text( 'confirmRestart' ) ) )
+                if (confirm(translations.text("confirmRestart"))) {
                     setupController.restartBook();
+                }
             });
 
             // If there are pending combats, disable them
@@ -1601,69 +1686,77 @@ const mechanicsEngine = {
     /**
      * Apply the healing discipline on the current section
      */
-    healingDiscipline: function() {
-        if( !state.actionChart.disciplines.contains('healing') && !state.actionChart.disciplines.contains('curing') && !state.actionChart.disciplines.contains('deliver') )
+    healingDiscipline() {
+        if (!state.actionChart.disciplines.contains("healing") && !state.actionChart.disciplines.contains("curing") && !state.actionChart.disciplines.contains("deliver")) {
             return;
-        var sectionState = state.sectionStates.getSectionState();
-        if( sectionState.combats.length > 0 )
+        }
+        const sectionState = state.sectionStates.getSectionState();
+        if (sectionState.combats.length > 0) {
             // Only on sections without combats
             return;
-        if( sectionState.healingExecuted )
+        }
+        if (sectionState.healingExecuted) {
             // Already executed
             return;
+        }
         sectionState.healingExecuted = true;
-        if( state.actionChart.currentEndurance < state.actionChart.getMaxEndurance() )
+        if (state.actionChart.currentEndurance < state.actionChart.getMaxEndurance()) {
             actionChartController.increaseEndurance(+1, true);
+        }
     },
 
     /**
      * Check if this is the last section of the book
      * @param {Section} section The current section
      */
-    checkLastSection: function(section) {
+    checkLastSection(section: Section) {
 
-        if( section.sectionId != state.mechanics.getLastSectionId() || 
-            state.book.bookNumber >= projectAon.getLastSupportedBook() )
+        if (section.sectionId !== state.mechanics.getLastSectionId() ||
+            state.book.bookNumber >= projectAon.getLastSupportedBook()) {
             return;
-        
-        var $nextBook = $('.bookref');
-        if( $nextBook.length === 0 ) {
-            // XML bug with spanish book 4 (and 9, and others???). It has no bookref...
-            // Just the first one, spanish book 9 contains two cites
-            $nextBook = $('cite').first();
         }
 
-        $nextBook.replaceWith( '<a href="#" id="game-nextBook" class="action">' + 
-            $nextBook.html() + '</a>' );
-        $('#game-nextBook').click(function(e) {
+        let $nextBook = $(".bookref");
+        if ($nextBook.length === 0) {
+            // XML bug with spanish book 4 (and 9, and others???). It has no bookref...
+            // Just the first one, spanish book 9 contains two cites
+            $nextBook = $("cite").first();
+        }
+
+        $nextBook.replaceWith('<a href="#" id="game-nextBook" class="action">' +
+            $nextBook.html() + "</a>");
+        $("#game-nextBook").click( (e) => {
             e.preventDefault();
             // Move the scroll to the top: The scroll state will be stored when we leave
             // the controller, and we want to start the next book with a scroll y=0
             window.scrollTo(0, 0);
             state.nextBook();
-            routing.redirect('setup');
+            routing.redirect("setup");
         });
     },
 
     /**
-     * Get a translated property of a rule. The properties checked are 'en-<property>' and 
+     * Get a translated property of a rule. The properties checked are 'en-<property>' and
      * 'es-<property>'
      * @param {xmlNode} rule The rule to check
      * @param propertyName The property to check. If it's null, the 'text' property
      * will be search
      * @return The translated text
      */
-    getRuleText: function(rule, propertyName : string = null ) : string {
-        if( !propertyName )
-            propertyName = 'text';
+    getRuleText(rule: Element | JQuery<HTMLElement>, propertyName: string = null): string {
+        if (!propertyName) {
+            propertyName = "text";
+        }
 
-        var $rule = $(rule);
-        var text = $rule.attr( state.language + '-' + propertyName);
-        if( !text )
+        const $rule = $(rule);
+        let text = $rule.attr(state.language + "-" + propertyName);
+        if (!text) {
             // Return the english text
-            text = $rule.attr( 'en-' + propertyName);
-        if( !text )
-            text = '';
+            text = $rule.attr("en-" + propertyName);
+        }
+        if (!text) {
+            text = "";
+        }
         return text;
     },
 
@@ -1672,19 +1765,21 @@ const mechanicsEngine = {
      * @param {XmlNode} rule The root rule
      * @param {function(XmlNode)} callback The function to execute
      */
-    enumerateSectionRules: function( rule , callback ) {
+    enumerateSectionRules(rule: Element, callback: any) {
 
-        var result = callback( rule );
-        if( result == 'finish' )
-            return 'finish';
-        else if( result == 'ignoreDescendants' )
+        let result = callback(rule);
+        if (result === "finish") {
+            return "finish";
+        } else if (result === "ignoreDescendants") {
             return;
+        }
 
-        var childrenRules = $(rule).children();
-        for(var i=0; i<childrenRules.length; i++) {
-            result = mechanicsEngine.enumerateSectionRules( childrenRules[i] , callback );
-            if( result == 'finish' )
-                return 'finish';
+        const childrenRules = $(rule).children();
+        for (const childRule of childrenRules.toArray()) {
+            result = mechanicsEngine.enumerateSectionRules(childRule, callback);
+            if (result === "finish") {
+                return "finish";
+            }
         }
 
     },
@@ -1696,38 +1791,41 @@ const mechanicsEngine = {
      * @param objectsArray The Action Chart array (the Special Items or BackBackItems)
      * @returns Ids of dropped objects
      */
-    dropActionChartSlots : function( $rule : any , property : string , objectsArray : Array<string> ) : Array<string> {
+    dropActionChartSlots($rule: JQuery<HTMLElement>, property: string, objectsArray: string[]): string[] {
 
         // Objects to drop
-        let slotObjectsIds : Array<string> = [];
-        for( let itemSlotTxt of mechanicsEngine.getArrayProperty( $rule , property ) ) {
+        const slotObjectsIds: string[] = [];
+        for (const itemSlotTxt of mechanicsEngine.getArrayProperty($rule, property)) {
 
             let slotIndex;
-            if( itemSlotTxt == 'last' )
+            if (itemSlotTxt === "last") {
                 slotIndex = objectsArray.length;
-            else
-                slotIndex = parseInt( itemSlotTxt );
+            } else {
+                slotIndex = parseInt(itemSlotTxt, 10);
+            }
             slotIndex -= 1;
 
-            if( slotIndex >= 0 && objectsArray.length > slotIndex )
-                slotObjectsIds.push( objectsArray[slotIndex] );
+            if (slotIndex >= 0 && objectsArray.length > slotIndex) {
+                slotObjectsIds.push(objectsArray[slotIndex]);
+            }
         }
-        
+
         // Drop objects
-        for( let objectId of slotObjectsIds )
-            actionChartController.drop( objectId );
+        for (const objectId of slotObjectsIds) {
+            actionChartController.drop(objectId);
+        }
 
         return slotObjectsIds;
     },
 
-    appedToInventoryState : function(newRestorePoint : InventoryState, restorePointId : string ) {
+    appedToInventoryState(newRestorePoint: InventoryState, restorePointId: string) {
 
-        const currentRestorePointObject : any = state.sectionStates.otherStates[ restorePointId ];
-        if( currentRestorePointObject ) {
+        const currentRestorePointObject: any = state.sectionStates.otherStates[restorePointId];
+        if (currentRestorePointObject) {
             // Join both
-            newRestorePoint.addInventoryToThis( InventoryState.fromObject( currentRestorePointObject ) );
+            newRestorePoint.addInventoryToThis(InventoryState.fromObject(currentRestorePointObject));
         }
-        state.sectionStates.otherStates[ restorePointId ] = newRestorePoint.toObject();
+        state.sectionStates.otherStates[restorePointId] = newRestorePoint.toObject();
     },
 
     /**
@@ -1735,19 +1833,21 @@ const mechanicsEngine = {
      * @param msg Message text
      * @param msgId Id to set on the message HTML tag. It's optional
      */
-    showMessage : function( msg : string , msgId : string = null) {
+    showMessage(msg: string, msgId: string = null) {
 
-        if( msgId ) {
+        if (msgId) {
             // Avoid duplicated messages
-            if( $('.mechanics-message[id=' + msgId + ']').length > 0 )
+            if ($(".mechanics-message[id=" + msgId + "]").length > 0) {
                 return;
+            }
         }
 
-        var $messageUI = mechanicsEngine.getMechanicsUI( 'mechanics-message' );
-        if( msgId )
-            $messageUI.attr('id', msgId );
-        $messageUI.find('b').text( msg );
-        gameView.appendToSection( $messageUI );
-    }
+        const $messageUI = mechanicsEngine.getMechanicsUI("mechanics-message");
+        if (msgId) {
+            $messageUI.attr("id", msgId);
+        }
+        $messageUI.find("b").text(msg);
+        gameView.appendToSection($messageUI);
+    },
 
 };

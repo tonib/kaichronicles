@@ -1,4 +1,3 @@
-/// <reference path="../external.ts" />
 
 /**
  * Only for Cordova app.
@@ -9,36 +8,38 @@ class LocalBooksLibrary {
     /**
      * Info about the books states
      */
-    public booksLibrary : Array<BookDownloadState> = [];
+    public booksLibrary: BookDownloadState[] = [];
 
     /**
      * Absolute path where to books are stored. It's filled at resolveBooksDirectoryAsync()
      */
-    public BOOKS_PATH : string = null;
+    public BOOKS_PATH: string = null;
 
-    /** 
+    /**
      * Constructor
      */
     public constructor() {
-    
-        var onWebEnvironment = !cordovaApp.isRunningApp();
-        for( var i=1; i<=projectAon.supportedBooks.length; i++) {
-            var book = new BookDownloadState(i);
-            if( onWebEnvironment )
+
+        const onWebEnvironment = !cordovaApp.isRunningApp();
+        for ( let i = 1; i <= projectAon.supportedBooks.length; i++) {
+            const book = new BookDownloadState(i);
+            if ( onWebEnvironment ) {
                 book.downloaded = true;
+            }
             this.booksLibrary.push( book );
         }
     }
-    
+
     /**
      * Get the currently downloaded books
      * @return Downloaded books
      */
-    public getDownloadedBooks() : Array<BookDownloadState> {
-        var result = [];
-        for(var i=0; i<this.booksLibrary.length; i++) {
-            if( this.booksLibrary[i].downloaded )
-                result.push( this.booksLibrary[i] );
+    public getDownloadedBooks(): BookDownloadState[] {
+        const result = [];
+        for (const book of this.booksLibrary) {
+            if ( book.downloaded ) {
+                result.push( book );
+            }
         }
         return result;
     }
@@ -48,10 +49,11 @@ class LocalBooksLibrary {
      * @param bookNumber The book number to check (1-based index)
      * @return True if the book is downloaded
      */
-    public isBookDownloaded( bookNumber : number ) : boolean {
-        var idx = bookNumber - 1;
-        if( idx >= this.booksLibrary.length )
+    public isBookDownloaded( bookNumber: number ): boolean {
+        const idx = bookNumber - 1;
+        if ( idx >= this.booksLibrary.length ) {
             return false;
+        }
         return this.booksLibrary[ idx ].downloaded;
     }
 
@@ -59,31 +61,30 @@ class LocalBooksLibrary {
      * Get the directory where books are stored on the device
      * @returns {Promise<DirectoryEntry>} Promise with the Cordova directory entry where the books are stored
      */
-    public static getBooksDirectoryAsync() : JQueryPromise<any> {
+    public static getBooksDirectoryAsync(): JQueryPromise<any> {
         return cordovaFS.requestFileSystemAsync()
-        .then(function(fs: any) {
-            return cordovaFS.getDirectoryAsync(fs.root, 'books', { create: true });
+        .then((fs: any) => {
+            return cordovaFS.getDirectoryAsync(fs.root, "books", { create: true });
         });
     }
 
-
     /**
-     * Resolve the directory where the books are stored. The directory URL will be stored on 
+     * Resolve the directory where the books are stored. The directory URL will be stored on
      * this.BOOKS_PATH
      * @return The resolution promise
      */
-    public resolveBooksDirectoryAsync() : JQueryPromise<void> {
+    public resolveBooksDirectoryAsync(): JQueryPromise<void> {
 
-        if( !cordovaApp.isRunningApp() )
+        if ( !cordovaApp.isRunningApp() ) {
             // This is just for the app
             return jQuery.Deferred<void>().resolve().promise();
+        }
 
-        var self = this;
-        console.log('Resolving books directory');
+        console.log("Resolving books directory");
         return LocalBooksLibrary.getBooksDirectoryAsync()
-            .then(function(booksDirEntry) {
-                self.BOOKS_PATH = booksDirEntry.toURL();
-                console.log('Books are at ' + self.BOOKS_PATH );
+            .then((booksDirEntry) => {
+                this.BOOKS_PATH = booksDirEntry.toURL();
+                console.log("Books are at " + this.BOOKS_PATH );
             });
     }
 
@@ -91,19 +92,19 @@ class LocalBooksLibrary {
      * Check if books are downloaded or not
      * @return The resolution promise
      */
-    public updateBooksDownloadStateAsync() : JQueryPromise<void> {
+    public updateBooksDownloadStateAsync(): JQueryPromise<void> {
 
-        if( !cordovaApp.isRunningApp() )
+        if ( !cordovaApp.isRunningApp() ) {
             // This is just for the app
             return jQuery.Deferred<void>().resolve().promise();
+        }
 
         // Cordova app: Check downloaded books
-        var self = this;
         return LocalBooksLibrary.getBooksDirectoryAsync()
-        .then( function(booksDir) {
-            var promises = [];
+        .then( (booksDir) => {
+            const promises = [];
             // Start each book check
-            self.booksLibrary.forEach( function(book) {
+            this.booksLibrary.forEach( (book) => {
                 promises.push( book.checkDownloadStateAsync(booksDir) );
             });
 
@@ -117,13 +118,11 @@ class LocalBooksLibrary {
      * Setup the books states
      * @return The resolution promise
      */
-    public setupAsync() : JQueryPromise<void> {
-        var self = this;
+    public setupAsync(): JQueryPromise<void> {
         return this.resolveBooksDirectoryAsync()
-        .then(function() { 
-            return self.updateBooksDownloadStateAsync(); 
+        .then(() => {
+            return this.updateBooksDownloadStateAsync();
         });
-    };
+    }
 
 }
-
