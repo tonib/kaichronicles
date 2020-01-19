@@ -11,7 +11,7 @@ const book6sect340 = {
         $("#mechanics-book6sect340-bonus").text( ExpressionEvaluator.evalInteger("[BOWBONUS]") );
 
         for ( let i = 0; i < 3; i++) {
-        book6sect340.bindRandomLink(i);
+            book6sect340.bindRandomLink(i);
         }
 
         book6sect340.updateUI();
