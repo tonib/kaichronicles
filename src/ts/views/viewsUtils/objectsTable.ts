@@ -74,10 +74,12 @@ class ObjectsTableItem {
         var name = this.item.name;
 
         // Number of arrows on the quiver
-        if( this.objectInfo.id == Item.QUIVER && this.objectInfo.showCount) {
+        if( this.objectInfo.id == Item.QUIVER ) {
             // Be sure count is not null
             const count = ( this.objectInfo.count ? this.objectInfo.count : 0 );
-            name += ' (' + count + ' ' + translations.text('arrows') + ')';
+            // In INVENTORY always show "0 arrows", but not in SELL or AVAILABLE (ugly)
+            if( count > 0 || this.type == ObjectsTableType.INVENTORY )
+                name += ' (' + count + ' ' + translations.text('arrows') + ')';
         }
 
         // Arrow amount
@@ -244,7 +246,6 @@ class ObjectsTableItem {
             price : 0,
             unlimited : false,
             count : 0,
-            showCount : false,
             useOnSection : false
         };
 
@@ -265,9 +266,6 @@ class ObjectsTableItem {
 
         if( $link.attr( 'data-useonsection' ) == 'true' )
             objectInfo.useOnSection = true;
-
-        if( $link.attr( 'data-showcount' ) == 'true' )
-            objectInfo.showCount = true;
 
         return new ObjectsTableItem( objectInfo , tableType );
     }
