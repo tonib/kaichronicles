@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<mechanics book="14" xmlns="https://127.0.0.1:5000" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://raw.githubusercontent.com/cracrayol/kaichronicles/master/src/www/data/mechanics.xsd">
+<mechanics book="14" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://raw.githubusercontent.com/cracrayol/kaichronicles/master/src/www/data/mechanics.xsd">
 
     <!-- LIST OF TRANSLATED IMAGES -->
     <translated-images>
