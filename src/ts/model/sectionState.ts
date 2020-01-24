@@ -5,19 +5,19 @@
  */
 interface SectionItem {
     /** The object id */
-    id : string;
+    id: string;
 
     /** The object price. If its zero or null, the object is free */
-    price : number;
+    price: number;
 
     /** True if there are an infinite number of this kind of object on the section */
-    unlimited : boolean;
+    unlimited: boolean;
 
-    /** 
-     * Only applies if id = 'quiver' (number of arrows on the quiver) 
-     * or id = 'money' (number of Gold Crowns) 
+    /**
+     * Only applies if id = 'quiver' (number of arrows on the quiver)
+     * or id = 'money' (number of Gold Crowns)
      */
-    count : number;
+    count: number;
 
     /**
      * Object is allowed to be used from the section (not picked object)?
@@ -30,33 +30,33 @@ interface SectionItem {
  */
 interface SellPrice {
     /** The object id */
-    id : string;
+    id: string;
 
     /** The object price */
-    price : number;
+    price: number;
 
     /** Only applies if id = 'quiver'. Number of arrows on the quiver */
-    count : number;
+    count: number;
 }
 
 /**
- * Stores a section state (combats, objects, etc) 
+ * Stores a section state (combats, objects, etc)
  */
 class SectionState {
 
     /**
-     * Objects on the section 
+     * Objects on the section
      */
-    public objects : Array<SectionItem>  = [];
+    public objects: SectionItem[]  = [];
 
     /**
      * Sell prices on the section. Applies only on sections where you can
      * sell inventory objects.
      */
-    public sellPrices : Array<SellPrice> = [];
+    public sellPrices: SellPrice[] = [];
 
     /** Combats on the section */
-    public combats : Array<Combat> = [];
+    public combats: Combat[] = [];
 
     /** The combat has been eluded? */
     public combatEluded = false;
@@ -70,8 +70,8 @@ class SectionState {
     /** Healing discipline has been executed on this section? */
     public healingExecuted = false;
 
-    /** 
-     * Number picker states for this section. 
+    /**
+     * Number picker states for this section.
      * See numberPicker.js and numberPickerMechanics.ts
      */
     public numberPickersState = {};
@@ -82,9 +82,10 @@ class SectionState {
      * @param executionState The state to associate with the execution. If it's null,
      * if will be set to true
      */
-    public markRuleAsExecuted( rule, executionState : any = true ) {
-        if( !executionState )
+    public markRuleAsExecuted( rule, executionState: any = true ) {
+        if ( !executionState ) {
             executionState = true;
+        }
 
         this.executedRules[ Mechanics.getRuleSelector(rule) ] = executionState;
     }
@@ -94,11 +95,11 @@ class SectionState {
      * @param rule Rule to check
      * @return The object associated with the execution. true if there was no result stored
      */
-    public ruleHasBeenExecuted(rule) : any {
+    public ruleHasBeenExecuted(rule): any {
         // TODO: This will fail if the XML changes. The rule should be searched
-        // TODO: with all selectors on the sectionState.executedRules keys 
-        // TODO: If it's found, it's executed 
-        return this.executedRules[ Mechanics.getRuleSelector(rule) ]; 
+        // TODO: with all selectors on the sectionState.executedRules keys
+        // TODO: If it's found, it's executed
+        return this.executedRules[ Mechanics.getRuleSelector(rule) ];
     }
 
     /**
@@ -107,17 +108,19 @@ class SectionState {
      * null to return all
      * @return The objects on this section
      */
-    public getSectionObjects(type : string = null) : Array<Item> {
-        let items : Array<Item> = [];
-        for( let sectionItem of this.objects) {
+    public getSectionObjects(type: string = null): Item[] {
+        let items: Item[] = [];
+        for ( let sectionItem of this.objects) {
 
-            if( sectionItem.id == 'money' ) 
+            if ( sectionItem.id == "money" ) {
                 // Money if not really an object. It's stored like one for mechanics needs
                 continue;
+            }
 
             let i = state.mechanics.getObject( sectionItem.id );
-            if( !type || i.type == type )
+            if ( !type || i.type == type ) {
                 items.push(i);
+            }
         }
         return items;
     }
@@ -143,11 +146,12 @@ class SectionState {
     /**
      * Return the weapons and weapon special object on the section
      */
-    public getWeaponObjects() : Array<Item> {
-        let weapons : Array<Item> = [];
-        for( let i of this.getSectionObjects() ) {
-            if( i.isWeapon() )
+    public getWeaponObjects(): Item[] {
+        let weapons: Item[] = [];
+        for ( let i of this.getSectionObjects() ) {
+            if ( i.isWeapon() ) {
                 weapons.push( i );
+            }
         }
         return weapons;
     }
@@ -157,32 +161,37 @@ class SectionState {
      * Returns 'eluded' if all combats are eluded, and Lone Wolf is not death.
      * Returns false if there are pending combats, or Lone Wolf is death
      */
-    public areAllCombatsFinished(actionChart : ActionChart) : string|boolean {
+    public areAllCombatsFinished(actionChart: ActionChart): string|boolean {
 
-        if( actionChart.currentEndurance <= 0 )
+        if ( actionChart.currentEndurance <= 0 ) {
             // LW death
             return false;
-
-        if( this.combats.length === 0 )
-            return 'finished';
-
-        if( this.combatEluded )
-            return 'eluded';
-
-        for(var i=0; i<this.combats.length; i++) {
-            if( !this.combats[i].isFinished() )
-                return false;
         }
-        return 'finished';
+
+        if ( this.combats.length === 0 ) {
+            return "finished";
+        }
+
+        if ( this.combatEluded ) {
+            return "eluded";
+        }
+
+        for (var i = 0; i < this.combats.length; i++) {
+            if ( !this.combats[i].isFinished() ) {
+                return false;
+            }
+        }
+        return "finished";
     }
 
     /**
      * Returns true if all combats are won
      */
-    public areAllCombatsWon() : boolean {
-        for(var i=0; i<this.combats.length; i++) {
-            if( this.combats[i].endurance > 0 )
+    public areAllCombatsWon(): boolean {
+        for (var i = 0; i < this.combats.length; i++) {
+            if ( this.combats[i].endurance > 0 ) {
                 return false;
+            }
         }
         return true;
     }
@@ -190,29 +199,32 @@ class SectionState {
     /**
      * Returns true if there is some combat active
      */
-    public someCombatActive() : boolean {
-        if( this.combatEluded )
+    public someCombatActive(): boolean {
+        if ( this.combatEluded ) {
             return false;
+        }
 
-        for(var i=0; i<this.combats.length; i++) {
-            if( !this.combats[i].isFinished() )
+        for (var i = 0; i < this.combats.length; i++) {
+            if ( !this.combats[i].isFinished() ) {
                 return true;
+            }
         }
         return false;
     }
 
     /**
-     * Returns the number on endurance points lost by somebody on section combats 
+     * Returns the number on endurance points lost by somebody on section combats
      * @param {string} who If is 'enemy' we will calculate the enemy loss. Otherwise, we will
      * calculate the player loss
      */
-    public combatsEnduranceLost( who : string ) : number {
+    public combatsEnduranceLost( who: string ): number {
         var lost = 0;
-        for( var i=0, len = this.combats.length; i< len; i++) {
-            if( who == 'enemy')
+        for ( var i = 0, len = this.combats.length; i < len; i++) {
+            if ( who == "enemy") {
                 lost += this.combats[i].enemyEnduranceLost();
-            else
+            } else {
                 lost += this.combats[i].playerEnduranceLost();
+            }
         }
         return lost;
     }
@@ -220,10 +232,11 @@ class SectionState {
     /**
      * Returns the number of turns used on all combats on the section
      */
-    public combatsDuration() : number {
+    public combatsDuration(): number {
         var duration = 0;
-        for( var i=0, len = this.combats.length; i< len; i++)
+        for ( var i = 0, len = this.combats.length; i < len; i++) {
             duration += this.combats[i].turns.length;
+        }
         return duration;
     }
 
@@ -231,9 +244,10 @@ class SectionState {
      * Set combats as enabled / disabled
      * @param enabled True to enable combats. False to disable them
      */
-    public setCombatsEnabled(enabled : boolean) {
-        for( var i=0, len = this.combats.length; i< len; i++)
+    public setCombatsEnabled(enabled: boolean) {
+        for ( var i = 0, len = this.combats.length; i < len; i++) {
             this.combats[i].disabled = !enabled;
+        }
     }
 
     /**
@@ -249,10 +263,10 @@ class SectionState {
                               useOnSection: boolean = false ) {
 
         // Special cases:
-        if( objectId == 'money' ) {
+        if ( objectId == "money" ) {
             // Try to increase the current money amount / arrows on the section:
-            for( let o of this.objects ) {
-                if( o.id == objectId ) {
+            for ( let o of this.objects ) {
+                if ( o.id == objectId ) {
                     o.count += count;
                     return;
                 }
@@ -274,43 +288,48 @@ class SectionState {
      * @param price Price of the object to remove
      * @param count Count to decrease. Only applies if the object is 'money'
      */
-    public removeObjectFromSection(objectId : string, price: number, count: number = -1) {
+    public removeObjectFromSection(objectId: string, price: number, count: number = -1) {
         // Be sure price is not null
-        if( !price )
+        if ( !price ) {
             price = 0;
-        
-        for( var i=0, len = this.objects.length; i< len; i++) {
+        }
+
+        for ( var i = 0, len = this.objects.length; i < len; i++) {
             // Be sure price is not null
             let currentPrice = this.objects[i].price;
-            if( !currentPrice )
+            if ( !currentPrice ) {
                 currentPrice = 0;
+            }
 
-            if( this.objects[i].id == objectId && currentPrice == price ) {
+            if ( this.objects[i].id == objectId && currentPrice == price ) {
                 let removeObject = true;
-                if( ( objectId == Item.MONEY || objectId == Item.ARROW ) && count >= 0 && this.objects[i].count > count ) {
+                if ( ( objectId == Item.MONEY || objectId == Item.ARROW ) && count >= 0 && this.objects[i].count > count ) {
                     // Still money / arrows available:
                     this.objects[i].count -= count;
                     removeObject = false;
                 }
 
-                if( removeObject )
+                if ( removeObject ) {
                     this.objects.splice(i, 1);
+                }
                 return;
             }
         }
-        console.log( 'Object to remove from section not found :' + objectId + ' ' + price );
+        console.log( "Object to remove from section not found :" + objectId + " " + price );
     }
 
     /**
      * Returns the last random value picked on the first combat of this section.
      * Returns -1 if there are no combats or not turns yet
      */
-    public getLastRandomCombatTurn() : number {
-        if( this.combats.length === 0 )
+    public getLastRandomCombatTurn(): number {
+        if ( this.combats.length === 0 ) {
             return -1;
+        }
         var combat = this.combats[0];
-        if( combat.turns.length === 0 )
+        if ( combat.turns.length === 0 ) {
             return -1;
+        }
         return combat.turns[ combat.turns.length - 1].randomValue;
     }
 
@@ -318,20 +337,22 @@ class SectionState {
      * Returns the enemy current endurance of the first combat on the section.
      * It returns zero if there are no combats on the section
      */
-    public getEnemyEndurance() : number {
-        if( this.combats.length === 0 )
+    public getEnemyEndurance(): number {
+        if ( this.combats.length === 0 ) {
             return 0;
+        }
         return this.combats[0].endurance;
     }
 
     /**
      * Get the available amount of money on the section
      */
-    public getAvailableMoney() : number {
+    public getAvailableMoney(): number {
         let moneyCount = 0;
-        for( let o of this.objects ) {
-            if( o.id == 'money')
+        for ( let o of this.objects ) {
+            if ( o.id == "money") {
                 moneyCount += o.count;
+            }
         }
         return moneyCount;
     }
@@ -340,19 +361,21 @@ class SectionState {
      * Add a combat skill bonus to the current section combats by an object usage.
      * @param combatSkillModifier The combat skill increase
      */
-    public combatSkillUsageModifier( combatSkillModifier : number ) {
+    public combatSkillUsageModifier( combatSkillModifier: number ) {
         // Apply the modifier to current combats:
-        for( let combat of this.combats )
+        for ( let combat of this.combats ) {
             combat.objectsUsageModifier += combatSkillModifier;
+        }
     }
 
     /** Return true if the object is on the section */
-    public containsObject( objectId : string ) : boolean {
-        for( let sectionItem of this.objects ) {
-            if( sectionItem.id == objectId )
+    public containsObject( objectId: string ): boolean {
+        for ( let sectionItem of this.objects ) {
+            if ( sectionItem.id == objectId ) {
                 return true;
+            }
         }
         return false;
     }
-    
+
 }

@@ -8,18 +8,19 @@ var cordovaApp = {
      * Setup Cordova app, if needed
      * @returns {Promise} The process promise
      */
-    setup: function() {
+    setup() {
         var dfd = jQuery.Deferred();
 
-        if( !cordovaApp.isRunningApp() )
+        if ( !cordovaApp.isRunningApp() ) {
             // Running on web
             return dfd.resolve().promise();
+        }
 
-        document.addEventListener( 'deviceready', function() {
+        document.addEventListener( "deviceready", function() {
             // Register event listeners
-            document.addEventListener('backbutton', cordovaApp.onBackButton.bind(this), false);
+            document.addEventListener("backbutton", cordovaApp.onBackButton.bind(this), false);
             dfd.resolve();
-        }, 
+        },
         false );
 
         return dfd.promise();
@@ -28,25 +29,25 @@ var cordovaApp = {
     /**
      * Hardware back button clicked
      */
-    onBackButton: function() {
-        console.log('onBackButton');
+    onBackButton() {
+        console.log("onBackButton");
         // If a modal has class "nobackbutton", do not allow to close it with the back button
-        if( $('.modal.in').length > 0 && !$('.modal').hasClass('nobackbutton') )
+        if ( $(".modal.in").length > 0 && !$(".modal").hasClass("nobackbutton") ) {
             // It there is any bootstrap modal open, close it
-            $('.modal').modal('hide');
-        else if( template.isMenuExpanded() )
+            $(".modal").modal("hide");
+        } else if ( template.isMenuExpanded() ) {
             // If the bootstrap menu is expanded, collapse it
             template.collapseMenu();
-        else
+        } else {
             // Go back to the parent controller
             routing.onBackButton();
+        }
     },
 
-    closeApp: function() {
+    closeApp() {
         try {
             navigator.app.exitApp();
-        }
-        catch(e) {
+        } catch (e) {
             console.log(e);
         }
     },
@@ -54,18 +55,17 @@ var cordovaApp = {
     /**
      * Are we running inside an app?
      */
-    isRunningApp: function() { 
-        return window.cordova; 
+    isRunningApp() {
+        return window.cordova;
     },
 
     /**
      * Returns true if there is some kind of connection to Internet
      */
-    thereIsInternetConnection: function() {
+    thereIsInternetConnection() {
         try {
             return navigator.connection.type != Connection.NONE;
-        }
-        catch(e) {
+        } catch (e) {
             console.log(e);
             return true;
         }

@@ -8,22 +8,22 @@ const newGameController = {
     /**
      * New game page
      */
-    index: function() {
+    index() {
 
         // Get available books
         var downloadedBooks = state.localBooksLibrary.getDownloadedBooks();
 
-        if( downloadedBooks.length === 0 ) {
+        if ( downloadedBooks.length === 0 ) {
             // No books downloaded:
-            alert( translations.text('noDownloadedBooks') );
-            routing.redirect('mainMenu');
+            alert( translations.text("noDownloadedBooks") );
+            routing.redirect("mainMenu");
             return;
         }
 
-        template.setNavTitle( translations.text('kaiChronicles') , '#mainMenu', true);
+        template.setNavTitle( translations.text("kaiChronicles") , "#mainMenu", true);
         template.showStatistics(false);
 
-        views.loadView('newGame.html')
+        views.loadView("newGame.html")
         .then(function() {
             newGameView.setup(downloadedBooks);
         });
@@ -35,22 +35,22 @@ const newGameController = {
      * @param {string} bookNumber The book number
      * @param {string} language The book language
      */
-    startNewGame: function( bookNumber: number, language: string ) {
-        
+    startNewGame( bookNumber: number, language: string ) {
+
         state.reset(true);
-        routing.redirect( 'setup' , {
-            bookNumber: bookNumber,
-            language: language
+        routing.redirect( "setup" , {
+            bookNumber,
+            language
         });
-        
+
     },
 
-    selectedBookChanged: function(newBookNumber: number) {
-        var book = new Book(newBookNumber, 'en');
+    selectedBookChanged(newBookNumber: number) {
+        var book = new Book(newBookNumber, "en");
         newGameView.setCoverImage( book.getCoverURL() );
     },
 
     /** Return page */
-    getBackController: function() { return 'mainMenu'; }
+    getBackController() { return "mainMenu"; }
 
 };

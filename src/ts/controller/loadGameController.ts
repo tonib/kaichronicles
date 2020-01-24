@@ -4,21 +4,20 @@
  * Load stored game controller
  */
 class loadGameController {
-    
-    /**  
-     * The load game page 
+
+    /**
+     * The load game page
      */
     public static index() {
-        template.setNavTitle( translations.text('kaiChronicles'), '#mainMenu', true);
+        template.setNavTitle( translations.text("kaiChronicles"), "#mainMenu", true);
         template.showStatistics(false);
-        views.loadView('loadGame.html').then(function() {
-                
-            if( !cordovaApp.isRunningApp() ) {
+        views.loadView("loadGame.html").then(function() {
+
+            if ( !cordovaApp.isRunningApp() ) {
                 // Web page environment:
                 loadGameView.hideFilesList();
                 loadGameView.bindFileUploaderEvents();
-            }
-            else {
+            } else {
                 // Cordova app files list
                 loadGameView.hideFileUpload();
                 loadGameView.bindAppEvents();
@@ -33,14 +32,15 @@ class loadGameController {
      * @param entries {Array<Entry>} Filesystem entries to check
      * @returns The file names
      */
-    private static getFileNames( entries : Array<any> ) : Array<string> {
-        
+    private static getFileNames( entries: any[] ): string[] {
+
         // Get file names (entries is Array<Entry>)
-        let fileNames : Array<string> = [];
-        for(let entry of entries) {
+        let fileNames: string[] = [];
+        for (let entry of entries) {
             // There can be directories here (ex. downloaded books)
-            if( entry.isFile )
+            if ( entry.isFile ) {
                 fileNames.push( entry.name );
+            }
         }
 
         return fileNames;
@@ -57,7 +57,7 @@ class loadGameController {
         .then(function( fileSystem /* : FileSystem */ ) {
             return cordovaFS.getRootFilesAsync( fileSystem );
         })
-        .then( function(entries : Array<any> ) {
+        .then( function(entries: any[] ) {
 
             // Get file names (entries is Array<Entry>)
             let fileNames = loadGameController.getFileNames(entries);
@@ -67,28 +67,28 @@ class loadGameController {
             loadGameView.addFilesToList( fileNames );
             loadGameView.bindListEvents();
         })
-        .fail(function( error : any ) {
+        .fail(function( error: any ) {
             // TODO: Test this
-            let msg = 'Error retrieving saved games list';
-            if( error )
-                msg += ': ' + error.toString();
+            let msg = "Error retrieving saved games list";
+            if ( error ) {
+                msg += ": " + error.toString();
+            }
             alert( error );
         });
     }
 
-    /** 
+    /**
      * Called when the selected file changes (only web)
      * @param fileToUpload The selected file
      */
-    public static fileUploaderChanged(fileToUpload : Blob) {
+    public static fileUploaderChanged(fileToUpload: Blob) {
         try {
             var reader = new FileReader();
-            reader.onload = function (e) {
-                loadGameController.loadGame( (<any>e.target).result );
+            reader.onload = function(e) {
+                loadGameController.loadGame( (e.target as any).result );
             };
             reader.readAsText(fileToUpload);
-        }
-        catch(e) {
+        } catch (e) {
             console.log(e);
             loadGameView.showError( e.toString() );
         }
@@ -97,16 +97,17 @@ class loadGameController {
     /**
      * Called when a file is selected (Android only)
      */
-    public static fileListClicked(fileName : string) {
+    public static fileListClicked(fileName: string) {
         cordovaFS.readRootTextFileAsync( fileName )
         .then(
-            function( fileContent : string ) {
+            function( fileContent: string ) {
                 loadGameController.loadGame( fileContent );
             },
-            function( error : any ) {
-                let msg = 'Error loading saved game';
-                if( error )
-                    msg += ': ' + error.toString();
+            function( error: any ) {
+                let msg = "Error loading saved game";
+                if ( error ) {
+                    msg += ": " + error.toString();
+                }
                 alert( msg );
             }
         );
@@ -116,17 +117,17 @@ class loadGameController {
      * Load saved game and start to play it
      * @param jsonState The saved game file content
      */
-    private static loadGame(jsonState : string) {
+    private static loadGame(jsonState: string) {
         try {
             state.loadSaveGameJson( jsonState );
-            routing.redirect('setup');
-        }
-        catch(e) {
+            routing.redirect("setup");
+        } catch (e) {
             console.log(e);
-            if( cordovaApp.isRunningApp() )
+            if ( cordovaApp.isRunningApp() ) {
                 alert(e.toString());
-            else
+            } else {
                 loadGameView.showError( e.toString() );
+            }
         }
     }
 
@@ -134,8 +135,8 @@ class loadGameController {
      * Delete a saved game (Android only)
      * @param fileName The file name to delete
      */
-    public static deleteFile(fileName : string) {
-   
+    public static deleteFile(fileName: string) {
+
         cordovaFS.requestFileSystemAsync()
         .then( function( fs: any /* : FileSystem */ ) {
             return cordovaFS.getFileAsync( fs.root , fileName );
@@ -144,13 +145,14 @@ class loadGameController {
             return cordovaFS.deleteFileAsync( fileEntry );
         })
         .done( function() {
-            toastr.success( translations.text( 'fileDeleted' , [ fileName ] ) );
+            toastr.success( translations.text( "fileDeleted" , [ fileName ] ) );
             loadGameView.removeFilenameFromList( fileName );
         })
         .fail( function( error ) {
-            let msg = 'Error deleting file';
-            if( error )
-                msg += ': ' + error.toString();
+            let msg = "Error deleting file";
+            if ( error ) {
+                msg += ": " + error.toString();
+            }
             alert( msg );
         });
     }
@@ -161,27 +163,28 @@ class loadGameController {
     public static exportSavedGames() {
         try {
 
-            if( !confirm( translations.text( 'confirmExport' ) ) )
+            if ( !confirm( translations.text( "confirmExport" ) ) ) {
                 return;
+            }
 
             new SavedGamesExport().export()
-            .then( 
+            .then(
                 function() {
                     // OK
-                    toastr.success( translations.text( 'exportedDownloads' ) );
+                    toastr.success( translations.text( "exportedDownloads" ) );
                 },
                 function( error ) {
                     // ERROR
-                    let msg = translations.text( 'errorExporting' );
-                    if( error )
-                        msg += ': ' + error.toString();
+                    let msg = translations.text( "errorExporting" );
+                    if ( error ) {
+                        msg += ": " + error.toString();
+                    }
                     alert( msg );
                 }
             );
-        }
-        catch(e) {
+        } catch (e) {
             console.log(e);
-            alert( translations.text( 'errorExporting' ) + ': ' + e.toString() );
+            alert( translations.text( "errorExporting" ) + ": " + e.toString() );
         }
     }
 
@@ -191,36 +194,36 @@ class loadGameController {
     public static importSavedGames() {
         try {
 
-            alert( translations.text( 'infoImport' ) );
+            alert( translations.text( "infoImport" ) );
 
             const importProcess = new SavedGamesExport();
             DocumentSelection.selectDocument()
-            .then(function(doc : DocumentSelection) {
+            .then(function(doc: DocumentSelection) {
                 return importProcess.import(doc);
             })
-            .then( 
+            .then(
                 function() {
                     // OK
-                    toastr.success( translations.text( 'importedGames' , [ importProcess.nImportedGames ] ) );
+                    toastr.success( translations.text( "importedGames" , [ importProcess.nImportedGames ] ) );
                     // Refresh games list
                     loadGameController.listGameFiles();
                 },
-                function( error : any ) {
+                function( error: any ) {
                     // ERROR
-                    let msg = 'Error importing saved games';
-                    if( error )
-                        msg += ': ' + error.toString();
+                    let msg = "Error importing saved games";
+                    if ( error ) {
+                        msg += ": " + error.toString();
+                    }
                     alert( msg );
                 }
             );
-        }
-        catch(e) {
+        } catch (e) {
             console.log(e);
-            alert( 'Error importing: ' + e.toString() );
+            alert( "Error importing: " + e.toString() );
         }
     }
 
     /** Return page */
-    public static getBackController() { return 'mainMenu'; }
-    
-};
+    public static getBackController() { return "mainMenu"; }
+
+}

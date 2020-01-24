@@ -1,5 +1,5 @@
 
-function test(xx: number){
+function test(xx: number) {
     if (xx == 10) {
         console.log("Is ten");
     } else {

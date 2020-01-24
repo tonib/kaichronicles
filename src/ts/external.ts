@@ -84,6 +84,6 @@ interface Window {
         DocumentContract;
     };
     // commons.js:
-    getUrlParameter( parmName: string ): string
+    getUrlParameter( parmName: string ): string;
 
 }

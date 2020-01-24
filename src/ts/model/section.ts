@@ -6,21 +6,21 @@
 class Section {
 
     /** The section id */
-    public sectionId : string;
+    public sectionId: string;
 
     /** The owner book */
-    public book : Book;
+    public book: Book;
 
     /** The mechanics of the owner book.
       * It can be null
       */
-    public mechanics : Mechanics;
+    public mechanics: Mechanics;
 
     /** The jQuery handler for the section XML */
-    public $xmlSection : any;
+    public $xmlSection: any;
 
     /** The XML node for the "data" tag of the section */
-    public data : any;
+    public data: any;
 
     /**
      * Section constructor from the Book XML
@@ -29,19 +29,21 @@ class Section {
      * @param {Mechanics} mechanics The book mechanics. It can be null. In this
      * case, the images will not be translated
      */
-    public constructor( book : Book , sectionId : string, mechanics : Mechanics) {
-        
+    public constructor( book: Book , sectionId: string, mechanics: Mechanics) {
+
         /** The section id */
         this.sectionId = sectionId;
         this.book = book;
         this.mechanics = mechanics;
 
-        if( sectionId )
+        if ( sectionId ) {
             this.$xmlSection = book.getSectionXml( sectionId );
+        }
 
         // There can be nested sections, get the first one (the root)
-        if( this.$xmlSection )
-            this.data =  this.$xmlSection.find('data').first();
+        if ( this.$xmlSection ) {
+            this.data =  this.$xmlSection.find("data").first();
+        }
     }
 
     /**
@@ -51,7 +53,7 @@ class Section {
      * @param $xml The jQuery XML root tag
      * @returns The fake section
      */
-    public static createFromXml( book : Book , $xml : any ) : Section {
+    public static createFromXml( book: Book , $xml: any ): Section {
         let s = new Section( book , null , null);
         s.$xmlSection = $xml;
         s.data = $xml;
@@ -59,25 +61,26 @@ class Section {
     }
 
     /**
-     * Return false if the section noes not exists 
+     * Return false if the section noes not exists
      */
-    public exists() : boolean {
+    public exists(): boolean {
         return this.$xmlSection.length > 0;
     }
 
     /**
      * Return true if the section has navigation links (previous / next section)
      */
-    public hasNavigation() : boolean {
-        return this.$xmlSection.find('link[class=next]').length > 0;
+    public hasNavigation(): boolean {
+        return this.$xmlSection.find("link[class=next]").length > 0;
     }
 
     /**
-     * Return the section number. null if it has no number 
+     * Return the section number. null if it has no number
      */
-    public getSectionNumber() : number {
-        if( this.$xmlSection.attr('class') != 'numbered' )
+    public getSectionNumber(): number {
+        if ( this.$xmlSection.attr("class") != "numbered" ) {
             return null;
+        }
         // Id is "sectXXX"
         return parseInt( this.sectionId.substring(4) );
     }
@@ -85,58 +88,62 @@ class Section {
     /**
      * Returns the previous section id
      */
-    public getNextSectionId() : string {
-        var link = this.$xmlSection.find('link[class=next]');
-        if( link.length > 0 )
-            return link.attr('idref');
-        
-        var sNumber = this.getSectionNumber();
-        if( sNumber )
-            return 'sect' + ( sNumber + 1 );
+    public getNextSectionId(): string {
+        var link = this.$xmlSection.find("link[class=next]");
+        if ( link.length > 0 ) {
+            return link.attr("idref");
+        }
 
-        return null; 
+        var sNumber = this.getSectionNumber();
+        if ( sNumber ) {
+            return "sect" + ( sNumber + 1 );
+        }
+
+        return null;
     }
 
     /**
      * Returns the next section id
      */
-    public getPreviousSectionId() : string {
-        var link = this.$xmlSection.find('link[class=prev]');
-        if( link.length > 0 )
-            return link.attr('idref');
-
-        var sNumber = this.getSectionNumber();
-        if( sNumber ) {
-            if( sNumber == 1 )
-                return 'kaiwisdm';
-            else
-                return 'sect' + ( sNumber - 1 );
+    public getPreviousSectionId(): string {
+        var link = this.$xmlSection.find("link[class=prev]");
+        if ( link.length > 0 ) {
+            return link.attr("idref");
         }
 
-        return null; 
+        var sNumber = this.getSectionNumber();
+        if ( sNumber ) {
+            if ( sNumber == 1 ) {
+                return "kaiwisdm";
+            } else {
+                return "sect" + ( sNumber - 1 );
+            }
+        }
+
+        return null;
     }
 
     /**
      * Returns the section HTML
-     * @param renderIllustrationsText True if the illustrations text should be 
+     * @param renderIllustrationsText True if the illustrations text should be
      * rendered
      */
-    public getHtml(renderIllustrationsText : boolean = false) : string {
+    public getHtml(renderIllustrationsText: boolean = false): string {
         var sectionRenderer = new SectionRenderer( this );
         sectionRenderer.renderIllustrationsText = renderIllustrationsText;
-        return sectionRenderer.renderSection(); 
+        return sectionRenderer.renderSection();
     }
 
     /**
      * Returns an array of Combat objects with the combats on this section
      * @return Combats on this section
      */
-    public getCombats() : Array<Combat> {
+    public getCombats(): Combat[] {
         var result = [];
-        this.$xmlSection.find('combat').each(function(index, combat) {
+        this.$xmlSection.find("combat").each(function(index, combat) {
             const $combat = $(combat);
-            result.push( new Combat(  
-                $combat.find('enemy').text(), 
+            result.push( new Combat(
+                $combat.find("enemy").text(),
                 parseInt( SectionRenderer.getEnemyCombatSkill( $combat ).text() ),
                 parseInt( SectionRenderer.getEnemyEndurance( $combat ).text() )
             ));
@@ -147,22 +154,23 @@ class Section {
     /**
      * Get the title text
      */
-    public getTitleText() : string {
-        return this.$xmlSection.find('title').first().text().unescapeHtml();
+    public getTitleText(): string {
+        return this.$xmlSection.find("title").first().text().unescapeHtml();
     }
 
     /**
      * Get the section title HTML
      */
-    public getTitleHtml() : string {
-        var title = this.$xmlSection.find('title').first().text();
+    public getTitleHtml(): string {
+        var title = this.$xmlSection.find("title").first().text();
         // Check if the section has a "main title" on the mechanics file (see sect1 on book 4)
-        if( this.mechanics ) {
+        if ( this.mechanics ) {
             var section = this.mechanics.getSection(this.sectionId);
-            if( section ) {
+            if ( section ) {
                 var mainTitle = mechanicsEngine.getRuleText( section );
-                if( mainTitle )
-                    title = '<div class="book-section-title">' + mainTitle + '</div>' + title;
+                if ( mainTitle ) {
+                    title = '<div class="book-section-title">' + mainTitle + "</div>" + title;
+                }
             }
         }
         return title;
@@ -171,33 +179,33 @@ class Section {
     /**
      * Returns true if the section contains a anchor target with the given id ("<a id="[id]">)
      */
-    public hasTargetLink(id : string) : boolean {
-        return this.$xmlSection.find('a[id=' + id + ']').length > 0;
+    public hasTargetLink(id: string): boolean {
+        return this.$xmlSection.find("a[id=" + id + "]").length > 0;
     }
 
     /**
      * Returns the foot notes XML node for this section. null if it was not found
      */
-    public getFootNotesXml() : any {
-        return this.$xmlSection.find('footnotes').first();
+    public getFootNotesXml(): any {
+        return this.$xmlSection.find("footnotes").first();
     }
 
     /**
      * Returns the URL of this section on the project aon web site
-     * @param language The book language to get. null to get the current book 
+     * @param language The book language to get. null to get the current book
      * language
      */
-    public getSectionAonPage = function(language : string) : string {
+    public getSectionAonPage = function(language: string): string {
         return this.book.getBookProjectAonHtmlDir(language) + this.sectionId + ".htm";
-    }
+    };
 
     /**
      * Returns true if the section text contains the given text
      * @param text The text to check
      * @returns true if the section contains the given text
      */
-    public containsText(text : string) : boolean {
-        const sectionText : string = this.$xmlSection.text();
+    public containsText(text: string): boolean {
+        const sectionText: string = this.$xmlSection.text();
         return sectionText.indexOf(text) > 0;
     }
 
@@ -205,13 +213,12 @@ class Section {
      * Get the HTML for the first illustration on the section
      * @returns The illustration HTML. Empty string if there are no illustrations
      */
-    public getFirstIllustrationHtml() : string {
-        const $illustrations = this.$xmlSection.find( 'illustration' );
-        if( $illustrations.length == 0 )
-            return '';
+    public getFirstIllustrationHtml(): string {
+        const $illustrations = this.$xmlSection.find( "illustration" );
+        if ( $illustrations.length == 0 ) {
+            return "";
+        }
         const $firstIll = $illustrations.first();
         return SectionRenderer.renderIllustration(this, $firstIll);
     }
 }
-
-

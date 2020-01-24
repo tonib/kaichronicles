@@ -10,7 +10,21 @@
         "object-literal-sort-keys": false,
         "member-ordering": false,
         "no-console": false,
-        "trailing-comma": false
+        "trailing-comma": false,
+        "only-arrow-functions": false,
+        "object-literal-key-quotes": false,
+
+        
+        
+        "prefer-const": false,
+        "no-var-keyword": false,
+        "triple-equals": false,
+        "no-reference": false,
+        "class-name": false,
+        "prefer-for-of": false,
+        "radix": false,
+        "jsdoc-format": false
+
     },
     "rulesDirectory": []
 }

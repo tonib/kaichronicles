@@ -20,7 +20,8 @@
         "uglify-js": "3.6.2"
     },
     "scripts": {
-        "lint": "tslint -p tsconfig.json",
+        "lint": "tslint -t verbose -p tsconfig.json",
+        "lint-fix": "tslint -t verbose --fix --config tslint-fix.json --project tsconfig.json",
         "prepareversion": "node scripts/prepareVersion.js",
         "cleandist": "rm -rf dist",
         "downloaddata": "node scripts/downloadProjectAonData.js",

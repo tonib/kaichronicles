@@ -76,8 +76,21 @@
 
 * https://github.com/tonib/kaichronicles/commit/5f83d745b84c65dbe940510dbe334fb132db5233
     
+* https://github.com/tonib/kaichronicles/commit/09d312465261e04f6871506e18dcce531cab1ea6
+    - Re-add double quotes in translations.ts (lost in merge)
+    - ObjectsTableItem has been moved to new file. Check changes
+    - REVERTED
 
-* REMOVE src/ts/test-tslist.ts (TSLint tests)
+
+* TSLINT:
+    - CURRENT CHECK: ObjectsTable
+    - TSLint is deprecated...
+    - REMOVE src/ts/test-tslist.ts (TSLint tests)
+    - "only-arrow-functions" fix can break things. Semantics are different (this behaviour). There are a lot, ignore rule
+    - "prefer-const" fix can break things. (var scope). Keeped as rule
+    - "no-var-keyword" fix can break things. (var scope). Keeped as rule
+    - "triple-equals" can break things. Keeped as rule
+    - Ask why so many whitespaces were removed in commit 09d312465261e04f6871506e18dcce531cab1ea6
 
 * Book 12 (Spanish):
     sect350: This book is different from previous. You have to click on a footer note link to continue to the next book...

@@ -6,13 +6,13 @@
  */
 class InventoryState {
 
-    public weapons: Array<string> = [];
+    public weapons: string[] = [];
 
     public hasBackpack: boolean = false;
 
-    public backpackItems: Array<string> = [];
+    public backpackItems: string[] = [];
 
-    public specialItems: Array<string> = [];
+    public specialItems: string[] = [];
 
     public beltPouch: number = 0;
 
@@ -25,46 +25,48 @@ class InventoryState {
      * @param objectTypes Kind of objects to get: 'all' = all, 'weaponlike' = weapons and weapon Special Objects,
      * 'allobjects' = weapons, special items and backpack items
      */
-    public static fromActionChart( objectTypes : string , actionChart : ActionChart ) : InventoryState {
+    public static fromActionChart( objectTypes: string , actionChart: ActionChart ): InventoryState {
 
         let objects = new InventoryState();
 
-        if( objectTypes == 'all' || objectTypes == 'allobjects' ) {
+        if ( objectTypes == "all" || objectTypes == "allobjects" ) {
             objects.weapons = actionChart.weapons.clone();
             objects.backpackItems = actionChart.backpackItems.clone();
             objects.specialItems = actionChart.specialItems.clone();
             objects.arrows = actionChart.arrows;
             objects.meals = actionChart.meals;
 
-            if( objectTypes == 'all' ) {
+            if ( objectTypes == "all" ) {
                 objects.hasBackpack = actionChart.hasBackpack;
                 objects.beltPouch = actionChart.beltPouch;
             }
-        }
-        else if( objectTypes == 'weaponlike' ) {
-            for( let w of actionChart.getWeaponObjects(false) )
+        } else if ( objectTypes == "weaponlike" ) {
+            for ( let w of actionChart.getWeaponObjects(false) ) {
                 objects.addItem( w );
-        }
-        else
-            throw 'Wrong objectTypes: ' + objectTypes;
-            
+            }
+        } else {
+            throw "Wrong objectTypes: " + objectTypes;
+ }
+
         return objects;
     }
 
-    private addItem( item : Item ) {
-        if( item.type == Item.WEAPON )
+    private addItem( item: Item ) {
+        if ( item.type == Item.WEAPON ) {
             this.weapons.push(item.id);
-        else if( item.type == Item.SPECIAL)
+        } else if ( item.type == Item.SPECIAL) {
             this.specialItems.push(item.id);
-        else if( item.type == Item.OBJECT)
+        } else if ( item.type == Item.OBJECT) {
             this.backpackItems.push(item.id);
+        }
     }
 
-    public addObjectIds( objectIds : Array<string> ) {
-        for( let objectId of objectIds ) {
+    public addObjectIds( objectIds: string[] ) {
+        for ( let objectId of objectIds ) {
             const item = state.mechanics.getObject( objectId );
-            if( !item )
+            if ( !item ) {
                 continue;
+            }
             this.addItem( item );
         }
     }
@@ -73,8 +75,8 @@ class InventoryState {
      * Append to this inventory state other state
      * @param s2 The state to append to this
      */
-    public addInventoryToThis(s2 : InventoryState) {
-        
+    public addInventoryToThis(s2: InventoryState) {
+
         this.weapons = this.weapons.concat( s2.weapons );
         this.hasBackpack = this.hasBackpack || s2.hasBackpack;
         this.backpackItems = this.backpackItems.concat( s2.backpackItems );
@@ -88,19 +90,21 @@ class InventoryState {
      * Get special items on this state that are weapon, remove them from the state, and return them
      * @returns Special items on state that they were weapons
      */
-    public getAndRemoveSpecialItemsNonWeapon() : Array<string> {
+    public getAndRemoveSpecialItemsNonWeapon(): string[] {
 
         // Recover only non-weapon special items
-        let toRecover : Array<string> = [];
-        for(let itemId of this.specialItems) {
+        let toRecover: string[] = [];
+        for (let itemId of this.specialItems) {
             const i = state.mechanics.getObject( itemId );
-            if( i && !i.isWeapon() )
+            if ( i && !i.isWeapon() ) {
                 toRecover.push( itemId );
+            }
         }
 
         // Remove recovered items
-        for( let itemId of toRecover)
+        for ( let itemId of toRecover) {
             this.specialItems.removeValue( itemId );
+        }
 
         return toRecover;
     }
@@ -109,14 +113,15 @@ class InventoryState {
      * Create a inventory state from an object
      * @param inventoryState The inventory state object. Must to have same properties than InventoryState
      */
-    public static fromObject( inventoryState : any ) : InventoryState {
-        if( !inventoryState )
+    public static fromObject( inventoryState: any ): InventoryState {
+        if ( !inventoryState ) {
             return new InventoryState();
+        }
         return $.extend(new InventoryState(), inventoryState);
     }
-    
+
     /** Return a plain object with this instance info. */
-    public toObject() : any {
+    public toObject(): any {
         return {
             weapons: this.weapons,
             hasBackpack: this.hasBackpack,

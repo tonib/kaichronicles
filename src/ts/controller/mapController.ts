@@ -8,37 +8,39 @@ const mapController = {
     /**
      * Render the map
      */
-    index: function() {
+    index() {
 
-        if( !setupController.checkBook() )
+        if ( !setupController.checkBook() ) {
             return;
-        
-        var mapSection = new Section(state.book, 'map', state.mechanics);
-        if( !mapSection.exists() ) {
+        }
+
+        var mapSection = new Section(state.book, "map", state.mechanics);
+        if ( !mapSection.exists() ) {
             console.log("Map section does not exists" );
             return;
         }
 
-        views.loadView('map.html')
+        views.loadView("map.html")
         .then(function() {
-            if( state.book.bookNumber == 11 )
+            if ( state.book.bookNumber == 11 ) {
                 // Special case
                 mapView.setMapBook11();
-            else
+            } else {
                 mapView.setSectionContent( mapSection );
+            }
             mapView.bindEvents();
         });
-        
+
     },
 
     /**
      * On leave controller
      */
-    onLeave: function() {
+    onLeave() {
         mapView.unbindEvents();
     },
 
     /** Return page */
-    getBackController: function() { return 'game'; }
-    
+    getBackController() { return "game"; }
+
 };
