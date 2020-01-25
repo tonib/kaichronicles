@@ -3,7 +3,7 @@
 /**
  * Handle / download books (only for Cordova app)
  */
-var workWithBooksController = {
+const workWithBooksController = {
 
     /** Are we currently downloading / deleting books? */
     changingBooks: false,
@@ -45,8 +45,8 @@ var workWithBooksController = {
         // Check books state
         state.localBooksLibrary.updateBooksDownloadStateAsync()
         .then(function() {
-            var downloadedBooks = state.localBooksLibrary.getDownloadedBooks();
-            for (var i = 0; i < downloadedBooks.length; i++) {
+            const downloadedBooks = state.localBooksLibrary.getDownloadedBooks();
+            for (let i = 0; i < downloadedBooks.length; i++) {
                 workWithBooksView.markBookAsDownloaded( downloadedBooks[i].bookNumber );
             }
 
@@ -61,10 +61,10 @@ var workWithBooksController = {
     downloadBooks(selectedBookNumbers: number[]) {
 
         // Check differences:
-        var toRemove = [], toDownload = [];
-        for ( var i = 0; i < state.localBooksLibrary.booksLibrary.length; i++) {
-            var book = state.localBooksLibrary.booksLibrary[i];
-            var bookSelected = selectedBookNumbers.contains( book.bookNumber );
+        const toRemove = [], toDownload = [];
+        for ( let i = 0; i < state.localBooksLibrary.booksLibrary.length; i++) {
+            const book = state.localBooksLibrary.booksLibrary[i];
+            const bookSelected = selectedBookNumbers.contains( book.bookNumber );
             if ( book.downloaded && !bookSelected ) {
                 toRemove.push( book );
             } else if ( !book.downloaded && bookSelected ) {
@@ -96,7 +96,7 @@ var workWithBooksController = {
             workWithBooksView.displayModal(true);
 
             // Initial empty resolved promise
-            var changesPromise = jQuery.Deferred<void>().resolve().promise();
+            let changesPromise = jQuery.Deferred<void>().resolve().promise();
 
             // If we will remove books, clean the cached book: Needed, because
             // the cached book may be deleted now
@@ -125,7 +125,7 @@ var workWithBooksController = {
     deleteBook(booksDir: string , book: BookDownloadState, changesPromise: JQueryPromise<void>): JQueryPromise<void> {
 
         // Work to delete the book
-        var work = function() {
+        const work = function() {
 
             if ( workWithBooksController.processCancelled ) {
                 // Process cancelled. Do nothing else
@@ -158,7 +158,7 @@ var workWithBooksController = {
     downloadBook(booksDir: string , book: BookDownloadState, changesPromise: JQueryPromise<void>): JQueryPromise<void> {
 
         // Work to download the book
-        var work = function(): JQueryPromise<void> {
+        const work = function(): JQueryPromise<void> {
 
             if ( workWithBooksController.processCancelled ) {
                 // Process cancelled. Do nothing else
@@ -193,7 +193,7 @@ var workWithBooksController = {
 
     updateUIAfterProcess(changesPromise: JQueryPromise<void>) {
 
-        var updateUI = function() {
+        const updateUI = function() {
             // Refresh the books list
             workWithBooksController.updateBooksList();
 

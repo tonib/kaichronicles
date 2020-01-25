@@ -21,8 +21,8 @@ class Cookie {
         const nameEQ = this.name + "=";
 
         const currentCookies = document.cookie.split(";");
-        for (var i = 0; i < currentCookies.length; i++) {
-            var c = currentCookies[i];
+        for (let i = 0; i < currentCookies.length; i++) {
+            let c = currentCookies[i];
 
             // Left trim
             while (c.charAt(0) == " ") {
@@ -37,9 +37,9 @@ class Cookie {
     }
 
     public setValue( value: string , days: number ) {
-        var expires = "";
+        let expires = "";
         if (days) {
-            var date = new Date();
+            const date = new Date();
             date.setTime( date.getTime() + ( days * 24 * 60 * 60 * 1000 ) );
             expires = "; Expires=" + date.toUTCString();
         }

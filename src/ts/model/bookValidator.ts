@@ -37,7 +37,7 @@ class BookValidator {
         const book = new Book(bookNumber, language );
         const mechanics = new Mechanics( book );
 
-        let promises = [];
+        const promises = [];
         promises.push( book.downloadBookXml() );
         promises.push( mechanics.downloadXml() );
         promises.push( mechanics.downloadObjectsXml() );
@@ -96,7 +96,7 @@ class BookValidator {
         if ( !$parent ) {
             return;
         }
-        for ( let child of $parent.children() ) {
+        for ( const child of $parent.children() ) {
             this.validateRule( child );
         }
     }
@@ -162,13 +162,13 @@ class BookValidator {
 
     private validateObjectIdsAttribute( $rule , property: string , allowMultiple: boolean , onlyWeapons: boolean ): boolean {
 
-        let objectIds = this.getPropertyValueAsArray( $rule , property , allowMultiple );
+        const objectIds = this.getPropertyValueAsArray( $rule , property , allowMultiple );
         if ( objectIds.length == 0 ) {
             return false;
         }
 
-        for ( let objectId of objectIds ) {
-            let item = this.mechanics.getObject(objectId);
+        for ( const objectId of objectIds ) {
+            const item = this.mechanics.getObject(objectId);
             if ( !item ) {
                 this.addError( $rule , "Object id " + objectId + " not found");
             } else if ( onlyWeapons && !item.isWeapon() ) {
@@ -180,13 +180,13 @@ class BookValidator {
 
     private validateDisciplinesAttribute( $rule: any , property: string , allowMultiple: boolean ) {
 
-        let disciplinesIds = this.getPropertyValueAsArray( $rule , property , allowMultiple );
+        const disciplinesIds = this.getPropertyValueAsArray( $rule , property , allowMultiple );
         if ( disciplinesIds.length == 0 ) {
             return;
         }
 
         const disciplinesTable = this.book.getDisciplinesTable();
-        for ( let disciplineId of disciplinesIds ) {
+        for ( const disciplineId of disciplinesIds ) {
             if ( !disciplinesTable[disciplineId] ) {
                 this.addError( $rule , "Wrong discipline id: " + disciplineId );
             }
@@ -194,9 +194,9 @@ class BookValidator {
     }
 
     private validateSectionsAttribute( $rule: any , property: string , allowMultiple: boolean ) {
-        let sectionIds = this.getPropertyValueAsArray( $rule , property , allowMultiple );
+        const sectionIds = this.getPropertyValueAsArray( $rule , property , allowMultiple );
 
-        for ( let sectionId of sectionIds ) {
+        for ( const sectionId of sectionIds ) {
             if ( this.book.getSectionXml(sectionId).length == 0 ) {
                 this.addError( $rule , "Section does not exists: " + sectionId );
             }
@@ -250,7 +250,7 @@ class BookValidator {
 
     private validateAndEvalExpression( $rule: any ,  expression: string ): any {
         try {
-            for ( let keyword of ExpressionEvaluator.getKeywords( expression ) ) {
+            for ( const keyword of ExpressionEvaluator.getKeywords( expression ) ) {
                 if ( !ExpressionEvaluator.isValidKeyword( keyword ) ) {
                     this.addError( $rule , "Unkwown keyword " + keyword );
                 }
@@ -265,14 +265,14 @@ class BookValidator {
     }
 
     private validateExpression( $rule: any , property: string , expectedType: string ) {
-        let expression = $rule.attr( property );
+        const expression = $rule.attr( property );
         if ( !expression ) {
             return;
         }
 
-        let value = this.validateAndEvalExpression( $rule , expression );
+        const value = this.validateAndEvalExpression( $rule , expression );
         if ( value !== null ) {
-            let type = typeof value;
+            const type = typeof value;
             if ( type !== expectedType ) {
                 this.addError( $rule , "Wrong expression type. Expected: " + expectedType + ", expression type: " + type );
             }
@@ -358,7 +358,7 @@ class BookValidator {
         };
 
         // Do the XSD validation
-        var xmllint = validateXML(module).trim();
+        const xmllint = validateXML(module).trim();
         if ( xmllint != mechanicsFileName + " validates") {
             // Error:
             this.errors.push( xmllint );
@@ -390,10 +390,10 @@ class BookValidator {
         }
 
         // Check numbers coverage
-        let coverage: number[] = [];
+        const coverage: number[] = [];
         let overlapped = false;
         let nCasesFound = 0;
-        for ( let child of $rule.children() ) {
+        for ( const child of $rule.children() ) {
             if ( child.nodeName == "case" ) {
                 nCasesFound++;
                 const bounds = randomMechanics.getCaseRuleBounds( $(child) );
@@ -500,7 +500,7 @@ class BookValidator {
 
         this.checkThereAreCombats( $rule );
 
-        var combatIndex = parseInt( $rule.attr("index") );
+        const combatIndex = parseInt( $rule.attr("index") );
         if ( combatIndex ) {
             const nCombats = this.currentSection.getCombats().length;
             if ( nCombats <= combatIndex ) {

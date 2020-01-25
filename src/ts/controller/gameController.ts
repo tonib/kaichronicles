@@ -31,7 +31,7 @@ const gameController = {
             gameController.gameTemplateSetup();
             gameView.setup();
             // Go to the current section (or the initial)
-            var sec = state.sectionStates.currentSection;
+            let sec = state.sectionStates.currentSection;
             if ( !sec ) {
                 sec = Book.INITIAL_SECTION;
             }
@@ -55,7 +55,7 @@ const gameController = {
     loadSection(sectionId: string, choiceLinkClicked: boolean = false, yScroll: number = 0) {
 
         // Load and display the section
-        var newSection = new Section(state.book, sectionId, state.mechanics);
+        const newSection = new Section(state.book, sectionId, state.mechanics);
         if ( !newSection.exists() ) {
             console.log("Section " + sectionId + " does not exists" );
             return;
@@ -102,7 +102,7 @@ const gameController = {
             // Validate this section
             const validator = new BookValidator( state.mechanics , state.book );
             validator.validateSection( gameController.currentSection.sectionId );
-            for ( let error of validator.errors ) {
+            for ( const error of validator.errors ) {
                 mechanicsEngine.debugWarning(error);
             }
         }
@@ -114,8 +114,8 @@ const gameController = {
      * @param increment -1 to go the previous. +1 to the next
      */
     onNavigatePrevNext(increment: number) {
-        var s = gameController.currentSection;
-        var newId = ( increment < 0 ? s.getPreviousSectionId() : s.getNextSectionId() );
+        const s = gameController.currentSection;
+        const newId = ( increment < 0 ? s.getPreviousSectionId() : s.getNextSectionId() );
         gameController.loadSection( newId );
     },
 

@@ -17,7 +17,7 @@ const numberPickerMechanics = {
         }
 
         // The number picker UI
-        var $ui = mechanicsEngine.getMechanicsUI("mechanics-numberpicker");
+        const $ui = mechanicsEngine.getMechanicsUI("mechanics-numberpicker");
 
         // Check if it's a money picker
         if ( $(rule).attr("money") == "true" ) {
@@ -25,9 +25,9 @@ const numberPickerMechanics = {
         }
 
         // Check if it has an action button
-        var actionButtonTitle = mechanicsEngine.getRuleText(rule, "actionButton");
+        const actionButtonTitle = mechanicsEngine.getRuleText(rule, "actionButton");
         if ( actionButtonTitle ) {
-            var $pickNumberButton = $ui.find("#mechanics-picknumber");
+            const $pickNumberButton = $ui.find("#mechanics-picknumber");
             $pickNumberButton.show().text( actionButtonTitle );
             numberPickerMechanics.bindButtonActionEvent( $pickNumberButton , function() {
                 if ( mechanicsEngine.fireNumberPickerChoosed() ) {
@@ -48,13 +48,13 @@ const numberPickerMechanics = {
         $("#mechanics-mpAmount").bindNumberEvents();
 
         // Set the minimum value
-        var min = $(rule).attr("min");
+        const min = $(rule).attr("min");
         if ( min ) {
             $("#mechanics-mpAmount").attr( "min" , min );
         }
 
         // Set the maximum value
-        var max = $(rule).attr("max");
+        const max = $(rule).attr("max");
         if ( max ) {
             $("#mechanics-mpAmount").attr( "max" , max );
         }
@@ -91,7 +91,7 @@ const numberPickerMechanics = {
      * Return true if the money picker value is valid
      */
     isValid(): boolean {
-        var $picker = $("#mechanics-mpAmount");
+        const $picker = $("#mechanics-mpAmount");
 
         // If the money picker has been disabled, dont check it
         if ( !$picker.isEnabled() ) {
@@ -110,7 +110,7 @@ const numberPickerMechanics = {
      */
     getNumberPickerValue(): number {
         try {
-            var $picker = $("#mechanics-mpAmount");
+            const $picker = $("#mechanics-mpAmount");
             if ( $picker.length > 0 ) {
                 return $picker.getNumber();
             } else {

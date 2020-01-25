@@ -49,18 +49,18 @@ class SectionRenderer {
     public renderSection(): string {
 
         // Collect foot notes
-        var footNotes = this.sectionToRender.getFootNotesXml();
+        const footNotes = this.sectionToRender.getFootNotesXml();
         if ( footNotes.length > 0 ) {
             this.renderNodeChildren( footNotes , 0 );
         }
 
         // Render the section body
-        var html = this.renderNodeChildren( $(this.sectionToRender.data) , 0 );
+        let html = this.renderNodeChildren( $(this.sectionToRender.data) , 0 );
 
         // Render foot notes
         if ( footNotes.length > 0 ) {
             html += '<hr/><div class="footnotes">';
-            for (var i = 0, len = this.footNotes.length; i < len; i++) {
+            for (let i = 0, len = this.footNotes.length; i < len; i++) {
                 if ( this.renderedFootNotesRefs.contains( this.footNotes[i].id ) ) {
                     html += this.footNotes[i].html;
                 } else {
@@ -83,13 +83,13 @@ class SectionRenderer {
     public renderNodeChildren($tag: any, level: number ): string {
 
         // The HTML to return
-        var sectionContent = "";
+        let sectionContent = "";
 
         // Traverse all child elements, except separated sections
         // var children = $tag.contents().not('section.frontmatter-separate');
-        var children = $tag.contents();
-        for ( var i = 0; i < children.length; i++ ) {
-            var node = children[i];
+        const children = $tag.contents();
+        for ( let i = 0; i < children.length; i++ ) {
+            const node = children[i];
 
             if ( node.nodeType == 3 ) {
                 // Text node
@@ -103,11 +103,11 @@ class SectionRenderer {
             }
 
             // Get the tag name
-            var tagName = node.tagName.toLowerCase();
+            let tagName = node.tagName.toLowerCase();
             // Replace '-' char by '_' (not valid char for javascript function names)
             tagName = tagName.replaceAll("-" , "_");
 
-            var $node = $(node);
+            const $node = $(node);
 
             if ( tagName == "section" && $node.attr("class") == "frontmatter-separate" ) {
                 // Ignore separated sections
@@ -135,7 +135,7 @@ class SectionRenderer {
 
     /** Render nodes with the same meaning on book XML and HTML */
     private renderHtmlNode($node: any, level: number): string {
-        var name = $node[0].nodeName;
+        const name = $node[0].nodeName;
         return "<" + name + ">" + this.renderNodeChildren( $node , level ) +
             "</" + name + ">";
     }
@@ -203,13 +203,13 @@ class SectionRenderer {
     private footnote($footNote: any, level: number): string {
 
         // Note HTML
-        var noteHtml = this.renderNodeChildren( $footNote , level );
+        let noteHtml = this.renderNodeChildren( $footNote , level );
         // Add the note index to the HTML
-        var $html = $("<div>").html( noteHtml );
+        const $html = $("<div>").html( noteHtml );
         $html.find(">:first-child").prepend("[" + (this.footNotes.length + 1) + "] ");
         noteHtml = $html.html();
         // Store the note
-        var n = {
+        const n = {
             id: $footNote.attr("id"),
             html: noteHtml
         };
@@ -234,7 +234,7 @@ class SectionRenderer {
      */
     private getHtmlFootRef(id: string ): string {
         this.renderedFootNotesRefs.push( id );
-        for (var i = 0, len = this.footNotes.length; i < len; i++) {
+        for (let i = 0, len = this.footNotes.length; i < len; i++) {
             if ( this.footNotes[i].id == id ) {
                 return "<sup>" + (i + 1) + "</sup>";
             }
@@ -274,7 +274,7 @@ class SectionRenderer {
     /** Player property text */
     private typ($typ: any , level: number): string {
 
-        var html = this.renderNodeChildren( $typ , level );
+        const html = this.renderNodeChildren( $typ , level );
         if ( $typ.attr("class") == "attribute" ) {
             return '<span class="attribute">' + html + "</span>";
         } else {
@@ -374,12 +374,12 @@ class SectionRenderer {
      * @returns The HTML
      */
     private dl($dl: any, level: number): string {
-        var definitionContent = "";
-        var self = this;
+        let definitionContent = "";
+        const self = this;
 
-        for ( let element of $dl.find("> dt, > dd") ) {
+        for ( const element of $dl.find("> dt, > dd") ) {
             const $this = $(element);
-            var content = self.renderNodeChildren( $this , level );
+            const content = self.renderNodeChildren( $this , level );
             if ( $this.is("dt") ) {
                 definitionContent += "<tr><td><dl><dt>" + content + "</dt>";
             } else if ( $this.is("dd") ) {
@@ -394,7 +394,7 @@ class SectionRenderer {
 
     /** Choice links renderer */
     private link_text($linkText: any, level: number): string {
-        var section = $linkText.parent().attr("idref");
+        const section = $linkText.parent().attr("idref");
         return '<a href="#" class="action choice-link" data-section="' + section +
             '">' + this.renderNodeChildren( $linkText , level ) + "</a>";
     }
@@ -435,15 +435,15 @@ class SectionRenderer {
             return "";
         }
 
-        var illustrationContent = "";
-        var description = $illustration.find("> meta > description").text();
+        let illustrationContent = "";
+        const description = $illustration.find("> meta > description").text();
 
         const fileName: string = $illustration.find("> instance.html").attr("src");
         // Get the translated image URL:
-        var source = this.sectionToRender.book.getIllustrationURL(fileName,
+        const source = this.sectionToRender.book.getIllustrationURL(fileName,
             this.sectionToRender.mechanics);
 
-        var isLargeIllustration = (fileName.indexOf("ill") === 0);
+        const isLargeIllustration = (fileName.indexOf("ill") === 0);
         illustrationContent += '<div class="illustration' +
             (isLargeIllustration ? " ill" : "") +
             '"><img src="' + source + '" alt="' + description +
@@ -452,7 +452,7 @@ class SectionRenderer {
 
         if ( this.renderIllustrationsText ) {
             // Render the text instance too
-            var $textInstance = $illustration.find("> instance.text");
+            const $textInstance = $illustration.find("> instance.text");
             if ( $textInstance ) {
                 illustrationContent += this.renderNodeChildren( $textInstance , level );
             }
@@ -488,7 +488,7 @@ class SectionRenderer {
     }
 
     public static getEnemyEndurance( $combat: any ): any {
-        var $enduranceAttr = $combat.find("enemy-attribute[class=endurance]");
+        let $enduranceAttr = $combat.find("enemy-attribute[class=endurance]");
         if ( $enduranceAttr.length == 0 ) {
             // Book 6 / sect26: The endurance attribute is "target"
             $enduranceAttr = $combat.find("enemy-attribute[class=target]");
@@ -519,9 +519,9 @@ class SectionRenderer {
      * @returns The HTML
      */
     private combat( $combat: any , level: number ): string {
-        let enemyHtml = this.renderNodeChildren( $combat.find("enemy") , level );
-        var combatSkill = SectionRenderer.getEnemyCombatSkill( $combat ).text();
-        var endurance = SectionRenderer.getEnemyEndurance( $combat ).text();
+        const enemyHtml = this.renderNodeChildren( $combat.find("enemy") , level );
+        const combatSkill = SectionRenderer.getEnemyCombatSkill( $combat ).text();
+        const endurance = SectionRenderer.getEnemyEndurance( $combat ).text();
         return '<div class="combat well"><b>' + enemyHtml + "</b><br />" +
             '<span class="attribute">' + translations.text("combatSkillUpper") + "</span>: " +
             combatSkill +
@@ -537,10 +537,10 @@ class SectionRenderer {
      * @returns The HTML
      */
     private section( $section: any , level: number ): string {
-        var sectionId = $section.attr("id");
-        var innerSectionData = $section.find("data").first();
-        var headingLevel = level + 1;
-        var sectionContent = '<div class="subsection" id="' + sectionId +
+        const sectionId = $section.attr("id");
+        const innerSectionData = $section.find("data").first();
+        const headingLevel = level + 1;
+        let sectionContent = '<div class="subsection" id="' + sectionId +
             '"><h4 class="subsectionTitle">' +
             $section.find( "> meta > title").text() + "</h4>";
         sectionContent += this.renderNodeChildren(innerSectionData, level + 1);

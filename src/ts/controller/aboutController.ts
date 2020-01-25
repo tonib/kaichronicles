@@ -29,7 +29,7 @@ const aboutController = {
                 try {
                     const promises = state.book.downloadAuthorsBio();
                     // Wait downloads and the HTML of each one
-                    for ( let promise of promises) {
+                    for ( const promise of promises) {
                         promise.then(function(xml: string) {
                             try {
                                 xml = Book.fixXml(xml);
@@ -63,8 +63,8 @@ const aboutController = {
         },
 
         appendSection(sectionId: string, containerId: string) {
-            var section = new Section( state.book , sectionId , state.mechanics );
-            var renderer = new SectionRenderer( section );
+            const section = new Section( state.book , sectionId , state.mechanics );
+            const renderer = new SectionRenderer( section );
             $(containerId).append( renderer.renderSection() );
         },
 

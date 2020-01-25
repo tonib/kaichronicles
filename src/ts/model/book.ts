@@ -131,7 +131,7 @@ class Book {
         // Replace links
         // 12-21 12:37:11.655: E/browser(1884): Console: Uncaught TypeError: Cannot supply flags when constructing one RegExp from another http://10.0.2.2/ls/statskeeper3/model/book.js:51
         // xmlText = xmlText.replace( new RegExp( /\&link\..+?\;/ , 'g' ) , '' );
-        var exp = /\&link\..+?\;/g;
+        let exp = /\&link\..+?\;/g;
         xmlText = xmlText.replace( exp , "" );
 
         xmlText = xmlText.replaceAll("&copy;", "&amp;copy;" );
@@ -176,8 +176,8 @@ class Book {
      */
     public downloadBookXml(): JQueryPromise<void> {
 
-        var self = this;
-        var bookXmlUrl = this.getBookXmlURL();
+        const self = this;
+        const bookXmlUrl = this.getBookXmlURL();
         // console.log( 'Downloading book XML URL: ' + bookXmlUrl);
 
         return $.ajax({
@@ -207,8 +207,8 @@ class Book {
     public downloadAuthorsBio(): Array<JQueryPromise<string>> {
 
         try {
-            let promises: Array<JQueryPromise<string>> = [];
-            for ( let authorId of projectAon.supportedBooks[this.bookNumber - 1].biographies ) {
+            const promises: Array<JQueryPromise<string>> = [];
+            for ( const authorId of projectAon.supportedBooks[this.bookNumber - 1].biographies ) {
                 promises.push( this.downloadAuthorInfo( authorId ) );
             }
 
@@ -243,13 +243,13 @@ class Book {
             language = this.language;
         }
 
-        var bookMetadata = projectAon.supportedBooks[ this.bookNumber - 1 ];
+        const bookMetadata = projectAon.supportedBooks[ this.bookNumber - 1 ];
         if ( !bookMetadata ) {
             return null;
         }
 
-        var languageCode = "code_" + language;
-        var bookCode = bookMetadata[ languageCode ];
+        const languageCode = "code_" + language;
+        const bookCode = bookMetadata[ languageCode ];
 
         if ( !bookCode ) {
             return null;
@@ -273,13 +273,13 @@ class Book {
      * @returns The image URL, relative to application root
      */
     public getIllustrationURL(fileName: string, mechanics: any = null): string {
-        var illDirectory;
+        let illDirectory;
         if ( mechanics && mechanics.imageIsTranslated(fileName) ) {
             illDirectory = "ill_" + this.language;
         } else {
             illDirectory = "ill_en";
         }
-        var illUrl = Book.getBaseUrl() + this.bookNumber + "/" + illDirectory + "/" +
+        const illUrl = Book.getBaseUrl() + this.bookNumber + "/" + illDirectory + "/" +
             fileName;
         // console.log('Image URL: ' + illUrl);
         return illUrl;
@@ -325,7 +325,7 @@ class Book {
 
                 const $node = $(this);
 
-                var disciplineId = $node.attr("id");
+                const disciplineId = $node.attr("id");
 
                 let description: string;
                 if ( disciplineId === "psisurge") {
@@ -374,9 +374,9 @@ class Book {
     public getCopyrightHtml(): string {
 
         if ( !this.bookCopyrightHtml ) {
-            var fakeSection = new Section(this, "fakeSection", null);
-            var renderer = new SectionRenderer(fakeSection);
-            var selector = 'rights[class="copyrights"]';
+            const fakeSection = new Section(this, "fakeSection", null);
+            const renderer = new SectionRenderer(fakeSection);
+            const selector = 'rights[class="copyrights"]';
             this.bookCopyrightHtml = renderer.renderNodeChildren( $(this.bookXml).find(selector) , 0 );
         }
 
@@ -398,7 +398,7 @@ class Book {
         }
 
         // Get the title
-        var title = $(this.bookXml)
+        let title = $(this.bookXml)
             .find('section[id="levels"] > data > ol > li:eq(' + (nDisciplines - 1) + ")")
             .text();
         if ( !title ) {
@@ -407,7 +407,7 @@ class Book {
 
         // For the level 5, there is an extra explanation to remove:
         // &mdash;You begin the Lone Wolf adventures with this level of Kai training
-        var idx = title.indexOf( "&mdash;");
+        let idx = title.indexOf( "&mdash;");
         if ( idx >= 0 ) {
             title = title.substr(0, idx).trim();
         }
@@ -426,8 +426,8 @@ class Book {
      * @return Section ids that can go to the given section
      */
     public getOriginSections(sectionId: string): string[] {
-        var sourceSectionIds = [];
-        var sourceSections = $(this.bookXml)
+        const sourceSectionIds = [];
+        const sourceSections = $(this.bookXml)
             .find('section[class="numbered"]' )
             .has( 'data > choice[idref="' + sectionId + '"]')
             .each( function(index, section) {
@@ -447,7 +447,7 @@ class Book {
      * Return an array of 2 positions with the combat tables images
      */
     public getCombatTablesImagesUrls(mechanics) {
-        var images = [];
+        const images = [];
         images.push( this.getIllustrationURL( "crtpos.png", mechanics) );
         images.push( this.getIllustrationURL( "crtneg.png", mechanics ) );
         return images;
@@ -458,11 +458,11 @@ class Book {
      * @return Array with the 100 numbers of the random table
      */
     public getRandomTable(): number[] {
-        var $randomCells = $(this.bookXml)
+        const $randomCells = $(this.bookXml)
             .find("section[id=random] > data > illustration > instance[class=text]")
             .find("td");
-        var numbers = [];
-        for (var i = 0; i < $randomCells.length; i++) {
+        const numbers = [];
+        for (let i = 0; i < $randomCells.length; i++) {
             numbers.push( parseInt( $($randomCells[i]).text() ) );
         }
         return numbers;

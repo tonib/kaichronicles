@@ -8,7 +8,7 @@
      * Returns the number value, or NaN
      */
     $.fn.getNumber = function() {
-        var txtVal = this.val();
+        const txtVal = this.val();
         if ( !txtVal ) {
             return 0;
         }
@@ -34,10 +34,10 @@
      * Bind number events
      */
     $.fn.bindNumberEvents = function() {
-        var self = this;
+        const self = this;
         this.parent().find("button.add-number").click(function(e) {
             e.preventDefault();
-            var n = self.getNumber();
+            let n = self.getNumber();
             if ( isNaN(n) ) {
                 return;
             }
@@ -48,7 +48,7 @@
         });
         this.parent().find("button.sub-number").click(function(e) {
             e.preventDefault();
-            var n = self.getNumber();
+            let n = self.getNumber();
             if ( isNaN(n) ) {
                 return;
             }
@@ -68,7 +68,7 @@
     $.fn.fireValueChanged = function() {
         // console.log('fireValueChanged');
         try {
-            var sectionState = state.sectionStates.getSectionState();
+            const sectionState = state.sectionStates.getSectionState();
             sectionState.numberPickersState[ this.attr("id") ] = this.val();
         } catch (e) {
             console.log(e);
@@ -79,7 +79,7 @@
      * Returns the minimum value for this field
      */
     $.fn.getMinValue = function() {
-        var min = parseInt( this.attr("min") );
+        const min = parseInt( this.attr("min") );
         if ( isNaN(min) ) {
             return -99999999;
         }
@@ -90,7 +90,7 @@
      * Returns the maximum value for this field
      */
     $.fn.getMaxValue = function() {
-        var max = parseInt( this.attr("max") );
+        const max = parseInt( this.attr("max") );
         if ( isNaN(max) ) {
             return 99999999;
         }
@@ -101,20 +101,20 @@
      * Return true if the number is valid
      */
     $.fn.isValid = function() {
-        var number = this.getNumber();
+        const number = this.getNumber();
 
         if ( isNaN(number) ) {
             alert( translations.text("npWrongValue" , [this.getTitle()] ) );
             return false;
         }
 
-        var min = this.getMinValue();
+        const min = this.getMinValue();
         if ( number < min ) {
             alert( translations.text( "npMinValue" , [ this.getTitle() , min ] ) );
             return false;
         }
 
-        var max = this.getMaxValue();
+        const max = this.getMaxValue();
         if ( number > max ) {
             alert( translations.text( "npMaxValue" , [ this.getTitle() , max ] ) );
             return false;
@@ -153,13 +153,13 @@
      */
     $.fn.initializeValue = function() {
         // Check if there is a number recorded on the section
-        var sectionState = state.sectionStates.getSectionState();
-        var lastValue = sectionState.numberPickersState[ this.attr("id") ];
+        const sectionState = state.sectionStates.getSectionState();
+        const lastValue = sectionState.numberPickersState[ this.attr("id") ];
         if ( lastValue ) {
             this.val( lastValue );
         } else {
             // Try to set the minimum value
-            var min = this.attr( "min" );
+            const min = this.attr( "min" );
             if ( min ) {
                 this.val( min );
             }

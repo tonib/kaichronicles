@@ -3,7 +3,7 @@
 /**
  * Work with books view
  */
-var workWithBooksView = {
+const workWithBooksView = {
 
     /**
      * Setup view
@@ -20,9 +20,9 @@ var workWithBooksView = {
             }
 
             // Get selected books:
-            var selectedBooks = [];
+            const selectedBooks = [];
             $("tbody input:checked").parent().parent().each(function(index, tr) {
-                var bookNumber = parseInt( $(tr).attr("data-book-number") );
+                const bookNumber = parseInt( $(tr).attr("data-book-number") );
                 selectedBooks.push( bookNumber );
             });
 
@@ -31,7 +31,7 @@ var workWithBooksView = {
 
         // Select / deselect all books
         $("#wwbooks-all").change(function() {
-            var $allChecks = $("tbody input");
+            const $allChecks = $("tbody input");
             if ( $(this).prop("checked") ) {
                 $allChecks.prop( "checked" , "checked" );
             } else {
@@ -70,11 +70,11 @@ var workWithBooksView = {
     },
 
     updateBooksList(booksState: BookDownloadState[]) {
-        var $tableBody = $("#wwbooks-list > tbody");
+        const $tableBody = $("#wwbooks-list > tbody");
         $tableBody.empty();
 
-        var html = "";
-        for (var i = 0; i < booksState.length; i++) {
+        let html = "";
+        for (let i = 0; i < booksState.length; i++) {
             html += '<tr data-book-number="' + booksState[i].bookNumber +
                 '" style="width:100%"><td>' +
                 booksState[i].bookNumber + ". " + booksState[i].getTitle() +
@@ -87,7 +87,7 @@ var workWithBooksView = {
     },
 
     markBookAsDownloaded(bookNumber: number) {
-        var $row = $("tr[data-book-number=" + bookNumber + "]");
+        const $row = $("tr[data-book-number=" + bookNumber + "]");
         $row.addClass("success");
         $row.find( "input" ).prop("checked" , "checked");
     },

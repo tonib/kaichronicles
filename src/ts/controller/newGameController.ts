@@ -11,7 +11,7 @@ const newGameController = {
     index() {
 
         // Get available books
-        var downloadedBooks = state.localBooksLibrary.getDownloadedBooks();
+        const downloadedBooks = state.localBooksLibrary.getDownloadedBooks();
 
         if ( downloadedBooks.length === 0 ) {
             // No books downloaded:
@@ -46,7 +46,7 @@ const newGameController = {
     },
 
     selectedBookChanged(newBookNumber: number) {
-        var book = new Book(newBookNumber, "en");
+        const book = new Book(newBookNumber, "en");
         newGameView.setCoverImage( book.getCoverURL() );
     },
 

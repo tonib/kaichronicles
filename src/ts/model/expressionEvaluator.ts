@@ -157,8 +157,8 @@ class ExpressionEvaluator {
             return [];
         }
 
-        let keywords: string[] = [];
-        for ( let keyword of repeatedKeywords ) {
+        const keywords: string[] = [];
+        for ( const keyword of repeatedKeywords ) {
             if ( !keywords.contains(keyword) ) {
                 keywords.push( keyword );
             }
@@ -172,7 +172,7 @@ class ExpressionEvaluator {
      * @returns The expression with the replaced values
      */
     private static doReplacements( expression: string ): string {
-        for ( let keyword of ExpressionEvaluator.getKeywords(expression) ) {
+        for ( const keyword of ExpressionEvaluator.getKeywords(expression) ) {
             let replacement;
             const functionReplacer = ExpressionEvaluator.replacementFunctions[ keyword ];
             if ( !functionReplacer ) {

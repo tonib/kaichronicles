@@ -49,8 +49,8 @@ const gameRulesController = {
 
     appendSection( sectionId: string ) {
 
-        var section = new Section( state.book , sectionId , state.mechanics );
-        var renderer = new SectionRenderer( section );
+        const section = new Section( state.book , sectionId , state.mechanics );
+        const renderer = new SectionRenderer( section );
 
         // Add a target anchor
         let html = '<a id="' + sectionId + '"></a>';

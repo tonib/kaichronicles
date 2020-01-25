@@ -34,7 +34,7 @@ const settingsController = {
         if ( updateUI ) {
             settingsView.showDownloadDialog();
         }
-        var book = new Book( state.book.bookNumber , newLanguage );
+        const book = new Book( state.book.bookNumber , newLanguage );
         return book.downloadBookXml()
         .then(function() {
             if ( updateUI ) {
@@ -73,7 +73,7 @@ const settingsController = {
 
     /** Return a string to put on saved games files */
     getDateForFileNames(): string {
-        var now = new Date();
+        const now = new Date();
         return now.getFullYear() + "_" +
             ( now.getMonth() + 1 ).toString().padLeft( 2 , "0" ) + "_" +
             now.getDate().toString().padLeft( 2 , "0" ) + "_" +
@@ -95,8 +95,8 @@ const settingsController = {
      */
     saveGame(fileName: string) {
         try {
-            var stateJson = state.getSaveGameJson();
-            var blob = new Blob( [ stateJson ], {type: "text/plain;charset=utf-8"});
+            const stateJson = state.getSaveGameJson();
+            const blob = new Blob( [ stateJson ], {type: "text/plain;charset=utf-8"});
 
             // Check file name
             fileName = fileName.trim();

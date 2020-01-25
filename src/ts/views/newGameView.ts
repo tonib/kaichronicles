@@ -2,7 +2,7 @@
 /**
  * The new game view API
  */
-var newGameView = {
+const newGameView = {
 
     setup(downloadedBooks: BookDownloadState[]) {
 
@@ -10,8 +10,8 @@ var newGameView = {
         $("#newgame-language").val( state.language );
 
         // Add supported books
-        var html = "";
-        for ( var i = 0; i < downloadedBooks.length; i++) {
+        let html = "";
+        for ( let i = 0; i < downloadedBooks.length; i++) {
             html += '<option value="' + downloadedBooks[i].bookNumber + '" >' +
                 downloadedBooks[i].bookNumber + ". " +
                 downloadedBooks[i].getTitle() + "</option>";

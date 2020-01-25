@@ -54,12 +54,12 @@ class testsController {
             return;
         }
 
-        var count = state.mechanics.getSectionsCount();
+        const count = state.mechanics.getSectionsCount();
         testsController.addLog("Testing sections render (" + count + ")");
-        for (var i = 1; i < count; i++) {
+        for (let i = 1; i < count; i++) {
             try {
-                var section = new Section(state.book, "sect" + i, state.mechanics );
-                var renderer = new SectionRenderer(section);
+                const section = new Section(state.book, "sect" + i, state.mechanics );
+                const renderer = new SectionRenderer(section);
                 renderer.renderSection();
             } catch (e) {
                 testsController.addError("Section " + i + " error: " + e , e );
@@ -81,31 +81,31 @@ class testsController {
         }
 
         // Test implemented random table
-        var count = [];
-        for ( var i = 0; i < 10; i++) {
+        let count = [];
+        for (let i = 0; i < 10; i++) {
             count[i] = 0;
         }
-        var total = 1000000;
-        for ( i = 0; i < total; i++) {
+        const total = 1000000;
+        for ( let i = 0; i < total; i++) {
             count[randomTable.getRandomValue()]++;
         }
         console.log("Randomness test (" + total + " random table hits)");
-        for ( i = 0; i < 10; i++) {
+        for (let i = 0; i < 10; i++) {
             testsController.addLog(i + ": " + count[i] + " hits (" + ( count[i] / total ) * 100.0 + " %)" );
         }
 
         // Test randomness of the book random table:
         count = [];
-        for ( i = 0; i < 10; i++) {
+        for (let i = 0; i < 10; i++) {
             count[i] = 0;
         }
-        var bookRandomTable = state.book.getRandomTable();
-        for ( i = 0; i < bookRandomTable.length; i++) {
+        const bookRandomTable = state.book.getRandomTable();
+        for (let i = 0; i < bookRandomTable.length; i++) {
             count[ bookRandomTable[i] ]++;
         }
 
         console.log("Book random table:");
-        for ( i = 0; i < 10; i++) {
+        for (let i = 0; i < 10; i++) {
             testsController.addLog(i + ": " + count[i] + " (" + ( count[i] / bookRandomTable.length ) * 100.0 + " %)" );
         }
     }
@@ -119,13 +119,13 @@ class testsController {
 
     private static testBook( validator: BookValidator ) {
         validator.validateBook();
-        let title = "Book " + validator.book.bookNumber + " (" + validator.book.language + ") ";
+        const title = "Book " + validator.book.bookNumber + " (" + validator.book.language + ") ";
         if ( validator.errors.length == 0 ) {
             testsController.addLog( title + "OK!");
         } else {
             testsController.addLog(title + "with errors:");
         }
-        for ( let error of validator.errors ) {
+        for ( const error of validator.errors ) {
             testsController.addError(error);
         }
 

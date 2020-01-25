@@ -67,7 +67,9 @@
         "semicolon": { "options": ["always"] },
         "comment-format": {
             "options": ["check-space"]
-        }
+        },
+        "prefer-const": true,
+        "no-var-keyword": true
     },
     "rulesDirectory": []
 }

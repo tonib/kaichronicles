@@ -34,7 +34,7 @@ class SkillsSetup {
         if ( state.actionChart.combatSkill !== 0 ) {
             $("#mechanics-detWeapon").hide();
         } else {
-            var $w = $("#mechanics-chooseWeapon");
+            const $w = $("#mechanics-chooseWeapon");
             randomMechanics.bindTableRandomLink( $w , function(value) {
                 state.actionChart.combatSkill = value + (state.book.isGrandMasterBook() ? 25 : 10);
                 $w.parent().append( "<b>" + translations.text("combatSkillSet" , [state.actionChart.combatSkill] ) + ".</b>" );
@@ -49,7 +49,7 @@ class SkillsSetup {
         if ( state.actionChart.endurance !== 0 ) {
             $("#mechanics-detEndurance").hide();
         } else {
-            var $e = $("#mechanics-chooseEndurance");
+            const $e = $("#mechanics-chooseEndurance");
             randomMechanics.bindTableRandomLink( $e , function(value) {
                 state.actionChart.endurance = value + (state.book.isGrandMasterBook() ? 30 : 20);
                 state.actionChart.currentEndurance = state.actionChart.endurance;

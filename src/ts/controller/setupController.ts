@@ -27,9 +27,9 @@ const setupController = {
             setupController.recordPageVisit("continue");
         } else {
             // New game. Get hash URL parameters
-            var bookNumber = parseInt( routing.getHashParameter("bookNumber") );
-            var language = routing.getHashParameter("language");
-            var keepActionChart = routing.getHashParameter("keepActionChart");
+            const bookNumber = parseInt( routing.getHashParameter("bookNumber") );
+            const language = routing.getHashParameter("language");
+            const keepActionChart = routing.getHashParameter("keepActionChart");
             state.setup(bookNumber, language, keepActionChart);
             setupController.recordPageVisit("newgame");
         }
@@ -61,7 +61,7 @@ const setupController = {
 
     runDownloads() {
 
-        var downloads = [];
+        const downloads = [];
         // The book xml
         downloads.push( {
             url: state.book.getBookXmlURL(),
@@ -87,16 +87,16 @@ const setupController = {
         });
 
         // Stuff to handle each download
-        var promises = [];
-        var someError = false;
-        var failFunction = function(jqXHR, textStatus, errorThrown) {
+        const promises = [];
+        let someError = false;
+        const failFunction = function(jqXHR, textStatus, errorThrown) {
             setupView.log( ajaxErrorMsg(this, jqXHR, textStatus, errorThrown), "error" );
             someError = true;
         };
-        var doneFunction = function() {
+        const doneFunction = function() {
             setupView.log( this.url + " OK!" , "ok" );
         };
-        for (var i = 0; i < downloads.length; i++) {
+        for (let i = 0; i < downloads.length; i++) {
             setupView.log(downloads[i].url + " download started...");
             downloads[i].promise.url = downloads[i].url;
             downloads[i].promise
@@ -122,8 +122,8 @@ const setupController = {
     },
 
     restartBook() {
-        var bookNumber = state.book.bookNumber;
-        var language = state.language;
+        const bookNumber = state.book.bookNumber;
+        const language = state.language;
         state.reset(false);
         template.updateStatistics(true);
         routing.redirect("setup" , {

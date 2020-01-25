@@ -109,7 +109,7 @@ class SavedGamesExport {
 
         const self = this;
         let nNewGames = 0;
-        let zipContent: any = null;
+        const zipContent: any = null;
         let entriesToImport: any[] = null;
 
         return this.copyFileContent( doc , this.tmpDir )
@@ -126,8 +126,8 @@ class SavedGamesExport {
             entriesToImport = SavedGamesExport.filterSavedGamesEntries( entries );
 
             // Check if some file will be overwritten
-            let newFileNames: string[] = [];
-            for ( let entry of entriesToImport ) {
+            const newFileNames: string[] = [];
+            for ( const entry of entriesToImport ) {
                 newFileNames.push( entry.name );
             }
 
@@ -172,9 +172,9 @@ class SavedGamesExport {
      */
     private checkOverwritting( newFiles: string[] ): JQueryPromise<void> {
 
-        let duplicatedFiles: string[] = [];
-        for ( let newFile of newFiles ) {
-            for ( let oldFile of this.fileGameEntries ) {
+        const duplicatedFiles: string[] = [];
+        for ( const newFile of newFiles ) {
+            for ( const oldFile of this.fileGameEntries ) {
                 // Case sensitive
                 if ( oldFile.name == newFile ) {
                     duplicatedFiles.push( newFile );
@@ -246,8 +246,8 @@ class SavedGamesExport {
      * @returns {Array<Entry>} The saved games
      */
     private static filterSavedGamesEntries( entries: any[] ): any[] {
-        let result = [];
-        for (let entry of entries) {
+        const result = [];
+        for (const entry of entries) {
             let ok = true;
             if ( !entry.isFile ) {
                 ok = false;
@@ -369,8 +369,8 @@ class SavedGamesExport {
         .then( function() {
             console.log( "Deleting other tmp files" );
 
-            let promises: Array< JQueryPromise<any> > = [];
-            for ( let tmpFile of self.filesToDeleteAtEnd ) {
+            const promises: Array< JQueryPromise<any> > = [];
+            for ( const tmpFile of self.filesToDeleteAtEnd ) {
                 promises.push( cordovaFS.deleteFileAsync( tmpFile ) );
             }
 

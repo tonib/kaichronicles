@@ -10,7 +10,7 @@ const gameView = {
      * @param section The current Section
      */
     updateNavigation(section: Section) {
-        var $navButtons = $("#game-navSectionButtons");
+        const $navButtons = $("#game-navSectionButtons");
         if ( window.getUrlParameter("debug") || section.hasNavigation() ) {
             $navButtons.show();
         } else {
@@ -19,7 +19,7 @@ const gameView = {
     },
 
     enableLink( linkId: string, enabled: boolean ) {
-        var $nextLink = $(linkId);
+        const $nextLink = $(linkId);
         if ( enabled ) {
             $nextLink.removeClass("disabled");
         } else {
@@ -127,7 +127,7 @@ const gameView = {
 
         if ( where == "beforeChoices" ) {
             // Try to add the html before the first choice:
-            var $firstChoice = $("p.choice").first();
+            const $firstChoice = $("p.choice").first();
             if ( $firstChoice.length > 0 ) {
                 $firstChoice.before(html);
                 return;
@@ -184,7 +184,7 @@ const gameView = {
             return;
         }
 
-        var section = $(link).attr("data-section");
+        const section = $(link).attr("data-section");
         // console.log('Jump to section ' + section);
         if ( section ) {
             gameController.loadSection( section , true );
@@ -196,9 +196,9 @@ const gameView = {
      */
     showOriginSections() {
 
-        var sectionIds = state.book.getOriginSections(state.sectionStates.currentSection);
-        var linksHtml = "";
-        for (var i = 0; i < sectionIds.length; i++) {
+        const sectionIds = state.book.getOriginSections(state.sectionStates.currentSection);
+        let linksHtml = "";
+        for (let i = 0; i < sectionIds.length; i++) {
             // Ignore index of numbered sections
             if ( sectionIds[i] == "numbered" ) {
                 continue;

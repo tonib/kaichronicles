@@ -51,7 +51,7 @@ class LoreCircle {
      * @param disciplines Player disciplines ids
      */
     public matchCircle( disciplines: string[] ): boolean {
-        for ( let d of this.disciplines ) {
+        for ( const d of this.disciplines ) {
             if ( !disciplines.contains(d) ) {
                 return false;
             }
@@ -83,8 +83,8 @@ class LoreCircle {
 
         LoreCircle.initializeCircles();
 
-        let circles: LoreCircle[] = [];
-        for ( let c of LoreCircle.circles ) {
+        const circles: LoreCircle[] = [];
+        for ( const c of LoreCircle.circles ) {
             if ( c.matchCircle( disciplines ) ) {
                 circles.push( c );
             }
@@ -100,8 +100,8 @@ class LoreCircle {
     public static getCirclesBonuses( disciplines: string[] , type: string ): Bonus[] {
 
         const circles = LoreCircle.getCircles( disciplines );
-        let bonuses: Bonus[] = [];
-        for ( let c of circles ) {
+        const bonuses: Bonus[] = [];
+        for ( const c of circles ) {
             const bonusValue = ( type == "CS" ? c.bonusCS : c.bonusEP );
             if ( bonusValue > 0 ) {
                 bonuses.push({
@@ -122,7 +122,7 @@ class LoreCircle {
 
         LoreCircle.initializeCircles();
 
-        for ( let c of LoreCircle.circles ) {
+        for ( const c of LoreCircle.circles ) {
             if ( c.id == circleId ) {
                 return c;
             }

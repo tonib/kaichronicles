@@ -54,7 +54,7 @@ class Section {
      * @returns The fake section
      */
     public static createFromXml( book: Book , $xml: any ): Section {
-        let s = new Section( book , null , null);
+        const s = new Section( book , null , null);
         s.$xmlSection = $xml;
         s.data = $xml;
         return s;
@@ -89,12 +89,12 @@ class Section {
      * Returns the previous section id
      */
     public getNextSectionId(): string {
-        var link = this.$xmlSection.find("link[class=next]");
+        const link = this.$xmlSection.find("link[class=next]");
         if ( link.length > 0 ) {
             return link.attr("idref");
         }
 
-        var sNumber = this.getSectionNumber();
+        const sNumber = this.getSectionNumber();
         if ( sNumber ) {
             return "sect" + ( sNumber + 1 );
         }
@@ -106,12 +106,12 @@ class Section {
      * Returns the next section id
      */
     public getPreviousSectionId(): string {
-        var link = this.$xmlSection.find("link[class=prev]");
+        const link = this.$xmlSection.find("link[class=prev]");
         if ( link.length > 0 ) {
             return link.attr("idref");
         }
 
-        var sNumber = this.getSectionNumber();
+        const sNumber = this.getSectionNumber();
         if ( sNumber ) {
             if ( sNumber == 1 ) {
                 return "kaiwisdm";
@@ -129,7 +129,7 @@ class Section {
      * rendered
      */
     public getHtml(renderIllustrationsText: boolean = false): string {
-        var sectionRenderer = new SectionRenderer( this );
+        const sectionRenderer = new SectionRenderer( this );
         sectionRenderer.renderIllustrationsText = renderIllustrationsText;
         return sectionRenderer.renderSection();
     }
@@ -139,7 +139,7 @@ class Section {
      * @return Combats on this section
      */
     public getCombats(): Combat[] {
-        var result = [];
+        const result = [];
         this.$xmlSection.find("combat").each(function(index, combat) {
             const $combat = $(combat);
             result.push( new Combat(
@@ -162,12 +162,12 @@ class Section {
      * Get the section title HTML
      */
     public getTitleHtml(): string {
-        var title = this.$xmlSection.find("title").first().text();
+        let title = this.$xmlSection.find("title").first().text();
         // Check if the section has a "main title" on the mechanics file (see sect1 on book 4)
         if ( this.mechanics ) {
-            var section = this.mechanics.getSection(this.sectionId);
+            const section = this.mechanics.getSection(this.sectionId);
             if ( section ) {
-                var mainTitle = mechanicsEngine.getRuleText( section );
+                const mainTitle = mechanicsEngine.getRuleText( section );
                 if ( mainTitle ) {
                     title = '<div class="book-section-title">' + mainTitle + "</div>" + title;
                 }

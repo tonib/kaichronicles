@@ -30,7 +30,7 @@ const actionChartController = {
     pick(objectId: string, showError: boolean = false, fromUITable: boolean = false): boolean {
         try {
             // Get object info
-            var o = state.mechanics.getObject(objectId);
+            const o = state.mechanics.getObject(objectId);
             if ( o === null ) {
                 return false;
             }
@@ -98,8 +98,8 @@ const actionChartController = {
         }
 
         if ( objectId == "allweaponlike" ) {
-            let weaponsIds = [];
-            for ( let w of state.actionChart.getWeaponObjects(false) ) {
+            const weaponsIds = [];
+            for ( const w of state.actionChart.getWeaponObjects(false) ) {
                 weaponsIds.push(w.id);
             }
             actionChartController.dropItemsList( weaponsIds );
@@ -136,7 +136,7 @@ const actionChartController = {
             return true;
         }
 
-        var o = state.mechanics.getObject(objectId);
+        const o = state.mechanics.getObject(objectId);
         if ( !o ) {
             return false;
         }
@@ -167,7 +167,7 @@ const actionChartController = {
 
             if ( availableOnSection ) {
                 // Add the droped object as available on the current section
-                var sectionState = state.sectionStates.getSectionState();
+                const sectionState = state.sectionStates.getSectionState();
                 sectionState.addObjectToSection( objectId , 0 , false , count );
 
                 // Render available objects on this section (game view)
@@ -193,7 +193,7 @@ const actionChartController = {
         // arrayOfItems can be a reference to a state.actionChart member, so don't
         // traverse it as is, or we will lose elements
         const elementsToDrop = arrayOfItems.clone();
-        for ( let objectId of elementsToDrop ) {
+        for ( const objectId of elementsToDrop ) {
             actionChartController.drop(objectId, false, false);
         }
     },
@@ -214,7 +214,7 @@ const actionChartController = {
      */
     use(objectId: string, dropObject: boolean = true) {
         // Get the object
-        var o = state.mechanics.getObject(objectId);
+        const o = state.mechanics.getObject(objectId);
         if ( !o || !o.usage ) {
             return;
         }
@@ -253,7 +253,7 @@ const actionChartController = {
     increaseMeals(count: number) {
         try {
             state.actionChart.increaseMeals(count);
-            var o = state.mechanics.getObject("meal");
+            const o = state.mechanics.getObject("meal");
             if ( count > 0 ) {
                 actionChartView.showInventoryMsg("pick" , o ,
                     translations.text( "msgGetMeal" , [count] ) );
@@ -406,9 +406,9 @@ const actionChartController = {
      * @return {string} The bonuses text
      */
     getBonusesText(bonuses) {
-        var txt = [];
-        for ( var i = 0; i < bonuses.length; i++ ) {
-            var txtInc = bonuses[i].increment.toString();
+        const txt = [];
+        for ( let i = 0; i < bonuses.length; i++ ) {
+            let txtInc = bonuses[i].increment.toString();
             if ( bonuses[i].increment > 0 ) {
                 txtInc = "+" + txtInc;
             }
@@ -423,9 +423,9 @@ const actionChartController = {
      * @param arrayOfItems Array with object ids to pick
      */
     pickItemsList( arrayOfItems: string[] ) {
-        var renderAvailableObjects = false;
-        var sectionState = state.sectionStates.getSectionState();
-        for (var i = 0; i < arrayOfItems.length; i++) {
+        let renderAvailableObjects = false;
+        const sectionState = state.sectionStates.getSectionState();
+        for (let i = 0; i < arrayOfItems.length; i++) {
             if ( !actionChartController.pick( arrayOfItems[i] , true , false ) ) {
                 // Object cannot be picked. Add the object as available on the current section
                 sectionState.addObjectToSection( arrayOfItems[i] );

@@ -537,13 +537,13 @@ class Translations {
      */
     public translateView( view: String , doNotClone: Boolean = false ) {
 
-        var table = this[state.language];
+        const table = this[state.language];
         if ( !table ) {
             // Translation not available
             return view;
         }
 
-        var $clonedView;
+        let $clonedView;
         if ( doNotClone ) {
             $clonedView = $(view);
         } else {
@@ -570,13 +570,13 @@ class Translations {
             }
         }
 
-        var $translatedTags = $tags
+        const $translatedTags = $tags
             .find("[data-translation]")
             .addBack("[data-translation]");
-        for (var i = 0; i < $translatedTags.length; i++ ) {
-            var $t = $($translatedTags[i]);
-            var translationId = $t.attr("data-translation");
-            var html = table[ translationId ];
+        for (let i = 0; i < $translatedTags.length; i++ ) {
+            const $t = $($translatedTags[i]);
+            const translationId = $t.attr("data-translation");
+            const html = table[ translationId ];
             if ( html ) {
                 $t.html( html );
             }
@@ -591,20 +591,20 @@ class Translations {
      */
     public text( textId: string , replacements: any[] = null ): string {
         try {
-            var table = this[state.language];
+            let table = this[state.language];
             if ( !table ) {
                 // Use english as default
                 table = this.en;
             }
 
-            var text = table[textId];
+            let text = table[textId];
             if ( !text ) {
                 console.log("Text code not found: " + textId);
                 text = textId;
             }
 
             if ( replacements ) {
-                for (var i = 0; i < replacements.length; i++) {
+                for (let i = 0; i < replacements.length; i++) {
                     text = text.replaceAll( "{" + i + "}" , replacements[i].toString() );
                 }
             }

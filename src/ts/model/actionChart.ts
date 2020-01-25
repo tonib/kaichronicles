@@ -176,9 +176,9 @@ class ActionChart {
 
         // Check incompatibilities
         if ( o.incompatibleWith.length > 0 ) {
-            for ( let incompatibleId of o.incompatibleWith ) {
+            for ( const incompatibleId of o.incompatibleWith ) {
                 if ( this.hasObject( incompatibleId ) ) {
-                    var incombatibleObject = state.mechanics.getObject( incompatibleId );
+                    const incombatibleObject = state.mechanics.getObject( incompatibleId );
                     throw translations.text( "msgIncompatible" , [incombatibleObject.name] );
                 }
             }
@@ -262,9 +262,9 @@ class ActionChart {
      * @returns The number of objects on the backpack
      */
     public getNBackpackItems( roundToInteger: boolean = true ): number {
-        var count = this.meals;
-        for ( var i = 0; i < this.backpackItems.length; i++) {
-            var o = state.mechanics.getObject(this.backpackItems[i]);
+        let count = this.meals;
+        for ( let i = 0; i < this.backpackItems.length; i++) {
+            const o = state.mechanics.getObject(this.backpackItems[i]);
             if ( o ) {
                 count += o.itemCount;
             }
@@ -282,7 +282,7 @@ class ActionChart {
      */
     public getNSpecialItems( roundToInteger: boolean = true ): number {
         let count = 0;
-        for ( let specialId of this.specialItems ) {
+        for ( const specialId of this.specialItems ) {
             const o = state.mechanics.getObject( specialId );
             if ( o ) {
                 count += o.itemCount;
@@ -414,7 +414,7 @@ class ActionChart {
         }
 
         // Try to set the current weapon, only hand-to-hand weapons
-        var weaponObjects = this.getWeaponObjects(true);
+        const weaponObjects = this.getWeaponObjects(true);
         if ( weaponObjects.length === 0 ) {
             // No weapons
             this.selectedWeapon = "";
@@ -439,7 +439,7 @@ class ActionChart {
 
         let e = this.endurance;
         const bonuses = this.getEnduranceBonuses();
-        for (var i = 0; i < bonuses.length; i++) {
+        for (let i = 0; i < bonuses.length; i++) {
             e += bonuses[i].increment;
         }
         return e;
@@ -450,7 +450,7 @@ class ActionChart {
      * This can happens if an object that has effects (increase endurance) has ben dropped, or if the original endurance has changed
      */
     private checkMaxEndurance() {
-        var max = this.getMaxEndurance();
+        const max = this.getMaxEndurance();
         if ( this.currentEndurance > max ) {
             this.currentEndurance = max;
         }
@@ -486,9 +486,9 @@ class ActionChart {
      */
     public getCurrentCombatSkill( combat: Combat = null ): number {
 
-        var cs = this.combatSkill;
-        var bonuses = this.getCurrentCombatSkillBonuses(combat);
-        for (var i = 0; i < bonuses.length; i++) {
+        let cs = this.combatSkill;
+        const bonuses = this.getCurrentCombatSkillBonuses(combat);
+        for (let i = 0; i < bonuses.length; i++) {
             cs += bonuses[i].increment;
         }
 
@@ -530,7 +530,7 @@ class ActionChart {
             return false;
         }
 
-        for ( let w of this.weaponSkill ) {
+        for ( const w of this.weaponSkill ) {
             if ( w == weaponType ) {
                 return true;
             }
@@ -549,8 +549,8 @@ class ActionChart {
     private getWeaponCombatSkillBonuses( noWeapon: boolean , bowCombat: boolean , disabledObjectsIds: string[] )
     : Bonus[] {
 
-        var bonuses = [];
-        var currentWeapon = this.getSelectedWeaponItem( bowCombat );
+        const bonuses = [];
+        let currentWeapon = this.getSelectedWeaponItem( bowCombat );
 
         // Check if the current weapon is disabled
         if ( disabledObjectsIds.length > 0 && currentWeapon ) {
@@ -652,7 +652,7 @@ class ActionChart {
      */
     public getBowBonus(): number {
         let bonus = 0;
-        for ( let b of this.getWeaponCombatSkillBonuses(false, true, []) ) {
+        for ( const b of this.getWeaponCombatSkillBonuses(false, true, []) ) {
             bonus += b.increment;
         }
         return bonus;
@@ -672,14 +672,14 @@ class ActionChart {
             mechanicsEngine.runGlobalRules(true, combat);
         }
 
-        var bonuses = [];
+        const bonuses = [];
 
-        var currentWeapon = this.getSelectedWeaponItem( combat.bowCombat );
+        const currentWeapon = this.getSelectedWeaponItem( combat.bowCombat );
 
         // Current weapon bonuses
         if ( !combat.mentalOnly ) {
             const noWeapon = combat.noWeaponCurrentTurn();
-            for ( let b of this.getWeaponCombatSkillBonuses( noWeapon , combat.bowCombat , combat.disabledObjects ) ) {
+            for ( const b of this.getWeaponCombatSkillBonuses( noWeapon , combat.bowCombat , combat.disabledObjects ) ) {
                 bonuses.push( b );
             }
         }
@@ -720,7 +720,7 @@ class ActionChart {
         // not that detailed.
         if ( !combat.mentalOnly ) {
             const circlesBonuses = LoreCircle.getCirclesBonuses( this.disciplines , "CS" );
-            for ( let c of circlesBonuses ) {
+            for ( const c of circlesBonuses ) {
                 bonuses.push(c);
             }
         }
@@ -734,7 +734,7 @@ class ActionChart {
      */
     private enumerateObjects( callback: ( o: Item ) => void ) {
 
-        var enumerateFunction = function(index: number , objectId: string ) {
+        const enumerateFunction = function(index: number , objectId: string ) {
             const o = state.mechanics.getObject( objectId );
             if ( !o ) {
                 return;
@@ -753,7 +753,7 @@ class ActionChart {
      */
     public getEnduranceBonuses(): Bonus[] {
 
-        var bonuses = [];
+        const bonuses = [];
         this.enumerateObjects( function( o: Item ) {
             if ( o.enduranceEffect ) {
                 bonuses.push( {
@@ -764,7 +764,7 @@ class ActionChart {
         });
 
         const circlesBonuses = LoreCircle.getCirclesBonuses( this.disciplines , "EP" );
-        for ( let c of circlesBonuses ) {
+        for ( const c of circlesBonuses ) {
             bonuses.push(c);
         }
 
@@ -777,7 +777,7 @@ class ActionChart {
      */
     public getMealObjects() {
 
-        var result = [];
+        const result = [];
         this.enumerateObjects( function( o: Item ) {
             if ( o.isMeal && !result.contains(o.id) ) {
                 result.push(o.id);
@@ -795,9 +795,9 @@ class ActionChart {
     public getWeaponObjects(onlyHandToHand: boolean = false): Item[] {
 
         // Weapons
-        let result: Item[] = [];
+        const result: Item[] = [];
         for ( let i = 0; i < this.weapons.length; i++) {
-            let o = state.mechanics.getObject(this.weapons[i]);
+            const o = state.mechanics.getObject(this.weapons[i]);
             if ( o && ( !onlyHandToHand || o.isHandToHandWeapon() ) ) {
                 result.push(o);
             }
@@ -892,7 +892,7 @@ class ActionChart {
     public getWeaponType( weaponType: string ): Item {
         let maxBonus = 0;
         let w: Item = null;
-        for ( let weapon of this.getWeaponObjects() ) {
+        for ( const weapon of this.getWeaponObjects() ) {
             if ( weapon.isWeaponType( weaponType ) ) {
                 if ( weapon.combatSkillEffect >= maxBonus ) {
                     maxBonus = weapon.combatSkillEffect;

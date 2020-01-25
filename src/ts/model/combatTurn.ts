@@ -79,7 +79,7 @@ class CombatTurn {
         /** Enemy dammage multiplier */
         this.enemyMultiplier = combat.enemyMultiplier;
 
-        var tableResult = combatTable.getCombatTableResult(combat.getCombatRatio(), this.randomValue);
+        const tableResult = combatTable.getCombatTableResult(combat.getCombatRatio(), this.randomValue);
 
         /** Enemy base loss  */
         this.enemyBase = ( ( elude || combat.enemyImmuneTurns >= this.turnNumber ) ? 0 : tableResult[0] );
@@ -173,7 +173,7 @@ class CombatTurn {
      * Get a text for a turn result
      */
     public static lossText( base: any , multiplier: number, extra: number, finalLoss: any ): string {
-        var loss = CombatTurn.translateLoss( base );
+        let loss = CombatTurn.translateLoss( base );
         if ( multiplier != 1 ) {
             loss = loss + " x " + multiplier;
         }

@@ -35,8 +35,8 @@ class loadGameController {
     private static getFileNames( entries: any[] ): string[] {
 
         // Get file names (entries is Array<Entry>)
-        let fileNames: string[] = [];
-        for (let entry of entries) {
+        const fileNames: string[] = [];
+        for (const entry of entries) {
             // There can be directories here (ex. downloaded books)
             if ( entry.isFile ) {
                 fileNames.push( entry.name );
@@ -60,7 +60,7 @@ class loadGameController {
         .then( function(entries: any[] ) {
 
             // Get file names (entries is Array<Entry>)
-            let fileNames = loadGameController.getFileNames(entries);
+            const fileNames = loadGameController.getFileNames(entries);
 
             // The list may be unsorted:
             fileNames.sort();
@@ -83,7 +83,7 @@ class loadGameController {
      */
     public static fileUploaderChanged(fileToUpload: Blob) {
         try {
-            var reader = new FileReader();
+            const reader = new FileReader();
             reader.onload = function(e) {
                 loadGameController.loadGame( (e.target as any).result );
             };

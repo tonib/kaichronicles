@@ -2,14 +2,14 @@
 /**
  * The cordova app
  */
-var cordovaApp = {
+const cordovaApp = {
 
     /**
      * Setup Cordova app, if needed
      * @returns {Promise} The process promise
      */
     setup() {
-        var dfd = jQuery.Deferred();
+        const dfd = jQuery.Deferred();
 
         if ( !cordovaApp.isRunningApp() ) {
             // Running on web

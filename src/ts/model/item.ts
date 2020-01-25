@@ -170,7 +170,7 @@ class Item {
         this.loadImageInfo( $o );
 
         // Usage (only one use, and then the object is dropped)
-        var $usage = $o.find("usage");
+        const $usage = $o.find("usage");
         if ( $usage.length > 0 ) {
             this.usage = {
                 cls: $usage.attr("class"),
@@ -180,7 +180,7 @@ class Item {
 
         // Effects (when the player carry the object)
         const $effects: any[] = $o.find("effect");
-        for ( let effect of $effects ) {
+        for ( const effect of $effects ) {
             const $effect = $(effect);
             const increment = parseInt( $effect.attr("increment") );
             const cls: string = $effect.attr("class");
@@ -274,9 +274,9 @@ class Item {
         }
 
         // Get the book number:
-        let candidateBookNumbers: number[] = [];
+        const candidateBookNumbers: number[] = [];
         const txtBook: string = $image.attr("book");
-        for ( let txtBookNumber of txtBook.split("|") ) {
+        for ( const txtBookNumber of txtBook.split("|") ) {
             candidateBookNumbers.push( parseInt( txtBookNumber ) );
         }
         if ( candidateBookNumbers.length == 0 ) {

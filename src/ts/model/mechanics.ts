@@ -44,7 +44,7 @@ class Mechanics {
      */
     public downloadXml(): JQueryPromise<void> {
 
-        var self = this;
+        const self = this;
         return $.ajax({
             url: this.getXmlURL(),
             dataType: "text"
@@ -71,7 +71,7 @@ class Mechanics {
      */
     public downloadObjectsXml(): JQueryPromise<void> {
 
-        var self = this;
+        const self = this;
         return $.ajax({
             url: this.getObjectsXmlURL(),
             dataType: "xml"
@@ -92,7 +92,7 @@ class Mechanics {
      * Returns an jquery object with the section mechanics XML. null if there are no mechanics
      */
     public getSection(sectionId: string): any {
-        var $section = $(this.mechanicsXml)
+        const $section = $(this.mechanicsXml)
             .find("mechanics > sections > section[id=" + sectionId + "]");
         return $section.length === 0 ? null : $section;
     }
@@ -108,7 +108,7 @@ class Mechanics {
             return o;
         }
 
-        var $o = $(this.objectsXml).find("*[id=" + objectId + "]");
+        const $o = $(this.objectsXml).find("*[id=" + objectId + "]");
         if ( $o.length === 0 ) {
             console.log("Object " + objectId + " not found");
             return null;
@@ -136,12 +136,12 @@ class Mechanics {
 
         // Get nodes from the section rule to the given rule
         // var $path = $( $(rule).parentsUntil( 'section' ).andSelf().get().reverse() );
-        var $path = $(rule).parentsUntil( "section" ).addBack();
+        const $path = $(rule).parentsUntil( "section" ).addBack();
 
         // Build the jquery selector:
         return $path
             .map(function( index , node ) {
-                var txt = node.nodeName;
+                let txt = node.nodeName;
                 $.each( node.attributes , function( index , attribute ) {
                     txt += "[" + attribute.name + "='" + attribute.value + "']";
                 } );
@@ -181,8 +181,8 @@ class Mechanics {
      * Return the number of numbered sections on the book
      */
     public getSectionsCount(): number {
-        var $sections = $(this.mechanicsXml).find("mechanics > sections");
-        var count = $sections.attr("count");
+        const $sections = $(this.mechanicsXml).find("mechanics > sections");
+        let count = $sections.attr("count");
         if (!count) {
             // Default is 350
             count = "350";

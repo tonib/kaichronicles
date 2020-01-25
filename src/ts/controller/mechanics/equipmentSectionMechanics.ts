@@ -31,7 +31,7 @@ class EquipmentSectionMechanics {
         }
 
         // Get the the number of picked objects
-        let pickedObjects = EquipmentSectionMechanics.getPickedObjects( $sectionMechanics ,
+        const pickedObjects = EquipmentSectionMechanics.getPickedObjects( $sectionMechanics ,
             originalObjects );
 
         if ( pickedObjects.length >= nPickableObjects && !pickedObjects.contains(pickedObjectId) ) {
@@ -56,7 +56,7 @@ class EquipmentSectionMechanics {
         const originalObjects = EquipmentSectionMechanics.getOriginalObjects( $sectionMechanics );
 
         // Get the the number of picked objects
-        let pickedObjects = EquipmentSectionMechanics.getPickedObjects( $sectionMechanics , originalObjects , sectionId);
+        const pickedObjects = EquipmentSectionMechanics.getPickedObjects( $sectionMechanics , originalObjects , sectionId);
 
         return pickedObjects.length;
     }
@@ -114,12 +114,12 @@ class EquipmentSectionMechanics {
     private static getOriginalObjects( $sectionMechanics: any ): { [objectId: string ]: number } {
 
         // Get the original objects on the section:
-        var childrenRules = $sectionMechanics.children();
-        var originalObjects = {};
-        for (var i = 0; i < childrenRules.length; i++) {
-            var rule = childrenRules[i];
+        const childrenRules = $sectionMechanics.children();
+        const originalObjects = {};
+        for (let i = 0; i < childrenRules.length; i++) {
+            const rule = childrenRules[i];
             if ( rule.nodeName == "object" ) {
-                var objectid = $(rule).attr("objectId");
+                const objectid = $(rule).attr("objectId");
                 if ( !originalObjects[objectid] ) {
                     originalObjects[objectid] = 1;
                 } else {
@@ -143,8 +143,8 @@ class EquipmentSectionMechanics {
     : string[] {
 
         // Get the current number of objects on the section:
-        var sectionStateObjects = state.sectionStates.getSectionState(sectionId).objects;
-        var currentObjects: { [objectId: string ]: number } = {};
+        const sectionStateObjects = state.sectionStates.getSectionState(sectionId).objects;
+        const currentObjects: { [objectId: string ]: number } = {};
         let objectId: string;
         for (let i = 0; i < sectionStateObjects.length; i++) {
             objectId = sectionStateObjects[i].id;
@@ -156,21 +156,21 @@ class EquipmentSectionMechanics {
         }
 
         // Check the currently number of picked objects
-        let pickedObjects: string[] = [];
+        const pickedObjects: string[] = [];
         for ( objectId in originalObjects) {
 
             if ( !originalObjects.hasOwnProperty(objectId) ) {
                 continue;
             }
 
-            var nOriginal = originalObjects[objectId];
+            const nOriginal = originalObjects[objectId];
 
-            var nCurrent = currentObjects[objectId];
+            let nCurrent = currentObjects[objectId];
             if ( !nCurrent ) {
                 nCurrent = 0;
             }
 
-            var increase = nOriginal - nCurrent;
+            const increase = nOriginal - nCurrent;
             if ( increase > 0 ) {
                 pickedObjects.push( objectId );
             }

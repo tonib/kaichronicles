@@ -32,7 +32,7 @@ const loadGameView = {
         if ( fileNames.length == 0 ) {
             html += "<tr><td><i>" + translations.text( "noSavedGames" ) + "</i></td></tr>";
         } else {
-            for ( let fileName of fileNames ) {
+            for ( const fileName of fileNames ) {
                 html += '<tr id="' + fileName + '"><td>';
                 html += '<button class="btn btn-default table-op" title="Delete" data-filename="' +
                     fileName + '">' +
@@ -79,7 +79,7 @@ const loadGameView = {
             // IMPORTANT: Do not remove this preventDefault(), otherwise
             // Cordova beleaves we have changed the current page
             e.preventDefault();
-            var fileName = $(this).attr("data-filename");
+            const fileName = $(this).attr("data-filename");
             if ( !confirm( translations.text("confirmDeleteSave" , [ fileName ] ) ) ) {
                 return;
             }

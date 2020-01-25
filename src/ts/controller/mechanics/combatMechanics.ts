@@ -8,7 +8,7 @@ const combatMechanics = {
     renderCombats() {
 
         // Get combats to render
-        var sectionState = state.sectionStates.getSectionState();
+        const sectionState = state.sectionStates.getSectionState();
         if ( sectionState.combats.length === 0 ) {
             return;
         }
@@ -19,18 +19,18 @@ const combatMechanics = {
         }
 
         // Combat UI template:
-        var $template = mechanicsEngine.getMechanicsUI("mechanics-combat");
+        const $template = mechanicsEngine.getMechanicsUI("mechanics-combat");
 
         $template.attr("id", null);
 
         // Populate combats
         $.each(sectionState.combats, function(index: number, combat: Combat) {
-            var $combatUI = $template.clone();
+            const $combatUI = $template.clone();
             // Set the combat index
             $combatUI.attr("data-combatIdx", index);
 
             // Add combats UI
-            var $combatOriginal = $(".combat:eq(" + index + ")");
+            const $combatOriginal = $(".combat:eq(" + index + ")");
 
             $combatOriginal.append( $combatUI )
             .find(".mechanics-playTurn").click(function(e) {
@@ -41,7 +41,7 @@ const combatMechanics = {
             });
 
             // Move the show combat tables as the first child (needed because it's a float)
-            var $btnCombatTables = $combatUI.find(".mechanics-combatTables");
+            const $btnCombatTables = $combatUI.find(".mechanics-combatTables");
             $btnCombatTables.remove();
             $combatOriginal.prepend( $btnCombatTables );
 
@@ -72,9 +72,9 @@ const combatMechanics = {
             // Add already played turns
             if ( combat.turns.length > 0 ) {
                 // Add already played turns
-                var $turnsTable = $combatUI.find( "table" );
+                const $turnsTable = $combatUI.find( "table" );
                 $turnsTable.show();
-                var $turnsTableBody = $turnsTable.find( "> tbody" );
+                const $turnsTableBody = $turnsTable.find( "> tbody" );
                 $.each( combat.turns, function(index, turn) {
                     combatMechanics.renderCombatTurn( $turnsTableBody , turn );
                 });
@@ -110,7 +110,7 @@ const combatMechanics = {
                 });
 
                 // UI Psi-Surge texts
-                var kaiSurgeBonus = combat.kaiSurgeBonus ? combat.kaiSurgeBonus : Combat.defaultKaiSurgeBonus();
+                let kaiSurgeBonus = combat.kaiSurgeBonus ? combat.kaiSurgeBonus : Combat.defaultKaiSurgeBonus();
                 kaiSurgeBonus *= combat.mindblastMultiplier;
                 $combatUI.find(".kaisurgebonus").text( kaiSurgeBonus );
                 $combatUI.find(".kaisurgeloss").text( Combat.kaiSurgeTurnLoss() );
@@ -136,7 +136,7 @@ const combatMechanics = {
                 });
 
                 // UI Psi-Surge texts
-                var psiSurgeBonus = combat.psiSurgeBonus ? combat.psiSurgeBonus : Combat.defaultPsiSurgeBonus();
+                let psiSurgeBonus = combat.psiSurgeBonus ? combat.psiSurgeBonus : Combat.defaultPsiSurgeBonus();
                 psiSurgeBonus *= combat.mindblastMultiplier;
                 $combatUI.find(".psisurgebonus").text( psiSurgeBonus );
                 $combatUI.find(".psisurgeloss").text( Combat.psiSurgeTurnLoss() );
@@ -160,12 +160,12 @@ const combatMechanics = {
      */
     updateCombats() {
         // Get combats to render
-        var sectionState = state.sectionStates.getSectionState();
+        const sectionState = state.sectionStates.getSectionState();
         if ( sectionState.combats.length === 0 ) {
             return;
         }
         $.each(sectionState.combats, function(index, combat) {
-            var $combatUI = $(".mechanics-combatUI:eq(" + index + ")");
+            const $combatUI = $(".mechanics-combatUI:eq(" + index + ")");
             combatMechanics.updateCombatRatio( $combatUI , combat);
         });
     },
@@ -202,8 +202,8 @@ const combatMechanics = {
         }
 
         // Get combat data
-        var sectionState = state.sectionStates.getSectionState();
-        var combatIndex = parseInt( $combatUI.attr( "data-combatIdx" ) );
+        const sectionState = state.sectionStates.getSectionState();
+        const combatIndex = parseInt( $combatUI.attr( "data-combatIdx" ) );
         const combat = sectionState.combats[ combatIndex ];
 
         if ( !(sectionState.combatEluded || combat.isFinished() || combat.disabled) ) {
@@ -236,7 +236,7 @@ const combatMechanics = {
             template.updateStatistics();
 
             // Render new turn
-            var $turnsTable = $combatUI.find( "table" ).first();
+            const $turnsTable = $combatUI.find( "table" ).first();
             $turnsTable.show();
             combatMechanics.renderCombatTurn( $turnsTable.find( "> tbody" ), turn );
 
@@ -389,12 +389,12 @@ const combatMechanics = {
         if ( state.actionChart.currentEndurance > Combat.minimumEPForPsiSurge() ) {
             return;
         }
-        var sectionState = state.sectionStates.getSectionState();
+        const sectionState = state.sectionStates.getSectionState();
         if ( sectionState.combats.length === 0 ) {
             return;
         }
         for ( let i = 0; i < sectionState.combats.length; i++ ) {
-            var $combatUI = $(".mechanics-combatUI:eq(" + i + ")");
+            const $combatUI = $(".mechanics-combatUI:eq(" + i + ")");
             combatMechanics.disablePsiSurge( $combatUI , sectionState.combats[i]);
         }
 
@@ -412,12 +412,12 @@ const combatMechanics = {
         if ( state.actionChart.currentEndurance > Combat.minimumEPForKaiSurge() ) {
             return;
         }
-        var sectionState = state.sectionStates.getSectionState();
+        const sectionState = state.sectionStates.getSectionState();
         if ( sectionState.combats.length === 0 ) {
             return;
         }
         for ( let i = 0; i < sectionState.combats.length; i++ ) {
-            var $combatUI = $(".mechanics-combatUI:eq(" + i + ")");
+            const $combatUI = $(".mechanics-combatUI:eq(" + i + ")");
             combatMechanics.disableKaiSurge( $combatUI , sectionState.combats[i]);
         }
 
@@ -460,7 +460,7 @@ const combatMechanics = {
         // Player CS for this combat:
         let csPlayer: string = state.actionChart.combatSkill.toString();
         const bonuses = combat.getCSBonuses();
-        for ( let bonus of bonuses ) {
+        for ( const bonus of bonuses ) {
             csPlayer += " ";
             if ( bonus.increment >= 0 ) {
                 csPlayer += "+";

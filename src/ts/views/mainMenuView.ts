@@ -1,5 +1,5 @@
 
-var mainMenuView = {
+const mainMenuView = {
 
     /**
      * Main menu view
@@ -44,7 +44,7 @@ var mainMenuView = {
         });
 
         // Download books (only for app)
-        var $downloadBooksBtn = $("#menu-downloadbooks");
+        const $downloadBooksBtn = $("#menu-downloadbooks");
         // Switch this to test the "Download books" view with the web browser
         // if( true ) {
         if ( cordovaApp.isRunningApp() ) {

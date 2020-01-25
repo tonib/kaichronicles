@@ -160,7 +160,7 @@ class Combat {
      */
     public getCurrentCombatSkill(): number {
         let cs = state.actionChart.combatSkill;
-        for ( let bonus of this.getCSBonuses() ) {
+        for ( const bonus of this.getCSBonuses() ) {
             cs += bonus.increment;
         }
         return cs;
@@ -171,9 +171,9 @@ class Combat {
      * @returns The combat bonuses. It includes the Action Chart bonuses
      */
     public getCSBonuses(): Bonus[] {
-        let bonuses: Bonus[] = [];
+        const bonuses: Bonus[] = [];
 
-        for ( let bonus of state.actionChart.getCurrentCombatSkillBonuses(this) ) {
+        for ( const bonus of state.actionChart.getCurrentCombatSkillBonuses(this) ) {
             bonuses.push( bonus );
         }
 
@@ -215,10 +215,10 @@ class Combat {
      */
     public nextTurnAsync( elude: boolean ): JQueryPromise<CombatTurn> {
 
-        var dfd = jQuery.Deferred<CombatTurn>();
+        const dfd = jQuery.Deferred<CombatTurn>();
 
         // Calculate the turn
-        var self = this;
+        const self = this;
         randomTable.getRandomValueAsync()
         .then(function(randomValue) {
             const helshezagUsed = ( state.actionChart.getSelectedWeapon() == Item.HELSHEZAG );
@@ -301,7 +301,7 @@ class Combat {
             this.combatFinished = true;
             if ( this.fakeCombat ) {
                 // Restore player endurance to original :
-                var epToRestore = this.originalPlayerEndurance - state.actionChart.currentEndurance;
+                let epToRestore = this.originalPlayerEndurance - state.actionChart.currentEndurance;
                 // Apply the factor
                 epToRestore = Math.floor( this.fakeRestoreFactor * epToRestore );
                 // If you call this, the endurance on the UI is not updated
@@ -342,9 +342,9 @@ class Combat {
      * Returns the number on endurance points lost by the player on this combat
      */
     public playerEnduranceLost(): number {
-        var lost = 0;
-        for ( var i = 0, len = this.turns.length; i < len; i++) {
-            var turn = this.turns[i];
+        let lost = 0;
+        for ( let i = 0, len = this.turns.length; i < len; i++) {
+            const turn = this.turns[i];
             if ( turn.loneWolf == combatTable_DEATH ) {
                 lost += state.actionChart.getMaxEndurance();
             } else {
@@ -358,9 +358,9 @@ class Combat {
      * Returns the number on endurance points lost by the enemy on this combat
      */
     public enemyEnduranceLost(): number {
-        var lost = 0;
-        for ( var i = 0, len = this.turns.length; i < len; i++) {
-            var turn = this.turns[i];
+        let lost = 0;
+        for ( let i = 0, len = this.turns.length; i < len; i++) {
+            const turn = this.turns[i];
             if ( turn.enemy == combatTable_DEATH ) {
                 lost += this.originalEndurance;
             } else {
@@ -385,7 +385,7 @@ class Combat {
 
     /** Get the default Kai-Surge bonus */
     public static defaultKaiSurgeBonus(): number {
-        let bonus = +8;
+        const bonus = +8;
         return bonus;
     }
 
@@ -429,7 +429,7 @@ class Combat {
 
     /** Returns the number of EP loss by turn when using Kai-Surge */
     public static kaiSurgeTurnLoss(): number {
-        let loss = 1;
+        const loss = 1;
         return loss;
     }
 
@@ -445,7 +445,7 @@ class Combat {
 
     /** Returns the minumum Endurance Points to use the Kai-Surge */
     public static minimumEPForKaiSurge(): number {
-        let min = 6;
+        const min = 6;
         return min;
     }
 

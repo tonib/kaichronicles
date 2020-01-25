@@ -21,9 +21,9 @@ class LocalBooksLibrary {
      */
     public constructor() {
 
-        var onWebEnvironment = !cordovaApp.isRunningApp();
-        for ( var i = 1; i <= projectAon.supportedBooks.length; i++) {
-            var book = new BookDownloadState(i);
+        const onWebEnvironment = !cordovaApp.isRunningApp();
+        for ( let i = 1; i <= projectAon.supportedBooks.length; i++) {
+            const book = new BookDownloadState(i);
             if ( onWebEnvironment ) {
                 book.downloaded = true;
             }
@@ -36,8 +36,8 @@ class LocalBooksLibrary {
      * @return Downloaded books
      */
     public getDownloadedBooks(): BookDownloadState[] {
-        var result = [];
-        for (var i = 0; i < this.booksLibrary.length; i++) {
+        const result = [];
+        for (let i = 0; i < this.booksLibrary.length; i++) {
             if ( this.booksLibrary[i].downloaded ) {
                 result.push( this.booksLibrary[i] );
             }
@@ -51,7 +51,7 @@ class LocalBooksLibrary {
      * @return True if the book is downloaded
      */
     public isBookDownloaded( bookNumber: number ): boolean {
-        var idx = bookNumber - 1;
+        const idx = bookNumber - 1;
         if ( idx >= this.booksLibrary.length ) {
             return false;
         }
@@ -81,7 +81,7 @@ class LocalBooksLibrary {
             return jQuery.Deferred<void>().resolve().promise();
         }
 
-        var self = this;
+        const self = this;
         console.log("Resolving books directory");
         return LocalBooksLibrary.getBooksDirectoryAsync()
             .then(function(booksDirEntry) {
@@ -102,10 +102,10 @@ class LocalBooksLibrary {
         }
 
         // Cordova app: Check downloaded books
-        var self = this;
+        const self = this;
         return LocalBooksLibrary.getBooksDirectoryAsync()
         .then( function(booksDir) {
-            var promises = [];
+            const promises = [];
             // Start each book check
             self.booksLibrary.forEach( function(book) {
                 promises.push( book.checkDownloadStateAsync(booksDir) );
@@ -122,7 +122,7 @@ class LocalBooksLibrary {
      * @return The resolution promise
      */
     public setupAsync(): JQueryPromise<void> {
-        var self = this;
+        const self = this;
         return this.resolveBooksDirectoryAsync()
         .then(function() {
             return self.updateBooksDownloadStateAsync();

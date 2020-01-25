@@ -78,7 +78,7 @@ const mapView = {
     onWindowResize( e: Event ) {
         // Window has been resized (orientation change). Reset to original size:
         // console.log( 'onWindowResize' );
-        let $image = $("#map-section img");
+        const $image = $("#map-section img");
         $image.removeAttr( "width" );
         $image.removeAttr( "height" );
         $image.removeClass( "originalsize" );

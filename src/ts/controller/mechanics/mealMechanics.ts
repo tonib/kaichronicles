@@ -14,14 +14,14 @@ const mealMechanics = {
         }
 
         // Get the UI id for the meal
-        var id = "mechanics-meal";
-        var txtIndex = $(rule).attr("index");
+        let id = "mechanics-meal";
+        const txtIndex = $(rule).attr("index");
         if ( txtIndex ) {
             id += "-" + txtIndex;
         }
 
         // The jquery current meal selector
-        var mealSelector = "#" + id;
+        const mealSelector = "#" + id;
 
         // If the meal UI is already on the section, recreate the UI
         if ( $(mealSelector).length > 0 ) {
@@ -29,11 +29,11 @@ const mealMechanics = {
         }
 
         // Get a copy of the meal UI
-        var $meal = mechanicsEngine.getMechanicsUI("mechanics-meal");
+        const $meal = mechanicsEngine.getMechanicsUI("mechanics-meal");
         $meal.attr("id" , id);
 
         // Set the radio inputs id
-        var mealOptionId = "mechanics-mealOption";
+        let mealOptionId = "mechanics-mealOption";
         if ( txtIndex ) {
             mealOptionId += "-" + txtIndex;
             $meal.find("input[name=mechanics-mealOption]").attr("name", mealOptionId);
@@ -43,7 +43,7 @@ const mealMechanics = {
         gameView.appendToSection( $meal );
 
         // Check if hunting discipline is available
-        var huntDisabled = $(rule).attr("huntDisabled") == "true";
+        const huntDisabled = $(rule).attr("huntDisabled") == "true";
         const hasHuntingDiscipline = state.actionChart.disciplines.contains("hunting") ||
             state.actionChart.disciplines.contains("hntmstry");
         if ( !hasHuntingDiscipline || !state.sectionStates.huntEnabled || huntDisabled ) {
@@ -58,20 +58,21 @@ const mealMechanics = {
         }
 
         // Check if you can buy a meal
-        var priceValue = $(rule).attr("price");
-        if ( priceValue ) {
-            var price = parseInt( priceValue );
+        const priceValue = $(rule).attr("price");
+        let price = 0;
+        if (priceValue) {
+            price = parseInt(priceValue, 10);
             $(mealSelector + " .mechanics-mealPrice").text(price);
         } else {
             $(mealSelector + " .mechanics-buyMeal").hide();
         }
 
         // Get meal objects on backpack (ex. "laumspurmeal")
-        var $mealObjectTemplate = $(mealSelector + " .mechanics-eatObject").clone();
+        const $mealObjectTemplate = $(mealSelector + " .mechanics-eatObject").clone();
         $(mealSelector + " .mechanics-eatObject").remove();
         $.each( state.actionChart.getMealObjects() , function(index, objectId) {
-            var o = state.mechanics.getObject( objectId );
-            var $mealObject = $mealObjectTemplate.clone();
+            const o = state.mechanics.getObject( objectId );
+            const $mealObject = $mealObjectTemplate.clone();
             $mealObject.find( ".mechanics-eatDescription" ).text( o.name );
             $mealObject.find( "input" ).val( o.id );
             $(mealSelector + " .mechanics-eatDoNotEat").before( $mealObject );
@@ -87,12 +88,12 @@ const mealMechanics = {
         $(mealSelector + " button").click(function(e) {
             e.preventDefault();
 
-            var option = $(mealSelector + " input[name=" + mealOptionId + "]:checked").val();
+            const option = $(mealSelector + " input[name=" + mealOptionId + "]:checked").val();
             if ( option == "meal" ) {
                 actionChartController.drop("meal" , false);
             } else if ( option == "doNotEat" ) {
                 actionChartController.increaseEndurance(-3);
- } else if ( option == "hunting" ) {
+            } else if ( option == "hunting" ) {
                 // Do nothing
             } else if ( option == "buyMeal") {
                 // Buy the meal

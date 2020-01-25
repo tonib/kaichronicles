@@ -14,7 +14,7 @@ const mapController = {
             return;
         }
 
-        var mapSection = new Section(state.book, "map", state.mechanics);
+        const mapSection = new Section(state.book, "map", state.mechanics);
         if ( !mapSection.exists() ) {
             console.log("Map section does not exists" );
             return;

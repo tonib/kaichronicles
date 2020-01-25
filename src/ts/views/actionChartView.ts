@@ -113,8 +113,8 @@ const actionChartView = {
             if ( circles.length == 0 ) {
                 $("#achart-currentCircles").html( "<i>" + translations.text("noneMasculine") + "</i>" );
             } else {
-                let circlesNames: string[] = [];
-                for ( let c of actionChart.getLoreCircles() ) {
+                const circlesNames: string[] = [];
+                for ( const c of actionChart.getLoreCircles() ) {
                     circlesNames.push( c.getDescription() );
                 }
                 $("#achart-currentCircles").html( circlesNames.join( ", ") );
@@ -122,19 +122,19 @@ const actionChartView = {
         }
 
         // TODO: Display the discipline "quote" tag instead the name
-        var $displines = $("#achart-disciplines > tbody");
+        const $displines = $("#achart-disciplines > tbody");
         if ( actionChart.disciplines.length === 0 ) {
             $displines.append( "<tr><td>(" + translations.text("noneFemenine") + ")</td></tr>" );
         } else {
-            var bookDisciplines = state.book.getDisciplinesTable();
+            const bookDisciplines = state.book.getDisciplinesTable();
             // Enumerate disciplines
             $.each( actionChart.disciplines , function(index, disciplineId: string) {
-                var dInfo = bookDisciplines[disciplineId];
-                var name = dInfo.name;
+                const dInfo = bookDisciplines[disciplineId];
+                let name = dInfo.name;
 
                 if ( disciplineId == "wepnskll" || disciplineId == "wpnmstry" ) {
                     // Show selected weapons description
-                    let weapons: string[] = [];
+                    const weapons: string[] = [];
                     for (let i = 0; i < actionChart.weaponSkill.length; i++) {
                         weapons.push( state.mechanics.getObject( actionChart.weaponSkill[i] ).name );
                     }
@@ -144,7 +144,7 @@ const actionChartView = {
                 }
 
                 // Unescape the HTML description:
-                var descriptionHtml = $("<div />").html(dInfo.description).text();
+                const descriptionHtml = $("<div />").html(dInfo.description).text();
                 $displines.append( "<tr><td>" +
                     '<button class="btn btn-default table-op" title="' +
                     translations.text("disciplineDescription") +
@@ -182,7 +182,7 @@ const actionChartView = {
      */
     updateStatistics() {
 
-        var txtCurrent = translations.text("current") + ": ";
+        const txtCurrent = translations.text("current") + ": ";
         // Combat skill
         $("#achart-combatSkills").val(
             txtCurrent +
@@ -192,8 +192,8 @@ const actionChartView = {
             actionChartController.getBonusesText( state.actionChart.getCurrentCombatSkillBonuses() ) );
 
         // Endurance
-        var txtEndurance = txtCurrent + state.actionChart.currentEndurance;
-        var max = state.actionChart.getMaxEndurance();
+        let txtEndurance = txtCurrent + state.actionChart.currentEndurance;
+        const max = state.actionChart.getMaxEndurance();
         if ( max != state.actionChart.endurance ) {
             txtEndurance += " / Max.: " + max;
         }
@@ -258,12 +258,12 @@ const actionChartView = {
     },
 
     showInventoryMsg(action: string, object: Item, msg: string) {
-        var toastType = ( action == "pick" ? "success" : "warning" );
-        var html = "";
+        const toastType = ( action == "pick" ? "success" : "warning" );
+        let html = "";
 
         // Check if the object has an image
         if ( object) {
-            var imageUrl = object.getImageUrl();
+            const imageUrl = object.getImageUrl();
             if ( imageUrl ) {
                 html += '<img class="inventoryImg" src="' + imageUrl + '" /> ';
             }

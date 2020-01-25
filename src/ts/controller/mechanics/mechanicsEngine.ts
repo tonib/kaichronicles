@@ -50,11 +50,11 @@ const mechanicsEngine = {
 
         // There is a trick here: If we are on production, the UI was already
         // loaded with the views:
-        var cachedView = views.getCachedView( "mechanicsEngine.html" );
+        const cachedView = views.getCachedView( "mechanicsEngine.html" );
         if ( cachedView ) {
             mechanicsEngine.$mechanicsUI = $(cachedView).find("#mechanics-container");
             // Return a resolved promise
-            var dfd = jQuery.Deferred();
+            const dfd = jQuery.Deferred();
             dfd.resolve();
             return dfd.promise();
         }
@@ -74,7 +74,7 @@ const mechanicsEngine = {
      * @returns {jQuery} The translated tag
      */
     getMechanicsUI( tagId: string ): any {
-        var $tag = mechanicsEngine.$mechanicsUI.find("#" + tagId ).clone();
+        const $tag = mechanicsEngine.$mechanicsUI.find("#" + tagId ).clone();
         return translations.translateView($tag, true);
     },
 
@@ -146,7 +146,7 @@ const mechanicsEngine = {
         }
 
         // Run section rules
-        var $sectionMechanics =
+        const $sectionMechanics =
             state.mechanics.getSection( state.sectionStates.currentSection );
         if ( $sectionMechanics !== null ) {
             mechanicsEngine.runChildRules( $sectionMechanics );
@@ -163,12 +163,12 @@ const mechanicsEngine = {
      */
     runGlobalRules(onlyCombatRules: boolean = false, combatToApply: Combat = null) {
 
-        for ( var i = 0; i < state.sectionStates.globalRulesIds.length; i++) {
+        for ( let i = 0; i < state.sectionStates.globalRulesIds.length; i++) {
             const id = state.sectionStates.globalRulesIds[i];
             const $globalRule = state.mechanics.getGlobalRule(id);
 
             if ( onlyCombatRules ) {
-                for ( let rule of $globalRule.children() ) {
+                for ( const rule of $globalRule.children() ) {
                     if ( rule.nodeName == "combat" ) {
                         mechanicsEngine.combat(rule, combatToApply);
                     }
@@ -184,8 +184,8 @@ const mechanicsEngine = {
      * @param $rule Rule where to run child rules
      */
     runChildRules($rule) {
-        var childrenRules = $rule.children();
-        for (var i = 0; i < childrenRules.length; i++) {
+        const childrenRules = $rule.children();
+        for (let i = 0; i < childrenRules.length; i++) {
             mechanicsEngine.runRule( childrenRules[i] );
         }
     },
@@ -253,7 +253,7 @@ const mechanicsEngine = {
     checkReRenderAfterInventoryEvent(o: Item) {
 
         // Get section rules
-        var $sectionRules = state.mechanics.getSection( state.sectionStates.currentSection );
+        const $sectionRules = state.mechanics.getSection( state.sectionStates.currentSection );
         if ( $sectionRules === null ) {
             return false;
         }
@@ -261,7 +261,7 @@ const mechanicsEngine = {
         // TODO: Here there is a huge design error: Or use this re-render, or use "onInventoryEvent" rule
         // TODO: Both do the same
 
-        var reRender = false;
+        let reRender = false;
         mechanicsEngine.enumerateSectionRules( $sectionRules[0] , function(rule) {
             if ( rule.nodeName == "onInventoryEvent" ) {
                 // onInventoryEvent rule don't affect, has been executed
@@ -272,7 +272,7 @@ const mechanicsEngine = {
                 const $rule = $(rule);
 
                 // TODO: Use mechanicsEngine.getArrayProperty here
-                var objectsList = $rule.attr("hasObject");
+                const objectsList = $rule.attr("hasObject");
                 if ( objectsList ) {
                     const objects = objectsList.split("|");
                     if ( objects.contains(o.id) ) {
@@ -327,7 +327,7 @@ const mechanicsEngine = {
      */
     fireAfterCombatTurn(combat) {
 
-        var sectionState = state.sectionStates.getSectionState();
+        const sectionState = state.sectionStates.getSectionState();
 
         if ( !combat) {
             // Fire all combats
@@ -338,8 +338,8 @@ const mechanicsEngine = {
         }
 
         // Fire the given combat turn events
-        for (var i = 0; i < mechanicsEngine.onAfterCombatTurns.length; i++) {
-            var rule = mechanicsEngine.onAfterCombatTurns[i];
+        for (let i = 0; i < mechanicsEngine.onAfterCombatTurns.length; i++) {
+            const rule = mechanicsEngine.onAfterCombatTurns[i];
 
             // Turn when to execute the rule:
             const txtRuleTurn: string = $(rule).attr("turn");
@@ -358,7 +358,7 @@ const mechanicsEngine = {
      */
     fireChoiceSelected(sectionId) {
         $.each( mechanicsEngine.onChoiceSelected , function(index, rule) {
-            var ruleSectionId = $(rule).attr("section");
+            const ruleSectionId = $(rule).attr("section");
             if ( ruleSectionId == "all" || ruleSectionId == sectionId ) {
                 mechanicsEngine.runChildRules( $(rule) );
             }
@@ -374,9 +374,9 @@ const mechanicsEngine = {
             return;
         }
 
-        var $eventRule = $(mechanicsEngine.onObjectUsedRule);
+        const $eventRule = $(mechanicsEngine.onObjectUsedRule);
         // TODO: Use mechanicsEngine.getArrayProperty here
-        var objectIds = $eventRule.attr("objectId").split("|");
+        const objectIds = $eventRule.attr("objectId").split("|");
         if ( objectIds.contains(objectId) ) {
             mechanicsEngine.runChildRules( $eventRule );
         }
@@ -414,7 +414,7 @@ const mechanicsEngine = {
      * Choose the kai disciplines UI
      */
     setDisciplines() {
-        var setup = new SetupDisciplines();
+        const setup = new SetupDisciplines();
         setup.setupDisciplinesChoose();
     },
 
@@ -432,7 +432,7 @@ const mechanicsEngine = {
      */
     pick(rule) {
 
-        var sectionState = state.sectionStates.getSectionState();
+        const sectionState = state.sectionStates.getSectionState();
 
         // Do not execute the rule twice:
         if ( sectionState.ruleHasBeenExecuted(rule) ) {
@@ -442,7 +442,7 @@ const mechanicsEngine = {
         const $rule = $(rule);
 
         // Check if we are picking an object
-        var objectId = $rule.attr("objectId");
+        const objectId = $rule.attr("objectId");
         if ( objectId ) {
             if ( !state.mechanics.getObject( objectId ) ) {
                 mechanicsEngine.debugWarning( "Unknown object: " + objectId );
@@ -461,7 +461,7 @@ const mechanicsEngine = {
         }
 
         // Other things (money or meals)
-        var cls = $rule.attr("class");
+        const cls = $rule.attr("class");
 
         // Check the amount
         let count = ExpressionEvaluator.evalInteger( $rule.attr("count") );
@@ -507,18 +507,18 @@ const mechanicsEngine = {
         // "OR" OPERATOR
 
         // Initially the condition is false
-        var conditionStatisfied = false;
+        let conditionStatisfied = false;
 
         const $rule = $(rule);
 
         // Check discipline
         // TODO: Use mechanicsEngine.getArrayProperty here
-        var disciplineToTest = $rule.attr("hasDiscipline");
-        var i;
+        const disciplineToTest = $rule.attr("hasDiscipline");
+        let i;
         if ( disciplineToTest ) {
             // Check if the player has some of the disciplines
-            var allDisciplines = Object.keys( state.book.getDisciplinesTable() );
-            var disciplines = disciplineToTest.split("|");
+            const allDisciplines = Object.keys( state.book.getDisciplinesTable() );
+            const disciplines = disciplineToTest.split("|");
             for (i = 0; i < disciplines.length; i++ ) {
                 if ( !allDisciplines.contains( disciplines[i] ) ) {
                     mechanicsEngine.debugWarning("Unknown discipline: " + disciplines[i]);
@@ -531,11 +531,11 @@ const mechanicsEngine = {
         }
 
         // Check objects
-        var objectIdsToTest = $rule.attr("hasObject");
+        const objectIdsToTest = $rule.attr("hasObject");
         if ( objectIdsToTest ) {
             // Check if the player has some of the objects
             // TODO: Use mechanicsEngine.getArrayProperty here
-            var objects = objectIdsToTest.split("|");
+            const objects = objectIdsToTest.split("|");
             for (i = 0; i < objects.length; i++ ) {
                 if ( !state.mechanics.getObject( objects[i] ) ) {
                     mechanicsEngine.debugWarning( "Unknown object: " + objects[i] );
@@ -548,14 +548,14 @@ const mechanicsEngine = {
         }
 
         // Check expression
-        var expression = $rule.attr("expression");
+        const expression = $rule.attr("expression");
         if ( expression && ExpressionEvaluator.evalBoolean( expression ) ) {
             conditionStatisfied = true;
         }
 
         // Check section visited:
         // TODO: Use mechanicsEngine.getArrayProperty here
-        var sectionIdsList = $rule.attr("sectionVisited");
+        const sectionIdsList = $rule.attr("sectionVisited");
         if ( sectionIdsList ) {
             const sectionIds = sectionIdsList.split("|");
             for (i = 0; i < sectionIds.length; i++ ) {
@@ -571,7 +571,7 @@ const mechanicsEngine = {
         if ( currentWeaponList.length > 0 ) {
             const selectedWeapon: Item = state.actionChart.getSelectedWeaponItem(false);
             if ( selectedWeapon ) {
-                for ( let w of currentWeaponList ) {
+                for ( const w of currentWeaponList ) {
                     if ( selectedWeapon.isWeaponType( w ) ) {
                         conditionStatisfied = true;
                         break;
@@ -582,7 +582,7 @@ const mechanicsEngine = {
 
         // Test weaponskill with current weapon
         // TODO: Use mechanicsEngine.getBooleanProperty here
-        var weaponskillActive = $rule.attr("weaponskillActive");
+        const weaponskillActive = $rule.attr("weaponskillActive");
         if ( weaponskillActive == "true" ) {
             if ( state.actionChart.isWeaponskillActive() ) {
                 conditionStatisfied = true;
@@ -591,9 +591,9 @@ const mechanicsEngine = {
 
         // Test combats won:
         // TODO: Use mechanicsEngine.getBooleanProperty here
-        var combatsWon = $rule.attr("combatsWon");
+        const combatsWon = $rule.attr("combatsWon");
         if ( combatsWon ) {
-            var allCombatsWon = state.sectionStates.getSectionState().areAllCombatsWon();
+            const allCombatsWon = state.sectionStates.getSectionState().areAllCombatsWon();
             if ( combatsWon == "true" && allCombatsWon ) {
                 conditionStatisfied = true;
             } else if ( combatsWon == "false" && !allCombatsWon ) {
@@ -603,20 +603,20 @@ const mechanicsEngine = {
 
         // Test some combat active:
         // TODO: Use mechanicsEngine.getBooleanProperty here
-        var combatsActive = $rule.attr("combatsActive");
+        const combatsActive = $rule.attr("combatsActive");
         if ( combatsActive == "true" &&
             state.sectionStates.getSectionState().someCombatActive() ) {
             conditionStatisfied = true;
         }
 
         // Test book language
-        var bookLanguage = $rule.attr("bookLanguage");
+        const bookLanguage = $rule.attr("bookLanguage");
         if ( bookLanguage && state.book.language == bookLanguage ) {
             conditionStatisfied = true;
         }
 
         // Test section choice is enabled:
-        var sectionToCheck = $rule.attr("isChoiceEnabled");
+        const sectionToCheck = $rule.attr("isChoiceEnabled");
         if ( sectionToCheck && mechanicsEngine.isChoiceEnabled(sectionToCheck) ) {
             conditionStatisfied = true;
         }
@@ -629,9 +629,9 @@ const mechanicsEngine = {
 
         // Test if the player has a kind of weapon
         // TODO: Use mechanicsEngine.getArrayProperty here
-        let hasWeaponType: string = $rule.attr( "hasWeaponType" );
+        const hasWeaponType: string = $rule.attr( "hasWeaponType" );
         if ( hasWeaponType ) {
-            for ( let weaponType of hasWeaponType.split("|") ) {
+            for ( const weaponType of hasWeaponType.split("|") ) {
                 if ( state.actionChart.getWeaponType( weaponType ) ) {
                     conditionStatisfied = true;
                     break;
@@ -640,7 +640,7 @@ const mechanicsEngine = {
         }
 
         // Test if the player has a lore-circle
-        let circleId: string = $rule.attr("hasCircle");
+        const circleId: string = $rule.attr("hasCircle");
         if ( circleId && LoreCircle.getCircle( circleId ).matchCircle( state.actionChart.disciplines ) ) {
             conditionStatisfied = true;
         }
@@ -670,8 +670,8 @@ const mechanicsEngine = {
         // There are some of these objects on the section?
         const objectOnSection = mechanicsEngine.getArrayProperty( $rule , "objectOnSection" );
         if ( objectOnSection.length > 0 ) {
-            let sectionState = state.sectionStates.getSectionState();
-            for ( let objectId of objectOnSection ) {
+            const sectionState = state.sectionStates.getSectionState();
+            for ( const objectId of objectOnSection ) {
                 if ( sectionState.containsObject( objectId ) ) {
                     conditionStatisfied = true;
                     break;
@@ -712,7 +712,7 @@ const mechanicsEngine = {
     choiceState(rule) {
 
         // Get the choice filter
-        var section = $(rule).attr("section");
+        const section = $(rule).attr("section");
 
         // Test section:
         if ( section != "all" &&
@@ -722,7 +722,7 @@ const mechanicsEngine = {
         }
 
         // Get if we must enable or disable:
-        var disabled = ( $(rule).attr("set") == "disabled" );
+        const disabled = ( $(rule).attr("set") == "disabled" );
 
         // Set choice/s state
         mechanicsEngine.setChoiceState(section, disabled);
@@ -733,7 +733,7 @@ const mechanicsEngine = {
      */
     object(rule) {
 
-        var sectionState = state.sectionStates.getSectionState();
+        const sectionState = state.sectionStates.getSectionState();
 
         // Do not execute the rule twice:
         if ( sectionState.ruleHasBeenExecuted(rule) ) {
@@ -751,9 +751,10 @@ const mechanicsEngine = {
         }
 
         // Object price (optional)
-        var priceValue = $(rule).attr("price");
-        if ( priceValue ) {
-            var price = ExpressionEvaluator.evalInteger( priceValue );
+        const priceValue = $(rule).attr("price");
+        let price: number = 0;
+        if (priceValue) {
+            price = ExpressionEvaluator.evalInteger(priceValue);
         }
 
         // Unlimited number of this kind of object?
@@ -779,16 +780,16 @@ const mechanicsEngine = {
 
         // TODO: Use a single "$rule" variable instead referencing $(rule) (performance...)
 
-        var sectionState = state.sectionStates.getSectionState();
+        const sectionState = state.sectionStates.getSectionState();
         if ( sectionState.ruleHasBeenExecuted(rule) ) {
             // Execute only once
             return;
         }
 
-        var price = parseInt( $(rule).attr("price") );
+        const price = parseInt( $(rule).attr("price") );
 
         // Sell a specific item
-        var objectId = $(rule).attr("objectId");
+        const objectId = $(rule).attr("objectId");
         if ( objectId ) {
             sectionState.sellPrices.push({
                 id: objectId,
@@ -798,10 +799,10 @@ const mechanicsEngine = {
         }
 
         // Other things (money / meals / special items ...)
-        var cls = $(rule).attr("class");
+        const cls = $(rule).attr("class");
         if ( cls ) {
-            var objectIds = [];
-            var except = [];
+            let objectIds = [];
+            let except = [];
 
             // TODO: Use mechanicsEngine.getArrayProperty here
             const txtExcept = $(rule).attr("except");
@@ -816,7 +817,7 @@ const mechanicsEngine = {
                 mechanicsEngine.debugWarning("Sell rule with invalid class");
             }
 
-            for ( let id of objectIds ) {
+            for ( const id of objectIds ) {
                 if ( !except.contains( id ) ) {
                     sectionState.sellPrices.push({
                         id,
@@ -842,12 +843,12 @@ const mechanicsEngine = {
         const $rule = $(rule);
 
         // Combat index
-        var combatIndex = parseInt( $rule.attr("index") );
+        let combatIndex = parseInt( $rule.attr("index") );
         if ( !combatIndex ) {
             combatIndex = 0;
         }
 
-        var sectionState = state.sectionStates.getSectionState();
+        const sectionState = state.sectionStates.getSectionState();
 
         // Get the combat where to apply the rule
         let combat: Combat;
@@ -875,11 +876,11 @@ const mechanicsEngine = {
         }
 
         // Check if the enemy has mindforce attack
-        var txtMindforceCS = $(rule).attr("mindforceCS");
+        const txtMindforceCS = $(rule).attr("mindforceCS");
         if ( txtMindforceCS ) {
             combat.mindforceCS = parseInt( txtMindforceCS );
         }
-        var txtMindforceEP = $(rule).attr("mindforceEP");
+        const txtMindforceEP = $(rule).attr("mindforceEP");
         if ( txtMindforceEP ) {
             combat.mindforceEP = parseInt( txtMindforceEP );
         }
@@ -894,7 +895,7 @@ const mechanicsEngine = {
         combat.noKaiSurge = mechanicsEngine.getBooleanProperty( $rule , "noKaiSurge", false );
 
         // Special mindblast bonus?
-        var txtMindblastBonus = $(rule).attr("mindblastBonus");
+        const txtMindblastBonus = $(rule).attr("mindblastBonus");
         if ( txtMindblastBonus ) {
             combat.mindblastBonus = parseInt( txtMindblastBonus );
         }
@@ -934,7 +935,7 @@ const mechanicsEngine = {
 
         // Check if the combat is non-physical (disables most bonuses)
         // TODO: Use mechanicsEngine.getBooleanProperty here
-        var txtMentalOnly = $(rule).attr("mentalOnly");
+        const txtMentalOnly = $(rule).attr("mentalOnly");
         if ( txtMentalOnly ) {
             combat.mentalOnly = ( txtMentalOnly == "true" );
         }
@@ -980,7 +981,7 @@ const mechanicsEngine = {
         }
 
         // Enemy extra loss per turn
-        var txtEnemyTurnLoss = $(rule).attr("enemyTurnLoss");
+        const txtEnemyTurnLoss = $(rule).attr("enemyTurnLoss");
         if ( txtEnemyTurnLoss ) {
             combat.enemyTurnLoss = parseInt( txtEnemyTurnLoss );
         }
@@ -999,11 +1000,11 @@ const mechanicsEngine = {
 
         // It's a fake combat?
         // TODO: Use mechanicsEngine.getBooleanProperty here
-        var txtFake = $(rule).attr("fake");
+        const txtFake = $(rule).attr("fake");
         if ( txtFake ) {
             combat.fakeCombat = ( txtFake == "true" );
             // % of the E.P. lost to restore after the combat on fake combats.
-            var txtFactor = $(rule).attr("restoreFactor");
+            const txtFactor = $(rule).attr("restoreFactor");
             if ( txtFactor ) {
                 combat.fakeRestoreFactor = parseFloat(txtFactor);
             }
@@ -1039,7 +1040,7 @@ const mechanicsEngine = {
     afterCombats(rule) {
 
         mechanicsEngine.onAfterCombatsRule = rule;
-        var sectionState =  state.sectionStates.getSectionState();
+        const sectionState =  state.sectionStates.getSectionState();
         if ( sectionState.areAllCombatsFinished(state.actionChart) == "finished" ) {
             // All combats are finished. Fire the rule
             mechanicsEngine.runChildRules( $(rule) );
@@ -1053,7 +1054,7 @@ const mechanicsEngine = {
     afterElude(rule) {
 
         mechanicsEngine.onEludeCombatsRule = rule;
-        var sectionState =  state.sectionStates.getSectionState();
+        const sectionState =  state.sectionStates.getSectionState();
         if ( sectionState.areAllCombatsFinished(state.actionChart) == "eluded" ) {
             // All combats are eluded. Fire the rule
             mechanicsEngine.runChildRules( $(rule) );
@@ -1070,8 +1071,8 @@ const mechanicsEngine = {
      * Disable / enable all combats
      */
     disableCombats(rule) {
-        var sectionState = state.sectionStates.getSectionState();
-        var enabled = $(rule).attr("disabled") == "false";
+        const sectionState = state.sectionStates.getSectionState();
+        const enabled = $(rule).attr("disabled") == "false";
         sectionState.setCombatsEnabled(enabled);
         if (enabled) {
             // Enable combats
@@ -1134,9 +1135,9 @@ const mechanicsEngine = {
     message(rule) {
 
         const $rule = $(rule);
-        var msgId = $rule.attr("id");
+        const msgId = $rule.attr("id");
 
-        var op = $rule.attr("op");
+        const op = $rule.attr("op");
         if ( op ) {
             // Change the state of the message
             if ( op == "show" ) {
@@ -1174,7 +1175,7 @@ const mechanicsEngine = {
         const originalArrows = state.actionChart.arrows;
 
         // Drop the first one of the specified
-        for ( let objectId of mechanicsEngine.getArrayProperty( $rule , "objectId" ) ) {
+        for ( const objectId of mechanicsEngine.getArrayProperty( $rule , "objectId" ) ) {
             if ( actionChartController.drop( objectId ) ) {
                 droppedObjects.push( objectId );
                 break;
@@ -1272,7 +1273,7 @@ const mechanicsEngine = {
         }
 
         // Save the inventory state:
-        let newRestorePoint = InventoryState.fromActionChart( objectsType , state.actionChart );
+        const newRestorePoint = InventoryState.fromActionChart( objectsType , state.actionChart );
         mechanicsEngine.appedToInventoryState( newRestorePoint , restorePointId );
 
         state.sectionStates.markRuleAsExecuted(rule);
@@ -1322,7 +1323,7 @@ const mechanicsEngine = {
             return;
         }
 
-        var ruleId = $(rule).attr("id");
+        const ruleId = $(rule).attr("id");
         if ( !state.sectionStates.globalRulesIds.contains( ruleId ) ) {
             console.log("Registered global rule " + ruleId);
             state.sectionStates.globalRulesIds.push( ruleId );
@@ -1338,7 +1339,7 @@ const mechanicsEngine = {
      * Unregister a set of global rules
      */
     unregisterGlobalRule(rule) {
-        var ruleId = $(rule).attr("id");
+        const ruleId = $(rule).attr("id");
         console.log("Unregistering global rule " + ruleId );
         state.sectionStates.globalRulesIds.removeValue(ruleId);
         // update stats in case global rule affected them...
@@ -1397,14 +1398,14 @@ const mechanicsEngine = {
             return;
         }
 
-        var $textContainer = $(':contains("' + linkText + '")').last();
+        const $textContainer = $(':contains("' + linkText + '")').last();
         if ( $textContainer.length == 0 ) {
             mechanicsEngine.debugWarning( 'textToChoice: text "' + linkText + '" not found');
             return;
         }
 
-        let sectionId = $(rule).attr("section");
-        var newHtml = $textContainer.html().replace( linkText ,
+        const sectionId = $(rule).attr("section");
+        const newHtml = $textContainer.html().replace( linkText ,
             '<p class="choice" style="display: inline; margin: 0"><a href="#" class="action choice-link" data-section="' + sectionId + '">' + linkText + "</a></p>" );
         $textContainer.html( newHtml );
     },
@@ -1574,11 +1575,11 @@ const mechanicsEngine = {
      */
     showAvailableObjects( renderEmptyTable = false ) {
 
-        var sectionState = state.sectionStates.getSectionState();
-        var thereAreObjects = ( sectionState.objects.length >= 1 );
+        const sectionState = state.sectionStates.getSectionState();
+        const thereAreObjects = ( sectionState.objects.length >= 1 );
 
         // Check if the table was already inserted on the UI:
-        var $table = $("#mechanics-availableObjectsList");
+        let $table = $("#mechanics-availableObjectsList");
         if ( $table.length === 0 ) {
             if ( thereAreObjects || renderEmptyTable ) {
                 // Add the objects table template
@@ -1598,13 +1599,13 @@ const mechanicsEngine = {
      * Show or update the table with the sell objects table
      */
     showSellObjects() {
-        var sectionState = state.sectionStates.getSectionState();
+        const sectionState = state.sectionStates.getSectionState();
         if ( sectionState.sellPrices.length === 0 ) {
             return;
         }
 
         // Check if the table was already inserted on the UI:
-        var $table = $("#mechanics-sellObjectsList");
+        let $table = $("#mechanics-sellObjectsList");
         if ( $table.length === 0 ) {
             // Add the template
             gameView.appendToSection(
@@ -1628,13 +1629,13 @@ const mechanicsEngine = {
             return;
         }
 
-        var txtSelector = "#game-section .choice";
+        let txtSelector = "#game-section .choice";
         if ( section != "all" ) {
              txtSelector += ":has(a[data-section=" + section + "])";
         }
 
         // Select the choose that contains the link to the section, and enable / disable it
-        var $choose = $( txtSelector );
+        const $choose = $( txtSelector );
         if ( disabled ) {
             $choose.find(".choice-link").addClass("disabled");
         } else {
@@ -1647,7 +1648,7 @@ const mechanicsEngine = {
      * @param {String} sectionId The section id for the choice to check
      */
     isChoiceEnabled(sectionId) {
-        var $selector = $("#game-section a[data-section=" + sectionId + "]");
+        const $selector = $("#game-section a[data-section=" + sectionId + "]");
         if ( $selector.length === 0 ) {
             return false;
         }
@@ -1659,7 +1660,7 @@ const mechanicsEngine = {
      */
     testDeath() {
         // Dont show death on non numbered sections (maybe we have not choose the endurance yet)
-        var section = new Section(state.book, state.sectionStates.currentSection,
+        const section = new Section(state.book, state.sectionStates.currentSection,
             state.mechanics);
         if ( ! section.getSectionNumber() ) {
             return;
@@ -1699,7 +1700,7 @@ const mechanicsEngine = {
         if ( !state.actionChart.disciplines.contains("healing") && !state.actionChart.disciplines.contains("curing") && !state.actionChart.disciplines.contains("deliver") ) {
             return;
         }
-        var sectionState = state.sectionStates.getSectionState();
+        const sectionState = state.sectionStates.getSectionState();
         if ( sectionState.combats.length > 0 ) {
             // Only on sections without combats
             return;
@@ -1725,7 +1726,7 @@ const mechanicsEngine = {
             return;
         }
 
-        var $nextBook = $(".bookref");
+        let $nextBook = $(".bookref");
         if ( $nextBook.length === 0 ) {
             // XML bug with spanish book 4 (and 9, and others???). It has no bookref...
             // Just the first one, spanish book 9 contains two cites
@@ -1757,8 +1758,8 @@ const mechanicsEngine = {
             propertyName = "text";
         }
 
-        var $rule = $(rule);
-        var text = $rule.attr( state.language + "-" + propertyName);
+        const $rule = $(rule);
+        let text = $rule.attr( state.language + "-" + propertyName);
         if ( !text ) {
             // Return the english text
             text = $rule.attr( "en-" + propertyName);
@@ -1776,15 +1777,15 @@ const mechanicsEngine = {
      */
     enumerateSectionRules( rule , callback ) {
 
-        var result = callback( rule );
+        let result = callback( rule );
         if ( result == "finish" ) {
             return "finish";
         } else if ( result == "ignoreDescendants" ) {
             return;
  }
 
-        var childrenRules = $(rule).children();
-        for (var i = 0; i < childrenRules.length; i++) {
+        const childrenRules = $(rule).children();
+        for (let i = 0; i < childrenRules.length; i++) {
             result = mechanicsEngine.enumerateSectionRules( childrenRules[i] , callback );
             if ( result == "finish" ) {
                 return "finish";
@@ -1803,8 +1804,8 @@ const mechanicsEngine = {
     dropActionChartSlots( $rule: any , property: string , objectsArray: string[] ): string[] {
 
         // Objects to drop
-        let slotObjectsIds: string[] = [];
-        for ( let itemSlotTxt of mechanicsEngine.getArrayProperty( $rule , property ) ) {
+        const slotObjectsIds: string[] = [];
+        for ( const itemSlotTxt of mechanicsEngine.getArrayProperty( $rule , property ) ) {
 
             let slotIndex;
             if ( itemSlotTxt == "last" ) {
@@ -1820,7 +1821,7 @@ const mechanicsEngine = {
         }
 
         // Drop objects
-        for ( let objectId of slotObjectsIds ) {
+        for ( const objectId of slotObjectsIds ) {
             actionChartController.drop( objectId );
         }
 
@@ -1851,7 +1852,7 @@ const mechanicsEngine = {
             }
         }
 
-        var $messageUI = mechanicsEngine.getMechanicsUI( "mechanics-message" );
+        const $messageUI = mechanicsEngine.getMechanicsUI( "mechanics-message" );
         if ( msgId ) {
             $messageUI.attr("id", msgId );
         }

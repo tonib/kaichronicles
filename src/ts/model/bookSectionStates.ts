@@ -47,7 +47,7 @@ class BookSectionStates {
             sectionId = this.currentSection;
         }
 
-        var sectionState = this.sectionStates[ sectionId ];
+        let sectionState = this.sectionStates[ sectionId ];
         if ( !sectionState ) {
             sectionState = new SectionState();
             this.sectionStates[ sectionId ] = sectionState;
@@ -87,9 +87,9 @@ class BookSectionStates {
      * @param section The current section info
      */
     public setupCombats( section: Section ) {
-        var sectionState = this.getSectionState();
+        const sectionState = this.getSectionState();
         if ( sectionState.combats.length === 0 ) {
-            var combats = section.getCombats();
+            const combats = section.getCombats();
             if ( combats.length > 0 ) {
                 sectionState.combats = combats;
             }
@@ -103,19 +103,19 @@ class BookSectionStates {
 
         // Replace generic objects by the needed objects
         this.sectionStates = {};
-        var self = this;
+        const self = this;
         $.each( stateObject.sectionStates , function( sectionId , s ) {
-            var sectionState = $.extend( new SectionState() , s );
+            const sectionState = $.extend( new SectionState() , s );
             self.sectionStates[ sectionId ] = sectionState;
 
             // Restore combats
-            var combats = [];
+            const combats = [];
             $.each( sectionState.combats , function( index , combat ) {
-                var rightCombat = $.extend( new Combat( "" , 0 , 0 ) , combat );
+                const rightCombat = $.extend( new Combat( "" , 0 , 0 ) , combat );
                 combats.push( rightCombat );
 
                 // Restore combat turns
-                var turns = [];
+                const turns = [];
                 $.each( rightCombat.turns , function( index , turn ) {
                     turns.push( $.extend( new CombatTurn(null, 0, false, false) , turn ) );
                 });

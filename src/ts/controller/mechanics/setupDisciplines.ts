@@ -126,7 +126,7 @@ class SetupDisciplines {
             return;
         }
 
-        var disable: boolean = false;
+        const disable: boolean = false;
 
         // If Weaponmastery is not selected, disable all weapons
         if ( !state.actionChart.disciplines.contains( "wpnmstry" ) ) {
@@ -141,7 +141,7 @@ class SetupDisciplines {
         // selected on the previous book
         if ( !window.getUrlParameter("debug") && this.previousActionChart &&
             this.previousActionChart.disciplines.contains( "wpnmstry" ) ) {
-            for ( let weaponId of this.previousActionChart.weaponSkill ) {
+            for ( const weaponId of this.previousActionChart.weaponSkill ) {
                 $("#" + weaponId + " input[type=checkbox]").prop( "disabled" , true );
             }
         }
@@ -203,12 +203,12 @@ class SetupDisciplines {
     private setupDisciplineCheckBox( $disciplineSection: any ) {
 
         // Set the discipline name on the checkbox
-        let $title = $disciplineSection.find( ".subsectionTitle" );
+        const $title = $disciplineSection.find( ".subsectionTitle" );
         $disciplineSection.find( ".mechanics-dName" ).text( $title.text() );
 
         // Set checkbox initial value
-        let disciplineId: string = $disciplineSection.attr("id");
-        let $check = $disciplineSection.find( "input[type=checkbox]" );
+        const disciplineId: string = $disciplineSection.attr("id");
+        const $check = $disciplineSection.find( "input[type=checkbox]" );
         $check.attr("checked" , state.actionChart.disciplines.contains(disciplineId) );
 
         // If the player had this discipline on the previous book, disable the check
@@ -277,7 +277,7 @@ class SetupDisciplines {
         }
 
         // Check weapons selected for magnakai books
-        let showWeaponsWarning = false;
+        const showWeaponsWarning = false;
         if ( state.book.bookNumber > 5 && state.actionChart.disciplines.contains( "wpnmstry" ) &&
             state.actionChart.weaponSkill.length < this.getExpectedNWeaponsWeaponmastery() ) {
             enableNextPage = false;

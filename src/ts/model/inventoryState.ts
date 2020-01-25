@@ -27,7 +27,7 @@ class InventoryState {
      */
     public static fromActionChart( objectTypes: string , actionChart: ActionChart ): InventoryState {
 
-        let objects = new InventoryState();
+        const objects = new InventoryState();
 
         if ( objectTypes == "all" || objectTypes == "allobjects" ) {
             objects.weapons = actionChart.weapons.clone();
@@ -41,7 +41,7 @@ class InventoryState {
                 objects.beltPouch = actionChart.beltPouch;
             }
         } else if ( objectTypes == "weaponlike" ) {
-            for ( let w of actionChart.getWeaponObjects(false) ) {
+            for ( const w of actionChart.getWeaponObjects(false) ) {
                 objects.addItem( w );
             }
         } else {
@@ -62,7 +62,7 @@ class InventoryState {
     }
 
     public addObjectIds( objectIds: string[] ) {
-        for ( let objectId of objectIds ) {
+        for ( const objectId of objectIds ) {
             const item = state.mechanics.getObject( objectId );
             if ( !item ) {
                 continue;
@@ -93,8 +93,8 @@ class InventoryState {
     public getAndRemoveSpecialItemsNonWeapon(): string[] {
 
         // Recover only non-weapon special items
-        let toRecover: string[] = [];
-        for (let itemId of this.specialItems) {
+        const toRecover: string[] = [];
+        for (const itemId of this.specialItems) {
             const i = state.mechanics.getObject( itemId );
             if ( i && !i.isWeapon() ) {
                 toRecover.push( itemId );
@@ -102,7 +102,7 @@ class InventoryState {
         }
 
         // Remove recovered items
-        for ( let itemId of toRecover) {
+        for ( const itemId of toRecover) {
             this.specialItems.removeValue( itemId );
         }
 

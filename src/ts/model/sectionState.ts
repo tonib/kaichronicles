@@ -109,15 +109,15 @@ class SectionState {
      * @return The objects on this section
      */
     public getSectionObjects(type: string = null): Item[] {
-        let items: Item[] = [];
-        for ( let sectionItem of this.objects) {
+        const items: Item[] = [];
+        for ( const sectionItem of this.objects) {
 
             if ( sectionItem.id == "money" ) {
                 // Money if not really an object. It's stored like one for mechanics needs
                 continue;
             }
 
-            let i = state.mechanics.getObject( sectionItem.id );
+            const i = state.mechanics.getObject( sectionItem.id );
             if ( !type || i.type == type ) {
                 items.push(i);
             }
@@ -147,8 +147,8 @@ class SectionState {
      * Return the weapons and weapon special object on the section
      */
     public getWeaponObjects(): Item[] {
-        let weapons: Item[] = [];
-        for ( let i of this.getSectionObjects() ) {
+        const weapons: Item[] = [];
+        for ( const i of this.getSectionObjects() ) {
             if ( i.isWeapon() ) {
                 weapons.push( i );
             }
@@ -176,7 +176,7 @@ class SectionState {
             return "eluded";
         }
 
-        for (var i = 0; i < this.combats.length; i++) {
+        for (let i = 0; i < this.combats.length; i++) {
             if ( !this.combats[i].isFinished() ) {
                 return false;
             }
@@ -188,7 +188,7 @@ class SectionState {
      * Returns true if all combats are won
      */
     public areAllCombatsWon(): boolean {
-        for (var i = 0; i < this.combats.length; i++) {
+        for (let i = 0; i < this.combats.length; i++) {
             if ( this.combats[i].endurance > 0 ) {
                 return false;
             }
@@ -204,7 +204,7 @@ class SectionState {
             return false;
         }
 
-        for (var i = 0; i < this.combats.length; i++) {
+        for (let i = 0; i < this.combats.length; i++) {
             if ( !this.combats[i].isFinished() ) {
                 return true;
             }
@@ -218,8 +218,8 @@ class SectionState {
      * calculate the player loss
      */
     public combatsEnduranceLost( who: string ): number {
-        var lost = 0;
-        for ( var i = 0, len = this.combats.length; i < len; i++) {
+        let lost = 0;
+        for ( let i = 0, len = this.combats.length; i < len; i++) {
             if ( who == "enemy") {
                 lost += this.combats[i].enemyEnduranceLost();
             } else {
@@ -233,8 +233,8 @@ class SectionState {
      * Returns the number of turns used on all combats on the section
      */
     public combatsDuration(): number {
-        var duration = 0;
-        for ( var i = 0, len = this.combats.length; i < len; i++) {
+        let duration = 0;
+        for ( let i = 0, len = this.combats.length; i < len; i++) {
             duration += this.combats[i].turns.length;
         }
         return duration;
@@ -245,7 +245,7 @@ class SectionState {
      * @param enabled True to enable combats. False to disable them
      */
     public setCombatsEnabled(enabled: boolean) {
-        for ( var i = 0, len = this.combats.length; i < len; i++) {
+        for ( let i = 0, len = this.combats.length; i < len; i++) {
             this.combats[i].disabled = !enabled;
         }
     }
@@ -265,7 +265,7 @@ class SectionState {
         // Special cases:
         if ( objectId == "money" ) {
             // Try to increase the current money amount / arrows on the section:
-            for ( let o of this.objects ) {
+            for ( const o of this.objects ) {
                 if ( o.id == objectId ) {
                     o.count += count;
                     return;
@@ -294,7 +294,7 @@ class SectionState {
             price = 0;
         }
 
-        for ( var i = 0, len = this.objects.length; i < len; i++) {
+        for ( let i = 0, len = this.objects.length; i < len; i++) {
             // Be sure price is not null
             let currentPrice = this.objects[i].price;
             if ( !currentPrice ) {
@@ -326,7 +326,7 @@ class SectionState {
         if ( this.combats.length === 0 ) {
             return -1;
         }
-        var combat = this.combats[0];
+        const combat = this.combats[0];
         if ( combat.turns.length === 0 ) {
             return -1;
         }
@@ -349,7 +349,7 @@ class SectionState {
      */
     public getAvailableMoney(): number {
         let moneyCount = 0;
-        for ( let o of this.objects ) {
+        for ( const o of this.objects ) {
             if ( o.id == "money") {
                 moneyCount += o.count;
             }
@@ -363,14 +363,14 @@ class SectionState {
      */
     public combatSkillUsageModifier( combatSkillModifier: number ) {
         // Apply the modifier to current combats:
-        for ( let combat of this.combats ) {
+        for ( const combat of this.combats ) {
             combat.objectsUsageModifier += combatSkillModifier;
         }
     }
 
     /** Return true if the object is on the section */
     public containsObject( objectId: string ): boolean {
-        for ( let sectionItem of this.objects ) {
+        for ( const sectionItem of this.objects ) {
             if ( sectionItem.id == objectId ) {
                 return true;
             }

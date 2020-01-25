@@ -43,7 +43,7 @@ class ObjectsTableItem {
     }
 
     public renderItem(): string {
-        let html = this.getItemDescription();
+        const html = this.getItemDescription();
         if ( !html ) {
             // Item should not be rendered
             return html;
@@ -73,10 +73,10 @@ class ObjectsTableItem {
             }
         }
 
-        var html = "";
+        let html = "";
 
         // Name
-        var name = this.item.name;
+        let name = this.item.name;
 
         // Number of arrows on the quiver
         if ( this.objectInfo.id == Item.QUIVER ) {
@@ -110,7 +110,7 @@ class ObjectsTableItem {
         }
 
         // Object Image
-        var imageUrl = this.item.getImageUrl();
+        const imageUrl = this.item.getImageUrl();
         if ( imageUrl ) {
             html += '<span class="inventoryImgContainer"><img class="inventoryImg" src=' +
                 imageUrl + " /></span>";
@@ -259,7 +259,7 @@ class ObjectsTableItem {
 
     public static restoreFromLink( $link: any , tableType: ObjectsTableType ): ObjectsTableItem {
 
-        let objectInfo: SectionItem = {
+        const objectInfo: SectionItem = {
             id : null,
             price : 0,
             unlimited : false,
@@ -477,7 +477,7 @@ class ObjectsTable {
     public fillObjectsList( objects: any[] ) {
         let arrows = ( this.type == ObjectsTableType.INVENTORY ) ? state.actionChart.arrows : 0;
 
-        for ( let obj of objects ) {
+        for ( const obj of objects ) {
             let info = obj;
 
             if ( typeof(obj) === "string" ) {
@@ -509,8 +509,8 @@ class ObjectsTable {
         this.$tableBody.empty();
 
         // Populate the table
-        var html = "";
-        for ( let o of this.objects ) {
+        let html = "";
+        for ( const o of this.objects ) {
 
             const objectHtml = o.renderItem();
             if ( objectHtml ) {
@@ -538,11 +538,11 @@ class ObjectsTable {
             e.preventDefault();
             const $link = $(this);
 
-            var op: string = $link.attr("data-op");
+            const op: string = $link.attr("data-op");
             if ( !op ) {
                 return;
             }
-            let i = ObjectsTableItem.restoreFromLink( $link , type );
+            const i = ObjectsTableItem.restoreFromLink( $link , type );
             if ( !i ) {
                 return;
             }
