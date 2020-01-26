@@ -74,7 +74,9 @@ class SectionState {
      * Number picker states for this section.
      * See numberPicker.js and numberPickerMechanics.ts
      */
-    public numberPickersState = {};
+    public numberPickersState = {
+        actionFired: null
+    };
 
     /**
      * Mark a rule as executed

@@ -80,10 +80,11 @@
     - Re-add double quotes in translations.ts (lost in merge)
     - ObjectsTableItem has been moved to new file. Check changes
     - REVERTED
+    - CHECK ALL "throw new Error", probably they will need to be removed
 
 
 * TSLINT:
-    - CURRENT CHECK: 
+    - CURRENT CHECK: numberPickerMechanics
     - TSLint is deprecated...
     - REMOVE src/ts/test-tslist.ts (TSLint tests)
     - "only-arrow-functions" fix can break things. Semantics are different (this behaviour). There are a lot, ignore rule
