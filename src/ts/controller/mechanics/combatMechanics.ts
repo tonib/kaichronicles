@@ -1,5 +1,3 @@
-/// <reference path="../../external.ts" />
-
 const combatMechanics = {
 
     /**
@@ -24,7 +22,7 @@ const combatMechanics = {
         $template.attr("id", null);
 
         // Populate combats
-        $.each(sectionState.combats, function(index: number, combat: Combat) {
+        $.each(sectionState.combats, (index: number, combat: Combat) => {
             const $combatUI = $template.clone();
             // Set the combat index
             $combatUI.attr("data-combatIdx", index);
@@ -46,7 +44,7 @@ const combatMechanics = {
             $combatOriginal.prepend( $btnCombatTables );
 
             // Bind the show combat tables button click
-            $btnCombatTables.click(function(e) {
+            $btnCombatTables.click((e) => {
                 e.preventDefault();
                 template.showCombatTables();
             });
@@ -75,7 +73,7 @@ const combatMechanics = {
                 const $turnsTable = $combatUI.find( "table" );
                 $turnsTable.show();
                 const $turnsTableBody = $turnsTable.find( "> tbody" );
-                $.each( combat.turns, function(index, turn) {
+                $.each( combat.turns, (idxTurn, turn) => {
                     combatMechanics.renderCombatTurn( $turnsTableBody , turn );
                 });
                 // Update enemy current endurance
@@ -145,12 +143,12 @@ const combatMechanics = {
 
     },
 
-    updateEnemyEndurance( $combatUI: any , combat: Combat , doNotAnimate: boolean ) {
+    updateEnemyEndurance( $combatUI: JQuery<HTMLElement> , combat: Combat , doNotAnimate: boolean ) {
         template.animateValueChange( $combatUI.parent().find( ".enemy-current-endurance" ) ,
             combat.endurance , doNotAnimate , combat.endurance > 0 ? null : "red" );
     },
 
-    updateCombatRatio( $combatUI: any , combat: Combat ) {
+    updateCombatRatio( $combatUI: JQuery<HTMLElement> , combat: Combat ) {
         // Set combat ratio:
         $combatUI.find(".mechanics-combatRatio").text( combat.getCombatRatio() );
     },
@@ -164,7 +162,7 @@ const combatMechanics = {
         if ( sectionState.combats.length === 0 ) {
             return;
         }
-        $.each(sectionState.combats, function(index, combat) {
+        $.each(sectionState.combats, (index, combat) => {
             const $combatUI = $(".mechanics-combatUI:eq(" + index + ")");
             combatMechanics.updateCombatRatio( $combatUI , combat);
         });
@@ -175,7 +173,7 @@ const combatMechanics = {
      * @param {jquery} $combatUI The combat UI where disable buttons. If it's null, all
      * combats buttons on the section will be hidden
      */
-    hideCombatButtons( $combatUI: any ) {
+    hideCombatButtons( $combatUI: JQuery<HTMLElement> ) {
         if ( !$combatUI ) {
             // Disable all combats
             $combatUI = $(".mechanics-combatUI");
@@ -190,7 +188,7 @@ const combatMechanics = {
      * @param {jquery} $combatUI The combat UI where enable buttons. If it's null, all
      * combats buttons on the section will be hidden
      */
-    showCombatButtons( $combatUI: any ) {
+    showCombatButtons( $combatUI: JQuery<HTMLElement> ) {
 
         if ( !$combatUI ) {
             // Disable all combats
@@ -203,7 +201,7 @@ const combatMechanics = {
 
         // Get combat data
         const sectionState = state.sectionStates.getSectionState();
-        const combatIndex = parseInt( $combatUI.attr( "data-combatIdx" ) );
+        const combatIndex = parseInt( $combatUI.attr( "data-combatIdx" ), 10 );
         const combat = sectionState.combats[ combatIndex ];
 
         if ( !(sectionState.combatEluded || combat.isFinished() || combat.disabled) ) {
@@ -217,14 +215,14 @@ const combatMechanics = {
      * @param {jquery} $combatUI The combat UI
      * @param elude True if the player is eluding the combat
      */
-    runCombatTurn( $combatUI: any, elude: boolean ) {
+    runCombatTurn( $combatUI: JQuery<HTMLElement>, elude: boolean ) {
         // Get the combat info:
-        const combatIndex = parseInt( $combatUI.attr( "data-combatIdx" ) );
+        const combatIndex = parseInt( $combatUI.attr( "data-combatIdx" ), 10 );
         const sectionState = state.sectionStates.getSectionState();
         const combat = sectionState.combats[ combatIndex ];
 
         combat.nextTurnAsync( elude )
-        .then(function(turn) {
+        .then((turn) => {
 
             // Apply turn combat losses
             combat.applyTurn(turn);
@@ -257,16 +255,16 @@ const combatMechanics = {
 
                 // Post combat rules execution:
                 const combatsResult = sectionState.areAllCombatsFinished(state.actionChart);
-                if ( combatsResult == "finished" && mechanicsEngine.onAfterCombatsRule ) {
+                if ( combatsResult === "finished" && mechanicsEngine.onAfterCombatsRule ) {
                     // Fire "afterCombats" rule
                     mechanicsEngine.runChildRules( $(mechanicsEngine.onAfterCombatsRule) );
                 }
-                if ( combatsResult == "eluded" && mechanicsEngine.onEludeCombatsRule ) {
+                if ( combatsResult === "eluded" && mechanicsEngine.onEludeCombatsRule ) {
                     // Fire "afterElude" rule
                     mechanicsEngine.runChildRules( $(mechanicsEngine.onEludeCombatsRule) );
                 }
 
-                if ( ( combatsResult == "finished" || combatsResult == "eluded" ) && combat.adganaUsed ) {
+                if ( ( combatsResult === "finished" || combatsResult === "eluded" ) && combat.adganaUsed ) {
                     // Fire post-combat adgana effects
                     SpecialObjectsUse.postAdganaUse();
                 }
@@ -303,7 +301,7 @@ const combatMechanics = {
      * @param combat The combat to update
      * @param {jQuery} $combatUI The combat UI
      */
-    showHideEludeButton( combat: Combat , $combatUI: any ) {
+    showHideEludeButton( combat: Combat , $combatUI: JQuery<HTMLElement> ) {
         if ( combat.canBeEluded() ) {
             // The combat can be eluded after this turn
             $combatUI.find(".mechanics-elude").show();
@@ -317,7 +315,7 @@ const combatMechanics = {
      * @param {jquery} $combatTable Table where to append the turn
      * @param turn The turn to render
      */
-    renderCombatTurn( $combatTableBody: any , turn: CombatTurn ) {
+    renderCombatTurn( $combatTableBody: JQuery<HTMLElement> , turn: CombatTurn ) {
         $combatTableBody.append(
             '<tr><td class="hidden-xs">' + turn.turnNumber + "</td><td>" + turn.randomValue +
             "</td><td>" + turn.getPlayerLossText() + "</td><td>" +
@@ -328,10 +326,10 @@ const combatMechanics = {
     /**
      * Psi-surge event handler
      */
-    onPsiSurgeClick(e: Event, $psiSurgeCheck: any) {
+    onPsiSurgeClick(e: Event, $psiSurgeCheck: JQuery<HTMLElement>) {
 
         const $combatUI = $psiSurgeCheck.parents(".mechanics-combatUI").first();
-        const combatIndex = parseInt( $combatUI.attr( "data-combatIdx" ) );
+        const combatIndex = parseInt( $combatUI.attr( "data-combatIdx" ), 10 );
         const sectionState = state.sectionStates.getSectionState();
         const combat = sectionState.combats[ combatIndex ];
 
@@ -354,10 +352,10 @@ const combatMechanics = {
     /**
      * Kai-surge event handler
      */
-    onKaiSurgeClick(e: Event, $kaiSurgeCheck: any) {
+    onKaiSurgeClick(e: Event, $kaiSurgeCheck: JQuery<HTMLElement>) {
 
         const $combatUI = $kaiSurgeCheck.parents(".mechanics-combatUI").first();
-        const combatIndex = parseInt( $combatUI.attr( "data-combatIdx" ) );
+        const combatIndex = parseInt( $combatUI.attr( "data-combatIdx" ), 10 );
         const sectionState = state.sectionStates.getSectionState();
         const combat = sectionState.combats[ combatIndex ];
 
@@ -426,7 +424,7 @@ const combatMechanics = {
     /**
      * Disable Psi-surge on a combat
      */
-    disablePsiSurge( $combatUI: any , combat: Combat ) {
+    disablePsiSurge( $combatUI: JQuery<HTMLElement> , combat: Combat ) {
         combat.psiSurge = false;
         const $psiSurgeCheck = $combatUI.find(".psisurgecheck input");
         $psiSurgeCheck.prop("checked", false);
@@ -437,7 +435,7 @@ const combatMechanics = {
     /**
      * Disable Psi-surge on a combat
      */
-    disableKaiSurge( $combatUI: any , combat: Combat ) {
+    disableKaiSurge( $combatUI: JQuery<HTMLElement> , combat: Combat ) {
         combat.kaiSurge = false;
         const $kaiSurgeCheck = $combatUI.find(".kaisurgecheck input");
         $kaiSurgeCheck.prop("checked", false);
@@ -449,9 +447,9 @@ const combatMechanics = {
      * Show dialog with combat ratio details
      * @param {jQuery} $combatUI The combat UI
      */
-    showCombatRatioDetails( $combatUI: any ) {
+    showCombatRatioDetails( $combatUI: JQuery<HTMLElement> ) {
         // Get the combat info:
-        const combatIndex = parseInt( $combatUI.attr( "data-combatIdx" ) );
+        const combatIndex = parseInt( $combatUI.attr( "data-combatIdx" ), 10 );
         const sectionState = state.sectionStates.getSectionState();
         const combat = sectionState.combats[ combatIndex ];
 
