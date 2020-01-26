@@ -20,7 +20,7 @@ class EquipmentSectionMechanics {
         if ( !txtNPickableObjects ) {
             return;
         }
-        const nPickableObjects = parseInt( txtNPickableObjects );
+        const nPickableObjects = parseInt( txtNPickableObjects, 10 );
 
         // Get the original objects on the section:
         const originalObjects = EquipmentSectionMechanics.getOriginalObjects( $sectionMechanics );
@@ -31,8 +31,7 @@ class EquipmentSectionMechanics {
         }
 
         // Get the the number of picked objects
-        const pickedObjects = EquipmentSectionMechanics.getPickedObjects( $sectionMechanics ,
-            originalObjects );
+        const pickedObjects = EquipmentSectionMechanics.getPickedObjects( originalObjects );
 
         if ( pickedObjects.length >= nPickableObjects && !pickedObjects.contains(pickedObjectId) ) {
             // D'oh!
@@ -56,7 +55,7 @@ class EquipmentSectionMechanics {
         const originalObjects = EquipmentSectionMechanics.getOriginalObjects( $sectionMechanics );
 
         // Get the the number of picked objects
-        const pickedObjects = EquipmentSectionMechanics.getPickedObjects( $sectionMechanics , originalObjects , sectionId);
+        const pickedObjects = EquipmentSectionMechanics.getPickedObjects(originalObjects , sectionId);
 
         return pickedObjects.length;
     }
@@ -64,7 +63,7 @@ class EquipmentSectionMechanics {
     /**
      * Choose equipment UI
      */
-    public static chooseEquipment(rule) {
+    public static chooseEquipment(rule: Element) {
 
         // Add the UI:
         gameView.appendToSection( mechanicsEngine.getMechanicsUI("mechanics-chooseEquipment") );
@@ -111,14 +110,13 @@ class EquipmentSectionMechanics {
      * Get the original objects on the section
      * @returns An object. Key is the object id and the value is the number of objects
      */
-    private static getOriginalObjects( $sectionMechanics: any ): { [objectId: string ]: number } {
+    private static getOriginalObjects( $sectionMechanics: JQuery<Element> ): { [objectId: string ]: number } {
 
         // Get the original objects on the section:
         const childrenRules = $sectionMechanics.children();
         const originalObjects = {};
-        for (let i = 0; i < childrenRules.length; i++) {
-            const rule = childrenRules[i];
-            if ( rule.nodeName == "object" ) {
+        for (const rule of childrenRules.toArray()) {
+            if ( rule.nodeName === "object" ) {
                 const objectid = $(rule).attr("objectId");
                 if ( !originalObjects[objectid] ) {
                     originalObjects[objectid] = 1;
@@ -139,15 +137,14 @@ class EquipmentSectionMechanics {
      * @param sectionId The section where to check picked objects. If it's null, the current section will be checked
      * @returns The different picked objects ids
      */
-    private static getPickedObjects( $sectionMechanics: any , originalObjects: { [objectId: string ]: number } , sectionId: string = null )
-    : string[] {
+    private static getPickedObjects(originalObjects: { [objectId: string ]: number } , sectionId: string = null ): string[] {
 
         // Get the current number of objects on the section:
         const sectionStateObjects = state.sectionStates.getSectionState(sectionId).objects;
         const currentObjects: { [objectId: string ]: number } = {};
         let objectId: string;
-        for (let i = 0; i < sectionStateObjects.length; i++) {
-            objectId = sectionStateObjects[i].id;
+        for (const object of sectionStateObjects) {
+            objectId = object.id;
             if ( !currentObjects[objectId] ) {
                 currentObjects[objectId] = 1;
             } else {
