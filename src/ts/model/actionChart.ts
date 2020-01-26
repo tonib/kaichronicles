@@ -773,9 +773,9 @@ class ActionChart {
 
     /**
      * Returns the backpack objects and special items that are meals too
-     * @return {Array<string>} Meal-like objects on backpack
+     * @return Meal-like object ids owned by the player
      */
-    public getMealObjects() {
+    public getMealObjects(): string[] {
 
         const result = [];
         this.enumerateObjects( function( o: Item ) {

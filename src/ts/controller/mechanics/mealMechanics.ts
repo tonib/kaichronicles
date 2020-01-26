@@ -1,4 +1,3 @@
-/// <reference path="../../external.ts" />
 
 /**
  * Meal mechanics
@@ -6,9 +5,9 @@
 const mealMechanics = {
 
     /** Run meals rule */
-    runRule(rule) {
+    runRule(rule: Element) {
 
-        if ( state.sectionStates.ruleHasBeenExecuted(rule) ) {
+        if (state.sectionStates.ruleHasBeenExecuted(rule)) {
             // Execute only once
             return;
         }
@@ -16,7 +15,7 @@ const mealMechanics = {
         // Get the UI id for the meal
         let id = "mechanics-meal";
         const txtIndex = $(rule).attr("index");
-        if ( txtIndex ) {
+        if (txtIndex) {
             id += "-" + txtIndex;
         }
 
@@ -24,34 +23,34 @@ const mealMechanics = {
         const mealSelector = "#" + id;
 
         // If the meal UI is already on the section, recreate the UI
-        if ( $(mealSelector).length > 0 ) {
+        if ($(mealSelector).length > 0) {
             $(mealSelector).remove();
         }
 
         // Get a copy of the meal UI
         const $meal = mechanicsEngine.getMechanicsUI("mechanics-meal");
-        $meal.attr("id" , id);
+        $meal.attr("id", id);
 
         // Set the radio inputs id
         let mealOptionId = "mechanics-mealOption";
-        if ( txtIndex ) {
+        if (txtIndex) {
             mealOptionId += "-" + txtIndex;
             $meal.find("input[name=mechanics-mealOption]").attr("name", mealOptionId);
         }
 
         // Add the UI to the section
-        gameView.appendToSection( $meal );
+        gameView.appendToSection($meal);
 
         // Check if hunting discipline is available
-        const huntDisabled = $(rule).attr("huntDisabled") == "true";
+        const huntDisabled = $(rule).attr("huntDisabled") === "true";
         const hasHuntingDiscipline = state.actionChart.disciplines.contains("hunting") ||
             state.actionChart.disciplines.contains("hntmstry");
-        if ( !hasHuntingDiscipline || !state.sectionStates.huntEnabled || huntDisabled ) {
+        if (!hasHuntingDiscipline || !state.sectionStates.huntEnabled || huntDisabled) {
             $(mealSelector + " .mechanics-eatHunt").hide();
         }
 
         // Check if there are meals on the backpack
-        if ( state.actionChart.meals <= 0 ) {
+        if (state.actionChart.meals <= 0) {
             $(".mechanics-eatMeal").hide();
         } else {
             $(".mechanics-eatMeal").show();
@@ -70,12 +69,12 @@ const mealMechanics = {
         // Get meal objects on backpack (ex. "laumspurmeal")
         const $mealObjectTemplate = $(mealSelector + " .mechanics-eatObject").clone();
         $(mealSelector + " .mechanics-eatObject").remove();
-        $.each( state.actionChart.getMealObjects() , function(index, objectId) {
-            const o = state.mechanics.getObject( objectId );
+        $.each(state.actionChart.getMealObjects(), (index, objectId) => {
+            const o = state.mechanics.getObject(objectId);
             const $mealObject = $mealObjectTemplate.clone();
-            $mealObject.find( ".mechanics-eatDescription" ).text( o.name );
-            $mealObject.find( "input" ).val( o.id );
-            $(mealSelector + " .mechanics-eatDoNotEat").before( $mealObject );
+            $mealObject.find(".mechanics-eatDescription").text(o.name);
+            $mealObject.find("input").val(o.id);
+            $(mealSelector + " .mechanics-eatDoNotEat").before($mealObject);
         });
 
         // Set the default value
@@ -85,27 +84,27 @@ const mealMechanics = {
         mechanicsEngine.setChoiceState("all", true);
 
         // Button event handler
-        $(mealSelector + " button").click(function(e) {
+        $(mealSelector + " button").click((e) => {
             e.preventDefault();
 
             const option = $(mealSelector + " input[name=" + mealOptionId + "]:checked").val();
-            if ( option == "meal" ) {
-                actionChartController.drop("meal" , false);
-            } else if ( option == "doNotEat" ) {
+            if (option === "meal") {
+                actionChartController.drop("meal", false);
+            } else if (option === "doNotEat") {
                 actionChartController.increaseEndurance(-3);
-            } else if ( option == "hunting" ) {
+            } else if (option === "hunting") {
                 // Do nothing
-            } else if ( option == "buyMeal") {
+            } else if (option === "buyMeal") {
                 // Buy the meal
-                if ( state.actionChart.beltPouch < price ) {
-                    alert( translations.text( "noEnoughMoney" ) );
+                if (state.actionChart.beltPouch < price) {
+                    alert(translations.text("noEnoughMoney"));
                     return;
                 }
-                actionChartController.increaseMoney( -price );
+                actionChartController.increaseMoney(-price);
             } else {
                 // Eat object (option is the object id)
                 const item = state.mechanics.getObject(option);
-                if ( item && item.usage ) {
+                if (item && item.usage) {
                     // Use / eat the object
                     actionChartController.use(option, true);
                 } else {
@@ -120,7 +119,7 @@ const mealMechanics = {
             // Enable section choices, and re-execute section rules to disable not available
             // choices
             mechanicsEngine.setChoiceState("all", false);
-            mechanicsEngine.runSectionRules( true );
+            mechanicsEngine.runSectionRules(true);
 
             // Remove UI
             $(mealSelector).remove();
