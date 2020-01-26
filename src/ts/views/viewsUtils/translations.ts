@@ -535,12 +535,12 @@ class Translations {
      * @param {boolean} doNotClone True if the view should be modified. False, if a clone of the view
      * should be returned
      */
-    public translateView( view: String , doNotClone: Boolean = false ) {
+    public translateView( view: HTMLElement | JQuery<HTMLElement> , doNotClone: boolean = false ): JQuery<HTMLElement> {
 
         const table = this[state.language];
         if ( !table ) {
             // Translation not available
-            return view;
+            return $(view);
         }
 
         let $clonedView;

@@ -13,6 +13,7 @@
         "trailing-comma": false,
         "only-arrow-functions": false,
         "object-literal-key-quotes": false,
+        "no-string-throw": false,
 
         
         "triple-equals": false,
