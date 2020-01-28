@@ -1,6 +1,4 @@
 
-/// <reference path="../../external.ts" />
-
 /**
  * Setup player disciplines
  */
@@ -9,14 +7,14 @@ class SetupDisciplines {
     /**
      * Weapons table for Weaponskill discipline on Kai books
      */
-    private readonly kaiWeapons = [ "dagger" , "spear" , "mace" , "shortsword" , "warhammer", "sword",
-                                    "axe" , "sword" , "quarterstaff" , "broadsword" ];
+    private readonly kaiWeapons = ["dagger", "spear", "mace", "shortsword", "warhammer", "sword",
+        "axe", "sword", "quarterstaff", "broadsword"];
 
     /**
      * Weapons table for Weaponmastery discipline on Magnakai books
      */
-    private readonly magnakaiWeapons = [ "dagger" , "spear" , "mace" , "shortsword" , "warhammer", "bow",
-                                         "axe" , "sword" , "quarterstaff" , "broadsword" ];
+    private readonly magnakaiWeapons = ["dagger", "spear", "mace", "shortsword", "warhammer", "bow",
+        "axe", "sword", "quarterstaff", "broadsword"];
     /**
      * Expected number of disciplines to choose
      */
@@ -33,12 +31,12 @@ class SetupDisciplines {
         this.expectedNDisciplines = this.getNExpectedDisciplines();
     }
 
-     /**
+    /**
      * Choose the kai disciplines UI
      */
     public setupDisciplinesChoose() {
 
-         // Add the warning about the number of disciplines
+        // Add the warning about the number of disciplines
         gameView.appendToSection(mechanicsEngine.getMechanicsUI("mechanics-setDisciplines-NDis"));
         $("#mechanics-nDisciplines").text(this.expectedNDisciplines);
 
@@ -49,14 +47,14 @@ class SetupDisciplines {
         // Add checkbox for each discipline:
         const self = this;
         $('.subsection[id!="mksumary"]').append(mechanicsEngine.getMechanicsUI("mechanics-setDisciplines"))
-        .each(function(index, disciplineSection) {
-            self.setupDisciplineCheckBox($(disciplineSection));
-        })
-        // Set events when checkboxes are clicked
-        .find("input[type=checkbox]")
-        .click(function(e) {
-            self.onDiscliplineCheckBoxClick(e, $(this));
-        });
+            .each((index, disciplineSection) => {
+                self.setupDisciplineCheckBox($(disciplineSection));
+            })
+            // Set events when checkboxes are clicked
+            .find("input[type=checkbox]")
+            .click(function(e) {
+                self.onDiscliplineCheckBoxClick(e, $(this));
+            });
 
         // If we are on a magnakai book, add the weapons checkboxes
         this.populateMagnakaiWeapons();
@@ -89,28 +87,28 @@ class SetupDisciplines {
             // Prepare the weapon UI
             const weaponItem = state.mechanics.getObject(this.magnakaiWeapons[i]);
             const $checkbox = $checkboxTemplate.clone();
-            $checkbox.attr("id" , weaponItem.id);
+            $checkbox.attr("id", weaponItem.id);
             $checkbox.find(".mechanics-wName").text(weaponItem.name);
 
             // The weapon has been already selected?
             const selected: boolean = state.actionChart.weaponSkill.contains(this.magnakaiWeapons[i]);
-            $checkbox.find("input").attr("checked" , selected);
+            $checkbox.find("input").attr("checked", selected);
 
             html += $checkbox[0].outerHTML;
 
-            if (i % 2 == 1) {
+            if (i % 2 === 1) {
                 html += "</div>";
             }
         }
         const $well = $("#wpnmstry .well");
-        $well.append (html);
+        $well.append(html);
 
         // Add event handlers
         const self = this;
         $well.find("input.weaponmastery-chk")
-        .click(function(e: Event) {
-            self.onWeaponmasteryWeaponClick(e, $(this));
-        });
+            .click(function(e: Event) {
+                self.onWeaponmasteryWeaponClick(e, $(this));
+            });
 
         // Set the initial state
         this.enableMagnakaiWeapons();
@@ -130,19 +128,19 @@ class SetupDisciplines {
 
         // If Weaponmastery is not selected, disable all weapons
         if (!state.actionChart.disciplines.contains("wpnmstry")) {
-            $("input.weaponmastery-chk").prop("disabled" , true);
+            $("input.weaponmastery-chk").prop("disabled", true);
             return;
         }
 
         // By default, enable all weapons
-        $("input.weaponmastery-chk").prop("disabled" , false);
+        $("input.weaponmastery-chk").prop("disabled", false);
 
         // If Weaponmastery was selected on a previous book, disable disable the weapons already
         // selected on the previous book
         if (!window.getUrlParameter("debug") && this.previousActionChart &&
             this.previousActionChart.disciplines.contains("wpnmstry")) {
             for (const weaponId of this.previousActionChart.weaponSkill) {
-                $("#" + weaponId + " input[type=checkbox]").prop("disabled" , true);
+                $("#" + weaponId + " input[type=checkbox]").prop("disabled", true);
             }
         }
     }
@@ -158,7 +156,7 @@ class SetupDisciplines {
             nWeapons = 2;
         }
         // If first book of a serie, don't check previous book
-        if (state.book.bookNumber == 13) {
+        if (state.book.bookNumber === 13) {
             return nWeapons;
         }
 
@@ -174,7 +172,7 @@ class SetupDisciplines {
      * @param e The click event
      * @param  $checkBox The checkbox (jQuery)
      */
-    private onWeaponmasteryWeaponClick(e: Event, $checkBox: any) {
+    private onWeaponmasteryWeaponClick(e: Event, $checkBox: JQuery<HTMLElement>) {
 
         const selected: boolean = $checkBox.prop("checked");
         const weaponId: string = $checkBox.closest(".weaponmastery-weapon").attr("id");
@@ -184,7 +182,7 @@ class SetupDisciplines {
             const nExpectedWeapons = this.getExpectedNWeaponsWeaponmastery();
             if (!window.getUrlParameter("debug") && state.actionChart.weaponSkill.length >= nExpectedWeapons) {
                 e.preventDefault();
-                alert(translations.text("onlyNWeapons" , [nExpectedWeapons]));
+                alert(translations.text("onlyNWeapons", [nExpectedWeapons]));
                 return;
             }
             state.actionChart.weaponSkill.push(weaponId);
@@ -200,7 +198,7 @@ class SetupDisciplines {
      * Initialize a discliplne check box
      * @param $disciplineSection The checkbox to initialize (Jquery)
      */
-    private setupDisciplineCheckBox($disciplineSection: any) {
+    private setupDisciplineCheckBox($disciplineSection: JQuery<HTMLElement>) {
 
         // Set the discipline name on the checkbox
         const $title = $disciplineSection.find(".subsectionTitle");
@@ -209,13 +207,13 @@ class SetupDisciplines {
         // Set checkbox initial value
         const disciplineId: string = $disciplineSection.attr("id");
         const $check = $disciplineSection.find("input[type=checkbox]");
-        $check.attr("checked" , state.actionChart.disciplines.contains(disciplineId));
+        $check.prop("checked", state.actionChart.disciplines.contains(disciplineId));
 
         // If the player had this discipline on the previous book, disable the check
         // On debug mode, always enabled
         if (!window.getUrlParameter("debug") && this.previousActionChart &&
             this.previousActionChart.disciplines.contains(disciplineId)) {
-            $check.prop("disabled" , true);
+            $check.prop("disabled", true);
         }
     }
 
@@ -230,7 +228,7 @@ class SetupDisciplines {
         const selected: boolean = $checkBox.prop("checked");
         if (selected && this.getAllDisciplinesSelected() && !window.getUrlParameter("debug")) {
             e.preventDefault();
-            alert(translations.text("maxDisciplines" , [ this.expectedNDisciplines ]));
+            alert(translations.text("maxDisciplines", [this.expectedNDisciplines]));
             return;
         }
 
@@ -252,7 +250,7 @@ class SetupDisciplines {
      */
     private onDisciplineSelected(e: Event, disciplineId: string) {
 
-        if (disciplineId == "wepnskll") {
+        if (disciplineId === "wepnskll") {
             // Special case for kai series: Choose on the random table the weapon
             this.chooseWeaponskillWeapon(e);
             return;
@@ -312,22 +310,22 @@ class SetupDisciplines {
         // Pick a  random number
         const self = this;
         randomTable.getRandomValueAsync()
-        .then(function(value: number) {
+            .then((value: number) => {
 
-            // Store the discipline
-            state.actionChart.disciplines.push("wepnskll");
-            state.actionChart.weaponSkill.push(self.kaiWeapons[ value ]);
+                // Store the discipline
+                state.actionChart.disciplines.push("wepnskll");
+                state.actionChart.weaponSkill.push(self.kaiWeapons[value]);
 
-            // Show on UI the selected weapon
-            self.setWeaponSkillWeaponNameOnUI();
-            const $well = $("#wepnskll .well");
-            $well.append("<div><i><small>" + translations.text("randomTable") + ": " + value + "</small></i></div>");
+                // Show on UI the selected weapon
+                self.setWeaponSkillWeaponNameOnUI();
+                const $well = $("#wepnskll .well");
+                $well.append("<div><i><small>" + translations.text("randomTable") + ": " + value + "</small></i></div>");
 
-            // Mark the checkbox
-            $well.find("input[type=checkbox]").prop("checked" , true);
+                // Mark the checkbox
+                $well.find("input[type=checkbox]").prop("checked", true);
 
-            self.afterDisciplineSelection();
-        });
+                self.afterDisciplineSelection();
+            });
     }
 
     /**
@@ -362,7 +360,7 @@ class SetupDisciplines {
             expectedNDisciplines = 4;
         }
         // If first book of a serie, don't check previous book
-        if (state.book.bookNumber == 6 || state.book.bookNumber == 13) {
+        if (state.book.bookNumber === 6 || state.book.bookNumber === 13) {
             return expectedNDisciplines;
         }
 
