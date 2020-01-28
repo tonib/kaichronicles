@@ -1,0 +1,9 @@
+{
+    "defaultSeverity": "error",
+    "extends": [],
+    "jsRules": {},
+    "rules": {
+        "space-within-parens": [ true, 0 ]
+    },
+    "rulesDirectory": []
+}
