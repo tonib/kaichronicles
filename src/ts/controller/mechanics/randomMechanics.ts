@@ -1,4 +1,3 @@
-/// <reference path="../../external.ts" />
 
 /**
  * Random table links mechanics
@@ -27,7 +26,7 @@ const randomMechanics = {
         const linkText = $(rule).attr("text-" + state.language);
         if (linkText) {
             const $textContainer = $(':contains("' + linkText + '")').last();
-            const newHtml = $textContainer.html().replace(linkText ,
+            const newHtml = $textContainer.html().replace(linkText,
                 '<span class="random">' + linkText + "</span>");
             $textContainer.html(newHtml);
             $link = $textContainer.find(".random");
@@ -44,14 +43,14 @@ const randomMechanics = {
                 result.increment);
             // Fire the inner rules:
             randomMechanics.onRandomTableMechanicsClicked(rule,
-                result.randomValue , result.increment);
+                result.randomValue, result.increment);
         } else {
             // Bind the tag click event
-            const zeroAsTen = $(rule).attr("zeroAsTen") == "true";
-            randomMechanics.bindTableRandomLink($link , function(value, increment) {
+            const zeroAsTen = $(rule).attr("zeroAsTen") === "true";
+            randomMechanics.bindTableRandomLink($link, (value, increment) => {
                 randomMechanics.onRandomTableMechanicsClicked(rule, value, increment);
             },
-            false, zeroAsTen);
+                false, zeroAsTen);
         }
     },
 
@@ -69,7 +68,7 @@ const randomMechanics = {
         if (!indexValue) {
             indexValue = "0";
         }
-        return randomMechanics.getRandomTableRefByIndex(parseInt(indexValue, 10));
+        return randomMechanics.getRandomTableRefByIndex( parseInt(indexValue, 10) );
     },
 
     /**
@@ -77,12 +76,12 @@ const randomMechanics = {
      * It can be needed if a section rules need to be re-executed without re-rendering the section
      * @param {jQuery} $link The random table link to reset. If it's null all section random table link will be reset
      */
-    resetRandomTableIncrements($link: any = null) {
+    resetRandomTableIncrements($link: JQuery<HTMLElement> = null) {
         if (!$link) {
             // Reset all random tables
             $link = $(".random[data-increment]");
         }
-        $link.attr("data-increment" , "0");
+        $link.attr("data-increment", "0");
     },
 
     /** Increment for random table selection */
@@ -91,7 +90,7 @@ const randomMechanics = {
         const $link = randomMechanics.getRandomTableRefByRule(rule);
         const txtIncrement: string = $(rule).attr("increment");
 
-        if (txtIncrement == "reset") {
+        if (txtIncrement === "reset") {
             // Reset the random table increment to zero
             randomMechanics.resetRandomTableIncrements($link);
             return;
@@ -104,11 +103,11 @@ const randomMechanics = {
         let increment = 0;
         const txtCurrentIncrement = $link.attr("data-increment");
         if (txtCurrentIncrement) {
-            increment = parseInt(txtCurrentIncrement);
+            increment = parseInt(txtCurrentIncrement, 10);
         }
 
         increment += newIncrement;
-        $link.attr("data-increment" , increment);
+        $link.attr("data-increment", increment);
     },
 
     /**
@@ -119,12 +118,12 @@ const randomMechanics = {
      * @param {boolean} zeroAsTen true if the zero must to be returned as ten
      */
     bindTableRandomLink($element: any, onLinkPressed: (value: number, increment: number) => void,
-                        ignoreZero: boolean , zeroAsTen: boolean) {
+                        ignoreZero: boolean, zeroAsTen: boolean) {
 
         // If the element is an span, replace it by a link
         $element = randomMechanics.setupRandomTableLink($element);
 
-        $element.click(function(e) {
+        $element.click(function(e: Event) {
             e.preventDefault();
 
             if ($(this).hasClass("disabled")) {
@@ -144,22 +143,21 @@ const randomMechanics = {
             }
 
             // Get the random value
-            const self = this;
             randomTable.getRandomValueAsync(ignoreZero, zeroAsTen)
-            .then(function(value) {
-                // Get the increment
-                const incrementValue = $(self).attr("data-increment");
-                let increment = 0;
-                if (incrementValue) {
-                    increment = parseInt(incrementValue);
-                }
+                .then((value) => {
+                    // Get the increment
+                    const incrementValue = $(this).attr("data-increment");
+                    let increment = 0;
+                    if (incrementValue) {
+                        increment = parseInt(incrementValue, 10);
+                    }
 
-                // Show the result on the link
-                randomMechanics.linkAddChooseValue($(self) , value , increment);
+                    // Show the result on the link
+                    randomMechanics.linkAddChooseValue($(this), value, increment);
 
-                // Fire the event:
-                onLinkPressed(value , increment);
-            });
+                    // Fire the event:
+                    onLinkPressed(value, increment);
+                });
         });
     },
 
@@ -175,21 +173,21 @@ const randomMechanics = {
     setupRandomTableLink($element: any, alreadyChoose: boolean = false, valueAlreadyChoose: number = 0,
                          increment: number = 0): any {
 
-        if (!$element || $element.length == 0) {
+        if (!$element || $element.length === 0) {
             console.log("Random table link not found");
             return;
         }
 
         // Initially, the random table links are plain text (spans). When they got setup by a random rule, they
         // are converted to links:
-        if ($element.prop("tagName").toLowerCase() == "span") {
+        if ($element.prop("tagName").toLowerCase() === "span") {
             const $link = $('<a class="random action" href="#">' + $element.html() + "</a>");
             $element.replaceWith($link);
             $element = $link;
         }
 
         if (alreadyChoose) {
-            randomMechanics.linkAddChooseValue($element , valueAlreadyChoose , increment);
+            randomMechanics.linkAddChooseValue($element, valueAlreadyChoose, increment);
         }
 
         return $element;
@@ -198,7 +196,7 @@ const randomMechanics = {
     /**
      * Change a random table link to clicked
      */
-    linkAddChooseValue($link: any , valueChoose: number, increment: number) {
+    linkAddChooseValue($link: any, valueChoose: number, increment: number) {
 
         if ($link.hasClass("picked")) {
             // The link text / format has been already assigned
@@ -210,12 +208,12 @@ const randomMechanics = {
             html += " + " + increment;
         } else if (increment < 0) {
             html += " - " + (-increment);
- }
+        }
         $link.append(" (" + html + ")");
         // Disable the link:
         $link.addClass("disabled").addClass("picked");
         // Store the value on the UI too
-        $link.attr("data-picked" , valueChoose + increment);
+        $link.attr("data-picked", valueChoose + increment);
     },
 
     /**
@@ -229,8 +227,8 @@ const randomMechanics = {
         randomMechanics.lastValue = randomValue + increment;
 
         // Process rule childs. It can be a single action, and/or a set of "case" rules
-        $(rule).children().each(function(index, childRule) {
-            if (childRule.nodeName == "case") {
+        $(rule).children().each((index, childRule) => {
+            if (childRule.nodeName === "case") {
                 // Evaluate the case rule
                 if (randomMechanics.evaluateCaseRule(childRule, randomValue + increment)) {
                     mechanicsEngine.runChildRules($(childRule));
@@ -242,29 +240,28 @@ const randomMechanics = {
         });
 
         // Ugly hack: If we are on the 'equipment' section, check if all link has been clicked
-        if (state.sectionStates.currentSection == "equipmnt") {
+        if (state.sectionStates.currentSection === "equipmnt") {
             EquipmentSectionMechanics.checkExitEquipmentSection();
         }
 
         // Mark the rule as executed
-        const r = randomValue, i = increment;
-        state.sectionStates.markRuleAsExecuted(rule, { randomValue: r , increment: i });
+        state.sectionStates.markRuleAsExecuted(rule, { randomValue, increment });
     },
 
-    getCaseRuleBounds($rule: any): number[] {
+    getCaseRuleBounds($rule: JQuery<Element>): number[] {
 
         // Test single value
         const txtValue: string = $rule.attr("value");
         if (txtValue) {
-            const value = parseInt(txtValue);
+            const value = parseInt(txtValue, 10);
             return [value, value];
         }
 
         // Test from / to value
         const txtFromValue: string = $rule.attr("from");
         if (txtFromValue) {
-            const fromValue = parseInt(txtFromValue);
-            const toValue = parseInt($rule.attr("to"));
+            const fromValue = parseInt(txtFromValue, 10);
+            const toValue = parseInt($rule.attr("to"), 10);
             return [fromValue, toValue];
         }
 
@@ -276,7 +273,7 @@ const randomMechanics = {
      * @param rule The rule to evaluate
      * @return True if the case conditions are satisfied
      */
-    evaluateCaseRule(rule: any, randomValue: number): boolean {
+    evaluateCaseRule(rule: Element, randomValue: number): boolean {
 
         const bounds = randomMechanics.getCaseRuleBounds($(rule));
         if (!bounds) {
@@ -302,7 +299,7 @@ const randomMechanics = {
             return -1;
         }
 
-        return parseInt(txtPicked);
+        return parseInt(txtPicked, 10);
     }
 
 };

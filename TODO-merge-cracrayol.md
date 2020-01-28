@@ -84,7 +84,7 @@
 
 
 * TSLINT:
-    - CURRENT CHECK: numberPickerMechanics (done, next is randomMechanics)
+    - CURRENT CHECK: randomMechanics (done, next is SetupDisciplines)
     - TSLint is deprecated...
     - REMOVE src/ts/test-tslist.ts (TSLint tests)
     - "only-arrow-functions" fix can break things. Semantics are different (this behaviour). There are a lot, ignore rule
