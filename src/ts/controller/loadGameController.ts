@@ -1,4 +1,3 @@
-/// <reference path="../external.ts" />
 
 /**
  * Load stored game controller

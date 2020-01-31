@@ -82,10 +82,11 @@
     - REVERTED
     - CHECK ALL "throw new Error", probably they will need to be removed
     - Keeped controllers as "class". Useful to have private members
+    - I simply cannot check this: loadGameController.ts
 
 
 * TSLINT:
-    - CURRENT CHECK: kaimonasteryController
+    - CURRENT CHECK: loadGameController.ts
     - TSLint is deprecated...
     - REMOVE src/ts/test-tslist.ts (TSLint tests)
     - "only-arrow-functions" fix can break things. Semantics are different (this behaviour). There are a lot, ignore rule
