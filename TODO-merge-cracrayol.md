@@ -81,10 +81,11 @@
     - ObjectsTableItem has been moved to new file. Check changes
     - REVERTED
     - CHECK ALL "throw new Error", probably they will need to be removed
+    - Keeped controllers as "class". Useful to have private members
 
 
 * TSLINT:
-    - CURRENT CHECK: actionChartController
+    - CURRENT CHECK: faqController (keep like this)
     - TSLint is deprecated...
     - REMOVE src/ts/test-tslist.ts (TSLint tests)
     - "only-arrow-functions" fix can break things. Semantics are different (this behaviour). There are a lot, ignore rule
