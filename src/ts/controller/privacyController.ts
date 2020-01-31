@@ -9,7 +9,7 @@ class privacyController {
       */
     public static index() {
         views.loadView( "privacy_" + state.language + ".html" )
-        .then(function() {
+        .then(() => {
             if ( cordovaApp.isRunningApp() ) {
                 $("#privacy-web").hide();
             } else {
