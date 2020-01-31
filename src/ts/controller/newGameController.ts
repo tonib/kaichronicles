@@ -1,5 +1,3 @@
-/// <reference path="../external.ts" />
-
 /**
  * New game controller
  */
@@ -24,7 +22,7 @@ const newGameController = {
         template.showStatistics(false);
 
         views.loadView("newGame.html")
-        .then(function() {
+        .then(() => {
             newGameView.setup(downloadedBooks);
         });
 
