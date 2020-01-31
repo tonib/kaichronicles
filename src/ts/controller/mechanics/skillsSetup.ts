@@ -1,4 +1,3 @@
-/// <reference path="../../external.ts" />
 
 /**
  * Player characteristics setup
@@ -28,16 +27,16 @@ class SkillsSetup {
 
         // Book language inconsistencies: Spanish books say "ignore zero", english does not.
         // Starting from book 13 (Grand Master), Spanish books allow zero:
-        const ignoreZero = (state.book.language === "es" && state.book.bookNumber < 13);
+        const ignoreZero = ( state.book.language === "es" && state.book.bookNumber < 13 );
 
         // Combat skill
         if (state.actionChart.combatSkill !== 0) {
             $("#mechanics-detWeapon").hide();
         } else {
             const $w = $("#mechanics-chooseWeapon");
-            randomMechanics.bindTableRandomLink($w , function(value) {
+            randomMechanics.bindTableRandomLink($w, (value) => {
                 state.actionChart.combatSkill = value + (state.book.isGrandMasterBook() ? 25 : 10);
-                $w.parent().append("<b>" + translations.text("combatSkillSet" , [state.actionChart.combatSkill]) + ".</b>");
+                $w.parent().append("<b>" + translations.text("combatSkillSet", [state.actionChart.combatSkill]) + ".</b>");
                 template.updateStatistics();
                 if (state.actionChart.combatSkill !== 0 && state.actionChart.endurance !== 0) {
                     gameView.enableNextLink(true);
@@ -50,10 +49,10 @@ class SkillsSetup {
             $("#mechanics-detEndurance").hide();
         } else {
             const $e = $("#mechanics-chooseEndurance");
-            randomMechanics.bindTableRandomLink($e , function(value) {
+            randomMechanics.bindTableRandomLink($e, (value) => {
                 state.actionChart.endurance = value + (state.book.isGrandMasterBook() ? 30 : 20);
                 state.actionChart.currentEndurance = state.actionChart.endurance;
-                $e.parent().append("<b>" + translations.text("enduranceSet" , [state.actionChart.endurance]) + ".</b>");
+                $e.parent().append("<b>" + translations.text("enduranceSet", [state.actionChart.endurance]) + ".</b>");
                 template.updateStatistics();
                 if (state.actionChart.combatSkill !== 0 && state.actionChart.endurance !== 0) {
                     gameView.enableNextLink(true);
