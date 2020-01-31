@@ -1,5 +1,3 @@
-/// <reference path="../external.ts" />
-
 /**
  * The book loader controller
  * TODO: Change the name of this controller. It's a "book setup" controller
@@ -14,7 +12,7 @@ const setupController = {
         // If the book is already loaded, redirect to the game
         if (state.book && state.book.bookXml) {
             console.log("Book already loaded");
-            template.setNavTitle(state.book.getBookTitle() , "#game" , false);
+            template.setNavTitle(state.book.getBookTitle(), "#game", false);
             routing.redirect("game");
             setupController.verifyLanguageChange();
             return;
@@ -27,7 +25,7 @@ const setupController = {
             setupController.recordPageVisit("continue");
         } else {
             // New game. Get hash URL parameters
-            const bookNumber = parseInt(routing.getHashParameter("bookNumber"));
+            const bookNumber = parseInt(routing.getHashParameter("bookNumber"), 10);
             const language = routing.getHashParameter("language");
             const keepActionChart = routing.getHashParameter("keepActionChart");
             state.setup(bookNumber, language, keepActionChart);
@@ -37,12 +35,12 @@ const setupController = {
 
         // Check if the book to setup is downloaded
         if (!state.localBooksLibrary.isBookDownloaded(state.book.bookNumber)) {
-            alert(translations.text("bookNotDownloaded" , [state.book.bookNumber]));
+            alert(translations.text("bookNotDownloaded", [state.book.bookNumber]));
             routing.redirect("mainMenu");
             return jQuery.Deferred().reject().promise();
         } else {
             return views.loadView("setup.html")
-            .then(function() { setupController.runDownloads(); });
+                .then(() => { setupController.runDownloads(); });
         }
 
     },
@@ -53,7 +51,7 @@ const setupController = {
         if (!state.book) {
             return;
         }
-        if (state.language != state.book.language) {
+        if (state.language !== state.book.language) {
             state.language = state.book.language;
             template.translateMainMenu();
         }
@@ -89,35 +87,35 @@ const setupController = {
         // Stuff to handle each download
         const promises = [];
         let someError = false;
-        const failFunction = function(jqXHR, textStatus, errorThrown) {
+        const failFunction = (jqXHR: JQueryXHR, textStatus: string, errorThrown: string) => {
             setupView.log(ajaxErrorMsg(this, jqXHR, textStatus, errorThrown), "error");
             someError = true;
         };
-        const doneFunction = function() {
-            setupView.log(this.url + " OK!" , "ok");
+        const doneFunction = () => {
+            setupView.log(this.url + " OK!", "ok");
         };
-        for (let i = 0; i < downloads.length; i++) {
-            setupView.log(downloads[i].url + " download started...");
-            downloads[i].promise.url = downloads[i].url;
-            downloads[i].promise
-            .fail(failFunction)
-            .done(doneFunction);
-            promises.push(downloads[i].promise);
+        for (const download of downloads) {
+            setupView.log(download.url + " download started...");
+            download.promise.url = download.url;
+            download.promise
+                .fail(failFunction)
+                .done(doneFunction);
+            promises.push(download.promise);
         }
 
         // Wait for all downloads
         $.when.apply($, promises)
-        .done(function() {
-            setupView.log("Done!");
-            setupView.done();
+            .done(() => {
+                setupView.log("Done!");
+                setupView.done();
 
-            // Fill the random table UI
-            template.fillRandomTableModal(state.book.bookRandomTable);
-            template.setNavTitle(state.book.getBookTitle() , "#game", false);
-            template.updateStatistics(true);
-            routing.redirect("game");
-        })
-        .fail(function() { setupView.done(); });
+                // Fill the random table UI
+                template.fillRandomTableModal(state.book.bookRandomTable);
+                template.setNavTitle(state.book.getBookTitle(), "#game", false);
+                template.updateStatistics(true);
+                routing.redirect("game");
+            })
+            .fail(() => { setupView.done(); });
 
     },
 
@@ -126,7 +124,7 @@ const setupController = {
         const language = state.language;
         state.reset(false);
         template.updateStatistics(true);
-        routing.redirect("setup" , {
+        routing.redirect("setup", {
             bookNumber,
             language,
             keepActionChart: true
