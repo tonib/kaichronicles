@@ -1,4 +1,3 @@
-/// <reference path="../external.ts" />
 
 /**
  * Game settings controller
@@ -14,7 +13,7 @@ const settingsController = {
         document.title = translations.text("settings");
 
         views.loadView("settings.html")
-        .then(function() {
+        .then(() => {
             settingsView.setup();
         });
 
@@ -36,7 +35,7 @@ const settingsController = {
         }
         const book = new Book( state.book.bookNumber , newLanguage );
         return book.downloadBookXml()
-        .then(function() {
+        .then(() => {
             if ( updateUI ) {
                 settingsView.hideDownloadDialog();
             }
@@ -115,7 +114,7 @@ const settingsController = {
 
             if ( cordovaApp.isRunningApp() ) {
                 // We are on cordova app
-                cordovaFS.saveFile( fileName , blob, function() {
+                cordovaFS.saveFile( fileName , blob, () => {
                     toastr.success( translations.text( "gameSaved" ) );
                 });
             } else {
