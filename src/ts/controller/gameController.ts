@@ -1,5 +1,3 @@
-/// <reference path="../external.ts" />
-
 /**
  * The game controller
  */
@@ -19,7 +17,7 @@ const gameController = {
             return;
         }
 
-        if (state.sectionStates.currentSection == Book.KAIMONASTERY_SECTION) {
+        if (state.sectionStates.currentSection === Book.KAIMONASTERY_SECTION) {
             gameController.gameTemplateSetup();
             // Special case: Move to the inexistent section for the Kai monastery
             routing.redirect("kaimonastery");
@@ -27,23 +25,23 @@ const gameController = {
         }
 
         views.loadView("game.html")
-        .then(function() {
-            gameController.gameTemplateSetup();
-            gameView.setup();
-            // Go to the current section (or the initial)
-            let sec = state.sectionStates.currentSection;
-            if (!sec) {
-                sec = Book.INITIAL_SECTION;
-            }
-            gameController.loadSection(sec, false, state.actionChart.yScrollPosition);
-        });
+            .then(() => {
+                gameController.gameTemplateSetup();
+                gameView.setup();
+                // Go to the current section (or the initial)
+                let sec = state.sectionStates.currentSection;
+                if (!sec) {
+                    sec = Book.INITIAL_SECTION;
+                }
+                gameController.loadSection(sec, false, state.actionChart.yScrollPosition);
+            });
 
     },
 
     /** Setup the HTML main page template for the game view */
     gameTemplateSetup() {
         template.showStatistics(true);
-        template.setNavTitle(state.book.getBookTitle() , "#game" , false);
+        template.setNavTitle(state.book.getBookTitle(), "#game", false);
     },
 
     /**
@@ -100,7 +98,7 @@ const gameController = {
             gameView.showOriginSections();
 
             // Validate this section
-            const validator = new BookValidator(state.mechanics , state.book);
+            const validator = new BookValidator(state.mechanics, state.book);
             validator.validateSection(gameController.currentSection.sectionId);
             for (const error of validator.errors) {
                 mechanicsEngine.debugWarning(error);
@@ -135,7 +133,7 @@ const gameController = {
 
         // Store the scroll position.
         // Special case: Do not store if we are going redirected from 'game' controller, at the index function to 'kaimonastery'
-        if (!(routing.getControllerName() == "kaimonasteryController" && window.pageYOffset == 0)) {
+        if (!(routing.getControllerName() === "kaimonasteryController" && window.pageYOffset === 0)) {
             state.actionChart.yScrollPosition = window.pageYOffset;
         }
 
