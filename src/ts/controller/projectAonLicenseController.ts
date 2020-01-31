@@ -1,5 +1,3 @@
-/// <reference path="../external.ts" />
-
 /**
  * Project Aon license controller
  */
