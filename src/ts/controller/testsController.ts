@@ -9,36 +9,36 @@ class testsController {
     public static index() {
 
         return views.loadView("tests.html")
-        .then(function() {
-            // Load XSD for XML validation
-            return BookValidator.downloadXsd();
-        })
-        .then(function() {
-            // View setup
-            testsController.setup();
-        });
+            .then(() => {
+                // Load XSD for XML validation
+                return BookValidator.downloadXsd();
+            })
+            .then(() => {
+                // View setup
+                testsController.setup();
+            });
     }
 
     /**
      * Setup view
      */
     private static setup() {
-        $("#tests-random").click( function(e: Event) {
+        $("#tests-random").click((e: Event) => {
             e.preventDefault();
             testsController.testRandomTable();
-        } );
-        $("#tests-rendering").click( function(e: Event) {
+        });
+        $("#tests-rendering").click((e: Event) => {
             e.preventDefault();
             testsController.testRendering();
-        } );
-        $("#tests-bookmechanics").click( function(e: Event) {
+        });
+        $("#tests-bookmechanics").click((e: Event) => {
             e.preventDefault();
             testsController.testCurrentBookMechanics();
-        } );
-        $("#tests-allbooks").click( function(e: Event) {
+        });
+        $("#tests-allbooks").click((e: Event) => {
             e.preventDefault();
             testsController.testAllBooks();
-        } );
+        });
 
     }
 
@@ -49,7 +49,7 @@ class testsController {
 
         testsController.clearLog();
 
-        if ( !setupController.checkBook() ) {
+        if (!setupController.checkBook()) {
             testsController.addError("No book loaded yet (Finished");
             return;
         }
@@ -58,11 +58,11 @@ class testsController {
         testsController.addLog("Testing sections render (" + count + ")");
         for (let i = 1; i < count; i++) {
             try {
-                const section = new Section(state.book, "sect" + i, state.mechanics );
+                const section = new Section(state.book, "sect" + i, state.mechanics);
                 const renderer = new SectionRenderer(section);
                 renderer.renderSection();
             } catch (e) {
-                testsController.addError("Section " + i + " error: " + e , e );
+                testsController.addError("Section " + i + " error: " + e, e);
             }
         }
         testsController.addLog("Finished (errors are displayed here, see Dev. Tools console for warnings)");
@@ -75,7 +75,7 @@ class testsController {
 
         testsController.clearLog();
 
-        if ( !setupController.checkBook() ) {
+        if (!setupController.checkBook()) {
             testsController.addError("No book loaded yet (Finished)");
             return;
         }
@@ -86,12 +86,12 @@ class testsController {
             count[i] = 0;
         }
         const total = 1000000;
-        for ( let i = 0; i < total; i++) {
+        for (let i = 0; i < total; i++) {
             count[randomTable.getRandomValue()]++;
         }
         console.log("Randomness test (" + total + " random table hits)");
         for (let i = 0; i < 10; i++) {
-            testsController.addLog(i + ": " + count[i] + " hits (" + ( count[i] / total ) * 100.0 + " %)" );
+            testsController.addLog(i + ": " + count[i] + " hits (" + (count[i] / total) * 100.0 + " %)");
         }
 
         // Test randomness of the book random table:
@@ -100,32 +100,32 @@ class testsController {
             count[i] = 0;
         }
         const bookRandomTable = state.book.getRandomTable();
-        for (let i = 0; i < bookRandomTable.length; i++) {
-            count[ bookRandomTable[i] ]++;
+        for (const num of bookRandomTable) {
+            count[num]++;
         }
 
         console.log("Book random table:");
         for (let i = 0; i < 10; i++) {
-            testsController.addLog(i + ": " + count[i] + " (" + ( count[i] / bookRandomTable.length ) * 100.0 + " %)" );
+            testsController.addLog(i + ": " + count[i] + " (" + (count[i] / bookRandomTable.length) * 100.0 + " %)");
         }
     }
 
     private static testCurrentBookMechanics() {
         testsController.clearLog();
-        const validator = new BookValidator( state.mechanics , state.book );
-        testsController.testBook( validator );
+        const validator = new BookValidator(state.mechanics, state.book);
+        testsController.testBook(validator);
         testsController.addLog("Finished");
     }
 
     private static testBook( validator: BookValidator ) {
         validator.validateBook();
         const title = "Book " + validator.book.bookNumber + " (" + validator.book.language + ") ";
-        if ( validator.errors.length == 0 ) {
-            testsController.addLog( title + "OK!");
+        if (validator.errors.length === 0) {
+            testsController.addLog(title + "OK!");
         } else {
             testsController.addLog(title + "with errors:");
         }
-        for ( const error of validator.errors ) {
+        for (const error of validator.errors) {
             testsController.addError(error);
         }
 
@@ -135,32 +135,32 @@ class testsController {
 
     private static downloadAndTestBook( bookNumber: number , language: string ) {
 
-        BookValidator.downloadBookAndGetValidator( bookNumber , language )
-        .then(function(validator: BookValidator) {
+        BookValidator.downloadBookAndGetValidator(bookNumber, language)
+            .then((validator: BookValidator) => {
 
-            testsController.testBook(validator);
+                testsController.testBook(validator);
 
-            // Move to the next book:
-            let nextBookNumber = validator.book.bookNumber;
-            let nextLanguage = validator.book.language;
-            if ( nextLanguage == "en") {
-                nextLanguage = "es";
-            } else {
-                nextBookNumber++;
-                nextLanguage = "en";
-            }
-            if ( nextBookNumber > projectAon.supportedBooks.length ) {
-                testsController.addLog("Finished");
-                return;
-            }
+                // Move to the next book:
+                let nextBookNumber = validator.book.bookNumber;
+                let nextLanguage = validator.book.language;
+                if (nextLanguage === "en") {
+                    nextLanguage = "es";
+                } else {
+                    nextBookNumber++;
+                    nextLanguage = "en";
+                }
+                if (nextBookNumber > projectAon.supportedBooks.length) {
+                    testsController.addLog("Finished");
+                    return;
+                }
 
-            testsController.downloadAndTestBook( nextBookNumber , nextLanguage );
-        });
+                testsController.downloadAndTestBook(nextBookNumber, nextLanguage);
+            });
     }
 
     private static testAllBooks() {
         testsController.clearLog();
-        testsController.downloadAndTestBook( 1, "en" );
+        testsController.downloadAndTestBook(1, "en");
     }
 
     private static clearLog() {
@@ -168,13 +168,13 @@ class testsController {
     }
 
     private static addLog( textLine: string ) {
-        $("#tests-log").append( textLine + "</br>" );
+        $("#tests-log").append(textLine + "</br>");
     }
 
     private static addError( textLine: string , exception: any = null ) {
-        testsController.addLog("ERROR: " + textLine );
-        if ( exception ) {
-            console.log( exception );
+        testsController.addLog("ERROR: " + textLine);
+        if (exception) {
+            console.log(exception);
         }
     }
 
