@@ -1,5 +1,3 @@
-/// <reference path="../external.ts" />
-
 /**
  * Game rules controller
  */
@@ -16,7 +14,7 @@ const gameRulesController = {
 
         document.title = translations.text("gameRules");
         views.loadView("gameRules.html")
-        .then(function() {
+        .then(() => {
 
             // Push game rules sections:
             gameRulesController.appendSection( Book.COMBATRULESSUMMARY_SECTION );
