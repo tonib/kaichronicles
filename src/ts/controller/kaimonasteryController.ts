@@ -25,7 +25,7 @@ class kaimonasteryController {
         }
 
         views.loadView("kaimonastery.html")
-        .then( function() {
+        .then( () => {
             // Go back to the equipment section
             $("#monastery-goback").click( function(e: Event) {
                 kaimonasteryController.onGoBackToEquipment(e);
