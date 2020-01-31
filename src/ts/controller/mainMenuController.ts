@@ -10,7 +10,7 @@ const mainMenuController = {
     index() {
         template.setNavTitle( translations.text("kaiChronicles") , "#mainMenu", true);
         template.showStatistics(false);
-        views.loadView("mainMenu.html").then(function() {
+        views.loadView("mainMenu.html").then(() => {
             mainMenuView.setup();
 
             // Hide info only for the web site on the app:
@@ -30,7 +30,7 @@ const mainMenuController = {
      * Change the current language
      */
     changeTranslation() {
-        state.language = ( state.language == "es" ? "en" : "es" );
+        state.language = ( state.language === "es" ? "en" : "es" );
         mainMenuController.index();
     },
 
@@ -38,7 +38,7 @@ const mainMenuController = {
      * Change the current color theme
      */
     changeColor() {
-        settingsController.changeColorTheme(state.color == "light" ? "dark" : "light");
+        settingsController.changeColorTheme(state.color === "light" ? "dark" : "light");
         mainMenuController.index();
     },
 
