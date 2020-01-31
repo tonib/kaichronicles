@@ -1,5 +1,3 @@
-/// <reference path="../external.ts" />
-
 /**
  * The map controller
  */
@@ -21,8 +19,8 @@ const mapController = {
         }
 
         views.loadView("map.html")
-        .then(function() {
-            if ( state.book.bookNumber == 11 ) {
+        .then(() => {
+            if ( state.book.bookNumber === 11 ) {
                 // Special case
                 mapView.setMapBook11();
             } else {
