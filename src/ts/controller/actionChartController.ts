@@ -14,9 +14,9 @@ const actionChartController = {
         }
 
         views.loadView("actionChart.html")
-        .then(function() {
-            actionChartView.fill(state.actionChart);
-        });
+            .then(() => {
+                actionChartView.fill(state.actionChart);
+            });
     },
 
     /**
@@ -47,8 +47,8 @@ const actionChartController = {
             }
 
             // Show toast
-            actionChartView.showInventoryMsg("pick", o ,
-                translations.text("msgGetObject" , [o.name]));
+            actionChartView.showInventoryMsg("pick", o,
+                translations.text("msgGetObject", [o.name]));
 
             // Update player statistics (for objects with effects)
             actionChartView.updateStatistics();
@@ -79,17 +79,17 @@ const actionChartController = {
      * @param availableOnSection True if the object should be available on
      * the current section
      * @param fromUI True if the action is fired from the UI
-     * @param count Object count (only for quivers. count == n. arrows to drop)
+     * @param count Object count (only for quivers. count === n. arrows to drop)
      * @returns True if the object has been dropped
      */
     drop(objectId: string, availableOnSection: boolean = false, fromUI: boolean = false, count: number = 0): boolean {
 
-        if (objectId == "allweapons") {
+        if (objectId === "allweapons") {
             actionChartController.dropItemsList(state.actionChart.weapons);
             return true;
         }
 
-        if (objectId == "currentweapon") {
+        if (objectId === "currentweapon") {
             const selectedWeapon = state.actionChart.getSelectedWeapon();
             if (selectedWeapon) {
                 this.drop(selectedWeapon);
@@ -97,7 +97,7 @@ const actionChartController = {
             return true;
         }
 
-        if (objectId == "allweaponlike") {
+        if (objectId === "allweaponlike") {
             const weaponsIds = [];
             for (const w of state.actionChart.getWeaponObjects(false)) {
                 weaponsIds.push(w.id);
@@ -106,28 +106,28 @@ const actionChartController = {
             return true;
         }
 
-        if (objectId == "backpackcontent") {
+        if (objectId === "backpackcontent") {
             actionChartController.dropBackpackContent();
             return true;
         }
 
-        if (objectId == "allspecial") {
+        if (objectId === "allspecial") {
             actionChartController.dropItemsList(state.actionChart.specialItems);
             return true;
         }
 
-        if (objectId == "allmeals") {
+        if (objectId === "allmeals") {
             actionChartController.increaseMeals(-state.actionChart.meals);
             return true;
         }
 
-        if (objectId == "all" || objectId == "allobjects") {
+        if (objectId === "all" || objectId === "allobjects") {
 
-            if (objectId == "all") {
+            if (objectId === "all") {
                 actionChartController.drop("backpack");
                 actionChartController.increaseMoney(- state.actionChart.beltPouch);
             } else {
-                // objectId == 'allobjects' => Backpack content, but not the backpack itself
+                // objectId === 'allobjects' => Backpack content, but not the backpack itself
                 actionChartController.drop("backpackcontent");
             }
 
@@ -145,18 +145,18 @@ const actionChartController = {
         // of arrows. You should drop THAT quiver (and no other). So, pass the number of arrows as parameter
         /*
         let count = 0;
-        if( objectId == Item.QUIVER ) {
+        if( objectId === Item.QUIVER ) {
             // Number of arrows on the quiver (to keep it on the dropped object)
             count = state.actionChart.arrows % 6;
-            if( count == 0 && state.actionChart.arrows > 0 )
+            if( count === 0 && state.actionChart.arrows > 0 )
                 count = 6;
         }
         */
 
         const dropped = state.actionChart.drop(objectId, count);
         if (dropped) {
-            actionChartView.showInventoryMsg("drop", o ,
-                translations.text("msgDropObject" , [o.name]));
+            actionChartView.showInventoryMsg("drop", o,
+                translations.text("msgDropObject", [o.name]));
 
             // Update the action chart view
             actionChartView.updateObjectsLists();
@@ -168,10 +168,10 @@ const actionChartController = {
             if (availableOnSection) {
                 // Add the droped object as available on the current section
                 const sectionState = state.sectionStates.getSectionState();
-                sectionState.addObjectToSection(objectId , 0 , false , count);
+                sectionState.addObjectToSection(objectId, 0, false, count);
 
                 // Render available objects on this section (game view)
-                mechanicsEngine.fireInventoryEvents(fromUI , o);
+                mechanicsEngine.fireInventoryEvents(fromUI, o);
             }
         }
         return dropped;
@@ -220,13 +220,13 @@ const actionChartController = {
         }
 
         // Do the usage action:
-        if (o.usage.cls == Item.ENDURANCE) {
+        if (o.usage.cls === Item.ENDURANCE) {
             actionChartController.increaseEndurance(o.usage.increment);
-        } else if (o.usage.cls == Item.COMBATSKILL) {
+        } else if (o.usage.cls === Item.COMBATSKILL) {
             // Combat skill modifiers only apply to the current section combats
             const sectionState = state.sectionStates.getSectionState();
             sectionState.combatSkillUsageModifier(o.usage.increment);
-        } else if (o.usage.cls == "special") {
+        } else if (o.usage.cls === "special") {
             // Special usage
             SpecialObjectsUse.use(o);
         }
@@ -255,12 +255,12 @@ const actionChartController = {
             state.actionChart.increaseMeals(count);
             const o = state.mechanics.getObject("meal");
             if (count > 0) {
-                actionChartView.showInventoryMsg("pick" , o ,
-                    translations.text("msgGetMeal" , [count]));
+                actionChartView.showInventoryMsg("pick", o,
+                    translations.text("msgGetMeal", [count]));
             } else if (count < 0) {
-                actionChartView.showInventoryMsg("drop" , o ,
-                    translations.text("msgDropMeal" , [-count]));
- }
+                actionChartView.showInventoryMsg("drop", o,
+                    translations.text("msgDropMeal", [-count]));
+            }
         } catch (e) {
             toastr.error(e);
         }
@@ -276,14 +276,14 @@ const actionChartController = {
         const amountPicked = state.actionChart.increaseMoney(count);
         const o = state.mechanics.getObject("money");
         if (count > 0) {
-            actionChartView.showInventoryMsg("pick" , o ,
-                translations.text("msgGetMoney" , [count]));
+            actionChartView.showInventoryMsg("pick", o,
+                translations.text("msgGetMoney", [count]));
         } else if (count < 0) {
-            actionChartView.showInventoryMsg("drop" , o , translations.text("msgDropMoney" , [-count]));
+            actionChartView.showInventoryMsg("drop", o, translations.text("msgDropMoney", [-count]));
             if (availableOnSection && count < 0) {
                 // Add the droped money as available on the current section
                 const sectionState = state.sectionStates.getSectionState();
-                sectionState.addObjectToSection("money" , 0 , false , -count);
+                sectionState.addObjectToSection("money", 0, false, -count);
             }
         }
         actionChartView.updateMoney();
@@ -295,11 +295,11 @@ const actionChartController = {
      * @param count Number to increase. Negative to decrease
      * @param permanent True if the increase is permanent (it changes the original endurance)
      */
-    displayEnduranceChangeToast(count: number , permanent: boolean) {
+    displayEnduranceChangeToast(count: number, permanent: boolean) {
         if (count > 0) {
-            toastr.success(translations.text("msgEndurance" , ["+" + count]));
+            toastr.success(translations.text("msgEndurance", ["+" + count]));
         } else if (count < 0) {
-            let toast = translations.text("msgEndurance" , [count]);
+            let toast = translations.text("msgEndurance", [count]);
             if (permanent) {
                 toast += " (" + translations.text("permanent") + ")";
                 toastr.error(toast);
@@ -321,7 +321,7 @@ const actionChartController = {
 
         if (!noToast) {
             // Display toast
-            actionChartController.displayEnduranceChangeToast(count , permanent);
+            actionChartController.displayEnduranceChangeToast(count, permanent);
         }
 
         if (count < 0) {
@@ -341,14 +341,14 @@ const actionChartController = {
      * @param count Number to increase. Negative to decrease
      * @param showToast True if we should show a "toast" on the UI with the CS increase
      */
-    increaseCombatSkill(count , showToast: boolean = true) {
+    increaseCombatSkill(count, showToast: boolean = true) {
         state.actionChart.combatSkill += count;
         if (showToast) {
             if (count > 0) {
-                toastr.success(translations.text("msgCombatSkill" , ["+" + count]));
+                toastr.success(translations.text("msgCombatSkill", ["+" + count]));
             } else if (count < 0) {
-                toastr.warning(translations.text("msgCombatSkill" , [count]));
- }
+                toastr.warning(translations.text("msgCombatSkill", [count]));
+            }
         }
         template.updateStatistics();
     },
@@ -358,7 +358,7 @@ const actionChartController = {
      * @param weaponId The weapon id to set selected
      */
     setSelectedWeapon(weaponId: string) {
-        if (state.actionChart.getSelectedWeapon() == weaponId) {
+        if (state.actionChart.getSelectedWeapon() === weaponId) {
             return;
         }
 
@@ -397,7 +397,7 @@ const actionChartController = {
         // Show toast with the weapon change
         const weapon = state.actionChart.getSelectedWeaponItem(false);
         const name = weapon ? weapon.name : translations.text("noneFemenine");
-        toastr.info(translations.text("msgCurrentWeapon" , [ name ]));
+        toastr.info(translations.text("msgCurrentWeapon", [name]));
     },
 
     /**
@@ -405,15 +405,15 @@ const actionChartController = {
      * @param {Array} Bonuses to render
      * @return {string} The bonuses text
      */
-    getBonusesText(bonuses) {
+    getBonusesText(bonuses: Bonus[]) {
         const txt = [];
-        for (let i = 0; i < bonuses.length; i++) {
-            let txtInc = bonuses[i].increment.toString();
-            if (bonuses[i].increment > 0) {
+        for (const bonus of bonuses) {
+            let txtInc = bonus.increment.toString();
+            if (bonus.increment > 0) {
                 txtInc = "+" + txtInc;
             }
 
-            txt.push(bonuses[i].concept + ": " + txtInc);
+            txt.push(bonus.concept + ": " + txtInc);
         }
         return txt.join(", ");
     },
@@ -425,10 +425,10 @@ const actionChartController = {
     pickItemsList(arrayOfItems: string[]) {
         let renderAvailableObjects = false;
         const sectionState = state.sectionStates.getSectionState();
-        for (let i = 0; i < arrayOfItems.length; i++) {
-            if (!actionChartController.pick(arrayOfItems[i] , true , false)) {
+        for (const item of arrayOfItems) {
+            if (!actionChartController.pick(item, true, false)) {
                 // Object cannot be picked. Add the object as available on the current section
-                sectionState.addObjectToSection(arrayOfItems[i]);
+                sectionState.addObjectToSection(item);
                 renderAvailableObjects = true;
             }
         }
@@ -488,13 +488,13 @@ const actionChartController = {
         const o = state.mechanics.getObject("arrow");
 
         if (realIncrement > 0) {
-            actionChartView.showInventoryMsg("pick" , o ,
-                translations.text("msgGetArrows" , [realIncrement]));
+            actionChartView.showInventoryMsg("pick", o,
+                translations.text("msgGetArrows", [realIncrement]));
         } else if (increment < 0) {
             // If increment is negative, show always the original amount, not the real (useful for debugging)
-            actionChartView.showInventoryMsg("drop" , o ,
-                translations.text("msgDropArrows" , [-increment]));
-        } else if (increment > 0 && realIncrement == 0) {
+            actionChartView.showInventoryMsg("drop", o,
+                translations.text("msgDropArrows", [-increment]));
+        } else if (increment > 0 && realIncrement === 0) {
             // You cannot pick more arrows (not quivers enough)
             toastr.error(translations.text("noQuiversEnough"));
         }
@@ -507,7 +507,7 @@ const actionChartController = {
      */
     use20EPRestore() {
         if (state.actionChart.use20EPRestore()) {
-            toastr.success(translations.text("msgEndurance" , ["+20"]));
+            toastr.success(translations.text("msgEndurance", ["+20"]));
             template.updateStatistics();
         }
     },
