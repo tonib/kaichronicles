@@ -37,36 +37,36 @@ class SavedGamesExport {
         const zipFileName = "KaiChroniclesExport-" + settingsController.getDateForFileNames() + ".zip";
 
         const process = this.setup()
-        .then(function() {
-            // Return a human readable error if there are no files to export:
-            if (self.fileGameEntries.length == 0) {
-                return jQuery.Deferred().reject(translations.text("noGamesToExport")).promise();
-            } else {
-                return jQuery.Deferred().resolve().promise();
-            }
-        })
-        .then(function() {
-            console.log("Copying file games to tmp dir (" + self.fileGameEntries.length + ")");
-            return cordovaFS.copySetToAsync(self.fileGameEntries , self.tmpDir);
-        })
-        .then(function() {
-            // Create the zip. If it's created on the tmp directory, the zip creation will fail
-            console.log("Creating zip file on root directory");
-            zipPath = self.fs.root.toURL() + zipFileName;
-            return cordovaFS.zipAsync(self.tmpDir.toURL() , zipPath);
-        })
-        .then(function() {
-            console.log("Get the zip file entry");
-            return cordovaFS.getFileAsync(self.fs.root , zipFileName);
-        })
-        .then(function(entry: any) {
-            // This generated zip file will be removed at the end of the process
-            self.filesToDeleteAtEnd.push(entry);
+            .then(() => {
+                // Return a human readable error if there are no files to export:
+                if (self.fileGameEntries.length === 0) {
+                    return jQuery.Deferred().reject(translations.text("noGamesToExport")).promise();
+                } else {
+                    return jQuery.Deferred().resolve().promise();
+                }
+            })
+            .then(() => {
+                console.log("Copying file games to tmp dir (" + self.fileGameEntries.length + ")");
+                return cordovaFS.copySetToAsync(self.fileGameEntries, self.tmpDir);
+            })
+            .then(() => {
+                // Create the zip. If it's created on the tmp directory, the zip creation will fail
+                console.log("Creating zip file on root directory");
+                zipPath = self.fs.root.toURL() + zipFileName;
+                return cordovaFS.zipAsync(self.tmpDir.toURL(), zipPath);
+            })
+            .then(() => {
+                console.log("Get the zip file entry");
+                return cordovaFS.getFileAsync(self.fs.root, zipFileName);
+            })
+            .then((entry: any) => {
+                // This generated zip file will be removed at the end of the process
+                self.filesToDeleteAtEnd.push(entry);
 
-            console.log("Copying the zip to Download directory");
-            // Copy the zip
-            return cordovaFS.copyToDownloadAsync(zipPath , zipFileName , "Kai Chronicles saved games export" , "application/zip");
-        });
+                console.log("Copying the zip to Download directory");
+                // Copy the zip
+                return cordovaFS.copyToDownloadAsync(zipPath, zipFileName, "Kai Chronicles saved games export", "application/zip");
+            });
 
         // Cleant tmp files
         return this.clean(process);
@@ -82,19 +82,19 @@ class SavedGamesExport {
         const self = this;
 
         const process = this.setup()
-        .then(function() {
-            // Get the file type. It can be a zip file or a json file
-            // TODO: Check the mime type too?
-            const nameAndExtension = cordovaFS.getFileNameAndExtension(doc.fileName.toLowerCase());
-            if (nameAndExtension.extension == "zip") {
-                return self.importZip(doc);
-            } else if (nameAndExtension.extension == "json") {
-                return self.importJson(doc);
-            } else {
-                // Wrong extension
-                return jQuery.Deferred().reject(translations.text("importExtensionsError")).promise();
-            }
-        });
+            .then(() => {
+                // Get the file type. It can be a zip file or a json file
+                // TODO: Check the mime type too?
+                const nameAndExtension = cordovaFS.getFileNameAndExtension(doc.fileName.toLowerCase());
+                if (nameAndExtension.extension === "zip") {
+                    return self.importZip(doc);
+                } else if (nameAndExtension.extension === "json") {
+                    return self.importJson(doc);
+                } else {
+                    // Wrong extension
+                    return jQuery.Deferred().reject(translations.text("importExtensionsError")).promise();
+                }
+            });
 
         // Cleant tmp files
         return this.clean(process);
@@ -112,37 +112,37 @@ class SavedGamesExport {
         const zipContent: any = null;
         let entriesToImport: any[] = null;
 
-        return this.copyFileContent(doc , this.tmpDir)
-        .then(function(zipFileEntryOnTmpDir /* : FileEntry */) {
-            console.log("Unziping file on tmp directory");
-            return cordovaFS.unzipAsync(zipFileEntryOnTmpDir.toURL() , self.tmpDir.toURL());
-        })
-        .then(function() {
-            console.log("Get unziped files");
-            return cordovaFS.readEntriesAsync(self.tmpDir);
-        })
-        .then(function(entries: any[]) {
-            console.log("Filtering unziped files");
-            entriesToImport = SavedGamesExport.filterSavedGamesEntries(entries);
+        return this.copyFileContent(doc, this.tmpDir)
+            .then((zipFileEntryOnTmpDir /* : FileEntry */) => {
+                console.log("Unziping file on tmp directory");
+                return cordovaFS.unzipAsync(zipFileEntryOnTmpDir.toURL(), self.tmpDir.toURL());
+            })
+            .then(() => {
+                console.log("Get unziped files");
+                return cordovaFS.readEntriesAsync(self.tmpDir);
+            })
+            .then((entries: any[]) => {
+                console.log("Filtering unziped files");
+                entriesToImport = SavedGamesExport.filterSavedGamesEntries(entries);
 
-            // Check if some file will be overwritten
-            const newFileNames: string[] = [];
-            for (const entry of entriesToImport) {
-                newFileNames.push(entry.name);
-            }
+                // Check if some file will be overwritten
+                const newFileNames: string[] = [];
+                for (const entry of entriesToImport) {
+                    newFileNames.push(entry.name);
+                }
 
-            return self.checkOverwritting(newFileNames);
-        })
-        .then(function() {
-            console.log("Copying saved games to the root");
-            nNewGames = entriesToImport.length;
-            return cordovaFS.copySetToAsync(entriesToImport , self.fs.root);
-        })
-        .then(function() {
-            // Notify the number of imported games
-            self.nImportedGames = nNewGames;
-            return jQuery.Deferred<number>().resolve(nNewGames).promise();
-        });
+                return self.checkOverwritting(newFileNames);
+            })
+            .then(() => {
+                console.log("Copying saved games to the root");
+                nNewGames = entriesToImport.length;
+                return cordovaFS.copySetToAsync(entriesToImport, self.fs.root);
+            })
+            .then(() => {
+                // Notify the number of imported games
+                self.nImportedGames = nNewGames;
+                return jQuery.Deferred<number>().resolve(nNewGames).promise();
+            });
     }
 
     /**
@@ -153,16 +153,16 @@ class SavedGamesExport {
     private importJson(doc: DocumentSelection): JQueryPromise<number> {
         const self = this;
 
-        return self.checkOverwritting([ doc.fileName ])
-        .then(function() {
-            // Create the json file
-            return self.copyFileContent(doc , self.fs.root);
-        })
-        .then(function() {
-            // Notify the number of imported games
-            self.nImportedGames = 1;
-            return jQuery.Deferred<number>().resolve(1).promise();
-        });
+        return self.checkOverwritting([doc.fileName])
+            .then(() => {
+                // Create the json file
+                return self.copyFileContent(doc, self.fs.root);
+            })
+            .then(() => {
+                // Notify the number of imported games
+                self.nImportedGames = 1;
+                return jQuery.Deferred<number>().resolve(1).promise();
+            });
     }
 
     /**
@@ -176,18 +176,18 @@ class SavedGamesExport {
         for (const newFile of newFiles) {
             for (const oldFile of this.fileGameEntries) {
                 // Case sensitive
-                if (oldFile.name == newFile) {
+                if (oldFile.name === newFile) {
                     duplicatedFiles.push(newFile);
                 }
             }
         }
 
         const dfd = jQuery.Deferred<void>();
-        if (duplicatedFiles.length == 0) {
+        if (duplicatedFiles.length === 0) {
             // Ok, there will be no duplicates
             dfd.resolve();
         } else {
-            const msg = translations.text("confirmSavedOverwrite" , [ duplicatedFiles.join("\n") ]);
+            const msg = translations.text("confirmSavedOverwrite", [duplicatedFiles.join("\n")]);
             if (confirm(msg)) {
                 dfd.resolve();
             } else {
@@ -203,7 +203,7 @@ class SavedGamesExport {
      * @param doc The file to copy
      * @param {DirectoryEntry} parent Directory where to create the new file
      */
-    private copyFileContent(doc: DocumentSelection , parent: any): JQueryPromise<any>  {
+    private copyFileContent(doc: DocumentSelection, parent: any): JQueryPromise<any> {
 
         let fileContent: any = null;
 
@@ -216,31 +216,31 @@ class SavedGamesExport {
         // with a URL outside the app content. So, I have created a external plugin function.
         if (doc.uri.toLowerCase().startsWith("file://")) {
             console.log("Copy zip to the tmp directory");
-            return cordovaFS.copyNativePathsAsync(doc.uri , parent.toURL());
+            return cordovaFS.copyNativePathsAsync(doc.uri, parent.toURL());
         } else {
             return cordovaFS.resolveLocalFileSystemURIAsync(doc.uri)
-            // THIS DOES NOT WORK FOR "content://" entries
-            // .then( function( entry /* : Entry */ ) {
-            //     console.log( 'Copy zip to the tmp directory' );
-            //     return cordovaFS.copyToAsync( entry , self.tmpDir , doc.fileName )
-            // })
-            .then(function(entry /* : Entry */) {
-                console.log("Reading file content");
-                return cordovaFS.readFileAsync(entry , true);
-            })
-            .then(function(content: any) {
-                fileContent = content;
-                console.log("Creating empty file");
-                return cordovaFS.getFileAsync(parent , doc.fileName , { create: true, exclusive: false });
-            })
-            .then(function(newFileEntry /* : FileEntry */) {
-                console.log("Save the file content");
-                return cordovaFS.writeFileContentAsync(newFileEntry , fileContent);
-            });
+                // THIS DOES NOT WORK FOR "content://" entries
+                // .then( function( entry /* : Entry */ ) {
+                //     console.log( 'Copy zip to the tmp directory' );
+                //     return cordovaFS.copyToAsync( entry , self.tmpDir , doc.fileName )
+                // })
+                .then((entry /* : Entry */) => {
+                    console.log("Reading file content");
+                    return cordovaFS.readFileAsync(entry, true);
+                })
+                .then((content: any) => {
+                    fileContent = content;
+                    console.log("Creating empty file");
+                    return cordovaFS.getFileAsync(parent, doc.fileName, { create: true, exclusive: false });
+                })
+                .then((newFileEntry /* : FileEntry */) => {
+                    console.log("Save the file content");
+                    return cordovaFS.writeFileContentAsync(newFileEntry, fileContent);
+                });
         }
     }
 
-    /**
+        /**
      * Check file entries, get those that are saved games
      * @param {Array<Entry>} entries File entries to check
      * @returns {Array<Entry>} The saved games
@@ -271,24 +271,24 @@ class SavedGamesExport {
 
         // Retrieve a FS and the saved games
         return cordovaFS.requestFileSystemAsync()
-        .then(function(fileSystem /* : FileSystem */) {
-            self.fs = fileSystem;
-            // Get save game files
-            console.log("Get save game files");
-            return cordovaFS.getRootFilesAsync(fileSystem);
-        })
-        .then(function(entries: any[]) {
-            console.log("Storing saved games entries");
-            // Store saved games, and ignore others. There can be directories here (ex. downloaded books)
-            self.fileGameEntries = SavedGamesExport.filterSavedGamesEntries(entries);
+            .then((fileSystem /* : FileSystem */) => {
+                self.fs = fileSystem;
+                // Get save game files
+                console.log("Get save game files");
+                return cordovaFS.getRootFilesAsync(fileSystem);
+            })
+            .then((entries: any[]) => {
+                console.log("Storing saved games entries");
+                // Store saved games, and ignore others. There can be directories here (ex. downloaded books)
+                self.fileGameEntries = SavedGamesExport.filterSavedGamesEntries(entries);
 
-            // Re-create the tmp directory
-            return self.createTmpDirectory();
-        })
-        .then(function(tmpDirEntry) {
-            // Store the tmp directory entry
-            self.tmpDir = tmpDirEntry;
-        });
+                // Re-create the tmp directory
+                return self.createTmpDirectory();
+            })
+            .then((tmpDirEntry) => {
+                // Store the tmp directory entry
+                self.tmpDir = tmpDirEntry;
+            });
     }
 
     /**
@@ -300,23 +300,23 @@ class SavedGamesExport {
 
         const dirName = "tmpKaiChronicles";
         // Check if the directory exists
-        return cordovaFS.getDirectoryAsync(this.fs.root , dirName , { create : false })
-        .then(
-            function(dirEntry) {
-                // Directory exists. Remove it
-                console.log("Deleting previous tmp directory");
-                return cordovaFS.deleteDirRecursivelyAsync(dirEntry);
-            },
-            function(errorDirDontExists) {
-                // Directory does not exists. Do nothing
-                return jQuery.Deferred().resolve().promise();
-            }
-        )
-        .then(function() {
-            // Create the directory
-            console.log("Creating tmp directory");
-            return cordovaFS.getDirectoryAsync(self.fs.root , dirName , { create : true });
-        });
+        return cordovaFS.getDirectoryAsync(this.fs.root, dirName, { create: false })
+            .then(
+                (dirEntry) => {
+                    // Directory exists. Remove it
+                    console.log("Deleting previous tmp directory");
+                    return cordovaFS.deleteDirRecursivelyAsync(dirEntry);
+                },
+                (errorDirDontExists) => {
+                    // Directory does not exists. Do nothing
+                    return jQuery.Deferred().resolve().promise();
+                }
+            )
+            .then(() => {
+                // Create the directory
+                console.log("Creating tmp directory");
+                return cordovaFS.getDirectoryAsync(self.fs.root, dirName, { create: true });
+            });
     }
 
     /**
@@ -331,18 +331,18 @@ class SavedGamesExport {
 
         // Delete tmp files in any case (success or error)
         return process
-        .then(
-            // Ok. Clean
-            self.cleanTmpFiles.bind(self),
-            function(error) {
-                // Error happened. Clean and return the PREVIOUS error
-                return self.cleanTmpFiles()
-                .then(
-                    function() { return jQuery.Deferred().reject(error).promise(); },
-                    function() { return jQuery.Deferred().reject(error).promise(); }
-                );
-            }
-        );
+            .then(
+                // Ok. Clean
+                self.cleanTmpFiles.bind(self),
+                (error) => {
+                    // Error happened. Clean and return the PREVIOUS error
+                    return self.cleanTmpFiles()
+                        .then(
+                            () => jQuery.Deferred().reject(error).promise(),
+                            () => jQuery.Deferred().reject(error).promise()
+                        );
+                }
+            );
 
     }
 
@@ -366,17 +366,17 @@ class SavedGamesExport {
         // Delete other tmp files
         const self = this;
         return rootPromise
-        .then(function() {
-            console.log("Deleting other tmp files");
+            .then(() => {
+                console.log("Deleting other tmp files");
 
-            const promises: Array< JQueryPromise<any> > = [];
-            for (const tmpFile of self.filesToDeleteAtEnd) {
-                promises.push(cordovaFS.deleteFileAsync(tmpFile));
-            }
+                const promises: Array<JQueryPromise<any>> = [];
+                for (const tmpFile of self.filesToDeleteAtEnd) {
+                    promises.push(cordovaFS.deleteFileAsync(tmpFile));
+                }
 
-            // Wait for all deletions to finish
-            return $.when.apply($, promises);
-        });
+                // Wait for all deletions to finish
+                return $.when.apply($, promises);
+            });
     }
 
 }
