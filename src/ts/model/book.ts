@@ -1,6 +1,4 @@
 
-/// <reference path="../external.ts" />
-
 /** Book disciplines table */
 interface DisciplinesTable {
 
@@ -77,8 +75,8 @@ class Book {
      * @param number The book index number to create
      * @param language The book language ('es' = spanish / 'en' = english )
      */
-    public constructor(number: number, language: string) {
-        this.bookNumber = number;
+    public constructor(num: number, language: string) {
+        this.bookNumber = num;
         this.language = language;
         this.bookXml = null;
         this.bookRandomTable = [];
@@ -184,7 +182,7 @@ class Book {
             url: bookXmlUrl,
             dataType: "text"
         })
-        .done(function(xml) {
+        .done((xml) => {
             self.setXml(xml);
         });
     }
@@ -295,7 +293,7 @@ class Book {
             language = this.language;
         }
         return "https://projectaon.org/" + language + "/xhtml/" +
-            ( language == "en" ? "lw" : "ls" ) +  "/" +
+            ( language === "en" ? "lw" : "ls" ) +  "/" +
             this.getProjectAonBookCode(language) + "/";
     }
 
@@ -430,7 +428,7 @@ class Book {
         const sourceSections = $(this.bookXml)
             .find('section[class="numbered"]' )
             .has( 'data > choice[idref="' + sectionId + '"]')
-            .each( function(index, section) {
+            .each( (index, section) => {
                 sourceSectionIds.push( $(section).attr("id") );
             }) ;
         return sourceSectionIds;
@@ -462,8 +460,8 @@ class Book {
             .find("section[id=random] > data > illustration > instance[class=text]")
             .find("td");
         const numbers = [];
-        for (let i = 0; i < $randomCells.length; i++) {
-            numbers.push( parseInt( $($randomCells[i]).text() ) );
+        for (const cell of $randomCells.toArray()) {
+            numbers.push( parseInt( $(cell).text(), 10 ) );
         }
         return numbers;
     }
