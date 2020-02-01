@@ -1,5 +1,3 @@
-/// <reference path="../external.ts" />
-
 /**
  * Stuff to access the file system on Cordova app
  */
@@ -13,31 +11,31 @@ const cordovaFS = {
     // TODO: Replace this with functions with Promises
     saveFile(originalFileName, fileContent, callback) {
         cordovaFS.requestFileSystemAsync()
-        .then(function(fs: any) {
-            console.log("file system open: " + fs.name);
+            .then((fs: any) => {
+                console.log("file system open: " + fs.name);
 
-            cordovaFS.getUnusedName(originalFileName, fs, function(fileName) {
-                // Get the file to save
-                fs.root.getFile(fileName,
-                    {
-                        create: true,
-                        exclusive: false
-                    },
-                    function(fileEntry) {
-                        console.log("fileEntry is file?" + fileEntry.isFile.toString());
-                        cordovaFS.writeFile(fileEntry, fileContent, callback);
-                    },
-                    function() { alert("Error getting file"); }
-                );
-            });
-        },
-        function() { alert("Error requesting file system"); });
+                cordovaFS.getUnusedName(originalFileName, fs, (fileName) => {
+                    // Get the file to save
+                    fs.root.getFile(fileName,
+                        {
+                            create: true,
+                            exclusive: false
+                        },
+                        (fileEntry) => {
+                            console.log("fileEntry is file?" + fileEntry.isFile.toString());
+                            cordovaFS.writeFile(fileEntry, fileContent, callback);
+                        },
+                        () => { alert("Error getting file"); }
+                    );
+                });
+            },
+            () => { alert("Error requesting file system"); });
     },
 
     // TODO: Remove this and use writeFileContentAsync
     writeFile(fileEntry, fileContent, callback) {
-        cordovaFS.writeFileContentAsync(fileEntry , fileContent)
-        .then(function() { callback(); });
+        cordovaFS.writeFileContentAsync(fileEntry, fileContent)
+            .then(() => { callback(); });
     },
 
     /**
@@ -50,24 +48,24 @@ const cordovaFS = {
         const dfd = jQuery.Deferred();
 
         cordovaFS.createWriterAsync(fileEntry)
-        .then(function(fileWriter /* : FileWriter */) {
+            .then((fileWriter /* : FileWriter */) => {
 
-            fileWriter.onwriteend = function() {
-                console.log("Successful file write");
-                dfd.resolve(fileEntry);
-            };
+                fileWriter.onwriteend = () => {
+                    console.log("Successful file write");
+                    dfd.resolve(fileEntry);
+                };
 
-            fileWriter.onerror = function(error) {
-                let msg = "Failed to write file";
-                if (error) {
-                    msg += ": " + error.toString();
-                }
-                console.log(msg);
-                dfd.reject(msg);
-            };
+                fileWriter.onerror = (error) => {
+                    let msg = "Failed to write file";
+                    if (error) {
+                        msg += ": " + error.toString();
+                    }
+                    console.log(msg);
+                    dfd.reject(msg);
+                };
 
-            fileWriter.write(fileContent);
-        });
+                fileWriter.write(fileContent);
+            });
 
         return dfd.promise();
     },
@@ -81,10 +79,10 @@ const cordovaFS = {
         const dfd = jQuery.Deferred();
 
         fileEntry.createWriter(
-            function(fileWriter /* : FileWriter */) {
+            (fileWriter /* : FileWriter */) => {
                 dfd.resolve(fileWriter);
             },
-            function(error /* : FileError */) {
+            (error /* : FileError */) => {
                 const msg = "Error creating file writer. Code: " + error.code;
                 console.log(msg);
                 dfd.reject(msg);
@@ -99,15 +97,15 @@ const cordovaFS = {
      * @param fileName The file name to check
      * @returns The name and extension. The extension will be an empty string, if no extension was found
      */
-    getFileNameAndExtension(fileName: string): { name: string , extension: string } {
+    getFileNameAndExtension(fileName: string): { name: string, extension: string } {
         const idx = fileName.lastIndexOf(".");
         if (idx < 0) {
-            return { name : fileName , extension : "" };
+            return { name: fileName, extension: "" };
         }
 
         return {
-            name : fileName.substr(0, idx) ,
-            extension : fileName.substr(idx + 1)
+            name: fileName.substr(0, idx),
+            extension: fileName.substr(idx + 1)
         };
     },
 
@@ -125,10 +123,10 @@ const cordovaFS = {
         const extension = fileName.substr(idx +1);*/
         const nameAndExtension = cordovaFS.getFileNameAndExtension(fileName);
 
-        cordovaFS.enumerateFiles(fs, function(entries) {
+        cordovaFS.enumerateFiles(fs, (entries) => {
             console.log("Searching unused name for " + fileName);
             let idx = 0;
-            const hasSameName = function(f) { return f.name == fileName; };
+            const hasSameName = (f) => f.name === fileName;
             while (true) {
                 fileName = nameAndExtension.name + (idx > 0 ? "-" + idx : "") + "." + nameAndExtension.extension;
                 console.log("Checking " + fileName);
@@ -151,12 +149,12 @@ const cordovaFS = {
 
         const dirReader = fs.root.createReader();
         dirReader.readEntries(
-            function(entries) {
+            (entries) => {
                 console.log("Got list of files. Running callback");
                 callback(entries);
                 console.log("Callback finished");
             },
-            function() {
+            () => {
                 console.log("Error listing files");
                 alert("Error listing files");
                 callback([]);
@@ -169,7 +167,7 @@ const cordovaFS = {
      * @param {FileSystem} fs The cordova file sytem
      * @returns {Promise<Array<Entry>>} Promise with array of entries on the root file system
      */
-    getRootFilesAsync(fs: any): JQueryPromise< any[] > {
+    getRootFilesAsync(fs: any): JQueryPromise<any[]> {
         console.log("file system open: " + fs.name);
         return cordovaFS.readEntriesAsync(fs.root);
     },
@@ -179,15 +177,15 @@ const cordovaFS = {
      * @param {DirectoryEntry} dirEntry The directory to read
      * @returns {Promise<Array<Entry>>} Promise with array of entries on the directory
      */
-    readEntriesAsync(dirEntry: any): JQueryPromise< any[] > {
+    readEntriesAsync(dirEntry: any): JQueryPromise<any[]> {
         const dfd = jQuery.Deferred<any[]>();
         const dirReader = dirEntry.createReader();
         dirReader.readEntries(
-            function(entries: any[]) {
+            (entries: any[]) => {
                 console.log("Got list of files");
                 dfd.resolve(entries);
             },
-            function(error /*: FileError*/) {
+            (error /*: FileError*/) => {
                 const msg = "Error listing files. Error code: " + error.code;
                 console.log(msg);
                 dfd.reject(msg);
@@ -204,13 +202,13 @@ const cordovaFS = {
      * @param newFileName The new file name. If it's null, it will be the original
      * @returns {Promise<Entry>} Promise with the new copied file
      */
-    copyToAsync(fileEntry: any , parent: any , newFileName: string = null): JQueryPromise<any> {
+    copyToAsync(fileEntry: any, parent: any, newFileName: string = null): JQueryPromise<any> {
         const dfd = jQuery.Deferred();
-        fileEntry.copyTo(parent , newFileName ,
-            function(entry /*: Entry*/) {
+        fileEntry.copyTo(parent, newFileName,
+            (entry /*: Entry*/) => {
                 dfd.resolve(entry);
             },
-            function(error /*: FileError*/) {
+            (error /*: FileError*/) => {
                 const msg = "Error copying file. Error code: " + error.code;
                 console.log(msg);
                 dfd.reject(msg);
@@ -226,12 +224,12 @@ const cordovaFS = {
      * @param {DirectoryEntry} parent The destination directory
      * @returns Promise with the copy process
      */
-    copySetToAsync(entries: any[] , parent: any): JQueryPromise<void> {
+    copySetToAsync(entries: any[], parent: any): JQueryPromise<void> {
         console.log("Copying " + entries.length + " files to other directory");
 
-        const promises: Array< JQueryPromise<any> > = [];
+        const promises: Array<JQueryPromise<any>> = [];
         for (const entry of entries) {
-            promises.push(cordovaFS.copyToAsync(entry , parent));
+            promises.push(cordovaFS.copyToAsync(entry, parent));
         }
 
         // Wait for all copys to finish
@@ -245,12 +243,12 @@ const cordovaFS = {
      */
     readRootTextFileAsync(fileName: string): JQueryPromise<string> {
         return cordovaFS.requestFileSystemAsync()
-        .then(function(fs: any /* : FileSystem */) {
-            return cordovaFS.getFileAsync(fs.root , fileName);
-        })
-        .then(function(fileEntry /* : FileEntry */) {
-            return cordovaFS.readFileAsync(fileEntry , false);
-        });
+            .then((fs: any /* : FileSystem */) => {
+                return cordovaFS.getFileAsync(fs.root, fileName);
+            })
+            .then((fileEntry /* : FileEntry */) => {
+                return cordovaFS.readFileAsync(fileEntry, false);
+            });
     },
 
     /**
@@ -261,11 +259,11 @@ const cordovaFS = {
     fileAsync(entry: any): JQueryPromise<any> {
         const dfd = jQuery.Deferred();
         entry.file(
-            function(file /* : File */) {
+            (file /* : File */) => {
                 console.log("file call OK");
                 dfd.resolve(file);
             },
-            function(fileError /* : FileError */) {
+            (fileError /* : FileError */) => {
                 const msg = "Error getting file: " + fileError.code;
                 console.log(msg);
                 dfd.reject(msg);
@@ -284,30 +282,30 @@ const cordovaFS = {
         const dfd = jQuery.Deferred();
 
         cordovaFS.fileAsync(entry)
-        .then(
-            function(file /* : File */) {
-                const reader = new FileReader();
-                reader.onloadend = function() {
-                    console.log("File read finished");
-                    dfd.resolve(this.result);
-                };
-                reader.onerror = function(error: any) {
-                    let msg = "Error reading file";
-                    if (error && error.message) {
-                        msg += ": " + error.message;
+            .then(
+                function(file /* : File */) {
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        console.log("File read finished");
+                        dfd.resolve(this.result);
+                    };
+                    reader.onerror = (error: any) => {
+                        let msg = "Error reading file";
+                        if (error && error.message) {
+                            msg += ": " + error.message;
+                        }
+                        console.log(msg);
+                        dfd.reject(msg);
+                    };
+                    if (binary) {
+                        // reader.readAsBinaryString(file);
+                        reader.readAsArrayBuffer(file);
+                    } else {
+                        reader.readAsText(file);
                     }
-                    console.log(msg);
-                    dfd.reject(msg);
-                };
-                if (binary) {
-                    // reader.readAsBinaryString(file);
-                    reader.readAsArrayBuffer(file);
-                } else {
-                    reader.readAsText(file);
-                }
-            },
-            function(error: any) { dfd.reject(error); }
-        );
+                },
+                (error: any) => { dfd.reject(error); }
+            );
 
         return dfd.promise();
     },
@@ -323,11 +321,11 @@ const cordovaFS = {
 
         console.log("Deleting file " + fileEntry.toURL());
         fileEntry.remove(
-            function() {
+            () => {
                 console.log("File deleted");
                 dfd.resolve();
             },
-            function(error /* : FileError*/) {
+            (error /* : FileError*/) => {
                 const msg = "Error deleting entry. Error code: " + error.code;
                 console.log(msg);
                 dfd.reject(msg);
@@ -347,11 +345,11 @@ const cordovaFS = {
         const dfd = jQuery.Deferred<void>();
         console.log("Deleting directory " + directoryEntry.toURL());
         directoryEntry.removeRecursively(
-            function() {
+            () => {
                 console.log("Directory deleted");
                 dfd.resolve();
             },
-            function(fileError) {
+            (fileError) => {
                 dfd.reject("Error deleting directory " + directoryEntry.toURL() +
                     " (code " + fileError.code + ")");
             }
@@ -367,10 +365,10 @@ const cordovaFS = {
     requestFileSystemAsync() {
         const dfd = jQuery.Deferred();
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0,
-            function(fileSystem) {
+            (fileSystem) => {
                 dfd.resolve(fileSystem);
             },
-            function(fileError) {
+            (fileError) => {
                 // TODO: Test this (codes?)
                 dfd.reject("Error requesting file system (code " + fileError.code + ")");
             }
@@ -387,11 +385,11 @@ const cordovaFS = {
         const dfd = jQuery.Deferred();
 
         window.resolveLocalFileSystemURI(uri,
-            function(entry /* : Entry */) {
+            (entry /* : Entry */) => {
                 console.log("URI resolved");
                 dfd.resolve(entry);
             },
-            function(error /* : FileError */) {
+            (error /* : FileError */) => {
                 const msg = "Error resolving local file URI (code " + error.code + ")";
                 console.log(msg);
                 dfd.reject(msg);
@@ -409,13 +407,13 @@ const cordovaFS = {
      * @param {Flags} options  create : true to create the directory, if it does not exist
      * @returns {Promise<DirectoryEntry>} Promise with the directory
      */
-    getDirectoryAsync(dir: any , path: string , options: any): JQueryPromise<any> {
+    getDirectoryAsync(dir: any, path: string, options: any): JQueryPromise<any> {
         const dfd = jQuery.Deferred();
-        dir.getDirectory(path , options,
-            function(subdir) {
+        dir.getDirectory(path, options,
+            (subdir) => {
                 dfd.resolve(subdir);
             },
-            function(fileError) {
+            (fileError) => {
                 // TODO: Test this (codes?)
                 dfd.reject("Error getting / creating directory " + dir.toURL() + "/" + path +
                     ": (code " + fileError.code + ")");
@@ -431,14 +429,14 @@ const cordovaFS = {
      * @param options Options to get / create the file
      * @returns {Promise<FileEntry>} Promise with the file
      */
-    getFileAsync(dir: any , fileName: string , options: Object = { create: false, exclusive: false }): JQueryPromise<any> {
+    getFileAsync(dir: any, fileName: string, options: object = { create: false, exclusive: false }): JQueryPromise<any> {
         const dfd = jQuery.Deferred();
         dir.getFile(fileName, options,
-            function(fileEntry /* : FileEntry */) {
+            (fileEntry /* : FileEntry */) => {
                 console.log("Got the file: " + fileName);
                 dfd.resolve(fileEntry);
             },
-            function(error /* : FileError */) {
+            (error /* : FileError */) => {
                 const msg = "Error getting / creating file. Error code: " + error.code;
                 console.log(msg);
                 dfd.reject(msg);
@@ -455,7 +453,7 @@ const cordovaFS = {
      * percentage (0.0 - 100.0)
      * @returns Promise with the process. Parameter is the downloaded file FileEntry
      */
-    downloadAsync(url: string, dstPath: string, progressCallback: (number) => void = null): JQueryPromise<any> {
+    downloadAsync(url: string, dstPath: string, progressCallback: (num: number) => void = null): JQueryPromise<any> {
 
         const dfd = jQuery.Deferred();
         console.log("Downloading " + url + " to " + dstPath);
@@ -464,7 +462,7 @@ const cordovaFS = {
         cordovaFS.currentDownload = fileTransfer;
         if (progressCallback) {
             console.log("Registering progress callback");
-            fileTransfer.onprogress = function(progressEvent) {
+            fileTransfer.onprogress = (progressEvent) => {
                 if (!progressEvent.lengthComputable || progressEvent.total === 0) {
                     console.log("No computable length");
                     return;
@@ -478,12 +476,12 @@ const cordovaFS = {
         }
 
         fileTransfer.download(url, dstPath,
-            function(zipFileEntry) {
+            (zipFileEntry) => {
                 // Download ok
                 cordovaFS.currentDownload = null;
                 dfd.resolve(zipFileEntry);
             },
-            function(fileTransferError) {
+            (fileTransferError) => {
                 // Download failed
                 cordovaFS.currentDownload = null;
                 let msg = "Download of " + url + " to " + dstPath + " failed. Code: " +
@@ -509,17 +507,17 @@ const cordovaFS = {
         }
     },
 
-    zipAsync(dirToCompressPath: string , zipFilePath: string): JQueryPromise<void> {
+    zipAsync(dirToCompressPath: string, zipFilePath: string): JQueryPromise<void> {
 
         const dfd = jQuery.Deferred<void>();
 
         // Create the zip
-        Zeep.zip({ from : dirToCompressPath, to : zipFilePath } ,
-            function() {
+        Zeep.zip({ from: dirToCompressPath, to: zipFilePath },
+            () => {
                 console.log("Zip created succesfuly");
                 dfd.resolve();
             },
-            function(error) {
+            (error) => {
                 let msg = "Error creating zip file";
                 if (error) {
                     msg += ": " + error.toString();
@@ -538,11 +536,11 @@ const cordovaFS = {
      * @param dstDir Path to the directory where uncompress the zip file
      * @returns Promise with the process
      */
-    unzipAsync(zipPath: string , dstDir: string): JQueryPromise<void> {
+    unzipAsync(zipPath: string, dstDir: string): JQueryPromise<void> {
 
         const dfd = jQuery.Deferred<void>();
         console.log("Unzipping " + zipPath + " to " + dstDir);
-        zip.unzip(zipPath , dstDir , function(resultCode) {
+        zip.unzip(zipPath, dstDir, (resultCode) => {
             // Check the unzip operation
             if (resultCode === 0) {
                 dfd.resolve();
@@ -560,16 +558,16 @@ const cordovaFS = {
      * @param description the description that would appear for this file in Downloads App.
      * @param mimeType    mimetype of the file.
      */
-    copyToDownloadAsync(url: string , title: string , description: string , mimeType: string): JQueryPromise<void> {
+    copyToDownloadAsync(url: string, title: string, description: string, mimeType: string): JQueryPromise<void> {
 
         const dfd = jQuery.Deferred<void>();
 
-        CopyToDownload.copyToDownload(url , title , description , false , mimeType , true ,
-            function() {
+        CopyToDownload.copyToDownload(url, title, description, false, mimeType, true,
+            () => {
                 console.log("copyToDownloadAsync ok");
                 dfd.resolve();
             },
-            function(error) {
+            (error) => {
                 let msg = "error copying file to Download folder";
                 if (error) {
                     msg += ": " + error.toString();
@@ -587,17 +585,17 @@ const cordovaFS = {
      * @param dstDirectoryUrl URL to the target directory where to copy
      * @returns Promise with the process. The parameter is the FileEntry for the new copied file
      */
-    copyNativePathsAsync(srcFileUrl: string , dstDirectoryUrl: string): JQueryPromise<any> {
+    copyNativePathsAsync(srcFileUrl: string, dstDirectoryUrl: string): JQueryPromise<any> {
 
         const dfd = jQuery.Deferred();
 
         // Do the copy
-        CopyToDownload.copyNativePaths(srcFileUrl , dstDirectoryUrl ,
-            function(dstFilePath: string) {
+        CopyToDownload.copyNativePaths(srcFileUrl, dstDirectoryUrl,
+            (dstFilePath: string) => {
                 console.log("copyNativePathsAsync ok");
                 dfd.resolve(dstFilePath);
             },
-            function(error) {
+            (error) => {
                 let msg = "error copying file with native paths";
                 if (error) {
                     msg += ": " + error.toString();
@@ -609,9 +607,9 @@ const cordovaFS = {
 
         // Return the FileEntry for the copied file
         return dfd.promise()
-        .then(function(dstFilePath: string) {
-            return cordovaFS.resolveLocalFileSystemURIAsync(dstFilePath);
-        });
+            .then((dstFilePath: string) => {
+                return cordovaFS.resolveLocalFileSystemURIAsync(dstFilePath);
+            });
     }
 
 };
