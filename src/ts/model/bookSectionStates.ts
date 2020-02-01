@@ -103,20 +103,19 @@ class BookSectionStates {
 
         // Replace generic objects by the needed objects
         this.sectionStates = {};
-        const self = this;
-        $.each( stateObject.sectionStates , function( sectionId , s ) {
+        $.each( stateObject.sectionStates , ( sectionId , s ) => {
             const sectionState = $.extend( new SectionState() , s );
-            self.sectionStates[ sectionId ] = sectionState;
+            this.sectionStates[ sectionId ] = sectionState;
 
             // Restore combats
             const combats = [];
-            $.each( sectionState.combats , function( index , combat ) {
+            $.each( sectionState.combats , ( index , combat ) => {
                 const rightCombat = $.extend( new Combat( "" , 0 , 0 ) , combat );
                 combats.push( rightCombat );
 
                 // Restore combat turns
                 const turns = [];
-                $.each( rightCombat.turns , function( index , turn ) {
+                $.each( rightCombat.turns , ( turnIndex , turn ) => {
                     turns.push( $.extend( new CombatTurn(null, 0, false, false) , turn ) );
                 });
                 rightCombat.turns = turns;
