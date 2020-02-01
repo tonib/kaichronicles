@@ -86,7 +86,7 @@
 
 
 * TSLINT:
-    - CURRENT CHECK: cordovaFS
+    - CURRENT CHECK: DocumentSelection
     - TSLint is deprecated...
     - REMOVE src/ts/test-tslist.ts (TSLint tests)
     - "only-arrow-functions" fix can break things. Semantics are different (this behaviour). There are a lot, ignore rule

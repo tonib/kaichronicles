@@ -13,8 +13,8 @@ class DocumentSelection {
     /** Selected mime type */
     public mimeType: string;
 
+    // TODO: Check if this can be removed
     public copyTo( parent: any ): Promise<void> {
-
         return null;
     }
 
@@ -26,19 +26,19 @@ class DocumentSelection {
         const dfd = jQuery.Deferred<DocumentSelection>();
 
         DocumentSelection.selectDocumentWithUI()
-        .then( function(uri: string) {
+        .then( (uri: string) => {
             return DocumentSelection.getDocumentInfo(uri);
         })
         .then(
-            function(doc: DocumentSelection ) { dfd.resolve(doc); },
-            function( error ) { dfd.reject(error); }
+            (doc: DocumentSelection ) => { dfd.resolve(doc); },
+            ( error ) => { dfd.reject(error); }
         );
         return dfd.promise();
     }
 
     private static selectDocumentWithUI(): JQueryPromise<string> {
         const dfd = jQuery.Deferred<string>();
-        fileChooser.open(function(uri) {
+        fileChooser.open((uri) => {
             dfd.resolve(uri);
         });
         return dfd.promise();
@@ -71,14 +71,14 @@ class DocumentSelection {
                     "_display_name", "mime_type"
                 ]
             },
-            function(contract) {
+            (contract) => {
                 const doc = new DocumentSelection();
-                doc.fileName = contract["_display_name"];
-                doc.mimeType = contract["mime_type"];
+                doc.fileName = contract._display_name;
+                doc.mimeType = contract.mime_type;
                 doc.uri = uri;
                 dfd.resolve(doc);
             },
-            function(error) {
+            (error) => {
                 dfd.reject( error );
             }
         );
