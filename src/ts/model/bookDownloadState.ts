@@ -1,4 +1,3 @@
-
 /**
  * Class to handle the download state of a Project Aon book.
  * Only for Cordova app
@@ -40,19 +39,18 @@ class BookDownloadState {
      */
     public checkDownloadStateAsync( booksDir: any ): JQueryPromise<BookDownloadState> {
         const dfd = jQuery.Deferred<BookDownloadState>();
-        const self = this;
 
         cordovaFS.getDirectoryAsync( booksDir , this.bookNumber.toString() , {} )
         .then(
-            function() {
+            () => {
                 // Book directory found
-                self.downloaded = true;
-                dfd.resolve(self);
+                this.downloaded = true;
+                dfd.resolve(this);
             },
-            function() {
+            () => {
                 // Book directory not found
-                self.downloaded = false;
-                dfd.resolve(self);
+                this.downloaded = false;
+                dfd.resolve(this);
         });
 
         return dfd.promise();
@@ -66,13 +64,12 @@ class BookDownloadState {
     public deleteAsync( booksDir: any ): JQueryPromise<void> {
 
         console.log( "Deleting book " + this.bookNumber );
-        const self = this;
         return cordovaFS.getDirectoryAsync( booksDir , this.bookNumber.toString() , {} )
-        .then( function( bookDir: any ) {
+        .then( ( bookDir: any ) => {
             return cordovaFS.deleteDirRecursivelyAsync( bookDir );
         })
-        .then( function() {
-            self.downloaded = false;
+        .then( () => {
+            this.downloaded = false;
             return jQuery.Deferred<void>().resolve().promise();
         });
     }
@@ -83,17 +80,16 @@ class BookDownloadState {
      * @param progressCallback Optional callback to call with the download progress. Parameter is the downloaded
      * percentage (0.0 - 100.0)
      */
-    public downloadAsync( booksDir: any , progressCallback: (number) => void = null ): JQueryPromise<void> {
+    public downloadAsync( booksDir: any , progressCallback: (number: number) => void = null ): JQueryPromise<void> {
 
         const fileName = this.bookNumber + ".zip";
         // var url = 'http://192.168.1.4/ls/data/projectAon/' + fileName;
         const url = "https://www.projectaon.org/staff/toni/data/projectAon/" + fileName;
         const dstDir = booksDir.toURL();
         const dstPath = dstDir + "/" + fileName;
-        const self = this;
 
         let zEntry: any = null;
-        const clean = function( withErrors: boolean , error: any ) {
+        const clean = ( withErrors: boolean , error: any ) => {
 
             // Delete the downloaded zip file
             if ( zEntry ) {
@@ -114,20 +110,20 @@ class BookDownloadState {
         };
 
         return cordovaFS.downloadAsync(url , dstPath, progressCallback)
-        .then(function(zipFileEntry) {
+        .then((zipFileEntry) => {
             // Download ok. Uncompress the book
             zEntry = zipFileEntry;
             return cordovaFS.unzipAsync( dstPath , dstDir );
         })
-        .then(function() {
-            console.log( "Book " + self.bookNumber + " downloaded and unzipped" );
-            self.downloaded = true;
+        .then(() => {
+            console.log( "Book " + this.bookNumber + " downloaded and unzipped" );
+            this.downloaded = true;
             return jQuery.Deferred().resolve().promise();
         })
         // Always clean the downloaded zip file
         .then(
-            function() { return clean(false , null); },
-            function( error ) { return clean( true , error ); }
+            () => clean(false , null),
+            ( error ) => clean( true , error )
         );
     }
 }
