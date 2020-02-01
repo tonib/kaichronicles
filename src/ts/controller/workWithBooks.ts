@@ -1,4 +1,3 @@
-/// <reference path="../external.ts" />
 
 /**
  * Handle / download books (only for Cordova app)
@@ -26,7 +25,7 @@ const workWithBooksController = {
         template.showStatistics(false);
 
         views.loadView("workWithBooks.html")
-        .then(function() {
+        .then(() => {
             // Setup UI
             workWithBooksView.setup();
             // Update the books list
@@ -44,14 +43,14 @@ const workWithBooksController = {
 
         // Check books state
         state.localBooksLibrary.updateBooksDownloadStateAsync()
-        .then(function() {
+        .then(() => {
             const downloadedBooks = state.localBooksLibrary.getDownloadedBooks();
-            for (let i = 0; i < downloadedBooks.length; i++) {
-                workWithBooksView.markBookAsDownloaded( downloadedBooks[i].bookNumber );
+            for (const downloadedBook of downloadedBooks) {
+                workWithBooksView.markBookAsDownloaded( downloadedBook.bookNumber );
             }
 
             // If all books are downloaded, check the "select all"
-            if ( downloadedBooks.length == state.localBooksLibrary.booksLibrary.length ) {
+            if ( downloadedBooks.length === state.localBooksLibrary.booksLibrary.length ) {
                 workWithBooksView.setSelectAllState(true);
             }
         });
@@ -61,15 +60,15 @@ const workWithBooksController = {
     downloadBooks(selectedBookNumbers: number[]) {
 
         // Check differences:
-        const toRemove = [], toDownload = [];
-        for ( let i = 0; i < state.localBooksLibrary.booksLibrary.length; i++) {
-            const book = state.localBooksLibrary.booksLibrary[i];
+        const toRemove: BookDownloadState[] = [];
+        const toDownload: BookDownloadState[] = [];
+        for (const book of state.localBooksLibrary.booksLibrary) {
             const bookSelected = selectedBookNumbers.contains( book.bookNumber );
             if ( book.downloaded && !bookSelected ) {
                 toRemove.push( book );
             } else if ( !book.downloaded && bookSelected ) {
                 toDownload.push( book );
-            }
+ }
         }
 
         if ( toRemove.length === 0 && toDownload.length === 0 ) {
@@ -87,7 +86,7 @@ const workWithBooksController = {
         }
 
         LocalBooksLibrary.getBooksDirectoryAsync()
-        .then( function(booksDir) {
+        .then( (booksDir) => {
 
             workWithBooksController.changingBooks = true;
             workWithBooksController.processCancelled = false;
@@ -105,12 +104,12 @@ const workWithBooksController = {
             }
 
             // Remove books, chaining promises
-            toRemove.forEach(function(book) {
+            toRemove.forEach((book) => {
                 changesPromise = workWithBooksController.deleteBook( booksDir , book , changesPromise );
             });
 
             // Download books, chaining promises
-            toDownload.forEach(function(book) {
+            toDownload.forEach((book) => {
                 changesPromise = workWithBooksController.downloadBook( booksDir , book , changesPromise );
             });
 
@@ -118,14 +117,14 @@ const workWithBooksController = {
             workWithBooksController.updateUIAfterProcess(changesPromise);
 
         })
-        .fail(function(reason) { alert(reason); });
+        .fail((reason: string) => { alert(reason); });
 
     },
 
     deleteBook(booksDir: string , book: BookDownloadState, changesPromise: JQueryPromise<void>): JQueryPromise<void> {
 
         // Work to delete the book
-        const work = function() {
+        const work = () => {
 
             if ( workWithBooksController.processCancelled ) {
                 // Process cancelled. Do nothing else
@@ -140,14 +139,14 @@ const workWithBooksController = {
 
         // Chain always the next promise, it was failed the previous or not
         return changesPromise.then(
-            function() { return work(); } ,
-            function() { return work(); }
+            () => work(),
+            () => work()
         )
-        .done(function() {
+        .done(() => {
             workWithBooksView.logEvent(
                 translations.text( "bookDeleted" , [book.bookNumber] ) );
         })
-        .fail(function(reason) {
+        .fail((reason) => {
             if ( !workWithBooksController.processCancelled ) {
                 workWithBooksView.logEvent( translations.text( "deletionFailed" , [ book.bookNumber , reason ] ) );
             }
@@ -158,7 +157,7 @@ const workWithBooksController = {
     downloadBook(booksDir: string , book: BookDownloadState, changesPromise: JQueryPromise<void>): JQueryPromise<void> {
 
         // Work to download the book
-        const work = function(): JQueryPromise<void> {
+        const work = (): JQueryPromise<void> => {
 
             if ( workWithBooksController.processCancelled ) {
                 // Process cancelled. Do nothing else
@@ -167,7 +166,7 @@ const workWithBooksController = {
 
             workWithBooksView.setCurrentWork(
                 translations.text( "downloadingBook" , [book.bookNumber] ) );
-            return book.downloadAsync(booksDir, function(percent) {
+            return book.downloadAsync(booksDir, (percent) => {
                 workWithBooksView.updateProgress(percent);
             });
 
@@ -175,14 +174,14 @@ const workWithBooksController = {
 
         // Chain always the next promise, it was failed the previous or not
         return changesPromise.then(
-            function() { return work(); } ,
-            function() { return work(); }
+            () => work(),
+            () => work()
         )
-        .done(function() {
+        .done(() => {
             workWithBooksView.logEvent(
                 translations.text( "bookDownloaded" , [book.bookNumber] ) );
         })
-        .fail(function(reason) {
+        .fail((reason) => {
             if ( !workWithBooksController.processCancelled ) {
                 workWithBooksView.logEvent( translations.text( "downloadFailed" , [ book.bookNumber , reason ] ) );
             }
@@ -193,7 +192,7 @@ const workWithBooksController = {
 
     updateUIAfterProcess(changesPromise: JQueryPromise<void>) {
 
-        const updateUI = function() {
+        const updateUI = () => {
             // Refresh the books list
             workWithBooksController.updateBooksList();
 
@@ -213,8 +212,8 @@ const workWithBooksController = {
         };
 
         changesPromise.then(
-            function() { updateUI(); },
-            function() { updateUI(); }
+            () => { updateUI(); },
+            () => { updateUI(); }
         );
     },
 
