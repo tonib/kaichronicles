@@ -1,4 +1,3 @@
-
 /**
  * The new game view API
  */
@@ -7,36 +6,36 @@ const newGameView = {
     setup(downloadedBooks: BookDownloadState[]) {
 
         // Set current language
-        $("#newgame-language").val( state.language );
+        $("#newgame-language").val(state.language);
 
         // Add supported books
         let html = "";
-        for ( let i = 0; i < downloadedBooks.length; i++) {
-            html += '<option value="' + downloadedBooks[i].bookNumber + '" >' +
-                downloadedBooks[i].bookNumber + ". " +
-                downloadedBooks[i].getTitle() + "</option>";
+        for (const book of downloadedBooks) {
+            html += '<option value="' + book.bookNumber + '" >' +
+                book.bookNumber + ". " +
+                book.getTitle() + "</option>";
         }
-        $("#newgame-book").html( html );
+        $("#newgame-book").html(html);
 
         // Form submit
-        $("#newgame-form").submit(function(e) {
+        $("#newgame-form").submit((e) => {
             e.preventDefault();
-            if ( !$("#newgame-license").prop("checked") ) {
-                alert( translations.text("youMustAgree") );
+            if (!$("#newgame-license").prop("checked")) {
+                alert(translations.text("youMustAgree"));
                 return;
             }
-            newGameController.startNewGame( $("#newgame-book").val() ,
-                $("#newgame-language").val() );
+            newGameController.startNewGame($("#newgame-book").val(),
+                $("#newgame-language").val());
         });
 
         // Book change
-        $("#newgame-book").change(function() {
-            newGameController.selectedBookChanged( $("#newgame-book").val() );
+        $("#newgame-book").change(() => {
+            newGameController.selectedBookChanged($("#newgame-book").val());
         });
 
         // Set the first book as selected:
-        if ( downloadedBooks.length > 0 ) {
-            newGameController.selectedBookChanged( downloadedBooks[0].bookNumber );
+        if (downloadedBooks.length > 0) {
+            newGameController.selectedBookChanged(downloadedBooks[0].bookNumber);
         }
     },
 
@@ -45,7 +44,7 @@ const newGameView = {
      * @param {string} url The cover URL
      */
     setCoverImage(url: string) {
-        if ( !cordovaApp.isRunningApp() ) {
+        if (!cordovaApp.isRunningApp()) {
             // Web: Clear the previous cover (PA server has a slow connection)
             $("#newgame-cover").attr("src", "");
         }
