@@ -1,5 +1,3 @@
-/// <reference path="../external.ts" />
-
 const mapView = {
 
     /**
@@ -52,10 +50,10 @@ const mapView = {
             $this.removeAttr( "height" );
             $this.toggleClass("originalsize");
         });
-        $("#map-increasezoom").click(function(e: Event) {
+        $("#map-increasezoom").click((e: Event) => {
             mapView.changeZoom(true, e);
         });
-        $("#map-decreasezoom").click(function(e: Event) {
+        $("#map-decreasezoom").click((e: Event) => {
             mapView.changeZoom(false, e);
         });
 
