@@ -1,5 +1,3 @@
-/// <reference path="../../external.ts" />
-
 /**
  * Translations table
  */
@@ -560,7 +558,7 @@ class Translations {
      * @param  $tags jQuery selector of tags to translate
      * @param table Translations table to use. If null, the current language will be used
      */
-    public translateTags( $tags: any , table: { [key: string]: string } = null ) {
+    public translateTags( $tags: JQuery<HTMLElement> , table: { [key: string]: string } = null ) {
 
         if ( !table ) {
             table = this[state.language];
@@ -573,8 +571,8 @@ class Translations {
         const $translatedTags = $tags
             .find("[data-translation]")
             .addBack("[data-translation]");
-        for (let i = 0; i < $translatedTags.length; i++ ) {
-            const $t = $($translatedTags[i]);
+        for (const translatedTag of $translatedTags.toArray()) {
+            const $t = $(translatedTag);
             const translationId = $t.attr("data-translation");
             const html = table[ translationId ];
             if ( html ) {
