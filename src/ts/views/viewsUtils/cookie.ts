@@ -21,15 +21,13 @@ class Cookie {
         const nameEQ = this.name + "=";
 
         const currentCookies = document.cookie.split(";");
-        for (let i = 0; i < currentCookies.length; i++) {
-            let c = currentCookies[i];
-
+        for (let c of currentCookies) {
             // Left trim
-            while (c.charAt(0) == " ") {
+            while (c.charAt(0) === " ") {
                 c = c.substring( 1 , c.length );
             }
 
-            if (c.indexOf(nameEQ) == 0) {
+            if (c.indexOf(nameEQ) === 0) {
                 return c.substring( nameEQ.length , c.length );
             }
         }
