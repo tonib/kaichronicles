@@ -1,4 +1,3 @@
-/// <reference path="../external.ts" />
 
 /**
  * Metadata about books and Project Aon web structure
