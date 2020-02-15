@@ -134,26 +134,26 @@ class Item {
 
         /** Number of items the object it occupies on the backpack */
         const txtItemCount: string = $o.attr("itemCount");
-        this.itemCount = txtItemCount ? parseInt( txtItemCount ) : 1;
+        this.itemCount = txtItemCount ? parseInt(txtItemCount) : 1;
 
         /** Number of usage of the object */
         const txtUsageCount: string = $o.attr("usageCount");
-        this.usageCount = txtUsageCount ? parseInt( txtUsageCount ) : 1;
+        this.usageCount = txtUsageCount ? parseInt(txtUsageCount) : 1;
 
         /** The translated object description */
         this.description = $o.find("description[lang=" + book.language + "]").text();
 
         // If it's the map, add description from the book:
-        if ( objectId == Item.MAP ) {
+        if (objectId == Item.MAP) {
             this.assignMapDescription(book);
         }
 
-        if ( this.itemCount != 1 ) {
+        if (this.itemCount != 1) {
             // Add description of the size used
-            if ( this.description ) {
+            if (this.description) {
                 this.description += " ";
             }
-            this.description += translations.text( "countAsObjects" , [this.itemCount] );
+            this.description += translations.text("countAsObjects" , [this.itemCount]);
         }
 
         // Extra description
@@ -167,52 +167,52 @@ class Item {
         this.weaponType = $o.attr("weaponType");
 
         // Object image
-        this.loadImageInfo( $o );
+        this.loadImageInfo($o);
 
         // Usage (only one use, and then the object is dropped)
         const $usage = $o.find("usage");
-        if ( $usage.length > 0 ) {
+        if ($usage.length > 0) {
             this.usage = {
                 cls: $usage.attr("class"),
-                increment: parseInt( $usage.attr("increment") )
+                increment: parseInt($usage.attr("increment"))
             };
         }
 
         // Effects (when the player carry the object)
         const $effects: any[] = $o.find("effect");
-        for ( const effect of $effects ) {
+        for (const effect of $effects) {
             const $effect = $(effect);
-            const increment = parseInt( $effect.attr("increment") );
+            const increment = parseInt($effect.attr("increment"));
             const cls: string = $effect.attr("class");
-            if ( cls == Item.COMBATSKILL ) {
+            if (cls == Item.COMBATSKILL) {
                 this.combatSkillEffect = increment;
-            } else if ( cls == Item.ENDURANCE ) {
+            } else if (cls == Item.ENDURANCE) {
                 this.enduranceEffect = increment;
             } else {
-                console.log( "Object " + this.id + ", wrong class effect: " + cls );
+                console.log("Object " + this.id + ", wrong class effect: " + cls);
             }
         }
 
         // Incompatibilities
-        this.incompatibleWith = mechanicsEngine.getArrayProperty( $o , "incompatibleWith" );
+        this.incompatibleWith = mechanicsEngine.getArrayProperty($o , "incompatibleWith");
 
     }
 
     private assignMapDescription(book: Book) {
         // Exception with book 11: The "map" section refers to "Northern Magnamund", no the real map at sect233
-        if ( book.bookNumber == 11) {
+        if (book.bookNumber == 11) {
             return;
         }
 
-        const mapSection = new Section( book , Book.MAP_SECTION , null);
-        if ( mapSection.exists() ) {
+        const mapSection = new Section(book , Book.MAP_SECTION , null);
+        if (mapSection.exists()) {
             this.description = mapSection.getTitleText();
         }
     }
 
     /** Returns true if the object is a weapon */
     public isWeapon(): boolean {
-        if ( this.weaponType ) {
+        if (this.weaponType) {
             return true;
         }
         return this.type == "weapon";
@@ -224,21 +224,21 @@ class Item {
      * @return True if the object is a weapon of the given type
      */
     public isWeaponType(weaponType: string): boolean {
-        if ( this.id == weaponType ) {
+        if (this.id == weaponType) {
             return true;
         }
-        if ( this.weaponType ) {
-            return this.weaponType.split("|").contains( weaponType );
+        if (this.weaponType) {
+            return this.weaponType.split("|").contains(weaponType);
         }
         return false;
     }
 
     /** Returns true if this is a hand-to-hand weapon (not a bow) */
     public isHandToHandWeapon(): boolean {
-        if ( !this.isWeapon() ) {
+        if (!this.isWeapon()) {
             return false;
         }
-        if ( this.id == "bow" || this.weaponType == "bow" ) {
+        if (this.id == "bow" || this.weaponType == "bow") {
             return false;
         }
         return true;
@@ -251,12 +251,12 @@ class Item {
      */
     public getImageUrl(): string {
 
-        if ( !this.imageUrl ) {
+        if (!this.imageUrl) {
             return null;
         }
 
         // Cordova app: Check if the book where is the image is downloaded
-        if ( !state.localBooksLibrary.isBookDownloaded( this.imageBookNumber ) ) {
+        if (!state.localBooksLibrary.isBookDownloaded(this.imageBookNumber)) {
             return null;
         }
 
@@ -267,19 +267,19 @@ class Item {
      * Get information about the image
      * @param {jQuery} $o XML node for object
      */
-    private loadImageInfo( $o: any ) {
+    private loadImageInfo($o: any) {
         const $image = $o.find("image");
-        if ( $image.length == 0 ) {
+        if ($image.length == 0) {
             return;
         }
 
         // Get the book number:
         const candidateBookNumbers: number[] = [];
         const txtBook: string = $image.attr("book");
-        for ( const txtBookNumber of txtBook.split("|") ) {
-            candidateBookNumbers.push( parseInt( txtBookNumber ) );
+        for (const txtBookNumber of txtBook.split("|")) {
+            candidateBookNumbers.push(parseInt(txtBookNumber));
         }
-        if ( candidateBookNumbers.length == 0 ) {
+        if (candidateBookNumbers.length == 0) {
             return;
         }
         candidateBookNumbers.sort();
@@ -289,15 +289,15 @@ class Item {
 
         if (candidateBookNumbers.length > 1) {
             // Choose the last played (or playing) book.
-            for ( let i = candidateBookNumbers.length - 1 ; i >= 0 ; i-- ) {
-                if ( state.book.bookNumber >= candidateBookNumbers[i] && state.localBooksLibrary.isBookDownloaded(candidateBookNumbers[i]) ) {
+            for (let i = candidateBookNumbers.length - 1 ; i >= 0 ; i--) {
+                if (state.book.bookNumber >= candidateBookNumbers[i] && state.localBooksLibrary.isBookDownloaded(candidateBookNumbers[i])) {
                     this.imageBookNumber = candidateBookNumbers[i];
                     break;
                 }
             }
         }
 
-        const imageBook = new Book( this.imageBookNumber , state.book.language );
-        this.imageUrl = imageBook.getIllustrationURL( $image.attr("name") );
+        const imageBook = new Book(this.imageBookNumber , state.book.language);
+        this.imageUrl = imageBook.getIllustrationURL($image.attr("name"));
     }
 }
