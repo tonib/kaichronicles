@@ -1,4 +1,3 @@
-/// <reference path="../external.ts" />
 
 /**
  * A book section info
@@ -12,8 +11,8 @@ class Section {
     public book: Book;
 
     /** The mechanics of the owner book.
-      * It can be null
-      */
+     * It can be null
+     */
     public mechanics: Mechanics;
 
     /** The jQuery handler for the section XML */
@@ -78,11 +77,11 @@ class Section {
      * Return the section number. null if it has no number
      */
     public getSectionNumber(): number {
-        if ( this.$xmlSection.attr("class") != "numbered" ) {
+        if ( this.$xmlSection.attr("class") !== "numbered" ) {
             return null;
         }
         // Id is "sectXXX"
-        return parseInt( this.sectionId.substring(4) );
+        return parseInt( this.sectionId.substring(4), 10 );
     }
 
     /**
@@ -113,7 +112,7 @@ class Section {
 
         const sNumber = this.getSectionNumber();
         if ( sNumber ) {
-            if ( sNumber == 1 ) {
+            if ( sNumber === 1 ) {
                 return "kaiwisdm";
             } else {
                 return "sect" + ( sNumber - 1 );
@@ -140,12 +139,12 @@ class Section {
      */
     public getCombats(): Combat[] {
         const result = [];
-        this.$xmlSection.find("combat").each(function(index, combat) {
+        this.$xmlSection.find("combat").each((index, combat) => {
             const $combat = $(combat);
             result.push( new Combat(
                 $combat.find("enemy").text(),
-                parseInt( SectionRenderer.getEnemyCombatSkill( $combat ).text() ),
-                parseInt( SectionRenderer.getEnemyEndurance( $combat ).text() )
+                parseInt( SectionRenderer.getEnemyCombatSkill( $combat ).text(), 10 ),
+                parseInt( SectionRenderer.getEnemyEndurance( $combat ).text(), 10 )
             ));
         });
         return result;
@@ -215,7 +214,7 @@ class Section {
      */
     public getFirstIllustrationHtml(): string {
         const $illustrations = this.$xmlSection.find( "illustration" );
-        if ( $illustrations.length == 0 ) {
+        if ( $illustrations.length === 0 ) {
             return "";
         }
         const $firstIll = $illustrations.first();
