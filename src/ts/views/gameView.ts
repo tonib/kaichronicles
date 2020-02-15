@@ -11,16 +11,16 @@ const gameView = {
      */
     updateNavigation(section: Section) {
         const $navButtons = $("#game-navSectionButtons");
-        if ( window.getUrlParameter("debug") || section.hasNavigation() ) {
+        if (window.getUrlParameter("debug") || section.hasNavigation()) {
             $navButtons.show();
         } else {
             $navButtons.hide();
         }
     },
 
-    enableLink( linkId: string, enabled: boolean ) {
+    enableLink(linkId: string, enabled: boolean) {
         const $nextLink = $(linkId);
-        if ( enabled ) {
+        if (enabled) {
             $nextLink.removeClass("disabled");
         } else {
             $nextLink.addClass("disabled");
@@ -40,13 +40,13 @@ const gameView = {
     /**
      * Set the current section content
      */
-    setSectionContent( section: Section ) {
+    setSectionContent(section: Section) {
         document.title = section.book.getBookTitle() + " - " +
             section.getTitleText();
-        $("#game-section-title").html( section.getTitleHtml() );
-        $("#game-section").html( section.getHtml() );
-        $("#game-aonLink-english").attr("href", section.getSectionAonPage("en") );
-        $("#game-aonLink-spanish").attr("href", section.getSectionAonPage("es") );
+        $("#game-section-title").html(section.getTitleHtml());
+        $("#game-section").html(section.getHtml());
+        $("#game-aonLink-english").attr("href", section.getSectionAonPage("en"));
+        $("#game-aonLink-spanish").attr("href", section.getSectionAonPage("es"));
     },
 
     /**
@@ -61,53 +61,53 @@ const gameView = {
         });
         $("#game-nextSection").click(function(e) {
             e.preventDefault();
-            if ( $(this).hasClass("disabled") ) {
+            if ($(this).hasClass("disabled")) {
                 return;
             }
             gameController.onNavigatePrevNext(+1);
         });
 
         // Show book copyright
-        $("#game-copyrights").html( state.book.getBookTitle() + "<br/>" + state.book.getCopyrightHtml() );
+        $("#game-copyrights").html(state.book.getBookTitle() + "<br/>" + state.book.getCopyrightHtml());
 
         // Setup debug options
-        if ( window.getUrlParameter("debug") == "true" ) {
+        if (window.getUrlParameter("debug") == "true") {
             $("#game-debugSection").show();
 
             $("#game-debugJump").submit(function(e) {
                 e.preventDefault();
-                gameController.loadSection( $("#game-debugNSection").val() );
+                gameController.loadSection($("#game-debugNSection").val());
             });
 
             $("#game-debugRandomTable").submit(function(e) {
                 e.preventDefault();
-                randomTable.nextValueDebug = parseInt( $("#game-debugRandomFix").val() );
-                console.log( "Next random table value set to " + randomTable.nextValueDebug );
+                randomTable.nextValueDebug = parseInt($("#game-debugRandomFix").val());
+                console.log("Next random table value set to " + randomTable.nextValueDebug);
                 $("#game-debugRandomFix").val("");
             });
 
             $("#game-resetSection").click(function(e) {
                 e.preventDefault();
-                state.sectionStates.resetSectionState( state.sectionStates.currentSection );
-                gameController.loadSection( state.sectionStates.currentSection );
+                state.sectionStates.resetSectionState(state.sectionStates.currentSection);
+                gameController.loadSection(state.sectionStates.currentSection);
             });
 
             $("#game-goDisciplines").click(function(e) {
                 e.preventDefault();
-                if ( state.sectionStates.currentSection == Book.DISCIPLINES_SECTION ) {
+                if (state.sectionStates.currentSection == Book.DISCIPLINES_SECTION) {
                     return;
                 }
 
                 // Keep the current section, to ease the go-back
-                $("#game-debugNSection").val( state.sectionStates.currentSection );
-                gameController.loadSection( Book.DISCIPLINES_SECTION );
+                $("#game-debugNSection").val(state.sectionStates.currentSection);
+                gameController.loadSection(Book.DISCIPLINES_SECTION);
             });
 
             $("#game-switchlanguage").click(function(e: Event) {
                 e.preventDefault();
-                settingsController.changeLanguage( state.book.language == "en" ? "es" : "en" , false )
+                settingsController.changeLanguage(state.book.language == "en" ? "es" : "en" , false)
                 .then(function() {
-                    gameController.loadSection( state.sectionStates.currentSection );
+                    gameController.loadSection(state.sectionStates.currentSection);
                 });
             });
         }
@@ -123,25 +123,25 @@ const gameView = {
      * - 'afterTitle': After section title
      */
     // appendToSection: function(html : any, afterChoices : boolean = false) {
-    appendToSection(html: any, where: string = "beforeChoices" ) {
+    appendToSection(html: any, where: string = "beforeChoices") {
 
-        if ( where == "beforeChoices" ) {
+        if (where == "beforeChoices") {
             // Try to add the html before the first choice:
             const $firstChoice = $("p.choice").first();
-            if ( $firstChoice.length > 0 ) {
+            if ($firstChoice.length > 0) {
                 $firstChoice.before(html);
                 return;
             }
         }
 
-        if ( where == "afterTitle" ) {
+        if (where == "afterTitle") {
             // Add at "game-section" top
             $("#game-section").prepend(html);
             return;
         }
 
         // After choices, or something failed with the location
-        if ( $("div.footnotes").length > 0 ) {
+        if ($("div.footnotes").length > 0) {
             // Add to the end, but before foot notes
             $("hr").first().before(html);
         } else {
@@ -157,8 +157,8 @@ const gameView = {
     bindChoiceLinks() {
         // This MUST to be "live" events and non static because HTML can be replaced by
         // by game rules
-        $("#game-section").off( "click" , ".choice a.choice-link" );
-        $("#game-section").on( "click" , ".choice a.choice-link" , function(e) {
+        $("#game-section").off("click" , ".choice a.choice-link");
+        $("#game-section").on("click" , ".choice a.choice-link" , function(e) {
             gameView.choiceLinkClicked(e, this);
         });
 
@@ -166,7 +166,7 @@ const gameView = {
     },
 
     bindCombatTablesLinks() {
-        $(".crtable").click( function(e) {
+        $(".crtable").click(function(e) {
             e.preventDefault();
             template.showCombatTables();
         });
@@ -180,14 +180,14 @@ const gameView = {
         e.preventDefault();
 
         // Validate money picker, if there is. If its not valid, don't follow with this link
-        if ( !numberPickerMechanics.isValid() ) {
+        if (!numberPickerMechanics.isValid()) {
             return;
         }
 
         const section = $(link).attr("data-section");
         // console.log('Jump to section ' + section);
-        if ( section ) {
-            gameController.loadSection( section , true );
+        if (section) {
+            gameController.loadSection(section , true);
         }
     },
 
@@ -200,17 +200,17 @@ const gameView = {
         let linksHtml = "";
         for (let i = 0; i < sectionIds.length; i++) {
             // Ignore index of numbered sections
-            if ( sectionIds[i] == "numbered" ) {
+            if (sectionIds[i] == "numbered") {
                 continue;
             }
 
-            if ( linksHtml ) {
+            if (linksHtml) {
                 linksHtml += ", ";
             }
             linksHtml += '<a href="#" class="action choice-link" data-section="' +
                 sectionIds[i] + '">' + sectionIds[i] + "</a>";
         }
-        $("#game-sourceSections").html( linksHtml );
+        $("#game-sourceSections").html(linksHtml);
         $("#game-sourceSections a").click(function(e) {
             gameView.choiceLinkClicked(e, this);
         });
