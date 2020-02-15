@@ -8,37 +8,37 @@ const mainMenuView = {
         document.title = translations.text("kaiChronicles");
 
         // TODO: Use translation on mainMenu.html instead of this ?
-        if ( state.language == "es" ) {
+        if ( state.language === "es" ) {
             $("#menu-translate").text("English");
         } else {
             $("#menu-translate").text("Español");
         }
 
-        $("#menu-continue").click(function(e) {
+        $("#menu-continue").click((e) => {
             e.preventDefault();
             routing.redirect("setup");
         });
-        $("#menu-new").click(function(e) {
+        $("#menu-new").click((e) => {
             e.preventDefault();
             routing.redirect("newGame");
         });
-        $("#menu-load").click(function(e) {
+        $("#menu-load").click((e) => {
             e.preventDefault();
             routing.redirect("loadGame");
         });
-        $("#menu-translate").click(function(e) {
+        $("#menu-translate").click((e) => {
             e.preventDefault();
             mainMenuController.changeTranslation();
         });
-        $("#menu-color-theme").click(function(e) {
+        $("#menu-color-theme").click((e) => {
             e.preventDefault();
             mainMenuController.changeColor();
         });
-        $("#menu-faq").click(function(e) {
+        $("#menu-faq").click((e) => {
             e.preventDefault();
             routing.redirect("faq");
         });
-        $("#menu-privacy").click(function(e) {
+        $("#menu-privacy").click((e) => {
             e.preventDefault();
             routing.redirect("privacy");
         });
@@ -48,7 +48,7 @@ const mainMenuView = {
         // Switch this to test the "Download books" view with the web browser
         // if( true ) {
         if ( cordovaApp.isRunningApp() ) {
-            $("#menu-downloadbooks").click(function(e) {
+            $("#menu-downloadbooks").click((e) => {
                 e.preventDefault();
                 routing.redirect("workWithBooks");
             });
