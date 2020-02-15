@@ -1,4 +1,3 @@
-/// <reference path="../external.ts" />
 
 class CombatTurn {
 
@@ -18,29 +17,29 @@ class CombatTurn {
     public enemyMultiplier: number;
 
     /** Enemy EP base loss.
-      * It can be a number or combatTable_DEATH
-      */
+     * It can be a number or combatTable_DEATH
+     */
     public enemyBase: any;
 
     /** Enemy extra loss */
     public enemyExtra: number;
 
     /** The enemy total loss.
-      * It can be a number or combatTable_DEATH
-      */
+     * It can be a number or combatTable_DEATH
+     */
     public enemy: any;
 
     /** The player base loss.
-      * It can be a number or combatTable_DEATH
-      */
+     * It can be a number or combatTable_DEATH
+     */
     public loneWolfBase: any;
 
     /** Player extra loss */
     public loneWolfExtra: number;
 
     /** Player total loss.
-      * It can be a number or combatTable_DEATH
-      */
+     * It can be a number or combatTable_DEATH
+     */
     public loneWolf: any;
 
     /** Text with the player loss */
@@ -85,9 +84,9 @@ class CombatTurn {
         this.enemyBase = ( ( elude || combat.enemyImmuneTurns >= this.turnNumber ) ? 0 : tableResult[0] );
         /** The enemy loss */
         this.enemy = CombatTurn.applyMultiplier( this.enemyBase , this.dammageMultiplier );
-        /** Enemy extra loss (combat.enemyTurnLoss is negative)*/
+        /** Enemy extra loss (combat.enemyTurnLoss is negative) */
         this.enemyExtra = combat.enemyTurnLoss;
-        if ( this.enemy != combatTable_DEATH) {
+        if ( this.enemy !== combatTable_DEATH) {
             this.enemy -= combat.enemyTurnLoss;
         }
 
@@ -98,30 +97,30 @@ class CombatTurn {
 
         // Player extra loss
         this.loneWolfExtra = 0;
-        if ( this.loneWolf != combatTable_DEATH && combat.mindforceEP < 0 && !state.actionChart.hasMindShield() ) {
+        if ( this.loneWolf !== combatTable_DEATH && combat.mindforceEP < 0 && !state.actionChart.hasMindShield() ) {
             // Enemy mind force attack (combat.mindforceEP is negative):
-            if ( this.loneWolf != combatTable_DEATH) {
+            if ( this.loneWolf !== combatTable_DEATH) {
                 this.loneWolf -= combat.mindforceEP;
             }
             this.loneWolfExtra = combat.mindforceEP;
         }
-        if ( this.loneWolf != combatTable_DEATH) {
+        if ( this.loneWolf !== combatTable_DEATH) {
             // Extra loss per turn
             this.loneWolf -= combat.turnLoss;
             // Extra loss if wounded on this turn
-            if ( this.loneWolfBase != 0 ) {
+            if ( this.loneWolfBase !== 0 ) {
                 this.loneWolf -= combat.turnLossIfWounded;
             }
         }
         this.loneWolfExtra += combat.turnLoss;
-        if ( this.loneWolfBase != 0 ) {
+        if ( this.loneWolfBase !== 0 ) {
             this.loneWolfExtra += combat.turnLossIfWounded;
         }
 
         // Psi-surge loss
         if ( combat.psiSurge ) {
             const psiSurgeLoss = Combat.psiSurgeTurnLoss();
-            if ( this.loneWolf != combatTable_DEATH ) {
+            if ( this.loneWolf !== combatTable_DEATH ) {
                 this.loneWolf += psiSurgeLoss;
             }
             this.loneWolfExtra -= psiSurgeLoss;
@@ -130,7 +129,7 @@ class CombatTurn {
         // Kai-surge loss
         if ( combat.kaiSurge ) {
             const kaiSurgeLoss = Combat.kaiSurgeTurnLoss();
-            if ( this.loneWolf != combatTable_DEATH ) {
+            if ( this.loneWolf !== combatTable_DEATH ) {
                 this.loneWolf += kaiSurgeLoss;
             }
             this.loneWolfExtra -= kaiSurgeLoss;
@@ -166,7 +165,7 @@ class CombatTurn {
      * @param {string|number} loss It can be a number with the loss, or combatTable_DEATH
      */
     public static translateLoss(loss: any): string {
-        return loss == combatTable_DEATH ? translations.text( "deathLetter" ) : loss.toString();
+        return loss === combatTable_DEATH ? translations.text( "deathLetter" ) : loss.toString();
     }
 
     /**
@@ -174,13 +173,13 @@ class CombatTurn {
      */
     public static lossText( base: any , multiplier: number, extra: number, finalLoss: any ): string {
         let loss = CombatTurn.translateLoss( base );
-        if ( multiplier != 1 ) {
+        if ( multiplier !== 1 ) {
             loss = loss + " x " + multiplier;
         }
         if ( extra !== 0 ) {
             loss += " + " + ( - extra );
         }
-        if ( multiplier != 1 || extra !== 0 ) {
+        if ( multiplier !== 1 || extra !== 0 ) {
             loss += " = " + CombatTurn.translateLoss( finalLoss );
         }
         return loss;
@@ -199,7 +198,7 @@ class CombatTurn {
             return 0;
         }
 
-        if ( enduranceLoss != combatTable_DEATH ) {
+        if ( enduranceLoss !== combatTable_DEATH ) {
             // Apply the dammage multiplier
             enduranceLoss = Math.floor( enduranceLoss * multiplier );
         }
