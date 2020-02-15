@@ -1,4 +1,3 @@
-/// <reference path="../external.ts" />
 
 /**
  * Only for Cordova app.
@@ -37,9 +36,9 @@ class LocalBooksLibrary {
      */
     public getDownloadedBooks(): BookDownloadState[] {
         const result = [];
-        for (let i = 0; i < this.booksLibrary.length; i++) {
-            if ( this.booksLibrary[i].downloaded ) {
-                result.push( this.booksLibrary[i] );
+        for (const book of this.booksLibrary) {
+            if ( book.downloaded ) {
+                result.push( book );
             }
         }
         return result;
@@ -64,7 +63,7 @@ class LocalBooksLibrary {
      */
     public static getBooksDirectoryAsync(): JQueryPromise<any> {
         return cordovaFS.requestFileSystemAsync()
-        .then(function(fs: any) {
+        .then((fs: any) => {
             return cordovaFS.getDirectoryAsync(fs.root, "books", { create: true });
         });
     }
@@ -81,12 +80,11 @@ class LocalBooksLibrary {
             return jQuery.Deferred<void>().resolve().promise();
         }
 
-        const self = this;
         console.log("Resolving books directory");
         return LocalBooksLibrary.getBooksDirectoryAsync()
-            .then(function(booksDirEntry) {
-                self.BOOKS_PATH = booksDirEntry.toURL();
-                console.log("Books are at " + self.BOOKS_PATH );
+            .then((booksDirEntry) => {
+                this.BOOKS_PATH = booksDirEntry.toURL();
+                console.log("Books are at " + this.BOOKS_PATH );
             });
     }
 
@@ -102,12 +100,11 @@ class LocalBooksLibrary {
         }
 
         // Cordova app: Check downloaded books
-        const self = this;
         return LocalBooksLibrary.getBooksDirectoryAsync()
-        .then( function(booksDir) {
+        .then( (booksDir) => {
             const promises = [];
             // Start each book check
-            self.booksLibrary.forEach( function(book) {
+            this.booksLibrary.forEach( (book) => {
                 promises.push( book.checkDownloadStateAsync(booksDir) );
             });
 
@@ -122,10 +119,9 @@ class LocalBooksLibrary {
      * @return The resolution promise
      */
     public setupAsync(): JQueryPromise<void> {
-        const self = this;
         return this.resolveBooksDirectoryAsync()
-        .then(function() {
-            return self.updateBooksDownloadStateAsync();
+        .then(() => {
+            return this.updateBooksDownloadStateAsync();
         });
     }
 
