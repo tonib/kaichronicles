@@ -2,6 +2,7 @@
 /**
  * jQuery functions for number fields
  */
+// tslint:disable-next-line: only-arrow-functions
 (function( $ ) {
 
     /**
@@ -12,7 +13,7 @@
         if ( !txtVal ) {
             return 0;
         }
-        return parseInt( txtVal );
+        return parseInt( txtVal, 10 );
     };
 
     /**
@@ -35,7 +36,7 @@
      */
     $.fn.bindNumberEvents = function() {
         const self = this;
-        this.parent().find("button.add-number").click(function(e) {
+        this.parent().find("button.add-number").click((e) => {
             e.preventDefault();
             let n = self.getNumber();
             if ( isNaN(n) ) {
@@ -46,7 +47,7 @@
                 self.setNumber(n);
             }
         });
-        this.parent().find("button.sub-number").click(function(e) {
+        this.parent().find("button.sub-number").click((e) => {
             e.preventDefault();
             let n = self.getNumber();
             if ( isNaN(n) ) {
@@ -57,7 +58,7 @@
                 self.setNumber(n);
             }
         });
-        this.change(function() {
+        this.change(() => {
             self.fireValueChanged();
         });
     };
@@ -79,7 +80,7 @@
      * Returns the minimum value for this field
      */
     $.fn.getMinValue = function() {
-        const min = parseInt( this.attr("min") );
+        const min = parseInt( this.attr("min"), 10 );
         if ( isNaN(min) ) {
             return -99999999;
         }
@@ -90,7 +91,7 @@
      * Returns the maximum value for this field
      */
     $.fn.getMaxValue = function() {
-        const max = parseInt( this.attr("max") );
+        const max = parseInt( this.attr("max"), 10 );
         if ( isNaN(max) ) {
             return 99999999;
         }
@@ -101,28 +102,28 @@
      * Return true if the number is valid
      */
     $.fn.isValid = function() {
-        const number = this.getNumber();
+        const num = this.getNumber();
 
-        if ( isNaN(number) ) {
+        if ( isNaN(num) ) {
             alert( translations.text("npWrongValue" , [this.getTitle()] ) );
             return false;
         }
 
         const min = this.getMinValue();
-        if ( number < min ) {
+        if ( num < min ) {
             alert( translations.text( "npMinValue" , [ this.getTitle() , min ] ) );
             return false;
         }
 
         const max = this.getMaxValue();
-        if ( number > max ) {
+        if ( num > max ) {
             alert( translations.text( "npMaxValue" , [ this.getTitle() , max ] ) );
             return false;
         }
 
-        if ( this.attr("data-ismoneypicker") == "true" ) {
+        if ( this.attr("data-ismoneypicker") === "true" ) {
             // Check if you have enough money
-            if ( state.actionChart.beltPouch < number) {
+            if ( state.actionChart.beltPouch < num) {
                 alert( translations.text( "noEnoughMoney" ) );
                 return false;
             }
