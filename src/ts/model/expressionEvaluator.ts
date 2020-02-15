@@ -194,6 +194,7 @@ class ExpressionEvaluator {
     private static eval( expression: string ): any {
         try {
             expression = ExpressionEvaluator.doReplacements( expression );
+            // tslint:disable-next-line: no-eval
             return eval( expression );
         } catch (e) {
             mechanicsEngine.debugWarning("Error evaluating expression " + expression + ": " + e);
