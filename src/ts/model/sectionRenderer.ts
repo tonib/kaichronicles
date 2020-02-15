@@ -1,4 +1,3 @@
-/// <reference path="../external.ts" />
 
 /*
  * This file contains code taken from Lone Wolf Adventures,
@@ -6,8 +5,8 @@
  */
 
  /**
- * Tool to transform the book XML to HTML
- */
+  * Tool to transform the book XML to HTML
+  */
 class SectionRenderer {
 
     /**
@@ -22,7 +21,7 @@ class SectionRenderer {
     /**
      * The footnotes HTML.
      * The key is the foot note id, and the value is the foot note HTML
-     * */
+     */
     private footNotes: Array< { [id: string]: string } > = [];
 
     /**
@@ -80,7 +79,7 @@ class SectionRenderer {
      * @param level The nesting level index of the tag
      * @return The HTML
      */
-    public renderNodeChildren($tag: any, level: number ): string {
+    public renderNodeChildren($tag: JQuery<Element>, level: number ): string {
 
         // The HTML to return
         let sectionContent = "";
@@ -88,16 +87,14 @@ class SectionRenderer {
         // Traverse all child elements, except separated sections
         // var children = $tag.contents().not('section.frontmatter-separate');
         const children = $tag.contents();
-        for ( let i = 0; i < children.length; i++ ) {
-            const node = children[i];
-
-            if ( node.nodeType == 3 ) {
+        for (const node of children.toArray() ) {
+            if ( node.nodeType === 3 ) {
                 // Text node
                 sectionContent += node.textContent;
                 continue;
             }
 
-            if ( node.nodeType != 1 ) {
+            if ( node.nodeType !== 1 ) {
                 // Not a node, skip it
                 continue;
             }
@@ -109,7 +106,7 @@ class SectionRenderer {
 
             const $node = $(node);
 
-            if ( tagName == "section" && $node.attr("class") == "frontmatter-separate" ) {
+            if ( tagName === "section" && $node.attr("class") === "frontmatter-separate" ) {
                 // Ignore separated sections
                 continue;
             }
@@ -165,7 +162,7 @@ class SectionRenderer {
     // PLAIN TEXT RENDERING
     ////////////////////////////////////////////////////////
 
-    /** Render node as plain text*/
+    /** Render node as plain text */
     private renderPlainText = function($node: any, level: number): string {
         return this.renderNodeChildren( $node , level );
     };
@@ -235,7 +232,7 @@ class SectionRenderer {
     private getHtmlFootRef(id: string ): string {
         this.renderedFootNotesRefs.push( id );
         for (let i = 0, len = this.footNotes.length; i < len; i++) {
-            if ( this.footNotes[i].id == id ) {
+            if ( this.footNotes[i].id === id ) {
                 return "<sup>" + (i + 1) + "</sup>";
             }
         }
@@ -275,7 +272,7 @@ class SectionRenderer {
     private typ($typ: any , level: number): string {
 
         const html = this.renderNodeChildren( $typ , level );
-        if ( $typ.attr("class") == "attribute" ) {
+        if ( $typ.attr("class") === "attribute" ) {
             return '<span class="attribute">' + html + "</span>";
         } else {
             return html;
@@ -293,7 +290,7 @@ class SectionRenderer {
         // Check if it's a anchor target id
         if ( $a.attr("id") ) {
             // Check if its a foot note target
-            if ( $a.attr("class") == "footnote" ) {
+            if ( $a.attr("class") === "footnote" ) {
                 // It is. Render its content and the reference to the foot note
                 return this.renderNodeChildren( $a , level ) + this.getHtmlFootRef( $a.attr("idref") );
             }
@@ -489,15 +486,15 @@ class SectionRenderer {
 
     public static getEnemyEndurance( $combat: any ): any {
         let $enduranceAttr = $combat.find("enemy-attribute[class=endurance]");
-        if ( $enduranceAttr.length == 0 ) {
+        if ( $enduranceAttr.length === 0 ) {
             // Book 6 / sect26: The endurance attribute is "target"
             $enduranceAttr = $combat.find("enemy-attribute[class=target]");
         }
-        if ( $enduranceAttr.length == 0 ) {
+        if ( $enduranceAttr.length === 0 ) {
             // Book 6 / sect156: The endurance attribute is "resistance"
             $enduranceAttr = $combat.find("enemy-attribute[class=resistance]");
         }
-        if ( $enduranceAttr.length == 0 ) {
+        if ( $enduranceAttr.length === 0 ) {
             // Book 9 / sect3 (Spanish version bug)
             $enduranceAttr = $combat.find("enemy-attribute[class=RESISTENCIA]");
         }
@@ -506,7 +503,7 @@ class SectionRenderer {
 
     public static getEnemyCombatSkill( $combat: any ): any {
         let $cs = $combat.find(".combatskill");
-        if ( $cs.length == 0 ) {
+        if ( $cs.length === 0 ) {
             // Book 9 / sect3 (Spanish version bug)
             $cs = $combat.find('enemy-attribute[class="DESTREZA EN EL COMBATE"]');
         }
