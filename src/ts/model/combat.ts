@@ -160,7 +160,7 @@ class Combat {
      */
     public getCurrentCombatSkill(): number {
         let cs = state.actionChart.combatSkill;
-        for ( const bonus of this.getCSBonuses() ) {
+        for (const bonus of this.getCSBonuses()) {
             cs += bonus.increment;
         }
         return cs;
@@ -173,28 +173,28 @@ class Combat {
     public getCSBonuses(): Bonus[] {
         const bonuses: Bonus[] = [];
 
-        for ( const bonus of state.actionChart.getCurrentCombatSkillBonuses(this) ) {
-            bonuses.push( bonus );
+        for (const bonus of state.actionChart.getCurrentCombatSkillBonuses(this)) {
+            bonuses.push(bonus);
         }
 
-        if ( this.combatModifier ) {
+        if (this.combatModifier) {
             bonuses.push({
                 increment : this.combatModifier,
-                concept : translations.text( "sectionModifier" )
+                concept : translations.text("sectionModifier")
             });
         }
 
-        if ( !this.mentalOnly && this.objectsUsageModifier ) {
+        if (!this.mentalOnly && this.objectsUsageModifier) {
             bonuses.push({
                 increment : this.objectsUsageModifier,
-                concept : translations.text( "objectsUse" )
+                concept : translations.text("objectsUse")
             });
         }
 
-        if ( this.mindforceCS < 0 && !state.actionChart.hasMindShield() ) {
+        if (this.mindforceCS < 0 && !state.actionChart.hasMindShield()) {
             bonuses.push({
                 increment : this.mindforceCS,
-                concept : translations.text( "enemyMindblast" )
+                concept : translations.text("enemyMindblast")
             });
         }
 
@@ -213,7 +213,7 @@ class Combat {
      * @param elude True if the player is eluding the combat
      * @return Promise with the next CombatTurn
      */
-    public nextTurnAsync( elude: boolean ): JQueryPromise<CombatTurn> {
+    public nextTurnAsync(elude: boolean): JQueryPromise<CombatTurn> {
 
         const dfd = jQuery.Deferred<CombatTurn>();
 
@@ -221,21 +221,21 @@ class Combat {
         const self = this;
         randomTable.getRandomValueAsync()
         .then(function(randomValue) {
-            const helshezagUsed = ( state.actionChart.getSelectedWeapon() == Item.HELSHEZAG );
-            const turn = new CombatTurn( self, randomValue, elude , helshezagUsed );
-            self.turns.push( turn );
+            const helshezagUsed = (state.actionChart.getSelectedWeapon() == Item.HELSHEZAG);
+            const turn = new CombatTurn(self, randomValue, elude , helshezagUsed);
+            self.turns.push(turn);
             dfd.resolve(turn);
         });
 
         return dfd.promise();
     }
 
-    public static applyLoss( currentEndurance: number , loss: any ): number {
-        if ( loss == combatTable_DEATH ) {
+    public static applyLoss(currentEndurance: number , loss: any): number {
+        if (loss == combatTable_DEATH) {
             return 0;
         } else {
             currentEndurance -= loss;
-            if ( currentEndurance < 0 ) {
+            if (currentEndurance < 0) {
                 currentEndurance = 0;
             }
             return currentEndurance;
@@ -247,21 +247,21 @@ class Combat {
      * @param turn The current played turn
      * @returns True if the player should lose 1 EP on this turn
      */
-    private checkHelshezagPermanentLoss( turn: CombatTurn ): boolean {
+    private checkHelshezagPermanentLoss(turn: CombatTurn): boolean {
 
-        if ( !turn.helshezagUsed ) {
+        if (!turn.helshezagUsed) {
             // Helshezag not used on this turn
             return false;
         }
 
         // Helshezag effects do not apply on book 12 / sect133
-        if ( state.book.bookNumber == 12 && state.sectionStates.currentSection == "sect133" ) {
+        if (state.book.bookNumber == 12 && state.sectionStates.currentSection == "sect133") {
             return false;
         }
 
         // Check if this is the second or subsequent turn where the Helshezag was used on this combat
-        for ( let i = 0; i < ( turn.turnNumber - 1 ) ; i++ ) {
-            if ( this.turns[i].helshezagUsed ) {
+        for (let i = 0; i < (turn.turnNumber - 1) ; i++) {
+            if (this.turns[i].helshezagUsed) {
                 return true;
             }
         }
@@ -272,41 +272,41 @@ class Combat {
      * Apply the combat turn effects
      * @param turn The turn to apply
      */
-    public applyTurn( turn: CombatTurn ) {
+    public applyTurn(turn: CombatTurn) {
 
         // Apply player damages:
-        if ( turn.loneWolf == combatTable_DEATH ) {
+        if (turn.loneWolf == combatTable_DEATH) {
             state.actionChart.currentEndurance = 0;
         } else {
 
             // Aply dammage
-            state.actionChart.increaseEndurance( -turn.loneWolf , this.permanentDammage );
+            state.actionChart.increaseEndurance(-turn.loneWolf , this.permanentDammage);
 
             // If dammage is permanent, display a toast
-            if ( this.permanentDammage ) {
-                actionChartController.displayEnduranceChangeToast( -turn.loneWolf , true );
+            if (this.permanentDammage) {
+                actionChartController.displayEnduranceChangeToast(-turn.loneWolf , true);
             }
 
-            if ( this.checkHelshezagPermanentLoss( turn ) ) {
+            if (this.checkHelshezagPermanentLoss(turn)) {
                 // Apply a permanent -1 EP due to Helshezag use
-                actionChartController.increaseEndurance( -1 , false , true );
+                actionChartController.increaseEndurance(-1 , false , true);
             }
         }
 
         // Apply enemy damages:
-        this.endurance = Combat.applyLoss( this.endurance , turn.enemy );
+        this.endurance = Combat.applyLoss(this.endurance , turn.enemy);
 
         // Check if the combat has been finished
-        if ( turn.elude || this.endurance === 0 || state.actionChart.currentEndurance === 0 ) {
+        if (turn.elude || this.endurance === 0 || state.actionChart.currentEndurance === 0) {
             this.combatFinished = true;
-            if ( this.fakeCombat ) {
+            if (this.fakeCombat) {
                 // Restore player endurance to original :
                 let epToRestore = this.originalPlayerEndurance - state.actionChart.currentEndurance;
                 // Apply the factor
-                epToRestore = Math.floor( this.fakeRestoreFactor * epToRestore );
+                epToRestore = Math.floor(this.fakeRestoreFactor * epToRestore);
                 // If you call this, the endurance on the UI is not updated
                 // state.actionChart.increaseEndurance( epToRestore );
-                actionChartController.increaseEndurance( epToRestore );
+                actionChartController.increaseEndurance(epToRestore);
             }
         }
     }
@@ -323,16 +323,16 @@ class Combat {
      * Returns true if the combat can be eluded right now
      */
     public canBeEluded(): boolean {
-        if ( this.eludeTurn < 0 || this.isFinished() ) {
+        if (this.eludeTurn < 0 || this.isFinished()) {
             return false;
         }
-        if ( this.turns.length < this.eludeTurn ) {
+        if (this.turns.length < this.eludeTurn) {
             return false;
         }
-        if ( this.maxEludeTurn >= 0 && this.turns.length > this.maxEludeTurn ) {
+        if (this.maxEludeTurn >= 0 && this.turns.length > this.maxEludeTurn) {
             return false;
         }
-        if ( this.eludeEnemyEP > 0 && this.endurance > this.eludeEnemyEP ) {
+        if (this.eludeEnemyEP > 0 && this.endurance > this.eludeEnemyEP) {
             return false;
         }
         return true;
@@ -343,9 +343,9 @@ class Combat {
      */
     public playerEnduranceLost(): number {
         let lost = 0;
-        for ( let i = 0, len = this.turns.length; i < len; i++) {
+        for (let i = 0, len = this.turns.length; i < len; i++) {
             const turn = this.turns[i];
-            if ( turn.loneWolf == combatTable_DEATH ) {
+            if (turn.loneWolf == combatTable_DEATH) {
                 lost += state.actionChart.getMaxEndurance();
             } else {
                 lost += turn.loneWolf;
@@ -359,9 +359,9 @@ class Combat {
      */
     public enemyEnduranceLost(): number {
         let lost = 0;
-        for ( let i = 0, len = this.turns.length; i < len; i++) {
+        for (let i = 0, len = this.turns.length; i < len; i++) {
             const turn = this.turns[i];
-            if ( turn.enemy == combatTable_DEATH ) {
+            if (turn.enemy == combatTable_DEATH) {
                 lost += this.originalEndurance;
             } else {
                 lost += turn.enemy;
@@ -374,7 +374,7 @@ class Combat {
      * Returns true if the player can NOT use any weapon on the current turn
      */
     public noWeaponCurrentTurn(): boolean {
-        if ( this.noWeaponTurns < 0 ) {
+        if (this.noWeaponTurns < 0) {
             // All turns no weapon
             return true;
         }
@@ -399,7 +399,7 @@ class Combat {
             ENDURANCE score falls to 4 points or below.
         */
         let bonus = +4;
-        if ( (state.book.isMagnakaiBook() && state.actionChart.disciplines.length >= 9) || state.book.isGrandMasterBook() ) {
+        if ((state.book.isMagnakaiBook() && state.actionChart.disciplines.length >= 9) || state.book.isGrandMasterBook()) {
             bonus = +6;
         }
         return bonus;
@@ -409,9 +409,9 @@ class Combat {
     public static defaultMindblastBonus(): number {
         // See defaultPsiSurgeBonus comment
         let bonus = +2;
-        if ( state.book.isMagnakaiBook() && state.actionChart.disciplines.length >= 9 ) {
+        if (state.book.isMagnakaiBook() && state.actionChart.disciplines.length >= 9) {
             bonus = +3;
-        } else if ( state.book.isGrandMasterBook() ) {
+        } else if (state.book.isGrandMasterBook()) {
             bonus = +4;
         }
         return bonus;
@@ -421,7 +421,7 @@ class Combat {
     public static psiSurgeTurnLoss(): number {
         // See defaultPsiSurgeBonus comment
         let loss = 2;
-        if ( (state.book.isMagnakaiBook() && state.actionChart.disciplines.length >= 9) || state.book.isGrandMasterBook() ) {
+        if ((state.book.isMagnakaiBook() && state.actionChart.disciplines.length >= 9) || state.book.isGrandMasterBook()) {
             loss = 1;
         }
         return loss;
@@ -437,7 +437,7 @@ class Combat {
     public static minimumEPForPsiSurge(): number {
         // See defaultPsiSurgeBonus comment
         let min = 6;
-        if ( (state.book.isMagnakaiBook() && state.actionChart.disciplines.length >= 9) || state.book.isGrandMasterBook() ) {
+        if ((state.book.isMagnakaiBook() && state.actionChart.disciplines.length >= 9) || state.book.isGrandMasterBook()) {
             min = 4;
         }
         return min;
