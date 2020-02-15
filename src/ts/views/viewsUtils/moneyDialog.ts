@@ -11,14 +11,14 @@ class MoneyDialog {
         // Update bounds and initial value
         if (drop) {
             $("#mechanics-moneyamount")
-            .attr("max", state.actionChart.beltPouch)
-            .val("1");
+                .attr("max", state.actionChart.beltPouch)
+                .val("1");
             $("#mechanics-moneyamount").attr("data-ismoneypicker", "true");
         } else {
             const sectionMoney = state.sectionStates.getSectionState().getAvailableMoney();
             $("#mechanics-moneyamount")
-            .attr("max", sectionMoney)
-            .val(sectionMoney);
+                .attr("max", sectionMoney)
+                .val(sectionMoney);
             $("#mechanics-moneyamount").attr("data-ismoneypicker", "false");
         }
 
@@ -26,13 +26,13 @@ class MoneyDialog {
 
         // Update translations
         const title = (drop ? "dropMoney" : "pickMoney");
-        $("#mechanics-moneytitle").attr("data-translation" , title);
-        $("#mechanics-moneyapply").attr("data-translation" , title);
+        $("#mechanics-moneytitle").attr("data-translation", title);
+        $("#mechanics-moneyapply").attr("data-translation", title);
         translations.translateTags($dlg);
 
         // Show
         $dlg
-            .prop("data-isdrop" , drop)
+            .prop("data-isdrop", drop)
             .modal("show");
     }
 
@@ -50,7 +50,7 @@ class MoneyDialog {
         $("#mechanics-moneyamount").bindNumberEvents();
 
         // Bind drop money confirmation button
-        $("#mechanics-moneyapply").click(function(e: Event) {
+        $("#mechanics-moneyapply").click((e: Event) => {
             e.preventDefault();
             MoneyDialog.onDialogConfirmed();
         });
@@ -67,12 +67,12 @@ class MoneyDialog {
         const moneyAmount = $moneyAmount.getNumber();
         if ($("#mechanics-moneydialog").prop("data-isdrop")) {
             // Drop
-            actionChartController.increaseMoney(- moneyAmount , true);
+            actionChartController.increaseMoney(- moneyAmount, true);
         } else {
             // Pick
             const countPicked = actionChartController.increaseMoney(moneyAmount);
             const sectionState = state.sectionStates.getSectionState();
-            sectionState.removeObjectFromSection(Item.MONEY , 0 , countPicked);
+            sectionState.removeObjectFromSection(Item.MONEY, 0, countPicked);
             // Re-render section
             mechanicsEngine.showAvailableObjects();
         }
