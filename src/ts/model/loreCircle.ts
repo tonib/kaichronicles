@@ -1,4 +1,3 @@
-/// <reference path="../external.ts" />
 
 /**
  * Lore-circles for Magnakai disciplines
@@ -102,7 +101,7 @@ class LoreCircle {
         const circles = LoreCircle.getCircles( disciplines );
         const bonuses: Bonus[] = [];
         for ( const c of circles ) {
-            const bonusValue = ( type == "CS" ? c.bonusCS : c.bonusEP );
+            const bonusValue = ( type === "CS" ? c.bonusCS : c.bonusEP );
             if ( bonusValue > 0 ) {
                 bonuses.push({
                     concept: c.getDescription(),
@@ -123,7 +122,7 @@ class LoreCircle {
         LoreCircle.initializeCircles();
 
         for ( const c of LoreCircle.circles ) {
-            if ( c.id == circleId ) {
+            if ( c.id === circleId ) {
                 return c;
             }
         }
