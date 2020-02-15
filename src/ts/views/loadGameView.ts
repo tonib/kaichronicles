@@ -29,10 +29,10 @@ const loadGameView = {
     addFilesToList(fileNames: string[]) {
 
         let html = "";
-        if ( fileNames.length == 0 ) {
-            html += "<tr><td><i>" + translations.text( "noSavedGames" ) + "</i></td></tr>";
+        if (fileNames.length == 0) {
+            html += "<tr><td><i>" + translations.text("noSavedGames") + "</i></td></tr>";
         } else {
-            for ( const fileName of fileNames ) {
+            for (const fileName of fileNames) {
                 html += '<tr id="' + fileName + '"><td>';
                 html += '<button class="btn btn-default table-op" title="Delete" data-filename="' +
                     fileName + '">' +
@@ -45,7 +45,7 @@ const loadGameView = {
             }
         }
 
-        $("#loadGame-fileslist tbody").append( html );
+        $("#loadGame-fileslist tbody").append(html);
     },
 
     /**
@@ -71,7 +71,7 @@ const loadGameView = {
         // Load game events
         $(".savegame").click(function(e: Event) {
             e.preventDefault();
-            loadGameController.fileListClicked( $(this).attr( "href" ) );
+            loadGameController.fileListClicked($(this).attr("href"));
         });
 
         // Delete file events
@@ -80,10 +80,10 @@ const loadGameView = {
             // Cordova beleaves we have changed the current page
             e.preventDefault();
             const fileName = $(this).attr("data-filename");
-            if ( !confirm( translations.text("confirmDeleteSave" , [ fileName ] ) ) ) {
+            if (!confirm(translations.text("confirmDeleteSave" , [ fileName ]))) {
                 return;
             }
-            loadGameController.deleteFile( fileName );
+            loadGameController.deleteFile(fileName);
         });
 
     },
@@ -91,12 +91,12 @@ const loadGameView = {
     /**
      * Remove a file name from the files list (Android)
      */
-    removeFilenameFromList( fileName: string ) {
+    removeFilenameFromList(fileName: string) {
         // It does not work, because fileName can contain points...
         // $('#' + fileName).remove();
         $('tr[id="' + fileName + '"]').remove();
 
-        if ( $("#loadGame-fileslist tr").length == 0 ) {
+        if ($("#loadGame-fileslist tr").length == 0) {
             // Show the "No games found" message
             loadGameView.addFilesToList([]);
         }
@@ -107,10 +107,10 @@ const loadGameView = {
      */
     bindFileUploaderEvents() {
         $("#loadGame-file").change(function() {
-            if ( !this.files || !this.files[0] ) {
+            if (!this.files || !this.files[0]) {
                 return;
             }
-            loadGameController.fileUploaderChanged( this.files[0] );
+            loadGameController.fileUploaderChanged(this.files[0]);
         });
     },
 
@@ -119,6 +119,6 @@ const loadGameView = {
      * @param errorMsg Message to show
      */
     showError(errorMsg: string) {
-        $("#loadGame-errors").text( errorMsg );
+        $("#loadGame-errors").text(errorMsg);
     }
 };
