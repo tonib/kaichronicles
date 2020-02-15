@@ -1,6 +1,3 @@
-
-/// <reference path="../external.ts" />
-
 /**
  * Info about a current choose
  */
