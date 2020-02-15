@@ -1,4 +1,3 @@
-/// <reference path="../../external.ts" />
 
 /**
  * Kind of objects table
@@ -46,7 +45,7 @@ class ObjectsTable {
      * a proper array of ObjectsTableItems.
      */
     public fillObjectsList( objects: any[] ) {
-        let arrows = ( this.type == ObjectsTableType.INVENTORY ) ? state.actionChart.arrows : 0;
+        let arrows = ( this.type === ObjectsTableType.INVENTORY ) ? state.actionChart.arrows : 0;
 
         for ( const obj of objects ) {
             let info = obj;
@@ -54,7 +53,7 @@ class ObjectsTable {
             if ( typeof(obj) === "string" ) {
                 let count = 0;
 
-                if ( obj == Item.QUIVER ) {
+                if ( obj === Item.QUIVER ) {
                     count = Math.min( 6, arrows );
                     arrows -= count;
                 }
@@ -105,7 +104,7 @@ class ObjectsTable {
         .find(".equipment-op")
         // Include the $element itself too
         .addBack(".equipment-op")
-        .click(function(e: Event) {
+        .click((e: Event) => {
             e.preventDefault();
             const $link = $(this);
 
