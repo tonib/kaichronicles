@@ -1,5 +1,3 @@
-/// <reference path="../external.ts" />
-
 /**
  * The action chart view API
  */
@@ -73,7 +71,7 @@ const actionChartView = {
     bindRestore20EP() {
         const $restoreButton = state.book.isGrandMasterBook() ? $("#grdmast-restore20Ep") : $("#achart-restore20Ep");
         actionChartView.updateRestore20EPState();
-        $restoreButton.click( function(e: Event) {
+        $restoreButton.click( (e: Event) => {
             e.preventDefault();
             if ( !confirm( translations.text(state.book.isGrandMasterBook() ? "confirm20EPGrdMaster" : "confirm20EP") ) ) {
                 return;
@@ -88,7 +86,7 @@ const actionChartView = {
      */
     bindDropMoneyEvents() {
         // Bind drop money button event
-        $("#achart-dropmoneybutton").click( function(e: Event) {
+        $("#achart-dropmoneybutton").click( (e: Event) => {
             e.preventDefault();
             MoneyDialog.show( true );
         });
@@ -110,7 +108,7 @@ const actionChartView = {
             $("#achart-circles").hide();
         } else {
             const circles = actionChart.getLoreCircles();
-            if ( circles.length == 0 ) {
+            if ( circles.length === 0 ) {
                 $("#achart-currentCircles").html( "<i>" + translations.text("noneMasculine") + "</i>" );
             } else {
                 const circlesNames: string[] = [];
@@ -128,15 +126,15 @@ const actionChartView = {
         } else {
             const bookDisciplines = state.book.getDisciplinesTable();
             // Enumerate disciplines
-            $.each( actionChart.disciplines , function(index, disciplineId: string) {
+            $.each( actionChart.disciplines , (index, disciplineId: string) => {
                 const dInfo = bookDisciplines[disciplineId];
                 let name = dInfo.name;
 
-                if ( disciplineId == "wepnskll" || disciplineId == "wpnmstry" ) {
+                if ( disciplineId === "wepnskll" || disciplineId === "wpnmstry" ) {
                     // Show selected weapons description
                     const weapons: string[] = [];
-                    for (let i = 0; i < actionChart.weaponSkill.length; i++) {
-                        weapons.push( state.mechanics.getObject( actionChart.weaponSkill[i] ).name );
+                    for (const weaponSkill of actionChart.weaponSkill) {
+                        weapons.push( state.mechanics.getObject( weaponSkill ).name );
                     }
                     if ( weapons.length > 0 ) {
                         name += " (" + weapons.join(", ") + ")";
@@ -194,7 +192,7 @@ const actionChartView = {
         // Endurance
         let txtEndurance = txtCurrent + state.actionChart.currentEndurance;
         const max = state.actionChart.getMaxEndurance();
-        if ( max != state.actionChart.endurance ) {
+        if ( max !== state.actionChart.endurance ) {
             txtEndurance += " / Max.: " + max;
         }
         txtEndurance += " / Original: " + state.actionChart.endurance;
@@ -258,7 +256,7 @@ const actionChartView = {
     },
 
     showInventoryMsg(action: string, object: Item, msg: string) {
-        const toastType = ( action == "pick" ? "success" : "warning" );
+        const toastType = ( action === "pick" ? "success" : "warning" );
         let html = "";
 
         // Check if the object has an image
