@@ -1,4 +1,3 @@
-/// <reference path="../external.ts" />
 
 /**
  * Game mechanics and objects handling for a given book
@@ -13,7 +12,7 @@ class Mechanics {
     /**
      * The book mechanics XML document (XmlDocument)
      */
-    public mechanicsXml: any = null;
+    public mechanicsXml: XMLDocument = null;
 
     /**
      * The original XML text. It will be saved only if we are on debug mode. Otherwise it will be null
@@ -49,7 +48,7 @@ class Mechanics {
             url: this.getXmlURL(),
             dataType: "text"
         })
-        .done(function(xml: string) {
+        .done((xml: string) => {
             self.mechanicsXml = $.parseXML(xml);
             if ( window.getUrlParameter("debug") ) {
                 // Debug mode: Store the original XML. This can be needed to do tests (BookValidator.ts)
@@ -76,7 +75,7 @@ class Mechanics {
             url: this.getObjectsXmlURL(),
             dataType: "xml"
         })
-        .done(function(xml) {
+        .done((xml) => {
             self.objectsXml = xml;
         });
     }
@@ -91,7 +90,7 @@ class Mechanics {
     /**
      * Returns an jquery object with the section mechanics XML. null if there are no mechanics
      */
-    public getSection(sectionId: string): any {
+    public getSection(sectionId: string): JQuery<Element> {
         const $section = $(this.mechanicsXml)
             .find("mechanics > sections > section[id=" + sectionId + "]");
         return $section.length === 0 ? null : $section;
@@ -132,7 +131,7 @@ class Mechanics {
      * Get a jquery selector for a give rule, relative to the "section" parent
      * @return {string} The jquery selector for the rule inside the section
      */
-    public static getRuleSelector(rule): string {
+    public static getRuleSelector(rule: Element): string {
 
         // Get nodes from the section rule to the given rule
         // var $path = $( $(rule).parentsUntil( 'section' ).andSelf().get().reverse() );
@@ -140,9 +139,9 @@ class Mechanics {
 
         // Build the jquery selector:
         return $path
-            .map(function( index , node ) {
+            .map(( index , node ) => {
                 let txt = node.nodeName;
-                $.each( node.attributes , function( index , attribute ) {
+                $.each( node.attributes , ( attrIndex , attribute ) => {
                     txt += "[" + attribute.name + "='" + attribute.value + "']";
                 } );
                 return txt;
@@ -158,7 +157,7 @@ class Mechanics {
      */
     public imageIsTranslated(fileName: string): boolean {
 
-        if ( fileName == "crtneg.png" || fileName == "crtpos.png" ) {
+        if ( fileName === "crtneg.png" || fileName === "crtpos.png" ) {
             // Combat tables
             return true;
         }
@@ -173,7 +172,7 @@ class Mechanics {
      * @param id The global rule container id to return
      * @return The XML tag found
      */
-    public getGlobalRule(id: string): any {
+    public getGlobalRule(id: string): JQuery<Element> {
         return $(this.mechanicsXml).find("registerGlobalRule[id=" + id + "]").first();
     }
 
@@ -187,13 +186,13 @@ class Mechanics {
             // Default is 350
             count = "350";
         }
-        return parseInt(count);
+        return parseInt(count, 10);
     }
 
     /**
      * Return the id of the book last section
      */
-    getLastSectionId(): string {
+    public getLastSectionId(): string {
         return "sect" + this.getSectionsCount();
     }
 
