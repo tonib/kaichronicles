@@ -1,4 +1,3 @@
-/// <reference path="../external.ts" />
 
 /**
  * The game view interface functions
@@ -55,11 +54,11 @@ const gameView = {
     setup() {
 
         // Section navigation events
-        $("#game-prevSection").click(function(e) {
+        $("#game-prevSection").click((e) => {
             e.preventDefault();
             gameController.onNavigatePrevNext(-1);
         });
-        $("#game-nextSection").click(function(e) {
+        $("#game-nextSection").click((e) => {
             e.preventDefault();
             if ($(this).hasClass("disabled")) {
                 return;
@@ -71,30 +70,30 @@ const gameView = {
         $("#game-copyrights").html(state.book.getBookTitle() + "<br/>" + state.book.getCopyrightHtml());
 
         // Setup debug options
-        if (window.getUrlParameter("debug") == "true") {
+        if (window.getUrlParameter("debug") === "true") {
             $("#game-debugSection").show();
 
-            $("#game-debugJump").submit(function(e) {
+            $("#game-debugJump").submit((e) => {
                 e.preventDefault();
                 gameController.loadSection($("#game-debugNSection").val());
             });
 
-            $("#game-debugRandomTable").submit(function(e) {
+            $("#game-debugRandomTable").submit((e) => {
                 e.preventDefault();
-                randomTable.nextValueDebug = parseInt($("#game-debugRandomFix").val());
+                randomTable.nextValueDebug = parseInt($("#game-debugRandomFix").val(), 10);
                 console.log("Next random table value set to " + randomTable.nextValueDebug);
                 $("#game-debugRandomFix").val("");
             });
 
-            $("#game-resetSection").click(function(e) {
+            $("#game-resetSection").click((e) => {
                 e.preventDefault();
                 state.sectionStates.resetSectionState(state.sectionStates.currentSection);
                 gameController.loadSection(state.sectionStates.currentSection);
             });
 
-            $("#game-goDisciplines").click(function(e) {
+            $("#game-goDisciplines").click((e) => {
                 e.preventDefault();
-                if (state.sectionStates.currentSection == Book.DISCIPLINES_SECTION) {
+                if (state.sectionStates.currentSection === Book.DISCIPLINES_SECTION) {
                     return;
                 }
 
@@ -103,12 +102,12 @@ const gameView = {
                 gameController.loadSection(Book.DISCIPLINES_SECTION);
             });
 
-            $("#game-switchlanguage").click(function(e: Event) {
+            $("#game-switchlanguage").click((e: Event) => {
                 e.preventDefault();
-                settingsController.changeLanguage(state.book.language == "en" ? "es" : "en" , false)
-                .then(function() {
-                    gameController.loadSection(state.sectionStates.currentSection);
-                });
+                settingsController.changeLanguage(state.book.language === "en" ? "es" : "en", false)
+                    .then(() => {
+                        gameController.loadSection(state.sectionStates.currentSection);
+                    });
             });
         }
 
@@ -116,16 +115,16 @@ const gameView = {
 
     /**
      * Appends HTML to the current section
-     * @param {string|jQuery} html The HTML to append
+     * @param html The HTML to append
      * @param where Where to place the html:
      * - 'beforeChoices': Before section choices
      * - 'afterChoices': After section choices
      * - 'afterTitle': After section title
      */
     // appendToSection: function(html : any, afterChoices : boolean = false) {
-    appendToSection(html: any, where: string = "beforeChoices") {
+    appendToSection(html: string|JQuery<HTMLElement>, where: string = "beforeChoices") {
 
-        if (where == "beforeChoices") {
+        if (where === "beforeChoices") {
             // Try to add the html before the first choice:
             const $firstChoice = $("p.choice").first();
             if ($firstChoice.length > 0) {
@@ -134,7 +133,7 @@ const gameView = {
             }
         }
 
-        if (where == "afterTitle") {
+        if (where === "afterTitle") {
             // Add at "game-section" top
             $("#game-section").prepend(html);
             return;
@@ -157,8 +156,8 @@ const gameView = {
     bindChoiceLinks() {
         // This MUST to be "live" events and non static because HTML can be replaced by
         // by game rules
-        $("#game-section").off("click" , ".choice a.choice-link");
-        $("#game-section").on("click" , ".choice a.choice-link" , function(e) {
+        $("#game-section").off("click", ".choice a.choice-link");
+        $("#game-section").on("click", ".choice a.choice-link", function(e) {
             gameView.choiceLinkClicked(e, this);
         });
 
@@ -166,7 +165,7 @@ const gameView = {
     },
 
     bindCombatTablesLinks() {
-        $(".crtable").click(function(e) {
+        $(".crtable").click((e) => {
             e.preventDefault();
             template.showCombatTables();
         });
@@ -187,7 +186,7 @@ const gameView = {
         const section = $(link).attr("data-section");
         // console.log('Jump to section ' + section);
         if (section) {
-            gameController.loadSection(section , true);
+            gameController.loadSection(section, true);
         }
     },
 
@@ -198,9 +197,9 @@ const gameView = {
 
         const sectionIds = state.book.getOriginSections(state.sectionStates.currentSection);
         let linksHtml = "";
-        for (let i = 0; i < sectionIds.length; i++) {
+        for (const sectionId of sectionIds) {
             // Ignore index of numbered sections
-            if (sectionIds[i] == "numbered") {
+            if (sectionId === "numbered") {
                 continue;
             }
 
@@ -208,7 +207,7 @@ const gameView = {
                 linksHtml += ", ";
             }
             linksHtml += '<a href="#" class="action choice-link" data-section="' +
-                sectionIds[i] + '">' + sectionIds[i] + "</a>";
+                sectionId + '">' + sectionId + "</a>";
         }
         $("#game-sourceSections").html(linksHtml);
         $("#game-sourceSections a").click(function(e) {
