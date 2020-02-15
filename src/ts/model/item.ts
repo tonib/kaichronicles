@@ -1,4 +1,3 @@
-/// <reference path="../external.ts" />
 
 /**
  * Item effect / usage description
@@ -104,8 +103,8 @@ class Item {
     public usage: ItemEffect;
 
     /** Object ids that cannot be carried at same time with this object.
-      * Empty array if there are no incompatibilities
-      */
+     * Empty array if there are no incompatibilities
+     */
     public incompatibleWith: string[] = [];
 
     /**
@@ -124,36 +123,36 @@ class Item {
         this.name = $o.find("name[lang=" + book.language + "]").text();
 
         // True if the object is a meal
-        this.isMeal = $o.attr("isMeal") == "true";
+        this.isMeal = $o.attr("isMeal") === "true";
 
         // True if the object is an Arrow
-        this.isArrow = $o.attr("isArrow") == "true";
+        this.isArrow = $o.attr("isArrow") === "true";
 
         /** True if the object can be dropped */
-        this.droppable = $o.attr("droppable") != "false";
+        this.droppable = $o.attr("droppable") !== "false";
 
         /** Number of items the object it occupies on the backpack */
         const txtItemCount: string = $o.attr("itemCount");
-        this.itemCount = txtItemCount ? parseInt(txtItemCount) : 1;
+        this.itemCount = txtItemCount ? parseInt(txtItemCount, 10) : 1;
 
         /** Number of usage of the object */
         const txtUsageCount: string = $o.attr("usageCount");
-        this.usageCount = txtUsageCount ? parseInt(txtUsageCount) : 1;
+        this.usageCount = txtUsageCount ? parseInt(txtUsageCount, 10) : 1;
 
         /** The translated object description */
         this.description = $o.find("description[lang=" + book.language + "]").text();
 
         // If it's the map, add description from the book:
-        if (objectId == Item.MAP) {
+        if (objectId === Item.MAP) {
             this.assignMapDescription(book);
         }
 
-        if (this.itemCount != 1) {
+        if (this.itemCount !== 1) {
             // Add description of the size used
             if (this.description) {
                 this.description += " ";
             }
-            this.description += translations.text("countAsObjects" , [this.itemCount]);
+            this.description += translations.text("countAsObjects", [this.itemCount]);
         }
 
         // Extra description
@@ -174,7 +173,7 @@ class Item {
         if ($usage.length > 0) {
             this.usage = {
                 cls: $usage.attr("class"),
-                increment: parseInt($usage.attr("increment"))
+                increment: parseInt($usage.attr("increment"), 10)
             };
         }
 
@@ -182,11 +181,11 @@ class Item {
         const $effects: any[] = $o.find("effect");
         for (const effect of $effects) {
             const $effect = $(effect);
-            const increment = parseInt($effect.attr("increment"));
+            const increment = parseInt($effect.attr("increment"), 10);
             const cls: string = $effect.attr("class");
-            if (cls == Item.COMBATSKILL) {
+            if (cls === Item.COMBATSKILL) {
                 this.combatSkillEffect = increment;
-            } else if (cls == Item.ENDURANCE) {
+            } else if (cls === Item.ENDURANCE) {
                 this.enduranceEffect = increment;
             } else {
                 console.log("Object " + this.id + ", wrong class effect: " + cls);
@@ -194,17 +193,17 @@ class Item {
         }
 
         // Incompatibilities
-        this.incompatibleWith = mechanicsEngine.getArrayProperty($o , "incompatibleWith");
+        this.incompatibleWith = mechanicsEngine.getArrayProperty($o, "incompatibleWith");
 
     }
 
     private assignMapDescription(book: Book) {
         // Exception with book 11: The "map" section refers to "Northern Magnamund", no the real map at sect233
-        if (book.bookNumber == 11) {
+        if (book.bookNumber === 11) {
             return;
         }
 
-        const mapSection = new Section(book , Book.MAP_SECTION , null);
+        const mapSection = new Section(book, Book.MAP_SECTION, null);
         if (mapSection.exists()) {
             this.description = mapSection.getTitleText();
         }
@@ -215,7 +214,7 @@ class Item {
         if (this.weaponType) {
             return true;
         }
-        return this.type == "weapon";
+        return this.type === "weapon";
     }
 
     /**
@@ -224,7 +223,7 @@ class Item {
      * @return True if the object is a weapon of the given type
      */
     public isWeaponType(weaponType: string): boolean {
-        if (this.id == weaponType) {
+        if (this.id === weaponType) {
             return true;
         }
         if (this.weaponType) {
@@ -238,7 +237,7 @@ class Item {
         if (!this.isWeapon()) {
             return false;
         }
-        if (this.id == "bow" || this.weaponType == "bow") {
+        if (this.id === "bow" || this.weaponType === "bow") {
             return false;
         }
         return true;
@@ -269,7 +268,7 @@ class Item {
      */
     private loadImageInfo($o: any) {
         const $image = $o.find("image");
-        if ($image.length == 0) {
+        if ($image.length === 0) {
             return;
         }
 
@@ -277,9 +276,9 @@ class Item {
         const candidateBookNumbers: number[] = [];
         const txtBook: string = $image.attr("book");
         for (const txtBookNumber of txtBook.split("|")) {
-            candidateBookNumbers.push(parseInt(txtBookNumber));
+            candidateBookNumbers.push(parseInt(txtBookNumber), 10);
         }
-        if (candidateBookNumbers.length == 0) {
+        if (candidateBookNumbers.length === 0) {
             return;
         }
         candidateBookNumbers.sort();
@@ -289,7 +288,7 @@ class Item {
 
         if (candidateBookNumbers.length > 1) {
             // Choose the last played (or playing) book.
-            for (let i = candidateBookNumbers.length - 1 ; i >= 0 ; i--) {
+            for (let i = candidateBookNumbers.length - 1; i >= 0; i--) {
                 if (state.book.bookNumber >= candidateBookNumbers[i] && state.localBooksLibrary.isBookDownloaded(candidateBookNumbers[i])) {
                     this.imageBookNumber = candidateBookNumbers[i];
                     break;
@@ -297,7 +296,7 @@ class Item {
             }
         }
 
-        const imageBook = new Book(this.imageBookNumber , state.book.language);
+        const imageBook = new Book(this.imageBookNumber, state.book.language);
         this.imageUrl = imageBook.getIllustrationURL($image.attr("name"));
     }
 }
