@@ -1,4 +1,3 @@
-/// <reference path="../external.ts" />
 
 /**
  * The load game view interface functions
@@ -29,17 +28,17 @@ const loadGameView = {
     addFilesToList(fileNames: string[]) {
 
         let html = "";
-        if (fileNames.length == 0) {
+        if (fileNames.length === 0) {
             html += "<tr><td><i>" + translations.text("noSavedGames") + "</i></td></tr>";
         } else {
             for (const fileName of fileNames) {
                 html += '<tr id="' + fileName + '"><td>';
                 html += '<button class="btn btn-default table-op" title="Delete" data-filename="' +
                     fileName + '">' +
-                        '<span class="glyphicon glyphicon-remove"></span>' +
+                    '<span class="glyphicon glyphicon-remove"></span>' +
                     "</button>" +
                     '<a class="savegame" href="' + fileName + '">' +
-                        fileName +
+                    fileName +
                     "</a>";
                 html += "</td></tr>";
             }
@@ -53,11 +52,11 @@ const loadGameView = {
      */
     bindAppEvents() {
         // Export / import saved games
-        $("#loadGame-export").click(function(e: Event) {
+        $("#loadGame-export").click((e: Event) => {
             e.preventDefault();
             loadGameController.exportSavedGames();
         });
-        $("#loadGame-import").click(function(e: Event) {
+        $("#loadGame-import").click((e: Event) => {
             e.preventDefault();
             loadGameController.importSavedGames();
         });
@@ -80,7 +79,7 @@ const loadGameView = {
             // Cordova beleaves we have changed the current page
             e.preventDefault();
             const fileName = $(this).attr("data-filename");
-            if (!confirm(translations.text("confirmDeleteSave" , [ fileName ]))) {
+            if (!confirm(translations.text("confirmDeleteSave", [fileName]))) {
                 return;
             }
             loadGameController.deleteFile(fileName);
@@ -96,7 +95,7 @@ const loadGameView = {
         // $('#' + fileName).remove();
         $('tr[id="' + fileName + '"]').remove();
 
-        if ($("#loadGame-fileslist tr").length == 0) {
+        if ($("#loadGame-fileslist tr").length === 0) {
             // Show the "No games found" message
             loadGameView.addFilesToList([]);
         }
