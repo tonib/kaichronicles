@@ -18,7 +18,7 @@ class GoogleAnalytics {
             }
 
             // Check if disabled by user
-            return new Cookie(GoogleAnalytics.GA_DISABLED_COOKIE).getValue() != "true";
+            return new Cookie(GoogleAnalytics.GA_DISABLED_COOKIE).getValue() !== "true";
         } catch (ex) {
             console.log(ex);
             return false;
@@ -32,7 +32,7 @@ class GoogleAnalytics {
             if (enabled) {
                 cookie.delete();
             } else {
-                cookie.setValue("true" , 9999);
+                cookie.setValue("true", 9999);
             }
             console.log("Changed send Anayltics to " + enabled);
         } catch (ex) {
@@ -53,7 +53,7 @@ class GoogleAnalytics {
                 return;
             }
 
-            if (typeof ga == "undefined") {
+            if (typeof ga === "undefined") {
                 // Google Analytics object not defined
                 return;
             }
@@ -76,7 +76,7 @@ class GoogleAnalytics {
 
         try {
 
-            if (typeof ga == "undefined") {
+            if (typeof ga === "undefined") {
                 // Google Analytics object not defined
                 return;
             }
