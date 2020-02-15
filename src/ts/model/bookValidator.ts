@@ -45,10 +45,10 @@ class BookValidator {
         const dfd = jQuery.Deferred<BookValidator>();
 
         $.when.apply($, promises)
-        .done( function() {
+        .done( () => {
             dfd.resolve( new BookValidator(mechanics, book) );
         } )
-        .fail( function() {
+        .fail( () => {
             dfd.reject("Error downloading book files");
         });
 
@@ -68,7 +68,7 @@ class BookValidator {
         // Traverse book sections
         const lastSectionId = this.mechanics.getLastSectionId();
         let currentSectionId = Book.INITIAL_SECTION;
-        while ( currentSectionId != lastSectionId ) {
+        while ( currentSectionId !== lastSectionId ) {
             // The book section
             this.validateSectionInternal(currentSectionId);
             currentSectionId = this.currentSection.getNextSectionId();
@@ -111,12 +111,12 @@ class BookValidator {
                 this[rule.nodeName]( $rule );
             }
 
-            if ( rule.nodeName == "test" ) {
+            if ( rule.nodeName === "test" ) {
 
                 // Special case: If this is a "test" rule with "bookLanguage" attr. set, check it:
                 // (there are semantic differences between languages...)
                 const language: string = $rule.attr("bookLanguage");
-                if ( language && language != this.book.language ) {
+                if ( language && language !== this.book.language ) {
                     // Ignore children
                     return;
                 }
@@ -163,7 +163,7 @@ class BookValidator {
     private validateObjectIdsAttribute( $rule , property: string , allowMultiple: boolean , onlyWeapons: boolean ): boolean {
 
         const objectIds = this.getPropertyValueAsArray( $rule , property , allowMultiple );
-        if ( objectIds.length == 0 ) {
+        if ( objectIds.length === 0 ) {
             return false;
         }
 
@@ -173,7 +173,7 @@ class BookValidator {
                 this.addError( $rule , "Object id " + objectId + " not found");
             } else if ( onlyWeapons && !item.isWeapon() ) {
                 this.addError( $rule , "Object id " + objectId + " is not a weapon");
-            }
+ }
         }
         return true;
     }
@@ -181,7 +181,7 @@ class BookValidator {
     private validateDisciplinesAttribute( $rule: any , property: string , allowMultiple: boolean ) {
 
         const disciplinesIds = this.getPropertyValueAsArray( $rule , property , allowMultiple );
-        if ( disciplinesIds.length == 0 ) {
+        if ( disciplinesIds.length === 0 ) {
             return;
         }
 
@@ -197,7 +197,7 @@ class BookValidator {
         const sectionIds = this.getPropertyValueAsArray( $rule , property , allowMultiple );
 
         for ( const sectionId of sectionIds ) {
-            if ( this.book.getSectionXml(sectionId).length == 0 ) {
+            if ( this.book.getSectionXml(sectionId).length === 0 ) {
                 this.addError( $rule , "Section does not exists: " + sectionId );
             }
         }
@@ -209,7 +209,7 @@ class BookValidator {
             return;
         }
 
-        if ( allowAll && sectionId == "all" ) {
+        if ( allowAll && sectionId === "all" ) {
             return;
         }
 
@@ -219,7 +219,7 @@ class BookValidator {
         }
 
         const $choices = this.currentSection.$xmlSection.find( "choice[idref=" + sectionId + "]" );
-        if ( $choices.length == 0 ) {
+        if ( $choices.length === 0 ) {
 
             // If there is a "textToChoice" link with that destination, it's ok
             const $sectionMechanics = this.mechanics.getSection( this.currentSection.sectionId );
@@ -239,7 +239,7 @@ class BookValidator {
         }
 
         // Check there are combats on this section
-        if ( this.currentSection.getCombats().length == 0 ) {
+        if ( this.currentSection.getCombats().length === 0 ) {
             this.addError( $rule , "There are no combats on this section");
         }
     }
@@ -317,7 +317,7 @@ class BookValidator {
             url: "data/mechanics.xsd",
             dataType: "text"
         })
-        .done(function(xmlText: string) {
+        .done((xmlText: string) => {
             BookValidator.xsdText = xmlText;
         });
     }
@@ -327,7 +327,7 @@ class BookValidator {
      */
     private validateXml() {
 
-        if ( typeof validateXML == "undefined" ) {
+        if ( typeof validateXML === "undefined" ) {
             // On production, the xmllint.js is not available (size = 2.2 MB minified...)
             return;
         }
@@ -359,7 +359,7 @@ class BookValidator {
 
         // Do the XSD validation
         const xmllint = validateXML(module).trim();
-        if ( xmllint != mechanicsFileName + " validates") {
+        if ( xmllint !== mechanicsFileName + " validates") {
             // Error:
             this.errors.push( xmllint );
         }
@@ -394,7 +394,7 @@ class BookValidator {
         let overlapped = false;
         let nCasesFound = 0;
         for ( const child of $rule.children() ) {
-            if ( child.nodeName == "case" ) {
+            if ( child.nodeName === "case" ) {
                 nCasesFound++;
                 const bounds = randomMechanics.getCaseRuleBounds( $(child) );
                 if ( bounds && bounds[0] <= bounds[1] ) {
@@ -410,13 +410,13 @@ class BookValidator {
         }
 
         // There can be randomTable's without cases: In that case, do no check coverage:
-        if ( nCasesFound == 0 ) {
+        if ( nCasesFound === 0 ) {
             return;
         }
 
         // TODO: Check randomTableIncrement, and [BOWBONUS]: If it exists, the bounds should be -99, +99
         let numberToTest;
-        if ( $rule.attr( "zeroAsTen" ) == "true" ) {
+        if ( $rule.attr( "zeroAsTen" ) === "true" ) {
             numberToTest = [1, 10];
         } else {
             numberToTest = [0, 9];
@@ -438,7 +438,7 @@ class BookValidator {
     }
 
     private randomTableIncrement( $rule ) {
-        if ( $rule.attr( "increment" ) != "reset" ) {
+        if ( $rule.attr( "increment" ) !== "reset" ) {
             this.validateNumericExpression( $rule , "increment" );
         }
         this.validateRandomTableIndex( $rule );
@@ -464,7 +464,7 @@ class BookValidator {
         this.validateObjectIdsAttribute( $rule , "objectOnSection" , true , false );
 
         const language: string = $rule.attr("bookLanguage");
-        if ( language && ( language != "en" && language != "es" ) ) {
+        if ( language && ( language !== "en" && language !== "es" ) ) {
             this.addError( $rule , "Wrong language: " + language );
         }
 
@@ -494,13 +494,13 @@ class BookValidator {
         this.validateNumericExpression( $rule , "combatSkillModifier" );
         this.validateNumericExpression( $rule , "combatSkillModifierIncrement" );
 
-        if ( $rule.attr("disabledObjects") != "none" ) {
+        if ( $rule.attr("disabledObjects") !== "none" ) {
             this.validateObjectIdsAttribute( $rule , "disabledObjects" , true , false );
         }
 
         this.checkThereAreCombats( $rule );
 
-        const combatIndex = parseInt( $rule.attr("index") );
+        const combatIndex = parseInt( $rule.attr("index"), 10 );
         if ( combatIndex ) {
             const nCombats = this.currentSection.getCombats().length;
             if ( nCombats <= combatIndex ) {
@@ -529,7 +529,7 @@ class BookValidator {
 
     private numberPickerChoosed( $rule ) {
         const $sectionMechanics = this.mechanics.getSection( this.currentSection.sectionId );
-        if ( $sectionMechanics.find( "numberPicker" ).length == 0 ) {
+        if ( $sectionMechanics.find( "numberPicker" ).length === 0 ) {
             this.addError( $rule , 'No "numberPicker" rule found on this section' );
         }
     }
@@ -551,7 +551,7 @@ class BookValidator {
             } else {
                 // Find the referenced message
                 const $sectionMechanics = this.mechanics.getSection( this.currentSection.sectionId );
-                if ( $sectionMechanics.find( "message[id=" + msgId + "]:not([op])" ).length == 0 ) {
+                if ( $sectionMechanics.find( "message[id=" + msgId + "]:not([op])" ).length === 0 ) {
                     this.addError( $rule , 'No "message" found with id ' + msgId );
                 }
             }
@@ -599,7 +599,7 @@ class BookValidator {
         }
 
         const cls = $rule.attr("class");
-        if ( cls && cls != "special" ) {
+        if ( cls && cls !== "special" ) {
             this.addError( $rule , 'Wrong "class" property value' );
         }
 
@@ -627,14 +627,14 @@ class BookValidator {
 
         const html = this.currentSection.getHtml();
         const linkText: string = $rule.attr("text-" + this.book.language);
-        if ( $(html).find(':contains("' + linkText + '")').length == 0 ) {
+        if ( $(html).find(':contains("' + linkText + '")').length === 0 ) {
             this.addError( $rule , 'Text to replace "' + linkText + '" not found');
         }
     }
 
     private kaiMonasteryStorage( $rule ) {
         // Only available on "equipment" sections
-        if ( $rule.closest( "section[id=equipmnt]" ).length == 0 ) {
+        if ( $rule.closest( "section[id=equipmnt]" ).length === 0 ) {
             this.addError( $rule , 'Rule "kaiMonasteryStorage" should be included only on section with id=equipmnt' );
         }
     }
