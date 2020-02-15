@@ -1,5 +1,3 @@
-/// <reference path="../external.ts" />
-
 /**
  * Settings view
  */
@@ -10,7 +8,7 @@ const settingsView = {
         // Language
         $("#settings-language").val(state.language);
         $("#settings-language").change(function() {
-            settingsController.changeLanguage($(this).val() , true);
+            settingsController.changeLanguage($(this).val(), true);
         });
 
         // Color theme
@@ -22,17 +20,17 @@ const settingsView = {
         // Random table type
         $("#settings-randomtable").val(state.actionChart.manualRandomTable ? "manual" : "computer");
         $("#settings-randomtable").change(function() {
-            state.actionChart.manualRandomTable = ($(this).val() == "manual");
+            state.actionChart.manualRandomTable = ($(this).val() === "manual");
         });
 
         // Extended CRT
         $("#settings-extendedcrt").val(state.actionChart.extendedCRT ? "yes" : "no");
         $("#settings-extendedcrt").change(function() {
-            state.actionChart.extendedCRT = ($(this).val() == "yes");
+            state.actionChart.extendedCRT = ($(this).val() === "yes");
         });
 
         // Restart book
-        $("#settings-restart").click(function(e) {
+        $("#settings-restart").click((e) => {
             e.preventDefault();
             if (confirm(translations.text("confirmRestart"))) {
                 setupController.restartBook();
@@ -40,30 +38,30 @@ const settingsView = {
         });
 
         // Start new game
-        $("#settings-new").click(function(e) {
+        $("#settings-new").click((e) => {
             e.preventDefault();
             routing.redirect("newGame");
         });
 
         // Game rules
-        $("#settings-gamerules").click(function() {
+        $("#settings-gamerules").click(() => {
             routing.redirect("gameRules");
         });
 
         // About the book
-        $("#settings-about").click(function() {
+        $("#settings-about").click(() => {
             routing.redirect("about");
         });
 
         // Game save button
-        $("#settings-save").click(function(e) {
+        $("#settings-save").click((e) => {
             e.preventDefault();
             $("#settings-saveName").val(settingsController.defaultSaveGameName());
             $("#settings-saveDialog").modal("show");
         });
 
         // Save game dialog - save button
-        $("#settings-saveBtn").click(function(e) {
+        $("#settings-saveBtn").click((e) => {
             e.preventDefault();
             if (settingsController.saveGame($("#settings-saveName").val())) {
                 $("#settings-saveDialog").modal("hide");
@@ -71,7 +69,7 @@ const settingsView = {
         });
 
         // Remove the current file name
-        $("#settings-saveRemove").click(function(e) {
+        $("#settings-saveRemove").click((e) => {
             e.preventDefault();
             $("#settings-saveName").val("").focus();
         });
