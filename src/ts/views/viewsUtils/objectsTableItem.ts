@@ -1,4 +1,3 @@
-
 /**
  * Item on a objects table to render
  */
@@ -50,12 +49,12 @@ class ObjectsTableItem {
         }
 
         // If it's a sell table, and we don't have the object, do not show it
-        if ( this.type == ObjectsTableType.SELL  ) {
-            if ( this.objectInfo.id != "arrow" && !state.actionChart.hasObject( this.objectInfo.id ) ) {
+        if ( this.type === ObjectsTableType.SELL  ) {
+            if ( this.objectInfo.id !== "arrow" && !state.actionChart.hasObject( this.objectInfo.id ) ) {
                 return "";
             }
             // We don't have enough arrows to sell, do not show
-            if ( this.objectInfo.id == "arrow" && state.actionChart.arrows < this.objectInfo.count ) {
+            if ( this.objectInfo.id === "arrow" && state.actionChart.arrows < this.objectInfo.count ) {
                 return "";
             }
         }
@@ -66,22 +65,22 @@ class ObjectsTableItem {
         let name = this.item.name;
 
         // Number of arrows on the quiver
-        if ( this.objectInfo.id == Item.QUIVER ) {
+        if ( this.objectInfo.id === Item.QUIVER ) {
             // Be sure count is not null
             const count = ( this.objectInfo.count ? this.objectInfo.count : 0 );
             // In INVENTORY always show "0 arrows", but not in SELL or AVAILABLE (ugly)
-            if ( count > 0 || this.type == ObjectsTableType.INVENTORY ) {
+            if ( count > 0 || this.type === ObjectsTableType.INVENTORY ) {
                 name += " (" + count + " " + translations.text("arrows") + ")";
             }
         }
 
         // Arrow amount
-        if ( this.objectInfo.id == Item.ARROW && this.objectInfo.count ) {
+        if ( this.objectInfo.id === Item.ARROW && this.objectInfo.count ) {
             name = this.objectInfo.count + " " + name;
         }
 
         // Money amount
-        if ( this.objectInfo.id == Item.MONEY && this.objectInfo.count ) {
+        if ( this.objectInfo.id === Item.MONEY && this.objectInfo.count ) {
             name += " (" + this.objectInfo.count + " " + translations.text("goldCrowns") + ")";
         }
 
@@ -91,7 +90,7 @@ class ObjectsTableItem {
         }
 
         // Buy X objects for a given price
-        if ( this.objectInfo.id != Item.MONEY && this.objectInfo.id != Item.ARROW && this.objectInfo.id != Item.QUIVER &&
+        if ( this.objectInfo.id !== Item.MONEY && this.objectInfo.id !== Item.ARROW && this.objectInfo.id !== Item.QUIVER &&
             this.objectInfo.price > 0 && this.objectInfo.count > 1 ) {
             name = this.objectInfo.count + " x " + name;
         }
@@ -104,7 +103,7 @@ class ObjectsTableItem {
         }
 
         // Special
-        if ( this.objectInfo.id == "map" ) {
+        if ( this.objectInfo.id === "map" ) {
             // It's the map:
             name = '<a href="#map">' + name + "</a>";
         } else if ( imageUrl || this.item.extraDescription ) {
@@ -135,16 +134,16 @@ class ObjectsTableItem {
     }
 
     /**
-      * Get HTML for a given object operation
-      * @param operation The operation for the link
-      * @param title The tooltip text for the operation. null to do not display
-      * @param opDescription The operation description
-      * @return The operation HTML
-      */
+     * Get HTML for a given object operation
+     * @param operation The operation for the link
+     * @param title The tooltip text for the operation. null to do not display
+     * @param opDescription The operation description
+     * @return The operation HTML
+     */
     private getOperationTag(operation: string, title: string = null , opDescription: string ) {
         let link = '<a href="#" data-objectId="' + this.item.id + '" class="equipment-op btn btn-default" ';
 
-        if ( this.item.id == Item.QUIVER || this.item.id == Item.ARROW || this.item.id == Item.MONEY ||
+        if ( this.item.id === Item.QUIVER || this.item.id === Item.ARROW || this.item.id === Item.MONEY ||
             ( this.objectInfo.price > 0 && this.objectInfo.count > 0 ) ) {
             // Store the number of arrows on the quiver / gold crowns / number of items to buy by the given price
             link += 'data-count="' + this.objectInfo.count + '" ';
@@ -199,10 +198,10 @@ class ObjectsTableItem {
 
         let html = "";
 
-        if ( this.type == ObjectsTableType.AVAILABLE ) {
+        if ( this.type === ObjectsTableType.AVAILABLE ) {
             // Avaiable object (free) / buy object:
 
-            if ( this.objectInfo.price == 0 && this.objectInfo.useOnSection ) {
+            if ( this.objectInfo.price === 0 && this.objectInfo.useOnSection ) {
                 // Allow to use the object from the section, without picking it
                 html += this.getUseOperation();
             }
@@ -210,18 +209,18 @@ class ObjectsTableItem {
             // Get it / Buy it
             const title = translations.text( this.objectInfo.price ? "buyObject" : "pickObject" );
             html += this.getOperationTag( "get" , title , '<span class="glyphicon glyphicon-plus"></span>' );
-        } else if ( this.type == ObjectsTableType.SELL ) {
+        } else if ( this.type === ObjectsTableType.SELL ) {
             // Shell object operation link
             const title = translations.text( "sellObject" );
             html += this.getOperationTag( "sell" , title , '<span class="glyphicon glyphicon-share"></span>' );
-        } else if ( this.type == ObjectsTableType.INVENTORY ) {
+        } else if ( this.type === ObjectsTableType.INVENTORY ) {
 
             if ( this.item.usage ) {
                 // Use object operation
                 html += this.getUseOperation();
             }
 
-            if ( this.item.isHandToHandWeapon() && state.actionChart.getSelectedWeapon() != this.item.id ) {
+            if ( this.item.isHandToHandWeapon() && state.actionChart.getSelectedWeapon() !== this.item.id ) {
                 // Op to set the weapon as current
                 const title = translations.text("setCurrentWeapon");
                 html += this.getOperationTag( "currentWeapon" , title , '<span class="glyphicon glyphicon-hand-left"></span>' );
@@ -261,19 +260,19 @@ class ObjectsTableItem {
 
         const txtPrice: string = $link.attr("data-price");
         if ( txtPrice ) {
-            objectInfo.price = parseInt( txtPrice );
+            objectInfo.price = parseInt( txtPrice, 10 );
         }
 
-        if ( $link.attr( "data-unlimited" ) == "true" ) {
+        if ( $link.attr( "data-unlimited" ) === "true" ) {
             objectInfo.unlimited = true;
         }
 
         const txtCount: string = $link.attr("data-count");
         if ( txtCount ) {
-            objectInfo.count = parseInt( txtCount );
+            objectInfo.count = parseInt( txtCount, 10 );
         }
 
-        if ( $link.attr( "data-useonsection" ) == "true" ) {
+        if ( $link.attr( "data-useonsection" ) === "true" ) {
             objectInfo.useOnSection = true;
         }
 
@@ -296,7 +295,7 @@ class ObjectsTableItem {
     private get() {
 
         // Special case. On kai monastery, ask the money amount to pick
-        if ( this.objectInfo.id == Item.MONEY && routing.getControllerName() == kaimonasteryController.NAME ) {
+        if ( this.objectInfo.id === Item.MONEY && routing.getControllerName() === kaimonasteryController.NAME ) {
             MoneyDialog.show(false);
             return;
         }
@@ -309,7 +308,7 @@ class ObjectsTableItem {
                 return;
             }
 
-            if ( this.item.id == Item.ARROW && state.actionChart.arrows >= state.actionChart.getMaxArrowCount() ) {
+            if ( this.item.id === Item.ARROW && state.actionChart.arrows >= state.actionChart.getMaxArrowCount() ) {
                 // Don't let spend money on arrows you can't carry
                 alert( translations.text("noQuiversEnough") );
                 return;
@@ -321,15 +320,15 @@ class ObjectsTableItem {
         }
 
         let objectPicked: boolean;
-        if ( this.item.id == Item.MONEY || this.item.id == Item.ARROW ) {
+        if ( this.item.id === Item.MONEY || this.item.id === Item.ARROW ) {
             // Not really an object
             objectPicked = true;
         } else {
 
-            // A count == 0 means one object
+            // A count === 0 means one object
             // "Count" for quivers means "count of arrows", not "count of quivers"
             let nItems = this.objectInfo.count;
-            if ( !nItems || this.item.id == Item.QUIVER ) {
+            if ( !nItems || this.item.id === Item.QUIVER ) {
                 nItems = 1;
             }
 
@@ -344,16 +343,16 @@ class ObjectsTableItem {
 
             let countPicked = this.objectInfo.count;
 
-            if ( this.item.id == Item.QUIVER || this.item.id == Item.ARROW ) {
+            if ( this.item.id === Item.QUIVER || this.item.id === Item.ARROW ) {
                 // Increase the number of arrows on the action chart
                 const realIncrement = actionChartController.increaseArrows( this.objectInfo.count );
-                if ( this.item.id == Item.ARROW ) {
+                if ( this.item.id === Item.ARROW ) {
                     // Track real number of arrows picked
                     countPicked = realIncrement;
                 }
             }
 
-            if ( this.item.id == Item.MONEY ) {
+            if ( this.item.id === Item.MONEY ) {
                 // Pick the money
                 countPicked = actionChartController.increaseMoney( this.objectInfo.count );
             }
@@ -380,7 +379,7 @@ class ObjectsTableItem {
             return;
         }
 
-        if ( this.item.id == "arrow" && this.objectInfo.count > 0 ) {
+        if ( this.item.id === "arrow" && this.objectInfo.count > 0 ) {
             // Drop arrows
             actionChartController.increaseArrows( -this.objectInfo.count );
         } else {
@@ -398,11 +397,11 @@ class ObjectsTableItem {
         }
 
         // Use the object
-        const dropObject = ( this.type == ObjectsTableType.INVENTORY && --this.item.usageCount <= 0 );
+        const dropObject = ( this.type === ObjectsTableType.INVENTORY && --this.item.usageCount <= 0 );
         actionChartController.use( this.item.id , dropObject );
 
         // If the object was used from the section, remove it
-        if ( this.type == ObjectsTableType.AVAILABLE && !this.objectInfo.unlimited ) {
+        if ( this.type === ObjectsTableType.AVAILABLE && !this.objectInfo.unlimited ) {
             const sectionState = state.sectionStates.getSectionState();
             sectionState.removeObjectFromSection( this.item.id , this.objectInfo.price );
             // Refresh the table of available objects

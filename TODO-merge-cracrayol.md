@@ -86,7 +86,7 @@
 
 
 * TSLINT:
-    - CURRENT CHECK: objectsTable.ts
+    - CURRENT CHECK: objectsTableItem.ts
     - TSLint is deprecated...
     - REMOVE src/ts/test-tslist.ts (TSLint tests)
     - "only-arrow-functions" fix can break things. Semantics are different (this behaviour). There are a lot, ignore rule
@@ -94,6 +94,7 @@
     - "no-var-keyword" fix can break things. (var scope). Keeped as rule
     - "triple-equals" can break things. Keeped as rule
     - Ask why so many whitespaces were removed in commit 09d312465261e04f6871506e18dcce531cab1ea6
+    - Check if remains any "throw new Error("
 
 * Error in setup:
     - Add breakpoint at Item.prototype.loadImageInfo start
