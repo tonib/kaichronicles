@@ -1,4 +1,3 @@
-/// <reference path="../external.ts" />
 
 class Combat {
 
@@ -53,10 +52,10 @@ class Combat {
     /** Turn beyond which the combat can be eluded. -1 = no elude */
     public eludeTurn = -1;
 
-    /** Maximum turn which the combat can be eluded. -1 == no max turn */
+    /** Maximum turn which the combat can be eluded. -1 === no max turn */
     public maxEludeTurn = -1;
 
-    /** Combat can be eluded if enemy has EP equals or below. -1 == no elude */
+    /** Combat can be eluded if enemy has EP equals or below. -1 === no elude */
     public eludeEnemyEP = -1;
 
     /** Combat has been disabled? */
@@ -179,22 +178,22 @@ class Combat {
 
         if (this.combatModifier) {
             bonuses.push({
-                increment : this.combatModifier,
-                concept : translations.text("sectionModifier")
+                increment: this.combatModifier,
+                concept: translations.text("sectionModifier")
             });
         }
 
         if (!this.mentalOnly && this.objectsUsageModifier) {
             bonuses.push({
-                increment : this.objectsUsageModifier,
-                concept : translations.text("objectsUse")
+                increment: this.objectsUsageModifier,
+                concept: translations.text("objectsUse")
             });
         }
 
         if (this.mindforceCS < 0 && !state.actionChart.hasMindShield()) {
             bonuses.push({
-                increment : this.mindforceCS,
-                concept : translations.text("enemyMindblast")
+                increment: this.mindforceCS,
+                concept: translations.text("enemyMindblast")
             });
         }
 
@@ -218,20 +217,19 @@ class Combat {
         const dfd = jQuery.Deferred<CombatTurn>();
 
         // Calculate the turn
-        const self = this;
         randomTable.getRandomValueAsync()
-        .then(function(randomValue) {
-            const helshezagUsed = (state.actionChart.getSelectedWeapon() == Item.HELSHEZAG);
-            const turn = new CombatTurn(self, randomValue, elude , helshezagUsed);
-            self.turns.push(turn);
-            dfd.resolve(turn);
-        });
+            .then((randomValue) => {
+                const helshezagUsed = (state.actionChart.getSelectedWeapon() === Item.HELSHEZAG);
+                const turn = new CombatTurn(this, randomValue, elude, helshezagUsed);
+                this.turns.push(turn);
+                dfd.resolve(turn);
+            });
 
         return dfd.promise();
     }
 
-    public static applyLoss(currentEndurance: number , loss: any): number {
-        if (loss == combatTable_DEATH) {
+    public static applyLoss(currentEndurance: number, loss: any): number {
+        if (loss === combatTable_DEATH) {
             return 0;
         } else {
             currentEndurance -= loss;
@@ -255,12 +253,12 @@ class Combat {
         }
 
         // Helshezag effects do not apply on book 12 / sect133
-        if (state.book.bookNumber == 12 && state.sectionStates.currentSection == "sect133") {
+        if (state.book.bookNumber === 12 && state.sectionStates.currentSection === "sect133") {
             return false;
         }
 
         // Check if this is the second or subsequent turn where the Helshezag was used on this combat
-        for (let i = 0; i < (turn.turnNumber - 1) ; i++) {
+        for (let i = 0; i < (turn.turnNumber - 1); i++) {
             if (this.turns[i].helshezagUsed) {
                 return true;
             }
@@ -275,26 +273,26 @@ class Combat {
     public applyTurn(turn: CombatTurn) {
 
         // Apply player damages:
-        if (turn.loneWolf == combatTable_DEATH) {
+        if (turn.loneWolf === combatTable_DEATH) {
             state.actionChart.currentEndurance = 0;
         } else {
 
             // Aply dammage
-            state.actionChart.increaseEndurance(-turn.loneWolf , this.permanentDammage);
+            state.actionChart.increaseEndurance(-turn.loneWolf, this.permanentDammage);
 
             // If dammage is permanent, display a toast
             if (this.permanentDammage) {
-                actionChartController.displayEnduranceChangeToast(-turn.loneWolf , true);
+                actionChartController.displayEnduranceChangeToast(-turn.loneWolf, true);
             }
 
             if (this.checkHelshezagPermanentLoss(turn)) {
                 // Apply a permanent -1 EP due to Helshezag use
-                actionChartController.increaseEndurance(-1 , false , true);
+                actionChartController.increaseEndurance(-1, false, true);
             }
         }
 
         // Apply enemy damages:
-        this.endurance = Combat.applyLoss(this.endurance , turn.enemy);
+        this.endurance = Combat.applyLoss(this.endurance, turn.enemy);
 
         // Check if the combat has been finished
         if (turn.elude || this.endurance === 0 || state.actionChart.currentEndurance === 0) {
@@ -315,7 +313,7 @@ class Combat {
      * Returns true if the combat is finished?
      */
     public isFinished(): boolean {
-        // return this.endurance == 0 || state.actionChart.currentEndurance == 0;
+        // return this.endurance === 0 || state.actionChart.currentEndurance === 0;
         return this.combatFinished;
     }
 
@@ -345,7 +343,7 @@ class Combat {
         let lost = 0;
         for (let i = 0, len = this.turns.length; i < len; i++) {
             const turn = this.turns[i];
-            if (turn.loneWolf == combatTable_DEATH) {
+            if (turn.loneWolf === combatTable_DEATH) {
                 lost += state.actionChart.getMaxEndurance();
             } else {
                 lost += turn.loneWolf;
@@ -361,7 +359,7 @@ class Combat {
         let lost = 0;
         for (let i = 0, len = this.turns.length; i < len; i++) {
             const turn = this.turns[i];
-            if (turn.enemy == combatTable_DEATH) {
+            if (turn.enemy === combatTable_DEATH) {
                 lost += this.originalEndurance;
             } else {
                 lost += turn.enemy;
