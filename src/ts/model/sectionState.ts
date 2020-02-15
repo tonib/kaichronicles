@@ -1,4 +1,3 @@
-/// <reference path="../external.ts" />
 
 /**
  * Stores information about an object available to pick on a section
@@ -84,7 +83,7 @@ class SectionState {
      * @param executionState The state to associate with the execution. If it's null,
      * if will be set to true
      */
-    public markRuleAsExecuted( rule, executionState: any = true ) {
+    public markRuleAsExecuted( rule: Element, executionState: any = true ) {
         if ( !executionState ) {
             executionState = true;
         }
@@ -97,7 +96,7 @@ class SectionState {
      * @param rule Rule to check
      * @return The object associated with the execution. true if there was no result stored
      */
-    public ruleHasBeenExecuted(rule): any {
+    public ruleHasBeenExecuted(rule: Element): any {
         // TODO: This will fail if the XML changes. The rule should be searched
         // TODO: with all selectors on the sectionState.executedRules keys
         // TODO: If it's found, it's executed
@@ -114,13 +113,13 @@ class SectionState {
         const items: Item[] = [];
         for ( const sectionItem of this.objects) {
 
-            if ( sectionItem.id == "money" ) {
+            if ( sectionItem.id === "money" ) {
                 // Money if not really an object. It's stored like one for mechanics needs
                 continue;
             }
 
             const i = state.mechanics.getObject( sectionItem.id );
-            if ( !type || i.type == type ) {
+            if ( !type || i.type === type ) {
                 items.push(i);
             }
         }
@@ -139,8 +138,8 @@ class SectionState {
         // Code from cracrayol fork (reverted, it will break things, https://github.com/tonib/kaichronicles/commit/c527e2e63ae80c6a5e60ef66cde29f3825ee2725)
         /*let count = 0;
         const items = this.getSectionObjects(type);
-        for(let i = 0; i < items.length; i++) {
-            count += items[i].itemCount ? items[i].itemCount : 1;
+        for (const item of items) {
+            count += item.itemCount ? item.itemCount : 1;
         }
         return count;*/
     }
@@ -178,8 +177,8 @@ class SectionState {
             return "eluded";
         }
 
-        for (let i = 0; i < this.combats.length; i++) {
-            if ( !this.combats[i].isFinished() ) {
+        for (const combat of this.combats) {
+            if ( !combat.isFinished() ) {
                 return false;
             }
         }
@@ -190,8 +189,8 @@ class SectionState {
      * Returns true if all combats are won
      */
     public areAllCombatsWon(): boolean {
-        for (let i = 0; i < this.combats.length; i++) {
-            if ( this.combats[i].endurance > 0 ) {
+        for (const combat of this.combats) {
+            if ( combat.endurance > 0 ) {
                 return false;
             }
         }
@@ -206,8 +205,8 @@ class SectionState {
             return false;
         }
 
-        for (let i = 0; i < this.combats.length; i++) {
-            if ( !this.combats[i].isFinished() ) {
+        for (const combat of this.combats) {
+            if ( !combat.isFinished() ) {
                 return true;
             }
         }
@@ -222,7 +221,7 @@ class SectionState {
     public combatsEnduranceLost( who: string ): number {
         let lost = 0;
         for ( let i = 0, len = this.combats.length; i < len; i++) {
-            if ( who == "enemy") {
+            if ( who === "enemy") {
                 lost += this.combats[i].enemyEnduranceLost();
             } else {
                 lost += this.combats[i].playerEnduranceLost();
@@ -255,7 +254,7 @@ class SectionState {
     /**
      * Add an object to the section
      * @param objectId Object id to add
-     * @param price The object price. 0 == no buy (free)
+     * @param price The object price. 0 === no buy (free)
      * @param unlimited True if there are an infinite number of this kind of object on the section
      * @param count Only applies if id = 'quiver' (number of arrows on the quiver), 'arrow' (number of arrows), or 'money' (number of Gold Crowns),
      * or if price is is not zero (-> you buy "count" items for one "price")
@@ -265,10 +264,10 @@ class SectionState {
                               useOnSection: boolean = false ) {
 
         // Special cases:
-        if ( objectId == "money" ) {
+        if ( objectId === "money" ) {
             // Try to increase the current money amount / arrows on the section:
             for ( const o of this.objects ) {
-                if ( o.id == objectId ) {
+                if ( o.id === objectId ) {
                     o.count += count;
                     return;
                 }
@@ -303,9 +302,9 @@ class SectionState {
                 currentPrice = 0;
             }
 
-            if ( this.objects[i].id == objectId && currentPrice == price ) {
+            if ( this.objects[i].id === objectId && currentPrice === price ) {
                 let removeObject = true;
-                if ( ( objectId == Item.MONEY || objectId == Item.ARROW ) && count >= 0 && this.objects[i].count > count ) {
+                if ( ( objectId === Item.MONEY || objectId === Item.ARROW ) && count >= 0 && this.objects[i].count > count ) {
                     // Still money / arrows available:
                     this.objects[i].count -= count;
                     removeObject = false;
@@ -352,7 +351,7 @@ class SectionState {
     public getAvailableMoney(): number {
         let moneyCount = 0;
         for ( const o of this.objects ) {
-            if ( o.id == "money") {
+            if ( o.id === "money") {
                 moneyCount += o.count;
             }
         }
@@ -373,7 +372,7 @@ class SectionState {
     /** Return true if the object is on the section */
     public containsObject( objectId: string ): boolean {
         for ( const sectionItem of this.objects ) {
-            if ( sectionItem.id == objectId ) {
+            if ( sectionItem.id === objectId ) {
                 return true;
             }
         }
