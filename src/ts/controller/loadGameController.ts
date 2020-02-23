@@ -2,6 +2,7 @@
 /**
  * Load stored game controller
  */
+// tslint:disable-next-line: class-name
 class loadGameController {
 
     /**
@@ -10,7 +11,7 @@ class loadGameController {
     public static index() {
         template.setNavTitle( translations.text("kaiChronicles"), "#mainMenu", true);
         template.showStatistics(false);
-        views.loadView("loadGame.html").then(function() {
+        views.loadView("loadGame.html").then(() => {
 
             if ( !cordovaApp.isRunningApp() ) {
                 // Web page environment:
@@ -53,10 +54,10 @@ class loadGameController {
 
         // Get files on the root directory of the persistent storage
         cordovaFS.requestFileSystemAsync()
-        .then(function( fileSystem /* : FileSystem */ ) {
+        .then(( fileSystem /* : FileSystem */ ) => {
             return cordovaFS.getRootFilesAsync( fileSystem );
         })
-        .then( function(entries: any[] ) {
+        .then((entries: any[]) => {
 
             // Get file names (entries is Array<Entry>)
             const fileNames = loadGameController.getFileNames(entries);
@@ -66,7 +67,7 @@ class loadGameController {
             loadGameView.addFilesToList( fileNames );
             loadGameView.bindListEvents();
         })
-        .fail(function( error: any ) {
+        .fail(( error: any ) => {
             // TODO: Test this
             let msg = "Error retrieving saved games list";
             if ( error ) {
@@ -83,7 +84,7 @@ class loadGameController {
     public static fileUploaderChanged(fileToUpload: Blob) {
         try {
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = (e) => {
                 loadGameController.loadGame( (e.target as any).result );
             };
             reader.readAsText(fileToUpload);
@@ -99,10 +100,10 @@ class loadGameController {
     public static fileListClicked(fileName: string) {
         cordovaFS.readRootTextFileAsync( fileName )
         .then(
-            function( fileContent: string ) {
+            ( fileContent: string ) => {
                 loadGameController.loadGame( fileContent );
             },
-            function( error: any ) {
+            ( error: any ) => {
                 let msg = "Error loading saved game";
                 if ( error ) {
                     msg += ": " + error.toString();
@@ -137,17 +138,17 @@ class loadGameController {
     public static deleteFile(fileName: string) {
 
         cordovaFS.requestFileSystemAsync()
-        .then( function( fs: any /* : FileSystem */ ) {
+        .then( ( fs: any /* : FileSystem */ ) => {
             return cordovaFS.getFileAsync( fs.root , fileName );
         })
-        .then( function( fileEntry /* : FileEntry */ ) {
+        .then( ( fileEntry /* : FileEntry */ ) => {
             return cordovaFS.deleteFileAsync( fileEntry );
         })
-        .done( function() {
+        .done( () => {
             toastr.success( translations.text( "fileDeleted" , [ fileName ] ) );
             loadGameView.removeFilenameFromList( fileName );
         })
-        .fail( function( error ) {
+        .fail( ( error ) => {
             let msg = "Error deleting file";
             if ( error ) {
                 msg += ": " + error.toString();
@@ -168,11 +169,11 @@ class loadGameController {
 
             new SavedGamesExport().export()
             .then(
-                function() {
+                () => {
                     // OK
                     toastr.success( translations.text( "exportedDownloads" ) );
                 },
-                function( error ) {
+                (error) => {
                     // ERROR
                     let msg = translations.text( "errorExporting" );
                     if ( error ) {
@@ -197,17 +198,17 @@ class loadGameController {
 
             const importProcess = new SavedGamesExport();
             DocumentSelection.selectDocument()
-            .then(function(doc: DocumentSelection) {
+            .then((doc: DocumentSelection) => {
                 return importProcess.import(doc);
             })
             .then(
-                function() {
+                () => {
                     // OK
                     toastr.success( translations.text( "importedGames" , [ importProcess.nImportedGames ] ) );
                     // Refresh games list
                     loadGameController.listGameFiles();
                 },
-                function( error: any ) {
+                ( error: any ) => {
                     // ERROR
                     let msg = "Error importing saved games";
                     if ( error ) {

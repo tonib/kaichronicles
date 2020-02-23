@@ -1,8 +1,7 @@
-/// <reference path="../external.ts" />
-
 /**
  * The Kai monastery storage controller
  */
+// tslint:disable-next-line: class-name
 class kaimonasteryController {
 
     /** Controller name */
@@ -17,7 +16,7 @@ class kaimonasteryController {
             return;
         }
 
-        if ( state.sectionStates.currentSection != Book.KAIMONASTERY_SECTION ) {
+        if ( state.sectionStates.currentSection !== Book.KAIMONASTERY_SECTION ) {
             // This page should be only available if the current section is KAIMONASTERY_SECTION
             // This is beacause on that section state will be stored the objects info
             routing.redirect("game");
@@ -27,7 +26,7 @@ class kaimonasteryController {
         views.loadView("kaimonastery.html")
         .then( () => {
             // Go back to the equipment section
-            $("#monastery-goback").click( function(e: Event) {
+            $("#monastery-goback").click( (e: Event) => {
                 kaimonasteryController.onGoBackToEquipment(e);
             });
 

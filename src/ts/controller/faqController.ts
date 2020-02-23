@@ -2,6 +2,7 @@
 /**
  * FAQ controller
  */
+// tslint:disable-next-line: class-name
 class faqController {
 
     public static index() {
