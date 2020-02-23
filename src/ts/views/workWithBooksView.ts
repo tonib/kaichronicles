@@ -14,26 +14,26 @@ const workWithBooksView = {
         $("#wwbooks-update").click(function(e) {
             e.preventDefault();
 
-            if ( !$("#wwbooks-license").prop("checked") ) {
-                alert( translations.text("youMustAgree") );
+            if (!$("#wwbooks-license").prop("checked")) {
+                alert(translations.text("youMustAgree"));
                 return;
             }
 
             // Get selected books:
             const selectedBooks = [];
             $("tbody input:checked").parent().parent().each(function(index, tr) {
-                const bookNumber = parseInt( $(tr).attr("data-book-number") );
-                selectedBooks.push( bookNumber );
+                const bookNumber = parseInt($(tr).attr("data-book-number"));
+                selectedBooks.push(bookNumber);
             });
 
-            workWithBooksController.downloadBooks( selectedBooks );
+            workWithBooksController.downloadBooks(selectedBooks);
         });
 
         // Select / deselect all books
         $("#wwbooks-all").change(function() {
             const $allChecks = $("tbody input");
-            if ( $(this).prop("checked") ) {
-                $allChecks.prop( "checked" , "checked" );
+            if ($(this).prop("checked")) {
+                $allChecks.prop("checked" , "checked");
             } else {
                 $allChecks.removeAttr("checked");
             }
@@ -47,9 +47,9 @@ const workWithBooksView = {
     },
 
     closeCancelClicked() {
-        if ( workWithBooksController.changingBooks ) {
+        if (workWithBooksController.changingBooks) {
             // Cancel process
-            if ( !confirm( translations.text( "confirmCancel" ) ) ) {
+            if (!confirm(translations.text("confirmCancel"))) {
                 return;
             }
         }
@@ -62,10 +62,10 @@ const workWithBooksView = {
      * @param {bool} checked True to check. False to uncheck
      */
     setSelectAllState(checked: boolean) {
-        if ( checked ) {
-            $("#wwbooks-all").prop( "checked" , "checked" );
+        if (checked) {
+            $("#wwbooks-all").prop("checked" , "checked");
         } else {
-            $("#wwbooks-all").removeAttr( "checked" );
+            $("#wwbooks-all").removeAttr("checked");
         }
     },
 
@@ -89,11 +89,11 @@ const workWithBooksView = {
     markBookAsDownloaded(bookNumber: number) {
         const $row = $("tr[data-book-number=" + bookNumber + "]");
         $row.addClass("success");
-        $row.find( "input" ).prop("checked" , "checked");
+        $row.find("input").prop("checked" , "checked");
     },
 
     displayModal(show: boolean) {
-        if ( show ) {
+        if (show) {
             // Clear the log
             $("#wwbooks-log").empty();
 
@@ -101,13 +101,13 @@ const workWithBooksView = {
             $("#wwbooks-closemodal")
                 .removeClass("btn-primary")
                 .addClass("btn-danger")
-                .text( translations.text("cancel") );
+                .text(translations.text("cancel"));
 
             // Do no close the dialog with the hardware back button
             $("#wwbooks-modal").addClass("nobackbutton");
         }
 
-        $("#wwbooks-modal").modal( show ? "show" : "hide" );
+        $("#wwbooks-modal").modal(show ? "show" : "hide");
     },
 
     enableCloseModal() {
@@ -115,7 +115,7 @@ const workWithBooksView = {
         $("#wwbooks-closemodal")
             .removeClass("btn-danger")
             .addClass("btn-primary")
-            .text( translations.text("close") );
+            .text(translations.text("close"));
 
         // Enable to close the dialog with the hardware back button
         $("#wwbooks-modal").removeClass("nobackbutton");
@@ -130,7 +130,7 @@ const workWithBooksView = {
         workWithBooksView.updateProgress(0);
     },
 
-    updateProgress( percent: number ) {
+    updateProgress(percent: number) {
         $("#wwbooks-progress").css("width", percent + "%");
     },
 
