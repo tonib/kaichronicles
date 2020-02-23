@@ -1,4 +1,3 @@
-/// <reference path="../external.ts" />
 
 /**
  * Work with books view
@@ -11,7 +10,7 @@ const workWithBooksView = {
     setup() {
 
         // Update books event
-        $("#wwbooks-update").click(function(e) {
+        $("#wwbooks-update").click((e) => {
             e.preventDefault();
 
             if (!$("#wwbooks-license").prop("checked")) {
@@ -21,8 +20,8 @@ const workWithBooksView = {
 
             // Get selected books:
             const selectedBooks = [];
-            $("tbody input:checked").parent().parent().each(function(index, tr) {
-                const bookNumber = parseInt($(tr).attr("data-book-number"));
+            $("tbody input:checked").parent().parent().each((index, tr) => {
+                const bookNumber = parseInt($(tr).attr("data-book-number"), 10);
                 selectedBooks.push(bookNumber);
             });
 
@@ -30,17 +29,17 @@ const workWithBooksView = {
         });
 
         // Select / deselect all books
-        $("#wwbooks-all").change(function() {
+        $("#wwbooks-all").change(() => {
             const $allChecks = $("tbody input");
             if ($(this).prop("checked")) {
-                $allChecks.prop("checked" , "checked");
+                $allChecks.prop("checked", "checked");
             } else {
                 $allChecks.removeAttr("checked");
             }
         });
 
         // Close / cancel button
-        $("#wwbooks-closemodal").click(function(e) {
+        $("#wwbooks-closemodal").click((e) => {
             e.preventDefault();
             workWithBooksView.closeCancelClicked();
         });
@@ -63,7 +62,7 @@ const workWithBooksView = {
      */
     setSelectAllState(checked: boolean) {
         if (checked) {
-            $("#wwbooks-all").prop("checked" , "checked");
+            $("#wwbooks-all").prop("checked", "checked");
         } else {
             $("#wwbooks-all").removeAttr("checked");
         }
@@ -74,11 +73,11 @@ const workWithBooksView = {
         $tableBody.empty();
 
         let html = "";
-        for (let i = 0; i < booksState.length; i++) {
-            html += '<tr data-book-number="' + booksState[i].bookNumber +
+        for (const book of booksState) {
+            html += '<tr data-book-number="' + book.bookNumber +
                 '" style="width:100%"><td>' +
-                booksState[i].bookNumber + ". " + booksState[i].getTitle() +
-                '</td><td style="white-space: nowrap">' + booksState[i].size.toString() + " MB</td>" +
+                book.bookNumber + ". " + book.getTitle() +
+                '</td><td style="white-space: nowrap">' + book.size.toString() + " MB</td>" +
                 '<td class="center"><input type="checkbox"></td>' +
                 "</tr>";
         }
@@ -89,7 +88,7 @@ const workWithBooksView = {
     markBookAsDownloaded(bookNumber: number) {
         const $row = $("tr[data-book-number=" + bookNumber + "]");
         $row.addClass("success");
-        $row.find("input").prop("checked" , "checked");
+        $row.find("input").prop("checked", "checked");
     },
 
     displayModal(show: boolean) {
@@ -132,6 +131,6 @@ const workWithBooksView = {
 
     updateProgress(percent: number) {
         $("#wwbooks-progress").css("width", percent + "%");
-    },
+    }
 
 };
