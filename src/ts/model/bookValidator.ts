@@ -256,6 +256,7 @@ class BookValidator {
                 }
                 expression = expression.replaceAll( keyword , "0" );
             }
+            // tslint:disable-next-line: no-eval
             return eval( expression );
         } catch (e) {
             console.log(e);

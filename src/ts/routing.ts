@@ -84,9 +84,8 @@ const routing = {
                 return null;
             }
 
-            /* jshint ignore:start */
+            // tslint:disable-next-line: no-eval
             return eval( controllerName );
-            /* jshint ignore:end */
         } catch (e) {
             console.log(e);
             return null;

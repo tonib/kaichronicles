@@ -2,6 +2,8 @@
 /**
  * Combat result for death
  */
+// TODO: Rename this variable to uppercase?
+// tslint:disable-next-line: variable-name
 const combatTable_DEATH = "D";
 
 /**
