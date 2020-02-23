@@ -117,7 +117,7 @@ const cordovaFS = {
      * @param {FileSystem} fs The file system. We will check existing files on the root directory
      * @param callback Callback to call with the new file name
      */
-    getUnusedName(fileName: string, fs: any, callback: (string) => void) {
+    getUnusedName(fileName: string, fs: any, callback: (fileName: string) => void) {
         /*var idx = fileName.lastIndexOf('.');
         var name = fileName.substr(0, idx);
         const extension = fileName.substr(idx +1);*/
@@ -134,11 +134,13 @@ const cordovaFS = {
                     idx++;
                     continue;
                 }
+
                 try {
                     callback(fileName);
-                } finally {
-                    return;
+                } catch (ex) {
+                    console.log("Error calling callback: " + ex.toString());
                 }
+                return;
             }
         });
     },

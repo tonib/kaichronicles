@@ -1,9 +1,8 @@
 
 /**
  * Application tests
- * TODO: Run XSD
- * TODO: Test all books / languages
  */
+// tslint:disable-next-line: class-name
 class testsController {
 
     public static index() {

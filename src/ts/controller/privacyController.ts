@@ -2,11 +2,12 @@
 /**
  * Privacy controller page
  */
+// tslint:disable-next-line: class-name
 class privacyController {
 
     /**
-      * Render the page
-      */
+     * Render the page
+     */
     public static index() {
         views.loadView( "privacy_" + state.language + ".html" )
         .then(() => {
