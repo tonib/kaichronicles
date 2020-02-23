@@ -21,8 +21,6 @@
     },
     "scripts": {
         "lint": "tslint -t verbose -p tsconfig.json",
-        "lint-fix": "tslint -t verbose --fix --config tslint-fix.json --project tsconfig.json",
-        "lint-spaces": "tslint -t verbose --fix --config tslint-fix-spaces.json --project tsconfig.json",
         "prepareversion": "node scripts/prepareVersion.js",
         "cleandist": "rm -rf dist",
         "downloaddata": "node scripts/downloadProjectAonData.js",
