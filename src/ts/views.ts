@@ -1,9 +1,10 @@
-let views = {
+const views = {
 
     /**
-     * Cache with views already loaded
+     * Cache with views already loaded.
+     * Key is the view relative path, and value is the view HTML root element.
      */
-    viewCache: {},
+    viewCache: {} as { string: HTMLElement },
 
     /**
      * Views setup
@@ -84,6 +85,6 @@ let views = {
      */
     getCachedView(viewPath: string) {
         return views.viewCache[viewPath];
-    },
+    }
 
 };
