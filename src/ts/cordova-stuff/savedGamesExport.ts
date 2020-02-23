@@ -240,7 +240,7 @@ class SavedGamesExport {
         }
     }
 
-        /**
+    /**
      * Check file entries, get those that are saved games
      * @param {Array<Entry>} entries File entries to check
      * @returns {Array<Entry>} The saved games
@@ -252,7 +252,7 @@ class SavedGamesExport {
             if (!entry.isFile) {
                 ok = false;
             }
-            if (cordovaFS.getFileNameAndExtension(entry.name).extension.toLowerCase() != "json") {
+            if (cordovaFS.getFileNameAndExtension(entry.name).extension.toLowerCase() !== "json") {
                 ok = false;
             }
             if (ok) {
