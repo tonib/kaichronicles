@@ -58,7 +58,7 @@ const gameView = {
             e.preventDefault();
             gameController.onNavigatePrevNext(-1);
         });
-        $("#game-nextSection").click((e) => {
+        $("#game-nextSection").click( function(e: Event) {
             e.preventDefault();
             if ($(this).hasClass("disabled")) {
                 return;
