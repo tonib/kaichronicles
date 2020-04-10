@@ -104,7 +104,7 @@ class ObjectsTable {
         .find(".equipment-op")
         // Include the $element itself too
         .addBack(".equipment-op")
-        .click((e: Event) => {
+        .click(function(e: Event) {
             e.preventDefault();
             const $link = $(this);
 
