@@ -84,7 +84,9 @@
     - Keeped controllers as "class". Useful to have private members
     - I simply cannot check this: loadGameController.ts
 
-
+* https://github.com/tonib/kaichronicles/commit/11e02df6b4351e2c8a6b8fd986e8f14503b750b5
+    - Removed extra references to showCount
+    
 * TSLINT:
     - TSLint is deprecated...
     - Check if remains any "throw new Error("
