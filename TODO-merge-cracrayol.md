@@ -88,7 +88,6 @@
 * TSLINT:
     - TSLint is deprecated...
     - Check if remains any "throw new Error("
-    - IMPORTANT: Review all "_this" in src/www/js (there is a bug in ObjectsTable.bindTableEquipmentEvents)
 
 * Error in setup:
     - Add breakpoint at Item.prototype.loadImageInfo start
