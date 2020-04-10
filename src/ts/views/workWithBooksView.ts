@@ -29,7 +29,7 @@ const workWithBooksView = {
         });
 
         // Select / deselect all books
-        $("#wwbooks-all").change(() => {
+        $("#wwbooks-all").change( function() {
             const $allChecks = $("tbody input");
             if ($(this).prop("checked")) {
                 $allChecks.prop("checked", "checked");
