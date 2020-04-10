@@ -285,9 +285,10 @@ const cordovaFS = {
 
         cordovaFS.fileAsync(entry)
             .then(
+                // tslint:disable-next-line only-arrow-functions
                 function(file /* : File */) {
                     const reader = new FileReader();
-                    reader.onloadend = () => {
+                    reader.onloadend = function() {
                         console.log("File read finished");
                         dfd.resolve(this.result);
                     };
