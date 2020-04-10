@@ -67,6 +67,9 @@ class ObjectsTable {
                 };
             }
 
+            // Show arrows count of quiver only in action chart or count > 0
+            info.showCount = (info.id === Item.QUIVER && (info.count > 0 || this.type === ObjectsTableType.INVENTORY));
+
             this.objects.push( new ObjectsTableItem( info, this.type ) );
         }
     }

@@ -50,7 +50,7 @@
 
             <object objectId="sword" />
             <object objectId="bow" />
-            <object objectId="quiver" count="6" showCount="true" />
+            <object objectId="quiver" count="6" />
             <object objectId="axe" />
             <object objectId="meal" index="0" />
             <object objectId="meal" index="1" />
