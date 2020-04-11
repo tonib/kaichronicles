@@ -86,7 +86,10 @@
 
 * https://github.com/tonib/kaichronicles/commit/11e02df6b4351e2c8a6b8fd986e8f14503b750b5
     - Removed extra references to showCount
-    
+
+* https://github.com/tonib/kaichronicles/commit/74435f28d5c3cc11eea79902c676633e4a2e6b71
+    - Check books 14+: I did not found where these bonuses are explained
+
 * TSLINT:
     - TSLint is deprecated...
     - Check if remains any "throw new Error("
