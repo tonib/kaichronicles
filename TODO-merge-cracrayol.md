@@ -90,6 +90,9 @@
 * https://github.com/tonib/kaichronicles/commit/74435f28d5c3cc11eea79902c676633e4a2e6b71
     - Check books 14+: I did not found where these bonuses are explained
 
+* https://github.com/tonib/kaichronicles/commit/8791936183e58b9d828625a39e68fe591c8d9089
+    - Missed spanish codes for book 14
+    
 * TSLINT:
     - TSLint is deprecated...
     - Check if remains any "throw new Error("
