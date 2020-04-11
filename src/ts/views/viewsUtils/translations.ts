@@ -69,6 +69,7 @@ class Translations {
         "circleSolaris" : "Círculo de Solaris",
         "circleSpirit" : "Círculo del Espíritu",
         "circles" : "Círculos de la Ciencia:",
+        "kaiLevel" : "Kai Level", // TODO Translate
         "dropMoney" : "Dejar dinero",
         "pickMoney" : "Coger dinero",
         "amount" : "Cantidad",
@@ -392,6 +393,7 @@ class Translations {
         "circleLight" : "Circle of Light",
         "circleSolaris" : "Circle of Solaris",
         "circleSpirit" : "Circle of the Spirit",
+        "kaiLevel" : "Kai Level",
         "dropMoney" : "Drop money",
         "pickMoney" : "Pick money",
         "amount" : "Amount",
