@@ -1,0 +1,399 @@
+﻿{
+    "currentState": {
+        "actionChart": {
+            "combatSkill": 18,
+            "endurance": 26,
+            "currentEndurance": 26,
+            "weapons": [
+                "sword",
+                "bow"
+            ],
+            "fightUnarmed": false,
+            "selectedWeapon": "sword",
+            "beltPouch": 31,
+            "meals": 3,
+            "backpackItems": [
+                "rope",
+                "khetuspores",
+                "baylonboughfungi",
+                "silverflask",
+                "silverflask"
+            ],
+            "specialItems": [
+                "quiver",
+                "quiver",
+                "map",
+                "crystalexplosive",
+                "goldenamulet"
+            ],
+            "hasBackpack": true,
+            "disciplines": [
+                "wpnmstry",
+                "curing",
+                "hntmstry",
+                "dvnation"
+            ],
+            "weaponSkill": [
+                "bow",
+                "sword",
+                "dagger",
+                "broadsword",
+                "spear"
+            ],
+            "annotations": "",
+            "manualRandomTable": true,
+            "extendedCRT": false,
+            "yScrollPosition": 0,
+            "arrows": 9,
+            "adganaUsed": false,
+            "restore20EPUsed": false,
+            "kaiMonasterySafekeeping": [
+                {
+                    "id": "money",
+                    "price": 0,
+                    "unlimited": false,
+                    "count": 2,
+                    "useOnSection": false
+                },
+                {
+                    "id": "quiver",
+                    "price": 0,
+                    "unlimited": false,
+                    "count": 3,
+                    "useOnSection": false
+                },
+                {
+                    "id": "lantern",
+                    "price": 0,
+                    "unlimited": false,
+                    "count": 0,
+                    "useOnSection": false
+                }
+            ]
+        },
+        "bookNumber": 12,
+        "language": "es",
+        "sectionStates": {
+            "currentSection": "sect325",
+            "sectionStates": {
+                "kaimonastery": {
+                    "objects": [
+                        {
+                            "id": "lantern",
+                            "price": 0,
+                            "unlimited": false,
+                            "count": 0,
+                            "useOnSection": false
+                        }
+                    ],
+                    "sellPrices": [],
+                    "combats": [],
+                    "combatEluded": false,
+                    "executedRules": {},
+                    "healingExecuted": false,
+                    "numberPickersState": {
+                        "actionFired": null
+                    }
+                },
+                "tssf": {
+                    "objects": [],
+                    "sellPrices": [],
+                    "combats": [],
+                    "combatEluded": false,
+                    "executedRules": {
+                        "endurance[count='+[MAXENDURANCE]']": true,
+                        "drop[objectId='map']": true
+                    },
+                    "healingExecuted": true,
+                    "numberPickersState": {
+                        "actionFired": null
+                    }
+                },
+                "gamerulz": {
+                    "objects": [],
+                    "sellPrices": [],
+                    "combats": [],
+                    "combatEluded": false,
+                    "executedRules": {},
+                    "healingExecuted": true,
+                    "numberPickersState": {
+                        "actionFired": null
+                    }
+                },
+                "discplnz": {
+                    "objects": [],
+                    "sellPrices": [],
+                    "combats": [],
+                    "combatEluded": false,
+                    "executedRules": {},
+                    "healingExecuted": true,
+                    "numberPickersState": {
+                        "actionFired": null
+                    }
+                },
+                "equipmnt": {
+                    "objects": [
+                        {
+                            "id": "sword",
+                            "price": 0,
+                            "unlimited": false,
+                            "count": 0,
+                            "useOnSection": false
+                        },
+                        {
+                            "id": "bow",
+                            "price": 0,
+                            "unlimited": false,
+                            "count": 0,
+                            "useOnSection": false
+                        },
+                        {
+                            "id": "quiver",
+                            "price": 0,
+                            "unlimited": false,
+                            "count": 6,
+                            "useOnSection": false
+                        },
+                        {
+                            "id": "rope",
+                            "price": 0,
+                            "unlimited": false,
+                            "count": 0,
+                            "useOnSection": false
+                        },
+                        {
+                            "id": "laumspurpotion4",
+                            "price": 0,
+                            "unlimited": false,
+                            "count": 0,
+                            "useOnSection": false
+                        },
+                        {
+                            "id": "lantern",
+                            "price": 0,
+                            "unlimited": false,
+                            "count": 0,
+                            "useOnSection": false
+                        },
+                        {
+                            "id": "mace",
+                            "price": 0,
+                            "unlimited": false,
+                            "count": 0,
+                            "useOnSection": false
+                        },
+                        {
+                            "id": "meal",
+                            "price": 0,
+                            "unlimited": false,
+                            "count": 0,
+                            "useOnSection": false
+                        },
+                        {
+                            "id": "meal",
+                            "price": 0,
+                            "unlimited": false,
+                            "count": 0,
+                            "useOnSection": false
+                        },
+                        {
+                            "id": "meal",
+                            "price": 0,
+                            "unlimited": false,
+                            "count": 0,
+                            "useOnSection": false
+                        },
+                        {
+                            "id": "meal",
+                            "price": 0,
+                            "unlimited": false,
+                            "count": 0,
+                            "useOnSection": false
+                        },
+                        {
+                            "id": "dagger",
+                            "price": 0,
+                            "unlimited": false,
+                            "count": 0,
+                            "useOnSection": false
+                        },
+                        {
+                            "id": "quarterstaff",
+                            "price": 0,
+                            "unlimited": false,
+                            "count": 0,
+                            "useOnSection": false
+                        },
+                        {
+                            "id": "axe",
+                            "price": 0,
+                            "unlimited": false,
+                            "count": 0,
+                            "useOnSection": false
+                        }
+                    ],
+                    "sellPrices": [],
+                    "combats": [],
+                    "combatEluded": false,
+                    "executedRules": {
+                        "test[not='true'][hasObject='map'] > pick[objectId='map']": true,
+                        "object[objectId='sword']": true,
+                        "object[objectId='bow']": true,
+                        "object[objectId='quiver'][count='6']": true,
+                        "object[objectId='rope']": true,
+                        "object[objectId='laumspurpotion4']": true,
+                        "object[objectId='lantern']": true,
+                        "object[objectId='mace']": true,
+                        "object[objectId='meal'][index='0']": true,
+                        "object[objectId='meal'][index='1']": true,
+                        "object[objectId='meal'][index='2']": true,
+                        "object[objectId='meal'][index='3']": true,
+                        "object[objectId='dagger']": true,
+                        "object[objectId='quarterstaff']": true,
+                        "object[objectId='axe']": true,
+                        "randomTable > pick[class='money'][count='[RANDOM] + 10']": true,
+                        "randomTable": {
+                            "randomValue": 7,
+                            "increment": 0
+                        }
+                    },
+                    "healingExecuted": true,
+                    "numberPickersState": {
+                        "actionFired": null
+                    }
+                },
+                "cmbtrulz": {
+                    "objects": [],
+                    "sellPrices": [],
+                    "combats": [],
+                    "combatEluded": false,
+                    "executedRules": {},
+                    "healingExecuted": true,
+                    "numberPickersState": {
+                        "actionFired": null
+                    }
+                },
+                "levels": {
+                    "objects": [],
+                    "sellPrices": [],
+                    "combats": [],
+                    "combatEluded": false,
+                    "executedRules": {},
+                    "healingExecuted": true,
+                    "numberPickersState": {
+                        "actionFired": null
+                    }
+                },
+                "lorecrcl": {
+                    "objects": [],
+                    "sellPrices": [],
+                    "combats": [],
+                    "combatEluded": false,
+                    "executedRules": {},
+                    "healingExecuted": true,
+                    "numberPickersState": {
+                        "actionFired": null
+                    }
+                },
+                "imprvdsc": {
+                    "objects": [],
+                    "sellPrices": [],
+                    "combats": [],
+                    "combatEluded": false,
+                    "executedRules": {},
+                    "healingExecuted": true,
+                    "numberPickersState": {
+                        "actionFired": null
+                    }
+                },
+                "kaiwisdm": {
+                    "objects": [],
+                    "sellPrices": [],
+                    "combats": [],
+                    "combatEluded": false,
+                    "executedRules": {},
+                    "healingExecuted": true,
+                    "numberPickersState": {
+                        "actionFired": null
+                    }
+                },
+                "sect1": {
+                    "objects": [],
+                    "sellPrices": [],
+                    "combats": [],
+                    "combatEluded": false,
+                    "executedRules": {
+                        "randomTable[zeroAsTen='true'] > endurance[count='-[RANDOM]']": true,
+                        "randomTable[zeroAsTen='true']": {
+                            "randomValue": 6,
+                            "increment": 0
+                        }
+                    },
+                    "healingExecuted": true,
+                    "numberPickersState": {
+                        "actionFired": null
+                    }
+                },
+                "sect94": {
+                    "objects": [],
+                    "sellPrices": [],
+                    "combats": [],
+                    "combatEluded": false,
+                    "executedRules": {},
+                    "healingExecuted": true,
+                    "numberPickersState": {
+                        "actionFired": null
+                    }
+                },
+                "sect166": {
+                    "objects": [],
+                    "sellPrices": [],
+                    "combats": [],
+                    "combatEluded": false,
+                    "executedRules": {
+                        "pick[objectId='crystalexplosive']": true
+                    },
+                    "healingExecuted": true,
+                    "numberPickersState": {
+                        "actionFired": null
+                    }
+                },
+                "sect229": {
+                    "objects": [],
+                    "sellPrices": [],
+                    "combats": [],
+                    "combatEluded": false,
+                    "executedRules": {
+                        "pick[objectId='goldenamulet']": true
+                    },
+                    "healingExecuted": true,
+                    "numberPickersState": {
+                        "actionFired": null
+                    }
+                },
+                "sect325": {
+                    "objects": [],
+                    "sellPrices": [],
+                    "combats": [],
+                    "combatEluded": false,
+                    "executedRules": {},
+                    "healingExecuted": true,
+                    "numberPickersState": {
+                        "actionFired": null
+                    }
+                }
+            },
+            "huntEnabled": true,
+            "otherStates": {
+                "book6sect26TargetPoints": null,
+                "book6sect284": null,
+                "book6sect340": null,
+                "book9sect91": null
+            },
+            "globalRulesIds": []
+        }
+    },
+    "previousBooksState": {
+        "11": "{\"combatSkill\":18,\"endurance\":26,\"currentEndurance\":28,\"weapons\":[\"sword\",\"bow\"],\"fightUnarmed\":false,\"selectedWeapon\":\"sword\",\"beltPouch\":14,\"meals\":3,\"backpackItems\":[\"rope\",\"lantern\",\"khetuspores\",\"baylonboughfungi\",\"silverflask\",\"silverflask\"],\"specialItems\":[\"quiver\",\"map\",\"quiver\"],\"hasBackpack\":true,\"disciplines\":[\"wpnmstry\",\"curing\",\"hntmstry\"],\"weaponSkill\":[\"bow\",\"sword\",\"dagger\",\"broadsword\"],\"annotations\":\"\",\"manualRandomTable\":true,\"extendedCRT\":false,\"yScrollPosition\":323.6363525390625,\"arrows\":9,\"adganaUsed\":false,\"restore20EPUsed\":false,\"kaiMonasterySafekeeping\":[]}"
+    }
+}
