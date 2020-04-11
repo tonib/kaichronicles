@@ -261,13 +261,16 @@ const projectAon = {
             title_en: "The Captives of Kaag",
             code_en: "14tcok",
 
+            title_es: "Los Cautivos de Kaag",
+            code_es: "14lcdk",
+
             illustrators: [ "williams" ],
 
             biographies: [ "jdbiolw" , "bwbiolw" ],
 
             zipSize: 2980342,
 
-            revision: 2752,
+            revision: 2752
         }
 
     ],
