@@ -938,6 +938,12 @@
             <name lang="en">Cener Robe &amp; Mask</name>
         </special>
 
+        <!-- BOOK 14 -->
+
+        <special id="statuetteofzagarna">
+            <name lang="en">Statuette of Zagarna</name>
+        </special>
+
     </specials>
 
     <objects>
@@ -1875,6 +1881,16 @@
 
         <object id="copperbowl">
             <name lang="en">Copper Bowl</name>
+        </object>
+
+        <!-- BOOK 14 -->
+
+        <object id="whistle">
+            <name lang="en">Whistle</name>
+        </object>
+
+        <object id="brasskeybook14">
+            <name lang="en">Brass Key</name>
         </object>
 
         <!-- OTHERS -->
