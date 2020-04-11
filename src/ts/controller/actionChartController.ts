@@ -73,6 +73,7 @@ const actionChartController = {
      * or "backpackcontent" to drop all backpack content, but not the backpack
      * or "currentweapon" to drop the current weapon,
      * or "allspecial" to drop all the special items
+     * or "allspecialgrdmaster" to drop all the special items except the ones allowed when beginning Grand Master serie
      * or "allmeals" to drop all meals
      * or "all" to drop all (weapons, backpack, special items, and money)
      * or "allobjects" to drop all objects (weapons, backpack content, special items)
@@ -113,6 +114,14 @@ const actionChartController = {
 
         if (objectId === "allspecial") {
             actionChartController.dropItemsList(state.actionChart.specialItems);
+            return true;
+        }
+
+        if (objectId === "allspecialgrdmaster") {
+            actionChartController.dropItemsList(state.actionChart.specialItems.filter((value) => {
+                return !["crystalstar", "sommerswerd", "silverhelm", "daggerofvashna", "silverbracers", "jewelledmace",
+                    "silverbowduadon", "helshezag", "kagonitechainmail", "korliniumscabbard"].contains(value);
+            }));
             return true;
         }
 
