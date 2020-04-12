@@ -313,11 +313,9 @@
 
         <section id="sect47">
             <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" noPsiSurge="true" noKaiSurge="true" combatSkillModifier="0"/>
             <test currentWeapon="quarterstaff|mace|warhammer">
                 <combat noMindblast="true" noPsiSurge="true" noKaiSurge="true" combatSkillModifier="-4"/>
-            </test>
-            <test not="true" currentWeapon="quarterstaff|mace|warhammer">
-                <combat noMindblast="true" noPsiSurge="true" noKaiSurge="true" combatSkillModifier="0"/>
             </test>
             <afterCombats>
                 <choiceState section="all" set="enabled" />
@@ -681,8 +679,10 @@
                     <choiceState section="sect235" set="enabled" />
                 </case>
             </randomTable>
+            <randomTableIncrement increment="[BOWBONUS]" />
             <test hasWeaponskillWith="bow">
-                <randomTableIncrement increment="+3" />
+                <!-- In this book, bonus is only +3, not the default +5 -->
+                <randomTableIncrement increment="-2" />
             </test>
         </section>
 
@@ -841,9 +841,9 @@
         <section id="sect131">
             <endurance count="-6" />
             <choiceState section="all" set="disabled" />
-            <combat combatSkillModifier="-3" />
+            <combat dammageMultiplier="1" combatSkillModifier="-3" />
             <test currentWeapon="sommerswerd">
-                <combat dammageMultiplier="2" />
+                <combat dammageMultiplier="2" combatSkillModifier="-3" />
             </test>
             <afterCombats>
                 <choiceState section="all" set="enabled" />
@@ -1126,9 +1126,11 @@
                 <case from="6" to="12">
                     <choiceState section="sect317" set="enabled" />
                 </case>
-            </randomTable>              
+            </randomTable>
+            <randomTableIncrement increment="[BOWBONUS]" />
             <test hasWeaponskillWith="bow">
-                <randomTableIncrement increment="+3" />
+                <!-- In this book, bonus is only +3, not the default +5 -->
+                <randomTableIncrement increment="-2" />
             </test>
         </section>
 
@@ -1476,11 +1478,9 @@
 
         <section id="sect243">
             <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" noPsiSurge="true" combatSkillModifier="-6"/>
             <test currentWeapon="broadsword|spear|quarterstaff">
                 <combat noMindblast="true" noPsiSurge="true" combatSkillModifier="-9"/>
-            </test>
-            <test not="true" currentWeapon="broadsword|spear|quarterstaff">
-                <combat noMindblast="true" noPsiSurge="true" combatSkillModifier="-6"/>
             </test>
             <afterCombats>
                 <choiceState section="all" set="enabled" />
@@ -1720,9 +1720,9 @@
             </test>
         </section>
 
-        <section id="sect285">
-            <!-- TODO Add special item when visiting Quarlen or Maaken ?? sect109 is only info -->
-        </section>
+        <!-- <section id="sect285">
+            TODO Add special item when visiting Quarlen or Maaken ?? sect109 is only info
+        </section> -->
 
         <section id="sect286">
             <object objectId="copperkeybook13" />
@@ -1788,11 +1788,9 @@
 
         <section id="sect295">
             <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" combatSkillModifier="-5" eludeTurn="6"/>
             <test currentWeapon="broadsword|spear|quarterstaff">
                 <combat noMindblast="true" combatSkillModifier="-8" eludeTurn="6"/>
-            </test>
-            <test not="true" currentWeapon="broadsword|spear|quarterstaff">
-                <combat noMindblast="true" combatSkillModifier="-5" eludeTurn="6"/>
             </test>
             <afterElude>
                 <choiceState section="sect63" set="enabled" />
@@ -1848,8 +1846,10 @@
                     <choiceState section="sect250" set="enabled" />
                 </case>
             </randomTable>
+            <randomTableIncrement increment="[BOWBONUS]" />
             <test hasWeaponskillWith="bow">
-                <randomTableIncrement increment="+3" />
+                <!-- In this book, bonus is only +3, not the default +5 -->
+                <randomTableIncrement increment="-2" />
             </test>
         </section>
 
@@ -1937,6 +1937,10 @@
         </section>
 
         <section id="sect318">
+            <choiceState section="sect151" set="disabled" />
+            <test hasDiscipline="anmlmstr">
+                <choiceState section="sect151" set="enabled" />
+            </test>
         </section>
 
         <section id="sect319">
@@ -1969,11 +1973,9 @@
 
         <section id="sect325">
             <choiceState section="all" set="disabled" />
+            <combat combatSkillModifier="-3" />
             <test hasDiscipline="kaiscrn">
                 <combat combatSkillModifier="0" />
-            </test>
-            <test not="true" hasDiscipline="kaiscrn">
-                <combat combatSkillModifier="-3" />
             </test>
             <afterCombats>
                 <test not="true" expression="[COMBATSDURATION] >= 5">
@@ -2042,11 +2044,9 @@
 
         <section id="sect339">
             <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" noPsiSurge="true" noKaiSurge="true" combatSkillModifier="0" />
             <test currentWeapon="mace|warhammer|quarterstaff">
                 <combat noMindblast="true" noPsiSurge="true" noKaiSurge="true" combatSkillModifier="-4" />
-            </test>
-            <test not="true" currentWeapon="broadsword|spear|quarterstaff">
-                <combat noMindblast="true" noPsiSurge="true" noKaiSurge="true" combatSkillModifier="0" />
             </test>
             <afterCombats>
                 <choiceState section="sect129" set="enabled" />
@@ -2114,9 +2114,6 @@
             <object objectId="cenerrobe" />
             <object objectId="cenermask" />
             <pick class="money" count="20" currency="lune" />
-        </section>
-
-        <section id="sect350">
         </section>
         
     </sections>
