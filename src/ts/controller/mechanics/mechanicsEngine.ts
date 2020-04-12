@@ -1699,7 +1699,12 @@ const mechanicsEngine = {
      * Apply the healing discipline on the current section
      */
     healingDiscipline() {
-        if (!state.actionChart.disciplines.contains("healing") && !state.actionChart.disciplines.contains("curing") && !state.actionChart.disciplines.contains("deliver")) {
+        if (!state.actionChart.disciplines.contains("healing")
+            && !state.actionChart.disciplines.contains("curing")
+            && !state.actionChart.disciplines.contains("deliver")
+            && !state.hasCompletedKaiSerie()
+            && !state.hasCompletedMagnakaiSerie() ) {
+            // Only if having healing discipline or loyalty bonus
             return;
         }
         const sectionState = state.sectionStates.getSectionState();

@@ -4,8 +4,6 @@ TODO
 
 ## Dev
 
-- Replace var with let/const
-- Replace main const/var with TS classes
 - Replace Google analytics with Matomo
 - Fix Cordova config.xml plugin versions to use
 - Cordova package.json should be versioned with git ???
@@ -20,11 +18,18 @@ TODO
   * book 12, sect43
   * book 12, sect61
 - At new game, ask for the random table type
+- An extension of the above, consider saving a snapshot of the action chart when starting a book in section 1. Then add that option to restart the book at section 1 if you die. That way, you don't have to go through and re-do Disciplines and equipment. Keep the option to completely restart the book, though, in case you want to pick different Disciplines or equipment options  "General - You are erroneously allowed to use healing items (Laumspur, etc.) in combat sections before combat has started. Healing items are only to be used in combat sections after combat is over (and if you're still alive and not evading combat).
+- Add a "random discipline" button that will randomly select the proper number of initial disciplines, as well as your bonus discipline each book from the choices remaining
+- Add a Seventh-Sense-like achievement system
+- "Restart book" (at Settings / book death): Add the book number you will restart (ex. "Restart book 9"). On confirmation, explain
+  you will restart with your previous book Action Chart status
 
 ## Android
 
 - Compile android app and test it
 - Do not show the license text on Android (the book was already downloaded)
+- Fix config.xml plugin versions to use
+- package.json should be versioned with git ???
 
 ## Bugs
 
@@ -37,6 +42,9 @@ TODO
   * Excelente..esperando los libros finales, por favor!!! Update: En el libro 12, pagina 133 no hay manera de continuar. La unica opcion disponible 
   para avanzar de pagina esta deshabilitada
 - Save games is not working on Safari
+- You are erroneously allowed to apply multiple Alether effects per combat. You are always limited to one (the berries you can purchase in book 6 even explicitly say so).
+- You are erroneously allowed to use healing items (Laumspur, etc.) in combat sections before combat has started. Healing items are only to be used in combat sections after combat is over (and if you're still alive and not evading combat).
+- Action chart buttons don't work on iPad Safari
 
 - ERROR: Book 8, sect139: 
   ```actionChartController.pick('quiver'); actionChartController.pick('quiver'); actionChartController.increaseArrows(10);```
@@ -83,7 +91,6 @@ TODO
 - Test all books / all sections rendering. It should be valid HTML5
   (https://validator.w3.org/docs/api.html)
 - Test tags <ch.* /> replacements
-- Action chart buttons don't work on iPad Safari
 - Dialogs with text input: Allow to confirm with the screen keyboard ("go" button)
 - Remove the "Alert" text from the message dialog (same for confirms)
 - Google Play will require API 26 on november 2018 (upgrade Cordova version?)
@@ -95,14 +102,6 @@ TODO
 - Add illustrations index?
 - Mechanics: Allow to declare a set of rules that can be runned on multiple sections. See book 12, references to sect208 
   ("Sommerswerd stuff", repeated rules)
-- "Restart book" (at Settings / book death): Add the book number you will restart (ex. "Restart book 9"). On confirmation, explain
-  you will restart with your previous book Action Chart status
-- PAON English reports:
-  "General - You are erroneously allowed to apply multiple Alether effects per combat. You are always limited to one (the berries you can purchase in book 6 even explicitly say so)."
-  "Suggestion - An extension of the above, consider saving a snapshot of the action chart when starting a book in section 1. Then add that option to restart the book at section 1 if you die. That way, you don't have to go through and re-do Disciplines and equipment. Keep the option to completely restart the book, though, in case you want to pick different Disciplines or equipment options  "General - You are erroneously allowed to use healing items (Laumspur, etc.) in combat sections before combat has started. Healing items are only to be used in combat sections after combat is over (and if you're still alive and not evading combat)."
-  "Add a "random discipline" button that will randomly select the proper number of initial disciplines, as well as your bonus discipline each book from the choices remaining"
-  "You are erroneously allowed to use healing items (Laumspur, etc.) in combat sections before combat has started. Healing items are only to be used in combat sections after combat is over (and if you're still alive and not evading combat)."
-  "Add a Seventh-Sense-like achievement system"
 - Allow to add a concept description for combat skill modifiers rules on combat ratio explanation
 - Display concepts for objects usages (Adgana, etc) on combat ratio explanation
 - Display book 11 map ("Northern magnamund") somewhere?
