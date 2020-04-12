@@ -92,6 +92,9 @@
 
 * https://github.com/tonib/kaichronicles/commit/8791936183e58b9d828625a39e68fe591c8d9089
 
+* https://github.com/tonib/kaichronicles/commit/45e950ff770bf493651599c47e679450d4e1729a
+
+
 * TSLINT:
     - TSLint is deprecated...
     - Check if remains any "throw new Error("

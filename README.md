@@ -79,8 +79,8 @@ Please, keep in mind this if you have plans to add a Pull Request, because Kai C
 Game rules for each book are located at [src/www/data](src/www/data). "mechanics-X" are the game rules
 for the book X. "objects.xml" are the game objects
 
-There is (unfished) documentation for [rules](doc/README-mechanics.md) and 
-[object formats](doc/README-objects.md).
+There is (unfished) documentation for [rules](doc/README-mechanics.md), [object formats](doc/README-objects.md) and
+[save game file format](doc/README-savegames.md).
 
 The game rules implementation are at src/ts/controller/mechanics and src/www/controller/mechanics/.
 
