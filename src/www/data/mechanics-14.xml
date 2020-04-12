@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<mechanics book="14" xmlns="https://127.0.0.1:5000" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://localhost:5000/data/mechanics.xsd">
+<mechanics book="14" xmlns="https://127.0.0.1:5000" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://raw.githubusercontent.com/cracrayol/kaichronicles/master/src/www/data/mechanics.xsd">
 
     <!-- LIST OF TRANSLATED IMAGES -->
     <translated-images>
@@ -158,10 +158,10 @@
         <section id="sect19">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="2">
+                <case to="2">
                     <choiceState section="sect60" set="enabled" />
                 </case>
-                <case from="3" to="11">
+                <case from="3">
                     <choiceState section="sect202" set="enabled" />
                 </case>
             </randomTable>
@@ -206,10 +206,10 @@
         <section id="sect26">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="5">
+                <case to="5">
                     <choiceState section="sect239" set="enabled" />
                 </case>
-                <case from="6" to="11">
+                <case from="6">
                     <choiceState section="sect98" set="enabled" />
                 </case>
             </randomTable>
@@ -258,10 +258,10 @@
         <section id="sect35">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="5">
+                <case to="5">
                     <choiceState section="sect32" set="enabled" />
                 </case>
-                <case from="6" to="11">
+                <case from="6">
                     <choiceState section="sect51" set="enabled" />
                 </case>
             </randomTable>
@@ -273,10 +273,10 @@
         <section id="sect36">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="4">
+                <case to="4">
                     <choiceState section="sect27" set="enabled" />
                 </case>
-                <case from="5" to="12">
+                <case from="5">
                     <choiceState section="sect262" set="enabled" />
                 </case>
             </randomTable>
@@ -310,8 +310,7 @@
         <section id="sect43">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="1">
-                </case>
+                <case to="1" />
                 <case from="2" to="9">
                     <endurance count="-[RANDOM] + 1" />
                 </case>
@@ -369,16 +368,23 @@
             <endurance count="-2" />
         </section>
 
+        <section id="sect52">
+            <pick class="arrow" count="-1" />
+            <test not="true" sectionVisited="sect346">
+                <toast duration="10000" en-text="Because you possess the Discipline of Magi-magic and have reached the rank of Kai Grand Guardian, you have consider it appropriate to make use of the Flameshaft spell to set light to the 'inflammable liquid'." />
+            </test>                
+        </section>
+
         <section id="sect53">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="3">
+                <case to="3">
                     <choiceState section="sect289" set="enabled" />
                 </case>
                 <case from="4" to="9">
                     <choiceState section="sect41" set="enabled" />
                 </case>
-                <case from="10" to="11">
+                <case from="10">
                     <choiceState section="sect348" set="enabled" />
                 </case>
             </randomTable>
@@ -424,10 +430,10 @@
         <section id="sect67">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="5">
+                <case to="5">
                     <choiceState section="sect32" set="enabled" />
                 </case>
-                <case from="6" to="11">
+                <case from="6">
                     <choiceState section="sect51" set="enabled" />
                 </case>
             </randomTable>
@@ -439,9 +445,8 @@
         <section id="sect68">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="1">
-                </case>
-                <case from="2" to="9">
+                <case to="1" />
+                <case from="2">
                     <endurance count="-[RANDOM] + 1" />
                 </case>
                 <choiceState section="all" set="enabled" />
@@ -481,31 +486,26 @@
         <section id="sect73">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="8">
+                <case to="8">
                     <choiceState section="sect251" set="enabled" />
                 </case>
-                <case from="9" to="17">
+                <case from="9">
                     <choiceState section="sect231" set="enabled" />
                 </case>
             </randomTable>
-            <test hasWeaponskillWith="bow">
-                <randomTableIncrement increment="+5" />
-            </test>
-            <test hasObject="silverbowduadon">
-                <randomTableIncrement increment="+3" />
-            </test>
+            <randomTableIncrement increment="[BOWBONUS]" />
         </section>
 
         <section id="sect74">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="2">
+                <case to="2">
                     <choiceState section="sect178" set="enabled" />
                 </case>
                 <case from="3" to="5">
                     <choiceState section="sect28" set="enabled" />
                 </case>
-                <case from="6" to="10">
+                <case from="6">
                     <choiceState section="sect344" set="enabled" />
                 </case>
             </randomTable>
@@ -517,10 +517,10 @@
         <section id="sect75">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="3">
+                <case to="3">
                     <choiceState section="sect161" set="enabled" />
                 </case>
-                <case from="4" to="15">
+                <case from="4">
                     <choiceState section="sect302" set="enabled" />
                 </case>
             </randomTable>
@@ -594,6 +594,7 @@
         </section>
 
         <section id="sect91">
+            <pick class="arrow" count="-1" />
             <choiceState section="sect333" set="disabled" />
             <test hasDiscipline="nexus">
                 <choiceState section="sect333" set="enabled" />
@@ -626,10 +627,10 @@
         <section id="sect95">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="4">
+                <case to="4">
                     <choiceState section="sect27" set="enabled" />
                 </case>
-                <case from="5" to="12">
+                <case from="5">
                     <choiceState section="sect262" set="enabled" />
                 </case>
             </randomTable>
@@ -643,10 +644,10 @@
         <section id="sect97">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="4">
+                <case to="4">
                     <choiceState section="sect216" set="enabled" />
                 </case>
-                <case from="5" to="12">
+                <case from="5">
                     <choiceState section="sect259" set="enabled" />
                 </case>
             </randomTable>
@@ -658,10 +659,10 @@
         <section id="sect99">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="4">
+                <case to="4">
                     <choiceState section="sect334" set="enabled" />
                 </case>
-                <case from="5" to="12">
+                <case from="5">
                     <choiceState section="sect135" set="enabled" />
                 </case>
             </randomTable>
@@ -749,9 +750,8 @@
         <section id="sect115">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="1">
-                </case>
-                <case from="2" to="9">
+                <case to="1" />
+                <case from="2">
                     <endurance count="-[RANDOM] + 1" />
                 </case>
                 <choiceState section="all" set="enabled" />
@@ -922,10 +922,10 @@
         <section id="sect136">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="-2" to="3">
+                <case to="3">
                     <choiceState section="sect16" set="enabled" />
                 </case>
-                <case from="4" to="12">
+                <case from="4">
                     <choiceState section="sect249" set="enabled" />
                 </case>
             </randomTable>
@@ -966,10 +966,10 @@
         <section id="sect144">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="5">
+                <case to="5">
                     <choiceState section="sect32" set="enabled" />
                 </case>
-                <case from="6" to="11">
+                <case from="6">
                     <choiceState section="sect51" set="enabled" />
                 </case>
             </randomTable>
@@ -988,13 +988,13 @@
         <section id="sect147">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="0">
+                <case to="0">
                     <choiceState section="sect275" set="enabled" />
                 </case>
                 <case from="1" to="3">
                     <choiceState section="sect283" set="enabled" />
                 </case>
-                <case from="4" to="9">
+                <case from="4">
                     <choiceState section="sect36" set="enabled" />
                 </case>
             </randomTable>
@@ -1040,6 +1040,10 @@
             </test>
         </section>
 
+        <section id="sect158">        
+            <pick class="arrow" count="-1" />
+        </section>
+
         <section id="sect159">
             <pick class="arrow" count="-1" />
             <object objectId="whistle" />
@@ -1061,13 +1065,13 @@
         <section id="sect164">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="3">
+                <case to="3">
                     <choiceState section="sect253" set="enabled" />
                 </case>
                 <case from="4" to="6">
                     <choiceState section="sect198" set="enabled" />
                 </case>
-                <case from="7" to="12">
+                <case from="7">
                     <choiceState section="sect63" set="enabled" />
                 </case>
             </randomTable>
@@ -1087,10 +1091,10 @@
         <section id="sect168">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="4">
+                <case to="4">
                     <choiceState section="sect198" set="enabled" />
                 </case>
-                <case from="5" to="12">
+                <case from="5">
                     <choiceState section="sect63" set="enabled" />
                 </case>
             </randomTable>
@@ -1115,10 +1119,10 @@
         <section id="sect170">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="3">
+                <case to="3">
                     <choiceState section="sect210" set="enabled" />
                 </case>
-                <case from="4" to="11">
+                <case from="4">
                     <choiceState section="sect256" set="enabled" />
                 </case>
             </randomTable>
@@ -1214,10 +1218,10 @@
         </section>
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="6">
+                <case to="6">
                     <choiceState section="sect317" set="enabled" />
                 </case>
-                <case from="7" to="12">
+                <case from="7">
                     <choiceState section="sect58" set="enabled" />
                 </case>
             </randomTable>
@@ -1355,10 +1359,10 @@
         <section id="sect212">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="4">
+                <case to="4">
                     <choiceState section="sect311" set="enabled" />
                 </case>
-                <case from="5" to="11">
+                <case from="5">
                     <choiceState section="sect151" set="enabled" />
                 </case>
             </randomTable>
@@ -1430,10 +1434,10 @@
         <section id="sect222">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="0" to="5">
+                <case to="5">
                     <choiceState section="sect33" set="enabled" />
                 </case>
-                <case from="6" to="12">
+                <case from="6">
                     <choiceState section="sect166" set="enabled" />
                 </case>
             </randomTable>
@@ -1451,156 +1455,368 @@
         </section>
 
         <section id="sect226">
+            <choiceState section="sect199" set="disabled" />
+            <choiceState section="sect81" set="disabled" />
+            <choiceState section="sect307" set="disabled" />
+            <test canUseBow="true">
+                <choiceState section="sect199" set="enabled" />
+            </test>
+            <test hasDiscipline="alchemy">
+                <choiceState section="sect81" set="enabled" />
+            </test>
+            <test hasDiscipline="magi">
+                <choiceState section="sect307" set="enabled" />
+            </test>
         </section>
 
         <section id="sect227">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case to="6">
+                    <choiceState section="sect91" set="enabled" />
+                </case>
+                <case from="7">
+                    <choiceState section="sect158" set="enabled" />
+                </case>
+            </randomTable>
+            <randomTableIncrement increment="[BOWBONUS]" />
         </section>
 
         <section id="sect228">
+            <choiceState section="sect93" set="disabled" />
+            <test hasDiscipline="gnosis">                
+                <test hasDiscipline="pthmnshp">
+                    <choiceState section="sect93" set="enabled" />
+                    <choiceState section="sect155" set="disabled" />
+                </test>
+            </test>
         </section>
 
         <section id="sect229">
+            <!-- TODO Halve the damage if Kai-Surge is used -->
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" noPsiSurge="true" mindblastMultiplier="0.5" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
         </section>
 
         <section id="sect230">
+            <object objectId="sword" index="0" />
+            <object objectId="sword" index="1" />
+            <object objectId="dagger" />
+            <object objectId="meal" index="0" />
+            <object objectId="meal" index="1" />
+            <object objectId="bottlewine" />
+            <pick class="money" currency="kika" count="80" />
         </section>
 
         <section id="sect231">
+            <pick class="arrow" count="-1" />
+            <choiceState section="sect333" set="disabled" />
+            <test hasDiscipline="nexus">        
+                <choiceState section="sect333" set="enabled" />
+                <choiceState section="sect287" set="disabled" />
+            </test>
         </section>
 
         <section id="sect232">
-        </section>
-
-        <section id="sect233">
-        </section>
-
-        <section id="sect234">
-        </section>
-
-        <section id="sect235">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <test expression="[RANDOM] % 2 == 0">
+                    <choiceState section="sect183" set="enabled" />
+                </test>
+                <test expression="[RANDOM] % 2 == 1">
+                    <choiceState section="sect112" set="enabled" />
+                </test>
+            </randomTable>
         </section>
 
         <section id="sect236">
-        </section>
-
-        <section id="sect237">
+            <endurance count="-3" />
         </section>
 
         <section id="sect238">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case to="3">
+                    <choiceState section="sect187" set="enabled" />
+                </case>
+                <case from="4" to="8">
+                    <choiceState section="sect342" set="enabled" />
+                </case>
+                <case from="9">
+                    <choiceState section="sect9" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="+2" />
+            </test>
         </section>
 
         <section id="sect239">
+            <choiceState section="sect61" set="disabled" />
+            <test hasObject="statuetteofslutar|daggerofvashna|helshezag">        
+                <choiceState section="sect61" set="enabled" />
+                <choiceState section="sect137" set="disabled" />
+            </test>
         </section>
 
         <section id="sect240">
+            <choiceState section="sect184" set="disabled" />
+            <test hasDiscipline="kaiscrn">        
+                <choiceState section="sect184" set="enabled" />
+                <choiceState section="sect265" set="disabled" />
+            </test>
         </section>
 
         <section id="sect241">
-        </section>
-
-        <section id="sect242">
+            <endurance count="-3" />
         </section>
 
         <section id="sect243">
+            <choiceState section="sect346" set="disabled" />
+            <test hasDiscipline="alchemy">        
+                <choiceState section="sect346" set="enabled" />
+                <choiceState section="sect94" set="disabled" />
+            </test>
+            <test hasDiscipline="magi">
+                <test expression="[KAILEVEL] >= 5">
+                    <goToSection section="sect52" />
+                </test>
+            </test>
         </section>
 
         <section id="sect244">
+            <choiceState section="sect96" set="disabled" />
+            <test hasDiscipline="anmlmstr">        
+                <choiceState section="sect96" set="enabled" />
+                <choiceState section="sect195" set="disabled" />
+            </test>
         </section>
 
         <section id="sect245">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case to="4">
+                    <choiceState section="sect131" set="enabled" />
+                </case>
+                <case from="5">
+                    <choiceState section="sect143" set="enabled" />
+                </case>
+            </randomTable>
         </section>
 
         <section id="sect246">
+            <object objectId="statuetteofzagarna" />
         </section>
 
         <section id="sect247">
+            <endurance count="-4" />
+            <choiceState section="sect205" set="disabled" />
+            <test hasObject="sommerswerd">
+                <choiceState section="sect205" set="enabled" />
+                <choiceState section="sect292" set="disabled" />
+            </test>
         </section>
 
         <section id="sect248">
-        </section>
-
-        <section id="sect249">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case to="8">
+                    <choiceState section="sect66" set="enabled" />
+                </case>
+                <case from="9">
+                    <choiceState section="sect341" set="enabled" />
+                </case>
+            </randomTable>
         </section>
 
         <section id="sect250">
+            <choiceState section="sect107" set="disabled" />
+            <test hasDiscipline="hntmstry">
+                <choiceState section="sect107" set="enabled" />
+            </test>
         </section>
 
         <section id="sect251">
+            <pick class="arrow" count="-1" />
+            <choiceState section="sect333" set="disabled" />
+            <test hasDiscipline="nexus">
+                <choiceState section="sect333" set="enabled" />
+                <choiceState section="sect287" set="disabled" />
+            </test>
         </section>
 
         <section id="sect252">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case to="4">
+                    <choiceState section="sect92" set="enabled" />
+                </case>
+                <case from="5">
+                    <choiceState section="sect109" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="+2" />
+            </test>
         </section>
 
         <section id="sect253">
+            <death />
         </section>
 
         <section id="sect254">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case to="1" />
+                <case from="2" to="9">
+                    <endurance count="-[RANDOM] + 1" />
+                </case>
+                <choiceState section="all" set="enabled" />
+            </randomTable>
         </section>
 
         <section id="sect255">
-        </section>
-
-        <section id="sect256">
+            <choiceState section="sect179" set="disabled" />
+            <choiceState section="sect234" set="disabled" />
+            <test hasDiscipline="alchemy">
+                <choiceState section="sect179" set="enabled" />
+            </test>
+            <test hasDiscipline="magi">
+                <choiceState section="sect234" set="enabled" />
+            </test>
         </section>
 
         <section id="sect257">
+            <object objectId="whistle" />
+            <object objectId="brasskeybook14" />
         </section>
 
         <section id="sect258">
-        </section>
-
-        <section id="sect259">
-        </section>
-
-        <section id="sect260">
-        </section>
-
-        <section id="sect261">
-        </section>
-
-        <section id="sect262">
+            <endurance count="-5" />
+            <choiceState section="sect243" set="disabled" />
+            <test canUseBow="true">
+                <choiceState section="sect243" set="enabled" />
+                <choiceState section="sect192" set="disabled" />
+            </test>
         </section>
 
         <section id="sect263">
-        </section>
-
-        <section id="sect264">
+            <choiceState section="all" set="disabled" />
+            <combat />
+            <test currentWeapon="sommerswerd">
+                <combat combatSkillModifier="+8" />
+            </test>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
         </section>
 
         <section id="sect265">
+            <endurance count="-4" />
         </section>
 
         <section id="sect266">
+            <choiceState section="sect22" set="disabled" />
+            <test hasDiscipline="hntmstry">
+                <test expression="[KAILEVEL] >= 5 ">
+                    <choiceState section="sect22" set="enabled" />
+                    <choiceState section="sect232" set="disabled" />
+                </test>
+            </test>
         </section>
 
         <section id="sect267">
+            <choiceState section="sect294" set="disabled" />
+            <test hasDiscipline="pthmnshp">
+                <choiceState section="sect294" set="enabled" />
+                <choiceState section="sect168" set="disabled" />
+            </test>
         </section>
 
         <section id="sect268">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case to="4">
+                    <choiceState section="sect347" set="enabled" />
+                </case>
+                <case from="5">
+                    <choiceState section="sect175" set="enabled" />
+                </case>
+            </randomTable>
         </section>
 
         <section id="sect269">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case to="1">
+                    <choiceState section="sect71" set="enabled" />
+                </case>
+                <case from="2" to="6">
+                    <choiceState section="sect236" set="enabled" />
+                </case>
+                <case from="7">
+                    <choiceState section="sect316" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="pthmnshp">
+                <randomTableIncrement increment="+3" />
+            </test>
         </section>
 
         <section id="sect270">
+            <choiceState section="sect174" set="disabled" />
+            <test hasDiscipline="kaiscrn">
+                <choiceState section="sect174" set="enabled" />
+                <choiceState section="sect45" set="disabled" />
+            </test>
         </section>
 
         <section id="sect271">
+            <choiceState section="sect141" set="disabled" />
+            <test hasObject="brasskeybook14">
+                <choiceState section="sect141" set="enabled" />
+                <choiceState section="sect255" set="disabled" />
+            </test>
         </section>
 
         <section id="sect272">
         </section>
 
         <section id="sect273">
+            <choiceState section="sect19" set="disabled" />
+            <test hasDiscipline="assimila">
+                <choiceState section="sect19" set="enabled" />
+                <choiceState section="sect163" set="disabled" />
+            </test>
         </section>
 
         <section id="sect274">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case to="3">
+                    <choiceState section="sect299" set="enabled" />
+                </case>
+                <case from="4">
+                    <choiceState section="sect122" set="enabled" />
+                </case>
+            </randomTable>
+            <test not="true" expression="[ENDURANCE] >= 20">
+                <randomTableIncrement increment="-1" />
+            </test>
+            <test expression="[ENDURANCE] >= 20">
+                <randomTableIncrement increment="+1" />
+            </test>
         </section>
 
         <section id="sect275">
+            <death />
         </section>
 
         <section id="sect276">
+            <object objectId="greenkey" />
         </section>
 
         <section id="sect277">
@@ -1688,6 +1904,7 @@
         </section>
 
         <section id="sect305">
+            <pick class="arrow" count="-1" />
         </section>
 
         <section id="sect306">
@@ -1810,7 +2027,6 @@
         </section>
 
         <section id="sect345">
-            <pick class="arrow" count="-1" />
         </section>
 
         <section id="sect346">
