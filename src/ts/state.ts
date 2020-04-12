@@ -258,13 +258,13 @@ const state = {
      * @param {number} bookNumber Book which get the action chart
      * @returns {object} The action chart. null if it was not found. The returned value is an Object, not an ActionChart
      */
-    getPreviousBookActionChart(bookNumber: number): ActionChart {
+    getPreviousBookActionChart(bookNumber: number): any {
         const key = "state-book-" + bookNumber.toString();
         const json = localStorage.getItem( key );
         if ( !json ) {
             return null;
         }
-        return JSON.parse(json) as ActionChart;
+        return JSON.parse(json);
     },
 
     /**

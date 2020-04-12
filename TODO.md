@@ -4,9 +4,8 @@ TODO
 
 ## Dev
 
+- Replace main const/var with TS classes
 - Replace Google analytics with Matomo
-- Fix Cordova config.xml plugin versions to use
-- Cordova package.json should be versioned with git ???
 - Replace list of items with available object list
 
 ## Gameplay
