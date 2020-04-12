@@ -1905,6 +1905,16 @@
             <name lang="en">Silver Flask</name>
         </object>
 
+        <object id="blackkeybook14">
+            <name lang="en">Black Key</name>
+            
+            <image book="1" name="small15.png" />
+        </object>
+
+        <object id="hammer">
+            <name lang="en">Hammer</name>
+        </object>
+
         <!-- OTHERS -->
 
         <!-- This not really an object, but needed for mechanics -->
