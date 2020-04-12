@@ -456,7 +456,7 @@ const cordovaFS = {
      * percentage (0.0 - 100.0)
      * @returns Promise with the process. Parameter is the downloaded file FileEntry
      */
-    downloadAsync(url: string, dstPath: string, progressCallback: (num: number) => void = null): JQueryPromise<any> {
+    downloadAsync(url: string, dstPath: string, progressCallback: (percent: number) => void = null): JQueryPromise<any> {
 
         const dfd = jQuery.Deferred();
         console.log("Downloading " + url + " to " + dstPath);

@@ -13,4 +13,4 @@ class faqController {
     /** Return page */
     public static getBackController() { return "mainMenu"; }
 
-}
+};
