@@ -899,7 +899,7 @@ const mechanicsEngine = {
         // Mindblast multiplier (to all mental attacks too, like psi-surge)
         const txtMindblastMultiplier: string = $rule.attr("mindblastMultiplier");
         if (txtMindblastMultiplier) {
-            combat.mindblastMultiplier = parseInt(txtMindblastMultiplier, 10);
+            combat.mindblastMultiplier = parseFloat(txtMindblastMultiplier);
         }
 
         // Special Psi-Surge bonus?
@@ -1365,7 +1365,13 @@ const mechanicsEngine = {
      * Show a "toast" message
      */
     toast(rule: Element) {
-        toastr.info(mechanicsEngine.getRuleText(rule));
+        let durationValue = 5000;
+        const txtDurationValue: string = $(rule).attr("duration");
+        if (txtDurationValue) {
+            durationValue = parseInt(txtDurationValue, 10);
+        }
+
+        toastr.info(mechanicsEngine.getRuleText(rule), null, {timeOut: durationValue});
     },
 
     /**
