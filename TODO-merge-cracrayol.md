@@ -94,6 +94,24 @@
 
 * https://github.com/tonib/kaichronicles/commit/45e950ff770bf493651599c47e679450d4e1729a
 
+* https://github.com/tonib/kaichronicles/commit/2cf6c9b063ba4a6f6aa3a1a1d1f332e2321fa6b4
+
+* https://github.com/tonib/kaichronicles/commit/95daa47db0850faa8d05f5c25939f804576d2245
+
+* https://github.com/tonib/kaichronicles/commit/1bd4f6cd05dfa7db452923ebe591d669872b737f
+
+* https://github.com/tonib/kaichronicles/commit/224d7925277b36887d29eff4cd27194e43404f62
+    - Check xsi:schemaLocation attribute in books 13+ for mechanics files root tag 
+
+* https://github.com/tonib/kaichronicles/commit/9f690b0d9997bbde44d944a2c01afecebe888b3d
+    - mindblastMultiplier now can be float. Change xsd to detect this and documentation (done in posterior commits?)
+    - mindblastMultiplier now can be float. I dont' see any change to round values when the multiplier is applied. CHECK THIS
+    - toast now has duration. Change xsd to detect this and documentation (done in posterior commits?)
+    - 'from' or 'to' can be optionnal in case tag. CHECK THIS
+
+* https://github.com/tonib/kaichronicles/commit/4cda9d2b668652265d49b796096f1e7e02fedc23
+
+* https://github.com/tonib/kaichronicles/commit/98b7f754f9fd3887506d56db94e0d8f99d148fb3
 
 * TSLINT:
     - TSLint is deprecated...
