@@ -91,4 +91,4 @@
  - Fixed Quivers with no arrows available on section should not show "(0 arrows)". Show "(0 arrows)" only on Action chart. Same to sell quiver object (see book 8, sect168)
  - Objects on the Action Chart can have a available uses count (used in book 8, 9 11). 
  - Book 8 Section 138: Avoid duplicates in sell objects list.
- - Hidden loyalty bonus of healing implemented (+1EP in each section without combat if fully done Kai or Masterkai serie)
+ - Hidden loyalty bonus for healing/mindblast implemented
