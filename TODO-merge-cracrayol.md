@@ -114,6 +114,7 @@
 * https://github.com/tonib/kaichronicles/commit/98b7f754f9fd3887506d56db94e0d8f99d148fb3
 
 * https://github.com/tonib/kaichronicles/commit/bd9f122eb42af09e1ff4b59c3ed330921c85dcfe
+    - Add mindblast loyalty bonus HERE. Check this when previous books disciplines will be stored
 
 * TSLINT:
     - TSLint is deprecated...
