@@ -277,11 +277,11 @@ const state = {
     },
 
     /**
-     * Check if the Magnakai serie of books was completed
+     * Check if the Kai && Magnakai serie of books was completed
      * @returns {object} true if serie was completed
      */
-    hasCompletedMagnakaiSerie(): boolean {
-        const json = localStorage.getItem( "state-book-6" );
+    hasCompletedKaiMagnakaiSerie(): boolean {
+        const json = localStorage.getItem( "state-book-1" );
         return !!json && state.book.isGrandMasterBook();
     },
 

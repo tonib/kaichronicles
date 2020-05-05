@@ -2,14 +2,9 @@
 TODO
 ====
 
-## Dev
-
-- Replace main const/var with TS classes
-- Replace Google analytics with Matomo
-- Replace list of items with available object list
-
 ## Gameplay
 
+- Replace list of items with available object list ??
 - Get Kai/Magnakai bonuses as specified in the handbook (See Healing for example)
   * https://github.com/tonib/kaichronicles/issues/5
   * https://www.projectaon.org/es/foro3/viewtopic.php?p=27752#p27752
@@ -66,7 +61,6 @@ TODO
   * Objects types
   * Others?
 - Performance
-- FAQ: Questions about "I cannot write on the Action Chart"
 - "Okay okay. Didn't know about the lone wolf series and went through the 10 programmed books in 2 days. Turns out the rest are online !!! 
    So it won't be as fast to play but I'm definitely continuing. One remark. I'd like to be able to know what was in the Kai monastery at 
    the end so I can continue with that too !"
