@@ -119,6 +119,11 @@
 * https://github.com/tonib/kaichronicles/commit/2c1959cfebf572e9c82c43bd771d1a5bd5dfaac4
     - Add mindblast loyalty bonus HERE. CHECK THIS
 
+* https://github.com/tonib/kaichronicles/commit/3ffe1860fb323a5a90b4861ddfe862822b8e6e88
+    - Add weaponskill loyalty bonus HERE. CHECK THIS
+    - ActionChart.getWeaponSkill is a mess
+    - Healing loyalty bonus edited here. CHECK THIS
+
 * TSLINT:
     - TSLint is deprecated...
     - Check if remains any "throw new Error("
