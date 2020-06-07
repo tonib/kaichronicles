@@ -271,7 +271,7 @@ const projectAon = {
             zipSize: 2980342,
 
             revision: 2752
-        }
+        },
 
         // Book 15:
         {
@@ -284,7 +284,7 @@ const projectAon = {
 
             zipSize: 2980342,
 
-            revision: 2752,
+            revision: 2752
         },
 
     ],

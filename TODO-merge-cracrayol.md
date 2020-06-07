@@ -145,6 +145,9 @@
 
 * https://github.com/tonib/kaichronicles/commit/6f848689e78973301d343d07ca9b5d77e9ae3f91
 
+* https://github.com/tonib/kaichronicles/commit/2d89249fda23331b4762df57d7d62077cf8a745c
+    * BOOK 15: There is no translation to spanish? Ask in Spanish forums
+
 * TSLINT:
     - TSLint is deprecated...
     - Check if remains any "throw new Error("
