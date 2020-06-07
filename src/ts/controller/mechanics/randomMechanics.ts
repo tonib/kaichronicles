@@ -272,7 +272,7 @@ const randomMechanics = {
         }
 
         if (fromValue !== null || toValue !== null) {
-            return [fromValue ? fromValue : -99, toValue ? toValue : 99];
+            return [fromValue !== null ? fromValue : -99, toValue !== null ? toValue : 99];
         }
 
         return null;
