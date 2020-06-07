@@ -65,11 +65,7 @@ class ObjectsTableItem {
         let name = this.item.name;
 
         // Number of arrows on the quiver
-<<<<<<< HEAD
         if ( this.objectInfo.id === Item.QUIVER ) {
-=======
-        if ( this.objectInfo.id === Item.QUIVER) {
->>>>>>> d56ac0509c83357deffe7695b3bf5f7d68d29472
             // Be sure count is not null
             const count = ( this.objectInfo.count ? this.objectInfo.count : 0 );
             // In INVENTORY always show "0 arrows", but not in SELL or AVAILABLE (ugly)
