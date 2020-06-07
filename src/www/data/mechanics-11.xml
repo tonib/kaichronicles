@@ -450,7 +450,7 @@
 
         <section id="sect74">
             <object objectId="haina" />
-            <meal huntDisabled="true" />
+            <meal hntmstryDisabled="true" />
         </section>
 
         <section id="sect75">
@@ -843,7 +843,7 @@
         </section>
 
         <section id="sect143">
-            <meal huntDisabled="true" />
+            <meal hntmstryDisabled="true" />
         </section>
 
         <section id="sect144">
