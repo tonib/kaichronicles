@@ -1926,6 +1926,15 @@
             <name lang="es">Sello</name>
         </object>
 
+        <object id="floroa">
+            <name lang="en">Floroa</name>
+            <description lang="en">
+                Restores 3 ENDURANCE points
+            </description>
+
+            <usage class="endurance" increment="3" />
+        </object>
+
         <!-- OTHERS -->
 
         <!-- This not really an object, but needed for mechanics -->
