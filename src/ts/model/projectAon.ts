@@ -273,6 +273,20 @@ const projectAon = {
             revision: 2752
         }
 
+        // Book 15:
+        {
+            title_en: "The Darke Crusade",
+            code_en: "15tdc",
+
+            illustrators: [ "williams" ],
+
+            biographies: [ "jdbiolw" , "bwbiolw" ],
+
+            zipSize: 2980342,
+
+            revision: 2752,
+        },
+
     ],
 
     /**

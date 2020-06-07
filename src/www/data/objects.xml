@@ -1919,6 +1919,13 @@
             <name lang="en">Hammer</name>
         </object>
 
+        <!-- BOOK 15 -->
+
+        <object id="signetringbook15">
+            <name lang="en">Signet Ring</name>
+            <name lang="es">Sello</name>
+        </object>
+
         <!-- OTHERS -->
 
         <!-- This not really an object, but needed for mechanics -->
