@@ -337,7 +337,7 @@ const combatMechanics = {
         const selected: boolean = $psiSurgeCheck.prop( "checked" ) ? true : false;
         combat.psiSurge = selected;
 
-        // TODO: What is this for ???
+        // If click on PsiSurge, uncheck KaiSurge
         const $kaiSurgeCheck = $combatUI.find(".kaisurgecheck input");
         $kaiSurgeCheck.prop("disabled", selected);
         $kaiSurgeCheck.prop("checked", false);
@@ -345,7 +345,6 @@ const combatMechanics = {
         if ( !selected && state.actionChart.currentEndurance <= Combat.minimumEPForKaiSurge() ) {
             combatMechanics.disableKaiSurge( $combatUI , combat );
         }
-        // TODO: end
 
         combatMechanics.updateCombatRatio( $combatUI , combat);
     },
@@ -363,7 +362,7 @@ const combatMechanics = {
         const selected: boolean = $kaiSurgeCheck.prop( "checked" ) ? true : false;
         combat.kaiSurge = selected;
 
-        // TODO: What is this for ???
+        // If click on KaiSurge, uncheck PsiSurge
         const $psiSurgeCheck = $combatUI.find(".psisurgecheck input");
         $psiSurgeCheck.prop("disabled", selected);
         $psiSurgeCheck.prop("checked", false);
@@ -371,7 +370,6 @@ const combatMechanics = {
         if ( !selected && state.actionChart.currentEndurance <= Combat.minimumEPForPsiSurge() ) {
             combatMechanics.disablePsiSurge( $combatUI , combat );
         }
-        // TODO: end
 
         combatMechanics.updateCombatRatio( $combatUI , combat);
     },

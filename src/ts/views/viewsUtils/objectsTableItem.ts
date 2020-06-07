@@ -110,7 +110,7 @@ class ObjectsTableItem {
             // Add a link to view a larger version of the image / view object extra description
             name = '<a href="#" class="equipment-op" data-op="details" data-objectId="' +
             this.item.id + '">' + name + "</a>";
- }
+        }
 
         html += "<span><b>" + name + "</b></span>";
 
