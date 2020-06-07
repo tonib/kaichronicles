@@ -45,7 +45,7 @@ TODO
   Sell Quiver: OBJECTS TABLE TO SELL IS NOT UPDATED !!!!
 
 ## Other
-
+- Add option to jump from one book to other (debugging, loyalty bonuses)
 - UPLOAD NEW VERSION 1.11.1
 - FAQ: Add info about change the Random Table
 - Add help for "LW club newsletter 29" setting

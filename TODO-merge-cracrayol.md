@@ -124,6 +124,11 @@
     - ActionChart.getWeaponSkill is a mess
     - Healing loyalty bonus edited here. CHECK THIS
 
+* https://github.com/tonib/kaichronicles/commit/5a534bcbda08bf943b03cbe1326992b0bb450c00
+    - Hunting loyalty bonus added HERE. CHECK THIS
+    - hntmstryDisabled attr. seems ok, as there are places where Huntmastery is explicitly required
+    - Add hntmstryDisabled attr. to xml verification
+
 * TSLINT:
     - TSLint is deprecated...
     - Check if remains any "throw new Error("

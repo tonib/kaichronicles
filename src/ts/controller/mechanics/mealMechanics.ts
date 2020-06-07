@@ -42,11 +42,17 @@ const mealMechanics = {
         gameView.appendToSection($meal);
 
         // Check if hunting discipline is available
-        const huntDisabled = $(rule).attr("huntDisabled") === "true";
+        const huntDisabled = $(rule).attr("huntDisabled") === "true";   // This disables Kai hunt, but no Huntmastery
         const hntmstryDisabled = $(rule).attr("hntmstryDisabled") === "true";
-        const hasHuntingDiscipline = state.actionChart.disciplines.contains("hunting") || state.hasCompletedKaiSerie();
-        const hasHntmstryDiscipline = state.actionChart.disciplines.contains("hntmstry");
-        if ( (!hasHuntingDiscipline && !hasHntmstryDiscipline) || !state.sectionStates.huntEnabled || (huntDisabled && !hasHntmstryDiscipline) || (hntmstryDisabled)) {
+        let hasHuntingDiscipline = state.actionChart.disciplines.contains("hunting") || state.hasCompletedKaiSerie();
+        if (huntDisabled || hntmstryDisabled) {
+            hasHuntingDiscipline = false;
+        }
+        let hasHntmstryDiscipline = state.actionChart.disciplines.contains("hntmstry");
+        if (hntmstryDisabled) {
+            hasHntmstryDiscipline = false;
+        }
+        if ((!hasHuntingDiscipline && !hasHntmstryDiscipline) || !state.sectionStates.huntEnabled) {
             $(mealSelector + " .mechanics-eatHunt").hide();
         }
 
