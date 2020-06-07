@@ -5,6 +5,7 @@ TODO
 ## Gameplay
 
 - Replace list of items with available object list ??
+- Get Magnakai bonuses as specified in the handbook (See Healing for example)
 - Get Kai/Magnakai bonuses as specified in the handbook (See Healing for example)
   * https://github.com/tonib/kaichronicles/issues/5
   * https://www.projectaon.org/es/foro3/viewtopic.php?p=27752#p27752

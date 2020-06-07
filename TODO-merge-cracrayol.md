@@ -129,6 +129,18 @@
     - hntmstryDisabled attr. seems ok, as there are places where Huntmastery is explicitly required
     - Add hntmstryDisabled attr. to xml verification
 
+* https://github.com/tonib/kaichronicles/commit/6a3155ee5e10b9da34179f5ab144bde3d97795c4
+    - Combat loyalty bonuses edited here. CHECK THIS
+    - Psi-surge loyalty bonus HERE. CHECK THIS
+    - Change to ActionChart.isWeaponskillActive() > state.hasCompletedKaiMagnakaiSerie() I think is wrong. This will give you
+      mastery with any weapon, but this is used for other things (see "weaponskillActive" rule). CHANGE THIS
+    - This line in actionChart:
+        ```
+            } else if (state.book.isMagnakaiBook() || (state.hasCompletedKaiMagnakaiSerie() && (!this.disciplines.contains("wpnmstry") || !this.hasWeaponskillWith(currentWeapon.weaponType || currentWeapon.id)))) {
+        ```
+      is not clear for me (currentWeapon.weaponType || currentWeapon.id ???). CHANGE THIS
+    - Related to previous: ActionChart.hasWeaponskillWith seems to be changed to accept a set of weapon types. Document this (CHECK THIS)
+
 * TSLINT:
     - TSLint is deprecated...
     - Check if remains any "throw new Error("
