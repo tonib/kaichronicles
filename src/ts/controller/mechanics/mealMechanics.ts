@@ -48,7 +48,7 @@ const mealMechanics = {
         if (huntDisabled || hntmstryDisabled) {
             hasHuntingDiscipline = false;
         }
-        let hasHntmstryDiscipline = state.actionChart.disciplines.contains("hntmstry");
+        let hasHntmstryDiscipline = state.actionChart.disciplines.contains("hntmstry") || state.hasCompletedKaiMagnakaiSerie();
         if (hntmstryDisabled) {
             hasHntmstryDiscipline = false;
         }

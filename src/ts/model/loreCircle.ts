@@ -50,6 +50,11 @@ class LoreCircle {
      * @param disciplines Player disciplines ids
      */
     public matchCircle( disciplines: string[] ): boolean {
+        if (state.hasCompletedKaiMagnakaiSerie()) {
+            // Loyalty bonus
+            return true;
+        }
+
         for ( const d of this.disciplines ) {
             if ( !disciplines.contains(d) ) {
                 return false;
@@ -75,7 +80,7 @@ class LoreCircle {
      */
     public static getCircles( disciplines: string[] ): LoreCircle[] {
 
-        if ( state.book.bookNumber <= 5 ) {
+        if ( state.book.bookNumber <= 5 || (state.book.bookNumber >= 13 && !state.hasCompletedKaiMagnakaiSerie()) ) {
             // Only for magnakai books
             return [];
         }
