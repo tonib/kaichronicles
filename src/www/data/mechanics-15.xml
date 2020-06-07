@@ -826,75 +826,118 @@
         </section>
 
         <section id="sect156">
-        </section>
-
-        <section id="sect157">
+            <test expression="[ENDURANCE] > 15">
+                <endurance count="-([ENDURANCE] - 15)" />
+            </test>
+            <drop objectId="allmeals" />
+            <!-- TODO Drop potions -->
         </section>
 
         <section id="sect158">
+            <choiceState section="sect17" set="disabled" />
+            <choiceState section="sect86" set="disabled" />
+            <test hasDiscipline="alchemy">
+                <test expression="[KAILEVEL] >= 6">
+                    <choiceState section="sect17" set="enabled" />
+                </test>
+                <test not="true" expression="[KAILEVEL] >= 6">
+                    <choiceState section="sect86" set="enabled" />
+                </test>
+                <choiceState section="sect345" set="disabled" />
+            </test>
         </section>
 
         <section id="sect159">
+            <choiceState section="sect19" set="disabled" />
+            <test hasDiscipline="assimila">
+                <test expression="[KAILEVEL] >= 5">
+                    <choiceState section="sect19" set="enabled" />
+                    <choiceState section="sect93" set="disabled" />
+                </test>
+            </test>
         </section>
 
         <section id="sect160">
-        </section>
-
-        <section id="sect161">
-        </section>
-
-        <section id="sect162">
+            <endurance count="-3" />
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case to="5">
+                    <choiceState section="sect153" set="enabled" />
+                </case>
+                <case from="6">
+                    <choiceState section="sect28" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="+3" />
+            </test>
         </section>
 
         <section id="sect163">
-        </section>
-
-        <section id="sect164">
-        </section>
-
-        <section id="sect165">
-        </section>
-
-        <section id="sect166">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case to="6">
+                    <choiceState section="sect242" set="enabled" />
+                </case>
+                <case from="7">
+                    <choiceState section="sect99" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="kaisurge">
+                <randomTableIncrement increment="+4" />
+            </test>
         </section>
 
         <section id="sect167">
-        </section>
-
-        <section id="sect168">
-        </section>
-
-        <section id="sect169">
-        </section>
-
-        <section id="sect170">
-        </section>
-
-        <section id="sect171">
-        </section>
-
-        <section id="sect172">
+            <endurance count="-4" />
         </section>
 
         <section id="sect173">
-        </section>
-
-        <section id="sect174">
+            <endurance count="+3" />
+            <choiceState section="sect227" set="disabled" />
+            <test hasDiscipline="anmlmstr">
+                <test expression="[KAILEVEL] >= 5">
+                    <choiceState section="sect227" set="enabled" />
+                    <choiceState section="sect131" set="disabled" />
+                </test>
+            </test>
         </section>
 
         <section id="sect175">
+            <choiceState section="sect240" set="disabled" />
+            <test hasDiscipline="pthmnshp">
+                <test expression="[KAILEVEL] >= 6">
+                    <choiceState section="sect240" set="enabled" />
+                    <choiceState section="sect281" set="disabled" />
+                </test>
+            </test>
         </section>
 
         <section id="sect176">
-        </section>
-
-        <section id="sect177">
+            <endurance count="-5" />
         </section>
 
         <section id="sect178">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case to="4">
+                    <choiceState section="sect237" set="enabled" />
+                </case>
+                <case from="5">
+                    <choiceState section="sect58" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="+1" />
+            </test>
         </section>
 
         <section id="sect179">
+            <choiceState section="all" set="disabled" />
+            <combat />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
         </section>
 
         <section id="sect180">
@@ -902,63 +945,106 @@
         </section>
 
         <section id="sect181">
+            <death />
         </section>
 
         <section id="sect182">
-        </section>
-
-        <section id="sect183">
-        </section>
-
-        <section id="sect184">
+            <choiceState section="sect241" set="disabled" />
+            <test canUseBow="true">
+                <choiceState section="sect241" set="enabled" />
+            </test>
         </section>
 
         <section id="sect185">
+            <meal />
         </section>
 
         <section id="sect186">
+            <endurance count="-3" />
         </section>
 
         <section id="sect187">
+            <choiceState section="sect68" set="disabled" />
+            <test expression="[MEALS] > 0">
+                <choiceState section="sect68" set="enabled" />
+                <choiceState section="sect282" set="disabled" />
+            </test>
         </section>
 
         <section id="sect188">
+            <endurance count="+3" />
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case to="4">
+                    <choiceState section="sect73" set="enabled" />
+                </case>
+                <case from="5">
+                    <choiceState section="sect293" set="enabled" />
+                </case>
+            </randomTable>
         </section>
 
         <section id="sect189">
+            <meal />
         </section>
 
         <section id="sect190">
+            <endurance count="-1" />
         </section>
 
         <section id="sect191">
+            <choiceState section="sect214" set="disabled" />
+            <test hasDiscipline="pthmnshp|hntmstry">
+                <choiceState section="sect214" set="enabled" />
+                <choiceState section="sect229" set="disabled" />
+            </test>
         </section>
 
         <section id="sect192">
+            <choiceState section="sect55" set="disabled" />
+            <test hasDiscipline="pthmnshp">
+                <test expression="[KAILEVEL] >= 6">
+                    <choiceState section="sect55" set="enabled" />
+                    <choiceState section="sect37" set="disabled" />
+                </test>
+            </test>
         </section>
 
         <section id="sect193">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case to="6">
+                    <choiceState section="sect210" set="enabled" />
+                </case>
+                <case from="7">
+                    <choiceState section="sect114" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="+2" />
+            </test>
+            <test hasObject="rope">
+                <randomTableIncrement increment="+1" />
+            </test>
+            <test expression="[KAILEVEL] >= 5">
+                <randomTableIncrement increment="+1" />
+            </test>
         </section>
 
         <section id="sect194">
-        </section>
-
-        <section id="sect195">
-        </section>
-
-        <section id="sect196">
-        </section>
-
-        <section id="sect197">
+            <endurance count="-4" />
         </section>
 
         <section id="sect198">
+            <choiceState section="all" set="disabled" />
+            <combat immuneTurns="1" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
         </section>
 
         <section id="sect199">
-        </section>
-
-        <section id="sect200">
+            <endurance count="-1" />
         </section>
 
         <section id="sect201">
