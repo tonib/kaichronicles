@@ -1934,6 +1934,16 @@
 
             <usage class="endurance" increment="3" />
         </object>
+		
+        <object id="emptybottle">
+            <name lang="en">Bottle (Empty)</name>
+            <name lang="es">Botella (Vacío)</name>
+        </object>
+		
+        <object id="ballofstring">
+            <name lang="en">Ball of String</name>
+            <name lang="es">Bola de cuerda</name>
+        </object>
 
         <!-- OTHERS -->
 

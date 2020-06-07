@@ -719,11 +719,13 @@
                 </test>
             </test>
             <afterCombats>
-                <test expression="[KAILEVEL] >= 5">
-                    <test expression="[ENDURANCE] &lt;= 5">
-                        <endurance count="6 - [ENDURANCE]" noToast="true" />
+                <test hasDiscipline="alchemy">
+                    <test expression="[KAILEVEL] >= 5">
+                        <test expression="[ENDURANCE] &lt;= 5">
+                            <endurance count="6 - [ENDURANCE]" noToast="true" />
+                        </test>
+                        <endurance count="-5" noToast="true" permanent="true" />
                     </test>
-                    <endurance count="-5" noToast="true" permanent="true" />
                 </test>
                 <choiceState section="all" set="enabled" />
             </afterCombats>
@@ -1130,6 +1132,8 @@
         </section>
 
         <section id="sect212">
+            <!-- TODO only remove 1 use for sabitojar -->
+            <drop objectId="oedeherb|oedejar|sabitojar" />
             <choiceState section="sect304" set="disabled" />
             <test hasObject="greenkey">
                 <choiceState section="sect304" set="enabled" />
@@ -1325,106 +1329,160 @@
         </section>
 
         <section id="sect244">
-        </section>
-
-        <section id="sect245">
+            <!-- TODO unable to use any potions prior to combat -->
+            <choiceState section="all" set="disabled" />
+            <combat combatSkillModifier="-10" />
+            <afterCombatTurn turn="2">
+                <combat combatSkillModifier="0" />
+            </afterCombatTurn>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
         </section>
 
         <section id="sect246">
+            <endurance count="-3" />
         </section>
 
-        <section id="sect247">
+        <section id="sect247">      
+            <object objectId="dagger" />
+            <object objectId="sword" />
+            <object objectId="emptybottle" />
+            <object objectId="bow" />
+            <object objectId="arrow" count="2" />
+            <object objectId="ballofstring" />
+            <object objectId="silverrod" />
+            <pick class="money" count="40" currency="kika" />
         </section>
 
         <section id="sect248">
+            <choiceState section="all" set="disabled" />
+            <combat />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
         </section>
 
         <section id="sect249">
+            <choiceState section="all" set="disabled" />
+            <combat />
+            <test hasDiscipline="anmlmstr">
+                <combat combatSkillModifier="+2" />
+            </test>
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
         </section>
 
         <section id="sect250">
-        </section>
-
-        <section id="sect251">
-        </section>
-
-        <section id="sect252">
+            <endurance count="-2" />
+            <choiceState section="all" set="disabled" />
+            <combat mindblastMultiplier="2" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
         </section>
 
         <section id="sect253">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case to="3">
+                    <choiceState section="sect244" set="enabled" />
+                </case>
+                <case from="4" to="8">
+                    <choiceState section="sect49" set="enabled" />
+                </case>
+                <case from="9">
+                    <choiceState section="sect172" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="hntmstry">
+                <randomTableIncrement increment="+3" />
+            </test>
         </section>
 
         <section id="sect254">
-        </section>
-
-        <section id="sect255">
-        </section>
-
-        <section id="sect256">
-        </section>
-
-        <section id="sect257">
-        </section>
-
-        <section id="sect258">
-        </section>
-
-        <section id="sect259">
-        </section>
-
-        <section id="sect260">
+            <choiceState section="all" set="disabled" />
+            <combat />
+            <afterCombats>
+                <test not="true" expression="[COMBATSDURATION] >= 4">
+                    <choiceState section="sect35" set="enabled" />
+                </test>
+                <test expression="[COMBATSDURATION] >= 4">
+                    <choiceState section="sect160" set="enabled" />
+                </test>
+            </afterCombats>
         </section>
 
         <section id="sect261">
+            <choiceState section="sect48" set="disabled" />
+            <test hasDiscipline="pthmnshp">
+                <choiceState section="sect48" set="enabled" />
+                <choiceState section="sect335" set="disabled" />
+            </test>
         </section>
 
         <section id="sect262">
-        </section>
-
-        <section id="sect263">
-        </section>
-
-        <section id="sect264">
-        </section>
-
-        <section id="sect265">
-        </section>
-
-        <section id="sect266">
-        </section>
-
-        <section id="sect267">
+            <choiceState section="sect168" set="disabled" />
+            <test hasDiscipline="anmlmstr">
+                <choiceState section="sect168" set="enabled" />
+                <choiceState section="sect302" set="disabled" />
+            </test>
         </section>
 
         <section id="sect268">
+            <choiceState section="all" set="disabled" />
+            <combat />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
         </section>
 
         <section id="sect269">
+            <endurance count="-6" />
         </section>
 
         <section id="sect270">
             <pick class="arrow" count="-1" />
-        </section>
-
-        <section id="sect271">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case to="5">
+                    <choiceState section="sect183" set="enabled" />
+                </case>
+                <case from="6">
+                    <choiceState section="sect201" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasWeaponskillWith="bow">
+                <randomTableIncrement increment="+5" />
+            </test>
         </section>
 
         <section id="sect272">
-        </section>
-
-        <section id="sect273">
+            <choiceState section="all" set="disabled" />
+            <combat />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
         </section>
 
         <section id="sect274">
-        </section>
-
-        <section id="sect275">
-        </section>
-
-        <section id="sect276">
+            <choiceState section="sect143" set="disabled" />
+            <choiceState section="sect338" set="disabled" />
+            <choiceState section="sect265" set="disabled" />
+            <test hasDiscipline="magi">
+                <choiceState section="sect143" set="enabled" />
+            </test>
+            <test hasDiscipline="alchemy">
+                <choiceState section="sect338" set="enabled" />
+            </test>
+            <test hasDiscipline="nexus">
+                <choiceState section="sect265" set="enabled" />
+            </test>
         </section>
 
         <section id="sect277">
+            <meal />
         </section>
 
         <section id="sect278">
@@ -1432,69 +1490,142 @@
         </section>
 
         <section id="sect279">
+            <choiceState section="sect190" set="disabled" />
+            <test hasDiscipline="kaisurge">
+                <test expression="[KAILEVEL] >= 5">
+                    <choiceState section="sect190" set="enabled" />
+                    <choiceState section="sect44" set="disabled" />
+                </test>
+            </test>
         </section>
 
         <section id="sect280">
+            <choiceState section="sect170" set="disabled" />
+            <test canUseBow="true">
+                <choiceState section="sect170" set="enabled" />
+            </test>
         </section>
 
         <section id="sect281">
-        </section>
-
-        <section id="sect282">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" noPsiSurge="true" noKaiSurge="true" />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
         </section>
 
         <section id="sect283">
-        </section>
-
-        <section id="sect284">
+            <choiceState section="all" set="disabled" />
+            <combat />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
         </section>
 
         <section id="sect285">
-        </section>
-
-        <section id="sect286">
-        </section>
-
-        <section id="sect287">
+            <choiceState section="all" set="disabled" />
+            <combat />
+            <afterCombats>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
         </section>
 
         <section id="sect288">
+            <death />
         </section>
 
         <section id="sect289">
+            <choiceState section="all" set="disabled" />
+            <randomTable>
+                <case to="3">
+                    <choiceState section="sect209" set="enabled" />
+                </case>
+                <case from="4" to="8">
+                    <choiceState section="sect133" set="enabled" />
+                </case>
+                <case from="9">
+                    <choiceState section="sect62" set="enabled" />
+                </case>
+            </randomTable>
+            <test hasDiscipline="wpnmstry">
+                <test expression="[KAILEVEL] >= 6">
+                    <randomTableIncrement increment="+3" />
+                </test>
+            </test>
         </section>
 
         <section id="sect290">
+            <choiceState section="sect207" set="disabled" />
+            <test hasDiscipline="alchemy">
+                <choiceState section="sect207" set="enabled" />
+            </test>
         </section>
 
         <section id="sect291">
+            <choiceState section="sect167" set="disabled" />
+            <test hasDiscipline="alchemy">
+                <test expression="[KAILEVEL] >= 6">
+                    <choiceState section="sect167" set="enabled" />
+                    <choiceState section="sect334" set="disabled" />
+                </test>
+            </test>
         </section>
 
         <section id="sect292">
-        </section>
-
-        <section id="sect293">
-        </section>
-
-        <section id="sect294">
+            <choiceState section="sect212" set="disabled" />
+            <test hasObject="oedeherb|oedejar|sabitojar">
+                <choiceState section="sect212" set="enabled" />
+                <choiceState section="sect233" set="disabled" />
+            </test>
         </section>
 
         <section id="sect295">
-        </section>
-
-        <section id="sect296">
+            <choiceState section="sect232" set="disabled" />
+            <test hasDiscipline="alchemy">
+                <choiceState section="sect232" set="enabled" />
+                <choiceState section="sect198" set="disabled" />
+            </test>
         </section>
 
         <section id="sect297">
+            <choiceState section="all" set="disabled" />
+            <combat noMindblast="true" noPsiSurge="true" kaiSurgeBonus="1" />
+            <test hasDiscipline="alchemy">
+                <test expression="[KAILEVEL] >= 5">
+                    <combat noMindblast="true" noPsiSurge="true" kaiSurgeBonus="1" combatSkillModifier="+5" />
+                    <endurance count="+5" noToast="true" permanent="true" />
+                </test>
+            </test>
+            <afterCombats>
+                <test hasDiscipline="alchemy">
+                    <test expression="[KAILEVEL] >= 5">
+                        <test expression="[ENDURANCE] &lt;= 5">
+                            <endurance count="6 - [ENDURANCE]" noToast="true" />
+                        </test>
+                        <endurance count="-5" noToast="true" permanent="true" />
+                    </test>
+                </test>
+                <choiceState section="all" set="enabled" />
+            </afterCombats>
         </section>
 
-        <section id="sect298">
-        </section>
-
-        <section id="sect299">
+        <section id="sect299">  
+            <object objectId="bow" />
+            <object objectId="arrow" count="2" />
+            <object objectId="ballofstring" />
+            <object objectId="dagger" />
+            <object objectId="sword" />
+            <object objectId="emptybottle" />
+            <pick class="money" count="40" currency="kika" />
+            <object objectId="silverrod" />
         </section>
 
         <section id="sect300">
+            <choiceState section="sect173" set="disabled" />
+            <test hasDiscipline="pthmnshp">
+                <choiceState section="sect173" set="enabled" />
+                <choiceState section="sect320" set="disabled" />
+            </test>
         </section>
 
         <section id="sect301">
