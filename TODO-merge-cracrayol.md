@@ -141,6 +141,10 @@
       is not clear for me (currentWeapon.weaponType || currentWeapon.id ???). CHANGE THIS
     - Related to previous: ActionChart.hasWeaponskillWith seems to be changed to accept a set of weapon types. Document this (CHECK THIS)
 
+* https://github.com/tonib/kaichronicles/commit/7b79ab05b7209668c8a26ab6deffb9c5b413e840
+
+* https://github.com/tonib/kaichronicles/commit/6f848689e78973301d343d07ca9b5d77e9ae3f91
+
 * TSLINT:
     - TSLint is deprecated...
     - Check if remains any "throw new Error("
