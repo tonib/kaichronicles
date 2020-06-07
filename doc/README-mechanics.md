@@ -70,6 +70,10 @@ There are some keywords that can be used on expressions. They have the following
   Special items that are weapons too are included
 * **[WEAPONLIKE-CNT-ON-ACTIONCHART]**: The current count of weapons on the action chart.
   Special items that are weapons too are included
+* **[BOW-CNT-ON-SECTION]**: The current count of bows on the action chart.
+  Special items that are bows too are included
+* **[BOW-CNT-ON-ACTIONCHART]**: The current count of bows on the action chart.
+  Special items that are bows too are included
 * **[SPECIAL-ITEMS-ON-SECTION]**: The current count of special items on the action chart.
 * **[SPECIAL-ITEMS-ON-ACTIONCHART]**: The current count of special items on the action chart.
 * **[ENDURANCE]**: The current endurance points
