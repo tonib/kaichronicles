@@ -148,6 +148,15 @@
 * https://github.com/tonib/kaichronicles/commit/2d89249fda23331b4762df57d7d62077cf8a745c
     * BOOK 15: There is no translation to spanish? Ask in Spanish forums
 
+* https://github.com/tonib/kaichronicles/commit/9448e54df5685bf862e2ea9b0feb9ac0415292fa
+
+* https://github.com/tonib/kaichronicles/commit/ac528466997006c67b024451faeee41abe871d02
+
+* https://github.com/tonib/kaichronicles/commit/4345c00f5156c2b9b9e105c3b3460584bffba743
+    * Added noToast and permanent atrs. for endurance rule. Add them to documentation
+
+* https://github.com/tonib/kaichronicles/commit/54cf6b11353f7a645c828af9a3fb12d67e822b3f
+
 * TSLINT:
     - TSLint is deprecated...
     - Check if remains any "throw new Error("
