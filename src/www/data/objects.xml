@@ -948,6 +948,15 @@
             <name lang="en">Statuette of Slûtar</name>
         </special>
 
+        <!-- BOOK 15 -->
+        <special id="jadinamulet">
+            <name lang="en">Jadin Amulet</name>
+            <description lang="en">
+                Adds +1 to your score when picking a number from the Random Number Table
+                when trying to avoid normal missiles (e.g. arrows, bolts, darts, etc.) aimed at you.
+            </description>
+        </special>
+
     </specials>
 
     <objects>
@@ -1943,6 +1952,11 @@
         <object id="ballofstring">
             <name lang="en">Ball of String</name>
             <name lang="es">Bola de cuerda</name>
+        </object>
+		
+        <object id="boarwhip">
+            <name lang="en">Boar Whip</name>
+            <name lang="es">Fusta de Jabalí</name>
         </object>
 
         <!-- OTHERS -->
