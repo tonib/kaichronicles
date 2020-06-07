@@ -146,20 +146,39 @@
 * https://github.com/tonib/kaichronicles/commit/6f848689e78973301d343d07ca9b5d77e9ae3f91
 
 * https://github.com/tonib/kaichronicles/commit/2d89249fda23331b4762df57d7d62077cf8a745c
-    * BOOK 15: There is no translation to spanish? Ask in Spanish forums
+    - BOOK 15: There is no translation to spanish? Ask in Spanish forums
 
 * https://github.com/tonib/kaichronicles/commit/9448e54df5685bf862e2ea9b0feb9ac0415292fa
 
 * https://github.com/tonib/kaichronicles/commit/ac528466997006c67b024451faeee41abe871d02
 
 * https://github.com/tonib/kaichronicles/commit/4345c00f5156c2b9b9e105c3b3460584bffba743
-    * Added noToast and permanent atrs. for endurance rule. Add them to documentation
+    - Added noToast and permanent atrs. for endurance rule. Add them to documentation
 
 * https://github.com/tonib/kaichronicles/commit/54cf6b11353f7a645c828af9a3fb12d67e822b3f
 
 * https://github.com/tonib/kaichronicles/commit/f86fa296116eff77f896b581eb536816e8fa71a2
 
 * https://github.com/tonib/kaichronicles/commit/d56ac0509c83357deffe7695b3bf5f7d68d29472
+
+* https://github.com/tonib/kaichronicles/commit/2c087dba0a06a3e3e8cf996e39857f978ad8edba
+
+* https://github.com/tonib/kaichronicles/commit/68391db36b1757d4dd35f5e1bae18c322f9df46e
+
+* https://github.com/tonib/kaichronicles/commit/b59e54b29c57e7c666ac57305f52361e05459962
+
+* https://github.com/tonib/kaichronicles/commit/0d7011fb7fe6120d65ca1d2239e35403e77314ee
+
+* https://github.com/tonib/kaichronicles/commit/06634383c5d03f96cd7c8c8b062a68440855233c
+    - Check this: BOW-CNT-ON-SECTION, BOW-CNT-ON-ACTIONCHART expressions. In book 15?
+
+* https://github.com/tonib/kaichronicles/commit/277502e25ccd477d833dd8a53e3299aab0387ecd
+
+* https://github.com/tonib/kaichronicles/commit/62b828ab8d5715eddab2cb3d341c5c1124263c87
+
+* https://github.com/tonib/kaichronicles/commit/f90a309f08ebec002b9aadd3a27599abf4e8eb3d
+
+* https://github.com/tonib/kaichronicles/commit/a674bdc583b64ec6c2783787847ff183a7d8ff28
 
 * TSLINT:
     - TSLint is deprecated...
@@ -181,9 +200,6 @@
       But you should keep your "Lore circles" and other bonuses... So, we should keep a track of old previous book series
       disciplines.... Or, assume that if you have moved to a new serie from a previous one, you have all the old serie 
       disciplines
-
-* Book 14+:
-    - Add rule "restoreDeliveranceUse" on each book "tssf" section
 
 * Spanish books erratas:
     - Book 13, sect equipmnt: "tu nueva Carta de Acciónde Gran Maestro" should be "tu nueva Carta de Acción de Gran Maestro" (space)
