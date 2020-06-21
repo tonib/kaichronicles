@@ -53,12 +53,23 @@ declare const CopyToDownload: any;
 // com.megster.cordova.FileChooser (Cordova plugin)
 declare const fileChooser: any;
 
-// commons.js:
+// commons.ts:
 interface Array<T> {
     removeValue( value: T ): boolean;
     contains( value: T ): boolean;
+
+    /**
+     * Returns a shallow clone of this array
+     */
     clone(): T[];
+
+    /**
+     * Returns a deep clone of this array.
+     * This will call to clone() / deepClone() of each array element, if it has Otherwise the element will be directly copied.
+     */
+    deepClone(): T[];
 }
+
 interface String {
     replaceAll(find: string, replace: string): string;
     padLeft(padLength: number, padChar: string): string;

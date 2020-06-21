@@ -28,9 +28,9 @@ class InventoryState {
         const objects = new InventoryState();
 
         if (objectTypes === "all" || objectTypes === "allobjects") {
-            objects.weapons = actionChart.weapons.clone();
-            objects.backpackItems = actionChart.backpackItems.clone();
-            objects.specialItems = actionChart.specialItems.clone();
+            objects.weapons = actionChart.getWeaponsIds();
+            objects.backpackItems = actionChart.getBackpackItemsIds();
+            objects.specialItems = actionChart.getSpecialItemsIds();
             objects.arrows = actionChart.arrows;
             objects.meals = actionChart.meals;
 

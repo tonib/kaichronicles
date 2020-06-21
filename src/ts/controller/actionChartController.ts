@@ -86,7 +86,7 @@ const actionChartController = {
     drop(objectId: string, availableOnSection: boolean = false, fromUI: boolean = false, count: number = 0): boolean {
 
         if (objectId === "allweapons") {
-            actionChartController.dropItemsList(state.actionChart.weapons);
+            actionChartController.dropItemsList(state.actionChart.getWeaponsIds());
             return true;
         }
 
@@ -113,14 +113,14 @@ const actionChartController = {
         }
 
         if (objectId === "allspecial") {
-            actionChartController.dropItemsList(state.actionChart.specialItems);
+            actionChartController.dropItemsList(state.actionChart.getSpecialItemsIds());
             return true;
         }
 
         if (objectId === "allspecialgrdmaster") {
-            actionChartController.dropItemsList(state.actionChart.specialItems.filter((value) => {
+            actionChartController.dropItemsList(state.actionChart.getSpecialItemsIds().filter((itemId) => {
                 return !["crystalstar", "sommerswerd", "silverhelm", "daggerofvashna", "silverbracers", "jewelledmace",
-                    "silverbowduadon", "helshezag", "kagonitechainmail", "korliniumscabbard"].contains(value);
+                    "silverbowduadon", "helshezag", "kagonitechainmail", "korliniumscabbard"].contains(itemId);
             }));
             return true;
         }
@@ -191,7 +191,7 @@ const actionChartController = {
      */
     dropBackpackContent() {
         actionChartController.increaseMeals(-state.actionChart.meals);
-        actionChartController.dropItemsList(state.actionChart.backpackItems);
+        actionChartController.dropItemsList(state.actionChart.getBackpackItemsIds());
     },
 
     /**
@@ -209,12 +209,13 @@ const actionChartController = {
 
     /**
      * Drop all weapons
+     * Seems not used?
      */
-    dropAllWeapons() {
+    /*dropAllWeapons() {
         while (state.actionChart.weapons.length > 0) {
-            actionChartController.drop(state.actionChart.weapons[0], false, false);
+            actionChartController.drop(state.actionChart.weapons[0].id, false, false);
         }
-    },
+    },*/
 
     /**
      * Use an object

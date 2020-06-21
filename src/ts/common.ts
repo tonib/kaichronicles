@@ -123,6 +123,16 @@ if (!Array.prototype.clone) {
     };
 }
 
+if (!Array.prototype.deepClone) {
+  Array.prototype.deepClone = function() {
+    const copy = [];
+    for (const element of this) {
+      copy.push( element.clone ? element.clone() : element );
+    }
+    return copy;
+  };
+}
+
 /****************** WINDOW ******************/
 
 if (typeof Window.prototype.getUrlParameter !== "function") {

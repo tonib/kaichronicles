@@ -87,7 +87,7 @@ const state = {
             state.actionChart = state.getPreviousBookActionChart(bookNumber - 1);
             if ( state.actionChart ) {
                 // Convert the Object to ActionChart
-                state.actionChart = $.extend(new ActionChart(), state.actionChart);
+                state.actionChart = ActionChart.fromObject(state.actionChart);
             }
 
             // Restore Kai monastery objects
@@ -202,7 +202,7 @@ const state = {
         state.language = stateKeys.language;
         state.book = new Book(stateKeys.bookNumber, state.language);
         state.mechanics = new Mechanics(state.book);
-        state.actionChart = $.extend(new ActionChart(), stateKeys.actionChart);
+        state.actionChart = ActionChart.fromObject(stateKeys.actionChart);
         state.sectionStates = new BookSectionStates();
         state.sectionStates.fromStateObject( stateKeys.sectionStates );
     },

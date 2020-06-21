@@ -25,20 +25,6 @@ interface SectionItem {
 }
 
 /**
- * Store a price on a section where the player can shell an object
- */
-interface SellPrice {
-    /** The object id */
-    id: string;
-
-    /** The object price */
-    price: number;
-
-    /** Only applies if id = 'quiver'. Number of arrows on the quiver */
-    count: number;
-}
-
-/**
  * Stores a section state (combats, objects, etc)
  */
 class SectionState {
@@ -52,7 +38,7 @@ class SectionState {
      * Sell prices on the section. Applies only on sections where you can
      * sell inventory objects.
      */
-    public sellPrices: SellPrice[] = [];
+    public sellPrices: SectionItem[] = [];
 
     /** Combats on the section */
     public combats: Combat[] = [];

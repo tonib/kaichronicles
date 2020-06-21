@@ -789,15 +789,17 @@ const mechanicsEngine = {
             sectionState.sellPrices.push({
                 id: objectId,
                 price,
-                count: parseInt($rule.attr("count"), 10)
+                count: parseInt($rule.attr("count"), 10),
+                unlimited: false,
+                useOnSection: false
             });
         }
 
         // Other things (money / meals / special items ...)
         const cls = $rule.attr("class");
         if (cls) {
-            let objectIds = [];
-            let except = [];
+            let objectIds: string[] = [];
+            let except: string[] = [];
 
             // TODO: Use mechanicsEngine.getArrayProperty here
             const txtExcept = $rule.attr("except");
@@ -806,7 +808,7 @@ const mechanicsEngine = {
             }
 
             if (cls === Item.SPECIAL) {
-                objectIds = state.actionChart.specialItems;
+                objectIds = state.actionChart.getSpecialItemsIds();
                 except.push(Item.MAP); // don't sell this, come on!
             } else {
                 mechanicsEngine.debugWarning("Sell rule with invalid class");
@@ -818,6 +820,8 @@ const mechanicsEngine = {
                         id,
                         price,
                         count: 0,
+                        unlimited: false,
+                        useOnSection: false
                     });
                     except.push(id); // Avoid duplicates
                 }
@@ -1182,9 +1186,9 @@ const mechanicsEngine = {
 
         // Drop backpack item slots by its index (1-based index)
         droppedObjects = droppedObjects.concat(
-            mechanicsEngine.dropActionChartSlots($rule, "backpackItemSlots", state.actionChart.backpackItems));
+            mechanicsEngine.dropActionChartSlots($rule, "backpackItemSlots", state.actionChart.getBackpackItemsIds()));
         droppedObjects = droppedObjects.concat(
-            mechanicsEngine.dropActionChartSlots($rule, "specialItemSlots", state.actionChart.specialItems));
+            mechanicsEngine.dropActionChartSlots($rule, "specialItemSlots", state.actionChart.getSpecialItemsIds()));
 
         // Store dropped objects as an inventory state
         const restorePointId: string = $rule.attr("restorePoint");

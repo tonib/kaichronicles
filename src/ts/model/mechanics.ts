@@ -101,6 +101,10 @@ class Mechanics {
      */
     public getObject(objectId: string): Item {
 
+        if (!objectId) {
+            return null;
+        }
+
         // Try to get the object from the cache:
         let o = this.objectsCache[objectId];
         if ( o ) {

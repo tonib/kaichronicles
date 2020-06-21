@@ -1,4 +1,4 @@
-/** Bow tournament */
+/** Book 9, sect91: Drop half of your backpack content */
 const book9sect91 = {
 
     run() {
@@ -15,18 +15,19 @@ const book9sect91 = {
             // Count up the number of Backpack Items you possess and, if there is an odd number, erase the last one on your list
             const l = state.actionChart.backpackItems.length;
             if ( l % 2 === 1 ) {
-                actionChartController.drop( state.actionChart.backpackItems[ l - 1 ] );
+                actionChartController.drop( state.actionChart.getBackpackItemsIds()[ l - 1 ] );
             }
 
             // Get the two lists
-            const heads = [];
-            const tails = [];
-            const halfIndex = state.actionChart.backpackItems.length / 2;
+            const heads: string[] = [];
+            const tails: string[] = [];
+            const backpackItemsIds = state.actionChart.getBackpackItemsIds();
+            const halfIndex = backpackItemsIds.length / 2;
             for ( let i = 0; i < state.actionChart.backpackItems.length; i++)  {
                 if ( i < halfIndex ) {
-                    heads.push( state.actionChart.backpackItems[i] );
+                    heads.push( backpackItemsIds[i] );
                 } else {
-                    tails.push( state.actionChart.backpackItems[i] );
+                    tails.push( backpackItemsIds[i] );
                 }
             }
 

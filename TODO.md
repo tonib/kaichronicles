@@ -45,7 +45,18 @@ TODO
   ```actionChartController.pick('quiver'); actionChartController.pick('quiver'); actionChartController.increaseArrows(10);```
   Sell Quiver: OBJECTS TABLE TO SELL IS NOT UPDATED !!!!
 
+- ERROR:
+  There is a bug picking quivers in game section. If there are two quivers, one with 6 arrows and other with 4. If you pick first
+  the one with 4 arrows, the remaining quiver changes its number of arrows from 6 to 4....
+
+## Development / refactorings
+- State load: Items stored in inventory restore poins were strings. Now are ActionChartItem -> do the conversion
+- Drop items by slot position SHOULD BE REWRITTEN: Keep in mind count usages left
+- Check why Typescript dont check array parameter types en calls (accepts arrays of other types)
+- Indent common.ts
+
 ## Other
+- Move all bonuses calculation from ActionChart to a new class
 - Add option to jump from one book to other (debugging, loyalty bonuses)
 - UPLOAD NEW VERSION 1.11.1
 - FAQ: Add info about change the Random Table
@@ -169,16 +180,22 @@ cordova emulate --target=Android_9 android
 ```
 actionChartController.drop('all')
 actionChartController.pick('backpack')
+
 actionChartController.pick('sword')
 actionChartController.pick('bow')
+
 actionChartController.increaseMoney(15)
+
 actionChartController.pick('meal')
 actionChartController.pick('meal')
+
 actionChartController.pick('rope')
 actionChartController.pick('comb')
 actionChartController.pick('brasskey')
 actionChartController.pick('whip')
+actionChartController.pick('laumspurmeal')
 actionChartController.pick('hourglass')
+
 actionChartController.pick('sommerswerd')
 actionChartController.pick('quiver')
 actionChartController.increaseArrows(5)

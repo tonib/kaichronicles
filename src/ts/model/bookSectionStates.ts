@@ -21,7 +21,8 @@ class BookSectionStates {
     public huntEnabled: boolean = true;
 
     /**
-     * Other states
+     * Other states.
+     * Enumerated properties are NOT the only ones, there can be others
      */
     public otherStates = {
         book6sect26TargetPoints: null,

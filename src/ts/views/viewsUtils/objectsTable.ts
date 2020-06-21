@@ -27,12 +27,12 @@ class ObjectsTable {
 
     /**
      * Fill table with object descriptions.
-     * @param {Array<string>} objects Array with objects ids (string) OR SectionItem's
-     * @param {jQuery} $tableBody The HTML table to fill
+     * @param objects Array with objects ids (string) OR SectionItem's
+     * @param $tableBody The HTML table to fill
      * @param type Table type: 'available': Available objects on section,
      * 'sell': Sell inventory objects, 'inventory': Inventory objects
      */
-    constructor(objects: any[] , $tableBody: any, type: ObjectsTableType ) {
+    constructor(objects: Array<string|SectionItem>, $tableBody: JQuery<HTMLElement>, type: ObjectsTableType ) {
 
         this.type = type;
         this.$tableBody = $tableBody;
@@ -44,11 +44,11 @@ class ObjectsTable {
      * Converts the provided array of either strings or SectionItems to
      * a proper array of ObjectsTableItems.
      */
-    public fillObjectsList( objects: any[] ) {
+    public fillObjectsList( objects: Array<string|SectionItem>) {
         let arrows = ( this.type === ObjectsTableType.INVENTORY ) ? state.actionChart.arrows : 0;
 
         for ( const obj of objects ) {
-            let info = obj;
+            let sectionItem: SectionItem = null;
 
             if ( typeof(obj) === "string" ) {
                 let count = 0;
@@ -58,16 +58,18 @@ class ObjectsTable {
                     arrows -= count;
                 }
 
-                info = {
+                sectionItem = {
                     id : obj,
                     price : 0,
                     unlimited : false,
                     count,
                     useOnSection : false
                 };
+            } else {
+                sectionItem = obj;
             }
 
-            this.objects.push( new ObjectsTableItem( info, this.type ) );
+            this.objects.push( new ObjectsTableItem( sectionItem, this.type ) );
         }
     }
 

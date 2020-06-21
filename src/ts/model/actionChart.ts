@@ -27,7 +27,7 @@ class ActionChart {
     public currentEndurance = 0;
 
     /** The player weapons (up to 2) */
-    public weapons: string[] = [];
+    public weapons: ActionChartItem[] = [];
 
     /**
      * If true, the player will fight with no weapons (hand-to-hand).
@@ -44,11 +44,11 @@ class ActionChart {
     /** Number of meals (they count as backpack items) */
     public meals = 0;
 
-    /** Backpack items ids (up to 8) */
-    public backpackItems: string[] = [];
+    /** Backpack items */
+    public backpackItems: ActionChartItem[] = [];
 
-    /** Special items ids */
-    public specialItems = [];
+    /** Special items */
+    public specialItems: ActionChartItem[] = [];
 
     /** The player has a backpack? */
     public hasBackpack = true;
@@ -188,7 +188,7 @@ class ActionChart {
                     throw translations.text("msgNoMoreWeapons");
                 }
                 // console.log('Picked weapon ' + o.id);
-                this.weapons.push(o.id);
+                this.weapons.push(new ActionChartItem(o.id));
                 this.checkCurrentWeapon();
                 return true;
 
@@ -205,7 +205,7 @@ class ActionChart {
                     throw translations.text("noQuiversEnough");
                 }
 
-                this.specialItems.push(o.id);
+                this.specialItems.push(new ActionChartItem(o.id));
 
                 if (o.isWeapon()) {
                     this.checkCurrentWeapon();
@@ -240,7 +240,7 @@ class ActionChart {
                     // Special case
                     this.increaseMeals(1);
                 } else {
-                    this.backpackItems.push(o.id);
+                    this.backpackItems.push(new ActionChartItem(o.id));
                 }
                 if (o.isWeapon()) {
                     this.checkCurrentWeapon();
@@ -262,7 +262,7 @@ class ActionChart {
     public getNBackpackItems(roundToInteger: boolean = true): number {
         let count = this.meals;
         for (const item of this.backpackItems) {
-            const o = state.mechanics.getObject(item);
+            const o = item.getItem();
             if (o) {
                 count += o.itemCount;
             }
@@ -280,8 +280,8 @@ class ActionChart {
      */
     public getNSpecialItems(roundToInteger: boolean = true): number {
         let count = 0;
-        for (const specialId of this.specialItems) {
-            const o = state.mechanics.getObject(specialId);
+        for (const special of this.specialItems) {
+            const o = special.getItem();
             if (o) {
                 count += o.itemCount;
             }
@@ -339,20 +339,19 @@ class ActionChart {
         return this.beltPouch - oldBeltPouch;
     }
 
-    // TODO: Why is this an assignment? Should not be a member?
     /**
      * Returns true if the player has the object
      * @param objectId The object id to test. "backpack" to check if the player has a backpack
      */
-    public hasObject = function(objectId: string): boolean {
-        if (objectId === "backpack") {
+    public hasObject(objectId: string): boolean {
+        if (objectId === Item.BACKPACK) {
             return this.hasBackpack;
         }
 
-        return this.backpackItems.contains(objectId) ||
-            this.specialItems.contains(objectId) ||
-            this.weapons.contains(objectId);
-    };
+        return ActionChartItem.containsId(this.backpackItems, objectId) ||
+            ActionChartItem.containsId(this.specialItems, objectId) ||
+            ActionChartItem.containsId(this.weapons, objectId);
+    }
 
     /**
      * Drop an object
@@ -382,7 +381,8 @@ class ActionChart {
             return true;
         }
 
-        if (this.backpackItems.removeValue(objectId) || this.specialItems.removeValue(objectId)) {
+        if (ActionChartItem.removeById(this.weapons, objectId) || ActionChartItem.removeById(this.backpackItems, objectId) ||
+            ActionChartItem.removeById(this.specialItems, objectId)) {
             this.checkMaxEndurance();
             this.checkCurrentWeapon();
             if (objectId === Item.QUIVER) {
@@ -393,11 +393,6 @@ class ActionChart {
             return true;
         }
 
-        if (this.weapons.removeValue(objectId)) {
-            // Check changes on selected weapon
-            this.checkCurrentWeapon();
-            return true;
-        }
         return false;
     }
 
@@ -737,7 +732,7 @@ class ActionChart {
 
         // Other objects (not weapons). Ex. shield. They are not applied for bow combats
         if (!combat.mentalOnly && !combat.bowCombat) {
-            this.enumerateObjects((o: Item) => {
+            this.enumerateObjectsAsItems((o: Item) => {
                 if (!o.isWeapon() && o.combatSkillEffect && !combat.disabledObjects.contains(o.id)) {
                     bonuses.push({
                         concept: o.name,
@@ -770,20 +765,32 @@ class ActionChart {
     }
 
     /**
-     * Function to enumerate backpack objects and special items
+     * Function to enumerate backpack objects and special items. Optionally weapons can be included
      * @param callback Function to be called for each object. Parameter is each Item owned by the player
+     * @param enumerateWeapons True if weapons should be enumerated
      */
-    private enumerateObjects(callback: (o: Item) => void) {
+    private enumerateObjectsAsItems(callback: (o: Item) => void, enumerateWeapons: boolean = false) {
+        this.enumerateObjects((aItem) => { callback(aItem.getItem()); }, enumerateWeapons);
+    }
 
-        const enumerateFunction = (index: number, objectId: string) => {
-            const o = state.mechanics.getObject(objectId);
-            if (!o) {
+    /**
+     * Function to enumerate backpack objects and special items as ActionChartItems. Optionally weapons can be included
+     * @param callback Function to be called for each object. Parameter is each Item owned by the player
+     * @param enumerateWeapons True if weapons should be enumerated
+     */
+    private enumerateObjects(callback: (o: ActionChartItem) => void, enumerateWeapons: boolean = false) {
+
+        const enumerateFunction = (index: number, aItem: ActionChartItem) => {
+            if (!aItem.getItem()) {
                 return;
             }
-            callback(o);
+            callback(aItem);
         };
 
         // Check objects:
+        if (enumerateWeapons) {
+            $.each(this.weapons, enumerateFunction);
+        }
         $.each(this.backpackItems, enumerateFunction);
         $.each(this.specialItems, enumerateFunction);
     }
@@ -795,7 +802,7 @@ class ActionChart {
     public getEnduranceBonuses(): Bonus[] {
 
         const bonuses = [];
-        this.enumerateObjects((o: Item) => {
+        this.enumerateObjectsAsItems((o: Item) => {
             if (o.enduranceEffect) {
                 bonuses.push({
                     concept: o.name,
@@ -827,7 +834,7 @@ class ActionChart {
     public getMealObjects(): string[] {
 
         const result = [];
-        this.enumerateObjects((o: Item) => {
+        this.enumerateObjectsAsItems((o: Item) => {
             if (o.isMeal && !result.contains(o.id)) {
                 result.push(o.id);
             }
@@ -843,21 +850,13 @@ class ActionChart {
      */
     public getWeaponObjects(onlyHandToHand: boolean = false): Item[] {
 
-        // Weapons
         const result: Item[] = [];
-        for (const weapon of this.weapons) {
-            const o = state.mechanics.getObject(weapon);
-            if (o && (!onlyHandToHand || o.isHandToHandWeapon())) {
-                result.push(o);
-            }
-        }
-
-        // Weapon-like objects
-        this.enumerateObjects((o: Item) => {
+        // Traverse Weapons and Weapon-like objects
+        this.enumerateObjectsAsItems((o: Item) => {
             if (o.isWeapon() && (!onlyHandToHand || o.isHandToHandWeapon())) {
                 result.push(o);
             }
-        });
+        }, true);
         return result;
     }
 
@@ -869,15 +868,15 @@ class ActionChart {
 
         // Compute the maximum number of arrows, given the carried quivers
         let max = 0;
-        for (const item of this.specialItems) {
-            if (item === Item.QUIVER) {
+        for (const aItem of this.specialItems) {
+            if (aItem.id === Item.QUIVER) {
                 // Only 6 arrows per quiver
                 max += 6;
             }
         }
 
         // Objects with isArrow="true" occupies the same space in quiver as a normal Arrow
-        this.enumerateObjects((o: Item) => {
+        this.enumerateObjectsAsItems((o: Item) => {
             if (o.isArrow) {
                 max -= 1;
             }
@@ -997,9 +996,39 @@ class ActionChart {
     }
 
     /**
+     * Return identifiers of backpack items
+     */
+    public getBackpackItemsIds(): string[] {
+        return ActionChartItem.getIds(this.backpackItems);
+    }
+
+    /**
+     * Return identifiers of special items
+     */
+    public getSpecialItemsIds(): string[] {
+        return ActionChartItem.getIds(this.specialItems);
+    }
+
+    /**
+     * Return identifiers of weapons
+     */
+    public getWeaponsIds(): string[] {
+        return ActionChartItem.getIds(this.weapons);
+    }
+
+    /**
      * Return the maximum number of backpack items in the current book
      */
     private static getMaxBackpackItems(): number {
         return state.book.isGrandMasterBook() ? 10 : 8;
+    }
+
+    public static fromObject(o: object): ActionChart {
+        const actionChart: ActionChart = $.extend(new ActionChart(), o);
+        // Replace plain objects by ActionChartItem instances
+        actionChart.weapons = ActionChartItem.fromObjectsArray(actionChart.weapons);
+        actionChart.backpackItems = ActionChartItem.fromObjectsArray(actionChart.backpackItems);
+        actionChart.specialItems = ActionChartItem.fromObjectsArray(actionChart.specialItems);
+        return actionChart;
     }
 }
