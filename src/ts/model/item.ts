@@ -60,11 +60,6 @@ class Item {
      */
     public itemCount: number;
 
-    /**
-     * Number of allowed usage of the item
-     */
-    public usageCount: number;
-
     /** The translated object description */
     public description: string;
 
@@ -81,7 +76,7 @@ class Item {
      */
     public weaponType: string;
 
-    /** Get the object image URL, untranslated. null if the object has no image. */
+    /** Object image URL, untranslated. null if the object has no image. */
     private imageUrl: string;
 
     /**
@@ -99,8 +94,14 @@ class Item {
     /** Endurance increment when the player carry the object */
     public enduranceEffect: number = 0;
 
-    /** Usage (only one use, and then the object is dropped) */
+    /** Usage effect */
     public usage: ItemEffect;
+
+    /**
+     * Number of allowed uses of the item.
+     * After this number of uses, it will be dropped. Only applies if usage is not null.
+     */
+    public usageCount: number;
 
     /** Object ids that cannot be carried at same time with this object.
      * Empty array if there are no incompatibilities

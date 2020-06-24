@@ -22,6 +22,12 @@ interface SectionItem {
      * Object is allowed to be used from the section (not picked object)?
      */
     useOnSection: boolean;
+
+    /**
+     * Number of allowed uses of the item.
+     * Added in v1.12. It can be null after installation of this version. In this case, asume is 1
+     */
+    usageCount: number;
 }
 
 /**
@@ -260,12 +266,14 @@ class SectionState {
             }
         }
 
+        const item = state.mechanics.getObject(objectId);
         this.objects.push({
             id: objectId,
             price,
             unlimited,
             count: (objectId === Item.QUIVER || objectId === Item.ARROW || objectId === Item.MONEY || price > 0 ? count : 0 ),
-            useOnSection
+            useOnSection,
+            usageCount: item && item.usageCount ? item.usageCount : 1
         });
     }
 

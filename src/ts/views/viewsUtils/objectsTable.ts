@@ -3,7 +3,7 @@
  * Kind of objects table
  */
 enum ObjectsTableType {
-    /** Availabe objects on section (free of for buy ) */
+    /** Availabe objects on section (free or for buy ) */
     AVAILABLE,
     /** Sell inventory objects */
     SELL,
@@ -51,6 +51,7 @@ class ObjectsTable {
             let sectionItem: SectionItem = null;
 
             if ( typeof(obj) === "string" ) {
+                // It's a Item id
                 let count = 0;
 
                 if ( obj === Item.QUIVER ) {
@@ -58,12 +59,14 @@ class ObjectsTable {
                     arrows -= count;
                 }
 
+                const item = state.mechanics.getObject(obj);
                 sectionItem = {
                     id : obj,
                     price : 0,
                     unlimited : false,
                     count,
-                    useOnSection : false
+                    useOnSection : false,
+                    usageCount: item && item.usageCount ? item.usageCount : 1
                 };
             } else {
                 sectionItem = obj;

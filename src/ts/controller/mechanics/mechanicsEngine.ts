@@ -786,12 +786,14 @@ const mechanicsEngine = {
         // Sell a specific item
         const objectId = $rule.attr("objectId");
         if (objectId) {
+            const item = state.mechanics.getObject(objectId);
             sectionState.sellPrices.push({
                 id: objectId,
                 price,
                 count: parseInt($rule.attr("count"), 10),
                 unlimited: false,
-                useOnSection: false
+                useOnSection: false,
+                usageCount: item && item.usageCount ? item.usageCount : 1
             });
         }
 
@@ -815,13 +817,15 @@ const mechanicsEngine = {
             }
 
             for (const id of objectIds) {
+                const item = state.mechanics.getObject(objectId);
                 if (!except.contains(id)) {
                     sectionState.sellPrices.push({
                         id,
                         price,
                         count: 0,
                         unlimited: false,
-                        useOnSection: false
+                        useOnSection: false,
+                        usageCount: item && item.usageCount ? item.usageCount : 1
                     });
                     except.push(id); // Avoid duplicates
                 }

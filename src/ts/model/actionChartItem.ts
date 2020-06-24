@@ -32,7 +32,7 @@ class ActionChartItem {
             this.usageCount = usageCount;
         } else {
             const i: Item = this.getItem();
-            this.usageCount = i ? i.usageCount : 0;
+            this.usageCount = i ? i.usageCount : 1;
         }
     }
 

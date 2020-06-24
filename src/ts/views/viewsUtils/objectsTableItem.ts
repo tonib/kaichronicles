@@ -115,8 +115,8 @@ class ObjectsTableItem {
         html += "<span><b>" + name + "</b></span>";
 
         // Usage count
-        if ( this.item.usageCount > 1 ) {
-            html += " <span>" + translations.text( "usageCount" , [this.item.usageCount] ) + "</span>";
+        if ( this.objectInfo.usageCount > 1 ) {
+            html += " <span>" + translations.text( "usageCount" , [this.objectInfo.usageCount] ) + "</span>";
         }
 
         // Description
@@ -159,6 +159,10 @@ class ObjectsTableItem {
 
         if ( this.objectInfo.useOnSection ) {
             link += 'data-useonsection="true" ';
+        }
+
+        if ( this.objectInfo.usageCount ) {
+            link += `data-usagecount="${this.objectInfo.usageCount}"`;
         }
 
         if ( title ) {
@@ -243,14 +247,15 @@ class ObjectsTableItem {
 
     }
 
-    public static restoreFromLink( $link: any , tableType: ObjectsTableType ): ObjectsTableItem {
+    public static restoreFromLink( $link: JQuery<HTMLElement> , tableType: ObjectsTableType ): ObjectsTableItem {
 
         const objectInfo: SectionItem = {
             id : null,
             price : 0,
             unlimited : false,
             count : 0,
-            useOnSection : false
+            useOnSection : false,
+            usageCount: 1
         };
 
         objectInfo.id = $link.attr("data-objectId");
@@ -274,6 +279,11 @@ class ObjectsTableItem {
 
         if ( $link.attr( "data-useonsection" ) === "true" ) {
             objectInfo.useOnSection = true;
+        }
+
+        const txtUsageCount = $link.attr("data-usagecount");
+        if (txtUsageCount) {
+            objectInfo.usageCount = parseInt(txtUsageCount, 10);
         }
 
         return new ObjectsTableItem( objectInfo , tableType );
@@ -397,7 +407,7 @@ class ObjectsTableItem {
         }
 
         // Use the object
-        const dropObject = ( this.type === ObjectsTableType.INVENTORY && --this.item.usageCount <= 0 );
+        const dropObject = ( this.type === ObjectsTableType.INVENTORY && --this.objectInfo.usageCount <= 0 );
         actionChartController.use( this.item.id , dropObject );
 
         // If the object was used from the section, remove it
