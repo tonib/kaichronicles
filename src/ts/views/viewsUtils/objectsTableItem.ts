@@ -343,7 +343,7 @@ class ObjectsTableItem {
             }
 
             for (let i = 0; i < nItems; i++) {
-                 if ( actionChartController.pick( this.item.id , true, true) ) {
+                 if ( actionChartController.pickFromUi( this.objectInfo ) ) {
                     objectPicked = true;
                  }
             }

@@ -20,17 +20,40 @@ const actionChartController = {
     },
 
     /**
-     * Pick an object
-     * @param objectId The object to pick, or "meal", to pick one meal
+     * Pick an object by its id
+     * @param objectId The object id to pick
      * @param showError True we should show a toast if the player
      * cannot pick the object
      * @param fromUITable True if we are picking the object from the UI
      * @return True if the object has been get. False if the object cannot be get
      */
     pick(objectId: string, showError: boolean = false, fromUITable: boolean = false): boolean {
+        // TODO: Check if fromUITable here should be always false...
+        return actionChartController.pickActionChartItem(new ActionChartItem(objectId), showError, fromUITable);
+    },
+
+    /**
+     * Pick an object from the user interface
+     * @param sectionItem The object to pick
+     * @return True if the object has been get. False if the object cannot be get
+     */
+    pickFromUi(sectionItem: SectionItem): boolean {
+        const aChartItem = new ActionChartItem(sectionItem.id, sectionItem.count);
+        return actionChartController.pickActionChartItem(aChartItem, true, true);
+    },
+
+    /**
+     * Pick an object
+     * @param aChartItem The object to pick
+     * @param showError True we should show a toast if the player
+     * cannot pick the object
+     * @param fromUITable True if we are picking the object from the UI
+     * @return True if the object has been get. False if the object cannot be get
+     */
+    pickActionChartItem(aChartItem: ActionChartItem, showError: boolean = false, fromUITable: boolean = false): boolean {
         try {
             // Get object info
-            const o = state.mechanics.getObject(objectId);
+            const o = aChartItem.getItem();
             if (o === null) {
                 return false;
             }
@@ -38,17 +61,16 @@ const actionChartController = {
             // Check if the section has restrictions about picking objects
             // This will throw an exception if no more objects can be picked
             if (fromUITable) {
-                EquipmentSectionMechanics.checkMoreObjectsCanBePicked(objectId);
+                EquipmentSectionMechanics.checkMoreObjectsCanBePicked(aChartItem.id);
             }
 
             // Try to pick the object
-            if (!state.actionChart.pick(new ActionChartItem(objectId))) {
+            if (!state.actionChart.pick(aChartItem)) {
                 return false;
             }
 
             // Show toast
-            actionChartView.showInventoryMsg("pick", o,
-                translations.text("msgGetObject", [o.name]));
+            actionChartView.showInventoryMsg("pick", o, translations.text("msgGetObject", [o.name]));
 
             // Update player statistics (for objects with effects)
             actionChartView.updateStatistics();
@@ -62,6 +84,26 @@ const actionChartController = {
             }
             console.log(e);
             return false;
+        }
+    },
+
+    /**
+     * The player pick a set of objects
+     * @param arrayOfItems Array with object ids to pick
+     */
+    pickItemsList(arrayOfItems: string[]) {
+        let renderAvailableObjects = false;
+        const sectionState = state.sectionStates.getSectionState();
+        for (const item of arrayOfItems) {
+            if (!actionChartController.pick(item, true, false)) {
+                // Object cannot be picked. Add the object as available on the current section
+                sectionState.addObjectToSection(item);
+                renderAvailableObjects = true;
+            }
+        }
+        if (renderAvailableObjects) {
+            // Render available objects on this section (game view)
+            mechanicsEngine.fireInventoryEvents();
         }
     },
 
@@ -206,16 +248,6 @@ const actionChartController = {
             actionChartController.drop(objectId, false, false);
         }
     },
-
-    /**
-     * Drop all weapons
-     * Seems not used?
-     */
-    /*dropAllWeapons() {
-        while (state.actionChart.weapons.length > 0) {
-            actionChartController.drop(state.actionChart.weapons[0].id, false, false);
-        }
-    },*/
 
     /**
      * Use an object
@@ -426,26 +458,6 @@ const actionChartController = {
             txt.push(bonus.concept + ": " + txtInc);
         }
         return txt.join(", ");
-    },
-
-    /**
-     * The player pick a set of objects
-     * @param arrayOfItems Array with object ids to pick
-     */
-    pickItemsList(arrayOfItems: string[]) {
-        let renderAvailableObjects = false;
-        const sectionState = state.sectionStates.getSectionState();
-        for (const item of arrayOfItems) {
-            if (!actionChartController.pick(item, true, false)) {
-                // Object cannot be picked. Add the object as available on the current section
-                sectionState.addObjectToSection(item);
-                renderAvailableObjects = true;
-            }
-        }
-        if (renderAvailableObjects) {
-            // Render available objects on this section (game view)
-            mechanicsEngine.fireInventoryEvents();
-        }
     },
 
     /**

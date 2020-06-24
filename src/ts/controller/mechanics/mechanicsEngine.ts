@@ -463,9 +463,9 @@ const mechanicsEngine = {
         let count = ExpressionEvaluator.evalInteger($rule.attr("count"));
 
         // Add to the action chart
-        if (cls === "meal") {
+        if (cls === Item.MEAL ) {
             actionChartController.increaseMeals(count);
-        } else if (cls === "arrow") {
+        } else if (cls === Item.ARROW) {
             actionChartController.increaseArrows(count);
         } else if (cls === Item.MONEY) {
             // TODO: We should store the amount of each currency. Unsupported
