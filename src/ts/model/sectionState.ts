@@ -105,7 +105,7 @@ class SectionState {
         const items: Item[] = [];
         for ( const sectionItem of this.objects) {
 
-            if ( sectionItem.id === "money" ) {
+            if ( sectionItem.id === Item.MONEY ) {
                 // Money if not really an object. It's stored like one for mechanics needs
                 continue;
             }
@@ -256,7 +256,7 @@ class SectionState {
                               useOnSection: boolean = false ) {
 
         // Special cases:
-        if ( objectId === "money" ) {
+        if ( objectId === Item.MONEY ) {
             // Try to increase the current money amount / arrows on the section:
             for ( const o of this.objects ) {
                 if ( o.id === objectId ) {
@@ -345,7 +345,7 @@ class SectionState {
     public getAvailableMoney(): number {
         let moneyCount = 0;
         for ( const o of this.objects ) {
-            if ( o.id === "money") {
+            if (o.id === Item.MONEY) {
                 moneyCount += o.count;
             }
         }
