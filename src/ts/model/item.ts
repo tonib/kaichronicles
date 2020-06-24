@@ -21,8 +21,11 @@ class Item {
     public static readonly ENDURANCE = "endurance";
 
     // Object types
+    /** Special item type */
     public static readonly SPECIAL = "special";
+    /** Backpack item type */
     public static readonly OBJECT = "object";
+    /** Weapon item type */
     public static readonly WEAPON = "weapon";
 
     // Object ids
@@ -35,7 +38,7 @@ class Item {
     public static readonly BACKPACK = "backpack";
     public static readonly HELSHEZAG = "helshezag";
 
-    /** The object type ('special', 'object' or 'weapon' ) */
+    /** The object type (Item.SPECIAL, Item.OBJECT or Item.WEAPON) */
     public type: string;
 
     /** The object id */

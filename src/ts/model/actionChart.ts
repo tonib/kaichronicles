@@ -385,19 +385,70 @@ class ActionChart {
             return true;
         }
 
-        if (ActionChartItem.removeById(this.weapons, objectId) || ActionChartItem.removeById(this.backpackItems, objectId) ||
-            ActionChartItem.removeById(this.specialItems, objectId)) {
-            this.checkMaxEndurance();
-            this.checkCurrentWeapon();
-            if (objectId === Item.QUIVER) {
-                // Decrease arrows count
-                this.arrows -= count;
-                this.sanitizeArrowCount();
-            }
-            return true;
+        // Drop the object (find its position, and drop that position)
+        const item = state.mechanics.getObject(objectId);
+        if (!item) {
+            return false;
         }
+        const objectsArray = this.getObjectsByType(item.type);
+        if (!objectsArray) {
+            return false;
+        }
+        const index = ActionChartItem.findById(objectsArray, objectId);
+        if (index < 0) {
+            return false;
+        }
+        return this.dropByIndex(item.type, index, count);
+    }
 
-        return false;
+    /**
+     * Returns the array of objects of a given type
+     * @param objectType The object types (Item.WEAPON, Item.SPECIAL or Item.OBJECT)
+     * @returns The objects of that type. null if the object type was wrong
+     */
+    private getObjectsByType(objectType: string): ActionChartItem[] {
+        let objectsArray: ActionChartItem[] = null;
+        switch (objectType) {
+            case Item.WEAPON:
+                objectsArray = this.weapons;
+                break;
+            case Item.SPECIAL:
+                objectsArray = this.specialItems;
+                break;
+            case Item.OBJECT:
+                objectsArray = this.backpackItems;
+                break;
+            default:
+                objectsArray = null;
+        }
+        return objectsArray;
+    }
+
+    /**
+     * Drops an object by its position on the action chart
+     * @param objectType The object type to drop (Item.WEAPON, Item.SPECIAL or Item.OBJECT)
+     * @param index Object position on the objects array (this.weapons, this.specialItems or this.backpackItems)
+     * @param arrowsCount Only for quivers. n. arrows to drop. It must to be >= 0
+     */
+    public dropByIndex(objectType: string, index: number, arrowsCount: number = 0): boolean {
+        const objectsArray = this.getObjectsByType(objectType);
+        if (!objectsArray) {
+            return false;
+        }
+        if (index < 0 || index >= objectsArray.length) {
+            return false;
+        }
+        const aChartItem = objectsArray[index];
+        objectsArray.splice(index, 1);
+
+        this.checkMaxEndurance();
+        this.checkCurrentWeapon();
+        if (aChartItem.id === Item.QUIVER) {
+            // Decrease arrows count
+            this.arrows -= arrowsCount;
+            this.sanitizeArrowCount();
+        }
+        return true;
     }
 
     /**
