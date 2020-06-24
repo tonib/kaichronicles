@@ -361,44 +361,53 @@ class ActionChart {
      * Drop an object
      * @param objectId Object id to drop, or 'meal' to drop one meal, or 'backpack' to drop the
      * backpack.
-     * @param count Object count. Only for quivers. count === n. arrows to drop. It must to be >= 0
-     * @return True if player had the object
+     * @param arrowsCount Only for quivers. count === n. arrows to drop. It must to be >= 0
+     * @param objectIndex If specified, object index in the Action Chart object array to drop. If it's not specified
+     * the first object with the given objectId will be dropped
+     * @returns The dropped item. null if no item was dropped
      */
-    public drop(objectId: string, count: number = 0): boolean {
+    public drop(objectId: string, arrowsCount: number = 0, objectIndex: number = -1): ActionChartItem {
 
         if (objectId === Item.MEAL) {
             // Special
             this.increaseMeals(-1);
-            return true;
+            return new ActionChartItem(Item.MEAL);
         }
 
-        if (objectId === "backpack") {
+        if (objectId === Item.BACKPACK) {
             // Special
             if (!this.hasBackpack) {
-                return false;
+                return null;
             }
 
             this.hasBackpack = false;
             this.meals = 0;
             this.backpackItems = [];
             this.checkCurrentWeapon();
-            return true;
+            return new ActionChartItem(Item.BACKPACK);
         }
 
         // Drop the object (find its position, and drop that position)
         const item = state.mechanics.getObject(objectId);
         if (!item) {
-            return false;
+            return null;
         }
         const objectsArray = this.getObjectsByType(item.type);
         if (!objectsArray) {
-            return false;
+            return null;
         }
-        const index = ActionChartItem.findById(objectsArray, objectId);
+
+        let index: number;
+        if (objectIndex >= 0) {
+            index = objectIndex;
+        } else {
+            index = ActionChartItem.findById(objectsArray, objectId);
+        }
         if (index < 0) {
-            return false;
+            return null;
         }
-        return this.dropByIndex(item.type, index, count);
+
+        return this.dropByIndex(item.type, index, arrowsCount);
     }
 
     /**
@@ -429,14 +438,15 @@ class ActionChart {
      * @param objectType The object type to drop (Item.WEAPON, Item.SPECIAL or Item.OBJECT)
      * @param index Object position on the objects array (this.weapons, this.specialItems or this.backpackItems)
      * @param arrowsCount Only for quivers. n. arrows to drop. It must to be >= 0
+     * @returns The dropped item. null if no object was dropped
      */
-    public dropByIndex(objectType: string, index: number, arrowsCount: number = 0): boolean {
+    public dropByIndex(objectType: string, index: number, arrowsCount: number = 0): ActionChartItem {
         const objectsArray = this.getObjectsByType(objectType);
         if (!objectsArray) {
-            return false;
+            return null;
         }
         if (index < 0 || index >= objectsArray.length) {
-            return false;
+            return null;
         }
         const aChartItem = objectsArray[index];
         objectsArray.splice(index, 1);
@@ -448,7 +458,7 @@ class ActionChart {
             this.arrows -= arrowsCount;
             this.sanitizeArrowCount();
         }
-        return true;
+        return aChartItem;
     }
 
     /**

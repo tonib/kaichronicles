@@ -122,10 +122,13 @@ const actionChartController = {
      * @param availableOnSection True if the object should be available on
      * the current section
      * @param fromUI True if the action is fired from the UI
-     * @param count Object count (only for quivers. count === n. arrows to drop)
+     * @param arrowsCount Object count (only for quivers. count === n. arrows to drop)
+     * @param objectIndex If specified, object index in the Action Chart object array to drop. If it's not specified
+     * the first object with the given objectId will be dropped (there can be more than one item with the same id)
      * @returns True if the object has been dropped
      */
-    drop(objectId: string, availableOnSection: boolean = false, fromUI: boolean = false, count: number = 0): boolean {
+    drop(objectId: string, availableOnSection: boolean = false, fromUI: boolean = false, arrowsCount: number = 0,
+         objectIndex: number = -1): boolean {
 
         if (objectId === "allweapons") {
             actionChartController.dropItemsList(state.actionChart.getWeaponsIds());
@@ -192,10 +195,9 @@ const actionChartController = {
             return false;
         }
 
-        const dropped = state.actionChart.drop(objectId, count);
-        if (dropped) {
-            actionChartView.showInventoryMsg("drop", o,
-                translations.text("msgDropObject", [o.name]));
+        const droppedItem = state.actionChart.drop(objectId, arrowsCount, objectIndex);
+        if (droppedItem) {
+            actionChartView.showInventoryMsg("drop", o, translations.text("msgDropObject", [o.name]));
 
             // Update the action chart view
             actionChartView.updateObjectsLists();
@@ -207,13 +209,15 @@ const actionChartController = {
             if (availableOnSection) {
                 // Add the droped object as available on the current section
                 const sectionState = state.sectionStates.getSectionState();
-                sectionState.addObjectToSection(objectId, 0, false, count);
+                sectionState.addObjectToSection(objectId, 0, false, arrowsCount);
 
                 // Render available objects on this section (game view)
                 mechanicsEngine.fireInventoryEvents(fromUI, o);
             }
+            return true;
+        } else {
+            return false;
         }
-        return dropped;
     },
 
     /**
