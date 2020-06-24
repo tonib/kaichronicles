@@ -27,12 +27,12 @@ class ObjectsTable {
 
     /**
      * Fill table with object descriptions.
-     * @param objects Array with objects ids (string) OR SectionItem's
+     * @param objects Array with ActionChartItem OR SectionItem to render
      * @param $tableBody The HTML table to fill
      * @param type Table type: 'available': Available objects on section,
      * 'sell': Sell inventory objects, 'inventory': Inventory objects
      */
-    constructor(objects: Array<string|SectionItem>, $tableBody: JQuery<HTMLElement>, type: ObjectsTableType ) {
+    constructor(objects: Array<ActionChartItem|SectionItem>, $tableBody: JQuery<HTMLElement>, type: ObjectsTableType ) {
 
         this.type = type;
         this.$tableBody = $tableBody;
@@ -44,31 +44,36 @@ class ObjectsTable {
      * Converts the provided array of either strings or SectionItems to
      * a proper array of ObjectsTableItems.
      */
-    public fillObjectsList( objects: Array<string|SectionItem>) {
+    public fillObjectsList( objects: Array<ActionChartItem|SectionItem>) {
+
+        // Number of arrows to distribute across quivers. Only applies if this is a Action Chart table
         let arrows = ( this.type === ObjectsTableType.INVENTORY ) ? state.actionChart.arrows : 0;
 
         for ( const obj of objects ) {
             let sectionItem: SectionItem = null;
 
-            if ( typeof(obj) === "string" ) {
-                // It's a Item id
-                let count = 0;
+            if (obj instanceof ActionChartItem) {
+                // It's an action chart item
+                const aChartItem: ActionChartItem = obj;
 
-                if ( obj === Item.QUIVER ) {
+                // Distribute arrows across owned quivers
+                let count = 0;
+                if ( aChartItem.id === Item.QUIVER ) {
                     count = Math.min( 6, arrows );
                     arrows -= count;
                 }
 
-                const item = state.mechanics.getObject(obj);
+                // Do the conversion from ActionChartItem to SectionItem
                 sectionItem = {
-                    id : obj,
+                    id : aChartItem.id,
                     price : 0,
                     unlimited : false,
                     count,
                     useOnSection : false,
-                    usageCount: item && item.usageCount ? item.usageCount : 1
+                    usageCount: aChartItem.usageCount ? aChartItem.usageCount : 1
                 };
             } else {
+                // Its a SectionItem
                 sectionItem = obj;
             }
 

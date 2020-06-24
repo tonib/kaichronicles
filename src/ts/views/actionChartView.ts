@@ -208,7 +208,7 @@ const actionChartView = {
     updateWeapons() {
 
         // Weapons list
-        new ObjectsTable( state.actionChart.getWeaponsIds() , $("#achart-weapons > tbody") , ObjectsTableType.INVENTORY )
+        new ObjectsTable( state.actionChart.weapons , $("#achart-weapons > tbody") , ObjectsTableType.INVENTORY )
             .renderTable();
 
         // Current weapon:
@@ -237,14 +237,14 @@ const actionChartView = {
 
         // Backpack items
         if ( state.actionChart.hasBackpack ) {
-            new ObjectsTable( state.actionChart.getBackpackItemsIds() , $("#achart-backpack > tbody") , ObjectsTableType.INVENTORY )
+            new ObjectsTable( state.actionChart.backpackItems, $("#achart-backpack > tbody") , ObjectsTableType.INVENTORY )
                 .renderTable();
         } else {
             $("#achart-backpack-content").html("<i>" + translations.text("backpackLost") + "</i>");
         }
 
         // Special items
-        new ObjectsTable( state.actionChart.getSpecialItemsIds() , $("#achart-special > tbody") , ObjectsTableType.INVENTORY )
+        new ObjectsTable( state.actionChart.specialItems, $("#achart-special > tbody") , ObjectsTableType.INVENTORY )
             .renderTable();
 
         // Meals

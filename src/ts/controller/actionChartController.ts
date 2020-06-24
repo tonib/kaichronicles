@@ -38,7 +38,7 @@ const actionChartController = {
      * @return True if the object has been get. False if the object cannot be get
      */
     pickFromUi(sectionItem: SectionItem): boolean {
-        const aChartItem = new ActionChartItem(sectionItem.id, sectionItem.count);
+        const aChartItem = new ActionChartItem(sectionItem.id, sectionItem.usageCount);
         return actionChartController.pickActionChartItem(aChartItem, true, true);
     },
 
@@ -191,18 +191,6 @@ const actionChartController = {
         if (!o) {
             return false;
         }
-
-        // There is a problem with this: The player clicks "drop" on a quiver with a given number
-        // of arrows. You should drop THAT quiver (and no other). So, pass the number of arrows as parameter
-        /*
-        let count = 0;
-        if( objectId === Item.QUIVER ) {
-            // Number of arrows on the quiver (to keep it on the dropped object)
-            count = state.actionChart.arrows % 6;
-            if( count === 0 && state.actionChart.arrows > 0 )
-                count = 6;
-        }
-        */
 
         const dropped = state.actionChart.drop(objectId, count);
         if (dropped) {
