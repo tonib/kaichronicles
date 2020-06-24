@@ -49,7 +49,9 @@ class ObjectsTable {
         // Number of arrows to distribute across quivers. Only applies if this is a Action Chart table
         let arrows = ( this.type === ObjectsTableType.INVENTORY ) ? state.actionChart.arrows : 0;
 
-        for ( const obj of objects ) {
+        for (let i = 0; i < objects.length; i++) {
+
+            const obj = objects[i];
             let sectionItem: SectionItem = null;
 
             if (obj instanceof ActionChartItem) {
@@ -77,7 +79,7 @@ class ObjectsTable {
                 sectionItem = obj;
             }
 
-            this.objects.push( new ObjectsTableItem( sectionItem, this.type ) );
+            this.objects.push( new ObjectsTableItem(sectionItem, this.type, i) );
         }
     }
 
@@ -108,7 +110,7 @@ class ObjectsTable {
         ObjectsTable.bindTableEquipmentEvents( this.$tableBody , this.type );
     }
 
-    public static bindTableEquipmentEvents( $tableBody: any , type: ObjectsTableType) {
+    public static bindTableEquipmentEvents($tableBody: JQuery<HTMLElement> , type: ObjectsTableType) {
 
         $tableBody
         .find(".equipment-op")

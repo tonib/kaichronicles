@@ -12,15 +12,18 @@ class ObjectsTableItem {
     /** The table type */
     private type: ObjectsTableType;
 
+    /** Item index in the ObjectsTable array. */
+    private index: number;
+
     /**
      * Constructor
-     * @param itemInfo Object info as a SectionItem
-     * on the section
+     * @param itemInfo Object info as a SectionItem on the section
      * @param type Table type
      */
-    constructor( itemInfo: SectionItem , type: ObjectsTableType ) {
+    constructor(itemInfo: SectionItem, type: ObjectsTableType, index: number) {
         this.type = type;
         this.objectInfo = itemInfo;
+        this.index = index;
 
         // Get the object info
         if ( this.objectInfo ) {
@@ -141,7 +144,8 @@ class ObjectsTableItem {
      * @return The operation HTML
      */
     private getOperationTag(operation: string, title: string = null , opDescription: string ) {
-        let link = '<a href="#" data-objectId="' + this.item.id + '" class="equipment-op btn btn-default" ';
+
+        let link = `<a href="#" data-objectId="${this.item.id}" data-index="${this.index}" class="equipment-op btn btn-default" `;
 
         if ( this.item.id === Item.QUIVER || this.item.id === Item.ARROW || this.item.id === Item.MONEY ||
             ( this.objectInfo.price > 0 && this.objectInfo.count > 0 ) ) {
@@ -286,7 +290,13 @@ class ObjectsTableItem {
             objectInfo.usageCount = parseInt(txtUsageCount, 10);
         }
 
-        return new ObjectsTableItem( objectInfo , tableType );
+        let index = -1;
+        const txtIndex = $link.attr("data-index");
+        if (txtIndex) {
+            index = parseInt(txtIndex, 10);
+        }
+
+        return new ObjectsTableItem( objectInfo , tableType, index);
     }
 
     ///////////////////////////////////////////////////////////////////////
