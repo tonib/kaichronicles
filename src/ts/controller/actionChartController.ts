@@ -42,7 +42,7 @@ const actionChartController = {
             }
 
             // Try to pick the object
-            if (!state.actionChart.pick(o)) {
+            if (!state.actionChart.pick(new ActionChartItem(objectId))) {
                 return false;
             }
 

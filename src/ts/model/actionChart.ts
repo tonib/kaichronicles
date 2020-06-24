@@ -163,18 +163,22 @@ class ActionChart {
      * Pick an object
      * TODO: It's a nosense: It returns false ONLY if o is null. On all other cases, it throws an exception.
      * TODO: If o is null, throw an exception too, and do not return any value
-     * @param o Object to pick
+     * @param aChartItem Object to pick
      * @return True if the object was really picked
      */
-    public pick(o: Item): boolean {
+    public pick(aChartItem: ActionChartItem): boolean {
 
-        if (!o) {
+        if (!aChartItem) {
+            return false;
+        }
+        const item = aChartItem.getItem();
+        if (!item) {
             return false;
         }
 
         // Check incompatibilities
-        if (o.incompatibleWith.length > 0) {
-            for (const incompatibleId of o.incompatibleWith) {
+        if (item.incompatibleWith.length > 0) {
+            for (const incompatibleId of item.incompatibleWith) {
                 if (this.hasObject(incompatibleId)) {
                     const incombatibleObject = state.mechanics.getObject(incompatibleId);
                     throw translations.text("msgIncompatible", [incombatibleObject.name]);
@@ -182,45 +186,45 @@ class ActionChart {
             }
         }
 
-        switch (o.type) {
-            case "weapon":
+        switch (item.type) {
+            case Item.WEAPON:
                 if (this.weapons.length >= 2) {
                     throw translations.text("msgNoMoreWeapons");
                 }
-                // console.log('Picked weapon ' + o.id);
-                this.weapons.push(new ActionChartItem(o.id));
+                // console.log('Picked weapon ' + item.id);
+                this.weapons.push(aChartItem);
                 this.checkCurrentWeapon();
                 return true;
 
-            case "special":
+            case Item.SPECIAL:
 
                 // Check Special Items limit
                 const nMax = ActionChart.getMaxSpecials();
-                if (o.itemCount && nMax && (this.getNSpecialItems(false) + o.itemCount) > nMax) {
+                if (item.itemCount && nMax && (this.getNSpecialItems(false) + item.itemCount) > nMax) {
                     throw translations.text("msgNoMoreSpecialItems");
                 }
 
                 // If the object is an Arrow, check if the player has some quiver
-                if (o.isArrow && !this.hasObject(Item.QUIVER)) {
+                if (item.isArrow && !this.hasObject(Item.QUIVER)) {
                     throw translations.text("noQuiversEnough");
                 }
 
-                this.specialItems.push(new ActionChartItem(o.id));
+                this.specialItems.push(aChartItem);
 
-                if (o.isWeapon()) {
+                if (item.isWeapon()) {
                     this.checkCurrentWeapon();
                 }
 
-                if (o.isArrow) {
+                if (item.isArrow) {
                     // The object is an Arrow. Drop a normal Arrow if needed
                     this.sanitizeArrowCount();
                 }
 
                 return true;
 
-            case "object":
+            case Item.OBJECT:
 
-                if (o.id === "backpack") {
+                if (aChartItem.id === Item.BACKPACK) {
                     // Special case
                     if (this.hasBackpack) {
                         throw translations.text("msgAlreadyBackpack");
@@ -233,23 +237,23 @@ class ActionChart {
                 if ( !this.hasBackpack ) {
                     throw translations.text( "backpackLost" );
                 }
-                if ( ( this.getNBackpackItems(false) + o.itemCount ) > ActionChart.getMaxBackpackItems() ) {
+                if ( ( this.getNBackpackItems(false) + item.itemCount ) > ActionChart.getMaxBackpackItems() ) {
                     throw translations.text( "msgNoMoreBackpackItems" );
                 }
-                if ( o.id === "meal") {
+                if ( aChartItem.id === Item.MEAL ) {
                     // Special case
                     this.increaseMeals(1);
                 } else {
-                    this.backpackItems.push(new ActionChartItem(o.id));
+                    this.backpackItems.push(aChartItem);
                 }
-                if (o.isWeapon()) {
+                if (item.isWeapon()) {
                     this.checkCurrentWeapon();
                 }
-                console.log("Picked object " + o.id);
+                console.log("Picked object " + aChartItem.id);
                 return true;
 
             default:
-                throw "Unknown object type: " + o.type;
+                throw "Unknown object type: " + item.type;
         }
 
     }
