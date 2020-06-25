@@ -123,12 +123,14 @@ const actionChartController = {
      * the current section
      * @param fromUI True if the action is fired from the UI
      * @param arrowsCount Object count (only for quivers. count === n. arrows to drop)
-     * @param objectIndex If specified, object index in the Action Chart object array to drop. If it's not specified
-     * the first object with the given objectId will be dropped (there can be more than one item with the same id)
-     * @returns True if the object has been dropped
+     * @param objectIndex Only applies if objectId is an object id. If specified, object index in the Action Chart object
+     * array to drop. If it's not specified the first object with the given objectId will be dropped (there can be more than one
+     * item with the same id)
+     * @returns If objectId was an really object id and the object was deleted, it returns the delete object info.
+     * Otherwise, it returns true if something was deleted, or false if not
      */
     drop(objectId: string, availableOnSection: boolean = false, fromUI: boolean = false, arrowsCount: number = 0,
-         objectIndex: number = -1): boolean {
+         objectIndex: number = -1): boolean|ActionChartItem {
 
         if (objectId === "allweapons") {
             actionChartController.dropItemsList(state.actionChart.getWeaponsIds());
@@ -190,6 +192,7 @@ const actionChartController = {
             return true;
         }
 
+        // TODO: o can be removed, and use droppedItem.getItem() as replacement
         const o = state.mechanics.getObject(objectId);
         if (!o) {
             return false;
@@ -214,7 +217,7 @@ const actionChartController = {
                 // Render available objects on this section (game view)
                 mechanicsEngine.fireInventoryEvents(fromUI, o);
             }
-            return true;
+            return droppedItem;
         } else {
             return false;
         }

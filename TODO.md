@@ -198,13 +198,14 @@ actionChartController.pick('hourglass')
 
 actionChartController.pick('sommerswerd')
 actionChartController.pick('quiver')
-actionChartController.increaseArrows(5)
 actionChartController.pick('shield')
 actionChartController.pick('map')
 actionChartController.pick('helmet')
 actionChartController.pick('chainmail')
 actionChartController.pick('leatherwaistcoat')
 actionChartController.pick('daggerofvashna')
+
+actionChartController.increaseArrows(5)
 ```
 
 * Test book images:

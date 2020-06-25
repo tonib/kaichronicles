@@ -1175,30 +1175,33 @@ const mechanicsEngine = {
         const $rule = $(rule);
 
         // Object ids dropped on this rule execution
-        let droppedObjects: string[] = [];
+        let droppedObjects: ActionChartItem[] = [];
 
         // Track dropped arrows
         const originalArrows = state.actionChart.arrows;
 
         // Drop the first one of the specified
         for (const objectId of mechanicsEngine.getArrayProperty($rule, "objectId")) {
-            if (actionChartController.drop(objectId)) {
-                droppedObjects.push(objectId);
+            const droppedItem = actionChartController.drop(objectId);
+            if (droppedItem) {
+                if (droppedItem instanceof ActionChartItem) {
+                    droppedObjects.push(droppedItem);
+                }
                 break;
             }
         }
 
         // Drop backpack item slots by its index (1-based index)
         droppedObjects = droppedObjects.concat(
-            mechanicsEngine.dropActionChartSlots($rule, "backpackItemSlots", state.actionChart.getBackpackItemsIds()));
+            mechanicsEngine.dropActionChartSlots($rule, "backpackItemSlots", state.actionChart.backpackItems));
         droppedObjects = droppedObjects.concat(
-            mechanicsEngine.dropActionChartSlots($rule, "specialItemSlots", state.actionChart.getSpecialItemsIds()));
+            mechanicsEngine.dropActionChartSlots($rule, "specialItemSlots", state.actionChart.specialItems));
 
         // Store dropped objects as an inventory state
         const restorePointId: string = $rule.attr("restorePoint");
         if (restorePointId) {
             const inventoryState = new InventoryState();
-            inventoryState.addObjectIds(droppedObjects);
+            inventoryState.addObjectIds( ActionChartItem.getIds(droppedObjects) );
 
             if (state.actionChart.arrows < originalArrows) {
                 // One or more quivers have been dropped. Save arrows:
@@ -1815,12 +1818,12 @@ const mechanicsEngine = {
      * @param $rule The "drop" rule
      * @param property The rule property with the slots to drop
      * @param objectsArray The Action Chart array (the Special Items or BackBackItems)
-     * @returns Ids of dropped objects
+     * @returns Dropped objects
      */
-    dropActionChartSlots($rule: JQuery<Element>, property: string, objectsArray: string[]): string[] {
+    dropActionChartSlots($rule: JQuery<Element>, property: string, objectsArray: ActionChartItem[]): ActionChartItem[] {
 
-        // Objects to drop
-        const slotObjectsIds: string[] = [];
+        // Indices to drop
+        const slotIndices: number[] = [];
         for (const itemSlotTxt of mechanicsEngine.getArrayProperty($rule, property)) {
 
             let slotIndex;
@@ -1832,16 +1835,24 @@ const mechanicsEngine = {
             slotIndex -= 1;
 
             if (slotIndex >= 0 && objectsArray.length > slotIndex) {
-                slotObjectsIds.push(objectsArray[slotIndex]);
+                slotIndices.push(slotIndex);
             }
         }
 
+        // We will delete objects one by one. To be sure indices still valid, delete in descending order
+        slotIndices.sort();
+        slotIndices.reverse();
+
         // Drop objects
-        for (const objectId of slotObjectsIds) {
-            actionChartController.drop(objectId);
+        const droppedItems: ActionChartItem[] = [];
+        for (const index of slotIndices) {
+            const item = objectsArray[index];
+            if (actionChartController.drop(item.id, false, false, 0, index)) {
+                droppedItems.push(item);
+            }
         }
 
-        return slotObjectsIds;
+        return droppedItems;
     },
 
     appedToInventoryState(newRestorePoint: InventoryState, restorePointId: string) {
