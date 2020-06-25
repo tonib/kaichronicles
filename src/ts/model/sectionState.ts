@@ -126,14 +126,6 @@ class SectionState {
      */
     public getCntSectionObjects(type: string): number {
         return this.getSectionObjects(type).length;
-
-        // Code from cracrayol fork (reverted, it will break things, https://github.com/tonib/kaichronicles/commit/c527e2e63ae80c6a5e60ef66cde29f3825ee2725)
-        /*let count = 0;
-        const items = this.getSectionObjects(type);
-        for (const item of items) {
-            count += item.itemCount ? item.itemCount : 1;
-        }
-        return count;*/
     }
 
     /**
@@ -248,12 +240,13 @@ class SectionState {
      * @param objectId Object id to add
      * @param price The object price. 0 === no buy (free)
      * @param unlimited True if there are an infinite number of this kind of object on the section
-     * @param count Only applies if id = 'quiver' (number of arrows on the quiver), 'arrow' (number of arrows), or 'money' (number of Gold Crowns),
-     * or if price is is not zero (-> you buy "count" items for one "price")
+     * @param count Only applies if id = Item.QUIVER (number of arrows on the quiver), Item.ARROW (number of arrows), or Item.MONEY
+     * (number of Gold Crowns), or if price is is not zero (-> you buy "count" items for one "price")
      * @param useOnSection The object is allowed to be used on the section (not picked object)?
+     * @param usageCount Number of remaining object uses. If no specified or < 0, the default Item usageCount will be used
      */
     public addObjectToSection(objectId: string , price: number = 0, unlimited: boolean = false, count: number = 0 ,
-                              useOnSection: boolean = false ) {
+                              useOnSection: boolean = false, usageCount: number = -1) {
 
         // Special cases:
         if ( objectId === Item.MONEY ) {
@@ -266,14 +259,24 @@ class SectionState {
             }
         }
 
-        const item = state.mechanics.getObject(objectId);
+        // Usages count
+        if (usageCount < 0) {
+            // Default usage count
+            const item = state.mechanics.getObject(objectId);
+            usageCount = item && item.usageCount ? item.usageCount : 1;
+        }
+        if (!usageCount) {
+            // Do not store nulls
+            usageCount = 0;
+        }
+
         this.objects.push({
             id: objectId,
             price,
             unlimited,
             count: (objectId === Item.QUIVER || objectId === Item.ARROW || objectId === Item.MONEY || price > 0 ? count : 0 ),
             useOnSection,
-            usageCount: item && item.usageCount ? item.usageCount : 1
+            usageCount
         });
     }
 

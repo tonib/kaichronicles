@@ -97,6 +97,7 @@ const actionChartController = {
         for (const item of arrayOfItems) {
             if (!actionChartController.pick(item, true, false)) {
                 // Object cannot be picked. Add the object as available on the current section
+                // TODO: This should store the usageCount
                 sectionState.addObjectToSection(item);
                 renderAvailableObjects = true;
             }
@@ -212,7 +213,7 @@ const actionChartController = {
             if (availableOnSection) {
                 // Add the droped object as available on the current section
                 const sectionState = state.sectionStates.getSectionState();
-                sectionState.addObjectToSection(objectId, 0, false, arrowsCount);
+                sectionState.addObjectToSection(objectId, 0, false, arrowsCount, false, droppedItem.usageCount);
 
                 // Render available objects on this section (game view)
                 mechanicsEngine.fireInventoryEvents(fromUI, o);
