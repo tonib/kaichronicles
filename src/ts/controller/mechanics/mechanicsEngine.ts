@@ -1839,20 +1839,8 @@ const mechanicsEngine = {
             }
         }
 
-        // We will delete objects one by one. To be sure indices still valid, delete in descending order
-        slotIndices.sort();
-        slotIndices.reverse();
-
         // Drop objects
-        const droppedItems: ActionChartItem[] = [];
-        for (const index of slotIndices) {
-            const item = objectsArray[index];
-            if (actionChartController.drop(item.id, false, false, 0, index)) {
-                droppedItems.push(item);
-            }
-        }
-
-        return droppedItems;
+        return actionChartController.dropItemIndicesList(objectsArray, slotIndices);
     },
 
     appedToInventoryState(newRestorePoint: InventoryState, restorePointId: string) {

@@ -119,7 +119,7 @@ const actionChartController = {
      * or "allmeals" to drop all meals
      * or "all" to drop all (weapons, backpack, special items, and money)
      * or "allobjects" to drop all objects (weapons, backpack content, special items)
-     * @param availableOnSection True if the object should be available on
+     * @param availableOnSection Only applies if objectId is really an object id. True if the object should be available on
      * the current section
      * @param fromUI True if the action is fired from the UI
      * @param arrowsCount Object count (only for quivers. count === n. arrows to drop)
@@ -242,6 +242,33 @@ const actionChartController = {
         for (const objectId of elementsToDrop) {
             actionChartController.drop(objectId, false, false);
         }
+    },
+
+    /**
+     * Drop a set of objects by its index
+     * @param arrayOfItems Source array of objects
+     * @param indices Indices to arrayOfItems of objects to drop. IT MUST NOT CONTAIN DUPLICATED INDICES !!!
+     * @returns Dropped objects
+     */
+    dropItemIndicesList(arrayOfItems: ActionChartItem[], indices: number[]): ActionChartItem[] {
+
+        // We will delete objects one by one. To be sure indices still valid, delete in descending orde
+        indices = indices.clone();
+        indices.sort();
+        indices.reverse();
+
+        // Drop objects
+        const droppedItems: ActionChartItem[] = [];
+        for (const index of indices) {
+            if (index < 0 || index >= arrayOfItems.length) {
+                continue;
+            }
+            const item = arrayOfItems[index];
+            if (actionChartController.drop(item.id, false, false, 0, index)) {
+                droppedItems.push(item);
+            }
+        }
+        return droppedItems;
     },
 
     /**

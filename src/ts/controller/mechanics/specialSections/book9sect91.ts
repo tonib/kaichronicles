@@ -15,19 +15,19 @@ const book9sect91 = {
             // Count up the number of Backpack Items you possess and, if there is an odd number, erase the last one on your list
             const l = state.actionChart.backpackItems.length;
             if ( l % 2 === 1 ) {
-                actionChartController.drop( state.actionChart.getBackpackItemsIds()[ l - 1 ] );
+                const index = l - 1;
+                actionChartController.drop( state.actionChart.backpackItems[index].id, false, false, 0, index);
             }
 
             // Get the two lists
-            const heads: string[] = [];
-            const tails: string[] = [];
-            const backpackItemsIds = state.actionChart.getBackpackItemsIds();
-            const halfIndex = backpackItemsIds.length / 2;
+            const headsIndices: number[] = [];
+            const tailsIndices: number[] = [];
+            const halfIndex = state.actionChart.backpackItems.length / 2;
             for ( let i = 0; i < state.actionChart.backpackItems.length; i++)  {
                 if ( i < halfIndex ) {
-                    heads.push( backpackItemsIds[i] );
+                    headsIndices.push(i);
                 } else {
-                    tails.push( backpackItemsIds[i] );
+                    tailsIndices.push(i);
                 }
             }
 
@@ -35,7 +35,8 @@ const book9sect91 = {
             coinState = ( randomTable.getRandomValue() % 2 === 0 ? "heads" : "tails" );
 
             // Drop objects
-            actionChartController.dropItemsList( coinState === "heads" ? heads : tails );
+            actionChartController.dropItemIndicesList( state.actionChart.backpackItems,
+                coinState === "heads" ? headsIndices : tailsIndices );
 
             // Store state
             state.sectionStates.otherStates.book9sect91 = coinState;
