@@ -275,8 +275,10 @@ const actionChartController = {
      * Use an object
      * @param objectId The object to use
      * @param dropObject True if the object should be droped from the action chart
+     * @param index If used object was a owned object, this is the object index in its Action Chart array. If not specified
+     * or < 0, the first owned object will be used
      */
-    use(objectId: string, dropObject: boolean = true) {
+    use(objectId: string, dropObject: boolean = true, index: number = -1) {
         // Get the object
         const o = state.mechanics.getObject(objectId);
         if (!o || !o.usage) {
@@ -299,11 +301,22 @@ const actionChartController = {
         actionChartView.updateStatistics();
         template.updateStatistics();
 
-        // Drop the object, and do not keep it on the section
+        // Owned object to drop?
         if (dropObject) {
-            actionChartController.drop(objectId, false);
-        } else {
-            actionChartView.updateObjectsLists();
+            // Decrease the usageCount. If there are no more uses, drop the object
+            const aChartItem = state.actionChart.getActionChartItem(objectId, index);
+            if (aChartItem) {
+                // Be sure usageCount is not null
+                if (!aChartItem.usageCount) {
+                    aChartItem.usageCount = 0;
+                }
+                aChartItem.usageCount--;
+                if (aChartItem.usageCount <= 0) {
+                    actionChartController.drop(objectId, false, false, 0, index);
+                } else {
+                    actionChartView.updateObjectsLists();
+                }
+            }
         }
 
         // Fire mechanics rules

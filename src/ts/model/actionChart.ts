@@ -411,6 +411,31 @@ class ActionChart {
     }
 
     /**
+     * Get an owned object info.
+     * @param objectId Object id to get the information
+     * @param index If specified and >= 0, object index in the Action Chart array. Otherwise, the
+     * first owned object will be returned
+     * @returns The object info. null if it was not found
+     */
+    public getActionChartItem(objectId: string, index: number = -1): ActionChartItem {
+        const item = state.mechanics.getObject(objectId);
+        if (!item) {
+            return null;
+        }
+        const objectsArray = this.getObjectsByType(item.type);
+        if (!objectsArray) {
+            return null;
+        }
+        if (index < 0) {
+            index = ActionChartItem.findById(objectsArray, objectId);
+        }
+        if (index < 0 || index >= objectsArray.length) {
+            return null;
+        }
+        return objectsArray[index];
+    }
+
+    /**
      * Returns the array of objects of a given type
      * @param objectType The object types (Item.WEAPON, Item.SPECIAL or Item.OBJECT)
      * @returns The objects of that type. null if the object type was wrong

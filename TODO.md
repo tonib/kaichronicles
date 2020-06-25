@@ -52,7 +52,8 @@ TODO
 ## Development / refactorings
 - State load: Items stored in inventory restore poins were strings. Now are ActionChartItem -> do the conversion
 - Drop items by slot position SHOULD BE REWRITTEN: Keep in mind count usages left
-- Check why Typescript dont check array parameter types en calls (accepts arrays of other types)
+- Objects with multiple uses ("sabito") will cannot be dropped: They need a new rule "use", to decrease the usage count. This can,
+  or not, drop the object
 - Indent common.ts
 
 ## Other

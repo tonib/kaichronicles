@@ -417,9 +417,10 @@ class ObjectsTableItem {
         }
 
         // Use the object
-        const dropObject = ( this.type === ObjectsTableType.INVENTORY && --this.objectInfo.usageCount <= 0 );
-        actionChartController.use( this.item.id , dropObject );
+        const dropObject = ( this.type === ObjectsTableType.INVENTORY );
+        actionChartController.use(this.item.id, dropObject, this.index);
 
+        // TODO: Decrease use count here !!!
         // If the object was used from the section, remove it
         if ( this.type === ObjectsTableType.AVAILABLE && !this.objectInfo.unlimited ) {
             const sectionState = state.sectionStates.getSectionState();
