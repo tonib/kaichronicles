@@ -431,7 +431,7 @@ class ObjectsTableItem {
 
     private drop() {
         if ( confirm( translations.text( "confirmDrop" , [this.item.name] ) ) ) {
-            actionChartController.drop( this.item.id , true , true , this.objectInfo.count );
+            actionChartController.drop( this.item.id , true , true , this.objectInfo.count , this.index );
         }
     }
 
