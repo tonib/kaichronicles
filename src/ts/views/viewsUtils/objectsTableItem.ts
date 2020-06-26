@@ -53,11 +53,11 @@ class ObjectsTableItem {
 
         // If it's a sell table, and we don't have the object, do not show it
         if ( this.type === ObjectsTableType.SELL  ) {
-            if ( this.objectInfo.id !== "arrow" && !state.actionChart.hasObject( this.objectInfo.id ) ) {
+            if ( this.objectInfo.id !== Item.ARROW && !state.actionChart.hasObject( this.objectInfo.id ) ) {
                 return "";
             }
             // We don't have enough arrows to sell, do not show
-            if ( this.objectInfo.id === "arrow" && state.actionChart.arrows < this.objectInfo.count ) {
+            if ( this.objectInfo.id === Item.ARROW && state.actionChart.arrows < this.objectInfo.count ) {
                 return "";
             }
         }
@@ -399,7 +399,7 @@ class ObjectsTableItem {
             return;
         }
 
-        if ( this.item.id === "arrow" && this.objectInfo.count > 0 ) {
+        if ( this.item.id === Item.ARROW && this.objectInfo.count > 0 ) {
             // Drop arrows
             actionChartController.increaseArrows( -this.objectInfo.count );
         } else {
