@@ -53,7 +53,6 @@ TODO
 - Check older savegames with usageCount = undefined in section states, action chart and InventoryState
   Check also savegames from v1.6 (changes for this in ActionChart.fromObject())
 - Indent common.ts
-- Rename mechanicsEngine.appedToInventoryState to "appeNd"
 
 ## Other
 - Move all bonuses calculation from ActionChart to a new class

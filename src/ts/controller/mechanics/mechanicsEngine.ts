@@ -1208,7 +1208,7 @@ const mechanicsEngine = {
                 inventoryState.arrows += originalArrows - state.actionChart.arrows;
             }
 
-            mechanicsEngine.appedToInventoryState(inventoryState, restorePointId);
+            mechanicsEngine.appendToInventoryState(inventoryState, restorePointId);
         }
 
         state.sectionStates.markRuleAsExecuted(rule);
@@ -1283,7 +1283,7 @@ const mechanicsEngine = {
 
         // Save the inventory state:
         const newRestorePoint = InventoryState.fromActionChart(objectsType, state.actionChart);
-        mechanicsEngine.appedToInventoryState(newRestorePoint, restorePointId);
+        mechanicsEngine.appendToInventoryState(newRestorePoint, restorePointId);
 
         state.sectionStates.markRuleAsExecuted(rule);
     },
@@ -1864,7 +1864,7 @@ const mechanicsEngine = {
         return actionChartController.dropItemIndicesList(objectsArray, slotIndices);
     },
 
-    appedToInventoryState(newRestorePoint: InventoryState, restorePointId: string) {
+    appendToInventoryState(newRestorePoint: InventoryState, restorePointId: string) {
 
         const currentRestorePointObject: any = state.sectionStates.otherStates[restorePointId];
         if (currentRestorePointObject) {
