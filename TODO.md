@@ -46,13 +46,8 @@ TODO
   Sell Quiver: OBJECTS TABLE TO SELL IS NOT UPDATED !!!!
 
 ## Development / refactorings
-- State load: Items stored in inventory restore poins were strings. Now are ActionChartItem -> do the conversion
-- Drop items by slot position SHOULD BE REWRITTEN: Keep in mind count usages left
-- Objects with multiple uses ("sabito") will cannot be dropped: They need a new rule "use", to decrease the usage count. This can,
-  or not, drop the object
 - Check older savegames with usageCount = undefined in section states, action chart and InventoryState
   Check also savegames from v1.6 (changes for this in ActionChart.fromObject())
-- Indent common.ts
 
 ## Other
 - Move all bonuses calculation from ActionChart to a new class
