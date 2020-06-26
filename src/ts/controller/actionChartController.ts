@@ -278,24 +278,31 @@ const actionChartController = {
      * @param dropObject True if the object should be droped from the action chart
      * @param index If used object was a owned object, this is the object index in its Action Chart array. If not specified
      * or < 0, the first owned object will be used
+     * @param displayToast True if a message must to be displayed
      */
-    use(objectId: string, dropObject: boolean = true, index: number = -1) {
+    use(objectId: string, dropObject: boolean = true, index: number = -1, displayToast = false) {
         // Get the object
         const o = state.mechanics.getObject(objectId);
-        if (!o || !o.usage) {
+        if (!o) {
             return;
         }
 
-        // Do the usage action:
-        if (o.usage.cls === Item.ENDURANCE) {
-            actionChartController.increaseEndurance(o.usage.increment);
-        } else if (o.usage.cls === Item.COMBATSKILL) {
-            // Combat skill modifiers only apply to the current section combats
-            const sectionState = state.sectionStates.getSectionState();
-            sectionState.combatSkillUsageModifier(o.usage.increment);
-        } else if (o.usage.cls === "special") {
-            // Special usage
-            SpecialObjectsUse.use(o);
+        if (o.usage) {
+            // Do the usage action:
+            if (o.usage.cls === Item.ENDURANCE) {
+                actionChartController.increaseEndurance(o.usage.increment);
+            } else if (o.usage.cls === Item.COMBATSKILL) {
+                // Combat skill modifiers only apply to the current section combats
+                const sectionState = state.sectionStates.getSectionState();
+                sectionState.combatSkillUsageModifier(o.usage.increment);
+            } else if (o.usage.cls === "special") {
+                // Special usage
+                SpecialObjectsUse.use(o);
+            }
+        }
+
+        if (displayToast) {
+            toastr.info(translations.text("objectUsed", [o.name]));
         }
 
         // Update player statistics

@@ -85,6 +85,7 @@ class Translations {
         "fightUnarmed" : "Luchar desarmado",
         "permanent" : "Permanente",
         "usageCount" : "(se puede usar {0} veces)",
+        "objectUsed" : "{0} usado",
 
         //////////////////////////////////////
         // Combats
@@ -403,6 +404,7 @@ class Translations {
         "more" : "More",
         "permanent" : "Permanent",
         "usageCount" : "(can be used {0} times)",
+        "objectUsed" : "{0} has been used",
 
         //////////////////////////////////////
         // Combats

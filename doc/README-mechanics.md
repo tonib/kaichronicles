@@ -626,6 +626,12 @@ It runs the "onInventoryEvent" event handler, if it exists on the section.
 ```
 Displays the first illustration on the "section" attribute section. "xx-text" is an option title to display with the illustration.
 
+### use
+```xml
+<use objectId="vialbluepills|vialbluepills2|vialbluepills3" />
+```
+Force use of one object. objectId is the object to use. If more than one object is specified, only the first one owned will be used.
+
 ### Special sections
 
 There are sections (or parts of them) that cannot be described by the game rules.

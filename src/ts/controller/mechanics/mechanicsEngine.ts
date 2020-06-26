@@ -1498,6 +1498,27 @@ const mechanicsEngine = {
         gameView.appendToSection($illContainer);
     },
 
+    /**
+     * Force use of some owned object.
+     * Rule has state.
+     */
+    use(rule: Element) {
+        if ( state.sectionStates.ruleHasBeenExecuted(rule) ) {
+            // Execute only once
+            return;
+        }
+
+        // Use only the first one
+        for (const objectId of mechanicsEngine.getArrayProperty($(rule) , "objectId")) {
+            if (state.actionChart.hasObject(objectId)) {
+                actionChartController.use(objectId, true, -1, true);
+                break;
+            }
+        }
+
+        state.sectionStates.markRuleAsExecuted(rule);
+    },
+
     /************************************************************/
     /**************** SPECIAL SECTIONS **************************/
     /************************************************************/

@@ -69,7 +69,7 @@ class BookSectionStates {
      * @param rule Rule to check
      * @return The object associated with the execution. true if there was no result stored
      */
-    public ruleHasBeenExecuted(rule): any {
+    public ruleHasBeenExecuted(rule: Element): any {
         return this.getSectionState().ruleHasBeenExecuted(rule);
     }
 
@@ -79,7 +79,7 @@ class BookSectionStates {
      * @param executionState The state to associate with the execution. If it's null,
      * if will be set to true
      */
-    public markRuleAsExecuted( rule, executionState: any = true ) {
+    public markRuleAsExecuted(rule: Element, executionState: any = true ) {
         this.getSectionState().markRuleAsExecuted( rule, executionState );
     }
 

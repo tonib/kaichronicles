@@ -137,7 +137,7 @@ class Item {
 
         /** Number of items the object it occupies on the backpack */
         const txtItemCount: string = $o.attr("itemCount");
-        this.itemCount = txtItemCount ? parseInt(txtItemCount, 10) : 1;
+        this.itemCount = txtItemCount ? parseFloat(txtItemCount) : 1;
 
         /** Number of usage of the object */
         const txtUsageCount: string = $o.attr("usageCount");

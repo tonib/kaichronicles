@@ -649,4 +649,7 @@ class BookValidator {
         }
     }
 
+    private use( $rule ) {
+        this.validateObjectIdsAttribute( $rule , "objectId" , true , false );
+    }
 }

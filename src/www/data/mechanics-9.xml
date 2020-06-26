@@ -235,7 +235,7 @@
         </section>
 
         <section id="sect25">
-            <drop objectId="vialbluepills|vialbluepills2|vialbluepills3" />
+            <use objectId="vialbluepills|vialbluepills2|vialbluepills3" />
             <test not="true" hasDiscipline="dvnation">
                 <choiceState section="sect298" set="disabled" />
             </test>
