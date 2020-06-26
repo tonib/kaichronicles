@@ -411,6 +411,35 @@ class ActionChart {
     }
 
     /**
+     * Drops an object by its position on the action chart
+     * TODO: No need for a different functions for this. Put this code inside drop() function
+     * @param objectType The object type to drop (Item.WEAPON, Item.SPECIAL or Item.OBJECT)
+     * @param index Object position on the objects array (this.weapons, this.specialItems or this.backpackItems)
+     * @param arrowsCount Only for quivers. n. arrows to drop. It must to be >= 0
+     * @returns The dropped item. null if no object was dropped
+     */
+    private dropByIndex(objectType: string, index: number, arrowsCount: number = 0): ActionChartItem {
+        const objectsArray = this.getObjectsByType(objectType);
+        if (!objectsArray) {
+            return null;
+        }
+        if (index < 0 || index >= objectsArray.length) {
+            return null;
+        }
+        const aChartItem = objectsArray[index];
+        objectsArray.splice(index, 1);
+
+        this.checkMaxEndurance();
+        this.checkCurrentWeapon();
+        if (aChartItem.id === Item.QUIVER) {
+            // Decrease arrows count
+            this.arrows -= arrowsCount;
+            this.sanitizeArrowCount();
+        }
+        return aChartItem;
+    }
+
+    /**
      * Get an owned object info.
      * @param objectId Object id to get the information
      * @param index If specified and >= 0, object index in the Action Chart array. Otherwise, the
@@ -456,34 +485,6 @@ class ActionChart {
                 objectsArray = null;
         }
         return objectsArray;
-    }
-
-    /**
-     * Drops an object by its position on the action chart
-     * @param objectType The object type to drop (Item.WEAPON, Item.SPECIAL or Item.OBJECT)
-     * @param index Object position on the objects array (this.weapons, this.specialItems or this.backpackItems)
-     * @param arrowsCount Only for quivers. n. arrows to drop. It must to be >= 0
-     * @returns The dropped item. null if no object was dropped
-     */
-    public dropByIndex(objectType: string, index: number, arrowsCount: number = 0): ActionChartItem {
-        const objectsArray = this.getObjectsByType(objectType);
-        if (!objectsArray) {
-            return null;
-        }
-        if (index < 0 || index >= objectsArray.length) {
-            return null;
-        }
-        const aChartItem = objectsArray[index];
-        objectsArray.splice(index, 1);
-
-        this.checkMaxEndurance();
-        this.checkCurrentWeapon();
-        if (aChartItem.id === Item.QUIVER) {
-            // Decrease arrows count
-            this.arrows -= arrowsCount;
-            this.sanitizeArrowCount();
-        }
-        return aChartItem;
     }
 
     /**
@@ -941,10 +942,26 @@ class ActionChart {
     public getWeaponObjects(onlyHandToHand: boolean = false): Item[] {
 
         const result: Item[] = [];
+        for (const aChartItem of this.getWeaponAChartItems(onlyHandToHand)) {
+            result.push(aChartItem.getItem());
+        }
+        return result;
+    }
+
+    /**
+     * Returns all weapons and backpack / special item objects that can be
+     * used as weapons
+     * @param onlyHandToHand If it's true, only hand to hand weapons will be returned
+     * @return All weapon objects
+     */
+    public getWeaponAChartItems(onlyHandToHand: boolean = false): ActionChartItem[] {
+
+        const result: ActionChartItem[] = [];
         // Traverse Weapons and Weapon-like objects
-        this.enumerateObjectsAsItems((o: Item) => {
+        this.enumerateObjects((aChartItem: ActionChartItem) => {
+            const o = aChartItem.getItem();
             if (o.isWeapon() && (!onlyHandToHand || o.isHandToHandWeapon())) {
-                result.push(o);
+                result.push(aChartItem);
             }
         }, true);
         return result;

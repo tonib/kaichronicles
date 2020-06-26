@@ -1201,7 +1201,7 @@ const mechanicsEngine = {
         const restorePointId: string = $rule.attr("restorePoint");
         if (restorePointId) {
             const inventoryState = new InventoryState();
-            inventoryState.addObjectIds( ActionChartItem.getIds(droppedObjects) );
+            inventoryState.addItemsArray(droppedObjects);
 
             if (state.actionChart.arrows < originalArrows) {
                 // One or more quivers have been dropped. Save arrows:

@@ -45,10 +45,6 @@ TODO
   ```actionChartController.pick('quiver'); actionChartController.pick('quiver'); actionChartController.increaseArrows(10);```
   Sell Quiver: OBJECTS TABLE TO SELL IS NOT UPDATED !!!!
 
-- ERROR:
-  There is a bug picking quivers in game section. If there are two quivers, one with 6 arrows and other with 4. If you pick first
-  the one with 4 arrows, the remaining quiver changes its number of arrows from 6 to 4....
-
 ## Development / refactorings
 - State load: Items stored in inventory restore poins were strings. Now are ActionChartItem -> do the conversion
 - Drop items by slot position SHOULD BE REWRITTEN: Keep in mind count usages left
@@ -56,10 +52,10 @@ TODO
   or not, drop the object
 - Check sell, use object from available objects and other operations from ObjectsTableItem
 - actionChartController.pickItemsList() should add ActionChartItems, no ids
-- Check older savegames with usageCount = undefined in section states and action chart
-- Change InventoryState for usageCount
-- Keep older count="0.5" objects
+- Check older savegames with usageCount = undefined in section states, action chart and InventoryState
 - Indent common.ts
+- Rename mechanicsEngine.appedToInventoryState to "appeNd"
+- state.restoreStateFromObject(), check the TODO
 
 ## Other
 - Move all bonuses calculation from ActionChart to a new class
@@ -200,7 +196,7 @@ actionChartController.pick('comb')
 actionChartController.pick('brasskey')
 actionChartController.pick('whip')
 actionChartController.pick('laumspurmeal')
-actionChartController.pick('hourglass')
+actionChartController.pick('larnumaliqueur2')
 
 actionChartController.pick('sommerswerd')
 actionChartController.pick('quiver')

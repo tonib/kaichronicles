@@ -41,6 +41,10 @@ class ActionChartItem {
         return new ActionChartItem(this.id, this.usageCount);
     }
 
+    /////////////////////////////////////////////////
+    // ActionChartItem arrays helpers
+    /////////////////////////////////////////////////
+
     public static findById(array: ActionChartItem[], itemId: string): number {
         for ( let i = 0; i < array.length; i++) {
             if (array[i].id === itemId) {

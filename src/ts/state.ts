@@ -185,6 +185,7 @@ const state = {
      */
     restoreStateFromObject(stateKeys: any) {
 
+        // TODO: Move these checks to ActionChart.fromObject()
         // On version 1.6.3 / 1.7, the stateKeys.actionChart.weaponSkill has been changed from string to Array<string> (magnakai)
         if ( typeof stateKeys.actionChart.weaponSkill === "string" ) {
             if ( stateKeys.actionChart.weaponSkill ) {

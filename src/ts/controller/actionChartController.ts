@@ -89,16 +89,15 @@ const actionChartController = {
 
     /**
      * The player pick a set of objects
-     * @param arrayOfItems Array with object ids to pick
+     * @param arrayOfItems Array with object to pick
      */
-    pickItemsList(arrayOfItems: string[]) {
+    pickItemsList(arrayOfItems: ActionChartItem[]) {
         let renderAvailableObjects = false;
         const sectionState = state.sectionStates.getSectionState();
         for (const item of arrayOfItems) {
-            if (!actionChartController.pick(item, true, false)) {
+            if (!actionChartController.pickActionChartItem(item, true, false)) {
                 // Object cannot be picked. Add the object as available on the current section
-                // TODO: This should store the usageCount
-                sectionState.addObjectToSection(item);
+                sectionState.addActionChartItemToSection(item);
                 renderAvailableObjects = true;
             }
         }
@@ -213,7 +212,7 @@ const actionChartController = {
             if (availableOnSection) {
                 // Add the droped object as available on the current section
                 const sectionState = state.sectionStates.getSectionState();
-                sectionState.addObjectToSection(objectId, 0, false, arrowsCount, false, droppedItem.usageCount);
+                sectionState.addActionChartItemToSection(droppedItem, arrowsCount);
 
                 // Render available objects on this section (game view)
                 mechanicsEngine.fireInventoryEvents(fromUI, o);
@@ -368,7 +367,7 @@ const actionChartController = {
             if (availableOnSection && count < 0) {
                 // Add the droped money as available on the current section
                 const sectionState = state.sectionStates.getSectionState();
-                sectionState.addObjectToSection("money", 0, false, -count);
+                sectionState.addObjectToSection(Item.MONEY, 0, false, -count);
             }
         }
         actionChartView.updateMoney();

@@ -236,6 +236,15 @@ class SectionState {
     }
 
     /**
+     * Add an object from the Action Chart to the section available objects
+     * @param aChartItem Action Chart item information
+     * @param arrowCount Only applies if id = Item.QUIVER (number of arrows on the quiver)
+     */
+    public addActionChartItemToSection(aChartItem: ActionChartItem, arrowCount: number = 0) {
+        this.addObjectToSection(aChartItem.id, 0, false, arrowCount, false, aChartItem.usageCount);
+    }
+
+    /**
      * Add an object to the section
      * @param objectId Object id to add
      * @param price The object price. 0 === no buy (free)
