@@ -1428,7 +1428,7 @@ const mechanicsEngine = {
     /**
      * Add a button to access to the Kai monastery stored objects
      */
-    kaiMonasteryStorage(rule: any) {
+    kaiMonasteryStorage(rule: Element) {
         const $tag = mechanicsEngine.getMechanicsUI("mechanics-kaimonasterystorage");
         gameView.appendToSection($tag, "afterChoices");
         $tag.find("button").click( (e: Event) => {
@@ -1444,7 +1444,7 @@ const mechanicsEngine = {
      * Magnakai: Restore deliverance +20 EP button use (each X days)
      * Rule has state.
      */
-    restoreDeliveranceUse(rule: any) {
+    restoreDeliveranceUse(rule: Element) {
         if ( state.sectionStates.ruleHasBeenExecuted(rule) ) {
             // Execute only once
             return;
@@ -1457,7 +1457,7 @@ const mechanicsEngine = {
     /**
      * Set of rules that should be executed only once
      */
-    executeOnce(rule: any) {
+    executeOnce(rule: Element) {
         if (state.sectionStates.ruleHasBeenExecuted(rule)) {
             // Execute only once
             return;
@@ -1469,14 +1469,14 @@ const mechanicsEngine = {
     /**
      * Fire the inventory event
      */
-    runInventoryEvent(rule: any) {
+    runInventoryEvent(rule: Element) {
         mechanicsEngine.fireInventoryEvents();
     },
 
     /**
      * Display section illustration
      */
-    displayIllustration(rule: any) {
+    displayIllustration(rule: Element) {
 
         // Get the UI
         const $illContainer = mechanicsEngine.getMechanicsUI("mechanics-displayillustration");
