@@ -106,7 +106,7 @@ class ObjectsTableItem {
         }
 
         // Special
-        if ( this.objectInfo.id === "map" ) {
+        if ( this.objectInfo.id === Item.MAP ) {
             // It's the map:
             name = '<a href="#map">' + name + "</a>";
         } else if ( imageUrl || this.item.extraDescription ) {
@@ -380,7 +380,7 @@ class ObjectsTableItem {
             if ( !this.objectInfo.unlimited ) {
                 // Remove it from the available objects on the section
                 const sectionState = state.sectionStates.getSectionState();
-                sectionState.removeObjectFromSection( this.item.id , this.objectInfo.price , countPicked );
+                sectionState.removeObjectFromSection(this.item.id, this.objectInfo.price, countPicked, this.index);
             }
 
             if ( this.objectInfo.price ) {
@@ -420,11 +420,18 @@ class ObjectsTableItem {
         const dropObject = ( this.type === ObjectsTableType.INVENTORY );
         actionChartController.use(this.item.id, dropObject, this.index);
 
-        // TODO: Decrease use count here !!!
-        // If the object was used from the section, remove it
+        // If the object was used from the section, decrease its usageCount in section
         if ( this.type === ObjectsTableType.AVAILABLE && !this.objectInfo.unlimited ) {
             const sectionState = state.sectionStates.getSectionState();
-            sectionState.removeObjectFromSection( this.item.id , this.objectInfo.price );
+            const sectionObject = sectionState.objects[this.index];
+            // Be sure is not null
+            if (!sectionObject.usageCount) {
+                sectionObject.usageCount = 0;
+            }
+            sectionObject.usageCount--;
+            if (sectionObject.usageCount <= 0) {
+                sectionState.removeObjectFromSection(this.item.id , this.objectInfo.price);
+            }
             // Refresh the table of available objects
             mechanicsEngine.fireInventoryEvents(true, this.item);
         }

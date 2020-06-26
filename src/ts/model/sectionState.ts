@@ -251,11 +251,10 @@ class SectionState {
         // Special cases:
         if ( objectId === Item.MONEY ) {
             // Try to increase the current money amount / arrows on the section:
-            for ( const o of this.objects ) {
-                if ( o.id === objectId ) {
-                    o.count += count;
-                    return;
-                }
+            const moneyIndex = this.getObjectIndex(objectId);
+            if (moneyIndex >= 0) {
+                this.objects[moneyIndex].count += count;
+                return;
             }
         }
 
@@ -283,36 +282,35 @@ class SectionState {
     /**
      * Remove an object from the section
      * @param objectId Object id to remove
-     * @param price Price of the object to remove
+     * @param price Price of the object to remove. If index is specified, this will be ignored
      * @param count Count to decrease. Only applies if the object is 'money'
+     * @param index Object index to remove. If not specified or < 0, the first object with the gived id will be removed
      */
-    public removeObjectFromSection(objectId: string, price: number, count: number = -1) {
+    public removeObjectFromSection(objectId: string, price: number, count: number = -1, index: number = -1) {
         // Be sure price is not null
         if ( !price ) {
             price = 0;
         }
 
-        for ( let i = 0, len = this.objects.length; i < len; i++) {
-            // Be sure price is not null
-            let currentPrice = this.objects[i].price;
-            if ( !currentPrice ) {
-                currentPrice = 0;
-            }
-
-            if ( this.objects[i].id === objectId && currentPrice === price ) {
-                let removeObject = true;
-                if ( ( objectId === Item.MONEY || objectId === Item.ARROW ) && count >= 0 && this.objects[i].count > count ) {
-                    // Still money / arrows available:
-                    this.objects[i].count -= count;
-                    removeObject = false;
-                }
-
-                if ( removeObject ) {
-                    this.objects.splice(i, 1);
-                }
-                return;
-            }
+        if (index < 0) {
+            // Find the first one with the gived id and price
+            index = this.getObjectIndex(objectId, price);
         }
+
+        if (index >= 0 && index < this.objects.length) {
+            let removeObject = true;
+            if ( ( objectId === Item.MONEY || objectId === Item.ARROW ) && count >= 0 && this.objects[index].count > count ) {
+                // Still money / arrows available:
+                this.objects[index].count -= count;
+                removeObject = false;
+            }
+
+            if ( removeObject ) {
+                this.objects.splice(index, 1);
+            }
+            return;
+        }
+
         console.log( "Object to remove from section not found :" + objectId + " " + price );
     }
 
@@ -368,12 +366,28 @@ class SectionState {
 
     /** Return true if the object is on the section */
     public containsObject( objectId: string ): boolean {
-        for ( const sectionItem of this.objects ) {
-            if ( sectionItem.id === objectId ) {
-                return true;
-            }
-        }
-        return false;
+        return this.getObjectIndex(objectId) >= 0;
     }
 
+    /**
+     * Get an object index in this.objects
+     * @param objectId The object id
+     * @param price If specified and >= 0, the object price to search. If it's not specified the price will not be checked
+     * @returns The object index in this.objects. -1 if the object was not found.
+     */
+    private getObjectIndex(objectId: string, price: number = -1): number {
+        for (let i = 0; i < this.objects.length; i++) {
+
+            // Be sure price is not null
+            let currentPrice = this.objects[i].price;
+            if ( !currentPrice ) {
+                currentPrice = 0;
+            }
+
+            if ( this.objects[i].id === objectId && ( price < 0 || currentPrice === price ) ) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }
