@@ -184,22 +184,6 @@ const state = {
      * Restore the state from an object
      */
     restoreStateFromObject(stateKeys: any) {
-
-        // TODO: Move these checks to ActionChart.fromObject()
-        // On version 1.6.3 / 1.7, the stateKeys.actionChart.weaponSkill has been changed from string to Array<string> (magnakai)
-        if ( typeof stateKeys.actionChart.weaponSkill === "string" ) {
-            if ( stateKeys.actionChart.weaponSkill ) {
-                stateKeys.actionChart.weaponSkill = [ stateKeys.actionChart.weaponSkill ];
-            } else {
-                stateKeys.actionChart.weaponSkill = [];
-            }
-        }
-
-        // On version 1.6.3 / 1.7, we store the number of arrows (magnakai)
-        if ( !stateKeys.actionChart.arrows ) {
-            stateKeys.actionChart.arrows = 0;
-        }
-
         state.language = stateKeys.language;
         state.book = new Book(stateKeys.bookNumber, state.language);
         state.mechanics = new Mechanics(state.book);

@@ -1130,12 +1130,33 @@ class ActionChart {
         return state.book.isGrandMasterBook() ? 10 : 8;
     }
 
-    public static fromObject(o: object): ActionChart {
+    /**
+     * Create an ActionChart instance from a plain object
+     * @param o The plain object
+     * @returns The ActionChart instance
+     */
+    public static fromObject(o: any): ActionChart {
+
+        // On version 1.6.3 / 1.7, the o.weaponSkill has been changed from string to Array<string> (magnakai)
+        if ( typeof o.weaponSkill === "string" ) {
+            o.weaponSkill = [ o.weaponSkill ];
+        }
+        if (!o.weaponSkill) {
+            o.weaponSkill = [];
+        }
+
+        // On version 1.6.3 / 1.7, we store the number of arrows (magnakai)
+        if ( !o.arrows ) {
+            o.arrows = 0;
+        }
+
         const actionChart: ActionChart = $.extend(new ActionChart(), o);
+
         // Replace plain objects by ActionChartItem instances
         actionChart.weapons = ActionChartItem.fromObjectsArray(actionChart.weapons);
         actionChart.backpackItems = ActionChartItem.fromObjectsArray(actionChart.backpackItems);
         actionChart.specialItems = ActionChartItem.fromObjectsArray(actionChart.specialItems);
+
         return actionChart;
     }
 }
