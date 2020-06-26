@@ -235,7 +235,7 @@
         </section>
 
         <section id="sect25">
-            <drop objectId="vialbluepills|vialbluepills2" />
+            <drop objectId="vialbluepills|vialbluepills2|vialbluepills3" />
             <test not="true" hasDiscipline="dvnation">
                 <choiceState section="sect298" set="disabled" />
             </test>
@@ -245,7 +245,7 @@
         </section>
         
         <section id="sect29">
-            <object objectId="vialbluepills2" />
+            <object objectId="vialbluepills3" />
         </section>
         
         <section id="sect32">
@@ -891,8 +891,6 @@
             <object objectId="meal" index="1" />
             <pick class="money" count="7" />
             <object objectId="blanket" />
-            <!-- Moved to sect29 -->
-            <!--object objectId="vialbluepills" /-->
             <test not="true" hasDiscipline="curing">
                 <choiceState section="sect29" set="disabled" />
             </test>
@@ -1711,7 +1709,7 @@
 
         <section id="sect289">
             <choiceState section="sect25" set="disabled" />
-            <test hasObject="vialbluepills|vialbluepills2">
+            <test hasObject="vialbluepills|vialbluepills2|vialbluepills3">
                 <choiceState section="sect25" set="enabled" />
                 <choiceState section="sect329" set="disabled" />
             </test>

@@ -1281,12 +1281,6 @@
             <test not="true" canUseBow="true">
                 <choiceState section="sect206" set="disabled" />
             </test>
-            <!--test not="true" hasDiscipline="XXX" hasObject="XXX">
-                <choiceState section="sect332" set="disabled" />
-            </test>
-            <test not="true" hasDiscipline="XXX" hasObject="XXX">
-                <choiceState section="sect69" set="disabled" />
-            </test-->
         </section>
 
         <section id="sect182">
@@ -1297,11 +1291,6 @@
             <test not="true" hasObject="vialbluepills">
                 <choiceState section="sect230" set="disabled" />
             </test>
-            <!-- Dont be restrictive with the choices -->
-            <!--test hasObject="vialbluepills">
-                <choiceState section="sect313" set="disabled" />
-                <choiceState section="sect153" set="disabled" />
-            </test-->
         </section>
         
         <section id="sect185">
@@ -1520,8 +1509,6 @@
             <object objectId="rope" />
             <object objectId="blanket" />
             <object objectId="dagger" />
-            <!-- Moved to sect43 -->
-            <!--object objectId="vialbluepills" /-->
             <object objectId="bottlewater" />
             <object objectId="powerkey" />
             <test not="true" hasDiscipline="curing">

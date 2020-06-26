@@ -1605,7 +1605,22 @@
             <name lang="es">Mapa de Tharro</name>
         </object>
 
-        <object id="larnumaliqueur" usageCount="2">
+        <object id="larnumaliqueur" itemCount="0.5">
+            <!-- This object has been replaced by larnumaliqueur2 in 1.12 (usageCount implemented)-->
+            <name lang="en">Larnuma Liqueur</name>
+            <description lang="en">
+                Restores 3 ENDURANCE points per dose
+            </description>
+
+            <name lang="es">Licor de Larnuma</name>
+            <description lang="es">
+                Cada dosis restablece 3 puntos de RESISTENCIA
+            </description>
+
+            <usage class="endurance" increment="3" />
+        </object>
+
+        <object id="larnumaliqueur2" usageCount="2">
             <name lang="en">Larnuma Liqueur</name>
             <description lang="en">
                 Restores 3 ENDURANCE points per dose
@@ -1646,7 +1661,28 @@
             <name lang="es">Ajorca</name>
         </object>
 
-        <object id="vialbluepills2" usageCount="2">
+        <object id="vialbluepills2" itemCount="0.5">
+            <!-- This object has been replaced by vialbluepills3 in 1.12 (usageCount implemented)-->
+            <name lang="en">Vial of Blue Pills</name>
+            <description lang="en">
+                They enable the human body to extract oxygen from water by absorbing it through the skin.
+            </description>
+            <extraDescription lang="en">
+                They are made from the dried and crushed roots of the Sabito plant, 
+                commonly found in the Boari Jungle, but rare in any other part of Magnamund. 
+            </extraDescription>
+
+            <name lang="es">Frasco de Píldoras Azules</name>
+            <description lang="es">
+                Esas píldoras permiten al cuerpo humano extraer oxígeno del agua absorbiéndolo a través de la piel.
+            </description>
+            <extraDescription lang="es">
+                Las píldoras azules están hechas de raíces secas y trituradas de sabito, una planta que crece 
+                abundantemente en el bosque de Boari, pero que es muy rara en otras partes de Magnamund. 
+            </extraDescription>
+        </object>
+
+        <object id="vialbluepills3" usageCount="2">
             <name lang="en">Vial of Blue Pills</name>
             <description lang="en">
                 They enable the human body to extract oxygen from water by absorbing it through the skin.
@@ -1782,7 +1818,24 @@
             <name lang="es">Caracola</name>
         </object>
 
-        <object id="silverflask" usageCount="2">
+        <object id="silverflask" itemCount="0.5">
+            <!-- This object has been replaced by silverflask2 in 1.12 (usageCount implemented)-->
+            <name lang="en">Silver Flask</name>
+            <description lang="en">
+                The wine has been charmed with a potent magical spell, imbuing it with special healing properties.
+                Each draught restores 4 ENDURANCE points
+            </description>
+
+            <name lang="es">Frasco de Plata</name>
+            <description lang="es">
+                Este vino se halla encantado por un poderoso sortilegio que le proporciona especiales propiedades curativa.
+                Cada trago te permite recobrar 4 puntos de RESISTENCIA
+            </description>
+
+            <usage class="endurance" increment="4" />
+        </object>
+
+        <object id="silverflask2" usageCount="2">
             <name lang="en">Silver Flask</name>
             <description lang="en">
                 The wine has been charmed with a potent magical spell, imbuing it with special healing properties.
