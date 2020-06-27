@@ -54,7 +54,7 @@ class ActionChart {
     public hasBackpack = true;
 
     /** Disciplines ids */
-    public disciplines: string[] = [];
+    private disciplines: string[] = [];
 
     /**
      * The weapon codes for the "wepnskll" / "wpnmstry" disciplines.
@@ -585,7 +585,7 @@ class ActionChart {
      */
     public isWeaponskillActive(bow: boolean = false): boolean {
 
-        if (!this.disciplines.contains("wepnskll") && !this.disciplines.contains("wpnmstry") && !state.hasCompletedKaiSerie()) {
+        if (!this.getDisciplines().contains("wepnskll") && !this.getDisciplines().contains("wpnmstry") && !state.hasCompletedKaiSerie()) {
             // Player has no Weaponskill
             return false;
         }
@@ -614,7 +614,7 @@ class ActionChart {
      * @return True if the player has weaponskill with that weapon
      */
     public hasWeaponskillWith(weaponType: string): boolean {
-        if (!this.disciplines.contains("wepnskll") && !this.disciplines.contains("wpnmstry") && !state.hasCompletedKaiSerie()) {
+        if (!this.getDisciplines().contains("wepnskll") && !this.getDisciplines().contains("wpnmstry") && !state.hasCompletedKaiSerie()) {
             // Player has no Weaponskill
             return false;
         }
@@ -639,7 +639,7 @@ class ActionChart {
 
         let weaponSkill = this.weaponSkill;
 
-        if (!this.disciplines.contains("wpnmstry") && state.hasCompletedKaiSerie()) {
+        if (!this.getDisciplines().contains("wpnmstry") && state.hasCompletedKaiSerie()) {
             // Player currently has no Weaponmastery, but has completed Kai series: Add loyalty bonus
 
             // Check weapons with Weaponmastery on last Kai book serie
@@ -696,11 +696,11 @@ class ActionChart {
                    from their COMBAT SKILL.
             */
             let bonus = -4;
-            if (state.book.isMagnakaiBook() && state.actionChart.disciplines.contains("wpnmstry")) {
-                if (state.actionChart.disciplines.length >= 8) {
+            if (state.book.isMagnakaiBook() && state.actionChart.getDisciplines().contains("wpnmstry")) {
+                if (state.actionChart.getDisciplines().length >= 8) {
                     // Scion-kai
                     bonus = -1;
-                } else if (state.actionChart.disciplines.length >= 5) {
+                } else if (state.actionChart.getDisciplines().length >= 5) {
                     // Tutelary
                     bonus = -2;
                 }
@@ -712,20 +712,20 @@ class ActionChart {
             });
         } else if (this.isWeaponskillActive(bowCombat)) {
             // Weapon skill bonus
-            if (state.book.isKaiBook() || (state.hasCompletedKaiSerie() && state.book.isMagnakaiBook() && !state.actionChart.disciplines.contains("wpnmstry"))) {
+            if (state.book.isKaiBook() || (state.hasCompletedKaiSerie() && state.book.isMagnakaiBook() && !state.actionChart.getDisciplines().contains("wpnmstry"))) {
                 // Kai book, or later with loyalty bonus
                 bonuses.push({
                     concept: translations.text("weaponskill"),
                     increment: +2
                 });
-            } else if (state.book.isMagnakaiBook() || (state.hasCompletedKaiMagnakaiSerie() && (!this.disciplines.contains("wpnmstry") || !this.hasWeaponskillWith(currentWeapon.weaponType || currentWeapon.id)))) {
+            } else if (state.book.isMagnakaiBook() || (state.hasCompletedKaiMagnakaiSerie() && (!this.getDisciplines().contains("wpnmstry") || !this.hasWeaponskillWith(currentWeapon.weaponType || currentWeapon.id)))) {
                 // Magnakai book
                 let bonus = +3;
                 /*  Exception (Magnakai books):
                     Improvements: Scion-kai / Weaponmastery	/ When entering combat with a weapon they have mastered, Scion-kai may add 4 points
                     (instead of the usual 3 points) to their COMBAT SKILL...
                 */
-                if (state.actionChart.disciplines.length >= 8 || state.hasCompletedKaiMagnakaiSerie()) {
+                if (state.actionChart.getDisciplines().length >= 8 || state.hasCompletedKaiMagnakaiSerie()) {
                     // Scion-kai
                     bonus = +4;
                 }
@@ -756,7 +756,7 @@ class ActionChart {
                 weapons, whether fired (e.g. a bow) or thrown (e.g. a dagger). When using a bow or thrown weapon and instructed to pick a
                 number from the Random Number Table, add 2 to the number picked if you are a Mentora with the Magnakai Discipline
                 of Weaponmastery */
-            if (state.book.isMagnakaiBook() && this.disciplines.length >= 7 && this.disciplines.contains("wpnmstry")) {
+            if (state.book.isMagnakaiBook() && this.getDisciplines().length >= 7 && this.getDisciplines().contains("wpnmstry")) {
                 bonuses.push({
                     concept: state.book.getKaiTitle(7), // "Mentora" traslation
                     increment: +2
@@ -814,7 +814,7 @@ class ActionChart {
                 concept: translations.text("psisurge"),
                 increment: (combat.psiSurgeBonus ? combat.psiSurgeBonus : Combat.defaultPsiSurgeBonus()) * combat.mindblastMultiplier
             });
-        } else if (!combat.noMindblast && (this.disciplines.contains("mndblst") || this.disciplines.contains("psisurge") || this.disciplines.contains("kaisurge") || state.hasCompletedKaiSerie())) {
+        } else if (!combat.noMindblast && (this.getDisciplines().contains("mndblst") || this.getDisciplines().contains("psisurge") || this.getDisciplines().contains("kaisurge") || state.hasCompletedKaiSerie())) {
             bonuses.push({
                 concept: translations.text("mindblast"),
                 increment: (combat.mindblastBonus ? combat.mindblastBonus : Combat.defaultMindblastBonus()) * combat.mindblastMultiplier
@@ -838,17 +838,17 @@ class ActionChart {
         // arguably still allow the Spirit circle. Although the game rules are
         // not that detailed.
         if (!combat.mentalOnly) {
-            const circlesBonuses = LoreCircle.getCirclesBonuses(this.disciplines, "CS");
+            const circlesBonuses = LoreCircle.getCirclesBonuses(this.getDisciplines(), "CS");
             for (const c of circlesBonuses) {
                 bonuses.push(c);
             }
         }
 
         // Grand Master level bonus
-        if (state.book.isGrandMasterBook() && this.disciplines.length > 4) {
+        if (state.book.isGrandMasterBook() && this.getDisciplines().length > 4) {
             bonuses.push({
                 concept: translations.text("kaiLevel"),
-                increment: (this.disciplines.length - 4),
+                increment: (this.getDisciplines().length - 4),
             });
         }
 
@@ -902,16 +902,16 @@ class ActionChart {
             }
         });
 
-        const circlesBonuses = LoreCircle.getCirclesBonuses(this.disciplines, "EP");
+        const circlesBonuses = LoreCircle.getCirclesBonuses(this.getDisciplines(), "EP");
         for (const c of circlesBonuses) {
             bonuses.push(c);
         }
 
         // Grand Master level bonus
-        if (state.book.isGrandMasterBook() && this.disciplines.length > 4) {
+        if (state.book.isGrandMasterBook() && this.getDisciplines().length > 4) {
             bonuses.push({
                 concept: translations.text("kaiLevel"),
-                increment: (this.disciplines.length - 4) * 2,
+                increment: (this.getDisciplines().length - 4) * 2,
             });
         }
 
@@ -1016,12 +1016,12 @@ class ActionChart {
      * Get the magnakai lore circles owned by the player
      */
     public getLoreCircles(): LoreCircle[] {
-        return LoreCircle.getCircles(this.disciplines);
+        return LoreCircle.getCircles(this.getDisciplines());
     }
 
     /** The player has Mindshield / Psi-screen? */
     public hasMindShield(): boolean {
-        return this.disciplines.contains("mindshld") || this.disciplines.contains("psiscrn");
+        return this.getDisciplines().contains("mindshld") || this.getDisciplines().contains("psiscrn");
     }
 
     /** The player has a bow and some arrow? */
@@ -1070,8 +1070,8 @@ class ActionChart {
      * The Magnakai Medicine Archmaster +20 EP can be used on this book?
      */
     public canUse20EPRestoreOnThisBook(): boolean {
-        return (this.disciplines.length >= 9 && state.book.isMagnakaiBook() && this.disciplines.contains("curing")) ||
-            (state.book.isGrandMasterBook() && this.disciplines.contains("deliver"));
+        return (this.getDisciplines().length >= 9 && state.book.isMagnakaiBook() && this.getDisciplines().contains("curing")) ||
+            (state.book.isGrandMasterBook() && this.getDisciplines().contains("deliver"));
     }
 
     /**
@@ -1122,6 +1122,15 @@ class ActionChart {
     public getWeaponsIds(): string[] {
         return ActionChartItem.getIds(this.weapons);
     }
+
+    /** Returns current disciplines for current book serie */
+    public getDisciplines(): string[] { return this.disciplines; }
+
+    /**
+     * Clear current dispciplines
+     * TODO: This function will be removed
+     */
+    public clearDisciplines() { this.disciplines = []; }
 
     /**
      * Return the maximum number of backpack items in the current book

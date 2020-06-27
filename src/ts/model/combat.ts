@@ -397,7 +397,7 @@ class Combat {
             ENDURANCE score falls to 4 points or below.
         */
         let bonus = +4;
-        if ((state.book.isMagnakaiBook() && state.actionChart.disciplines.length >= 9) || state.book.isGrandMasterBook()) {
+        if ((state.book.isMagnakaiBook() && state.actionChart.getDisciplines().length >= 9) || state.book.isGrandMasterBook()) {
             bonus = +6;
         }
         return bonus;
@@ -407,7 +407,7 @@ class Combat {
     public static defaultMindblastBonus(): number {
         // See defaultPsiSurgeBonus comment
         let bonus = +2;
-        if (state.book.isMagnakaiBook() && state.actionChart.disciplines.length >= 9) {
+        if (state.book.isMagnakaiBook() && state.actionChart.getDisciplines().length >= 9) {
             bonus = +3;
         } else if (state.book.isGrandMasterBook()) {
             bonus = +4;
@@ -419,7 +419,7 @@ class Combat {
     public static psiSurgeTurnLoss(): number {
         // See defaultPsiSurgeBonus comment
         let loss = 2;
-        if ((state.book.isMagnakaiBook() && state.actionChart.disciplines.length >= 9) || state.book.isGrandMasterBook()) {
+        if ((state.book.isMagnakaiBook() && state.actionChart.getDisciplines().length >= 9) || state.book.isGrandMasterBook()) {
             loss = 1;
         }
         return loss;
@@ -435,7 +435,7 @@ class Combat {
     public static minimumEPForPsiSurge(): number {
         // See defaultPsiSurgeBonus comment
         let min = 6;
-        if ((state.book.isMagnakaiBook() && state.actionChart.disciplines.length >= 9) || state.book.isGrandMasterBook()) {
+        if ((state.book.isMagnakaiBook() && state.actionChart.getDisciplines().length >= 9) || state.book.isGrandMasterBook()) {
             min = 4;
         }
         return min;

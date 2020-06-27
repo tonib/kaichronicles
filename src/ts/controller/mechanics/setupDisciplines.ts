@@ -127,7 +127,7 @@ class SetupDisciplines {
         const disable: boolean = false;
 
         // If Weaponmastery is not selected, disable all weapons
-        if (!state.actionChart.disciplines.contains("wpnmstry")) {
+        if (!state.actionChart.getDisciplines().contains("wpnmstry")) {
             $("input.weaponmastery-chk").prop("disabled", true);
             return;
         }
@@ -207,7 +207,7 @@ class SetupDisciplines {
         // Set checkbox initial value
         const disciplineId: string = $disciplineSection.attr("id");
         const $check = $disciplineSection.find("input[type=checkbox]");
-        $check.prop("checked", state.actionChart.disciplines.contains(disciplineId));
+        $check.prop("checked", state.actionChart.getDisciplines().contains(disciplineId));
 
         // If the player had this discipline on the previous book, disable the check
         // On debug mode, always enabled
@@ -237,7 +237,7 @@ class SetupDisciplines {
         if (selected) {
             this.onDisciplineSelected(e, disciplineId);
         } else {
-            state.actionChart.disciplines.removeValue(disciplineId);
+            state.actionChart.getDisciplines().removeValue(disciplineId);
         }
 
         this.afterDisciplineSelection();
@@ -256,7 +256,7 @@ class SetupDisciplines {
             return;
         }
 
-        state.actionChart.disciplines.push(disciplineId);
+        state.actionChart.getDisciplines().push(disciplineId);
     }
 
     /**
@@ -276,7 +276,7 @@ class SetupDisciplines {
 
         // Check weapons selected for magnakai books
         const showWeaponsWarning = false;
-        if (state.book.bookNumber > 5 && state.actionChart.disciplines.contains("wpnmstry") &&
+        if (state.book.bookNumber > 5 && state.actionChart.getDisciplines().contains("wpnmstry") &&
             state.actionChart.weaponSkill.length < this.getExpectedNWeaponsWeaponmastery()) {
             enableNextPage = false;
             $("#mechanics-setDisciplines-NWeapons").show();
@@ -298,7 +298,7 @@ class SetupDisciplines {
 
         if (state.actionChart.weaponSkill.length > 0) {
             // Weapon already choosed
-            state.actionChart.disciplines.push("wepnskll");
+            state.actionChart.getDisciplines().push("wepnskll");
             return;
         }
 
@@ -312,7 +312,7 @@ class SetupDisciplines {
             .then((value: number) => {
 
                 // Store the discipline
-                state.actionChart.disciplines.push("wepnskll");
+                state.actionChart.getDisciplines().push("wepnskll");
                 state.actionChart.weaponSkill.push(SetupDisciplines.kaiWeapons[value]);
 
                 // Show on UI the selected weapon
@@ -376,7 +376,7 @@ class SetupDisciplines {
      * @returns True if all disciplines are selected
      */
     private getAllDisciplinesSelected(): boolean {
-        return state.actionChart.disciplines.length >= this.expectedNDisciplines;
+        return state.actionChart.getDisciplines().length >= this.expectedNDisciplines;
     }
 
 }

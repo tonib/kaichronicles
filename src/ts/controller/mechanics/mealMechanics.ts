@@ -44,11 +44,11 @@ const mealMechanics = {
         // Check if hunting discipline is available
         const huntDisabled = $(rule).attr("huntDisabled") === "true";   // This disables Kai hunt, but no Huntmastery
         const hntmstryDisabled = $(rule).attr("hntmstryDisabled") === "true";
-        let hasHuntingDiscipline = state.actionChart.disciplines.contains("hunting") || state.hasCompletedKaiSerie();
+        let hasHuntingDiscipline = state.actionChart.getDisciplines().contains("hunting") || state.hasCompletedKaiSerie();
         if (huntDisabled || hntmstryDisabled) {
             hasHuntingDiscipline = false;
         }
-        let hasHntmstryDiscipline = state.actionChart.disciplines.contains("hntmstry") || state.hasCompletedKaiMagnakaiSerie();
+        let hasHntmstryDiscipline = state.actionChart.getDisciplines().contains("hntmstry") || state.hasCompletedKaiMagnakaiSerie();
         if (hntmstryDisabled) {
             hasHntmstryDiscipline = false;
         }

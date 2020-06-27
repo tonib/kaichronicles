@@ -140,7 +140,7 @@ class ExpressionEvaluator {
 
         // Player current number of disciplines
         "[KAILEVEL]"() {
-            return state.actionChart.disciplines.length;
+            return state.actionChart.getDisciplines().length;
         },
 
         "[NUMBERPICKER]"() {

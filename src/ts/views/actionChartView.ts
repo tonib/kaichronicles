@@ -100,7 +100,7 @@ const actionChartView = {
 
         // Kai title:
         $("#achart-kaititle")
-            .text( state.book.getKaiTitle( actionChart.disciplines.length ) );
+            .text( state.book.getKaiTitle( actionChart.getDisciplines().length ) );
 
         // Lore circles:
         if ( state.book.bookNumber <= 5 ) {
@@ -121,12 +121,12 @@ const actionChartView = {
 
         // TODO: Display the discipline "quote" tag instead the name
         const $displines = $("#achart-disciplines > tbody");
-        if ( actionChart.disciplines.length === 0 ) {
+        if ( actionChart.getDisciplines().length === 0 ) {
             $displines.append( "<tr><td>(" + translations.text("noneFemenine") + ")</td></tr>" );
         } else {
             const bookDisciplines = state.book.getDisciplinesTable();
             // Enumerate disciplines
-            $.each( actionChart.disciplines , (index, disciplineId: string) => {
+            $.each( actionChart.getDisciplines() , (index, disciplineId: string) => {
                 const dInfo = bookDisciplines[disciplineId];
                 let name = dInfo.name;
 

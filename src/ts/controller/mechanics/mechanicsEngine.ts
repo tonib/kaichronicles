@@ -519,7 +519,7 @@ const mechanicsEngine = {
                 if (!allDisciplines.contains(disciplines[i])) {
                     mechanicsEngine.debugWarning("Unknown discipline: " + disciplines[i]);
                 }
-                if (state.actionChart.disciplines.contains(disciplines[i])) {
+                if (state.actionChart.getDisciplines().contains(disciplines[i])) {
                     conditionStatisfied = true;
                     break;
                 }
@@ -637,7 +637,7 @@ const mechanicsEngine = {
 
         // Test if the player has a lore-circle
         const circleId: string = $rule.attr("hasCircle");
-        if (circleId && LoreCircle.getCircle(circleId).matchCircle(state.actionChart.disciplines)) {
+        if (circleId && LoreCircle.getCircle(circleId).matchCircle(state.actionChart.getDisciplines())) {
             conditionStatisfied = true;
         }
 
@@ -1396,7 +1396,7 @@ const mechanicsEngine = {
             // Execute only once
             return;
         }
-        state.actionChart.disciplines = [];
+        state.actionChart.clearDisciplines();
         // Redraw current CS / EP on the bar title
         template.updateStatistics();
         state.sectionStates.markRuleAsExecuted(rule);
@@ -1733,9 +1733,9 @@ const mechanicsEngine = {
      * Apply the healing discipline on the current section
      */
     healingDiscipline() {
-        if (!state.actionChart.disciplines.contains("healing")
-            && !state.actionChart.disciplines.contains("curing")
-            && !state.actionChart.disciplines.contains("deliver")
+        if (!state.actionChart.getDisciplines().contains("healing")
+            && !state.actionChart.getDisciplines().contains("curing")
+            && !state.actionChart.getDisciplines().contains("deliver")
             && !state.hasCompletedKaiSerie() ) {
             // Only if having healing discipline or loyalty bonus
             return;

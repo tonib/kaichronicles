@@ -88,7 +88,7 @@ const combatMechanics = {
                 combatMechanics.showHideEludeButton( combat , $combatUI );
             }
 
-            if ( !state.actionChart.disciplines.contains("kaisurge" ) || combat.noKaiSurge ) {
+            if ( !state.actionChart.getDisciplines().contains("kaisurge" ) || combat.noKaiSurge ) {
                 // Hide Psi-surge check
                 $combatUI.find(".kaisurgecheck").hide();
             } else {
@@ -114,7 +114,7 @@ const combatMechanics = {
                 $combatUI.find(".kaisurgeloss").text( Combat.kaiSurgeTurnLoss() );
             }
 
-            if ( !(state.actionChart.disciplines.contains("psisurge" ) || state.actionChart.disciplines.contains("kaisurge" ) ||
+            if ( !(state.actionChart.getDisciplines().contains("psisurge" ) || state.actionChart.getDisciplines().contains("kaisurge" ) ||
                  state.hasCompletedKaiMagnakaiSerie()) || combat.noPsiSurge ) {
                 // Hide Psi-surge check
                 $combatUI.find(".psisurgecheck").hide();
@@ -380,7 +380,7 @@ const combatMechanics = {
      */
     checkPsiSurgeEnabled() {
 
-        if ( !state.actionChart.disciplines.contains("psisurge") || !state.actionChart.disciplines.contains("kaisurge") ) {
+        if ( !state.actionChart.getDisciplines().contains("psisurge") || !state.actionChart.getDisciplines().contains("kaisurge") ) {
             return;
         }
         if ( state.actionChart.currentEndurance > Combat.minimumEPForPsiSurge() ) {
@@ -403,7 +403,7 @@ const combatMechanics = {
      */
     checkKaiSurgeEnabled() {
 
-        if ( !state.actionChart.disciplines.contains("kaisurge") ) {
+        if ( !state.actionChart.getDisciplines().contains("kaisurge") ) {
             return;
         }
         if ( state.actionChart.currentEndurance > Combat.minimumEPForKaiSurge() ) {
