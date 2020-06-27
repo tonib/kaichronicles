@@ -60,7 +60,7 @@ class ActionChart {
      * The weapon codes for the "wepnskll" / "wpnmstry" disciplines.
      * On kai series, it's a single weapon. On magnakai, they are 3 or more
      */
-    public weaponSkill: string[] = [];
+    private weaponSkill: string[] = [];
 
     /** Player annotations */
     public annotations = "";
@@ -107,16 +107,16 @@ class ActionChart {
                     this.endurance = this.currentEndurance = 35;
                     this.combatSkill = 30;
                     // debug data for Grand Master
-                    this.disciplines = ["wpnmstry", "deliver", "hntmstry", "assimila"];
-                    this.weaponSkill = ["axe", "sword"];
+                    this.setDisciplines( ["wpnmstry", "deliver", "hntmstry", "assimila"] );
+                    this.setWeaponSkill( ["axe", "sword"] );
                 } else if (state.book.isMagnakaiBook()) {
                     // debug data for magnakai
-                    this.disciplines = ["wpnmstry", "curing", "hntmstry"];
-                    this.weaponSkill = ["axe", "sword", "bow"];
+                    this.setDisciplines( ["wpnmstry", "curing", "hntmstry"] );
+                    this.setWeaponSkill( ["axe", "sword", "bow"] );
                 } else {
                     // debug data for kai series
-                    this.disciplines = ["camflage", "hunting", "sixthsns", "healing", "wepnskll"];
-                    this.weaponSkill = ["axe"];
+                    this.setDisciplines( ["camflage", "hunting", "sixthsns", "healing", "wepnskll"] );
+                    this.setWeaponSkill( ["axe"] );
                 }
             }
         }
@@ -631,36 +631,6 @@ class ActionChart {
     }
 
     /**
-     * Get the weaponSkill array.
-     * If no weaponSkill but the kai serie is completed, add a random weaponSkill from kai serie.
-     * @return Array of weapon skill
-     */
-    private getWeaponSkill(): string[] {
-
-        let weaponSkill = this.weaponSkill;
-
-        if (!this.getDisciplines().contains("wpnmstry") && state.hasCompletedKaiSerie()) {
-            // Player currently has no Weaponmastery, but has completed Kai series: Add loyalty bonus
-
-            // Check weapons with Weaponmastery on last Kai book serie
-            const lastKaiBookActionChat = state.getPreviousBookActionChart(5);
-            if (lastKaiBookActionChat) {
-                weaponSkill = lastKaiBookActionChat.weaponSkill;
-                if (!weaponSkill.length) {
-                    // Player had no weaponskill at the end of book 5. Use current weapons Weaponskill
-                    if (this.weaponSkill.length === 0) {
-                        // But currently has no Weaponskill! So, add a random weapon
-                        this.weaponSkill.push(SetupDisciplines.kaiWeapons[randomTable.getRandomValue()]);
-                    }
-                    weaponSkill = this.weaponSkill;
-                }
-            }
-        }
-
-        return weaponSkill;
-    }
-
-    /**
      * Get bonuses for the selected weapon
      * @param noWeapon True if the combat is with no weapons
      * @param bowCombat True if it's a combat with bow
@@ -1127,10 +1097,42 @@ class ActionChart {
     public getDisciplines(): string[] { return this.disciplines; }
 
     /**
-     * Clear current dispciplines
-     * TODO: This function will be removed
+     * Set current disciplines
      */
-    public clearDisciplines() { this.disciplines = []; }
+    public setDisciplines(disciplines: string[]) { this.disciplines = disciplines; }
+
+    /**
+     * Get the weaponSkill array.
+     * If no weaponSkill but the kai serie is completed, add a random weaponSkill from kai serie.
+     * @return Array of weapon skill
+     */
+    // TODO: DO NOT DELETE THIS. IT SHOULD BE ADAPTED TO THE NEW DISCIPLINES STORAGE
+    /*private getWeaponSkill(): string[] {
+
+        let weaponSkill = this.weaponSkill;
+
+        if (!this.getDisciplines().contains("wpnmstry") && state.hasCompletedKaiSerie()) {
+            // Player currently has no Weaponmastery, but has completed Kai series: Add loyalty bonus
+
+            // Check weapons with Weaponmastery on last Kai book serie
+            const lastKaiBookActionChat = state.getPreviousBookActionChart(5);
+            if (lastKaiBookActionChat) {
+                weaponSkill = lastKaiBookActionChat.weaponSkill;
+                if (!weaponSkill.length) {
+                    // Player had no weaponskill at the end of book 5. Use current weapons Weaponskill
+                    if (this.weaponSkill.length === 0) {
+                        // But currently has no Weaponskill! So, add a random weapon
+                        this.weaponSkill.push(SetupDisciplines.kaiWeapons[randomTable.getRandomValue()]);
+                    }
+                    weaponSkill = this.weaponSkill;
+                }
+            }
+        }
+
+        return weaponSkill;
+    }*/
+    public getWeaponSkill(): string[] { return this.weaponSkill; }
+    public setWeaponSkill(weaponSkill: string[]) { this.weaponSkill = weaponSkill; }
 
     /**
      * Return the maximum number of backpack items in the current book

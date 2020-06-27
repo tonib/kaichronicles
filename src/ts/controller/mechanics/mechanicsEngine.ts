@@ -1396,7 +1396,9 @@ const mechanicsEngine = {
             // Execute only once
             return;
         }
-        state.actionChart.clearDisciplines();
+
+        state.actionChart.setDisciplines([]);
+
         // Redraw current CS / EP on the bar title
         template.updateStatistics();
         state.sectionStates.markRuleAsExecuted(rule);

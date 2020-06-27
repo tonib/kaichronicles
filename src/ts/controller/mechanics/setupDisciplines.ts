@@ -91,7 +91,7 @@ class SetupDisciplines {
             $checkbox.find(".mechanics-wName").text(weaponItem.name);
 
             // The weapon has been already selected?
-            const selected: boolean = state.actionChart.weaponSkill.contains(SetupDisciplines.magnakaiWeapons[i]);
+            const selected: boolean = state.actionChart.getWeaponSkill().contains(SetupDisciplines.magnakaiWeapons[i]);
             $checkbox.find("input").attr("checked", selected);
 
             html += $checkbox[0].outerHTML;
@@ -180,14 +180,14 @@ class SetupDisciplines {
         if (selected) {
             // Check the maximum weapons number
             const nExpectedWeapons = this.getExpectedNWeaponsWeaponmastery();
-            if (!window.getUrlParameter("debug") && state.actionChart.weaponSkill.length >= nExpectedWeapons) {
+            if (!window.getUrlParameter("debug") && state.actionChart.getWeaponSkill().length >= nExpectedWeapons) {
                 e.preventDefault();
                 alert(translations.text("onlyNWeapons", [nExpectedWeapons]));
                 return;
             }
-            state.actionChart.weaponSkill.push(weaponId);
+            state.actionChart.getWeaponSkill().push(weaponId);
         } else {
-            state.actionChart.weaponSkill.removeValue(weaponId);
+            state.actionChart.getWeaponSkill().removeValue(weaponId);
         }
 
         // Update UI
@@ -277,7 +277,7 @@ class SetupDisciplines {
         // Check weapons selected for magnakai books
         const showWeaponsWarning = false;
         if (state.book.bookNumber > 5 && state.actionChart.getDisciplines().contains("wpnmstry") &&
-            state.actionChart.weaponSkill.length < this.getExpectedNWeaponsWeaponmastery()) {
+            state.actionChart.getWeaponSkill().length < this.getExpectedNWeaponsWeaponmastery()) {
             enableNextPage = false;
             $("#mechanics-setDisciplines-NWeapons").show();
         } else {
@@ -296,7 +296,7 @@ class SetupDisciplines {
      */
     private chooseWeaponskillWeapon(e: Event) {
 
-        if (state.actionChart.weaponSkill.length > 0) {
+        if (state.actionChart.getWeaponSkill().length > 0) {
             // Weapon already choosed
             state.actionChart.getDisciplines().push("wepnskll");
             return;
@@ -313,7 +313,7 @@ class SetupDisciplines {
 
                 // Store the discipline
                 state.actionChart.getDisciplines().push("wepnskll");
-                state.actionChart.weaponSkill.push(SetupDisciplines.kaiWeapons[value]);
+                state.actionChart.getWeaponSkill().push(SetupDisciplines.kaiWeapons[value]);
 
                 // Show on UI the selected weapon
                 this.setWeaponSkillWeaponNameOnUI();
@@ -333,7 +333,7 @@ class SetupDisciplines {
      */
     private setWeaponSkillWeaponNameOnUI() {
 
-        if (state.actionChart.weaponSkill.length === 0) {
+        if (state.actionChart.getWeaponSkill().length === 0) {
             // No weapon selected yet
             return;
         }
@@ -342,7 +342,7 @@ class SetupDisciplines {
             return;
         }
 
-        const o = state.mechanics.getObject(state.actionChart.weaponSkill[0]);
+        const o = state.mechanics.getObject(state.actionChart.getWeaponSkill()[0]);
         $("#wepnskll .mechanics-wName").text("(" + o.name + ")");
     }
 

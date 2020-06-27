@@ -133,7 +133,7 @@ const actionChartView = {
                 if ( disciplineId === "wepnskll" || disciplineId === "wpnmstry" ) {
                     // Show selected weapons description
                     const weapons: string[] = [];
-                    for (const weaponSkill of actionChart.weaponSkill) {
+                    for (const weaponSkill of actionChart.getWeaponSkill()) {
                         weapons.push( state.mechanics.getObject( weaponSkill ).name );
                     }
                     if ( weapons.length > 0 ) {
