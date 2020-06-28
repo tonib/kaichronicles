@@ -18,16 +18,6 @@ interface DisciplinesTable {
 }
 
 /**
- * Books series
- */
-enum BookSeries {
-    // Order here is important!
-    Kai,
-    Magnakai,
-    GrandMaster
-}
-
-/**
  * Class to handle the Project Aon books XML
  */
 class Book {
@@ -477,25 +467,16 @@ class Book {
     }
 
     public getBookSeries(): BookSeries {
-        return Book.getBookNumberSeries(this.bookNumber);
+        return BookSeries.getBookNumberSeries(this.bookNumber);
     }
 
     /** Is it a book of Kai series (1-5)? */
-    public isKaiBook(): boolean { return this.getBookSeries() === BookSeries.Kai; }
+    public isKaiBook(): boolean { return this.getBookSeries().id === BookSeriesId.Kai; }
 
     /** Is it a book of Magnakai series (6-12)? */
-    public isMagnakaiBook(): boolean { return this.getBookSeries() === BookSeries.Magnakai; }
+    public isMagnakaiBook(): boolean { return this.getBookSeries().id === BookSeriesId.Magnakai; }
 
     /** Is it a book of Magnakai series (13-?)? */
-    public isGrandMasterBook(): boolean { return this.getBookSeries() === BookSeries.GrandMaster; }
+    public isGrandMasterBook(): boolean { return this.getBookSeries().id === BookSeriesId.GrandMaster; }
 
-    public static getBookNumberSeries(bookNumber: number): BookSeries {
-        if (bookNumber <= 5) {
-            return BookSeries.Kai;
-        } else if (bookNumber > 5 && bookNumber <= 12) {
-            return BookSeries.Magnakai;
-        } else {
-            return BookSeries.GrandMaster;
-        }
-    }
 }

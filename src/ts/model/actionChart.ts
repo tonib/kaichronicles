@@ -1120,20 +1120,20 @@ class ActionChart {
     }
 
     /** Returns current disciplines for current book serie */
-    public getDisciplines(series: BookSeries = null): string[] {
+    public getDisciplines(series: BookSeriesId = null): string[] {
         return this.getSeriesDisciplines(series).disciplines;
     }
 
-    public getSeriesDisciplines(series: BookSeries = null): Disciplines {
-        if (series === null) {
-            series = state.book.getBookSeries();
+    public getSeriesDisciplines(seriesId: BookSeriesId = null): Disciplines {
+        if (seriesId === null) {
+            seriesId = state.book.getBookSeries().id;
         }
-        switch (series) {
-            case BookSeries.Kai:
+        switch (seriesId) {
+            case BookSeriesId.Kai:
                 return this.kaiDisciplines;
-            case BookSeries.Magnakai:
+            case BookSeriesId.Magnakai:
                 return this.magnakaiDisciplines;
-            case BookSeries.GrandMaster:
+            case BookSeriesId.GrandMaster:
                 return this.grandMasterDisciplines;
             default:
                 console.log("ActionChart.getSeriesDisciplines: Wrong book series");
@@ -1144,8 +1144,8 @@ class ActionChart {
     /**
      * Set current disciplines
      */
-    public setDisciplines(disciplines: string[], series: BookSeries = null) {
-        this.getSeriesDisciplines(series).disciplines = disciplines;
+    public setDisciplines(disciplines: string[], seriesId: BookSeriesId = null) {
+        this.getSeriesDisciplines(seriesId).disciplines = disciplines;
     }
 
     /**
@@ -1178,11 +1178,11 @@ class ActionChart {
 
         return weaponSkill;
     }*/
-    public getWeaponSkill(series: BookSeries = null): string[] {
-        return this.getSeriesDisciplines().weaponSkill;
+    public getWeaponSkill(seriesId: BookSeriesId = null): string[] {
+        return this.getSeriesDisciplines(seriesId).weaponSkill;
     }
-    public setWeaponSkill(weaponSkill: string[], series: BookSeries = null) {
-        this.getSeriesDisciplines().weaponSkill = weaponSkill;
+    public setWeaponSkill(weaponSkill: string[], seriesId: BookSeriesId = null) {
+        this.getSeriesDisciplines(seriesId).weaponSkill = weaponSkill;
     }
 
     /**
@@ -1219,15 +1219,15 @@ class ActionChart {
         if (!o.kaiDisciplines) {
 
             // Store current book disciplines
-            const currentSeries = Book.getBookNumberSeries(bookNumber);
-            switch (currentSeries) {
-                case BookSeries.Kai:
+            const currentSeries = BookSeries.getBookNumberSeries(bookNumber);
+            switch (currentSeries.id) {
+                case BookSeriesId.Kai:
                     o.kaiDisciplines = { disciplines: o.disciplines, weaponSkill: o.weaponSkill };
                     break;
-                case BookSeries.Magnakai:
+                case BookSeriesId.Magnakai:
                     o.magnakaiDisciplines = { disciplines: o.disciplines, weaponSkill: o.weaponSkill };
                     break;
-                case BookSeries.GrandMaster:
+                case BookSeriesId.GrandMaster:
                     o.grandMasterDisciplines = { disciplines: o.disciplines, weaponSkill: o.weaponSkill };
                     break;
             }
@@ -1235,10 +1235,10 @@ class ActionChart {
             delete o.weaponSkill;
 
             // Try to load previous series final disciplines
-            if (BookSeries.Kai < currentSeries) {
+            if (BookSeriesId.Kai < currentSeries.id) {
                 // TODO: Pending
             }
-            if (BookSeries.Magnakai < currentSeries) {
+            if (BookSeriesId.Magnakai < currentSeries.id) {
                 // TODO: Pending
             }
 
