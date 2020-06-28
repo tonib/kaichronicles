@@ -1236,10 +1236,16 @@ class ActionChart {
 
             // Try to load previous series final disciplines
             if (BookSeriesId.Kai < currentSeries.id) {
-                // TODO: Pending
+                const aChartEndKai = state.getPreviousBookActionChart(BookSeries.series[BookSeriesId.Kai].bookEnd);
+                if (aChartEndKai) {
+                    o.kaiDisciplines = aChartEndKai.kaiDisciplines.disciplines;
+                }
             }
             if (BookSeriesId.Magnakai < currentSeries.id) {
-                // TODO: Pending
+                const aChartEndMagnakai = state.getPreviousBookActionChart(BookSeries.series[BookSeriesId.Magnakai].bookEnd);
+                if (aChartEndMagnakai) {
+                    o.magnakaiDisciplines = aChartEndMagnakai.magnakaiDisciplines.disciplines;
+                }
             }
 
             // Setup uninitialiced properties

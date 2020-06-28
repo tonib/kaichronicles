@@ -13,8 +13,11 @@ enum BookSeriesId {
  */
 class BookSeries {
 
+    /** Book series identifier */
     public readonly id: BookSeriesId;
+    /** Series first book, 1 based index (1 = first book) */
     public readonly bookStart: number;
+    /** Series last book, 1 based index (1 = first book) */
     public readonly bookEnd: number;
 
     /**
