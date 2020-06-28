@@ -477,13 +477,7 @@ class Book {
     }
 
     public getBookSeries(): BookSeries {
-        if (this.bookNumber <= 5) {
-            return BookSeries.Kai;
-        } else if (this.bookNumber > 5 && this.bookNumber <= 12) {
-            return BookSeries.Magnakai;
-        } else {
-            return BookSeries.GrandMaster;
-        }
+        return Book.getBookNumberSeries(this.bookNumber);
     }
 
     /** Is it a book of Kai series (1-5)? */
@@ -495,4 +489,13 @@ class Book {
     /** Is it a book of Magnakai series (13-?)? */
     public isGrandMasterBook(): boolean { return this.getBookSeries() === BookSeries.GrandMaster; }
 
+    public static getBookNumberSeries(bookNumber: number): BookSeries {
+        if (bookNumber <= 5) {
+            return BookSeries.Kai;
+        } else if (bookNumber > 5 && bookNumber <= 12) {
+            return BookSeries.Magnakai;
+        } else {
+            return BookSeries.GrandMaster;
+        }
+    }
 }

@@ -48,6 +48,7 @@ TODO
 ## Development / refactorings
 - Check older savegames with usageCount = undefined in section states, action chart and InventoryState
   Check also savegames from v1.6 (changes for this in ActionChart.fromObject())
+- Check all calls to state.getPreviousBookActionChart(), as it's format can change in time. Make it return an ActionChart ???
 
 ## Other
 - Move all bonuses calculation from ActionChart to a new class

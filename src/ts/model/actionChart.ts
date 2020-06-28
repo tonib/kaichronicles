@@ -10,6 +10,21 @@ interface Bonus {
 }
 
 /**
+ * Disciplines for a given book series
+ */
+interface Disciplines {
+
+    /** Disciplines ids */
+    disciplines: string[];
+
+    /**
+     * The weapon codes for the "wepnskll" / "wpnmstry" disciplines.
+     * On kai series, it's a single weapon. On serires >= magnakai, they will be more than one
+     */
+    weaponSkill: string[];
+}
+
+/**
  * The action chart / player state
  */
 class ActionChart {
@@ -53,14 +68,25 @@ class ActionChart {
     /** The player has a backpack? */
     public hasBackpack = true;
 
-    /** Disciplines ids */
-    private disciplines: string[] = [];
+    /* Disciplines ids */
+    // Removed in v.12
+    // private disciplines: string[] = [];
 
-    /**
+    /*
      * The weapon codes for the "wepnskll" / "wpnmstry" disciplines.
      * On kai series, it's a single weapon. On magnakai, they are 3 or more
      */
-    private weaponSkill: string[] = [];
+    // // Removed in v.12
+    // private weaponSkill: string[] = [];
+
+    /** Kai disciplines (books 1-5) */
+    private kaiDisciplines: Disciplines = { disciplines: [], weaponSkill: [] };
+
+    /** Magnakai disciplines (books 6-12) */
+    private magnakaiDisciplines: Disciplines = { disciplines: [], weaponSkill: [] };
+
+    /** Grand Master disciplines (books 6-12) */
+    private grandMasterDisciplines: Disciplines = { disciplines: [], weaponSkill: [] };
 
     /** Player annotations */
     public annotations = "";
@@ -1094,12 +1120,33 @@ class ActionChart {
     }
 
     /** Returns current disciplines for current book serie */
-    public getDisciplines(): string[] { return this.disciplines; }
+    public getDisciplines(series: BookSeries = null): string[] {
+        return this.getSeriesDisciplines(series).disciplines;
+    }
+
+    public getSeriesDisciplines(series: BookSeries = null): Disciplines {
+        if (series === null) {
+            series = state.book.getBookSeries();
+        }
+        switch (series) {
+            case BookSeries.Kai:
+                return this.kaiDisciplines;
+            case BookSeries.Magnakai:
+                return this.magnakaiDisciplines;
+            case BookSeries.GrandMaster:
+                return this.grandMasterDisciplines;
+            default:
+                console.log("ActionChart.getSeriesDisciplines: Wrong book series");
+                return { disciplines: [], weaponSkill: [] };
+        }
+    }
 
     /**
      * Set current disciplines
      */
-    public setDisciplines(disciplines: string[]) { this.disciplines = disciplines; }
+    public setDisciplines(disciplines: string[], series: BookSeries = null) {
+        this.getSeriesDisciplines(series).disciplines = disciplines;
+    }
 
     /**
      * Get the weaponSkill array.
@@ -1131,8 +1178,12 @@ class ActionChart {
 
         return weaponSkill;
     }*/
-    public getWeaponSkill(): string[] { return this.weaponSkill; }
-    public setWeaponSkill(weaponSkill: string[]) { this.weaponSkill = weaponSkill; }
+    public getWeaponSkill(series: BookSeries = null): string[] {
+        return this.getSeriesDisciplines().weaponSkill;
+    }
+    public setWeaponSkill(weaponSkill: string[], series: BookSeries = null) {
+        this.getSeriesDisciplines().weaponSkill = weaponSkill;
+    }
 
     /**
      * Return the maximum number of backpack items in the current book
@@ -1142,28 +1193,71 @@ class ActionChart {
     }
 
     /**
-     * Create an ActionChart instance from a plain object
+     * Create an ActionChart instance from a plain object. The localStorage keys "state-book-xxxx" **MUST** to
+     * be loaded before call to this member.
      * @param o The plain object
      * @returns The ActionChart instance
      */
-    public static fromObject(o: any): ActionChart {
+    public static fromObject(o: any, bookNumber: number): ActionChart {
 
-        // On version 1.6.3 / 1.7, the o.weaponSkill has been changed from string to Array<string> (magnakai)
-        if ( typeof o.weaponSkill === "string" ) {
-            o.weaponSkill = [ o.weaponSkill ];
-        }
-        if (!o.weaponSkill) {
-            o.weaponSkill = [];
+        // In version 1.6.3 / 1.7, the o.weaponSkill has been changed from string to string[] (magnakai)
+        if ( o.disciplines && typeof o.weaponSkill === "string" ) {
+            if ( o.actionChart.weaponSkill ) {
+                o.actionChart.weaponSkill = [ o.actionChart.weaponSkill ];
+            } else {
+                o.actionChart.weaponSkill = [];
+            }
         }
 
-        // On version 1.6.3 / 1.7, we store the number of arrows (magnakai)
+        // In version 1.6.3 / 1.7, we store the number of arrows (magnakai)
         if ( !o.arrows ) {
             o.arrows = 0;
         }
 
+        // In version 1.12 disciplines of Kai, Magnakai and Grand Master are stored in ActionChart. Previously, only the
+        // current book disciplines were stored
+        if (!o.kaiDisciplines) {
+
+            // Store current book disciplines
+            const currentSeries = Book.getBookNumberSeries(bookNumber);
+            switch (currentSeries) {
+                case BookSeries.Kai:
+                    o.kaiDisciplines = { disciplines: o.disciplines, weaponSkill: o.weaponSkill };
+                    break;
+                case BookSeries.Magnakai:
+                    o.magnakaiDisciplines = { disciplines: o.disciplines, weaponSkill: o.weaponSkill };
+                    break;
+                case BookSeries.GrandMaster:
+                    o.grandMasterDisciplines = { disciplines: o.disciplines, weaponSkill: o.weaponSkill };
+                    break;
+            }
+            delete o.disciplines;
+            delete o.weaponSkill;
+
+            // Try to load previous series final disciplines
+            if (BookSeries.Kai < currentSeries) {
+                // TODO: Pending
+            }
+            if (BookSeries.Magnakai < currentSeries) {
+                // TODO: Pending
+            }
+
+            // Setup uninitialiced properties
+            if (!o.kaiDisciplines) {
+                o.kaiDisciplines = { disciplines: [], weaponSkill: [] };
+            }
+            if (!o.magnakaiDisciplines) {
+                o.magnakaiDisciplines = { disciplines: [], weaponSkill: [] };
+            }
+            if (!o.grandMasterDisciplines) {
+                o.grandMasterDisciplines = { disciplines: [], weaponSkill: [] };
+            }
+        }
+
         const actionChart: ActionChart = $.extend(new ActionChart(), o);
 
-        // Replace plain objects by ActionChartItem instances
+        // Replace plain objects by ActionChartItem instances.
+        // Changed in 1.12. In previous versiones, arrays were string[] with object ids
         actionChart.weapons = ActionChartItem.fromObjectsArray(actionChart.weapons);
         actionChart.backpackItems = ActionChartItem.fromObjectsArray(actionChart.backpackItems);
         actionChart.specialItems = ActionChartItem.fromObjectsArray(actionChart.specialItems);

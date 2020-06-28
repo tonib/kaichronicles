@@ -84,10 +84,11 @@ const state = {
         state.actionChart = null;
         if ( keepActionChart ) {
             // Try to get the previous book action chart, and set it as the current
-            state.actionChart = state.getPreviousBookActionChart(bookNumber - 1);
+            const previousBookNumber = bookNumber - 1;
+            state.actionChart = state.getPreviousBookActionChart(previousBookNumber);
             if ( state.actionChart ) {
                 // Convert the Object to ActionChart
-                state.actionChart = ActionChart.fromObject(state.actionChart);
+                state.actionChart = ActionChart.fromObject(state.actionChart, previousBookNumber);
             }
 
             // Restore Kai monastery objects
@@ -187,7 +188,7 @@ const state = {
         state.language = stateKeys.language;
         state.book = new Book(stateKeys.bookNumber, state.language);
         state.mechanics = new Mechanics(state.book);
-        state.actionChart = ActionChart.fromObject(stateKeys.actionChart);
+        state.actionChart = ActionChart.fromObject(stateKeys.actionChart, stateKeys.bookNumber);
         state.sectionStates = new BookSectionStates();
         state.sectionStates.fromStateObject( stateKeys.sectionStates );
     },
@@ -304,11 +305,10 @@ const state = {
         // console.log( json );
         const saveGameObject = JSON.parse( json );
 
-        // Restore current state
+        // Check errors
         if ( !saveGameObject || !saveGameObject.currentState) {
             throw new Error("Wrong format");
         }
-        state.restoreStateFromObject(saveGameObject.currentState);
 
         // Restore previous books action chart
         for (let i = 1; i <= 30; i++) {
@@ -319,6 +319,9 @@ const state = {
                 localStorage.removeItem( key );
             }
         }
+
+        // Restore current state
+        state.restoreStateFromObject(saveGameObject.currentState);
 
         state.persistState();
     },
