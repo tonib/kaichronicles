@@ -84,12 +84,7 @@ const state = {
         state.actionChart = null;
         if ( keepActionChart ) {
             // Try to get the previous book action chart, and set it as the current
-            const previousBookNumber = bookNumber - 1;
-            state.actionChart = state.getPreviousBookActionChart(previousBookNumber);
-            if ( state.actionChart ) {
-                // Convert the Object to ActionChart
-                state.actionChart = ActionChart.fromObject(state.actionChart, previousBookNumber);
-            }
+            state.actionChart = state.getPreviousBookActionChart(bookNumber - 1);
 
             // Restore Kai monastery objects
             state.restoreKaiMonasterySectionObjects();
@@ -241,16 +236,21 @@ const state = {
 
     /**
      * Get the action chart on the ending of the previous book
-     * @param {number} bookNumber Book which get the action chart
-     * @returns {object} The action chart. null if it was not found. The returned value is an Object, not an ActionChart
+     * @param bookNumber Book which get the action chart
+     * @returns The action chart. null if it was not found or it cannot be loaded.
      */
-    getPreviousBookActionChart(bookNumber: number): any {
-        const key = "state-book-" + bookNumber.toString();
-        const json = localStorage.getItem( key );
-        if ( !json ) {
+    getPreviousBookActionChart(bookNumber: number): ActionChart {
+        try {
+            const key = "state-book-" + bookNumber.toString();
+            const json = localStorage.getItem( key );
+            if ( !json ) {
+                return null;
+            }
+            return ActionChart.fromObject(JSON.parse(json), bookNumber);
+        } catch (e) {
+            console.log(e);
             return null;
         }
-        return JSON.parse(json);
     },
 
     /**

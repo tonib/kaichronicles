@@ -24,10 +24,26 @@ class SetupDisciplines {
      * The last book player action chart.
      * null if this is the first book the player play
      */
-    private readonly previousActionChart: any;
+    private readonly previousActionChart: ActionChart = null;
+
+    /** Last book series id. Only applies if previousActionChart is not null */
+    private readonly previousBookSeries: BookSeriesId = BookSeriesId.Kai;
 
     constructor() {
-        this.previousActionChart = state.getPreviousBookActionChart(state.book.bookNumber - 1);
+
+        // Get info about the last played book
+        const previousBookNumber = state.book.bookNumber - 1;
+        if (previousBookNumber >= 1) {
+            this.previousActionChart = state.getPreviousBookActionChart(previousBookNumber);
+            this.previousBookSeries = BookSeries.getBookNumberSeries(previousBookNumber).id;
+
+            // When a series start, by default, keep Weaponmastery with the same weapons from previous series
+            if (this.previousActionChart && this.previousBookSeries !== state.book.getBookSeries().id &&
+                state.actionChart.getWeaponSkill().length === 0 ) {
+                    state.actionChart.setWeaponSkill( this.previousActionChart.getWeaponSkill(this.previousBookSeries).clone() );
+            }
+        }
+
         this.expectedNDisciplines = this.getNExpectedDisciplines();
     }
 
@@ -135,11 +151,11 @@ class SetupDisciplines {
         // By default, enable all weapons
         $("input.weaponmastery-chk").prop("disabled", false);
 
-        // If Weaponmastery was selected on a previous book, disable disable the weapons already
+        // If Weaponmastery was selected on a previous book, disable the weapons already
         // selected on the previous book
         if (!window.getUrlParameter("debug") && this.previousActionChart &&
-            this.previousActionChart.disciplines.contains("wpnmstry")) {
-            for (const weaponId of this.previousActionChart.weaponSkill) {
+            this.previousActionChart.getDisciplines(this.previousBookSeries).contains("wpnmstry")) {
+            for (const weaponId of this.previousActionChart.getWeaponSkill(this.previousBookSeries)) {
                 $("#" + weaponId + " input[type=checkbox]").prop("disabled", true);
             }
         }
@@ -160,9 +176,9 @@ class SetupDisciplines {
             return nWeapons;
         }
 
-        if (this.previousActionChart && this.previousActionChart.disciplines.contains("wpnmstry")) {
+        if (this.previousActionChart && this.previousActionChart.getDisciplines(this.previousBookSeries).contains("wpnmstry")) {
             // One more for this book
-            nWeapons = this.previousActionChart.weaponSkill.length + 1;
+            nWeapons = this.previousActionChart.getWeaponSkill(this.previousBookSeries).length + 1;
         }
         return nWeapons;
     }
@@ -212,7 +228,7 @@ class SetupDisciplines {
         // If the player had this discipline on the previous book, disable the check
         // On debug mode, always enabled
         if (!window.getUrlParameter("debug") && this.previousActionChart &&
-            this.previousActionChart.disciplines.contains(disciplineId)) {
+            this.previousActionChart.getDisciplines(this.previousBookSeries).contains(disciplineId)) {
             $check.prop("disabled", true);
         }
     }
@@ -365,7 +381,7 @@ class SetupDisciplines {
 
         // Number of disciplines to choose (previous book disciplines + 1):
         if (this.previousActionChart) {
-            expectedNDisciplines = this.previousActionChart.disciplines.length + 1;
+            expectedNDisciplines = this.previousActionChart.getDisciplines(this.previousBookSeries).length + 1;
         }
 
         return expectedNDisciplines;

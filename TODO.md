@@ -49,11 +49,14 @@ TODO
 - Check older savegames with usageCount = undefined in section states, action chart and InventoryState
   Check also savegames from v1.6 (changes for this in ActionChart.fromObject())
 - Check all calls to state.getPreviousBookActionChart(), as it's format can change in time. Make it return an ActionChart ???
+- Test load previous savegame / state versions to v1.12 !!!
+- Test SetupDisciplines
+- SetupDisciplines: Move all info about the serie (initial number disciplines, book number starts, etc) to BookSeries
+- Rule "dropDisciplines" could be removed, no longer needed
 
 ## Other
 - Move all bonuses calculation from ActionChart to a new class
 - Add option to jump from one book to other (debugging, loyalty bonuses)
-- UPLOAD NEW VERSION 1.11.1
 - FAQ: Add info about change the Random Table
 - Add help for "LW club newsletter 29" setting
 - Use latest version on PAON data on SVN (a fixed commit number)
