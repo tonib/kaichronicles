@@ -1238,13 +1238,13 @@ class ActionChart {
             if (BookSeriesId.Kai < currentSeries.id) {
                 const aChartEndKai = state.getPreviousBookActionChart(BookSeries.series[BookSeriesId.Kai].bookEnd);
                 if (aChartEndKai) {
-                    o.kaiDisciplines = aChartEndKai.kaiDisciplines.disciplines;
+                    o.kaiDisciplines = aChartEndKai.kaiDisciplines;
                 }
             }
             if (BookSeriesId.Magnakai < currentSeries.id) {
                 const aChartEndMagnakai = state.getPreviousBookActionChart(BookSeries.series[BookSeriesId.Magnakai].bookEnd);
                 if (aChartEndMagnakai) {
-                    o.magnakaiDisciplines = aChartEndMagnakai.magnakaiDisciplines.disciplines;
+                    o.magnakaiDisciplines = aChartEndMagnakai.magnakaiDisciplines;
                 }
             }
 
