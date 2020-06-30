@@ -10,9 +10,9 @@ interface Bonus {
 }
 
 /**
- * Disciplines for a given book series
+ * Disciplines player has for a given book series
  */
-interface Disciplines {
+interface SeriesDisciplines {
 
     /** Disciplines ids */
     disciplines: string[];
@@ -80,13 +80,13 @@ class ActionChart {
     // private weaponSkill: string[] = [];
 
     /** Kai disciplines (books 1-5) */
-    private kaiDisciplines: Disciplines = { disciplines: [], weaponSkill: [] };
+    private kaiDisciplines: SeriesDisciplines = { disciplines: [], weaponSkill: [] };
 
     /** Magnakai disciplines (books 6-12) */
-    private magnakaiDisciplines: Disciplines = { disciplines: [], weaponSkill: [] };
+    private magnakaiDisciplines: SeriesDisciplines = { disciplines: [], weaponSkill: [] };
 
-    /** Grand Master disciplines (books 6-12) */
-    private grandMasterDisciplines: Disciplines = { disciplines: [], weaponSkill: [] };
+    /** Grand Master disciplines (books 13+) */
+    private grandMasterDisciplines: SeriesDisciplines = { disciplines: [], weaponSkill: [] };
 
     /** Player annotations */
     public annotations = "";
@@ -1124,7 +1124,7 @@ class ActionChart {
         return this.getSeriesDisciplines(series).disciplines;
     }
 
-    public getSeriesDisciplines(seriesId: BookSeriesId = null): Disciplines {
+    private getSeriesDisciplines(seriesId: BookSeriesId = null): SeriesDisciplines {
         if (seriesId === null) {
             seriesId = state.book.getBookSeries().id;
         }
