@@ -55,19 +55,16 @@ class Disciplines {
         return result;
     }
 
-    /** Get all Kai disciplines ids */
-    public static getKaiDisciplinesIds(): string[] {
-        return Disciplines.getDisciplinesIds(KaiDisciplines);
+    public static getSeriesDisciplines(seriesId: BookSeriesId): string[] {
+        switch (seriesId) {
+            case BookSeriesId.Kai:
+                return Disciplines.getDisciplinesIds(KaiDisciplines);
+            case BookSeriesId.Magnakai:
+                return Disciplines.getDisciplinesIds(MgnDisciplines);
+            case BookSeriesId.GrandMaster:
+                return Disciplines.getDisciplinesIds(GndDisciplines);
+            default:
+                return [];
+        }
     }
-
-    /** Get all Magnakai disciplines ids */
-    public static getMagnakaiDisciplinesIds(): string[] {
-        return Disciplines.getDisciplinesIds(MgnDisciplines);
-    }
-
-    /** Get all Grand Master disciplines ids */
-    public static getGrandMasterDisciplinesIds(): string[] {
-        return Disciplines.getDisciplinesIds(GndDisciplines);
-    }
-
 }

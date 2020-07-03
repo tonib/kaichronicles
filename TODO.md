@@ -53,6 +53,7 @@ TODO
 - Test SetupDisciplines
 - SetupDisciplines: Move all info about the serie (initial number disciplines, book number starts, etc) to BookSeries
 - Rule "dropDisciplines" could be removed, no longer needed
+- Now we can check if rule "test" with "hasDiscipline" has a valid discipline code
 
 ## Other
 - Move all bonuses calculation from ActionChart to a new class

@@ -79,13 +79,17 @@ class ActionChart {
     // // Removed in v.12
     // private weaponSkill: string[] = [];
 
-    /** Kai disciplines (books 1-5) */
+    /**
+     * Kai disciplines (books 1-5).
+     * This stores disciplines player had at end of book 5. So, it will NEVER contain the 10 disciplines.
+     * See getDisciplines() for how is handled.
+     */
     private kaiDisciplines: SeriesDisciplines = { disciplines: [], weaponSkill: [] };
 
-    /** Magnakai disciplines (books 6-12) */
+    /** Magnakai disciplines (books 6-12). See kaiDisciplines comments */
     private magnakaiDisciplines: SeriesDisciplines = { disciplines: [], weaponSkill: [] };
 
-    /** Grand Master disciplines (books 13+) */
+    /** Grand Master disciplines (books 13+). See kaiDisciplines comments */
     private grandMasterDisciplines: SeriesDisciplines = { disciplines: [], weaponSkill: [] };
 
     /** Player annotations */
@@ -1119,26 +1123,62 @@ class ActionChart {
         return ActionChartItem.getIds(this.weapons);
     }
 
-    /** Returns current disciplines for current book serie */
+    /**
+     * Returns player disciplines for a given book series
+     * @param series Book series witch get disciplines. If null or not specified, we get current book disciplines
+     * @returns Disciplines for that serie
+     */
     public getDisciplines(series: BookSeriesId = null): string[] {
         return this.getSeriesDisciplines(series).disciplines;
     }
 
+    public hasDiscipline(disciplineId: string, seriesId: BookSeriesId = null) {
+        return this.getSeriesDisciplines(seriesId).disciplines.contains(disciplineId);
+    }
+
+    /**
+     * Returns player disciplines and weaponskill for a given book series
+     * @param series Book series witch get disciplines. If null or not specified, we get current book disciplines
+     * @returns Disciplines for that serie
+     */
     private getSeriesDisciplines(seriesId: BookSeriesId = null): SeriesDisciplines {
+
+        const currentSeriesId = state.book.getBookSeries().id;
         if (seriesId === null) {
-            seriesId = state.book.getBookSeries().id;
+            seriesId = currentSeriesId;
+        } else if (seriesId > currentSeriesId) {
+            // Future series. If we are debugging, maybe we have disciplines in that series: Ignore them
+            return { disciplines: [], weaponSkill: [] };
         }
+
+        let seriesDisciplines: SeriesDisciplines;
         switch (seriesId) {
             case BookSeriesId.Kai:
-                return this.kaiDisciplines;
+                seriesDisciplines = this.kaiDisciplines;
+                break;
             case BookSeriesId.Magnakai:
-                return this.magnakaiDisciplines;
+                seriesDisciplines = this.magnakaiDisciplines;
+                break;
             case BookSeriesId.GrandMaster:
-                return this.grandMasterDisciplines;
+                seriesDisciplines = this.grandMasterDisciplines;
+                break;
             default:
                 console.log("ActionChart.getSeriesDisciplines: Wrong book series");
-                return { disciplines: [], weaponSkill: [] };
+                seriesDisciplines = { disciplines: [], weaponSkill: [] };
+                break;
         }
+
+        // Clone, to avoid change ActionChart in next lines
+        seriesDisciplines = { disciplines: seriesDisciplines.disciplines, weaponSkill: seriesDisciplines.weaponSkill };
+
+        // If the player has played SOME book of a previous series, he/she has ALL disciplines of that series
+        // and can benefit of loyalty bonuses
+        if (seriesId < currentSeriesId && seriesDisciplines.disciplines.length > 0 ) {
+            seriesDisciplines.disciplines = Disciplines.getSeriesDisciplines(seriesId);
+            // TODO: If player had no weaponskill, add two random weapons
+        }
+
+        return seriesDisciplines;
     }
 
     /**
