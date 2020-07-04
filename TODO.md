@@ -56,6 +56,8 @@ TODO
 - Now we can check if rule "test" with "hasDiscipline" has a valid discipline code
 - If noPsiSurge="true" , set noMinblast="true". If noKaiSurge="true, set noMindblast="true", noPsisurge="true". Set a single flag for this ???
 - Grand Master: If you have no weapon, there is no malus
+- I suspect Kai-surge and Psi-surge checks could be a single one
+- In Grand Master books, if you have Psi-surge, check the bonus for Mindblast
 
 ## Other
 - Move all bonuses calculation from ActionChart to a new class

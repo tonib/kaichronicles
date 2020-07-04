@@ -10,7 +10,7 @@ const views = {
      * Views setup
      */
     setup() {
-        if ( ENVIRONMENT === "DEVELOPMENT" ) {
+        if ( App.environment === EnvironmentType.Development ) {
             // Nothing to do. Return a resolved promise
             return jQuery.Deferred().resolve().promise();
         }

@@ -1,12 +1,30 @@
-const app = {
 
-    run() {
-        // *************** SETUP ***************
+/** Execution enviroment type */
+enum EnvironmentType {
+    Development = "DEVELOPMENT",
+    Production = "PRODUCTION"
+}
+
+/**
+ * The web application
+ */
+class App {
+
+    /** Execution environment type */
+    public static environment: EnvironmentType;
+
+    /** Debug functions are enabled */
+    public static debugMode: boolean;
+
+    /** Web application setup  */
+    public static run(environment: string) {
+
+        App.environment =  environment as EnvironmentType;
 
         // Are we on debug mode?
-        const debugMode = ( window.getUrlParameter("debug") === "true" );
+        App.debugMode = ( window.getUrlParameter("debug") === "true" );
 
-        if ( debugMode ) {
+        if ( App.debugMode ) {
             // On debug mode, disable the cache (to always reload the books xml)
             console.log("Debug mode: cache disabled");
             $.ajaxSetup({ cache: false });
@@ -43,7 +61,7 @@ const app = {
                     // Setup google analytics, if we are on web
                     GoogleAnalytics.setup();
 
-                    if ( debugMode && state.existsPersistedState() ) {
+                    if ( App.debugMode && state.existsPersistedState() ) {
                         // If we are developing a book, avoid to press the "Continue game"
                         routing.redirect( "setup" );
                     }
@@ -69,5 +87,5 @@ const app = {
                 }
                 template.setErrorMessage(reason.toString());
             });
-    },
-};
+    }
+}

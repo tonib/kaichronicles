@@ -12,7 +12,7 @@ class GoogleAnalytics {
     public static isEnabled(): boolean {
         try {
 
-            if (ENVIRONMENT !== "PRODUCTION" || cordovaApp.isRunningApp()) {
+            if (App.environment !== EnvironmentType.Production || cordovaApp.isRunningApp()) {
                 // Debug or in Cordova app
                 return false;
             }
