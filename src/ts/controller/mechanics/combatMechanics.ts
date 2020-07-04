@@ -1,9 +1,12 @@
-const combatMechanics = {
+/**
+ * Combats mechanics
+ */
+class combatMechanics {
 
     /**
      * Render section combats
      */
-    renderCombats() {
+    public static renderCombats() {
 
         // Get combats to render
         const sectionState = state.sectionStates.getSectionState();
@@ -142,22 +145,22 @@ const combatMechanics = {
             }
         });
 
-    },
+    }
 
-    updateEnemyEndurance( $combatUI: JQuery<HTMLElement> , combat: Combat , doNotAnimate: boolean ) {
+    private static updateEnemyEndurance( $combatUI: JQuery<HTMLElement> , combat: Combat , doNotAnimate: boolean ) {
         template.animateValueChange( $combatUI.parent().find( ".enemy-current-endurance" ) ,
             combat.endurance , doNotAnimate , combat.endurance > 0 ? null : "red" );
-    },
+    }
 
-    updateCombatRatio( $combatUI: JQuery<HTMLElement> , combat: Combat ) {
+    private static updateCombatRatio( $combatUI: JQuery<HTMLElement> , combat: Combat ) {
         // Set combat ratio:
         $combatUI.find(".mechanics-combatRatio").text( combat.getCombatRatio() );
-    },
+    }
 
     /**
      * Update all combats ratio on UI
      */
-    updateCombats() {
+    public static updateCombats() {
         // Get combats to render
         const sectionState = state.sectionStates.getSectionState();
         if ( sectionState.combats.length === 0 ) {
@@ -167,14 +170,14 @@ const combatMechanics = {
             const $combatUI = $(".mechanics-combatUI:eq(" + index + ")");
             combatMechanics.updateCombatRatio( $combatUI , combat);
         });
-    },
+    }
 
     /**
      * Hide combat UI buttons
      * @param {jquery} $combatUI The combat UI where disable buttons. If it's null, all
      * combats buttons on the section will be hidden
      */
-    hideCombatButtons( $combatUI: JQuery<HTMLElement> ) {
+    public static hideCombatButtons( $combatUI: JQuery<HTMLElement> ) {
         if ( !$combatUI ) {
             // Disable all combats
             $combatUI = $(".mechanics-combatUI");
@@ -182,14 +185,14 @@ const combatMechanics = {
 
         $combatUI.find(".mechanics-playTurn").hide();
         $combatUI.find(".mechanics-elude").hide();
-    },
+    }
 
     /**
      * Show combat UI buttons
      * @param {jquery} $combatUI The combat UI where enable buttons. If it's null, all
      * combats buttons on the section will be hidden
      */
-    showCombatButtons( $combatUI: JQuery<HTMLElement> ) {
+    public static showCombatButtons( $combatUI: JQuery<HTMLElement> ) {
 
         if ( !$combatUI ) {
             // Disable all combats
@@ -209,14 +212,14 @@ const combatMechanics = {
             $combatUI.find(".mechanics-playTurn").show();
             combatMechanics.showHideEludeButton( combat , $combatUI );
         }
-    },
+    }
 
     /**
      * Run a combat turn
      * @param {jquery} $combatUI The combat UI
      * @param elude True if the player is eluding the combat
      */
-    runCombatTurn( $combatUI: JQuery<HTMLElement>, elude: boolean ) {
+    private static runCombatTurn( $combatUI: JQuery<HTMLElement>, elude: boolean ) {
         // Get the combat info:
         const combatIndex = parseInt( $combatUI.attr( "data-combatIdx" ), 10 );
         const sectionState = state.sectionStates.getSectionState();
@@ -295,39 +298,39 @@ const combatMechanics = {
             combatMechanics.checkKaiSurgeEnabled();
         });
 
-    },
+    }
 
     /**
      * Update visibility of the elude combat button
      * @param combat The combat to update
      * @param {jQuery} $combatUI The combat UI
      */
-    showHideEludeButton( combat: Combat , $combatUI: JQuery<HTMLElement> ) {
+    private static showHideEludeButton( combat: Combat , $combatUI: JQuery<HTMLElement> ) {
         if ( combat.canBeEluded() ) {
             // The combat can be eluded after this turn
             $combatUI.find(".mechanics-elude").show();
         } else {
             $combatUI.find(".mechanics-elude").hide();
         }
-    },
+    }
 
     /**
      * Render a combat turn
      * @param {jquery} $combatTable Table where to append the turn
      * @param turn The turn to render
      */
-    renderCombatTurn( $combatTableBody: JQuery<HTMLElement> , turn: CombatTurn ) {
+    private static renderCombatTurn( $combatTableBody: JQuery<HTMLElement> , turn: CombatTurn ) {
         $combatTableBody.append(
             '<tr><td class="hidden-xs">' + turn.turnNumber + "</td><td>" + turn.randomValue +
             "</td><td>" + turn.getPlayerLossText() + "</td><td>" +
             turn.getEnemyLossText() + "</td></tr>"
         );
-    },
+    }
 
     /**
      * Psi-surge event handler
      */
-    onPsiSurgeClick(e: Event, $psiSurgeCheck: JQuery<HTMLElement>) {
+    private static onPsiSurgeClick(e: Event, $psiSurgeCheck: JQuery<HTMLElement>) {
 
         const $combatUI = $psiSurgeCheck.parents(".mechanics-combatUI").first();
         const combatIndex = parseInt( $combatUI.attr( "data-combatIdx" ), 10 );
@@ -347,12 +350,12 @@ const combatMechanics = {
         }
 
         combatMechanics.updateCombatRatio( $combatUI , combat);
-    },
+    }
 
     /**
      * Kai-surge event handler
      */
-    onKaiSurgeClick(e: Event, $kaiSurgeCheck: JQuery<HTMLElement>) {
+    private static onKaiSurgeClick(e: Event, $kaiSurgeCheck: JQuery<HTMLElement>) {
 
         const $combatUI = $kaiSurgeCheck.parents(".mechanics-combatUI").first();
         const combatIndex = parseInt( $combatUI.attr( "data-combatIdx" ), 10 );
@@ -372,13 +375,13 @@ const combatMechanics = {
         }
 
         combatMechanics.updateCombatRatio( $combatUI , combat);
-    },
+    }
 
     /**
      * Check if the Psi-surge can be enabled.
      * It cannot be used if the EP <= 6
      */
-    checkPsiSurgeEnabled() {
+    public static checkPsiSurgeEnabled() {
 
         if ( !(state.actionChart.hasMgnDiscipline(MgnDisciplines.PsiSurge) || state.actionChart.hasGndDiscipline(GndDisciplines.KaiSurge)) ) {
             return;
@@ -395,13 +398,13 @@ const combatMechanics = {
             combatMechanics.disablePsiSurge( $combatUI , sectionState.combats[i]);
         }
 
-    },
+    }
 
     /**
      * Check if the Psi-surge can be enabled.
      * It cannot be used if the EP <= 6
      */
-    checkKaiSurgeEnabled() {
+    public static checkKaiSurgeEnabled() {
 
         if ( !state.actionChart.hasGndDiscipline(GndDisciplines.KaiSurge) ) {
             return;
@@ -418,35 +421,35 @@ const combatMechanics = {
             combatMechanics.disableKaiSurge( $combatUI , sectionState.combats[i]);
         }
 
-    },
+    }
 
     /**
      * Disable Psi-surge on a combat
      */
-    disablePsiSurge( $combatUI: JQuery<HTMLElement> , combat: Combat ) {
+    private static disablePsiSurge( $combatUI: JQuery<HTMLElement> , combat: Combat ) {
         combat.psiSurge = false;
         const $psiSurgeCheck = $combatUI.find(".psisurgecheck input");
         $psiSurgeCheck.prop("checked", false);
         $psiSurgeCheck.prop("disabled", true);
         combatMechanics.updateCombatRatio( $combatUI , combat );
-    },
+    }
 
     /**
      * Disable Kai-surge on a combat
      */
-    disableKaiSurge( $combatUI: JQuery<HTMLElement> , combat: Combat ) {
+    private static disableKaiSurge( $combatUI: JQuery<HTMLElement> , combat: Combat ) {
         combat.kaiSurge = false;
         const $kaiSurgeCheck = $combatUI.find(".kaisurgecheck input");
         $kaiSurgeCheck.prop("checked", false);
         $kaiSurgeCheck.prop("disabled", true);
         combatMechanics.updateCombatRatio( $combatUI , combat );
-    },
+    }
 
     /**
      * Show dialog with combat ratio details
      * @param {jQuery} $combatUI The combat UI
      */
-    showCombatRatioDetails( $combatUI: JQuery<HTMLElement> ) {
+    private static showCombatRatioDetails( $combatUI: JQuery<HTMLElement> ) {
         // Get the combat info:
         const combatIndex = parseInt( $combatUI.attr( "data-combatIdx" ), 10 );
         const sectionState = state.sectionStates.getSectionState();
@@ -480,4 +483,4 @@ const combatMechanics = {
         $("#game-ratiodetails").modal();
     }
 
-};
+}
