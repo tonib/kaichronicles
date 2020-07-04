@@ -2,10 +2,10 @@
 /**
  * Meal mechanics
  */
-const mealMechanics = {
+class MealMechanics {
 
     /** Run meals rule */
-    runRule(rule: Element) {
+    public static runRule(rule: Element) {
 
         const $rule = $(rule);
 
@@ -130,13 +130,13 @@ const mealMechanics = {
             $(mealSelector).remove();
 
         });
-    },
+    }
 
     /**
      * Return true if there are pending meals on the section
      */
-    arePendingMeals() {
+    public static arePendingMeals(): boolean {
         return $(".mechanics-meal-ui").length > 0;
     }
 
-};
+}

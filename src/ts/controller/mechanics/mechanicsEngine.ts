@@ -1134,7 +1134,7 @@ const mechanicsEngine = {
 
     /** Have a meal rule */
     meal(rule: Element) {
-        mealMechanics.runRule(rule);
+        MealMechanics.runRule(rule);
     },
 
     /** Display message rule */

@@ -137,7 +137,7 @@ const randomMechanics = {
             }
 
             // If there are pending meals, don't follow with this link
-            if (mealMechanics.arePendingMeals()) {
+            if (MealMechanics.arePendingMeals()) {
                 alert(translations.text("doMealFirst"));
                 return;
             }
