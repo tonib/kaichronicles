@@ -575,9 +575,7 @@ const mechanicsEngine = {
         }
 
         // Test weaponskill with current weapon
-        // TODO: Use mechanicsEngine.getBooleanProperty here
-        const weaponskillActive = $rule.attr("weaponskillActive");
-        if (weaponskillActive === "true") {
+        if (mechanicsEngine.getBooleanProperty($rule, "weaponskillActive")) {
             if (state.actionChart.isWeaponskillActive()) {
                 conditionStatisfied = true;
             }
