@@ -7,6 +7,8 @@ const mealMechanics = {
     /** Run meals rule */
     runRule(rule: Element) {
 
+        const $rule = $(rule);
+
         if (state.sectionStates.ruleHasBeenExecuted(rule)) {
             // Execute only once
             return;
@@ -14,7 +16,7 @@ const mealMechanics = {
 
         // Get the UI id for the meal
         let id = "mechanics-meal";
-        const txtIndex = $(rule).attr("index");
+        const txtIndex = $rule.attr("index");
         if (txtIndex) {
             id += "-" + txtIndex;
         }
@@ -42,16 +44,19 @@ const mealMechanics = {
         gameView.appendToSection($meal);
 
         // Check if hunting discipline is available
-        const huntDisabled = $(rule).attr("huntDisabled") === "true";   // This disables Kai hunt, but no Huntmastery
-        const hntmstryDisabled = $(rule).attr("hntmstryDisabled") === "true";
-        let hasHuntingDiscipline = state.actionChart.getDisciplines().contains("hunting") || state.hasCompletedKaiSerie();
+        const huntDisabled = mechanicsEngine.getBooleanProperty($rule, "huntDisabled", false); // This disables Kai hunt, but no Huntmastery
+        const hntmstryDisabled = mechanicsEngine.getBooleanProperty($rule, "hntmstryDisabled", false); // This disables both
+
+        let hasHuntingDiscipline = state.actionChart.hasKaiDiscipline(KaiDisciplines.Hunting);
         if (huntDisabled || hntmstryDisabled) {
             hasHuntingDiscipline = false;
         }
-        let hasHntmstryDiscipline = state.actionChart.getDisciplines().contains("hntmstry") || state.hasCompletedKaiMagnakaiSerie();
+        let hasHntmstryDiscipline = state.actionChart.hasMgnDiscipline(MgnDisciplines.Huntmastery) ||
+            state.actionChart.hasGndDiscipline(GndDisciplines.GrandHuntmastery);
         if (hntmstryDisabled) {
             hasHntmstryDiscipline = false;
         }
+
         if ((!hasHuntingDiscipline && !hasHntmstryDiscipline) || !state.sectionStates.huntEnabled) {
             $(mealSelector + " .mechanics-eatHunt").hide();
         }
@@ -64,7 +69,7 @@ const mealMechanics = {
         }
 
         // Check if you can buy a meal
-        const priceValue = $(rule).attr("price");
+        const priceValue = $rule.attr("price");
         let price = 0;
         if (priceValue) {
             price = parseInt(priceValue, 10);
