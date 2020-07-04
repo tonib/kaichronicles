@@ -341,8 +341,8 @@ section, and there are rules with state there that must to be reexecuted
 ```
 The player must to have a meal on this section.
 
-If the attribute "huntDisabled" is "true" the player will not be allowed to use the hunting discipline on this meal. If the attribute
-"hntmstryDisabled" is "true" the player will not be allowed to use the hunting and huntmastery discipline on this meal.
+If the attribute "huntDisabled" is "true" the player will not be allowed to use any hunting discipline, of any book series, on this 
+meal.
 If the attribute "price" is set with a integer value, this will allows to buy a meat for the given price.
 
 ### huntStatus
