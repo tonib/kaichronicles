@@ -610,13 +610,20 @@ class ActionChart {
     }
 
     /**
-     * Return true if the Weaponskill is active with the selected weapon
-     * @return True if Weaponskill is active
+     * Return true if the Weaponskill is active with the selected weapon for a given book series
+     * @param bow True if we should test weaponskill with bow. False to check hand to hand currently selected weapon
+     * @param bookSeriesId Book series disciplines to check. If not specified or null, current book series disciplines will be checked
+     * @returns True if Weaponskill discipline is active for the currently selected hand to hand weapon, or for a owned bow
      */
-    public isWeaponskillActive(bow: boolean = false): boolean {
+    public isWeaponskillActive(bow: boolean = false, bookSeriesId: BookSeriesId = null): boolean {
 
-        if (!this.getDisciplines().contains("wepnskll") && !this.getDisciplines().contains("wpnmstry") && !state.hasCompletedKaiSerie()) {
-            // Player has no Weaponskill
+        if (bookSeriesId === null) {
+            // Current book series
+            bookSeriesId = state.book.getBookSeries().id;
+        }
+
+        if (!this.hasDiscipline(BookSeries.series[bookSeriesId].weaponskillDiscipline, bookSeriesId)) {
+            // Player has no weaponskill on that book series
             return false;
         }
 
@@ -626,13 +633,9 @@ class ActionChart {
             return false;
         }
 
-        if (state.hasCompletedKaiMagnakaiSerie()) {
-            // Weapon mastery loyalty bonus
-            return true;
-        }
-
-        for (const skill of this.getWeaponSkill()) {
-            if (currentWeapon.isWeaponType(skill)) {
+        // Check if current weapon has a type appliable in the current weaponskill discipline
+        for (const weaponType of this.getWeaponSkill(bookSeriesId)) {
+            if (currentWeapon.isWeaponType(weaponType)) {
                 return true;
             }
         }
