@@ -544,12 +544,6 @@ Changes the player current weapon to the set on "objectId" property
 ```
 Display a "toast" message
 
-### dropDisciplines
-```xml
-<dropDisciplines />
-```
-Remove all disciplines from the Action Chart. Only used when changing of book series (ex. from to Kai to Magnakai)
-
 ### textToChoice
 ```xml
 <textToChoice 

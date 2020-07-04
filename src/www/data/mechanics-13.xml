@@ -17,8 +17,6 @@
             <drop objectId="map" />
             <!-- Restore Deliverance use each X days -->
             <restoreDeliveranceUse />
-            <!-- Drop all Magnakai disciplines, now we use Grand Master disciplines -->
-            <dropDisciplines />
         </section>
 
         <section id="gamerulz">

@@ -195,7 +195,6 @@
     - Up to sect1
     - Remove showCount property from mechanics-13+
     - "Game rules section": There is a link to the "Readers’ Handbook": Read this!
-    - Big TODO: Added "dropDisciplines" to "tssf" section. Needed because you don't carry previous Magnakai displiclines.
       But you should keep your "Lore circles" and other bonuses... So, we should keep a track of old previous book series
       disciplines.... Or, assume that if you have moved to a new serie from a previous one, you have all the old serie 
       disciplines

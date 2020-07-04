@@ -1386,24 +1386,6 @@ const mechanicsEngine = {
     },
 
     /**
-     * Drop all disciplines.
-     * Used when changing of book series (kai -> magnakai)
-     */
-    dropDisciplines(rule: Element) {
-        // TODO: This rule is no longer needed, remove it
-        /*if (state.sectionStates.ruleHasBeenExecuted(rule)) {
-            // Execute only once
-            return;
-        }
-
-        state.actionChart.setDisciplines([]);
-
-        // Redraw current CS / EP on the bar title
-        template.updateStatistics();
-        state.sectionStates.markRuleAsExecuted(rule);*/
-    },
-
-    /**
      * Change a section text by a section choice
      */
     textToChoice(rule: Element) {

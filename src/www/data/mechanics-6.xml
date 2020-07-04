@@ -15,8 +15,6 @@
             <endurance count="+[MAXENDURANCE]" />
             <!-- Drop the previous books map -->
             <drop objectId="map" />
-            <!-- Drop all kai disciplines, now we use magnakai disciplines -->
-            <dropDisciplines />
         </section>
 
         <section id="gamerulz">

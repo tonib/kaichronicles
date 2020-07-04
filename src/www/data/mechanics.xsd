@@ -388,8 +388,6 @@
 
         <xs:attribute name="objectId" type="xs:string" use="required" />
     </xs:complexType>
-    
-    <xs:complexType name="dropDisciplines" />
 
     <xs:complexType name="textToChoice">
         <xs:attribute name="text-en" type="xs:string" use="required" />
@@ -464,7 +462,6 @@
             <xs:element name="registerGlobalRule" type="registerGlobalRule" />
             <xs:element name="objectUsed" type="objectUsed" />
             <xs:element name="unregisterGlobalRule" type="unregisterGlobalRule" />
-            <xs:element name="dropDisciplines" type="dropDisciplines" />
             <xs:element name="textToChoice" type="textToChoice" />
             <xs:element name="kaiMonasteryStorage" type="kaiMonasteryStorage" />
             <xs:element name="executeOnce" type="executeOnce" />
