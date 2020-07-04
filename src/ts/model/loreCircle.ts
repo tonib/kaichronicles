@@ -29,7 +29,7 @@ class LoreCircle {
     public bonusEP: number;
 
     /** Disciplines on the circle */
-    public disciplines: string[];
+    public disciplines: MgnDiscipline[];
 
     /**
      * Returns the translated description of the circle
@@ -38,7 +38,7 @@ class LoreCircle {
         return translations.text( this.id );
     }
 
-    private constructor(id: string, bonusCS: number, bonusEP: number, disciplines: string[]) {
+    private constructor(id: string, bonusCS: number, bonusEP: number, disciplines: MgnDiscipline[]) {
         this.id = id;
         this.bonusCS = bonusCS;
         this.bonusEP = bonusEP;
@@ -46,8 +46,8 @@ class LoreCircle {
     }
 
     /**
-     * Return true if the player disciplines match this circle
-     * @param disciplines Player disciplines ids
+     * Return true if the player Magnakai disciplines match this circle
+     * @param disciplines Player Magnakai disciplines ids
      */
     public matchCircle( disciplines: string[] ): boolean {
         if (state.hasCompletedKaiMagnakaiSerie()) {
@@ -68,22 +68,21 @@ class LoreCircle {
             return;
         }
         LoreCircle.circles = [];
-        LoreCircle.circles.push( new LoreCircle(LoreCircle.FIRE_ID, 1, 2, [ "wpnmstry" , "hntmstry" ]) );
-        LoreCircle.circles.push( new LoreCircle(LoreCircle.LIGHT_ID, 0, 3 , [ "anmlctrl" , "curing" ]) );
-        LoreCircle.circles.push( new LoreCircle(LoreCircle.SOLARIS_ID, 1, 3 , [ "invsblty" , "hntmstry" , "pthmnshp" ]) );
-        LoreCircle.circles.push( new LoreCircle(LoreCircle.SPIRIT_ID, 3, 3 , [ "psisurge" , "psiscrn" , "nexus" , "dvnation" ]) );
+        LoreCircle.circles.push( new LoreCircle(LoreCircle.FIRE_ID, 1, 2,
+            [ MgnDiscipline.Weaponmastery , MgnDiscipline.Huntmastery ]) );
+        LoreCircle.circles.push( new LoreCircle(LoreCircle.LIGHT_ID, 0, 3 ,
+            [ MgnDiscipline.AnimalControl , MgnDiscipline.Curing ]) );
+        LoreCircle.circles.push( new LoreCircle(LoreCircle.SOLARIS_ID, 1, 3 ,
+            [ MgnDiscipline.Invisibility, MgnDiscipline.Huntmastery, MgnDiscipline.Pathsmanship ]) );
+        LoreCircle.circles.push( new LoreCircle(LoreCircle.SPIRIT_ID, 3, 3 ,
+            [ MgnDiscipline.PsiSurge, MgnDiscipline.PsiScreen, MgnDiscipline.Nexus, MgnDiscipline.Divination ]) );
     }
 
     /**
      * Return the player Lore-Circles
-     * @param disciplines The player disciplines ids
+     * @param disciplines The player Magnakai disciplines ids
      */
     public static getCircles( disciplines: string[] ): LoreCircle[] {
-
-        if ( state.book.bookNumber <= 5 || (state.book.bookNumber >= 13 && !state.hasCompletedKaiMagnakaiSerie()) ) {
-            // Only for magnakai books
-            return [];
-        }
 
         LoreCircle.initializeCircles();
 
@@ -98,7 +97,7 @@ class LoreCircle {
 
     /**
      * Return the bonuses for the player circles
-     * @param disciplines The player disciplines ids
+     * @param disciplines The player Magnakai disciplines ids
      * @param type Type of bonuses to return: 'EP' for endurance points. 'CS' for combat skill
      */
     public static getCirclesBonuses( disciplines: string[] , type: string ): Bonus[] {

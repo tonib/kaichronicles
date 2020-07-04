@@ -55,6 +55,7 @@ class Disciplines {
         return result;
     }
 
+    /** Returns all disciplines ids for the  given book series */
     public static getSeriesDisciplines(seriesId: BookSeriesId): string[] {
         switch (seriesId) {
             case BookSeriesId.Kai:

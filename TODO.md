@@ -58,7 +58,9 @@ TODO
 - Grand Master: If you have no weapon, there is no malus
 - I suspect Kai-surge and Psi-surge checks could be a single one
 - In Grand Master books, if you have Psi-surge, check the bonus for Mindblast
-- Change disciplines codes in LoreCircle
+- Do not show lore circles in action chart in grand master series if player has not played any magnakai book
+- Remove dropDisciplines rule
+- Check if magnakai deliverance +20EP button loyalty bonus is available in Grand Master
 
 ## Other
 - Move all bonuses calculation from ActionChart to a new class

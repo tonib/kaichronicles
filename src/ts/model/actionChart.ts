@@ -838,7 +838,7 @@ class ActionChart {
         // arguably still allow the Spirit circle. Although the game rules are
         // not that detailed.
         if (!combat.mentalOnly) {
-            const circlesBonuses = LoreCircle.getCirclesBonuses(this.getDisciplines(), "CS");
+            const circlesBonuses = LoreCircle.getCirclesBonuses(this.getDisciplines(BookSeriesId.Magnakai), "CS");
             for (const c of circlesBonuses) {
                 bonuses.push(c);
             }
@@ -902,7 +902,7 @@ class ActionChart {
             }
         });
 
-        const circlesBonuses = LoreCircle.getCirclesBonuses(this.getDisciplines(), "EP");
+        const circlesBonuses = LoreCircle.getCirclesBonuses(this.getDisciplines(BookSeriesId.Magnakai), "EP");
         for (const c of circlesBonuses) {
             bonuses.push(c);
         }
@@ -1016,7 +1016,7 @@ class ActionChart {
      * Get the magnakai lore circles owned by the player
      */
     public getLoreCircles(): LoreCircle[] {
-        return LoreCircle.getCircles(this.getDisciplines());
+        return LoreCircle.getCircles(this.getDisciplines(BookSeriesId.Magnakai));
     }
 
     /** The player has Mindshield / Psi-screen? */
@@ -1177,13 +1177,11 @@ class ActionChart {
                 break;
         }
 
-        // Clone, to avoid change ActionChart in next lines
-        seriesDisciplines = { disciplines: seriesDisciplines.disciplines, weaponSkill: seriesDisciplines.weaponSkill };
-
         // If the player has played SOME book of a previous series, he/she has ALL disciplines of that series
         // and can benefit of loyalty bonuses
         if (seriesId < currentSeriesId && seriesDisciplines.disciplines.length > 0 ) {
-            seriesDisciplines.disciplines = Disciplines.getSeriesDisciplines(seriesId);
+            // Clone, to avoid change ActionChart
+            seriesDisciplines = { disciplines: Disciplines.getSeriesDisciplines(seriesId), weaponSkill: seriesDisciplines.weaponSkill };
             // TODO: If player had no weaponskill, add two random weapons
         }
 
@@ -1191,10 +1189,10 @@ class ActionChart {
     }
 
     /**
-     * Set current disciplines
+     * Set current disciplines for current book series
      */
-    public setDisciplines(disciplines: string[], seriesId: BookSeriesId = null) {
-        this.getSeriesDisciplines(seriesId).disciplines = disciplines;
+    public setDisciplines(disciplinesIds: string[]) {
+        this.getSeriesDisciplines().disciplines = disciplinesIds;
     }
 
     /**

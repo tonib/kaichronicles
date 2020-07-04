@@ -1390,7 +1390,8 @@ const mechanicsEngine = {
      * Used when changing of book series (kai -> magnakai)
      */
     dropDisciplines(rule: Element) {
-        if (state.sectionStates.ruleHasBeenExecuted(rule)) {
+        // TODO: This rule is no longer needed, remove it
+        /*if (state.sectionStates.ruleHasBeenExecuted(rule)) {
             // Execute only once
             return;
         }
@@ -1399,7 +1400,7 @@ const mechanicsEngine = {
 
         // Redraw current CS / EP on the bar title
         template.updateStatistics();
-        state.sectionStates.markRuleAsExecuted(rule);
+        state.sectionStates.markRuleAsExecuted(rule);*/
     },
 
     /**
