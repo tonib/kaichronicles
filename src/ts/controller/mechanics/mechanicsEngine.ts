@@ -508,18 +508,15 @@ const mechanicsEngine = {
         const $rule = $(rule);
 
         // Check discipline
-        // TODO: Use mechanicsEngine.getArrayProperty here
-        const disciplineToTest = $rule.attr("hasDiscipline");
-        let i;
-        if (disciplineToTest) {
+        const disciplineToTest = mechanicsEngine.getArrayProperty($rule, "hasDiscipline");
+        if (disciplineToTest.length > 0) {
             // Check if the player has some of the disciplines
             const allDisciplines = Object.keys(state.book.getDisciplinesTable());
-            const disciplines = disciplineToTest.split("|");
-            for (i = 0; i < disciplines.length; i++) {
-                if (!allDisciplines.contains(disciplines[i])) {
-                    mechanicsEngine.debugWarning("Unknown discipline: " + disciplines[i]);
+            for (const discipline of disciplineToTest) {
+                if (!allDisciplines.contains(discipline)) {
+                    mechanicsEngine.debugWarning("Unknown discipline: " + discipline);
                 }
-                if (state.actionChart.getDisciplines().contains(disciplines[i])) {
+                if (state.actionChart.hasDiscipline(discipline)) {
                     conditionStatisfied = true;
                     break;
                 }
@@ -527,6 +524,7 @@ const mechanicsEngine = {
         }
 
         // Check objects
+        let i;
         const objectIdsToTest = $rule.attr("hasObject");
         if (objectIdsToTest) {
             // Check if the player has some of the objects
@@ -637,7 +635,7 @@ const mechanicsEngine = {
 
         // Test if the player has a lore-circle
         const circleId: string = $rule.attr("hasCircle");
-        if (circleId && LoreCircle.getCircle(circleId).matchCircle(state.actionChart.getDisciplines())) {
+        if (circleId && LoreCircle.getCircle(circleId).matchCircle(state.actionChart.getDisciplines(BookSeriesId.Magnakai))) {
             conditionStatisfied = true;
         }
 
@@ -1735,10 +1733,9 @@ const mechanicsEngine = {
      * Apply the healing discipline on the current section
      */
     healingDiscipline() {
-        if (!state.actionChart.getDisciplines().contains("healing")
-            && !state.actionChart.getDisciplines().contains("curing")
-            && !state.actionChart.getDisciplines().contains("deliver")
-            && !state.hasCompletedKaiSerie() ) {
+        if (!state.actionChart.hasKaiDiscipline(KaiDiscipline.Healing) &&
+            !state.actionChart.hasMgnDiscipline(MgnDiscipline.Curing) &&
+            !state.actionChart.hasGndDiscipline(GndDiscipline.Deliverance)) {
             // Only if having healing discipline or loyalty bonus
             return;
         }

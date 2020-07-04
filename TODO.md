@@ -58,6 +58,7 @@ TODO
 - Grand Master: If you have no weapon, there is no malus
 - I suspect Kai-surge and Psi-surge checks could be a single one
 - In Grand Master books, if you have Psi-surge, check the bonus for Mindblast
+- Change disciplines codes in LoreCircle
 
 ## Other
 - Move all bonuses calculation from ActionChart to a new class

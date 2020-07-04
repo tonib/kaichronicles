@@ -1132,7 +1132,7 @@ class ActionChart {
         return this.getSeriesDisciplines(series).disciplines;
     }
 
-    private hasDiscipline(disciplineId: string, seriesId: BookSeriesId) {
+    public hasDiscipline(disciplineId: string, seriesId: BookSeriesId = null) {
         return this.getSeriesDisciplines(seriesId).disciplines.contains(disciplineId);
     }
     public hasKaiDiscipline(disciplineId: KaiDiscipline) {
@@ -1172,7 +1172,7 @@ class ActionChart {
                 seriesDisciplines = this.grandMasterDisciplines;
                 break;
             default:
-                console.log("ActionChart.getSeriesDisciplines: Wrong book series");
+                mechanicsEngine.debugWarning("ActionChart.getSeriesDisciplines: Wrong book series");
                 seriesDisciplines = { disciplines: [], weaponSkill: [] };
                 break;
         }
