@@ -226,7 +226,7 @@ class SetupDisciplines {
         // Set checkbox initial value
         const disciplineId: string = $disciplineSection.attr("id");
         const $check = $disciplineSection.find("input[type=checkbox]");
-        $check.prop("checked", state.actionChart.getDisciplines().contains(disciplineId));
+        $check.prop("checked", state.actionChart.hasDiscipline(disciplineId));
 
         // If the player had this discipline on the previous book, disable the check
         // On debug mode, always enabled

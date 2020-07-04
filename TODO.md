@@ -56,7 +56,6 @@ TODO
 - In Grand Master books, if you have Psi-surge, check the bonus for Mindblast
 - Do not show lore circles in action chart in grand master series if player has not played any magnakai book
 - Check if magnakai deliverance +20EP button loyalty bonus is available in Grand Master
-- Pick disciplines in transition magnakai > grand master FAILS
 
 ## Other
 - Move all bonuses calculation from ActionChart to a new class
