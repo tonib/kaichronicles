@@ -1,7 +1,7 @@
 /**
  * Combats mechanics
  */
-class combatMechanics {
+class CombatMechanics {
 
     /**
      * Render section combats
@@ -37,7 +37,7 @@ class combatMechanics {
             .find(".mechanics-playTurn").click(function(e) {
                 // Play turn button click
                 e.preventDefault();
-                combatMechanics.runCombatTurn( $(this).parents(".mechanics-combatUI").first() ,
+                CombatMechanics.runCombatTurn( $(this).parents(".mechanics-combatUI").first() ,
                     false );
             });
 
@@ -55,20 +55,20 @@ class combatMechanics {
             // Elude combat button click
             $combatOriginal.find(".mechanics-elude").click(function(e) {
                 e.preventDefault();
-                combatMechanics.runCombatTurn( $(this).parents(".mechanics-combatUI").first() ,
+                CombatMechanics.runCombatTurn( $(this).parents(".mechanics-combatUI").first() ,
                     true );
             });
 
             // Bind combat ratio link click
             $combatUI.find(".crlink").click(function( e: Event ) {
                 e.preventDefault();
-                combatMechanics.showCombatRatioDetails( $(this).parents(".mechanics-combatUI").first() );
+                CombatMechanics.showCombatRatioDetails( $(this).parents(".mechanics-combatUI").first() );
             });
 
             // Set enemy name on table
             $combatUI.find(".mechanics-enemyName").html( combat.enemy );
             // Set combat ratio:
-            combatMechanics.updateCombatRatio( $combatUI, combat );
+            CombatMechanics.updateCombatRatio( $combatUI, combat );
 
             // Add already played turns
             if ( combat.turns.length > 0 ) {
@@ -77,18 +77,18 @@ class combatMechanics {
                 $turnsTable.show();
                 const $turnsTableBody = $turnsTable.find( "> tbody" );
                 $.each( combat.turns, (idxTurn, turn) => {
-                    combatMechanics.renderCombatTurn( $turnsTableBody , turn );
+                    CombatMechanics.renderCombatTurn( $turnsTableBody , turn );
                 });
                 // Update enemy current endurance
-                combatMechanics.updateEnemyEndurance( $combatUI , combat , true );
+                CombatMechanics.updateEnemyEndurance( $combatUI , combat , true );
             }
 
             if ( sectionState.combatEluded || combat.isFinished() || combat.disabled ) {
                 // Hide button to run more turns
-                combatMechanics.hideCombatButtons( $combatUI );
+                CombatMechanics.hideCombatButtons( $combatUI );
             } else {
                 // Check if the combat can be eluded
-                combatMechanics.showHideEludeButton( combat , $combatUI );
+                CombatMechanics.showHideEludeButton( combat , $combatUI );
             }
 
             if ( !state.actionChart.hasGndDiscipline(GndDisciplines.KaiSurge) || combat.noKaiSurge ) {
@@ -99,15 +99,15 @@ class combatMechanics {
                 // Initialice Psi surge:
                 if ( combat.kaiSurge ) {
                     $kaiSurgeCheck.attr( "checked" , true );
-                    combatMechanics.disablePsiSurge( $combatUI , combat );
+                    CombatMechanics.disablePsiSurge( $combatUI , combat );
                 }
                 // Check if the Psi-surge cannot be used (EP <= 6)
                 if ( state.actionChart.currentEndurance <= Combat.minimumEPForKaiSurge() ) {
-                    combatMechanics.disableKaiSurge( $combatUI , combat );
+                    CombatMechanics.disableKaiSurge( $combatUI , combat );
                 }
                 // Psi surge selection
                 $kaiSurgeCheck.click(function(e: Event) {
-                    combatMechanics.onKaiSurgeClick(e , $(this) );
+                    CombatMechanics.onKaiSurgeClick(e , $(this) );
                 });
 
                 // UI Psi-Surge texts
@@ -126,15 +126,15 @@ class combatMechanics {
                 // Initialice Psi surge:
                 if ( combat.psiSurge ) {
                     $psiSurgeCheck.attr( "checked" , true );
-                    combatMechanics.disableKaiSurge( $combatUI , combat );
+                    CombatMechanics.disableKaiSurge( $combatUI , combat );
                 }
                 // Check if the Psi-surge cannot be used (EP <= 6)
                 if ( state.actionChart.currentEndurance <= Combat.minimumEPForPsiSurge() ) {
-                    combatMechanics.disablePsiSurge( $combatUI , combat );
+                    CombatMechanics.disablePsiSurge( $combatUI , combat );
                 }
                 // Psi surge selection
                 $psiSurgeCheck.click(function(e: Event) {
-                    combatMechanics.onPsiSurgeClick(e , $(this) );
+                    CombatMechanics.onPsiSurgeClick(e , $(this) );
                 });
 
                 // UI Psi-Surge texts
@@ -168,7 +168,7 @@ class combatMechanics {
         }
         $.each(sectionState.combats, (index, combat) => {
             const $combatUI = $(".mechanics-combatUI:eq(" + index + ")");
-            combatMechanics.updateCombatRatio( $combatUI , combat);
+            CombatMechanics.updateCombatRatio( $combatUI , combat);
         });
     }
 
@@ -210,7 +210,7 @@ class combatMechanics {
 
         if ( !(sectionState.combatEluded || combat.isFinished() || combat.disabled) ) {
             $combatUI.find(".mechanics-playTurn").show();
-            combatMechanics.showHideEludeButton( combat , $combatUI );
+            CombatMechanics.showHideEludeButton( combat , $combatUI );
         }
     }
 
@@ -240,16 +240,16 @@ class combatMechanics {
             // Render new turn
             const $turnsTable = $combatUI.find( "table" ).first();
             $turnsTable.show();
-            combatMechanics.renderCombatTurn( $turnsTable.find( "> tbody" ), turn );
+            CombatMechanics.renderCombatTurn( $turnsTable.find( "> tbody" ), turn );
 
             // Update enemy current endurance
-            combatMechanics.updateEnemyEndurance( $combatUI , combat , false );
+            CombatMechanics.updateEnemyEndurance( $combatUI , combat , false );
 
             if ( sectionState.combatEluded || combat.isFinished() ) {
                 // Combat finished
 
                 // Hide button to run more turns
-                combatMechanics.hideCombatButtons( $combatUI );
+                CombatMechanics.hideCombatButtons( $combatUI );
 
                 // Test player death
                 mechanicsEngine.testDeath();
@@ -276,26 +276,26 @@ class combatMechanics {
                 // Combat continues
 
                 // Check if the combat can be eluded
-                combatMechanics.showHideEludeButton( combat , $combatUI );
+                CombatMechanics.showHideEludeButton( combat , $combatUI );
 
                 // Fire turn events:
                 mechanicsEngine.fireAfterCombatTurn(combat);
 
                 // Update combat ratio (it can be changed by combat turn rules):
-                combatMechanics.updateCombatRatio( $combatUI , combat );
+                CombatMechanics.updateCombatRatio( $combatUI , combat );
             }
 
             // Combat has been eluded?
             if ( elude ) {
                 // Disable other combats
-                combatMechanics.hideCombatButtons( null );
+                CombatMechanics.hideCombatButtons( null );
             }
 
             // Check if the Psi-surge should be disabled after this turn
-            combatMechanics.checkPsiSurgeEnabled();
+            CombatMechanics.checkPsiSurgeEnabled();
 
             // Check if the Kai-surge should be disabled after this turn
-            combatMechanics.checkKaiSurgeEnabled();
+            CombatMechanics.checkKaiSurgeEnabled();
         });
 
     }
@@ -346,10 +346,10 @@ class combatMechanics {
         combat.kaiSurge = false;
 
         if ( !selected && state.actionChart.currentEndurance <= Combat.minimumEPForKaiSurge() ) {
-            combatMechanics.disableKaiSurge( $combatUI , combat );
+            CombatMechanics.disableKaiSurge( $combatUI , combat );
         }
 
-        combatMechanics.updateCombatRatio( $combatUI , combat);
+        CombatMechanics.updateCombatRatio( $combatUI , combat);
     }
 
     /**
@@ -371,10 +371,10 @@ class combatMechanics {
         combat.psiSurge = false;
 
         if ( !selected && state.actionChart.currentEndurance <= Combat.minimumEPForPsiSurge() ) {
-            combatMechanics.disablePsiSurge( $combatUI , combat );
+            CombatMechanics.disablePsiSurge( $combatUI , combat );
         }
 
-        combatMechanics.updateCombatRatio( $combatUI , combat);
+        CombatMechanics.updateCombatRatio( $combatUI , combat);
     }
 
     /**
@@ -395,7 +395,7 @@ class combatMechanics {
         }
         for ( let i = 0; i < sectionState.combats.length; i++ ) {
             const $combatUI = $(".mechanics-combatUI:eq(" + i + ")");
-            combatMechanics.disablePsiSurge( $combatUI , sectionState.combats[i]);
+            CombatMechanics.disablePsiSurge( $combatUI , sectionState.combats[i]);
         }
 
     }
@@ -418,7 +418,7 @@ class combatMechanics {
         }
         for ( let i = 0; i < sectionState.combats.length; i++ ) {
             const $combatUI = $(".mechanics-combatUI:eq(" + i + ")");
-            combatMechanics.disableKaiSurge( $combatUI , sectionState.combats[i]);
+            CombatMechanics.disableKaiSurge( $combatUI , sectionState.combats[i]);
         }
 
     }
@@ -431,7 +431,7 @@ class combatMechanics {
         const $psiSurgeCheck = $combatUI.find(".psisurgecheck input");
         $psiSurgeCheck.prop("checked", false);
         $psiSurgeCheck.prop("disabled", true);
-        combatMechanics.updateCombatRatio( $combatUI , combat );
+        CombatMechanics.updateCombatRatio( $combatUI , combat );
     }
 
     /**
@@ -442,7 +442,7 @@ class combatMechanics {
         const $kaiSurgeCheck = $combatUI.find(".kaisurgecheck input");
         $kaiSurgeCheck.prop("checked", false);
         $kaiSurgeCheck.prop("disabled", true);
-        combatMechanics.updateCombatRatio( $combatUI , combat );
+        CombatMechanics.updateCombatRatio( $combatUI , combat );
     }
 
     /**

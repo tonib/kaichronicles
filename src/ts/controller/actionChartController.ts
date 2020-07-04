@@ -411,9 +411,9 @@ const actionChartController = {
         if (count < 0) {
             mechanicsEngine.testDeath();
             // Check if the Psi-surge should be disabled
-            combatMechanics.checkPsiSurgeEnabled();
+            CombatMechanics.checkPsiSurgeEnabled();
             // Check if the Kai-surge should be disabled
-            combatMechanics.checkKaiSurgeEnabled();
+            CombatMechanics.checkKaiSurgeEnabled();
         }
 
         template.updateStatistics();

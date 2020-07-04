@@ -118,7 +118,7 @@ const mechanicsEngine = {
         mechanicsEngine.fireAfterCombatTurn(null);
 
         // Render combats
-        combatMechanics.renderCombats();
+        CombatMechanics.renderCombats();
 
         // Test if the player is already death
         mechanicsEngine.testDeath();
@@ -217,7 +217,7 @@ const mechanicsEngine = {
         }
 
         // Update combat ratio on combats  (have we picked a weapon?)
-        combatMechanics.updateCombats();
+        CombatMechanics.updateCombats();
 
         if (fromUI && routing.getControllerName() === "gameController") {
             // Check if we must to re-render the section. This may be needed if the
@@ -1080,10 +1080,10 @@ const mechanicsEngine = {
         sectionState.setCombatsEnabled(enabled);
         if (enabled) {
             // Enable combats
-            combatMechanics.showCombatButtons(null);
+            CombatMechanics.showCombatButtons(null);
         } else {
             // Disable combats
-            combatMechanics.hideCombatButtons(null);
+            CombatMechanics.hideCombatButtons(null);
         }
     },
 
@@ -1727,7 +1727,7 @@ const mechanicsEngine = {
             });
 
             // If there are pending combats, disable them
-            combatMechanics.hideCombatButtons(null);
+            CombatMechanics.hideCombatButtons(null);
         }
     },
 
