@@ -1132,8 +1132,18 @@ class ActionChart {
         return this.getSeriesDisciplines(series).disciplines;
     }
 
-    public hasDiscipline(disciplineId: string, seriesId: BookSeriesId = null) {
+    public hasDiscipline(disciplineId: string, seriesId: BookSeriesId) {
+        // TODO: If we are on debug, check the discipline exists on that serie
         return this.getSeriesDisciplines(seriesId).disciplines.contains(disciplineId);
+    }
+    public hasKaiDiscipline(disciplineId: string) {
+        return this.hasDiscipline(disciplineId, BookSeriesId.Kai);
+    }
+    public hasMgnDiscipline(disciplineId: string) {
+        return this.hasDiscipline(disciplineId, BookSeriesId.Magnakai);
+    }
+    public hasGndDiscipline(disciplineId: string) {
+        return this.hasDiscipline(disciplineId, BookSeriesId.GrandMaster);
     }
 
     /**

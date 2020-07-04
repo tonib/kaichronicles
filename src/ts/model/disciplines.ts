@@ -14,29 +14,29 @@ enum KaiDisciplines {
 
 /** Magnakai series disciplines codes */
 enum MgnDisciplines {
-    Weaponmastery = "wpnmstry",
+    Weaponmastery = "wpnmstry", // Duplicate!
     AnimalControl = "anmlctrl",
     Curing = "curing",
     Invisibility = "invsblty",
-    Huntmastery = "hntmstry",
-    Pathsmanship = "pthmnshp",
+    Huntmastery = "hntmstry", // Duplicate!
+    Pathsmanship = "pthmnshp", // Duplicate!
     PsiSurge = "psisurge",
     PsiScreen = "psiscrn",
-    Nexus = "nexus",
+    Nexus = "nexus", // Duplicate!
     Divination = "dvnation"
 }
 
 /** Grandmaster series disciplines codes */
 enum GndDisciplines {
-    GrandWeaponmastery = "wpnmstry",
+    GrandWeaponmastery = "wpnmstry", // Duplicate!
     AnimalMastery = "anmlmstr",
     Deliverance = "deliver",
     Assimilance = "assimila",
-    GrandHuntmastery = "hntmstry",
-    GrandPathsmanship = "pthmnshp",
+    GrandHuntmastery = "hntmstry", // Duplicate!
+    GrandPathsmanship = "pthmnshp", // Duplicate!
     KaiSurge = "kaisurge",
     KaiScreen = "kaiscrn",
-    GrandNexus = "nexus",
+    GrandNexus = "nexus", // Duplicate!
     Telegnosis = "gnosis",
     MagiMagic = "magi",
     KaiAlchemy = "alchemy"

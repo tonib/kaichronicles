@@ -54,6 +54,8 @@ TODO
 - SetupDisciplines: Move all info about the serie (initial number disciplines, book number starts, etc) to BookSeries
 - Rule "dropDisciplines" could be removed, no longer needed
 - Now we can check if rule "test" with "hasDiscipline" has a valid discipline code
+- If noPsiSurge="true" , set noMinblast="true". If noKaiSurge="true, set noMindblast="true", noPsisurge="true". Set a single flag for this ???
+- Grand Master: If you have no weapon, there is no malus
 
 ## Other
 - Move all bonuses calculation from ActionChart to a new class

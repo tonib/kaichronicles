@@ -88,7 +88,7 @@ const combatMechanics = {
                 combatMechanics.showHideEludeButton( combat , $combatUI );
             }
 
-            if ( !state.actionChart.getDisciplines().contains("kaisurge" ) || combat.noKaiSurge ) {
+            if ( !state.actionChart.hasGndDiscipline(GndDisciplines.KaiSurge) || combat.noKaiSurge ) {
                 // Hide Psi-surge check
                 $combatUI.find(".kaisurgecheck").hide();
             } else {
@@ -114,8 +114,8 @@ const combatMechanics = {
                 $combatUI.find(".kaisurgeloss").text( Combat.kaiSurgeTurnLoss() );
             }
 
-            if ( !(state.actionChart.getDisciplines().contains("psisurge" ) || state.actionChart.getDisciplines().contains("kaisurge" ) ||
-                 state.hasCompletedKaiMagnakaiSerie()) || combat.noPsiSurge ) {
+            if ( !(state.actionChart.hasMgnDiscipline(MgnDisciplines.PsiSurge) || state.actionChart.hasGndDiscipline(GndDisciplines.KaiSurge))
+                 || combat.noPsiSurge ) {
                 // Hide Psi-surge check
                 $combatUI.find(".psisurgecheck").hide();
             } else {
@@ -380,7 +380,7 @@ const combatMechanics = {
      */
     checkPsiSurgeEnabled() {
 
-        if ( !state.actionChart.getDisciplines().contains("psisurge") || !state.actionChart.getDisciplines().contains("kaisurge") ) {
+        if ( !(state.actionChart.hasMgnDiscipline(MgnDisciplines.PsiSurge) || state.actionChart.hasGndDiscipline(GndDisciplines.KaiSurge)) ) {
             return;
         }
         if ( state.actionChart.currentEndurance > Combat.minimumEPForPsiSurge() ) {
@@ -403,7 +403,7 @@ const combatMechanics = {
      */
     checkKaiSurgeEnabled() {
 
-        if ( !state.actionChart.getDisciplines().contains("kaisurge") ) {
+        if ( !state.actionChart.hasGndDiscipline(GndDisciplines.KaiSurge) ) {
             return;
         }
         if ( state.actionChart.currentEndurance > Combat.minimumEPForKaiSurge() ) {
@@ -432,7 +432,7 @@ const combatMechanics = {
     },
 
     /**
-     * Disable Psi-surge on a combat
+     * Disable Kai-surge on a combat
      */
     disableKaiSurge( $combatUI: JQuery<HTMLElement> , combat: Combat ) {
         combat.kaiSurge = false;
