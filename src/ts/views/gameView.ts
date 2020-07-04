@@ -10,7 +10,7 @@ const gameView = {
      */
     updateNavigation(section: Section) {
         const $navButtons = $("#game-navSectionButtons");
-        if (window.getUrlParameter("debug") || section.hasNavigation()) {
+        if (App.debugMode || section.hasNavigation()) {
             $navButtons.show();
         } else {
             $navButtons.hide();
@@ -70,7 +70,7 @@ const gameView = {
         $("#game-copyrights").html(state.book.getBookTitle() + "<br/>" + state.book.getCopyrightHtml());
 
         // Setup debug options
-        if (window.getUrlParameter("debug") === "true") {
+        if (App.debugMode) {
             $("#game-debugSection").show();
 
             $("#game-debugJump").submit((e) => {

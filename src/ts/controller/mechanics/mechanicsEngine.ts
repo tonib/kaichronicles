@@ -238,7 +238,7 @@ const mechanicsEngine = {
      */
     debugWarning(msg: string) {
         console.log(msg);
-        if (window.getUrlParameter("debug")) {
+        if (App.debugMode) {
             mechanicsEngine.showMessage(msg);
         }
     },

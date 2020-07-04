@@ -13,7 +13,7 @@ class App {
     /** Execution environment type */
     public static environment: EnvironmentType;
 
-    /** Debug functions are enabled */
+    /** Debug functions are enabled? */
     public static debugMode: boolean;
 
     /** Web application setup  */

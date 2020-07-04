@@ -127,7 +127,7 @@ class ActionChart {
 
     constructor() {
         // Debug fast setup:
-        if (window.getUrlParameter("debug")) {
+        if (App.debugMode) {
             this.endurance = this.currentEndurance = 25;
             this.combatSkill = 15;
             this.manualRandomTable = true;

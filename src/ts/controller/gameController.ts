@@ -93,7 +93,7 @@ const gameController = {
         // Persist state
         state.persistState();
 
-        if (window.getUrlParameter("debug")) {
+        if (App.debugMode) {
             // Show section that can come to here
             gameView.showOriginSections();
 

@@ -50,7 +50,7 @@ class Mechanics {
         })
         .done((xml: string) => {
             self.mechanicsXml = $.parseXML(xml);
-            if ( window.getUrlParameter("debug") ) {
+            if ( App.debugMode ) {
                 // Debug mode: Store the original XML. This can be needed to do tests (BookValidator.ts)
                 self.mechanicsXmlText = xml;
             }

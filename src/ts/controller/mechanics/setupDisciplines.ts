@@ -153,7 +153,7 @@ class SetupDisciplines {
 
         // If Weaponmastery was selected on a previous book, disable the weapons already
         // selected on the previous book
-        if (!window.getUrlParameter("debug") && this.previousActionChart &&
+        if (!App.debugMode && this.previousActionChart &&
             this.previousActionChart.getDisciplines(this.previousBookSeries).contains("wpnmstry")) {
             for (const weaponId of this.previousActionChart.getWeaponSkill(this.previousBookSeries)) {
                 $("#" + weaponId + " input[type=checkbox]").prop("disabled", true);
@@ -196,7 +196,7 @@ class SetupDisciplines {
         if (selected) {
             // Check the maximum weapons number
             const nExpectedWeapons = this.getExpectedNWeaponsWeaponmastery();
-            if (!window.getUrlParameter("debug") && state.actionChart.getWeaponSkill().length >= nExpectedWeapons) {
+            if (!App.debugMode && state.actionChart.getWeaponSkill().length >= nExpectedWeapons) {
                 e.preventDefault();
                 alert(translations.text("onlyNWeapons", [nExpectedWeapons]));
                 return;
@@ -227,7 +227,7 @@ class SetupDisciplines {
 
         // If the player had this discipline on the previous book, disable the check
         // On debug mode, always enabled
-        if (!window.getUrlParameter("debug") && this.previousActionChart &&
+        if (!App.debugMode && this.previousActionChart &&
             this.previousActionChart.getDisciplines(this.previousBookSeries).contains(disciplineId)) {
             $check.prop("disabled", true);
         }
@@ -242,7 +242,7 @@ class SetupDisciplines {
 
         // Limit the number of disciplines. Unlimited on debug mode
         const selected: boolean = $checkBox.prop("checked");
-        if (selected && this.getAllDisciplinesSelected() && !window.getUrlParameter("debug")) {
+        if (selected && this.getAllDisciplinesSelected() && !App.debugMode) {
             e.preventDefault();
             alert(translations.text("maxDisciplines", [this.expectedNDisciplines]));
             return;
