@@ -1132,16 +1132,16 @@ class ActionChart {
         return this.getSeriesDisciplines(series).disciplines;
     }
 
-    public hasDiscipline(disciplineId: string, seriesId: BookSeriesId = null) {
+    public hasDiscipline(disciplineId: string, seriesId: BookSeriesId = null): boolean {
         return this.getSeriesDisciplines(seriesId).disciplines.contains(disciplineId);
     }
-    public hasKaiDiscipline(disciplineId: KaiDiscipline) {
+    public hasKaiDiscipline(disciplineId: KaiDiscipline): boolean {
         return this.hasDiscipline(disciplineId, BookSeriesId.Kai);
     }
-    public hasMgnDiscipline(disciplineId: MgnDiscipline) {
+    public hasMgnDiscipline(disciplineId: MgnDiscipline): boolean {
         return this.hasDiscipline(disciplineId, BookSeriesId.Magnakai);
     }
-    public hasGndDiscipline(disciplineId: GndDiscipline) {
+    public hasGndDiscipline(disciplineId: GndDiscipline): boolean {
         return this.hasDiscipline(disciplineId, BookSeriesId.GrandMaster);
     }
 

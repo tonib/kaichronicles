@@ -12,6 +12,7 @@ class SetupDisciplines {
 
     /**
      * Weapons table for Weaponmastery discipline on Magnakai books
+     * TODO: This table is different in Grand Master series
      */
     private static readonly magnakaiWeapons = ["dagger", "spear", "mace", "shortsword", "warhammer", "bow",
         "axe", "sword", "quarterstaff", "broadsword"];
@@ -26,22 +27,20 @@ class SetupDisciplines {
      */
     private readonly previousActionChart: ActionChart = null;
 
-    /** Last book series id. Only applies if previousActionChart is not null */
-    private readonly previousBookSeries: BookSeriesId = BookSeriesId.Kai;
-
     constructor() {
 
         // Get info about the last played book
         const previousBookNumber = state.book.bookNumber - 1;
         if (previousBookNumber >= 1) {
             this.previousActionChart = state.getPreviousBookActionChart(previousBookNumber);
-            this.previousBookSeries = BookSeries.getBookNumberSeries(previousBookNumber).id;
 
             // When a series start, by default, keep Weaponmastery with the same weapons from previous series
-            if (this.previousActionChart && this.previousBookSeries !== state.book.getBookSeries().id &&
+            // DO NOT: This is OK in Kai -> Magnakai transition, but not in Magnakai -> Grand Master
+            // You can end Magnakai with weaponskill with, say, 5 weapons, but you start with less weapons. So, do not
+            /*if (this.previousActionChart && this.previousBookSeries !== state.book.getBookSeries().id &&
                 state.actionChart.getWeaponSkill().length === 0 ) {
                     state.actionChart.setWeaponSkill( this.previousActionChart.getWeaponSkill(this.previousBookSeries).clone() );
-            }
+            }*/
         }
 
         this.expectedNDisciplines = this.getNExpectedDisciplines();
@@ -88,7 +87,7 @@ class SetupDisciplines {
      */
     private populateMagnakaiWeapons() {
         // Only for magnakai books
-        if (state.book.bookNumber <= 5) {
+        if (state.book.getBookSeries().id < BookSeriesId.Magnakai) {
             return;
         }
 
@@ -135,15 +134,17 @@ class SetupDisciplines {
      */
     private enableMagnakaiWeapons() {
 
-        // Only for magnakai books
-        if (state.book.bookNumber <= 5) {
+        const bookSeries = state.book.getBookSeries();
+
+        // Only for Magnakai / Grand Master books
+        if (bookSeries.id < BookSeriesId.Magnakai) {
             return;
         }
 
         const disable: boolean = false;
 
         // If Weaponmastery is not selected, disable all weapons
-        if (!state.actionChart.getDisciplines().contains("wpnmstry")) {
+        if (!state.actionChart.hasDiscipline(bookSeries.weaponskillDiscipline)) {
             $("input.weaponmastery-chk").prop("disabled", true);
             return;
         }
@@ -152,10 +153,13 @@ class SetupDisciplines {
         $("input.weaponmastery-chk").prop("disabled", false);
 
         // If Weaponmastery was selected on a previous book, disable the weapons already
-        // selected on the previous book
-        if (!App.debugMode && this.previousActionChart &&
-            this.previousActionChart.getDisciplines(this.previousBookSeries).contains("wpnmstry")) {
-            for (const weaponId of this.previousActionChart.getWeaponSkill(this.previousBookSeries)) {
+        // selected on the previous book. This only applies if the book is not a series start
+        if (!App.debugMode &&
+            !BookSeries.isSeriesStart(state.book.bookNumber) &&
+            this.previousActionChart &&
+            this.previousActionChart.hasDiscipline(bookSeries.weaponskillDiscipline)
+        ) {
+            for (const weaponId of this.previousActionChart.getWeaponSkill()) {
                 $("#" + weaponId + " input[type=checkbox]").prop("disabled", true);
             }
         }
@@ -163,22 +167,21 @@ class SetupDisciplines {
 
     /**
      * Returns the number of weapons to select for the Weaponmastery discipline.
-     * Only for magnakai books
+     * Only for Magnakai / Grand Master books
      */
     private getExpectedNWeaponsWeaponmastery(): number {
-        let nWeapons = 3;
 
-        if (state.book.bookNumber >= 13) {
-            nWeapons = 2;
-        }
-        // If first book of a serie, don't check previous book
-        if (state.book.bookNumber === 13) {
+        const bookSeries = state.book.getBookSeries();
+        let nWeapons = bookSeries.initialWeaponskillNWeapons;
+
+        if (BookSeries.isSeriesStart(state.book.bookNumber)) {
+            // If first book of a serie, don't check previous book
             return nWeapons;
         }
 
-        if (this.previousActionChart && this.previousActionChart.getDisciplines(this.previousBookSeries).contains("wpnmstry")) {
+        if (this.previousActionChart && this.previousActionChart.hasDiscipline(bookSeries.weaponskillDiscipline)) {
             // One more for this book
-            nWeapons = this.previousActionChart.getWeaponSkill(this.previousBookSeries).length + 1;
+            nWeapons = this.previousActionChart.getWeaponSkill().length + 1;
         }
         return nWeapons;
     }
@@ -227,8 +230,11 @@ class SetupDisciplines {
 
         // If the player had this discipline on the previous book, disable the check
         // On debug mode, always enabled
-        if (!App.debugMode && this.previousActionChart &&
-            this.previousActionChart.getDisciplines(this.previousBookSeries).contains(disciplineId)) {
+        if (!App.debugMode &&
+            !BookSeries.isSeriesStart(state.book.bookNumber) &&
+            this.previousActionChart &&
+            this.previousActionChart.hasDiscipline(disciplineId)
+        ) {
             $check.prop("disabled", true);
         }
     }
@@ -238,7 +244,7 @@ class SetupDisciplines {
      * @param e The click event
      * @param $checkBox The clicked checkbox (JQuery)
      */
-    private onDiscliplineCheckBoxClick(e: Event, $checkBox: any) {
+    private onDiscliplineCheckBoxClick(e: Event, $checkBox: JQuery<HTMLElement>) {
 
         // Limit the number of disciplines. Unlimited on debug mode
         const selected: boolean = $checkBox.prop("checked");
@@ -266,7 +272,7 @@ class SetupDisciplines {
      */
     private onDisciplineSelected(e: Event, disciplineId: string) {
 
-        if (disciplineId === "wepnskll") {
+        if (disciplineId === KaiDiscipline.Weaponskill) {
             // Special case for kai series: Choose on the random table the weapon
             this.chooseWeaponskillWeapon(e);
             return;
@@ -290,10 +296,12 @@ class SetupDisciplines {
             enableNextPage = false;
         }
 
-        // Check weapons selected for magnakai books
-        const showWeaponsWarning = false;
-        if (state.book.bookNumber > 5 && state.actionChart.getDisciplines().contains("wpnmstry") &&
-            state.actionChart.getWeaponSkill().length < this.getExpectedNWeaponsWeaponmastery()) {
+        // Check weapons selected for Magnakai / Grand Master books
+        const bookSeries = state.book.getBookSeries();
+        if (bookSeries.id >= BookSeriesId.Magnakai &&
+            state.actionChart.hasDiscipline(bookSeries.weaponskillDiscipline) &&
+            state.actionChart.getWeaponSkill().length < this.getExpectedNWeaponsWeaponmastery()
+        ) {
             enableNextPage = false;
             $("#mechanics-setDisciplines-NWeapons").show();
         } else {
@@ -308,13 +316,13 @@ class SetupDisciplines {
 
     /**
      * Do the random choice for Weaponskill weapon.
-     * Only applies to Kai serie
+     * Only applies to Kai series
      */
     private chooseWeaponskillWeapon(e: Event) {
 
         if (state.actionChart.getWeaponSkill().length > 0) {
             // Weapon already choosed
-            state.actionChart.getDisciplines().push("wepnskll");
+            state.actionChart.getDisciplines().push(KaiDiscipline.Weaponskill);
             return;
         }
 
@@ -328,7 +336,7 @@ class SetupDisciplines {
             .then((value: number) => {
 
                 // Store the discipline
-                state.actionChart.getDisciplines().push("wepnskll");
+                state.actionChart.getDisciplines().push(KaiDiscipline.Weaponskill);
                 state.actionChart.getWeaponSkill().push(SetupDisciplines.kaiWeapons[value]);
 
                 // Show on UI the selected weapon
@@ -353,7 +361,7 @@ class SetupDisciplines {
             // No weapon selected yet
             return;
         }
-        if (state.book.bookNumber > 5) {
+        if (state.book.getBookSeries().id > BookSeriesId.Kai) {
             // Only for kai books
             return;
         }
@@ -367,21 +375,16 @@ class SetupDisciplines {
      * @returns Number of expected disciplines
      */
     private getNExpectedDisciplines(): number {
-        let expectedNDisciplines = 5;
+        let expectedNDisciplines = state.book.getBookSeries().initialNDisciplines;
 
-        if (state.book.bookNumber >= 6 && state.book.bookNumber < 13) {
-            expectedNDisciplines = 3;
-        } else if (state.book.bookNumber >= 13) {
-            expectedNDisciplines = 4;
-        }
-        // If first book of a serie, don't check previous book
-        if (state.book.bookNumber === 6 || state.book.bookNumber === 13) {
+        // If first book of a series, don't check previous book
+        if (BookSeries.isSeriesStart(state.book.bookNumber)) {
             return expectedNDisciplines;
         }
 
         // Number of disciplines to choose (previous book disciplines + 1):
         if (this.previousActionChart) {
-            expectedNDisciplines = this.previousActionChart.getDisciplines(this.previousBookSeries).length + 1;
+            expectedNDisciplines = this.previousActionChart.getDisciplines().length + 1;
         }
 
         return expectedNDisciplines;
