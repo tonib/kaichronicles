@@ -126,6 +126,7 @@
     - Hunting loyalty bonus added HERE. CHECK THIS
     - hntmstryDisabled attr. seems ok, as there are places where Huntmastery is explicitly required
     - Add hntmstryDisabled attr. to xml verification
+    - hntmstryDisabled REMOVED (we will keep hundDisabled only)
 
 * https://github.com/tonib/kaichronicles/commit/6a3155ee5e10b9da34179f5ab144bde3d97795c4
     - Combat loyalty bonuses edited here. CHECK THIS

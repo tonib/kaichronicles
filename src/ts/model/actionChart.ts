@@ -1135,13 +1135,13 @@ class ActionChart {
     private hasDiscipline(disciplineId: string, seriesId: BookSeriesId) {
         return this.getSeriesDisciplines(seriesId).disciplines.contains(disciplineId);
     }
-    public hasKaiDiscipline(disciplineId: KaiDisciplines) {
+    public hasKaiDiscipline(disciplineId: KaiDiscipline) {
         return this.hasDiscipline(disciplineId, BookSeriesId.Kai);
     }
-    public hasMgnDiscipline(disciplineId: MgnDisciplines) {
+    public hasMgnDiscipline(disciplineId: MgnDiscipline) {
         return this.hasDiscipline(disciplineId, BookSeriesId.Magnakai);
     }
-    public hasGndDiscipline(disciplineId: GndDisciplines) {
+    public hasGndDiscipline(disciplineId: GndDiscipline) {
         return this.hasDiscipline(disciplineId, BookSeriesId.GrandMaster);
     }
 

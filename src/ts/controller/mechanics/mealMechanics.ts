@@ -47,12 +47,12 @@ const mealMechanics = {
         const huntDisabled = mechanicsEngine.getBooleanProperty($rule, "huntDisabled", false); // This disables Kai hunt, but no Huntmastery
         const hntmstryDisabled = mechanicsEngine.getBooleanProperty($rule, "hntmstryDisabled", false); // This disables both
 
-        let hasHuntingDiscipline = state.actionChart.hasKaiDiscipline(KaiDisciplines.Hunting);
+        let hasHuntingDiscipline = state.actionChart.hasKaiDiscipline(KaiDiscipline.Hunting);
         if (huntDisabled || hntmstryDisabled) {
             hasHuntingDiscipline = false;
         }
-        let hasHntmstryDiscipline = state.actionChart.hasMgnDiscipline(MgnDisciplines.Huntmastery) ||
-            state.actionChart.hasGndDiscipline(GndDisciplines.GrandHuntmastery);
+        let hasHntmstryDiscipline = state.actionChart.hasMgnDiscipline(MgnDiscipline.Huntmastery) ||
+            state.actionChart.hasGndDiscipline(GndDiscipline.GrandHuntmastery);
         if (hntmstryDisabled) {
             hasHntmstryDiscipline = false;
         }

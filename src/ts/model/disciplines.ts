@@ -1,5 +1,5 @@
 /** Kai series disciplines codes */
-enum KaiDisciplines {
+enum KaiDiscipline {
     Camouflage = "camflage",
     Hunting = "hunting",
     SixthSense = "sixthsns",
@@ -13,7 +13,7 @@ enum KaiDisciplines {
 }
 
 /** Magnakai series disciplines codes */
-enum MgnDisciplines {
+enum MgnDiscipline {
     Weaponmastery = "wpnmstry", // Duplicate!
     AnimalControl = "anmlctrl",
     Curing = "curing",
@@ -27,7 +27,7 @@ enum MgnDisciplines {
 }
 
 /** Grandmaster series disciplines codes */
-enum GndDisciplines {
+enum GndDiscipline {
     GrandWeaponmastery = "wpnmstry", // Duplicate!
     AnimalMastery = "anmlmstr",
     Deliverance = "deliver",
@@ -58,11 +58,11 @@ class Disciplines {
     public static getSeriesDisciplines(seriesId: BookSeriesId): string[] {
         switch (seriesId) {
             case BookSeriesId.Kai:
-                return Disciplines.getDisciplinesIds(KaiDisciplines);
+                return Disciplines.getDisciplinesIds(KaiDiscipline);
             case BookSeriesId.Magnakai:
-                return Disciplines.getDisciplinesIds(MgnDisciplines);
+                return Disciplines.getDisciplinesIds(MgnDiscipline);
             case BookSeriesId.GrandMaster:
-                return Disciplines.getDisciplinesIds(GndDisciplines);
+                return Disciplines.getDisciplinesIds(GndDiscipline);
             default:
                 return [];
         }
