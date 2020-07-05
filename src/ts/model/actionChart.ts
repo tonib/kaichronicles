@@ -689,60 +689,69 @@ class ActionChart {
 
         // Weapons
         if (noWeapon || !currentWeapon) {
-            // No weapon: -4 CS
+            // No current weapon:
+            let bonus;
 
-            /*  Exception (Magnakai books):
-                1) Kai level "Tutelary" with "Weaponmastery": Tutelaries are able to use defensive combat skills to great effect
-                   when fighting unarmed. When entering combat without a weapon, Tutelaries lose only 2 points from their COMBAT SKILL,
-                   instead of the usual 4 points.
-                2) Kai level "Scion-kai" with "Weaponmastery": ...Also, when in combat without a weapon they lose only 1 point
-                   from their COMBAT SKILL.
-            */
-            let bonus = -4;
-            if (state.book.isMagnakaiBook() && state.actionChart.getDisciplines().contains("wpnmstry")) {
-                if (state.actionChart.getDisciplines().length >= 8) {
-                    // Scion-kai
-                    bonus = -1;
-                } else if (state.actionChart.getDisciplines().length >= 5) {
-                    // Tutelary
-                    bonus = -2;
-                }
+            if (state.book.getBookSeries().id >= BookSeriesId.GrandMaster) {
+                // Grand Master series: No loss
+                bonus = 0;
+            } else if (this.hasMgnDiscipline(MgnDiscipline.Weaponmastery) && this.getDisciplines(BookSeriesId.Magnakai).length >= 8) {
+                /*  Exception (Magnakai books):
+                    Kai level "Scion-kai" with "Weaponmastery": ...Also, when in combat without a weapon they lose only 1 point
+                    from their COMBAT SKILL.
+                */
+                bonus = -1;
+            } else if (this.hasMgnDiscipline(MgnDiscipline.Weaponmastery) && this.getDisciplines(BookSeriesId.Magnakai).length >= 5) {
+                /*  Exception (Magnakai books):
+                    Kai level "Tutelary" with "Weaponmastery": Tutelaries are able to use defensive combat skills to great effect
+                    when fighting unarmed. When entering combat without a weapon, Tutelaries lose only 2 points from their COMBAT SKILL,
+                    instead of the usual 4 points.
+                */
+                bonus = -2;
+            } else {
+                // Other cases: Kai, or Magnakai with Weaponmastery with level < 5, or no Magnakai Weaponmastery
+                bonus = -4;
             }
 
-            bonuses.push({
-                concept: translations.text("noWeapon"),
-                increment: bonus
-            });
-        } else if (this.isWeaponskillActive(bowCombat)) {
-            // Weapon skill bonus
-            if (state.book.isKaiBook() || (state.hasCompletedKaiSerie() && state.book.isMagnakaiBook() && !state.actionChart.getDisciplines().contains("wpnmstry"))) {
-                // Kai book, or later with loyalty bonus
+            if (bonus < 0) {
                 bonuses.push({
-                    concept: translations.text("weaponskill"),
-                    increment: +2
-                });
-            } else if (state.book.isMagnakaiBook() || (state.hasCompletedKaiMagnakaiSerie() && (!this.getDisciplines().contains("wpnmstry") || !this.hasWeaponskillWith(currentWeapon.weaponType || currentWeapon.id)))) {
-                // Magnakai book
-                let bonus = +3;
-                /*  Exception (Magnakai books):
-                    Improvements: Scion-kai / Weaponmastery	/ When entering combat with a weapon they have mastered, Scion-kai may add 4 points
-                    (instead of the usual 3 points) to their COMBAT SKILL...
-                */
-                if (state.actionChart.getDisciplines().length >= 8 || state.hasCompletedKaiMagnakaiSerie()) {
-                    // Scion-kai
-                    bonus = +4;
-                }
-
-                bonuses.push({
-                    concept: translations.text("weaponmastery"),
+                    concept: translations.text("noWeapon"),
                     increment: bonus
                 });
-            } else {
-                bonuses.push({
-                    concept: translations.text("grdweaponmastery"),
-                    increment: +5
-                });
             }
+
+        } else if (this.isWeaponskillActive(bowCombat, BookSeriesId.GrandMaster)) {
+            // Grand Master / Grand Weaponmastery bonuses
+
+            bonuses.push({
+                concept: translations.text("grdweaponmastery"),
+                increment: +5
+            });
+
+        } else if (this.isWeaponskillActive(bowCombat, BookSeriesId.Magnakai)) {
+            // Magnakai / Weaponmastery bonuses
+
+            let bonus = +3;
+            /*  Exception (Magnakai books):
+                Improvements: Scion-kai / Weaponmastery	/ When entering combat with a weapon they have mastered, Scion-kai may add 4 points
+                (instead of the usual 3 points) to their COMBAT SKILL...
+            */
+            // Changed in v1.12: Seems this should not be applied to bow bonuses, it's just for hand to hand CS
+            if (!bowCombat && state.actionChart.getDisciplines(BookSeriesId.Magnakai).length >= 8) {
+                // Scion-kai
+                bonus = +4;
+            }
+            bonuses.push({
+                concept: translations.text("weaponmastery"),
+                increment: bonus
+            });
+
+        } else if (this.isWeaponskillActive(bowCombat, BookSeriesId.Kai)) {
+            // Kai / Weaponskill bonus
+            bonuses.push({
+                concept: translations.text("weaponskill"),
+                increment: +2
+            });
         }
 
         // Check current weapon bonuses
@@ -754,16 +763,22 @@ class ActionChart {
         }
 
         if (bowCombat) {
-            /* Improved disciplines:
-                Kai level "Mentora" with "Weaponmastery": Mentoras skilled in Weaponmastery are more accurate when using all missile
-                weapons, whether fired (e.g. a bow) or thrown (e.g. a dagger). When using a bow or thrown weapon and instructed to pick a
-                number from the Random Number Table, add 2 to the number picked if you are a Mentora with the Magnakai Discipline
-                of Weaponmastery */
-            if (state.book.isMagnakaiBook() && this.getDisciplines().length >= 7 && this.getDisciplines().contains("wpnmstry")) {
-                bonuses.push({
-                    concept: state.book.getKaiTitle(7), // "Mentora" traslation
-                    increment: +2
-                });
+            // Grand Master books, disciplines section foot note:
+            // ...+2 Mentora bonus is therefore not cumulative with Grand Weaponmastery with Bow
+            if (!this.isWeaponskillActive(true, BookSeriesId.GrandMaster)) {
+                // OK, there is no Grand Weaponmastery with Bow
+
+                /* Improved disciplines:
+                    Kai level "Mentora" with "Weaponmastery": Mentoras skilled in Weaponmastery are more accurate when using all missile
+                    weapons, whether fired (e.g. a bow) or thrown (e.g. a dagger). When using a bow or thrown weapon and instructed to pick a
+                    number from the Random Number Table, add 2 to the number picked if you are a Mentora with the Magnakai Discipline
+                    of Weaponmastery */
+                if (this.hasMgnDiscipline(MgnDiscipline.Weaponmastery) && this.getDisciplines(BookSeriesId.Magnakai).length >= 7) {
+                    bonuses.push({
+                        concept: translations.text("mentora"),
+                        increment: +2
+                    });
+                }
             }
         }
 

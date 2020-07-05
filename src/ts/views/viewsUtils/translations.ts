@@ -86,6 +86,7 @@ class Translations {
         "permanent" : "Permanente",
         "usageCount" : "(se puede usar {0} veces)",
         "objectUsed" : "{0} usado",
+        "mentora": "Mentor",
 
         //////////////////////////////////////
         // Combats
@@ -405,6 +406,7 @@ class Translations {
         "permanent" : "Permanent",
         "usageCount" : "(can be used {0} times)",
         "objectUsed" : "{0} has been used",
+        "mentora": "Mentora",
 
         //////////////////////////////////////
         // Combats
