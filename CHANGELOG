@@ -92,3 +92,4 @@
  - Objects on the Action Chart can have a available uses count (used in book 8, 9 11). 
  - Book 8 Section 138: Avoid duplicates in sell objects list.
  - Add Kai/Magnakai serie loyalty bonus, effective only if played all the 5 kai books (for magnakai) or 12 kai/magnakai books (for grand master)
+ - Fixed bug in book 5 / sect178: Mindblast was disabled

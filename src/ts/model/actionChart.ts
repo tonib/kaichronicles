@@ -825,11 +825,15 @@ class ActionChart {
                 concept: translations.text("psisurge"),
                 increment: (combat.psiSurgeBonus ? combat.psiSurgeBonus : Combat.defaultPsiSurgeBonus()) * combat.mindblastMultiplier
             });
-        } else if (!combat.noMindblast && (this.getDisciplines().contains("mndblst") || this.getDisciplines().contains("psisurge") || this.getDisciplines().contains("kaisurge") || state.hasCompletedKaiSerie())) {
-            bonuses.push({
-                concept: translations.text("mindblast"),
-                increment: (combat.mindblastBonus ? combat.mindblastBonus : Combat.defaultMindblastBonus()) * combat.mindblastMultiplier
-            });
+        } else if (!combat.noMindblast) {
+            if (this.hasKaiDiscipline(KaiDiscipline.Mindblast) || this.hasMgnDiscipline(MgnDiscipline.PsiSurge) ||
+                this.hasGndDiscipline(GndDiscipline.KaiSurge)
+            ) {
+                bonuses.push({
+                    concept: translations.text("mindblast"),
+                    increment: (combat.mindblastBonus ? combat.mindblastBonus : Combat.defaultMindblastBonus()) * combat.mindblastMultiplier
+                });
+            }
         }
 
         // Other objects (not weapons). Ex. shield. They are not applied for bow combats
@@ -856,10 +860,10 @@ class ActionChart {
         }
 
         // Grand Master level bonus
-        if (state.book.isGrandMasterBook() && this.getDisciplines().length > 4) {
+        if (this.getDisciplines(BookSeriesId.GrandMaster).length > 4) {
             bonuses.push({
                 concept: translations.text("kaiLevel"),
-                increment: (this.getDisciplines().length - 4),
+                increment: (this.getDisciplines(BookSeriesId.GrandMaster).length - 4),
             });
         }
 

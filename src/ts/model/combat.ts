@@ -383,8 +383,37 @@ class Combat {
 
     /** Get the default Kai-Surge bonus */
     public static defaultKaiSurgeBonus(): number {
-        const bonus = +8;
-        return bonus;
+        return +8;
+    }
+
+    /** Returns the number of EP loss by turn when using Kai-Surge */
+    public static kaiSurgeTurnLoss(): number {
+        return 1;
+    }
+
+    /** Returns the minimum Endurance Points to use the Kai-Surge */
+    public static minimumEPForKaiSurge(): number {
+        return 6;
+    }
+
+    /** Returns the number of EP loss by turn when using Psi-Surge */
+    public static psiSurgeTurnLoss(): number {
+        if (state.actionChart.hasMgnDiscipline(MgnDiscipline.PsiSurge) && state.actionChart.getDisciplines(BookSeriesId.Magnakai).length >= 9) {
+            // See defaultPsiSurgeBonus comment
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+
+    /** Returns the minimum Endurance Points to use the Psi-Surge */
+    public static minimumEPForPsiSurge(): number {
+        if (state.actionChart.hasMgnDiscipline(MgnDiscipline.PsiSurge) && state.actionChart.getDisciplines(BookSeriesId.Magnakai).length >= 9) {
+            // See defaultPsiSurgeBonus comment
+            return 4;
+        } else {
+            return 6;
+        }
     }
 
     /** Get the default Psi-Surge bonus */
@@ -396,55 +425,23 @@ class Combat {
             attack—Mindblast—they may add 3 points to their COMBAT SKILL without loss of ENDURANCE points. Archmasters cannot use Psi-surge if their
             ENDURANCE score falls to 4 points or below.
         */
-        let bonus = +4;
-        if ((state.book.isMagnakaiBook() && state.actionChart.getDisciplines().length >= 9) || state.book.isGrandMasterBook()) {
-            bonus = +6;
+        if (state.actionChart.hasMgnDiscipline(MgnDiscipline.PsiSurge) && state.actionChart.getDisciplines(BookSeriesId.Magnakai).length >= 9) {
+            return +6;
+        } else {
+            return +4;
         }
-        return bonus;
     }
 
     /** Get the default Mindblast bonus */
     public static defaultMindblastBonus(): number {
-        // See defaultPsiSurgeBonus comment
-        let bonus = +2;
-        if (state.book.isMagnakaiBook() && state.actionChart.getDisciplines().length >= 9) {
-            bonus = +3;
-        } else if (state.book.isGrandMasterBook()) {
-            bonus = +4;
+        if (state.actionChart.hasGndDiscipline(GndDiscipline.KaiSurge)) {
+            return +4;
+        } else if (state.actionChart.hasMgnDiscipline(MgnDiscipline.PsiSurge) && state.actionChart.getDisciplines(BookSeriesId.Magnakai).length >= 9) {
+            // See defaultPsiSurgeBonus comment
+            return +3;
+        } else {
+            return +2;
         }
-        return bonus;
-    }
-
-    /** Returns the number of EP loss by turn when using Psi-Surge */
-    public static psiSurgeTurnLoss(): number {
-        // See defaultPsiSurgeBonus comment
-        let loss = 2;
-        if ((state.book.isMagnakaiBook() && state.actionChart.getDisciplines().length >= 9) || state.book.isGrandMasterBook()) {
-            loss = 1;
-        }
-        return loss;
-    }
-
-    /** Returns the number of EP loss by turn when using Kai-Surge */
-    public static kaiSurgeTurnLoss(): number {
-        const loss = 1;
-        return loss;
-    }
-
-    /** Returns the minumum Endurance Points to use the Psi-Surge */
-    public static minimumEPForPsiSurge(): number {
-        // See defaultPsiSurgeBonus comment
-        let min = 6;
-        if ((state.book.isMagnakaiBook() && state.actionChart.getDisciplines().length >= 9) || state.book.isGrandMasterBook()) {
-            min = 4;
-        }
-        return min;
-    }
-
-    /** Returns the minumum Endurance Points to use the Kai-Surge */
-    public static minimumEPForKaiSurge(): number {
-        const min = 6;
-        return min;
     }
 
 }

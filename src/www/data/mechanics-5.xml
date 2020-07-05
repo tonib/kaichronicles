@@ -936,7 +936,6 @@
 
         <section id="sect178">
             <choiceState section="all" set="disabled" />
-            <combat noMindblast="true" />
             <afterCombats>
                 <choiceState section="all" set="enabled" />
             </afterCombats>

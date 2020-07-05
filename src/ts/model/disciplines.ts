@@ -7,7 +7,7 @@ enum KaiDiscipline {
     Healing = "healing",
     Weaponskill = "wepnskll",
     Mindshield = "mindshld",
-    Mindblast = "mindshld",
+    Mindblast = "mndblst",
     AnimalKinship = "anmlknsp",
     MindOverMatter = "mindomtr"
 }
