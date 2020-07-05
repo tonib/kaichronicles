@@ -642,25 +642,18 @@ class ActionChart {
     }
 
     /**
-     * Check if the player has weaponskill with a given type of weapon
+     * Check if the player has weaponskill with a given type of weapon with current book disciplines
      * @param weaponType Weapon type to check
      * @return True if the player has weaponskill with that weapon
      */
     public hasWeaponskillWith(weaponType: string): boolean {
-        if (!this.getDisciplines().contains("wepnskll") && !this.getDisciplines().contains("wpnmstry") && !state.hasCompletedKaiSerie()) {
+
+        const bookSeries = state.book.getBookSeries();
+        if (!this.hasDiscipline(bookSeries.weaponskillDiscipline)) {
             // Player has no Weaponskill
             return false;
         }
-
-        const weaponTypes = weaponType.split("|");
-
-        for (const w of this.getWeaponSkill()) {
-            if (weaponTypes.contains(w)) {
-                return true;
-            }
-        }
-
-        return false;
+        return this.getWeaponSkill().contains(weaponType);
     }
 
     /**

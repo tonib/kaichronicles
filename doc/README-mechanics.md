@@ -261,13 +261,13 @@ will be executed.
 * **combatsActive="true"**: Do some combat still active (not won and not eluded)?
 * **bookLanguage="language code (en/es)"**: Is this the current book language?
 * **sectionContainsText="text"**: Does the current section contain this text?
-* **weaponskillActive="true"**: Has the player Weaponskill with the current weapon?
+* **weaponskillActive="true"**: Has the player "Weaponskill" (current book discipline, no loyalty bonus) with the current weapon?
 * **not="true"**: This will negate the current test. So if all of these conditions are false,
   the inner rules will be executed
 * **isChoiceEnabled="sectionId"**: Is the choice for the given section enabled?
 * **hasWeaponType="weaponType1|weaponType2|..."**: The player has some weapon of some of the given types?
 * **hasCircle="loreCircleId"**: The player has this Lore Circle (see loreCircle.ts for codes)
-* **hasWeaponskillWith="weaponType"** : The player has weaponskill / weaponmastery with the given weapon?
+* **hasWeaponskillWith="weaponType"** : The player has "Weaponskill" (current book discipline, no loyalty bonus) with the given weapon type?
 * **canUseBow="boolean"** : The player has a bow and one arrow (or not)?
 * **currentWeaponSpecial="boolean"** : Current weapon is a Special Item (or not)?
 * **isGlobalRuleRegistered="globalRuleId"** : A global rule with a given id is currently registered?
