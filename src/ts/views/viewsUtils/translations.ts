@@ -62,6 +62,7 @@ class Translations {
         "grdweaponmastery" : "Gran Maestría en el Manejo de Armas",
         "mindblast" : "Ataque Psíquico",
         "psisurge" : "Acometida Psíquica",
+        "kaisurge": "Embestida Psíquica",
         "countAsObjects"  : "(Cuenta como {0} objetos)",
         "annotations" : "Anotaciones",
         "circleFire" : "Círculo de Fuego",
@@ -103,6 +104,8 @@ class Translations {
         "deathLetter" : "M",
         "mechanics-combat-psisurge" : 'Acometida Psíquica: +<span class="psisurgebonus">4</span> DC, ' +
             '-<span class="psisurgeloss">2</span> R por asalto',
+        "mechanics-combat-kaisurge" : 'Embestida Psíquica: +<span class="kaisurgebonus">8</span> DC, ' +
+            '-<span class="kaisurgeloss">1</span> R por asalto',
         "sectionModifier" : "Modificador sección",
         "objectsUse" : "Uso objetos",
         "enemyMindblast" : "Ataque psíquico enemigo",

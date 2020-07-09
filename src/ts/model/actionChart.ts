@@ -860,10 +860,11 @@ class ActionChart {
         }
 
         // Grand Master level bonus
-        if (this.getDisciplines(BookSeriesId.GrandMaster).length > 4) {
+        const nGndDisciplines = this.getDisciplines(BookSeriesId.GrandMaster).length;
+        if (nGndDisciplines > 4) {
             bonuses.push({
                 concept: translations.text("kaiLevel"),
-                increment: (this.getDisciplines(BookSeriesId.GrandMaster).length - 4),
+                increment: (nGndDisciplines - 4),
             });
         }
 
@@ -923,10 +924,11 @@ class ActionChart {
         }
 
         // Grand Master level bonus
-        if (state.book.isGrandMasterBook() && this.getDisciplines().length > 4) {
+        const nGndDisciplines = this.getDisciplines(BookSeriesId.GrandMaster).length;
+        if (nGndDisciplines > 4) {
             bonuses.push({
                 concept: translations.text("kaiLevel"),
-                increment: (this.getDisciplines().length - 4) * 2,
+                increment: (nGndDisciplines - 4) * 2,
             });
         }
 
@@ -1034,9 +1036,9 @@ class ActionChart {
         return LoreCircle.getCircles(this.getDisciplines(BookSeriesId.Magnakai));
     }
 
-    /** The player has Mindshield / Psi-screen? */
+    /** The player has "Mindshield" with the current book disciplines (no loyalty bonus here) */
     public hasMindShield(): boolean {
-        return this.getDisciplines().contains("mindshld") || this.getDisciplines().contains("psiscrn");
+        return this.hasDiscipline(state.book.getBookSeries().mindshieldDiscipline);
     }
 
     /** The player has a bow and some arrow? */

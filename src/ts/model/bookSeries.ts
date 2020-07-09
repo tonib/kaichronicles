@@ -25,29 +25,33 @@ class BookSeries {
     /** Initial number of disciplines */
     public readonly initialNDisciplines: number;
 
-    /** Discipline id for weaponskill in this series */
+    /** Discipline id for "Weaponskill" in this series */
     public readonly weaponskillDiscipline: string;
 
     /** Initial number of weapons for weaponskill discipline */
     public readonly initialWeaponskillNWeapons: number;
 
+    /** Discipline id for "Mindshield" in this series */
+    public readonly mindshieldDiscipline: string;
+
     /**
      * Supported book series. This array can be accesed with a BookSeriesId index
      */
     public static readonly series: BookSeries[] = [
-        new BookSeries(BookSeriesId.Kai, 1, 5, 5, KaiDiscipline.Weaponskill, 1),
-        new BookSeries(BookSeriesId.Magnakai, 6, 12, 3, MgnDiscipline.Weaponmastery, 3),
-        new BookSeries(BookSeriesId.GrandMaster, 13, 20, 4, GndDiscipline.GrandWeaponmastery, 2)
+        new BookSeries(BookSeriesId.Kai, 1, 5, 5, KaiDiscipline.Weaponskill, 1, KaiDiscipline.Mindshield),
+        new BookSeries(BookSeriesId.Magnakai, 6, 12, 3, MgnDiscipline.Weaponmastery, 3, MgnDiscipline.PsiScreen),
+        new BookSeries(BookSeriesId.GrandMaster, 13, 20, 4, GndDiscipline.GrandWeaponmastery, 2, GndDiscipline.KaiScreen)
     ];
 
     private constructor(id: BookSeriesId, bookStart: number, bookEnd: number, initialNDisciplines: number,
-                        weaponskillDiscipline: string, initialWeaponskillNWeapons: number) {
+                        weaponskillDiscipline: string, initialWeaponskillNWeapons: number, mindshieldDiscipline: string) {
         this.id = id;
         this.bookStart = bookStart;
         this.bookEnd = bookEnd;
         this.initialNDisciplines = initialNDisciplines;
         this.weaponskillDiscipline = weaponskillDiscipline;
         this.initialWeaponskillNWeapons = initialWeaponskillNWeapons;
+        this.mindshieldDiscipline = mindshieldDiscipline;
     }
 
     /**

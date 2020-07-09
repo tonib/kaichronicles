@@ -57,6 +57,7 @@ TODO
 - Do not show lore circles in action chart in grand master series if player has not played any magnakai book
 - Check if magnakai deliverance +20EP button loyalty bonus is available in Grand Master
 - Check all calls to Book.getKaiTitle() (dangerous, referers to current book!)
+- ERROR rendering (Book 8, spanish, sect13): Unkown tag: table
 
 ## Other
 - Move all bonuses calculation from ActionChart to a new class
