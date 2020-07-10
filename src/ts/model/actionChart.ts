@@ -137,15 +137,17 @@ class ActionChart {
                     this.endurance = this.currentEndurance = 35;
                     this.combatSkill = 30;
                     // debug data for Grand Master
-                    this.setDisciplines( ["wpnmstry", "deliver", "hntmstry", "assimila"] );
+                    this.setDisciplines( [ GndDiscipline.GrandWeaponmastery , GndDiscipline.Deliverance, GndDiscipline.GrandHuntmastery,
+                        GndDiscipline.Assimilance ] );
                     this.setWeaponSkill( ["axe", "sword"] );
                 } else if (state.book.isMagnakaiBook()) {
                     // debug data for magnakai
-                    this.setDisciplines( ["wpnmstry", "curing", "hntmstry"] );
+                    this.setDisciplines( [ MgnDiscipline.Weaponmastery, MgnDiscipline.Curing, MgnDiscipline.Huntmastery ] );
                     this.setWeaponSkill( ["axe", "sword", "bow"] );
                 } else {
                     // debug data for kai series
-                    this.setDisciplines( ["camflage", "hunting", "sixthsns", "healing", "wepnskll"] );
+                    this.setDisciplines( [ KaiDiscipline.Camouflage, KaiDiscipline.Hunting, KaiDiscipline.SixthSense,
+                        KaiDiscipline.Healing, KaiDiscipline.Weaponskill ] );
                     this.setWeaponSkill( ["axe"] );
                 }
             }
