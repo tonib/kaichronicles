@@ -161,9 +161,9 @@ class Book {
         xmlText = xmlText.replaceAll("&amp;rdquot;", "&amp;rdquo;");
         xmlText = xmlText.replaceAll("&amp;ldquot;", "&amp;ldquo;");
 
-        // On book 4, the discipline id "mndblst" has been changed to "mndblast"
+        // On book 4, English version, the discipline id "mndblst" has been changed to "mndblast"
         // This will break the game mechanics, so keep it as "mndblst":
-        xmlText = xmlText.replaceAll('"mndblast"', '"mndblst"');
+        xmlText = xmlText.replaceAll('"mndblast"', `"${KaiDiscipline.Mindblast}"`);
 
         return xmlText;
     }
