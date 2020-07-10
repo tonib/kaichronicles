@@ -125,12 +125,13 @@ const actionChartView = {
             $displines.append( "<tr><td>(" + translations.text("noneFemenine") + ")</td></tr>" );
         } else {
             const bookDisciplines = state.book.getDisciplinesTable();
+            const bookSeries = state.book.getBookSeries();
             // Enumerate disciplines
-            $.each( actionChart.getDisciplines() , (index, disciplineId: string) => {
+            for (const disciplineId of actionChart.getDisciplines()) {
                 const dInfo = bookDisciplines[disciplineId];
                 let name = dInfo.name;
 
-                if ( disciplineId === "wepnskll" || disciplineId === "wpnmstry" ) {
+                if (disciplineId === bookSeries.weaponskillDiscipline) {
                     // Show selected weapons description
                     const weapons: string[] = [];
                     for (const weaponSkill of actionChart.getWeaponSkill()) {
@@ -152,7 +153,7 @@ const actionChartView = {
                     "<b>" + name + '</b><br/><i style="display:none"><small>' +
                     descriptionHtml +
                     "</small></i></td></tr>" );
-            });
+            }
             // Bind help button events
             $displines.find("button").click(function(e) {
                 $(this).parent().find("i").toggle();

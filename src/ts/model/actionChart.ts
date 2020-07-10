@@ -18,8 +18,8 @@ interface SeriesDisciplines {
     disciplines: string[];
 
     /**
-     * The weapon codes for the "wepnskll" / "wpnmstry" disciplines.
-     * On kai series, it's a single weapon. On serires >= magnakai, they will be more than one
+     * The weapon codes for the "Weaponskill" disciplines.
+     * On Kai series, it's a single weapon. On series >= Magnakai, they will be more than one
      */
     weaponSkill: string[];
 }
@@ -73,7 +73,7 @@ class ActionChart {
     // private disciplines: string[] = [];
 
     /*
-     * The weapon codes for the "wepnskll" / "wpnmstry" disciplines.
+     * The weapon codes for the "Weaponskill" discipline.
      * On kai series, it's a single weapon. On magnakai, they are 3 or more
      */
     // // Removed in v.12
