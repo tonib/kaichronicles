@@ -403,6 +403,8 @@ class Translations {
         "pickMoney" : "Pick money",
         "amount" : "Amount",
         "noQuiversEnough" : "You don't have enough Quivers (only 6 Arrows per Quiver)",
+        "restore20EPMagnakaiButton": "Curing: +20 EP (only if EP 6 or less, once every 100 days)",
+        "restore20EPGrdMasterButton": "Deliverance: +20 EP (only if EP 8 or less, once every 20 days)",
         "confirm20EP": "This ability can only be used once every 100 days. Continue?",
         "confirm20EPGrdMaster": "This ability can only be used once every 20 days. Continue?",
         "more" : "More",

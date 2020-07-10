@@ -414,6 +414,9 @@ const actionChartController = {
             CombatMechanics.checkPsiSurgeEnabled();
             // Check if the Kai-surge should be disabled
             CombatMechanics.checkKaiSurgeEnabled();
+        } else {
+            // Check if +20EP button is still available
+            actionChartView.updateRestore20EPState();
         }
 
         template.updateStatistics();

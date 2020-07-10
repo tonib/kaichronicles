@@ -49,17 +49,16 @@ const actionChartView = {
      * Hide / disable the restore 20 EP button if needed
      */
     updateRestore20EPState() {
-        let $restoreButton = null;
-        if (state.book.isGrandMasterBook()) {
-            $restoreButton = $("#grdmast-restore20Ep");
-            $("#achart-restore20Ep").hide();
-        } else {
-            $restoreButton = $("#achart-restore20Ep");
-            $("#grdmast-restore20Ep").hide();
-        }
-        if ( !state.actionChart.canUse20EPRestoreOnThisBook() ) {
+        const $restoreButton = $("#achart-restore20Ep");
+        const restoreDiscipline = state.actionChart.get20EPRestoreDiscipline();
+        if (!restoreDiscipline) {
             $restoreButton.hide();
+        } else if ( restoreDiscipline === GndDiscipline.Deliverance ) {
+            $restoreButton.html( translations.text("restore20EPGrdMasterButton") );
+        } else {
+            $restoreButton.html( translations.text("restore20EPMagnakaiButton") );
         }
+
         if ( !state.actionChart.canUse20EPRestoreNow() ) {
             $restoreButton.prop( "disabled", true );
         }
@@ -69,11 +68,12 @@ const actionChartView = {
      * Bind events to restore 20 EP (Curing)
      */
     bindRestore20EP() {
-        const $restoreButton = state.book.isGrandMasterBook() ? $("#grdmast-restore20Ep") : $("#achart-restore20Ep");
+        const $restoreButton = $("#achart-restore20Ep");
         actionChartView.updateRestore20EPState();
         $restoreButton.click( (e: Event) => {
             e.preventDefault();
-            if ( !confirm( translations.text(state.book.isGrandMasterBook() ? "confirm20EPGrdMaster" : "confirm20EP") ) ) {
+            const restoreDiscipline = state.actionChart.get20EPRestoreDiscipline();
+            if ( !confirm( translations.text(restoreDiscipline === GndDiscipline.Deliverance ? "confirm20EPGrdMaster" : "confirm20EP") ) ) {
                 return;
             }
             actionChartController.use20EPRestore();

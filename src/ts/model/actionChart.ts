@@ -1084,19 +1084,35 @@ class ActionChart {
     }
 
     /**
-     * The Magnakai Medicine Archmaster +20 EP can be used on this book?
+     * The get the discipline id that supports +20 EP ability
+     * @returns The discipline id that will be used. null if the +20EP cannot be used
      */
-    public canUse20EPRestoreOnThisBook(): boolean {
-        return (this.getDisciplines().length >= 9 && state.book.isMagnakaiBook() && this.getDisciplines().contains("curing")) ||
-            (state.book.isGrandMasterBook() && this.getDisciplines().contains("deliver"));
+    public get20EPRestoreDiscipline(): string {
+        if (this.hasGndDiscipline(GndDiscipline.Deliverance)) {
+            return GndDiscipline.Deliverance;
+        }
+        if ( this.hasMgnDiscipline(MgnDiscipline.Curing) && this.getDisciplines(BookSeriesId.Magnakai).length >= 9 ) {
+            return MgnDiscipline.Curing;
+        }
+        return null;
     }
 
     /**
-     * The Magnakai Medicine Archmaster +20 EP can be used now?
+     * The +20 EP can be used now?
      */
     public canUse20EPRestoreNow(): boolean {
-        return ((!state.book.isGrandMasterBook() && this.currentEndurance <= 6) || (state.book.isGrandMasterBook() && this.currentEndurance <= 8))
-            && !this.restore20EPUsed && this.canUse20EPRestoreOnThisBook();
+        const disciplineId = this.get20EPRestoreDiscipline();
+        if (!disciplineId || this.restore20EPUsed) {
+            return false;
+        }
+
+        let minEndurance: number;
+        if (disciplineId === GndDiscipline.Deliverance) {
+            minEndurance = 8;
+        } else {
+            minEndurance = 6;
+        }
+        return this.currentEndurance <= minEndurance;
     }
 
     /**
