@@ -103,10 +103,8 @@ const actionChartView = {
             .text( state.book.getKaiTitle( actionChart.getDisciplines().length ) );
 
         // Lore circles:
-        if ( state.book.bookNumber <= 5 ) {
-            // Only for magnakai books
-            $("#achart-circles").hide();
-        } else {
+        if (state.book.getBookSeries().id === BookSeriesId.Magnakai || state.actionChart.getDisciplines(BookSeriesId.Magnakai).length > 0) {
+            // Only for Magnakai books, or if player has played some Magnakai books
             const circles = actionChart.getLoreCircles();
             if ( circles.length === 0 ) {
                 $("#achart-currentCircles").html( "<i>" + translations.text("noneMasculine") + "</i>" );
@@ -117,6 +115,8 @@ const actionChartView = {
                 }
                 $("#achart-currentCircles").html( circlesNames.join( ", ") );
             }
+        } else {
+            $("#achart-circles").hide();
         }
 
         // TODO: Display the discipline "quote" tag instead the name

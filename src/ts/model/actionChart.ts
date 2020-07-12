@@ -30,7 +30,7 @@ interface SeriesDisciplines {
 class ActionChart {
 
     /** First book number with a limit on Special Items count */
-    public static BOOK_WITH_MAX_SPECIALS = 8;
+    public static readonly BOOK_WITH_MAX_SPECIALS = 8;
 
     /** The original combat skill */
     public combatSkill = 0;
@@ -1082,14 +1082,6 @@ class ActionChart {
     }
 
     /**
-     * Return the maximum number of special items that can be picked on the current book.
-     * @returns The max number. Zero if there is no limit on the current book
-     */
-    public static getMaxSpecials(): number {
-        return state.book.bookNumber >= ActionChart.BOOK_WITH_MAX_SPECIALS ? 12 : 0;
-    }
-
-    /**
      * The get the discipline id that supports +20 EP ability
      * @returns The discipline id that will be used. null if the +20EP cannot be used
      */
@@ -1269,6 +1261,14 @@ class ActionChart {
     }
     public setWeaponSkill(weaponSkill: string[], seriesId: BookSeriesId = null) {
         this.getSeriesDisciplines(seriesId).weaponSkill = weaponSkill;
+    }
+
+    /**
+     * Return the maximum number of special items that can be picked on the current book.
+     * @returns The max number. Zero if there is no limit on the current book
+     */
+    public static getMaxSpecials(): number {
+        return state.book.bookNumber >= ActionChart.BOOK_WITH_MAX_SPECIALS ? 12 : 0;
     }
 
     /**
