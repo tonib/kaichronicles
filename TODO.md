@@ -49,14 +49,10 @@ TODO
 - Check older savegames with usageCount = undefined in section states, action chart and InventoryState
   Check also savegames from v1.6 (changes for this in ActionChart.fromObject())
 - Test load previous savegame / state versions to v1.12 !!!
-- Now we can check if rule "test" with "hasDiscipline" has a valid discipline code
 - If noPsiSurge="true" , set noMinblast="true". If noKaiSurge="true, set noMindblast="true", noPsisurge="true". Set a single flag for this ???
 - Grand Master: If you have no weapon, there is no malus
 - I suspect Kai-surge and Psi-surge checks could be a single one
 - In Grand Master books, if you have Psi-surge, check the bonus for Mindblast
-- Do not show lore circles in action chart in grand master series if player has not played any magnakai book
-- Check if magnakai deliverance +20EP button loyalty bonus is available in Grand Master
-- Check all calls to Book.getKaiTitle() (dangerous, referers to current book!)
 - ERROR rendering (Book 8, spanish, sect13): Unkown tag: table
 
 ## Other

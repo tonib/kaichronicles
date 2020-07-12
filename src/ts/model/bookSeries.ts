@@ -8,6 +8,9 @@ enum BookSeriesId {
     Magnakai = 1,
     GrandMaster = 2
 }
+
+// TODO: Add other common disciplines definitions to BookSeries and use them from here (healing, hunt, etc)
+
 /**
  * Books series info
  */

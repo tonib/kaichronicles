@@ -84,12 +84,32 @@ class BookValidator {
         this.validateSectionInternal(sectionId);
     }
 
+    /** Check book disciplines ids and applicacion disciplines ids match */
+    private validateDisciplines() {
+        const bookIds = Object.keys( this.book.getDisciplinesTable() );
+        const enumIds = Disciplines.getSeriesDisciplines(this.book.getBookSeries().id);
+        for (const d of bookIds) {
+            if (!enumIds.contains(d)) {
+                this.addError(null, `Book discipline id ${d} not found in application enum`);
+            }
+        }
+        for (const d of enumIds) {
+            if (!bookIds.contains(d)) {
+                this.addError(null, `Application enum discipline id ${d} not found in book disciplines`);
+            }
+        }
+    }
+
     private validateSectionInternal( sectionId: string ) {
         // The book section
         this.currentSection = new Section( this.book , sectionId , this.mechanics );
         // The section mechanics
         const $sectionMechanics = this.mechanics.getSection( sectionId );
         this.validateChildrenRules( $sectionMechanics );
+
+        if (sectionId === Book.DISCIPLINES_SECTION) {
+            this.validateDisciplines();
+        }
     }
 
     private validateChildrenRules( $parent ) {
@@ -137,8 +157,18 @@ class BookValidator {
         }
     }
 
-    private addError( $rule , errorMsg: string ) {
-        this.errors.push( "Section " + this.currentSection.sectionId + ", rule " + $rule[0].nodeName + ": " + errorMsg );
+    /**
+     * Add a validation error
+     * @param $rule The wrong rule. It can be null
+     * @param errorMsg Error message
+     */
+    private addError($rule: JQuery<Element>, errorMsg: string) {
+        let msg = "Section " + this.currentSection.sectionId;
+        if ($rule) {
+            msg += ", rule " + $rule[0].nodeName;
+        }
+        msg += ": " + errorMsg;
+        this.errors.push(msg);
     }
 
     //////////////////////////////////////////////////////////
