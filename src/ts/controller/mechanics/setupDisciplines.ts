@@ -5,17 +5,23 @@
 class SetupDisciplines {
 
     /**
-     * Weapons table for Weaponskill discipline on Kai books
+     * Weapons table for Weaponskill discipline in Kai books
      */
     public static readonly kaiWeapons = ["dagger", "spear", "mace", "shortsword", "warhammer", "sword",
         "axe", "sword", "quarterstaff", "broadsword"];
 
     /**
-     * Weapons table for Weaponmastery discipline on Magnakai books
-     * TODO: This table is different in Grand Master series
+     * Weapons table for Weaponmastery discipline in Magnakai books
      */
     private static readonly magnakaiWeapons = ["dagger", "spear", "mace", "shortsword", "warhammer", "bow",
         "axe", "sword", "quarterstaff", "broadsword"];
+
+    /**
+     * Weapons table for Weaponmastery discipline in Grand Master books
+     */
+    private static readonly grandMasterWeapons = ["spear", "bow", "dagger", "quarterstaff", "mace", "broadsword",
+        "shortsword", "axe", "warhammer", "sword"];
+
     /**
      * Expected number of disciplines to choose
      */
@@ -86,27 +92,30 @@ class SetupDisciplines {
      * Only for magnakai books
      */
     private populateMagnakaiWeapons() {
-        // Only for magnakai books
-        if (state.book.getBookSeries().id < BookSeriesId.Magnakai) {
+        // Only for series >= Magnakai
+        const currentSeriesId = state.book.getBookSeries().id;
+        if (currentSeriesId < BookSeriesId.Magnakai) {
             return;
         }
+
+        const weaponsTable = (currentSeriesId === BookSeriesId.GrandMaster ? SetupDisciplines.grandMasterWeapons : SetupDisciplines.magnakaiWeapons);
 
         // Add checkboxes
         const $checkboxTemplate = mechanicsEngine.getMechanicsUI("mechanics-magnakaiWeapon");
         let html = "";
-        for (let i = 0; i < SetupDisciplines.magnakaiWeapons.length; i++) {
+        for (let i = 0; i < weaponsTable.length; i++) {
             if (i % 2 === 0) {
                 html += '<div class="row">';
             }
 
             // Prepare the weapon UI
-            const weaponItem = state.mechanics.getObject(SetupDisciplines.magnakaiWeapons[i]);
+            const weaponItem = state.mechanics.getObject(weaponsTable[i]);
             const $checkbox = $checkboxTemplate.clone();
             $checkbox.attr("id", weaponItem.id);
             $checkbox.find(".mechanics-wName").text(weaponItem.name);
 
             // The weapon has been already selected?
-            const selected: boolean = state.actionChart.getWeaponSkill().contains(SetupDisciplines.magnakaiWeapons[i]);
+            const selected: boolean = state.actionChart.getWeaponSkill().contains(weaponsTable[i]);
             $checkbox.find("input").attr("checked", selected);
 
             html += $checkbox[0].outerHTML;
