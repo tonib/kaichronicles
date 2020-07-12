@@ -35,7 +35,7 @@ class SkillsSetup {
         } else {
             const $w = $("#mechanics-chooseWeapon");
             randomMechanics.bindTableRandomLink($w, (value) => {
-                state.actionChart.combatSkill = value + (state.book.isGrandMasterBook() ? 25 : 10);
+                state.actionChart.combatSkill = value + state.book.getBookSeries().baseCombatSkill;
                 $w.parent().append("<b>" + translations.text("combatSkillSet", [state.actionChart.combatSkill]) + ".</b>");
                 template.updateStatistics();
                 if (state.actionChart.combatSkill !== 0 && state.actionChart.endurance !== 0) {
@@ -50,7 +50,7 @@ class SkillsSetup {
         } else {
             const $e = $("#mechanics-chooseEndurance");
             randomMechanics.bindTableRandomLink($e, (value) => {
-                state.actionChart.endurance = value + (state.book.isGrandMasterBook() ? 30 : 20);
+                state.actionChart.endurance = value + state.book.getBookSeries().baseEndurance;
                 state.actionChart.currentEndurance = state.actionChart.endurance;
                 $e.parent().append("<b>" + translations.text("enduranceSet", [state.actionChart.endurance]) + ".</b>");
                 template.updateStatistics();

@@ -470,13 +470,4 @@ class Book {
         return BookSeries.getBookNumberSeries(this.bookNumber);
     }
 
-    /** Is it a book of Kai series (1-5)? */
-    public isKaiBook(): boolean { return this.getBookSeries().id === BookSeriesId.Kai; }
-
-    /** Is it a book of Magnakai series (6-12)? */
-    public isMagnakaiBook(): boolean { return this.getBookSeries().id === BookSeriesId.Magnakai; }
-
-    /** Is it a book of Magnakai series (13-?)? */
-    public isGrandMasterBook(): boolean { return this.getBookSeries().id === BookSeriesId.GrandMaster; }
-
 }

@@ -34,17 +34,24 @@ class BookSeries {
     /** Discipline id for "Mindshield" in this series */
     public readonly mindshieldDiscipline: string;
 
+    /** Base CS when you pick your stats in this series */
+    public readonly baseCombatSkill: number;
+
+    /** Base EP when you pick your stats in this series */
+    public readonly baseEndurance: number;
+
     /**
      * Supported book series. This array can be accesed with a BookSeriesId index
      */
     public static readonly series: BookSeries[] = [
-        new BookSeries(BookSeriesId.Kai, 1, 5, 5, KaiDiscipline.Weaponskill, 1, KaiDiscipline.Mindshield),
-        new BookSeries(BookSeriesId.Magnakai, 6, 12, 3, MgnDiscipline.Weaponmastery, 3, MgnDiscipline.PsiScreen),
-        new BookSeries(BookSeriesId.GrandMaster, 13, 20, 4, GndDiscipline.GrandWeaponmastery, 2, GndDiscipline.KaiScreen)
+        new BookSeries(BookSeriesId.Kai, 1, 5, 5, KaiDiscipline.Weaponskill, 1, KaiDiscipline.Mindshield, 10, 20),
+        new BookSeries(BookSeriesId.Magnakai, 6, 12, 3, MgnDiscipline.Weaponmastery, 3, MgnDiscipline.PsiScreen, 10, 20),
+        new BookSeries(BookSeriesId.GrandMaster, 13, 20, 4, GndDiscipline.GrandWeaponmastery, 2, GndDiscipline.KaiScreen, 25, 30)
     ];
 
     private constructor(id: BookSeriesId, bookStart: number, bookEnd: number, initialNDisciplines: number,
-                        weaponskillDiscipline: string, initialWeaponskillNWeapons: number, mindshieldDiscipline: string) {
+                        weaponskillDiscipline: string, initialWeaponskillNWeapons: number, mindshieldDiscipline: string,
+                        baseCombatSkill: number, baseEndurance: number) {
         this.id = id;
         this.bookStart = bookStart;
         this.bookEnd = bookEnd;
@@ -52,6 +59,8 @@ class BookSeries {
         this.weaponskillDiscipline = weaponskillDiscipline;
         this.initialWeaponskillNWeapons = initialWeaponskillNWeapons;
         this.mindshieldDiscipline = mindshieldDiscipline;
+        this.baseCombatSkill = baseCombatSkill;
+        this.baseEndurance = baseEndurance;
     }
 
     /**

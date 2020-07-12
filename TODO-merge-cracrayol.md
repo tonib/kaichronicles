@@ -199,6 +199,9 @@
       disciplines.... Or, assume that if you have moved to a new serie from a previous one, you have all the old serie 
       disciplines
 
+* Book 14:
+    - gameRulesController: Check if there is a IMPROVEDDISCIPLINES_SECTION section in Grand Master
+
 * Spanish books erratas:
     - Book 13, sect equipmnt: "tu nueva Carta de Acciónde Gran Maestro" should be "tu nueva Carta de Acción de Gran Maestro" (space)
     - Book 13, sect1: 

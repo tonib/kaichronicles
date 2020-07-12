@@ -254,24 +254,6 @@ const state = {
     },
 
     /**
-     * Check if the Kai serie of books was completed
-     * @returns {object} true if serie was completed
-     */
-    hasCompletedKaiSerie(): boolean {
-        const json = localStorage.getItem( "state-book-1" );
-        return !!json && (state.book.isMagnakaiBook() || state.book.isGrandMasterBook());
-    },
-
-    /**
-     * Check if the Kai && Magnakai serie of books was completed
-     * @returns {object} true if serie was completed
-     */
-    hasCompletedKaiMagnakaiSerie(): boolean {
-        const json = localStorage.getItem( "state-book-1" );
-        return !!json && state.book.isGrandMasterBook();
-    },
-
-    /**
      * Returns the object to save the game state
      */
     getSaveGameJson() {

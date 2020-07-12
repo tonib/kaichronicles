@@ -132,24 +132,28 @@ class ActionChart {
             this.combatSkill = 15;
             this.manualRandomTable = true;
             this.extendedCRT = false;
-            if (state.book) {
-                if (state.book.isGrandMasterBook()) {
+            switch (state.book.getBookSeries().id) {
+                case BookSeriesId.GrandMaster:
                     this.endurance = this.currentEndurance = 35;
                     this.combatSkill = 30;
                     // debug data for Grand Master
                     this.setDisciplines( [ GndDiscipline.GrandWeaponmastery , GndDiscipline.Deliverance, GndDiscipline.GrandHuntmastery,
                         GndDiscipline.Assimilance ] );
                     this.setWeaponSkill( ["axe", "sword"] );
-                } else if (state.book.isMagnakaiBook()) {
+                    break;
+
+                case BookSeriesId.Magnakai:
                     // debug data for magnakai
                     this.setDisciplines( [ MgnDiscipline.Weaponmastery, MgnDiscipline.Curing, MgnDiscipline.Huntmastery ] );
                     this.setWeaponSkill( ["axe", "sword", "bow"] );
-                } else {
+                    break;
+
+                case BookSeriesId.Kai:
                     // debug data for kai series
                     this.setDisciplines( [ KaiDiscipline.Camouflage, KaiDiscipline.Hunting, KaiDiscipline.SixthSense,
                         KaiDiscipline.Healing, KaiDiscipline.Weaponskill ] );
                     this.setWeaponSkill( ["axe"] );
-                }
+                    break;
             }
         }
     }
@@ -1271,7 +1275,7 @@ class ActionChart {
      * Return the maximum number of backpack items in the current book
      */
     private static getMaxBackpackItems(): number {
-        return state.book.isGrandMasterBook() ? 10 : 8;
+        return state.book.getBookSeries().id >= BookSeriesId.GrandMaster ? 10 : 8;
     }
 
     /**

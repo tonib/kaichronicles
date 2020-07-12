@@ -20,7 +20,7 @@ const gameRulesController = {
             gameRulesController.appendSection( Book.COMBATRULESSUMMARY_SECTION );
             gameRulesController.appendSection( Book.KAILEVELS_SECTION );
 
-            if ( state.book.isMagnakaiBook() ) {
+            if (state.book.getBookSeries().id === BookSeriesId.Magnakai) {
                 // Lore-circles rules
                 gameRulesController.appendSection( Book.LORECIRCLES_SECTION );
                 // Improved disciplines
