@@ -1163,15 +1163,27 @@ class ActionChart {
         return this.getSeriesDisciplines(series).disciplines;
     }
 
+    /**
+     * Player has a given discipline on a given book series?
+     * @param disciplineId Displine to check
+     * @param seriesId Book series to check. If null or not specified, the current book series
+     * @returns true if player has the discipline
+     */
     public hasDiscipline(disciplineId: string, seriesId: BookSeriesId = null): boolean {
         return this.getSeriesDisciplines(seriesId).disciplines.contains(disciplineId);
     }
+
+    /** Player has a given Kai discipline */
     public hasKaiDiscipline(disciplineId: KaiDiscipline): boolean {
         return this.hasDiscipline(disciplineId, BookSeriesId.Kai);
     }
+
+    /** Player has a given Magnakai discipline */
     public hasMgnDiscipline(disciplineId: MgnDiscipline): boolean {
         return this.hasDiscipline(disciplineId, BookSeriesId.Magnakai);
     }
+
+    /** Player has a given Grand Master discipline */
     public hasGndDiscipline(disciplineId: GndDiscipline): boolean {
         return this.hasDiscipline(disciplineId, BookSeriesId.GrandMaster);
     }
