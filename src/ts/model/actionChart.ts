@@ -1178,7 +1178,7 @@ class ActionChart {
 
     /**
      * Returns player disciplines and weaponskill for a given book series
-     * @param series Book series witch get disciplines. If null or not specified, we get current book disciplines
+     * @param series Book series witch get disciplines. If null or not specified, we get current book series disciplines
      * @returns Disciplines for that serie
      */
     private getSeriesDisciplines(seriesId: BookSeriesId = null): SeriesDisciplines {
@@ -1208,12 +1208,21 @@ class ActionChart {
                 break;
         }
 
-        // If the player has played SOME book of a previous series, he/she has ALL disciplines of that series
+        // If the player has played SOME book of a previous series, player has ALL disciplines of that series
         // and can benefit of loyalty bonuses
         if (seriesId < currentSeriesId && seriesDisciplines.disciplines.length > 0 ) {
-            // Clone, to avoid change ActionChart
-            seriesDisciplines = { disciplines: Disciplines.getSeriesDisciplines(seriesId), weaponSkill: seriesDisciplines.weaponSkill };
-            // TODO: If player had no weaponskill, add two random weapons
+
+            if (seriesId === BookSeriesId.Kai && this.kaiDisciplines.weaponSkill.length === 0) {
+                // If some book of Kai series has been played, now you should have Weaponskill with one weapon. But you can
+                // end the series without chosing Weaponskill... So add a random weapon
+                this.kaiDisciplines.weaponSkill.push( SetupDisciplines.kaiWeapons[randomTable.getRandomValue()] );
+            }
+
+            // In Kai series, you end with Weaponskill with one weapon. In later series, you end with Weaponskill with all weapons
+            const weaponskill = ( seriesId === BookSeriesId.Kai ? this.kaiDisciplines.weaponSkill : SetupDisciplines.kaiWeapons );
+
+            // Player has all disciplines
+            seriesDisciplines = { disciplines: Disciplines.getSeriesDisciplines(seriesId), weaponSkill: weaponskill };
         }
 
         return seriesDisciplines;
@@ -1222,44 +1231,20 @@ class ActionChart {
     /**
      * Set current disciplines for current book series
      */
-    public setDisciplines(disciplinesIds: string[]) {
+    private setDisciplines(disciplinesIds: string[]) {
         this.getSeriesDisciplines().disciplines = disciplinesIds;
     }
 
     /**
-     * Get the weaponSkill array.
-     * If no weaponSkill but the kai serie is completed, add a random weaponSkill from kai serie.
-     * @return Array of weapon skill
+     * Get the weapon ids for the "Weaponskill" discipline.
+     * On Kai series, it's a single weapon. On series >= Magnakai, they will be more than one
+     * @param series Book series witch get weapons. If null or not specified, we get current book series weapons
      */
-    // TODO: DO NOT DELETE THIS. IT SHOULD BE ADAPTED TO THE NEW DISCIPLINES STORAGE
-    /*private getWeaponSkill(): string[] {
-
-        let weaponSkill = this.weaponSkill;
-
-        if (!this.getDisciplines().contains("wpnmstry") && state.hasCompletedKaiSerie()) {
-            // Player currently has no Weaponmastery, but has completed Kai series: Add loyalty bonus
-
-            // Check weapons with Weaponmastery on last Kai book serie
-            const lastKaiBookActionChat = state.getPreviousBookActionChart(5);
-            if (lastKaiBookActionChat) {
-                weaponSkill = lastKaiBookActionChat.weaponSkill;
-                if (!weaponSkill.length) {
-                    // Player had no weaponskill at the end of book 5. Use current weapons Weaponskill
-                    if (this.weaponSkill.length === 0) {
-                        // But currently has no Weaponskill! So, add a random weapon
-                        this.weaponSkill.push(SetupDisciplines.kaiWeapons[randomTable.getRandomValue()]);
-                    }
-                    weaponSkill = this.weaponSkill;
-                }
-            }
-        }
-
-        return weaponSkill;
-    }*/
     public getWeaponSkill(seriesId: BookSeriesId = null): string[] {
         return this.getSeriesDisciplines(seriesId).weaponSkill;
     }
-    public setWeaponSkill(weaponSkill: string[], seriesId: BookSeriesId = null) {
+
+    private setWeaponSkill(weaponSkill: string[], seriesId: BookSeriesId = null) {
         this.getSeriesDisciplines(seriesId).weaponSkill = weaponSkill;
     }
 
