@@ -112,16 +112,16 @@ class BookValidator {
         }
     }
 
-    private validateChildrenRules( $parent ) {
+    private validateChildrenRules($parent: JQuery<Element>) {
         if ( !$parent ) {
             return;
         }
-        for ( const child of $parent.children() ) {
+        for ( const child of $parent.children().toArray() ) {
             this.validateRule( child );
         }
     }
 
-    private validateRule( rule ) {
+    private validateRule(rule: Element) {
         try {
 
             const $rule = $(rule);
@@ -175,7 +175,7 @@ class BookValidator {
     // COMMON ATTRIBUTRES VALIDATION
     //////////////////////////////////////////////////////////
 
-    private getPropertyValueAsArray( $rule , property: string , allowMultiple: boolean ): string[] {
+    private getPropertyValueAsArray( $rule: JQuery<Element> , property: string , allowMultiple: boolean ): string[] {
 
         if ( allowMultiple ) {
             return mechanicsEngine.getArrayProperty( $rule , property );
@@ -190,7 +190,7 @@ class BookValidator {
         }
     }
 
-    private validateObjectIdsAttribute( $rule , property: string , allowMultiple: boolean , onlyWeapons: boolean ): boolean {
+    private validateObjectIdsAttribute( $rule: JQuery<Element> , property: string , allowMultiple: boolean , onlyWeapons: boolean ): boolean {
 
         const objectIds = this.getPropertyValueAsArray( $rule , property , allowMultiple );
         if ( objectIds.length === 0 ) {
@@ -208,7 +208,7 @@ class BookValidator {
         return true;
     }
 
-    private validateDisciplinesAttribute( $rule: any , property: string , allowMultiple: boolean ) {
+    private validateDisciplinesAttribute( $rule: JQuery<Element> , property: string , allowMultiple: boolean ) {
 
         const disciplinesIds = this.getPropertyValueAsArray( $rule , property , allowMultiple );
         if ( disciplinesIds.length === 0 ) {
@@ -223,7 +223,7 @@ class BookValidator {
         }
     }
 
-    private validateSectionsAttribute( $rule: any , property: string , allowMultiple: boolean ) {
+    private validateSectionsAttribute( $rule: JQuery<Element> , property: string , allowMultiple: boolean ) {
         const sectionIds = this.getPropertyValueAsArray( $rule , property , allowMultiple );
 
         for ( const sectionId of sectionIds ) {
@@ -233,7 +233,7 @@ class BookValidator {
         }
     }
 
-    private validateSectionChoiceAttribute( $rule: any, property: string, allowAll: boolean ) {
+    private validateSectionChoiceAttribute( $rule: JQuery<Element>, property: string, allowAll: boolean ) {
         const sectionId: string = $rule.attr( property );
         if ( !sectionId ) {
             return;
@@ -261,7 +261,7 @@ class BookValidator {
         }
     }
 
-    private checkThereAreCombats( $rule ) {
+    private checkThereAreCombats( $rule: JQuery<Element> ) {
 
         // If the rule is under a "registerGlobalRule", do no check this
         if ( $rule.closest( "registerGlobalRule" ).length > 0 ) {
@@ -278,7 +278,7 @@ class BookValidator {
     // EXPRESSIONS VALIDATION
     //////////////////////////////////////////////////////////
 
-    private validateAndEvalExpression( $rule: any ,  expression: string ): any {
+    private validateAndEvalExpression( $rule: JQuery<Element> ,  expression: string ): any {
         try {
             for ( const keyword of ExpressionEvaluator.getKeywords( expression ) ) {
                 if ( !ExpressionEvaluator.isValidKeyword( keyword ) ) {
@@ -295,7 +295,7 @@ class BookValidator {
         }
     }
 
-    private validateExpression( $rule: any , property: string , expectedType: string ) {
+    private validateExpression( $rule: JQuery<Element> , property: string , expectedType: string ) {
         const expression = $rule.attr( property );
         if ( !expression ) {
             return;
@@ -310,15 +310,15 @@ class BookValidator {
         }
     }
 
-    private validateNumericExpression( $rule: any , property: string ) {
+    private validateNumericExpression( $rule: JQuery<Element> , property: string ) {
         this.validateExpression( $rule , property , "number" );
     }
 
-    private validateBooleanExpression( $rule: any , property: string ) {
+    private validateBooleanExpression( $rule: JQuery<Element> , property: string ) {
         this.validateExpression( $rule , property , "boolean" );
     }
 
-    private validateRandomTableIndex($rule: any) {
+    private validateRandomTableIndex($rule: JQuery<Element>) {
         // Check index:
         let txtIndex: string = $rule.attr("index");
         if (!txtIndex) {
@@ -401,7 +401,7 @@ class BookValidator {
     // RULES VALIDATION
     //////////////////////////////////////////////////////////
 
-    private pick( $rule ) {
+    private pick( $rule: JQuery<Element> ) {
         const objectIdFound = this.validateObjectIdsAttribute( $rule , "objectId" , false , false );
         const classFound = $rule.attr("class");
         const onlyOne = ( ( objectIdFound && !classFound ) || ( !objectIdFound && classFound ) );
@@ -414,7 +414,7 @@ class BookValidator {
         this.validateNumericExpression( $rule , "count" );
     }
 
-    private randomTable( $rule ) {
+    private randomTable( $rule: JQuery<Element> ) {
 
         if ( !$rule.attr("text-en") ) {
             this.validateRandomTableIndex($rule);
@@ -424,7 +424,7 @@ class BookValidator {
         const coverage: number[] = [];
         let overlapped = false;
         let nCasesFound = 0;
-        for ( const child of $rule.children() ) {
+        for ( const child of $rule.children().toArray() ) {
             if ( child.nodeName === "case" ) {
                 nCasesFound++;
                 const bounds = randomMechanics.getCaseRuleBounds( $(child) );
@@ -468,14 +468,14 @@ class BookValidator {
 
     }
 
-    private randomTableIncrement( $rule ) {
+    private randomTableIncrement( $rule: JQuery<Element> ) {
         if ( $rule.attr( "increment" ) !== "reset" ) {
             this.validateNumericExpression( $rule , "increment" );
         }
         this.validateRandomTableIndex( $rule );
     }
 
-    private case( $rule ) {
+    private case( $rule: JQuery<Element> ) {
         const bounds = randomMechanics.getCaseRuleBounds( $rule );
         if ( !bounds ) {
             this.addError( $rule, 'Needs "value" or "from" / "to" attributes' );
@@ -486,7 +486,7 @@ class BookValidator {
         }
     }
 
-    private test( $rule ) {
+    private test( $rule: JQuery<Element> ) {
         this.validateDisciplinesAttribute( $rule , "hasDiscipline" , true );
         this.validateObjectIdsAttribute( $rule , "hasObject" , true , false );
         this.validateBooleanExpression( $rule , "expression" );
@@ -512,16 +512,16 @@ class BookValidator {
         // TODO: attribute "isGlobalRuleRegistered". Check the ruleId exists on the current mechanics XML
     }
 
-    private choiceState( $rule ) {
+    private choiceState( $rule: JQuery<Element> ) {
         this.validateSectionChoiceAttribute( $rule , "section" , true );
     }
 
-    private object( $rule ) {
+    private object( $rule: JQuery<Element> ) {
         this.validateObjectIdsAttribute( $rule , "objectId" , false , false );
         this.validateNumericExpression( $rule , "price" );
     }
 
-    private combat( $rule ) {
+    private combat( $rule: JQuery<Element> ) {
         this.validateNumericExpression( $rule , "combatSkillModifier" );
         this.validateNumericExpression( $rule , "combatSkillModifierIncrement" );
 
@@ -542,38 +542,38 @@ class BookValidator {
         // TODO: Check attr "noWeapon" is boolean or number
     }
 
-    private afterCombats( $rule ) {
+    private afterCombats( $rule: JQuery<Element> ) {
         this.checkThereAreCombats( $rule );
     }
 
-    private afterElude( $rule ) {
+    private afterElude( $rule: JQuery<Element> ) {
         this.checkThereAreCombats( $rule );
     }
 
-    private afterCombatTurn( $rule ) {
+    private afterCombatTurn( $rule: JQuery<Element> ) {
         this.checkThereAreCombats( $rule );
     }
 
-    private choiceSelected( $rule ) {
+    private choiceSelected( $rule: JQuery<Element> ) {
         this.validateSectionChoiceAttribute( $rule , "section" , true );
     }
 
-    private numberPickerChoosed( $rule ) {
+    private numberPickerChoosed( $rule: JQuery<Element> ) {
         const $sectionMechanics = this.mechanics.getSection( this.currentSection.sectionId );
         if ( $sectionMechanics.find( "numberPicker" ).length === 0 ) {
             this.addError( $rule , 'No "numberPicker" rule found on this section' );
         }
     }
 
-    private endurance( $rule ) {
+    private endurance( $rule: JQuery<Element> ) {
         this.validateNumericExpression( $rule , "count" );
     }
 
-    private resetSectionState( $rule ) {
+    private resetSectionState( $rule: JQuery<Element> ) {
         this.validateSectionsAttribute( $rule , "sectionId" , false );
     }
 
-    private message( $rule ) {
+    private message( $rule: JQuery<Element> ) {
         const msgId: string = $rule.attr("id");
 
         if ( $rule.attr( "op" ) ) {
@@ -601,7 +601,7 @@ class BookValidator {
         }
     }
 
-    private drop( $rule ) {
+    private drop( $rule: JQuery<Element> ) {
         // Special values:
         const objectId = $rule.attr( "objectId" );
         if ( objectId && this.specialDropValues.contains( objectId ) ) {
@@ -614,15 +614,15 @@ class BookValidator {
         // TODO: "objectId" AND/OR "backpackItemSlots"/"specialItemSlots" should have value
     }
 
-    private disableCombats( $rule ) {
+    private disableCombats( $rule: JQuery<Element> ) {
         this.checkThereAreCombats( $rule );
     }
 
-    private currentWeapon( $rule ) {
+    private currentWeapon( $rule: JQuery<Element> ) {
         this.validateObjectIdsAttribute( $rule , "objectId" , false , true );
     }
 
-    private sell( $rule ) {
+    private sell( $rule: JQuery<Element> ) {
 
         const objectId = $rule.attr("objectId");
         if ( objectId ) {
@@ -645,15 +645,15 @@ class BookValidator {
         }
     }
 
-    private goToSection( $rule ) {
+    private goToSection( $rule: JQuery<Element> ) {
         this.validateSectionsAttribute( $rule , "section" , false );
     }
 
-    private objectUsed( $rule ) {
+    private objectUsed( $rule: JQuery<Element> ) {
         this.validateObjectIdsAttribute( $rule , "objectId" , true , false );
     }
 
-    private textToChoice( $rule ) {
+    private textToChoice( $rule: JQuery<Element> ) {
         this.validateSectionsAttribute( $rule , "section" , false );
 
         const html = this.currentSection.getHtml();
@@ -663,14 +663,14 @@ class BookValidator {
         }
     }
 
-    private kaiMonasteryStorage( $rule ) {
+    private kaiMonasteryStorage( $rule: JQuery<Element> ) {
         // Only available on "equipment" sections
         if ( $rule.closest( "section[id=equipmnt]" ).length === 0 ) {
             this.addError( $rule , 'Rule "kaiMonasteryStorage" should be included only on section with id=equipmnt' );
         }
     }
 
-    private displayIllustration( $rule ) {
+    private displayIllustration( $rule: JQuery<Element> ) {
         this.validateSectionsAttribute( $rule , "section" , false );
         const sectionId: string = $rule.attr( "section" );
         const section = new Section( this.book , sectionId , this.mechanics );
@@ -679,7 +679,7 @@ class BookValidator {
         }
     }
 
-    private use( $rule ) {
+    private use( $rule: JQuery<Element> ) {
         this.validateObjectIdsAttribute( $rule , "objectId" , true , false );
     }
 }
