@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<mechanics book="13">
+<mechanics book="13" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://raw.githubusercontent.com/tonib/kaichronicles/master/src/www/data/mechanics.xsd">
 
     <!-- LIST OF TRANSLATED IMAGES -->
     <translated-images>
@@ -76,6 +77,11 @@
 
         <section id="sect2">
             <endurance count="-1" />
+            <choiceState section="sect97" set="disabled" />
+            <test hasDiscipline="pthmnshp">
+                <choiceState section="sect97" set="enabled" />
+                <choiceState section="sect245" set="disabled" />
+            </test>
         </section>
 
         <section id="sect3">
@@ -86,6 +92,8 @@
                 <choiceState section="all" set="enabled" />
             </afterCombats>
         </section>
+
+        <!-- START HERE -->
 
         <section id="sect4">
             <object objectId="dagger" />

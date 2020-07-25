@@ -191,19 +191,5 @@
     sect350: This book is different from previous. You have to click on a footer note link to continue to the next book...
     Ugly. Add a message rule to help?
 
-* Book 13 tests:
-    - Up to sect1
-    - Remove showCount property from mechanics-13+
-    - "Game rules section": There is a link to the "Readers’ Handbook": Read this!
-      But you should keep your "Lore circles" and other bonuses... So, we should keep a track of old previous book series
-      disciplines.... Or, assume that if you have moved to a new serie from a previous one, you have all the old serie 
-      disciplines
-
 * Book 14:
     - gameRulesController: Check if there is a IMPROVEDDISCIPLINES_SECTION section in Grand Master
-
-* Spanish books erratas:
-    - Book 13, sect equipmnt: "tu nueva Carta de Acciónde Gran Maestro" should be "tu nueva Carta de Acción de Gran Maestro" (space)
-    - Book 13, sect1: 
-        * '" Me gustaría poder"' should be "Me gustaría poder" (space)
-        * 'en tu misión.”dice Rimoah' should be 'en tu misión,” dice Rimoah' (comma, and space)

@@ -45,7 +45,7 @@ TODO
   ```actionChartController.pick('quiver'); actionChartController.pick('quiver'); actionChartController.increaseArrows(10);```
   Sell Quiver: OBJECTS TABLE TO SELL IS NOT UPDATED !!!!
 
-## Development / refactorings
+## Development / refactorings (TO DO NOW)
 - Check older savegames with usageCount = undefined in section states, action chart and InventoryState
   Check also savegames from v1.6 (changes for this in ActionChart.fromObject())
 - Test load previous savegame / state versions to v1.12 !!!
@@ -56,7 +56,14 @@ TODO
 - ERROR rendering (Book 8, spanish, sect13): Unkown tag: table
 - IMPROVE TESTING
 - Documentation about new save game format
-- Set types in SectionRenderer
+- Check if there is any VS code plugin to help XML edition with XSL support
+
+## Spanish books erratas to report
+- Book 13, sect equipmnt: "tu nueva Carta de Acciónde Gran Maestro" should be "tu nueva Carta de Acción de Gran Maestro" (space)
+- Book 13, sect1:
+    * '" Me gustaría poder"' should be "Me gustaría poder" (space)
+    * 'en tu misión.”dice Rimoah' should be 'en tu misión,” dice Rimoah' (comma, and space)
+- Book 13, sect3: sonoroclang should be "sonoro clang" (space)
 
 ## Other
 - Add images to disciplines in Action Chart
