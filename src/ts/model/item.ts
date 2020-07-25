@@ -121,14 +121,15 @@ class Item {
      * @param $o The XML tag with the object info
      * @param objectId The object identifier
      */
-    constructor(book: Book, $o: any, objectId: string) {
+    constructor(book: Book, $o: JQuery<Element>, objectId: string) {
 
         /** The object type ('special', 'object' or 'weapon' ) */
         this.type = $o.prop("tagName");
         /** The object id */
         this.id = objectId;
-        /** The translated object name */
-        this.name = $o.find("name[lang=" + book.language + "]").text();
+
+        // The translated object name
+        this.name = Item.getTranslatedTag($o, book, "name");
 
         // True if the object is a meal
         this.isMeal = $o.attr("isMeal") === "true";
@@ -147,8 +148,8 @@ class Item {
         const txtUsageCount: string = $o.attr("usageCount");
         this.usageCount = txtUsageCount ? parseInt(txtUsageCount, 10) : 1;
 
-        /** The translated object description */
-        this.description = $o.find("description[lang=" + book.language + "]").text();
+        // The translated object description
+        this.description = Item.getTranslatedTag($o, book, "description");
 
         // If it's the map, add description from the book:
         if (objectId === Item.MAP) {
@@ -164,7 +165,7 @@ class Item {
         }
 
         // Extra description
-        this.extraDescription = $o.find("extraDescription[lang=" + book.language + "]").text();
+        this.extraDescription = Item.getTranslatedTag($o, book, "extraDescription");
 
         /**
          * The weapon type. Only for special and object types. It is the kind of weapon.
@@ -186,8 +187,8 @@ class Item {
         }
 
         // Effects (when the player carry the object)
-        const $effects: any[] = $o.find("effect");
-        for (const effect of $effects) {
+        const $effects = $o.find("effect");
+        for (const effect of $effects.toArray()) {
             const $effect = $(effect);
             const increment = parseInt($effect.attr("increment"), 10);
             const cls: string = $effect.attr("class");
@@ -203,6 +204,15 @@ class Item {
         // Incompatibilities
         this.incompatibleWith = mechanicsEngine.getArrayProperty($o, "incompatibleWith");
 
+    }
+
+    private static getTranslatedTag($o: JQuery<Element>, book: Book, tagName: string) {
+        let text = $o.find(tagName + "[lang=" + book.language + "]").text();
+        if (!text && book.language !== Language.ENGLISH) {
+            // Maybe object is untranslated. Try to get the english text
+            text = $o.find(tagName + "[lang=" + Language.ENGLISH + "]").text();
+        }
+        return text;
     }
 
     private assignMapDescription(book: Book) {

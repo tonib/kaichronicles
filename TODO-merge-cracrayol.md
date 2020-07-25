@@ -34,7 +34,6 @@
     - Re-Check all Kai Surge stuff
     
 * https://github.com/tonib/kaichronicles/commit/5e9d84bc5f9ad18052e9b8d3b23b23d262ea697e
-    - TODO (mine): If an object has no spanish translation, show the english name
 
 * https://github.com/tonib/kaichronicles/commit/38d0d6700c6297ae411f764b91e693e1497f93bd
 

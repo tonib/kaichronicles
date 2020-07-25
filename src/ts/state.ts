@@ -1,3 +1,10 @@
+
+/** Language codes */
+enum Language {
+    ENGLISH = "en",
+    SPANISH = "es"
+}
+
 /**
  * The application state
  */
@@ -26,7 +33,7 @@ const state = {
     /**
      * The current language ('en' = english / 'es' = spanish)
      */
-    language: "en",
+    language: Language.ENGLISH as string,
 
     /**
      * Color Theme ( 'light' or 'dark' ).
