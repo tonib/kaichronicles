@@ -38,6 +38,10 @@ class Item {
     public static readonly BACKPACK = "backpack";
     public static readonly HELSHEZAG = "helshezag";
 
+    /** Allowed Special Items to carry to Grand Master from previous series */
+    public static readonly ALLOWED_GRAND_MASTER = ["crystalstar", "sommerswerd", "silverhelm", "daggerofvashna", "silverbracers", "jewelledmace",
+        "silverbowduadon", "helshezag", "kagonitechainmail", "korliniumscabbard"];
+
     /** The object type (Item.SPECIAL, Item.OBJECT or Item.WEAPON) */
     public type: string;
 

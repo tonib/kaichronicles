@@ -49,6 +49,26 @@ class kaimonasteryController {
         routing.redirect( "game" );
     }
 
+    /** Remove any Special Item non allowed in Grand Master from Kai Monastery. */
+    public static removeSpecialGrandMaster() {
+        const kaiMonasterySection = state.sectionStates.getSectionState(Book.KAIMONASTERY_SECTION);
+
+        // Remove any non allowed Special Item
+        kaiMonasterySection.objects = kaiMonasterySection.objects.filter( (sectionItem: SectionItem) => {
+            const item = state.mechanics.getObject(sectionItem.id);
+            if (!item) {
+                return false;
+            }
+            if (item.type !== Item.SPECIAL) {
+                return true;
+            }
+            return Item.ALLOWED_GRAND_MASTER.contains(sectionItem.id);
+        });
+
+        // Update action chart
+        state.actionChart.kaiMonasterySafekeeping = kaiMonasterySection.objects;
+    }
+
     /** Return page */
     public static getBackController() { return "mainMenu"; }
 

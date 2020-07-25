@@ -1508,6 +1508,22 @@ const mechanicsEngine = {
         GrandMasterUpgrade.upgrade(rule);
     },
 
+    /**
+     * Drop any Special Item non allowed in Grand Master. Remove them too from the Kai Monastery.
+     * Rule has state.
+     */
+    removeSpecialGrandMaster(rule: Element) {
+        if ( state.sectionStates.ruleHasBeenExecuted(rule) ) {
+            // Execute only once
+            return;
+        }
+
+        actionChartController.drop("allspecialgrdmaster");
+        kaimonasteryController.removeSpecialGrandMaster();
+
+        state.sectionStates.markRuleAsExecuted(rule);
+    },
+
     /************************************************************/
     /**************** SPECIAL SECTIONS **************************/
     /************************************************************/

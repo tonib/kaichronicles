@@ -166,8 +166,7 @@ const actionChartController = {
 
         if (objectId === "allspecialgrdmaster") {
             actionChartController.dropItemsList(state.actionChart.getSpecialItemsIds().filter((itemId) => {
-                return !["crystalstar", "sommerswerd", "silverhelm", "daggerofvashna", "silverbracers", "jewelledmace",
-                    "silverbowduadon", "helshezag", "kagonitechainmail", "korliniumscabbard"].contains(itemId);
+                return !Item.ALLOWED_GRAND_MASTER.contains(itemId);
             }));
             return true;
         }

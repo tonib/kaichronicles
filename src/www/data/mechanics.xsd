@@ -414,6 +414,8 @@
     
     <xs:complexType name="grandMasterUpgrade" />
 
+    <xs:complexType name="removeSpecialGrandMaster" />
+
     <xs:complexType name="runInventoryEvent" />
 
     <!--
@@ -471,6 +473,7 @@
             <xs:element name="displayIllustration" type="displayIllustration" />
             <xs:element name="use" type="use" />
             <xs:element name="grandMasterUpgrade" type="grandMasterUpgrade" />
+            <xs:element name="removeSpecialGrandMaster" type="removeSpecialGrandMaster" />
 
             <!-- Special sections -->
             <xs:element name="book2Sect238" type="specialsection_type" />

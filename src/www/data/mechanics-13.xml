@@ -22,7 +22,9 @@
         <section id="gamerulz">
             <!-- Select the player skills (weapons skill and endurance) UI -->
             <setSkills />
-            <drop objectId="allspecialgrdmaster" />
+            <!-- Remove non allowed object to carry to Grand Master -->
+            <removeSpecialGrandMaster />
+            <!-- Allow to upgrade stats -->
             <grandMasterUpgrade />
         </section>
 

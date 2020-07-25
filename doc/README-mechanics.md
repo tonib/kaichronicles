@@ -144,6 +144,10 @@ Game setup: The player selects the initial Endurance and Combat Skill
 ### grandMasterUpgrade
 Allow to upgrade stats at the Grand Master beginning
 
+### removeSpecialGrandMaster
+Carry only allowed Special Items at the Grand Master beginning. Removes Special Items from Action Chart and
+Kai Monastery
+
 ### restoreDeliveranceUse (execute once only)
 Magnakai and later: Action Chart button to restore +X EP after Y days will available again
 

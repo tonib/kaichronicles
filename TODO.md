@@ -56,7 +56,7 @@ TODO
 - ERROR rendering (Book 8, spanish, sect13): Unkown tag: table
 - IMPROVE TESTING
 - Documentation about new save game format
-- Book 13: drop objectId="allspecialgrdmaster" should remove non allowed special objects from Kai Monastery?
+- Set types in SectionRenderer
 
 ## Other
 - Add images to disciplines in Action Chart
