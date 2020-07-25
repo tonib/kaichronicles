@@ -23,6 +23,7 @@
             <!-- Select the player skills (weapons skill and endurance) UI -->
             <setSkills />
             <drop objectId="allspecialgrdmaster" />
+            <grandMasterUpgrade />
         </section>
 
         <section id="discplnz">

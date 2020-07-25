@@ -273,6 +273,57 @@
         <p id="mechanics-ill"></p>
     </div>
 
+    <!-- Upgrade stats at Grand Master beginning -->
+    <div class="well" id="mechanics-gmupgrade">
+        <p data-translation="gmupgrade-info">
+            According to <a href="https://www.projectaon.org/en/ReadersHandbook/GrandMaster" target="_blank">The Readers’ Handbook</a>, you
+            can change your stats at the Grand Master beginning. We support the Handbook recommendations:
+        </p>
+        <div class="radio">
+            <label>
+                <input type="radio" name="mechanics-gmupgrade-option" value="same">
+                <span data-translation="gmupgrade-same">Continue with current stats, bonus and items</span>
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" name="mechanics-gmupgrade-option" value="reroll-nobonus">
+                <span data-translation="gmupgrade-nobonus">
+                    Discard and re-roll your existing statistics adding 25 and 30 to your rolls, discard all bonuses, and keep all weapons and items
+                </span>
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" name="mechanics-gmupgrade-option" value="reroll">
+                <span data-translation="gmupgrade-reroll">
+                    Discard and re-roll your existing statistics adding 25 and 30 to your rolls but keep all bonuses, weapons, and items
+                </span>
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" name="mechanics-gmupgrade-option" value="increasestats">
+                <span data-translation="gmupgrade-increasestats">
+                    Compensate for the changed modifier to the random number rolls by adding 15 and 10 to your previous statistics
+                </span>
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" name="mechanics-gmupgrade-option" value="newplayer">
+                <span data-translation="gmupgrade-newplayer">
+                    Discard everything (i.e. all statistics, weapons, bonuses, and items) and roll a completely new character
+                </span>
+            </label>
+        </div>
+        <div>
+            <button class="btn btn-primary btn-block" type="button" id="mechanics-gmupgrade-button" data-translation="gmupgrade-apply">
+                Apply changes
+            </button>
+        </div>
+    </div>
+
     <!-- *** SPECIAL SECTIONS *** -->
 
     <!-- Cartwheel game -->

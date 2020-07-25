@@ -412,6 +412,8 @@
         <xs:attribute name="objectId" type="xs:string" use="required" />
     </xs:complexType>
     
+    <xs:complexType name="grandMasterUpgrade" />
+
     <xs:complexType name="runInventoryEvent" />
 
     <!--
@@ -468,6 +470,7 @@
             <xs:element name="runInventoryEvent" type="runInventoryEvent" />
             <xs:element name="displayIllustration" type="displayIllustration" />
             <xs:element name="use" type="use" />
+            <xs:element name="grandMasterUpgrade" type="grandMasterUpgrade" />
 
             <!-- Special sections -->
             <xs:element name="book2Sect238" type="specialsection_type" />

@@ -1500,6 +1500,14 @@ const mechanicsEngine = {
         state.sectionStates.markRuleAsExecuted(rule);
     },
 
+    /**
+     * Upgrade stats at Grand Master beginning.
+     * Rule has state.
+     */
+    grandMasterUpgrade(rule: Element) {
+        GrandMasterUpgrade.upgrade(rule);
+    },
+
     /************************************************************/
     /**************** SPECIAL SECTIONS **************************/
     /************************************************************/

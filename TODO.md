@@ -52,16 +52,14 @@ TODO
 - If noPsiSurge="true" , set noMinblast="true". If noKaiSurge="true, set noMindblast="true", noPsisurge="true". Confirm this is true
   for any game rule, and add it as a check to validation
 - Grand Master: If you have no weapon, there is no malus
-- I suspect Kai-surge and Psi-surge checks could be a single one
 - In Grand Master books, if you have Psi-surge, check the bonus for Mindblast
 - ERROR rendering (Book 8, spanish, sect13): Unkown tag: table
-- Remove Combat.kaiSurge
 - IMPROVE TESTING
 - Documentation about new save game format
+- Book 13: drop objectId="allspecialgrdmaster" should remove non allowed special objects from Kai Monastery?
 
 ## Other
 - Add images to disciplines in Action Chart
-- Move all bonuses calculation from ActionChart to a new class
 - Add option to jump from one book to other (debugging, loyalty bonuses)
 - FAQ: Add info about change the Random Table
 - Add help for "LW club newsletter 29" setting
@@ -179,6 +177,15 @@ cordova emulate --target=Android_9 android
   svn diff -x --ignore-all-space https://www.projectaon.org/data/tags/20151013/es/xml/01hdlo.xml https://www.projectaon.org/data/trunk/es/xml/01hdlo.xml | iconv -f ISO-8859-1 | colordiff | less -R
   svn diff -x --ignore-all-space https://www.projectaon.org/data/tags/20151013/en/xml/01fftd.xml https://www.projectaon.org/data/trunk/en/xml/01fftd.xml | iconv -f ISO-8859-1 | colordiff | less -R
 
+* Set action chart for Kai series completed
+state.actionChart.kaiDisciplines.disciplines = [ KaiDiscipline.Camouflage, KaiDiscipline.Hunting , KaiDiscipline.SixthSense , 
+KaiDiscipline.Tracking , KaiDiscipline.Healing , KaiDiscipline.Weaponskill , KaiDiscipline.Mindshield , KaiDiscipline.Mindblast , KaiDiscipline.AnimalKinship ];
+state.actionChart.kaiDisciplines.weaponSkill = [ "axe" ];
+
+* Set action chart for Magnakai series completed
+state.actionChart.magnakaiDisciplines.disciplines = [ MgnDiscipline.Weaponmastery, MgnDiscipline.AnimalControl, MgnDiscipline.Curing, MgnDiscipline.Invisibility, MgnDiscipline.Huntmastery, MgnDiscipline.Pathsmanship, MgnDiscipline.PsiSurge, MgnDiscipline.PsiScreen, MgnDiscipline.Nexus ];
+state.actionChart.kaiDisciplines.weaponSkill = [ "dagger", "spear", "mace", "shortsword", "warhammer", "bow",
+        "axe", "sword", "quarterstaff" ];
 
 * Create a default inventory (Magnakai books)
 ```

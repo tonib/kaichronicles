@@ -1163,7 +1163,7 @@ class ActionChart {
 
     /**
      * Returns player disciplines for a given book series
-     * @param series Book series witch get disciplines. If null or not specified, we get current book disciplines
+     * @param series Book series which get disciplines. If null or not specified, we get current book disciplines
      * @returns Disciplines for that serie
      */
     public getDisciplines(series: BookSeriesId = null): string[] {
@@ -1195,10 +1195,24 @@ class ActionChart {
         return this.hasDiscipline(disciplineId, BookSeriesId.GrandMaster);
     }
 
+    private getRealDisciplines(seriesId: BookSeriesId): SeriesDisciplines {
+        switch (seriesId) {
+            case BookSeriesId.Kai:
+                return this.kaiDisciplines;
+            case BookSeriesId.Magnakai:
+                return this.magnakaiDisciplines;
+            case BookSeriesId.GrandMaster:
+                return this.grandMasterDisciplines;
+            default:
+                mechanicsEngine.debugWarning("ActionChart.getSeriesDisciplines: Wrong book series");
+                return { disciplines: [], weaponSkill: [] };
+        }
+    }
+
     /**
      * Returns player disciplines and weaponskill for a given book series
-     * @param series Book series witch get disciplines. If null or not specified, we get current book series disciplines
-     * @returns Disciplines for that serie
+     * @param series Book series which get disciplines. If null or not specified, we get current book series disciplines
+     * @returns Disciplines for that serie to apply. They can be different of the real disciplines which the played finished the series
      */
     private getSeriesDisciplines(seriesId: BookSeriesId = null): SeriesDisciplines {
 
@@ -1210,22 +1224,7 @@ class ActionChart {
             return { disciplines: [], weaponSkill: [] };
         }
 
-        let seriesDisciplines: SeriesDisciplines;
-        switch (seriesId) {
-            case BookSeriesId.Kai:
-                seriesDisciplines = this.kaiDisciplines;
-                break;
-            case BookSeriesId.Magnakai:
-                seriesDisciplines = this.magnakaiDisciplines;
-                break;
-            case BookSeriesId.GrandMaster:
-                seriesDisciplines = this.grandMasterDisciplines;
-                break;
-            default:
-                mechanicsEngine.debugWarning("ActionChart.getSeriesDisciplines: Wrong book series");
-                seriesDisciplines = { disciplines: [], weaponSkill: [] };
-                break;
-        }
+        let seriesDisciplines = this.getRealDisciplines(seriesId);
 
         // If the player has played SOME book of a previous series, player has ALL disciplines of that series
         // and can benefit of loyalty bonuses
@@ -1248,16 +1247,20 @@ class ActionChart {
     }
 
     /**
-     * Set current disciplines for current book series
+     * Set current disciplines for a given book series
+     * @param series Book series which set disciplines. If null or not specified, we set current book series disciplines
      */
-    private setDisciplines(disciplinesIds: string[]) {
-        this.getSeriesDisciplines().disciplines = disciplinesIds;
+    public setDisciplines(disciplinesIds: string[], seriesId: BookSeriesId = null) {
+        if (seriesId === null) {
+            seriesId = state.book.getBookSeries().id;
+        }
+        this.getRealDisciplines(seriesId).disciplines = disciplinesIds;
     }
 
     /**
      * Get the weapon ids for the "Weaponskill" discipline.
      * On Kai series, it's a single weapon. On series >= Magnakai, they will be more than one
-     * @param series Book series witch get weapons. If null or not specified, we get current book series weapons
+     * @param series Book series which get weapons. If null or not specified, we get current book series weapons
      */
     public getWeaponSkill(seriesId: BookSeriesId = null): string[] {
         return this.getSeriesDisciplines(seriesId).weaponSkill;

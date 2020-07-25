@@ -164,6 +164,24 @@ class Translations {
             "ellos antes de continuar a la siguiente sección.</p>",
 
         //////////////////////////////////////
+        // Grand Master upgrade
+        //////////////////////////////////////
+
+        "gmupgrade-info": 'De acuerdo con <a href="https://www.projectaon.org/en/ReadersHandbook/GrandMaster" target="_blank">El Manual del Lector</a>, ' +
+            "puedes cambiar tus puntuaciones al inicio de Gran Maestro. Soportamos las recomendaciones del Manual:",
+        "gmupgrade-same": "Continuar con tus puntuaciones, bonus y objetos actuales",
+        "gmupgrade-nobonus": "Descartar tus puntuaciones actuales y elegir nuevas, sumando 25 y 30 a la Tabla de la Suerte, descartar " +
+            "todos los bonus, y mantener tus armas y objetos",
+        "gmupgrade-reroll": "Descartar tus puntuaciones actuales y elegir nuevas, sumando 25 y 30 a la Tabla de la Suerte, pero mantener " +
+            "todos los bonus, armas y objetos",
+        "gmupgrade-increasestats": "Compensar el cambio de los modificadores a la Tabla de la Suerte, añadiendo 15 y 10 a tus anteriores " +
+            "puntuaciones",
+        "gmupgrade-newplayer": "Descartar todo (esto es: puntuaciones, armas, bonus y objetos) y empezar con un nuevo personaje",
+        "gmupgrade-apply": "Aplicar cambios",
+        "gmupgrade-confirm": "¡ESTOS CAMBIOS NO SE PUEDEN DESHACER! ¿Estas seguro que quieres aplicarlos?",
+        "gmupgrade-applied": "Cambios aplicados",
+
+        //////////////////////////////////////
         // Special sections
         //////////////////////////////////////
 
@@ -442,6 +460,13 @@ class Translations {
         "enduranceSet" : "Your Endurance Points are {0}",
         "maxDisciplines" : "You can choose only {0} disciplines",
         "onlyNWeapons" : "You can select only {0} weapons",
+
+        //////////////////////////////////////
+        // Grand Master upgrade
+        //////////////////////////////////////
+
+        "gmupgrade-confirm": "THESE CHANGES CANNOT BE UNDONE! Are you sure you want to apply them?",
+        "gmupgrade-applied": "Changes applied",
 
         //////////////////////////////////////
         // Special sections
