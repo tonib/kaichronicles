@@ -30,7 +30,7 @@ const mainMenuController = {
      * Change the current language
      */
     changeTranslation() {
-        state.language = ( state.language === "es" ? "en" : "es" );
+        state.language = ( state.language === Language.SPANISH ? Language.ENGLISH : Language.SPANISH );
         mainMenuController.index();
     },
 

@@ -44,7 +44,7 @@ const newGameController = {
     },
 
     selectedBookChanged(newBookNumber: number) {
-        const book = new Book(newBookNumber, "en");
+        const book = new Book(newBookNumber, Language.ENGLISH);
         newGameView.setCoverImage( book.getCoverURL() );
     },
 

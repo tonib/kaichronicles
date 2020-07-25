@@ -104,7 +104,7 @@ const gameView = {
 
             $("#game-switchlanguage").click((e: Event) => {
                 e.preventDefault();
-                settingsController.changeLanguage(state.book.language === "en" ? "es" : "en", false)
+                settingsController.changeLanguage(state.book.language === Language.ENGLISH ? Language.SPANISH : Language.ENGLISH , false)
                     .then(() => {
                         gameController.loadSection(state.sectionStates.currentSection);
                     });

@@ -54,7 +54,7 @@ class Book {
     public bookNumber: number;
 
     /** The book language */
-    public language: string;
+    public language: Language;
 
     /** The book XML document */
     public bookXml: any;
@@ -78,7 +78,7 @@ class Book {
      * @param number The book index number to create
      * @param language The book language ('es' = spanish / 'en' = english )
      */
-    public constructor(num: number, language: string) {
+    public constructor(num: number, language: Language) {
         this.bookNumber = num;
         this.language = language;
         this.bookXml = null;

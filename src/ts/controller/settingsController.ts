@@ -25,7 +25,7 @@ const settingsController = {
      * @param updateUI Should we show progress on UI. Set true ONLY on the settings page
      * @return The promise to download the book with the new language
      */
-    changeLanguage(newLanguage: string, updateUI: boolean): JQueryPromise<void> {
+    changeLanguage(newLanguage: Language, updateUI: boolean): JQueryPromise<void> {
 
         // TODO: Check download errors
 

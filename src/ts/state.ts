@@ -33,7 +33,7 @@ const state = {
     /**
      * The current language ('en' = english / 'es' = spanish)
      */
-    language: Language.ENGLISH as string,
+    language: Language.ENGLISH,
 
     /**
      * Color Theme ( 'light' or 'dark' ).
@@ -56,7 +56,7 @@ const state = {
             return;
         }
         if ( navigator.language.toLowerCase().substr(0, 2) === "es" ) {
-            state.language = "es";
+            state.language = Language.SPANISH;
         }
     },
 
@@ -79,7 +79,7 @@ const state = {
     /**
      * Setup the state for a book number and language
      */
-    setup(bookNumber: number, language: string, keepActionChart: boolean) {
+    setup(bookNumber: number, language: Language, keepActionChart: boolean) {
 
         if ( !bookNumber ) {
             bookNumber = 1;
@@ -179,7 +179,7 @@ const state = {
             state.restoreStateFromObject( stateKeys );
         } catch (e) {
             console.log(e);
-            state.setup(1, "en", false);
+            state.setup(1, Language.ENGLISH, false);
         }
     },
 

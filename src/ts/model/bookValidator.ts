@@ -32,7 +32,7 @@ class BookValidator {
         this.book = book;
     }
 
-    public static downloadBookAndGetValidator( bookNumber: number , language: string ): JQueryPromise<BookValidator> {
+    public static downloadBookAndGetValidator( bookNumber: number , language: Language ): JQueryPromise<BookValidator> {
 
         const book = new Book(bookNumber, language );
         const mechanics = new Mechanics( book );
@@ -495,8 +495,17 @@ class BookValidator {
         this.validateObjectIdsAttribute( $rule , "objectOnSection" , true , false );
 
         const language: string = $rule.attr("bookLanguage");
-        if ( language && ( language !== "en" && language !== "es" ) ) {
-            this.addError( $rule , "Wrong language: " + language );
+        if ( language ) {
+            let langFound = false;
+            for (const langKey of Object.keys(Language)) {
+                if (Language[langKey] === language) {
+                    langFound = true;
+                    break;
+                }
+            }
+            if (!langFound) {
+                this.addError( $rule , "Language key not found in Language enum: " + language );
+            }
         }
 
         this.validateSectionChoiceAttribute( $rule , "isChoiceEnabled" , false );

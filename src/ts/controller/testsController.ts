@@ -132,7 +132,7 @@ class testsController {
         testsController.addLog("");
     }
 
-    private static downloadAndTestBook( bookNumber: number , language: string ) {
+    private static downloadAndTestBook( bookNumber: number , language: Language ) {
 
         BookValidator.downloadBookAndGetValidator(bookNumber, language)
             .then((validator: BookValidator) => {
@@ -142,11 +142,11 @@ class testsController {
                 // Move to the next book:
                 let nextBookNumber = validator.book.bookNumber;
                 let nextLanguage = validator.book.language;
-                if (nextLanguage === "en") {
-                    nextLanguage = "es";
+                if (nextLanguage === Language.ENGLISH) {
+                    nextLanguage = Language.SPANISH;
                 } else {
                     nextBookNumber++;
-                    nextLanguage = "en";
+                    nextLanguage = Language.ENGLISH;
                 }
                 if (nextBookNumber > projectAon.supportedBooks.length) {
                     testsController.addLog("Finished");
@@ -159,7 +159,7 @@ class testsController {
 
     private static testAllBooks() {
         testsController.clearLog();
-        testsController.downloadAndTestBook(1, "en");
+        testsController.downloadAndTestBook(1, Language.ENGLISH);
     }
 
     private static clearLog() {
