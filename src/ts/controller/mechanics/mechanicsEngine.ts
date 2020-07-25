@@ -886,13 +886,13 @@ const mechanicsEngine = {
         }
 
         // Check if the enemy is immune to Mindblast
-        combat.noMindblast = mechanicsEngine.getBooleanProperty($rule, "noMindblast", false);
+        combat.noMindblast = mechanicsEngine.getBooleanProperty($rule, "noMindblast", combat.noMindblast);
 
         // Check if the enemy is immune to Psi-Surge
-        combat.noPsiSurge = mechanicsEngine.getBooleanProperty($rule, "noPsiSurge", false);
+        combat.noPsiSurge = mechanicsEngine.getBooleanProperty($rule, "noPsiSurge", combat.noPsiSurge);
 
-        // Check if the enemy is immune to Psi-Surge
-        combat.noKaiSurge = mechanicsEngine.getBooleanProperty($rule, "noKaiSurge", false);
+        // Check if the enemy is immune to Kai-Surge
+        combat.noKaiSurge = mechanicsEngine.getBooleanProperty($rule, "noKaiSurge", combat.noKaiSurge);
 
         // Special mindblast bonus?
         const txtMindblastBonus = $rule.attr("mindblastBonus");
