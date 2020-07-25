@@ -820,24 +820,31 @@ class ActionChart {
             }
         }
 
-        // Mindblast / Psi-surge
-        if (combat.kaiSurge) {
-            bonuses.push({
-                concept: translations.text("kaisurge"),
-                increment: (combat.kaiSurgeBonus ? combat.kaiSurgeBonus : Combat.defaultKaiSurgeBonus()) * combat.mindblastMultiplier
-            });
-        } else if (combat.psiSurge) {
-            bonuses.push({
-                concept: translations.text("psisurge"),
-                increment: (combat.psiSurgeBonus ? combat.psiSurgeBonus : Combat.defaultPsiSurgeBonus()) * combat.mindblastMultiplier
-            });
+        // Mindblast / XXX-surge
+        if (combat.psiSurge) {
+            // XXX-surge currently active
+
+            const surgeDisciplineId = combat.getSurgeDiscipline();
+            if (surgeDisciplineId === GndDiscipline.KaiSurge) {
+                bonuses.push({
+                    concept: translations.text("kaisurge"),
+                    increment: combat.getFinalSurgeBonus(GndDiscipline.KaiSurge)
+                });
+            } else if (surgeDisciplineId === MgnDiscipline.PsiSurge) {
+                bonuses.push({
+                    concept: translations.text("psisurge"),
+                    increment: combat.getFinalSurgeBonus(MgnDiscipline.PsiSurge)
+                });
+            }
+
         } else if (!combat.noMindblast) {
             if (this.hasKaiDiscipline(KaiDiscipline.Mindblast) || this.hasMgnDiscipline(MgnDiscipline.PsiSurge) ||
                 this.hasGndDiscipline(GndDiscipline.KaiSurge)
             ) {
+                // Mindblast active
                 bonuses.push({
                     concept: translations.text("mindblast"),
-                    increment: (combat.mindblastBonus ? combat.mindblastBonus : Combat.defaultMindblastBonus()) * combat.mindblastMultiplier
+                    increment: combat.getFinalMindblastBonus()
                 });
             }
         }

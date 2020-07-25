@@ -117,22 +117,13 @@ class CombatTurn {
             this.loneWolfExtra += combat.turnLossIfWounded;
         }
 
-        // Psi-surge loss
+        // XXX-surge loss
         if ( combat.psiSurge ) {
-            const psiSurgeLoss = Combat.psiSurgeTurnLoss();
+            const psiSurgeLoss = Combat.surgeTurnLoss(combat.getSurgeDiscipline());
             if ( this.loneWolf !== COMBATTABLE_DEATH ) {
                 this.loneWolf += psiSurgeLoss;
             }
             this.loneWolfExtra -= psiSurgeLoss;
-        }
-
-        // Kai-surge loss
-        if ( combat.kaiSurge ) {
-            const kaiSurgeLoss = Combat.kaiSurgeTurnLoss();
-            if ( this.loneWolf !== COMBATTABLE_DEATH ) {
-                this.loneWolf += kaiSurgeLoss;
-            }
-            this.loneWolfExtra -= kaiSurgeLoss;
         }
 
         /** Text with the player loss */

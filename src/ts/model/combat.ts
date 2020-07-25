@@ -109,7 +109,7 @@ class Combat {
     /** Combat has been finished? */
     public combatFinished = false;
 
-    /** Psi-surge is activated on this combat? */
+    /** Psi-surge / Kai-surge is activated on this combat? */
     public psiSurge = false;
 
     /** It's a bow combat? If false, it's a hand-to-hand combat */
@@ -123,9 +123,6 @@ class Combat {
 
     /** Loss on this combat is permanent (reduce original endurance)? */
     public permanentDammage = false;
-
-    /** Kai-surge is activated on this combat? */
-    public kaiSurge = false;
 
     /**
      * Create a combat
@@ -148,8 +145,8 @@ class Combat {
         this.originalPlayerEndurance = state.actionChart.currentEndurance;
 
         // Default Kai-Surge / Psi-Surge / Mindblast bonuses
-        this.kaiSurgeBonus = Combat.defaultKaiSurgeBonus();
-        this.psiSurgeBonus = Combat.defaultPsiSurgeBonus();
+        this.kaiSurgeBonus = Combat.defaultSurgeBonus(GndDiscipline.KaiSurge);
+        this.psiSurgeBonus = Combat.defaultSurgeBonus(MgnDiscipline.PsiSurge);
         this.mindblastBonus = Combat.defaultMindblastBonus();
     }
 
@@ -381,58 +378,113 @@ class Combat {
         return this.noWeaponTurns > this.turns.length;
     }
 
-    /** Get the default Kai-Surge bonus */
-    public static defaultKaiSurgeBonus(): number {
-        return +8;
+    /**
+     * The applicable XXX-Surge discipline in this combat
+     * @returns The applicable XXX-Surge discipline (GndDiscipline.KaiSurge or MgnDiscipline.PsiSurge). null if no XXX-surge is applicable
+     */
+    public getSurgeDiscipline(): string {
+        if (state.actionChart.hasGndDiscipline(GndDiscipline.KaiSurge) && !this.noKaiSurge) {
+            return GndDiscipline.KaiSurge;
+        } else if (state.actionChart.hasMgnDiscipline(MgnDiscipline.PsiSurge) && !this.noPsiSurge) {
+            return MgnDiscipline.PsiSurge;
+        }
+        return null;
     }
 
-    /** Returns the number of EP loss by turn when using Kai-Surge */
-    public static kaiSurgeTurnLoss(): number {
-        return 1;
+    /**
+     * The full bonus for the XXX-Surge discipline on this combat, with any multiplier applied
+     * @param surgeDisciplineId Discipline applied in this combat (GndDiscipline.KaiSurge or MgnDiscipline.PsiSurge)
+     * @returns The XXX-Surge CS bonus
+     */
+    public getFinalSurgeBonus(surgeDisciplineId: string): number {
+        if (!surgeDisciplineId) {
+            return 0;
+        }
+        const surgeBonus = (surgeDisciplineId === GndDiscipline.KaiSurge ? this.kaiSurgeBonus : this.psiSurgeBonus);
+        return (surgeBonus ? surgeBonus : Combat.defaultSurgeBonus(surgeDisciplineId)) * this.mindblastMultiplier;
     }
 
-    /** Returns the minimum Endurance Points to use the Kai-Surge */
-    public static minimumEPForKaiSurge(): number {
-        return 6;
+    /**
+     * The full bonus for Mindblast on this combat, with any multiplier applied
+     * @returns The Mindblast CS bonus
+     */
+    public getFinalMindblastBonus(): number {
+        return (this.mindblastBonus ? this.mindblastBonus : Combat.defaultMindblastBonus()) * this.mindblastMultiplier;
     }
 
-    /** Returns the number of EP loss by turn when using Psi-Surge */
-    public static psiSurgeTurnLoss(): number {
-        if (state.actionChart.hasMgnDiscipline(MgnDiscipline.PsiSurge) && state.actionChart.getDisciplines(BookSeriesId.Magnakai).length >= 9) {
-            // See defaultPsiSurgeBonus comment
+    /**
+     * Returns the number of EP loss by turn when using XXX-Surge
+     * @param surgeDisciplineId Discipline applied in this combat (GndDiscipline.KaiSurge or MgnDiscipline.PsiSurge)
+     * @returns EP loss for each turn
+     */
+    public static surgeTurnLoss(surgeDisciplineId: string): number {
+        if (surgeDisciplineId === GndDiscipline.KaiSurge) {
             return 1;
         } else {
-            return 2;
+            // MgnDiscipline.PsiSurge
+
+            if (state.actionChart.hasMgnDiscipline(MgnDiscipline.PsiSurge) &&
+                state.actionChart.getDisciplines(BookSeriesId.Magnakai).length >= 9) {
+                // See defaultPsiSurgeBonus comment
+                return 1;
+            } else {
+                return 2;
+            }
         }
     }
 
-    /** Returns the minimum Endurance Points to use the Psi-Surge */
-    public static minimumEPForPsiSurge(): number {
-        if (state.actionChart.hasMgnDiscipline(MgnDiscipline.PsiSurge) && state.actionChart.getDisciplines(BookSeriesId.Magnakai).length >= 9) {
-            // See defaultPsiSurgeBonus comment
-            return 4;
-        } else {
+    /**
+     * Returns the minimum Endurance Points to use the Psi-Surge / Kai-Surge
+     * @param surgeDisciplineId Discipline applied in this combat (GndDiscipline.KaiSurge or MgnDiscipline.PsiSurge)
+     * @returns Minimum EP to use discipline
+     */
+    public static minimumEPForSurge(surgeDisciplineId: string): number {
+        if (surgeDisciplineId === GndDiscipline.KaiSurge) {
             return 6;
-        }
-    }
-
-    /** Get the default Psi-Surge bonus */
-    public static defaultPsiSurgeBonus(): number {
-        /*
-            Magnakai / Psi-Surge:
-            When using their psychic ability to attack an enemy, Archmasters may add 6 points to their COMBAT SKILL instead of the usual 4 points.
-            For every round in which Psi-surge is used, Archmasters need only deduct 1 ENDURANCE point. When using the weaker psychic
-            attack—Mindblast—they may add 3 points to their COMBAT SKILL without loss of ENDURANCE points. Archmasters cannot use Psi-surge if their
-            ENDURANCE score falls to 4 points or below.
-        */
-        if (state.actionChart.hasMgnDiscipline(MgnDiscipline.PsiSurge) && state.actionChart.getDisciplines(BookSeriesId.Magnakai).length >= 9) {
-            return +6;
         } else {
-            return +4;
+            // MgnDiscipline.PsiSurge
+
+            if (state.actionChart.hasMgnDiscipline(MgnDiscipline.PsiSurge) &&
+                state.actionChart.getDisciplines(BookSeriesId.Magnakai).length >= 9) {
+                // See defaultPsiSurgeBonus comment
+                return 4;
+            } else {
+                return 6;
+            }
         }
     }
 
-    /** Get the default Mindblast bonus */
+    /**
+     * Get the default Psi-Surge bonus
+     * @param surgeDisciplineId Discipline applied in this combat (GndDiscipline.KaiSurge or MgnDiscipline.PsiSurge)
+     * @returns Default +CS bonus
+     */
+    public static defaultSurgeBonus(surgeDisciplineId: string): number {
+        if (surgeDisciplineId === GndDiscipline.KaiSurge) {
+            return +8;
+        } else {
+            // MgnDiscipline.PsiSurge
+            /*
+                Magnakai / Psi-Surge:
+                When using their psychic ability to attack an enemy, Archmasters may add 6 points to their COMBAT SKILL instead of the usual 4 points.
+                For every round in which Psi-surge is used, Archmasters need only deduct 1 ENDURANCE point. When using the weaker psychic
+                attack—Mindblast—they may add 3 points to their COMBAT SKILL without loss of ENDURANCE points. Archmasters cannot use Psi-surge if their
+                ENDURANCE score falls to 4 points or below.
+            */
+            if (state.actionChart.hasMgnDiscipline(MgnDiscipline.PsiSurge) &&
+                state.actionChart.getDisciplines(BookSeriesId.Magnakai).length >= 9)
+            {
+                return +6;
+            } else {
+                return +4;
+            }
+        }
+    }
+
+    /**
+     * Get the default Mindblast bonus
+     * @returns Default +CS bonus
+     */
     public static defaultMindblastBonus(): number {
         if (state.actionChart.hasGndDiscipline(GndDiscipline.KaiSurge)) {
             return +4;

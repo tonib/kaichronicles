@@ -102,10 +102,8 @@ class Translations {
         "playTurn" : "Jugar turno",
         "eludeCombat" : "Eludir combate",
         "deathLetter" : "M",
-        "mechanics-combat-psisurge" : 'Acometida Psíquica: +<span class="psisurgebonus">4</span> DC, ' +
-            '-<span class="psisurgeloss">2</span> R por asalto',
-        "mechanics-combat-kaisurge" : 'Embestida Psíquica: +<span class="kaisurgebonus">8</span> DC, ' +
-            '-<span class="kaisurgeloss">1</span> R por asalto',
+        "mechanics-combat-psisurge" : "Acometida Psíquica: +{0} DC, -{1} R por asalto",
+        "mechanics-combat-kaisurge" : "Embestida Psíquica: +{0} DC, -{1} R por asalto",
         "sectionModifier" : "Modificador sección",
         "objectsUse" : "Uso objetos",
         "enemyMindblast" : "Ataque psíquico enemigo",
@@ -422,6 +420,8 @@ class Translations {
         "enduranceUpper" : "ENDURANCE",
         "loneWolf": "Lone Wolf",
         "deathLetter" : "K",
+        "mechanics-combat-psisurge" : "Psi-surge: +{0} CS, -{1} EP per round",
+        "mechanics-combat-kaisurge" : "Kai-surge: +{0} CS, -{1} EP per round",
         "sectionModifier" : "Section modifier",
         "objectsUse" : "Objects use",
         "enemyMindblast" : "Enemy mindblast",

@@ -49,14 +49,18 @@ TODO
 - Check older savegames with usageCount = undefined in section states, action chart and InventoryState
   Check also savegames from v1.6 (changes for this in ActionChart.fromObject())
 - Test load previous savegame / state versions to v1.12 !!!
-- If noPsiSurge="true" , set noMinblast="true". If noKaiSurge="true, set noMindblast="true", noPsisurge="true". Set a single flag for this ???
+- If noPsiSurge="true" , set noMinblast="true". If noKaiSurge="true, set noMindblast="true", noPsisurge="true". Confirm this is true
+  for any game rule, and add it as a check to validation
 - Grand Master: If you have no weapon, there is no malus
 - I suspect Kai-surge and Psi-surge checks could be a single one
 - In Grand Master books, if you have Psi-surge, check the bonus for Mindblast
 - ERROR rendering (Book 8, spanish, sect13): Unkown tag: table
+- Remove Combat.kaiSurge
 - IMPROVE TESTING
+- Documentation about new save game format
 
 ## Other
+- Add images to disciplines in Action Chart
 - Move all bonuses calculation from ActionChart to a new class
 - Add option to jump from one book to other (debugging, loyalty bonuses)
 - FAQ: Add info about change the Random Table
