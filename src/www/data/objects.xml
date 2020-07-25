@@ -1892,10 +1892,12 @@
 
         <object id="cenerrobe" itemCount="2">
             <name lang="en">Cener Robe</name>
+            <name lang="es">Túnica Cener</name>
         </object>
 
         <object id="cenermask">
             <name lang="en">Cener Mask</name>
+            <name lang="es">Máscara Cener</name>
         </object>
 
         <object id="copperkeybook13">

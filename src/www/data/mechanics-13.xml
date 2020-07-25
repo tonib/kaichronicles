@@ -93,9 +93,9 @@
             </afterCombats>
         </section>
 
-        <!-- START HERE -->
-
         <section id="sect4">
+            <!-- TODO: cenerrobe / cenermask are special or backpack items ???. Now they are backpack items -->
+            <!-- TODO: Later there is a cenerrobemask special item, countas=0, CHECK THIS -->
             <object objectId="dagger" />
             <object objectId="cenerrobe" />
             <object objectId="cenermask" />
@@ -134,7 +134,7 @@
                 <case from="0" to="5">
                     <choiceState section="sect181" set="enabled" />
                 </case>
-                <case from="6" to="12">
+                <case from="6" to="99">
                     <choiceState section="sect59" set="enabled" />
                 </case>
             </randomTable>
@@ -169,7 +169,7 @@
                 <case from="0" to="5">
                     <choiceState section="sect192" set="enabled" />
                 </case>
-                <case from="6" to="12">
+                <case from="6" to="99">
                     <choiceState section="sect346" set="enabled" />
                 </case>
             </randomTable>
@@ -178,7 +178,12 @@
             </test>
         </section>
 
-        <section id="sect16">    
+        <section id="sect15">
+            <!-- This is the correct answer to the combination lock riddle in Sections 158 and 227.-->
+        </section>
+
+        <section id="sect16">
+            <endurance count="-2" />
             <choiceState section="sect277" set="disabled" />
             <test hasObject="baylonboughfungi">
                 <choiceState section="sect277" set="enabled" />
@@ -186,6 +191,8 @@
             </test>
         </section>
 
+        <!-- START HERE -->
+        
         <section id="sect18">
             <object objectId="copperkeybook13" />
         </section>

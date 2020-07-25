@@ -57,6 +57,7 @@ TODO
 - IMPROVE TESTING
 - Documentation about new save game format
 - Check if there is any VS code plugin to help XML edition with XSL support
+- Book 13, sect4, dark mode, sword object: Add margin to right of object images
 
 ## Spanish books erratas to report
 - Book 13, sect equipmnt: "tu nueva Carta de Acciónde Gran Maestro" should be "tu nueva Carta de Acción de Gran Maestro" (space)
@@ -64,6 +65,11 @@ TODO
     * '" Me gustaría poder"' should be "Me gustaría poder" (space)
     * 'en tu misión.”dice Rimoah' should be 'en tu misión,” dice Rimoah' (comma, and space)
 - Book 13, sect3: sonoroclang should be "sonoro clang" (space)
+- Book 13, sect7: domeñado should be dominado
+- Book 13, sect8: Asimilación should be Mimetismo
+- Book 13, sect9: Asimilación should be Mimetismo
+- Book 13, sect16: "si no posees" should be "Si no posees" (uppercase)
+- Book 13, sect16: "Hongo Baylon" should be "Hongos del Árbol de Baylon" (description in book 11, sect146)
 
 ## Other
 - Add images to disciplines in Action Chart
