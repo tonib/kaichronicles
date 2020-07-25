@@ -6,13 +6,16 @@ interface DisciplinesTable {
     [disciplineId: string]: {
 
         /** Discipline id */
-        id: string ,
+        id: string,
 
         /** Discipline translated name */
-        name: string ,
+        name: string,
 
         /** Discipline translated description */
-        description: string
+        description: string,
+
+        /** Discipline image HTML. Only for series >= Grand Master, empty string otherwise */
+        imageHtml: string
     };
 
 }
@@ -315,6 +318,9 @@ class Book {
 
         if ( !this.disciplines ) {
 
+            const bookSeries = this.getBookSeries();
+            const disciplinesSection = new Section(this, Book.DISCIPLINES_SECTION, state.mechanics);
+
             this.disciplines = {};
             const self = this;
             // Parse the disciplines section
@@ -336,10 +342,17 @@ class Book {
                     description = $node.find("p").first().text();
                 }
 
+                let imageHtml: string = "";
+                if (bookSeries.id >= BookSeriesId.GrandMaster) {
+                    const $disciplineIll = $node.find("> data > illustration").first();
+                    imageHtml = SectionRenderer.renderIllustration(disciplinesSection, $disciplineIll);
+                }
+
                 self.disciplines[disciplineId] = {
                     id: disciplineId,
                     name: $node.find("> meta > title").text(),
-                    description
+                    description,
+                    imageHtml
                 };
             });
         }

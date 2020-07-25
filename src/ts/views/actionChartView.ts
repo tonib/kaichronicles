@@ -150,7 +150,7 @@ const actionChartView = {
                     '">' +
                         '<span class="glyphicon glyphicon-question-sign"></span>' +
                     "</button>" +
-                    "<b>" + name + '</b><br/><i style="display:none"><small>' +
+                    "<b>" + name + `</b><br/>${dInfo.imageHtml}<i style="display:none"><small>` +
                     descriptionHtml +
                     "</small></i></td></tr>" );
             }
