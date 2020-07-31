@@ -190,8 +190,6 @@
                 <choiceState section="sect136" set="disabled" />
             </test>
         </section>
-
-        <!-- START HERE -->
         
         <section id="sect18">
             <object objectId="copperkeybook13" />
@@ -205,6 +203,8 @@
             </test>
         </section>
 
+        <!-- START HERE -->
+        
         <section id="sect21">
             <object objectId="dagger" />
             <object objectId="sword" />

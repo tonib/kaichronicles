@@ -70,8 +70,11 @@ TODO
 - Book 13, sect9: Asimilación should be Mimetismo
 - Book 13, sect16: "si no posees" should be "Si no posees" (uppercase)
 - Book 13, sect16: "Hongo Baylon" should be "Hongos del Árbol de Baylon" (description in book 11, sect146)
-
+- Book 13, sect20: "Cunado" should be "Cuando"
+- Book 13, sect20: "norte Pasa al 85" should be "norte pasa al 85"
+ 
 ## Other
+- Allow to zoom illustrations?
 - Add images to disciplines in Action Chart
 - Add option to jump from one book to other (debugging, loyalty bonuses)
 - FAQ: Add info about change the Random Table
