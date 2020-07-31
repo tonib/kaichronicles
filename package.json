@@ -10,12 +10,15 @@
     "devDependencies": {
         "@types/bootstrap": "^3.3.42",
         "@types/cordova": "0.0.34",
+        "@types/jest": "^26.0.8",
         "@types/jquery": "^2.0.54",
         "@types/toastr": "^2.1.37",
-        "tslint": "^5.20.0",
-        "klaw-sync": "6.0.0",
         "fs-extra": "8.1.0",
+        "jest": "^26.2.1",
+        "klaw-sync": "6.0.0",
         "preprocess": "3.1.0",
+        "ts-jest": "^26.1.4",
+        "tslint": "^5.20.0",
         "typescript": "^3.7.2",
         "uglify-js": "3.6.2"
     },
@@ -26,6 +29,7 @@
         "downloaddata": "node scripts/downloadProjectAonData.js",
         "ts": "tsc -p tsconfig.json --watch",
         "cleants": "rm -rf src/www/js",
-        "reviewchanges": "node scripts/reviewBookChanges.js"
+        "reviewchanges": "node scripts/reviewBookChanges.js",
+        "test": "jest"
     }
 }
