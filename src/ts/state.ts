@@ -5,120 +5,123 @@ enum Language {
     SPANISH = "es"
 }
 
+// Variabe "state" is declared at bottom of this file
+
 /**
- * The application state
+ * The application state.
  */
-const state = {
+class State {
 
     /**
      * The current book
      */
-    book : null as Book,
+    public book = null as Book;
 
     /**
      * The current book mechanics
      */
-    mechanics: null as Mechanics,
+    public mechanics = null as Mechanics;
 
     /**
      * The current book section states
      */
-    sectionStates: null as BookSectionStates,
+    public sectionStates = null as BookSectionStates;
 
     /**
      * The current action chart
      */
-    actionChart: null as ActionChart,
+    public actionChart = null as ActionChart;
 
     /**
      * The current language ('en' = english / 'es' = spanish)
      */
-    language: Language.ENGLISH,
+    public language = Language.ENGLISH;
 
+    // TODO: Declare enum for "color"
     /**
      * Color Theme ( 'light' or 'dark' ).
      * This is stored at localStorage['color'], not with the game state
      */
-    color: "light",
+    public color = "light";
 
     /**
      * The local books download state for the Cordova app.
      * This member is not persisted
      */
-    localBooksLibrary: null as LocalBooksLibrary,
+    public localBooksLibrary = null as LocalBooksLibrary;
 
     /**
      * Setup the default browser language
      */
-    setupDefaultLanguage() {
+    public setupDefaultLanguage() {
         console.log("Current language: " + navigator.language);
         if ( !navigator.language || navigator.language.length < 2 ) {
             return;
         }
         if ( navigator.language.toLowerCase().substr(0, 2) === "es" ) {
-            state.language = Language.SPANISH;
+            this.language = Language.SPANISH;
         }
-    },
+    }
 
     /**
      * Setup the default color or persist from local storage
      */
-    setupDefaultColorTheme() {
+    public setupDefaultColorTheme() {
 
         try {
-            state.color = localStorage.getItem( "color" );
-            if ( !state.color ) {
-                state.color = "light";
+            this.color = localStorage.getItem( "color" );
+            if ( !this.color ) {
+                this.color = "light";
             }
         } catch (e) {
-            state.color = "light";
+            this.color = "light";
             console.log(e);
         }
-    },
+    }
 
     /**
      * Setup the state for a book number and language
      */
-    setup(bookNumber: number, language: Language, keepActionChart: boolean) {
+    public setup(bookNumber: number, language: Language, keepActionChart: boolean) {
 
         if ( !bookNumber ) {
             bookNumber = 1;
         }
 
-        state.sectionStates = new BookSectionStates();
+        this.sectionStates = new BookSectionStates();
 
         // Action chart
-        state.actionChart = null;
+        this.actionChart = null;
         if ( keepActionChart ) {
             // Try to get the previous book action chart, and set it as the current
-            state.actionChart = state.getPreviousBookActionChart(bookNumber - 1);
+            this.actionChart = this.getPreviousBookActionChart(bookNumber - 1);
 
             // Restore Kai monastery objects
-            state.restoreKaiMonasterySectionObjects();
+            this.restoreKaiMonasterySectionObjects();
         }
 
-        state.language = language;
-        state.book = new Book(bookNumber, state.language);
-        state.mechanics = new Mechanics(state.book);
+        this.language = language;
+        this.book = new Book(bookNumber, this.language);
+        this.mechanics = new Mechanics(this.book);
 
-        if ( !state.actionChart ) {
-            state.actionChart = new ActionChart();
+        if ( !this.actionChart ) {
+            this.actionChart = new ActionChart();
         }
-    },
+    }
 
-    removeCachedState() {
-        state.book = null;
-        state.mechanics = null;
-        state.sectionStates = null;
-        state.actionChart = null;
-    },
+    public removeCachedState() {
+        this.book = null;
+        this.mechanics = null;
+        this.sectionStates = null;
+        this.actionChart = null;
+    }
 
     /**
      * Reset the current state
      */
-    reset(deleteBooksHistory: boolean) {
+    public reset(deleteBooksHistory: boolean) {
 
-        state.removeCachedState();
+        this.removeCachedState();
 
         // Remove current game state
         localStorage.removeItem( "state" );
@@ -129,44 +132,44 @@ const state = {
                 localStorage.removeItem( "state-book-" + i.toString() );
             }
         }
-    },
+    }
 
     /**
      * Returns the current state object
      */
-    getCurrentState() {
+    private getCurrentState(): object {
         return {
-            actionChart: state.actionChart,
-            bookNumber: state.book ? state.book.bookNumber : 0,
-            language: state.language,
-            sectionStates: state.sectionStates
+            actionChart: this.actionChart,
+            bookNumber: this.book ? this.book.bookNumber : 0,
+            language: this.language,
+            sectionStates: this.sectionStates
         };
-    },
+    }
 
     /**
      * Store the current state at the browser local storage
      */
-    persistState() {
+    public persistState() {
         try {
-            const json = JSON.stringify( state.getCurrentState() );
+            const json = JSON.stringify( this.getCurrentState() );
             localStorage.setItem( "state" , json );
         } catch (e) {
             console.log(e);
             // throw new Error(e);
         }
-    },
+    }
 
     /**
      * Return true if there is an stored persisted state
      */
-    existsPersistedState() {
+    public existsPersistedState() {
         return localStorage.getItem( "state" );
-    },
+    }
 
     /**
      * Restore the state from the local storage
      */
-    restoreState() {
+    public restoreState() {
         try {
             const json = localStorage.getItem( "state" );
             if ( !json ) {
@@ -176,77 +179,77 @@ const state = {
             if ( !stateKeys ) {
                 throw new Error("Wrong JSON format");
             }
-            state.restoreStateFromObject( stateKeys );
+            this.restoreStateFromObject( stateKeys );
         } catch (e) {
             console.log(e);
-            state.setup(1, Language.ENGLISH, false);
+            this.setup(1, Language.ENGLISH, false);
         }
-    },
+    }
 
     /**
      * Restore the state from an object
      */
-    restoreStateFromObject(stateKeys: any) {
-        state.language = stateKeys.language;
-        state.book = new Book(stateKeys.bookNumber, state.language);
-        state.mechanics = new Mechanics(state.book);
-        state.actionChart = ActionChart.fromObject(stateKeys.actionChart, stateKeys.bookNumber);
-        state.sectionStates = new BookSectionStates();
-        state.sectionStates.fromStateObject( stateKeys.sectionStates );
-    },
+    private restoreStateFromObject(stateKeys: any) {
+        this.language = stateKeys.language;
+        this.book = new Book(stateKeys.bookNumber, this.language);
+        this.mechanics = new Mechanics(this.book);
+        this.actionChart = ActionChart.fromObject(stateKeys.actionChart, stateKeys.bookNumber);
+        this.sectionStates = new BookSectionStates();
+        this.sectionStates.fromStateObject( stateKeys.sectionStates );
+    }
 
     /**
      * Update state to change the book language
      */
-    updateBookTranslation(book: Book) {
-        state.book = book;
-        state.mechanics.book = book;
-        state.language = book.language;
-    },
+    public updateBookTranslation(book: Book) {
+        this.book = book;
+        this.mechanics.book = book;
+        this.language = book.language;
+    }
 
     /**
      * Update state to change the book language
      * @param color 'light' or 'dark'
      */
-    updateColorTheme(color: string) {
-        state.color = color;
-        localStorage.setItem( "color" , state.color );
-    },
+    public updateColorTheme(color: string) {
+        this.color = color;
+        localStorage.setItem( "color" , this.color );
+    }
 
     /**
      * Restore objects on the Kai Monastery section from the Action Chart
      */
-    restoreKaiMonasterySectionObjects() {
-        const kaiMonasterySection = state.sectionStates.getSectionState( Book.KAIMONASTERY_SECTION );
-        kaiMonasterySection.objects = state.actionChart ? state.actionChart.kaiMonasterySafekeeping : [];
-    },
+    private restoreKaiMonasterySectionObjects() {
+        const kaiMonasterySection = this.sectionStates.getSectionState( Book.KAIMONASTERY_SECTION );
+        kaiMonasterySection.objects = this.actionChart ? this.actionChart.kaiMonasterySafekeeping : [];
+    }
 
     /**
      * Update state to start the next book
      */
-    nextBook() {
+    public nextBook() {
 
         // Save the action chart state on the current book ending
-        const key = "state-book-" + state.book.bookNumber.toString();
-        localStorage.setItem( key , JSON.stringify( state.actionChart ) );
+        const key = "state-book-" + this.book.bookNumber.toString();
+        localStorage.setItem( key , JSON.stringify( this.actionChart ) );
 
         // Move to the next book
-        state.book = new Book(state.book.bookNumber + 1, state.language);
-        state.mechanics = new Mechanics(state.book);
-        state.sectionStates = new BookSectionStates();
+        this.book = new Book(this.book.bookNumber + 1, this.language);
+        this.mechanics = new Mechanics(this.book);
+        this.sectionStates = new BookSectionStates();
 
         // Restore Kai monastery objects
-        state.restoreKaiMonasterySectionObjects();
+        this.restoreKaiMonasterySectionObjects();
 
-        state.persistState();
-    },
+        this.persistState();
+    }
 
     /**
      * Get the action chart on the ending of the previous book
      * @param bookNumber Book which get the action chart
      * @returns The action chart. null if it was not found or it cannot be loaded.
      */
-    getPreviousBookActionChart(bookNumber: number): ActionChart {
+    public getPreviousBookActionChart(bookNumber: number): ActionChart {
         try {
             const key = "state-book-" + bookNumber.toString();
             const json = localStorage.getItem( key );
@@ -258,17 +261,17 @@ const state = {
             console.log(e);
             return null;
         }
-    },
+    }
 
     /**
      * Returns the object to save the game state
      */
-    getSaveGameJson() {
+    public getSaveGameJson(): any {
 
         // Get the current state
         const saveGameObject = {
-            currentState: state.getCurrentState(),
-            previousBooksState: {},
+            currentState: this.getCurrentState(),
+            previousBooksState: {}
         };
 
         // Get the action charts at the end of each book
@@ -280,12 +283,12 @@ const state = {
             }
         }
         return JSON.stringify( saveGameObject );
-    },
+    }
 
     /**
      * Restore the game from a save game file
      */
-    loadSaveGameJson(json: string) {
+    public loadSaveGameJson(json: string) {
 
         // replace BOM Character (https://en.wikipedia.org/wiki/Byte_order_mark). Otherwise call to JSON.parse will fail
         json = json.replace(/\ufeff/g, "");
@@ -310,8 +313,20 @@ const state = {
         }
 
         // Restore current state
-        state.restoreStateFromObject(saveGameObject.currentState);
+        this.restoreStateFromObject(saveGameObject.currentState);
 
-        state.persistState();
-    },
-};
+        this.persistState();
+    }
+}
+
+/** Application model state */
+const state = new State();
+
+// Do not use Typescript modules here, plain node.js modules for browser JS compatiblity (oh javascript...)
+try {
+    if (typeof exports !== "undefined") {
+        exports.state = state;
+    }
+} catch (e) {
+    console.log(e);
+}
