@@ -59,6 +59,7 @@ TODO
 - Check if there is any VS code plugin to help XML edition with XSL support
 - Book 13, sect4, dark mode, sword object: Add margin to right of object images
 - Add types to cordovaFS.ts
+- Check damn Javascript modules, for test/web use...
 
 ## Spanish books erratas to report
 - Book 13, sect equipmnt: "tu nueva Carta de Acciónde Gran Maestro" should be "tu nueva Carta de Acción de Gran Maestro" (space)

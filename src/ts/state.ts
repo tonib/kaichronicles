@@ -321,12 +321,3 @@ class State {
 
 /** Application model state */
 const state = new State();
-
-// Do not use Typescript modules here, plain node.js modules for browser JS compatiblity (oh javascript...)
-try {
-    if (typeof exports !== "undefined") {
-        exports.state = state;
-    }
-} catch (e) {
-    console.log(e);
-}
