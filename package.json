@@ -19,7 +19,6 @@
         "klaw-sync": "6.0.0",
         "preprocess": "3.1.0",
         "selenium-webdriver": "^4.0.0-alpha.7",
-        "ts-jest": "^26.1.4",
         "tslint": "^5.20.0",
         "typescript": "^3.7.2",
         "uglify-js": "3.6.2"
