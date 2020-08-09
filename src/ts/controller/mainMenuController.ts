@@ -1,8 +1,9 @@
+import { template, translations, views, mainMenuView, cordovaApp, state, Language, settingsController } from "..";
 
 /**
  * The application menu controller
  */
-const mainMenuController = {
+export const mainMenuController = {
 
     /**
      * The game menu

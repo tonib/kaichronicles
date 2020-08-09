@@ -1,8 +1,9 @@
+import { setupController, translations, views, settingsView, Language, Book, state, template, cordovaApp, cordovaFS } from "..";
 
 /**
  * Game settings controller
  */
-const settingsController = {
+export const settingsController = {
 
     index() {
 

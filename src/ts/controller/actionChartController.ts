@@ -1,8 +1,9 @@
+import { setupController, views, actionChartView, state, ActionChartItem, SectionItem, EquipmentSectionMechanics, translations, template, mechanicsEngine, Item, SpecialObjectsUse, CombatMechanics, Bonus, InventoryState } from "..";
 
 /**
  * The action chart controller
  */
-const actionChartController = {
+export const actionChartController = {
 
     /**
      * Render the action chart

@@ -19,9 +19,12 @@
         "klaw-sync": "6.0.0",
         "preprocess": "3.1.0",
         "selenium-webdriver": "^4.0.0-alpha.7",
+        "ts-loader": "^8.0.2",
         "tslint": "^5.20.0",
         "typescript": "^3.7.2",
-        "uglify-js": "3.6.2"
+        "uglify-js": "3.6.2",
+        "webpack": "^4.44.1",
+        "webpack-cli": "^3.3.12"
     },
     "scripts": {
         "lint": "tslint -t verbose -p tsconfig.json",
@@ -29,6 +32,7 @@
         "cleandist": "rm -rf dist",
         "downloaddata": "node scripts/downloadProjectAonData.js",
         "ts": "tsc -p tsconfig.json --watch",
+        "build": "webpack --config webpack.config.js",
         "cleants": "rm -rf src/www/js",
         "reviewchanges": "node scripts/reviewBookChanges.js",
         "test": "jest"

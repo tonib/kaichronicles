@@ -1,8 +1,9 @@
+import { MgnDiscipline, translations, Bonus } from "..";
 
 /**
  * Lore-circles for Magnakai disciplines
  */
-class LoreCircle {
+export class LoreCircle {
 
     /** The lore circles */
     private static circles: LoreCircle[];

@@ -1,7 +1,9 @@
+import { translations, views } from "..";
+
 /**
  * Project Aon license controller
  */
-const projectAonLicenseController = {
+export const projectAonLicenseController = {
 
     index() {
         document.title = translations.text("projectAonLicense");

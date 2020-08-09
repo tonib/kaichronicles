@@ -1,8 +1,9 @@
+import { randomMechanics, state, Item, numberPickerMechanics, mechanicsEngine } from "..";
 
 /**
  * Evaluation of mechanics expressions
  */
-class ExpressionEvaluator {
+export class ExpressionEvaluator {
 
     /**
      * Expression to find texts to replace

@@ -1,9 +1,10 @@
+import { BookDownloadState, cordovaApp, projectAon, cordovaFS } from "..";
 
 /**
  * Only for Cordova app.
  * Stores the download state of all available books
  */
-class LocalBooksLibrary {
+export class LocalBooksLibrary {
 
     /**
      * Info about the books states

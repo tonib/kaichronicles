@@ -1,8 +1,11 @@
+import { setupController, state, Book, routing, views, mechanicsEngine, SectionItem, Item } from "..";
+
 /**
  * The Kai monastery storage controller
  */
+
 // tslint:disable-next-line: class-name
-class kaimonasteryController {
+export class kaimonasteryController {
 
     /** Controller name */
     public static readonly NAME = "kaimonasteryController";

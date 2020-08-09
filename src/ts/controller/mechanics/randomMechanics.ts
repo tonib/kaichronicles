@@ -1,8 +1,10 @@
+import { state, ExpressionEvaluator, numberPickerMechanics, MealMechanics, translations, randomTable, mechanicsEngine, 
+    EquipmentSectionMechanics } from "../..";
 
 /**
  * Random table links mechanics
  */
-const randomMechanics = {
+export const randomMechanics = {
 
     /**
      * The last random number picked, with the increment added

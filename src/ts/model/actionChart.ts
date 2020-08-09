@@ -1,8 +1,9 @@
+import { ActionChartItem, SectionItem, App, state, BookSeriesId, GndDiscipline, MgnDiscipline, KaiDiscipline, Item, translations, Combat, BookSeries, mechanicsEngine, LoreCircle, SetupDisciplines, randomTable, Disciplines } from "..";
 
 /**
  * Bonus for CS/EP definition
  */
-interface Bonus {
+export interface Bonus {
     /** The bonus description */
     concept: string;
     /** The increment / decrement of the CS/EP */
@@ -12,7 +13,7 @@ interface Bonus {
 /**
  * Disciplines player has for a given book series
  */
-interface SeriesDisciplines {
+export interface SeriesDisciplines {
 
     /** Disciplines ids */
     disciplines: string[];
@@ -27,7 +28,7 @@ interface SeriesDisciplines {
 /**
  * The action chart / player state
  */
-class ActionChart {
+export class ActionChart {
 
     /** First book number with a limit on Special Items count */
     public static readonly BOOK_WITH_MAX_SPECIALS = 8;

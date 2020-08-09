@@ -1,9 +1,10 @@
+import { views, BookValidator, setupController, state, Section, SectionRenderer, randomTable, Language, projectAon } from "..";
 
 /**
  * Application tests
  */
 // tslint:disable-next-line: class-name
-class testsController {
+export class testsController {
 
     public static index() {
 

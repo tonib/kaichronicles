@@ -1,8 +1,14 @@
+import { views, translations, Section, gameView, state, CombatMechanics, randomMechanics, Combat, Item, routing, gameController,
+    App, ExpressionEvaluator, numberPickerMechanics, SkillsSetup, SetupDisciplines, EquipmentSectionMechanics, actionChartController,
+    Currency, LoreCircle, BookSeriesId, MealMechanics, ActionChartItem, InventoryState, actionChartView, template, Book,
+    GrandMasterUpgrade, kaimonasteryController, book2sect238, book2sect308, book3sect88, book6sect26, book6sect284,
+    book6sect340, book9sect91, ObjectsTable, ObjectsTableType, setupController, KaiDiscipline, MgnDiscipline,
+    GndDiscipline, projectAon } from "../..";
 
 /**
  * Engine to render and run gamebook mechanics rules
  */
-const mechanicsEngine = {
+export const mechanicsEngine = {
 
     /**
      * jquery DOM object with the mechanics HTML

@@ -1,7 +1,10 @@
+import { state, translations, routing, template, views, newGameView, Book, Language } from "..";
+
+
 /**
  * New game controller
  */
-const newGameController = {
+export const newGameController = {
 
     /**
      * New game page

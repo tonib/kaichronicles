@@ -1,8 +1,9 @@
+import { state, template, gameView, mechanicsEngine, BookSeriesId, randomMechanics, translations } from "../..";
 
 /**
  * Player characteristics setup
  */
-class SkillsSetup {
+export class SkillsSetup {
 
     /**
      * Choose player skills UI

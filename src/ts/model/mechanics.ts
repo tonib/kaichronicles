@@ -1,8 +1,9 @@
+import { Book, Item, App } from "..";
 
 /**
  * Game mechanics and objects handling for a given book
  */
-class Mechanics {
+export class Mechanics {
 
     /**
      * The book

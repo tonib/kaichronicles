@@ -1,8 +1,9 @@
+import { state, mechanicsEngine, gameView, KaiDiscipline, MgnDiscipline, GndDiscipline, actionChartController, translations } from "../..";
 
 /**
  * Meal mechanics
  */
-class MealMechanics {
+export class MealMechanics {
 
     /** Run meals rule */
     public static runRule(rule: Element) {

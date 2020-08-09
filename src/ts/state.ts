@@ -1,6 +1,7 @@
+import { Book, Mechanics, BookSectionStates, ActionChart, LocalBooksLibrary, projectAon } from ".";
 
 /** Language codes */
-enum Language {
+export enum Language {
     ENGLISH = "en",
     SPANISH = "es"
 }
@@ -10,7 +11,7 @@ enum Language {
 /**
  * The application state.
  */
-class State {
+export class State {
 
     /**
      * The current book
@@ -320,4 +321,4 @@ class State {
 }
 
 /** Application model state */
-const state = new State();
+export const state = new State();

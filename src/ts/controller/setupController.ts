@@ -1,8 +1,10 @@
+import { state, template, routing, translations, views, mechanicsEngine, setupView, GoogleAnalytics, ajaxErrorMsg } from "..";
+
 /**
  * The book loader controller
  * TODO: Change the name of this controller. It's a "book setup" controller
  */
-const setupController = {
+export const setupController = {
 
     /** Set up the application
      * This will load the XML book and then redirect to the game

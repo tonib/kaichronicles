@@ -1,7 +1,9 @@
+import { setupController, translations, views, Book, state, BookSeriesId, gameView, routing, Section, SectionRenderer } from "..";
+
 /**
  * Game rules controller
  */
-const gameRulesController = {
+export const gameRulesController = {
 
     /**
      * Render the game rules page

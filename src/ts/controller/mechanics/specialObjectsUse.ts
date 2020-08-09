@@ -1,7 +1,9 @@
+import { Item, randomTable, translations, state, actionChartController } from "../..";
+
 /**
  * Special objects use
  */
-class SpecialObjectsUse {
+export class SpecialObjectsUse {
 
     /** Use special object */
     public static use( item: Item ) {

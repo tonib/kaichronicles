@@ -1,8 +1,9 @@
+import { translations, loadGameController } from "..";
 
 /**
  * The load game view interface functions
  */
-const loadGameView = {
+export const loadGameView = {
 
     /**
      * Hide the Android files list

@@ -1,8 +1,9 @@
+import { ActionChartItem, ActionChart, Item } from "..";
 
 /**
  * Inventory state at one point
  */
-class InventoryState {
+export class InventoryState {
 
     public weapons: ActionChartItem[] = [];
 

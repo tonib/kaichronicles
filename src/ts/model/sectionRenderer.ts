@@ -4,10 +4,12 @@
  * by Liquid State Limited.
  */
 
+import { Section, translations } from "..";
+
  /**
   * Tool to transform the book XML to HTML
   */
-class SectionRenderer {
+export class SectionRenderer {
 
     /**
      * Only illustrations of following authors are rendered (Others are not included on PAON).

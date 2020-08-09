@@ -1,9 +1,11 @@
+import { template, translations, views, cordovaApp, loadGameView, cordovaFS, state, routing, SavedGamesExport, DocumentSelection } from "..";
 
 /**
  * Load stored game controller
  */
+
 // tslint:disable-next-line: class-name
-class loadGameController {
+export class loadGameController {
 
     /**
      * The load game page

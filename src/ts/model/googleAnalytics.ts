@@ -1,9 +1,10 @@
+import { App, EnvironmentType, cordovaApp, Cookie } from "..";
 
 /**
  * Google Analytics stuff.
  * Only for the web version
  */
-class GoogleAnalytics {
+export class GoogleAnalytics {
 
     /** Cookie name to disable Google Analytics */
     private static readonly GA_DISABLED_COOKIE = "KC_gadisabled";

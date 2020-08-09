@@ -1,7 +1,9 @@
+import { Section, setupController, state, Book, routing, views, gameView, template, mechanicsEngine, App, BookValidator } from "..";
+
 /**
  * The game controller
  */
-const gameController = {
+export const gameController = {
 
     /**
      * The current book section

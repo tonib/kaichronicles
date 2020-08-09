@@ -1,5 +1,6 @@
+import { Combat, combatTable, COMBATTABLE_DEATH, state, translations } from "..";
 
-class CombatTurn {
+export class CombatTurn {
 
     /** True if the player is eluding the combat */
     public elude: boolean;

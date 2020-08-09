@@ -2,7 +2,7 @@
 /**
  * File selection and information about the selected file
  */
-class DocumentSelection {
+export class DocumentSelection {
 
     /** URI for the selected file (content://blahblah...) */
     public uri: string;

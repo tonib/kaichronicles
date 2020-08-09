@@ -1,7 +1,9 @@
+import { state, template, translations } from "..";
+
 /**
  * Info about a current choose
  */
-interface RandomTableCurrentChoose {
+export interface RandomTableCurrentChoose {
     ignoreZero: boolean;
     zeroAsTen: boolean;
     /**
@@ -13,7 +15,7 @@ interface RandomTableCurrentChoose {
 /**
  * The random number generator
  */
-class RandomTable {
+export class RandomTable {
 
     /**
      * If >= 0, next value to return from the random table, fixed.
@@ -111,4 +113,4 @@ class RandomTable {
 /**
  * The random numbers generator singleton
  */
-const randomTable = new RandomTable();
+export const randomTable = new RandomTable();

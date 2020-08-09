@@ -70,6 +70,7 @@ interface Array<T> {
     deepClone(): T[];
 }
 
+// commons.ts:
 interface String {
     replaceAll(find: string, replace: string): string;
     padLeft(padLength: number, padChar: string): string;
@@ -94,7 +95,7 @@ interface Window {
     plugins: {
         DocumentContract: any;
     };
-    // commons.js:
+    // commons.ts:
     getUrlParameter( parmName: string ): string;
 
 }

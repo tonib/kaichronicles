@@ -238,110 +238,12 @@
           var ENVIRONMENT = 'DEVELOPMENT';
       </script>
 
-      <!-- Base -->
-      <script src="js/app.js"></script>
-      <script src="js/common.js"></script>
-      <script src="js/views.js"></script>
-      <script src="js/state.js"></script>
-      <script src="js/routing.js"></script>
-
-      <!-- Base (cordova stuff) -->
-      <script src="js/cordova-stuff/cordovaApp.js"></script>
-      <script src="js/cordova-stuff/cordovaFS.js"></script>
-      <script src="js/cordova-stuff/savedGamesExport.js"></script>
-      <script src="js/cordova-stuff/documentSelection.js"></script>
-
-      <!-- Model -->
-      <script src="js/model/disciplines.js"></script>
-      <script src="js/model/bookSeries.js"></script>
-      <script src="js/model/book.js"></script>
-      <script src="js/model/section.js"></script>
-      <script src="js/model/sectionRenderer.js"></script>
-      <script src="js/model/actionChart.js"></script>
-      <script src="js/model/actionChartItem.js"></script>
-      <script src="js/model/mechanics.js"></script>
-      <script src="js/model/randomTable.js"></script>
-      <script src="js/model/combatTable.js"></script>
-      <script src="js/model/combat.js"></script>
-      <script src="js/model/combatTurn.js"></script>
-      <script src="js/model/sectionState.js"></script>
-      <script src="js/model/bookSectionStates.js"></script>
-      <script src="js/model/item.js"></script>
-      <script src="js/model/projectAon.js"></script>
-      <script src="js/model/bookDownloadState.js"></script>
-      <script src="js/model/localBooksLibrary.js"></script>
-      <script src="js/model/loreCircle.js"></script>
-      <script src="js/model/bookValidator.js"></script>
-      <script src="js/model/expressionEvaluator.js"></script>
-      <script src="js/model/inventoryState.js"></script>
-      <script src="js/model/currency.js"></script>
-      <script src="js/model/googleAnalytics.js"></script>
-
-      <!-- Controllers -->
-      <script src="js/controller/setupController.js"></script>
-      <script src="js/controller/gameController.js"></script>
-      <script src="js/controller/actionChartController.js"></script>
-      <script src="js/controller/mapController.js"></script>
-      <script src="js/controller/settingsController.js"></script>
-      <script src="js/controller/testsController.js"></script>
-      <script src="js/controller/mainMenuController.js"></script>
-      <script src="js/controller/newGameController.js"></script>
-      <script src="js/controller/aboutController.js"></script>
-      <script src="js/controller/loadGameController.js"></script>
-      <script src="js/controller/projectAonLicenseController.js"></script>
-      <script src="js/controller/gameRulesController.js"></script>
-      <script src="js/controller/workWithBooks.js"></script>
-      <script src="js/controller/kaimonasteryController.js"></script>
-      <script src="js/controller/faqController.js"></script>
-      <script src="js/controller/privacyController.js"></script>
-
-      <!-- Mechanics -->
-      <script src="js/controller/mechanics/mechanicsEngine.js"></script>
-      <script src="js/controller/mechanics/mealMechanics.js"></script>
-      <script src="js/controller/mechanics/combatMechanics.js"></script>
-      <script src="js/controller/mechanics/randomMechanics.js"></script>
-      <script src="js/controller/mechanics/skillsSetup.js"></script>
-      <script src="js/controller/mechanics/specialObjectsUse.js"></script>
-      <script src="js/controller/mechanics/numberPickerMechanics.js"></script>
-      <script src="js/controller/mechanics/setupDisciplines.js"></script>
-      <script src="js/controller/mechanics/equipmentSectionMechanics.js"></script>
-      <script src="js/controller/mechanics/grandMasterUpgrade.js"></script>
-      
-      <!-- Special sections -->
-      <script src="js/controller/mechanics/specialSections/book2sect238.js"></script>
-      <script src="js/controller/mechanics/specialSections/book2sect308.js"></script>
-      <script src="js/controller/mechanics/specialSections/book3sect88.js"></script>
-      <script src="js/controller/mechanics/specialSections/book6sect26.js"></script>
-      <script src="js/controller/mechanics/specialSections/book6sect284.js"></script>
-      <script src="js/controller/mechanics/specialSections/book6sect340.js"></script>
-      <script src="js/controller/mechanics/specialSections/book9sect91.js"></script>
-
-      <!-- UI utilities -->
-      <script src="js/views/viewsUtils/numberPicker.js"></script>
-      <script src="js/views/viewsUtils/translations.js"></script>
-      <script src="js/views/viewsUtils/objectsTable.js"></script>
-      <script src="js/views/viewsUtils/objectsTableItem.js"></script>
-      <script src="js/views/viewsUtils/moneyDialog.js"></script>
-      <script src="js/views/viewsUtils/cookie.js"></script>
-
-      <!-- Views -->
-      <script src="js/views/actionChartView.js"></script>
-      <script src="js/views/gameView.js"></script>
-      <script src="js/views/setupView.js"></script>
-      <script src="js/views/mapView.js"></script>
-      <script src="js/views/settingsView.js"></script>
-      <script src="js/views/mainMenuView.js"></script>
-      <script src="js/views/newGameView.js"></script>
-      <script src="js/views/loadGameView.js"></script>
-      <script src="js/views/workWithBooksView.js"></script>
-      
-      <!-- This HTML page template handler -->
-      <script src="js/template.js"></script>
-
     <!-- @endif -->
 
+    <script src="js/kai.js"></script>
+    
     <script lang="javascript">
-      App.run(ENVIRONMENT);
+      kai.App.run(ENVIRONMENT);
     </script>
 
   </body>

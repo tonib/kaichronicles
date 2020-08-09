@@ -1,7 +1,9 @@
+import { BookDownloadState, state, translations, newGameController, cordovaApp } from "..";
+
 /**
  * The new game view API
  */
-const newGameView = {
+export const newGameView = {
 
     setup(downloadedBooks: BookDownloadState[]) {
 

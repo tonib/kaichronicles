@@ -1,7 +1,7 @@
 /**
  * The setup view API
  */
-const setupView = {
+export const setupView = {
     log(text: string, level: string = null) {
         let style: string = "";
         if (level === "ok") {

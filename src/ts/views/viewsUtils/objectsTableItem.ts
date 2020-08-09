@@ -1,7 +1,9 @@
+import { SectionItem, Item, ObjectsTableType, state, translations, routing, kaimonasteryController, MoneyDialog, actionChartController, mechanicsEngine, template } from "../..";
+
 /**
  * Item on a objects table to render
  */
-class ObjectsTableItem {
+export class ObjectsTableItem {
 
     /** The section/inventory context object information */
     private objectInfo: SectionItem;

@@ -1,7 +1,9 @@
+import { state, settingsController, translations, setupController, routing, cordovaApp } from "..";
+
 /**
  * Settings view
  */
-const settingsView = {
+export const settingsView = {
 
     setup() {
 

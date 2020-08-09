@@ -1,7 +1,9 @@
+import { mechanicsEngine, gameView, template, state, translations, actionChartController, randomTable } from "../../..";
+
 /**
  * Portholes game
  */
-const book2sect308 = {
+export const book2sect308 = {
 
     run() {
         // Portholes game UI:

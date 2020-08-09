@@ -1,8 +1,9 @@
+import { Combat, Mechanics, Item, state, ActionChart, ActionChartItem } from "..";
 
 /**
  * Stores information about an object available to pick on a section
  */
-interface SectionItem {
+export interface SectionItem {
     /** The object id */
     id: string;
 
@@ -33,7 +34,7 @@ interface SectionItem {
 /**
  * Stores a section state (combats, objects, etc)
  */
-class SectionState {
+export class SectionState {
 
     /**
      * Objects on the section

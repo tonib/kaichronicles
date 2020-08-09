@@ -1,6 +1,8 @@
+import { state, BookSeriesId, gameView, mechanicsEngine, translations, actionChartController, template, gameController } from "../..";
+
 
 /** Upgrade stats at Grand Master beginning */
-class GrandMasterUpgrade {
+export class GrandMasterUpgrade {
 
     public static upgrade(rule: Element) {
 

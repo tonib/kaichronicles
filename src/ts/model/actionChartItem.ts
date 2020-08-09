@@ -1,8 +1,9 @@
+import { Item, state } from "..";
 
 /**
  * Information about an item stored in the action chart
  */
-class ActionChartItem {
+export class ActionChartItem {
 
     /**
      * Item id

@@ -1,8 +1,9 @@
+import { template, translations, views, workWithBooksView, state, BookDownloadState, cordovaApp, LocalBooksLibrary, cordovaFS } from "..";
 
 /**
  * Handle / download books (only for Cordova app)
  */
-const workWithBooksController = {
+export const workWithBooksController = {
 
     /** Are we currently downloading / deleting books? */
     changingBooks: false,

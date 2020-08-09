@@ -1,8 +1,9 @@
+import { ObjectsTableItem, ActionChartItem, SectionItem, state, Item, translations } from "../..";
 
 /**
  * Kind of objects table
  */
-enum ObjectsTableType {
+export enum ObjectsTableType {
     /** Availabe objects on section (free or for buy ) */
     AVAILABLE,
     /** Sell inventory objects */
@@ -14,7 +15,7 @@ enum ObjectsTableType {
 /**
  * An objects table renderer
  */
-class ObjectsTable {
+export class ObjectsTable {
 
     /** The table type */
     private type: ObjectsTableType;

@@ -1,8 +1,9 @@
+import { settingsController, translations, cordovaFS, DocumentSelection } from "..";
 
 /**
  * Handles export / import saved games
  */
-class SavedGamesExport {
+export class SavedGamesExport {
 
     /**
      * The Cordova persistent file system (FileSystem)

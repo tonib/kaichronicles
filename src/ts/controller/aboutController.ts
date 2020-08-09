@@ -1,8 +1,9 @@
+import { setupController, translations, views, state, Book, Section, SectionRenderer } from "..";
 
 /**
  * About the book controller
  */
-const aboutController = {
+export const aboutController = {
 
     /**
      * Render the about page

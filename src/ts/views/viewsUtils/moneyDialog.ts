@@ -1,8 +1,9 @@
+import { state, translations, mechanicsEngine, actionChartController, Item } from "../..";
 
 /**
  * Modal dialog to pick / drop money.
  */
-class MoneyDialog {
+export class MoneyDialog {
 
     public static show(drop: boolean) {
 

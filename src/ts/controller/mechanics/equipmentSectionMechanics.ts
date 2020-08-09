@@ -1,8 +1,9 @@
+import { state, translations, gameView, mechanicsEngine, ActionChart } from "../..";
 
 /**
  * Equipment section mechanics
  */
-class EquipmentSectionMechanics {
+export class EquipmentSectionMechanics {
 
     /**
      * Check if some more object can be picked on the current section

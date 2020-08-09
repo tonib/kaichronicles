@@ -1,8 +1,9 @@
+import { translations, workWithBooksController, BookDownloadState } from "..";
 
 /**
  * Work with books view
  */
-const workWithBooksView = {
+export const workWithBooksView = {
 
     /**
      * Setup view

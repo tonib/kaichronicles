@@ -1,4 +1,9 @@
 
+import {state, ActionChart} from "..";
+
+state.actionChart = new ActionChart();
+console.log(state.actionChart);
+
 /*
 //import {state} from "../kaiimports";
 //import "../kaiimports";

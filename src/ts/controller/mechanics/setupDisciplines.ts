@@ -1,8 +1,10 @@
+import { ActionChart, state, gameView, mechanicsEngine, BookSeriesId, App, BookSeries, translations, KaiDiscipline, template, randomTable } from "../..";
+
 
 /**
  * Setup player disciplines
  */
-class SetupDisciplines {
+export class SetupDisciplines {
 
     /**
      * Weapons table for Weaponskill discipline in Kai books

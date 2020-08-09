@@ -1,8 +1,10 @@
+import { projectAon, state, cordovaFS } from "..";
+
 /**
  * Class to handle the download state of a Project Aon book.
  * Only for Cordova app
  */
-class BookDownloadState {
+export class BookDownloadState {
 
     /** The book number, 1-index based */
     public bookNumber: number;

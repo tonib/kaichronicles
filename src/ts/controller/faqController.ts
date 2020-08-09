@@ -1,9 +1,11 @@
+import { template, translations, views, state } from "..";
 
 /**
  * FAQ controller
  */
+
 // tslint:disable-next-line: class-name
-class faqController {
+export class faqController {
 
     public static index() {
         template.setNavTitle( translations.text("kaiChronicles"), "#mainMenu", true);

@@ -1,5 +1,8 @@
+import { state, mechanicsEngine, CombatTurn, Combat, template } from "../../..";
+
+
 /** Bow tournament final */
-const book6sect26 = {
+export const book6sect26 = {
 
     run() {
 

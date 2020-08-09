@@ -1,5 +1,6 @@
+import { CombatTurn, state, GndDiscipline, MgnDiscipline, Bonus, translations, randomTable, Item, COMBATTABLE_DEATH, actionChartController, BookSeriesId } from "..";
 
-class Combat {
+export class Combat {
 
     /** Enemy name */
     public enemy: string;

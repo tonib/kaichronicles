@@ -1,9 +1,11 @@
 
+import { views, state, cordovaApp, GoogleAnalytics } from "..";
+
 /**
  * Privacy controller page
  */
 // tslint:disable-next-line: class-name
-class privacyController {
+export class privacyController {
 
     /**
      * Render the page

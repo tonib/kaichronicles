@@ -1,8 +1,9 @@
+import { KaiDiscipline, MgnDiscipline, GndDiscipline, mechanicsEngine } from "..";
 
 /**
  * Book series identifier
  */
-enum BookSeriesId {
+export enum BookSeriesId {
     // Order is important!
     Kai = 0,
     Magnakai = 1,
@@ -14,7 +15,7 @@ enum BookSeriesId {
 /**
  * Books series info
  */
-class BookSeries {
+export class BookSeries {
 
     /** Book series identifier */
     public readonly id: BookSeriesId;

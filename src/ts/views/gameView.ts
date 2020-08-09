@@ -1,8 +1,9 @@
+import { Section, App, gameController, state, randomTable, Book, settingsController, Language, template, numberPickerMechanics } from "..";
 
 /**
  * The game view interface functions
  */
-const gameView = {
+export const gameView = {
 
     /**
      * Enable / disable previous and next section links

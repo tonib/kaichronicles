@@ -1,7 +1,10 @@
+import { state, mechanicsEngine, Combat, template, SpecialObjectsUse, CombatTurn, GndDiscipline, translations } from "../..";
+
+
 /**
  * Combats mechanics
  */
-class CombatMechanics {
+export class CombatMechanics {
 
     /**
      * Render section combats

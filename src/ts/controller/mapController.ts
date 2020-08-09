@@ -1,7 +1,10 @@
+import { setupController, Section, state, views, mapView } from "..";
+
+
 /**
  * The map controller
  */
-const mapController = {
+export const mapController = {
 
     /**
      * Render the map

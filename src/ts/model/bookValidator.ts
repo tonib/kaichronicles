@@ -1,7 +1,9 @@
+import { Mechanics, Book, Section, Language, Disciplines, mechanicsEngine, ExpressionEvaluator, randomMechanics, LoreCircle } from "..";
+
 /**
  * Tools to validate book mechanics
  */
-class BookValidator {
+export class BookValidator {
 
     /** Book mechanics */
     private mechanics: Mechanics;

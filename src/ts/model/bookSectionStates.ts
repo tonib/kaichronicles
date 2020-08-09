@@ -1,10 +1,11 @@
+import { SectionState, Section, Combat, CombatTurn } from "..";
 
 /**
  * Class to store book sections states
  * TODO: Remove all members that call to this.getSectionState(). They should be
  * TODO: called directly from SectionState
  */
-class BookSectionStates {
+export class BookSectionStates {
 
     /** The current section id */
     public currentSection: string = null;

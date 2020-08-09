@@ -2,7 +2,7 @@
 /**
  * Currency exchange
  */
-class Currency {
+export class Currency {
 
     /** Gold crowns id (Sommerlund) */
     public static readonly CROWN = "crown";

@@ -1,7 +1,10 @@
+import { state, CombatTurn, Combat, COMBATTABLE_DEATH, randomTable } from "../../..";
+
+
 /**
  * Javek venom test
  */
-const book3sect88 = {
+export const book3sect88 = {
 
     run() {
         // Replace the combat turns generation:

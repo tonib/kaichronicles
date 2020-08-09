@@ -1,9 +1,10 @@
+import { template, cordovaApp, App } from ".";
 
 /**
  * The routes handler.
  * As this is a single page app, routes are implemented with the URL hash
  */
-const routing = {
+export const routing = {
 
     /**
      * The current controller name
@@ -85,7 +86,7 @@ const routing = {
             }
 
             // tslint:disable-next-line: no-eval
-            return eval( controllerName );
+            return eval( App.PACKAGE_NAME + "." + controllerName );
         } catch (e) {
             console.log(e);
             return null;

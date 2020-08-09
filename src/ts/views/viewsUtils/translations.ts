@@ -1,7 +1,10 @@
+import { state } from "../..";
+
+
 /**
  * Translations table
  */
-class Translations {
+export class Translations {
 
     /**
      * Spanish translations
@@ -654,4 +657,4 @@ class Translations {
 /**
  * The translations singleton
  */
-const translations = new Translations();
+export const translations = new Translations();

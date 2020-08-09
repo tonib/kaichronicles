@@ -12,7 +12,8 @@
         "no-console": false,
         "trailing-comma": false,
         "object-literal-key-quotes": false,
-        "no-string-throw": false
+        "no-string-throw": false,
+        "ordered-imports": false
     },
     "rulesDirectory": []
 }

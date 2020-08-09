@@ -1,7 +1,9 @@
+import { template, routing } from "..";
+
 /**
  * The cordova app
  */
-const cordovaApp = {
+export const cordovaApp = {
 
     /**
      * Setup Cordova app, if needed

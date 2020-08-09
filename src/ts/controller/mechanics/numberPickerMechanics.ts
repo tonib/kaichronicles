@@ -1,8 +1,9 @@
+import { mechanicsEngine, state, gameView } from "../..";
 
 /**
  * Tool to select a number (or an amount of money)
  */
-const numberPickerMechanics = {
+export const numberPickerMechanics = {
 
     /**
      * numberPicker rule execution

@@ -1,8 +1,9 @@
+import { Book, translations, mechanicsEngine, Language, Section, state } from "..";
 
 /**
  * Item effect / usage description
  */
-interface ItemEffect {
+export interface ItemEffect {
 
     /** Combat.COMBATSKILL for combat skill increment. Item.ENDURANCE for endurance points increment. */
     cls: string;
@@ -14,7 +15,7 @@ interface ItemEffect {
 /**
  * Game object information
  */
-class Item {
+export class Item {
 
     // Item effect classes (see ItemEffect interface)
     public static readonly COMBATSKILL = "combatSkill";

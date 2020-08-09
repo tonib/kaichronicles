@@ -1,5 +1,8 @@
+import { state, actionChartController, randomTable, mechanicsEngine, translations } from "../../..";
+
+
 /** Book 9, sect91: Drop half of your backpack content */
-const book9sect91 = {
+export const book9sect91 = {
 
     run() {
 

@@ -1,6 +1,7 @@
+import { views, cordovaApp, state, LocalBooksLibrary, template, routing, GoogleAnalytics, declareCommonHelpers } from ".";
 
 /** Execution enviroment type */
-enum EnvironmentType {
+export enum EnvironmentType {
     Development = "DEVELOPMENT",
     Production = "PRODUCTION"
 }
@@ -8,7 +9,10 @@ enum EnvironmentType {
 /**
  * The web application
  */
-class App {
+export class App {
+
+    /** The webpack library name */
+    public static readonly PACKAGE_NAME = "kai";
 
     /** Execution environment type */
     public static environment: EnvironmentType;
@@ -18,6 +22,9 @@ class App {
 
     /** Web application setup  */
     public static run(environment: string) {
+
+        // Declare helper functions in common.ts
+        declareCommonHelpers();
 
         App.environment =  environment as EnvironmentType;
 

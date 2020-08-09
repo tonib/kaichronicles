@@ -1,5 +1,7 @@
+import { mechanicsEngine, gameView, ExpressionEvaluator, state, randomMechanics } from "../../..";
+
 /** Bow tournament */
-const book6sect340 = {
+export const book6sect340 = {
 
     run() {
         const $gameUI = mechanicsEngine.getMechanicsUI("mechanics-book6sect340");

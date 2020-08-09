@@ -1,8 +1,9 @@
+import { Book, Mechanics, SectionRenderer, Combat, mechanicsEngine } from "..";
 
 /**
  * A book section info
  */
-class Section {
+export class Section {
 
     /** The section id */
     public sectionId: string;

@@ -1,7 +1,7 @@
 /**
  * Stuff to access the file system on Cordova app
  */
-const cordovaFS = {
+export const cordovaFS = {
 
     /**
      * The current download (see downloadAsync and cancelCurrentDownload)

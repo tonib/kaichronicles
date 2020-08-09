@@ -1,13 +1,14 @@
+import { state } from "..";
 
 /**
  * Combat result for death
  */
-const COMBATTABLE_DEATH = "D";
+export const COMBATTABLE_DEATH = "D";
 
 /**
  * The combat table
  */
-const combatTable = {
+export const combatTable = {
 
     /**
      * Combat table results when the combat ratio is <= 0

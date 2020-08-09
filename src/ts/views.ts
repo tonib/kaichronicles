@@ -1,4 +1,6 @@
-const views = {
+import { App, EnvironmentType, template, translations, cordovaApp, ajaxErrorMsg } from ".";
+
+export const views = {
 
     /**
      * Cache with views already loaded.

@@ -3,7 +3,7 @@
  * A HTTP cookie.
  * Taken from https://stackoverflow.com/questions/14573223/set-cookie-and-get-cookie-with-javascript
  */
-class Cookie {
+export class Cookie {
 
     /**
      * Cookie name

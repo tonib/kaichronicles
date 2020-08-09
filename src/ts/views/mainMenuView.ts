@@ -1,5 +1,6 @@
+import { translations, state, routing, mainMenuController, cordovaApp } from "..";
 
-const mainMenuView = {
+export const mainMenuView = {
 
     /**
      * Main menu view

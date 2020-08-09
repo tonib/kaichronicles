@@ -1,6 +1,7 @@
+import { Language, cordovaApp, state, KaiDiscipline, projectAon, Section, MgnDiscipline, GndDiscipline, BookSeriesId, SectionRenderer, BookSeries } from "..";
 
 /** Book disciplines table */
-interface DisciplinesTable {
+export interface DisciplinesTable {
 
     /** Discipline id */
     [disciplineId: string]: {
@@ -23,7 +24,7 @@ interface DisciplinesTable {
 /**
  * Class to handle the Project Aon books XML
  */
-class Book {
+export class Book {
 
     /** Initial books section */
     public static readonly INITIAL_SECTION = "tssf";

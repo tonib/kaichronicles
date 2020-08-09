@@ -1,4 +1,6 @@
-const mapView = {
+import { Section, state, Item } from "..";
+
+export const mapView = {
 
     /**
      * Show the map section

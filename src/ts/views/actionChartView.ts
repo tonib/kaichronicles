@@ -1,7 +1,9 @@
+import { ActionChart, translations, ObjectsTable, ObjectsTableType, actionChartController, state, GndDiscipline, MoneyDialog, BookSeriesId, Item } from "..";
+
 /**
  * The action chart view API
  */
-const actionChartView = {
+export const actionChartView = {
 
     /**
      * Fill the action chart with the player state

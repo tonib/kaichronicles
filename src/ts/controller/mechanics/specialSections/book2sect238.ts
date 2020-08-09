@@ -1,7 +1,9 @@
+import { mechanicsEngine, gameView, state, template, randomTable, actionChartController, translations } from "../../..";
+
 /**
  * Cartwheel game
  */
-const book2sect238 = {
+export const book2sect238 = {
 
     run(rule: Element) {
         // Cartwheel game UI:

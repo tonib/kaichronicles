@@ -1,8 +1,9 @@
+import { Language } from "..";
 
 /**
  * Metadata about books and Project Aon web structure
  */
-const projectAon = {
+export const projectAon = {
 
     /**
      * Books metadata

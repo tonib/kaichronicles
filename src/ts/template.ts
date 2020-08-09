@@ -1,7 +1,9 @@
+import { routing, state, cordovaApp, Item, translations, randomTable } from ".";
+
 /**
  * The HTML template API
  */
-const template = {
+export const template = {
 
     /**
      * Set the navbar title and target URL
