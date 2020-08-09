@@ -86,7 +86,8 @@ export class Section {
     }
 
     /**
-     * Returns the previous section id
+     * Returns the next section id
+     * @returns The next section id. null if there is no next section
      */
     public getNextSectionId(): string {
         const link = this.$xmlSection.find("link[class=next]");
@@ -104,6 +105,7 @@ export class Section {
 
     /**
      * Returns the next section id
+     * @returns The previous section id. null if there is no next section
      */
     public getPreviousSectionId(): string {
         const link = this.$xmlSection.find("link[class=prev]");

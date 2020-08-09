@@ -62,6 +62,7 @@ TODO
 - Check damn Javascript modules, for test/web use...
 - Update documentation about testing (now package name is "kai."), and build
 - webpack includes jquery and bootstrap stuff into the library. Remove it
+- Tests: Detect exceptions and warnings
 
 ## Spanish books erratas to report
 - Book 13, sect equipmnt: "tu nueva Carta de Acciónde Gran Maestro" should be "tu nueva Carta de Acción de Gran Maestro" (space)

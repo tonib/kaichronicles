@@ -12,7 +12,7 @@ global.$ = $( jsDomDocument.window ) as any;
 // Other imports
 
 import {Builder, By, until, WebDriver, ThenableWebDriver} from "selenium-webdriver";
-import {state, ActionChart, projectAon, declareCommonHelpers, LocalBooksLibrary} from "..";
+import {state, ActionChart, projectAon, declareCommonHelpers, LocalBooksLibrary, Section} from "..";
 import { Book } from "..";
 import { Language } from "..";
 import { readFileSync } from "fs-extra";
@@ -56,8 +56,31 @@ async function traverseBooks() {
 
             // Setup state
             await setupBookState(i + 1, language);
+
+            // Traverse sections
+            let sectionId = Book.INITIAL_SECTION;
+            while (sectionId != null) {
+                const section = new Section(state.book, sectionId, state.mechanics);
+                await testSection(section);
+                sectionId = section.getNextSectionId();
+            }
         }
     }
+}
+
+async function testSection(section: Section) {
+    console.log(section.sectionId);
+
+    // Reset state
+    await driver.executeScript("kai.state.actionChart = new kai.ActionChart(); kai.state.sectionStates = new kai.BookSectionStates();");
+    // console.log(await driver.executeScript("kai.state.actionChart.currentEndurance;"));
+
+    // Load section
+    await driver.executeScript(`kai.gameController.loadSection("${section.sectionId}")`);
+
+    // Wait section render
+    await driver.wait( until.elementLocated( By.id("section-ready") ) , 10000);
+
 }
 
 async function setupBookState(bookNumber: number, language: Language) {

@@ -36,7 +36,7 @@
         "cleandist": "rm -rf dist",
         "downloaddata": "node scripts/downloadProjectAonData.js",
         "ts": "tsc -p tsconfig.json --watch",
-        "build": "webpack --config webpack.config.js",
+        "build": "webpack --config webpack.config.js --watch",
         "cleants": "rm -rf src/www/js",
         "reviewchanges": "node scripts/reviewBookChanges.js",
         "test": "jest"
