@@ -1,25 +1,26 @@
 
-import {state, ActionChart} from "..";
+// Prepare environment for jQuery execution
 
-state.actionChart = new ActionChart();
-console.log(state.actionChart);
+import * as $ from "jquery";
+import { JSDOM } from "jsdom";
+
+const jsDomDocument = new JSDOM("");
+global.document = jsDomDocument as any;
+global.window = jsDomDocument.window as any;
+global.$ = $( jsDomDocument.window ) as any;
+
+// Other imports
+
+import {Builder, By, until, WebDriver} from "selenium-webdriver";
+import {state, ActionChart, projectAon, declareCommonHelpers} from "..";
+import { Book } from "..";
+import { Language } from "..";
+import { readFileSync } from "fs-extra";
+
+// Define common functions
+declareCommonHelpers(false);
 
 /*
-//import {state} from "../kaiimports";
-//import "../kaiimports";
-import {Builder, By, until, WebDriver} from "selenium-webdriver";
-
-const state = require( "../../state" ).state as State;
-const Book = require( "../../model/book" ).Book;
-//import {Book} from  "../../model/book" ;
-
-//import {state} from "../../state"; // < does not work
-
-console.log(Book);
-const book = new Book();
-console.log(book);
-
-
 function sum(a: number, b: number): number {
     return a + b;
 }
@@ -27,7 +28,33 @@ function sum(a: number, b: number): number {
 test("adds 1 + 2 to equal 3", () => {
     expect(sum(1, 2)).toBe(3);
 });
+*/
 
+// Traverse books
+for (let i = 0 ; i < projectAon.supportedBooks.length ; i++) {
+    const bookMetadata = projectAon.supportedBooks[i];
+    // Traverse languages
+    for (const langKey of Object.keys(Language)) {
+        const language = Language[langKey] as Language;
+
+        if (!bookMetadata["code_" + language]) {
+            // Untranslated
+            continue;
+        }
+
+        // Setup state
+        state.book = new Book(i + 1, language);
+        const path = "src/www/" + state.book.getBookXmlURL();
+        console.log(path);
+
+        // Read book XML
+        state.book.setXml( readFileSync( path , "latin1" ) );
+
+        console.log( state.book.getKaiTitle(2) );
+    }
+}
+
+/*
 test("test selenium", () => {
     return (async function myFunction() {
         const driver = await new Builder().forBrowser("chrome").build();

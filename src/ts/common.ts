@@ -1,7 +1,7 @@
 import { declareJqueryNumberFunctions } from ".";
 
 /** Declare helper members for global types */
-export function declareCommonHelpers() {
+export function declareCommonHelpers(declareJqueryPlugins: boolean = true) {
 
     /****************** STRING ******************/
 
@@ -134,7 +134,7 @@ export function declareCommonHelpers() {
 
     /****************** WINDOW ******************/
 
-    if (typeof Window.prototype.getUrlParameter !== "function") {
+    if (typeof Window !== "undefined" && typeof Window.prototype.getUrlParameter !== "function") {
         /**
          * Get a parameter value of the current URL
          * @param sParam The parameter name to get (String)
@@ -145,7 +145,9 @@ export function declareCommonHelpers() {
         };
     }
 
-    declareJqueryNumberFunctions();
+    if (declareJqueryPlugins) {
+        declareJqueryNumberFunctions();
+    }
 }
 
 /****************** AJAX UTILS ******************/

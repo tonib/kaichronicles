@@ -76,7 +76,7 @@ export class Book {
 
     /**
      * Constructor
-     * @param number The book index number to create
+     * @param number The book index number to create (1 = first)
      * @param language The book language ('es' = spanish / 'en' = english )
      */
     public constructor(num: number, language: Language) {

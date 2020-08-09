@@ -56,8 +56,11 @@ export const cordovaApp = {
     /**
      * Are we running inside an app?
      */
-    isRunningApp() {
-        return window.cordova;
+    isRunningApp(): boolean {
+        if (typeof window === "undefined") {
+            return false;
+        }
+        return window.cordova ? true : false;
     },
 
     /**
