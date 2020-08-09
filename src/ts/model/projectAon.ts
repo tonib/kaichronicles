@@ -1,6 +1,41 @@
 import { Language } from "..";
 
 /**
+ * Project AON book metadata
+ */
+export interface BookMetadata {
+
+    /** English title */
+    title_en: string;
+
+    /** English book code */
+    code_en: string;
+
+    /** Spanish title */
+    title_es: string;
+
+    /** Spanish code */
+    code_es: string;
+
+    /** Illustrators folders to download */
+    illustrators: string[];
+
+    /** Authors biographies (.inc files in [LANGUAGECODE]/xml ) */
+    biographies: string[];
+
+    /** Zip size, in bytes */
+    zipSize: number;
+
+    /**
+     * Project AON SVN revision number to use.
+     * If == 0, the version at https://www.projectaon.org/data/tags/20151013 will be used
+     * If it's not zero, the file at https://www.projectaon.org/data/trunk/ will be used, with this SVN Revision number
+     * This is used at downloadProjectAonData.js
+     */
+    revision: number;
+}
+
+/**
  * Metadata about books and Project Aon web structure
  */
 export const projectAon = {
@@ -12,30 +47,18 @@ export const projectAon = {
 
         // Book 1:
         {
-            // English title
             title_en: "Flight from the Dark",
-            // English book code
             code_en: "01fftd",
 
-            // Spanish title
             title_es: "Huida de la oscuridad",
-            // Spanish code
             code_es: "01hdlo",
 
-            // Illustrators folders to download
             illustrators: [ "chalk" ],
 
-            // Authors biographies (.inc files in [LANGUAGECODE]/xml )
             biographies: [ "jdbiolw" , "gcbiolw" ],
 
-            // Zip size, in bytes
             zipSize: 4887076,
 
-            // Project AON SVN revision number to use.
-            // If == 0, the version at https://www.projectaon.org/data/tags/20151013 will be used
-            // If it's not zero, the file at https://www.projectaon.org/data/trunk/ will be used, with this SVN Revision number
-            // This is used at downloadProjectAonData.js
-            // revision: 0
             revision: 2713      // Upgraded 15/4/2018
         },
 
@@ -288,7 +311,7 @@ export const projectAon = {
             revision: 2752
         },
 
-    ],
+    ] as BookMetadata[],
 
     /**
      * Returns the title of a book on a given language
