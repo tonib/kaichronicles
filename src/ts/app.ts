@@ -20,6 +20,9 @@ export class App {
     /** Debug functions are enabled? */
     public static debugMode: boolean;
 
+    /** Testing functions are enabled? */
+    public static testMode: boolean;
+
     /** Web application setup  */
     public static run(environment: string) {
 
@@ -28,8 +31,10 @@ export class App {
 
         App.environment =  environment as EnvironmentType;
 
-        // Are we on debug mode?
-        App.debugMode = ( window.getUrlParameter("debug") === "true" );
+        // Are we in debug / test mode?
+        App.testMode = window.getUrlParameter("test") === "true";
+        const debugFlag = window.getUrlParameter("debug") === "true";
+        App.debugMode = debugFlag || App.testMode;
 
         if ( App.debugMode ) {
             // On debug mode, disable the cache (to always reload the books xml)
@@ -68,7 +73,7 @@ export class App {
                     // Setup google analytics, if we are on web
                     GoogleAnalytics.setup();
 
-                    if ( App.debugMode && state.existsPersistedState() ) {
+                    if ( App.debugMode && !App.testMode && state.existsPersistedState() ) {
                         // If we are developing a book, avoid to press the "Continue game"
                         routing.redirect( "setup" );
                     }

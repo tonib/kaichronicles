@@ -65,6 +65,11 @@ export class Mechanics {
         return "data/mechanics-" + this.book.bookNumber + ".xml";
     }
 
+    /** Set mechanics XML */
+    public setXml(xml: string) {
+        this.mechanicsXml = $.parseXML(xml);
+    }
+
     /**
      * Start the download of the objects XML
      * @return Promise with the download
@@ -79,6 +84,11 @@ export class Mechanics {
         .done((xml) => {
             self.objectsXml = xml;
         });
+    }
+
+    /** Set objects XML */
+    public setObjectsXml(xml: string) {
+        this.objectsXml = $.parseXML(xml);
     }
 
     /**
