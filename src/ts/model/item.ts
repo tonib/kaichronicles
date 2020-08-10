@@ -198,7 +198,7 @@ export class Item {
             } else if (cls === Item.ENDURANCE) {
                 this.enduranceEffect = increment;
             } else {
-                console.log("Object " + this.id + ", wrong class effect: " + cls);
+                mechanicsEngine.debugWarning("Object " + this.id + ", wrong class effect: " + cls);
             }
         }
 

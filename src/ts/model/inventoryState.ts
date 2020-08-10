@@ -1,4 +1,5 @@
 import { ActionChartItem, ActionChart, Item } from "..";
+import { mechanicsEngine } from "../controller/mechanics/mechanicsEngine";
 
 /**
  * Inventory state at one point
@@ -44,7 +45,9 @@ export class InventoryState {
                 objects.addItem(w.clone());
             }
         } else {
-            throw "Wrong objectTypes: " + objectTypes;
+            const msg = "Wrong objectTypes: " + objectTypes;
+            mechanicsEngine.debugWarning(msg);
+            throw msg;
         }
 
         return objects;

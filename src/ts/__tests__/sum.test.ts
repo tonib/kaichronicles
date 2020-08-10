@@ -1,22 +1,11 @@
 
-// Prepare environment for jQuery execution
-
-import * as $ from "jquery";
-import { JSDOM } from "jsdom";
-
-const jsDomDocument = new JSDOM("");
-global.document = jsDomDocument as any;
-global.window = jsDomDocument.window as any;
-global.$ = $( jsDomDocument.window ) as any;
-
-// Other imports
-
 import {Builder, By, until, WebDriver, ThenableWebDriver} from "selenium-webdriver";
 import {state, ActionChart, projectAon, declareCommonHelpers, LocalBooksLibrary, Section} from "..";
 import { Book } from "..";
 import { Language } from "..";
 import { readFileSync } from "fs-extra";
 import { Mechanics } from "../model/mechanics";
+import { Type, Level } from "selenium-webdriver/lib/logging";
 
 // Define common functions
 declareCommonHelpers(false);
@@ -27,63 +16,61 @@ state.localBooksLibrary = new LocalBooksLibrary();
 // Selenium web driver
 let driver: WebDriver = null;
 
-(async function execution() {
+// Initial setup
+beforeAll( async () => {
+    // Setup jQuery
+    global.jQuery = require("jquery");
+    global.$ = global.jQuery;
 
     // Setup Selenium
+    console.log("Setup Selenium");
     driver = await new Builder().forBrowser("chrome").build();
+});
 
-    await traverseBooks();
-
+// Final shutdown
+afterAll( async () => {
     // Close Selenium
+    console.log("Close Selenium");
     await driver.close();
-})();
+});
+
+function playBook(bookNumber: number, language: Language) {
+    describe(`Play book ${bookNumber} / ${language}`, () => {
+
+        beforeAll( async () => {
+            console.log("Setup book " + bookNumber + " / " + language);
+            await setupBookState(bookNumber, language);
+        });
+
+        test(`${bookNumber} / ${language} test`, () => {
+            console.log("Test book " + bookNumber + " / " + language);
+            expect(1).toBe(1);
+        });
+    });
+}
 
 // Traverse books
-async function traverseBooks() {
-    for (let i = 0 ; i < projectAon.supportedBooks.length ; i++) {
-        const bookMetadata = projectAon.supportedBooks[i];
+for (let i = 0 ; i < projectAon.supportedBooks.length ; i++) {
+    const bookMetadata = projectAon.supportedBooks[i];
 
-        // Traverse languages
-        for (const langKey of Object.keys(Language)) {
-            const language = Language[langKey] as Language;
+    // Traverse languages
+    for (const langKey of Object.keys(Language)) {
+        const language = Language[langKey] as Language;
 
-            console.log(bookMetadata["code_" + language]);
+        console.log(bookMetadata["code_" + language]);
 
-            if (!bookMetadata["code_" + language]) {
-                // Untranslated
-                continue;
-            }
-
-            // Setup state
-            await setupBookState(i + 1, language);
-
-            // Traverse sections
-            let sectionId = Book.INITIAL_SECTION;
-            while (sectionId != null) {
-                const section = new Section(state.book, sectionId, state.mechanics);
-                await testSection(section);
-                sectionId = section.getNextSectionId();
-            }
+        if (!bookMetadata["code_" + language]) {
+            // Untranslated
+            continue;
         }
+
+        // Setup tests for this book
+        playBook(i + 1, language);
     }
 }
 
-async function testSection(section: Section) {
-    console.log(section.sectionId);
-
-    // Reset state
-    await driver.executeScript("kai.state.actionChart = new kai.ActionChart(); kai.state.sectionStates = new kai.BookSectionStates();");
-    // console.log(await driver.executeScript("kai.state.actionChart.currentEndurance;"));
-
-    // Load section
-    await driver.executeScript(`kai.gameController.loadSection("${section.sectionId}")`);
-
-    // Wait section render
-    await driver.wait( until.elementLocated( By.id("section-ready") ) , 10000);
-
-}
-
 async function setupBookState(bookNumber: number, language: Language) {
+    console.log("setupBookState");
 
     state.language = language;
 
@@ -107,33 +94,3 @@ async function setupBookState(bookNumber: number, language: Language) {
     await (await driver.wait(until.elementLocated(By.id("newgame-start")), 10000)).click();
     await driver.wait(until.elementLocated(By.id("game-nextSection")), 5000);
 }
-
-/*
-test("test selenium", () => {
-    return (async function myFunction() {
-        const driver = await new Builder().forBrowser("chrome").build();
-
-        await driver.get("http://localhost/ls/?debug=true#game");
-
-        (await driver.findElement(By.id("menu-new"))).click();
-
-        await (await driver.wait(until.elementLocated(By.id("newgame-start")), 10000)).click();
-
-        const ac = await driver.executeScript("return state.actionChart");
-
-        console.log(state.actionChart);
-        // await driver.close();
-    })();
-
-});
-*/
-
-/*
-function sum(a: number, b: number): number {
-    return a + b;
-}
-
-test("adds 1 + 2 to equal 3", () => {
-    expect(sum(1, 2)).toBe(3);
-});
-*/

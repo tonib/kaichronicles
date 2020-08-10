@@ -1,4 +1,4 @@
-import { views, BookValidator, setupController, state, Section, SectionRenderer, randomTable, Language, projectAon } from "..";
+import { views, BookValidator, setupController, state, Section, SectionRenderer, randomTable, Language, projectAon, mechanicsEngine } from "..";
 
 /**
  * Application tests
@@ -174,7 +174,7 @@ export class testsController {
     private static addError( textLine: string , exception: any = null ) {
         testsController.addLog("ERROR: " + textLine);
         if (exception) {
-            console.log(exception);
+            mechanicsEngine.debugWarning(exception);
         }
     }
 

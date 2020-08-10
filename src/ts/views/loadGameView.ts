@@ -1,4 +1,4 @@
-import { translations, loadGameController } from "..";
+import { translations, loadGameController, mechanicsEngine } from "..";
 
 /**
  * The load game view interface functions
@@ -120,5 +120,6 @@ export const loadGameView = {
      */
     showError(errorMsg: string) {
         $("#loadGame-errors").text(errorMsg);
+        mechanicsEngine.debugWarning(errorMsg);
     }
 };

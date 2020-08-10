@@ -1,3 +1,5 @@
+import { mechanicsEngine } from "..";
+
 /**
  * Stuff to access the file system on Cordova app
  */
@@ -60,7 +62,7 @@ export const cordovaFS = {
                     if (error) {
                         msg += ": " + error.toString();
                     }
-                    console.log(msg);
+                    mechanicsEngine.debugWarning(msg);
                     dfd.reject(msg);
                 };
 
@@ -84,7 +86,7 @@ export const cordovaFS = {
             },
             (error /* : FileError */) => {
                 const msg = "Error creating file writer. Code: " + error.code;
-                console.log(msg);
+                mechanicsEngine.debugWarning(msg);
                 dfd.reject(msg);
             }
         );
@@ -138,7 +140,7 @@ export const cordovaFS = {
                 try {
                     callback(fileName);
                 } catch (ex) {
-                    console.log("Error calling callback: " + ex.toString());
+                    mechanicsEngine.debugWarning("Error calling callback: " + ex.toString());
                 }
                 return;
             }
@@ -157,7 +159,7 @@ export const cordovaFS = {
                 console.log("Callback finished");
             },
             () => {
-                console.log("Error listing files");
+                mechanicsEngine.debugWarning("Error listing files");
                 alert("Error listing files");
                 callback([]);
             }
@@ -189,7 +191,7 @@ export const cordovaFS = {
             },
             (error /*: FileError*/) => {
                 const msg = "Error listing files. Error code: " + error.code;
-                console.log(msg);
+                mechanicsEngine.debugWarning(msg);
                 dfd.reject(msg);
             }
         );
@@ -212,7 +214,7 @@ export const cordovaFS = {
             },
             (error /*: FileError*/) => {
                 const msg = "Error copying file. Error code: " + error.code;
-                console.log(msg);
+                mechanicsEngine.debugWarning(msg);
                 dfd.reject(msg);
             }
         );
@@ -267,7 +269,7 @@ export const cordovaFS = {
             },
             (fileError /* : FileError */) => {
                 const msg = "Error getting file: " + fileError.code;
-                console.log(msg);
+                mechanicsEngine.debugWarning(msg);
                 dfd.reject(msg);
             }
         );
@@ -297,7 +299,7 @@ export const cordovaFS = {
                         if (error && error.message) {
                             msg += ": " + error.message;
                         }
-                        console.log(msg);
+                        mechanicsEngine.debugWarning(msg);
                         dfd.reject(msg);
                     };
                     if (binary) {
@@ -330,7 +332,7 @@ export const cordovaFS = {
             },
             (error /* : FileError*/) => {
                 const msg = "Error deleting entry. Error code: " + error.code;
-                console.log(msg);
+                mechanicsEngine.debugWarning(msg);
                 dfd.reject(msg);
             }
         );
@@ -394,7 +396,7 @@ export const cordovaFS = {
             },
             (error /* : FileError */) => {
                 const msg = "Error resolving local file URI (code " + error.code + ")";
-                console.log(msg);
+                mechanicsEngine.debugWarning(msg);
                 dfd.reject(msg);
             }
         );
@@ -441,7 +443,7 @@ export const cordovaFS = {
             },
             (error /* : FileError */) => {
                 const msg = "Error getting / creating file. Error code: " + error.code;
-                console.log(msg);
+                mechanicsEngine.debugWarning(msg);
                 dfd.reject(msg);
             }
         );
@@ -506,7 +508,7 @@ export const cordovaFS = {
             }
             cordovaFS.currentDownload.abort();
         } catch (e) {
-            console.log(e);
+            mechanicsEngine.debugWarning(e);
         }
     },
 
@@ -525,7 +527,7 @@ export const cordovaFS = {
                 if (error) {
                     msg += ": " + error.toString();
                 }
-                console.log(msg);
+                mechanicsEngine.debugWarning(msg);
                 dfd.reject(msg);
             }
         );
@@ -575,7 +577,7 @@ export const cordovaFS = {
                 if (error) {
                     msg += ": " + error.toString();
                 }
-                console.log(msg);
+                mechanicsEngine.debugWarning(msg);
                 dfd.reject(msg);
             }
         );
@@ -603,7 +605,7 @@ export const cordovaFS = {
                 if (error) {
                     msg += ": " + error.toString();
                 }
-                console.log(msg);
+                mechanicsEngine.debugWarning(msg);
                 dfd.reject(msg);
             }
         );

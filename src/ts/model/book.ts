@@ -1,4 +1,5 @@
 import { Language, cordovaApp, state, KaiDiscipline, projectAon, Section, MgnDiscipline, GndDiscipline, BookSeriesId, SectionRenderer, BookSeries } from "..";
+import { mechanicsEngine } from "../controller/mechanics/mechanicsEngine";
 
 /** Book disciplines table */
 export interface DisciplinesTable {
@@ -197,6 +198,7 @@ export class Book {
             this.bookXml = $.parseXML(xml);
             this.bookRandomTable = this.getRandomTable();
         } catch (e) {
+            mechanicsEngine.debugWarning(e);
             throw e;
         }
     }
@@ -216,7 +218,7 @@ export class Book {
 
             return promises;
         } catch (ex) {
-            console.log(ex);
+            mechanicsEngine.debugWarning(ex);
             return null;
         }
     }

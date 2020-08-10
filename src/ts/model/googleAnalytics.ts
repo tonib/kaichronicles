@@ -1,4 +1,4 @@
-import { App, EnvironmentType, cordovaApp, Cookie } from "..";
+import { App, EnvironmentType, cordovaApp, Cookie, mechanicsEngine } from "..";
 
 /**
  * Google Analytics stuff.
@@ -21,7 +21,7 @@ export class GoogleAnalytics {
             // Check if disabled by user
             return new Cookie(GoogleAnalytics.GA_DISABLED_COOKIE).getValue() !== "true";
         } catch (ex) {
-            console.log(ex);
+            mechanicsEngine.debugWarning(ex);
             return false;
         }
     }
@@ -37,7 +37,7 @@ export class GoogleAnalytics {
             }
             console.log("Changed send Anayltics to " + enabled);
         } catch (ex) {
-            console.log(ex);
+            mechanicsEngine.debugWarning(ex);
         }
     }
 
@@ -68,7 +68,7 @@ export class GoogleAnalytics {
             console.log("Page view sent to Google Analytics: " + pageName);
 
         } catch (e) {
-            console.log(e);
+            mechanicsEngine.debugWarning(e);
         }
     }
 
@@ -91,7 +91,7 @@ export class GoogleAnalytics {
             // Send "index.html" page view, if enabled
             GoogleAnalytics.sendPageView("index.html");
         } catch (e) {
-            console.log(e);
+            mechanicsEngine.debugWarning(e);
         }
     }
 

@@ -117,6 +117,7 @@ export const numberPickerMechanics = {
                 return 0;
             }
         } catch (e) {
+            mechanicsEngine.debugWarning(e);
             return 0;
         }
     },

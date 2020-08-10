@@ -90,6 +90,11 @@ export class Section {
      * @returns The next section id. null if there is no next section
      */
     public getNextSectionId(): string {
+
+        if (this.sectionId === this.mechanics.getLastSectionId() ) {
+            return null;
+        }
+
         const link = this.$xmlSection.find("link[class=next]");
         if ( link.length > 0 ) {
             return link.attr("idref");
@@ -108,6 +113,11 @@ export class Section {
      * @returns The previous section id. null if there is no next section
      */
     public getPreviousSectionId(): string {
+
+        if (this.sectionId === Book.INITIAL_SECTION ) {
+            return null;
+        }
+
         const link = this.$xmlSection.find("link[class=prev]");
         if ( link.length > 0 ) {
             return link.attr("idref");

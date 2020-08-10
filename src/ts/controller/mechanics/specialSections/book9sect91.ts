@@ -1,6 +1,5 @@
 import { state, actionChartController, randomTable, mechanicsEngine, translations } from "../../..";
 
-
 /** Book 9, sect91: Drop half of your backpack content */
 export const book9sect91 = {
 
@@ -48,7 +47,7 @@ export const book9sect91 = {
             book9sect91.setUI( coinState );
         } catch (e) {
             // throw new Error(e);
-            console.log(e);
+            mechanicsEngine.debugWarning(e);
         }
     },
 

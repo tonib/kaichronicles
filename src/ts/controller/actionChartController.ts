@@ -83,7 +83,7 @@ export const actionChartController = {
             if (showError) {
                 toastr.error(e);
             }
-            console.log(e);
+            console.log(e); // This is not really an application error, so do not call mechanicsEngine.debugWarning()
             return false;
         }
     },

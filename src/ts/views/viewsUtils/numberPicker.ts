@@ -1,5 +1,5 @@
 
-import { state, translations } from "../..";
+import { state, translations, mechanicsEngine } from "../..";
 
 /**
  * Declare jQuery functions for number fields
@@ -75,7 +75,7 @@ export function declareJqueryNumberFunctions() {
                 const sectionState = state.sectionStates.getSectionState();
                 sectionState.numberPickersState[ this.attr("id") ] = this.val();
             } catch (e) {
-                console.log(e);
+                mechanicsEngine.debugWarning(e);
             }
         };
 

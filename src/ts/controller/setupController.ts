@@ -150,7 +150,7 @@ export const setupController = {
         try {
             GoogleAnalytics.sendPageView("/" + pageName + "-" + state.book.bookNumber + ".html");
         } catch (e) {
-            console.log(e);
+            mechanicsEngine.debugWarning(e);
         }
     },
 

@@ -1,4 +1,4 @@
-import { setupController, translations, views, Book, state, BookSeriesId, gameView, routing, Section, SectionRenderer } from "..";
+import { setupController, translations, views, Book, state, BookSeriesId, gameView, routing, Section, SectionRenderer, mechanicsEngine } from "..";
 
 /**
  * Game rules controller
@@ -42,7 +42,7 @@ export const gameRulesController = {
                     window.scrollTo( 0 , $("a[id=" + section + "]").offset().top - 65 );
                 }
             } catch (e) {
-                console.log(e);
+                mechanicsEngine.debugWarning(e);
             }
         });
     },

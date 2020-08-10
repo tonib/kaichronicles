@@ -57,7 +57,7 @@ export const gameController = {
         // Load and display the section
         const newSection = new Section(state.book, sectionId, state.mechanics);
         if (!newSection.exists()) {
-            console.log("Section " + sectionId + " does not exists");
+            mechanicsEngine.debugWarning("Section " + sectionId + " does not exists");
             return;
         }
         gameController.currentSection = newSection;

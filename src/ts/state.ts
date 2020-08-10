@@ -1,4 +1,4 @@
-import { Book, Mechanics, BookSectionStates, ActionChart, LocalBooksLibrary, projectAon } from ".";
+import { Book, Mechanics, BookSectionStates, ActionChart, LocalBooksLibrary, projectAon, mechanicsEngine } from ".";
 
 /** Language codes */
 export enum Language {
@@ -76,7 +76,7 @@ export class State {
             }
         } catch (e) {
             this.color = "light";
-            console.log(e);
+            mechanicsEngine.debugWarning(e);
         }
     }
 
@@ -155,7 +155,7 @@ export class State {
             const json = JSON.stringify( this.getCurrentState() );
             localStorage.setItem( "state" , json );
         } catch (e) {
-            console.log(e);
+            mechanicsEngine.debugWarning(e);
             // throw new Error(e);
         }
     }
@@ -182,7 +182,7 @@ export class State {
             }
             this.restoreStateFromObject( stateKeys );
         } catch (e) {
-            console.log(e);
+            mechanicsEngine.debugWarning(e);
             this.setup(1, Language.ENGLISH, false);
         }
     }
@@ -259,7 +259,7 @@ export class State {
             }
             return ActionChart.fromObject(JSON.parse(json), bookNumber);
         } catch (e) {
-            console.log(e);
+            mechanicsEngine.debugWarning(e);
             return null;
         }
     }

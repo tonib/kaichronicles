@@ -1,4 +1,4 @@
-import { template, cordovaApp, App } from ".";
+import { template, cordovaApp, App, mechanicsEngine } from ".";
 
 /**
  * The routes handler.
@@ -37,7 +37,7 @@ export const routing = {
             location.hash = route;
 
         } catch (e) {
-            console.log(e);
+            mechanicsEngine.debugWarning(e);
             return false;
         }
 
@@ -73,7 +73,7 @@ export const routing = {
 
             return route + "Controller";
         } catch (e) {
-            console.log(e);
+            mechanicsEngine.debugWarning(e);
             return null;
         }
     },
@@ -88,7 +88,7 @@ export const routing = {
             // tslint:disable-next-line: no-eval
             return eval( App.PACKAGE_NAME + "." + controllerName );
         } catch (e) {
-            console.log(e);
+            mechanicsEngine.debugWarning(e);
             return null;
         }
     },
@@ -128,7 +128,7 @@ export const routing = {
                 }
             }
         } catch (e) {
-            console.log(e);
+            mechanicsEngine.debugWarning(e);
             // throw new Error(e);
         }
 
@@ -136,7 +136,7 @@ export const routing = {
         try {
             controller = routing.getCurrentController();
             if ( !controller ) {
-                console.log("Undefined controller: " + routing.getControllerName() );
+                mechanicsEngine.debugWarning("Undefined controller: " + routing.getControllerName() );
                 // throw new Error("Undefined controller: " + routing.getControllerName());
             } else {
                 // Store the new hash
@@ -145,7 +145,7 @@ export const routing = {
                 controller.index();
             }
         } catch (e) {
-            console.log(e);
+            mechanicsEngine.debugWarning(e);
             // throw new Error(e);
         }
     },

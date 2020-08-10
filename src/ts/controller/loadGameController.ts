@@ -1,4 +1,4 @@
-import { template, translations, views, cordovaApp, loadGameView, cordovaFS, state, routing, SavedGamesExport, DocumentSelection } from "..";
+import { template, translations, views, cordovaApp, loadGameView, cordovaFS, state, routing, SavedGamesExport, DocumentSelection, mechanicsEngine } from "..";
 
 /**
  * Load stored game controller
@@ -91,7 +91,7 @@ export class loadGameController {
             };
             reader.readAsText(fileToUpload);
         } catch (e) {
-            console.log(e);
+            mechanicsEngine.debugWarning(e);
             loadGameView.showError( e.toString() );
         }
     }
@@ -124,7 +124,7 @@ export class loadGameController {
             state.loadSaveGameJson( jsonState );
             routing.redirect("setup");
         } catch (e) {
-            console.log(e);
+            mechanicsEngine.debugWarning(e);
             if ( cordovaApp.isRunningApp() ) {
                 alert(e.toString());
             } else {
@@ -185,7 +185,7 @@ export class loadGameController {
                 }
             );
         } catch (e) {
-            console.log(e);
+            mechanicsEngine.debugWarning(e);
             alert( translations.text( "errorExporting" ) + ": " + e.toString() );
         }
     }
@@ -220,7 +220,7 @@ export class loadGameController {
                 }
             );
         } catch (e) {
-            console.log(e);
+            mechanicsEngine.debugWarning(e);
             alert( "Error importing: " + e.toString() );
         }
     }

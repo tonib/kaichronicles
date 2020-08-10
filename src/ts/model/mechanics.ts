@@ -1,4 +1,4 @@
-import { Book, Item, App } from "..";
+import { Book, Item, App, mechanicsEngine } from "..";
 
 /**
  * Game mechanics and objects handling for a given book
@@ -124,7 +124,7 @@ export class Mechanics {
 
         const $o = $(this.objectsXml).find("*[id=" + objectId + "]");
         if ( $o.length === 0 ) {
-            console.log("Object " + objectId + " not found");
+            mechanicsEngine.debugWarning("Object " + objectId + " not found");
             return null;
         }
 

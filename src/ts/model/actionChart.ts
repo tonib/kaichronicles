@@ -290,7 +290,9 @@ export class ActionChart {
                 return true;
 
             default:
-                throw "Unknown object type: " + item.type;
+                const msg = "Unknown object type: " + item.type;
+                mechanicsEngine.debugWarning(msg);
+                throw msg;
         }
 
     }

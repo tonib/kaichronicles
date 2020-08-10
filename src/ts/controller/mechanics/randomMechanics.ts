@@ -176,7 +176,7 @@ export const randomMechanics = {
                          increment: number = 0): any {
 
         if (!$element || $element.length === 0) {
-            console.log("Random table link not found");
+            mechanicsEngine.debugWarning("Random table link not found");
             return;
         }
 

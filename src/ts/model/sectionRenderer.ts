@@ -4,7 +4,7 @@
  * by Liquid State Limited.
  */
 
-import { Section, translations } from "..";
+import { Section, translations, mechanicsEngine } from "..";
 
  /**
   * Tool to transform the book XML to HTML
@@ -65,6 +65,7 @@ export class SectionRenderer {
                 if ( this.renderedFootNotesRefs.contains( this.footNotes[i].id ) ) {
                     html += this.footNotes[i].html;
                 } else {
+                    // Not really an application error, it's a PAON xml error, so do not call mechanicsEngine.debugWarning()
                     console.log( this.sectionToRender.sectionId + ": Footnote " + this.footNotes[i].id +
                         " not rendered because its not referenced" );
                 }
@@ -115,12 +116,14 @@ export class SectionRenderer {
 
             // Call the function renderer (this class method with the tag name)
             if ( !this[tagName] ) {
-                throw this.sectionToRender.sectionId + ": Unkown tag: " + tagName;
+                const msg = this.sectionToRender.sectionId + ": Unkown tag: " + tagName;
+                mechanicsEngine.debugWarning(msg);
+                throw msg;
             } else {
                 try {
                     sectionContent += this[tagName]( $node , level );
                 } catch (e) {
-                    console.log(e);
+                    mechanicsEngine.debugWarning(e);
                 }
             }
         }
@@ -361,7 +364,9 @@ export class SectionRenderer {
                     // Link to anchor on this section. Ignore
                     return this.renderNodeChildren( $a , level );
                 } else {
-                    throw "a tag: Unknown idref type: " + $a.attr("idref");
+                    const msg = "a tag: Unknown idref type: " + $a.attr("idref");
+                    mechanicsEngine.debugWarning(msg);
+                    throw msg;
                 }
         }
         return open + this.renderNodeChildren( $a , level ) + close;

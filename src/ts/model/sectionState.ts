@@ -1,4 +1,4 @@
-import { Combat, Mechanics, Item, state, ActionChart, ActionChartItem } from "..";
+import { Combat, Mechanics, Item, state, ActionChart, ActionChartItem, mechanicsEngine } from "..";
 
 /**
  * Stores information about an object available to pick on a section
@@ -321,7 +321,7 @@ export class SectionState {
             return;
         }
 
-        console.log( "Object to remove from section not found :" + objectId + " " + price );
+        mechanicsEngine.debugWarning( "Object to remove from section not found :" + objectId + " " + price );
     }
 
     /**

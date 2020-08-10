@@ -1,4 +1,4 @@
-import { setupController, Section, state, views, mapView } from "..";
+import { setupController, Section, state, views, mapView, mechanicsEngine } from "..";
 
 
 /**
@@ -17,7 +17,7 @@ export const mapController = {
 
         const mapSection = new Section(state.book, "map", state.mechanics);
         if ( !mapSection.exists() ) {
-            console.log("Map section does not exists" );
+            mechanicsEngine.debugWarning("Map section does not exists");
             return;
         }
 

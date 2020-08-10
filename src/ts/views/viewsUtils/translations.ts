@@ -1,4 +1,4 @@
-import { state } from "../..";
+import { state, mechanicsEngine } from "../..";
 
 
 /**
@@ -636,7 +636,7 @@ export class Translations {
 
             let text = table[textId];
             if ( !text ) {
-                console.log("Text code not found: " + textId);
+                mechanicsEngine.debugWarning("Text code not found: " + textId);
                 text = textId;
             }
 
@@ -647,7 +647,7 @@ export class Translations {
             }
             return text;
         } catch (e) {
-            console.log(e);
+            mechanicsEngine.debugWarning(e);
             return textId;
         }
     }

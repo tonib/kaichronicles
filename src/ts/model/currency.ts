@@ -1,3 +1,4 @@
+import { mechanicsEngine } from "..";
 
 /**
  * Currency exchange
@@ -37,7 +38,7 @@ export class Currency {
 
         let exchange = Currency.EXCHANGES[ currencyId ];
         if ( !exchange ) {
-            console.log( "Wrong currency: " + currencyId );
+            mechanicsEngine.debugWarning( "Wrong currency: " + currencyId );
             exchange = 1;
         }
 

@@ -1,4 +1,4 @@
-import { views, cordovaApp, state, LocalBooksLibrary, template, routing, GoogleAnalytics, declareCommonHelpers } from ".";
+import { views, cordovaApp, state, LocalBooksLibrary, template, routing, GoogleAnalytics, declareCommonHelpers, mechanicsEngine } from ".";
 
 /** Execution enviroment type */
 export enum EnvironmentType {
@@ -80,7 +80,7 @@ export class App {
 
                 } catch (e) {
                     // d'oh!
-                    console.log(e);
+                    mechanicsEngine.debugWarning(e);
                     return jQuery.Deferred().reject(e).promise();
                 }
             })

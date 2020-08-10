@@ -1,4 +1,4 @@
-import { template, routing } from "..";
+import { template, routing, mechanicsEngine } from "..";
 
 /**
  * The cordova app
@@ -49,7 +49,7 @@ export const cordovaApp = {
         try {
             navigator.app.exitApp();
         } catch (e) {
-            console.log(e);
+            mechanicsEngine.debugWarning(e);
         }
     },
 
@@ -70,7 +70,7 @@ export const cordovaApp = {
         try {
             return navigator.connection.type !== Connection.NONE;
         } catch (e) {
-            console.log(e);
+            mechanicsEngine.debugWarning(e);
             return true;
         }
     }

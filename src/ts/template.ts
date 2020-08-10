@@ -1,4 +1,4 @@
-import { routing, state, cordovaApp, Item, translations, randomTable } from ".";
+import { routing, state, cordovaApp, Item, translations, randomTable, mechanicsEngine } from ".";
 
 /**
  * The HTML template API
@@ -137,6 +137,7 @@ export const template = {
      * Display an error
      */
     setErrorMessage(msg: string) {
+        mechanicsEngine.debugWarning(msg);
         template.setViewContent('<p style="color: red">' + msg + "</p>");
     },
 

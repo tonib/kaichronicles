@@ -1,4 +1,4 @@
-import { projectAon, state, cordovaFS } from "..";
+import { projectAon, state, cordovaFS, mechanicsEngine } from "..";
 
 /**
  * Class to handle the download state of a Project Aon book.
@@ -98,7 +98,7 @@ export class BookDownloadState {
                 console.log("Deleting downloaded zip file");
                 zEntry.remove();
             } else {
-                console.log( "No downloaded zip found" );
+                mechanicsEngine.debugWarning( "No downloaded zip found" );
             }
 
             // Return the previous error

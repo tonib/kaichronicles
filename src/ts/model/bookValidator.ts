@@ -154,7 +154,7 @@ export class BookValidator {
 
             this.validateChildrenRules( $rule );
         } catch (e) {
-            console.log(e);
+            mechanicsEngine.debugWarning(e);
             this.addError( $(rule) , "Exception validating rule: " + e );
         }
     }
@@ -291,7 +291,7 @@ export class BookValidator {
             // tslint:disable-next-line: no-eval
             return eval( expression );
         } catch (e) {
-            console.log(e);
+            mechanicsEngine.debugWarning(e);
             this.addError( $rule , "Error evaluating expression: " + e );
             return null;
         }

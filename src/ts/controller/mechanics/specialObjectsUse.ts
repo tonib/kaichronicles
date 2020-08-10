@@ -1,4 +1,4 @@
-import { Item, randomTable, translations, state, actionChartController } from "../..";
+import { Item, randomTable, translations, state, actionChartController, mechanicsEngine } from "../..";
 
 /**
  * Special objects use
@@ -10,7 +10,7 @@ export class SpecialObjectsUse {
         if ( item.id === "pouchadgana" ) {
             SpecialObjectsUse.useAdgana();
         } else {
-            console.log("SpecialObjectsUse - Unknown object: " + item.id );
+            mechanicsEngine.debugWarning("SpecialObjectsUse - Unknown object: " + item.id );
         }
     }
 

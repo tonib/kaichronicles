@@ -242,10 +242,10 @@ export const mechanicsEngine = {
      * Print debug warning to console, and even more prominently if we're in
      * debug mode.
      */
-    debugWarning(msg: string) {
-        console.log(msg);
+    debugWarning(msg: string | Error) {
+        console.error(msg);
         if (App.debugMode) {
-            mechanicsEngine.showMessage(msg);
+            mechanicsEngine.showMessage(msg.toString());
         }
     },
 

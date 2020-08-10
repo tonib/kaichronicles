@@ -1,4 +1,4 @@
-import { setupController, translations, views, settingsView, Language, Book, state, template, cordovaApp, cordovaFS } from "..";
+import { setupController, translations, views, settingsView, Language, Book, state, template, cordovaApp, cordovaFS, mechanicsEngine } from "..";
 
 /**
  * Game settings controller
@@ -123,7 +123,7 @@ export const settingsController = {
             }
             return true;
         } catch (e) {
-            console.log(e);
+            mechanicsEngine.debugWarning(e);
             alert("Your browser version does not support save file with javascript. " +
                 "Try a newer browser version. Error: " + e);
             return false;

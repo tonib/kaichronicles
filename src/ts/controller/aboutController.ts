@@ -1,4 +1,4 @@
-import { setupController, translations, views, state, Book, Section, SectionRenderer } from "..";
+import { setupController, translations, views, state, Book, Section, SectionRenderer, mechanicsEngine } from "..";
 
 /**
  * About the book controller
@@ -42,7 +42,7 @@ export const aboutController = {
                     });
                 }
             } catch (ex) {
-                console.log(ex);
+                mechanicsEngine.debugWarning(ex);
             }
         });
     },
