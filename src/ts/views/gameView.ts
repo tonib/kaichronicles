@@ -214,6 +214,17 @@ export const gameView = {
         $("#game-sourceSections a").click(function(e) {
             gameView.choiceLinkClicked(e, this);
         });
+    },
+
+    addSectionReadyMarker() {
+        if (App.testMode) {
+            // Append a "mark" to let the tests controller know the section is completly loaded
+            gameView.appendToSection('<p id="section-ready">SECTION READY</p>', "afterChoices");
+        }
+    },
+
+    removeSectionReadymarker() {
+        $("#section-ready").remove();
     }
 
 };

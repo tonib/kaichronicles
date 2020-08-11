@@ -1,4 +1,4 @@
-import { state, mechanicsEngine, Combat, template, SpecialObjectsUse, CombatTurn, GndDiscipline, translations } from "../..";
+import { state, mechanicsEngine, Combat, template, SpecialObjectsUse, CombatTurn, GndDiscipline, translations, gameView } from "../..";
 
 /**
  * Combats mechanics
@@ -247,6 +247,8 @@ export class CombatMechanics {
             // Check if the XXX-surge should be disabled after this turn
             CombatMechanics.checkSurgeEnabled();
 
+            // For testing, add marker to notify to the test we are ready
+            gameView.addSectionReadyMarker();
         });
 
     }
