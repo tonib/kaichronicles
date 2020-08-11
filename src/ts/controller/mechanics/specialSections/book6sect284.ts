@@ -1,6 +1,5 @@
 import { numberPickerMechanics, state, randomTable, actionChartController, translations, mechanicsEngine } from "../../..";
 
-
 /** Bet */
 export const book6sect284 = {
 

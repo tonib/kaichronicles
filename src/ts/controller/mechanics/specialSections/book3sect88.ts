@@ -1,6 +1,5 @@
 import { state, CombatTurn, Combat, COMBATTABLE_DEATH, randomTable } from "../../..";
 
-
 /**
  * Javek venom test
  */

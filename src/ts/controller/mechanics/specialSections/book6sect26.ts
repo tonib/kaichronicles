@@ -1,6 +1,5 @@
 import { state, mechanicsEngine, CombatTurn, Combat, template } from "../../..";
 
-
 /** Bow tournament final */
 export const book6sect26 = {
 

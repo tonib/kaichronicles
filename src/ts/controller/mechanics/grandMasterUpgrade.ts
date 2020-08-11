@@ -1,6 +1,5 @@
 import { state, BookSeriesId, gameView, mechanicsEngine, translations, actionChartController, template, gameController } from "../..";
 
-
 /** Upgrade stats at Grand Master beginning */
 export class GrandMasterUpgrade {
 

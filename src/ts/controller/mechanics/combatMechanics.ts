@@ -1,6 +1,5 @@
 import { state, mechanicsEngine, Combat, template, SpecialObjectsUse, CombatTurn, GndDiscipline, translations } from "../..";
 
-
 /**
  * Combats mechanics
  */

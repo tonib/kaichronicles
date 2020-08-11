@@ -1,6 +1,5 @@
 import { setupController, Section, state, views, mapView, mechanicsEngine } from "..";
 
-
 /**
  * The map controller
  */

@@ -473,8 +473,7 @@ export class Combat {
                 ENDURANCE score falls to 4 points or below.
             */
             if (state.actionChart.hasMgnDiscipline(MgnDiscipline.PsiSurge) &&
-                state.actionChart.getDisciplines(BookSeriesId.Magnakai).length >= 9)
-            {
+                state.actionChart.getDisciplines(BookSeriesId.Magnakai).length >= 9) {
                 return +6;
             } else {
                 return +4;

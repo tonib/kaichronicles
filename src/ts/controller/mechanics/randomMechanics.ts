@@ -1,4 +1,4 @@
-import { state, ExpressionEvaluator, numberPickerMechanics, MealMechanics, translations, randomTable, mechanicsEngine, 
+import { state, ExpressionEvaluator, numberPickerMechanics, MealMechanics, translations, randomTable, mechanicsEngine,
     EquipmentSectionMechanics } from "../..";
 
 /**

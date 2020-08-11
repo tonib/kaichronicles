@@ -17,10 +17,10 @@ export class Section {
     public mechanics: Mechanics;
 
     /** The jQuery handler for the section XML */
-    public $xmlSection: any;
+    public $xmlSection: JQuery<Element>;
 
-    /** The XML node for the "data" tag of the section */
-    public data: any;
+    /** The jQuery handler for the XML node for the "data" tag of the section */
+    public $data: JQuery<Element>;
 
     /**
      * Section constructor from the Book XML
@@ -42,7 +42,7 @@ export class Section {
 
         // There can be nested sections, get the first one (the root)
         if ( this.$xmlSection ) {
-            this.data =  this.$xmlSection.find("data").first();
+            this.$data =  this.$xmlSection.find("data").first();
         }
     }
 
@@ -56,7 +56,7 @@ export class Section {
     public static createFromXml( book: Book , $xml: any ): Section {
         const s = new Section( book , null , null);
         s.$xmlSection = $xml;
-        s.data = $xml;
+        s.$data = $xml;
         return s;
     }
 
@@ -91,7 +91,7 @@ export class Section {
      */
     public getNextSectionId(): string {
 
-        if (this.sectionId === this.mechanics.getLastSectionId() ) {
+        if (this.mechanics && this.sectionId === this.mechanics.getLastSectionId() ) {
             return null;
         }
 

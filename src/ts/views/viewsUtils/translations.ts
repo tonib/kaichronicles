@@ -1,6 +1,5 @@
 import { state, mechanicsEngine } from "../..";
 
-
 /**
  * Translations table
  */

@@ -56,7 +56,7 @@ export class SectionRenderer {
         }
 
         // Render the section body
-        let html = this.renderNodeChildren( $(this.sectionToRender.data) , 0 );
+        let html = this.renderNodeChildren( this.sectionToRender.$data , 0 );
 
         // Render foot notes
         if ( footNotes.length > 0 ) {
