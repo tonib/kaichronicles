@@ -47,32 +47,32 @@ async function noLogErrors() {
     expect( await getLogErrors() ).toHaveLength(0);
 }
 
-async function getPlayTurnButton(): Promise<WebElement> {
+async function getPlayTurnButton(): Promise<WebElement[]> {
     try {
-        return await driver.findElement(By.css(".mechanics-playTurn"));
+        return await driver.findElements(By.css(".mechanics-playTurn"));
     } catch (e) {
         // console.log("No play turn button");
-        return null;
+        return [];
     }
 }
 
 async function noCombatErrors() {
 
-    // TODO: This only plays the first combat
     // TODO: This do not test elude
 
     // Clean rendering messages
     await cleanLog();
 
-    let playTurnButton = await getPlayTurnButton();
-    while (playTurnButton && await playTurnButton.isEnabled() && await playTurnButton.isDisplayed() ) {
-        await cleanSectionReady();
-        await setNextRandomValue(0);
-        await playTurnButton.click();
-        await waitForSectionReady();
-        playTurnButton = await getPlayTurnButton();
+    for (const playTurnButton of await getPlayTurnButton()) {
+        while (await playTurnButton.isEnabled() && await playTurnButton.isDisplayed() ) {
+            await cleanSectionReady();
+            await setNextRandomValue(0);
+            await playTurnButton.click();
+            await waitForSectionReady();
+        }
     }
     await noLogErrors();
+
 }
 
 function declareSectionTests(sectionId: string) {
