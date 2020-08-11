@@ -27,11 +27,6 @@ beforeAll( async () => {
     global.jQuery = require("jquery");
     global.$ = global.jQuery;
 
-    /*const jsDomDocument = new JSDOM("");
-    global.document = jsDomDocument as any;
-    global.window = jsDomDocument.window as any;
-    global.$ = $( jsDomDocument.window ) as any;*/
-
     // Setup Selenium
     // console.log("Setup Selenium");
     driver = await new Builder().forBrowser("chrome").build();
@@ -44,46 +39,52 @@ afterAll( async () => {
     await driver.close();
 });
 
-function declareSectionTests(section: Section) {
-    describe(`Play section ${section.sectionId}`, () => {
+function declareSectionTests(sectionId: string) {
+    describe(sectionId, () => {
 
         // Clean book state before each section test
-        beforeEach( async () => { await loadCleanSection(section); } );
+        beforeEach( async () => { await loadCleanSection(sectionId); } );
 
         // Test there are no errors with initial section rendering
         test("No errors rendering section", async () => {
             expect( await getLogErrors() ).toHaveLength(0);
         });
+
     });
 }
 
 function declarePlayBookTests(book: Book) {
-    describe(`Play book ${book.bookNumber} / ${book.language}`, () => {
+
+    // jest runs out of memory if the closure references the book variable. So I'll use these instead:
+    const bookNumber = book.bookNumber;
+    const language = book.language;
+    const bookCode = book.getProjectAonBookCode();
+
+    const sectionIds = [];
+    let sectionId = Book.INITIAL_SECTION;
+    while (sectionId != null) {
+        const section = new Section(book, sectionId, state.mechanics);
+        sectionIds.push(section.sectionId);
+        sectionId = section.getNextSectionId();
+    }
+
+    describe(bookCode, () => {
 
         // Load book state
         beforeAll( async () => {
             // console.log("Setup book " + book.bookNumber + " / " + book.language);
-            await setupBookState(book);
+            await setupBookState(bookNumber, language);
         });
 
-        // Traverse sections
-        let sectionId = Book.INITIAL_SECTION;
-        // console.log("book = " + book);
-        while (sectionId != null) {
-            // console.log("Declare tests for section " + sectionId);
-
-            const section = new Section(book, sectionId, state.mechanics);
-            // Declare tests for this section
-            declareSectionTests(section);
-            sectionId = section.getNextSectionId();
+        // Declare section tests
+        for (const sId of sectionIds) {
+            declareSectionTests(sId);
         }
-
     });
 }
 
 // Traverse books
-for (let i = 0 ; i < 1 ; i++) {
-// for (let i = 0 ; i < projectAon.supportedBooks.length ; i++) {
+for (let i = 0 ; i < projectAon.supportedBooks.length ; i++) {
     const bookMetadata = projectAon.supportedBooks[i];
 
     // Traverse languages
@@ -98,18 +99,17 @@ for (let i = 0 ; i < 1 ; i++) {
         }
 
         // Setup tests for this book
-        const book = new Book(i + 1, language);
-        loadBookState(book);
-        declarePlayBookTests(book);
+        loadBookState(i + 1, language);
+        declarePlayBookTests(state.book);
     }
 }
 
-function loadBookState(book: Book) {
-    state.book = book;
-    state.language = book.language;
+function loadBookState(bookNumber: number, language: Language) {
+    state.book = new Book(bookNumber, language);
+    state.language = state.book.language;
 
     // Book
-    book.setXml(readFileSync(basePath + book.getBookXmlURL(), "latin1"));
+    state.book.setXml(readFileSync(basePath + state.book.getBookXmlURL(), "latin1"));
 
     // Mechanics
     state.mechanics = new Mechanics(state.book);
@@ -117,10 +117,10 @@ function loadBookState(book: Book) {
     state.mechanics.setObjectsXml(readFileSync(basePath + state.mechanics.getObjectsXmlURL(), "utf-8"));
 }
 
-async function setupBookState(book: Book) {
+async function setupBookState(bookNumber: number, language: Language) {
     // console.log("setupBookState");
 
-    loadBookState(book);
+    loadBookState(bookNumber, language);
 
     // Go to new game page
     await driver.get("http://localhost/ls/?debug=true&test=true#newGame");
@@ -134,7 +134,7 @@ async function setupBookState(book: Book) {
     await driver.wait(until.elementLocated(By.id("game-nextSection")), 5000);
 }
 
-async function loadCleanSection(section: Section) {
+async function loadCleanSection(sectionId: string) {
     // Reset state
     await driver.executeScript("kai.state.actionChart = new kai.ActionChart(); kai.state.sectionStates = new kai.BookSectionStates();");
     // console.log(await driver.executeScript("kai.state.actionChart.currentEndurance;"));
@@ -143,7 +143,7 @@ async function loadCleanSection(section: Section) {
     await driver.executeScript("console.clear()");
 
     // Load section
-    await driver.executeScript(`kai.gameController.loadSection("${section.sectionId}")`);
+    await driver.executeScript(`kai.gameController.loadSection("${sectionId}")`);
 
     // Wait section render
     await driver.wait( until.elementLocated( By.id("section-ready") ) , 10000);
