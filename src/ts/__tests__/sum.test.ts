@@ -47,7 +47,7 @@ async function noLogErrors() {
     expect( await getLogErrors() ).toHaveLength(0);
 }
 
-async function getPlayTurnButton(): Promise<WebElement[]> {
+async function getPlayTurnButtons(): Promise<WebElement[]> {
     try {
         return await driver.findElements(By.css(".mechanics-playTurn"));
     } catch (e) {
@@ -56,15 +56,42 @@ async function getPlayTurnButton(): Promise<WebElement[]> {
     }
 }
 
-async function noCombatErrors() {
+async function getEludeButtons(): Promise<WebElement[]> {
+    try {
+        return await driver.findElements(By.css(".mechanics-elude"));
+    } catch (e) {
+        // console.log("No play turn button");
+        return [];
+    }
+}
 
-    // TODO: This do not test elude
-
+async function noCombatErrorsWithElude(elude: boolean) {
     // Clean rendering messages
     await cleanLog();
 
-    for (const playTurnButton of await getPlayTurnButton()) {
-        while (await playTurnButton.isEnabled() && await playTurnButton.isDisplayed() ) {
+    const eludeButtons = elude ? await getEludeButtons() : null;
+    for (const playTurnButton of await getPlayTurnButtons()) {
+        while ( await playTurnButton.isEnabled() && await playTurnButton.isDisplayed() ) {
+
+            if (elude) {
+                let eluded = false;
+                // Check if there is any elude button visible
+                for (const eludeButton of eludeButtons) {
+                    if (await eludeButton.isEnabled() && await eludeButton.isDisplayed()) {
+                        await cleanSectionReady();
+                        await setNextRandomValue(0);
+                        await eludeButton.click();
+                        await waitForSectionReady();
+                        eluded = true;
+                        break;
+                    }
+                }
+                if (eluded) {
+                    break;
+                }
+            }
+
+            // Play next turn
             await cleanSectionReady();
             await setNextRandomValue(0);
             await playTurnButton.click();
@@ -72,7 +99,14 @@ async function noCombatErrors() {
         }
     }
     await noLogErrors();
+}
 
+async function noCombatErrors() {
+    await noCombatErrorsWithElude(false);
+}
+
+async function noEludeErrors() {
+    await noCombatErrorsWithElude(true);
 }
 
 function declareSectionTests(sectionId: string) {
@@ -85,6 +119,8 @@ function declareSectionTests(sectionId: string) {
         test("No errors rendering section", noLogErrors );
 
         test("No errors playing combats", noCombatErrors );
+
+        test("No errors eluding combats", noEludeErrors );
     });
 }
 
