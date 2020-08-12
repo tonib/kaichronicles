@@ -22,7 +22,8 @@ export const setupController = {
 
         // Check if there is a persisted state
         if (state.existsPersistedState()) {
-            template.updateStatistics(true);
+            // At this moment the mechanics/object XML is unknown, and this log errors on the console:
+            // template.updateStatistics(true);
             state.restoreState();
             setupController.recordPageVisit("continue");
         } else {

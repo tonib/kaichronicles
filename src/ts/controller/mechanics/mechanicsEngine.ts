@@ -245,7 +245,11 @@ export const mechanicsEngine = {
     debugWarning(msg: string | Error) {
         console.error(msg);
         if (App.debugMode) {
-            mechanicsEngine.showMessage(msg.toString());
+            try {
+                mechanicsEngine.showMessage(msg.toString());
+            } catch (e) {
+                // This will fail if we are in the application setup. It's ok
+            }
         }
     },
 

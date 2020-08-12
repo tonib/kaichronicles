@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "outDir" : "src/www/js",
+        "sourceMap": true,
         "rootDir" : "src/ts",
         "target": "es3"
     },
