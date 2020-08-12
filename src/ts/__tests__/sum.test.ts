@@ -34,6 +34,9 @@ beforeAll( async () => {
     // Setup Selenium
     // console.log("Setup Selenium");
     driver = await new Builder().forBrowser("chrome").build();
+
+    // Maximize to avoid links get shadows by toastr
+    driver.manage().window().maximize();
 });
 
 // Final shutdown
@@ -47,30 +50,57 @@ async function noLogErrors() {
     expect( await getLogErrors() ).toHaveLength(0);
 }
 
-async function getPlayTurnButtons(): Promise<WebElement[]> {
+async function getElementsByCss(selector: string): Promise<WebElement[]> {
     try {
-        return await driver.findElements(By.css(".mechanics-playTurn"));
+        return await driver.findElements(By.css(selector));
     } catch (e) {
         // console.log("No play turn button");
         return [];
     }
 }
 
-async function getEludeButtons(): Promise<WebElement[]> {
-    try {
-        return await driver.findElements(By.css(".mechanics-elude"));
-    } catch (e) {
-        // console.log("No play turn button");
-        return [];
+async function noRandomTableErrors() {
+    // TODO: This only tests the unconditional random tables, with no combinations between them
+
+    let done = false;
+    if ( state.sectionStates.currentSection === Book.GAMERULZ_SECTION ) {
+        // Don't run this test in this section. There is a sample link in '..old text like this "Some text" into the book..'
+        // that do not respond to click, and this is ok
+        done = true;
     }
+    let randomNumber = 0;
+
+    while (!done) {
+        let randomClicked = false;
+        // Traverse clickable random table links
+        for (const link of await getElementsByCss(".random.action")) {
+            if (await link.isEnabled() && await link.isDisplayed()) {
+                await cleanSectionReady();
+                await setNextRandomValue(randomNumber);
+                await link.click();
+                console.log(randomNumber);
+                await waitForSectionReady();
+                randomClicked = true;
+            }
+        }
+        randomNumber++;
+        if (!randomClicked || randomNumber >= 10) {
+            done = true;
+        } else {
+            // Reload the section to test the next number
+            await loadCleanSection(state.sectionStates.currentSection, false);
+        }
+    }
+
+    await noLogErrors();
 }
 
 async function noCombatErrorsWithElude(elude: boolean) {
     // Clean rendering messages
     await cleanLog();
 
-    const eludeButtons = elude ? await getEludeButtons() : null;
-    for (const playTurnButton of await getPlayTurnButtons()) {
+    const eludeButtons = elude ? await getElementsByCss(".mechanics-elude") : null;
+    for (const playTurnButton of await getElementsByCss(".mechanics-playTurn")) {
         while ( await playTurnButton.isEnabled() && await playTurnButton.isDisplayed() ) {
 
             if (elude) {
@@ -121,6 +151,8 @@ function declareSectionTests(sectionId: string) {
         test("No errors playing combats", noCombatErrors );
 
         test("No errors eluding combats", noEludeErrors );
+
+        test("No errors choosing Random Table", noRandomTableErrors );
     });
 }
 
@@ -228,7 +260,7 @@ async function cleanLog() {
     await driver.executeScript("console.clear()");
 }
 
-async function loadCleanSection(sectionId: string) {
+async function loadCleanSection(sectionId: string, deleteLog: boolean = true) {
     // Reset state
     await driver.executeScript(
         "kai.state.actionChart = new kai.ActionChart();" +
@@ -237,8 +269,10 @@ async function loadCleanSection(sectionId: string) {
     );
     // console.log(await driver.executeScript("kai.state.actionChart.currentEndurance;"));
 
-    // Clear log
-    await cleanLog();
+    if (deleteLog) {
+        // Clear log
+        await cleanLog();
+    }
 
     // Load section
     await driver.executeScript(`kai.gameController.loadSection("${sectionId}")`);

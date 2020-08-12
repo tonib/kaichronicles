@@ -534,7 +534,7 @@ export const mechanicsEngine = {
         }
 
         // Check objects
-        let i;
+        let i: number;
         const objectIdsToTest = $rule.attr("hasObject");
         if (objectIdsToTest) {
             // Check if the player has some of the objects

@@ -1,5 +1,4 @@
-import { Language, cordovaApp, state, KaiDiscipline, projectAon, Section, MgnDiscipline, GndDiscipline, BookSeriesId, SectionRenderer, BookSeries } from "..";
-import { mechanicsEngine } from "../controller/mechanics/mechanicsEngine";
+import { Language, cordovaApp, state, KaiDiscipline, projectAon, Section, MgnDiscipline, GndDiscipline, BookSeriesId, SectionRenderer, BookSeries, mechanicsEngine } from "..";
 
 /** Book disciplines table */
 export interface DisciplinesTable {
@@ -35,6 +34,9 @@ export class Book {
 
     /** Books equipment section */
     public static readonly EQUIPMENT_SECTION = "equipmnt";
+
+    /** Game rules section */
+    public static readonly GAMERULZ_SECTION = "gamerulz";
 
     public static readonly COMBATRULESSUMMARY_SECTION = "crsumary";
 
