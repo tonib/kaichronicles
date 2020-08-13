@@ -5,6 +5,7 @@
 
 import { declareCommonHelpers, state, Book, projectAon, Language } from "../..";
 import { GameDriver } from "../gameDriver";
+import { By } from "selenium-webdriver";
 
 // Define common functions
 declareCommonHelpers(false);
@@ -127,8 +128,23 @@ async function noEludeErrors() {
     await noCombatErrorsWithElude(true);
 }
 
-/*async function noMealErrors() {
-}*/
+async function doMeals(): Promise<boolean> {
+    let anyMeal = false;
+    for (const meal of await driver.getElementsByCss("div.mechanics-meal-ui")) {
+        // Select do not eat
+        await ( await meal.findElement(By.css("input[value='doNotEat']")) ).click();
+        // Click ok
+        await driver.cleanClickAndWait( meal.findElement(By.css("button")) );
+        anyMeal = true;
+    }
+    return anyMeal;
+}
+
+async function noMealErrors() {
+    // TODO: This only tests do not eat option
+    await doMeals();
+    await noLogErrors();
+}
 
 async function prepareSectionTest(sectionId: string) {
     await driver.loadCleanSection(sectionId);
@@ -166,7 +182,7 @@ function declareSectionTests(sectionId: string) {
 
         test("No errors choosing Random Table", noRandomTableErrors );
 
-        // test("No errors on meals", noMealErrors );
+        test("No errors on meals", noMealErrors );
     });
 }
 

@@ -130,6 +130,7 @@ export class MealMechanics {
             // Remove UI
             $(mealSelector).remove();
 
+            gameView.addSectionReadyMarker();
         });
     }
 
