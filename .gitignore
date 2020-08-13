@@ -24,3 +24,5 @@ node_modules
 # Keystore to sign apks
 keystore
 
+# Tests result
+tests_log.txt

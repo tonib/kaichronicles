@@ -125,7 +125,11 @@ export const gameController = {
     onNavigatePrevNext(increment: number) {
         const s = gameController.currentSection;
         const newId = (increment < 0 ? s.getPreviousSectionId() : s.getNextSectionId());
-        gameController.loadSection(newId);
+        if (newId) {
+            gameController.loadSection(newId);
+        } else {
+            mechanicsEngine.debugWarning("No previous/next section found");
+        }
     },
 
     /** Return page */

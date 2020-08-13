@@ -259,3 +259,10 @@ state.sectionStates.getSectionState().addObjectToSection('taunorwater')
 state.sectionStates.getSectionState().addObjectToSection('meal')
 state.sectionStates.getSectionState().addObjectToSection('arrow')
 ```
+
+* Save tests results to file
+No format:
+npm run test -- --no-color 2> tests_log.txt
+
+JSON:
+npm run test -- --json --outputFile=output.json

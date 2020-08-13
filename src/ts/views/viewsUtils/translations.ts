@@ -576,6 +576,7 @@ export class Translations {
         const table = this[state.language];
         if ( !table ) {
             // Translation not available
+            mechanicsEngine.debugWarning("Translations table not found: " + state.language);
             return $(view);
         }
 
@@ -602,6 +603,7 @@ export class Translations {
             table = this[state.language];
             if ( !table ) {
                 // Translation not available
+                mechanicsEngine.debugWarning("Translations table not found: " + state.language);
                 return;
             }
         }
@@ -615,6 +617,8 @@ export class Translations {
             const html = table[ translationId ];
             if ( html ) {
                 $t.html( html );
+            } else {
+                mechanicsEngine.debugWarning("data-translation not found: " + translationId);
             }
         }
     }
@@ -640,6 +644,7 @@ export class Translations {
             }
 
             if ( replacements ) {
+                // TODO: Check replacements in debug mode
                 for (let i = 0; i < replacements.length; i++) {
                     text = text.replaceAll( "{" + i + "}" , replacements[i].toString() );
                 }

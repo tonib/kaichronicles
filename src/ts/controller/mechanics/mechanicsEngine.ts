@@ -80,6 +80,9 @@ export const mechanicsEngine = {
      */
     getMechanicsUI(tagId: string): any {
         const $tag = mechanicsEngine.$mechanicsUI.find("#" + tagId).clone();
+        if ($tag.length === 0) {
+            mechanicsEngine.debugWarning(tagId + " tag not found");
+        }
         return translations.translateView($tag, true);
     },
 

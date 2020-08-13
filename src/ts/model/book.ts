@@ -368,9 +368,9 @@ export class Book {
     /**
      * Get the book section with the given id.
      * @param sectionId The section id to get
-     * @return {jquery} The related section. An empty selection if the section id was not found
+     * @return The related section. An empty selection if the section id was not found
      */
-    public getSectionXml(sectionId: string): any {
+    public getSectionXml(sectionId: string): JQuery<Element> {
         return $(this.bookXml).find("section[id=" + sectionId + "]");
     }
 
@@ -488,4 +488,15 @@ export class Book {
         return BookSeries.getBookNumberSeries(this.bookNumber);
     }
 
+    public getSectionsIds(): string[] {
+        const sectionIds: string[] = [];
+        let sectionId = Book.INITIAL_SECTION;
+        while (sectionId != null) {
+            sectionIds.push(sectionId);
+
+            const section = new Section(this, sectionId, state.mechanics);
+            sectionId = section.getNextSectionId();
+        }
+        return sectionIds;
+    }
 }
