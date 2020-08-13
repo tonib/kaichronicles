@@ -24,8 +24,14 @@ const driver: GameDriver = new GameDriver();
 // Configuration for sections
 const sectionsConfiguration = {
     3: {
-        "sect152" : {
+        "sect152": {
             money: 10
+        }
+    },
+
+    12: {
+        "sect88": {
+            equipment: [ "daggerofvashna" ]
         }
     }
 };
@@ -164,6 +170,12 @@ async function configureCurrentSection() {
     if (sectionCfg.money) {
         await driver.increaseMoney(sectionCfg.money);
     }
+    if (sectionCfg.equipment) {
+        for (const objectId of sectionCfg.equipment) {
+            await driver.pick(objectId);
+        }
+        await driver.fireInventoryEvents();
+    }
 }
 
 async function prepareSectionTest(sectionId: string) {
@@ -184,8 +196,8 @@ function declareSectionTests(sectionId: string) {
         // Test there are no errors with initial section rendering
         test("No errors rendering section", noLogErrors );
 
+        // TODO: Unify both in a single test
         test("No errors playing combats", noCombatErrors );
-
         test("No errors eluding combats", noEludeErrors );
 
         test("No errors choosing Random Table", noRandomTableErrors );

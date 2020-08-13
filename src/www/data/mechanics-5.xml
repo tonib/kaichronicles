@@ -899,8 +899,11 @@
             <!-- ARM Limbdeath HERE!!! -->
             <combatSkill count="-3" />
             <registerGlobalRule id="book5sect166">
-                <!-- ...as you are suffering from this disease, you cannot use a shield of any sort... -->
-                <combat disabledObjects="shield" />
+                <!-- Added this "test" to do not appy the "combat" rule in sections without combats (it show errors in console) -->
+                <test combatsActive="true">
+                    <!-- ...as you are suffering from this disease, you cannot use a shield of any sort... -->
+                    <combat disabledObjects="shield" />
+                </test>
             </registerGlobalRule>
         </section>
 

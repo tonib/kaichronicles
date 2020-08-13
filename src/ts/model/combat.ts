@@ -308,7 +308,7 @@ export class Combat {
     }
 
     /**
-     * Returns true if the combat is finished?
+     * Returns true if the combat is finished (won/eluded)?
      */
     public isFinished(): boolean {
         // return this.endurance === 0 || state.actionChart.currentEndurance === 0;

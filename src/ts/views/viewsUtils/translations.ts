@@ -1,4 +1,5 @@
 import { state, mechanicsEngine } from "../..";
+import { Language } from "../../state";
 
 /**
  * Translations table
@@ -594,10 +595,13 @@ export class Translations {
 
     /**
      * Translate an HTML fragment
-     * @param  $tags jQuery selector of tags to translate
+     * @param $tags jQuery selector of tags to translate
      * @param table Translations table to use. If null, the current language will be used
      */
     public translateTags( $tags: JQuery<HTMLElement> , table: { [key: string]: string } = null ) {
+
+        // TODO: Is all this needed for SOME English translation? I suspect not, as the default text for HTML texts is English...
+        // TODO: As I'm not sure, I will not change it
 
         if ( !table ) {
             table = this[state.language];
@@ -617,8 +621,8 @@ export class Translations {
             const html = table[ translationId ];
             if ( html ) {
                 $t.html( html );
-            } else {
-                mechanicsEngine.debugWarning("data-translation not found: " + translationId);
+            } else if (state.language !== Language.ENGLISH) {
+                mechanicsEngine.debugWarning("data-translation not found: " + translationId + ", language: " + state.language);
             }
         }
     }
@@ -634,12 +638,13 @@ export class Translations {
             let table = this[state.language];
             if ( !table ) {
                 // Use english as default
+                mechanicsEngine.debugWarning("Translations table not found: " + state.language);
                 table = this.en;
             }
 
             let text = table[textId];
             if ( !text ) {
-                mechanicsEngine.debugWarning("Text code not found: " + textId);
+                mechanicsEngine.debugWarning("Text code not found: " + textId + ", language: " + state.language);
                 text = textId;
             }
 

@@ -46,6 +46,14 @@ export class GameDriver {
         await this.driver.executeScript(`kai.actionChartController.increaseMoney(${amount})`);
     }
 
+    public async pick(objectId: string) {
+        await this.driver.executeScript(`kai.actionChartController.pick("${objectId}")`);
+    }
+
+    public async fireInventoryEvents() {
+        await this.driver.executeScript("kai.mechanicsEngine.fireInventoryEvents()");
+    }
+
     public async cleanLog() {
         await this.driver.executeScript("console.clear()");
     }
