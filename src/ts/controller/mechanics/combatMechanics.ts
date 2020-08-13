@@ -407,7 +407,7 @@ export class CombatMechanics {
         $("#game-ratioplayer").text( csPlayer );
 
         // Enemy info:
-        $("#game-ratioenemyname").text( combat.enemy );
+        $("#game-ratioenemyname").html( combat.enemy );
         $("#game-ratioenemy").text( combat.combatSkill );
 
         // Combat ratio result:

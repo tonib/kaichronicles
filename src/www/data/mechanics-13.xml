@@ -202,8 +202,6 @@
                 <choiceState section="sect47" set="disabled" />
             </test>
         </section>
-
-        <!-- START HERE -->
         
         <section id="sect21">
             <object objectId="dagger" />
@@ -227,6 +225,7 @@
         </section>
 
         <section id="sect26">
+            <!-- TODO: This section corresponds to an incorrect answer to the riddle in sect48 -->
             <endurance count="-2" />
         </section>
 
@@ -250,7 +249,7 @@
                 <case from="3" to="6">
                     <choiceState section="sect293" set="enabled" />
                 </case>
-                <case from="7" to="13">
+                <case from="7" to="99">
                     <choiceState section="sect278" set="enabled" />
                 </case>
             </randomTable>
@@ -263,7 +262,10 @@
             <death />
         </section>
 
+        <!-- START HERE -->
+
         <section id="sect31">
+            <!-- TODO: Arrow here -->
             <pick class="arrow" count="-1" />
             <choiceState section="all" set="disabled" />
             <combat noMindblast="true" noPsiSurge="true" />

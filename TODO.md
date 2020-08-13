@@ -77,6 +77,7 @@ TODO
 - Book 13, sect16: "Hongo Baylon" should be "Hongos del Árbol de Baylon" (description in book 11, sect146)
 - Book 13, sect20: "Cunado" should be "Cuando"
 - Book 13, sect20: "norte Pasa al 85" should be "norte pasa al 85"
+- Book 13, sect31: "y , junto" should be "y, junto" (space)
  
 ## Other
 - Allow to zoom illustrations?

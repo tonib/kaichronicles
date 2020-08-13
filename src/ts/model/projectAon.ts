@@ -264,7 +264,7 @@ export const projectAon = {
         },
 
         // Book 13:
-        /*{
+        {
             title_en: "The Plague Lords of Ruel",
             code_en: "13tplor",
 
@@ -281,7 +281,7 @@ export const projectAon = {
         },
 
         // Book 14:
-        {
+        /*{
             title_en: "The Captives of Kaag",
             code_en: "14tcok",
 

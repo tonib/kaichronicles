@@ -144,12 +144,10 @@ async function doMeals() {
         if (!meal) {
             return;
         }
-        await driver.debugSleep();
         // Select do not eat
         await ( await meal.findElement(By.css("input[value='doNotEat']")) ).click();
         // Click ok
         await driver.cleanClickAndWait( meal.findElement(By.css("button")) );
-        await driver.debugSleep();
     }
 }
 
