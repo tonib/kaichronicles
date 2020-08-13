@@ -56,19 +56,22 @@ async function noLogErrors() {
 async function noRandomTableErrors() {
     // TODO: This only tests the unconditional random tables, with no combinations between them
 
-    let done = false;
     if ( state.sectionStates.currentSection === Book.GAMERULZ_SECTION ) {
         // Don't run this test in this section. There is a sample link in '..old text like this "Some text" into the book..'
         // that do not respond to click, and this is ok
-        done = true;
+        return;
     }
-    let randomNumber = 0;
 
+    let done = false;
+    let randomNumber = 0;
     while (!done) {
         let randomClicked = false;
+
+        // Do meals before click any link: If not, an alert with "do meals first" will appear
+        await doMeals();
+
         // Traverse clickable random table links
         for (const link of await driver.getElementsByCss(".random.action")) {
-            // if (await GameDriver.isClickable(link)) {
             if (await GameDriver.isClickable(link)) {
                 await driver.setNextRandomValue(randomNumber);
                 await driver.cleanClickAndWait(link);
@@ -81,6 +84,7 @@ async function noRandomTableErrors() {
         } else {
             // Reload the section to test the next number
             await driver.loadCleanSection(state.sectionStates.currentSection, false);
+            await configureCurrentSection();
         }
     }
 
@@ -146,14 +150,13 @@ async function noMealErrors() {
     await noLogErrors();
 }
 
-async function prepareSectionTest(sectionId: string) {
-    await driver.loadCleanSection(sectionId);
+async function configureCurrentSection() {
     const bookCfg = sectionsConfiguration[state.book.bookNumber];
     if (!bookCfg) {
         return;
     }
 
-    const sectionCfg = bookCfg[sectionId];
+    const sectionCfg = bookCfg[state.sectionStates.currentSection];
     if (!sectionCfg) {
         return;
     }
@@ -161,6 +164,11 @@ async function prepareSectionTest(sectionId: string) {
     if (sectionCfg.money) {
         await driver.increaseMoney(sectionCfg.money);
     }
+}
+
+async function prepareSectionTest(sectionId: string) {
+    await driver.loadCleanSection(sectionId);
+    await configureCurrentSection();
 }
 
 /////////////////////////////////////////////////////////////////////////////////
