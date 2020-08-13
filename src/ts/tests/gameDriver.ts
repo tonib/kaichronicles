@@ -42,6 +42,15 @@ export class GameDriver {
         }
     }
 
+    public async getElementByCss(selector: string): Promise<WebElement> {
+        try {
+            return await this.driver.findElement(By.css(selector));
+        } catch (e) {
+            // console.log("No play turn button");
+            return null;
+        }
+    }
+
     public async increaseMoney(amount: number) {
         await this.driver.executeScript(`kai.actionChartController.increaseMoney(${amount})`);
     }

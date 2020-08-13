@@ -138,16 +138,19 @@ async function noEludeErrors() {
     await noCombatErrorsWithElude(true);
 }
 
-async function doMeals(): Promise<boolean> {
-    let anyMeal = false;
-    for (const meal of await driver.getElementsByCss("div.mechanics-meal-ui")) {
+async function doMeals() {
+    while (true) {
+        const meal = await driver.getElementByCss("div.mechanics-meal-ui");
+        if (!meal) {
+            return;
+        }
+        await driver.debugSleep();
         // Select do not eat
         await ( await meal.findElement(By.css("input[value='doNotEat']")) ).click();
         // Click ok
         await driver.cleanClickAndWait( meal.findElement(By.css("button")) );
-        anyMeal = true;
+        await driver.debugSleep();
     }
-    return anyMeal;
 }
 
 async function noMealErrors() {
