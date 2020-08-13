@@ -153,6 +153,7 @@ export class Book {
         xmlText = xmlText.replaceAll("<ch.minus/>", "-");
         xmlText = xmlText.replaceAll("<ch.ampersand/>", "&amp;amp;");
         xmlText = xmlText.replaceAll("<ch.thinspace/>", " ");
+        xmlText = xmlText.replaceAll("<ch.percent/>", "&amp;percnt;");
 
         // replace html special characters
         // 12-21 12:42:19.090: E/browser(1884): Console: Uncaught TypeError: Cannot supply flags when constructing one RegExp from another http://10.0.2.2/ls/statskeeper3/model/book.js:68

@@ -565,4 +565,17 @@ export class SectionRenderer {
     private thought( $thought: JQuery<Element> , level: number ): string {
         return "<i>" + this.renderNodeChildren( $thought , level ) + "</i>";
     }
+
+    ////////////////////////////////////////////////////////
+    // TABLES. These only appears in some spanish books
+    // They seems errors, because they are not renderend in HTML pages in PAON web site...
+    // See one in book 8, Spanish, sect13
+    ////////////////////////////////////////////////////////
+
+    private table($node: JQuery<Element>, level: number): string {
+        return '<table class="table table-striped">' + this.renderNodeChildren( $node , level ) + "</table>";
+    }
+    private tr($node: JQuery<Element>, level: number): string { return this.renderHtmlNode( $node , level ); }
+    private th($node: JQuery<Element>, level: number): string { return this.renderHtmlNode( $node , level ); }
+    private td($node: JQuery<Element>, level: number): string { return this.renderHtmlNode( $node , level ); }
 }
