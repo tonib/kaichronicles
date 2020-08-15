@@ -1,5 +1,4 @@
 * https://github.com/tonib/kaichronicles/commit/77f6a57aefb41f847fd34e5caa3efef1d82b9369
-    - Check "eludeEnemyEP" seems OK, check it in book 13
     - Re-Check all Kai Surge stuff
         * combatMechanics.ts: check "// TODO: What is this for ???" comments
     - Recheck all this commit when book 13 is playable

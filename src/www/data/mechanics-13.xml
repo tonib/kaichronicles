@@ -262,8 +262,6 @@
             <death />
         </section>
 
-        <!-- START HERE -->
-
         <section id="sect31">
             <!-- TODO: Arrow here -->
             <pick class="arrow" count="-1" />
@@ -306,9 +304,10 @@
         </section>
 
         <section id="sect39">
+            <!-- TODO: Arrow here -->
             <pick class="arrow" count="-1" />
         </section>
-
+        
         <section id="sect42">
             <death />
         </section>
@@ -331,16 +330,21 @@
 
         <section id="sect47">
             <choiceState section="all" set="disabled" />
-            <combat noMindblast="true" noPsiSurge="true" noKaiSurge="true" combatSkillModifier="0"/>
-            <test currentWeapon="quarterstaff|mace|warhammer">
-                <combat noMindblast="true" noPsiSurge="true" noKaiSurge="true" combatSkillModifier="-4"/>
-            </test>
+            <combat noMindblast="true" noPsiSurge="true" noKaiSurge="true" />
+            <onInventoryEvent>
+                <combat combatSkillModifier="0"/>
+                <!-- TODO: What about no weapon? -->
+                <test currentWeapon="quarterstaff|mace|warhammer">
+                    <combat combatSkillModifier="-4"/>
+                </test>
+            </onInventoryEvent>
             <afterCombats>
                 <choiceState section="all" set="enabled" />
             </afterCombats>
         </section>
 
         <section id="sect48">
+            <endurance count="-2" />
             <numberPicker 
                 en-text="Choose the number"
                 es-text="Elige el número"
@@ -378,6 +382,8 @@
             <randomTableIncrement increment="+1" />
         </section>
 
+        <!-- START HERE -->
+        
         <section id="sect53">
             <object objectId="dagger" />
             <object objectId="cenerrobe" />

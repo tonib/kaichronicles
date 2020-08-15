@@ -959,14 +959,16 @@ export const mechanicsEngine = {
         }
 
         // Max. turn to elude combat
+        // TODO: Use mechanicsEngine.getIntProperty here
         const txtmaxEludeTurn: string = $rule.attr("maxEludeTurn");
         if (txtmaxEludeTurn) {
             combat.maxEludeTurn = parseInt(txtmaxEludeTurn, 10);
         }
 
         // Enemy EP to allow to elude the combat
-        if ($rule.attr("eludeEnemyEP")) {
-            combat.eludeEnemyEP = parseInt($rule.attr("eludeEnemyEP"), 10);
+        const eludeEnemyEP = mechanicsEngine.getIntProperty($rule, "eludeEnemyEP", false);
+        if (eludeEnemyEP !== null) {
+            combat.eludeEnemyEP = eludeEnemyEP;
         }
 
         // Dammage multiplier (player)
@@ -1607,6 +1609,9 @@ export const mechanicsEngine = {
      * TODO: Use this where a parseInt is used on this file
      * @param $rule {jQuery} The rule
      * @param property The property to get
+     * @param evaluateReplacements True if "[XXX]" texts in property value should be replaced by its current
+     * value
+     * @see ExpressionEvaluator.evalInteger
      * @returns The property value. null if the property was not present
      */
     getIntProperty($rule: JQuery<Element>, property: string, evaluateReplacements: boolean): number | null {
