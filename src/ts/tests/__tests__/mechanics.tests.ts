@@ -98,3 +98,28 @@ test("Psi Surge Grand Master series - loyalty bonus", async () => {
     await driver.setDisciplines( [ MgnDiscipline.PsiSurge ] , BookSeriesId.Magnakai );
     await testPsiSurge("sect11", 2, 5, -1, 5);
 });
+
+test("healing +1 per section", async () => {
+
+    // Expect healing +1 with healing
+    await driver.setupBookState(1, Language.ENGLISH);
+    await driver.setEndurance(5);
+    await driver.setDisciplines( [ KaiDiscipline.Healing ] , BookSeriesId.Kai );
+    await driver.goToSection("sect1");
+    expect( (await driver.getActionChart()).currentEndurance ).toBe(6);
+
+    // Expect no +1 if no healing
+    await driver.setupBookState(1, Language.ENGLISH);
+    await driver.setEndurance(5);
+    await driver.setDisciplines( [] , BookSeriesId.Kai );
+    await driver.goToSection("sect1");
+    expect( (await driver.getActionChart()).currentEndurance ).toBe(5);
+
+    // Expect +1 if loyalty bonus
+    await driver.setupBookState(6, Language.ENGLISH);
+    await driver.setEndurance(5);
+    await driver.setDisciplines( [ KaiDiscipline.Healing ] , BookSeriesId.Kai );
+    await driver.goToSection("sect1");
+    expect( (await driver.getActionChart()).currentEndurance ).toBe(6);
+
+});
