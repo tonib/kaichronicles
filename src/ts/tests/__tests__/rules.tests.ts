@@ -5,6 +5,7 @@ import { KaiDiscipline, MgnDiscipline, GndDiscipline } from "../../model/discipl
 import { BookSeriesId } from "../../model/bookSeries";
 import { Disciplines } from "../../model/disciplines";
 import { CombatMechanics } from "../..";
+import { Driver } from "selenium-webdriver/chrome";
 
 // Selenium web driver
 const driver: GameDriver = new GameDriver();
@@ -27,10 +28,24 @@ describe("combat rule", () => {
 
     test("noMindblast", async () => {
         await driver.setupBookState(1, Language.ENGLISH);
-        await driver.setDisciplines( [ KaiDiscipline.Mindblast] );
+        await driver.setDisciplines( [ KaiDiscipline.Mindblast]  );
         await driver.goToSection("sect133");
-        expect( await driver.getTextByCss(".mechanics-combatRatio") ).toBe("-5");
+        expect( await driver.getCombatRatio() ).toBe(-5);
     });
+
+    test("noPsiSurge", async () => {
+        await driver.setupBookState(6, Language.ENGLISH);
+        await driver.setDisciplines( [ MgnDiscipline.PsiSurge ] );
+        await driver.goToSection("sect156");
+        // No mindblast bonus:
+        expect( await driver.getCombatRatio() ).toBe(-2);
+        // No Psi-surge check available:
+        expect( await (await driver.getSurgeCheckbox()).isDisplayed() ).toBe(false);
+    });
+
+    /*test("noKaiSurge", async () => {
+
+    });*/
 
     test("maxEludeTurn", async () => {
         await driver.setupBookState(6, Language.ENGLISH);

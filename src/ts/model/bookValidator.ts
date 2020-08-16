@@ -554,6 +554,14 @@ export class BookValidator {
             this.addError($rule, "If attribute eludeEnemyEP is set, eludeTurn attribute must be set too");
         }
 
+        if ($rule.attr("noPsiSurge") === "true" && $rule.attr("noMindblast") !== "true") {
+            this.addError($rule, "If noPsiSurge attr. is true, noMindblast attribute should be true too");
+        }
+
+        if ($rule.attr("noKaiSurge") === "true" && ( $rule.attr("noMindblast") !== "true" || $rule.attr("noPsiSurge") !== "true" ) ) {
+            this.addError($rule, "If noKaiSurge attr. is true, noMindblast and noKaiSurge attributes should be true too");
+        }
+
         // TODO: Check attr "noWeapon" is boolean or number
     }
 

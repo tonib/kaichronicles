@@ -6,10 +6,16 @@ import { state, mechanicsEngine, Combat, template, SpecialObjectsUse, CombatTurn
 export class CombatMechanics {
 
     /** Selector for elude buttons */
-    public static ELUDE_BTN_SELECTOR = ".mechanics-elude";
+    public static readonly ELUDE_BTN_SELECTOR = ".mechanics-elude";
 
     /** Selector for play turn buttons */
-    public static PLAY_TURN_BTN_SELECTOR = ".mechanics-playTurn";
+    public static readonly PLAY_TURN_BTN_SELECTOR = ".mechanics-playTurn";
+
+    /** Selector for combat ratio text */
+    public static readonly COMBAT_RATIO_SELECTOR = ".mechanics-combatRatio";
+
+    /** Selector for XXX surge checkbox */
+    public static readonly SURGE_CHECK_SELECTOR = ".psisurgecheck input";
 
     /**
      * Render section combats
@@ -112,7 +118,7 @@ export class CombatMechanics {
 
     private static updateCombatRatio( $combatUI: JQuery<HTMLElement> , combat: Combat ) {
         // Set combat ratio:
-        $combatUI.find(".mechanics-combatRatio").text( combat.getCombatRatio() );
+        $combatUI.find(CombatMechanics.COMBAT_RATIO_SELECTOR).text( combat.getCombatRatio() );
     }
 
     /**
@@ -300,7 +306,7 @@ export class CombatMechanics {
             return;
         }
 
-        const $psiSurgeCheck = $combatUI.find(".psisurgecheck input");
+        const $psiSurgeCheck = $combatUI.find(CombatMechanics.SURGE_CHECK_SELECTOR);
         // Initialice XXX surge:
         if (combat.psiSurge) {
             $psiSurgeCheck.attr( "checked" , "true" );
@@ -382,7 +388,7 @@ export class CombatMechanics {
      */
     private static disableSurge( $combatUI: JQuery<HTMLElement> , combat: Combat ) {
         combat.psiSurge = false;
-        const $psiSurgeCheck = $combatUI.find(".psisurgecheck input");
+        const $psiSurgeCheck = $combatUI.find(CombatMechanics.SURGE_CHECK_SELECTOR);
         $psiSurgeCheck.prop("checked", false);
         $psiSurgeCheck.prop("disabled", true);
         CombatMechanics.updateCombatRatio( $combatUI , combat );

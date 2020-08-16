@@ -182,6 +182,14 @@ export class GameDriver {
         await this.cleanClickAndWait( await this.getElementByCss(CombatMechanics.PLAY_TURN_BTN_SELECTOR) );
     }
 
+    public async getCombatRatio(): Promise<number> {
+        return parseInt( await this.getTextByCss(CombatMechanics.COMBAT_RATIO_SELECTOR) , 10);
+    }
+
+    public async getSurgeCheckbox(): Promise<WebElement> {
+        return await this.getElementByCss(CombatMechanics.SURGE_CHECK_SELECTOR);
+    }
+
     public async setDisciplines(disciplinesIds: string[], seriesId: BookSeriesId = null) {
         const js = `kai.state.actionChart.setDisciplines(${JSON.stringify(disciplinesIds)}, ${seriesId});` +
             "kai.state.actionChart.checkMaxEndurance();";
