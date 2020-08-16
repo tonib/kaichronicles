@@ -935,7 +935,7 @@
 
         <section id="sect147">
             <drop objectId="backpackcontent" />
-            <drop objectId="allmeals" />"
+            <drop objectId="allmeals" />
             <choiceState section="all" set="disabled" />
             <combat />
             <afterCombats>
@@ -1606,7 +1606,7 @@
         </section>
 
         <section id="sect259">
-            <endurance counte="+8" />
+            <endurance count="+8" />
         </section>
 
         <section id="sect261">

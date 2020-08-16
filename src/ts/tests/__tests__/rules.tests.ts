@@ -43,9 +43,15 @@ describe("combat rule", () => {
         expect( await (await driver.getSurgeCheckbox()).isDisplayed() ).toBe(false);
     });
 
-    /*test("noKaiSurge", async () => {
-
-    });*/
+    test("noKaiSurge", async () => {
+        await driver.setupBookState(13, Language.ENGLISH);
+        await driver.setDisciplines( [ GndDiscipline.KaiSurge ] );
+        await driver.goToSection("sect56");
+        // No mindblast bonus:
+        expect( await driver.getCombatRatio() ).toBe(-6);
+        // No Kai-surge check available:
+        expect( await (await driver.getSurgeCheckbox()).isDisplayed() ).toBe(false);
+    });
 
     test("maxEludeTurn", async () => {
         await driver.setupBookState(6, Language.ENGLISH);
