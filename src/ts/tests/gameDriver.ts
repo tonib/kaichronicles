@@ -190,6 +190,10 @@ export class GameDriver {
         return await this.getElementByCss(CombatMechanics.SURGE_CHECK_SELECTOR);
     }
 
+    public async getEludeCombatButton(): Promise<WebElement> {
+        return await this.getElementByCss(CombatMechanics.ELUDE_BTN_SELECTOR);
+    }
+
     public async setDisciplines(disciplinesIds: string[], seriesId: BookSeriesId = null) {
         const js = `kai.state.actionChart.setDisciplines(${JSON.stringify(disciplinesIds)}, ${seriesId});` +
             "kai.state.actionChart.checkMaxEndurance();";

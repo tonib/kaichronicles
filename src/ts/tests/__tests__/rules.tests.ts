@@ -58,7 +58,7 @@ describe("combat rule", () => {
         await driver.goToSection("sect116");
 
         // Expect to elude to be clickable in first turn
-        const eludeBtn = await driver.getElementByCss(CombatMechanics.ELUDE_BTN_SELECTOR);
+        const eludeBtn = await driver.getEludeCombatButton();
         expect(await GameDriver.isClickable(eludeBtn)).toBe(true);
 
         // Play turn
@@ -95,5 +95,33 @@ describe("combat rule", () => {
         // Check use Kai Surge. Expect CS increase
         await driver.cleanClickAndWait( await driver.getSurgeCheckbox() );
         expect( await driver.getCombatRatio() ).toBe(0);
+    });
+
+    test("eludeEnemyEP", async () => {
+        await driver.setupBookState(13, Language.ENGLISH);
+        await driver.pick("sommerswerd");
+        await driver.goToSection("sect38");
+
+        await driver.setNextRandomValue(0);
+        await driver.clickPlayCombatTurn();
+
+        for (let i = 0; i < 4 ; i++) {
+            await driver.setNextRandomValue(0);
+            await driver.clickPlayCombatTurn();
+        }
+        // Enemy EP here = 40
+
+        await driver.setNextRandomValue(5);
+        await driver.clickPlayCombatTurn();
+
+        // EP = 37. Expect no elude allowed
+        const eludeBtn = await driver.getEludeCombatButton();
+        expect( await eludeBtn.isDisplayed() ).toBe(false);
+
+        await driver.setNextRandomValue(3);
+        await driver.clickPlayCombatTurn();
+
+        // EP = 36. Expect elude allowed
+        expect( await GameDriver.isClickable(eludeBtn) ).toBe(true);
     });
 });
