@@ -68,4 +68,11 @@ describe("combat rule", () => {
         // Expect to elude to be not visible
         expect(await eludeBtn.isDisplayed()).toBe(false);
     });
+
+    test("mindblastBonus", async () => {
+        await driver.setupBookState(5, Language.ENGLISH);
+        await driver.setDisciplines( [ KaiDiscipline.Mindblast ] );
+        await driver.goToSection("sect110");
+        expect( await driver.getCombatRatio() ).toBe(-4);
+    });
 });
