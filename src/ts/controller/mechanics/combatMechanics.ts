@@ -5,6 +5,12 @@ import { state, mechanicsEngine, Combat, template, SpecialObjectsUse, CombatTurn
  */
 export class CombatMechanics {
 
+    /** Selector for elude buttons */
+    public static ELUDE_BTN_SELECTOR = ".mechanics-elude";
+
+    /** Selector for play turn buttons */
+    public static PLAY_TURN_BTN_SELECTOR = ".mechanics-playTurn";
+
     /**
      * Render section combats
      */
@@ -36,11 +42,10 @@ export class CombatMechanics {
             const $combatOriginal = $(".combat:eq(" + index + ")");
 
             $combatOriginal.append( $combatUI )
-            .find(".mechanics-playTurn").click(function(e) {
+            .find(CombatMechanics.PLAY_TURN_BTN_SELECTOR).click(function(e) {
                 // Play turn button click
                 e.preventDefault();
-                CombatMechanics.runCombatTurn( $(this).parents(".mechanics-combatUI").first() ,
-                    false );
+                CombatMechanics.runCombatTurn( $(this).parents(".mechanics-combatUI").first(), false );
             });
 
             // Move the show combat tables as the first child (needed because it's a float)
@@ -55,7 +60,7 @@ export class CombatMechanics {
             });
 
             // Elude combat button click
-            $combatOriginal.find(".mechanics-elude").click(function(e) {
+            $combatOriginal.find(CombatMechanics.ELUDE_BTN_SELECTOR).click(function(e) {
                 e.preventDefault();
                 CombatMechanics.runCombatTurn( $(this).parents(".mechanics-combatUI").first() ,
                     true );
@@ -136,8 +141,8 @@ export class CombatMechanics {
             $combatUI = $(".mechanics-combatUI");
         }
 
-        $combatUI.find(".mechanics-playTurn").hide();
-        $combatUI.find(".mechanics-elude").hide();
+        $combatUI.find(CombatMechanics.PLAY_TURN_BTN_SELECTOR).hide();
+        $combatUI.find(CombatMechanics.ELUDE_BTN_SELECTOR).hide();
     }
 
     /**
@@ -162,7 +167,7 @@ export class CombatMechanics {
         const combat = sectionState.combats[ combatIndex ];
 
         if ( !(sectionState.combatEluded || combat.isFinished() || combat.disabled) ) {
-            $combatUI.find(".mechanics-playTurn").show();
+            $combatUI.find(CombatMechanics.PLAY_TURN_BTN_SELECTOR).show();
             CombatMechanics.showHideEludeButton( combat , $combatUI );
         }
     }
@@ -261,9 +266,9 @@ export class CombatMechanics {
     private static showHideEludeButton( combat: Combat , $combatUI: JQuery<HTMLElement> ) {
         if ( combat.canBeEluded() ) {
             // The combat can be eluded after this turn
-            $combatUI.find(".mechanics-elude").show();
+            $combatUI.find(CombatMechanics.ELUDE_BTN_SELECTOR).show();
         } else {
-            $combatUI.find(".mechanics-elude").hide();
+            $combatUI.find(CombatMechanics.ELUDE_BTN_SELECTOR).hide();
         }
     }
 
@@ -296,15 +301,15 @@ export class CombatMechanics {
         }
 
         const $psiSurgeCheck = $combatUI.find(".psisurgecheck input");
-        // Initialice Psi surge:
+        // Initialice XXX surge:
         if (combat.psiSurge) {
             $psiSurgeCheck.attr( "checked" , "true" );
         }
-        // Check if the Psi-surge cannot be used (EP <= Limit)
+        // Check if the XXX-surge cannot be used (EP <= Limit)
         if ( state.actionChart.currentEndurance <= Combat.minimumEPForSurge(surgeDisciplineId) ) {
             CombatMechanics.disableSurge( $combatUI , combat );
         }
-        // Psi surge selection
+        // XXX surge selection
         $psiSurgeCheck.click(function(e: Event) {
             CombatMechanics.onSurgeClick(e , $(this) );
         });
@@ -364,6 +369,7 @@ export class CombatMechanics {
         if ( state.actionChart.currentEndurance > Combat.minimumEPForSurge(surgeDisciplineId) ) {
             return;
         }
+        // TODO: This check is really needed ??? I suspect no
         const sectionState = state.sectionStates.getSectionState();
         if ( sectionState.combats.length === 0 ) {
             return;

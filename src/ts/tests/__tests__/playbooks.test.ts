@@ -3,7 +3,7 @@
 // Setup
 /////////////////////////////////////////////////////////////////////////////////
 
-import { declareCommonHelpers, state, Book, projectAon, Language } from "../..";
+import { declareCommonHelpers, state, Book, projectAon, Language, CombatMechanics } from "../..";
 import { GameDriver } from "../gameDriver";
 import { By } from "selenium-webdriver";
 
@@ -95,9 +95,9 @@ async function noCombatErrorsWithElude(elude: boolean) {
     // Clean rendering messages
     await driver.cleanLog();
 
-    const eludeButtons = elude ? await driver.getElementsByCss(".mechanics-elude") : null;
+    const eludeButtons = elude ? await driver.getElementsByCss(CombatMechanics.ELUDE_BTN_SELECTOR) : null;
 
-    for (const playTurnButton of await driver.getElementsByCss(".mechanics-playTurn")) {
+    for (const playTurnButton of await driver.getElementsByCss(CombatMechanics.PLAY_TURN_BTN_SELECTOR)) {
         while (await GameDriver.isClickable(playTurnButton)) {
 
             if (elude) {

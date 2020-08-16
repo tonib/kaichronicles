@@ -1,5 +1,5 @@
 import { WebDriver, Builder, WebElement, By, until } from "selenium-webdriver";
-import { Language, state, Mechanics, BookSectionStates, Book, LocalBooksLibrary, declareCommonHelpers, BookSeriesId } from "..";
+import { Language, state, Mechanics, BookSectionStates, Book, LocalBooksLibrary, declareCommonHelpers, BookSeriesId, CombatMechanics } from "..";
 import { Type, Level } from "selenium-webdriver/lib/logging";
 import { readFileSync } from "fs-extra";
 import { ActionChart } from "../model/actionChart";
@@ -176,6 +176,10 @@ export class GameDriver {
         await this.cleanSectionReady();
         await element.click();
         await this.waitForSectionReady();
+    }
+
+    public async clickPlayCombatTurn() {
+        await this.cleanClickAndWait( await this.getElementByCss(CombatMechanics.PLAY_TURN_BTN_SELECTOR) );
     }
 
     public async setDisciplines(disciplinesIds: string[], seriesId: BookSeriesId = null) {
