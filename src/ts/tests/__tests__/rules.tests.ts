@@ -73,6 +73,17 @@ describe("combat rule", () => {
         await driver.setupBookState(5, Language.ENGLISH);
         await driver.setDisciplines( [ KaiDiscipline.Mindblast ] );
         await driver.goToSection("sect110");
+
         expect( await driver.getCombatRatio() ).toBe(-4);
+    });
+
+    test("psiSurgeBonus", async () => {
+        await driver.setupBookState(10, Language.ENGLISH);
+        await driver.setDisciplines( [ MgnDiscipline.PsiSurge ] );
+        await driver.goToSection("sect81");
+
+        // Check use Kai Surge. Expect CS increase
+        await driver.cleanClickAndWait( await driver.getSurgeCheckbox() );
+        expect( await driver.getCombatRatio() ).toBe(-9);
     });
 });
