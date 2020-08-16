@@ -86,4 +86,14 @@ describe("combat rule", () => {
         await driver.cleanClickAndWait( await driver.getSurgeCheckbox() );
         expect( await driver.getCombatRatio() ).toBe(-9);
     });
+
+    test("kaiSurgeBonus", async () => {
+        await driver.setupBookState(13, Language.ENGLISH);
+        await driver.setDisciplines( [ GndDiscipline.KaiSurge ] );
+        await driver.goToSection("sect301");
+
+        // Check use Kai Surge. Expect CS increase
+        await driver.cleanClickAndWait( await driver.getSurgeCheckbox() );
+        expect( await driver.getCombatRatio() ).toBe(0);
+    });
 });
