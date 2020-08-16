@@ -311,7 +311,8 @@ export class CombatMechanics {
 
         // UI XXX-Surge texts
         const surgeTextId = surgeDisciplineId === GndDiscipline.KaiSurge ? "mechanics-combat-kaisurge" : "mechanics-combat-psisurge";
-        const surgeText = translations.text(surgeTextId , [ combat.getFinalSurgeBonus(surgeDisciplineId) , Combat.surgeTurnLoss(surgeDisciplineId) ] );
+        const surgeText = translations.text(surgeTextId , [ combat.getFinalSurgeBonus(surgeDisciplineId) ,
+            Combat.surgeTurnLoss(surgeDisciplineId) ] );
         $combatUI.find(".mechanics-combat-psisurge").text( surgeText );
     }
 
@@ -334,6 +335,8 @@ export class CombatMechanics {
         }
 
         CombatMechanics.updateCombatRatio( $combatUI , combat);
+
+        gameView.addSectionReadyMarker();
     }
 
     /**

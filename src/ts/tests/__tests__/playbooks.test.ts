@@ -7,13 +7,7 @@ import { declareCommonHelpers, state, Book, projectAon, Language } from "../..";
 import { GameDriver } from "../gameDriver";
 import { By } from "selenium-webdriver";
 
-// Define common functions
-declareCommonHelpers(false);
-
-// Setup jQuery
-// tslint:disable-next-line: no-var-requires
-global.jQuery = require("jquery");
-global.$ = global.jQuery;
+GameDriver.globalSetup();
 
 // To debug I add "sleeps", so increase the timeout
 jest.setTimeout(30000);
@@ -44,8 +38,8 @@ const sectionsConfiguration = {
 beforeAll( async () => {
     // Setup jQuery
     // TODO: Try to remove this...
-    global.jQuery = require("jquery");
-    global.$ = global.jQuery;
+    /*global.jQuery = require("jquery");
+    global.$ = global.jQuery;*/
 
     await driver.setupBrowser();
 });

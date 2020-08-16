@@ -1,7 +1,8 @@
 import { WebDriver, Builder, WebElement, By, until } from "selenium-webdriver";
-import { Language, state, Mechanics, BookSectionStates, Book, LocalBooksLibrary } from "..";
+import { Language, state, Mechanics, BookSectionStates, Book, LocalBooksLibrary, declareCommonHelpers, BookSeriesId } from "..";
 import { Type, Level } from "selenium-webdriver/lib/logging";
 import { readFileSync } from "fs-extra";
+import { ActionChart } from "../model/actionChart";
 
 export class GameDriver {
 
@@ -51,6 +52,10 @@ export class GameDriver {
         }
     }
 
+    public async getTextByCss(selector: string): Promise<string> {
+        return await (await this.getElementByCss(selector)).getText();
+    }
+
     public async increaseMoney(amount: number) {
         await this.driver.executeScript(`kai.actionChartController.increaseMoney(${amount})`);
     }
@@ -83,6 +88,10 @@ export class GameDriver {
             await this.cleanLog();
         }
 
+        await this.goToSection(sectionId);
+    }
+
+    public async goToSection(sectionId: string) {
         // Load section
         await this.driver.executeScript(`kai.gameController.loadSection("${sectionId}")`);
 
@@ -168,4 +177,30 @@ export class GameDriver {
         await element.click();
         await this.waitForSectionReady();
     }
+
+    public async setDisciplines(disciplinesIds: string[], seriesId: BookSeriesId = null) {
+        const js = `kai.state.actionChart.setDisciplines(${JSON.stringify(disciplinesIds)}, ${seriesId});` +
+            "kai.state.actionChart.checkMaxEndurance();";
+        console.log(js);
+        await this.driver.executeScript(js);
+    }
+
+    public async setEndurance(currentEndurance: number) {
+        await this.driver.executeScript(`kai.actionChartController.increaseEndurance( ${currentEndurance} - kai.state.actionChart.currentEndurance )`);
+    }
+
+    public async getActionChart(): Promise<ActionChart> {
+        return await this.driver.executeScript("return kai.state.actionChart") as ActionChart;
+    }
+
+    public static globalSetup() {
+        // Define common functions
+        declareCommonHelpers(false);
+
+        // Setup jQuery
+        // tslint:disable-next-line: no-var-requires
+        global.jQuery = require("jquery");
+        global.$ = global.jQuery;
+    }
+
 }

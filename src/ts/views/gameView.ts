@@ -219,7 +219,9 @@ export const gameView = {
     addSectionReadyMarker() {
         if (App.testMode) {
             // Append a "mark" to let the tests controller know the section is completly loaded
-            gameView.appendToSection('<p id="section-ready">SECTION READY</p>', "afterChoices");
+            if ($("#section-ready").length === 0) {
+                gameView.appendToSection('<p id="section-ready">SECTION READY</p>', "afterChoices");
+            }
         }
     },
 

@@ -131,7 +131,7 @@ export class ActionChart {
         if (App.debugMode) {
             this.endurance = this.currentEndurance = 25;
             this.combatSkill = 15;
-            this.manualRandomTable = true;
+            this.manualRandomTable = !App.testMode;
             this.extendedCRT = false;
             switch (state.book.getBookSeries().id) {
                 case BookSeriesId.GrandMaster:
@@ -1180,6 +1180,12 @@ export class ActionChart {
      * @returns true if player has the discipline
      */
     public hasDiscipline(disciplineId: string, seriesId: BookSeriesId = null): boolean {
+        if (App.debugMode) {
+            const possibleDisciplines = Disciplines.getSeriesDisciplines(seriesId !== null ? seriesId : state.book.getBookSeries().id);
+            if (!possibleDisciplines.contains(disciplineId)) {
+                mechanicsEngine.debugWarning("Disciplines of book series " + seriesId + " do not contains discipline " + disciplineId);
+            }
+        }
         return this.getSeriesDisciplines(seriesId).disciplines.contains(disciplineId);
     }
 
