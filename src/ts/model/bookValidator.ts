@@ -550,6 +550,10 @@ export class BookValidator {
             }
         }
 
+        if ($rule.attr("eludeEnemyEP") && !$rule.attr("eludeTurn")) {
+            this.addError($rule, "If attribute eludeEnemyEP is set, eludeTurn attribute must be set too");
+        }
+
         // TODO: Check attr "noWeapon" is boolean or number
     }
 
