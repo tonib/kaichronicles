@@ -381,8 +381,6 @@
             </randomTable>
             <randomTableIncrement increment="+1" />
         </section>
-
-        <!-- START HERE -->
         
         <section id="sect53">
             <object objectId="dagger" />
@@ -425,7 +423,7 @@
                 <case from="0" to="5">
                     <choiceState section="sect192" set="enabled" />
                 </case>
-                <case from="6" to="12">
+                <case from="6" to="99">
                     <choiceState section="sect346" set="enabled" />
                 </case>
             </randomTable>
@@ -454,6 +452,7 @@
         </section>
 
         <section id="sect65">  
+            <endurance count="-12" />
             <choiceState section="sect80" set="disabled" />
             <test hasDiscipline="kaisurge">
                 <choiceState section="sect80" set="enabled" />
@@ -467,6 +466,8 @@
             <object objectId="dagger" />
         </section>
 
+        <!-- START HERE -->
+        
         <section id="sect68">
             <choiceState section="all" set="disabled" />
             <randomTable>

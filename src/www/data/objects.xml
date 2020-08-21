@@ -1909,6 +1909,7 @@
 
         <object id="blackberriesjar">
             <name lang="en">Jar of Black Berries</name>
+            <name lang="es">Jarra de Bayas Negras</name>
         </object>
 
         <object id="laumspurjar" usageCount="5">
