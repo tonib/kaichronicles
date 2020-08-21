@@ -9,15 +9,19 @@ export class GameDriver {
     // Selenium web driver
     private driver: WebDriver = null;
 
+    /** URL to start a new game */
+    private newGameUrl;
+
     private static readonly BASEPATH = "src/www/";
 
     public constructor() {
-        // Setup jQuery
-        // tslint:disable-next-line: no-var-requires
-        // global.jQuery = require("jquery");
-        // global.$ = global.jQuery;
-
         state.localBooksLibrary = new LocalBooksLibrary();
+
+        this.newGameUrl = "http://localhost/ls";
+        if (process.env.KAIURL) {
+            this.newGameUrl = process.env.KAIURL;
+        }
+        this.newGameUrl += "/?debug=true&test=true#newGame";
     }
 
     public async setupBrowser() {
@@ -113,10 +117,7 @@ export class GameDriver {
         const errors = [];
         for (const entry of await this.driver.manage().logs().get(Type.BROWSER)) {
             if (entry.level === Level.SEVERE ) {
-
-                const isCordova404error = entry.message.indexOf("http://localhost/ls/cordova.js") >= 0 &&
-                    entry.message.indexOf("http://localhost/ls/cordova.js") >= 0;
-
+                const isCordova404error = entry.message.indexOf("cordova.js") >= 0;
                 if (!isCordova404error) {
                     errors.push(entry.message);
                 }
@@ -142,7 +143,7 @@ export class GameDriver {
         this.loadBookState(bookNumber, language);
 
         // Go to new game page
-        await this.driver.get("http://localhost/ls/?debug=true&test=true#newGame");
+        await this.driver.get(this.newGameUrl);
         // Select new book
         await( await this.driver.wait( until.elementLocated( By.css(`#newgame-book > option[value='${bookNumber}']`) ) , 10000) ).click();
         // Select language
