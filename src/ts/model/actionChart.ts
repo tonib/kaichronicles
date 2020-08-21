@@ -1,4 +1,4 @@
-import { ActionChartItem, SectionItem, App, state, BookSeriesId, GndDiscipline, MgnDiscipline, KaiDiscipline, Item, translations, Combat, BookSeries, mechanicsEngine, LoreCircle, SetupDisciplines, randomTable, Disciplines } from "..";
+import { ActionChartItem, SectionItem, App, state, BookSeriesId, GndDiscipline, MgnDiscipline, KaiDiscipline, Item, translations, Combat, BookSeries, mechanicsEngine, LoreCircle, SetupDisciplines, randomTable, Disciplines, DebugMode } from "..";
 
 /**
  * Bonus for CS/EP definition
@@ -128,10 +128,10 @@ export class ActionChart {
 
     constructor() {
         // Debug fast setup:
-        if (App.debugMode) {
+        if (App.debugMode === DebugMode.DEBUG || App.debugMode === DebugMode.TEST) {
             this.endurance = this.currentEndurance = 25;
             this.combatSkill = 15;
-            this.manualRandomTable = !App.testMode;
+            this.manualRandomTable = (App.debugMode !== DebugMode.TEST);
             this.extendedCRT = false;
             switch (state.book.getBookSeries().id) {
                 case BookSeriesId.GrandMaster:
@@ -1180,7 +1180,7 @@ export class ActionChart {
      * @returns true if player has the discipline
      */
     public hasDiscipline(disciplineId: string, seriesId: BookSeriesId = null): boolean {
-        if (App.debugMode) {
+        if (App.debugMode === DebugMode.DEBUG || App.debugMode === DebugMode.TEST) {
             const possibleDisciplines = Disciplines.getSeriesDisciplines(seriesId !== null ? seriesId : state.book.getBookSeries().id);
             if (!possibleDisciplines.contains(disciplineId)) {
                 mechanicsEngine.debugWarning("Disciplines of book series " + seriesId + " do not contains discipline " + disciplineId);

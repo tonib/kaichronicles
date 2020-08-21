@@ -1,4 +1,4 @@
-import { Section, setupController, state, Book, routing, views, gameView, template, mechanicsEngine, App, BookValidator } from "..";
+import { Section, setupController, state, Book, routing, views, gameView, template, mechanicsEngine, App, BookValidator, DebugMode } from "..";
 
 /**
  * The game controller
@@ -95,10 +95,12 @@ export const gameController = {
         // Persist state
         state.persistState();
 
-        if (App.debugMode) {
+        if (App.debugMode === DebugMode.DEBUG) {
             // Show section that can come to here
             gameView.showOriginSections();
+        }
 
+        if (App.debugMode === DebugMode.DEBUG || App.debugMode === DebugMode.TEST) {
             // Validate this section
             const validator = new BookValidator(state.mechanics, state.book);
             validator.validateSection(gameController.currentSection.sectionId);
@@ -106,15 +108,7 @@ export const gameController = {
                 mechanicsEngine.debugWarning(error);
             }
 
-            gameController.addSectionReadyMarker();
-        }
-
-    },
-
-    addSectionReadyMarker() {
-        if (App.testMode) {
-            // Append a "mark" to let the tests controller know the section is completly loaded
-            gameView.appendToSection('<p id="section-ready">SECTION READY</p>', "afterChoices");
+            gameView.addSectionReadyMarker();
         }
     },
 

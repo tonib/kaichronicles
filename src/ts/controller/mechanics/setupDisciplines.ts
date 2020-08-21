@@ -1,4 +1,4 @@
-import { ActionChart, state, gameView, mechanicsEngine, BookSeriesId, App, BookSeries, translations, KaiDiscipline, template, randomTable } from "../..";
+import { ActionChart, state, gameView, mechanicsEngine, BookSeriesId, App, BookSeries, translations, KaiDiscipline, template, randomTable, DebugMode } from "../..";
 
 /**
  * Setup player disciplines
@@ -168,7 +168,7 @@ export class SetupDisciplines {
 
         // If Weaponmastery was selected on a previous book, disable the weapons already
         // selected on the previous book. This only applies if the book is not a series start
-        if (!App.debugMode &&
+        if (App.debugMode !== DebugMode.DEBUG &&
             !BookSeries.isSeriesStart(state.book.bookNumber) &&
             this.previousActionChart &&
             this.previousActionChart.hasDiscipline(bookSeries.weaponskillDiscipline)
@@ -213,7 +213,7 @@ export class SetupDisciplines {
         if (selected) {
             // Check the maximum weapons number
             const nExpectedWeapons = this.getExpectedNWeaponsWeaponmastery();
-            if (!App.debugMode && state.actionChart.getWeaponSkill().length >= nExpectedWeapons) {
+            if (App.debugMode !== DebugMode.DEBUG && state.actionChart.getWeaponSkill().length >= nExpectedWeapons) {
                 e.preventDefault();
                 alert(translations.text("onlyNWeapons", [nExpectedWeapons]));
                 return;
@@ -245,7 +245,7 @@ export class SetupDisciplines {
 
         // If the player had this discipline on the previous book, disable the check
         // On debug mode, always enabled
-        if (!App.debugMode &&
+        if (App.debugMode !== DebugMode.DEBUG &&
             !BookSeries.isSeriesStart(state.book.bookNumber) &&
             this.previousActionChart &&
             this.previousActionChart.hasDiscipline(disciplineId)
@@ -263,7 +263,7 @@ export class SetupDisciplines {
 
         // Limit the number of disciplines. Unlimited on debug mode
         const selected: boolean = $checkBox.prop("checked");
-        if (selected && this.getAllDisciplinesSelected() && !App.debugMode) {
+        if (selected && this.getAllDisciplinesSelected() && App.debugMode !== DebugMode.DEBUG) {
             e.preventDefault();
             alert(translations.text("maxDisciplines", [this.expectedNDisciplines]));
             return;

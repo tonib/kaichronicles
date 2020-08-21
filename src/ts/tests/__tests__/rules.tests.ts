@@ -151,6 +151,7 @@ test("setDisciplines", async () => {
             // Expect to choose weapon when selection Weaponskill discipline
             await driver.setNextRandomValue(7);
             await (await getDisciplineCheck(KaiDiscipline.Weaponskill)).click();
+            // await driver.debugSleep(1000000);
             const actionChart = await driver.getActionChart();
             expect( actionChart.getWeaponSkill() ).toStrictEqual( [ "sword" ] );
 

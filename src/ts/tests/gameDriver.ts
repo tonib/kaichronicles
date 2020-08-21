@@ -21,7 +21,7 @@ export class GameDriver {
         if (process.env.KAIURL) {
             this.newGameUrl = process.env.KAIURL;
         }
-        this.newGameUrl += "/?debug=true&test=true#newGame";
+        this.newGameUrl += "/?test=true#newGame";
     }
 
     public async setupBrowser() {

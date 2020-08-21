@@ -3,7 +3,7 @@ import { views, translations, Section, gameView, state, CombatMechanics, randomM
     Currency, LoreCircle, BookSeriesId, MealMechanics, ActionChartItem, InventoryState, actionChartView, template, Book,
     GrandMasterUpgrade, kaimonasteryController, book2sect238, book2sect308, book3sect88, book6sect26, book6sect284,
     book6sect340, book9sect91, ObjectsTable, ObjectsTableType, setupController, KaiDiscipline, MgnDiscipline,
-    GndDiscipline, projectAon } from "../..";
+    GndDiscipline, projectAon, DebugMode } from "../..";
 
 /**
  * Engine to render and run gamebook mechanics rules
@@ -247,7 +247,7 @@ export const mechanicsEngine = {
      */
     debugWarning(msg: string | Error) {
         console.error(msg);
-        if (App.debugMode) {
+        if (App.debugMode === DebugMode.DEBUG || App.debugMode === DebugMode.TEST) {
             try {
                 mechanicsEngine.showMessage(msg.toString());
             } catch (e) {

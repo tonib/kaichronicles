@@ -6,6 +6,13 @@ export enum EnvironmentType {
     Production = "PRODUCTION"
 }
 
+/** Debug execution mode */
+export enum DebugMode {
+    NO_DEBUG = 0,
+    DEBUG = 1,
+    TEST = 2
+}
+
 /**
  * The web application
  */
@@ -18,10 +25,7 @@ export class App {
     public static environment: EnvironmentType;
 
     /** Debug functions are enabled? */
-    public static debugMode: boolean;
-
-    /** Testing functions are enabled? */
-    public static testMode: boolean;
+    public static debugMode: DebugMode;
 
     /** Web application setup  */
     public static run(environment: string) {
@@ -32,11 +36,15 @@ export class App {
         App.environment =  environment as EnvironmentType;
 
         // Are we in debug / test mode?
-        App.testMode = window.getUrlParameter("test") === "true";
-        const debugFlag = window.getUrlParameter("debug") === "true";
-        App.debugMode = debugFlag || App.testMode;
+        if (window.getUrlParameter("test") === "true") {
+            App.debugMode = DebugMode.TEST;
+        } else if (window.getUrlParameter("debug") === "true") {
+            App.debugMode = DebugMode.DEBUG;
+        } else {
+            App.debugMode = DebugMode.NO_DEBUG;
+        }
 
-        if ( App.debugMode ) {
+        if (App.debugMode !== DebugMode.NO_DEBUG) {
             // On debug mode, disable the cache (to always reload the books xml)
             console.log("Debug mode: cache disabled");
             $.ajaxSetup({ cache: false });
@@ -73,7 +81,7 @@ export class App {
                     // Setup google analytics, if we are on web
                     GoogleAnalytics.setup();
 
-                    if ( App.debugMode && !App.testMode && state.existsPersistedState() ) {
+                    if ( App.debugMode === DebugMode.DEBUG && state.existsPersistedState() ) {
                         // If we are developing a book, avoid to press the "Continue game"
                         routing.redirect( "setup" );
                     }

@@ -1,4 +1,4 @@
-import { Section, App, gameController, state, randomTable, Book, settingsController, Language, template, numberPickerMechanics } from "..";
+import { Section, App, gameController, state, randomTable, Book, settingsController, Language, template, numberPickerMechanics, DebugMode } from "..";
 
 /**
  * The game view interface functions
@@ -11,7 +11,7 @@ export const gameView = {
      */
     updateNavigation(section: Section) {
         const $navButtons = $("#game-navSectionButtons");
-        if (App.debugMode || section.hasNavigation()) {
+        if (App.debugMode === DebugMode.DEBUG || section.hasNavigation()) {
             $navButtons.show();
         } else {
             $navButtons.hide();
@@ -71,7 +71,7 @@ export const gameView = {
         $("#game-copyrights").html(state.book.getBookTitle() + "<br/>" + state.book.getCopyrightHtml());
 
         // Setup debug options
-        if (App.debugMode) {
+        if (App.debugMode === DebugMode.DEBUG) {
             $("#game-debugSection").show();
 
             $("#game-debugJump").submit((e) => {
@@ -217,7 +217,7 @@ export const gameView = {
     },
 
     addSectionReadyMarker() {
-        if (App.testMode) {
+        if (App.debugMode === DebugMode.TEST) {
             // Append a "mark" to let the tests controller know the section is completly loaded
             if ($("#section-ready").length === 0) {
                 gameView.appendToSection('<p id="section-ready">SECTION READY</p>', "afterChoices");
@@ -226,7 +226,9 @@ export const gameView = {
     },
 
     removeSectionReadymarker() {
-        $("#section-ready").remove();
+        if (App.debugMode === DebugMode.TEST) {
+            $("#section-ready").remove();
+        }
     }
 
 };

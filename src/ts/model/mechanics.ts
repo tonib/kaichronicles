@@ -1,4 +1,4 @@
-import { Book, Item, App, mechanicsEngine } from "..";
+import { Book, Item, App, mechanicsEngine, DebugMode } from "..";
 
 /**
  * Game mechanics and objects handling for a given book
@@ -51,7 +51,7 @@ export class Mechanics {
         })
         .done((xml: string) => {
             self.mechanicsXml = $.parseXML(xml);
-            if ( App.debugMode ) {
+            if (App.debugMode === DebugMode.DEBUG) {
                 // Debug mode: Store the original XML. This can be needed to do tests (BookValidator.ts)
                 self.mechanicsXmlText = xml;
             }
