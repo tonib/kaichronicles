@@ -1,10 +1,8 @@
 import { GameDriver } from "../gameDriver";
-import { Dir } from "fs-extra";
 import { Language } from "../../state";
 import { KaiDiscipline, MgnDiscipline, GndDiscipline } from "../../model/disciplinesDefinitions";
 import { BookSeriesId } from "../../model/bookSeries";
 import { Disciplines } from "../../model/disciplines";
-import { CombatMechanics } from "../..";
 
 // Selenium web driver
 const driver: GameDriver = new GameDriver();

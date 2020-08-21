@@ -52,6 +52,14 @@ export class GameDriver {
         }
     }
 
+    public async getElementById(id: string): Promise<WebElement> {
+        try {
+            return await this.driver.findElement(By.id(id));
+        } catch (e) {
+            return null;
+        }
+    }
+
     public async getTextByCss(selector: string): Promise<string> {
         return await (await this.getElementByCss(selector)).getText();
     }
@@ -197,7 +205,11 @@ export class GameDriver {
     public async setDisciplines(disciplinesIds: string[], seriesId: BookSeriesId = null) {
         const js = `kai.state.actionChart.setDisciplines(${JSON.stringify(disciplinesIds)}, ${seriesId});` +
             "kai.state.actionChart.checkMaxEndurance();";
-        console.log(js);
+        await this.driver.executeScript(js);
+    }
+
+    public async setWeaponskill(weaponsIds: string[], seriesId: BookSeriesId = null) {
+        const js = `kai.state.actionChart.setWeaponSkill(${JSON.stringify(weaponsIds)}, ${seriesId});`;
         await this.driver.executeScript(js);
     }
 
@@ -206,7 +218,13 @@ export class GameDriver {
     }
 
     public async getActionChart(): Promise<ActionChart> {
-        return await this.driver.executeScript("return kai.state.actionChart") as ActionChart;
+        const aChartReceived = await this.driver.executeScript("return kai.state.actionChart");
+        // aChartReceived will contain functions declarations, but wrong: They are replaced by an object {}
+        // Remove them:
+        for (const methodName of Object.keys(ActionChart.prototype)) {
+            delete aChartReceived[methodName];
+        }
+        return ActionChart.fromObject(aChartReceived, state.book.bookNumber);
     }
 
     public static globalSetup() {

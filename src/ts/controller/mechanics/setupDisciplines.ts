@@ -5,6 +5,9 @@ import { ActionChart, state, gameView, mechanicsEngine, BookSeriesId, App, BookS
  */
 export class SetupDisciplines {
 
+    /** Prefix for disciplines checkboxes id */
+    public static readonly DISCIPLINE_CHECKBOX_ID = "mechanics-discipline-chk-";
+
     /**
      * Weapons table for Weaponskill discipline in Kai books
      */
@@ -99,7 +102,8 @@ export class SetupDisciplines {
             return;
         }
 
-        const weaponsTable = (currentSeriesId === BookSeriesId.GrandMaster ? SetupDisciplines.grandMasterWeapons : SetupDisciplines.magnakaiWeapons);
+        const weaponsTable = (currentSeriesId === BookSeriesId.GrandMaster ? SetupDisciplines.grandMasterWeapons :
+            SetupDisciplines.magnakaiWeapons);
 
         // Add checkboxes
         const $checkboxTemplate = mechanicsEngine.getMechanicsUI("mechanics-magnakaiWeapon");
@@ -237,6 +241,7 @@ export class SetupDisciplines {
         const disciplineId: string = $disciplineSection.attr("id");
         const $check = $disciplineSection.find("input[type=checkbox]");
         $check.prop("checked", state.actionChart.hasDiscipline(disciplineId));
+        $check.attr("id", SetupDisciplines.DISCIPLINE_CHECKBOX_ID + disciplineId);
 
         // If the player had this discipline on the previous book, disable the check
         // On debug mode, always enabled

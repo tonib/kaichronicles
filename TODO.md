@@ -211,34 +211,34 @@ state.actionChart.kaiDisciplines.weaponSkill = [ "dagger", "spear", "mace", "sho
 
 * Create a default inventory (Magnakai books)
 ```
-actionChartController.drop('all')
-actionChartController.pick('backpack')
+kai.actionChartController.drop('all')
+kai.actionChartController.pick('backpack')
 
-actionChartController.pick('sword')
-actionChartController.pick('bow')
+kai.actionChartController.pick('sword')
+kai.actionChartController.pick('bow')
 
-actionChartController.increaseMoney(15)
+kai.actionChartController.increaseMoney(15)
 
-actionChartController.pick('meal')
-actionChartController.pick('meal')
+kai.actionChartController.pick('meal')
+kai.actionChartController.pick('meal')
 
-actionChartController.pick('rope')
-actionChartController.pick('comb')
-actionChartController.pick('brasskey')
-actionChartController.pick('whip')
-actionChartController.pick('laumspurmeal')
-actionChartController.pick('larnumaliqueur2')
+kai.actionChartController.pick('rope')
+kai.actionChartController.pick('comb')
+kai.actionChartController.pick('brasskey')
+kai.actionChartController.pick('whip')
+kai.actionChartController.pick('laumspurmeal')
+kai.actionChartController.pick('larnumaliqueur2')
 
-actionChartController.pick('sommerswerd')
-actionChartController.pick('quiver')
-actionChartController.pick('shield')
-actionChartController.pick('map')
-actionChartController.pick('helmet')
-actionChartController.pick('chainmail')
-actionChartController.pick('leatherwaistcoat')
-actionChartController.pick('daggerofvashna')
+kai.actionChartController.pick('sommerswerd')
+kai.actionChartController.pick('quiver')
+kai.actionChartController.pick('shield')
+kai.actionChartController.pick('map')
+kai.actionChartController.pick('helmet')
+kai.actionChartController.pick('chainmail')
+kai.actionChartController.pick('leatherwaistcoat')
+kai.actionChartController.pick('daggerofvashna')
 
-actionChartController.increaseArrows(5)
+kai.actionChartController.increaseArrows(5)
 ```
 
 * Test book images:

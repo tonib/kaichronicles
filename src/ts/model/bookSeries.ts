@@ -1,4 +1,4 @@
-import { KaiDiscipline, MgnDiscipline, GndDiscipline, mechanicsEngine } from "..";
+import { KaiDiscipline, MgnDiscipline, GndDiscipline, mechanicsEngine , Disciplines } from "..";
 
 /**
  * Book series identifier
@@ -65,6 +65,11 @@ export class BookSeries {
         this.mindshieldDiscipline = mindshieldDiscipline;
         this.baseCombatSkill = baseCombatSkill;
         this.baseEndurance = baseEndurance;
+    }
+
+    /** Get disciplines ids in this book series */
+    public getDisciplines(): string[] {
+        return Disciplines.getSeriesDisciplines(this.id);
     }
 
     /**
