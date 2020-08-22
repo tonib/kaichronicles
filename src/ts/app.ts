@@ -38,6 +38,8 @@ export class App {
         // Are we in debug / test mode?
         if (window.getUrlParameter("test") === "true") {
             App.debugMode = DebugMode.TEST;
+            // To avoid Selenium clicks blocked by navbar
+            template.fixedNavbarTop();
         } else if (window.getUrlParameter("debug") === "true") {
             App.debugMode = DebugMode.DEBUG;
         } else {

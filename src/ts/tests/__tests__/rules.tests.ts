@@ -7,7 +7,7 @@ import { Disciplines } from "../../model/disciplines";
 import { CombatMechanics, Book, SetupDisciplines } from "../..";
 import { Driver } from "selenium-webdriver/chrome";
 import { projectAon } from "../../model/projectAon";
-import { WebElement } from "selenium-webdriver";
+import { WebElement, Alert } from "selenium-webdriver";
 
 // Selenium web driver
 const driver: GameDriver = new GameDriver();
@@ -128,52 +128,4 @@ describe("combat rule", () => {
     });
 });
 
-test("setDisciplines", async () => {
-
-    async function getDisciplineCheck(disciplineId: string): Promise<WebElement> {
-        return await driver.getElementById(SetupDisciplines.DISCIPLINE_CHECKBOX_ID + disciplineId);
-    }
-
-    async function cleanDisciplinesAndGoToSection() {
-        await driver.setDisciplines([]);
-        await driver.setWeaponskill([]);
-        await driver.goToSection(Book.DISCIPLINES_SECTION);
-    }
-
-    // for (let bookNumber = 1; bookNumber <= projectAon.supportedBooks.length; bookNumber++) {
-    for (let bookNumber = 1; bookNumber <= 1; bookNumber++) {
-
-        await driver.setupBookState(bookNumber, Language.ENGLISH);
-        await cleanDisciplinesAndGoToSection();
-
-        const bookSeries = BookSeries.getBookNumberSeries(bookNumber);
-        if (bookSeries.id === BookSeriesId.Kai) {
-            // Expect to choose weapon when selection Weaponskill discipline
-            await driver.setNextRandomValue(7);
-            await (await getDisciplineCheck(KaiDiscipline.Weaponskill)).click();
-            // await driver.debugSleep(1000000);
-            const actionChart = await driver.getActionChart();
-            expect( actionChart.getWeaponSkill() ).toStrictEqual( [ "sword" ] );
-
-            await cleanDisciplinesAndGoToSection();
-        }
-
-        // Test click on each discipline
-        for (const disciiplineId of bookSeries.getDisciplines()) {
-
-            // Check the discipline. Expect to get the discipline
-            const disciplineCheck = await getDisciplineCheck(disciiplineId);
-            await disciplineCheck.click();
-            let actionChart = await driver.getActionChart();
-            expect( actionChart.getDisciplines() ).toStrictEqual( [ disciiplineId ] );
-
-            // Uncheck the discipline. Expect to have no disciplines
-            await disciplineCheck.click();
-            actionChart = await driver.getActionChart();
-            expect( actionChart.getDisciplines() ).toStrictEqual( [] );
-
-            await cleanDisciplinesAndGoToSection();
-        }
-
-    }
-});
+// setDisciplines -> See setDisciplines.tests.ts

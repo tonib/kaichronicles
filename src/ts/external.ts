@@ -65,7 +65,7 @@ interface Array<T> {
 
     /**
      * Returns a deep clone of this array.
-     * This will call to clone() / deepClone() of each array element, if it has Otherwise the element will be directly copied.
+     * This will call to clone() / deepClone() of each array element, if it has. Otherwise the element will be directly copied.
      */
     deepClone(): T[];
 }

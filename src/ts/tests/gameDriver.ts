@@ -1,4 +1,4 @@
-import { WebDriver, Builder, WebElement, By, until } from "selenium-webdriver";
+import { WebDriver, Builder, WebElement, By, until, AlertPromise, Alert } from "selenium-webdriver";
 import { Language, state, Mechanics, BookSectionStates, Book, LocalBooksLibrary, declareCommonHelpers, BookSeriesId, CombatMechanics } from "..";
 import { Type, Level } from "selenium-webdriver/lib/logging";
 import { readFileSync } from "fs-extra";
@@ -60,6 +60,15 @@ export class GameDriver {
         try {
             return await this.driver.findElement(By.id(id));
         } catch (e) {
+            return null;
+        }
+    }
+
+    public async getAlert(): Promise<Alert> {
+        try {
+            return await this.driver.switchTo().alert();
+        } catch (e) {
+            console.log(e);
             return null;
         }
     }
@@ -170,7 +179,9 @@ export class GameDriver {
     }
 
     public static async isClickable(element: WebElement) {
-        return await element.isEnabled() && await element.isDisplayed();
+        // isEnabled only checks the "disabled". We use "disabled" class for links. So check it too
+        return await element.isEnabled() && await element.isDisplayed() &&
+            (await element.getAttribute("class")).indexOf("disabled") < 0;
     }
 
     public async waitForSectionReady() {

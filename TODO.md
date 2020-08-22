@@ -267,3 +267,10 @@ npm run test -- --no-color 2> tests_log.txt
 
 JSON:
 npm run test -- --json --outputFile=output.json
+
+* Debug Jest
+node --inspect-brk node_modules/.bin/jest --runInBand [any other arguments here]
+add "debugger" command to the test to debug
+open chrome://inspect/ > Open dedicated DevTools for Node
+F8 (resume execution)
+

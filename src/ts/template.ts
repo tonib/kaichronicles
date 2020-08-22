@@ -285,4 +285,12 @@ export const template = {
                 break;
         }
     },
+
+    /**
+     * Fixes the navbar to page top.
+     *  Needed for testing with selenium (sometimes the navbar blocks clicks of some elements)
+     */
+    fixedNavbarTop() {
+        $("#template-header").removeClass("navbar-fixed-top");
+    }
 };

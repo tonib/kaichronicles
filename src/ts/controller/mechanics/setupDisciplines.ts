@@ -8,6 +8,9 @@ export class SetupDisciplines {
     /** Prefix for disciplines checkboxes id */
     public static readonly DISCIPLINE_CHECKBOX_ID = "mechanics-discipline-chk-";
 
+    /** Prefix for weapon checkboxes id */
+    public static readonly WEAPON_CHECKBOX_ID = "mechanics-weapon-chk-";
+
     /**
      * Weapons table for Weaponskill discipline in Kai books
      */
@@ -115,15 +118,17 @@ export class SetupDisciplines {
 
             // Prepare the weapon UI
             const weaponItem = state.mechanics.getObject(weaponsTable[i]);
-            const $checkbox = $checkboxTemplate.clone();
-            $checkbox.attr("id", weaponItem.id);
-            $checkbox.find(".mechanics-wName").text(weaponItem.name);
+            const $checkboxDiv = $checkboxTemplate.clone();
+            $checkboxDiv.attr("id", weaponItem.id);
+            $checkboxDiv.find(".mechanics-wName").text(weaponItem.name);
 
             // The weapon has been already selected?
             const selected: boolean = state.actionChart.getWeaponSkill().contains(weaponsTable[i]);
-            $checkbox.find("input").attr("checked", selected);
+            const $chk = $checkboxDiv.find("input");
+            $chk.attr("id", SetupDisciplines.WEAPON_CHECKBOX_ID + weaponItem.id);
+            $chk.attr("checked", selected);
 
-            html += $checkbox[0].outerHTML;
+            html += $checkboxDiv[0].outerHTML;
 
             if (i % 2 === 1) {
                 html += "</div>";
