@@ -1,4 +1,5 @@
 // External declarations
+// numberPicker.ts
 interface JQuery {
     getNumber(): number;
     setNumber(value: number): void;
@@ -13,9 +14,12 @@ interface JQuery {
     initializeValue(): void;
 }
 
+// Cordova
 interface Navigator {
-    connection: any;
-    app: any;
+    // This is not included in TS types, but it works. Cordova documentation does not say anything about it...
+    app: {
+        exitApp(): any;
+    };
 }
 
 // index.html:
@@ -35,11 +39,6 @@ declare var ga;
 
 // xmllint.js
 declare function validateXML(parms: any): string;
-
-// Cordova
-declare const Connection: any;
-declare const LocalFileSystem: any;
-declare const FileTransfer: any;
 
 // cordova-plugin-zip (Cordova plugin)
 declare const zip: any;
@@ -85,16 +84,11 @@ interface String {
 // Mixed:
 interface Window {
 
-    // Cordova:
-    requestFileSystem: any;
-
-    // Cordova:
-    resolveLocalFileSystemURI: any;
-
     // cordova-plugin-document-contract (Cordova plugin)
     plugins: {
         DocumentContract: any;
     };
+
     // commons.ts:
     getUrlParameter( parmName: string ): string;
 

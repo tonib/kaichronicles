@@ -1,3 +1,5 @@
+import "cordova-plugin-file";
+import "cordova-plugin-file-transfer";
 import { mechanicsEngine } from "..";
 
 /**
@@ -491,8 +493,9 @@ export const cordovaFS = {
                 cordovaFS.currentDownload = null;
                 let msg = "Download of " + url + " to " + dstPath + " failed. Code: " +
                     fileTransferError.code;
-                if (fileTransfer.exception) {
-                    msg += ". Exception: " + fileTransfer.exception.toString();
+                // TODO: Check this, FileTransfer types do not declare an "exception" member....
+                if ((fileTransfer as any).exception) {
+                    msg += ". Exception: " + (fileTransfer as any).exception.toString();
                 }
                 dfd.reject(msg);
             },

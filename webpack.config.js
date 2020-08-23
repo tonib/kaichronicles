@@ -22,4 +22,11 @@ module.exports = {
     path: path.resolve(__dirname, 'src/www/js'),
     library: 'kai'
   },
+
+  externals: {
+    // Declare cordova plugins as external global variables, needed for web app to run
+    'cordova-plugin-file': { root: '_' },
+    'cordova-plugin-file-transfer': { root: '_' },
+    'cordova-plugin-network-information' : { root: '_' }
+  }
 };
