@@ -49,20 +49,13 @@ TODO
 - Check older savegames with usageCount = undefined in section states, action chart and InventoryState
   Check also savegames from v1.6 (changes for this in ActionChart.fromObject())
 - Test load previous savegame / state versions to v1.12 !!!
-- If noPsiSurge="true" , set noMinblast="true". If noKaiSurge="true, set noMindblast="true", noPsisurge="true". Confirm this is true
-  for any game rule, and add it as a check to validation
-- Grand Master: If you have no weapon, there is no malus
 - In Grand Master books, if you have Psi-surge, check the bonus for Mindblast
-- ERROR rendering (Book 8, spanish, sect13): Unkown tag: table
 - IMPROVE TESTING
 - Documentation about new save game format
 - Check if there is any VS code plugin to help XML edition with XSL support
 - Book 13, sect4, dark mode, sword object: Add margin to right of object images
-- Add types to cordovaFS.ts
-- Check damn Javascript modules, for test/web use...
 - Update documentation about testing (now package name is "kai."), and build
 - webpack includes jquery and bootstrap stuff into the library. Remove it
-- Tests: Detect exceptions and warnings
 
 ## Spanish books erratas to report
 - Book 13, sect equipmnt: "tu nueva Carta de Acciónde Gran Maestro" should be "tu nueva Carta de Acción de Gran Maestro" (space)

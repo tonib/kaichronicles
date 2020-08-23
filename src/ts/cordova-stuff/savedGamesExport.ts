@@ -6,24 +6,24 @@ import { settingsController, translations, cordovaFS, DocumentSelection } from "
 export class SavedGamesExport {
 
     /**
-     * The Cordova persistent file system (FileSystem)
+     * The Cordova persistent file system
      */
-    private fs: any = null;
+    private fs: FileSystem = null;
 
     /**
-     * Saved games file entries (Array<Entry>)
+     * Saved games file entries
      */
-    private fileGameEntries: any[] = null;
+    private fileGameEntries: Entry[] = null;
 
     /**
-     * Temporal directory (DirectoryEntry)
+     * Temporal directory
      */
-    private tmpDir: any = null;
+    private tmpDir: DirectoryEntry = null;
 
     /**
      * Files to delete after the process end
      */
-    private filesToDeleteAtEnd: any[] = [];
+    private filesToDeleteAtEnd: FileEntry[] = [];
 
     /** Number of imported games */
     public nImportedGames = 0;
@@ -60,7 +60,7 @@ export class SavedGamesExport {
                 console.log("Get the zip file entry");
                 return cordovaFS.getFileAsync(self.fs.root, zipFileName);
             })
-            .then((entry: any) => {
+            .then((entry) => {
                 // This generated zip file will be removed at the end of the process
                 self.filesToDeleteAtEnd.push(entry);
 
@@ -114,7 +114,7 @@ export class SavedGamesExport {
         let entriesToImport: any[] = null;
 
         return this.copyFileContent(doc, this.tmpDir)
-            .then((zipFileEntryOnTmpDir /* : FileEntry */) => {
+            .then((zipFileEntryOnTmpDir: FileEntry) => {
                 console.log("Unziping file on tmp directory");
                 return cordovaFS.unzipAsync(zipFileEntryOnTmpDir.toURL(), self.tmpDir.toURL());
             })
@@ -122,7 +122,7 @@ export class SavedGamesExport {
                 console.log("Get unziped files");
                 return cordovaFS.readEntriesAsync(self.tmpDir);
             })
-            .then((entries: any[]) => {
+            .then((entries: Entry[]) => {
                 console.log("Filtering unziped files");
                 entriesToImport = SavedGamesExport.filterSavedGamesEntries(entries);
 
@@ -202,10 +202,14 @@ export class SavedGamesExport {
     /**
      * Copy a file content to other directory
      * @param doc The file to copy
-     * @param {DirectoryEntry} parent Directory where to create the new file
+     * @param parent Directory where to create the new file
      */
-    private copyFileContent(doc: DocumentSelection, parent: any): JQueryPromise<any> {
+    private copyFileContent(doc: DocumentSelection, parent: DirectoryEntry): JQueryPromise<FileEntry> {
 
+        // TODO: There must be something wrong with my code or with Cordova @types:
+        // cordovaFS.readFileAsync here should return an ArrayBuffer and FileWriter.write() call in cordovaFS.writeFileContentAsync
+        // expects a Blob. ArrayBuffer and Blob are not compatible between them (you cannot assign one to other)
+        // But it works... So I keep fileContent as "any".... ¯\_(ツ)_/¯
         let fileContent: any = null;
 
         // Well, the Entry returned by window.resolveLocalFileSystemURI( doc.uri ) is not really a FileEntry: It cannot be
@@ -225,16 +229,16 @@ export class SavedGamesExport {
                 //     console.log( 'Copy zip to the tmp directory' );
                 //     return cordovaFS.copyToAsync( entry , self.tmpDir , doc.fileName )
                 // })
-                .then((entry /* : Entry */) => {
+                .then((entry: Entry) => {
                     console.log("Reading file content");
-                    return cordovaFS.readFileAsync(entry, true);
+                    return cordovaFS.readFileAsync(entry as FileEntry, true);
                 })
-                .then((content: any) => {
+                .then((content) => {
                     fileContent = content;
                     console.log("Creating empty file");
                     return cordovaFS.getFileAsync(parent, doc.fileName, { create: true, exclusive: false });
                 })
-                .then((newFileEntry /* : FileEntry */) => {
+                .then((newFileEntry: FileEntry) => {
                     console.log("Save the file content");
                     return cordovaFS.writeFileContentAsync(newFileEntry, fileContent);
                 });
@@ -243,10 +247,10 @@ export class SavedGamesExport {
 
     /**
      * Check file entries, get those that are saved games
-     * @param {Array<Entry>} entries File entries to check
-     * @returns {Array<Entry>} The saved games
+     * @param entries File entries to check
+     * @returns The saved games
      */
-    private static filterSavedGamesEntries(entries: any[]): any[] {
+    private static filterSavedGamesEntries(entries: Entry[]): Entry[] {
         const result = [];
         for (const entry of entries) {
             let ok = true;
@@ -272,13 +276,13 @@ export class SavedGamesExport {
 
         // Retrieve a FS and the saved games
         return cordovaFS.requestFileSystemAsync()
-            .then((fileSystem /* : FileSystem */) => {
+            .then((fileSystem: FileSystem) => {
                 self.fs = fileSystem;
                 // Get save game files
                 console.log("Get save game files");
                 return cordovaFS.getRootFilesAsync(fileSystem);
             })
-            .then((entries: any[]) => {
+            .then((entries: Entry[]) => {
                 console.log("Storing saved games entries");
                 // Store saved games, and ignore others. There can be directories here (ex. downloaded books)
                 self.fileGameEntries = SavedGamesExport.filterSavedGamesEntries(entries);
@@ -296,7 +300,7 @@ export class SavedGamesExport {
      * Re-create the temporal directory
      * @returns The process
      */
-    private createTmpDirectory(): JQueryPromise<void> {
+    private createTmpDirectory(): JQueryPromise<DirectoryEntry> {
         const self = this;
 
         const dirName = "tmpKaiChronicles";

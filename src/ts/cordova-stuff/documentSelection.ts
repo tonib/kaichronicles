@@ -13,11 +13,6 @@ export class DocumentSelection {
     /** Selected mime type */
     public mimeType: string;
 
-    // TODO: Check if this can be removed
-    public copyTo( parent: any ): Promise<void> {
-        return null;
-    }
-
     /**
      * Select a document from the UI, and get info about it
      * @returns Promise with the selected file
