@@ -71,6 +71,7 @@ TODO
 - Book 13, sect20: "Cunado" should be "Cuando"
 - Book 13, sect20: "norte Pasa al 85" should be "norte pasa al 85"
 - Book 13, sect31: "y , junto" should be "y, junto" (space)
+- Book 13, sect76: "que de dirige hacia" should be "que se dirige"
  
 ## Other
 - Allow to zoom illustrations?

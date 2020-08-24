@@ -935,7 +935,8 @@
         </special>
 
         <special id="cenerrobemask" itemCount="0">
-            <name lang="en">Cener Robe &amp; Mask</name>
+            <name lang="en">Cener Robe &amp; Mask (dress on)</name>
+            <name lang="es">Túnica y Máscara Cener (puestos)</name>
         </special>
 
         <!-- BOOK 14 -->

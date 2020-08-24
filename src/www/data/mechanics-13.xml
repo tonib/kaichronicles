@@ -465,8 +465,6 @@
             <object objectId="meal" />
             <object objectId="dagger" />
         </section>
-
-        <!-- START HERE -->
         
         <section id="sect68">
             <choiceState section="all" set="disabled" />
@@ -474,7 +472,7 @@
                 <case from="0" to="4">
                     <choiceState section="sect223" set="enabled" />
                 </case>
-                <case from="5" to="11">
+                <case from="5" to="99">
                     <choiceState section="sect331" set="enabled" />
                 </case>
             </randomTable>
@@ -511,6 +509,7 @@
         </section>
 
         <section id="sect77">
+            <!-- TODO: Check this, and all related to cenerrobemask / cenerrobe / cenermask objects -->
             <drop objectId="cenerrobe" />
             <drop objectId="cenermask" />
             <pick objectId="cenerrobemask" />
@@ -522,7 +521,7 @@
                 <case from="0" to="5">
                     <choiceState section="sect186" set="enabled" />
                 </case>
-                <case from="6" to="12">
+                <case from="6" to="99">
                     <choiceState section="sect196" set="enabled" />
                 </case>
             </randomTable>
@@ -553,21 +552,24 @@
         <section id="sect81">
             <choiceState section="all" set="disabled" />
             <randomTable>
-                <case from="-2" to="4">
+                <case from="-99" to="4">
                     <choiceState section="sect275" set="enabled" />
                 </case>
-                <case from="5" to="13">
+                <case from="5" to="99">
                     <choiceState section="sect248" set="enabled" />
                 </case>
             </randomTable>
             <test currentWeapon="sommerswerd">
                 <randomTableIncrement increment="+4" />
             </test>
-            <test currentWeapon="spear|broadsword">
-                <randomTableIncrement increment="+2" />
-            </test>
-            <test currentWeapon="quarterstaff|dagger">
-                <randomTableIncrement increment="-2" />
+            <test not="true" currentWeapon="sommerswerd">
+                <!-- sommerswerd can be used as broadsword, so don't get +2 + 4 bonus -->
+                <test currentWeapon="spear|broadsword">
+                    <randomTableIncrement increment="+2" />
+                </test>
+                <test currentWeapon="quarterstaff|dagger">
+                    <randomTableIncrement increment="-2" />
+                </test>
             </test>
         </section>
 
@@ -577,7 +579,7 @@
                 <case from="0" to="5">
                     <choiceState section="sect192" set="enabled" />
                 </case>
-                <case from="6" to="12">
+                <case from="6" to="99">
                     <choiceState section="sect346" set="enabled" />
                 </case>
             </randomTable>
@@ -586,6 +588,8 @@
             </test>
         </section>
 
+        <!-- START HERE -->
+        
         <section id="sect83">
             <meal />
         </section>
