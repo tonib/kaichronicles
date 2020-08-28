@@ -51,7 +51,7 @@
         "downloaddata": "node scripts/downloadProjectAonData.js",
         "ts": "tsc -p tsconfig.json --watch",
         "build": "webpack --config webpack.config.js --watch",
-        "cleants": "rm -rf www/js",
+        "cleants": "rm -rf www/js && rm -rf src/js",
         "reviewchanges": "node scripts/reviewBookChanges.js",
         "test": "jest"
     },

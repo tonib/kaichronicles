@@ -4,6 +4,7 @@ src/patches/projectAonPatches
 
 # Typescript generated code
 www/js
+src/js
 
 # Cordova stuff
 platforms

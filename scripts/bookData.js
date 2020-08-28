@@ -1,6 +1,6 @@
 
 const fs = require('fs-extra');
-const projectAon = require( '../www/js/model/projectAon.js' ).projectAon;
+const projectAon = require( '../src/js/model/projectAon.js' ).projectAon;
 const child_process = require('child_process');
 
 /**
