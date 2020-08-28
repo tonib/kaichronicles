@@ -207,18 +207,21 @@ BookData.prototype.downloadCover = function() {
 BookData.prototype.zipBook = function() {
     // Zip the book
     // Go to books dir
+    const curDir = process.cwd();
     process.chdir(BookData.TARGET_ROOT);
     var txtBookNumber = this.bookNumber.toString();
     child_process.execFileSync( 'zip' , ['-r' , txtBookNumber + '.zip' , txtBookNumber] , 
         {stdio:[0,1,2]} );
     // Go back
-    process.chdir('../../../..');
+    process.chdir(curDir);
 }
 
 BookData.prototype.downloadBookData = function() {
 
-    fs.removeSync( BookData.TARGET_ROOT + '/' + this.bookNumber );
-    fs.mkdirSync( BookData.TARGET_ROOT + '/' + this.bookNumber );
+    const bookDir = BookData.TARGET_ROOT + '/' + this.bookNumber;
+    console.log("Re-creating directory " + bookDir);
+    fs.removeSync( bookDir );
+    fs.mkdirSync( bookDir );
 
     this.downloadCover();
 

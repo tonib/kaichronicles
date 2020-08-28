@@ -12,6 +12,9 @@ const child_process = require('child_process');
 const process = require('process');
 const path = require('path');
 
+// TODO: See what to do with this script
+throw "TODO: This script needs to be changed";
+
 /**
  * The keystore to sign the apk (absolute path to the project root)
  */
