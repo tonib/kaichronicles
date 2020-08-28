@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="org.projectaon.kaichronicles" version="1.11.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <!-- CORDOVA CONFIGURATION FILE -->
-    
+
     <name>Kai Chronicles</name>
     <description>
         Game player for Lone Wolf gamebooks 1 - 12
@@ -28,6 +28,7 @@
     <plugin name="com.megster.cordova.FileChooser" spec="https://github.com/ihadeed/cordova-filechooser.git" />
     <plugin name="cordova-plugin-document-contract" spec="https://github.com/danjarvis/cordova-plugin-document-contract.git" />
     <plugin name="cordova-plugin-copytodownload" spec="https://github.com/tonib/cordova-plugin-copytodownload.git" />
+    <plugin name="cordova-plugin-exclude-files" />
 
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -37,6 +38,8 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <icon density="xxxhdpi" height="192" platform="android" src="res/android/xxxhdpi.png" width="192" />
+
+    <exclude-files pattern="data/projectAon" />
 
     <platform name="android">
 
