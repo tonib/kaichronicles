@@ -12,7 +12,7 @@ export class GameDriver {
     /** URL to start a new game */
     private newGameUrl;
 
-    private static readonly BASEPATH = "src/www/";
+    private static readonly BASEPATH = "www/";
 
     public constructor() {
         state.localBooksLibrary = new LocalBooksLibrary();

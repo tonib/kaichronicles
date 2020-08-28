@@ -82,7 +82,7 @@ Optional. A more extended description for the object, translated to some languag
 </weapon>
 ```
 Optional. It references to some book image for the object. The image should be at 
-/src/www/data/projectAon/[BOOKNUMBER]/ill_en/[IMAGENAME]. If object image was drawed by different
+/www/data/projectAon/[BOOKNUMBER]/ill_en/[IMAGENAME]. If object image was drawed by different
 illustrators (Chalk / Williams), different books versions should be separated by a "|" character
 
 ### "droppable" property

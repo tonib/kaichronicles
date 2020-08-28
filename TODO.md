@@ -56,6 +56,15 @@ TODO
 - Book 13, sect4, dark mode, sword object: Add margin to right of object images
 - Update documentation about testing (now package name is "kai."), and build
 - webpack includes jquery and bootstrap stuff into the library. Remove it
+- Cordova file plugin warning:
+The Android Persistent storage location now defaults to "Internal". Please check this plugin's README to see if your application needs any changes in its config.xml.
+If this is a new application no changes are required.
+If this is an update to an existing application that did not specify an "AndroidPersistentFileLocation" you may need to add:
+      "<preference name="AndroidPersistentFileLocation" value="Compatibility" />"
+to config.xml in order for the application to find previously stored files.
+Adding cordova-plugin-file to package.json
+- Change documentation about building Android app
+- Change documentation about Android min. version (now is API 22 => v5.1)
 
 ## Spanish books erratas to report
 - Book 13, sect equipmnt: "tu nueva Carta de Acciónde Gran Maestro" should be "tu nueva Carta de Acción de Gran Maestro" (space)

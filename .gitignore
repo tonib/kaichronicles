@@ -1,13 +1,13 @@
 # The project AON data
-src/www/data/projectAon
+www/data/projectAon
 src/patches/projectAonPatches
 
 # Typescript generated code
-src/www/js
+www/js
 
 # Cordova stuff
-src/platforms
-src/plugins
+platforms
+plugins
 
 # Visual Studio Code stuff
 jsconfig.json

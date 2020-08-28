@@ -5,4 +5,4 @@ COPY . .
 EXPOSE 8080
 RUN npm install && npm run ts && npm run downloaddata
 RUN npm install http-server -g && cat LICENSE
-CMD ["http-server", "./src/www"]
+CMD ["http-server", "./www"]

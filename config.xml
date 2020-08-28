@@ -43,8 +43,9 @@
               Chromium (Chrome v32), the previous fails to render Bootstrap.
             - The Project Aon hosting only supports TLS 1.2 or greater. Android 4.4 don't support TLS 1.2. 
               So, min supported API is 5.0.0 (API 21)
+            UPDATE v.12. With latest Cordova version, min API is 22, so this do not longer applies
         -->
-        <preference name="android-minSdkVersion" value="21" />
+        <!--preference name="android-minSdkVersion" value="21" /-->
 
         <allow-intent href="market:*" />
 

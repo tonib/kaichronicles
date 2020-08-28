@@ -13,7 +13,7 @@ This is a "guide" to develop mechanics for new books.
 
 ## Start the work session
 
-* Open the XML files to edit (/src/www/data/mechanics-[BOOKNUMBER].xml and /src/www/data/objects.xml) with your
+* Open the XML files to edit (/www/data/mechanics-[BOOKNUMBER].xml and /www/data/objects.xml) with your
   Good XML Editor
 * Open the browser
 * Open the browser developer tools (F12)
@@ -102,4 +102,4 @@ Cough Cough. Sources for mechanics documentation:
 * /doc/README-objects.md and /doc/README-objects.md (unfinished)
 * Already implemented production books XML
 * The mechanicsEngine.ts source file
-* The /src/www/data/mechanics.xsd file describes and validates the mechanics file format
+* The /www/data/mechanics.xsd file describes and validates the mechanics file format

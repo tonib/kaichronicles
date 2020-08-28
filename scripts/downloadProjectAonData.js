@@ -1,11 +1,11 @@
 const fs = require('fs-extra');
 const BookData = require( './bookData.js' ).BookData;
-const projectAon = require( '../src/www/js/model/projectAon.js' ).projectAon;
+const projectAon = require( '../www/js/model/projectAon.js' ).projectAon;
 
 /*
     Dowload Project Aon book data
     Command line parameters:
-    1) Book index (1-based). If it does not exists, the "src/www/data/projectAon" will be re-created and all books will be downloaded
+    1) Book index (1-based). If it does not exists, the "www/data/projectAon" will be re-created and all books will be downloaded
 */
 
 // Download PAON XML patches

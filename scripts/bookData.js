@@ -1,6 +1,6 @@
 
 const fs = require('fs-extra');
-const projectAon = require( '../src/www/js/model/projectAon.js' ).projectAon;
+const projectAon = require( '../www/js/model/projectAon.js' ).projectAon;
 const child_process = require('child_process');
 
 /**
@@ -49,7 +49,7 @@ BookData.prototype.getSvnRoot = function() {
 /**
  * The target directory root
  */
-BookData.TARGET_ROOT = 'src/www/data/projectAon';
+BookData.TARGET_ROOT = 'www/data/projectAon';
 
 
 /**

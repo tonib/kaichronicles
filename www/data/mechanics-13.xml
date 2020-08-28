@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <mechanics book="13" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="https://raw.githubusercontent.com/tonib/kaichronicles/master/src/www/data/mechanics.xsd">
+    xsi:schemaLocation="https://raw.githubusercontent.com/tonib/kaichronicles/master/www/data/mechanics.xsd">
 
     <!-- LIST OF TRANSLATED IMAGES -->
     <translated-images>

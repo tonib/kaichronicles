@@ -19,7 +19,7 @@ module.exports = {
   },
   output: {
     filename: 'kai.js',
-    path: path.resolve(__dirname, 'src/www/js'),
+    path: path.resolve(__dirname, 'www/js'),
     library: 'kai'
   },
 

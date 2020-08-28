@@ -32,7 +32,7 @@ function recreateDist() {
     fs.copySync( 'src' , 'dist/src' );
 
     // Remove xmllint.js: too big for production (2.2 MB) and only used for tests
-    fs.removeSync( 'dist/src/www/lib/xmllint.js');
+    fs.removeSync( 'dist/www/lib/xmllint.js');
 }
 
 /**
@@ -46,8 +46,8 @@ function preprocessIndexPage(includeCordova) {
         context.CORDOVA = 'true';
 
     // Copy the original index.html
-    fs.copySync('src/www/index.html', 'dist/src/www/index.html' );
-    preprocess.preprocessFileSync( 'dist/src/www/index.html' , 'dist/src/www/index.html' , 
+    fs.copySync('www/index.html', 'dist/www/index.html' );
+    preprocess.preprocessFileSync( 'dist/www/index.html' , 'dist/www/index.html' , 
         context);
 }
 
@@ -57,7 +57,7 @@ function preprocessIndexPage(includeCordova) {
 function minifyJavascript() {
 
     // Get all .js files on js directory
-    var jsFiles = klawSync( 'dist/src/www/js' , {nodir: true} );
+    var jsFiles = klawSync( 'dist/www/js' , {nodir: true} );
     console.log("Minfiying js files:");
     var jsPaths = {};
     jsFiles.forEach((f) => {
@@ -73,11 +73,11 @@ function minifyJavascript() {
         console.log( 'WARNINGS!!!! : ' + result.warnings );
 
     // Write minified file
-    fs.writeFileSync( 'dist/src/www/kai.min.js' , result.code );
+    fs.writeFileSync( 'dist/www/kai.min.js' , result.code );
 
     // Remove the unninified js files:
     console.log('Delete unnimified js files');
-    fs.removeSync('dist/src/www/js');
+    fs.removeSync('dist/www/js');
 
 }
 
@@ -132,7 +132,7 @@ function buildAndroidApp() {
 
     // Delete the project aon data
     console.log('Deleting Project Aon data');
-    fs.removeSync('dist/src/www/data/projectAon');
+    fs.removeSync('dist/www/data/projectAon');
 
     // Get the password to sign the apk
     var pwd = getApkSignPassword();
@@ -217,11 +217,11 @@ function prepareDistDirectory() {
 
     // Copy Project Aon data
     console.log('Copying Project Aon data');
-    fs.copySync('src/www/data/projectAon', 'dist/src/www/data/projectAon' );
+    fs.copySync('www/data/projectAon', 'dist/www/data/projectAon' );
 
-    console.log('Prepare www dir');
-    fs.renameSync( 'dist/src/www', 'dist/www' );
-    fs.removeSync( 'dist/src' );
+    //console.log('Prepare www dir');
+    //fs.renameSync( 'dist/src/www', 'dist/www' );
+    //fs.removeSync( 'dist/src' );
 
 }
 
@@ -232,7 +232,7 @@ function joinViews() {
     console.log("Join HTML views on a single file");
 
     // Get all .html files on views dir
-    var viewFiles = klawSync( 'dist/src/www/views' , {nodir: true} );
+    var viewFiles = klawSync( 'dist/www/views' , {nodir: true} );
     var joinedFileContent = '';
     viewFiles.forEach((f) => {
         console.log( f.path );
@@ -243,10 +243,10 @@ function joinViews() {
     joinedFileContent = "<div>\n" + joinedFileContent + "\n</div>\n";
 
     // Write joined file
-    fs.writeFileSync( 'dist/src/www/views.html' , joinedFileContent );
+    fs.writeFileSync( 'dist/www/views.html' , joinedFileContent );
 
     // Delete views directory
-    fs.removeSync( 'dist/src/www/views' );
+    fs.removeSync( 'dist/www/views' );
 }
 
 recreateDist();
