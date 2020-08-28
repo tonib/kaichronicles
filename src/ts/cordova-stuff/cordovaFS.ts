@@ -1,7 +1,7 @@
-import "cordova-plugin-file";
-import "cordova-plugin-file-transfer";
+/// <reference types="cordova-plugin-file" />
+/// <reference types="cordova-plugin-file-transfer" />
+
 import { mechanicsEngine } from "..";
-import { promise } from "selenium-webdriver";
 
 /**
  * Stuff to access the file system on Cordova app

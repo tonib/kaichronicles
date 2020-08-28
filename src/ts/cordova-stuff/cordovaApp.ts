@@ -1,5 +1,6 @@
+/// <reference types="cordova-plugin-network-information" />
+
 import { template, routing, mechanicsEngine } from "..";
-import "cordova-plugin-network-information";
 
 /**
  * The cordova app
