@@ -63,8 +63,6 @@ If this is an update to an existing application that did not specify an "Android
       "<preference name="AndroidPersistentFileLocation" value="Compatibility" />"
 to config.xml in order for the application to find previously stored files.
 Adding cordova-plugin-file to package.json
-- Change documentation about building Android app
-- Change documentation about Android min. version (now is API 22 => v5.1)
 - Change documentation about save games file format (changes in 1.12)
 - Check if the "edit-config" tag in config.xml can be configured for debug build only
 
