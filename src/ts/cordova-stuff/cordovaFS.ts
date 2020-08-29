@@ -492,11 +492,12 @@ export const cordovaFS = {
             (fileTransferError) => {
                 // Download failed
                 cordovaFS.currentDownload = null;
-                let msg = "Download of " + url + " to " + dstPath + " failed. Code: " +
-                    fileTransferError.code;
-                // TODO: Check this, FileTransfer types do not declare an "exception" member....
-                if ((fileTransfer as any).exception) {
-                    msg += ". Exception: " + (fileTransfer as any).exception.toString();
+                let msg = "Download of " + url + " to " + dstPath + " failed.\n Code: " + fileTransferError.code;
+                if (fileTransferError.http_status) {
+                    msg += "\n http_status: " + fileTransferError.http_status.toString();
+                }
+                if (fileTransferError.exception) {
+                    msg += "\n exception: " + fileTransferError.exception.toString();
                 }
                 dfd.reject(msg);
             },

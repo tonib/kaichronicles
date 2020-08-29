@@ -85,7 +85,7 @@ export class BookDownloadState {
     public downloadAsync( booksDir: any , progressCallback: (percent: number) => void = null ): JQueryPromise<void> {
 
         const fileName = this.bookNumber + ".zip";
-        // var url = 'http://192.168.1.4/ls/data/projectAon/' + fileName;
+        // const url = "http://192.168.1.3/ls/data/projectAon/" + fileName;
         const url = "https://www.projectaon.org/staff/toni/data/projectAon/" + fileName;
         const dstDir = booksDir.toURL();
         const dstPath = dstDir + "/" + fileName;

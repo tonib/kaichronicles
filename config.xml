@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="org.projectaon.kaichronicles" version="1.11.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="org.projectaon.kaichronicles" version="1.12" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <!-- CORDOVA CONFIGURATION FILE -->
 
     <name>Kai Chronicles</name>
     <description>
-        Game player for Lone Wolf gamebooks 1 - 12
+        Game player for Lone Wolf gamebooks 1 - 13
     </description>
     <author email="toni.bennasar@projectaon.org" href="https://www.projectaon.org">
         Project AON
@@ -79,6 +79,12 @@
         <splash density="port-ldpi" src="res/android/splashes/drawable-port-ldpi.png" />
         <splash density="port-mdpi" src="res/android/splashes/drawable-port-mdpi.png" />
         <splash density="port-xhdpi" src="res/android/splashes/drawable-port-xhdpi.png" />
+
+        <!-- This is only needed for local debug, to allow http connections (Android >= 8 by default allow only https requests) -->
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
+            <application android:usesCleartextTraffic="true" />
+        </edit-config>
+
     </platform>
     
 </widget>
