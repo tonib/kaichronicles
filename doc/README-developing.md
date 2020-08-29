@@ -36,11 +36,11 @@ functions to debug and test the book:
 * **Tests**: Open a page to make some tests to validate the game mechanics.
 * Also there are buttons to move to the previous and next section
 
-Other actions for debug can be done at the console of the Developer Tools of the browser. Usually, you will need only
-the "actionChartController" object:
+Other actions for debug can be done at the console of the Developer Tools of the browser. The namespace for this
+aaplication is "kai". Usually, you will need only the "actionChartController" object:
 
-* actionChartController.pick( objectId )
-* actionChartController.increaseMoney( amount )
+* kai.actionChartController.pick( objectId )
+* kai.actionChartController.increaseMoney( amount )
 * etc. (increaseArrows, increaseCombatSkill, increaseEndurance, increaseMeals, increaseMoney, increaseArrows,...). Look at
   actionChartController.ts file for details
 

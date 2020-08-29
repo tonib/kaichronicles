@@ -65,6 +65,7 @@ to config.xml in order for the application to find previously stored files.
 Adding cordova-plugin-file to package.json
 - Change documentation about building Android app
 - Change documentation about Android min. version (now is API 22 => v5.1)
+- Change documentation about save games file format (changes in 1.12)
 
 ## Spanish books erratas to report
 - Book 13, sect equipmnt: "tu nueva Carta de Acciónde Gran Maestro" should be "tu nueva Carta de Acción de Gran Maestro" (space)

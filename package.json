@@ -37,6 +37,7 @@
         "klaw-sync": "6.0.0",
         "preprocess": "3.1.0",
         "selenium-webdriver": "^4.0.0-alpha.7",
+        "serve": "^11.3.2",
         "ts-loader": "^8.0.2",
         "tslint": "^5.20.0",
         "typescript": "^3.7.2",
@@ -53,7 +54,11 @@
         "build": "webpack --config webpack.config.js --watch",
         "cleants": "rm -rf www/js && rm -rf src/js",
         "reviewchanges": "node scripts/reviewBookChanges.js",
-        "test": "jest"
+        "test": "jest",
+        "serve": "serve www",
+        "cordova-prepare": "cordova prepare",
+        "cordova-build": "cordova build android",
+        "cordova-run": "cordova run android"
     },
     "cordova": {
         "platforms": [
