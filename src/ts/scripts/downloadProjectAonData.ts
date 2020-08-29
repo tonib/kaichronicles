@@ -1,6 +1,6 @@
-const fs = require('fs-extra');
-const BookData = require( './bookData.js' ).BookData;
-const projectAon = require( '../src/js/model/projectAon.js' ).projectAon;
+import * as fs from "fs-extra";
+import { projectAon } from "..";
+import { BookData } from "./bookData";
 
 /*
     Dowload Project Aon book data
@@ -10,31 +10,36 @@ const projectAon = require( '../src/js/model/projectAon.js' ).projectAon;
 
 // Download PAON XML patches
 // THIS COULD BREAK THE PAON LICENSE, SO, DON'T DO IT
-//BookData.downloadBooksXmlPatches();
+// BookData.downloadBooksXmlPatches();
 
 // Check if we should download only a single book
-var bookNumber = 0;
-if( process.argv.length >= 3 )
+let bookNumber = 0;
+if ( process.argv.length >= 3 ) {
     // The book number (1-index based) number
-    bookNumber = parseInt( process.argv[2] );
+    bookNumber = parseInt( process.argv[2], 10);
+}
 
 // Recreate the books root directory, if we are downloading all books
-if( !bookNumber )
+if ( !bookNumber ) {
     fs.removeSync( BookData.TARGET_ROOT );
-if( !fs.existsSync(BookData.TARGET_ROOT) )
+}
+if ( !fs.existsSync(BookData.TARGET_ROOT) ) {
     fs.mkdirSync( BookData.TARGET_ROOT );
+}
 
 // Download books data
-var from, to;
-if( bookNumber )
+let from: number;
+let to: number;
+if ( bookNumber ) {
     // Download single book
     from = to = bookNumber;
-else {
+} else {
     // Download all books
     from = 1;
     to = projectAon.supportedBooks.length;
 }
 
 // Do the download stuff
-for( var i=from; i <= to; i++ )
+for (let i = from; i <= to; i++) {
     new BookData(i).downloadBookData();
+}
