@@ -634,7 +634,7 @@
                 <case from="0" to="7">
                     <choiceState section="sect281" set="enabled" />
                 </case>
-                <case from="8" to="14">
+                <case from="8" to="99">
                     <choiceState section="sect184" set="enabled" />
                 </case>
             </randomTable>
@@ -699,16 +699,14 @@
             </test>
         </section>
 
-        <!-- START HERE -->
-
         <section id="sect104">
             <choiceState section="all" set="disabled" />
             <randomTable>
                 <pick class="arrow" count="-1" />
-                <case from="0" to="5">
+                <case from="-99" to="5">
                     <choiceState section="sect167" set="enabled" />
                 </case>
-                <case from="6" to="12">
+                <case from="6" to="99">
                     <choiceState section="sect235" set="enabled" />
                 </case>
             </randomTable>
@@ -733,6 +731,8 @@
             </afterCombats>
         </section>
 
+        <!-- START HERE -->
+        
         <section id="sect110">
             <choiceState section="sect55" set="disabled" />
             <test hasDiscipline="pthmnshp">

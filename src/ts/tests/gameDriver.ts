@@ -240,6 +240,10 @@ export class GameDriver {
         await this.cleanClickAndWait(link);
     }
 
+    public async getRandomFinalValue(): Promise<number> {
+        return await this.driver.executeScript("return kai.randomMechanics.getRandomValueChoosed(0)");
+    }
+
     public async getChoice(sectionId: string): Promise<WebElement> {
         return await this.getElementByCss(`a[data-section=${sectionId}]`);
     }

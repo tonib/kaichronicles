@@ -132,8 +132,8 @@ async function testCarryDisciplinesPreviousBook(bookNumber: number) {
     disciplinesIds = disciplinesIds.slice(0, bookSeries.initialNDisciplines);
     await driver.setDisciplines( disciplinesIds );
 
-    const nextWeaponId = SetupDisciplines.kaiWeapons[bookSeries.initialWeaponskillNWeapons];
-    const weaponskill = SetupDisciplines.kaiWeapons.slice(0, bookSeries.initialWeaponskillNWeapons);
+    const nextWeaponId = SetupDisciplines.magnakaiWeapons[bookSeries.initialWeaponskillNWeapons];
+    const weaponskill = SetupDisciplines.magnakaiWeapons.slice(0, bookSeries.initialWeaponskillNWeapons);
     await driver.setWeaponskill(weaponskill);
 
     // Go to current book
@@ -184,7 +184,7 @@ async function testCarryDisciplinesPreviousBook(bookNumber: number) {
 
         // Try to select other weapon. Expect an alert
         await (await driver.getElementById(SetupDisciplines.WEAPON_CHECKBOX_ID +
-            SetupDisciplines.kaiWeapons[SetupDisciplines.kaiWeapons.length - 1])).click();
+            SetupDisciplines.magnakaiWeapons[SetupDisciplines.magnakaiWeapons.length - 1])).click();
         alert = await driver.getAlert();
         expect( alert ).not.toBeNull();
         await alert.accept();

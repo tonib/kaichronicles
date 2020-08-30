@@ -4,7 +4,7 @@ import { Language } from "../../state";
 import { KaiDiscipline, MgnDiscipline, GndDiscipline } from "../../model/disciplinesDefinitions";
 import { BookSeriesId, BookSeries } from "../../model/bookSeries";
 import { Disciplines } from "../../model/disciplines";
-import { CombatMechanics, Book, SetupDisciplines } from "../..";
+import { CombatMechanics, Book, SetupDisciplines, Item } from "../..";
 import { Driver } from "selenium-webdriver/chrome";
 import { projectAon } from "../../model/projectAon";
 import { WebElement, Alert } from "selenium-webdriver";
@@ -176,12 +176,12 @@ describe("test", () => {
         expect( await driver.choiceIsEnabled("sect225") ).toBe(false);
 
         // Only bow, you cannot shot
-        await driver.pick("bow");
+        await driver.pick(Item.BOW);
         await driver.goToSection("sect96");
         expect( await driver.choiceIsEnabled("sect225") ).toBe(false);
 
         // Bow and quiver, but no arrows, you cannot shot
-        await driver.pick("quiver");
+        await driver.pick(Item.QUIVER);
         await driver.goToSection("sect96");
         expect( await driver.choiceIsEnabled("sect225") ).toBe(false);
 
@@ -190,10 +190,10 @@ describe("test", () => {
         expect( await driver.choiceIsEnabled("sect225") ).toBe(true);
 
         // If you pick the bow from the section, expect to shot inmediatelly
-        await driver.drop("bow", true);
+        await driver.drop(Item.BOW, true);
         await driver.goToSection("sect96");
         expect( await driver.choiceIsEnabled("sect225") ).toBe(false);
-        await driver.pick("bow", true);
+        await driver.pick(Item.BOW, true);
         expect( await driver.choiceIsEnabled("sect225") ).toBe(true);
     });
 });
@@ -237,6 +237,52 @@ describe("expressions", () => {
         await driver.setDisciplines([]);
         await playCombat([4, 4, 4, 4, 0, 0]);
         expect( await driver.choiceIsEnabled("sect37") ).toBe(true);
+    });
+
+    test("BOWBONUS", async () => {
+
+        async function shot(expectedRandom: number) {
+            await driver.goToSection("sect99");
+            await driver.setNextRandomValue(0);
+            await driver.clickRandomLink();
+            expect( await driver.getRandomFinalValue() ).toBe(expectedRandom);
+        }
+
+        async function setInventory(silverBow: boolean) {
+            await driver.pick(silverBow ? "silverbowduadon" : Item.BOW);
+            await driver.pick(Item.QUIVER);
+            await driver.increaseArrows(6);
+        }
+
+        await driver.setupBookState(12, Language.ENGLISH);
+
+        // Expect -4 if no bow:
+        await driver.setDisciplines([]);
+        await shot(-4);
+
+        // Expect no bonus if no Weaponskill with bow
+        await driver.loadCleanSection(Book.INITIAL_SECTION);
+        await driver.setDisciplines([MgnDiscipline.Weaponmastery]);
+        await driver.setWeaponskill([]);
+        await setInventory(false);
+        await shot(0);
+
+        // Expect bow bonus
+        await driver.loadCleanSection(Book.INITIAL_SECTION);
+        await driver.setDisciplines([MgnDiscipline.Weaponmastery]);
+        await driver.setWeaponskill([Item.BOW]);
+        await setInventory(false);
+        await shot(3);
+
+        // Expect bow bonus + Silver Bow of Duadon bonus
+        await driver.loadCleanSection(Book.INITIAL_SECTION);
+        await driver.setDisciplines([MgnDiscipline.Weaponmastery]);
+        await driver.setWeaponskill([Item.BOW]);
+        await setInventory(true);
+        await shot(6);
+
+        // TODO: Test Grand Master bonus when book 14 is ready (book 13 has erratas with this and is not reliable)
+        // TODO: Test loyalty bonus in Grand Master
     });
 });
 

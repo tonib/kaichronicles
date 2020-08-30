@@ -12,7 +12,7 @@ export class SetupDisciplines {
     public static readonly WEAPON_CHECKBOX_ID = "mechanics-weapon-chk-";
 
     /**
-     * Weapons table for Weaponskill discipline in Kai books
+     * Weapons table for Weaponskill discipline in Kai books (IT DOES NOT CONTAIN BOW!!!)
      */
     public static readonly kaiWeapons = ["dagger", "spear", "mace", "shortsword", "warhammer", "sword",
         "axe", "sword", "quarterstaff", "broadsword"];
@@ -20,7 +20,7 @@ export class SetupDisciplines {
     /**
      * Weapons table for Weaponmastery discipline in Magnakai books
      */
-    private static readonly magnakaiWeapons = ["dagger", "spear", "mace", "shortsword", "warhammer", "bow",
+    public static readonly magnakaiWeapons = ["dagger", "spear", "mace", "shortsword", "warhammer", "bow",
         "axe", "sword", "quarterstaff", "broadsword"];
 
     /**

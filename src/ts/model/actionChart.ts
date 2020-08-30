@@ -739,7 +739,8 @@ export class ActionChart {
                 Improvements: Scion-kai / Weaponmastery	/ When entering combat with a weapon they have mastered, Scion-kai may add 4 points
                 (instead of the usual 3 points) to their COMBAT SKILL...
             */
-            // Changed in v1.12: Seems this should not be applied to bow bonuses, it's just for hand to hand CS
+            // Changed in v1.12: Seems this should not be applied to bow bonuses, it's just for hand to hand CS. See Disciplines
+            // foot notes in book 13 about non-cumulative bonus
             if (!bowCombat && state.actionChart.getDisciplines(BookSeriesId.Magnakai).length >= 8) {
                 // Scion-kai
                 bonus = +4;
@@ -1252,7 +1253,7 @@ export class ActionChart {
             }
 
             // In Kai series, you end with Weaponskill with one weapon. In later series, you end with Weaponskill with all weapons
-            const weaponskill = ( seriesId === BookSeriesId.Kai ? this.kaiDisciplines.weaponSkill : SetupDisciplines.kaiWeapons );
+            const weaponskill = ( seriesId === BookSeriesId.Kai ? this.kaiDisciplines.weaponSkill : SetupDisciplines.magnakaiWeapons );
 
             // Player has all disciplines
             seriesDisciplines = { disciplines: Disciplines.getSeriesDisciplines(seriesId), weaponSkill: weaponskill };
