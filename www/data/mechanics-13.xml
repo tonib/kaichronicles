@@ -713,10 +713,12 @@
                 </case>
             </randomTable>
             <randomTableIncrement increment="[BOWBONUS]" />
-            <test hasWeaponskillWith="bow">
-                <!-- In this book, bonus is only +3, not the default +5 -->
+            
+            <!-- In this book, bonus is only +3, not the default +5 -->
+            <!-- Moved this, and all this book BOWBONUS issues to TS code. It seems a book errata? -->
+            <!--test hasWeaponskillWith="bow">
                 <randomTableIncrement increment="-2" />
-            </test>
+            </test-->
         </section>
 
         <section id="sect106">
@@ -1158,10 +1160,6 @@
                 </case>
             </randomTable>
             <randomTableIncrement increment="[BOWBONUS]" />
-            <test hasWeaponskillWith="bow">
-                <!-- In this book, bonus is only +3, not the default +5 -->
-                <randomTableIncrement increment="-2" />
-            </test>
         </section>
 
         <section id="sect177">
@@ -1877,10 +1875,6 @@
                 </case>
             </randomTable>
             <randomTableIncrement increment="[BOWBONUS]" />
-            <test hasWeaponskillWith="bow">
-                <!-- In this book, bonus is only +3, not the default +5 -->
-                <randomTableIncrement increment="-2" />
-            </test>
         </section>
 
         <section id="sect304">

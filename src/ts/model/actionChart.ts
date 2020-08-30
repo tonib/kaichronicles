@@ -724,10 +724,11 @@ export class ActionChart {
 
         } else if (this.isWeaponskillActive(bowCombat, BookSeriesId.GrandMaster)) {
             // Grand Master / Grand Weaponmastery bonuses
-
+            // Exception: Book 13. It seems an errata, but it says EVERYWHERE it's +3 for bow bonus:
+            const inc = state.book.bookNumber === 13 && bowCombat ? +3 : +5;
             bonuses.push({
                 concept: translations.text("grdweaponmastery"),
-                increment: +5
+                increment: inc
             });
 
         } else if (this.isWeaponskillActive(bowCombat, BookSeriesId.Magnakai)) {

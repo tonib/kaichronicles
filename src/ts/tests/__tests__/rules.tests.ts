@@ -256,6 +256,7 @@ test("death", async () => {
     expect( (await driver.getActionChart()).currentEndurance ).toBe(0);
     expect( await (await driver.getElementById("mechanics-death")).isDisplayed() ).toBe(true);
 
+    // TODO: Create a mechanics.tests.ts for this, and test everything else is disabled (choices, etc), test "mechanics-death" options
     // Expect do not use objects or curing button
     await driver.goToActionChart();
     expect( await GameDriver.isClickable( await driver.getElementById("achart-restore20Ep") ) ).toBe(false);
