@@ -235,6 +235,7 @@ test("death", async () => {
     await driver.setDisciplines([GndDiscipline.Deliverance]);
     await driver.goToSection("sect99");
     expect( (await driver.getActionChart()).currentEndurance ).toBe(0);
+    expect( await (await driver.getElementById("mechanics-death")).isDisplayed() ).toBe(true);
 
     // Expect do not use objects or curing button
     await driver.goToActionChart();

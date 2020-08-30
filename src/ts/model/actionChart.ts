@@ -1114,6 +1114,11 @@ export class ActionChart {
             return false;
         }
 
+        if (this.currentEndurance <= 0) {
+            // Death -> no use
+            return false;
+        }
+
         let minEndurance: number;
         if (disciplineId === GndDiscipline.Deliverance) {
             minEndurance = 8;
