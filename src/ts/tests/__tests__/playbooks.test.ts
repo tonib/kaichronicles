@@ -71,7 +71,7 @@ async function noRandomTableErrors() {
         await doMeals();
 
         // Traverse clickable random table links
-        for (const link of await driver.getElementsByCss(".random.action")) {
+        for (const link of await driver.getElementsByCss(GameDriver.RANDOM_SELECTOR)) {
             if (await GameDriver.isClickable(link)) {
                 await driver.setNextRandomValue(randomNumber);
                 await driver.cleanClickAndWait(link);

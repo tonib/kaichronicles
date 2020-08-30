@@ -259,7 +259,7 @@ export class CombatMechanics {
             CombatMechanics.checkSurgeEnabled();
 
             // For testing, add marker to notify to the test we are ready
-            gameView.addSectionReadyMarker();
+            template.addSectionReadyMarker();
         });
 
     }
@@ -347,7 +347,7 @@ export class CombatMechanics {
 
         CombatMechanics.updateCombatRatio( $combatUI , combat);
 
-        gameView.addSectionReadyMarker();
+        template.addSectionReadyMarker();
     }
 
     /**

@@ -393,6 +393,8 @@ export class ObjectsTableItem {
             // Refresh the table of available objects
             mechanicsEngine.fireInventoryEvents(true, this.item);
         }
+
+        template.addSectionReadyMarker();
     }
 
     /** Sell object operation */

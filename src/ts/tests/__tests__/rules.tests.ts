@@ -26,7 +26,7 @@ afterAll( async () => {
     await driver.close();
 });
 
-describe("combat rule", () => {
+describe("combat", () => {
 
     test("noMindblast", async () => {
         await driver.setupBookState(1, Language.ENGLISH);
@@ -126,6 +126,118 @@ describe("combat rule", () => {
         // EP = 36. Expect elude allowed
         expect( await GameDriver.isClickable(eludeBtn) ).toBe(true);
     });
+
+    test("combatSkillModifier", async () => {
+        await driver.setupBookState(13, Language.ENGLISH);
+        await driver.setDisciplines([]);
+        await driver.goToSection("sect86");
+        expect( await driver.getCombatRatio() ).toBe(-10);
+    });
 });
 
 // setDisciplines -> See setDisciplines.tests.ts
+
+describe("test", () => {
+    test("hasDiscipline", async () => {
+        await driver.setupBookState(13, Language.ENGLISH);
+
+        await driver.setDisciplines([]);
+        await driver.goToSection("sect84");
+        expect( await driver.choiceIsEnabled("sect7") ).toBe(false);
+        expect( await driver.choiceIsEnabled("sect171") ).toBe(true);
+
+        await driver.setDisciplines([GndDiscipline.AnimalMastery]);
+        await driver.goToSection("sect84");
+        expect( await driver.choiceIsEnabled("sect7") ).toBe(true);
+        expect( await driver.choiceIsEnabled("sect171") ).toBe(false);
+    });
+
+    test("hasObject", async () => {
+        await driver.setupBookState(13, Language.ENGLISH);
+        await driver.pick("sommerswerd");
+        await driver.goToSection("sect290");
+        expect( await driver.choiceIsEnabled("sect199") ).toBe(true);
+        expect( await driver.choiceIsEnabled("sect316") ).toBe(false);
+
+        await driver.drop("sommerswerd", true);
+        await driver.goToSection("sect290");
+        expect( await driver.choiceIsEnabled("sect199") ).toBe(false);
+        expect( await driver.choiceIsEnabled("sect316") ).toBe(true);
+
+        // Pick object from section, expect allow to go to section right now
+        await driver.pick("sommerswerd", true);
+        expect( await driver.choiceIsEnabled("sect199") ).toBe(true);
+        expect( await driver.choiceIsEnabled("sect316") ).toBe(false);
+    });
+
+    test("canUseBow", async () => {
+        await driver.setupBookState(13, Language.ENGLISH);
+        await driver.goToSection("sect96");
+        expect( await driver.choiceIsEnabled("sect225") ).toBe(false);
+
+        // Only bow, you cannot shot
+        await driver.pick("bow");
+        await driver.goToSection("sect96");
+        expect( await driver.choiceIsEnabled("sect225") ).toBe(false);
+
+        // Bow and quiver, but no arrows, you cannot shot
+        await driver.pick("quiver");
+        await driver.goToSection("sect96");
+        expect( await driver.choiceIsEnabled("sect225") ).toBe(false);
+
+        await driver.increaseArrows(1);
+        await driver.goToSection("sect96");
+        expect( await driver.choiceIsEnabled("sect225") ).toBe(true);
+
+        // If you pick the bow from the section, expect to shot inmediatelly
+        await driver.drop("bow", true);
+        await driver.goToSection("sect96");
+        expect( await driver.choiceIsEnabled("sect225") ).toBe(false);
+        await driver.pick("bow", true);
+        expect( await driver.choiceIsEnabled("sect225") ).toBe(true);
+    });
+});
+
+describe("expressions", () => {
+
+    test("ENDURANCE", async () => {
+        await driver.setupBookState(13, Language.ENGLISH);
+
+        async function setup(endurance: number, randomValue: number) {
+            await driver.loadCleanSection(Book.INITIAL_SECTION);
+            await driver.setDisciplines([]);
+            await driver.setEndurance(endurance);
+            await driver.goToSection("sect91");
+            await driver.setNextRandomValue(randomValue);
+            await driver.clickRandomLink();
+        }
+
+        await setup(20, 6);
+        // Expect to get +2 and go to sect184
+        expect( await driver.choiceIsEnabled("sect184") ).toBe(true);
+        await setup(19, 7);
+        expect( await driver.choiceIsEnabled("sect184") ).toBe(false);
+    });
+
+});
+
+test("endurance", async () => {
+    await driver.setupBookState(13, Language.ENGLISH);
+    await driver.setDisciplines([]);
+    await driver.setEndurance(10);
+    await driver.goToSection("sect92");
+    expect( (await driver.getActionChart()).currentEndurance ).toBe(5);
+});
+
+test("death", async () => {
+    await driver.setupBookState(13, Language.ENGLISH);
+    await driver.pick("healingpotion");
+    await driver.setDisciplines([GndDiscipline.Deliverance]);
+    await driver.goToSection("sect99");
+    expect( (await driver.getActionChart()).currentEndurance ).toBe(0);
+
+    // Expect do not use objects or curing button
+    await driver.goToActionChart();
+    expect( await GameDriver.isClickable( await driver.getElementById("achart-restore20Ep") ) ).toBe(false);
+    expect( await driver.getUseObjectLink("healingpotion") ).toBe(null);
+});

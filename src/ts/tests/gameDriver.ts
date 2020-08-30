@@ -6,6 +6,8 @@ import { ActionChart } from "../model/actionChart";
 
 export class GameDriver {
 
+    public static readonly RANDOM_SELECTOR = ".random.action";
+
     // Selenium web driver
     private driver: WebDriver = null;
 
@@ -81,10 +83,6 @@ export class GameDriver {
         await this.driver.executeScript(`kai.actionChartController.increaseMoney(${amount})`);
     }
 
-    public async pick(objectId: string) {
-        await this.driver.executeScript(`kai.actionChartController.pick("${objectId}")`);
-    }
-
     public async fireInventoryEvents() {
         await this.driver.executeScript("kai.mechanicsEngine.fireInventoryEvents()");
     }
@@ -94,16 +92,13 @@ export class GameDriver {
     }
 
     public async loadCleanSection(sectionId: string, deleteLog: boolean = true) {
-        // console.log("loadCleanSection " + sectionId);
-
-        // Reset state
+        // Reset state. DO NO extract this execute to a standalone method: kai.state.sectionStates.currentSection will be null
+        // and it will throw exceptions
         await this.driver.executeScript(
             "kai.state.actionChart = new kai.ActionChart();" +
             "kai.state.actionChart.manualRandomTable = false;" +
             "kai.state.sectionStates = new kai.BookSectionStates();"
         );
-        // console.log(await driver.executeScript("kai.state.actionChart.currentEndurance;"));
-
         if (deleteLog) {
             // Clear log
             await this.cleanLog();
@@ -226,7 +221,8 @@ export class GameDriver {
     }
 
     public async setEndurance(currentEndurance: number) {
-        await this.driver.executeScript(`kai.actionChartController.increaseEndurance( ${currentEndurance} - kai.state.actionChart.currentEndurance )`);
+        const js = `kai.actionChartController.setEndurance(${currentEndurance});`;
+        await this.driver.executeScript(js);
     }
 
     public async getActionChart(): Promise<ActionChart> {
@@ -237,6 +233,54 @@ export class GameDriver {
             delete aChartReceived[methodName];
         }
         return ActionChart.fromObject(aChartReceived, state.book.bookNumber);
+    }
+
+    public async clickRandomLink(): Promise<void> {
+        const link = await this.getElementByCss(GameDriver.RANDOM_SELECTOR);
+        await this.cleanClickAndWait(link);
+    }
+
+    public async getChoice(sectionId: string): Promise<WebElement> {
+        return await this.getElementByCss(`a[data-section=${sectionId}]`);
+    }
+
+    public async choiceIsEnabled(sectionId: string): Promise<boolean> {
+        const choiceLink = await this.getChoice(sectionId);
+        if (choiceLink === null) {
+            throw new Error(`Choice ${sectionId} not found`);
+        }
+        return await GameDriver.isClickable(choiceLink);
+    }
+
+    private async getObjectOpLink(objectId: string, op: string): Promise<WebElement> {
+        return await this.getElementByCss(`a[data-objectid=${objectId}][data-op=${op}]`);
+    }
+
+    public async pick(objectId: string, fromSection: boolean = false) {
+        if (!fromSection) {
+            await this.driver.executeScript(`kai.actionChartController.pick("${objectId}")`);
+        } else {
+            const pickLink = await this.getObjectOpLink(objectId, "get");
+            await this.cleanClickAndWait(pickLink);
+        }
+    }
+
+    public async drop(objectId: string, availableOnSection: boolean = false) {
+        await this.driver.executeScript(`kai.actionChartController.drop("${objectId}", ${availableOnSection})`);
+    }
+
+    public async increaseArrows(count: number) {
+        await this.driver.executeScript(`kai.actionChartController.increaseArrows(${count})`);
+    }
+
+    public async goToActionChart() {
+        const link = await this.getElementById("template-actionChart");
+        await link.click();
+        await this.waitForSectionReady();
+    }
+
+    public async getUseObjectLink(objectId: string) {
+        return await this.getObjectOpLink(objectId, "get");
     }
 
     public static globalSetup() {

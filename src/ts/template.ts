@@ -1,4 +1,4 @@
-import { routing, state, cordovaApp, Item, translations, randomTable, mechanicsEngine } from ".";
+import { routing, state, cordovaApp, Item, translations, randomTable, mechanicsEngine, App, DebugMode } from ".";
 
 /**
  * The HTML template API
@@ -292,5 +292,20 @@ export const template = {
      */
     fixedNavbarTop() {
         $("#template-header").removeClass("navbar-fixed-top");
+    },
+
+    addSectionReadyMarker() {
+        if (App.debugMode === DebugMode.TEST) {
+            // Append a "mark" to let the tests controller know the section is completly loaded
+            if ($("#section-ready").length === 0) {
+                $("body").append('<p id="section-ready">SECTION READY</p>');
+            }
+        }
+    },
+
+    removeSectionReadymarker() {
+        if (App.debugMode === DebugMode.TEST) {
+            $("#section-ready").remove();
+        }
     }
 };

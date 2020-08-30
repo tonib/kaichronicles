@@ -587,8 +587,6 @@
                 <randomTableIncrement increment="+3" />
             </test>
         </section>
-
-        <!-- START HERE -->
         
         <section id="sect83">
             <meal />
@@ -616,6 +614,10 @@
             <afterCombats>
                 <choiceState section="all" set="enabled" />
             </afterCombats>
+        </section>
+
+        <section id="sect87">
+            <meal />
         </section>
 
         <section id="sect90">
@@ -669,6 +671,8 @@
             </test>
         </section>
 
+        <!-- START HERE -->
+        
         <section id="sect99">
             <death />
         </section>

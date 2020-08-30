@@ -1,4 +1,4 @@
-import { state, mechanicsEngine, gameView, KaiDiscipline, MgnDiscipline, GndDiscipline, actionChartController, translations } from "../..";
+import { state, mechanicsEngine, gameView, KaiDiscipline, MgnDiscipline, GndDiscipline, actionChartController, translations, template } from "../..";
 
 /**
  * Meal mechanics
@@ -130,7 +130,7 @@ export class MealMechanics {
             // Remove UI
             $(mealSelector).remove();
 
-            gameView.addSectionReadyMarker();
+            template.addSectionReadyMarker();
         });
     }
 

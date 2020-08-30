@@ -17,6 +17,7 @@ export const actionChartController = {
         views.loadView("actionChart.html")
             .then(() => {
                 actionChartView.fill(state.actionChart);
+                template.addSectionReadyMarker();
             });
     },
 
@@ -419,6 +420,11 @@ export const actionChartController = {
 
         template.updateStatistics();
 
+    },
+
+    /** Set the current endurance, just for debug */
+    setEndurance(endurance: number) {
+        actionChartController.increaseEndurance(endurance - state.actionChart.currentEndurance);
     },
 
     /**

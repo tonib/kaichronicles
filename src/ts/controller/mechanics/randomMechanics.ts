@@ -1,5 +1,5 @@
 import { state, ExpressionEvaluator, numberPickerMechanics, MealMechanics, translations, randomTable, mechanicsEngine,
-    EquipmentSectionMechanics, gameView } from "../..";
+    EquipmentSectionMechanics, gameView, template } from "../..";
 
 /**
  * Random table links mechanics
@@ -160,7 +160,7 @@ export const randomMechanics = {
                     // Fire the event:
                     onLinkPressed(value, increment);
 
-                    gameView.addSectionReadyMarker();
+                    template.addSectionReadyMarker();
                 });
         });
     },

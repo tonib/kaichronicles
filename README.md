@@ -125,6 +125,12 @@ A "guide" to develop new books can be found at [doc/README-developing.md](doc/RE
 
 Tests are run with Selenium Web Driver and Jest. Currently tests will run only with Chrome, and Selenium will need a "browser driver". See
 https://www.selenium.dev/documentation/en/webdriver/driver_requirements for installation instructions. Tests are located at src/ts/tests.
+Be sure Typescript for node.js is compiled before running tests:
+
+```bash
+npm run ts
+npm run test
+```
 
 ### License
 

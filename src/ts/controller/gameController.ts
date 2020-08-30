@@ -108,7 +108,7 @@ export const gameController = {
                 mechanicsEngine.debugWarning(error);
             }
 
-            gameView.addSectionReadyMarker();
+            template.addSectionReadyMarker();
         }
     },
 
