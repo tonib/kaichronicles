@@ -41,7 +41,7 @@ export class Combat {
     /** The CS bonus to apply if the player has Kai-Surge discipline */
     public kaiSurgeBonus;
 
-    /** The CS multiplier to apply to Mindblast/Psi-Surge attacks */
+    /** The CS multiplier to apply to Mindblast/Psi-Surge attacks. It can have decimals (ex. 0.5) */
     public mindblastMultiplier = 1;
 
     /** How many turns the player cannot use weapons on this combat. -1 = never */
@@ -401,8 +401,10 @@ export class Combat {
         if (!surgeDisciplineId) {
             return 0;
         }
-        const surgeBonus = (surgeDisciplineId === GndDiscipline.KaiSurge ? this.kaiSurgeBonus : this.psiSurgeBonus);
-        return (surgeBonus ? surgeBonus : Combat.defaultSurgeBonus(surgeDisciplineId)) * this.mindblastMultiplier;
+        let surgeBonus = (surgeDisciplineId === GndDiscipline.KaiSurge ? this.kaiSurgeBonus : this.psiSurgeBonus);
+        surgeBonus = (surgeBonus ? surgeBonus : Combat.defaultSurgeBonus(surgeDisciplineId)) * this.mindblastMultiplier;
+        // mindblastMultiplier can have decimals:
+        return Math.round(surgeBonus);
     }
 
     /**
@@ -410,7 +412,9 @@ export class Combat {
      * @returns The Mindblast CS bonus
      */
     public getFinalMindblastBonus(): number {
-        return (this.mindblastBonus ? this.mindblastBonus : Combat.defaultMindblastBonus()) * this.mindblastMultiplier;
+        const bonus = (this.mindblastBonus ? this.mindblastBonus : Combat.defaultMindblastBonus()) * this.mindblastMultiplier;
+        // mindblastMultiplier can have decimals:
+        return Math.round(bonus);
     }
 
     /**

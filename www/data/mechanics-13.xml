@@ -731,8 +731,6 @@
             </afterCombats>
         </section>
 
-        <!-- START HERE -->
-        
         <section id="sect110">
             <choiceState section="sect55" set="disabled" />
             <test hasDiscipline="pthmnshp">
@@ -763,6 +761,8 @@
             </afterCombats>
         </section>
 
+        <!-- START HERE -->
+        
         <section id="sect116">
             <choiceState section="all" set="disabled" />
             <randomTable>

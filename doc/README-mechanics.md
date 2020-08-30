@@ -376,7 +376,7 @@ the following properties:
 * **noMindblast="true"**: The enemy is immune to Mindblast
 * **noPsiSurge="true"**: The enemy is immune to Psi-Surge
 * **mindblastBonus="number"**: Special CS bonus to apply for Mindblast discipline on this combat
-* **mindblastMultiplier="number"**: CS multiplier to apply to Mindblast/Psi-Surge/Kai-Surge attacks this combat
+* **mindblastMultiplier="float"**: CS multiplier to apply to Mindblast/Psi-Surge/Kai-Surge attacks this combat
 * **psiSurgeBonus="number"**: Special CS bonus to apply for Psi-Surge discipline on this combat
 * **kaiSurgeBonus="number"**: Special CS bonus to apply for Kai-Surge discipline on this combat
 * **noWeapon="boolean|number"**: If true, Lone Wolf cannot use any weapon on this combat. If a number, LW cannot use any weapon for 
@@ -545,11 +545,10 @@ Changes the player current weapon to the set on "objectId" property
 
 ### toast
 ```xml
-<toast 
-    en-text="Wrong number!"
-    es-text="¡Número incorrecto!" />
+<toast en-text="Wrong number!" es-text="¡Número incorrecto!" />
+<toast duration="10000" en-text="Because you possess..." />
 ```
-Display a "toast" message
+Display a "toast" message. "duration" is the toast duration in milliseconds. It's optional, the default is 5000 ms
 
 ### textToChoice
 ```xml

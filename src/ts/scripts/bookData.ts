@@ -6,7 +6,7 @@ import { BookMetadata, projectAon, Language } from "..";
 export class BookData {
 
     /**
-     * URL base directory for extra contents for this application. 
+     * URL base directory for extra contents for this application.
      */
     private static readonly EXTRA_TONI_CONTENTS_URL = "https://projectaon.org/staff/toni/extraContent-DONOTREMOVE";
 

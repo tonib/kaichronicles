@@ -50,7 +50,7 @@ throw "TODO: This script needs to be changed";
 
 //     // Copy the original index.html
 //     fs.copySync('www/index.html', 'dist/www/index.html' );
-//     preprocess.preprocessFileSync( 'dist/www/index.html' , 'dist/www/index.html' , 
+//     preprocess.preprocessFileSync( 'dist/www/index.html' , 'dist/www/index.html' ,
 //         context);
 // }
 
@@ -88,7 +88,7 @@ throw "TODO: This script needs to be changed";
 //  * Get the APK sign password.
 //  * It's passed as the first parameter on the command line. If it does not exists
 //  * this function will return null.
-//  * The keystore is expected to be at KEYSTORE_PATH. If this 
+//  * The keystore is expected to be at KEYSTORE_PATH. If this
 //  * file does not exists, this function will return null.
 //  */
 // function getApkSignPassword() {
@@ -124,7 +124,7 @@ throw "TODO: This script needs to be changed";
 //     return pwd;
 // }
 
-// /** 
+// /**
 //  * Builds a production version of the application
 //  */
 // function buildAndroidApp() {
@@ -240,7 +240,7 @@ throw "TODO: This script needs to be changed";
 //     viewFiles.forEach((f) => {
 //         console.log( f.path );
 //         var fileText = fs.readFileSync( f.path , 'utf8' );
-//         joinedFileContent += '\n<div class="htmlpage" id="' + 
+//         joinedFileContent += '\n<div class="htmlpage" id="' +
 //             path.basename( f.path ) + '">\n' + fileText + "\n</div>\n";
 //     });
 //     joinedFileContent = "<div>\n" + joinedFileContent + "\n</div>\n";
@@ -257,4 +257,3 @@ throw "TODO: This script needs to be changed";
 // joinViews();
 // buildAndroidApp();
 // prepareDistDirectory();
-

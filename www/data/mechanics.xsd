@@ -220,7 +220,7 @@
         <xs:attribute name="restoreFactor" type="xs:decimal" />
         <xs:attribute name="bow" type="trueOnly" />
         <xs:attribute name="disabledObjects" type="xs:string" />
-        <xs:attribute name="mindblastMultiplier" type="xs:integer" />
+        <xs:attribute name="mindblastMultiplier" type="xs:decimal" />
         <xs:attribute name="mentalOnly" type="xs:boolean" />
         <xs:attribute name="immuneTurns" type="xs:nonNegativeInteger" />
         <xs:attribute name="enemyImmuneTurns" type="xs:nonNegativeInteger" />
@@ -369,6 +369,7 @@
     <xs:complexType name="toast">
         <xs:attribute name="en-text" type="xs:string" use="required" />
         <xs:attribute name="es-text" type="xs:string" />
+        <xs:attribute name="duration" type="xs:integer" />
     </xs:complexType>
     
     <xs:complexType name="registerGlobalRule">
