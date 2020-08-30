@@ -219,6 +219,25 @@ describe("expressions", () => {
         expect( await driver.choiceIsEnabled("sect184") ).toBe(false);
     });
 
+    test("COMBATSDURATION", async () => {
+        await driver.setupBookState(13, Language.ENGLISH);
+
+        async function playCombat(randomValues: number[]) {
+            await driver.loadCleanSection("sect100");
+            for (const r of randomValues) {
+                await driver.setNextRandomValue(r);
+                await driver.clickPlayCombatTurn();
+            }
+        }
+
+        await driver.setDisciplines([]);
+        await playCombat([5, 5, 5, 5, 0]);
+        expect( await driver.choiceIsEnabled("sect254") ).toBe(true);
+
+        await driver.setDisciplines([]);
+        await playCombat([4, 4, 4, 4, 0, 0]);
+        expect( await driver.choiceIsEnabled("sect37") ).toBe(true);
+    });
 });
 
 test("endurance", async () => {

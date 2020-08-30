@@ -58,7 +58,7 @@ TODO
 - Check if the "edit-config" tag in config.xml can be configured for debug build only
 - Loyalty bonus for hunting should be applied to Grand Master too?
 
-## Spanish books erratas to report
+## Books erratas to report
 - Book 13, sect equipmnt: "tu nueva Carta de Acciónde Gran Maestro" should be "tu nueva Carta de Acción de Gran Maestro" (space)
 - Book 13, sect1:
     * '" Me gustaría poder"' should be "Me gustaría poder" (space)
@@ -73,7 +73,8 @@ TODO
 - Book 13, sect20: "norte Pasa al 85" should be "norte pasa al 85"
 - Book 13, sect31: "y , junto" should be "y, junto" (space)
 - Book 13, sect76: "que de dirige hacia" should be "que se dirige"
- 
+- All book 13, EN and ES: Bow bonus should be +5 ???
+
 ## Other
 - Allow to zoom illustrations?
 - Add images to disciplines in Action Chart

@@ -184,7 +184,7 @@ export class GameDriver {
     }
 
     public async cleanSectionReady() {
-        await this.driver.executeScript("kai.gameView.removeSectionReadymarker()");
+        await this.driver.executeScript("kai.template.removeSectionReadymarker()");
     }
 
     public async cleanClickAndWait(element: WebElement) {

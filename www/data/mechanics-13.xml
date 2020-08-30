@@ -670,8 +670,6 @@
                 <choiceState section="sect74" set="disabled" />
             </test>
         </section>
-
-        <!-- START HERE -->
         
         <section id="sect99">
             <death />
@@ -701,10 +699,12 @@
             </test>
         </section>
 
+        <!-- START HERE -->
+
         <section id="sect104">
-            <pick class="arrow" count="-1" />
             <choiceState section="all" set="disabled" />
             <randomTable>
+                <pick class="arrow" count="-1" />
                 <case from="0" to="5">
                     <choiceState section="sect167" set="enabled" />
                 </case>
