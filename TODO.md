@@ -19,13 +19,6 @@ TODO
 - "Restart book" (at Settings / book death): Add the book number you will restart (ex. "Restart book 9"). On confirmation, explain
   you will restart with your previous book Action Chart status
 
-## Android
-
-- Compile android app and test it
-- Do not show the license text on Android (the book was already downloaded)
-- Fix config.xml plugin versions to use
-- package.json should be versioned with git ???
-
 ## Bugs
 
 - Bugs reported on Google Play:
@@ -74,7 +67,8 @@ TODO
 - Book 13, sect31: "y , junto" should be "y, junto" (space)
 - Book 13, sect76: "que de dirige hacia" should be "que se dirige"
 - All book 13, EN and ES: Bow bonus should be +5 ???
-
+- Book 12 (Spanish): sect350: This book is different from previous. You have to click on a footer note link to continue to the next book...
+    Ugly. Add a message rule to help?
 ## Other
 - Allow to zoom illustrations?
 - Add images to disciplines in Action Chart

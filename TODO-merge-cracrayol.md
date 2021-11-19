@@ -70,54 +70,32 @@
 * https://github.com/tonib/kaichronicles/commit/224d7925277b36887d29eff4cd27194e43404f62
 
 * https://github.com/tonib/kaichronicles/commit/9f690b0d9997bbde44d944a2c01afecebe888b3d
-    - 'from' or 'to' can be optionnal in case tag. CHECK THIS
 
 * https://github.com/tonib/kaichronicles/commit/4cda9d2b668652265d49b796096f1e7e02fedc23
 
 * https://github.com/tonib/kaichronicles/commit/98b7f754f9fd3887506d56db94e0d8f99d148fb3
 
 * https://github.com/tonib/kaichronicles/commit/bd9f122eb42af09e1ff4b59c3ed330921c85dcfe
-    - Added mindblast loyalty bonus HERE. Check this when previous books disciplines will be stored
 
 * https://github.com/tonib/kaichronicles/commit/2c1959cfebf572e9c82c43bd771d1a5bd5dfaac4
-    - Add mindblast loyalty bonus HERE. CHECK THIS
 
 * https://github.com/tonib/kaichronicles/commit/3ffe1860fb323a5a90b4861ddfe862822b8e6e88
-    - Add weaponskill loyalty bonus HERE. CHECK THIS
-    - ActionChart.getWeaponSkill is a mess
-    - Healing loyalty bonus edited here. CHECK THIS
 
 * https://github.com/tonib/kaichronicles/commit/5a534bcbda08bf943b03cbe1326992b0bb450c00
-    - Hunting loyalty bonus added HERE. CHECK THIS
-    - hntmstryDisabled attr. seems ok, as there are places where Huntmastery is explicitly required
-    - Add hntmstryDisabled attr. to xml verification
-    - hntmstryDisabled REMOVED (we will keep hundDisabled only)
 
 * https://github.com/tonib/kaichronicles/commit/6a3155ee5e10b9da34179f5ab144bde3d97795c4
-    - Combat loyalty bonuses edited here. CHECK THIS
-    - Psi-surge loyalty bonus HERE. CHECK THIS
-    - Change to ActionChart.isWeaponskillActive() > state.hasCompletedKaiMagnakaiSerie() I think is wrong. This will give you
-      mastery with any weapon, but this is used for other things (see "weaponskillActive" rule). CHANGE THIS
-    - This line in actionChart:
-        ```
-            } else if (state.book.isMagnakaiBook() || (state.hasCompletedKaiMagnakaiSerie() && (!this.disciplines.contains("wpnmstry") || !this.hasWeaponskillWith(currentWeapon.weaponType || currentWeapon.id)))) {
-        ```
-      is not clear for me (currentWeapon.weaponType || currentWeapon.id ???). CHANGE THIS
-    - Related to previous: ActionChart.hasWeaponskillWith seems to be changed to accept a set of weapon types. Document this (CHECK THIS)
 
 * https://github.com/tonib/kaichronicles/commit/7b79ab05b7209668c8a26ab6deffb9c5b413e840
 
 * https://github.com/tonib/kaichronicles/commit/6f848689e78973301d343d07ca9b5d77e9ae3f91
 
 * https://github.com/tonib/kaichronicles/commit/2d89249fda23331b4762df57d7d62077cf8a745c
-    - BOOK 15: There is no translation to spanish? Ask in Spanish forums
 
 * https://github.com/tonib/kaichronicles/commit/9448e54df5685bf862e2ea9b0feb9ac0415292fa
 
 * https://github.com/tonib/kaichronicles/commit/ac528466997006c67b024451faeee41abe871d02
 
 * https://github.com/tonib/kaichronicles/commit/4345c00f5156c2b9b9e105c3b3460584bffba743
-    - Added noToast and permanent atrs. for endurance rule. Add them to documentation
 
 * https://github.com/tonib/kaichronicles/commit/54cf6b11353f7a645c828af9a3fb12d67e822b3f
 
@@ -134,7 +112,6 @@
 * https://github.com/tonib/kaichronicles/commit/0d7011fb7fe6120d65ca1d2239e35403e77314ee
 
 * https://github.com/tonib/kaichronicles/commit/06634383c5d03f96cd7c8c8b062a68440855233c
-    - Check this: BOW-CNT-ON-SECTION, BOW-CNT-ON-ACTIONCHART expressions. In book 15?
 
 * https://github.com/tonib/kaichronicles/commit/277502e25ccd477d833dd8a53e3299aab0387ecd
 
@@ -143,18 +120,6 @@
 * https://github.com/tonib/kaichronicles/commit/f90a309f08ebec002b9aadd3a27599abf4e8eb3d
 
 * https://github.com/tonib/kaichronicles/commit/a674bdc583b64ec6c2783787847ff183a7d8ff28
-
-* TSLINT:
-    - TSLint is deprecated...
-    - Check if remains any "throw new Error("
-
-* Error in setup:
-    - Add breakpoint at Item.prototype.loadImageInfo start
-    - Check the setup log. They appear "undefined OK" messages...
-
-* Book 12 (Spanish):
-    sect350: This book is different from previous. You have to click on a footer note link to continue to the next book...
-    Ugly. Add a message rule to help?
 
 * Book 14:
     - gameRulesController: Check if there is a IMPROVEDDISCIPLINES_SECTION section in Grand Master
