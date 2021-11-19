@@ -1,19 +1,21 @@
 ## Kai Chronicles
 
-Kai Chronicles is a game player for Lone Wolf game books. Only books 1 - 13 are
-playable. The game player can run as a website or Android app. You can play it at 
-[https://www.projectaon.org/staff/toni](https://www.projectaon.org/staff/toni) or download
-the app from [Google Play](https://play.google.com/store/apps/details?id=org.projectaon.kaichronicles).
+**November 2021: Kai Chronicles app is no longer published**
 
-This repository does not contain game books data. Data must be downloaded from the 
+Kai Chronicles is a game player for Lone Wolf game books. Only books 1 - 13 are
+playable. The game player can run as a website or Android app.  ~~You can play it at 
+[https://www.projectaon.org/staff/toni](https://www.projectaon.org/staff/toni) or download
+the app from [Google Play](https://play.google.com/store/apps/details?id=org.projectaon.kaichronicles)~~.
+
+~~This repository does not contain game books data. Data must be downloaded from the 
 [Project Aon web site](https://www.projectaon.org). 
 **REMEMBER** that game books data is under the
-[Project Aon license](https://www.projectaon.org/en/Main/License), so:
+[Project Aon license](https://www.projectaon.org/en/Main/License), so:~~
 
-* You cannot put this application on a public web server (only on your local machine, for
+* ~~You cannot put this application on a public web server (only on your local machine, for
   your own use). The only place where this game can be published is on the Project Aon 
-  web site
-* You cannot redistribute the game books data in any way
+  web site~~
+* ~~You cannot redistribute the game books data in any way~~
 
 The Android older supported version is 5.1 (API 22). The web is tested with the
 latest version of Chrome and Firefox. Other browsers or/and older versions may don't 
@@ -77,10 +79,6 @@ Optional method for running a local website only to play the game
  More information about this method [here](./doc/README-docker.md)
 
 ### Developing 
-
-**IMPORTANT**: Official Lone Wolf mobile products are currently in development. At some point this year all fanmade unofficial apps **will be discontinued**.
-Please, keep in mind this if you have plans to add a Pull Request, because Kai Chronicles will be removed at some point of this year (2019).
-UPDATE August 2020: I'm not related to the official app, and I don't know its status, so I'll continue accepting pull requests.
 
 Game rules for each book are located at [www/data](www/data). "mechanics-X" are the game rules
 for the book X. "objects.xml" are the game objects
@@ -157,4 +155,4 @@ MIT. This application uses the following third-party code / resources:
 * [cordova-plugin-copytodownload](https://github.com/tonib/cordova-plugin-copytodownload) (MIT)
 * [cordova-plugin-document-contract](https://github.com/danjarvis/cordova-plugin-document-contract) (MIT)
 
-Thanks to [LSI](http://www.lsisoluciones.com) for letting us use its Google Play account for this app.
+~~Thanks to [LSI](http://www.lsisoluciones.com) for letting us use its Google Play account for this app.~~
