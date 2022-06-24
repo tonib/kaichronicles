@@ -33,7 +33,7 @@
         "fs-extra": "8.1.0",
         "jest": "^26.2.1",
         "jquery": "^2.2.4",
-        "jsdom": "^16.4.0",
+        "jsdom": "^16.5.0",
         "klaw-sync": "6.0.0",
         "preprocess": "3.1.0",
         "selenium-webdriver": "^4.0.0-alpha.7",
